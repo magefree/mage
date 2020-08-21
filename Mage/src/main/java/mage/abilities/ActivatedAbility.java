@@ -7,6 +7,7 @@ import mage.constants.TargetController;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -16,19 +17,19 @@ public interface ActivatedAbility extends Ability {
     final class ActivationStatus {
 
         private final boolean canActivate;
-        private final MageObjectReference permittingObject;
+        private final ApprovingObject approvingObject;
 
-        public ActivationStatus(boolean canActivate, MageObjectReference permittingObject) {
+        public ActivationStatus(boolean canActivate, ApprovingObject approvingObject) {
             this.canActivate = canActivate;
-            this.permittingObject = permittingObject;
+            this.approvingObject = approvingObject;
         }
 
         public boolean canActivate() {
             return canActivate;
         }
 
-        public MageObjectReference getPermittingObject() {
-            return permittingObject;
+        public ApprovingObject getApprovingObject() {
+            return approvingObject;
         }
 
         public static ActivationStatus getFalse() {
@@ -36,12 +37,11 @@ public interface ActivatedAbility extends Ability {
         }
 
         /**
-         * @param permittingObjectAbility card or permanent that allows to activate current ability
+         * @param approvingObjectAbility ability that allows to activate/use current ability
          */
-        public static ActivationStatus getTrue(Ability permittingObjectAbility, Game game) {
-            MageObject object = permittingObjectAbility == null ? null : permittingObjectAbility.getSourceObject(game);
-            MageObjectReference ref = object == null ? null : new MageObjectReference(object, game);
-            return new ActivationStatus(true, ref);
+        public static ActivationStatus getTrue(Ability approvingObjectAbility, Game game) {
+            ApprovingObject approvingObject = approvingObjectAbility == null ? null : new ApprovingObject(approvingObjectAbility, game);
+            return new ActivationStatus(true, approvingObject);
         }
     }
 

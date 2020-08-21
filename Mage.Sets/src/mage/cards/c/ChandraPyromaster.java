@@ -3,8 +3,8 @@ package mage.cards.c;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -230,26 +230,26 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
             if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
+                    ApprovingObject approvingObject = new ApprovingObject(source, game);
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), source, game)) {
                         Card copy1 = game.copyCard(card, source, source.getControllerId());
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy1.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(copy1, game, true),
-                                game, true, mor);
+                                game, true, approvingObject);
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy1.getId(), null);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), source, game)) {
                         Card copy2 = game.copyCard(card, source, source.getControllerId());
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy2.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(copy2, game, true),
-                                game, true, mor);
+                                game, true, approvingObject);
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy2.getId(), null);
                     }
                     if (controller.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), source, game)) {
                         Card copy3 = game.copyCard(card, source, source.getControllerId());
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy3.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(copy3, game, true),
-                                game, true, mor);
+                                game, true, approvingObject);
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy3.getId(), null);
                     }
                     return true;

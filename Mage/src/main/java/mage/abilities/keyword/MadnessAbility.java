@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -20,6 +19,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * 702.33. Madness
@@ -219,7 +219,7 @@ class MadnessCastEffect extends OneShotEffect {
         castByMadness.setSpellAbilityCastMode(SpellAbilityCastMode.MADNESS);
         costRef.clear();
         costRef.add(madnessCost);
-        return owner.cast(castByMadness, game, false, new MageObjectReference(source.getSourceObject(game), game));
+        return owner.cast(castByMadness, game, false, new ApprovingObject(source, game));
     }
 
     @Override

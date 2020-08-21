@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
+import mage.MageIdentifier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -690,4 +691,15 @@ public class StackAbility extends StackObjImpl implements Ability {
                 || (this.getOriginalId().equals(ability.getOriginalId()))
                 || (this.getClass() == ability.getClass() && this.getRule().equals(ability.getRule()));
     }
+    
+    @Override
+    public MageIdentifier getIdentifier() {
+        return ability.getIdentifier();
+    }
+
+    @Override
+    public AbilityImpl setIdentifier(MageIdentifier identifier) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+        
 }

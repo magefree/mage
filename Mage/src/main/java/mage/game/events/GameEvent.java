@@ -1,12 +1,14 @@
 package mage.game.events;
 
-import mage.MageObjectReference;
+
 import mage.constants.Zone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.ApprovingObject;
+import mage.MageIdentifier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -27,7 +29,7 @@ public class GameEvent implements Serializable {
     protected String data;
     protected Zone zone;
     protected List<UUID> appliedEffects = new ArrayList<>();
-    protected MageObjectReference reference; // e.g. the permitting object for casting a spell from non hand zone
+    protected ApprovingObject approvingObject; // e.g. the approving object for casting a spell from non hand zone
     protected UUID customEventType = null;
 
     public enum EventType {
@@ -359,8 +361,8 @@ public class GameEvent implements Serializable {
         this(type, null, targetId, sourceId, playerId, 0, false);
     }
 
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, MageObjectReference reference) {
-        this(type, null, targetId, sourceId, playerId, 0, false, reference);
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, ApprovingObject approvingObject) {
+        this(type, null, targetId, sourceId, playerId, 0, false, approvingObject);
     }
 
     public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
@@ -383,8 +385,8 @@ public class GameEvent implements Serializable {
         return new GameEvent(type, targetId, sourceId, playerId);
     }
 
-    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, MageObjectReference reference) {
-        return new GameEvent(type, targetId, sourceId, playerId, reference);
+    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, ApprovingObject approvingObject) {
+        return new GameEvent(type, targetId, sourceId, playerId, approvingObject);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId) {
@@ -423,7 +425,7 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, MageObjectReference reference) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
@@ -431,7 +433,7 @@ public class GameEvent implements Serializable {
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
-        this.reference = reference;
+        this.approvingObject = approvingObject;
     }
 
     public EventType getType() {
@@ -501,12 +503,17 @@ public class GameEvent implements Serializable {
         this.zone = zone;
     }
 
-    public MageObjectReference getAdditionalReference() {
-        return reference;
+    /**
+     * Returns possibly approving object that allowed the creation of the event.
+     *
+     * @return
+     */
+    public ApprovingObject getAdditionalReference() {
+        return approvingObject;
     }
 
-    public void setAdditionalReference(MageObjectReference additionalReference) {
-        this.reference = additionalReference;
+    public void setAdditionalReference(ApprovingObject approvingObject) {
+        this.approvingObject = approvingObject;
     }
 
     /**
@@ -545,5 +552,15 @@ public class GameEvent implements Serializable {
                 this.appliedEffects.addAll(appliedEffects);
             }
         }
+    }
+    
+    public boolean hasApprovingIdentifier(MageIdentifier identifier) {
+        if (approvingObject == null) {
+            return false;
+        }
+        if (identifier == null) {
+            return false;
+        }
+        return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());
     }
 }

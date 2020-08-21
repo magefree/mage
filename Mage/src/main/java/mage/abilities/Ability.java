@@ -23,6 +23,7 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.MageIdentifier;
 import mage.abilities.costs.common.TapSourceCost;
 
 /**
@@ -550,4 +551,8 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean isSameInstance(Ability ability);
+    
+    MageIdentifier getIdentifier(); 
+
+    AbilityImpl setIdentifier(MageIdentifier mageIdentifier);
 }

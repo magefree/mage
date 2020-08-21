@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,6 +22,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author emerald000
@@ -191,7 +191,7 @@ class SpellweaverHelixCastEffect extends OneShotEffect {
                                 if (controller.chooseUse(Outcome.PlayForFree, "Cast " + copy.getIdName() + " without paying its mana cost?", source, game)) {
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
                                     controller.cast(controller.chooseAbilityForCast(copy, game, true),
-                                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                            game, true, new ApprovingObject(source, game));
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), null);
                                 }
                             }

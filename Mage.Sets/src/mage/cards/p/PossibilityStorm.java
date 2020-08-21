@@ -2,8 +2,8 @@ package mage.cards.p;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -129,7 +129,7 @@ class PossibilityStormEffect extends OneShotEffect {
                             && !card.isLand()
                             && card.getSpellAbility().canChooseTarget(game)) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                            spellController.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            spellController.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
                         }
                     }
 

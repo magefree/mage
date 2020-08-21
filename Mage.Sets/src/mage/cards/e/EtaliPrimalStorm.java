@@ -2,7 +2,6 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -17,6 +16,7 @@ import mage.target.TargetCard;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author ciaccona007 & L_J
@@ -110,7 +110,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                 if (card != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                     Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                     if (!cardWasCast) {
                         game.informPlayer(controller, "You're not able to cast "

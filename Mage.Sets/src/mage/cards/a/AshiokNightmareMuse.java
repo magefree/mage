@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.MageObjectReference;
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -132,7 +132,7 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
                         && controller.chooseUse(outcome, "Cast " + chosenCard.getName() + " without paying its mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
                     controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
                 }
             }

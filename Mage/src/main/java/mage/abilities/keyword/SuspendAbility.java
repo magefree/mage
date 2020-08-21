@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
@@ -27,6 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * 502.59. Suspend
@@ -369,7 +369,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
             // cast the card for free
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             Boolean cardWasCast = player.cast(player.chooseAbilityForCast(card, game, true),
-                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             if (cardWasCast) {
                 if (card.isCreature()) {

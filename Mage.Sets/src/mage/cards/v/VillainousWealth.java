@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -19,6 +18,7 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -92,7 +92,7 @@ class VillainousWealthEffect extends OneShotEffect {
                             if (card != null) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                                 Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                        game, true, new ApprovingObject(source, game));
                                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                                 if (cardWasCast) {
                                     cardsToExile.remove(card);

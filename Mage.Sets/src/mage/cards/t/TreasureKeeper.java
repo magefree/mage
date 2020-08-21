@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,7 +15,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.MageObject;
+import mage.ApprovingObject;
 
 /**
  * @author fireshoes
@@ -78,7 +77,7 @@ class TreasureKeeperEffect extends OneShotEffect {
                     && controller.chooseUse(Outcome.PlayForFree, "Cast " + nonLandCard.getLogName() + " without paying its mana cost?", source, game)) {
                 game.getState().setValue("PlayFromNotOwnHandZone" + nonLandCard.getId(), Boolean.TRUE);
                 cardWasCast = controller.cast(controller.chooseAbilityForCast(nonLandCard, game, true),
-                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game, true, new ApprovingObject(source, game));
                 game.getState().setValue("PlayFromNotOwnHandZone" + nonLandCard.getId(), null);
                 if (cardWasCast) {
                     toReveal.remove(nonLandCard);

@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import java.util.ArrayList;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -22,6 +21,7 @@ import mage.watchers.common.SpellsCastWatcher;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.ApprovingObject;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.TargetCard;
@@ -108,7 +108,7 @@ class TwinningGlassEffect extends OneShotEffect {
                             + chosenCard.getName() + " without paying its mana cost?", source, game)) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
                         Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                game, true, new ApprovingObject(source, game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
                         return cardWasCast;
                     }

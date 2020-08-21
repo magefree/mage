@@ -1,8 +1,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -137,7 +137,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                     if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                         Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                game, true, new ApprovingObject(source, game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         if (cardWasCast) {
                             cards.remove(card);

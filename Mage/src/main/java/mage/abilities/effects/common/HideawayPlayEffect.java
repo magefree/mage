@@ -13,6 +13,7 @@ import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -67,7 +68,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                     }
                 }
 
-                if (!controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                if (!controller.playCard(card, game, true, true, new ApprovingObject(source, game))) {
                     if (card.getZoneChangeCounter(game) == zcc) {
                         card.setFaceDown(true, game);
                     }

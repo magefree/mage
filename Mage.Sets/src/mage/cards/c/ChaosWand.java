@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,6 +14,7 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -88,7 +88,7 @@ class ChaosWandEffect extends OneShotEffect {
                         + " without paying its mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                     cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
                 if (!cardWasCast) {

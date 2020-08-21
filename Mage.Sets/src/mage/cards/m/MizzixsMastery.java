@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -19,6 +18,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -84,7 +84,7 @@ class MizzixsMasteryEffect extends OneShotEffect {
                             + card.getName() + " without paying its mana cost?", source, game)) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(cardCopy, game, true),
-                                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                game, true, new ApprovingObject(source, game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), null);
                     }
                 }
@@ -138,7 +138,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                                     && selectedCard.getSpellAbility().canChooseTarget(game)) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + selectedCard.getId(), Boolean.TRUE);
                                 controller.cast(controller.chooseAbilityForCast(selectedCard, game, true),
-                                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                        game, true, new ApprovingObject(source, game));
                                 game.getState().setValue("PlayFromNotOwnHandZone" + selectedCard.getId(), null);
                             }
                             copiedCards.remove(selectedCard);

@@ -2833,15 +2833,15 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+    public boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject) {
         // TestPlayer, ComputerPlayer always call inherited cast() from PlayerImpl
         // that's why chooseSpellAbilityForCast will be ignored in TestPlayer, see workaround with TestComputerPlayerXXX
-        return computerPlayer.cast(ability, game, noMana, reference);
+        return computerPlayer.cast(ability, game, noMana, approvingObject);
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference) {
-        return computerPlayer.playCard(card, game, noMana, ignoreTiming, reference);
+    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
+        return computerPlayer.playCard(card, game, noMana, ignoreTiming, approvingObject);
     }
 
     @Override

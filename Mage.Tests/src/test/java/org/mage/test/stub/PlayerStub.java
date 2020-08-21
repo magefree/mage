@@ -41,6 +41,7 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.ApprovingObject;
 import mage.Mana;
 
 /**
@@ -535,7 +536,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+    public boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject) {
         return false;
     }
 
@@ -599,7 +600,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, MageObjectReference reference) {
+    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, ApprovingObject approvingObject) {
         return false;
     }
 

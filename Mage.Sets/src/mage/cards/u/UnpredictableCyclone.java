@@ -1,6 +1,5 @@
 package mage.cards.u;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -17,6 +16,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -91,7 +91,7 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
         if (toCast != null && player.chooseUse(outcome, "Cast the exiled card?", source, game)) {
             game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), Boolean.TRUE);
             Boolean cardWasCast = player.cast(player.chooseAbilityForCast(toCast, game, true),
-                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), null);
             if (cardWasCast) {
                 cards.remove(toCast);

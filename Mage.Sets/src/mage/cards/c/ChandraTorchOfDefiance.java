@@ -1,8 +1,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -98,7 +98,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
                             && (game.getState().getZone(card.getId()) == Zone.EXILED)) { // card must be in the exile zone
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);  // enable the card to be cast from the exile zone
                         cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, false),
-                                game, false, new MageObjectReference(sourceObject, game));
+                                game, false, new ApprovingObject(source, game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);  // reset to null
                     }
                 }

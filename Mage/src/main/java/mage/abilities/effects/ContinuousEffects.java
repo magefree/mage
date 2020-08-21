@@ -30,6 +30,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -507,7 +508,7 @@ public class ContinuousEffects implements Serializable {
      * @return sourceId of the permitting effect if any exists otherwise returns
      * null
      */
-    public MageObjectReference asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public ApprovingObject asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         if (!asThoughEffectsList.isEmpty()) {
             UUID idToCheck;
@@ -536,7 +537,7 @@ public class ContinuousEffects implements Serializable {
                     if (affectedAbility == null) {
                         // applies to own ability (one effect can be used in multiple abilities)
                         if (effect.applies(idToCheck, ability, controllerId, game)) {
-                            return new MageObjectReference(ability.getSourceObject(game), game);
+                            return new ApprovingObject(ability, game);
                         }
                     } else {
                         // applies to affected ability
@@ -547,7 +548,7 @@ public class ContinuousEffects implements Serializable {
                         }
 
                         if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                            return new MageObjectReference(ability.getSourceObject(game), game);
+                            return new ApprovingObject(ability, game);
                         }
                     }
                 }

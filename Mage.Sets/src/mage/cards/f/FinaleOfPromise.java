@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -25,6 +24,7 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import mage.ApprovingObject;
 
 /**
  * @author JayDi85
@@ -138,7 +138,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
             if (card != null) {
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game, true, new ApprovingObject(source, game));
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 ContinuousEffect effect = new FinaleOfPromiseReplacementEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));

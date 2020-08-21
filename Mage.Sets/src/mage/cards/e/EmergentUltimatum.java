@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -19,6 +18,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -109,7 +109,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
             }
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             Boolean cardWasCast = player.cast(player.chooseAbilityForCast(card, game, true),
-                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             cards.remove(card); // remove on non cast too (infinite freeze fix)
             if (cardWasCast) {

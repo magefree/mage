@@ -1,8 +1,8 @@
 package mage.cards.o;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -105,7 +105,7 @@ class OracleOfBonesCastEffect extends OneShotEffect {
                 if (cardToCast != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
                     controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
-                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
                 }
             }

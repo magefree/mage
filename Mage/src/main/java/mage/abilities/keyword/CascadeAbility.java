@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -109,7 +110,7 @@ class CascadeEffect extends OneShotEffect {
             if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        game, true, new ApprovingObject(source, game));
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             }
         }

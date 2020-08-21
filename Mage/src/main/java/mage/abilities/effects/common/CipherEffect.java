@@ -20,6 +20,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * FAQ 2013/01/11
@@ -120,7 +121,7 @@ class CipherStoreEffect extends OneShotEffect {
             SpellAbility ability = copyCard.getSpellAbility();
             // remove the cipher effect from the copy
             ability.getEffects().removeIf(effect -> effect instanceof CipherEffect);
-            controller.cast(ability, game, true, new MageObjectReference(source.getSourceObject(game), game));
+            controller.cast(ability, game, true, new ApprovingObject(source, game));
 
         }
 

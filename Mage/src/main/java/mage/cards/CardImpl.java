@@ -971,5 +971,5 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return false;
-    }
+    }   
 }

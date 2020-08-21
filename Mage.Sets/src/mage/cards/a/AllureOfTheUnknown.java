@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -15,6 +14,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -88,7 +88,7 @@ class AllureOfTheUnknownEffect extends OneShotEffect {
         if (opponent.chooseUse(outcome, "Cast the exiled card without paying its mana cost?", source, game)) {
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             opponent.cast(opponent.chooseAbilityForCast(card, game, true),
-                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
         return true;

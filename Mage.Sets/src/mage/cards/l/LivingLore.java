@@ -1,6 +1,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -185,7 +186,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
                             if (exiledCard.getSpellAbility().canChooseTarget(game)) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + exiledCard.getId(), Boolean.TRUE);
                                 controller.cast(controller.chooseAbilityForCast(exiledCard, game, true),
-                                        game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                        game, true, new ApprovingObject(source, game));
                                 game.getState().setValue("PlayFromNotOwnHandZone" + exiledCard.getId(), null);
                             }
                         }

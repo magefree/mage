@@ -3,6 +3,7 @@ package mage.cards.k;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -18,7 +19,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
@@ -44,7 +44,7 @@ public final class KaradorGhostChieftain extends CardImpl {
 
         // During each of your turns, you may cast one creature card from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new KaradorGhostChieftainCastFromGraveyardEffect()),
+                new KaradorGhostChieftainCastFromGraveyardEffect()).setIdentifier(MageIdentifier.KaradorGhostChieftainWatcher),
                 new KaradorGhostChieftainWatcher());
     }
 
@@ -118,17 +118,16 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.isControlledBy(affectedControllerId) 
-                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))
-                ) {
-        Card objectCard = game.getCard(objectId);
-        Permanent sourceObject = game.getPermanent(source.getSourceId()); // needs to be onto the battlefield
-        if (objectCard != null 
-                && sourceObject != null
-                && objectCard.isOwnedBy(source.getControllerId())
-                && objectCard.isCreature()
-                && objectCard.getSpellAbility() != null
-                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {            
+        if (source.isControlledBy(affectedControllerId)
+                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
+            Card objectCard = game.getCard(objectId);
+            Permanent sourceObject = game.getPermanent(source.getSourceId()); // needs to be onto the battlefield
+            if (objectCard != null
+                    && sourceObject != null
+                    && objectCard.isOwnedBy(source.getControllerId())
+                    && objectCard.isCreature()
+                    && objectCard.getSpellAbility() != null
+                    && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
                 KaradorGhostChieftainWatcher watcher
                         = game.getState().getWatcher(KaradorGhostChieftainWatcher.class);
                 return watcher != null
@@ -149,15 +148,9 @@ class KaradorGhostChieftainWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getZone() == Zone.GRAVEYARD) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.isCreature()) {
-                MageObjectReference mor = event.getAdditionalReference(); // permitting source
-                if (mor != null) {
-                    usedFrom.add(mor);
-                }                
-            }
+        if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
+                && event.hasApprovingIdentifier(MageIdentifier.KaradorGhostChieftainWatcher)) {
+            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
         }
     }
 

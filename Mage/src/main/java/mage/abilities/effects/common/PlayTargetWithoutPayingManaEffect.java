@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.ApprovingObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -38,7 +39,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
                 && target != null) {
             game.getState().setValue("PlayFromNotOwnHandZone" + target.getId(), Boolean.TRUE);
             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(target, game, true),
-                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + target.getId(), null);
             return cardWasCast;
         }

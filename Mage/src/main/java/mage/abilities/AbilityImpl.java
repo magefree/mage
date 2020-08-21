@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.MageIdentifier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -73,7 +73,8 @@ public abstract class AbilityImpl implements Ability {
     protected CostAdjuster costAdjuster = null;
     protected List<Hint> hints = new ArrayList<>();
     protected Outcome customOutcome = null; // uses for AI decisions instead effects
-
+    protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
+    
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
@@ -123,6 +124,7 @@ public abstract class AbilityImpl implements Ability {
             this.hints.add(hint.copy());
         }
         this.customOutcome = ability.customOutcome;
+        this.identifier = ability.identifier;
     }
 
     @Override
@@ -1306,4 +1308,15 @@ public abstract class AbilityImpl implements Ability {
                 || (this.getOriginalId().equals(ability.getOriginalId()))
                 || (this.getClass() == ability.getClass() && this.getRule(true).equals(ability.getRule(true)));
     }
+
+    @Override
+    public MageIdentifier getIdentifier() {
+        return identifier;
+    }
+
+    @Override
+    public AbilityImpl setIdentifier(MageIdentifier identifier) {
+        this.identifier = identifier;
+        return this;
+    }  
 }

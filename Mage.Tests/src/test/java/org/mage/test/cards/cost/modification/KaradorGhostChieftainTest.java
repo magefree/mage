@@ -3,6 +3,7 @@ package org.mage.test.cards.cost.modification;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -61,7 +62,7 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
     }
     
     @Test
-    public void castCastTwiceFromGraveyard() {
+    public void castCastMultipleFromGraveyard() {
         setStrictChooseMode(true);
         
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
@@ -93,4 +94,51 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
+    
+    @Test
+    @Ignore // It's not possible yet to select which ability to use to allow a asThoughtAs effect
+    public void test_castFromGraveyardWithDifferentApprovers() {
+        setStrictChooseMode(true);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        
+        // {1}{B}: Target attacking Zombie gains indestructible until end of turn. 
+        addCard(Zone.LIBRARY, playerA, "Accursed Horde", 1); // Creature Zombie {2}{B}{B}
+        skipInitShuffling();
+        
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 5);
+        
+        // Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
+        // During each of your turns, you may cast one creature card from your graveyard.
+        addCard(Zone.HAND, playerA, "Karador, Ghost Chieftain");// {5}{B}{G}{W}
+        
+        // When Gisa and Geralf enters the battlefield, put the top four cards of your library into your graveyard.
+        // During each of your turns, you may cast a Zombie creature card from your graveyard.        
+        addCard(Zone.HAND, playerA, "Gisa and Geralf"); // CREATURE {2}{U}{B} (4/4)
+        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisa and Geralf");
+        
+        
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Accursed Horde");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        
+        
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
+        assertPermanentCount(playerA, "Gisa and Geralf", 1);
+        
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Accursed Horde", 1);
+    }
+    
+    
 }

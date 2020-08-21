@@ -1,7 +1,6 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -26,6 +25,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -112,7 +112,7 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                         if (controller.chooseUse(Outcome.PlayForFree, "Cast " + targetCard.getLogName() + '?', source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + targetCard.getId(), Boolean.TRUE);
                             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(targetCard, game, true),
-                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game, true, new ApprovingObject(source, game));
                             game.getState().setValue("PlayFromNotOwnHandZone" + targetCard.getId(), null);
                             if (cardWasCast) {
                                 ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();

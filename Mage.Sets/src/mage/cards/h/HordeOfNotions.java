@@ -2,8 +2,8 @@
 package mage.cards.h;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -84,7 +84,7 @@ class HordeOfNotionsEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null && controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
-                controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game));
+                controller.playCard(card, game, true, true, new ApprovingObject(source, game));
             }
             return true;
         }

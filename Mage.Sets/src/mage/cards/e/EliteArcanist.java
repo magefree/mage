@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -24,6 +23,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author LevelX2
@@ -165,7 +165,7 @@ class EliteArcanistCopyEffect extends OneShotEffect {
                         if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
                             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),
-                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game, true, new ApprovingObject(source, game));
                             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                             return cardWasCast;
                         }

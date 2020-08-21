@@ -70,6 +70,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import mage.ApprovingObject;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -1136,7 +1137,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference) {
+    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
         if (card == null) {
             return false;
         }
@@ -1144,7 +1145,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (card.isLand()) {
             result = playLand(card, game, ignoreTiming);
         } else {
-            result = cast(card.getSpellAbility(), game, noMana, reference);
+            result = cast(card.getSpellAbility(), game, noMana, approvingObject);
         }
         if (!result) {
             game.informPlayer(this, "You can't play " + card.getIdName() + '.');
@@ -1156,11 +1157,11 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param originalAbility
      * @param game
      * @param noMana           cast it without paying mana costs
-     * @param permittingObject which object permitted the cast
+     * @param approvingObject which object approved the cast
      * @return
      */
     @Override
-    public boolean cast(SpellAbility originalAbility, Game game, boolean noMana, MageObjectReference permittingObject) {
+    public boolean cast(SpellAbility originalAbility, Game game, boolean noMana, ApprovingObject approvingObject) {
         if (game == null || originalAbility == null) {
             return false;
         }
@@ -1178,7 +1179,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Card card = game.getCard(ability.getSourceId());
         if (card != null) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                    ability.getId(), ability.getSourceId(), playerId, permittingObject), ability)) {
+                    ability.getId(), ability.getSourceId(), playerId, approvingObject), ability)) {
                 int bookmark = game.bookmarkState();
                 setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
                 Zone fromZone = game.getState().getZone(card.getMainCard().getId());
@@ -1213,11 +1214,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
 
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                        spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId, permittingObject);
+                        spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId, approvingObject);
                 game.fireEvent(event);
                 if (spell.activate(game, noMana)) {
                     event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
-                            spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId, permittingObject);
+                            spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId, approvingObject);
                     event.setZone(fromZone);
                     game.fireEvent(event);
                     if (!game.isSimulation()) {
@@ -1281,19 +1282,19 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND,
-                card.getId(), card.getId(), playerId, activationStatus.getPermittingObject()))) {
+                card.getId(), card.getId(), playerId, activationStatus.getApprovingObject()))) {
             // int bookmark = game.bookmarkState();
             // land events must return original zone (uses for commander watcher)
             Zone cardZoneBefore = game.getState().getZone(card.getId());
             GameEvent landEventBefore = GameEvent.getEvent(GameEvent.EventType.PLAY_LAND,
-                    card.getId(), card.getId(), playerId, activationStatus.getPermittingObject());
+                    card.getId(), card.getId(), playerId, activationStatus.getApprovingObject());
             landEventBefore.setZone(cardZoneBefore);
             game.fireEvent(landEventBefore);
 
             if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 landsPlayed++;
                 GameEvent landEventAfter = GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED,
-                        card.getId(), card.getId(), playerId, activationStatus.getPermittingObject());
+                        card.getId(), card.getId(), playerId, activationStatus.getApprovingObject());
                 landEventAfter.setZone(cardZoneBefore);
                 game.fireEvent(landEventAfter);
                 game.fireInformEvent(getLogName() + " plays " + card.getLogName());
@@ -1439,7 +1440,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
-                    result = cast((SpellAbility) ability, game, false, activationStatus.getPermittingObject());
+                    result = cast((SpellAbility) ability, game, false, activationStatus.getApprovingObject());
                     break;
                 default:
                     result = playAbility(ability.copy(), game);
@@ -3145,7 +3146,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 addPhyrexianLikePayOptions(abilityOptions, availableMana, game);
             }
 
-            MageObjectReference permittingObject = game.getContinuousEffects().asThough(ability.getSourceId(),
+            ApprovingObject approvingObject = game.getContinuousEffects().asThough(ability.getSourceId(),
                     AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
             for (Mana mana : abilityOptions) {
                 if (mana.count() == 0) {
@@ -3158,7 +3159,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                     //
                     //  add tests for non any color like Sunglasses of Urza
-                    if (permittingObject != null && mana.count() <= avail.count()) {
+                    if (approvingObject != null && mana.count() <= avail.count()) {
                         return true;
                     }
                     if (avail instanceof ConditionalMana && !((ConditionalMana) avail).apply(ability, game, getId(), ability.getManaCosts())) {
@@ -3427,17 +3428,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                 continue;
             }
 
-            MageObjectReference permittingObject;
+            ApprovingObject approvingObject;
             if (isPlaySpell || isPlayLand) {
                 // play hand from non hand zone
-                permittingObject = game.getContinuousEffects().asThough(object.getId(),
+                approvingObject = game.getContinuousEffects().asThough(object.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
             } else {
                 // other abilities from direct zones
-                permittingObject = null;
+                approvingObject = null;
             }
 
-            boolean canActivateAsHandZone = permittingObject != null
+            boolean canActivateAsHandZone = approvingObject != null
                     || (fromZone == Zone.GRAVEYARD && canPlayCardsFromGraveyard());
             boolean possibleToPlay = false;
 

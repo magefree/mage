@@ -1,8 +1,8 @@
 package mage.cards.y;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -92,7 +92,7 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
         player.revealCards(source, new CardsImpl(card), game);
         if (card.getConvertedManaCost() % 2 == 1) {
             if (player.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
-                player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
             } else {
                 /*
                 7/13/2018 | If the revealed card doesn’t have an odd converted mana cost or if that card does but you 

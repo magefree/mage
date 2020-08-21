@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -88,14 +89,14 @@ class SpelltwineEffect extends OneShotEffect {
                 controller.moveCards(cardTwo, Zone.EXILED, source, game);
             }
             boolean castCardOne = true;
-            MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
+            ApprovingObject approvingObject = new ApprovingObject(source, game);
             if (cardOne != null 
                     && controller.chooseUse(Outcome.Neutral, "Cast the copy of "
                     + cardOne.getName() + " first?", source, game)) {
                 Card copyOne = game.copyCard(cardOne, source, controller.getId());
                 game.getState().setValue("PlayFromNotOwnHandZone" + copyOne.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(copyOne, game, true),
-                        game, true, mor);
+                        game, true, approvingObject);
                 game.getState().setValue("PlayFromNotOwnHandZone" + copyOne.getId(), null);
                 castCardOne = false;
             }
@@ -103,7 +104,7 @@ class SpelltwineEffect extends OneShotEffect {
                 Card copyTwo = game.copyCard(cardTwo, source, controller.getId());
                 game.getState().setValue("PlayFromNotOwnHandZone" + copyTwo.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(copyTwo, game, true),
-                        game, true, mor);
+                        game, true, approvingObject);
                 game.getState().setValue("PlayFromNotOwnHandZone" + copyTwo.getId(), null);
             }
             if (cardOne != null 
@@ -111,7 +112,7 @@ class SpelltwineEffect extends OneShotEffect {
                 Card copyOne = game.copyCard(cardOne, source, controller.getId());
                 game.getState().setValue("PlayFromNotOwnHandZone" + copyOne.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(copyOne, game, true),
-                        game, true, mor);
+                        game, true, approvingObject);
                 game.getState().setValue("PlayFromNotOwnHandZone" + copyOne.getId(), null);
             }
             return true;

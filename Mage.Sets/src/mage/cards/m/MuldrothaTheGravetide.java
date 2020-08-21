@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -47,7 +48,9 @@ public final class MuldrothaTheGravetide extends CardImpl {
         this.toughness = new MageInt(6);
 
         // During each of your turns, you may play up to one permanent card of each permanent type from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MuldrothaTheGravetideCastFromGraveyardEffect()), new MuldrothaTheGravetideWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MuldrothaTheGravetideCastFromGraveyardEffect())
+                .setIdentifier(MageIdentifier.MuldrothaTheGravetideWatcher), 
+                new MuldrothaTheGravetideWatcher());
     }
 
     public MuldrothaTheGravetide(final MuldrothaTheGravetide card) {
@@ -142,7 +145,9 @@ class MuldrothaTheGravetideWatcher extends Watcher {
     }
 
     private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
-        if (mageObject != null && event.getAdditionalReference() != null) {
+        if (mageObject != null 
+                && event.getAdditionalReference() != null 
+                && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getAdditionalReference().getApprovingAbility().getIdentifier())) {
             UUID playerId = null;
             if (mageObject instanceof Spell) {
                 playerId = ((Spell) mageObject).getControllerId();
@@ -150,10 +155,10 @@ class MuldrothaTheGravetideWatcher extends Watcher {
                 playerId = ((Permanent) mageObject).getControllerId();
             }
             if (playerId != null) {
-                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference());
+                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference().getApprovingMageObjectReference());
                 if (permanentTypes == null) {
                     permanentTypes = EnumSet.noneOf(CardType.class);
-                    sourcePlayedPermanentTypes.put(event.getAdditionalReference(), permanentTypes);
+                    sourcePlayedPermanentTypes.put(event.getAdditionalReference().getApprovingMageObjectReference(), permanentTypes);
                 }
                 Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
                 for (CardType cardType : mageObject.getCardType()) {

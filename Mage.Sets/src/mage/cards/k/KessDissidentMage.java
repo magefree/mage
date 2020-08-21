@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -51,7 +52,8 @@ public final class KessDissidentMage extends CardImpl {
 
         // During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new KessDissidentMageCastFromGraveyardEffect());
+                new KessDissidentMageCastFromGraveyardEffect())
+                .setIdentifier(MageIdentifier.KessDissidentMageWatcher);
         ability.addEffect(new KessDissidentMageReplacementEffect());
         this.addAbility(ability, new KessDissidentMageWatcher());
     }
@@ -164,16 +166,13 @@ class KessDissidentMageWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getZone() == Zone.GRAVEYARD) {
+        if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
+                && event.hasApprovingIdentifier(MageIdentifier.KessDissidentMageWatcher)) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (event.getAdditionalReference() != null
-                    && event.getAdditionalReference().getSourceId() != null
-                    && (spell.isInstant()
-                    || spell.isSorcery())) {
-                allowingObjects.add(event.getAdditionalReference());
+            if (spell != null) {
+                allowingObjects.add(event.getAdditionalReference().getApprovingMageObjectReference());
                 castSpells.put(new MageObjectReference(spell.getMainCard().getId(), game),
-                        event.getAdditionalReference().getSourceId());
+                        event.getAdditionalReference().getApprovingAbility().getSourceId());
             }
         }
     }

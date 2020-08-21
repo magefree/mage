@@ -2,6 +2,7 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.ApprovingObject;
 import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -105,9 +106,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Can the player pay life for spells or activated abilities
-     * 
+     *
      * @param Ability
-     * @return 
+     * @return
      */
     boolean canPayLifeCost(Ability Ability);
 
@@ -319,7 +320,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects);
 
-    boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
+    boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject);
 
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
@@ -367,17 +368,17 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Plays a card if possible
      *
-     * @param card         the card that can be cast
+     * @param card            the card that can be cast
      * @param game
-     * @param noMana       if it's a spell i can be cast without paying mana
-     * @param ignoreTiming if it's cast during the resolution of another spell
-     *                     no sorcery or play land timing restriction are
-     *                     checked. For a land it has to be the turn of the
-     *                     player playing that card.
-     * @param reference    mage object that allows to play the card
+     * @param noMana          if it's a spell i can be cast without paying mana
+     * @param ignoreTiming    if it's cast during the resolution of another
+     *                        spell no sorcery or play land timing restriction
+     *                        are checked. For a land it has to be the turn of
+     *                        the player playing that card.
+     * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
-    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference);
+    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject);
 
     /**
      * @param card         the land card to play
@@ -941,13 +942,15 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Set the mana colors the user can pay with 2 life instead
-     * @param colors 
+     *
+     * @param colors
      */
     void addPhyrexianToColors(FilterMana colors);
 
     /**
      * Mana colors the player can pay instead with 2 life
-     * @return 
+     *
+     * @return
      */
     FilterMana getPhyrexianColors();
 

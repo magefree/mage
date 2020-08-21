@@ -1,7 +1,6 @@
 package mage.abilities;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -16,6 +15,7 @@ import mage.players.Player;
 
 import java.util.Optional;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -82,8 +82,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 return ActivationStatus.getFalse();
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            MageObjectReference permittingSource = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
-            if (permittingSource == null) {
+            ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
+            if (approvingObject == null) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
                     return ActivationStatus.getFalse();
@@ -118,7 +118,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
 
                 } else {
-                    return new ActivationStatus(canChooseTarget(game), permittingSource);
+                    return new ActivationStatus(canChooseTarget(game), approvingObject);
                 }
             }
         }
