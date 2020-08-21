@@ -29,7 +29,7 @@ public final class KaervekTheSpiteful extends CardImpl {
         // Other creatures get -1/-1.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
                 -1, -1, Duration.WhileOnBattlefield, true
-        ).setText("other creatures get +1/+1")));
+        ).setText("other creatures get -1/-1")));
     }
 
     private KaervekTheSpiteful(final KaervekTheSpiteful card) {
