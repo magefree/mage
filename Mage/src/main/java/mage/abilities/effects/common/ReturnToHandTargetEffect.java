@@ -90,15 +90,13 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         }
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("return ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+        if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ");
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
             if (!target.getTargetName().contains("target")) {
                 sb.append(" target ");
             }
             sb.append(target.getTargetName());
-            sb.append(" to their owners' hand");
-            return sb.toString();
         } else {
             if (target.getNumberOfTargets() > 1) {
                 sb.append(CardUtil.numberToText(target.getNumberOfTargets())).append(' ');
@@ -106,9 +104,14 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");
             }
-            sb.append(target.getTargetName()).append(" to its owner's hand");
-            return sb.toString();
         }
+        if(target.getMaxNumberOfTargets() > 1) {
+            sb.append(" to their owners' hand");
+        }
+        else {
+            sb.append(target.getTargetName()).append(" to its owner's hand");
+        }
+        return sb.toString();
     }
 
 }

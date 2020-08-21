@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class BarrinTolarianArchmage extends CardImpl {
 
     private static final FilterCreatureOrPlaneswalkerPermanent filter
-            = new FilterCreatureOrPlaneswalkerPermanent("other target creature or planeswalker");
+            = new FilterCreatureOrPlaneswalkerPermanent(" other target creature or planeswalker");
 
     static {
         filter.add(AnotherPredicate.instance);
