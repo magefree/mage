@@ -36,7 +36,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 52;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 231;
+    private static final long CARD_CONTENT_VERSION = 232;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
     private final RepositoryEventSource eventSource = new RepositoryEventSource();
