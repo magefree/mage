@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -6,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author fireshoes
  */
 public final class EldritchMoon extends ExpansionSet {
@@ -29,7 +27,7 @@ public final class EldritchMoon extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
-        
+
         cards.add(new SetCardInfo("Abandon Reason", 115, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
         cards.add(new SetCardInfo("Abolisher of Bloodlines", 111, Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Abundant Maw", 1, Rarity.UNCOMMON, mage.cards.a.AbundantMaw.class));

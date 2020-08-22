@@ -78,7 +78,7 @@ public final class MtgJsonService {
 
         String needName = convertXmageToMtgJsonCardName(name);
         return set.cards.stream()
-                .filter(c -> needName.equals(c.name) || needName.equals(c.asciiName) || needName.equals(c.faceName))
+                .filter(c -> needName.equals(c.getRealCardName()))
                 .collect(Collectors.toList());
     }
 
@@ -146,7 +146,7 @@ public final class MtgJsonService {
         public HashMap<String, ArrayList<MtgJsonCard>> data;
 
         private boolean containsSameNames(ArrayList<MtgJsonCard> list) {
-            Set<String> names = list.stream().map(c -> c.name).collect(Collectors.toSet());
+            Set<String> names = list.stream().map(MtgJsonCard::getRealCardName).collect(Collectors.toSet());
             return names.size() == 1;
         }
 

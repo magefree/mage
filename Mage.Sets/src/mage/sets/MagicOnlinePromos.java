@@ -66,6 +66,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Arc Lightning", 36116, Rarity.COMMON, mage.cards.a.ArcLightning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arc Lightning", 55791, Rarity.RARE, mage.cards.a.ArcLightning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 54547, Rarity.MYTHIC, mage.cards.a.ArcanisTheOmnipotent.class));
+        cards.add(new SetCardInfo("Archdemon of Greed", 43503, Rarity.RARE, mage.cards.a.ArchdemonOfGreed.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 55711, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 64422, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("Archon of the Triumvirate", 46877, Rarity.RARE, mage.cards.a.ArchonOfTheTriumvirate.class));
@@ -553,6 +554,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hoodwink", 62449, Rarity.COMMON, mage.cards.h.Hoodwink.class));
         cards.add(new SetCardInfo("Hordeling Outburst", 55783, Rarity.UNCOMMON, mage.cards.h.HordelingOutburst.class));
         cards.add(new SetCardInfo("Hostage Taker", 69987, Rarity.RARE, mage.cards.h.HostageTaker.class));
+        cards.add(new SetCardInfo("Howlpack Alpha", 42866, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 72241, Rarity.RARE, mage.cards.h.HuatliTheSunsHeart.class));
         cards.add(new SetCardInfo("Hydra Broodmaster", 53850, Rarity.RARE, mage.cards.h.HydraBroodmaster.class));
         cards.add(new SetCardInfo("Hydroblast", 69979, Rarity.COMMON, mage.cards.h.Hydroblast.class));
@@ -578,6 +580,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Infest", 43568, Rarity.UNCOMMON, mage.cards.i.Infest.class, FULL_ART));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 32013, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
         cards.add(new SetCardInfo("Inkmoth Nexus", 62999, Rarity.RARE, mage.cards.i.InkmothNexus.class));
+        cards.add(new SetCardInfo("Insidious Mist", 60472, Rarity.RARE, mage.cards.i.InsidiousMist.class));
         cards.add(new SetCardInfo("Intuition", 36046, Rarity.RARE, mage.cards.i.Intuition.class));
         cards.add(new SetCardInfo("Island", 239, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 247, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -689,6 +692,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Lowland Oaf", 62415, Rarity.COMMON, mage.cards.l.LowlandOaf.class));
         cards.add(new SetCardInfo("Loyal Retainers", 47973, Rarity.UNCOMMON, mage.cards.l.LoyalRetainers.class));
         cards.add(new SetCardInfo("Lu Bu, Master-at-Arms", 36130, Rarity.RARE, mage.cards.l.LuBuMasterAtArms.class));
+        cards.add(new SetCardInfo("Ludevic's Abomination", 42874, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", 42874, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));
         cards.add(new SetCardInfo("Mad Auntie", 35066, Rarity.RARE, mage.cards.m.MadAuntie.class));
         cards.add(new SetCardInfo("Maelstrom Pulse", 37845, Rarity.RARE, mage.cards.m.MaelstromPulse.class));
@@ -1212,6 +1216,7 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Tormented Hero", 51934, Rarity.UNCOMMON, mage.cards.t.TormentedHero.class));
         cards.add(new SetCardInfo("Tormented Soul", 41652, Rarity.COMMON, mage.cards.t.TormentedSoul.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 31427, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
+        cards.add(new SetCardInfo("Tovolar's Magehunter", 43507, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Tradewind Rider", 36048, Rarity.RARE, mage.cards.t.TradewindRider.class));
         cards.add(new SetCardInfo("Transmute Artifact", 65644, Rarity.RARE, mage.cards.t.TransmuteArtifact.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 69242, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));

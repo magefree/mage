@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -26,18 +25,19 @@ public final class Innistrad extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
+
         cards.add(new SetCardInfo("Abattoir Ghoul", 85, Rarity.UNCOMMON, mage.cards.a.AbattoirGhoul.class));
         cards.add(new SetCardInfo("Abbey Griffin", 1, Rarity.COMMON, mage.cards.a.AbbeyGriffin.class));
         cards.add(new SetCardInfo("Altar's Reap", 86, Rarity.COMMON, mage.cards.a.AltarsReap.class));
         cards.add(new SetCardInfo("Ambush Viper", 169, Rarity.COMMON, mage.cards.a.AmbushViper.class));
         cards.add(new SetCardInfo("Ancient Grudge", 127, Rarity.COMMON, mage.cards.a.AncientGrudge.class));
-        cards.add(new SetCardInfo("Angelic Overseer", 3, Rarity.MYTHIC, mage.cards.a.AngelicOverseer.class));
         cards.add(new SetCardInfo("Angel of Flight Alabaster", 2, Rarity.RARE, mage.cards.a.AngelOfFlightAlabaster.class));
+        cards.add(new SetCardInfo("Angelic Overseer", 3, Rarity.MYTHIC, mage.cards.a.AngelicOverseer.class));
         cards.add(new SetCardInfo("Armored Skaab", 43, Rarity.COMMON, mage.cards.a.ArmoredSkaab.class));
         cards.add(new SetCardInfo("Army of the Damned", 87, Rarity.MYTHIC, mage.cards.a.ArmyOfTheDamned.class));
         cards.add(new SetCardInfo("Ashmouth Hound", 128, Rarity.COMMON, mage.cards.a.AshmouthHound.class));
-        cards.add(new SetCardInfo("Avacynian Priest", 4, Rarity.COMMON, mage.cards.a.AvacynianPriest.class));
         cards.add(new SetCardInfo("Avacyn's Pilgrim", 170, Rarity.COMMON, mage.cards.a.AvacynsPilgrim.class));
+        cards.add(new SetCardInfo("Avacynian Priest", 4, Rarity.COMMON, mage.cards.a.AvacynianPriest.class));
         cards.add(new SetCardInfo("Back from the Brink", 44, Rarity.RARE, mage.cards.b.BackFromTheBrink.class));
         cards.add(new SetCardInfo("Balefire Dragon", 129, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class));
         cards.add(new SetCardInfo("Bane of Hanweir", 145, Rarity.UNCOMMON, mage.cards.b.BaneOfHanweir.class));
@@ -120,12 +120,12 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Gatstaf Howler", 182, Rarity.UNCOMMON, mage.cards.g.GatstafHowler.class));
         cards.add(new SetCardInfo("Gatstaf Shepherd", 182, Rarity.UNCOMMON, mage.cards.g.GatstafShepherd.class));
         cards.add(new SetCardInfo("Gavony Township", 239, Rarity.RARE, mage.cards.g.GavonyTownship.class));
+        cards.add(new SetCardInfo("Geist of Saint Traft", 213, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
+        cards.add(new SetCardInfo("Geist-Honored Monk", 17, Rarity.RARE, mage.cards.g.GeistHonoredMonk.class));
         cards.add(new SetCardInfo("Geistcatcher's Rig", 223, Rarity.UNCOMMON, mage.cards.g.GeistcatchersRig.class));
         cards.add(new SetCardInfo("Geistflame", 144, Rarity.COMMON, mage.cards.g.Geistflame.class));
-        cards.add(new SetCardInfo("Geist-Honored Monk", 17, Rarity.RARE, mage.cards.g.GeistHonoredMonk.class));
-        cards.add(new SetCardInfo("Geist of Saint Traft", 213, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
-        cards.add(new SetCardInfo("Ghostly Possession", 18, Rarity.COMMON, mage.cards.g.GhostlyPossession.class));
         cards.add(new SetCardInfo("Ghost Quarter", 240, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
+        cards.add(new SetCardInfo("Ghostly Possession", 18, Rarity.COMMON, mage.cards.g.GhostlyPossession.class));
         cards.add(new SetCardInfo("Ghoulcaller's Bell", 224, Rarity.COMMON, mage.cards.g.GhoulcallersBell.class));
         cards.add(new SetCardInfo("Ghoulcaller's Chant", 101, Rarity.COMMON, mage.cards.g.GhoulcallersChant.class));
         cards.add(new SetCardInfo("Ghoulraiser", 102, Rarity.COMMON, mage.cards.g.Ghoulraiser.class));
@@ -162,8 +162,8 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isolated Chapel", 242, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Kessig Cagebreakers", 189, Rarity.RARE, mage.cards.k.KessigCagebreakers.class));
-        cards.add(new SetCardInfo("Kessig Wolf", 151, Rarity.COMMON, mage.cards.k.KessigWolf.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 243, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
+        cards.add(new SetCardInfo("Kessig Wolf", 151, Rarity.COMMON, mage.cards.k.KessigWolf.class));
         cards.add(new SetCardInfo("Kindercatch", 190, Rarity.COMMON, mage.cards.k.Kindercatch.class));
         cards.add(new SetCardInfo("Krallenhorde Wantons", 185, Rarity.COMMON, mage.cards.k.KrallenhordeWantons.class));
         cards.add(new SetCardInfo("Kruin Outlaw", 152, Rarity.RARE, mage.cards.k.KruinOutlaw.class));
@@ -206,10 +206,10 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Naturalize", 197, Rarity.COMMON, mage.cards.n.Naturalize.class));
         cards.add(new SetCardInfo("Nephalia Drownyard", 245, Rarity.RARE, mage.cards.n.NephaliaDrownyard.class));
         cards.add(new SetCardInfo("Nevermore", 25, Rarity.RARE, mage.cards.n.Nevermore.class));
-        cards.add(new SetCardInfo("Nightbird's Clutches", 154, Rarity.COMMON, mage.cards.n.NightbirdsClutches.class));
-        cards.add(new SetCardInfo("Nightfall Predator", 176, Rarity.RARE, mage.cards.n.NightfallPredator.class));
         cards.add(new SetCardInfo("Night Revelers", 153, Rarity.COMMON, mage.cards.n.NightRevelers.class));
         cards.add(new SetCardInfo("Night Terrors", 111, Rarity.COMMON, mage.cards.n.NightTerrors.class));
+        cards.add(new SetCardInfo("Nightbird's Clutches", 154, Rarity.COMMON, mage.cards.n.NightbirdsClutches.class));
+        cards.add(new SetCardInfo("Nightfall Predator", 176, Rarity.RARE, mage.cards.n.NightfallPredator.class));
         cards.add(new SetCardInfo("Olivia Voldaren", 215, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class));
         cards.add(new SetCardInfo("One-Eyed Scarecrow", 230, Rarity.COMMON, mage.cards.o.OneEyedScarecrow.class));
         cards.add(new SetCardInfo("Orchard Spirit", 198, Rarity.COMMON, mage.cards.o.OrchardSpirit.class));
@@ -245,8 +245,8 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Sharpened Pitchfork", 232, Rarity.UNCOMMON, mage.cards.s.SharpenedPitchfork.class));
         cards.add(new SetCardInfo("Shimmering Grotto", 246, Rarity.COMMON, mage.cards.s.ShimmeringGrotto.class));
         cards.add(new SetCardInfo("Silent Departure", 75, Rarity.COMMON, mage.cards.s.SilentDeparture.class));
-        cards.add(new SetCardInfo("Silverchase Fox", 31, Rarity.COMMON, mage.cards.s.SilverchaseFox.class));
         cards.add(new SetCardInfo("Silver-Inlaid Dagger", 233, Rarity.UNCOMMON, mage.cards.s.SilverInlaidDagger.class));
+        cards.add(new SetCardInfo("Silverchase Fox", 31, Rarity.COMMON, mage.cards.s.SilverchaseFox.class));
         cards.add(new SetCardInfo("Skaab Goliath", 76, Rarity.UNCOMMON, mage.cards.s.SkaabGoliath.class));
         cards.add(new SetCardInfo("Skaab Ruinator", 77, Rarity.MYTHIC, mage.cards.s.SkaabRuinator.class));
         cards.add(new SetCardInfo("Skeletal Grimace", 116, Rarity.COMMON, mage.cards.s.SkeletalGrimace.class));
@@ -281,8 +281,8 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Thraben Sentry", 38, Rarity.COMMON, mage.cards.t.ThrabenSentry.class));
         cards.add(new SetCardInfo("Tormented Pariah", 165, Rarity.COMMON, mage.cards.t.TormentedPariah.class));
         cards.add(new SetCardInfo("Traitorous Blood", 166, Rarity.COMMON, mage.cards.t.TraitorousBlood.class));
-        cards.add(new SetCardInfo("Traveler's Amulet", 234, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Travel Preparations", 206, Rarity.COMMON, mage.cards.t.TravelPreparations.class));
+        cards.add(new SetCardInfo("Traveler's Amulet", 234, Rarity.COMMON, mage.cards.t.TravelersAmulet.class));
         cards.add(new SetCardInfo("Tree of Redemption", 207, Rarity.MYTHIC, mage.cards.t.TreeOfRedemption.class));
         cards.add(new SetCardInfo("Trepanation Blade", 235, Rarity.UNCOMMON, mage.cards.t.TrepanationBlade.class));
         cards.add(new SetCardInfo("Tribute to Hunger", 119, Rarity.UNCOMMON, mage.cards.t.TributeToHunger.class));

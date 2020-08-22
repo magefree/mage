@@ -548,6 +548,32 @@ public class VerifyCardDataTest {
     }
 
     @Test
+    public void test_checkMissingSecondSideCardsInSets() {
+        Collection<String> errorsList = new ArrayList<>();
+
+        // CHECK: if card have second side (flip, transform) then it must have all sides in that set
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            for (ExpansionSet.SetCardInfo info : set.getSetCardInfo()) {
+                CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
+                Assert.assertNotNull(cardInfo);
+
+                Card card = cardInfo.getCard();
+                Card secondCard = card.getSecondCardFace();
+                if (secondCard != null) {
+                    if (set.findCardInfoByClass(secondCard.getClass()).isEmpty()) {
+                        errorsList.add("Error: missing second face card from set: " + set.getCode() + " - " + set.getName() + " - main: " + card.getName() + "; second: " + secondCard.getName());
+                    }
+                }
+            }
+        }
+
+        printMessages(errorsList);
+        if (errorsList.size() > 0) {
+            Assert.fail("Found missing second side cards in sets, errors: " + errorsList.size());
+        }
+    }
+
+    @Test
     @Ignore // TODO: enable after all missing cards and settings fixes
     public void test_checkWrongCardsDataInSets() {
         Collection<String> errorsList = new ArrayList<>();
@@ -571,7 +597,7 @@ public class VerifyCardDataTest {
                 }
 
                 // index for missing cards
-                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.name + " - " + jsonCard.number;
+                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number;
                 foundedJsonCards.add(code);
 
                 // CHECK: must use full art setting
@@ -602,13 +628,13 @@ public class VerifyCardDataTest {
             }
 
             for (MtgJsonCard jsonCard : jsonSet.cards) {
-                String code = jsonSet.code + " - " + jsonCard.name + " - " + jsonCard.number;
+                String code = jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number;
                 if (!foundedJsonCards.contains(code)) {
-                    if (CardRepository.instance.findCard(jsonCard.name) == null) {
+                    if (CardRepository.instance.findCard(jsonCard.getRealCardName()) == null) {
                         // ignore non-implemented cards
                         continue;
                     }
-                    errorsList.add("Error: missing card from xmage's set: " + jsonSet.code + " - " + jsonCard.name + " - " + jsonCard.number);
+                    errorsList.add("Error: missing card from xmage's set: " + jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number);
                 }
             }
         }

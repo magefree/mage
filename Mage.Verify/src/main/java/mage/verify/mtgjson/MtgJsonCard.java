@@ -32,4 +32,16 @@ public final class MtgJsonCard {
     public String layout;
     public boolean isFullArt;
     public List<String> printings; // set codes with that card
+
+    public String getRealCardName() {
+        // double faces cards must be split in different cards in xmage (so use faceName instead name)
+        // for card searching
+        if ("transform".equals(layout)
+                || "flip".equals(layout)
+                || "adventure".equals(layout)
+                || "meld".equals(layout)) { // TODO: remove or keep after mtgjson's meld bug resolve https://github.com/mtgjson/mtgjson/issues/661
+            return faceName;
+        }
+        return asciiName != null ? asciiName : name;
+    }
 }

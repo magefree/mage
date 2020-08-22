@@ -10,6 +10,8 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -683,6 +685,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
+        // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
@@ -691,14 +694,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             return secondSideCard;
         }
 
-        List<ExpansionSet.SetCardInfo> cardInfo = Sets.findSet(expansionSetCode).findCardInfoByClass(secondSideCardClazz);
-        if (cardInfo.isEmpty()) {
-            return null;
-        }
-
-        ExpansionSet.SetCardInfo info = cardInfo.get(0);
-        return secondSideCard = createCard(secondSideCardClazz,
-                new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+        // must be non strict search in any sets, not one set
+        // example: if set contains only one card side, e.g. dev forget to add it
+        // verify test checks missing side cards in test_checkMissingSecondSideCardsInSets
+        CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCardByClassName(secondSideCardClazz.getCanonicalName(), expansionSetCode);
+        secondSideCard = cardInfo.getCard();
+        return secondSideCard;
     }
 
     @Override
@@ -971,5 +972,5 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return false;
-    }   
+    }
 }

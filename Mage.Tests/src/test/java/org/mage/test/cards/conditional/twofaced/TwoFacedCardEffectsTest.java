@@ -72,17 +72,24 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyCantTransform() {
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
+        addCard(Zone.HAND, playerA, "Mayor of Avabruck"); // {1}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Zone.HAND, playerA, "Mayor of Avabruck");
+        //
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+        addCard(Zone.HAND, playerB, "Clone"); // {3}{U}
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
-        addCard(Zone.HAND, playerB, "Clone");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mayor of Avabruck");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        setChoice(playerB, "Yes"); // use copy
+        setChoice(playerB, "Mayor of Avabruck"); // clone target
 
+        setStrictChooseMode(true);
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, 2);
         assertHandCount(playerB, 2);
@@ -120,14 +127,13 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
 
     /**
      * Tests that triggered abilities of the frontside do not trigger if the card is transformed
-     * 
      */
     @Test
     public void testTransformedDOesNotTriggerFrontsideAbilities() {
         addCard(Zone.BATTLEFIELD, playerA, "Loyal Cathar");
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-        addCard(Zone.HAND, playerB, "Lightning Bolt",2);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Loyal Cathar");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Unhallowed Cathar");
