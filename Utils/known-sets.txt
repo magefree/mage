@@ -28,6 +28,7 @@ Commander 2017 Edition|Commander2017Edition|
 Commander 2018|Commander2018Edition|
 Commander 2019|Commander2019Edition|
 Commander 2020|Commander2020Edition|
+Commander Legends|CommanderLegends|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|

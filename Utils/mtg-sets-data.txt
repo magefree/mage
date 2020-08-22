@@ -35,6 +35,7 @@ Commander 2017 Edition|C17|
 Commander 2018 Edition|C18|
 Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
+Commander Legends|CMR|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
