@@ -8,6 +8,8 @@ public final class MtgJsonCard {
     // contains only used fields, if you need more for tests then just add it here
 
     public String name;
+    public String asciiName; // mtgjson uses it for some cards like El-Hajjaj
+    public String number; // from sets source only, see https://mtgjson.com/data-models/card/
 
     public String faceName;
     public String side;
@@ -28,5 +30,6 @@ public final class MtgJsonCard {
 
     public Integer edhrecRank;
     public String layout;
+    public boolean isFullArt;
     public List<String> printings; // set codes with that card
 }

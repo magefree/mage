@@ -24,6 +24,8 @@ public final class MtgJsonService {
         for (Map.Entry<String, String> entry : mtgJsonToXMageCodes.entrySet()) {
             xMageToMtgJsonCodes.put(entry.getValue(), entry.getKey());
         }
+        xMageToMtgJsonCodes.put("8EB", "8ED");
+        xMageToMtgJsonCodes.put("9EB", "9ED");
     }
 
     private static Map<String, MtgJsonCard> loadAllCards() throws IOException {
@@ -68,18 +70,56 @@ public final class MtgJsonService {
         return findReference(CardHolder.cards, name);
     }
 
+    public static List<MtgJsonCard> cardsFromSet(String setCode, String name) {
+        MtgJsonSet set = findReference(SetHolder.sets, setCode);
+        if (set == null) {
+            return new ArrayList<>();
+        }
+
+        String needName = convertXmageToMtgJsonCardName(name);
+        return set.cards.stream()
+                .filter(c -> needName.equals(c.name) || needName.equals(c.asciiName) || needName.equals(c.faceName))
+                .collect(Collectors.toList());
+    }
+
+    public static MtgJsonCard cardFromSet(String setCode, String name, String number) {
+        String jsonSetCode = xMageToMtgJsonCodes.getOrDefault(setCode, setCode);
+        List<MtgJsonCard> list = cardsFromSet(jsonSetCode, name);
+        return list.stream()
+                .filter(c -> convertMtgJsonToXmageCardNumber(c.number).equals(number))
+                .findFirst().orElse(null);
+    }
+
     private static <T> T findReference(Map<String, T> reference, String name) {
         T ref = reference.get(name);
         if (ref == null) {
-            name = name.replaceFirst("\\bA[Ee]", "Æ");
-            ref = reference.get(name);
+            //name = name.replaceFirst("\\bA[Ee]", "Æ");
+            //ref = reference.get(name);
         }
         if (ref == null) {
-            name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
+            //name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
+            //ref = reference.get(name);
+        }
+        if (ref == null) {
+            name = convertXmageToMtgJsonCardName(name);
             ref = reference.get(name);
         }
 
         return ref;
+    }
+
+    private static String convertXmageToMtgJsonCardName(String cardName) {
+        return cardName;
+        //.replaceFirst("Aether", "Æther")
+        //.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
+    }
+
+    private static String convertMtgJsonToXmageCardNumber(String number) {
+        // card number notation must be same for all sets (replace non-ascii symbols)
+        // so your set generation tools must use same replaces
+        return number
+                .replace("★", "*")
+                .replace("†", "+");
     }
 
     private static <T> void addAliases(Map<String, T> reference) {

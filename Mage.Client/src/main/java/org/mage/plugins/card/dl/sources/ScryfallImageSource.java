@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import mage.client.util.CardLanguage;
-import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -85,19 +84,6 @@ public enum ScryfallImageSource implements CardImageSource {
                     alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
                 }
             }
-        }
-
-        // ARN and POR uses † notation for art variation cards
-        if (baseUrl == null && card.getUsesVariousArt() && card.getSet().matches("ARN|POR")) {
-            String collectorId = card.getCollectorId();
-            if (collectorId.endsWith("b"))
-                collectorId = collectorId.replace("b", "†");
-
-            final String scryfallCollectorId = CardUtil.urlEncode(collectorId);
-            baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + scryfallCollectorId + "/" + localizedCode + "?format=image";
-            alternativeUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
-                    + scryfallCollectorId + "/" + defaultCode + "?format=image";
         }
 
         // double faced card

@@ -77,6 +77,12 @@ public abstract class ExpansionSet implements Serializable {
         public CardGraphicInfo getGraphicInfo() {
             return this.graphicInfo;
         }
+
+        public boolean isFullArt() {
+            return this.graphicInfo != null
+                    && this.graphicInfo.getFrameStyle() != null
+                    && this.graphicInfo.getFrameStyle().isFullArt();
+        }
     }
 
     protected final List<SetCardInfo> cards = new ArrayList<>();

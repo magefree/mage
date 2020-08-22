@@ -84,7 +84,7 @@ class DawnEvangelAbility extends DiesCreatureTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a creature dies, if an Aura you control was attached to it, " +
+        return "Whenever a creature dies, if an Aura you controlled was attached to it, " +
                 "return target creature card with converted mana cost 2 or less from your graveyard to your hand.";
     }
 
