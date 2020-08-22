@@ -87,7 +87,7 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
 
         Stream.of(
                 // most popular
-                new Standard(), new Pioneer(), new Modern(), new Legacy(), new Vintage(), new Pauper(),
+                new Standard(), new Pioneer(), new Modern(), new Legacy(), new Vintage(), new Pauper(), new Historic(),
                 // common
                 new Commander(), new Oathbreaker(), new Brawl(),
                 // other
