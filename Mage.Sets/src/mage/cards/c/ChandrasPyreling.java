@@ -77,6 +77,6 @@ class ChandrasPyrelingAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a source you control deals noncombat damage to an opponent, {source} gets +1/+0 and gains double strike until end of turn.";
+        return "Whenever a source you control deals noncombat damage to an opponent, {this} gets +1/+0 and gains double strike until end of turn.";
     }
 }

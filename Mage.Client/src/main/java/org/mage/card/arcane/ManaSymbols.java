@@ -1,5 +1,23 @@
 package org.mage.card.arcane;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import mage.abilities.hint.HintUtils;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionRepository;
@@ -22,27 +40,6 @@ import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.util.SVGConstants;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.CardImageUtils;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageProducer;
-import java.awt.image.RGBImageFilter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.List;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 public final class ManaSymbols {
@@ -77,22 +74,22 @@ public final class ManaSymbols {
         withoutSymbols.add("P09");
         withoutSymbols.add("P10");
         withoutSymbols.add("P11");
-        
+
     }
 
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
     private static final String[] symbols = new String[]{
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-            "B", "BG", "BR", "BP", "2B",
-            "G", "GU", "GW", "GP", "2G",
-            "R", "RG", "RW", "RP", "2R",
-            "S", "T", "Q",
-            "U", "UB", "UR", "UP", "2U",
-            "W", "WB", "WU", "WP", "2W",
-            "X", "C", "E"};
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+        "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+        "B", "BG", "BR", "BP", "2B",
+        "G", "GU", "GW", "GP", "2G",
+        "R", "RG", "RW", "RP", "2R",
+        "S", "T", "Q",
+        "U", "UB", "UR", "UP", "2U",
+        "W", "WB", "WU", "WP", "2W",
+        "X", "C", "E"};
 
     private static final JLabel labelRender = new JLabel(); // render mana text
 
@@ -173,7 +170,7 @@ public final class ManaSymbols {
         }
 
         // preload set images
-        List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+        java.util.List<String> setCodes = ExpansionRepository.instance.getSetCodes();
         if (setCodes == null) {
             // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
             LOGGER.warn("No db information for sets found. Connect to a server to create database file on client side. Then try to restart the client.");
@@ -713,7 +710,7 @@ public final class ManaSymbols {
 
     }
 
-    public static String getStringManaCost(List<String> manaCost) {
+    public static String getStringManaCost(java.util.List<String> manaCost) {
         StringBuilder sb = new StringBuilder();
         for (String s : manaCost) {
             sb.append(s);
@@ -778,7 +775,6 @@ public final class ManaSymbols {
         // replace every {symbol} to <img> link
         // ignore data backup
         String replaced = value
-                .replace("{source}", "|source|")
                 .replace("{this}", "|this|");
 
         // not need to add different images (width and height do the work)
@@ -790,7 +786,7 @@ public final class ManaSymbols {
         replaced = replaced.replace(CardInfo.SPLIT_MANA_SEPARATOR_FULL, CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
                 "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
-                        + symbolSize + " height=" + symbolSize + '>');
+                + symbolSize + " height=" + symbolSize + '>');
 
         // replace hint icons
         if (replaced.contains(HintUtils.HINT_ICON_GOOD)) {
@@ -808,7 +804,6 @@ public final class ManaSymbols {
 
         // ignored data restore
         replaced = replaced
-                .replace("|source|", "{source}")
                 .replace("|this|", "{this}")
                 .replace("@S@", "$");
 

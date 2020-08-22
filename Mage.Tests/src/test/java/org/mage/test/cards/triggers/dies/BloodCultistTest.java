@@ -23,7 +23,7 @@ public class BloodCultistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Devilthorn Fox", 1); // 3/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Cultist");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Devilthorn Fox");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Devilthorn Fox");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -46,7 +46,7 @@ public class BloodCultistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Indulgent Aristocrat", 1); // 1/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Cultist");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Devilthorn Fox");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Devilthorn Fox");
 
         attack(5, playerA, "Blood Cultist");
         block(5, playerB, "Indulgent Aristocrat", "Blood Cultist");
@@ -73,8 +73,8 @@ public class BloodCultistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Shambling Ghoul", 1); // 2/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Cultist");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Devilthorn Fox");
-        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Shambling Ghoul");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Devilthorn Fox");
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Shambling Ghoul");
         attack(5, playerA, "Silvercoat Lion");
         block(5, playerB, "Shambling Ghoul", "Silvercoat Lion");
 
@@ -101,8 +101,8 @@ public class BloodCultistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Shambling Ghoul", 1); // 2/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Cultist");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Devilthorn Fox");
-        activateAbility(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals", "Shambling Ghoul");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Devilthorn Fox");
+        activateAbility(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals", "Shambling Ghoul");
         attack(5, playerA, "Silvercoat Lion");
         block(5, playerB, "Shambling Ghoul", "Silvercoat Lion");
 
@@ -127,7 +127,7 @@ public class BloodCultistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Shambling Ghoul", 1); // 2/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Cultist");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Shambling Ghoul");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Shambling Ghoul");
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Shambling Ghoul");
 
         setStopAt(3, PhaseStep.END_TURN);

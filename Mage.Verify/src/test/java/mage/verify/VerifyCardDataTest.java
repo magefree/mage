@@ -1,6 +1,18 @@
 package mage.verify;
 
 import com.google.common.base.CharMatcher;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -34,19 +46,6 @@ import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.reflections.Reflections;
-
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -553,8 +552,9 @@ public class VerifyCardDataTest {
 
         // missing
         for (ExpansionSet set : xmageSets) {
-            if (skipListHaveName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, set.getCode()))
+            if (skipListHaveName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, set.getCode())) {
                 continue;
+            }
 
             if (!scryfallSets.contains(set.getCode())) {
                 errorsList.add("Error: scryfall download missing setting: " + set.getCode() + " - " + set.getName());
@@ -944,7 +944,6 @@ public class VerifyCardDataTest {
         Reflections reflections = new Reflections("mage.");
         Set<Class<? extends Plane>> planesClassesList = reflections.getSubTypesOf(Plane.class);
 
-
         // 1. correct class name
         for (Class<? extends Plane> planeClass : planesClassesList) {
             if (!planeClass.getName().endsWith("Plane")) {
@@ -1086,7 +1085,7 @@ public class VerifyCardDataTest {
         // fix names (e.g. Urza’s to Urza's)
         if (expected != null && expected.contains("Urza’s")) {
             expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
+            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext();) {
                 if (it.next().equals("Urza’s")) {
                     it.set("Urza's");
                 }
@@ -1145,9 +1144,9 @@ public class VerifyCardDataTest {
             // ability/effect must have description or not
             boolean mustCheck = card.getAbilities().containsClass(objectClass)
                     || card.getAbilities().stream()
-                    .map(Ability::getAllEffects)
-                    .flatMap(Collection::stream)
-                    .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
+                            .map(Ability::getAllEffects)
+                            .flatMap(Collection::stream)
+                            .anyMatch(effect -> effect.getClass().isAssignableFrom(objectClass));
             mustCheck = false; // TODO: enable and fix all problems with effect and ability hints
             if (mustCheck) {
                 boolean needHint = ref.text.contains(objectHint);
@@ -1205,7 +1204,6 @@ public class VerifyCardDataTest {
         // replace special text and symbols
         newRule = newRule
                 .replace("{this}", cardName)
-                .replace("{source}", cardName)
                 .replace("−", "-")
                 .replace("—", "-")
                 .replace("&mdash;", "-");
@@ -1248,7 +1246,7 @@ public class VerifyCardDataTest {
     }
 
 
-        /*
+    /*
         for(String rule : card.getRules()) {
             rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
             // TODO: add Equip {3} checks
@@ -1302,7 +1300,6 @@ public class VerifyCardDataTest {
 
         }
     }*/
-
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
         if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {

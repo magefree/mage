@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -12,8 +13,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.Locale;
 
 public class DoIfCostPaid extends OneShotEffect {
 
@@ -85,11 +84,10 @@ public class DoIfCostPaid extends OneShotEffect {
                 }
                 message = getCostText() + (effectText.isEmpty() ? "" : " and " + effectText) + "?";
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
-                CardUtil.replaceSourceName(message, mageObject.getName());
             } else {
                 message = chooseUseText;
             }
-            message = CardUtil.replaceSourceName(message, mageObject.getLogName());
+            message = CardUtil.replaceSourceName(message, mageObject.getName());
             boolean result = true;
             Outcome payOutcome = executingEffects.getOutcome(source, this.outcome);
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)

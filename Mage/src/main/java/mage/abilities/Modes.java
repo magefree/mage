@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import java.util.*;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -10,8 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.RandomUtil;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -446,10 +445,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public String getText(String sourceName) {
-        String text = getText();
-        text = text.replace("{this}", sourceName);
-        text = text.replace("{source}", sourceName);
-        return text;
+        return getText().replace("{this}", sourceName);
     }
 
     public boolean isEachModeOnlyOnce() {

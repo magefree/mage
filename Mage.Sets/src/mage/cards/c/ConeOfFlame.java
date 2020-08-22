@@ -63,7 +63,7 @@ class ConeOfFlameEffect extends OneShotEffect {
 
     public ConeOfFlameEffect() {
         super(Outcome.Damage);
-        this.staticText = "{source} deals 1 damage to any target, "
+        this.staticText = "{this} deals 1 damage to any target, "
                 + "2 damage to another target, "
                 + "and 3 damage to a third target";
     }

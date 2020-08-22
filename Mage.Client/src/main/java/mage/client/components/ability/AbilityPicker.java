@@ -391,7 +391,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         List<Object> objectList = new ArrayList<>();
         objectList.add("T: add {R}. 111111111111111111111111111");
-        objectList.add("T: add {B}. {source} deals 1 damage to you.");
+        objectList.add("T: add {B}. {this} deals 1 damage to you.");
         objectList.add("{T}: add {B}");
         objectList.add("T: add {B}");
         objectList.add("T: add {B}");

@@ -95,7 +95,7 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {source} is in your graveyard, you may exile a black creature card other than {source} from your graveyard. If you do, return {source} to the battlefield.";
+        return "At the beginning of your upkeep, if {this} is in your graveyard, you may exile a black creature card other than {this} from your graveyard. If you do, return {this} to the battlefield.";
     }
     
 }

@@ -1,5 +1,18 @@
 package mage.player.human;
 
+import java.awt.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Queue;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
@@ -17,6 +30,8 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -46,16 +61,6 @@ import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
-
-import java.awt.*;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Queue;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -301,7 +306,6 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-
         while (canRespond()) {
             if (messageToClient.getSecondMessage() == null) {
                 messageToClient.setSecondMessage(getRelatedObjectName(source, game));
@@ -490,7 +494,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            List<UUID> chosen = target.getTargets();
+            java.util.List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable) chosen);
 
             updateGameStatePriority("choose(5)", game);
@@ -656,9 +660,9 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             Map<String, Serializable> options = getOptions(target, null);
-            List<UUID> chosen = target.getTargets();
+            java.util.List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable) chosen);
-            List<UUID> choosable = new ArrayList<>();
+            java.util.List<UUID> choosable = new ArrayList<>();
             for (UUID cardId : cards) {
                 if (target.canTarget(abilityControllerId, cardId, null, cards, game)) {
                     choosable.add(cardId);
@@ -730,9 +734,9 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             Map<String, Serializable> options = getOptions(target, null);
-            List<UUID> chosen = target.getTargets();
+            java.util.List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable) chosen);
-            List<UUID> choosable = new ArrayList<>();
+            java.util.List<UUID> choosable = new ArrayList<>();
             for (UUID cardId : cards) {
                 if (target.canTarget(abilityControllerId, cardId, source, cards, game)) {
                     choosable.add(cardId);
@@ -801,9 +805,9 @@ public class HumanPlayer extends PlayerImpl {
             if (!isExecutingMacro()) {
                 String selectedNames = target.getTargetedName(game);
                 game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
-                                + "<br> Amount remaining: " + target.getAmountRemaining()
-                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
-                                getRelatedObjectName(source, game)),
+                        + "<br> Amount remaining: " + target.getAmountRemaining()
+                        + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                        getRelatedObjectName(source, game)),
                         possibleTargets,
                         required,
                         getOptions(target, null));
@@ -817,7 +821,7 @@ public class HumanPlayer extends PlayerImpl {
 
                     boolean removeMode = target.getTargets().contains(targetId)
                             && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : " target") + "?", "",
-                            "Remove from selected", "Add extra amount (remaining " + target.getAmountRemaining() + ")", source, game);
+                                    "Remove from selected", "Add extra amount (remaining " + target.getAmountRemaining() + ")", source, game);
 
                     if (removeMode) {
                         target.remove(targetId);
@@ -959,9 +963,9 @@ public class HumanPlayer extends PlayerImpl {
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                    .getUserData()
-                                    .getUserSkipPrioritySteps()
-                                    .isStopOnAllEndPhases())) {
+                                            .getUserData()
+                                            .getUserSkipPrioritySteps()
+                                            .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -993,9 +997,9 @@ public class HumanPlayer extends PlayerImpl {
                         if (haveNewObjectsOnStack
                                 && (playerId.equals(game.getActivePlayerId())
                                 && controllingPlayer
-                                .getUserData()
-                                .getUserSkipPrioritySteps()
-                                .isStopOnStackNewObjects())) {
+                                        .getUserData()
+                                        .getUserSkipPrioritySteps()
+                                        .isStopOnStackNewObjects())) {
                             // new objects on stack -- disable "pass until stack resolved"
                             passedUntilStackResolved = false;
                         } else {
@@ -1131,7 +1135,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+    public TriggeredAbility chooseTriggeredAbility(java.util.List<TriggeredAbility> abilities, Game game) {
         // choose triggered abilitity from list
         if (gameInCheckPlayableState(game)) {
             return null;
@@ -1141,7 +1145,7 @@ public class HumanPlayer extends PlayerImpl {
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (canRespond()) {
             // try to set trigger auto order
-            List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
+            java.util.List<TriggeredAbility> abilitiesWithNoOrderSet = new ArrayList<>();
             TriggeredAbility abilityOrderLast = null;
             for (TriggeredAbility ability : abilities) {
                 if (triggerAutoOrderAbilityFirst.contains(ability.getOriginalId())) {
@@ -1399,7 +1403,7 @@ public class HumanPlayer extends PlayerImpl {
         filter.add(new ControllerIdPredicate(attackingPlayerId));
 
         while (canRespond()) {
-            List<UUID> possibleAttackers = new ArrayList<>();
+            java.util.List<UUID> possibleAttackers = new ArrayList<>();
             for (Permanent possibleAttacker : game.getBattlefield().getActivePermanents(filter, attackingPlayerId, game)) {
                 if (possibleAttacker.canAttack(null, game)) {
                     possibleAttackers.add(possibleAttacker.getId());
@@ -1413,8 +1417,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                    .getUserSkipPrioritySteps()
-                    .isStopOnDeclareAttackers()
+                            .getUserSkipPrioritySteps()
+                            .isStopOnDeclareAttackers()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1682,7 +1686,7 @@ public class HumanPlayer extends PlayerImpl {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 Map<String, Serializable> options = new HashMap<>();
-                List<UUID> possibleBlockers = game.getBattlefield().getActivePermanents(filter, playerId, game).stream()
+                java.util.List<UUID> possibleBlockers = game.getBattlefield().getActivePermanents(filter, playerId, game).stream()
                         .map(p -> p.getId())
                         .collect(Collectors.toList());
                 options.put(Constants.Option.POSSIBLE_BLOCKERS, (Serializable) possibleBlockers);
@@ -1715,7 +1719,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
+    public UUID chooseAttackerOrder(java.util.List<Permanent> attackers, Game game) {
         if (gameInCheckPlayableState(game)) {
             return null;
         }
@@ -1740,7 +1744,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
+    public UUID chooseBlockerOrder(java.util.List<Permanent> blockers, CombatGroup combatGroup, java.util.List<UUID> blockerOrder, Game game) {
         if (gameInCheckPlayableState(game)) {
             return null;
         }
@@ -1809,7 +1813,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+    public void assignDamage(int damage, java.util.List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
@@ -1873,7 +1877,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void pickCard(List<Card> cards, Deck deck, Draft draft) {
+    public void pickCard(java.util.List<Card> cards, Deck deck, Draft draft) {
         draft.firePickCardEvent(playerId);
     }
 
@@ -2056,7 +2060,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and needed targets have to be available
                     String modeText = mode.getEffects().getText(mode);
                     if (obj != null) {
-                        modeText = modeText.replace("{source}", obj.getName()).replace("{this}", obj.getName());
+                        modeText = modeText.replace("{this}", obj.getName());
                     }
                     if (modes.isEachModeMoreThanOnce()) {
                         if (timesSelected > 0) {
@@ -2131,7 +2135,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
+    public boolean choosePile(Outcome outcome, String message, java.util.List<? extends Card> pile1, java.util.List<? extends Card> pile2, Game game) {
         if (gameInCheckPlayableState(game)) {
             return true;
         }

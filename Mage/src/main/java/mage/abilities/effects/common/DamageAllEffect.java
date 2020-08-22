@@ -19,7 +19,7 @@ public class DamageAllEffect extends OneShotEffect {
 
     private FilterPermanent filter;
     private DynamicValue amount;
-    private String sourceName = "{source}";
+    private String sourceName = "{this}";
 
     public DamageAllEffect(int amount, FilterPermanent filter) {
         this(StaticValue.get(amount), filter);

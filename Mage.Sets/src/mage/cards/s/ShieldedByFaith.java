@@ -47,7 +47,7 @@ public final class ShieldedByFaith extends CardImpl {
         
         // Whenever a creature enters the battlefield, you may attach Shielded by Faith to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Benefit, "attach {source} to that creature"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Benefit, "attach {this} to that creature"),
                 new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, null, false));
     }
 

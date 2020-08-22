@@ -40,7 +40,7 @@ public final class CloakAndDagger extends CardImpl {
         this.addAbility(ability);
         // Whenever a Rogue creature enters the battlefield, you may attach Cloak and Dagger to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

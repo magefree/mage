@@ -55,6 +55,6 @@ public class SourcePermanentPowerCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "{source}'s power";
+        return "{this}'s power";
     }
 }

@@ -40,7 +40,7 @@ public final class DivinersWand extends CardImpl {
 
         // Whenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {3}

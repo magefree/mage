@@ -43,7 +43,7 @@ public final class Clickslither extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // Sacrifice a Goblin: Clickslither gets +2/+2 and gains trample until end of turn.
         Effect effect = new BoostSourceEffect(2,2,Duration.EndOfTurn);
-        effect.setText("{source} gets +2/+2");
+        effect.setText("{this} gets +2/+2");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, 
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true)));
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);

@@ -51,7 +51,7 @@ public final class ThornbiteStaff extends CardImpl {
         this.addAbility(ability);
         // Whenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));

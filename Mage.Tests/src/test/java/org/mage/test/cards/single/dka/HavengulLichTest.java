@@ -19,7 +19,7 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -61,8 +61,8 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB); // only inm turn 1, so Havengul Lich has the abilit ylost now
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB); // only inm turn 1, so Havengul Lich has the abilit ylost now
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

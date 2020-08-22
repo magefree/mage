@@ -46,7 +46,7 @@ public final class VeteransArmaments extends CardImpl {
 
         // Whenever a Soldier creature enters the battlefield, you may attach Veteran's Armaments to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {2}

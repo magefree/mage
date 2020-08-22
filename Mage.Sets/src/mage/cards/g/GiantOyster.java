@@ -71,7 +71,7 @@ class GiantOysterDontUntapAsLongAsSourceTappedEffect extends DontUntapAsLongAsSo
 
     public GiantOysterDontUntapAsLongAsSourceTappedEffect() {
         super();
-        staticText = "For as long as {source} remains tapped, target tapped creature doesn't untap during its controller's untap step";
+        staticText = "For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step";
     }
 
     public GiantOysterDontUntapAsLongAsSourceTappedEffect(final GiantOysterDontUntapAsLongAsSourceTappedEffect effect) {

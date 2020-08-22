@@ -25,7 +25,7 @@ public class ProtectionChosenColorSourceEffect extends ContinuousEffectImpl {
 
     public ProtectionChosenColorSourceEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "{source} has protection from the chosen color";
+        staticText = "{this} has protection from the chosen color";
     }
 
     public ProtectionChosenColorSourceEffect(final ProtectionChosenColorSourceEffect effect) {

@@ -35,10 +35,10 @@ public final class Tornado extends CardImpl {
         // {2}{G}, Pay 3 life for each velocity counter on Tornado: Destroy target permanent and put a velocity counter on Tornado. Activate this ability only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{G}"));
         DynamicValue lifeToPayAmount = new MultipliedValue(new CountersSourceCount(CounterType.VELOCITY), 3);
-        ability.addCost(new PayLifeCost(lifeToPayAmount, "3 life for each velocity counter on {source}"));
+        ability.addCost(new PayLifeCost(lifeToPayAmount, "3 life for each velocity counter on {this}"));
         ability.addTarget(new TargetPermanent());
         Effect effect = new AddCountersSourceEffect(CounterType.VELOCITY.createInstance());
-        effect.setText("and put a velocity counter on {source}");
+        effect.setText("and put a velocity counter on {this}");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

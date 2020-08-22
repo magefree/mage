@@ -97,6 +97,6 @@ class CounterSourceEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "any player may discard three cards. If a player does, counter {source}";
+        return "any player may discard three cards. If a player does, counter {this}";
     }
 }

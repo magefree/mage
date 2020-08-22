@@ -32,7 +32,7 @@ public final class GalvanicBombardment extends CardImpl {
 
         // Galvanic Bombardment deals X damage to target creature, where X is 2 plus the number of cards named Galvanic Bombardment in your graveyard.
         Effect effect = new DamageTargetEffect(new GalvanicBombardmentCardsInControllerGraveyardCount(filter));
-        effect.setText("{this} deals X damage to target creature, where X is 2 plus the number of cards named {source} in your graveyard");
+        effect.setText("{this} deals X damage to target creature, where X is 2 plus the number of cards named {this} in your graveyard");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

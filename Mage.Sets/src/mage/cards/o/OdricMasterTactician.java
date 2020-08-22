@@ -128,6 +128,9 @@ class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEf
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (source.isControlledBy(event.getPlayerId())) {
+            return false; // Don't replace the own call to selectBlockers
+        }
         ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
         if (watcher == null) {
             return false;

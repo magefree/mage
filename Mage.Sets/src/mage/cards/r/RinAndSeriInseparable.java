@@ -68,7 +68,7 @@ public final class RinAndSeriInseparable extends CardImpl {
         // {R}{G}{W}, {T}: Rin and Seri, Inseparable deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control.
         DynamicValue dogCount = new PermanentsOnBattlefieldCount(dogPermanentFilter);
         Effect damageEffect = new DamageTargetEffect(dogCount);
-        damageEffect.setText("{source} deals damage to any target equal to the number of Dogs you control");
+        damageEffect.setText("{this} deals damage to any target equal to the number of Dogs you control");
         DynamicValue catCount = new PermanentsOnBattlefieldCount(catPermanentFilter);
         Effect lifeGainEffect = new GainLifeEffect(catCount);
         lifeGainEffect.setText("You gain life equal to the number of Cats you control");

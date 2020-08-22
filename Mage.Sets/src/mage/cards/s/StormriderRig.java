@@ -32,7 +32,7 @@ public final class StormriderRig extends CardImpl {
 
         // Whenever a creature enters the battlefield under your control, you may attach Stormrider Rig to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true, SetTargetPointer.PERMANENT, null, true));
 
         // Equip {2}

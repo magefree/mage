@@ -63,7 +63,7 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         // {T}: Prodigal Pyromancer deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer", 1);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
         addTarget(playerA, playerB);
 
         setStopAt(3, PhaseStep.END_TURN);

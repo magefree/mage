@@ -39,7 +39,7 @@ public final class ObsidianBattleAxe extends CardImpl {
         this.addAbility(ability);
         // Whenever a Warrior creature enters the battlefield, you may attach Obsidian Battle-Axe to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT, null));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

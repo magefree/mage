@@ -19,7 +19,7 @@ import mage.game.permanent.Permanent;
 public class DamageAttachedEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    private String sourceName = "{source}";
+    private String sourceName = "{this}";
 
     public DamageAttachedEffect(int amount) {
         super(Outcome.Damage);

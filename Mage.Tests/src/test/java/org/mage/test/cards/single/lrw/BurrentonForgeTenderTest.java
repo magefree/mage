@@ -46,7 +46,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flametongue Kavu");
         addTarget(playerB, "Soldier of the Pantheon");
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.",
-                TestPlayer.NO_TARGET, "When {this} enters the battlefield, {source} deals 4 damage to target creature.");
+                TestPlayer.NO_TARGET, "When {this} enters the battlefield, {this} deals 4 damage to target creature.");
         playerA.addChoice("Flametongue Kavu");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -73,7 +73,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flametongue Kavu");
         addTarget(playerB, "Soldier of the Pantheon");
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.",
-                TestPlayer.NO_TARGET, "When {this} enters the battlefield, {source} deals 4 damage to target creature.");
+                TestPlayer.NO_TARGET, "When {this} enters the battlefield, {this} deals 4 damage to target creature.");
         playerA.addChoice("Flametongue Kavu");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cloudshift", "Flametongue Kavu");
@@ -117,7 +117,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.END_COMBAT, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.");
         playerA.addChoice("Mogg Fanatic");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {source} deals 1 damage to ", "Soldier of the Pantheon");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {this} deals 1 damage to ", "Soldier of the Pantheon");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

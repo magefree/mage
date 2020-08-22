@@ -1,5 +1,10 @@
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -30,12 +35,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-import mage.MageIdentifier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -74,7 +73,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Hint> hints = new ArrayList<>();
     protected Outcome customOutcome = null; // uses for AI decisions instead effects
     protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
-    
+
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
@@ -801,7 +800,6 @@ public abstract class AbilityImpl implements Ability {
         String replace = rule;
         if (rule != null && source != null && !source.isEmpty()) {
             replace = rule.replace("{this}", source);
-            replace = replace.replace("{source}", source);
         }
         return replace;
     }
@@ -1318,5 +1316,5 @@ public abstract class AbilityImpl implements Ability {
     public AbilityImpl setIdentifier(MageIdentifier identifier) {
         this.identifier = identifier;
         return this;
-    }  
+    }
 }

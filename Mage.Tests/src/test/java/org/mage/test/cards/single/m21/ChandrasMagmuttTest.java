@@ -13,7 +13,7 @@ public class ChandrasMagmuttTest extends CardTestPlayerBase {
         // {T}: Chandra's Magmutt deals 1 damage to target player or planeswalker.<        
         addCard(Zone.BATTLEFIELD, playerA, "Chandra's Magmutt");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
@@ -32,7 +32,7 @@ public class ChandrasMagmuttTest extends CardTestPlayerBase {
         // −6: You get an emblem with "At the beginning of combat on your turn, create a 1/1 white Soldier creature token, then put a +1/+1 counter on each creature you control."        
         addCard(Zone.BATTLEFIELD, playerB, "Basri Ket");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Basri Ket");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Basri Ket");
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();

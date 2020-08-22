@@ -191,8 +191,8 @@ public class TestAliases extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
         showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Silvercoat Lion");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -209,8 +209,8 @@ public class TestAliases extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion@lion", 1);
 
         showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "@lion");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", "@lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "@lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "@lion");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

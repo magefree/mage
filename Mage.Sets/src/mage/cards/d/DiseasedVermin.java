@@ -127,7 +127,7 @@ class DiseasedVerminPredicate implements ObjectSourcePlayerPredicate<ObjectSourc
 
     @Override
     public String toString() {
-        return "(Player previously dealt damage by {source})";
+        return "(Player previously dealt damage by {this})";
     }
 }
 
