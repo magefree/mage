@@ -2,10 +2,8 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
@@ -14,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 

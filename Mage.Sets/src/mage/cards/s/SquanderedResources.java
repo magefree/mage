@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,6 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ManaType;
 import mage.constants.Zone;

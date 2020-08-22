@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Locale.filter;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -12,7 +11,6 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.common.FilterOwnedCard;
 import mage.game.Game;

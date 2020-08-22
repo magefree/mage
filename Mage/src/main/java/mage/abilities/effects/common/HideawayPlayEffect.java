@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;

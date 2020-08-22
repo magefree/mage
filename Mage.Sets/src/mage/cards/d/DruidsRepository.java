@@ -2,8 +2,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;

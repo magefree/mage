@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;

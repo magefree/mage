@@ -9,9 +9,6 @@ import javax.swing.*;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.jdesktop.swingx.graphics.ShadowRenderer;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 
 import mage.client.util.ImageCaches;
 import mage.client.util.SoftValuesLoadingCache;

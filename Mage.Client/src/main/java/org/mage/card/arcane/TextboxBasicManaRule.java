@@ -1,6 +1,5 @@
 package org.mage.card.arcane;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

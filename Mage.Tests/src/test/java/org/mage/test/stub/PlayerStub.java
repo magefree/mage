@@ -1,7 +1,6 @@
 package org.mage.test.stub;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;

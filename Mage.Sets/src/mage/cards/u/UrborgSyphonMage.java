@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;

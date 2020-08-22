@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import mage.ApprovingObject;
 import mage.ConditionalMana;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;

@@ -40,7 +40,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import java.util.*;
-import java.util.Map.Entry;
 
 import static mage.client.dialog.PreferencesDialog.*;
 

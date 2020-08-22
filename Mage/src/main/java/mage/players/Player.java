@@ -5,7 +5,6 @@ import java.util.*;
 import mage.ApprovingObject;
 import mage.MageItem;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;

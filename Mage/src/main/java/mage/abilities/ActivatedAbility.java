@@ -1,7 +1,5 @@
 package mage.abilities;
 
-import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.TargetController;
 import mage.game.Game;

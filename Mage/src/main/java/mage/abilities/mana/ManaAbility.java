@@ -8,7 +8,6 @@ package mage.abilities.mana;
 import java.util.List;
 import java.util.Set;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.constants.ManaType;
 import mage.game.Game;
 

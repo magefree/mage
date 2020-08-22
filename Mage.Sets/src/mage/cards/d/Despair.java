@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import java.util.UUID;
 
-import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

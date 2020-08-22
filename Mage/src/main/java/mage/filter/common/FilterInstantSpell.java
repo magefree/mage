@@ -2,7 +2,6 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
 
 public class FilterInstantSpell extends FilterSpell {
 

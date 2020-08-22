@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 /**
  *

@@ -16,7 +16,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.target.common.TargetCreaturePermanent;
 

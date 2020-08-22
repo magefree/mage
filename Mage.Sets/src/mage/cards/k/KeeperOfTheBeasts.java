@@ -17,11 +17,9 @@ import mage.constants.CardType;
 import mage.filter.FilterOpponent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.BeastToken2;
 import mage.game.permanent.token.BeastToken4;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetOpponent;
 
 /**
  *

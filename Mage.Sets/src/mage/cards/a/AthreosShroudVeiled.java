@@ -27,7 +27,6 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
-import mage.game.permanent.PermanentToken;
 
 /**
  * @author TheElk801

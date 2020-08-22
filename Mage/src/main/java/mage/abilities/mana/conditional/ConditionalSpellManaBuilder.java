@@ -5,10 +5,7 @@
  */
 package mage.abilities.mana.conditional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import javax.sql.rowset.Predicate;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -18,11 +15,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.Card;
-import mage.constants.DependencyType;
-import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;

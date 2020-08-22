@@ -8,23 +8,18 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.ability.ArtifactSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetActivatedAbility;
-import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 /**
  *

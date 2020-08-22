@@ -13,7 +13,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SpellAbilityCastMode;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;

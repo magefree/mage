@@ -10,7 +10,6 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;

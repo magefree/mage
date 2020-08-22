@@ -1,9 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.Iterator;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;

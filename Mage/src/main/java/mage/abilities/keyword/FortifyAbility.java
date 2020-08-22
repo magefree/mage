@@ -5,20 +5,13 @@ package mage.abilities.keyword;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.FortifyEffect;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.common.AttachEffect;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *

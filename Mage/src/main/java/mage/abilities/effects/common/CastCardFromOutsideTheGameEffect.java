@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 
 import java.util.Set;
 import mage.ApprovingObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;

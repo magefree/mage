@@ -1,13 +1,8 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.Mana;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
@@ -20,9 +15,6 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

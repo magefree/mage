@@ -11,7 +11,6 @@ import mage.filter.FilterMana;
 import mage.util.ClassScanner;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 
 import java.util.*;
 

@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.ApprovingObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;

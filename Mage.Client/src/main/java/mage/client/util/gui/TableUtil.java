@@ -5,7 +5,6 @@
  */
 package mage.client.util.gui;
 
-import java.util.Arrays;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.table.TableColumn;

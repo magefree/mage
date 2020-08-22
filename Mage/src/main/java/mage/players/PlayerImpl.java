@@ -3,7 +3,6 @@ package mage.players;
 import com.google.common.collect.ImmutableMap;
 import mage.ConditionalMana;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.ActivatedAbility.ActivationStatus;

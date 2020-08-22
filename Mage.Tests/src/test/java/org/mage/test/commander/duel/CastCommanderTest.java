@@ -1,8 +1,6 @@
 
 package org.mage.test.commander.duel;
 
-import java.util.ArrayList;
-import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;

@@ -2,7 +2,6 @@ package org.mage.test.cards.single.iko;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.After;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

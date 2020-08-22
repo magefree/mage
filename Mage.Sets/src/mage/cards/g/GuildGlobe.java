@@ -1,26 +1,17 @@
 package mage.cards.g;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.AddManaOfTwoDifferentColorsEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceColor;
-import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**

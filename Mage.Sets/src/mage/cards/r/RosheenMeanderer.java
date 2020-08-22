@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.UUID;
-import mage.MageObject;
 
 /**
  * @author jeffwadsworth

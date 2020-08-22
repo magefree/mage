@@ -3,7 +3,6 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;

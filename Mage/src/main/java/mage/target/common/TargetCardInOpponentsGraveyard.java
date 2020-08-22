@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;

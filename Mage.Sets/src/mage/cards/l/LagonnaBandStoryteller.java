@@ -18,7 +18,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
-import mage.cards.Cards;
 import mage.constants.Zone;
 
 /**

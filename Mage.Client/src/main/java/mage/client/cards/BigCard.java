@@ -8,7 +8,6 @@
 
 package mage.client.cards;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,10 +15,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 import static mage.client.constants.Constants.CONTENT_MAX_XOFFSET;
 import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
 import static mage.client.constants.Constants.FRAME_MAX_WIDTH;

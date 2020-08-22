@@ -12,7 +12,6 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-import java.util.Collections;
 import java.util.UUID;
 
 /**

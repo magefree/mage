@@ -2,8 +2,6 @@ package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
@@ -13,7 +11,6 @@ import mage.game.events.ManaEvent;
 import mage.players.Player;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import mage.abilities.TriggeredAbility;

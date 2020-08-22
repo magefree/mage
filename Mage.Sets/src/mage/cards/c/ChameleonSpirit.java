@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import static java.awt.SystemColor.control;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;

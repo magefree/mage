@@ -9,7 +9,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.HalfValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;

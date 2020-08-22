@@ -10,7 +10,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -18,7 +17,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.StaticAbility;
 import mage.filter.StaticFilters;
 
 /**

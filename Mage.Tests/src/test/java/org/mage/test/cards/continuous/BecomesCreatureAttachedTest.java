@@ -1,7 +1,6 @@
 
 package org.mage.test.cards.continuous;
 
-import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -9,8 +8,6 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

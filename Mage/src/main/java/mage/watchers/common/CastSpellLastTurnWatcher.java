@@ -7,7 +7,6 @@ import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @author nantuko, BetaSteward_at_googlemail.com

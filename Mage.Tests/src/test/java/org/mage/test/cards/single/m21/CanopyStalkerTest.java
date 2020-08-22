@@ -1,8 +1,5 @@
 package org.mage.test.cards.single.m21;
 
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
-import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;

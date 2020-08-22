@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 
-import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;

@@ -4,7 +4,6 @@ package org.mage.test.cards.continuous;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;

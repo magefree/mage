@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SnakeToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 
