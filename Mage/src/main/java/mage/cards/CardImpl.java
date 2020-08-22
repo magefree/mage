@@ -10,8 +10,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -695,10 +693,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
 
         // must be non strict search in any sets, not one set
-        // example: if set contains only one card side, e.g. dev forget to add it
-        // verify test checks missing side cards in test_checkMissingSecondSideCardsInSets
-        CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCardByClassName(secondSideCardClazz.getCanonicalName(), expansionSetCode);
-        secondSideCard = cardInfo.getCard();
+        // example: if set contains only one card side
+        // method used in cards database creating, so can't use repository here
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(secondSideCardClazz, expansionSetCode);
+        if (info == null) {
+            return null;
+        }
+        secondSideCard = createCard(secondSideCardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
         return secondSideCard;
     }
 
