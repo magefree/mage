@@ -51,7 +51,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
             sourceObject = game.getObject(source.getSourceId());
         }
         if (controller != null && sourceObject != null) {
-            Choice cardChoice = new ChoiceImpl();
+            Choice cardChoice = new ChoiceImpl(true);
             switch (typeOfName) {
                 case ALL:
                     cardChoice.setChoices(CardRepository.instance.getNames());
