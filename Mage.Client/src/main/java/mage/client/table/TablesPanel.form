@@ -509,7 +509,7 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Other"/>
-                <Property name="toolTipText" type="java.lang.String" value="Other formats (Freeform, Pauper, Extended, etc.)"/>
+                <Property name="toolTipText" type="java.lang.String" value="Other formats (Freeform, Pauper, Historic, Extended, etc.)"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>

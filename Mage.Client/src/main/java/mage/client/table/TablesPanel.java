@@ -896,7 +896,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Limited", TablesTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatOther.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Frontier|^Constructed - Extended|^Constructed - Eternal|^Constructed - Historical|^Constructed - Super|^Constructed - Freeform|^Australian Highlander|^Canadian Highlander|^Constructed - Old", TablesTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Frontier|^Constructed - Extended|^Constructed - Eternal|^Constructed - Historical|^Constructed - Super|^Constructed - Freeform|^Australian Highlander|^Canadian Highlander|^Constructed - Old|^Constructed - Historic", TablesTableModel.COLUMN_DECK_TYPE));
         }
 
         // skill
@@ -1458,7 +1458,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         btnFormatOther.setSelected(true);
         btnFormatOther.setText("Other");
-        btnFormatOther.setToolTipText("Other formats (Freeform, Pauper, Extended, etc.)");
+        btnFormatOther.setToolTipText("Other formats (Freeform, Pauper, Historic, Extended, etc.)");
         btnFormatOther.setFocusPainted(false);
         btnFormatOther.setFocusable(false);
         btnFormatOther.setRequestFocusEnabled(false);
