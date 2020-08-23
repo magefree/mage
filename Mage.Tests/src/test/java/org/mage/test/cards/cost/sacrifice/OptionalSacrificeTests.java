@@ -12,14 +12,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class OptionalSacrificeTests extends CardTestPlayerBase {
 
     /**
-     * Glint Hawk - Flying 2/2 - {W}
-     * When Glint Hawk enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
-     * 
+     * Glint Hawk - Flying 2/2 - {W} When Glint Hawk enters the battlefield,
+     * sacrifice it unless you return an artifact you control to its owner's
+     * hand.
+     *
      * Test returning controlled artifact.
      */
     @Test
     public void testGlintHawkChooseArtifact() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Glint Hawk");
         addCard(Zone.BATTLEFIELD, playerA, "Relic of Progenitus");
@@ -36,16 +37,17 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         assertHandCount(playerA, "Relic of Progenitus", 1);
         assertPermanentCount(playerA, "Relic of Progenitus", 0);
     }
-    
+
     /**
-     * Glint Hawk - Flying 2/2 - {W}
-     * When Glint Hawk enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
-     * 
+     * Glint Hawk - Flying 2/2 - {W} When Glint Hawk enters the battlefield,
+     * sacrifice it unless you return an artifact you control to its owner's
+     * hand.
+     *
      * Test opting not to choose an artifact controlled to sacrifice Glint Hawk.
      */
     @Test
     public void testGlintHawkDoNotChooseArtifactControlled() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Glint Hawk");
         addCard(Zone.BATTLEFIELD, playerA, "Relic of Progenitus");
@@ -61,16 +63,17 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         assertHandCount(playerA, "Relic of Progenitus", 0);
         assertPermanentCount(playerA, "Relic of Progenitus", 1);
     }
-    
+
     /**
-     * Glint Hawk - Flying 2/2 - {W}
-     * When Glint Hawk enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
-     * 
+     * Glint Hawk - Flying 2/2 - {W} When Glint Hawk enters the battlefield,
+     * sacrifice it unless you return an artifact you control to its owner's
+     * hand.
+     *
      * Test no artifacts to target - so Glint Hawk is sacrificed.
      */
     @Test
     public void testGlintHawkNoArtifactControlled() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.HAND, playerA, "Glint Hawk");
 
@@ -82,17 +85,18 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Glint Hawk", 0);
         assertGraveyardCount(playerA, "Glint Hawk", 1);
-    } 
+    }
 
     /**
-     * Drake Familiar - Flying 2/1 - {1}{U}
-     * When Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
-     * 
+     * Drake Familiar - Flying 2/1 - {1}{U} When Drake Familiar enters the
+     * battlefield, sacrifice it unless you return an enchantment to its owner's
+     * hand.
+     *
      * Test returning own enchantment so not sacrificed.
      */
     @Test
     public void testDrakeFamiliarOwnEnchantment() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Drake Familiar");
         addCard(Zone.BATTLEFIELD, playerA, "Moat");
@@ -104,23 +108,25 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Drake Familiar", 1);        
-        assertGraveyardCount(playerA, "Drake Familiar", 0);        
+        assertPermanentCount(playerA, "Drake Familiar", 1);
+        assertGraveyardCount(playerA, "Drake Familiar", 0);
         assertHandCount(playerA, "Moat", 1);
         assertPermanentCount(playerA, "Moat", 0);
     }
-    
+
     /**
-     * Drake Familiar - Flying 2/1 - {1}{U}
-     * When Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
-     * 
+     * Drake Familiar - Flying 2/1 - {1}{U} When Drake Familiar enters the
+     * battlefield, sacrifice it unless you return an enchantment to its owner's
+     * hand.
+     *
      * Test returning opponent's enchantment so not sacrificed.
      */
     @Test
     public void testDrakeFamiliarOpposingEnchantment() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Drake Familiar");
+        // Creatures can’t attack you unless their controller pays {2} for each creature they control that’s attacking you.
         addCard(Zone.BATTLEFIELD, playerB, "Propaganda");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Familiar");
@@ -130,21 +136,22 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Drake Familiar", 1);        
-        assertGraveyardCount(playerA, "Drake Familiar", 0);        
+        assertPermanentCount(playerA, "Drake Familiar", 1);
+        assertGraveyardCount(playerA, "Drake Familiar", 0);
         assertHandCount(playerB, "Propaganda", 1);
         assertPermanentCount(playerB, "Propaganda", 0);
     }
-    
+
     /**
-     * Drake Familiar - Flying 2/1 - {1}{U}
-     * When Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
-     * 
+     * Drake Familiar - Flying 2/1 - {1}{U} When Drake Familiar enters the
+     * battlefield, sacrifice it unless you return an enchantment to its owner's
+     * hand.
+     *
      * Test when no enchantments are on battlefield, Drake is sacrificed.
      */
     @Test
     public void testDrakeFamiliarNoEnchantmentControlled() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Drake Familiar");
 
@@ -154,19 +161,20 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Drake Familiar", 0);    
+        assertPermanentCount(playerA, "Drake Familiar", 0);
         assertGraveyardCount(playerA, "Drake Familiar", 1);
     }
-    
+
     /**
-     * Drake Familiar - Flying 2/1 - {1}{U}
-     * When Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
-     * 
+     * Drake Familiar - Flying 2/1 - {1}{U} When Drake Familiar enters the
+     * battlefield, sacrifice it unless you return an enchantment to its owner's
+     * hand.
+     *
      * Test when no enchantments are on battlefield, Drake is sacrificed.
      */
     @Test
     public void testDrakeFamiliarDoNotChooseEnchantment() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Drake Familiar");
         addCard(Zone.BATTLEFIELD, playerB, "Propaganda");
@@ -177,9 +185,9 @@ public class OptionalSacrificeTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Drake Familiar", 0);    
+        assertPermanentCount(playerA, "Drake Familiar", 0);
         assertGraveyardCount(playerA, "Drake Familiar", 1);
         assertHandCount(playerB, "Propaganda", 0);
         assertPermanentCount(playerB, "Propaganda", 1);
-    }  
+    }
 }
