@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -31,7 +30,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public final class TaigamOjutaiMaster extends CardImpl {
 
     private static final String effectText = "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, that spell gains rebound.";
-    private static final FilterSpell filter = new FilterSpell("Instant, Sorcery, and Dragon spells");
+    private static final FilterSpell filter = new FilterSpell("Instant, Sorcery, and Dragon spells you control");
 
     static {
         filter.add(
@@ -52,7 +51,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Instant, sorcery, and Dragon spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, StaticFilters.FILTER_SPELL_OR_ABILITY, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, null, Duration.WhileOnBattlefield)));
 
         // Whenever you cast an instant or sorcery spell from your hand, if Taigam, Ojutai Master attacked this turn, that spell gains rebound.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),

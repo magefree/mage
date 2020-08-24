@@ -1,5 +1,6 @@
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,8 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoblinToken;
-
-import java.util.UUID;
 
 /**
  * @author North
@@ -34,9 +33,10 @@ public final class KrenkoMobBoss extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {tap}: create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.
+        // {T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new GoblinToken(), xValue), new TapSourceCost()
+                new CreateTokenEffect(new GoblinToken(), xValue).setText("create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control"),
+                new TapSourceCost()
         ));
     }
 

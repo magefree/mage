@@ -1,7 +1,6 @@
-
-
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -15,24 +14,21 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetOpponent;
 
-import java.util.UUID;
-
 /**
  * @author Loki
  */
 public final class HondenOfNightsReach extends CardImpl {
 
-    static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine you control");
 
     static {
         filter.add(SubType.SHRINE.getPredicate());
     }
 
     public HondenOfNightsReach(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
-
 
         // At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false);

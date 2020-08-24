@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -30,7 +29,9 @@ public final class Archaeomancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(
+                new ReturnToHandTargetEffect()
+                        .setText("return target instant or sorcery card from your graveyard to your hand"), false);
         Target target = new TargetCardInYourGraveyard(filter);
         ability.addTarget(target);
         this.addAbility(ability);
