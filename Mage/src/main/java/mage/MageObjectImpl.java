@@ -15,6 +15,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
+import mage.cards.mock.MockCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -167,8 +168,8 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
-        // its frame colors.
-        if (this.isLand()) {
+        // its frame colors while game is active to represent ability changes during the game.
+        if (this.isLand() && !(this instanceof MockCard)) {
             ObjectColor cl = frameColor.copy();
             Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
             for (Ability ab : getAbilities()) {
@@ -181,11 +182,6 @@ public abstract class MageObjectImpl implements MageObject {
             cl.setBlack(manaTypes.contains(ManaType.BLACK));
             cl.setRed(manaTypes.contains(ManaType.RED));
             cl.setGreen(manaTypes.contains(ManaType.GREEN));
-
-//                // Ability depends on game
-//                // but no game passed
-//                // All such abilities are 5-color ones
-//                return new ObjectColor("WUBRG");
             return cl;
         } else {
             // For everything else, just return the frame colors
