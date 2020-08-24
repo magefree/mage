@@ -244,7 +244,7 @@
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-gmail</artifactId>
-            <version>v1-rev20190120-1.28.0</version>
+            <version>v1-rev20200817-1.30.10</version>
             <type>jar</type>
         </dependency>
         <dependency>
