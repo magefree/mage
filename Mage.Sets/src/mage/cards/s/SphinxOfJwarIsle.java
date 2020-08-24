@@ -24,8 +24,10 @@ public final class SphinxOfJwarIsle extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flying, Shroud (This creature can't be the target of spells or abilities.)
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
+        // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
     }
 

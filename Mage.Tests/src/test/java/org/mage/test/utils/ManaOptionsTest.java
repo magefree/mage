@@ -158,9 +158,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
     @Test
     public void testNykthos1() {
-        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4); // Creature {G} (1/1)
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 4); // Creature {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1); // Land
 
         setStopAt(1, PhaseStep.UPKEEP);
         execute();
@@ -168,9 +169,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         assertDuplicatedManaOptions(manaOptions);
 
-        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         assertManaOptions("{C}{G}{G}{G}", manaOptions);
         assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{W}{W}{W}{W}{G}", manaOptions);
     }
 
     @Test
@@ -269,6 +271,38 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         assertManaOptions("{W}{W}{G}", manaOptions);
         assertManaOptions("{C}{G}{G}{G}", manaOptions);
         assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+    }
+
+    @Test
+    public void testNykthos6() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4); // Creature {G} (1/1)
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 4); // Creature {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1); // Land
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Radha, Heart of Keld");
+        addCard(Zone.BATTLEFIELD, playerA, "Precognition Field");
+        addCard(Zone.BATTLEFIELD, playerA, "Mystic Forge");
+        addCard(Zone.BATTLEFIELD, playerA, "Experimental Frenzy");
+        addCard(Zone.BATTLEFIELD, playerA, "Elsha of the Infinite");
+        addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
+        addCard(Zone.BATTLEFIELD, playerA, "Verge Rangers");
+        addCard(Zone.BATTLEFIELD, playerA, "Vivien, Monsters' Advocate");
+        addCard(Zone.BATTLEFIELD, playerA, "Vizier of the Menagerie");
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+
+        Assert.assertEquals("mana variations don't fit", 6, manaOptions.size());
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{W}{W}{W}{W}{W}{W}{G}", manaOptions);
+        assertManaOptions("{R}{R}{R}{G}", manaOptions);
+        assertManaOptions("{B}{B}{B}{G}", manaOptions);
+        assertManaOptions("{U}{U}{G}", manaOptions);
     }
 
     @Test
