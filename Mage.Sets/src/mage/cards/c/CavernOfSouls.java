@@ -1,8 +1,6 @@
-
 package mage.cards.c;
 
 import java.util.*;
-
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -70,7 +68,7 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
         }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (game.inCheckPlayableState() && controller != null && sourceObject != null) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
         }
