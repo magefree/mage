@@ -95,7 +95,7 @@ class EyeOfDoomEffect extends OneShotEffect {
                 }
             }
             player = playerList.getNext(game, false);
-        } while (!player.getId().equals(game.getActivePlayerId()));
+        } while (player != null && !player.getId().equals(game.getActivePlayerId()));
 
         for (Permanent permanent : permanents) {
             permanent.addCounters(CounterType.DOOM.createInstance(), source, game);

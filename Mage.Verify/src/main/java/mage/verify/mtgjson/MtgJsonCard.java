@@ -39,7 +39,7 @@ public final class MtgJsonCard {
         if ("transform".equals(layout)
                 || "flip".equals(layout)
                 || "adventure".equals(layout)
-                || "meld".equals(layout)) { // TODO: remove or keep after mtgjson's meld bug resolve https://github.com/mtgjson/mtgjson/issues/661
+                || "meld".equals(layout)) { // mtgjson uses composite names for meld cards, but scryfall uses simple face names
             return faceName;
         }
         return asciiName != null ? asciiName : name;

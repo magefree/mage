@@ -77,8 +77,8 @@ class ThievesAuctionEffect extends OneShotEffect {
             // Starting with you, each player
             PlayerList playerList = game.getState().getPlayersInRange(controller.getId(), game);
             Player player = playerList.getCurrent(game);
-            while (!exiledCards.isEmpty() && !game.hasEnded()) {
-                if (player != null && player.canRespond()) {
+            while (player != null && !exiledCards.isEmpty() && !game.hasEnded()) {
+                if (player.canRespond()) {
                     // chooses one of the exiled cards
                     TargetCard target = new TargetCardInExile(new FilterCard());
                     if (player.choose(Outcome.PutCardInPlay, exiledCards, target, game)) {

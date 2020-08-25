@@ -81,7 +81,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
                     game.informPlayers((player.getLogName() + decision + permanent.getName()));
                 }
                 player = playerList.getNext(game, false);
-            } while (!player.getId().equals(game.getActivePlayerId()));
+            } while (player != null && !player.getId().equals(game.getActivePlayerId()));
 
             for (UUID playerId : playersSaidYes) {
                 effect = new CreateTokenCopyTargetEffect(playerId);

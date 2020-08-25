@@ -796,7 +796,9 @@ public abstract class GameImpl implements Game, Serializable {
                     break;
                 }
                 playerByOrder = playerList.getNext(this, true);
-                state.setPlayerByOrderId(playerByOrder.getId());
+                if (playerByOrder != null) {
+                    state.setPlayerByOrderId(playerByOrder.getId());
+                }
             }
         }
         if (checkIfGameIsOver() && !isSimulation()) {
@@ -902,7 +904,10 @@ public abstract class GameImpl implements Game, Serializable {
             state.getTurn().resumePlay(this, wasPaused);
             if (!isPaused() && !checkIfGameIsOver()) {
                 endOfTurn();
-                player = playerList.getNext(this, true);
+                Player nextPlayer = playerList.getNext(this, true);
+                if (nextPlayer != null) {
+                    player = nextPlayer;
+                }
                 state.setTurnNum(state.getTurnNum() + 1);
             }
         }
