@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
@@ -13,6 +12,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
+import mage.MageItem;
+import mage.game.events.GameEvent.EventType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -34,7 +35,7 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
     }
 
     public PreventAllDamageToAllEffect(Duration duration, FilterPermanentOrPlayer filter, boolean onlyCombat) {
-        super(duration, Integer.MAX_VALUE, onlyCombat);
+        super(duration, Integer.MAX_VALUE, onlyCombat, false);
         this.filter = filter;
         staticText = "Prevent all "
                 + (onlyCombat ? "combat " : "")
@@ -84,7 +85,12 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            MageObject object = game.getObject(event.getTargetId());
+            MageItem object ;
+            if(EventType.DAMAGE_PLAYER.equals(event.getType())) {
+                object = game.getPlayer(event.getTargetId());                
+            } else {
+                object = game.getObject(event.getTargetId());
+            }            
             if (object != null) {
                 return filter.match(object, source.getSourceId(), source.getControllerId(), game);
             }
