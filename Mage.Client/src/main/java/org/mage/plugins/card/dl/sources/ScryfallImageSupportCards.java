@@ -478,6 +478,7 @@ public class ScryfallImageSupportCards {
             add("SLU"); // Secret Lair: Ultimate Edition
             add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3
+            add("CC1"); // Commander Collection: Green
 
             // add("TD0"); // Commander Theme Decks
             // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
