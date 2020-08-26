@@ -476,7 +476,7 @@ public class ScryfallImageSupportCards {
             add("SLD"); // Secret Lair Drop
             add("PMEI"); // Magazine Inserts
             add("SLU"); // Secret Lair: Ultimate Edition
-            //add("SS3"); // Signature Spellbook: Chandra
+            add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3
 
             // add("TD0"); // Commander Theme Decks
