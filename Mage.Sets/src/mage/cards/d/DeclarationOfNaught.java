@@ -1,12 +1,11 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,8 +16,9 @@ import mage.game.Game;
 import mage.target.TargetSpell;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DeclarationOfNaught extends CardImpl {
@@ -55,6 +55,9 @@ enum DeclarationOfNaughtAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         String chosenName = (String) game.getState().getValue(ability.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (chosenName == null) {
+            return;
+        }
         FilterSpell filterSpell = new FilterSpell("spell named " + chosenName);
         filterSpell.add(new NamePredicate(chosenName));
         TargetSpell target = new TargetSpell(1, filterSpell);

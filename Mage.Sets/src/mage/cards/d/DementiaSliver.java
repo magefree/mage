@@ -79,7 +79,7 @@ class DementiaSliverEffect extends OneShotEffect {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (opponent != null && sourceObject != null && !cardName.isEmpty()) {
+        if (opponent != null && sourceObject != null && cardName != null && !cardName.isEmpty()) {
             if (!opponent.getHand().isEmpty()) {
                 Cards revealed = new CardsImpl();
                 Card card = opponent.getHand().getRandom(game);

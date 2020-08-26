@@ -108,8 +108,9 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertTrue("Slot 1 is white", booster.get(0).getColor(null).isWhite());
         Assert.assertTrue("Slot 2 is white", booster.get(1).getColor(null).isWhite());
 
-        Assert.assertTrue("Slot 3 is blue", booster.get(2).getColor(null).isBlue());
-        Assert.assertTrue("Slot 4 is blue", booster.get(3).getColor(null).isBlue());
+        // Wretched Gryff is colorless, but stores in blue slots
+        Assert.assertTrue("Slot 3 is blue", booster.get(2).getName().equals("Wretched Gryff") || booster.get(2).getColor(null).isBlue());
+        Assert.assertTrue("Slot 4 is blue", booster.get(3).getName().equals("Wretched Gryff") || booster.get(3).getColor(null).isBlue());
 
         Assert.assertTrue("Slot 5 is black", booster.get(4).getColor(null).isBlack());
         Assert.assertTrue("Slot 6 is black", booster.get(5).getColor(null).isBlack());

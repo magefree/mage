@@ -78,7 +78,7 @@ class MedomaisProphecyTriggerEffect extends OneShotEffect {
         String cardName = (String) game.getState().getValue(
                 source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY
         );
-        if (cardName == null || "".equals(cardName)) {
+        if (cardName == null || cardName.isEmpty()) {
             return false;
         }
         game.addDelayedTriggeredAbility(new MedomaisProphecyDelayedTriggeredAbility(cardName), source);

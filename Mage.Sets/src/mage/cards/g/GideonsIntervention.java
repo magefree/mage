@@ -73,9 +73,9 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject != null) {
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return "You may not cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (mageObject != null && cardName != null) {
+            return "You can't cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
         }
         return null;
     }
@@ -134,7 +134,6 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         Permanent targetPerm = game.getPermanent(event.getTargetId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-
         if (object != null && (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
                 || targetPerm != null && (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
                 || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER))) {

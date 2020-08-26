@@ -6,10 +6,14 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -17,7 +21,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.filter.StaticFilters;
 
 /**
  * @author jonubuu
@@ -64,10 +67,10 @@ class CabalTherapyEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (targetPlayer == null || controller == null || sourceObject == null) {
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (targetPlayer == null || controller == null || sourceObject == null || cardName == null) {
             return false;
         }
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         Cards hand = targetPlayer.getHand().copy();
         targetPlayer.revealCards(source, hand, game);
         hand.removeIf(uuid -> {

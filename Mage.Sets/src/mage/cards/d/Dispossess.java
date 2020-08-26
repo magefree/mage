@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
@@ -11,8 +9,9 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class Dispossess extends CardImpl {
@@ -49,6 +48,9 @@ class DispossessEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
     @Override
     public boolean apply(Game game, Ability source) {
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (cardName == null) {
+            return false;
+        }
         return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
     }
 
