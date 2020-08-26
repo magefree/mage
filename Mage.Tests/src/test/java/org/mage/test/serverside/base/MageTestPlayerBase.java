@@ -141,7 +141,6 @@ public abstract class MageTestPlayerBase {
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            logger.info("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");

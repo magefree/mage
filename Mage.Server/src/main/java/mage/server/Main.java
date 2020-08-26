@@ -407,7 +407,6 @@ public final class Main {
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
-            logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
