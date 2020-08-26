@@ -15,8 +15,8 @@ public final class SignatureSpellbookChandra extends ExpansionSet {
         return instance;
     }
 
-    private SignatureSpellbookJace() {
-        super("Signature Spellbook: Jace", "SS3", ExpansionSet.buildDate(2020, 6, 26), SetType.SUPPLEMENTAL);
+    private SignatureSpellbookChandra() {
+        super("Signature Spellbook: Chandra", "SS3", ExpansionSet.buildDate(2020, 6, 26), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
