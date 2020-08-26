@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -202,6 +203,11 @@ public abstract class Designation implements MageObject {
     @Override
     public int getStartingLoyalty() {
         return 0;
+    }
+
+    @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+        return;
     }
 
     @Override
