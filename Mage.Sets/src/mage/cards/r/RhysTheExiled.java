@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -9,6 +8,8 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -18,14 +19,16 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author Loki
  */
 public final class RhysTheExiled extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ELF, "Elf");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ELF, "Elf");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.ELF, "Elf you control");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, 1);
 
     public RhysTheExiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -37,11 +40,11 @@ public final class RhysTheExiled extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.
-        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter2, 1)), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(xValue), false));
 
         // {B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 
