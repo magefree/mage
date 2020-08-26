@@ -9,7 +9,7 @@ import mage.constants.SetType;
  */
 public final class SignatureSpellbookChandra extends ExpansionSet {
 
-    private static final SignatureSpellbookChandra instance = new SignatureSpellbookJace();
+    private static final SignatureSpellbookChandra instance = new SignatureSpellbookChandra();
 
     public static SignatureSpellbookChandra getInstance() {
         return instance;
