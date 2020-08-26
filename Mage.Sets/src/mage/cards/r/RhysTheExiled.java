@@ -2,6 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -15,23 +16,19 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
 public final class RhysTheExiled extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Elf you control");
-    static {
-        filter.add(SubType.ELF.getPredicate());
-        filter2.add(SubType.ELF.getPredicate());
-    }
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ELF, "Elf");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.ELF, "Elf you control");
 
     public RhysTheExiled(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
@@ -41,7 +38,7 @@ public final class RhysTheExiled extends CardImpl {
 
         // Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.
         this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter2, 1)), false));
-        
+
         // {B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
