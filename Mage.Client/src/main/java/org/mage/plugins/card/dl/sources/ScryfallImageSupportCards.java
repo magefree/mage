@@ -478,8 +478,6 @@ public class ScryfallImageSupportCards {
             add("SLU"); // Secret Lair: Ultimate Edition
             add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3
-            add("CC1"); // Commander Collection: Green
-
             // add("TD0"); // Commander Theme Decks
             // add("TD2"); // Duel Decks: Mirrodin Pure vs. New Phyrexia
             // add("MD1"); // Modern Event Deck
@@ -487,11 +485,13 @@ public class ScryfallImageSupportCards {
             // add("PZ1"); // Legendary Cube
             add("IKO"); // Ikoria: Lair of Behemoths
             add("C20"); // Commander 2020 Edition
-            //
             add("M21"); // Core Set 2021
             add("JMP"); // Jumpstart
             add("2XM"); // Double Masters
             add("AKR"); // Amonkhet Remastered
+            add("ZNR"); // Zendikar Rising
+            add("CMR"); // Commander Legends
+            add("CC1"); // Commander Collection: Green
         }
     };
 

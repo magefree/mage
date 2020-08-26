@@ -225,5 +225,6 @@ Weatherlight|WTH|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|
+Zendikar Rising|ZNR|
 Star Wars|SWS|
 Happy Holidays|HHO|
