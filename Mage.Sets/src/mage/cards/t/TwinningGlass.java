@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import java.util.ArrayList;
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,19 +12,21 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import mage.ApprovingObject;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.target.TargetCard;
 
 /**
  * @author jeffwadsworth
@@ -95,7 +97,8 @@ class TwinningGlassEffect extends OneShotEffect {
             }
             List<NamePredicate> predicates = spells.stream()
                     .map(Spell::getName)
-                    .filter(s -> !"".equals(s))
+                    .filter(Objects::nonNull)
+                    .filter(s -> !s.isEmpty())
                     .map(NamePredicate::new)
                     .collect(Collectors.toList());
             FilterNonlandCard filterCard = new FilterNonlandCard("nonland card that was cast this turn");

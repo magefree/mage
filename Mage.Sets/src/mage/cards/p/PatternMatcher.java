@@ -20,6 +20,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -79,7 +80,8 @@ class RegularExpression extends OneShotEffect {
                         source.getControllerId(), source.getSourceId(), game
                 ).stream()
                 .map(Permanent::getName)
-                .filter(s -> !"".equals(s))
+                .filter(Objects::nonNull)
+                .filter(s -> !s.isEmpty())
                 .map(NamePredicate::new)
                 .collect(Collectors.toList());
         FilterCard filter

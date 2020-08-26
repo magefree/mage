@@ -93,7 +93,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return object != null && CardUtil.haveSameNames(object, cardName, game);
+            return object != null && cardName != null && CardUtil.haveSameNames(object, cardName, game);
         }
         return false;
     }

@@ -4,8 +4,9 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
-import java.io.File;
 import org.apache.log4j.Logger;
+
+import java.io.File;
 
 public class S3Uploader {
 
@@ -18,9 +19,9 @@ public class S3Uploader {
         String accessKeyId = System.getenv("AWS_ACCESS_ID");
         String secretKeyId = System.getenv("AWS_SECRET_KEY");
 
-        if (accessKeyId == null || "".equals(accessKeyId)
-                || secretKeyId == null || "".equals(secretKeyId)
-                || existingBucketName == null || "".equals(existingBucketName)) {
+        if (accessKeyId == null || accessKeyId.isEmpty()
+                || secretKeyId == null || secretKeyId.isEmpty()
+                || existingBucketName == null || existingBucketName.isEmpty()) {
             logger.info("Aborting json log sync.");
             return false;
         }

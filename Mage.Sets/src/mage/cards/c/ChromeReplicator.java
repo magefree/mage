@@ -74,7 +74,7 @@ enum ChromeReplicatorCondition implements Condition {
                 .filter(Objects::nonNull)
                 .map(MageObject::getName)
                 .filter(Objects::nonNull)
-                .filter(s -> !"".equals(s))
+                .filter(s -> !s.isEmpty())
                 .anyMatch(s -> nameMap.compute(s, (x, i) -> i == null ? 1 : Integer.sum(i, 1)) >= 2);
     }
 }

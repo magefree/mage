@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseACardNameEffect;
@@ -11,8 +10,9 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class Memoricide extends CardImpl {
@@ -51,6 +51,9 @@ class MemoricideEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
     @Override
     public boolean apply(Game game, Ability source) {
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (cardName == null) {
+            return false;
+        }
         return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
     }
 
