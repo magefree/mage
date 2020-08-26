@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -34,7 +35,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
-import mage.MageIdentifier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -217,6 +217,10 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public int getStartingLoyalty() {
         return 0;
+    }
+
+    @Override
+    public void setStartingLoyalty(int startingLoyalty) {
     }
 
     @Override
@@ -691,7 +695,7 @@ public class StackAbility extends StackObjImpl implements Ability {
                 || (this.getOriginalId().equals(ability.getOriginalId()))
                 || (this.getClass() == ability.getClass() && this.getRule().equals(ability.getRule()));
     }
-    
+
     @Override
     public MageIdentifier getIdentifier() {
         return ability.getIdentifier();
@@ -701,5 +705,5 @@ public class StackAbility extends StackObjImpl implements Ability {
     public AbilityImpl setIdentifier(MageIdentifier identifier) {
         throw new UnsupportedOperationException("Not supported.");
     }
-        
+
 }
