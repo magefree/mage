@@ -1,6 +1,7 @@
 package mage;
 
 import java.util.*;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -161,6 +162,15 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+        for (Ability ab : getAbilities()) {
+            if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
+                ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).setStartingLoyalty(startingLoyalty);
+            }
+        }
+    }
+
+    @Override
     public ObjectColor getColor(Game game) {
         return color;
     }
@@ -307,7 +317,7 @@ public abstract class MageObjectImpl implements MageObject {
      */
     @Override
     public void removePTCDA() {
-        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext(); ) {
             Ability ability = iter.next();
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -46,6 +47,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private ObjectColor color;
     private boolean useLKI = false;
     private boolean isntLegendary = false;
+    private int startingLoyalty = -1;
     private final List<Ability> additionalAbilities = new ArrayList();
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
@@ -176,6 +178,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (isntLegendary) {
             token.getSuperType().remove(SuperType.LEGENDARY);
         }
+
+        if (startingLoyalty!=-1){
+            token.setStartingLoyalty(startingLoyalty);
+        }
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
             token.addCardType(additionalCardType);
         }
@@ -286,6 +292,10 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public void setHasHaste(boolean hasHaste) {
         this.hasHaste = hasHaste;
+    }
+
+    public void setStartingLoyalty(int startingLoyalty) {
+        this.startingLoyalty = startingLoyalty;
     }
 
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {

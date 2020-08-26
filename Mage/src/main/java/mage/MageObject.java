@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -64,6 +65,8 @@ public interface MageObject extends MageItem, Serializable {
     MageInt getToughness();
 
     int getStartingLoyalty();
+
+    void setStartingLoyalty(int startingLoyalty);
 
     void adjustCosts(Ability ability, Game game);
 
