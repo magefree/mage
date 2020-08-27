@@ -115,7 +115,14 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("When ").append(attachedDescription);
+        StringBuilder sb = new StringBuilder();
+        if(attachedDescription.startsWith("equipped")) {
+            sb.append("Whenever ");
+        }
+        else {
+            sb.append("When ");
+        }
+        sb.append(attachedDescription);
         if (diesRuleText) {
             sb.append(" dies, ");
         } else {
