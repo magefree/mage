@@ -2,6 +2,7 @@
 package mage.cards.f;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,13 +22,12 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public final class FaadiyahSeer extends CardImpl {
 
     public FaadiyahSeer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -69,15 +69,20 @@ class FaadiyahSeerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            controller.drawCards(1, source.getSourceId(), game);
-            controller.revealCards("Fa'adiyah Seer", new CardsImpl(card), game);
-            if (!filter.match(card, game)) {
-                controller.discard(card, source, game);
-            }
+        if (controller == null) {
+            return false;
+        }
+        Card card = controller.getLibrary().getFromTop(game);
+        // Gatherer ruling (2007-02-01)
+        // If the draw is replaced by another effect, none of the rest of Fa’adiyah Seer’s ability applies,
+        // even if the draw is replaced by another draw (such as with Enduring Renewal).
+        if (controller.drawCards(1, source.getSourceId(), game) != 1) {
             return true;
         }
-        return false;
+        controller.revealCards(source, new CardsImpl(card), game);
+        if (!card.isLand()) {
+            controller.discard(card, source, game);
+        }
+        return true;
     }
 }

@@ -1,7 +1,7 @@
-
 package mage.cards.z;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,7 +22,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- *
  * @author Quercitron
  */
 public final class ZursWeirding extends CardImpl {
@@ -49,12 +48,12 @@ public final class ZursWeirding extends CardImpl {
 
 class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
 
-    public ZursWeirdingReplacementEffect() {
+    ZursWeirdingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.";
     }
 
-    public ZursWeirdingReplacementEffect(final ZursWeirdingReplacementEffect effect) {
+    private ZursWeirdingReplacementEffect(final ZursWeirdingReplacementEffect effect) {
         super(effect);
     }
 
@@ -83,37 +82,41 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
         boolean paid = false;
         Player player = game.getPlayer(event.getTargetId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (player != null
-                && sourceObject != null) {
-            Card card = player.getLibrary().getFromTop(game);
-            if (card != null) {
-                // Reveals it instead
-                player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum() + '|' + game.getPhase().getType() + ')', new CardsImpl(card), game);
+        if (player == null
+                || sourceObject == null) {
+            return false;
+        }
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        // Reveals it instead
+        player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum() + '|' + game.getPhase().getType() + ')', new CardsImpl(card), game);
 
-                // Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard
-                String message = "Pay 2 life to put " + card.getLogName() + " into " + player.getLogName() + " graveyard?";
+        // Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard
+        String message = "Pay 2 life to put " + card.getLogName() + " into " + player.getLogName() + " graveyard?";
 
-                for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
-                    if (playerId.equals(player.getId())) {
-                        continue;
-                    }
-                    Player otherPlayer = game.getPlayer(playerId);
-                    if (otherPlayer.canPayLifeCost(source)
-                            && otherPlayer.getLife() >= 2) {
-                        PayLifeCost lifeCost = new PayLifeCost(2);
-                        while (otherPlayer.canRespond()
-                                && !paid
-                                && otherPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
-                            paid = lifeCost.pay(source, game, source.getSourceId(), otherPlayer.getId(), false, null);
-                        }
-                        if (paid) {
-                            player.moveCards(card, Zone.GRAVEYARD, source, game);
-                            return true;
-                        }
-                    }
+        for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
+            if (playerId.equals(player.getId())) {
+                continue;
+            }
+            Player otherPlayer = game.getPlayer(playerId);
+            if (otherPlayer.canPayLifeCost(source)
+                    && otherPlayer.getLife() >= 2) {
+                PayLifeCost lifeCost = new PayLifeCost(2);
+                while (otherPlayer.canRespond()
+                        && !paid
+                        && otherPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
+                    paid = lifeCost.pay(source, game, source.getSourceId(), otherPlayer.getId(), false, null);
+                }
+                if (paid) {
+                    player.moveCards(card, Zone.GRAVEYARD, source, game);
+                    return true;
                 }
             }
         }
-        return false;
+        // This is still replacing the draw, so we still return true
+        player.drawCards(1, source.getSourceId(), game, event.getAppliedEffects());
+        return true;
     }
 }

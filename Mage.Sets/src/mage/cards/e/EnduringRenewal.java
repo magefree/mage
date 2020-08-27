@@ -1,7 +1,7 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
@@ -21,22 +21,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author anonymous
  */
 public final class EnduringRenewal extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 
     public EnduringRenewal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Play with your hand revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect()));
-        
+
         // If you would draw a card, reveal the top card of your library instead. If it's a creature card, put it into your graveyard. Otherwise, draw a card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnduringRenewalReplacementEffect()));
-        
+
         // Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("return it to your hand");
@@ -86,8 +85,11 @@ class EnduringRenewalReplacementEffect extends ReplacementEffectImpl {
             controller.revealCards("Top card of " + controller.getName() + "'s library", cards, game);
             if (card.isCreature()) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                return true;
+            } else {
+                // This is still replacing the draw, so we still return true
+                controller.drawCards(1, source.getSourceId(), game, event.getAppliedEffects());
             }
+            return true;
         }
         return false;
     }

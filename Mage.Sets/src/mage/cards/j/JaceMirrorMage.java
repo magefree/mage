@@ -113,14 +113,18 @@ class JaceMirrorMageDrawEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: Make this and similar effects work with draw replacement correctly
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Card card = player.getLibrary().getFromTop(game);
-        player.drawCards(1, source.getSourceId(), game);
-        player.revealCards(source, new CardsImpl(card), game);
+        Card card = controller.getLibrary().getFromTop(game);
+        // Gatherer ruling (2007-02-01)
+        // If the draw is replaced by another effect, none of the rest of Fa’adiyah Seer’s ability applies,
+        // even if the draw is replaced by another draw (such as with Enduring Renewal).
+        if (controller.drawCards(1, source.getSourceId(), game) != 1) {
+            return true;
+        }
+        controller.revealCards(source, new CardsImpl(card), game);
         if (card == null || card.getConvertedManaCost() == 0) {
             return true;
         }
