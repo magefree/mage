@@ -94,11 +94,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 31, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", 32, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sliver Overlord", 10, Rarity.MYTHIC, mage.cards.s.SliverOverlord.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 5, Rarity.RARE, mage.cards.s.SnowCoveredForest.class));
-        cards.add(new SetCardInfo("Snow-Covered Island", 2, Rarity.RARE, mage.cards.s.SnowCoveredIsland.class));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 4, Rarity.RARE, mage.cards.s.SnowCoveredMountain.class));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.RARE, mage.cards.s.SnowCoveredPlains.class));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.RARE, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 5, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 2, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 4, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Spell Pierce", 41, Rarity.RARE, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Storm Crow", 60, Rarity.RARE, mage.cards.s.StormCrow.class, FULL_ART));
         cards.add(new SetCardInfo("Swamp", 65, Rarity.LAND, mage.cards.basiclands.Swamp.class));
