@@ -591,7 +591,7 @@ public class VerifyCardDataTest {
                 MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
                 if (jsonCard == null) {
                     // see convertMtgJsonToXmageCardNumber for card number convert notation
-                    errorsList.add("Error: unknown card number, use standard number notations: "
+                    errorsList.add("Error: unknown card number or set, use standard number notations: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                     continue;
                 }
