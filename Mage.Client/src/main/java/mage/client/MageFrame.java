@@ -67,6 +67,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -1268,6 +1269,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         LOGGER.info("Starting MAGE client version " + VERSION);
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
+        LOGGER.info("Default charset: " + Charset.defaultCharset());
 
         startTime = System.currentTimeMillis();
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.fatal(null, e));

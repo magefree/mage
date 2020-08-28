@@ -31,6 +31,7 @@ import org.mage.test.player.TestPlayer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -104,6 +105,8 @@ public abstract class MageTestPlayerBase {
         Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
         logger.debug("Logging level: " + logger.getLevel());
+        logger.debug("Default charset: " + Charset.defaultCharset());
+
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {

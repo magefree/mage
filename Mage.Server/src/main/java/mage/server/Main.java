@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -68,6 +69,7 @@ public final class Main {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
+        logger.info("Default charset: " + Charset.defaultCharset());
 
         String adminPassword = "";
         for (String arg : args) {
