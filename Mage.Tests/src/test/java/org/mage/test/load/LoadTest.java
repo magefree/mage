@@ -34,7 +34,7 @@ import java.util.UUID;
  * started before running them. In case you want to debug these tests, use
  * -Ddebug.mage that would disable client-server request timeout.
  * <p>
- * Then it's also better to use -Xms256M -Xmx512M JVM options for these stests.
+ * Then it's also better to use -Xms256M -Xmx512M JVM options for these tests.
  *
  * @author JayDi85
  */
