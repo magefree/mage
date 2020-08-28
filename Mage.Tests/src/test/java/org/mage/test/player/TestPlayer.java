@@ -3383,7 +3383,12 @@ public class TestPlayer implements Player {
     public boolean canPayLifeCost(Ability ability) {
         return computerPlayer.canPayLifeCost(ability);
     }
-
+    
+    @Override
+    public boolean getCanPayLifeCost() {
+        return computerPlayer.getCanPayLifeCost();
+    }
+    
     @Override
     public void setCanPayLifeCost(boolean canPayLifeCost) {
         computerPlayer.setCanPayLifeCost(canPayLifeCost);

@@ -333,7 +333,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.inRange.clear();
         this.inRange.addAll(player.getInRange());
-        this.canPayLifeCost = player.canPayLifeCost(null);
+        this.canPayLifeCost = player.getCanPayLifeCost();
         this.sacrificeCostFilter = player.getSacrificeCostFilter() != null
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
@@ -1155,7 +1155,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param originalAbility
      * @param game
-     * @param noMana           cast it without paying mana costs
+     * @param noMana          cast it without paying mana costs
      * @param approvingObject which object approved the cast
      * @return
      */
@@ -1856,10 +1856,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private List<Permanent> getPermanentsThatCanBeUntapped(Game game,
-            List<Permanent> canBeUntapped,
-            RestrictionUntapNotMoreThanEffect handledEffect,
-            Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
+    private List<Permanent> getPermanentsThatCanBeUntapped(Game game, List<Permanent> canBeUntapped,RestrictionUntapNotMoreThanEffect handledEffect, Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
         List<Permanent> leftForUntap = new ArrayList<>();
         // select permanents that can still be untapped
         for (Permanent permanent : canBeUntapped) {
@@ -2047,14 +2044,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<
-            UUID> appliedEffects) {
+    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         return doDamage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
     }
 
     @SuppressWarnings({"null", "ConstantConditions"})
-    private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<
-            UUID> appliedEffects) {
+    private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         if (!this.isInGame()) {
             return 0;
         }
@@ -2571,8 +2566,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId,
-            boolean triggerEvents) {
+    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
         String searchInfo = null;
@@ -2819,8 +2813,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      *         or NilRoll
      */
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides,
-            int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
         int result = RandomUtil.nextInt(9) + 1;
         PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;
         if (numberChaosSides + numberPlanarSides > 9) {
@@ -3840,8 +3833,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setAllowBadMoves(boolean allowBadMoves
-    ) {
+    public void setAllowBadMoves(boolean allowBadMoves) {
         // do nothing
     }
 
@@ -3856,15 +3848,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost
-    ) {
+    public boolean getCanPayLifeCost() {
+        return canPayLifeCost;
+    }
+
+    @Override
+    public void setCanPayLifeCost(boolean canPayLifeCost) {
         this.canPayLifeCost = canPayLifeCost;
     }
 
     @Override
-    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId,
-            UUID controllerId, Game game
-    ) {
+    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
         return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, sourceId, controllerId, game);
     }
 
@@ -3885,8 +3879,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife
-    ) {
+    public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife) {
         this.loseByZeroOrLessLife = loseByZeroOrLessLife;
     }
 
@@ -3896,8 +3889,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard
-    ) {
+    public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
         this.canPlayCardsFromGraveyard = playCardsFromGraveyard;
     }
 
@@ -3929,8 +3921,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public synchronized void resetStoredBookmark(Game game
-    ) {
+    public synchronized void resetStoredBookmark(Game game) {
         if (this.storedBookmark != -1) {
             game.removeBookmark(this.storedBookmark);
         }
@@ -3982,8 +3973,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving
-    ) {
+    public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving) {
         this.reachedNextTurnAfterLeaving = reachedNextTurnAfterLeaving;
     }
 
@@ -4015,10 +4005,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Card card, Zone toZone,
-            Ability source, Game game,
-            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
-    ) {
+    public boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         Set<Card> cardList = new HashSet<>();
         if (card != null) {
             cardList.add(card);
@@ -4027,9 +4014,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Cards cards, Zone toZone,
-            Ability source, Game game
-    ) {
+    public boolean moveCards(Cards cards, Zone toZone, Ability source, Game game) {
         return moveCards(cards.getCards(game), toZone, source, game);
     }
 
@@ -4041,10 +4026,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone,
-            Ability source, Game game,
-            boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
-    ) {
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         if (cards.isEmpty()) {
             return true;
         }
@@ -4144,20 +4126,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardsToExile(Card card, Ability source,
-            Game game, boolean withName, UUID exileId,
-            String exileZoneName
-    ) {
+    public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         Set<Card> cards = new HashSet<>();
         cards.add(card);
         return moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 
     @Override
-    public boolean moveCardsToExile(Set<Card> cards, Ability source,
-            Game game, boolean withName, UUID exileId,
-            String exileZoneName
-    ) {
+    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         if (cards.isEmpty()) {
             return true;
         }
@@ -4171,16 +4147,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId,
-            Game game
-    ) {
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId,Game game) {
         return this.moveCardToHandWithInfo(card, sourceId, game, true);
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId,
-            Game game, boolean withName
-    ) {
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
         boolean result = false;
         Zone fromZone = game.getState().getZone(card.getId());
         if (fromZone == Zone.BATTLEFIELD && !(card instanceof Permanent)) {
@@ -4203,9 +4175,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source,
-            Game game, Zone fromZone
-    ) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
         UUID sourceId = source == null ? null : source.getSourceId();
         Set<Card> movedCards = new LinkedHashSet<>();
         while (!allCards.isEmpty()) {
@@ -4274,9 +4244,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId,
-            Game game, Zone fromZone
-    ) {
+    public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         if (card == null) {
             return false;
         }
@@ -4303,10 +4271,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId,
-            Game game, Zone fromZone,
-            boolean toTop, boolean withName
-    ) {
+    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
         if (card == null) {
             return false;
         }
@@ -4369,8 +4334,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId,
-            Game game, Zone fromZone, boolean withName) {
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
         if (card == null) {
             return false;
         }

@@ -179,7 +179,12 @@ public class PlayerStub implements Player {
     public void setCanPayLifeCost(boolean canPayLifeCost) {
 
     }
-
+    
+    @Override
+    public boolean getCanPayLifeCost() {
+        return false;
+    }
+    
     @Override
     public boolean canPayLifeCost(Ability ability) {
         return false;
