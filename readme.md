@@ -12,11 +12,14 @@ pauper, oathbreaker, historic, freeform and much more.
 There are [public servers](http://xmageservers.online/) where you can play XMage against other players. 
 You can also host your own server to play against the AI and/or your friends.
 
-XMage community:
+XMage community and resources:
 * [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70);
 * [Official XMage support and feature request on github](https://github.com/magefree/mage/issues);
 * [Reddit XMage group](https://www.reddit.com/r/XMage/);
-* [Reddit XMage discord channel](https://discord.gg/Pqf42yn).
+* [Reddit XMage discord channel](https://discord.gg/Pqf42yn);
+* [Latest releases](https://github.com/magefree/mage/releases);
+* [Latest news](https://jaydi85.github.io/xmage-web-news/news.html);
+* [Project documentation](https://github.com/magefree/mage/wiki).
 
 Servers status:
 * http://xmageservers.online/
@@ -36,23 +39,24 @@ Beta server with un-released or under development features:
     * Booster (also Cube) draft tournaments (4-16)
     * Sealed (also from Cube) tournaments (2-16)
 
-## Issues / bugs
+## Bug report / feature request
 
 The best way to report bug or feature request is [github's issues page](https://github.com/magefree/mage/issues). 
 There are another way to report bugs too:
 * Feedback from xmage app's main menu;
 * Bug thread in the [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70).  
 
-## Installation
+## Installation / running
 
 * Download [latest XMage launcher file](http://xmage.de) and put it to any folder like `D:\games\xmage`;
 * You need to have [Java version 8 or later](http://java.com/) to run launcher;
 * If you can't run it then create `run-LAUNCHER.cmd` text file in launcher folder and put that line to it and save as ANSI format:
   * `java -Djava.net.preferIPv4Stack=true -jar XMageLauncher-0.3.8.jar`
-  * or just [downlod and unpack that archive](http://xmage.today/X/run.zip) to launcher folder;
+  * or just [downlod and unpack that archive](http://xmage.today/X/run.zip) to launcher folder.
+  
+Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for more detailed instructions. 
 
-Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for more detailed instructions.
-[Here](http://github.com/magefree/mage/wiki/Release-changes) you can find a log of the latest changes.
+[Wiki page](https://github.com/magefree/mage/wiki) contains detail information about private or public server setup.
 
 ## Troubleshooting / FAQ
 
@@ -103,10 +107,9 @@ More details about [memory settings](https://stackoverflow.com/a/57839720/840169
 
 ## Developer
 
-If you are interested in developing XMage, here are some useful resources:
+Full project documentation and instructions for developers can be found in [wiki pages](http://github.com/magefree/mage/wiki/). 
+
+First steps for Xmage's developers:
 * [Developer Getting Started](http://github.com/magefree/mage/wiki/Developer-Getting-Started)
 * [Developer Notes](http://github.com/magefree/mage/wiki/Developer-Notes)
 * [Developer Testing Tools](http://github.com/magefree/mage/wiki/Developer-Testing-Tools)
-* [Double Faced Cards](http://github.com/magefree/mage/wiki/Double-Faced-Cards)
-* [Card Requests](https://www.slightlymagic.net/forum/viewtopic.php?f=70&t=20685)
-* [Tournament Relevant Card Requests](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=14062)
