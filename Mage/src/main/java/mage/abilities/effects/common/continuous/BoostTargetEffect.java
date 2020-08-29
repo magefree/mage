@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -25,7 +24,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    private boolean lockedIn;
+    private final boolean lockedIn;
 
     public BoostTargetEffect(int power, int toughness) {
         this(power, toughness, Duration.EndOfTurn);
@@ -104,7 +103,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
         } else {
-            if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
+            if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
                 sb.append("target ");
             }
             sb.append(target.getTargetName()).append(" gets ");

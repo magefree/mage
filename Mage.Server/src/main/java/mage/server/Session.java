@@ -1,17 +1,11 @@
 package mage.server;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import static mage.server.DisconnectReason.LostConnection;
 import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
@@ -22,6 +16,14 @@ import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static mage.server.DisconnectReason.LostConnection;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -201,9 +203,11 @@ public class Session {
                 }
             }
         }
+
         Optional<User> selectUser = UserManager.instance.createUser(userName, host, authorizedUser);
         boolean reconnect = false;
-        if (!selectUser.isPresent()) {  // user already exists
+        if (!selectUser.isPresent()) {
+            // user already connected
             selectUser = UserManager.instance.getUserByName(userName);
             if (selectUser.isPresent()) {
                 User user = selectUser.get();
@@ -222,6 +226,9 @@ public class Session {
                 } else {
                     return "User name " + userName + " already in use (or your IP address changed)";
                 }
+            } else {
+                // code never goes here
+                return "Can't find connected user name " + userName;
             }
         }
         User user = selectUser.get();
@@ -240,7 +247,6 @@ public class Session {
         }
 
         return null;
-
     }
 
     public void connectAdmin() {

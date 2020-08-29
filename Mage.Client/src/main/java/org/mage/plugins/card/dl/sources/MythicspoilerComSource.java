@@ -446,6 +446,11 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return true;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
     }
 
@@ -454,4 +459,8 @@ public enum MythicspoilerComSource implements CardImageSource {
         return new ArrayList<>(supportedSets);
     }
 
+    @Override
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return supportedSets.contains(setCode);
+    }
 }

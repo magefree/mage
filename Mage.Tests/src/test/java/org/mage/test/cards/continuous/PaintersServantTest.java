@@ -30,7 +30,7 @@ public class PaintersServantTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
         setChoice(playerA, "Blue");

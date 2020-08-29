@@ -463,6 +463,11 @@ public enum GrabbagImageSource implements CardImageSource {
         return true;
     }
 
+    @Override
+    public boolean isCardSource() {
+        return true;
+    }
+
     private String getSourceName(CardDownloadData card, String httpImageUrl) {
         if (card.getSet().equals("MTG")) {
             return "http://static.starcitygames.com/sales/cardscans/";
@@ -495,10 +500,4 @@ public enum GrabbagImageSource implements CardImageSource {
         }
         return singleLinks.containsKey(setCode + "/" + cardName) || singleLinks.containsKey(setCode + "/" + cardName + "-a");
     }
-
-    @Override
-    public boolean isSetSupportedComplete(String setCode) {
-        return false;
-    }
-
 }

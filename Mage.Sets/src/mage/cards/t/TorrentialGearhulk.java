@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -12,11 +11,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -24,10 +19,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import org.apache.log4j.Logger;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class TorrentialGearhulk extends CardImpl {
@@ -85,23 +80,18 @@ class TorrentialGearhulkEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    if (cardWasCast) {
-                        ContinuousEffect effect = new TorrentialGearhulkReplacementEffect(card.getId());
-                        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-                        game.addEffect(effect, source);
-                    }
+        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        if (controller != null && card != null) {
+            if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                        game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                if (cardWasCast) {
+                    ContinuousEffect effect = new TorrentialGearhulkReplacementEffect(card.getId());
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+                    game.addEffect(effect, source);
                 }
-            } else if (card != null) {
-                Logger.getLogger(TorrentialGearhulkEffect.class).error("Torrential Gearhulk - Instant card without spellAbility : " + card.getName());
-                return false;
             }
             return true;
         }

@@ -272,9 +272,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         List<String> setNames = new ArrayList<>();
 
         // multiple sets selection
-        setNames.add(ALL_IMAGES);
-        setNames.add(ALL_MODERN_IMAGES);
-        setNames.add(ALL_STANDARD_IMAGES);
+        if (selectedSource.isCardSource()) {
+            setNames.add(ALL_IMAGES);
+            setNames.add(ALL_MODERN_IMAGES);
+            setNames.add(ALL_STANDARD_IMAGES);
+        }
         if (selectedSource.isTokenSource()) {
             setNames.add(ALL_TOKENS);
         }
@@ -338,18 +340,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
-                if (selectedSource.isTokenSource() && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())) {
+                if (selectedSource.isTokenSource()
+                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())) {
                     numberTokenImagesAvailable++;
                     cardsDownloadQueue.add(data);
-                } else {
-                    //logger.warn("Source do not support token (set " + data.getSet() + ", token " + data.getName() + ")");
                 }
             } else {
-                if (selectedSets != null && selectedSets.contains(data.getSet())) {
-                    if (selectedSource.isSetSupportedComplete(data.getSet()) || selectedSource.isCardImageProvided(data.getSet(), data.getName())) {
-                        numberCardImagesAvailable++;
-                        cardsDownloadQueue.add(data);
-                    }
+                if (selectedSource.isCardSource()
+                        && selectedSource.isCardImageProvided(data.getSet(), data.getName())
+                        && selectedSets.contains(data.getSet())) {
+                    numberCardImagesAvailable++;
+                    cardsDownloadQueue.add(data);
                 }
             }
         }

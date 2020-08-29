@@ -32,9 +32,9 @@ public interface CardImageSource {
         return 0;
     }
 
-    default boolean isTokenSource() {
-        return false;
-    }
+    boolean isCardSource();
+
+    boolean isTokenSource();
 
     default boolean isLanguagesSupport() {
         return false;
@@ -53,13 +53,8 @@ public interface CardImageSource {
         return new ArrayList<>();
     }
 
-    default boolean isSetSupportedComplete(String setCode) {
-        return true;
-    }
 
-    default boolean isCardImageProvided(String setCode, String cardName) {
-        return false;
-    }
+    boolean isCardImageProvided(String setCode, String cardName);
 
     default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;

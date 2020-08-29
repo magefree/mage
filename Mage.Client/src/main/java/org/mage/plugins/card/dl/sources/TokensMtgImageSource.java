@@ -147,6 +147,11 @@ public enum TokensMtgImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return false;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
     }
 
@@ -157,6 +162,7 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     @Override
     public boolean isCardImageProvided(String setCode, String cardName) {
+        // no cards support, only tokens
         return false;
     }
 
@@ -173,11 +179,6 @@ public enum TokensMtgImageSource implements CardImageSource {
         }
         String key = setCode + "/" + searchName;
         return (tokensData.containsKey(key));
-    }
-
-    @Override
-    public boolean isSetSupportedComplete(String setCode) {
-        return false;
     }
 
     private HashMap<String, List<TokenData>> getTokensData() throws IOException {

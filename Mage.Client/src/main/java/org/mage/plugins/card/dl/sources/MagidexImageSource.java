@@ -285,11 +285,21 @@ public enum MagidexImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return true;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
     }
 
     @Override
     public List<String> getSupportedSets() {
         return new ArrayList<>(supportedSets);
+    }
+
+    @Override
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return supportedSets.contains(setCode);
     }
 }

@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.continuous;
 
 import mage.cards.Card;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
@@ -29,7 +27,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conspiracy");
         setChoice(playerA, "Orc");
@@ -105,7 +103,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conspiracy");
         setChoice(playerA, "Orc");
@@ -159,7 +157,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcane Adaptation");
         setChoice(playerA, "Orc");
@@ -246,7 +244,7 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Advent of the Wurm");
 
