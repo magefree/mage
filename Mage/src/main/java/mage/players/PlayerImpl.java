@@ -1,6 +1,7 @@
 package mage.players;
 
 import com.google.common.collect.ImmutableMap;
+import mage.ApprovingObject;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -69,7 +70,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import mage.ApprovingObject;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
@@ -276,13 +276,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
-        this.castSourceIdWithAlternateMana.addAll(player.castSourceIdWithAlternateMana);
-        this.castSourceIdManaCosts.putAll(player.castSourceIdManaCosts);
-        this.castSourceIdCosts.putAll(player.castSourceIdCosts);
-
+        this.castSourceIdWithAlternateMana.addAll(player.getCastSourceIdWithAlternateMana());
+        for (Entry<UUID, ManaCosts<ManaCost>> entry : player.getCastSourceIdManaCosts().entrySet()) {
+            this.castSourceIdManaCosts.put(entry.getKey(), (entry.getValue() == null ? null : entry.getValue().copy()));
+        }
+        for (Entry<UUID, Costs<Cost>> entry : player.getCastSourceIdCosts().entrySet()) {
+            this.castSourceIdCosts.put(entry.getKey(), (entry.getValue() == null ? null : entry.getValue().copy()));
+        }
         this.payManaMode = player.payManaMode;
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
-        this.designations.addAll(player.designations);
+        for (Designation object : player.designations) {
+            this.designations.add(object.copy());
+        }
     }
 
     @Override
@@ -360,8 +365,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.getPhyrexianColors().copy() : null;
+
         this.designations.clear();
-        this.designations.addAll(player.getDesignations());
+        for (Designation object : player.getDesignations()) {
+            this.designations.add(object.copy());
+        }
 
         // Don't restore!
         // this.storedBookmark
@@ -614,9 +622,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && this.hasOpponent(sourceControllerId, game)
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, null, sourceControllerId, game) == null
                     && abilities.stream()
-                            .filter(HexproofBaseAbility.class::isInstance)
-                            .map(HexproofBaseAbility.class::cast)
-                            .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .filter(HexproofBaseAbility.class::isInstance)
+                    .map(HexproofBaseAbility.class::cast)
+                    .anyMatch(ability -> ability.checkObject(source, game))) {
                 return false;
             }
 
@@ -656,7 +664,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " discards down to "
                         + this.maxHandSize
                         + (this.maxHandSize == 1
-                                ? " hand card" : " hand cards"));
+                        ? " hand card" : " hand cards"));
             }
             discard(hand.size() - this.maxHandSize, false, null, game);
         }
@@ -805,7 +813,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD,
                 card.getId(), source == null
-                ? null : source.getSourceId(), playerId);
+                        ? null : source.getSourceId(), playerId);
         gameEvent.setFlag(source != null); // event from effect or from cost (source == null)
         if (game.replaceEvent(gameEvent, source)) {
             return false;
@@ -1856,7 +1864,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private List<Permanent> getPermanentsThatCanBeUntapped(Game game, List<Permanent> canBeUntapped,RestrictionUntapNotMoreThanEffect handledEffect, Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
+    private List<Permanent> getPermanentsThatCanBeUntapped(Game game, List<Permanent> canBeUntapped, RestrictionUntapNotMoreThanEffect handledEffect, Map<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> notMoreThanEffectsUsage) {
         List<Permanent> leftForUntap = new ArrayList<>();
         // select permanents that can still be untapped
         for (Permanent permanent : canBeUntapped) {
@@ -2716,7 +2724,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param winnable
      * @param appliedEffects
      * @return if winnable, true if player won the toss, if not winnable, true
-     *         for heads and false for tails
+     * for heads and false for tails
      */
     @Override
     public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
@@ -2810,7 +2818,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param numberPlanarSides The number of chaos sides the planar die
      *                          currently has (normally 1)
      * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
-     *         or NilRoll
+     * or NilRoll
      */
     @Override
     public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
@@ -2887,7 +2895,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Card card : getHand().getCards(game)) {
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = card.getAbilities(game).getAvailableActivatedManaAbilities(Zone.HAND, playerId, game);
-            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
+            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext(); ) {
                 ActivatedManaAbilityImpl ability = it.next();
                 Abilities<ActivatedManaAbilityImpl> noTapAbilities = new AbilitiesImpl<>(ability);
                 if (ability.getManaCosts().isEmpty() && !ability.isPoolDependant()) {
@@ -2904,7 +2912,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean useLater = false; // sources with mana costs or mana pool dependency 
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = permanent.getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game); // returns ability only if canActivate is true
-            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext();) {
+            for (Iterator<ActivatedManaAbilityImpl> it = manaAbilities.iterator(); it.hasNext(); ) {
                 ActivatedManaAbilityImpl ability = it.next();
                 if (canUse == null) {
                     canUse = permanent.canUseActivatedAbilities(game);
@@ -2946,7 +2954,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean usePoolDependantAbilities = false; // use such abilities later than other if possible because it can maximize mana production
         while (anAbilityWasUsed && !sourceWithCosts.isEmpty()) {
             anAbilityWasUsed = false;
-            for (Iterator<Abilities<ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext();) {
+            for (Iterator<Abilities<ActivatedManaAbilityImpl>> iterator = sourceWithCosts.iterator(); iterator.hasNext(); ) {
                 Abilities<ActivatedManaAbilityImpl> manaAbilities = iterator.next();
                 if (usePoolDependantAbilities || !manaAbilities.hasPoolDependantAbilities()) {
                     boolean used;
@@ -3648,7 +3656,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      *
      * @param game
      * @return A Set of cardIds that are playable and amount of playable
-     *         abilities
+     * abilities
      */
     @Override
     public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
@@ -4020,7 +4028,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCards(Set<Card> cards, Zone toZone,
-            Ability source, Game game
+                             Ability source, Game game
     ) {
         return moveCards(cards, toZone, source, game, false, false, false, null);
     }
@@ -4147,7 +4155,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId,Game game) {
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
         return this.moveCardToHandWithInfo(card, sourceId, game, true);
     }
 
@@ -4182,7 +4190,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Iterator<Card> it = allCards.iterator(); it.hasNext();) {
+            for (Iterator<Card> it = allCards.iterator(); it.hasNext(); ) {
                 Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
@@ -4358,7 +4366,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
                             + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                             + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                                    + ' ' : "") + "to the exile zone");
+                            + ' ' : "") + "to the exile zone");
                 }
 
             }
