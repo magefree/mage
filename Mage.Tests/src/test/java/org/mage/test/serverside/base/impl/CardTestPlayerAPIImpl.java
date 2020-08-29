@@ -27,6 +27,7 @@ import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
+import mage.server.util.SystemUtil;
 import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Before;
@@ -655,6 +656,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
+    }
+
+    public void addPlane(Player player, Planes plane) {
+        Assert.assertTrue("Can't put plane to game: " + plane.getClassName(), SystemUtil.putPlaneToGame(currentGame, player, plane.getClassName()));
     }
 
     /**

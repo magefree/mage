@@ -522,29 +522,7 @@ public final class SystemUtil {
                         continue;
                     }
                 } else if ("plane".equalsIgnoreCase(command.zone)) {
-                    // eg: plane:Human:BantPlane:1
-                    // Steps: 1) Remove the last plane and set its effects to discarded
-                    for (CommandObject cobject : game.getState().getCommand()) {
-                        if (cobject instanceof Plane) {
-                            if (cobject.getAbilities() != null) {
-                                for (Ability ability : cobject.getAbilities()) {
-                                    for (Effect effect : ability.getEffects()) {
-                                        if (effect instanceof ContinuousEffect) {
-                                            ((ContinuousEffect) effect).discard();
-                                        }
-                                    }
-                                }
-                            }
-                            game.getState().removeTriggersOfSourceId(cobject.getId());
-                            game.getState().getCommand().remove(cobject);
-                            break;
-                        }
-                    }
-                    Planes planeType = Planes.fromClassName(command.cardName);
-                    Plane plane = Plane.createPlane(planeType);
-                    if (plane != null) {
-                        plane.setControllerId(player.getId());
-                        game.addPlane(plane, null, player.getId());
+                    if (putPlaneToGame(game, player, command.cardName)) {
                         continue;
                     }
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {
@@ -686,6 +664,36 @@ public final class SystemUtil {
         }
         game.applyEffects();
         logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
+    }
+
+    public static boolean putPlaneToGame(Game game, Player player, String planeClassName) {
+        // remove the last plane and set its effects to discarded
+        for (CommandObject comObject : game.getState().getCommand()) {
+            if (comObject instanceof Plane) {
+                if (comObject.getAbilities() != null) {
+                    for (Ability ability : comObject.getAbilities()) {
+                        for (Effect effect : ability.getEffects()) {
+                            if (effect instanceof ContinuousEffect) {
+                                ((ContinuousEffect) effect).discard();
+                            }
+                        }
+                    }
+                }
+                game.getState().removeTriggersOfSourceId(comObject.getId());
+                game.getState().getCommand().remove(comObject);
+                break;
+            }
+        }
+
+        // put new plane to game
+        Planes planeType = Planes.fromClassName(planeClassName);
+        Plane plane = Plane.createPlane(planeType);
+        if (plane != null) {
+            plane.setControllerId(player.getId());
+            game.addPlane(plane, null, player.getId());
+            return true;
+        }
+        return false;
     }
 
     /**

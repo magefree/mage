@@ -1102,7 +1102,7 @@ public class MageServerImpl implements MageServer {
         execute("removeTable", sessionId, () -> {
             SessionManager.instance.getSession(sessionId).ifPresent(session -> {
                 UUID userId = session.getUserId();
-                TableManager.instance.removeTable(userId, tableId); // delete account
+                TableManager.instance.removeTable(userId, tableId);
             });
         });
     }
