@@ -19,7 +19,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
-    private boolean onCard;
+    private final boolean onCard;
 
     // Duration until next phase step of player
     private PhaseStep durationPhaseStep = null;
@@ -140,7 +140,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
                 }
                 sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
             } else {
-                if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
+                if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
                     sb.append("target ");
                 }
                 sb.append(target.getTargetName()).append(" gains ");

@@ -1,9 +1,5 @@
-
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.Iterator;
-import java.util.Locale;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -19,16 +15,18 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Iterator;
+import java.util.Locale;
+
 /**
- *
  * @author LevelX2
  */
 public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
     private DynamicValue power;
     private DynamicValue toughness;
-    private boolean lockedInPT;
+    private final boolean lockedInPT;
 
     public SetPowerToughnessAllEffect(int power, int toughness, Duration duration) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, new FilterCreaturePermanent("Creatures"), true);
@@ -63,7 +61,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (affectedObjectsSet) {
-            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
@@ -78,7 +76,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         int newPower = power.calculate(game, source, this);
         int newToughness = toughness.calculate(game, source, this);
         if (affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
                     permanent.getPower().setValue(newPower);
@@ -88,7 +86,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.getPower().setValue(newPower);
                 permanent.getToughness().setValue(newToughness);
             }
@@ -104,7 +102,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
 
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
-        if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("Each ")) {
+        if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each ")) {
             sb.append(" has base power and toughness ");
         } else {
             sb.append(" have base power and toughness ");
