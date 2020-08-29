@@ -1,17 +1,5 @@
-
 package mage.server;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -30,6 +18,18 @@ import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -244,7 +244,7 @@ public enum TableManager {
     /**
      * Starts the Match from a non tournament table
      *
-     * @param userId table owner
+     * @param userId  table owner
      * @param roomId
      * @param tableId
      */
@@ -415,7 +415,7 @@ public enum TableManager {
                 if (table.getState() != TableState.FINISHED
                         && ((System.currentTimeMillis() - table.getStartTime().getTime()) / 1000) > 30) { // removeUserFromAllTablesAndChat only if table started longer than 30 seconds ago
                     // removeUserFromAllTablesAndChat tables and games not valid anymore
-                    logger.debug(table.getId() + " [" + table.getName() + "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) + " (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament" : ""));
+                    logger.debug(table.getId() + " [" + table.getName() + "] " + formatter.format(table.getStartTime() != null ? table.getStartTime() : table.getCreateTime()) + " (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament" : ""));
                     getController(table.getId()).ifPresent(tableController -> {
                         if ((table.isTournament() && !tableController.isTournamentStillValid())
                                 || (!table.isTournament() && !tableController.isMatchTableStillValid())) {
