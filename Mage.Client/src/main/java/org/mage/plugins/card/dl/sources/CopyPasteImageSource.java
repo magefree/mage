@@ -21,8 +21,8 @@ public enum CopyPasteImageSource implements CardImageSource {
 
     instance;
 
-    private Set<String> supportedSets = new LinkedHashSet<String>();
-    private Set<String> missingCards = new LinkedHashSet<String>();
+    private final Set<String> supportedSets = new LinkedHashSet<String>();
+    private final Set<String> missingCards = new LinkedHashSet<String>();
     Map<String, String> singleLinks = null;
     boolean loadedFromDialog = false;
     boolean viewMissingCards = true;
@@ -221,7 +221,12 @@ public enum CopyPasteImageSource implements CardImageSource {
 
     @Override
     public boolean isTokenSource() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean isCardSource() {
+        return true;
     }
 
     @Override
@@ -252,11 +257,6 @@ public enum CopyPasteImageSource implements CardImageSource {
 
     @Override
     public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
-        return false;
-    }
-
-    @Override
-    public boolean isSetSupportedComplete(String setCode) {
         return false;
     }
 }

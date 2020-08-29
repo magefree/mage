@@ -355,6 +355,11 @@ public enum MtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return false;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
     }
 

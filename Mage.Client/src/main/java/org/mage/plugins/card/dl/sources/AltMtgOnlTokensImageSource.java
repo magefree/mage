@@ -152,6 +152,17 @@ public enum AltMtgOnlTokensImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return false;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
+    }
+
+    @Override
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        // no cards support, only tokens
+        return false;
     }
 }

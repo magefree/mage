@@ -220,6 +220,11 @@ public enum ScryfallImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return true;
+    }
+
+    @Override
     public boolean isLanguagesSupport() {
         return true;
     }

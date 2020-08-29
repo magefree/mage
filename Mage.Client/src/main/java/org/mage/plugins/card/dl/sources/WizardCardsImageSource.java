@@ -691,6 +691,11 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return true;
+    }
+
+    @Override
     public boolean isLanguagesSupport() {
         return true;
     }
@@ -712,6 +717,11 @@ public enum WizardCardsImageSource implements CardImageSource {
     @Override
     public List<String> getSupportedSets() {
         return new ArrayList<>(supportedSets);
+    }
+
+    @Override
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return supportedSets.contains(setCode);
     }
 
 }
