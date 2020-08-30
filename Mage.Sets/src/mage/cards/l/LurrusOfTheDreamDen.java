@@ -44,7 +44,7 @@ public final class LurrusOfTheDreamDen extends CardImpl {
 
         // During each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard.
         this.addAbility(new SimpleStaticAbility(new LurrusOfTheDreamDenCastFromGraveyardEffect())
-                .setIdentifier(MageIdentifier.LurrusOfTheDreamDenWatcher), 
+                .setIdentifier(MageIdentifier.LurrusOfTheDreamDenWatcher),
                 new LurrusOfTheDreamDenWatcher());
     }
 
@@ -104,6 +104,7 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
             Card objectCard = game.getCard(objectId);
             Permanent sourceObject = game.getPermanent(source.getSourceId());
             if (sourceObject != null && objectCard != null
+                    && objectCard.isPermanent()
                     && objectCard.isOwnedBy(source.getControllerId())
                     && objectCard.getConvertedManaCost() < 3
                     && objectCard.getSpellAbility() != null
@@ -111,10 +112,8 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
                 LurrusOfTheDreamDenWatcher watcher = game.getState().getWatcher(LurrusOfTheDreamDenWatcher.class);
                 return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game));
             }
-        }        
-        
-        
-        
+        }
+
         if (!objectId.equals(getTargetPointer().getFirst(game, source))) {
             return false;
         }
@@ -137,9 +136,9 @@ class LurrusOfTheDreamDenWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
-                &&event.hasApprovingIdentifier(MageIdentifier.LurrusOfTheDreamDenWatcher)){
+                && event.hasApprovingIdentifier(MageIdentifier.LurrusOfTheDreamDenWatcher)) {
             usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
-        }       
+        }
     }
 
     @Override
