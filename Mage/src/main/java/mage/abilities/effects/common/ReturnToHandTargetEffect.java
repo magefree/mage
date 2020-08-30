@@ -102,7 +102,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         }
         sb.append(target.getTargetName());
         if(target.getMaxNumberOfTargets() > 1) {
-            sb.append(" to their owners' hand");
+            sb.append(" to their owners' hands");
         }
         else {
             sb.append(" to its owner's hand");
