@@ -18,6 +18,16 @@ public class FixedTarget implements TargetPointer {
     private int zoneChangeCounter;
     private boolean initialized;
 
+    /**
+     * Use this best only to target to a player or spells on the stack. Try to
+     * avoid this method to set the target to a specific card or permanent if
+     * possible. Because the zoneChangeCounter is not set immediately, it can be
+     * undefined to which object you refer to at the end. Best is to set the
+     * target for cards or permanents by using the methods with the card or
+     * permanent object or also setting the zoneChangeCounter directly.
+     *
+     * @param target
+     */
     public FixedTarget(UUID target) {
         this.targetId = target;
         this.initialized = false;
@@ -29,7 +39,7 @@ public class FixedTarget implements TargetPointer {
 
     /**
      * Target counter is immediatly initialised with current zoneChangeCounter
-     * value from the GameState Sets fixed the currect zone chnage counter
+     * value from the GameState Sets fixed the currect zoneChangeCounter
      *
      * @param card used to get the objectId
      * @param game
@@ -40,6 +50,13 @@ public class FixedTarget implements TargetPointer {
         this.initialized = true;
     }
 
+    /**
+     * Target counter is immediatly initialised with current zoneChangeCounter
+     * value from the given permanent
+     *
+     * @param permanent
+     * @param game
+     */
     public FixedTarget(Permanent permanent, Game game) {
         this.targetId = permanent.getId();
         this.zoneChangeCounter = permanent.getZoneChangeCounter(game);
@@ -87,6 +104,15 @@ public class FixedTarget implements TargetPointer {
         }
     }
 
+    /**
+     * This returns a list of the targetIds (but only if the targets are still
+     * have the same zoneChangeCounter). So if the target has changed zone
+     * meanwhile there is no id returned for this target and the list is empty.
+     *
+     * @param game
+     * @param source
+     * @return
+     */
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
         // check target not changed zone
@@ -138,6 +164,7 @@ public class FixedTarget implements TargetPointer {
 
     @Override
     public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
+        init(game, source);
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter) {
             return permanent;
