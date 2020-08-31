@@ -97,13 +97,14 @@ public class ProtectionAbility extends StaticAbility {
                 return true;
             }
         }
+        
         // Emrakul, the Aeons Torn
         if (filter instanceof FilterStackObject) {
-            if (source instanceof Spell) {
-                return !filter.match(source, game);
+            if (filter.match(source, game)) {
+                return (!source.isInstantOrSorcery());
             }
         }
-
+        
         if (filter instanceof FilterObject) {
             return !filter.match(source, game);
         }
