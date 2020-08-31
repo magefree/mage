@@ -512,10 +512,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 || target.getOriginalTarget() instanceof TargetCardInHand) {
             if (outcome.isGood()) {
                 // good
-                Cards cards = new CardsImpl(target.possibleTargets(sourceId, getId(), game));
+                Cards cards = new CardsImpl(possibleTargets);
                 List<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
                 while (!target.isChosen()
-                        && !target.possibleTargets(sourceId, getId(), game).isEmpty()
+                        && !cardsInHand.isEmpty()
                         && target.getMaxNumberOfTargets() > target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
@@ -531,20 +531,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             } else {
                 // bad
                 findPlayables(game);
-                if (!unplayable.isEmpty()) {
-                    for (int i = unplayable.size() - 1; i >= 0; i--) {
-                        if (target.canTarget(abilityControllerId, unplayable.values().toArray(new Card[0])[i].getId(), source, game)) {
-                            target.addTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game);
-                            if (target.isChosen()) {
-                                return true;
-                            }
+                for (Card card : unplayable.values()) {
+                    if (possibleTargets.contains(card.getId())
+                            && target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                        target.addTarget(card.getId(), source, game);
+                        if (target.isChosen()) {
+                            return true;
                         }
                     }
                 }
                 if (!hand.isEmpty()) {
-                    for (int i = 0; i < hand.size(); i++) {
-                        if (target.canTarget(abilityControllerId, hand.toArray(new UUID[0])[i], source, game)) {
-                            target.addTarget(hand.toArray(new UUID[0])[i], source, game);
+                    for (Card card : hand.getCards(game)) {
+                        if (possibleTargets.contains(card.getId())
+                                && target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                            target.addTarget(card.getId(), source, game);
                             if (target.isChosen()) {
                                 return true;
                             }
