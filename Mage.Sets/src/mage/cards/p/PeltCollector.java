@@ -93,7 +93,7 @@ class PeltCollectorAbility extends TriggeredAbilityImpl {
         if (isPowerGreater(sourceCreature, triggeringCreature)
                 && triggeringCreature.isCreature()
                 && triggeringCreature.isControlledBy(this.getControllerId())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            this.getEffects().setTargetPointer(new FixedTarget(triggeringCreature, game));
             return true;
         }
         return false;
