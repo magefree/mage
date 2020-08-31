@@ -21,7 +21,7 @@ public class S3Uploader {
 
         if (accessKeyId == null || accessKeyId.isEmpty()
                 || secretKeyId == null || secretKeyId.isEmpty()
-                || existingBucketName == null || existingBucketName.isEmpty()) {
+                || existingBucketName.isEmpty()) {
             logger.info("Aborting json log sync.");
             return false;
         }
