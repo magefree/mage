@@ -72,7 +72,7 @@ public class Effects extends ArrayList<Effect> {
                         || lastRule.endsWith(".")) {
                     endString = " ";
                     // if lastRule does not have appropriate punctuation, add the default ". "
-                } else if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
+                } else if (!lastRule.endsWith("<br>")) {
                     endString = ". ";
                 }
                 if (nextRule.length() > 3) {
