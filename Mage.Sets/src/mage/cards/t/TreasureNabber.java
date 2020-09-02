@@ -56,7 +56,8 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == EventType.TAPPED_FOR_MANA
+                && !game.inCheckPlayableState();
     }
 
     @Override

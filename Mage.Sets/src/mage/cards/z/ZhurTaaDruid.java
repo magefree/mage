@@ -29,7 +29,7 @@ public final class ZhurTaaDruid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {G}.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Whenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.
         this.addAbility(new ZhurTaaDruidAbility());
@@ -58,7 +58,8 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == EventType.TAPPED_FOR_MANA
+                && !game.inCheckPlayableState();
     }
 
     @Override
