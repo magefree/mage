@@ -65,6 +65,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 273, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Tajuru Blightblade", 208, Rarity.COMMON, mage.cards.t.TajuruBlightblade.class));
         cards.add(new SetCardInfo("Tajuru Snarecaster", 210, Rarity.COMMON, mage.cards.t.TajuruSnarecaster.class));
+        cards.add(new SetCardInfo("Taunting Arbormage", 212, Rarity.UNCOMMON, mage.cards.t.TauntingArbormage.class));
         cards.add(new SetCardInfo("Timbercrown Pathway", 261, Rarity.RARE, mage.cards.t.TimbercrownPathway.class));
         cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.COMMON, mage.cards.w.WindriderWizard.class));
     }
