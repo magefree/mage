@@ -65,7 +65,7 @@ public class CenturionCommander extends Commander {
         banned.add("Treasure Cruise");
         banned.add("Vampiric Tutor");
         banned.add("Yawgmoth's Bargain");
-        banned.add("Thassa's Oracle")
+        banned.add("Thassa's Oracle");
 
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Derevi, Empyrial Tactician");
