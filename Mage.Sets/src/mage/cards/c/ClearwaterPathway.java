@@ -16,7 +16,6 @@ public final class ClearwaterPathway extends CardImpl {
     public ClearwaterPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.m.MurkwaterPathway.class;
 
         // {T}: Add {U}.

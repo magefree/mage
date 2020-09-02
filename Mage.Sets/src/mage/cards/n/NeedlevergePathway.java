@@ -16,7 +16,6 @@ public final class NeedlevergePathway extends CardImpl {
     public NeedlevergePathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.p.PillarvergePathway.class;
 
         // {T}: Add {R}.

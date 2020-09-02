@@ -17,7 +17,6 @@ public final class BrightclimbPathway extends CardImpl {
     public BrightclimbPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.g.GrimclimbPathway.class;
 
         // {T}: Add {W}.

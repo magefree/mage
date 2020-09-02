@@ -16,7 +16,6 @@ public final class BranchloftPathway extends CardImpl {
     public BranchloftPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.b.BoulderloftPathway.class;
 
         // {T}: Add {G}.

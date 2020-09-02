@@ -16,7 +16,6 @@ public final class PillarvergePathway extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.nightCard = true;
-        this.transformable = true;
 
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());

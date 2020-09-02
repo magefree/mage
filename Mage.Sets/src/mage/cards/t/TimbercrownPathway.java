@@ -16,7 +16,6 @@ public final class TimbercrownPathway extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.nightCard = true;
-        this.transformable = true;
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());

@@ -16,7 +16,6 @@ public final class GrimclimbPathway extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.nightCard = true;
-        this.transformable = true;
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());

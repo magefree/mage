@@ -16,7 +16,6 @@ public final class LavaglidePathway extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.nightCard = true;
-        this.transformable = true;
 
         // {T}: Add {R}.
         this.addAbility(new RedManaAbility());

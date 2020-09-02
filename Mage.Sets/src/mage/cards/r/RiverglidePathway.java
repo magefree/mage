@@ -16,7 +16,6 @@ public final class RiverglidePathway extends CardImpl {
     public RiverglidePathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.transformable = true;
         this.secondSideCardClazz = mage.cards.l.LavaglidePathway.class;
 
         // {T}: Add {U}.
