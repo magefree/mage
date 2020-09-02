@@ -30,6 +30,7 @@ public final class ZendikarRising extends ExpansionSet {
             "Cragcrown Pathway",
             "Timbercrown Pathway",
             "Emeria Captain",
+            "Grotag Bug-Catcher",
             "Kabira Outrider",
             "Khalni Ambush",
             "Khalni Territory",
@@ -76,7 +77,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Boulderloft Pathway", 258, Rarity.RARE, mage.cards.b.BoulderloftPathway.class));
         cards.add(new SetCardInfo("Branchloft Pathway", 258, Rarity.RARE, mage.cards.b.BranchloftPathway.class));
         cards.add(new SetCardInfo("Brightclimb Pathway", 259, Rarity.RARE, mage.cards.b.BrightclimbPathway.class));
-        cards.add(new SetCardInfo("Clearwater Pathway", 286, Rarity.RARE, mage.cards.c.ClearwaterPathway.class));
+        cards.add(new SetCardInfo("Clearwater Pathway", 260, Rarity.RARE, mage.cards.c.ClearwaterPathway.class));
         cards.add(new SetCardInfo("Cliffhaven Sell-Sword", 8, Rarity.COMMON, mage.cards.c.CliffhavenSellSword.class));
         cards.add(new SetCardInfo("Cragcrown Pathway", 261, Rarity.RARE, mage.cards.c.CragcrownPathway.class));
         cards.add(new SetCardInfo("Emeria Captain", 11, Rarity.UNCOMMON, mage.cards.e.EmeriaCaptain.class));
@@ -91,12 +92,12 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Kitesail Cleric", 20, Rarity.UNCOMMON, mage.cards.k.KitesailCleric.class));
         cards.add(new SetCardInfo("Kor Blademaster", 21, Rarity.COMMON, mage.cards.k.KorBlademaster.class));
         cards.add(new SetCardInfo("Lavaglide Pathway", 264, Rarity.RARE, mage.cards.l.LavaglidePathway.class));
-        cards.add(new SetCardInfo("Legion Angel", 318, Rarity.RARE, mage.cards.l.LegionAngel.class));
+        cards.add(new SetCardInfo("Legion Angel", 23, Rarity.RARE, mage.cards.l.LegionAngel.class));
         cards.add(new SetCardInfo("Lotus Cobra", 193, Rarity.RARE, mage.cards.l.LotusCobra.class));
         cards.add(new SetCardInfo("Might of Murasa", 194, Rarity.COMMON, mage.cards.m.MightOfMurasa.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murasa Rootgrazer", 229, Rarity.UNCOMMON, mage.cards.m.MurasaRootgrazer.class));
-        cards.add(new SetCardInfo("Murkwater Pathway", 286, Rarity.RARE, mage.cards.m.MurkwaterPathway.class));
+        cards.add(new SetCardInfo("Murkwater Pathway", 260, Rarity.RARE, mage.cards.m.MurkwaterPathway.class));
         cards.add(new SetCardInfo("Nahiri, Heir of the Ancients", 230, Rarity.MYTHIC, mage.cards.n.NahiriHeirOfTheAncients.class));
         cards.add(new SetCardInfo("Needleverge Pathway", 263, Rarity.RARE, mage.cards.n.NeedlevergePathway.class));
         cards.add(new SetCardInfo("Omnath, Locus of Creation", 232, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfCreation.class));
