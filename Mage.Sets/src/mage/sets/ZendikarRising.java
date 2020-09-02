@@ -88,6 +88,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace, Mirror Mage", 63, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
         cards.add(new SetCardInfo("Kabira Outrider", 18, Rarity.COMMON, mage.cards.k.KabiraOutrider.class));
+        cards.add(new SetCardInfo("Kitesail Cleric", 20, Rarity.UNCOMMON, mage.cards.k.KitesailCleric.class));
         cards.add(new SetCardInfo("Kor Blademaster", 21, Rarity.COMMON, mage.cards.k.KorBlademaster.class));
         cards.add(new SetCardInfo("Lavaglide Pathway", 264, Rarity.RARE, mage.cards.l.LavaglidePathway.class));
         cards.add(new SetCardInfo("Legion Angel", 318, Rarity.RARE, mage.cards.l.LegionAngel.class));
