@@ -22,8 +22,11 @@ public class CommanderDuelMatch extends MatchImpl {
             startLife = 20;   // Starting with the Commander 2016 update (on November 11th, 2016), Duel Commander will be played with 20 life points instead of 30.
             checkCommanderDamage = false; // since nov 16 duel commander uses no longer commander damage rule
         }
-        if (options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander") || options.getDeckType().equals("Variant Magic - Centurion Commander")) {
+        if (options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
             startLife = 30;
+        }
+        if (options.getDeckType().equals("Variant Magic - Centurion Commander")) {
+            startLife = 25;
         }
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
         CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
