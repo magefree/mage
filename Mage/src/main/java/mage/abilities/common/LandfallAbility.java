@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,13 +10,16 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LandfallAbility extends TriggeredAbilityImpl {
 
     protected SetTargetPointer setTargetPointer;
     protected Permanent triggeringLand;
+
+    public LandfallAbility(Effect effect) {
+        this(effect, false);
+    }
 
     public LandfallAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, optional);
