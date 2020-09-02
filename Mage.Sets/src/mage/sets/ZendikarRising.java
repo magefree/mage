@@ -4,10 +4,43 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class ZendikarRising extends ExpansionSet {
+
+    static final List<String> unfinished = Arrays.asList(
+            "Acquisitions Expert",
+            "Archpriest of Iona",
+            "Branchloft Pathway",
+            "Boulderloft Pathway",
+            "Brightclimb Pathway",
+            "Grimclimb Pathway",
+            "Clearwater Pathway",
+            "Murkwater Pathway",
+            "Coveted Prize",
+            "Cragcrown Pathway",
+            "Timbercrown Pathway",
+            "Emeria Captain",
+            "Kabira Outrider",
+            "Linvala, Shield of Sea Gate",
+            "Needleverge Pathway",
+            "Pillarverge Pathway",
+            "Pelakka Predation",
+            "Pelakka Caverns",
+            "Riverglide Pathway",
+            "Lavaglide Pathway",
+            "Shepherd of Heroes",
+            "Spoils of Adventure",
+            "Tazri, Beacon of Unity",
+            "Umara Wizard",
+            "Umara Skyfalls",
+            "Valakut Awakening",
+            "Valakut Stoneforge"
+    );
 
     private static final ZendikarRising instance = new ZendikarRising();
 
@@ -68,5 +101,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Taunting Arbormage", 212, Rarity.UNCOMMON, mage.cards.t.TauntingArbormage.class));
         cards.add(new SetCardInfo("Timbercrown Pathway", 261, Rarity.RARE, mage.cards.t.TimbercrownPathway.class));
         cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.COMMON, mage.cards.w.WindriderWizard.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanics are fully implemented
     }
 }
