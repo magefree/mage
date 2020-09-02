@@ -15,7 +15,6 @@ public class CenturionCommander extends Commander {
         banned.add("Balance");
         banned.add("Bazaar of Baghdad");
         banned.add("Black Lotus");
-        banned.add("Cataclysm");
         banned.add("Channel");
         banned.add("Chaos Orb");
         banned.add("Chrome Mox");
@@ -54,7 +53,6 @@ public class CenturionCommander extends Commander {
         banned.add("Parallax Tide");
         banned.add("Protean Hulk");
         banned.add("Sensei's Diving Top");
-        banned.add("Serra Ascendant");
         banned.add("Sharazad");
         banned.add("Survival of the Fittest");
         banned.add("Sol Ring");
@@ -66,9 +64,8 @@ public class CenturionCommander extends Commander {
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
         banned.add("Vampiric Tutor");
-        banned.add("Vanishing");
-        banned.add("Winter Orb");
         banned.add("Yawgmoth's Bargain");
+        banned.add("Thassa's Oracle");
 
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Derevi, Empyrial Tactician");
@@ -76,11 +73,15 @@ public class CenturionCommander extends Commander {
         bannedCommander.add("Kess, Dissident Mage");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Erayo, Soratami Ascendant");
+        bannedCommander.add("Breya, Etherium Shaper");
+        bannedCommander.add("Yuriko, the Tiger's Shadow");
 
         bannedPartner.add("Rowan Kenrith");
         bannedPartner.add("Tymna the Weaver");
         bannedPartner.add("Will Kenrith");
         bannedPartner.add("Vial Smasher The Fierce");
+        bannedPartner.add("Kraum, Ludevic's Opus");
+        bannedPartner.add("Thrasios, Triton Hero ");
     }
 
 }
