@@ -41,7 +41,7 @@ public final class MindCarver extends CardImpl {
                 new BoostEquippedEffect(1, 0),
                 CardsInOpponentGraveCondition.EIGHT, "Equipped creature gets +1/+0. " +
                 "It gets +3/+1 instead as long as an opponent has eight or more cards in their graveyard."
-        )));
+        )).addHint(CardsInOpponentGraveCondition.EIGHT.getHint()));
 
         // Equip {2}{B}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{B}")));
