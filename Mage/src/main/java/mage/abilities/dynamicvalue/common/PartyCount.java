@@ -36,10 +36,10 @@ public enum PartyCount implements DynamicValue {
             SubType.WIZARD
     );
 
-    private void attemptRearrange(SubType subType, UUID uuid, Set<SubType> creatureTypes, Map<SubType, UUID> subTypeUUIDMap, Map<UUID, Set<SubType>> creatureTypesMap) {
+    private static boolean attemptRearrange(SubType subType, UUID uuid, Set<SubType> creatureTypes, Map<SubType, UUID> subTypeUUIDMap, Map<UUID, Set<SubType>> creatureTypesMap) {
         UUID uuid1 = subTypeUUIDMap.get(subType);
         if (uuid1 == null) {
-            return;
+            return false;
         }
         Set<SubType> creatureTypes1 = creatureTypesMap.get(uuid1);
         for (SubType subType1 : creatureTypes1) {
@@ -49,13 +49,14 @@ public enum PartyCount implements DynamicValue {
             if (!subTypeUUIDMap.containsKey(subType1)) {
                 subTypeUUIDMap.put(subType, uuid);
                 subTypeUUIDMap.put(subType1, uuid1);
-                continue;
+                return true;
             }
-            attemptRearrange(subType1, uuid1, creatureTypes, subTypeUUIDMap, creatureTypesMap);
+            return attemptRearrange(subType1, uuid1, creatureTypes, subTypeUUIDMap, creatureTypesMap);
         }
+        return false;
     }
 
-    private Set<SubType> makeSet(Permanent permanent, Game game) {
+    private static Set<SubType> makeSet(Permanent permanent, Game game) {
         Set<SubType> subTypeSet = new HashSet<>();
         for (SubType subType : partyTypes) {
             if (permanent.hasSubtype(subType, game)) {
@@ -94,9 +95,13 @@ public enum PartyCount implements DynamicValue {
             }
             if (subTypeUUIDMap.size() >= availableTypes.size()) {
                 return subTypeUUIDMap.size();
+            } else if (subTypeUUIDMap.containsValue(entry.getKey())) {
+                continue;
             } else {
                 for (SubType subType : entry.getValue()) {
-                    attemptRearrange(subType, entry.getKey(), entry.getValue(), subTypeUUIDMap, creatureTypesMap);
+                    if (attemptRearrange(subType, entry.getKey(), entry.getValue(), subTypeUUIDMap, creatureTypesMap)) {
+                        break;
+                    }
                 }
             }
         }
