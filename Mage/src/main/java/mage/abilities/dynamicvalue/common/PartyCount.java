@@ -4,7 +4,9 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -16,6 +18,16 @@ import java.util.stream.Collectors;
  */
 public enum PartyCount implements DynamicValue {
     instance;
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(Predicates.or(
+                SubType.CLERIC.getPredicate(),
+                SubType.ROGUE.getPredicate(),
+                SubType.WARRIOR.getPredicate(),
+                SubType.WIZARD.getPredicate()
+        ));
+    }
 
     private static final List<SubType> partyTypes = Arrays.asList(
             SubType.CLERIC,
@@ -24,90 +36,71 @@ public enum PartyCount implements DynamicValue {
             SubType.WIZARD
     );
 
-    private static final class CreatureTypes {
-
-        private final Set<SubType> subTypeSet = new HashSet<>();
-
-        private CreatureTypes(Permanent permanent, Game game) {
-            for (SubType subType : partyTypes) {
-                if (permanent.hasSubtype(subType, game)) {
-                    subTypeSet.add(subType);
-                }
+    private void attemptRearrange(SubType subType, UUID uuid, Set<SubType> creatureTypes, Map<SubType, UUID> subTypeUUIDMap, Map<UUID, Set<SubType>> creatureTypesMap) {
+        UUID uuid1 = subTypeUUIDMap.get(subType);
+        if (uuid1 == null) {
+            return;
+        }
+        Set<SubType> creatureTypes1 = creatureTypesMap.get(uuid1);
+        for (SubType subType1 : creatureTypes1) {
+            if (subType == subType1) {
+                continue;
             }
-        }
-
-        private int count() {
-            return subTypeSet.size();
-        }
-
-        private void removeAll(Set<SubType> subTypes) {
-            this.subTypeSet.removeAll(subTypes);
-        }
-
-        public Set<SubType> getSubTypeSet() {
-            return subTypeSet;
+            if (!subTypeUUIDMap.containsKey(subType1)) {
+                subTypeUUIDMap.put(subType, uuid);
+                subTypeUUIDMap.put(subType1, uuid1);
+                continue;
+            }
+            attemptRearrange(subType1, uuid1, creatureTypes, subTypeUUIDMap, creatureTypesMap);
         }
     }
 
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        List<CreatureTypes> creatureTypesList = game.getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
-                ).stream()
-                .map(permanent -> new CreatureTypes(permanent, game))
-                .collect(Collectors.toList());
+    private Set<SubType> makeSet(Permanent permanent, Game game) {
         Set<SubType> subTypeSet = new HashSet<>();
-        boolean flag = true;
-        while (flag) {
-            List<CreatureTypes> creatureTypesList2 = new ArrayList<>();
-            // Find all creatures with only one of the creature types and eliminate those
-            for (CreatureTypes creatureTypes : creatureTypesList) {
-                switch (creatureTypes.count()) {
-                    case 0:
-                        break;
-                    case 1:
-                        subTypeSet.addAll(creatureTypes.getSubTypeSet());
-                        flag = false;
-                        break;
-                    default:
-                        creatureTypesList2.add(creatureTypes);
-                }
-            }
-            // Now find all the creature types only represented by one creature and eliminate those
-            for (SubType subType : partyTypes) {
-                if (!subTypeSet.contains(subType) && creatureTypesList2.stream().map(CreatureTypes::getSubTypeSet).mapToInt(s -> s.contains(subType) ? 1 : 0).sum() == 1) {
-                    subTypeSet.add(subType);
-                    flag = false;
-                }
-            }
-            // Remove all the eliminated creature types from the creatures and now we have less to analyze
-            creatureTypesList.clear();
-            for (CreatureTypes creatureTypes : creatureTypesList2) {
-                creatureTypes.removeAll(subTypeSet);
-                if (creatureTypes.count() > 0) {
-                    creatureTypesList.add(creatureTypes);
-                }
-            }
-        }
-        if (creatureTypesList.isEmpty()) {
-            return subTypeSet.size();
-        }
-        // Not sure what to do here
-        return 0;
-    }
-
-    private static int typeCount(Permanent permanent, Game game) {
-        return partyTypes.stream().mapToInt(subType -> permanent.hasSubtype(subType, game) ? 1 : 0).sum();
-    }
-
-    private static void addType(Permanent permanent, Set<SubType> subTypeSet, Game game) {
         for (SubType subType : partyTypes) {
             if (permanent.hasSubtype(subType, game)) {
                 subTypeSet.add(subType);
             }
         }
+        return subTypeSet;
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Map<UUID, Set<SubType>> creatureTypesMap = new HashMap<>();
+        game.getBattlefield()
+                .getActivePermanents(
+                        filter, sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                ).stream()
+                .forEach(permanent -> creatureTypesMap.put(permanent.getId(), makeSet(permanent, game)));
+        if (creatureTypesMap.size() < 2) {
+            return creatureTypesMap.size();
+        }
+        Set<SubType> availableTypes = creatureTypesMap
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+        if (creatureTypesMap.size() == 2) {
+            return Math.min(2, availableTypes.size());
+        }
+        Map<SubType, UUID> subTypeUUIDMap = new HashMap<>();
+        for (Map.Entry<UUID, Set<SubType>> entry : creatureTypesMap.entrySet()) {
+            for (SubType subType : entry.getValue()) {
+                if (!subTypeUUIDMap.containsKey(subType)) {
+                    subTypeUUIDMap.put(subType, entry.getKey());
+                    break;
+                }
+            }
+            if (subTypeUUIDMap.size() >= availableTypes.size()) {
+                return subTypeUUIDMap.size();
+            } else {
+                for (SubType subType : entry.getValue()) {
+                    attemptRearrange(subType, entry.getKey(), entry.getValue(), subTypeUUIDMap, creatureTypesMap);
+                }
+            }
+        }
+        return subTypeUUIDMap.keySet().size();
     }
 
     @Override
