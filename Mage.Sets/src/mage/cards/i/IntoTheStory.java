@@ -3,6 +3,7 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInOpponentGraveCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.ConditionHint;
@@ -26,8 +27,8 @@ public final class IntoTheStory extends CardImpl {
 
         // This spell costs {3} less to cast if an opponent has seven or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(3, IntoTheStoryCondition.instance)
-        ).setRuleAtTheTop(true).addHint(new ConditionHint(IntoTheStoryCondition.instance, "Opponent has seven or more cards in their graveyard")));
+                Zone.ALL, new SpellCostReductionSourceEffect(3, CardsInOpponentGraveCondition.SEVEN)
+        ).setRuleAtTheTop(true).addHint(CardsInOpponentGraveCondition.SEVEN.getHint()));
 
         // Draw four cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
@@ -40,25 +41,5 @@ public final class IntoTheStory extends CardImpl {
     @Override
     public IntoTheStory copy() {
         return new IntoTheStory(this);
-    }
-}
-
-enum IntoTheStoryCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game
-                .getOpponents(source.getControllerId())
-                .stream()
-                .map(game::getPlayer)
-                .map(Player::getGraveyard)
-                .mapToInt(Graveyard::size)
-                .anyMatch(i -> i >= 7);
-    }
-
-    @Override
-    public String toString() {
-        return "an opponent has seven or more cards in their graveyard";
     }
 }
