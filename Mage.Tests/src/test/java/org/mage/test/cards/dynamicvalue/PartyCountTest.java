@@ -87,7 +87,7 @@ public class PartyCountTest extends CardTestPlayerBase {
     }
 
     private void makeCreature(String name, SubType... subTypes) {
-        addCustomCardWithAbility("dude", playerA, null, null, CardType.CREATURE, "{1}", Zone.BATTLEFIELD, subTypes);
+        addCustomCardWithAbility(name, playerA, null, null, CardType.CREATURE, "{1}", Zone.BATTLEFIELD, subTypes);
     }
 
     @Test
