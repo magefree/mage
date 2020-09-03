@@ -59,7 +59,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
-    protected boolean modalDFC;
+    protected boolean modalDFC; // modal double faces card
 
     protected List<UUID> attachments = new ArrayList<>();
 
@@ -126,20 +126,23 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
+        tokenSetCode = card.tokenSetCode;
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
         transformable = card.transformable;
-        if (transformable) {
-            secondSideCardClazz = card.secondSideCardClazz;
-            nightCard = card.nightCard;
-        }
-        spellAbility = null; // will be set on first getSpellAbility call if card has one.
+        secondSideCardClazz = card.secondSideCardClazz;
+        secondSideCard = null; // will be set on first getSecondCardFace call if card has one
+        nightCard = card.nightCard;
 
+        spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
-        splitCard = card.splitCard;
         usesVariousArt = card.usesVariousArt;
+        splitCard = card.splitCard;
+        morphCard = card.morphCard;
+        modalDFC = card.modalDFC;
+
         this.attachments.addAll(card.attachments);
     }
 
