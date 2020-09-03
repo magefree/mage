@@ -3390,8 +3390,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, adventureCard, adventureCard.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
+        } else if (object instanceof StackObject) {
+            // spells on stack are processing by Card above, other stack objects must be ignored
         } else {
-            // other things like StackObject or CommandObject
+            // other things like CommandObject
             getPlayableFromObjectSingle(game, fromZone, object, object.getAbilities(), availableMana, output);
         }
 

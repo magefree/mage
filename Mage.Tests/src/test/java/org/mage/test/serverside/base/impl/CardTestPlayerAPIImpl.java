@@ -1728,19 +1728,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
-        assertAliaseSupportInActivateCommand(ability, false);
+        assertAliaseSupportInActivateCommand(ability, true);
         addPlayerAction(player, turnNum, step, ACTIVATE_ABILITY + ability);
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, Player target) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
-        assertAliaseSupportInActivateCommand(ability, false);
+        assertAliaseSupportInActivateCommand(ability, true);
         addPlayerAction(player, turnNum, step, ACTIVATE_ABILITY + ability + "$targetPlayer=" + target.getName());
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String... targetNames) {
         // TODO: it's uses computerPlayer to execute, only ability target will work, but choices and targets commands aren't
-        assertAliaseSupportInActivateCommand(ability, false);
+        assertAliaseSupportInActivateCommand(ability, true);
         Arrays.stream(targetNames).forEach(n -> {
             assertAliaseSupportInActivateCommand(n, true);
         });
@@ -1771,8 +1771,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param clause
      */
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack, StackClause clause) {
-        assertAliaseSupportInActivateCommand(ability, false);
-        assertAliaseSupportInActivateCommand(targetName, false);
+        assertAliaseSupportInActivateCommand(ability, true);
+        assertAliaseSupportInActivateCommand(targetName, true);
         StringBuilder sb = new StringBuilder(ACTIVATE_ABILITY).append(ability);
         if (targetName != null && !targetName.isEmpty()) {
             sb.append("$target=").append(targetName);

@@ -578,7 +578,8 @@ public class TestPlayer implements Player {
                     if (groups.length > 2 && !checkExecuteCondition(groups, game)) {
                         break;
                     }
-                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true)) { // add wrong action log?
+                    // must process all duplicated abilities (aliases need objects to search)
+                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true, Zone.ALL, false)) { // add wrong action log?
                         if (hasAbilityTargetNameOrAlias(game, ability, groups[0])) {
                             int bookmark = game.bookmarkState();
                             ActivatedAbility newAbility = ability.copy();

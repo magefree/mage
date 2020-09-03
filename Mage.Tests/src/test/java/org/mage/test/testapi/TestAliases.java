@@ -205,12 +205,14 @@ public class TestAliases extends CardTestPlayerBase {
     @Test
     public void test_ActivateAbility_Alias() {
         // {T}: Embermage Goblin deals 1 damage to any target.
-        addCard(Zone.BATTLEFIELD, playerA, "Embermage Goblin@goblin", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Embermage Goblin@goblin", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion@lion", 1);
 
+        // use 2 of 3 goblins
         showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "@lion");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "@lion");
+        showAliases("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@goblin.1 {T}: {this} deals", "@lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@goblin.3 {T}: {this} deals", "@lion");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -218,7 +220,11 @@ public class TestAliases extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "@goblin.1", 1);
         assertPermanentCount(playerA, "@goblin.2", 1);
+        assertPermanentCount(playerA, "@goblin.3", 1);
         assertGraveyardCount(playerA, "@lion", 1);
+        assertTapped("@goblin.1", true);
+        assertTapped("@goblin.2", false);
+        assertTapped("@goblin.3", true);
     }
 
     @Test
