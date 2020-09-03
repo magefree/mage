@@ -150,6 +150,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Shepherd of Heroes", 38, Rarity.COMMON, mage.cards.s.ShepherdOfHeroes.class));
         cards.add(new SetCardInfo("Skyclave Geopede", 163, Rarity.UNCOMMON, mage.cards.s.SkyclaveGeopede.class));
         cards.add(new SetCardInfo("Sneaking Guide", 164, Rarity.COMMON, mage.cards.s.SneakingGuide.class));
+        cards.add(new SetCardInfo("Song-Mad Ruins", 165, Rarity.UNCOMMON, mage.cards.s.SongMadRuins.class));
+        cards.add(new SetCardInfo("Song-Mad Treachery", 165, Rarity.UNCOMMON, mage.cards.s.SongMadTreachery.class));
         cards.add(new SetCardInfo("Spitfire Lagac", 167, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Spoils of Adventure", 237, Rarity.UNCOMMON, mage.cards.s.SpoilsOfAdventure.class));
         cards.add(new SetCardInfo("Swamp", 273, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
