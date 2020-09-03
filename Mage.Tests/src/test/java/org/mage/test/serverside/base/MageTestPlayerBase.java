@@ -440,7 +440,9 @@ class CustomTestCard extends CardImpl {
     }
 
     static void addAdditionalSubtypes(String cardName, SubType... subtypes) {
-        subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
+        if(subtypes!=null) {
+            subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
+        }
     }
 
     static void clearAdditionalSubtypes(String cardName) {
