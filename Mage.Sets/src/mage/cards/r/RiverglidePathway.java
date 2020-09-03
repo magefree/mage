@@ -1,12 +1,11 @@
 package mage.cards.r;
 
-import java.util.UUID;
-
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -16,11 +15,11 @@ public final class RiverglidePathway extends CardImpl {
     public RiverglidePathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
+        this.modalDFC = true;
         this.secondSideCardClazz = mage.cards.l.LavaglidePathway.class;
 
         // {T}: Add {U}.
         this.addAbility(new RedManaAbility());
-        this.addAbility(new TransformAbility());
     }
 
     private RiverglidePathway(final RiverglidePathway card) {

@@ -59,6 +59,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
+    protected boolean modalDFC;
 
     protected List<UUID> attachments = new ArrayList<>();
 
