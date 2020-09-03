@@ -51,6 +51,8 @@ public final class ZendikarRising extends ExpansionSet {
             "Sejiri Shelter",
             "Sejiri Glacier",
             "Shepherd of Heroes",
+            "Song-Mad Treachery",
+            "Song-Mad Ruins",
             "Spoils of Adventure",
             "Tangled Florahedron",
             "Tangled Vale",
