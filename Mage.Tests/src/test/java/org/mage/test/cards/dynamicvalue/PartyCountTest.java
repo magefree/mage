@@ -108,4 +108,20 @@ public class PartyCountTest extends CardTestPlayerBase {
 
         assertLife(playerA, 28);
     }
+
+    @Test
+    public void testChangelings() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Impostor of the Sixth Pride", 4);
+        addCard(Zone.HAND, playerA, shpd);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, shpd);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 28);
+    }
 }
