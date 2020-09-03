@@ -1,5 +1,6 @@
 package org.mage.test.serverside.base;
 
+import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -381,8 +382,15 @@ public abstract class MageTestPlayerBase {
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
                                             CardType cardType, String spellCost, Zone putAtZone) {
+        addCustomCardWithAbility(customName, controllerPlayer, ability, spellAbility, cardType, spellCost, putAtZone, null);
+    }
+
+    protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
+                                            CardType cardType, String spellCost, Zone putAtZone, SubType... additionalSubTypes) {
         CustomTestCard.clearCustomAbilities(customName);
         CustomTestCard.addCustomAbility(customName, spellAbility, ability);
+        CustomTestCard.clearAdditionalSubtypes(customName);
+        CustomTestCard.addAdditionalSubtypes(customName, additionalSubTypes);
 
         CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
         PermanentCard card = new PermanentCard(new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost), controllerPlayer.getId(), currentGame);
@@ -414,6 +422,7 @@ class CustomTestCard extends CardImpl {
 
     static private final Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
     static private final Map<String, SpellAbility> spellAbilitiesList = new HashMap<>(); // card name -> spell ability
+    static private final Map<String, Set<SubType>> subTypesList = new HashMap<>(); // card name -> additional subtypes
 
     static void addCustomAbility(String cardName, SpellAbility spellAbility, Ability ability) {
         if (!abilitiesList.containsKey(cardName)) {
@@ -430,6 +439,16 @@ class CustomTestCard extends CardImpl {
         spellAbilitiesList.remove(cardName);
     }
 
+    static void addAdditionalSubtypes(String cardName, SubType... subtypes) {
+        if(subtypes!=null) {
+            subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
+        }
+    }
+
+    static void clearAdditionalSubtypes(String cardName) {
+        subTypesList.remove(cardName);
+    }
+
     CustomTestCard(UUID ownerId, CardSetInfo setInfo, CardType cardType, String spellCost) {
         super(ownerId, setInfo, new CardType[]{cardType}, spellCost);
 
@@ -442,6 +461,17 @@ class CustomTestCard extends CardImpl {
             for (Ability ability : extraAbitilies) {
                 this.addAbility(ability.copy());
             }
+        }
+
+        Set<SubType> subTypeSet = subTypesList.get(setInfo.getName());
+        if (subTypeSet != null) {
+            for (SubType subType : subTypeSet) {
+                this.subtype.add(subType);
+            }
+        }
+        if (cardType == CardType.CREATURE) {
+            this.power = new MageInt(1);
+            this.toughness = new MageInt(1);
         }
     }
 
