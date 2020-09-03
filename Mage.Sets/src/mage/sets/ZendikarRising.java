@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class ZendikarRising extends ExpansionSet {
 
-    static final List<String> unfinished = Arrays.asList(
+    private static final List<String> unfinished = Arrays.asList(
             "Acquisitions Expert",
             "Akoum Warrior",
             "Akoum Teeth",
@@ -24,12 +24,16 @@ public final class ZendikarRising extends ExpansionSet {
             "Boulderloft Pathway",
             "Brightclimb Pathway",
             "Grimclimb Pathway",
+            "Cascade Seer",
             "Clearwater Pathway",
             "Murkwater Pathway",
             "Coveted Prize",
             "Cragcrown Pathway",
             "Timbercrown Pathway",
+            "Deadly Alliance",
             "Emeria Captain",
+            "Emeria's Call",
+            "Emeria, Shattered Skyclave",
             "Grotag Bug-Catcher",
             "Kabira Outrider",
             "Khalni Ambush",
@@ -39,18 +43,24 @@ public final class ZendikarRising extends ExpansionSet {
             "Pillarverge Pathway",
             "Pelakka Predation",
             "Pelakka Caverns",
+            "Ravager's Mace",
             "Riverglide Pathway",
             "Lavaglide Pathway",
             "Seafloor Stalker",
+            "Sea Gate Colossus",
             "Sejiri Shelter",
             "Sejiri Glacier",
             "Shepherd of Heroes",
             "Spoils of Adventure",
+            "Tangled Florahedron",
+            "Tangled Vale",
             "Tazri, Beacon of Unity",
+            "Thwart the Grave",
             "Umara Wizard",
             "Umara Skyfalls",
             "Valakut Awakening",
-            "Valakut Stoneforge"
+            "Valakut Stoneforge",
+            "Zagras, Thief of Heartbeats"
     );
 
     private static final ZendikarRising instance = new ZendikarRising();
@@ -96,7 +106,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Mirror Mage", 63, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
         cards.add(new SetCardInfo("Kabira Outrider", 18, Rarity.COMMON, mage.cards.k.KabiraOutrider.class));
         cards.add(new SetCardInfo("Kitesail Cleric", 20, Rarity.UNCOMMON, mage.cards.k.KitesailCleric.class));
-        cards.add(new SetCardInfo("Kor Blademaster", 21, Rarity.COMMON, mage.cards.k.KorBlademaster.class));
+        cards.add(new SetCardInfo("Kor Blademaster", 21, Rarity.UNCOMMON, mage.cards.k.KorBlademaster.class));
         cards.add(new SetCardInfo("Lavaglide Pathway", 264, Rarity.RARE, mage.cards.l.LavaglidePathway.class));
         cards.add(new SetCardInfo("Legion Angel", 23, Rarity.RARE, mage.cards.l.LegionAngel.class));
         cards.add(new SetCardInfo("Linvala, Shield of Sea Gate", 226, Rarity.RARE, mage.cards.l.LinvalaShieldOfSeaGate.class));
@@ -125,7 +135,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Taunting Arbormage", 212, Rarity.UNCOMMON, mage.cards.t.TauntingArbormage.class));
         cards.add(new SetCardInfo("Tazri, Beacon of Unity", 44, Rarity.MYTHIC, mage.cards.t.TazriBeaconOfUnity.class));
         cards.add(new SetCardInfo("Timbercrown Pathway", 261, Rarity.RARE, mage.cards.t.TimbercrownPathway.class));
-        cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.COMMON, mage.cards.w.WindriderWizard.class));
+        cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.UNCOMMON, mage.cards.w.WindriderWizard.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanics are fully implemented
     }
