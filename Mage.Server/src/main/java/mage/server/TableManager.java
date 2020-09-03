@@ -366,6 +366,7 @@ public enum TableManager {
             if (table.getState() != TableState.FINISHED) {
                 if (game != null) {
                     GameManager.instance.removeGame(game.getId());
+                    // something goes wrong, so don't add it to ended stats
                 }
                 GamesRoomManager.instance.removeTable(tableId);
             }

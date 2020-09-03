@@ -681,6 +681,7 @@ public class TableController {
                 Game game = match.getGame();
                 if (game != null) {
                     GameManager.instance.removeGame(game.getId());
+                    // game ended by error, so don't add it to ended stats
                 }
             }
         }
@@ -746,6 +747,7 @@ public class TableController {
 
     public void endTournament(Tournament tournament) {
         table.endTournament();
+        ServerMessagesUtil.instance.incTournamentsEnded();
     }
 
     public MatchOptions getOptions() {
@@ -771,6 +773,8 @@ public class TableController {
             }
         }
         GameManager.instance.removeGame(game.getId());
+        ServerMessagesUtil.instance.incGamesEnded();
+
         try {
             if (!match.hasEnded()) {
                 if (match.getGame() != null && match.getGame().getGameType().isSideboardingAllowed()) {

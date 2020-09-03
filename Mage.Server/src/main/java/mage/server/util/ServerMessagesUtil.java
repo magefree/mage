@@ -27,7 +27,6 @@ public enum ServerMessagesUtil {
     instance;
     private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
-    private ScheduledExecutorService updateExecutor;
 
     private final List<String> messages = new ArrayList<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -38,7 +37,9 @@ public enum ServerMessagesUtil {
 
     private static long startDate;
     private static final AtomicInteger gamesStarted = new AtomicInteger(0);
+    private static final AtomicInteger gamesEnded = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
+    private static final AtomicInteger tournamentsEnded = new AtomicInteger(0);
     private static final AtomicInteger lostConnection = new AtomicInteger(0);
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
@@ -47,7 +48,7 @@ public enum ServerMessagesUtil {
     }
 
     ServerMessagesUtil() {
-        updateExecutor = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, 5 * 60, TimeUnit.SECONDS);
     }
 
@@ -139,13 +140,10 @@ public enum ServerMessagesUtil {
     private String getServerStatistics() {
         long current = System.currentTimeMillis();
         long hours = ((current - startDate) / (1000 * 60 * 60));
-        StringBuilder statistics = new StringBuilder("Server uptime: ");
-        statistics.append(hours);
-        statistics.append(" hour(s), games played: ");
-        statistics.append(gamesStarted.get());
-        statistics.append(" tournaments started: ");
-        statistics.append(tournamentsStarted.get());
-        return statistics.toString();
+        String statistics = "Server uptime: " + hours + " hour(s)"
+                + "; Games started: " + gamesStarted.get() + ", ended: " + gamesEnded.get()
+                + "; Tourneys started: " + tournamentsStarted.get() + ", ended: " + tournamentsEnded.get();
+        return statistics;
     }
 
     private String getServerStatistics2() {
@@ -154,12 +152,9 @@ public enum ServerMessagesUtil {
         if (minutes == 0) {
             minutes = 1;
         }
-        StringBuilder statistics = new StringBuilder("Disconnects: ");
-        statistics.append(lostConnection.get());
-        statistics.append(" avg/hour ").append(lostConnection.get() * 60 / minutes);
-        statistics.append(" Reconnects: ").append(reconnects.get());
-        statistics.append(" avg/hour ").append(reconnects.get() * 60 / minutes);
-        return statistics.toString();
+        String statistics = "Disconnects: " + lostConnection.get() + ", avg/hour: " + lostConnection.get() * 60 / minutes
+                + "; Reconnects: " + reconnects.get() + ", avg/hour: " + reconnects.get() * 60 / minutes;
+        return statistics;
     }
 
     //    private Timer timer = new Timer(1000 * 60, new ActionListener() {
@@ -178,11 +173,25 @@ public enum ServerMessagesUtil {
         } while (!gamesStarted.compareAndSet(value, value + 1));
     }
 
+    public void incGamesEnded() {
+        int value;
+        do {
+            value = gamesEnded.get();
+        } while (!gamesEnded.compareAndSet(value, value + 1));
+    }
+
     public void incTournamentsStarted() {
         int value;
         do {
             value = tournamentsStarted.get();
         } while (!tournamentsStarted.compareAndSet(value, value + 1));
+    }
+
+    public void incTournamentsEnded() {
+        int value;
+        do {
+            value = tournamentsEnded.get();
+        } while (!tournamentsEnded.compareAndSet(value, value + 1));
     }
 
     public void incReconnects() {
