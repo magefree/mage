@@ -116,6 +116,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Goma Fada Vanguard", 141, Rarity.UNCOMMON, mage.cards.g.GomaFadaVanguard.class));
         cards.add(new SetCardInfo("Grimclimb Pathway", 259, Rarity.RARE, mage.cards.g.GrimclimbPathway.class));
         cards.add(new SetCardInfo("Grotag Bug-Catcher", 142, Rarity.COMMON, mage.cards.g.GrotagBugCatcher.class));
+        cards.add(new SetCardInfo("Hagra Constrictor", 105, Rarity.COMMON, mage.cards.h.HagraConstrictor.class));
         cards.add(new SetCardInfo("Highborn Vampire", 107, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
         cards.add(new SetCardInfo("Into the Roil", 62, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
