@@ -130,6 +130,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Angel", 23, Rarity.RARE, mage.cards.l.LegionAngel.class));
         cards.add(new SetCardInfo("Linvala, Shield of Sea Gate", 226, Rarity.RARE, mage.cards.l.LinvalaShieldOfSeaGate.class));
         cards.add(new SetCardInfo("Lotus Cobra", 193, Rarity.RARE, mage.cards.l.LotusCobra.class));
+        cards.add(new SetCardInfo("Lullmage's Familiar", 227, Rarity.UNCOMMON, mage.cards.l.LullmagesFamiliar.class));
         cards.add(new SetCardInfo("Makindi Ox", 25, Rarity.COMMON, mage.cards.m.MakindiOx.class));
         cards.add(new SetCardInfo("Maul of the Skyclaves", 27, Rarity.RARE, mage.cards.m.MaulOfTheSkyclaves.class));
         cards.add(new SetCardInfo("Merfolk Windrobber", 70, Rarity.UNCOMMON, mage.cards.m.MerfolkWindrobber.class));
