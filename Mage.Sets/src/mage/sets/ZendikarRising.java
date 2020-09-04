@@ -155,6 +155,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Tangled Vale", 211, Rarity.UNCOMMON, mage.cards.t.TangledVale.class));
         cards.add(new SetCardInfo("Taunting Arbormage", 212, Rarity.UNCOMMON, mage.cards.t.TauntingArbormage.class));
         cards.add(new SetCardInfo("Tazri, Beacon of Unity", 44, Rarity.MYTHIC, mage.cards.t.TazriBeaconOfUnity.class));
+        cards.add(new SetCardInfo("Thwart the Grave", 130, Rarity.UNCOMMON, mage.cards.t.ThwartTheGrave.class));
         cards.add(new SetCardInfo("Timbercrown Pathway", 261, Rarity.RARE, mage.cards.t.TimbercrownPathway.class));
         cards.add(new SetCardInfo("Umara Mystic", 238, Rarity.UNCOMMON, mage.cards.u.UmaraMystic.class));
         cards.add(new SetCardInfo("Umara Skyfalls", 86, Rarity.UNCOMMON, mage.cards.u.UmaraSkyfalls.class));
