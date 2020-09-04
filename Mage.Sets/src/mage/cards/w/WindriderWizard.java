@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -17,16 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WindriderWizard extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an instant, sorcery, or Wizard spell");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate(),
-                SubType.WIZARD.getPredicate()
-        ));
-    }
 
     public WindriderWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -41,7 +30,8 @@ public final class WindriderWizard extends CardImpl {
 
         // Whenever you cast an instant, sorcery, or Wizard spell, you may draw a card. If you do, discard a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1, true), filter, false
+                new DrawDiscardControllerEffect(1, 1, true),
+                StaticFilters.FILTER_SPELL_INSTANT_SORCERY_WIZARD, false
         ));
     }
 

@@ -593,6 +593,17 @@ public final class StaticFilters {
         FILTER_SPELLS_INSTANT_OR_SORCERY.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_INSTANT_SORCERY_WIZARD = new FilterSpell("an instant, sorcery, or Wizard spell");
+
+    static {
+        FILTER_SPELL_INSTANT_SORCERY_WIZARD.add(Predicates.or(
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate(),
+                SubType.WIZARD.getPredicate()
+        ));
+        FILTER_SPELL_INSTANT_SORCERY_WIZARD.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     static {
