@@ -132,6 +132,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Prowling Felidar", 34, Rarity.COMMON, mage.cards.p.ProwlingFelidar.class));
         cards.add(new SetCardInfo("Ravager's Mace", 235, Rarity.UNCOMMON, mage.cards.r.RavagersMace.class));
         cards.add(new SetCardInfo("Riverglide Pathway", 264, Rarity.RARE, mage.cards.r.RiverglidePathway.class));
+        cards.add(new SetCardInfo("Rockslide Sorcerer", 154, Rarity.UNCOMMON, mage.cards.r.RockslideSorcerer.class));
         cards.add(new SetCardInfo("Roiling Regrowth", 201, Rarity.UNCOMMON, mage.cards.r.RoilingRegrowth.class));
         cards.add(new SetCardInfo("Ruin Crab", 75, Rarity.UNCOMMON, mage.cards.r.RuinCrab.class));
         cards.add(new SetCardInfo("Sea Gate Colossus", 251, Rarity.COMMON, mage.cards.s.SeaGateColossus.class));
