@@ -75,6 +75,7 @@ public final class ZendikarRising extends ExpansionSet {
         this.maxCardNumberInBooster = 280;
 
         cards.add(new SetCardInfo("Acquisitions Expert", 89, Rarity.UNCOMMON, mage.cards.a.AcquisitionsExpert.class));
+        cards.add(new SetCardInfo("Adventure Awaits", 177, Rarity.COMMON, mage.cards.a.AdventureAwaits.class));
         cards.add(new SetCardInfo("Akoum Hellhound", 133, Rarity.COMMON, mage.cards.a.AkoumHellhound.class));
         cards.add(new SetCardInfo("Akoum Teeth", 134, Rarity.UNCOMMON, mage.cards.a.AkoumTeeth.class));
         cards.add(new SetCardInfo("Akoum Warrior", 134, Rarity.UNCOMMON, mage.cards.a.AkoumWarrior.class));
