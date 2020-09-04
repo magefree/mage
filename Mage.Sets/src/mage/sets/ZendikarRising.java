@@ -39,8 +39,12 @@ public final class ZendikarRising extends ExpansionSet {
             "Pelakka Caverns",
             "Riverglide Pathway",
             "Lavaglide Pathway",
+            "Sea Gate Restoration",
+            "Sea Gate, Reborn",
             "Sejiri Shelter",
             "Sejiri Glacier",
+            "Shatterskull Smashing",
+            "Shatterskull, the Hammer Pass",
             "Song-Mad Treachery",
             "Song-Mad Ruins",
             "Tangled Florahedron",
@@ -95,6 +99,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Dauntless Survivor", 184, Rarity.COMMON, mage.cards.d.DauntlessSurvivor.class));
         cards.add(new SetCardInfo("Deadly Alliance", 96, Rarity.COMMON, mage.cards.d.DeadlyAlliance.class));
         cards.add(new SetCardInfo("Demon's Disciple", 97, Rarity.UNCOMMON, mage.cards.d.DemonsDisciple.class));
+        cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Emeria Captain", 11, Rarity.UNCOMMON, mage.cards.e.EmeriaCaptain.class));
         cards.add(new SetCardInfo("Expedition Diviner", 57, Rarity.COMMON, mage.cards.e.ExpeditionDiviner.class));
         cards.add(new SetCardInfo("Expedition Skulker", 101, Rarity.COMMON, mage.cards.e.ExpeditionSkulker.class));
@@ -105,7 +110,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Goma Fada Vanguard", 141, Rarity.UNCOMMON, mage.cards.g.GomaFadaVanguard.class));
         cards.add(new SetCardInfo("Grimclimb Pathway", 259, Rarity.RARE, mage.cards.g.GrimclimbPathway.class));
         cards.add(new SetCardInfo("Grotag Bug-Catcher", 142, Rarity.COMMON, mage.cards.g.GrotagBugCatcher.class));
-        cards.add(new SetCardInfo("Highborn Vampire", 108, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
+        cards.add(new SetCardInfo("Highborn Vampire", 107, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
         cards.add(new SetCardInfo("Into the Roil", 62, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace, Mirror Mage", 63, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
