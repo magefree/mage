@@ -36,6 +36,16 @@ public enum PartyCount implements DynamicValue {
             SubType.WIZARD
     );
 
+    private static Set<SubType> makeSet(Permanent permanent, Game game) {
+        Set<SubType> subTypeSet = new HashSet<>();
+        for (SubType subType : partyTypes) {
+            if (permanent.hasSubtype(subType, game)) {
+                subTypeSet.add(subType);
+            }
+        }
+        return subTypeSet;
+    }
+
     private static boolean attemptRearrange(SubType subType, UUID uuid, Set<SubType> creatureTypes, Map<SubType, UUID> subTypeUUIDMap, Map<UUID, Set<SubType>> creatureTypesMap) {
         UUID uuid1 = subTypeUUIDMap.get(subType);
         if (uuid1 == null) {
@@ -51,19 +61,18 @@ public enum PartyCount implements DynamicValue {
                 subTypeUUIDMap.put(subType1, uuid1);
                 return true;
             }
-            return attemptRearrange(subType1, uuid1, creatureTypes, subTypeUUIDMap, creatureTypesMap);
         }
-        return false;
-    }
-
-    private static Set<SubType> makeSet(Permanent permanent, Game game) {
-        Set<SubType> subTypeSet = new HashSet<>();
-        for (SubType subType : partyTypes) {
-            if (permanent.hasSubtype(subType, game)) {
-                subTypeSet.add(subType);
+        for (SubType subType1 : creatureTypes1) {
+            if (subType == subType1) {
+                continue;
+            }
+            if (attemptRearrange(subType1, uuid1, creatureTypes, subTypeUUIDMap, creatureTypesMap)) {
+                subTypeUUIDMap.put(subType, uuid);
+                subTypeUUIDMap.put(subType1, uuid1);
+                return true;
             }
         }
-        return subTypeSet;
+        return false;
     }
 
     @Override
