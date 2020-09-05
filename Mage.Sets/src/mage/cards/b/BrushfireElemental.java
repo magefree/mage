@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -32,6 +33,8 @@ public final class BrushfireElemental extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}");
 
         this.subtype.add(SubType.ELEMENTAL);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
