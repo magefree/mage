@@ -134,6 +134,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Roil", 62, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace, Mirror Mage", 63, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
+        cards.add(new SetCardInfo("Joraga Visionary", 188, Rarity.COMMON, mage.cards.j.JoragaVisionary.class));
         cards.add(new SetCardInfo("Kabira Outrider", 18, Rarity.COMMON, mage.cards.k.KabiraOutrider.class));
         cards.add(new SetCardInfo("Kaza, Roil Chaser", 225, Rarity.RARE, mage.cards.k.KazaRoilChaser.class));
         cards.add(new SetCardInfo("Kazuul's Cliffs", 146, Rarity.UNCOMMON, mage.cards.k.KazuulsCliffs.class));
