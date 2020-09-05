@@ -133,6 +133,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Hagra Constrictor", 105, Rarity.COMMON, mage.cards.h.HagraConstrictor.class));
         cards.add(new SetCardInfo("Highborn Vampire", 107, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
         cards.add(new SetCardInfo("Into the Roil", 62, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
+        cards.add(new SetCardInfo("Iridescent Hornbeetle", 187, Rarity.UNCOMMON, mage.cards.i.IridescentHornbeetle.class));
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace, Mirror Mage", 63, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
         cards.add(new SetCardInfo("Joraga Visionary", 188, Rarity.COMMON, mage.cards.j.JoragaVisionary.class));
