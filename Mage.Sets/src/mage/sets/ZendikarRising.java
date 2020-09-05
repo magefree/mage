@@ -33,6 +33,8 @@ public final class ZendikarRising extends ExpansionSet {
             "Kazuul's Cliffs",
             "Khalni Ambush",
             "Khalni Territory",
+            "Makindi Stampede",
+            "Makindi Mesas",
             "Needleverge Pathway",
             "Pillarverge Pathway",
             "Pelakka Predation",
@@ -45,14 +47,20 @@ public final class ZendikarRising extends ExpansionSet {
             "Sejiri Glacier",
             "Shatterskull Smashing",
             "Shatterskull, the Hammer Pass",
+            "Skyclave Cleric",
+            "Skyclave Basilica",
             "Song-Mad Treachery",
             "Song-Mad Ruins",
+            "Spikefield Hazard",
+            "Spikefield Cave",
             "Tangled Florahedron",
             "Tangled Vale",
             "Umara Wizard",
             "Umara Skyfalls",
             "Valakut Awakening",
-            "Valakut Stoneforge"
+            "Valakut Stoneforge",
+            "Zof Consumption",
+            "Zof Bloodbog"
     );
 
     private static final ZendikarRising instance = new ZendikarRising();
@@ -156,6 +164,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Pillarverge Pathway", 263, Rarity.RARE, mage.cards.p.PillarvergePathway.class));
         cards.add(new SetCardInfo("Plains", 266, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Prowling Felidar", 34, Rarity.COMMON, mage.cards.p.ProwlingFelidar.class));
+        cards.add(new SetCardInfo("Rabid Bite", 199, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Ravager's Mace", 235, Rarity.UNCOMMON, mage.cards.r.RavagersMace.class));
         cards.add(new SetCardInfo("Riverglide Pathway", 264, Rarity.RARE, mage.cards.r.RiverglidePathway.class));
         cards.add(new SetCardInfo("Rockslide Sorcerer", 154, Rarity.UNCOMMON, mage.cards.r.RockslideSorcerer.class));
@@ -175,6 +184,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Spare Supplies", 254, Rarity.COMMON, mage.cards.s.SpareSupplies.class));
         cards.add(new SetCardInfo("Spitfire Lagac", 167, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Spoils of Adventure", 237, Rarity.UNCOMMON, mage.cards.s.SpoilsOfAdventure.class));
+        cards.add(new SetCardInfo("Subtle Strike", 128, Rarity.COMMON, mage.cards.s.SubtleStrike.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Tajuru Blightblade", 208, Rarity.COMMON, mage.cards.t.TajuruBlightblade.class));
         cards.add(new SetCardInfo("Tajuru Snarecaster", 210, Rarity.COMMON, mage.cards.t.TajuruSnarecaster.class));
