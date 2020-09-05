@@ -115,6 +115,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Alliance", 96, Rarity.COMMON, mage.cards.d.DeadlyAlliance.class));
         cards.add(new SetCardInfo("Demon's Disciple", 97, Rarity.UNCOMMON, mage.cards.d.DemonsDisciple.class));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class));
+        cards.add(new SetCardInfo("Dreadwurm", 100, Rarity.COMMON, mage.cards.d.Dreadwurm.class));
         cards.add(new SetCardInfo("Emeria Captain", 11, Rarity.UNCOMMON, mage.cards.e.EmeriaCaptain.class));
         cards.add(new SetCardInfo("Expedition Champion", 138, Rarity.COMMON, mage.cards.e.ExpeditionChampion.class));
         cards.add(new SetCardInfo("Expedition Diviner", 57, Rarity.COMMON, mage.cards.e.ExpeditionDiviner.class));
