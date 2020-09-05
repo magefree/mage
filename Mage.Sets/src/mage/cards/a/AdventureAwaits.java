@@ -43,7 +43,7 @@ class AdventureAwaitsEffect extends OneShotEffect {
         staticText = "Look at the top five cards of your library. " +
                 "You may reveal a creature card from among them and put it into your hand. " +
                 "Put the rest on the bottom of your library in a random order. " +
-                "If you don't put a card into your hand this way, draw a card.";
+                "If you didn't put a card into your hand this way, draw a card.";
     }
 
     private AdventureAwaitsEffect(final AdventureAwaitsEffect effect) {
