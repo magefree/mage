@@ -96,7 +96,7 @@ class ClericOfLifesBondCounterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you gain life for the first time each turn, put a +1/+1 counter on {this}.";
+        return "Whenever you gain life for the first time each turn, put a +1/+1 counter on {this}.";
     }
 
     @Override
