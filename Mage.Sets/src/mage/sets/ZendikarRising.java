@@ -195,6 +195,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Stinger", 123, Rarity.UNCOMMON, mage.cards.s.ShadowStinger.class));
         cards.add(new SetCardInfo("Shell Shield", 79, Rarity.COMMON, mage.cards.s.ShellShield.class));
         cards.add(new SetCardInfo("Shepherd of Heroes", 38, Rarity.COMMON, mage.cards.s.ShepherdOfHeroes.class));
+        cards.add(new SetCardInfo("Skyclave Basilica", 40, Rarity.UNCOMMON, mage.cards.s.SkyclaveBasilica.class));
+        cards.add(new SetCardInfo("Skyclave Cleric", 40, Rarity.UNCOMMON, mage.cards.s.SkyclaveCleric.class));
         cards.add(new SetCardInfo("Skyclave Geopede", 163, Rarity.UNCOMMON, mage.cards.s.SkyclaveGeopede.class));
         cards.add(new SetCardInfo("Sneaking Guide", 164, Rarity.COMMON, mage.cards.s.SneakingGuide.class));
         cards.add(new SetCardInfo("Song-Mad Ruins", 165, Rarity.UNCOMMON, mage.cards.s.SongMadRuins.class));
