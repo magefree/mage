@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import mage.ObjectColor;
@@ -50,6 +49,8 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     LifeAndLimbEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types";
+        this.dependencyTypes.add(DependencyType.BecomeForest);
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     LifeAndLimbEffect(final LifeAndLimbEffect effect) {
@@ -72,25 +73,18 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                         if (!permanent.hasSubtype(SubType.SAPROLING, game)) {
                             permanent.getSubtype(game).add(SubType.SAPROLING);
                         }
-                        permanent.addCardType(CardType.LAND);
+
+                        // land abilities are intrinsic, so add them here, not in layer 6
                         if (!permanent.hasSubtype(SubType.FOREST, game)) {
                             permanent.getSubtype(game).add(SubType.FOREST);
+                            if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
+                                permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                            }
                         }
+                        permanent.addCardType(CardType.LAND);
                         break;
                     case ColorChangingEffects_5:
                         permanent.getColor(game).setColor(ObjectColor.GREEN);
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        boolean flag = false;
-                        for (Ability ability : permanent.getAbilities(game)) {
-                            if (ability instanceof GreenManaAbility) {
-                                flag = true;
-                                break;
-                            }
-                        }
-                        if (!flag) {
-                            permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                        }
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
@@ -114,7 +108,6 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.TypeChangingEffects_4
                 || layer == Layer.ColorChangingEffects_5
-                || layer == Layer.AbilityAddingRemovingEffects_6
                 || layer == Layer.PTChangingEffects_7;
     }
 }
