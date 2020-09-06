@@ -17,9 +17,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -66,6 +64,7 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
     public AshayaSoulOfTheWildEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Nontoken creatures you control are Forest lands in addition to their other types";
+        this.dependencyTypes.add(DependencyType.BecomeForest);
     }
 
     public AshayaSoulOfTheWildEffect(final AshayaSoulOfTheWildEffect effect) {
@@ -79,34 +78,21 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer subLayer, Ability source, Game game) {
-        Player you = game.getPlayer(source.getControllerId());
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-        if (you != null) {
-            for (Permanent creature : creatures) {
-                if (creature != null) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            creature.addCardType(CardType.LAND);
-                            creature.getSubtype(game).add(SubType.FOREST);
-                            break;
-                        case AbilityAddingRemovingEffects_6:
-                            boolean flag = false;
-                            for (Ability ability : creature.getAbilities(game)) {
-                                if (ability instanceof GreenManaAbility) {
-                                    flag = true;
-                                    break;
-                                }
-                            }
-                            if (!flag) {
-                                creature.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                            }
-                            break;
+        for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    // land abilities are intrinsic, so add them here, not in layer 6
+                    if (!land.hasSubtype(SubType.FOREST, game)) {
+                        land.getSubtype(game).add(SubType.FOREST);
+                        if (!land.getAbilities(game).containsClass(GreenManaAbility.class)) {
+                            land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                        }
                     }
-                }
+                    land.addCardType(CardType.LAND);
+                    break;
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -116,6 +102,6 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4 || layer == Layer.AbilityAddingRemovingEffects_6;
+        return layer == Layer.TypeChangingEffects_4;
     }
 }
