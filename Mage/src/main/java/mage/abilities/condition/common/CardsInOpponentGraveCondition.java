@@ -2,7 +2,6 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.game.Game;
@@ -10,7 +9,6 @@ import mage.game.Graveyard;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -76,15 +74,9 @@ public enum CardsInOpponentGraveCondition implements Condition {
                     .mapToInt(Graveyard::size)
                     .max()
                     .orElse(0);
-            String text = "An opponent has "
-                    + CardUtil.numberToText(maxGraveSize) + " card"
-                    + (maxGraveSize == 1 ? "" : "s")
-                    + " in their graveyard";
-            if (maxGraveSize >= this.value) {
-                return HintUtils.prepareText(text, Color.GREEN, HintUtils.HINT_ICON_GOOD);
-            } else {
-                return HintUtils.prepareText(text, Color.RED, HintUtils.HINT_ICON_BAD);
-            }
+            String text = "Opponent graveyard size: " + maxGraveSize
+                    + " (need: " + value + ")";
+            return HintUtils.prepareText(text, null, maxGraveSize >= this.value ? HintUtils.HINT_ICON_GOOD : HintUtils.HINT_ICON_BAD);
         }
 
         @Override
