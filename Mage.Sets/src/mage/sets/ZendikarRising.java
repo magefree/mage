@@ -221,6 +221,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Utility Knife", 256, Rarity.COMMON, mage.cards.u.UtilityKnife.class));
         cards.add(new SetCardInfo("Veteran Adventurer", 218, Rarity.UNCOMMON, mage.cards.v.VeteranAdventurer.class));
         cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.UNCOMMON, mage.cards.w.WindriderWizard.class));
+        cards.add(new SetCardInfo("Zof Bloodbog", 132, Rarity.UNCOMMON, mage.cards.z.ZofBloodbog.class));
+        cards.add(new SetCardInfo("Zof Consumption", 132, Rarity.UNCOMMON, mage.cards.z.ZofConsumption.class));
         cards.add(new SetCardInfo("Zulaport Duelist", 88, Rarity.COMMON, mage.cards.z.ZulaportDuelist.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanics are fully implemented
