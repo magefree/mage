@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -92,5 +93,32 @@ enum NighthawkScavengerValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "";
+    }
+}
+
+enum NighthawkScavengerHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        String types = game
+                .getOpponents(ability.getControllerId())
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(graveyard -> graveyard.getCards(game))
+                .flatMap(Collection::stream)
+                .map(MageObject::getCardType)
+                .flatMap(Collection::stream)
+                .map(CardType::toString)
+                .reduce((s1, s2) -> s1 + ", " + s2)
+                .orElse("None");
+        return "Card types in opponents' graveyards: " + types;
+    }
+
+    @Override
+    public NighthawkScavengerHint copy() {
+        return instance;
     }
 }
