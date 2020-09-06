@@ -17,7 +17,7 @@ import java.util.Objects;
  *
  * @author TheElk801
  */
-public enum CardsInOpponentGraveCondition implements Condition {
+public enum CardsInOpponentGraveyardCondition implements Condition {
     SEVEN(7),
     EIGHT(8),
     TEN(10);
@@ -25,9 +25,9 @@ public enum CardsInOpponentGraveCondition implements Condition {
     private final int value;
     private final Hint hint;
 
-    CardsInOpponentGraveCondition(int value) {
+    CardsInOpponentGraveyardCondition(int value) {
         this.value = value;
-        this.hint = new CardsInOpponentGraveConditionHint(value);
+        this.hint = new CardsInOpponentGraveyardConditionHint(value);
     }
 
     @Override
@@ -51,15 +51,15 @@ public enum CardsInOpponentGraveCondition implements Condition {
         return hint;
     }
 
-    private static final class CardsInOpponentGraveConditionHint implements Hint {
+    private static final class CardsInOpponentGraveyardConditionHint implements Hint {
 
         private final int value;
 
-        private CardsInOpponentGraveConditionHint(int value) {
+        private CardsInOpponentGraveyardConditionHint(int value) {
             this.value = value;
         }
 
-        private CardsInOpponentGraveConditionHint(final CardsInOpponentGraveConditionHint hint) {
+        private CardsInOpponentGraveyardConditionHint(final CardsInOpponentGraveyardConditionHint hint) {
             this.value = hint.value;
         }
 
@@ -80,8 +80,8 @@ public enum CardsInOpponentGraveCondition implements Condition {
         }
 
         @Override
-        public CardsInOpponentGraveConditionHint copy() {
-            return new CardsInOpponentGraveConditionHint(this);
+        public CardsInOpponentGraveyardConditionHint copy() {
+            return new CardsInOpponentGraveyardConditionHint(this);
         }
     }
 }

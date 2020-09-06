@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
@@ -42,9 +42,9 @@ public final class PutridImp extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
-        Effect effect = new ConditionalRestrictionEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7));
+        Effect effect = new ConditionalRestrictionEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7));
         effect.setText("and can't block");
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.THRESHOLD);

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -36,12 +36,12 @@ public final class GhituLavarunner extends CardImpl{
             Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY),
+                new CardsInControllerGraveyardCondition(2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY),
                 "As long as there are two or more instant and/or sorcery cards in your graveyard, {this} gets +1/+0"));
         ability.addEffect(
             new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance()),
-                new CardsInControllerGraveCondition(2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY),
+                new CardsInControllerGraveyardCondition(2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY),
                 "and has haste."));
         this.addAbility(ability);
     }

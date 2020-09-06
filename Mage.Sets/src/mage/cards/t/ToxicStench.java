@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -42,13 +42,13 @@ public final class ToxicStench extends CardImpl {
         // Target nonblack creature gets -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new ToxicStenchEffect(),
-                new InvertCondition(new CardsInControllerGraveCondition(7)),
+                new InvertCondition(new CardsInControllerGraveyardCondition(7)),
                 "Target nonblack creature gets -1/-1 until end of turn."));
 
         // Threshold - If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyTargetEffect(true),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated."));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

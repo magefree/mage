@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
@@ -30,7 +30,7 @@ public final class ShadowsOfThePast extends CardImpl {
 
         // {4}{B}: Each opponent loses 2 life and you gain 2 life. Activate this ability only if there are four or more creature cards in your graveyard.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{4}{B}"), new CardsInControllerGraveCondition(4, StaticFilters.FILTER_CARD_CREATURE));
+                new LoseLifeOpponentsEffect(2), new ManaCostsImpl<>("{4}{B}"), new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURE));
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);

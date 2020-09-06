@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
@@ -39,7 +39,7 @@ public final class Werebear extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                     new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
-                    new CardsInControllerGraveCondition(7),
+                    new CardsInControllerGraveyardCondition(7),
                     "{this} gets +3/+3 as long as seven or more cards are in your graveyard"
                 ));
         thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);

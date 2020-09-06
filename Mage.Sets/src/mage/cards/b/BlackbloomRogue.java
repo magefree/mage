@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -36,9 +36,9 @@ public final class BlackbloomRogue extends CardImpl {
         // Blackbloom Rogue gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
-                CardsInOpponentGraveCondition.EIGHT, "{this} gets +3/+0 as long as " +
+                CardsInOpponentGraveyardCondition.EIGHT, "{this} gets +3/+0 as long as " +
                 "an opponent has eight or more cards in their graveyard"
-        )).addHint(CardsInOpponentGraveCondition.EIGHT.getHint()));
+        )).addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }
 
     private BlackbloomRogue(final BlackbloomRogue card) {

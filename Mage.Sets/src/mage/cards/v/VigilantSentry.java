@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -36,12 +36,12 @@ public final class VigilantSentry extends CardImpl {
 
         // Threshold - As long as seven or more cards are in your graveyard, Vigilant Sentry gets +1/+1 and has "{tap}: Target attacking or blocking creature gets +3/+3 until end of turn."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetAttackingOrBlockingCreature());
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(gainedAbility),
-            new CardsInControllerGraveCondition(7), "and has \"{T}: Target attacking or blocking creature gets +3/+3 until end of turn.\""));
+            new CardsInControllerGraveyardCondition(7), "and has \"{T}: Target attacking or blocking creature gets +3/+3 until end of turn.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

@@ -4,17 +4,15 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  * @author Loki
@@ -33,9 +31,9 @@ public final class JacesPhantasm extends CardImpl {
         // Jace's Phantasm gets +4/+4 as long as an opponent has ten or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
-                CardsInOpponentGraveCondition.TEN, "{this} gets +4/+4 as long as " +
+                CardsInOpponentGraveyardCondition.TEN, "{this} gets +4/+4 as long as " +
                 "an opponent has ten or more cards in their graveyard"
-        )).addHint(CardsInOpponentGraveCondition.TEN.getHint()));
+        )).addHint(CardsInOpponentGraveyardCondition.TEN.getHint()));
     }
 
     public JacesPhantasm(final JacesPhantasm card) {

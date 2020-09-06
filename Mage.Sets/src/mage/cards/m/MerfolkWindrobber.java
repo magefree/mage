@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -43,8 +43,8 @@ public final class MerfolkWindrobber extends CardImpl {
         // Sacrifice Merfolk Windrobber: Draw a card. Activate this ability only if an opponent has eight or more cards in their graveyard.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new SacrificeSourceCost(), CardsInOpponentGraveCondition.EIGHT
-        ).addHint(CardsInOpponentGraveCondition.EIGHT.getHint()));
+                new SacrificeSourceCost(), CardsInOpponentGraveyardCondition.EIGHT
+        ).addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }
 
     private MerfolkWindrobber(final MerfolkWindrobber card) {

@@ -2,7 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -32,7 +32,7 @@ public final class Demoralize extends CardImpl {
         this.getSpellAbility().addEffect(
                 new ConditionalOneShotEffect(
                     new AddContinuousEffectToGame(new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn)),
-                    new CardsInControllerGraveCondition(7),
+                    new CardsInControllerGraveyardCondition(7),
                     "<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, creatures can't block this turn"
                 ));
     }

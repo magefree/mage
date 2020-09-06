@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -35,15 +35,15 @@ public final class Anticognition extends CardImpl {
         // Counter target creature or planeswalker spell unless its controller pays {2}. If an opponent has eight or more cards in their graveyard, instead counter that spell, then scry 2.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(), new CounterUnlessPaysEffect(new GenericManaCost(2)),
-                CardsInOpponentGraveCondition.EIGHT, "Counter target creature or planeswalker spell " +
+                CardsInOpponentGraveyardCondition.EIGHT, "Counter target creature or planeswalker spell " +
                 "unless its controller pays {2}. If an opponent has eight or more cards in their graveyard, " +
                 "instead counter that spell"
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new ScryEffect(2), CardsInOpponentGraveCondition.EIGHT, ", then scry 2"
+                new ScryEffect(2), CardsInOpponentGraveyardCondition.EIGHT, ", then scry 2"
         ));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-        this.getSpellAbility().addHint(CardsInOpponentGraveCondition.EIGHT.getHint());
+        this.getSpellAbility().addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint());
     }
 
     private Anticognition(final Anticognition card) {

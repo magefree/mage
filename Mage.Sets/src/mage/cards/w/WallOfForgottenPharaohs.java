@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -52,7 +52,7 @@ public final class WallOfForgottenPharaohs extends CardImpl {
                 new OrCondition(
                         "only if you control a Desert or there is a Desert card in your graveyard",
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveCondition(1, filterDesertCard)
+                        new CardsInControllerGraveyardCondition(1, filterDesertCard)
                 )
         );
         ability.addTarget(new TargetPlayerOrPlaneswalker());

@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SpelleaterWolverine extends CardImpl {
 
-    private static final Condition condition = new CardsInControllerGraveCondition(
+    private static final Condition condition = new CardsInControllerGraveyardCondition(
             3, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
     );
 

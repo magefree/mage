@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -52,11 +52,11 @@ public final class TreacherousVampire extends CardImpl {
 
         // Threshold - As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
                 "As long as seven or more cards are in your graveyard, {this} gets +2/+2"));
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new LoseLifeSourceControllerEffect(6))),
-                new CardsInControllerGraveCondition(7), "and has \"When {this} dies, you lose 6 life.\""
+                new CardsInControllerGraveyardCondition(7), "and has \"When {this} dies, you lose 6 life.\""
         );
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.THRESHOLD);

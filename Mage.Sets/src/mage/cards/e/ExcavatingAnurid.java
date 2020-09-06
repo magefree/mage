@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class ExcavatingAnurid extends CardImpl {
 
-    private static final Condition condition = new CardsInControllerGraveCondition(7);
+    private static final Condition condition = new CardsInControllerGraveyardCondition(7);
 
     public ExcavatingAnurid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

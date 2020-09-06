@@ -8,7 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -53,13 +53,13 @@ public final class RepentantVampire extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{tap}: Destroy target black creature."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BecomesColorSourceEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "As long as seven or more cards are in your graveyard, {this} is white"));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "and has \"{T}: Destroy target black creature.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

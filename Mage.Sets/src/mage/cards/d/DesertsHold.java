@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -54,7 +54,7 @@ public final class DesertsHold extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)),
                 new OrCondition(
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveCondition(1, filterDesertCard)),
+                        new CardsInControllerGraveyardCondition(1, filterDesertCard)),
                 "When {this} enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, you gain 3 life."));
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.

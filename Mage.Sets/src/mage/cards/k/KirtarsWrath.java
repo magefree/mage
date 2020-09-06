@@ -3,7 +3,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -31,7 +31,7 @@ public final class KirtarsWrath extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new KirtarsWrathEffect(),
                 new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated"));
 
     }

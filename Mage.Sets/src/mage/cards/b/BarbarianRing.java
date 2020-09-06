@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -36,7 +36,7 @@ public final class BarbarianRing extends CardImpl {
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new DamageTargetEffect(2),
             new ManaCostsImpl("{R}"),
-            new CardsInControllerGraveCondition(7));
+            new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
         thresholdAbility.addTarget(new TargetAnyTarget());

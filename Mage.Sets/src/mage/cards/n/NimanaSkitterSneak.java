@@ -3,7 +3,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -32,14 +32,14 @@ public final class NimanaSkitterSneak extends CardImpl {
         // As long as an opponent has eight or more cards in their graveyard, Nimana Skitter-Sneak gets +1/+0 and has menace.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
-                CardsInOpponentGraveCondition.EIGHT, "As long as an opponent has eight" +
+                CardsInOpponentGraveyardCondition.EIGHT, "As long as an opponent has eight" +
                 " or more cards in their graveyard, {this} gets +1/+0"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility()),
-                CardsInOpponentGraveCondition.EIGHT, "and has menace"
+                CardsInOpponentGraveyardCondition.EIGHT, "and has menace"
         ));
-        this.addAbility(ability.addHint(CardsInOpponentGraveCondition.EIGHT.getHint()));
+        this.addAbility(ability.addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }
 
     private NimanaSkitterSneak(final NimanaSkitterSneak card) {

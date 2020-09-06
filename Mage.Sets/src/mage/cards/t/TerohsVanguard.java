@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -41,7 +41,7 @@ public final class TerohsVanguard extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(new EntersBattlefieldTriggeredAbility(
             new GainAbilityControlledEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn, new FilterCreaturePermanent()))),
-            new CardsInControllerGraveCondition(7),
+            new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, creatures you control gain protection from black until end of turn.\""));
             ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

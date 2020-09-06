@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -37,7 +37,7 @@ public final class BattlefieldScrounger extends CardImpl {
                 new BoostSourceEffect(3, 3, Duration.EndOfTurn),
                 new BattlefieldScroungerCost(),
                 1,
-                new CardsInControllerGraveCondition(7));
+                new CardsInControllerGraveyardCondition(7));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

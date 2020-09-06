@@ -35,7 +35,7 @@ public final class PitKeeper extends CardImpl {
         triggeredAbility.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
-                new CreatureCardsInControllerGraveCondition(4),
+                new CreatureCardsInControllerGraveyardCondition(4),
                 "When {this} enters the battlefield, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
     }
 
@@ -49,11 +49,11 @@ public final class PitKeeper extends CardImpl {
     }
 }
 
-class CreatureCardsInControllerGraveCondition implements Condition {
+class CreatureCardsInControllerGraveyardCondition implements Condition {
 
     private int value;
 
-    public CreatureCardsInControllerGraveCondition(int value) {
+    public CreatureCardsInControllerGraveyardCondition(int value) {
         this.value = value;
     }
 

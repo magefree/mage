@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -41,7 +41,7 @@ public final class NutCollector extends CardImpl {
         // Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
-            new CardsInControllerGraveCondition(7), "Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard"));
+            new CardsInControllerGraveyardCondition(7), "Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

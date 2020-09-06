@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ExileCardFromOwnGraveyardControllerEffect;
@@ -39,7 +39,7 @@ public final class Bloodcurdler extends CardImpl {
         // At the beginning of your upkeep, put the top card of your library into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(1), TargetController.YOU, false));
 
-        Condition thresholdCondition = new CardsInControllerGraveCondition(7);
+        Condition thresholdCondition = new CardsInControllerGraveyardCondition(7);
         // Threshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
         Ability thresholdAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), thresholdCondition,

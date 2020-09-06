@@ -12,16 +12,16 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class CardsInControllerGraveCondition implements Condition {
+public class CardsInControllerGraveyardCondition implements Condition {
 
     private final int value;
     private final FilterCard filter;
 
-    public CardsInControllerGraveCondition(int value) {
+    public CardsInControllerGraveyardCondition(int value) {
         this(value, null);
     }
 
-    public CardsInControllerGraveCondition(int value, FilterCard filter) {
+    public CardsInControllerGraveyardCondition(int value, FilterCard filter) {
         this.value = value;
         this.filter = filter;
     }

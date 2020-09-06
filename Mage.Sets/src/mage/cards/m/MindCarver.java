@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -39,9 +39,9 @@ public final class MindCarver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEquippedEffect(3, 1),
                 new BoostEquippedEffect(1, 0),
-                CardsInOpponentGraveCondition.EIGHT, "Equipped creature gets +1/+0. " +
+                CardsInOpponentGraveyardCondition.EIGHT, "Equipped creature gets +1/+0. " +
                 "It gets +3/+1 instead as long as an opponent has eight or more cards in their graveyard."
-        )).addHint(CardsInOpponentGraveCondition.EIGHT.getHint()));
+        )).addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
 
         // Equip {2}{B}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{B}")));

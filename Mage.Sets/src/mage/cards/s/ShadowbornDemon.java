@@ -54,7 +54,7 @@ public final class ShadowbornDemon extends CardImpl {
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), TargetController.YOU, false),
-                new InvertCondition(new CreatureCardsInControllerGraveCondition(6)),
+                new InvertCondition(new CreatureCardsInControllerGraveyardCondition(6)),
                 "At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature"));
 
     }
@@ -69,11 +69,11 @@ public final class ShadowbornDemon extends CardImpl {
     }
 }
 
-class CreatureCardsInControllerGraveCondition implements Condition {
+class CreatureCardsInControllerGraveyardCondition implements Condition {
 
     private int value;
 
-    public CreatureCardsInControllerGraveCondition(int value) {
+    public CreatureCardsInControllerGraveyardCondition(int value) {
         this.value = value;
     }
 

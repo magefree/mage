@@ -4,7 +4,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -36,7 +36,7 @@ public final class KrosanAvenger extends CardImpl {
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),
             new ManaCostsImpl("{1}{G}"),
-            new CardsInControllerGraveCondition(7));
+            new CardsInControllerGraveyardCondition(7));
         thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }

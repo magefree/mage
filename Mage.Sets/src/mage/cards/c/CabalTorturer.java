@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -39,7 +39,7 @@ public final class CabalTorturer extends CardImpl {
         this.addAbility(ability);
         // Threshold - {3}{B}{B}, {tap}: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
         ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn),
-            new ManaCostsImpl("{3}{B}{B}"), new CardsInControllerGraveCondition(7));
+            new ManaCostsImpl("{3}{B}{B}"), new CardsInControllerGraveyardCondition(7));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.THRESHOLD);

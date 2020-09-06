@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.effects.WhileConditionContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -77,7 +77,7 @@ class RamunapHydraBoostEffect extends WhileConditionContinuousEffect {
     private final int toughness;
 
     public RamunapHydraBoostEffect(int power, int toughness) {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new CardsInControllerGraveCondition(1, filter), Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new CardsInControllerGraveyardCondition(1, filter), Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         staticText = "{this} gets +1/+1 as long as there is a Desert card in your graveyard";

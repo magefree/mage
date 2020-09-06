@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -44,7 +44,7 @@ public final class MaskedGorgon extends CardImpl {
             new ProtectionAbility(filter2), Duration.WhileOnBattlefield, filter1)));
         // Threshold - Masked Gorgon has protection from green and from white as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.WHITE), Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.WHITE), Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "{this} has protection from green and from white as long as seven or more cards are in your graveyard"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

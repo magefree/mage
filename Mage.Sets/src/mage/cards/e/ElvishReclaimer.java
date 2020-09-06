@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class ElvishReclaimer extends CardImpl {
 
     private static final Condition condition
-            = new CardsInControllerGraveCondition(3, StaticFilters.FILTER_CARD_LAND);
+            = new CardsInControllerGraveyardCondition(3, StaticFilters.FILTER_CARD_LAND);
 
     public ElvishReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

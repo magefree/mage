@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
@@ -41,11 +41,11 @@ public final class OtarianJuggernaut extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Otarian Juggernaut gets +3/+0 and attacks each combat if able.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "As long as seven or more cards are in your graveyard, {this} gets +3/+0"));
         ability.addEffect(new ConditionalRequirementEffect(
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "and attacks each combat if able"
         ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);

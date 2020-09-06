@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class MurasaBehemoth extends CardImpl {
 
-    Condition condition = new CardsInControllerGraveCondition(1, StaticFilters.FILTER_CARD_LAND);
+    Condition condition = new CardsInControllerGraveyardCondition(1, StaticFilters.FILTER_CARD_LAND);
 
     public MurasaBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

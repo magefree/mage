@@ -4,13 +4,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInOpponentGraveCondition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -20,11 +18,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.Graveyard;
-import mage.players.Player;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -55,13 +49,13 @@ public final class ThievesGuildEnforcer extends CardImpl {
         // As long as an opponent has eight or more cards in their graveyard, Thieves' Guild Enforcer gets +2/+1 and has deathtouch.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
-                CardsInOpponentGraveCondition.EIGHT, "as long as an opponent " +
+                CardsInOpponentGraveyardCondition.EIGHT, "as long as an opponent " +
                 "has eight or more cards in their graveyard, {this} gets +2/+1"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield
-        ), CardsInOpponentGraveCondition.EIGHT, "and has deathtouch"));
-        this.addAbility(ability.addHint(CardsInOpponentGraveCondition.EIGHT.getHint()));
+        ), CardsInOpponentGraveyardCondition.EIGHT, "and has deathtouch"));
+        this.addAbility(ability.addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }
 
     private ThievesGuildEnforcer(final ThievesGuildEnforcer card) {

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -43,7 +43,7 @@ public final class NomadDecoy extends CardImpl {
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new TapTargetEffect(),
             new ManaCostsImpl("{W}{W}"),
-            new CardsInControllerGraveCondition(7));
+            new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addTarget(new TargetCreaturePermanent(2));
         thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
