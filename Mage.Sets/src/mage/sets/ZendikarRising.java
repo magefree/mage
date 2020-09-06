@@ -114,6 +114,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Coralhelm Chronicler", 54, Rarity.RARE, mage.cards.c.CoralhelmChronicler.class));
         cards.add(new SetCardInfo("Cragcrown Pathway", 261, Rarity.RARE, mage.cards.c.CragcrownPathway.class));
         cards.add(new SetCardInfo("Cragplate Baloth", 183, Rarity.RARE, mage.cards.c.CragplateBaloth.class));
+        cards.add(new SetCardInfo("Crawling Barrens", 262, Rarity.RARE, mage.cards.c.CrawlingBarrens.class));
         cards.add(new SetCardInfo("Cunning Geysermage", 55, Rarity.COMMON, mage.cards.c.CunningGeysermage.class));
         cards.add(new SetCardInfo("Dauntless Survivor", 184, Rarity.COMMON, mage.cards.d.DauntlessSurvivor.class));
         cards.add(new SetCardInfo("Deadly Alliance", 96, Rarity.COMMON, mage.cards.d.DeadlyAlliance.class));
