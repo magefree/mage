@@ -22,7 +22,7 @@ public final class RockslideSorcerer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
