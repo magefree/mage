@@ -17,6 +17,8 @@ public final class ZendikarRising extends ExpansionSet {
             "Akoum Teeth",
             "Bala Ged Recovery",
             "Bala Ged Sanctuary",
+            "Blackbloom Rogue",
+            "Blackbloom Bog",
             "Branchloft Pathway",
             "Boulderloft Pathway",
             "Brightclimb Pathway",
