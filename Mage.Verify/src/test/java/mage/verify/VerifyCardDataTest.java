@@ -103,6 +103,7 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        skipListAddName(SKIP_LIST_SUBTYPE, "ZNR", "Veteran Adventurer"); // TODO: additional types must be added by effect, not direct?
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
