@@ -167,6 +167,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murasa Brute", 195, Rarity.COMMON, mage.cards.m.MurasaBrute.class));
         cards.add(new SetCardInfo("Murasa Rootgrazer", 229, Rarity.UNCOMMON, mage.cards.m.MurasaRootgrazer.class));
+        cards.add(new SetCardInfo("Murasa Sproutling", 196, Rarity.UNCOMMON, mage.cards.m.MurasaSproutling.class));
         cards.add(new SetCardInfo("Murkwater Pathway", 260, Rarity.RARE, mage.cards.m.MurkwaterPathway.class));
         cards.add(new SetCardInfo("Nahiri, Heir of the Ancients", 230, Rarity.MYTHIC, mage.cards.n.NahiriHeirOfTheAncients.class));
         cards.add(new SetCardInfo("Needleverge Pathway", 263, Rarity.RARE, mage.cards.n.NeedlevergePathway.class));
