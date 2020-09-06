@@ -217,6 +217,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Song-Mad Ruins", 165, Rarity.UNCOMMON, mage.cards.s.SongMadRuins.class));
         cards.add(new SetCardInfo("Song-Mad Treachery", 165, Rarity.UNCOMMON, mage.cards.s.SongMadTreachery.class));
         cards.add(new SetCardInfo("Spare Supplies", 254, Rarity.COMMON, mage.cards.s.SpareSupplies.class));
+        cards.add(new SetCardInfo("Spikefield Cave", 166, Rarity.UNCOMMON, mage.cards.s.SpikefieldCave.class));
+        cards.add(new SetCardInfo("Spikefield Hazard", 166, Rarity.UNCOMMON, mage.cards.s.SpikefieldHazard.class));
         cards.add(new SetCardInfo("Spitfire Lagac", 167, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Spoils of Adventure", 237, Rarity.UNCOMMON, mage.cards.s.SpoilsOfAdventure.class));
         cards.add(new SetCardInfo("Subtle Strike", 128, Rarity.COMMON, mage.cards.s.SubtleStrike.class));
