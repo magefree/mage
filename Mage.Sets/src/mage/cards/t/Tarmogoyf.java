@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -6,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.Hint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,25 +13,22 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.EnumSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
- *
  * @author Plopman
  */
 public final class Tarmogoyf extends CardImpl {
 
     public Tarmogoyf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.LHURGOYF);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
         // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TarmogoyfEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TarmogoyfEffect()).addHint(TarmogoyfHint.instance));
     }
 
     public Tarmogoyf(final Tarmogoyf card) {
@@ -85,4 +82,31 @@ class TarmogoyfEffect extends ContinuousEffectImpl {
         return false;
     }
 
+}
+
+enum TarmogoyfHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        String types = game.getState()
+                .getPlayersInRange(ability.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(graveyard -> graveyard.getCards(game))
+                .flatMap(Collection::stream)
+                .map(MageObject::getCardType)
+                .flatMap(Collection::stream)
+                .map(CardType::toString)
+                .reduce((s1, s2) -> s1 + ", " + s2)
+                .orElse("None");
+        return "Card types in graveyards: " + types;
+    }
+
+    @Override
+    public TarmogoyfHint copy() {
+        return instance;
+    }
 }
