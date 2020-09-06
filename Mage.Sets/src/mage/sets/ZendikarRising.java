@@ -175,6 +175,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Nissa's Zendikon", 197, Rarity.COMMON, mage.cards.n.NissasZendikon.class));
         cards.add(new SetCardInfo("Omnath, Locus of Creation", 232, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfCreation.class));
         cards.add(new SetCardInfo("Orah, Skyclave Hierophant", 233, Rarity.RARE, mage.cards.o.OrahSkyclaveHierophant.class));
+        cards.add(new SetCardInfo("Paired Tactician", 31, Rarity.UNCOMMON, mage.cards.p.PairedTactician.class));
         cards.add(new SetCardInfo("Pelakka Caverns", 120, Rarity.UNCOMMON, mage.cards.p.PelakkaCaverns.class));
         cards.add(new SetCardInfo("Pelakka Predation", 120, Rarity.UNCOMMON, mage.cards.p.PelakkaPredation.class));
         cards.add(new SetCardInfo("Pillarverge Pathway", 263, Rarity.RARE, mage.cards.p.PillarvergePathway.class));
