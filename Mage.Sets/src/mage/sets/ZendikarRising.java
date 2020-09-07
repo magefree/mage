@@ -223,6 +223,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Spikefield Hazard", 166, Rarity.UNCOMMON, mage.cards.s.SpikefieldHazard.class));
         cards.add(new SetCardInfo("Spitfire Lagac", 167, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Spoils of Adventure", 237, Rarity.UNCOMMON, mage.cards.s.SpoilsOfAdventure.class));
+        cards.add(new SetCardInfo("Springmantle Cleric", 205, Rarity.UNCOMMON, mage.cards.s.SpringmantleCleric.class));
         cards.add(new SetCardInfo("Subtle Strike", 128, Rarity.COMMON, mage.cards.s.SubtleStrike.class));
         cards.add(new SetCardInfo("Sure-Footed Infiltrator", 83, Rarity.UNCOMMON, mage.cards.s.SureFootedInfiltrator.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
