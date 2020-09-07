@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -25,9 +26,10 @@ public final class FeedTheSwarm extends CardImpl {
 
     static {
         filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
         ));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public FeedTheSwarm(UUID ownerId, CardSetInfo setInfo) {
