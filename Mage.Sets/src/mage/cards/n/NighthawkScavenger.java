@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -101,7 +102,7 @@ enum NighthawkScavengerHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        String types = game
+        List<String> types = game
                 .getOpponents(ability.getControllerId())
                 .stream()
                 .map(game::getPlayer)
@@ -114,9 +115,14 @@ enum NighthawkScavengerHint implements Hint {
                 .distinct()
                 .map(CardType::toString)
                 .sorted()
-                .reduce((s1, s2) -> s1 + ", " + s2)
-                .orElse("None");
-        return "Card types in opponents' graveyards: " + types;
+                .collect(Collectors.toList());
+        String message = "" + types.size();
+        if (types.size() > 0) {
+            message += " (";
+            message += types.stream().reduce((a, b) -> a + ", " + b);
+            message += ')';
+        }
+        return "Card types in opponents' graveyards: " + message;
     }
 
     @Override
