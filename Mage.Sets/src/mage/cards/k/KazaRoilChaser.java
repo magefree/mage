@@ -5,7 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -24,6 +28,10 @@ import java.util.UUID;
  */
 public final class KazaRoilChaser extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.WIZARD);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Wizards you control", xValue);
+
     public KazaRoilChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
@@ -40,7 +48,7 @@ public final class KazaRoilChaser extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves.
-        this.addAbility(new SimpleActivatedAbility(new KazaRoilChaserEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new KazaRoilChaserEffect(), new TapSourceCost()).addHint(hint));
     }
 
     private KazaRoilChaser(final KazaRoilChaser card) {
