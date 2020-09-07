@@ -1,10 +1,5 @@
 package mage.cards.n;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -15,9 +10,9 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -30,6 +25,11 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -87,8 +87,7 @@ public final class NahiriHeirOfTheAncients extends CardImpl {
 
 class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.EQUIPMENT);
 
     NahiriHeirOfTheAncientsEffect() {
         super(Outcome.Benefit);
@@ -119,7 +118,9 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         int equipCount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-        if (tokens.isEmpty() || equipCount == 0 || !player.chooseUse(outcome, "", source, game)) {
+        if (tokens.isEmpty()
+                || equipCount == 0
+                || !player.chooseUse(outcome, "Attach an equipment to the token?", source, game)) {
             return true;
         }
         Permanent tokenCreature = tokens.get(0);
@@ -136,21 +137,10 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
             player.choose(outcome, target, source.getSourceId(), game);
             tokenCreature = game.getPermanent(target.getFirstTarget());
         }
-        Permanent equipment;
-        if (equipCount > 1) {
-            TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
-            equipment = game.getPermanent(target.getFirstTarget());
-        } else {
-            equipment = game
-                    .getBattlefield()
-                    .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
-                    .stream()
-                    .filter(Objects::nonNull)
-                    .findFirst()
-                    .orElse(null);
-        }
+        TargetPermanent target = new TargetPermanent(filter);
+        target.setNotTarget(true);
+        player.choose(outcome, target, source.getSourceId(), game);
+        Permanent equipment = game.getPermanent(target.getFirstTarget());
         if (equipment != null && tokenCreature != null) {
             equipment.attachTo(tokenCreature.getId(), game);
         }
