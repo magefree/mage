@@ -99,6 +99,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Archpriest of Iona", 5, Rarity.RARE, mage.cards.a.ArchpriestOfIona.class));
         cards.add(new SetCardInfo("Ardent Electromancer", 135, Rarity.COMMON, mage.cards.a.ArdentElectromancer.class));
         cards.add(new SetCardInfo("Ashaya, Soul of the Wild", 179, Rarity.MYTHIC, mage.cards.a.AshayaSoulOfTheWild.class));
+        cards.add(new SetCardInfo("Attended Healer", 6, Rarity.UNCOMMON, mage.cards.a.AttendedHealer.class));
         cards.add(new SetCardInfo("Bala Ged Recovery", 180, Rarity.UNCOMMON, mage.cards.b.BalaGedRecovery.class));
         cards.add(new SetCardInfo("Bala Ged Sanctuary", 180, Rarity.UNCOMMON, mage.cards.b.BalaGedSanctuary.class));
         cards.add(new SetCardInfo("Blackbloom Bog", 91, Rarity.UNCOMMON, mage.cards.b.BlackbloomBog.class));
