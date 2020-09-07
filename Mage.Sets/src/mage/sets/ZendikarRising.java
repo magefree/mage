@@ -175,6 +175,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Maul of the Skyclaves", 27, Rarity.RARE, mage.cards.m.MaulOfTheSkyclaves.class));
         cards.add(new SetCardInfo("Merfolk Falconer", 69, Rarity.UNCOMMON, mage.cards.m.MerfolkFalconer.class));
         cards.add(new SetCardInfo("Merfolk Windrobber", 70, Rarity.UNCOMMON, mage.cards.m.MerfolkWindrobber.class));
+        cards.add(new SetCardInfo("Mesa Lynx", 28, Rarity.COMMON, mage.cards.m.MesaLynx.class));
         cards.add(new SetCardInfo("Might of Murasa", 194, Rarity.COMMON, mage.cards.m.MightOfMurasa.class));
         cards.add(new SetCardInfo("Mind Carver", 113, Rarity.UNCOMMON, mage.cards.m.MindCarver.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
