@@ -117,6 +117,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Cleric of Chill Depths", 51, Rarity.COMMON, mage.cards.c.ClericOfChillDepths.class));
         cards.add(new SetCardInfo("Cleric of Life's Bond", 222, Rarity.UNCOMMON, mage.cards.c.ClericOfLifesBond.class));
         cards.add(new SetCardInfo("Cliffhaven Sell-Sword", 8, Rarity.COMMON, mage.cards.c.CliffhavenSellSword.class));
+        cards.add(new SetCardInfo("Concerted Defense", 52, Rarity.UNCOMMON, mage.cards.c.ConcertedDefense.class));
         cards.add(new SetCardInfo("Coralhelm Chronicler", 54, Rarity.RARE, mage.cards.c.CoralhelmChronicler.class));
         cards.add(new SetCardInfo("Cragcrown Pathway", 261, Rarity.RARE, mage.cards.c.CragcrownPathway.class));
         cards.add(new SetCardInfo("Cragplate Baloth", 183, Rarity.RARE, mage.cards.c.CragplateBaloth.class));
