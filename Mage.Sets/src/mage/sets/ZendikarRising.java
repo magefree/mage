@@ -183,6 +183,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Mesa Lynx", 28, Rarity.COMMON, mage.cards.m.MesaLynx.class));
         cards.add(new SetCardInfo("Might of Murasa", 194, Rarity.COMMON, mage.cards.m.MightOfMurasa.class));
         cards.add(new SetCardInfo("Mind Carver", 113, Rarity.UNCOMMON, mage.cards.m.MindCarver.class));
+        cards.add(new SetCardInfo("Mind Drain", 114, Rarity.COMMON, mage.cards.m.MindDrain.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murasa Brute", 195, Rarity.COMMON, mage.cards.m.MurasaBrute.class));
         cards.add(new SetCardInfo("Murasa Rootgrazer", 229, Rarity.UNCOMMON, mage.cards.m.MurasaRootgrazer.class));
