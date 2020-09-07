@@ -1,11 +1,15 @@
 package mage.abilities.hint.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
-import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.constants.CardType;
 import mage.game.Game;
+import mage.players.Player;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -13,11 +17,30 @@ import mage.game.Game;
 public enum DeliriumHint implements Hint {
 
     instance;
-    private static final ConditionHint hint = new ConditionHint(DeliriumCondition.instance, "4+ card types in your graveyard");
 
     @Override
     public String getText(Game game, Ability ability) {
-        return hint.getText(game, ability) + " (current: " + CardTypesInGraveyardCount.instance.calculate(game, ability, null) + ")";
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null) {
+            return null;
+        }
+        List<String> types = player
+                .getGraveyard()
+                .getCards(game)
+                .stream()
+                .map(MageObject::getCardType)
+                .flatMap(Collection::stream)
+                .distinct()
+                .map(CardType::toString)
+                .sorted()
+                .collect(Collectors.toList());
+        String message = "" + types.size();
+        if (types.size() > 0) {
+            message += " (";
+            message += types.stream().reduce((a, b) -> a + ", " + b);
+            message += ')';
+        }
+        return "Card types in your graveyard: " + message;
     }
 
     @Override
