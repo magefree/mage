@@ -31,7 +31,7 @@ public class CreateTokenEffect extends OneShotEffect {
     private UUID lastAddedTokenId;
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
 
-    public CreateTokenEffect(Token token) {
+    publicCreateTokenEffect(Token token) {
         this(token, StaticValue.get(1));
     }
 
