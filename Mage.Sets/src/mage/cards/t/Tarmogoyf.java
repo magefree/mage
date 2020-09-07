@@ -99,7 +99,9 @@ enum TarmogoyfHint implements Hint {
                 .flatMap(Collection::stream)
                 .map(MageObject::getCardType)
                 .flatMap(Collection::stream)
+                .distinct()
                 .map(CardType::toString)
+                .sorted()
                 .reduce((s1, s2) -> s1 + ", " + s2)
                 .orElse("None");
         return "Card types in graveyards: " + types;
