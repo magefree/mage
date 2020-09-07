@@ -95,6 +95,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Akoum Warrior", 134, Rarity.UNCOMMON, mage.cards.a.AkoumWarrior.class));
         cards.add(new SetCardInfo("Angelheart Protector", 3, Rarity.COMMON, mage.cards.a.AngelheartProtector.class));
         cards.add(new SetCardInfo("Anticognition", 45, Rarity.COMMON, mage.cards.a.Anticognition.class));
+        cards.add(new SetCardInfo("Archon of Emeria", 4, Rarity.RARE, mage.cards.a.ArchonOfEmeria.class));
         cards.add(new SetCardInfo("Archpriest of Iona", 5, Rarity.RARE, mage.cards.a.ArchpriestOfIona.class));
         cards.add(new SetCardInfo("Ardent Electromancer", 135, Rarity.COMMON, mage.cards.a.ArdentElectromancer.class));
         cards.add(new SetCardInfo("Ashaya, Soul of the Wild", 179, Rarity.MYTHIC, mage.cards.a.AshayaSoulOfTheWild.class));
