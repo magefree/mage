@@ -19,6 +19,13 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.prefs.Preferences;
@@ -26,7 +33,7 @@ import java.util.prefs.Preferences;
 public final class CardImageUtils {
 
     private static final HashMap<CardDownloadData, String> pathCache = new HashMap<>();
-    private static final Logger log = Logger.getLogger(CardImageUtils.class);
+    private static final Logger LOGGER = Logger.getLogger(CardImageUtils.class);
 
     /**
      * @param card
@@ -54,7 +61,7 @@ public final class CardImageUtils {
 
             //log.warn("Token image file not found. Set: " + card.getSet() + " Token Set Code: " + card.getTokenSetCode() + " Name: " + card.getName() + " File path: " + getTokenImagePath(card));
         } else {
-            log.warn("Trying to get token path for non token card. Set: " + card.getSet() + " Set Code: " + card.getTokenSetCode() + " Name: " + card.getName());
+            LOGGER.warn("Trying to get token path for non token card. Set: " + card.getSet() + " Set Code: " + card.getTokenSetCode() + " Name: " + card.getName());
         }
         return null;
     }
@@ -295,5 +302,57 @@ public final class CardImageUtils {
             doc = Jsoup.parse(String.valueOf(tmp));
         }
         return doc;
+    }
+
+    public static void checkAndFixImageFiles() {
+        // search broken files and delete it (zero size files)
+        // search temp files and delete it (.tmp files from zip library)
+        Path rootPath = new File(CardImageUtils.getImagesDir()).toPath();
+        Collection<Path> brokenFilesList = new ArrayList<>();
+        Collection<Path> tempFilesList = new ArrayList<>();
+        try {
+            Files.walkFileTree(rootPath, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    // 1. broken files (need zero size files): delete with warning
+                    if (attrs.size() == 0) {
+                        brokenFilesList.add(file);
+                        return FileVisitResult.CONTINUE;
+                    }
+
+                    // 2. temp files delete without warning
+                    if (file.toString().endsWith(".tmp")) {
+                        tempFilesList.add(file);
+                    }
+
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            LOGGER.error("Can't load files list from images folder: " + rootPath.toAbsolutePath().toString(), e);
+        }
+
+        // temp files must be deleted without errors
+        for (Path tempFile : tempFilesList) {
+            try {
+                Files.delete(tempFile);
+            } catch (Throwable e) {
+                // ignore any error (e.g. it opened by xmage app)
+            }
+        }
+
+        // broken files must be informed
+        if (!brokenFilesList.isEmpty()) {
+            LOGGER.warn("Images: found " + brokenFilesList.size() + " broken files. Trying to fix it...");
+            for (Path brokenFile : brokenFilesList) {
+                try {
+                    Files.delete(brokenFile);
+                } catch (Throwable e) {
+                    // stop clean on any error
+                    LOGGER.error("Images check: ERROR, can't delete broken file: " + brokenFile.toAbsolutePath().toString(), e);
+                    break;
+                }
+            }
+        }
     }
 }

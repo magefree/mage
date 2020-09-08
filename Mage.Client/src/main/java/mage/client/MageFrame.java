@@ -55,6 +55,7 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
+import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.imageio.ImageIO;
@@ -235,10 +236,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         RepositoryUtil.bootstrapLocalDb();
         // re-create database on empty (e.g. after new build cleaned db on startup)
         if (RepositoryUtil.CARD_DB_RECREATE_BY_CLIENT_SIDE && RepositoryUtil.isDatabaseEmpty()) {
-            LOGGER.info("DB: creating cards database");
+            LOGGER.info("DB: creating cards database...");
             CardScanner.scan();
             LOGGER.info("Done.");
         }
+
+        // IMAGES CHECK
+        LOGGER.info("Images: search broken files...");
+        CardImageUtils.checkAndFixImageFiles();
 
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
             RateCard.bootstrapCardsAndRatings();
