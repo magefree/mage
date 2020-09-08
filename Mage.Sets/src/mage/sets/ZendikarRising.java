@@ -190,6 +190,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Kabira Plateau", 19, Rarity.UNCOMMON, mage.cards.k.KabiraPlateau.class));
         cards.add(new SetCardInfo("Kabira Takedown", 19, Rarity.UNCOMMON, mage.cards.k.KabiraTakedown.class));
         cards.add(new SetCardInfo("Kargan Intimidator", 145, Rarity.RARE, mage.cards.k.KarganIntimidator.class));
+        cards.add(new SetCardInfo("Kargan Warleader", 224, Rarity.UNCOMMON, mage.cards.k.KarganWarleader.class));
         cards.add(new SetCardInfo("Kaza, Roil Chaser", 225, Rarity.RARE, mage.cards.k.KazaRoilChaser.class));
         cards.add(new SetCardInfo("Kazandu Nectarpot", 190, Rarity.COMMON, mage.cards.k.KazanduNectarpot.class));
         cards.add(new SetCardInfo("Kazandu Stomper", 191, Rarity.COMMON, mage.cards.k.KazanduStomper.class));
