@@ -143,6 +143,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Dauntless Survivor", 184, Rarity.COMMON, mage.cards.d.DauntlessSurvivor.class));
         cards.add(new SetCardInfo("Dauntless Unity", 9, Rarity.COMMON, mage.cards.d.DauntlessUnity.class));
         cards.add(new SetCardInfo("Deadly Alliance", 96, Rarity.COMMON, mage.cards.d.DeadlyAlliance.class));
+        cards.add(new SetCardInfo("Deliberate", 56, Rarity.COMMON, mage.cards.d.Deliberate.class));
         cards.add(new SetCardInfo("Demon's Disciple", 97, Rarity.UNCOMMON, mage.cards.d.DemonsDisciple.class));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drana's Silencer", 99, Rarity.COMMON, mage.cards.d.DranasSilencer.class));
