@@ -168,6 +168,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Mirror Mage", 63, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
         cards.add(new SetCardInfo("Joraga Visionary", 188, Rarity.COMMON, mage.cards.j.JoragaVisionary.class));
         cards.add(new SetCardInfo("Journey to Oblivion", 17, Rarity.UNCOMMON, mage.cards.j.JourneyToOblivion.class));
+        cards.add(new SetCardInfo("Jwari Disruption", 64, Rarity.UNCOMMON, mage.cards.j.JwariDisruption.class));
+        cards.add(new SetCardInfo("Jwari Ruins", 64, Rarity.UNCOMMON, mage.cards.j.JwariRuins.class));
         cards.add(new SetCardInfo("Kabira Outrider", 18, Rarity.COMMON, mage.cards.k.KabiraOutrider.class));
         cards.add(new SetCardInfo("Kabira Plateau", 19, Rarity.UNCOMMON, mage.cards.k.KabiraPlateau.class));
         cards.add(new SetCardInfo("Kabira Takedown", 19, Rarity.UNCOMMON, mage.cards.k.KabiraTakedown.class));
