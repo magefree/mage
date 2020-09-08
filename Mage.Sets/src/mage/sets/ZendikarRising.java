@@ -210,6 +210,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Nahiri's Lithoforming", 151, Rarity.RARE, mage.cards.n.NahirisLithoforming.class));
         cards.add(new SetCardInfo("Nahiri, Heir of the Ancients", 230, Rarity.MYTHIC, mage.cards.n.NahiriHeirOfTheAncients.class));
         cards.add(new SetCardInfo("Needleverge Pathway", 263, Rarity.RARE, mage.cards.n.NeedlevergePathway.class));
+        cards.add(new SetCardInfo("Negate", 71, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nighthawk Scavenger", 115, Rarity.RARE, mage.cards.n.NighthawkScavenger.class));
         cards.add(new SetCardInfo("Nimana Skitter-Sneak", 116, Rarity.COMMON, mage.cards.n.NimanaSkitterSneak.class));
         cards.add(new SetCardInfo("Nissa's Zendikon", 197, Rarity.COMMON, mage.cards.n.NissasZendikon.class));

@@ -41,7 +41,7 @@ public final class ExpeditionChampion extends CardImpl {
         // Expedition Champion gets +2/+0 as long as you control another Warrior.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
-                condition, "{this} gets +2/+0 as long as you control another warrior"
+                condition, "{this} gets +2/+0 as long as you control another Warrior"
         )));
     }
 
