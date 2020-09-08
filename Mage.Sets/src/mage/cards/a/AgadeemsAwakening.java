@@ -33,6 +33,7 @@ public final class AgadeemsAwakening extends CardImpl {
                 "return from your graveyard to the battlefield any number of target creature cards " +
                         "that each have a different converted mana cost X or less"
         ));
+        this.getSpellAbility().setTargetAdjuster(AgadeemsAwakeningAdjuster.instance);
     }
 
     private AgadeemsAwakening(final AgadeemsAwakening card) {
