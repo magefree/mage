@@ -181,6 +181,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Kargan Intimidator", 145, Rarity.RARE, mage.cards.k.KarganIntimidator.class));
         cards.add(new SetCardInfo("Kaza, Roil Chaser", 225, Rarity.RARE, mage.cards.k.KazaRoilChaser.class));
         cards.add(new SetCardInfo("Kazandu Nectarpot", 190, Rarity.COMMON, mage.cards.k.KazanduNectarpot.class));
+        cards.add(new SetCardInfo("Kazandu Stomper", 191, Rarity.COMMON, mage.cards.k.KazanduStomper.class));
         cards.add(new SetCardInfo("Kazuul's Cliffs", 146, Rarity.UNCOMMON, mage.cards.k.KazuulsCliffs.class));
         cards.add(new SetCardInfo("Kazuul's Fury", 146, Rarity.UNCOMMON, mage.cards.k.KazuulsFury.class));
         cards.add(new SetCardInfo("Khalni Ambush", 192, Rarity.UNCOMMON, mage.cards.k.KhalniAmbush.class));
