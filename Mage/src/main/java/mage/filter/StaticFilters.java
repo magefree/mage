@@ -441,8 +441,22 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A.add(
-                Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        CardType.PLANESWALKER.getPredicate()
+                ));
         FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterPermanent("creature or planeswalker");
+
+    static {
+        FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.add(
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        CardType.PLANESWALKER.getPredicate()
+                ));
+        FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
