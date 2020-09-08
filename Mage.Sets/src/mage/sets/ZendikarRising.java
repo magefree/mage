@@ -165,6 +165,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Highborn Vampire", 107, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
         cards.add(new SetCardInfo("Inordinate Rage", 144, Rarity.COMMON, mage.cards.i.InordinateRage.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 186, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
+        cards.add(new SetCardInfo("Inscription of Insight", 61, Rarity.RARE, mage.cards.i.InscriptionOfInsight.class));
         cards.add(new SetCardInfo("Inscription of Ruin", 108, Rarity.RARE, mage.cards.i.InscriptionOfRuin.class));
         cards.add(new SetCardInfo("Into the Roil", 62, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Iridescent Hornbeetle", 187, Rarity.UNCOMMON, mage.cards.i.IridescentHornbeetle.class));
