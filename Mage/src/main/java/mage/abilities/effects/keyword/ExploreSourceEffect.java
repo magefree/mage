@@ -1,6 +1,5 @@
 package mage.abilities.effects.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -14,8 +13,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801, JayDi85
  */
 public class ExploreSourceEffect extends OneShotEffect {
@@ -61,6 +61,7 @@ public class ExploreSourceEffect extends OneShotEffect {
     public ExploreSourceEffect(boolean showAbilityHint, String whosExplores) {
         super(Outcome.Benefit);
 
+        this.showAbilityHint = showAbilityHint;
         if (whosExplores != null) {
             this.sourceName = whosExplores;
         }
@@ -71,7 +72,6 @@ public class ExploreSourceEffect extends OneShotEffect {
         super(effect);
         this.showAbilityHint = effect.showAbilityHint;
         this.sourceName = effect.sourceName;
-        setText();
     }
 
     private void setText() {

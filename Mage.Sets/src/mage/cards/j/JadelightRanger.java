@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,8 +9,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JadelightRanger extends CardImpl {
@@ -26,7 +25,7 @@ public final class JadelightRanger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Jadelight Ranger enters the battlefield, it explores, then it explores again.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect().setText("it explores"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect(false, "it"), false);
         ability.addEffect(new ExploreSourceEffect().setText(", then it explores again. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard. Then repeat this process.) "));
         this.addAbility(ability);
     }
