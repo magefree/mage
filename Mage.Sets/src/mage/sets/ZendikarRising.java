@@ -282,6 +282,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Sneaking Guide", 164, Rarity.COMMON, mage.cards.s.SneakingGuide.class));
         cards.add(new SetCardInfo("Song-Mad Ruins", 165, Rarity.UNCOMMON, mage.cards.s.SongMadRuins.class));
         cards.add(new SetCardInfo("Song-Mad Treachery", 165, Rarity.UNCOMMON, mage.cards.s.SongMadTreachery.class));
+        cards.add(new SetCardInfo("Soul Shatter", 127, Rarity.RARE, mage.cards.s.SoulShatter.class));
         cards.add(new SetCardInfo("Spare Supplies", 254, Rarity.COMMON, mage.cards.s.SpareSupplies.class));
         cards.add(new SetCardInfo("Spikefield Cave", 166, Rarity.UNCOMMON, mage.cards.s.SpikefieldCave.class));
         cards.add(new SetCardInfo("Spikefield Hazard", 166, Rarity.UNCOMMON, mage.cards.s.SpikefieldHazard.class));
