@@ -248,6 +248,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Roiling Regrowth", 201, Rarity.UNCOMMON, mage.cards.r.RoilingRegrowth.class));
         cards.add(new SetCardInfo("Ruin Crab", 75, Rarity.UNCOMMON, mage.cards.r.RuinCrab.class));
         cards.add(new SetCardInfo("Scale the Heights", 202, Rarity.COMMON, mage.cards.s.ScaleTheHeights.class));
+        cards.add(new SetCardInfo("Scavenged Blade", 157, Rarity.COMMON, mage.cards.s.ScavengedBlade.class));
         cards.add(new SetCardInfo("Scorch Rider", 158, Rarity.COMMON, mage.cards.s.ScorchRider.class));
         cards.add(new SetCardInfo("Scute Swarm", 203, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Sea Gate Banneret", 36, Rarity.COMMON, mage.cards.s.SeaGateBanneret.class));
