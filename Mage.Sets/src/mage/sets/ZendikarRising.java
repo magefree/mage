@@ -121,6 +121,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Brushfire Elemental", 221, Rarity.UNCOMMON, mage.cards.b.BrushfireElemental.class));
         cards.add(new SetCardInfo("Bubble Snare", 47, Rarity.COMMON, mage.cards.b.BubbleSnare.class));
         cards.add(new SetCardInfo("Canopy Baloth", 182, Rarity.COMMON, mage.cards.c.CanopyBaloth.class));
+        cards.add(new SetCardInfo("Canyon Jerboa", 7, Rarity.UNCOMMON, mage.cards.c.CanyonJerboa.class));
         cards.add(new SetCardInfo("Cascade Seer", 48, Rarity.COMMON, mage.cards.c.CascadeSeer.class));
         cards.add(new SetCardInfo("Cinderclasm", 136, Rarity.UNCOMMON, mage.cards.c.Cinderclasm.class));
         cards.add(new SetCardInfo("Clearwater Pathway", 260, Rarity.RARE, mage.cards.c.ClearwaterPathway.class));
