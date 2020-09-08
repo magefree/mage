@@ -271,6 +271,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Shatterskull, the Hammer Pass", 161, Rarity.MYTHIC, mage.cards.s.ShatterskullTheHammerPass.class));
         cards.add(new SetCardInfo("Shell Shield", 79, Rarity.COMMON, mage.cards.s.ShellShield.class));
         cards.add(new SetCardInfo("Shepherd of Heroes", 38, Rarity.COMMON, mage.cards.s.ShepherdOfHeroes.class));
+        cards.add(new SetCardInfo("Silundi Isle", 80, Rarity.UNCOMMON, mage.cards.s.SilundiIsle.class));
+        cards.add(new SetCardInfo("Silundi Vision", 80, Rarity.UNCOMMON, mage.cards.s.SilundiVision.class));
         cards.add(new SetCardInfo("Skyclave Basilica", 40, Rarity.UNCOMMON, mage.cards.s.SkyclaveBasilica.class));
         cards.add(new SetCardInfo("Skyclave Cleric", 40, Rarity.UNCOMMON, mage.cards.s.SkyclaveCleric.class));
         cards.add(new SetCardInfo("Skyclave Geopede", 163, Rarity.UNCOMMON, mage.cards.s.SkyclaveGeopede.class));
