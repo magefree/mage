@@ -116,6 +116,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Attended Healer", 6, Rarity.UNCOMMON, mage.cards.a.AttendedHealer.class));
         cards.add(new SetCardInfo("Bala Ged Recovery", 180, Rarity.UNCOMMON, mage.cards.b.BalaGedRecovery.class));
         cards.add(new SetCardInfo("Bala Ged Sanctuary", 180, Rarity.UNCOMMON, mage.cards.b.BalaGedSanctuary.class));
+        cards.add(new SetCardInfo("Beyeen Coast", 46, Rarity.UNCOMMON, mage.cards.b.BeyeenCoast.class));
+        cards.add(new SetCardInfo("Beyeen Veil", 46, Rarity.UNCOMMON, mage.cards.b.BeyeenVeil.class));
         cards.add(new SetCardInfo("Blackbloom Bog", 91, Rarity.UNCOMMON, mage.cards.b.BlackbloomBog.class));
         cards.add(new SetCardInfo("Blackbloom Rogue", 91, Rarity.UNCOMMON, mage.cards.b.BlackbloomRogue.class));
         cards.add(new SetCardInfo("Blood Beckoning", 92, Rarity.COMMON, mage.cards.b.BloodBeckoning.class));
