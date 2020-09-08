@@ -38,6 +38,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean isRandom = false;
     private String chooseText = null;
     private boolean allWhenKicked = false;
+    private boolean resetEachTurn = false;
+    private int turnNum = 0;
 
     public Modes() {
         this.currentMode = new Mode();
@@ -71,6 +73,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
         this.isRandom = modes.isRandom;
         this.chooseText = modes.chooseText;
+        this.allWhenKicked = modes.allWhenKicked;
+        this.resetEachTurn = modes.resetEachTurn;
+        this.turnNum = modes.turnNum;
         if (modes.getSelectedModes().isEmpty()) {
             this.currentMode = values().iterator().next();
         } else {
@@ -217,6 +222,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public boolean choose(Game game, Ability source) {
+        if (this.isResetEachTurn()) {
+            if (this.turnNum != game.getTurnNum()) {
+                this.clearAlreadySelectedModes(source, game);
+                this.turnNum = game.getTurnNum();
+            }
+        }
         if (this.allWhenKicked && KickedCondition.instance.apply(game, source)) {
             this.setMinModes(0);
             this.setMaxModes(3);
@@ -332,6 +343,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         }
     }
 
+    private void clearAlreadySelectedModes(Ability source, Game game) {
+        for (UUID modeId : getSelectedModes()) {
+            String key = getKey(source, game, modeId);
+            game.getState().setValue(key, false);
+        }
+    }
+
     /**
      * Adds a mode as selected. If the mode is already selected, it copies the
      * mode and adds it to the duplicate modes
@@ -436,6 +454,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (isEachModeOnlyOnce()) {
             sb.append(" that hasn't been chosen");
         }
+        if (isResetEachTurn()) {
+            sb.append(" this turn");
+        }
 
         if (isEachModeMoreThanOnce()) {
             sb.append(". You may choose the same mode more than once.");
@@ -487,6 +508,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public void setAllWhenKicked(boolean allWhenKicked) {
         this.allWhenKicked = allWhenKicked;
+    }
+
+    public boolean isResetEachTurn() {
+        return resetEachTurn;
+    }
+
+    public void setResetEachTurn(boolean resetEachTurn) {
+        this.resetEachTurn = resetEachTurn;
     }
 
     public void setChooseText(String chooseText) {
