@@ -146,6 +146,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Drana's Silencer", 99, Rarity.COMMON, mage.cards.d.DranasSilencer.class));
         cards.add(new SetCardInfo("Dreadwurm", 100, Rarity.COMMON, mage.cards.d.Dreadwurm.class));
         cards.add(new SetCardInfo("Emeria Captain", 11, Rarity.UNCOMMON, mage.cards.e.EmeriaCaptain.class));
+        cards.add(new SetCardInfo("Emeria's Call", 12, Rarity.MYTHIC, mage.cards.e.EmeriasCall.class));
+        cards.add(new SetCardInfo("Emeria, Shattered Skyclave", 12, Rarity.MYTHIC, mage.cards.e.EmeriaShatteredSkyclave.class));
         cards.add(new SetCardInfo("Expedition Champion", 138, Rarity.COMMON, mage.cards.e.ExpeditionChampion.class));
         cards.add(new SetCardInfo("Expedition Diviner", 57, Rarity.COMMON, mage.cards.e.ExpeditionDiviner.class));
         cards.add(new SetCardInfo("Expedition Skulker", 101, Rarity.COMMON, mage.cards.e.ExpeditionSkulker.class));
