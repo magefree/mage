@@ -258,6 +258,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Sejiri Glacier", 37, Rarity.UNCOMMON, mage.cards.s.SejiriGlacier.class));
         cards.add(new SetCardInfo("Sejiri Shelter", 37, Rarity.UNCOMMON, mage.cards.s.SejiriShelter.class));
         cards.add(new SetCardInfo("Shadow Stinger", 123, Rarity.UNCOMMON, mage.cards.s.ShadowStinger.class));
+        cards.add(new SetCardInfo("Shadows' Verdict", 124, Rarity.RARE, mage.cards.s.ShadowsVerdict.class));
         cards.add(new SetCardInfo("Shell Shield", 79, Rarity.COMMON, mage.cards.s.ShellShield.class));
         cards.add(new SetCardInfo("Shepherd of Heroes", 38, Rarity.COMMON, mage.cards.s.ShepherdOfHeroes.class));
         cards.add(new SetCardInfo("Skyclave Basilica", 40, Rarity.UNCOMMON, mage.cards.s.SkyclaveBasilica.class));
