@@ -117,6 +117,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         instance.uiDialog.showDialog();
         instance.uiDialog.dispose();
         instance.setNeedCancel(true);
+
+        // IMAGES CHECK (download process can broke some files, so fix it here too)
+        // code executes on cancel/close download dialog (but not executes on app's close -- it's ok)
+        logger.info("Images: search broken files...");
+        CardImageUtils.checkAndFixImageFiles();
     }
 
     public boolean isNeedCancel() {
