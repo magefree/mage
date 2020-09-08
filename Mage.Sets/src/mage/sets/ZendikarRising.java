@@ -196,6 +196,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Lullmage's Domination", 66, Rarity.UNCOMMON, mage.cards.l.LullmagesDomination.class));
         cards.add(new SetCardInfo("Lullmage's Familiar", 227, Rarity.UNCOMMON, mage.cards.l.LullmagesFamiliar.class));
         cards.add(new SetCardInfo("Luminarch Aspirant", 24, Rarity.RARE, mage.cards.l.LuminarchAspirant.class));
+        cards.add(new SetCardInfo("Maddening Cacophony", 67, Rarity.RARE, mage.cards.m.MaddeningCacophony.class));
         cards.add(new SetCardInfo("Magmatic Channeler", 148, Rarity.RARE, mage.cards.m.MagmaticChanneler.class));
         cards.add(new SetCardInfo("Makindi Mesas", 26, Rarity.UNCOMMON, mage.cards.m.MakindiMesas.class));
         cards.add(new SetCardInfo("Makindi Ox", 25, Rarity.COMMON, mage.cards.m.MakindiOx.class));
