@@ -228,6 +228,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Ondu Inversion", 30, Rarity.RARE, mage.cards.o.OnduInversion.class));
         cards.add(new SetCardInfo("Ondu Skyruins", 30, Rarity.RARE, mage.cards.o.OnduSkyruins.class));
         cards.add(new SetCardInfo("Orah, Skyclave Hierophant", 233, Rarity.RARE, mage.cards.o.OrahSkyclaveHierophant.class));
+        cards.add(new SetCardInfo("Oran-Rief Ooze", 198, Rarity.RARE, mage.cards.o.OranRiefOoze.class));
         cards.add(new SetCardInfo("Paired Tactician", 31, Rarity.UNCOMMON, mage.cards.p.PairedTactician.class));
         cards.add(new SetCardInfo("Pelakka Caverns", 120, Rarity.UNCOMMON, mage.cards.p.PelakkaCaverns.class));
         cards.add(new SetCardInfo("Pelakka Predation", 120, Rarity.UNCOMMON, mage.cards.p.PelakkaPredation.class));
