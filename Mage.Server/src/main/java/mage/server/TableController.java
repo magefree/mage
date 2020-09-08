@@ -975,7 +975,7 @@ public class TableController {
             if (!(table.getState() == TableState.WAITING || table.getState() == TableState.STARTING || table.getState() == TableState.READY_TO_START)) {
                 if (match == null) {
                     logger.warn("- Match table with no match:");
-                    logger.warn("-- matchId:" + match.getId() + " , table : " + table.getId());
+                    logger.warn("-- match: null , table : " + table.getId());
                     // return false;
                 } else if (match.isDoneSideboarding() && match.getGame() == null) {
                     // no sideboarding and not active game -> match seems to hang (maybe the Draw bug)

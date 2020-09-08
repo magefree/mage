@@ -15,7 +15,7 @@ import org.mage.test.serverside.base.CardTestOathbreaker3PlayersFFA;
  * @author LevelX2
  */
 
-public class BasicSaheekiSublimeArtificerTest extends CardTestOathbreaker3PlayersFFA {
+public class BasicSaheeliSublimeArtificerTest extends CardTestOathbreaker3PlayersFFA {
 
     /**
      * Check that if a player left the game, it's commander is also removed
@@ -35,7 +35,7 @@ public class BasicSaheekiSublimeArtificerTest extends CardTestOathbreaker3Player
         assertCommandZoneCount(playerA, "Thoughtcast", 0);
 
     }
-    
+
     @Test
     public void castCommanderTest() {
 
@@ -44,18 +44,18 @@ public class BasicSaheekiSublimeArtificerTest extends CardTestOathbreaker3Player
 
         // Planeswalker 5 Loyality Counter
         // Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.
-        // -2: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, 
-        // except it's an artifact in addition to its other types.        
+        // -2: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn,
+        // except it's an artifact in addition to its other types.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saheeli, Sublime Artificer"); // Planeswalker 5  {1}{U/R}{U/R}
 
         // Affinity for artifacts
-        // Draw two cards.        
+        // Draw two cards.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtcast"); // Sorcery {4}{U}
-        
+
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
 
-        
+
         assertCommandZoneCount(playerB, "Saheeli, Sublime Artificer", 1);
         assertCommandZoneCount(playerB, "Thoughtcast", 1);
         assertCommandZoneCount(playerC, "Saheeli, Sublime Artificer", 1);
