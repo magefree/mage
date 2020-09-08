@@ -253,6 +253,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Scute Swarm", 203, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Sea Gate Banneret", 36, Rarity.COMMON, mage.cards.s.SeaGateBanneret.class));
         cards.add(new SetCardInfo("Sea Gate Colossus", 251, Rarity.COMMON, mage.cards.s.SeaGateColossus.class));
+        cards.add(new SetCardInfo("Sea Gate Restoration", 76, Rarity.MYTHIC, mage.cards.s.SeaGateRestoration.class));
+        cards.add(new SetCardInfo("Sea Gate, Reborn", 76, Rarity.MYTHIC, mage.cards.s.SeaGateReborn.class));
         cards.add(new SetCardInfo("Sejiri Glacier", 37, Rarity.UNCOMMON, mage.cards.s.SejiriGlacier.class));
         cards.add(new SetCardInfo("Sejiri Shelter", 37, Rarity.UNCOMMON, mage.cards.s.SejiriShelter.class));
         cards.add(new SetCardInfo("Shadow Stinger", 123, Rarity.UNCOMMON, mage.cards.s.ShadowStinger.class));
