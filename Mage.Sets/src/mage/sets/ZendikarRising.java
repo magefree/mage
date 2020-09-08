@@ -275,6 +275,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Spitfire Lagac", 167, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Spoils of Adventure", 237, Rarity.UNCOMMON, mage.cards.s.SpoilsOfAdventure.class));
         cards.add(new SetCardInfo("Springmantle Cleric", 205, Rarity.UNCOMMON, mage.cards.s.SpringmantleCleric.class));
+        cards.add(new SetCardInfo("Squad Commander", 41, Rarity.RARE, mage.cards.s.SquadCommander.class));
         cards.add(new SetCardInfo("Stonework Packbeast", 255, Rarity.COMMON, mage.cards.s.StoneworkPackbeast.class));
         cards.add(new SetCardInfo("Subtle Strike", 128, Rarity.COMMON, mage.cards.s.SubtleStrike.class));
         cards.add(new SetCardInfo("Sure-Footed Infiltrator", 83, Rarity.UNCOMMON, mage.cards.s.SureFootedInfiltrator.class));
