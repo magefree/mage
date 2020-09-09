@@ -258,12 +258,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     protected void addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            }
-        });
+        FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
         long startTime = System.nanoTime();
         pool.execute(task);
         try {

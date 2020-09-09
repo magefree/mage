@@ -622,11 +622,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
         String languageName = languageAliases.get(preferredLanguage);
         Map<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
-        if (localizedLanguageIds.containsKey(languageName)) {
-            return localizedLanguageIds.get(languageName);
-        } else {
-            return multiverseId;
-        }
+        return localizedLanguageIds.getOrDefault(languageName, multiverseId);
     }
 
     private Map<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {

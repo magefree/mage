@@ -606,48 +606,45 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         for (TreeOptimizer optimizer : optimizers) {
             optimizer.optimize(game, allActions);
         }
-        Collections.sort(allActions, new Comparator<Ability>() {
-            @Override
-            public int compare(Ability ability1, Ability ability2) {
-                String rule1 = ability1.toString();
-                String rule2 = ability2.toString();
+        allActions.sort((ability1, ability2) -> {
+            String rule1 = ability1.toString();
+            String rule2 = ability2.toString();
 
-                // pass
-                boolean pass1 = rule1.startsWith("Pass");
-                boolean pass2 = rule2.startsWith("Pass");
-                if (pass1 != pass2) {
-                    if (pass1) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
+            // pass
+            boolean pass1 = rule1.startsWith("Pass");
+            boolean pass2 = rule2.startsWith("Pass");
+            if (pass1 != pass2) {
+                if (pass1) {
+                    return 1;
+                } else {
+                    return -1;
                 }
-
-                // play
-                boolean play1 = rule1.startsWith("Play");
-                boolean play2 = rule2.startsWith("Play");
-                if (play1 != play2) {
-                    if (play1) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                }
-
-                // cast
-                boolean cast1 = rule1.startsWith("Cast");
-                boolean cast2 = rule2.startsWith("Cast");
-                if (cast1 != cast2) {
-                    if (cast1) {
-                        return -1;
-                    } else {
-                        return 1;
-                    }
-                }
-
-                // default
-                return ability1.getRule().compareTo(ability2.getRule());
             }
+
+            // play
+            boolean play1 = rule1.startsWith("Play");
+            boolean play2 = rule2.startsWith("Play");
+            if (play1 != play2) {
+                if (play1) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+
+            // cast
+            boolean cast1 = rule1.startsWith("Cast");
+            boolean cast2 = rule2.startsWith("Cast");
+            if (cast1 != cast2) {
+                if (cast1) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+
+            // default
+            return ability1.getRule().compareTo(ability2.getRule());
         });
     }
 

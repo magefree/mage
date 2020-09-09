@@ -1566,23 +1566,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game);
         if (manaAbilities.size() > 1) {
             // Sort mana abilities by number of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
-            Collections.sort(manaAbilities, new Comparator<ActivatedManaAbilityImpl>() {
-                @Override
-                public int compare(ActivatedManaAbilityImpl a1, ActivatedManaAbilityImpl a2) {
-                    int a1Max = 0;
-                    for (Mana netMana : a1.getNetMana(game)) {
-                        if (netMana.count() > a1Max) {
-                            a1Max = netMana.count();
-                        }
+            manaAbilities.sort((a1, a2) -> {
+                int a1Max = 0;
+                for (Mana netMana : a1.getNetMana(game)) {
+                    if (netMana.count() > a1Max) {
+                        a1Max = netMana.count();
                     }
-                    int a2Max = 0;
-                    for (Mana netMana : a2.getNetMana(game)) {
-                        if (netMana.count() > a2Max) {
-                            a2Max = netMana.count();
-                        }
-                    }
-                    return a2Max - a1Max;
                 }
+                int a2Max = 0;
+                for (Mana netMana : a2.getNetMana(game)) {
+                    if (netMana.count() > a2Max) {
+                        a2Max = netMana.count();
+                    }
+                }
+                return a2Max - a1Max;
             });
         }
         return manaAbilities;
@@ -1634,12 +1631,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private List<MageObject> sortByValue(Map<MageObject, Integer> map) {
         List<Entry<MageObject, Integer>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, new Comparator<Entry<MageObject, Integer>>() {
-            @Override
-            public int compare(Entry<MageObject, Integer> o1, Entry<MageObject, Integer> o2) {
-                return (o1.getValue().compareTo(o2.getValue()));
-            }
-        });
+        list.sort(Entry.comparingByValue());
         List<MageObject> result = new ArrayList<>();
         for (Entry<MageObject, Integer> entry : list) {
             result.add(entry.getKey());
@@ -2058,13 +2050,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // sort card pool by top score
         List<Card> sortedCards = new ArrayList<>(cardPool);
-        Collections.sort(sortedCards, new Comparator<Card>() {
-            @Override
-            public int compare(Card o1, Card o2) {
-                Integer score1 = RateCard.rateCard(o1, colors);
-                Integer score2 = RateCard.rateCard(o2, colors);
-                return score2.compareTo(score1);
-            }
+        sortedCards.sort((o1, o2) -> {
+            Integer score1 = RateCard.rateCard(o1, colors);
+            Integer score2 = RateCard.rateCard(o2, colors);
+            return score2.compareTo(score1);
         });
 
         // get top cards
@@ -2306,16 +2295,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
-            Collections.sort(pickedCards, new Comparator<PickedCard>() {
-                @Override
-                public int compare(PickedCard o1, PickedCard o2) {
-                    if (o1.score.equals(o2.score)) {
-                        Integer i1 = RateCard.getColorManaCount(o1.card);
-                        Integer i2 = RateCard.getColorManaCount(o2.card);
-                        return i2.compareTo(i1);
-                    }
-                    return o2.score.compareTo(o1.score);
+            pickedCards.sort((o1, o2) -> {
+                if (o1.score.equals(o2.score)) {
+                    Integer i1 = RateCard.getColorManaCount(o1.card);
+                    Integer i2 = RateCard.getColorManaCount(o2.card);
+                    return i2.compareTo(i1);
                 }
+                return o2.score.compareTo(o1.score);
             });
             Set<String> chosenSymbols = new HashSet<>();
             for (PickedCard picked : pickedCards) {
@@ -2370,10 +2356,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         for (Permanent creature : creatures) {
             int potential = combatPotential(creature, game);
             if (potential > 0 && creature.getPower().getValue() > 0) {
-                List<Permanent> l = attackers.get(potential);
-                if (l == null) {
-                    attackers.put(potential, l = new ArrayList<>());
-                }
+                List<Permanent> l = attackers.computeIfAbsent(potential, k -> new ArrayList<>());
                 l.add(creature);
             }
         }
@@ -2570,14 +2553,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             filterCopy.add(new ControllerIdPredicate(playerId));
             threats = game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game);
         }
-        Iterator<Permanent> it = threats.iterator();
-        while (it.hasNext()) { // remove permanents already targeted
-            Permanent test = it.next();
-            if (targets.contains(test.getId()) || (playerId != null && !test.getControllerId().equals(playerId))) {
-                it.remove();
-            }
-        }
-        Collections.sort(threats, new PermanentComparator(game));
+        // remove permanents already targeted
+        threats.removeIf(test -> targets.contains(test.getId()) || (playerId != null && !test.getControllerId().equals(playerId)));
+        threats.sort(new PermanentComparator(game));
         if (mostValueableGoFirst) {
             Collections.reverse(threats);
         }
