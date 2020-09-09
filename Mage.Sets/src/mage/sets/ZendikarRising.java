@@ -325,6 +325,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Swarm Shambler", 207, Rarity.RARE, mage.cards.s.SwarmShambler.class));
         cards.add(new SetCardInfo("Synchronized Spellcraft", 168, Rarity.COMMON, mage.cards.s.SynchronizedSpellcraft.class));
         cards.add(new SetCardInfo("Tajuru Blightblade", 208, Rarity.COMMON, mage.cards.t.TajuruBlightblade.class));
+        cards.add(new SetCardInfo("Tajuru Paragon", 209, Rarity.RARE, mage.cards.t.TajuruParagon.class));
         cards.add(new SetCardInfo("Tajuru Snarecaster", 210, Rarity.COMMON, mage.cards.t.TajuruSnarecaster.class));
         cards.add(new SetCardInfo("Tangled Florahedron", 211, Rarity.UNCOMMON, mage.cards.t.TangledFlorahedron.class));
         cards.add(new SetCardInfo("Tangled Vale", 211, Rarity.UNCOMMON, mage.cards.t.TangledVale.class));
