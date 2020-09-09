@@ -626,9 +626,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Update Tournament Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Tournament Task error", ex);
         } catch (CancellationException ex) {
         }

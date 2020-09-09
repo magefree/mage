@@ -540,11 +540,7 @@ public class NewTableDialog extends MageDialog {
                 this.hideDialog();
                 return;
             }
-        } catch (FileNotFoundException ex) {
-            handleError(ex);
-        } catch (IOException ex) {
-            handleError(ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | IOException ex) {
             handleError(ex);
         }
         // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);

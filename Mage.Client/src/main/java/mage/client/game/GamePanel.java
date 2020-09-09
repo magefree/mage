@@ -2782,9 +2782,7 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Replay Match Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Replay Match Task error", ex);
         } catch (CancellationException ex) {
         }

@@ -616,19 +616,7 @@ public class MageBook extends JComponent {
 
                         emblems.add((Emblem) newEmblem);
                     }
-                } catch (ClassNotFoundException ex) {
-                    // Swallow exception
-                } catch (NoSuchMethodException ex) {
-                    // Swallow exception
-                } catch (SecurityException ex) {
-                    // Swallow exception
-                } catch (InstantiationException ex) {
-                    // Swallow exception
-                } catch (IllegalAccessException ex) {
-                    // Swallow exception
-                } catch (IllegalArgumentException ex) {
-                    // Swallow exception
-                } catch (InvocationTargetException ex) {
+                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
                     // Swallow exception
                 }
             }
@@ -677,19 +665,7 @@ public class MageBook extends JComponent {
 
                         planes.add((Plane) newPlane);
                     }
-                } catch (ClassNotFoundException ex) {
-                    // Swallow exception
-                } catch (NoSuchMethodException ex) {
-                    // Swallow exception
-                } catch (SecurityException ex) {
-                    // Swallow exception
-                } catch (InstantiationException ex) {
-                    // Swallow exception
-                } catch (IllegalAccessException ex) {
-                    // Swallow exception
-                } catch (IllegalArgumentException ex) {
-                    // Swallow exception
-                } catch (InvocationTargetException ex) {
+                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
                     // Swallow exception
                 }
             }
