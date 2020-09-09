@@ -227,6 +227,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Malakir Blood-Priest", 110, Rarity.COMMON, mage.cards.m.MalakirBloodPriest.class));
         cards.add(new SetCardInfo("Malakir Mire", 111, Rarity.UNCOMMON, mage.cards.m.MalakirMire.class));
         cards.add(new SetCardInfo("Malakir Rebirth", 111, Rarity.UNCOMMON, mage.cards.m.MalakirRebirth.class));
+        cards.add(new SetCardInfo("Master of Winds", 68, Rarity.RARE, mage.cards.m.MasterOfWinds.class));
         cards.add(new SetCardInfo("Maul of the Skyclaves", 27, Rarity.RARE, mage.cards.m.MaulOfTheSkyclaves.class));
         cards.add(new SetCardInfo("Merfolk Falconer", 69, Rarity.UNCOMMON, mage.cards.m.MerfolkFalconer.class));
         cards.add(new SetCardInfo("Merfolk Windrobber", 70, Rarity.UNCOMMON, mage.cards.m.MerfolkWindrobber.class));
