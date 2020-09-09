@@ -2420,7 +2420,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             CombatSimulator combat = new CombatSimulator();
             for (Permanent permanent : trialAttackers) {
-                combat.groups.add(new CombatGroupSimulator(opponentId, Arrays.asList(permanent.getId()), new ArrayList<UUID>(), game));
+                combat.groups.add(new CombatGroupSimulator(opponentId, Collections.singletonList(permanent.getId()), new ArrayList<UUID>(), game));
             }
             CombatSimulator test = simulateBlock(combat, blockers, game);
             if (test.evaluate() > bestResult) {

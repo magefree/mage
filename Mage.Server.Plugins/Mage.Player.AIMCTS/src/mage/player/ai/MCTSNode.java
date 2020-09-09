@@ -367,9 +367,7 @@ public class MCTSNode {
             MCTSNode current = queue.remove();
             if (current.stateValue.equals(state))
                 return current;
-            for (MCTSNode child: current.children) {
-                queue.add(child);
-            }
+            queue.addAll(current.children);
         }
         return null;
     }
@@ -385,9 +383,7 @@ public class MCTSNode {
         int mismatchCount = 0;
         
         List<MCTSNode> mergeChildren = new ArrayList<>();
-        for (MCTSNode child: merge.children) {
-            mergeChildren.add(child);
-        }
+        mergeChildren.addAll(merge.children);
 
         for (MCTSNode child: children) {
             for (MCTSNode mergeChild: mergeChildren) {

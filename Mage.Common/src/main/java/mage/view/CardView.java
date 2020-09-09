@@ -375,9 +375,7 @@ public class CardView extends SimpleCardView {
                 }
                 this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
                 this.bandedCards = new ArrayList<>();
-                for (UUID bandedCard : permanent.getBandedCards()) {
-                    bandedCards.add(bandedCard);
-                }
+                bandedCards.addAll(permanent.getBandedCards());
                 if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                     controlledByOwner = false;
                 }

@@ -49,9 +49,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
         this.suggested = new ArrayList<>();
-        for (String s : player.suggested) {
-            this.suggested.add(s);
-        }
+        this.suggested.addAll(player.suggested);
 
     }
 
@@ -107,9 +105,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             if (options.isEmpty()) {
                 allActions.add(ability);
             } else {
-                for (Ability option : options) {
-                    allActions.add(option);
-                }
+                allActions.addAll(options);
             }
         }
     }
