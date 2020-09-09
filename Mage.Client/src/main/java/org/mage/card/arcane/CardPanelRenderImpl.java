@@ -369,10 +369,8 @@ public class CardPanelRenderImpl extends CardPanel {
                             }
                         }
                     });
-                } catch (Exception e) {
+                } catch (Exception | Error e) {
                     e.printStackTrace();
-                } catch (Error err) {
-                    err.printStackTrace();
                 }
             });
         }

@@ -26,7 +26,7 @@ public enum TokensMtgImageSource implements CardImageSource {
 
     // [[EXP/Name, TokenData>
     private HashMap<String, List<TokenData>> tokensData;
-    private static final Set<String> supportedSets = new LinkedHashSet<String>();
+    private static final Set<String> supportedSets = new LinkedHashSet<>();
 
     private final Object tokensDataSync = new Object();
 

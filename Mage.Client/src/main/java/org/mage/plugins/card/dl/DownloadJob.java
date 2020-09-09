@@ -112,7 +112,6 @@ public class DownloadJob extends AbstractLaternaBean {
      * Prepare code to override in custom download tasks (it's calls before work start)
      */
     public void onPreparing() throws Exception {
-        return;
     }
 
     /**

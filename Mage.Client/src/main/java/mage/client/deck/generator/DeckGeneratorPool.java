@@ -311,8 +311,7 @@ public class DeckGeneratorPool
      */
     public Deck getDeck() {
         Set<Card> actualDeck = deck.getCards();
-        for(Card card : deckCards)
-            actualDeck.add(card);
+        actualDeck.addAll(deckCards);
         return deck;
     }
 

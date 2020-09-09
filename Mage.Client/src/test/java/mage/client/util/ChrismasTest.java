@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static mage.client.MageFrame.isChrismasTime;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ChrismasTest {
 
@@ -20,24 +22,24 @@ public class ChrismasTest {
     @Test
     public void testChrismasDays() throws Exception {
         // chrismas from 15 december to 15 january
-        Assert.assertEquals(false, isChrismasTime(getDate(2017, 11, 1)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2017, 11, 15)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2017, 11, 30)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2017, 12, 1)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2017, 12, 14)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2017, 12, 15)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2017, 12, 16)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2017, 12, 31)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2018, 1, 1)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2018, 1, 14)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2018, 1, 15)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2018, 1, 16)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2018, 1, 31)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2018, 2, 1)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2018, 12, 1)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2018, 12, 20)));
-        Assert.assertEquals(true, isChrismasTime(getDate(2019, 1, 10)));
-        Assert.assertEquals(false, isChrismasTime(getDate(2019, 1, 25)));
+        assertFalse(isChrismasTime(getDate(2017, 11, 1)));
+        assertFalse(isChrismasTime(getDate(2017, 11, 15)));
+        assertFalse(isChrismasTime(getDate(2017, 11, 30)));
+        assertFalse(isChrismasTime(getDate(2017, 12, 1)));
+        assertFalse(isChrismasTime(getDate(2017, 12, 14)));
+        assertTrue(isChrismasTime(getDate(2017, 12, 15)));
+        assertTrue(isChrismasTime(getDate(2017, 12, 16)));
+        assertTrue(isChrismasTime(getDate(2017, 12, 31)));
+        assertTrue(isChrismasTime(getDate(2018, 1, 1)));
+        assertTrue(isChrismasTime(getDate(2018, 1, 14)));
+        assertTrue(isChrismasTime(getDate(2018, 1, 15)));
+        assertFalse(isChrismasTime(getDate(2018, 1, 16)));
+        assertFalse(isChrismasTime(getDate(2018, 1, 31)));
+        assertFalse(isChrismasTime(getDate(2018, 2, 1)));
+        assertFalse(isChrismasTime(getDate(2018, 12, 1)));
+        assertTrue(isChrismasTime(getDate(2018, 12, 20)));
+        assertTrue(isChrismasTime(getDate(2019, 1, 10)));
+        assertFalse(isChrismasTime(getDate(2019, 1, 25)));
     }
 
 }

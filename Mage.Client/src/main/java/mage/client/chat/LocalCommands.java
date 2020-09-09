@@ -37,7 +37,7 @@ public final class LocalCommands {
             return false;
         }
 
-        final String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        final String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         Optional<String> response = Optional.empty();
 
         String command = st.nextToken();

@@ -78,7 +78,7 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         // Drop messages from ignored users
                         if (message.getUsername() != null && IgnoreList.IGNORED_MESSAGE_TYPES.contains(message.getMessageType())) {
-                            final String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+                            final String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
                             if (IgnoreList.userIsIgnored(serverAddress, message.getUsername())) {
                                 break;
                             }
@@ -451,7 +451,7 @@ public class CallbackClientImpl implements CallbackClient {
                         null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TABLES:
-                String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+                String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
                 usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" main menu.")
                                 .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
                                 .append("<br/>\\list - show a list of available chat commands.")

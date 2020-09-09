@@ -703,9 +703,7 @@ public class ConnectDialog extends MageDialog {
                 } else {
                     lblStatus.setText("Could not connect: " + lastConnectError);
                 }
-            } catch (InterruptedException ex) {
-                logger.fatal("Update Players Task error", ex);
-            } catch (ExecutionException ex) {
+            } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Update Players Task error", ex);
             } catch (CancellationException ex) {
                 logger.info("Connect: canceled");

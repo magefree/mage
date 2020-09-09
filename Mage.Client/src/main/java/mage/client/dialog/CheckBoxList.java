@@ -644,7 +644,7 @@ public class CheckBoxList extends JList {
         int i;
 
         // traverse over model
-        list = new Vector<Integer>();
+        list = new Vector<>();
         for (i = 0; i < getModel().getSize(); i++) {
             if (getChecked(i)) {
                 list.add(new Integer(i));

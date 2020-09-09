@@ -205,9 +205,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnExpansionSearch.setVisible(false);
         this.limited = true;
         this.cards.clear();
-        for (Card card : sideboard) {
-            this.cards.add(card);
-        }
+        this.cards.addAll(sideboard);
         filterCards();
     }
 

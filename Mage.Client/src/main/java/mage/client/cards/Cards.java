@@ -321,7 +321,7 @@
              }
          }
          // sort the cards
-         cardsToLayout.sort((cp1, cp2) -> Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x));
+         cardsToLayout.sort(Comparator.comparingInt(cp -> cp.getLocation().x));
          // relocate the cards
          int dx = 0;
          for (Component component : cardsToLayout) {

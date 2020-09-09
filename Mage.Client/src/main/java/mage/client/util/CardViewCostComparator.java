@@ -12,7 +12,7 @@ public class CardViewCostComparator implements Comparator<CardView> {
 
     @Override
     public int compare(CardView o1, CardView o2) {
-        return Integer.valueOf(o1.getConvertedManaCost()).compareTo(o2.getConvertedManaCost());
+        return Integer.compare(o1.getConvertedManaCost(), o2.getConvertedManaCost());
     }
 
 }

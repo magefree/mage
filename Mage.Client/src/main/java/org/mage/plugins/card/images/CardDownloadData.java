@@ -88,10 +88,10 @@ public class CardDownloadData {
             return false;
         }
         final CardDownloadData other = (CardDownloadData) obj;
-        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if ((this.set == null) ? (other.set != null) : !this.set.equals(other.set)) {
+        if (!Objects.equals(this.set, other.set)) {
             return false;
         }
         if (!Objects.equals(this.collectorId, other.collectorId) && (this.collectorId == null || !this.collectorId.equals(other.collectorId))) {

@@ -741,10 +741,8 @@ public class CardPanelComponentImpl extends CardPanel {
                         setImage(srcImage);
                     }
                 });
-            } catch (Exception e) {
+            } catch (Exception | Error e) {
                 e.printStackTrace();
-            } catch (Error err) {
-                err.printStackTrace();
             }
         });
     }

@@ -317,7 +317,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 // special sort for created and seat column
                 if (column == TablesTableModel.COLUMN_CREATED || column == TablesTableModel.COLUMN_SEATS) {
                     List<? extends SortKey> sortKeys = getSortKeys();
-                    if (!sortKeys.isEmpty() && sortKeys.size() == 2) {
+                    if (sortKeys.size() == 2) {
                         // clear sort on second click
                         setSortKeys(null);
                     } else {
@@ -936,7 +936,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // Hide games of ignored players
         java.util.List<RowFilter<Object, Object>> ignoreListFilterList = new ArrayList<>();
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         final Set<String> ignoreListCopy = IgnoreList.getIgnoredUsers(serverAddress);
         if (!ignoreListCopy.isEmpty()) {
             ignoreListFilterList.add(new RowFilter<Object, Object>() {
@@ -1707,7 +1707,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setRollbackTurnsAllowed(true);
             options.setQuitRatio(100);
             options.setMinimumRating(0);
-            String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+            String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
             options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
             table = SessionHandler.createTable(roomId, options);
 
