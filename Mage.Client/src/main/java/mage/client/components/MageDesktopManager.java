@@ -36,7 +36,7 @@ public class MageDesktopManager extends DefaultDesktopManager {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

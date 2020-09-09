@@ -23,7 +23,7 @@ public class MageClip {
 
     private final AudioGroup audioGroup;
     private final String filename;
-    private final byte buf[];
+    private final byte[] buf;
 
     public MageClip(String filename, AudioGroup audioGroup) {
         this.filename = filename;

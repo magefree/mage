@@ -42,7 +42,7 @@ public final class SystemUtil {
             Method method = clazz.getMethod(methodName);
             Object appInstance = method.invoke(clazz);
 
-            Class params[] = new Class[]{Window.class};
+            Class[] params = new Class[]{Window.class};
             method = clazz.getMethod(methodName2, params);
             method.invoke(appInstance, window);
         } catch (Throwable t) {
