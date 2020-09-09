@@ -322,6 +322,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Tazeem Raptor", 43, Rarity.COMMON, mage.cards.t.TazeemRaptor.class));
         cards.add(new SetCardInfo("Tazri, Beacon of Unity", 44, Rarity.MYTHIC, mage.cards.t.TazriBeaconOfUnity.class));
         cards.add(new SetCardInfo("Teeterpeak Ambusher", 169, Rarity.COMMON, mage.cards.t.TeeterpeakAmbusher.class));
+        cards.add(new SetCardInfo("Thundering Sparkmage", 171, Rarity.UNCOMMON, mage.cards.t.ThunderingSparkmage.class));
         cards.add(new SetCardInfo("Thwart the Grave", 130, Rarity.UNCOMMON, mage.cards.t.ThwartTheGrave.class));
         cards.add(new SetCardInfo("Timbercrown Pathway", 261, Rarity.RARE, mage.cards.t.TimbercrownPathway.class));
         cards.add(new SetCardInfo("Tuktuk Rubblefort", 173, Rarity.COMMON, mage.cards.t.TuktukRubblefort.class));

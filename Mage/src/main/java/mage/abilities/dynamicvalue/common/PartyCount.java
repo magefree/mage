@@ -124,7 +124,11 @@ public enum PartyCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "creature in your party. <i>(Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)</i>";
+        return "creature in your party. " + getReminder();
+    }
+
+    public static String getReminder() {
+        return "<i>(Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)</i>";
     }
 
     @Override

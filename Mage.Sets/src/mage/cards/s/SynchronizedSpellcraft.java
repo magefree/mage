@@ -45,8 +45,8 @@ class SynchronizedSpellcraftEffect extends OneShotEffect {
 
     SynchronizedSpellcraftEffect() {
         super(Outcome.Benefit);
-        staticText = "and X damage to that creature's controller, where X is the number of creatures in your party. " +
-                "<i>(Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)</i>";
+        staticText = "and X damage to that creature's controller, " +
+                "where X is the number of creatures in your party. " + PartyCount.getReminder();
     }
 
     private SynchronizedSpellcraftEffect(final SynchronizedSpellcraftEffect effect) {

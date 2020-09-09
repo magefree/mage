@@ -33,7 +33,8 @@ public final class MalakirBloodPriest extends CardImpl {
         );
         ability.addEffect(new GainLifeEffect(
                 PartyCount.instance, "and you gain X life, " +
-                "where X is your number of creatures in your party"
+                "where X is your number of creatures in your party. "
+                + PartyCount.getReminder()
         ));
         this.addAbility(ability.addHint(PartyCountHint.instance));
     }
