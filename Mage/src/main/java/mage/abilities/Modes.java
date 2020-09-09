@@ -228,9 +228,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 this.turnNum = game.getTurnNum();
             }
         }
-        if (this.allWhenKicked && KickedCondition.instance.apply(game, source)) {
-            this.setMinModes(0);
-            this.setMaxModes(3);
+        if (this.allWhenKicked) {
+            if (KickedCondition.instance.apply(game, source)) {
+                this.setMinModes(0);
+                this.setMaxModes(3);
+            } else {
+                this.setMinModes(1);
+                this.setMaxModes(1);
+            }
         }
         if (this.size() > 1) {
             this.clearSelectedModes();
