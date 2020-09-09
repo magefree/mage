@@ -172,6 +172,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Ghastly Gloomhunter", 103, Rarity.COMMON, mage.cards.g.GhastlyGloomhunter.class));
         cards.add(new SetCardInfo("Glacial Grasp", 59, Rarity.COMMON, mage.cards.g.GlacialGrasp.class));
+        cards.add(new SetCardInfo("Glasspool Mimic", 60, Rarity.RARE, mage.cards.g.GlasspoolMimic.class));
+        cards.add(new SetCardInfo("Glasspool Shore", 60, Rarity.RARE, mage.cards.g.GlasspoolShore.class));
         cards.add(new SetCardInfo("Gnarlid Colony", 185, Rarity.COMMON, mage.cards.g.GnarlidColony.class));
         cards.add(new SetCardInfo("Goma Fada Vanguard", 141, Rarity.UNCOMMON, mage.cards.g.GomaFadaVanguard.class));
         cards.add(new SetCardInfo("Grimclimb Pathway", 259, Rarity.RARE, mage.cards.g.GrimclimbPathway.class));
