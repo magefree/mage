@@ -17,6 +17,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
 
     private ZendikarRisingCommander() {
         super("Zendikar Rising Commander", "ZNC", ExpansionSet.buildDate(2020, 9, 25), SetType.SUPPLEMENTAL);
+        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Enigma Thief", 4, Rarity.RARE, mage.cards.e.EnigmaThief.class));
     }
