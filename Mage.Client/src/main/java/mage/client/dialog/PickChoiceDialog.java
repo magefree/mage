@@ -396,7 +396,7 @@ public class PickChoiceDialog extends MageDialog {
                 .addContainerGap())
         );
 
-        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancel, btOK});
+        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, btCancel, btOK);
 
         panelCommandsLayout.setVerticalGroup(
             panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

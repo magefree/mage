@@ -614,7 +614,7 @@ public class NewTableDialog extends MageDialog {
         options.setMinimumRating((Integer) this.spnMinimumRating.getValue());
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
         options.setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         return options;

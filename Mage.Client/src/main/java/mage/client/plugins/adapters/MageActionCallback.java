@@ -242,7 +242,7 @@ public class MageActionCallback implements ActionCallback {
         if (this.startedDragging && prevCardPanel != null && card != null) {
             for (Component component : card.getCardArea().getComponents()) {
                 if (component instanceof CardPanel) {
-                    if (cardPanels.contains((CardPanel) component)) {
+                    if (cardPanels.contains(component)) {
                         component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                 }
@@ -316,7 +316,7 @@ public class MageActionCallback implements ActionCallback {
         for (Component component : container.getComponents()) {
             if (component instanceof CardPanel) {
                 if (!component.equals(card)) {
-                    if (!cardPanels.contains((CardPanel) component)) {
+                    if (!cardPanels.contains(component)) {
                         component.setLocation(component.getLocation().x, component.getLocation().y + GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                     cardPanels.add((CardPanel) component);
