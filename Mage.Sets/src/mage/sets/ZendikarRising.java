@@ -176,6 +176,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Grimclimb Pathway", 259, Rarity.RARE, mage.cards.g.GrimclimbPathway.class));
         cards.add(new SetCardInfo("Grotag Bug-Catcher", 142, Rarity.COMMON, mage.cards.g.GrotagBugCatcher.class));
         cards.add(new SetCardInfo("Grotag Night-Runner", 143, Rarity.UNCOMMON, mage.cards.g.GrotagNightRunner.class));
+        cards.add(new SetCardInfo("Guul Draz Mucklord", 104, Rarity.COMMON, mage.cards.g.GuulDrazMucklord.class));
         cards.add(new SetCardInfo("Hagra Broodpit", 106, Rarity.RARE, mage.cards.h.HagraBroodpit.class));
         cards.add(new SetCardInfo("Hagra Constrictor", 105, Rarity.COMMON, mage.cards.h.HagraConstrictor.class));
         cards.add(new SetCardInfo("Hagra Mauling", 106, Rarity.RARE, mage.cards.h.HagraMauling.class));
