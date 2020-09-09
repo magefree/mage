@@ -232,12 +232,11 @@ public enum CopyPasteImageSource implements CardImageSource {
     @Override
     public List<String> getSupportedSets() {
         setupLinks();
-        List<String> supportedSetsCopy = new ArrayList<>();
         if (supportedSets.isEmpty()) {
             supportedSets.addAll(Sets.getInstance().keySet());
         }
 
-        supportedSetsCopy.addAll(supportedSets);
+        List<String> supportedSetsCopy = new ArrayList<>(supportedSets);
         return supportedSetsCopy;
     }
 

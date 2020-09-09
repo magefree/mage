@@ -58,8 +58,7 @@ public enum ServerMessagesUtil {
     private void reloadMessages() {
         LOGGER.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
-        List<String> newMessages = new ArrayList<>();
-        newMessages.addAll(motdMessages);
+        List<String> newMessages = new ArrayList<>(motdMessages);
         newMessages.add(getServerStatistics());
         newMessages.add(getServerStatistics2());
 
