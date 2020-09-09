@@ -218,3 +218,4 @@ WPN Gateway|WPNAndGatewayPromos|
 Zendikar|Zendikar|
 Zendikar Expeditions|ZendikarExpeditions|
 Zendikar Rising|ZendikarRising|
+Zendikar Rising Commander|ZendikarRisingCommander|
