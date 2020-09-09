@@ -129,7 +129,7 @@ public class MCTSPlayer extends ComputerPlayer {
         //add a node with no blockers
         List<List<UUID>> engagement = new ArrayList<>();
         for (int i = 0; i < numGroups; i++) {
-            engagement.add(new ArrayList<UUID>());
+            engagement.add(new ArrayList<>());
         }
         engagements.add(engagement);
 

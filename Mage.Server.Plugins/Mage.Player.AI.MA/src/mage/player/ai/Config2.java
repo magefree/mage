@@ -42,9 +42,7 @@ public final class Config2 {
                 p.setProperty("evaluatorHandFactor", "1");
 //                p.setProperty("maxThinkSeconds", "30");
             }
-        } catch (IOException ex) {
-            logger.error(null, ex);
-        } catch (URISyntaxException ex) {
+        } catch (IOException | URISyntaxException ex) {
             logger.error(null, ex);
         }
 //        maxDepth = Integer.parseInt(p.getProperty("maxDepth"));

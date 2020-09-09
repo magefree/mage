@@ -432,9 +432,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
             task.cancel(true);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            task.cancel(true);
         } catch (InterruptedException e) {
             e.printStackTrace();
             task.cancel(true);

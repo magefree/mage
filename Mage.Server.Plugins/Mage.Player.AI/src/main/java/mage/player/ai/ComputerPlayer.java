@@ -2420,7 +2420,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             CombatSimulator combat = new CombatSimulator();
             for (Permanent permanent : trialAttackers) {
-                combat.groups.add(new CombatGroupSimulator(opponentId, Collections.singletonList(permanent.getId()), new ArrayList<UUID>(), game));
+                combat.groups.add(new CombatGroupSimulator(opponentId, Collections.singletonList(permanent.getId()), new ArrayList<>(), game));
             }
             CombatSimulator test = simulateBlock(combat, blockers, game);
             if (test.evaluate() > bestResult) {
@@ -2586,7 +2586,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected void logState(Game game) {
         if (log.isTraceEnabled()) {
-            logList("Computer player " + name + " hand: ", new ArrayList<MageObject>(hand.getCards(game)));
+            logList("Computer player " + name + " hand: ", new ArrayList<>(hand.getCards(game)));
         }
     }
 

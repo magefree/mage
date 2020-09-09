@@ -624,9 +624,7 @@
      protected void done() {
          try {
              get();
-         } catch (InterruptedException ex) {
-             logger.fatal("Update Users Task error", ex);
-         } catch (ExecutionException ex) {
+         } catch (InterruptedException | ExecutionException ex) {
              logger.fatal("Update Users Task error", ex);
          } catch (CancellationException ex) {
          }
@@ -676,9 +674,7 @@
      protected void done() {
          try {
              get();
-         } catch (InterruptedException ex) {
-             logger.fatal("Update Tables Task error", ex);
-         } catch (ExecutionException ex) {
+         } catch (InterruptedException | ExecutionException ex) {
              logger.fatal("Update Tables Task error", ex);
          } catch (CancellationException ex) {
          }

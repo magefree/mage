@@ -398,9 +398,7 @@ public class ConnectDialog extends JDialog {
                 } else {
                     lblStatus.setText("Could not connect");
                 }
-            } catch (InterruptedException ex) {
-                logger.fatal("Update Players Task error", ex);
-            } catch (ExecutionException ex) {
+            } catch (InterruptedException | ExecutionException ex) {
                 logger.fatal("Update Players Task error", ex);
             } catch (CancellationException ex) {
             }
