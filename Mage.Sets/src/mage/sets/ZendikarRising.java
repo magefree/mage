@@ -269,6 +269,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Ravager's Mace", 235, Rarity.UNCOMMON, mage.cards.r.RavagersMace.class));
         cards.add(new SetCardInfo("Relic Golem", 249, Rarity.UNCOMMON, mage.cards.r.RelicGolem.class));
         cards.add(new SetCardInfo("Relic Robber", 153, Rarity.RARE, mage.cards.r.RelicRobber.class));
+        cards.add(new SetCardInfo("Relic Vial", 250, Rarity.UNCOMMON, mage.cards.r.RelicVial.class));
         cards.add(new SetCardInfo("Resolute Strike", 35, Rarity.COMMON, mage.cards.r.ResoluteStrike.class));
         cards.add(new SetCardInfo("Risen Riptide", 73, Rarity.COMMON, mage.cards.r.RisenRiptide.class));
         cards.add(new SetCardInfo("Riverglide Pathway", 264, Rarity.RARE, mage.cards.r.RiverglidePathway.class));
