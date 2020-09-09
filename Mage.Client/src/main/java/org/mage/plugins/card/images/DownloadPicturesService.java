@@ -599,7 +599,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         if (type != Proxy.Type.DIRECT) {
             try {
                 String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
+                int port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
                 proxy = new Proxy(type, new InetSocketAddress(address, port));
             } catch (Exception ex) {
                 throw new RuntimeException("Gui_DownloadPicturesService : error 1 - " + ex);

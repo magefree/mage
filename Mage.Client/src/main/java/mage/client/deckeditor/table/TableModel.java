@@ -256,7 +256,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
         if (displayNoCopies) {
             String key = card.getName() + card.getExpansionSetCode() + card.getCardNumber();
-            Integer count = 1;
+            int count = 1;
             if (cardsNoCopies.containsKey(key)) {
                 count = cardsNoCopies.get(key) + 1;
             } else {

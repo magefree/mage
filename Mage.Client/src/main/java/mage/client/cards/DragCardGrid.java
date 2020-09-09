@@ -1616,7 +1616,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         pimpedSets.put("PPRE", 1);
 
         String[] sets = pimpedSets.keySet().toArray(new String[pimpedSets.keySet().size()]);
-        Boolean didModify = false;
+        boolean didModify = false;
 
         for (List<List<CardView>> gridRow : cardGrid) {
             for (List<CardView> stack : gridRow) {
