@@ -345,7 +345,9 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Utility Knife", 256, Rarity.COMMON, mage.cards.u.UtilityKnife.class));
         cards.add(new SetCardInfo("Valakut Awakening", 174, Rarity.RARE, mage.cards.v.ValakutAwakening.class));
         cards.add(new SetCardInfo("Valakut Stoneforge", 174, Rarity.RARE, mage.cards.v.ValakutStoneforge.class));
+        cards.add(new SetCardInfo("Vastwood Fortification", 216, Rarity.UNCOMMON, mage.cards.v.VastwoodFortification.class));
         cards.add(new SetCardInfo("Vastwood Surge", 217, Rarity.UNCOMMON, mage.cards.v.VastwoodSurge.class));
+        cards.add(new SetCardInfo("Vastwood Thicket", 216, Rarity.UNCOMMON, mage.cards.v.VastwoodThicket.class));
         cards.add(new SetCardInfo("Veteran Adventurer", 218, Rarity.UNCOMMON, mage.cards.v.VeteranAdventurer.class));
         cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.UNCOMMON, mage.cards.w.WindriderWizard.class));
         cards.add(new SetCardInfo("Zof Bloodbog", 132, Rarity.UNCOMMON, mage.cards.z.ZofBloodbog.class));
