@@ -248,8 +248,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
 
             // Insert the new column to add to
-            for (int i = 0; i < cardGrid.size(); ++i) {
-                cardGrid.get(i).add(col, new ArrayList<>());
+            for (List<List<CardView>> lists : cardGrid) {
+                lists.add(col, new ArrayList<>());
             }
 
             // Add the cards
@@ -294,8 +294,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             // Add a new col if needed
             if (col >= cardGrid.get(0).size()) {
-                for (int i = 0; i < cardGrid.size(); ++i) {
-                    cardGrid.get(i).add(new ArrayList<>());
+                for (List<List<CardView>> lists : cardGrid) {
+                    lists.add(new ArrayList<>());
                 }
             }
 
@@ -1704,10 +1704,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // Remove all of the cards not in the cardsView
         boolean didModify = false; // Until contested
-        for (int i = 0; i < cardGrid.size(); ++i) {
-            List<List<CardView>> gridRow = cardGrid.get(i);
-            for (int j = 0; j < gridRow.size(); ++j) {
-                List<CardView> stack = gridRow.get(j);
+        for (List<List<CardView>> gridRow : cardGrid) {
+            for (List<CardView> stack : gridRow) {
                 for (int k = 0; k < stack.size(); ++k) {
                     CardView card = stack.get(k);
                     if (!cardsView.containsKey(card.getId())) {
@@ -2065,8 +2063,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 if (res <= 0) {
                     // Insert into this col, but if less, then we need to create a new col here first
                     if (res < 0) {
-                        for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
-                            cardGrid.get(rowIndex).add(currentColumn, new ArrayList<>());
+                        for (List<List<CardView>> lists : cardGrid) {
+                            lists.add(currentColumn, new ArrayList<>());
                         }
                     }
                     targetRow.get(currentColumn).add(newCard);
@@ -2080,8 +2078,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // If nothing else, insert in a new column after everything else
         if (!didInsert) {
-            for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
-                cardGrid.get(rowIndex).add(new ArrayList<>());
+            for (List<List<CardView>> lists : cardGrid) {
+                lists.add(new ArrayList<>());
             }
             targetRow.get(targetRow.size() - 1).add(newCard);
         }

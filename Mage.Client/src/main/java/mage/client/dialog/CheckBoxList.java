@@ -169,8 +169,8 @@ public class CheckBoxList extends JList {
          * it.
          */
         public CheckBoxListModel(Vector listData) {
-            for (int i = 0; i < listData.size(); i++) {
-                addElement(listData.get(i));
+            for (Object listDatum : listData) {
+                addElement(listDatum);
             }
         }
 

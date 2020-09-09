@@ -67,8 +67,8 @@ public class ManaPieChart extends JComponent {
 
     void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {
         double total = 0.0D;
-        for (int i = 0; i < slices.length; i++) {
-            total += slices[i].value;
+        for (Slice value : slices) {
+            total += value.value;
         }
         
         if (total == 0.0D) {
@@ -78,13 +78,13 @@ public class ManaPieChart extends JComponent {
         double curValue = 0.0D;
         int startAngle = 0;
         int lastAngle = 0;
-        for (int i = 0; i < slices.length; i++) {
+        for (Slice slice : slices) {
             startAngle = lastAngle;
-            int arcAngle = (int) (slices[i].value * 360 / total);
+            int arcAngle = (int) (slice.value * 360 / total);
 
-            g.setColor(slices[i].color);
+            g.setColor(slice.color);
             g.fillArc(area.x, area.y, area.width - 20, area.height - 20, startAngle, arcAngle);
-            curValue += slices[i].value;
+            curValue += slice.value;
             lastAngle += arcAngle;
         }
     }

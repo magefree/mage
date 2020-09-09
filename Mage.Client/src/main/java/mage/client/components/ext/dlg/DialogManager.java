@@ -263,8 +263,8 @@ public class DialogManager extends JComponent implements MouseListener,
 
         Component[] components = getComponents();
         boolean bFound = false;
-        for (int i = 0; i < components.length; i++) {
-            if (components[i] instanceof DialogContainer) {
+        for (Component component : components) {
+            if (component instanceof DialogContainer) {
                 bFound = true;
             }
         }

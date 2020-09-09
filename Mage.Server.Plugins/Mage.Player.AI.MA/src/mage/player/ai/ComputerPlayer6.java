@@ -981,8 +981,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     }
                 }
                 System.out.println("suggested::");
-                for (int i = 0; i < suggestedActions.size(); i++) {
-                    System.out.println("    " + suggestedActions.get(i));
+                for (String suggestedAction : suggestedActions) {
+                    System.out.println("    " + suggestedAction);
                 }
             }
         } catch (Exception e) {
