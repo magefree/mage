@@ -20,7 +20,6 @@ import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
