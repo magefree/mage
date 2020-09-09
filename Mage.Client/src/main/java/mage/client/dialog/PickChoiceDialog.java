@@ -57,13 +57,10 @@ public class PickChoiceDialog extends MageDialog {
 
         // sorting
         if (choice.isSortEnabled()) {
-            Collections.sort(this.allItems, new Comparator<KeyValueItem>() {
-                @Override
-                public int compare(KeyValueItem o1, KeyValueItem o2) {
-                    Integer n1 = choice.getSortData().get(o1.Key);
-                    Integer n2 = choice.getSortData().get(o2.Key);
-                    return n1.compareTo(n2);
-                }
+            this.allItems.sort((o1, o2) -> {
+                Integer n1 = choice.getSortData().get(o1.Key);
+                Integer n2 = choice.getSortData().get(o2.Key);
+                return n1.compareTo(n2);
             });
         }
 

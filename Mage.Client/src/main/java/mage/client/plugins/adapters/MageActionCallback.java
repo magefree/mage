@@ -332,7 +332,7 @@ public class MageActionCallback implements ActionCallback {
     private void sortLayout(List<CardPanel> cards, CardPanel source, boolean includeSource) {
         source.getLocation().x -= COMPARE_GAP_X; // this creates nice effect
 
-        cards.sort((cp1, cp2) -> Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x));
+        cards.sort(Comparator.comparingInt(cp -> cp.getLocation().x));
 
         int dx = 0;
         boolean createdGapForSource = false;
