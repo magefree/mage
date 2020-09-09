@@ -167,6 +167,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Feed the Swarm", 102, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Felidar Retreat", 16, Rarity.RARE, mage.cards.f.FelidarRetreat.class));
         cards.add(new SetCardInfo("Field Research", 58, Rarity.COMMON, mage.cards.f.FieldResearch.class));
+        cards.add(new SetCardInfo("Fireblade Charger", 139, Rarity.UNCOMMON, mage.cards.f.FirebladeCharger.class));
         cards.add(new SetCardInfo("Fissure Wizard", 140, Rarity.COMMON, mage.cards.f.FissureWizard.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Ghastly Gloomhunter", 103, Rarity.COMMON, mage.cards.g.GhastlyGloomhunter.class));
