@@ -21,6 +21,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.ConstructToken;
@@ -60,7 +61,9 @@ public final class MyriadConstruct extends CardImpl {
         ));
 
         // When Myriad Construct becomes the target of a spell, sacrifice it and create a number of 1/1 colourless Construct artifact creature tokens equal to its power.
-        Ability ability = new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it"));
+        Ability ability = new BecomesTargetTriggeredAbility(
+                new SacrificeSourceEffect().setText("sacrifice it"), StaticFilters.FILTER_SPELL_A
+        );
         ability.addEffect(new CreateTokenEffect(new ConstructToken(), xValue2)
                 .setText("and create a number of 1/1 colourless Construct artifact creature tokens equal to its power"));
         this.addAbility(ability);
