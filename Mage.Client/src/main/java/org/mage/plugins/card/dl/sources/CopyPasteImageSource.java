@@ -21,8 +21,8 @@ public enum CopyPasteImageSource implements CardImageSource {
 
     instance;
 
-    private final Set<String> supportedSets = new LinkedHashSet<String>();
-    private final Set<String> missingCards = new LinkedHashSet<String>();
+    private final Set<String> supportedSets = new LinkedHashSet<>();
+    private final Set<String> missingCards = new LinkedHashSet<>();
     Map<String, String> singleLinks = null;
     boolean loadedFromDialog = false;
     boolean viewMissingCards = true;
