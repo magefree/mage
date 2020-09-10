@@ -9,8 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.KickedPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,12 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class RisenRiptide extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a kicked spell");
-
-    static {
-        filter.add(KickedPredicate.instance);
-    }
 
     public RisenRiptide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -35,7 +28,7 @@ public final class RisenRiptide extends CardImpl {
         // Whenever you cast a kicked spell, Risen Riptide has base power and toughness 5/5 until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(
                 5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b
-        ).setText("{this} has base power and toughness 5/5 until end of turn"), filter, false));
+        ).setText("{this} has base power and toughness 5/5 until end of turn"), StaticFilters.FILTER_SPELL_KICKED_A, false));
     }
 
     private RisenRiptide(final RisenRiptide card) {

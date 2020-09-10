@@ -10,8 +10,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.KickedPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.DrakeToken;
 
 import java.util.UUID;
@@ -20,12 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class RoostOfDrakes extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a kicked spell");
-
-    static {
-        filter.add(KickedPredicate.instance);
-    }
 
     public RoostOfDrakes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
@@ -42,7 +35,7 @@ public final class RoostOfDrakes extends CardImpl {
 
         // Whenever you cast a kicked spell, create a 2/2 blue Drake creature token with flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new DrakeToken()), filter, false
+                new CreateTokenEffect(new DrakeToken()), StaticFilters.FILTER_SPELL_KICKED_A, false
         ));
     }
 

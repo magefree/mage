@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.KickedPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,12 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LullmagesFamiliar extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a kicked spell");
-
-    static {
-        filter.add(KickedPredicate.instance);
-    }
 
     public LullmagesFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
@@ -37,7 +30,9 @@ public final class LullmagesFamiliar extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // Whenever you cast a kicked spell, you gain 2 life.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(2), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new GainLifeEffect(2), StaticFilters.FILTER_SPELL_KICKED_A, false
+        ));
     }
 
     private LullmagesFamiliar(final LullmagesFamiliar card) {
