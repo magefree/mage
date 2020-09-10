@@ -22,9 +22,10 @@ public class RemoveAllCountersSourceCost extends CostImpl {
         this.text = "Remove all " + counterType.getName() + " counters from {this}";
     }
 
-    public RemoveAllCountersSourceCost(RemoveAllCountersSourceCost cost) {
+    private RemoveAllCountersSourceCost(final RemoveAllCountersSourceCost cost) {
         super(cost);
         this.counterType = cost.counterType;
+        this.removedCounters = cost.removedCounters;
     }
 
     @Override
