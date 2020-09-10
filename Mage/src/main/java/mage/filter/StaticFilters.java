@@ -6,6 +6,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.KickedPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -616,6 +617,13 @@ public final class StaticFilters {
                 SubType.WIZARD.getPredicate()
         ));
         FILTER_SPELL_INSTANT_SORCERY_WIZARD.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_KICKED_A = new FilterSpell("a kicked spell");
+
+    static {
+        FILTER_SPELL_KICKED_A.add(KickedPredicate.instance);
+        FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
