@@ -159,6 +159,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Demon's Disciple", 97, Rarity.UNCOMMON, mage.cards.d.DemonsDisciple.class));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drana's Silencer", 99, Rarity.COMMON, mage.cards.d.DranasSilencer.class));
+        cards.add(new SetCardInfo("Drana, the Last Bloodchief", 98, Rarity.MYTHIC, mage.cards.d.DranaTheLastBloodchief.class));
         cards.add(new SetCardInfo("Dreadwurm", 100, Rarity.COMMON, mage.cards.d.Dreadwurm.class));
         cards.add(new SetCardInfo("Emeria Captain", 11, Rarity.UNCOMMON, mage.cards.e.EmeriaCaptain.class));
         cards.add(new SetCardInfo("Emeria's Call", 12, Rarity.MYTHIC, mage.cards.e.EmeriasCall.class));
