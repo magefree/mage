@@ -366,6 +366,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Wayward Guide-Beast", 176, Rarity.RARE, mage.cards.w.WaywardGuideBeast.class));
         cards.add(new SetCardInfo("Windrider Wizard", 87, Rarity.UNCOMMON, mage.cards.w.WindriderWizard.class));
         cards.add(new SetCardInfo("Yasharn, Implacable Earth", 240, Rarity.RARE, mage.cards.y.YasharnImplacableEarth.class));
+        cards.add(new SetCardInfo("Zareth San, the Trickster", 242, Rarity.RARE, mage.cards.z.ZarethSanTheTrickster.class));
         cards.add(new SetCardInfo("Zof Bloodbog", 132, Rarity.UNCOMMON, mage.cards.z.ZofBloodbog.class));
         cards.add(new SetCardInfo("Zof Consumption", 132, Rarity.UNCOMMON, mage.cards.z.ZofConsumption.class));
         cards.add(new SetCardInfo("Zulaport Duelist", 88, Rarity.COMMON, mage.cards.z.ZulaportDuelist.class));
