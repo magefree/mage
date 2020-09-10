@@ -311,6 +311,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Skyclave Geopede", 163, Rarity.UNCOMMON, mage.cards.s.SkyclaveGeopede.class));
         cards.add(new SetCardInfo("Skyclave Pick-Axe", 204, Rarity.UNCOMMON, mage.cards.s.SkyclavePickAxe.class));
         cards.add(new SetCardInfo("Skyclave Relic", 252, Rarity.RARE, mage.cards.s.SkyclaveRelic.class));
+        cards.add(new SetCardInfo("Skyclave Shade", 125, Rarity.RARE, mage.cards.s.SkyclaveShade.class));
         cards.add(new SetCardInfo("Skyclave Shadowcat", 126, Rarity.UNCOMMON, mage.cards.s.SkyclaveShadowcat.class));
         cards.add(new SetCardInfo("Skyclave Squid", 82, Rarity.COMMON, mage.cards.s.SkyclaveSquid.class));
         cards.add(new SetCardInfo("Smite the Monstrous", 42, Rarity.COMMON, mage.cards.s.SmiteTheMonstrous.class));
