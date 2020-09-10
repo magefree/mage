@@ -319,6 +319,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Skyclave Squid", 82, Rarity.COMMON, mage.cards.s.SkyclaveSquid.class));
         cards.add(new SetCardInfo("Smite the Monstrous", 42, Rarity.COMMON, mage.cards.s.SmiteTheMonstrous.class));
         cards.add(new SetCardInfo("Sneaking Guide", 164, Rarity.COMMON, mage.cards.s.SneakingGuide.class));
+        cards.add(new SetCardInfo("Soaring Thought-Thief", 236, Rarity.UNCOMMON, mage.cards.s.SoaringThoughtThief.class));
         cards.add(new SetCardInfo("Song-Mad Ruins", 165, Rarity.UNCOMMON, mage.cards.s.SongMadRuins.class));
         cards.add(new SetCardInfo("Song-Mad Treachery", 165, Rarity.UNCOMMON, mage.cards.s.SongMadTreachery.class));
         cards.add(new SetCardInfo("Soul Shatter", 127, Rarity.RARE, mage.cards.s.SoulShatter.class));
