@@ -3,8 +3,6 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.keyword.EvokeAbility;
-import mage.cards.Card;
 import mage.game.Game;
 
 /**
