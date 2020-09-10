@@ -9,6 +9,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -17,8 +18,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class PartyCountTest extends CardTestPlayerBase {
 
     private void makeTester() {
+        makeTester(playerA);
+    }
+
+    private void makeTester(TestPlayer player) {
         addCustomCardWithAbility(
-                "tester", playerA,
+                "tester", player,
                 new SimpleActivatedAbility(
                         new GainLifeEffect(PartyCount.instance), new ManaCostsImpl<>("{0}")
                 )
@@ -26,14 +31,35 @@ public class PartyCountTest extends CardTestPlayerBase {
     }
 
     private void useTester() {
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}:");
+        useTester(playerA);
+    }
+
+    private void useTester(TestPlayer player) {
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, player, "{0}:");
     }
 
     private void makeCreature(String name, SubType... subTypes) {
+        makeCreature(name, playerA, subTypes);
+    }
+
+    private void makeCreature(String name, TestPlayer player, SubType... subTypes) {
         addCustomCardWithAbility(
                 name, playerA, null, null,
                 CardType.CREATURE, "{1}", Zone.BATTLEFIELD, subTypes
         );
+    }
+
+    @Test
+    public void testNoMembers() {
+        makeTester();
+
+        useTester();
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
     }
 
     @Test
@@ -141,6 +167,23 @@ public class PartyCountTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerA, 24);
+    }
+
+    @Test
+    public void testOpponent() {
+        makeTester(playerA);
+        makeTester(playerB);
+        makeCreature("crt1", playerB, SubType.CLERIC);
+
+        useTester(playerA);
+        useTester(playerB);
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 21);
     }
 
     @Test

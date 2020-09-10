@@ -5,7 +5,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public enum PartyCount implements DynamicValue {
     instance;
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(Predicates.or(
