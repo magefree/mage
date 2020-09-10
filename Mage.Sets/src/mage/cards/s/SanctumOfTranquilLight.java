@@ -2,51 +2,45 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.cost.CostModificationSourceEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class SanctumOfTranquilLight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("Shrine you control");
-    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-
-    static {
-        filter.add(SubType.SHRINE.getPredicate());
-    }
-
     public SanctumOfTranquilLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
         // {5}{W}: Tap target creature. This ability costs {1} less to activate for each Shrine you control.
-        Ability ability = new SimpleActivatedAbility(new SanctumOfTranquilLightActivatedAbility());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{5}{W}"));
+        ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each Shrine you control"));
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CostModificationSourceEffect(Duration.EndOfGame, Outcome.Benefit, SanctumOfTranquilLightActivatedAbility.class, count, true).setText(""))
-                .addHint(new ValueHint("Shrines you control", count)));
+        ability.setCostAdjuster(SanctumOfTranquilLightAdjuster.instance);
+        this.addAbility(ability.addHint(SanctumOfTranquilLightAdjuster.getHint()));
     }
 
     private SanctumOfTranquilLight(final SanctumOfTranquilLight card) {
@@ -59,18 +53,22 @@ public final class SanctumOfTranquilLight extends CardImpl {
     }
 }
 
-class SanctumOfTranquilLightActivatedAbility extends SimpleActivatedAbility {
+enum SanctumOfTranquilLightAdjuster implements CostAdjuster {
+    instance;
 
-    SanctumOfTranquilLightActivatedAbility() {
-        super(new TapTargetEffect().setText("target creature. This ability costs {1} less to activate for each Shrine you control"), new ManaCostsImpl<>("{5}{W}"));
-    }
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SHRINE);
+    private static final DynamicValue count = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Shrines you control", count);
 
-    private SanctumOfTranquilLightActivatedAbility(SanctumOfTranquilLightActivatedAbility ability) {
-        super(ability);
+    public static Hint getHint() {
+        return hint;
     }
 
     @Override
-    public SanctumOfTranquilLightActivatedAbility copy() {
-        return new SanctumOfTranquilLightActivatedAbility(this);
+    public void adjustCosts(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller != null) {
+            CardUtil.reduceCost(ability, count.calculate(game, ability, null));
+        }
     }
 }
