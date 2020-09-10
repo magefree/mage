@@ -1,36 +1,33 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.RemoveAllCountersSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SageOfHours extends CardImpl {
 
     public SageOfHours(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -40,8 +37,7 @@ public final class SageOfHours extends CardImpl {
         // Heroic - Whenever you cast a spell that targets Sage of Hours, put a +1/+1 counter on it.
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
         // Remove all +1/+1 counters from Sage of Hours: For each five counters removed this way, take an extra turn after this one.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SageOfHoursEffect(), new SageOfHoursCost()));
-        
+        this.addAbility(new SimpleActivatedAbility(new SageOfHoursEffect(), new RemoveAllCountersSourceCost(CounterType.P1P1)));
     }
 
     public SageOfHours(final SageOfHours card) {
@@ -51,49 +47,6 @@ public final class SageOfHours extends CardImpl {
     @Override
     public SageOfHours copy() {
         return new SageOfHours(this);
-    }
-}
-
-class SageOfHoursCost extends CostImpl {
-
-    private int removedCounters;
-
-    public SageOfHoursCost() {
-        super();
-        this.removedCounters = 0;
-        this.text = "Remove all +1/+1 counters from {this}";
-    }
-
-    public SageOfHoursCost(SageOfHoursCost cost) {
-        super(cost);
-        this.removedCounters = cost.removedCounters;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(ability.getSourceId());
-        if (permanent != null) {
-            this.removedCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
-            if (this.removedCounters > 0) {
-                permanent.removeCounters(CounterType.P1P1.createInstance(this.removedCounters), game);
-            }
-        }
-        this.paid = true;
-        return true;
-    }
-
-    @Override
-    public SageOfHoursCost copy() {
-        return new SageOfHoursCost(this);
-    }
-
-    public int getRemovedCounters() {
-        return this.removedCounters;
     }
 }
 
@@ -119,8 +72,8 @@ class SageOfHoursEffect extends OneShotEffect {
         if (player != null) {
             int countersRemoved = 0;
             for (Cost cost : source.getCosts()) {
-                if (cost instanceof SageOfHoursCost) {
-                    countersRemoved = ((SageOfHoursCost) cost).getRemovedCounters();
+                if (cost instanceof RemoveAllCountersSourceCost) {
+                    countersRemoved = ((RemoveAllCountersSourceCost) cost).getRemovedCounters();
                 }
             }
             int turns = countersRemoved / 5;
