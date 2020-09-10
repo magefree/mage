@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class CorpseChurn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Put the top three cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
-        getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(3));
+        getSpellAbility().addEffect(new MillCardsControllerEffect(3));
         getSpellAbility().addEffect(new CorpseChurnEffect());
     }
 

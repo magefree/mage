@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class SkullProphet extends CardImpl {
 
         // {T}: Put the top two cards of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(2), new TapSourceCost()
+                new MillCardsControllerEffect(2), new TapSourceCost()
         ));
     }
 

@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -41,7 +41,7 @@ public final class ThievesGuildEnforcer extends CardImpl {
 
         // Whenever Thieves' Guild Enforcer or another Rogue enters the battlefield under your control, each opponent mills two cards.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
+                new MillCardsEachPlayerEffect(
                         2, TargetController.OPPONENT
                 ), filter, false, true
         ));

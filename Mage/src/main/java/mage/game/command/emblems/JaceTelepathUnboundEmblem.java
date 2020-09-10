@@ -3,7 +3,7 @@ package mage.game.command.emblems;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.command.Emblem;
@@ -17,7 +17,7 @@ public final class JaceTelepathUnboundEmblem extends Emblem {
 
     public JaceTelepathUnboundEmblem() {
         this.setName("Emblem Jace");
-        Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
+        Effect effect = new MillCardsTargetEffect(5);
         effect.setText("target opponent mills five cards");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
         ability.addTarget(new TargetOpponent());

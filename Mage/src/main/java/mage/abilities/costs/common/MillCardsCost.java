@@ -12,21 +12,21 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
+public class MillCardsCost extends CostImpl {
 
     private final int numberOfCards;
     private final Set<Card> cardsMovedToGraveyard = new LinkedHashSet<>();
 
-    public PutTopCardOfYourLibraryToGraveyardCost() {
+    public MillCardsCost() {
         this(1);
     }
 
-    public PutTopCardOfYourLibraryToGraveyardCost(int numberOfCards) {
+    public MillCardsCost(int numberOfCards) {
         this.numberOfCards = numberOfCards;
         this.text = setText();
     }
 
-    private PutTopCardOfYourLibraryToGraveyardCost(final PutTopCardOfYourLibraryToGraveyardCost cost) {
+    private MillCardsCost(final MillCardsCost cost) {
         super(cost);
         this.numberOfCards = cost.numberOfCards;
         this.cardsMovedToGraveyard.addAll(cost.getCardsMovedToGraveyard());
@@ -49,8 +49,8 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
     }
 
     @Override
-    public PutTopCardOfYourLibraryToGraveyardCost copy() {
-        return new PutTopCardOfYourLibraryToGraveyardCost(this);
+    public MillCardsCost copy() {
+        return new MillCardsCost(this);
     }
 
     public Set<Card> getCardsMovedToGraveyard() {

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class SphinxMindbreaker extends CardImpl {
 
         // When Sphinx Mindbreaker enters the battlefield, each opponent puts the top ten cards of their library into their graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(10, TargetController.OPPONENT)
+                new MillCardsEachPlayerEffect(10, TargetController.OPPONENT)
         ));
     }
 

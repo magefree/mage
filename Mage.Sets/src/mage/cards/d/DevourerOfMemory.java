@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
@@ -37,7 +37,7 @@ public final class DevourerOfMemory extends CardImpl {
 
         // {1}{U}{B}: Put the top card of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(1), new ManaCostsImpl("{1}{U}{B}")
+                new MillCardsControllerEffect(1), new ManaCostsImpl("{1}{U}{B}")
         ));
     }
 

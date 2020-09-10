@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class RuinCrab extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Landfall - Whenever a land enters the battlefield under your control, each opponent mills 3 cards.
-        this.addAbility(new LandfallAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.OPPONENT), false));
+        this.addAbility(new LandfallAbility(new MillCardsEachPlayerEffect(3, TargetController.OPPONENT), false));
     }
 
     private RuinCrab(final RuinCrab card) {

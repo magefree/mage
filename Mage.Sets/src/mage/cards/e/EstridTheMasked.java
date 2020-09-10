@@ -7,7 +7,7 @@ import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -145,7 +145,7 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new PutTopCardOfLibraryIntoGraveControllerEffect(7).apply(game, source);
+        new MillCardsControllerEffect(7).apply(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;

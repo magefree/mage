@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -44,7 +44,7 @@ public final class TheBindingOfTheTitans extends CardImpl {
 
         // I — Each player puts the top three cards of their library into their graveyard.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
+                this, SagaChapter.CHAPTER_I, new MillCardsEachPlayerEffect(
                         3, TargetController.ANY
                 )
         );

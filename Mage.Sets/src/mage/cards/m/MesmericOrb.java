@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +40,7 @@ public final class MesmericOrb extends CardImpl {
 class MesmericOrbTriggeredAbility extends TriggeredAbilityImpl {
 
     MesmericOrbTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(1), false);
+        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), false);
     }
 
     private MesmericOrbTriggeredAbility(final MesmericOrbTriggeredAbility ability) {

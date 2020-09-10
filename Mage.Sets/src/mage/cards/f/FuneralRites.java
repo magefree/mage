@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +22,7 @@ public final class FuneralRites extends CardImpl {
                 .setText("You draw two cards"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2)
                 .setText(", lose 2 life"));
-        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(2)
+        this.getSpellAbility().addEffect(new MillCardsControllerEffect(2)
                 .concatBy(", and"));
     }
 

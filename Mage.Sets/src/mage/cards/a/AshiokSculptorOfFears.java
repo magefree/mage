@@ -5,7 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class AshiokSculptorOfFears extends CardImpl {
         Ability ability = new LoyaltyAbility(
                 new DrawCardSourceControllerEffect(1).setText("draw a card"), 2
         );
-        ability.addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
+        ability.addEffect(new MillCardsEachPlayerEffect(2, TargetController.ANY));
         this.addAbility(ability);
 
         // −5: Put target creature card from a graveyard onto the battlefield under your control.

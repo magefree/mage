@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class VenomousHierophant extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Venomous Hierophant enters the battlefield, put the top three cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3)));
     }
 
     private VenomousHierophant(final VenomousHierophant card) {

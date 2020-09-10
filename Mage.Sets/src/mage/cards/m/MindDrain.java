@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class MindDrain extends CardImpl {
 
         // Target opponent discards two cards, mills a card, and loses 1 life. You gain 1 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(1).setText(", mills a card"));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(1).setText(", mills a card"));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1).setText(", and loses 1 life."));
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
         this.getSpellAbility().addTarget(new TargetOpponent());

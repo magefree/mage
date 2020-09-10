@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class ViciousRumors extends CardImpl {
                 TargetController.OPPONENT
         ));
         this.getSpellAbility().addEffect(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
+                new MillCardsEachPlayerEffect(
                         1, TargetController.OPPONENT
                 ).setText(", then mills a card")
         );

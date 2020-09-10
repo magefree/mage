@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -30,7 +30,7 @@ public final class BreakingEntering extends SplitCard {
 
         // Breaking
         // Target player puts the top eight cards of their library into their graveyard.
-        getLeftHalfCard().getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(8));
+        getLeftHalfCard().getSpellAbility().addEffect(new MillCardsTargetEffect(8));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
         // Entering

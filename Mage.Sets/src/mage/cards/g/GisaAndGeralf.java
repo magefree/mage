@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class GisaAndGeralf extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Gisa and Geralf enters the battlefield, put the top four cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
 
         // During each of your turns, you may cast a Zombie creature card from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GisaAndGeralfCastFromGraveyardEffect())

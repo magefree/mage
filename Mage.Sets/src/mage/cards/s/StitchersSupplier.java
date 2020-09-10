@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class StitchersSupplier extends CardImpl {
 
         // When Stitcher's Supplier enters the battlefield or dies, put the top three cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(3), false)
+                new MillCardsControllerEffect(3), false)
         );
     }
 

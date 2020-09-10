@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class SibsigHost extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Sibsig Host enters the battlefield, each player puts the top three cards of their library into their graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.ANY)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsEachPlayerEffect(3, TargetController.ANY)));
     }
 
     public SibsigHost(final SibsigHost card) {

@@ -12,28 +12,28 @@ import mage.util.CardUtil;
 /**
  * @author LevelX2
  */
-public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
+public class MillCardsTargetEffect extends OneShotEffect {
 
     private DynamicValue numberCards;
 
-    public PutTopCardOfLibraryIntoGraveTargetEffect(int numberCards) {
+    public MillCardsTargetEffect(int numberCards) {
         this(StaticValue.get(numberCards));
     }
 
-    public PutTopCardOfLibraryIntoGraveTargetEffect(DynamicValue numberCards) {
+    public MillCardsTargetEffect(DynamicValue numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
         this.staticText = setText();
     }
 
-    public PutTopCardOfLibraryIntoGraveTargetEffect(final PutTopCardOfLibraryIntoGraveTargetEffect effect) {
+    public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
 
     @Override
-    public PutTopCardOfLibraryIntoGraveTargetEffect copy() {
-        return new PutTopCardOfLibraryIntoGraveTargetEffect(this);
+    public MillCardsTargetEffect copy() {
+        return new MillCardsTargetEffect(this);
     }
 
     @Override

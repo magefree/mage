@@ -9,7 +9,7 @@ import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -56,7 +56,7 @@ public final class TayamLuminousEnigma extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TayamLuminousEnigmaReplacementEffect()));
 
         // {3}, Remove three counters from among creatures you control: Put the top three cards of your library into your graveyard, then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
-        PutTopCardOfLibraryIntoGraveControllerEffect millEffect = new PutTopCardOfLibraryIntoGraveControllerEffect(3);
+        MillCardsControllerEffect millEffect = new MillCardsControllerEffect(3);
         millEffect.concatBy(".");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, millEffect, new GenericManaCost(3));
         ability.addCost(new TayamLuminousEnigmaCost());

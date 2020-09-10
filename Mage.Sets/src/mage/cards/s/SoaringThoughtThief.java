@@ -5,7 +5,7 @@ import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -49,7 +49,7 @@ public final class SoaringThoughtThief extends CardImpl {
 
         // Whenever one or more Rogues you control attack, each opponent mills two cards.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.OPPONENT), 1, filter
+                new MillCardsEachPlayerEffect(2, TargetController.OPPONENT), 1, filter
         ));
     }
 

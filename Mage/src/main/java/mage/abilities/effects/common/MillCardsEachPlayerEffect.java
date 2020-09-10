@@ -15,31 +15,31 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect {
+public class MillCardsEachPlayerEffect extends OneShotEffect {
 
     private final DynamicValue numberCards;
     private final TargetController targetController;
 
-    public PutTopCardOfLibraryIntoGraveEachPlayerEffect(int numberCards, TargetController targetController) {
+    public MillCardsEachPlayerEffect(int numberCards, TargetController targetController) {
         this(StaticValue.get(numberCards), targetController);
     }
 
-    public PutTopCardOfLibraryIntoGraveEachPlayerEffect(DynamicValue numberCards, TargetController targetController) {
+    public MillCardsEachPlayerEffect(DynamicValue numberCards, TargetController targetController) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
         this.targetController = targetController;
         this.staticText = setText();
     }
 
-    private PutTopCardOfLibraryIntoGraveEachPlayerEffect(final PutTopCardOfLibraryIntoGraveEachPlayerEffect effect) {
+    private MillCardsEachPlayerEffect(final MillCardsEachPlayerEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
         this.targetController = effect.targetController;
     }
 
     @Override
-    public PutTopCardOfLibraryIntoGraveEachPlayerEffect copy() {
-        return new PutTopCardOfLibraryIntoGraveEachPlayerEffect(this);
+    public MillCardsEachPlayerEffect copy() {
+        return new MillCardsEachPlayerEffect(this);
     }
 
     @Override

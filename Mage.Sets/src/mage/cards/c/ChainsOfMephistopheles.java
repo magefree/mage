@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -66,7 +66,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
         if (player != null) {
             if (player.getHand().isEmpty()) {
                 // they put the top card of their library into their graveyard
-                Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(1);
+                Effect effect = new MillCardsTargetEffect(1);
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 effect.apply(game, source);
                 return true;

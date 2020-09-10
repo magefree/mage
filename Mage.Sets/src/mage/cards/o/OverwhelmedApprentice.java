@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class OverwhelmedApprentice extends CardImpl {
 
         // When Overwhelmed Apprentice enters the battlefield, each opponent puts the top two cards of their library into their graveyard. Then you scry 2.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.OPPONENT)
+                new MillCardsEachPlayerEffect(2, TargetController.OPPONENT)
         );
         ability.addEffect(new ScryEffect(2, false).setText("Then you scry 2."));
         this.addAbility(ability);

@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
+import mage.abilities.costs.common.MillCardsCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.mana.ManaEffect;
@@ -51,7 +51,7 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
 
     public CharmedPendantAbility() {
         super(Zone.BATTLEFIELD, new CharmedPendantManaEffect(), new TapSourceCost());
-        this.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
+        this.addCost(new MillCardsCost());
         this.setUndoPossible(false); // Otherwise you could return the card from graveyard
     }
 
@@ -131,8 +131,8 @@ class CharmedPendantManaEffect extends ManaEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Cost cost : source.getCosts()) {
-                if (cost instanceof PutTopCardOfYourLibraryToGraveyardCost) {
-                    Set<Card> cards = ((PutTopCardOfYourLibraryToGraveyardCost) cost).getCardsMovedToGraveyard();
+                if (cost instanceof MillCardsCost) {
+                    Set<Card> cards = ((MillCardsCost) cost).getCardsMovedToGraveyard();
                     if (!cards.isEmpty()) {
                         Card card = cards.iterator().next();
                         if (card != null && card.getManaCost() != null) {

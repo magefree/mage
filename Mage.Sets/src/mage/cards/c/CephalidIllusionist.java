@@ -11,7 +11,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class CephalidIllusionist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.
-        this.addAbility(new BecomesTargetTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3)));
+        this.addAbility(new BecomesTargetTriggeredAbility(new MillCardsControllerEffect(3)));
         
         // {2}{U}, {tap}: Prevent all combat damage that would be dealt to
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);

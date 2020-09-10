@@ -8,7 +8,7 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.hint.common.DeliriumHint;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class CropSigil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // At the beginning of your upkeep, you may put the top card of your library into your graveyard.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PutTopCardOfLibraryIntoGraveControllerEffect(1), true));
+        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new MillCardsControllerEffect(1), true));
 
         // <i>Delirium</i> &mdash; {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand.
         // Activate this ability only if there are four or more card types among cards in your graveyard.

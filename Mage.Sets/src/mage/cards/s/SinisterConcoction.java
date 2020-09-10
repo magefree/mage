@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
+import mage.abilities.costs.common.MillCardsCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -28,7 +28,7 @@ public final class SinisterConcoction extends CardImpl {
         // {B}, Pay 1 life, Put the top card of your library into your graveyard, Discard a card, Sacrifice Sinister Concoction: Destroy target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new PayLifeCost(1));
-        ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
+        ability.addCost(new MillCardsCost());
         ability.addCost(new DiscardCardCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.EscapeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class SweetOblivion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Target player puts the top four cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(4));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Escape—{3}{U}, Exile four other cards from your graveyard.

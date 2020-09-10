@@ -5,7 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class SyrKonradTheGrim extends CardImpl {
         this.addAbility(new SyrKonradTheGrimTriggeredAbility());
 
         // {1}{B}: Each player puts the top card of their library into their graveyard.
-        this.addAbility(new SimpleActivatedAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
+        this.addAbility(new SimpleActivatedAbility(new MillCardsEachPlayerEffect(
                 1, TargetController.ANY
         ), new ManaCostsImpl("{1}{B}")));
     }

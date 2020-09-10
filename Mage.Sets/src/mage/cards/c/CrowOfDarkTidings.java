@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class CrowOfDarkTidings extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Crow of Dark Tidings enters the battlefield or dies, put the top two cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(2), false));
+        this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new MillCardsControllerEffect(2), false));
     }
 
     public CrowOfDarkTidings(final CrowOfDarkTidings card) {

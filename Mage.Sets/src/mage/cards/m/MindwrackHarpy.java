@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class MindwrackHarpy extends CardImpl {
 
         // At the beginning of combat on your turn, each player puts the top three cards of their library into their graveyard.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.ANY),
+                new MillCardsEachPlayerEffect(3, TargetController.ANY),
                 TargetController.YOU, false
         ));
     }

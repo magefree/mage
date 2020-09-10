@@ -8,7 +8,7 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -47,7 +47,7 @@ public final class LilianaTheLastHope extends CardImpl {
         this.addAbility(ability);
 
         // -2: Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.
-        ability = new LoyaltyAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(2), -2);
+        ability = new LoyaltyAbility(new MillCardsControllerEffect(2), -2);
         ability.addEffect(new LilianaTheLastHopeEffect());
         this.addAbility(ability);
 

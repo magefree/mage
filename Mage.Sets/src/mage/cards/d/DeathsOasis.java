@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -95,7 +95,7 @@ class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(2));
+        this.addEffect(new MillCardsControllerEffect(2));
         this.addEffect(new DeathsOasisEffect(zEvent.getTarget().getConvertedManaCost()));
         return true;
     }

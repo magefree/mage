@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class WindgraceAcolyte extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Windgrace Acolyte enters the battlefield, put the top three cards of your library into your graveyard and you gain 3 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3), false);
         ability.addEffect(new GainLifeEffect(3).setText("and you gain 3 life"));
         this.addAbility(ability);
     }

@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
+import mage.abilities.costs.common.MillCardsCost;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class DerangedAssistant extends CardImpl {
 
         // {T}, Mill a card: Add {C}.
         ColorlessManaAbility ability = new ColorlessManaAbility();
-        ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
+        ability.addCost(new MillCardsCost());
         ability.setUndoPossible(false);
         this.addAbility(ability);
     }

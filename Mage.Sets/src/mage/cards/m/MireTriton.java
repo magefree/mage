@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class MireTriton extends CardImpl {
 
         // When Mire Triton enters the battlefield, put the top two cards of your library into your graveyard and you gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(2)
+                new MillCardsControllerEffect(2)
         );
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);

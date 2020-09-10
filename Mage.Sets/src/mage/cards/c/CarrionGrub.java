@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class CarrionGrub extends CardImpl {
         )));
 
         // When Carrion Grub enters the battlefield, mill four cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
     }
 
     private CarrionGrub(final CarrionGrub card) {

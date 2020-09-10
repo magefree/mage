@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class ExcavationMole extends CardImpl {
 
         // When Excavation Mole enters the battlefield, put the top three cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(3)
+                new MillCardsControllerEffect(3)
         ));
     }
 

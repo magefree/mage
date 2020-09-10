@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class GlowsporeShaman extends CardImpl {
 
         // When Glowspore Shaman enters the battlefield, put the top three cards of your library into your graveyard. You may put a land card from your graveyard on top of your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(3), false
+                new MillCardsControllerEffect(3), false
         );
         ability.addEffect(new GlowsporeShamanEffect());
         this.addAbility(ability);

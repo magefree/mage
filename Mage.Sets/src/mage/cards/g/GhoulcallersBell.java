@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class GhoulcallersBell extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {T}: Each player puts the top card of their library into their graveyard.
-        this.addAbility(new SimpleActivatedAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.ANY), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new MillCardsEachPlayerEffect(1, TargetController.ANY), new TapSourceCost()));
     }
 
     private GhoulcallersBell(final GhoulcallersBell card) {

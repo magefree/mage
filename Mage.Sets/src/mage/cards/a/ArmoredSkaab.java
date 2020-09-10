@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class ArmoredSkaab extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Armored Skaab enters the battlefield, put the top four cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
     }
 
     public ArmoredSkaab(final ArmoredSkaab card) {

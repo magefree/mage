@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
 
         // When Emry, Lurker of the Loch enters the battlefield, put the top four cards of your library into your graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(4)
+                new MillCardsControllerEffect(4)
         ));
 
         // {T}: Choose target artifact card in your graveyard. You may cast that card this turn.

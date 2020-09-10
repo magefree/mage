@@ -8,7 +8,7 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -30,7 +30,7 @@ public final class PerpetualTimepiece extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {T}: Put the top two cards of your library into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(2), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(2), new TapSourceCost()));
 
         // {2}, Exile Perpetual Timepiece: Shuffle any number of target cards from your graveyard into your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerpetualTimepieceShuffleEffect(), new GenericManaCost(2));
