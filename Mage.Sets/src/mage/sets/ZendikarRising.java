@@ -366,6 +366,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Tazri, Beacon of Unity", 44, Rarity.MYTHIC, mage.cards.t.TazriBeaconOfUnity.class));
         cards.add(new SetCardInfo("Teeterpeak Ambusher", 169, Rarity.COMMON, mage.cards.t.TeeterpeakAmbusher.class));
         cards.add(new SetCardInfo("Territorial Scythecat", 213, Rarity.COMMON, mage.cards.t.TerritorialScythecat.class));
+        cards.add(new SetCardInfo("Throne of Makindi", 265, Rarity.RARE, mage.cards.t.ThroneOfMakindi.class));
         cards.add(new SetCardInfo("Thundering Rebuke", 170, Rarity.UNCOMMON, mage.cards.t.ThunderingRebuke.class));
         cards.add(new SetCardInfo("Thundering Sparkmage", 171, Rarity.UNCOMMON, mage.cards.t.ThunderingSparkmage.class));
         cards.add(new SetCardInfo("Thwart the Grave", 130, Rarity.UNCOMMON, mage.cards.t.ThwartTheGrave.class));
