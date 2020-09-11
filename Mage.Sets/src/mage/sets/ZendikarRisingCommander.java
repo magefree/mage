@@ -20,5 +20,6 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Enigma Thief", 4, Rarity.RARE, mage.cards.e.EnigmaThief.class));
+        cards.add(new SetCardInfo("Geode Rager", 6, Rarity.RARE, mage.cards.g.GeodeRager.class));
     }
 }
