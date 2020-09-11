@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.UUID;
 
@@ -22,7 +22,7 @@ public final class MoltenBlast extends CardImpl {
         // Choose one —
         // • Molten Blast deals 2 damage to target creature or planeswalker.
         getSpellAbility().addEffect(new DamageTargetEffect(3));
-        getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
 
         // • Destroy target artifact.
         Mode mode = new Mode(new DestroyTargetEffect());
