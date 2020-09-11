@@ -313,6 +313,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Sejiri Shelter", 37, Rarity.UNCOMMON, mage.cards.s.SejiriShelter.class));
         cards.add(new SetCardInfo("Shadow Stinger", 123, Rarity.UNCOMMON, mage.cards.s.ShadowStinger.class));
         cards.add(new SetCardInfo("Shadows' Verdict", 124, Rarity.RARE, mage.cards.s.ShadowsVerdict.class));
+        cards.add(new SetCardInfo("Shatterskull Charger", 159, Rarity.RARE, mage.cards.s.ShatterskullCharger.class));
         cards.add(new SetCardInfo("Shatterskull Smashing", 161, Rarity.MYTHIC, mage.cards.s.ShatterskullSmashing.class));
         cards.add(new SetCardInfo("Shatterskull, the Hammer Pass", 161, Rarity.MYTHIC, mage.cards.s.ShatterskullTheHammerPass.class));
         cards.add(new SetCardInfo("Shell Shield", 79, Rarity.COMMON, mage.cards.s.ShellShield.class));
