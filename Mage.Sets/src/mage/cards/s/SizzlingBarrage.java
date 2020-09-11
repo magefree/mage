@@ -70,8 +70,9 @@ class SizzlingBarrageWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.BLOCKER_DECLARED) {
-            blockers.add(new MageObjectReference(event.getSourceId(), game));
+            return;
         }
+        blockers.add(new MageObjectReference(event.getSourceId(), game));
     }
 
     @Override
