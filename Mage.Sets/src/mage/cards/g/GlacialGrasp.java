@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public final class GlacialGrasp extends CardImpl {
 
         // Tap target creature. Its controller mills two cards. That creature doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new GlacialGraspEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
