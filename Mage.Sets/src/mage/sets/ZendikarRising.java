@@ -169,6 +169,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Emeria, Shattered Skyclave", 12, Rarity.MYTHIC, mage.cards.e.EmeriaShatteredSkyclave.class));
         cards.add(new SetCardInfo("Expedition Champion", 138, Rarity.COMMON, mage.cards.e.ExpeditionChampion.class));
         cards.add(new SetCardInfo("Expedition Diviner", 57, Rarity.COMMON, mage.cards.e.ExpeditionDiviner.class));
+        cards.add(new SetCardInfo("Expedition Healer", 13, Rarity.COMMON, mage.cards.e.ExpeditionHealer.class));
         cards.add(new SetCardInfo("Expedition Skulker", 101, Rarity.COMMON, mage.cards.e.ExpeditionSkulker.class));
         cards.add(new SetCardInfo("Farsight Adept", 14, Rarity.COMMON, mage.cards.f.FarsightAdept.class));
         cards.add(new SetCardInfo("Fearless Fledgling", 15, Rarity.UNCOMMON, mage.cards.f.FearlessFledgling.class));
