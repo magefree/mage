@@ -280,6 +280,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Practiced Tactics", 32, Rarity.COMMON, mage.cards.p.PracticedTactics.class));
         cards.add(new SetCardInfo("Pressure Point", 33, Rarity.COMMON, mage.cards.p.PressurePoint.class));
         cards.add(new SetCardInfo("Prowling Felidar", 34, Rarity.COMMON, mage.cards.p.ProwlingFelidar.class));
+        cards.add(new SetCardInfo("Pyroclastic Hellion", 152, Rarity.COMMON, mage.cards.p.PyroclasticHellion.class));
         cards.add(new SetCardInfo("Rabid Bite", 199, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Ravager's Mace", 235, Rarity.UNCOMMON, mage.cards.r.RavagersMace.class));
         cards.add(new SetCardInfo("Reclaim the Wastes", 200, Rarity.COMMON, mage.cards.r.ReclaimTheWastes.class));
