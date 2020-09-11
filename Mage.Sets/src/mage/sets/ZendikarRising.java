@@ -149,6 +149,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Cliffhaven Kitesail", 243, Rarity.COMMON, mage.cards.c.CliffhavenKitesail.class));
         cards.add(new SetCardInfo("Cliffhaven Sell-Sword", 8, Rarity.COMMON, mage.cards.c.CliffhavenSellSword.class));
         cards.add(new SetCardInfo("Concerted Defense", 52, Rarity.UNCOMMON, mage.cards.c.ConcertedDefense.class));
+        cards.add(new SetCardInfo("Confounding Conundrum", 53, Rarity.RARE, mage.cards.c.ConfoundingConundrum.class));
         cards.add(new SetCardInfo("Coralhelm Chronicler", 54, Rarity.RARE, mage.cards.c.CoralhelmChronicler.class));
         cards.add(new SetCardInfo("Coveted Prize", 95, Rarity.RARE, mage.cards.c.CovetedPrize.class));
         cards.add(new SetCardInfo("Cragcrown Pathway", 261, Rarity.RARE, mage.cards.c.CragcrownPathway.class));
