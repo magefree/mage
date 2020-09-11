@@ -21,7 +21,7 @@ public final class StrengthOfSolidarity extends CardImpl {
 
         // Choose target creature you control. Put a +1/+1 counter on it for each creature in your party.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(), PartyCount.instance
+                CounterType.P1P1.createInstance(0), PartyCount.instance
         ).setText("Choose target creature you control. Put a +1/+1 counter on it for each creature in your party."));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addHint(PartyCountHint.instance);
