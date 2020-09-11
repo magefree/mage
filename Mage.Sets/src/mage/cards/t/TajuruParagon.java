@@ -14,8 +14,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,7 +50,8 @@ public final class TajuruParagon extends CardImpl {
         // When Tajuru Paragon enters the battlefield, if it was kicked, reveal the top six cards of your library. You may put a card that shares a creature type with it from among them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect()), KickedCondition.instance,
-                "reveal the top six cards of your library. You may put a card that shares a creature type with it " +
+                "When {this} enters the battlefield, if it was kicked, reveal the top six cards of your library. " +
+                        "You may put a card that shares a creature type with it " +
                         "from among them into your hand. Put the rest on the bottom of your library in a random order"
         ));
     }
@@ -67,12 +67,6 @@ public final class TajuruParagon extends CardImpl {
 }
 
 class TajuruParagonEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("card that shares a creature type");
-
-    static {
-        filter.add(TajuruParagonPredicate.instance);
-    }
 
     TajuruParagonEffect() {
         super(Outcome.Benefit);
@@ -95,37 +89,42 @@ class TajuruParagonEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         player.revealCards(source, cards, game);
-        TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card != null) {
-            player.moveCards(card, Zone.HAND, source, game);
-            cards.remove(card);
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            FilterCard filter = new FilterCard("card that shares a creature type with " + permanent.getName());
+            filter.add(new TajuruParagonPredicate(permanent));
+            TargetCard target = new TargetCardInLibrary(0, 1, filter);
+            player.choose(outcome, cards, target, game);
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                player.moveCards(card, Zone.HAND, source, game);
+                cards.remove(card);
+            }
         }
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }
 
-enum TajuruParagonPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
-    instance;
+class TajuruParagonPredicate implements Predicate<Card> {
+
+    private final Permanent permanent;
+
+    TajuruParagonPredicate(Permanent permanent) {
+        this.permanent = permanent;
+    }
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
+    public boolean apply(Card input, Game game) {
         boolean isAllA = permanent.isAllCreatureTypes()
                 || permanent.hasAbility(ChangelingAbility.getInstance(), game);
         boolean isAnyA = isAllA || permanent.getSubtype(game)
                 .stream()
                 .map(SubType::getSubTypeSet)
                 .anyMatch(SubTypeSet.CreatureType::equals);
-        boolean isAllB = input.getObject().isAllCreatureTypes()
-                || input.getObject().hasAbility(ChangelingAbility.getInstance(), game);
+        boolean isAllB = input.isAllCreatureTypes()
+                || input.hasAbility(ChangelingAbility.getInstance(), game);
         boolean isAnyB = isAllB || input
-                .getObject()
                 .getSubtype(game)
                 .stream()
                 .map(SubType::getSubTypeSet)
@@ -138,6 +137,6 @@ enum TajuruParagonPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
                 .getSubtype(game)
                 .stream()
                 .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                .anyMatch(subType -> input.getObject().hasSubtype(subType, game)));
+                .anyMatch(subType -> input.hasSubtype(subType, game)));
     }
 }
