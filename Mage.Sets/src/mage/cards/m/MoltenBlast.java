@@ -21,7 +21,7 @@ public final class MoltenBlast extends CardImpl {
 
         // Choose one —
         // • Molten Blast deals 2 damage to target creature or planeswalker.
-        getSpellAbility().addEffect(new DamageTargetEffect(3));
+        getSpellAbility().addEffect(new DamageTargetEffect(2));
         getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
 
         // • Destroy target artifact.
