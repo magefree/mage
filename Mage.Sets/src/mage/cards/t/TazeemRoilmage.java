@@ -1,5 +1,4 @@
-
-package mage.cards.g;
+package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -21,23 +20,23 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GhituChronicler extends CardImpl {
+public final class TazeemRoilmage extends CardImpl {
 
     private static final FilterCard filter
             = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
 
-    public GhituChronicler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+    public TazeemRoilmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Kicker {3}{R}
-        this.addAbility(new KickerAbility("{3}{R}"));
+        // Kicker {4}
+        this.addAbility(new KickerAbility("{4}"));
 
-        // When Ghitu Chronicler enters the battlefield, if it was kicked, return target instant or sorcery card from your graveyard to your hand.
+        // When Tazeem Roilmage enters the battlefield, if it was kicked, return target instant or sorcery card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false),
                 KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
@@ -47,12 +46,12 @@ public final class GhituChronicler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhituChronicler(final GhituChronicler card) {
+    private TazeemRoilmage(final TazeemRoilmage card) {
         super(card);
     }
 
     @Override
-    public GhituChronicler copy() {
-        return new GhituChronicler(this);
+    public TazeemRoilmage copy() {
+        return new TazeemRoilmage(this);
     }
 }
