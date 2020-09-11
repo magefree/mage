@@ -42,7 +42,7 @@ public final class ScuteSwarm extends CardImpl {
 
         // Landfall — Whenever a land enters the battlefield under your control, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of Scute Swarm instead.
         this.addAbility(new LandfallAbility(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new InsectToken()), new CreateTokenCopySourceEffect(),
+                new CreateTokenCopySourceEffect(), new CreateTokenEffect(new InsectToken()),
                 condition, "create a 1/1 green Insect creature token. If you control six or more lands, " +
                 "create a token that's a copy of {this} instead"
         )).addHint(hint));
