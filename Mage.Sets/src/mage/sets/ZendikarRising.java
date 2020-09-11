@@ -141,6 +141,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Canyon Jerboa", 7, Rarity.UNCOMMON, mage.cards.c.CanyonJerboa.class));
         cards.add(new SetCardInfo("Cascade Seer", 48, Rarity.COMMON, mage.cards.c.CascadeSeer.class));
         cards.add(new SetCardInfo("Charix, the Raging Isle", 49, Rarity.RARE, mage.cards.c.CharixTheRagingIsle.class));
+        cards.add(new SetCardInfo("Chilling Trap", 50, Rarity.COMMON, mage.cards.c.ChillingTrap.class));
         cards.add(new SetCardInfo("Cinderclasm", 136, Rarity.UNCOMMON, mage.cards.c.Cinderclasm.class));
         cards.add(new SetCardInfo("Clearwater Pathway", 260, Rarity.RARE, mage.cards.c.ClearwaterPathway.class));
         cards.add(new SetCardInfo("Cleric of Chill Depths", 51, Rarity.COMMON, mage.cards.c.ClericOfChillDepths.class));
