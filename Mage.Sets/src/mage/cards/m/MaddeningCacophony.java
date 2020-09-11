@@ -66,7 +66,7 @@ class MaddeningCacophonyEffect extends OneShotEffect {
             }
             int toMill = 8;
             if (kicked) {
-                toMill = (int) Math.ceil(player.getLibrary().size() / 2);
+                toMill = Math.floorDiv(player.getLibrary().size(), 2) + player.getLibrary().size() % 2;
             }
             player.millCards(toMill, source, game);
         }
