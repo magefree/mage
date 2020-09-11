@@ -10,9 +10,13 @@ import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -28,7 +32,12 @@ import java.util.UUID;
  */
 public final class MagmaticChanneler extends CardImpl {
 
-    private static final Condition condition = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY);
+    private static final Condition condition
+            = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY);
+    private static final DynamicValue cardsCount
+            = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
+    private static final Hint hint
+            = new ValueHint("Instant and sorcery cards in your graveyard", cardsCount);
 
     public MagmaticChanneler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -42,7 +51,7 @@ public final class MagmaticChanneler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 1, Duration.WhileOnBattlefield), condition,
                 "as long as there are four or more instant and/or sorcery cards in your graveyard, {this} gets +3/+1"
-        )));
+        )).addHint(hint));
 
         // {T}, Discard a card: Exile the top two cards of your library, then choose one of them. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(new MagmaticChannelerExileEffect(), new TapSourceCost());
