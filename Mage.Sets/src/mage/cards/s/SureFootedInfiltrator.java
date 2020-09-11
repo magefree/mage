@@ -9,6 +9,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -41,7 +42,8 @@ public final class SureFootedInfiltrator extends CardImpl {
 
         // Tap another untapped Rogue you control: Sure-Footed Infiltrator can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new CantBeBlockedSourceEffect(), new TapTargetCost(new TargetControlledPermanent(filter))
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn),
+                new TapTargetCost(new TargetControlledPermanent(filter))
         ));
 
         // Whenever Sure-Footed Infiltrator deals combat damage to a player, draw a card.
