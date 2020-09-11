@@ -43,7 +43,7 @@ public final class YasharnImplacableEarth extends CardImpl {
 
         // When Yasharn, Implacable Earth enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new YasharnImplacableEarthTarget())
+                new SearchLibraryPutInHandEffect(new YasharnImplacableEarthTarget(), true)
                         .setText("search your library for a basic Forest card and a basic Plains card, " +
                                 "reveal those cards, put them into your hand, then shuffle your library")
         ));
@@ -102,7 +102,7 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
         subTypes.removeIf(subType -> subType != SubType.FOREST && subType != SubType.PLAINS);
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
-            return card != null && subTypes.stream().noneMatch(subType -> card.hasSubtype(subType, game));
+            return card != null && subTypes.stream().anyMatch(subType -> card.hasSubtype(subType, game));
         });
         return possibleTargets;
     }
