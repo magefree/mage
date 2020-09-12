@@ -130,6 +130,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Blackbloom Bog", 91, Rarity.UNCOMMON, mage.cards.b.BlackbloomBog.class));
         cards.add(new SetCardInfo("Blackbloom Rogue", 91, Rarity.UNCOMMON, mage.cards.b.BlackbloomRogue.class));
         cards.add(new SetCardInfo("Blood Beckoning", 92, Rarity.COMMON, mage.cards.b.BloodBeckoning.class));
+        cards.add(new SetCardInfo("Blood Price", 93, Rarity.COMMON, mage.cards.b.BloodPrice.class));
         cards.add(new SetCardInfo("Bloodchief's Thirst", 94, Rarity.UNCOMMON, mage.cards.b.BloodchiefsThirst.class));
         cards.add(new SetCardInfo("Boulderloft Pathway", 258, Rarity.RARE, mage.cards.b.BoulderloftPathway.class));
         cards.add(new SetCardInfo("Branchloft Pathway", 258, Rarity.RARE, mage.cards.b.BranchloftPathway.class));
