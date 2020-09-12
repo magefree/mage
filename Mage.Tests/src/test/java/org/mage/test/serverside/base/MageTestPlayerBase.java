@@ -5,6 +5,10 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,6 +16,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -415,6 +420,27 @@ public abstract class MageTestPlayerBase {
                 Assert.fail("Unsupported zone: " + putAtZone);
         }
     }
+
+    /**
+     * Add cost modification effect to the game (all cast cost will be increaded or decreased for controller)
+     *
+     * @param controller
+     * @param modificationAmount
+     */
+    protected void addCustomEffect_SpellCostModification(TestPlayer controller, int modificationAmount) {
+        Effect effect;
+        if (modificationAmount >= 0) {
+            effect = new SpellsCostIncreasingAllEffect(modificationAmount, StaticFilters.FILTER_CARD, TargetController.YOU);
+        } else {
+            effect = new SpellsCostReductionAllEffect(StaticFilters.FILTER_CARD, -1 * modificationAmount, false, true);
+        }
+
+        addCustomCardWithAbility(
+                "cost modification " + controller.getName(),
+                controller,
+                new SimpleStaticAbility(effect)
+        );
+    }
 }
 
 // custom card with global abilities list to init (can contains abilities per card name)
@@ -440,7 +466,7 @@ class CustomTestCard extends CardImpl {
     }
 
     static void addAdditionalSubtypes(String cardName, SubType... subtypes) {
-        if(subtypes!=null) {
+        if (subtypes != null) {
             subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
         }
     }
