@@ -5,6 +5,7 @@
  */
 package mage.abilities.common;
 
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.counters.CounterType;
 
@@ -33,7 +34,7 @@ public class PlaneswalkerEntersWithLoyaltyCountersAbility extends EntersBattlefi
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
         this.getEffects().clear();
-        this.addEffect(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(startingLoyalty)));
+        this.addEffect(new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(startingLoyalty))));
     }
 
     @Override
