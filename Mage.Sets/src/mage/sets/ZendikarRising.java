@@ -230,6 +230,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Angel", 23, Rarity.RARE, mage.cards.l.LegionAngel.class));
         cards.add(new SetCardInfo("Leyline Tyrant", 147, Rarity.MYTHIC, mage.cards.l.LeylineTyrant.class));
         cards.add(new SetCardInfo("Linvala, Shield of Sea Gate", 226, Rarity.RARE, mage.cards.l.LinvalaShieldOfSeaGate.class));
+        cards.add(new SetCardInfo("Lithoform Blight", 109, Rarity.UNCOMMON, mage.cards.l.LithoformBlight.class));
         cards.add(new SetCardInfo("Living Tempest", 65, Rarity.COMMON, mage.cards.l.LivingTempest.class));
         cards.add(new SetCardInfo("Lotus Cobra", 193, Rarity.RARE, mage.cards.l.LotusCobra.class));
         cards.add(new SetCardInfo("Lullmage's Domination", 66, Rarity.UNCOMMON, mage.cards.l.LullmagesDomination.class));
