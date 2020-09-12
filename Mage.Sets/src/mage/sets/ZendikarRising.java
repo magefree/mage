@@ -271,6 +271,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Nimana Skitter-Sneak", 116, Rarity.COMMON, mage.cards.n.NimanaSkitterSneak.class));
         cards.add(new SetCardInfo("Nimana Skydancer", 117, Rarity.COMMON, mage.cards.n.NimanaSkydancer.class));
         cards.add(new SetCardInfo("Nimble Trapfinder", 72, Rarity.RARE, mage.cards.n.NimbleTrapfinder.class));
+        cards.add(new SetCardInfo("Nissa of Shadowed Boughs", 231, Rarity.MYTHIC, mage.cards.n.NissaOfShadowedBoughs.class));
         cards.add(new SetCardInfo("Nissa's Zendikon", 197, Rarity.COMMON, mage.cards.n.NissasZendikon.class));
         cards.add(new SetCardInfo("Nullpriest of Oblivion", 118, Rarity.RARE, mage.cards.n.NullpriestOfOblivion.class));
         cards.add(new SetCardInfo("Oblivion's Hunger", 119, Rarity.COMMON, mage.cards.o.OblivionsHunger.class));
