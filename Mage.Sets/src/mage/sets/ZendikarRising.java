@@ -189,6 +189,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Glasspool Shore", 60, Rarity.RARE, mage.cards.g.GlasspoolShore.class));
         cards.add(new SetCardInfo("Gnarlid Colony", 185, Rarity.COMMON, mage.cards.g.GnarlidColony.class));
         cards.add(new SetCardInfo("Goma Fada Vanguard", 141, Rarity.UNCOMMON, mage.cards.g.GomaFadaVanguard.class));
+        cards.add(new SetCardInfo("Grakmaw, Skyclave Ravager", 223, Rarity.RARE, mage.cards.g.GrakmawSkyclaveRavager.class));
         cards.add(new SetCardInfo("Grimclimb Pathway", 259, Rarity.RARE, mage.cards.g.GrimclimbPathway.class));
         cards.add(new SetCardInfo("Grotag Bug-Catcher", 142, Rarity.COMMON, mage.cards.g.GrotagBugCatcher.class));
         cards.add(new SetCardInfo("Grotag Night-Runner", 143, Rarity.UNCOMMON, mage.cards.g.GrotagNightRunner.class));
