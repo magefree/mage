@@ -40,7 +40,6 @@ import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -62,7 +61,7 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> imple
         permanentFilter = new FilterPermanent();
         cardFilter = new FilterCard();
         cardFilter.add(new AbilityPredicate(SuspendAbility.class));
-        cardFilter.add(new CounterCardPredicate(CounterType.TIME));
+        cardFilter.add(CounterType.TIME.getPredicate());
     }
 
     public FilterPermanentOrSuspendedCard(final FilterPermanentOrSuspendedCard filter) {

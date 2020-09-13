@@ -11,7 +11,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.token.KarnConstructToken;
@@ -125,7 +124,7 @@ class KarnMinus1Effect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("card you own with a silver counter on it in exile");
 
     static {
-        filter.add(new CounterCardPredicate(CounterType.SILVER));
+        filter.add(CounterType.SILVER.getPredicate());
     }
 
     public KarnMinus1Effect() {

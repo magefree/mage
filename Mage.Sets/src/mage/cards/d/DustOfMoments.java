@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CardCounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,7 +68,7 @@ public final class DustOfMoments extends CardImpl {
             permFilter.add(CounterType.TIME.getPredicate());
 
             this.exiledFilter = new FilterCard("permanent and each suspended card");
-            exiledFilter.add(new CardCounterPredicate(CounterType.TIME));
+            exiledFilter.add(CounterType.TIME.getPredicate());
             setText();
         }
 

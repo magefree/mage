@@ -22,7 +22,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -36,7 +35,7 @@ public final class MaintenanceDroid extends CardImpl {
     private static final FilterCard filter = new FilterCard("target card you own with a repair counter on it");
 
     static {
-        filter.add(new CounterCardPredicate(CounterType.REPAIR));
+        filter.add(CounterType.REPAIR.getPredicate());
     }
 
     public MaintenanceDroid(UUID ownerId, CardSetInfo setInfo) {

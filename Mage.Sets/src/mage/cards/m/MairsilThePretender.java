@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -120,7 +119,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new CounterCardPredicate(CounterType.CAGE));
+        filter.add(CounterType.CAGE.getPredicate());
     }
 
     public MairsilThePretenderGainAbilitiesEffect() {

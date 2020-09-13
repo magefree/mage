@@ -20,7 +20,6 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -35,7 +34,7 @@ public final class FuryCharm extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("suspended card");
     static {
-        filter.add(new CounterCardPredicate(CounterType.TIME));
+        filter.add(CounterType.TIME.getPredicate());
         filter.add(new AbilityPredicate(SuspendAbility.class));
     }
 
