@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class OranRiefOoze extends CardImpl {
             = new FilterAttackingCreature("attacking creature with a +1/+1 counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public OranRiefOoze(UUID ownerId, CardSetInfo setInfo) {

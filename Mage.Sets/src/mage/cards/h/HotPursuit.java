@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ public final class HotPursuit extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a bounty counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.BOUNTY));
+        filter.add(CounterType.BOUNTY.getPredicate());
     }
 
     public HotPursuit(UUID ownerId, CardSetInfo setInfo) {

@@ -21,7 +21,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -38,7 +38,6 @@ import java.util.UUID;
 import static com.google.common.collect.Iterables.getOnlyElement;
 
 /**
- *
  * @author htrajan
  */
 public final class TayamLuminousEnigma extends CardImpl {
@@ -80,7 +79,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with a counter among creatures you control");
 
     static {
-        filter.add(new CounterPredicate(null));
+        filter.add(CounterAnyPredicate.instance);
     }
 
     public TayamLuminousEnigmaCost() {

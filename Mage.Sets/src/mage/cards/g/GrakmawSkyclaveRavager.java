@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GrakmawSkyclaveRavagerToken;
@@ -34,7 +33,7 @@ public final class GrakmawSkyclaveRavager extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public GrakmawSkyclaveRavager(UUID ownerId, CardSetInfo setInfo) {

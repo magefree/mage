@@ -15,7 +15,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -61,7 +60,7 @@ class SoulbladeCorrupterTriggeredAbility extends AttacksAllTriggeredAbility {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
 
     static {
-        filter2.add(new CounterPredicate(CounterType.P1P1));
+        filter2.add(CounterType.P1P1.getPredicate());
     }
 
     SoulbladeCorrupterTriggeredAbility() {

@@ -23,7 +23,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -40,7 +39,7 @@ public final class ObsidianFireheart extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land without a blaze counter on it");
 
     static {
-        filter.add(Predicates.not(new CounterPredicate(CounterType.BLAZE)));
+        filter.add(Predicates.not(CounterType.BLAZE).getPredicate());
     }
 
     public ObsidianFireheart(UUID ownerId, CardSetInfo setInfo) {

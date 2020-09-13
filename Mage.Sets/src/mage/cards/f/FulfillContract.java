@@ -13,7 +13,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,7 +29,7 @@ public final class FulfillContract extends CardImpl {
     private static final FilterControlledCreaturePermanent filterRogueOrHunter = new FilterControlledCreaturePermanent("Rogue or Hunter you control");
 
     static {
-        filterBountyCreature.add(new CounterPredicate(CounterType.BOUNTY));
+        filterBountyCreature.add(CounterType.BOUNTY.getPredicate());
         filterRogueOrHunter.add(Predicates.or(SubType.ROGUE.getPredicate(), SubType.HUNTER.getPredicate()));
     }
 

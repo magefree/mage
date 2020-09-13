@@ -15,7 +15,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class EyeOfDoom extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent with a doom counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.DOOM));
+        filter.add(CounterType.DOOM.getPredicate());
     }
 
     public EyeOfDoom(UUID ownerId, CardSetInfo setInfo) {

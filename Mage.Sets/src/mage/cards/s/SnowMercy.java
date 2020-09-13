@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class SnowMercy extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with globe counters on them");
 
     static {
-        filter.add(new CounterPredicate(CounterType.GLOBE));
+        filter.add(CounterType.GLOBE.getPredicate());
     }
 
     public SnowMercy(UUID ownerId, CardSetInfo setInfo) {

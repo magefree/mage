@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +36,7 @@ public final class GrindDust extends SplitCard {
         // Exile any number of target creatures that have -1/-1 counters on them.
         getRightHalfCard().getSpellAbility().addEffect(new ExileTargetEffect());
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that have -1/-1 counters on them");
-        filter.add(new CounterPredicate(CounterType.M1M1));
+        filter.add(CounterType.M1M1.getPredicate());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
 
     }

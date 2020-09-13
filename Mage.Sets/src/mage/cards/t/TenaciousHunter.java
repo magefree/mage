@@ -18,7 +18,6 @@ import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class TenaciousHunter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature has a -1/-1 counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.M1M1));
+        filter.add(CounterType.M1M1.getPredicate());
     }
 
     public TenaciousHunter(UUID ownerId, CardSetInfo setInfo) {

@@ -25,7 +25,6 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -40,7 +39,7 @@ public final class RimefeatherOwl extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent("snow permanents on the battlefield");
 
     static {
-        filter.add(new CounterPredicate(CounterType.ICE));
+        filter.add(CounterType.ICE.getPredicate());
         filter2.add(SuperType.SNOW.getPredicate());
     }
 

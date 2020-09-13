@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public final class GnarlidColony extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public GnarlidColony(UUID ownerId, CardSetInfo setInfo) {

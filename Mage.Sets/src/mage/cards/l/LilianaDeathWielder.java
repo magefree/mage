@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -32,7 +31,7 @@ public final class LilianaDeathWielder extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a -1/-1 counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.M1M1));
+        filter.add(CounterType.M1M1.getPredicate());
     }
 
     public LilianaDeathWielder(UUID ownerId, CardSetInfo setInfo) {

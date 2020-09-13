@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -35,7 +34,7 @@ public final class BasrisLieutenant extends CardImpl {
     static {
         multicoloredFilter.add(MulticoloredPredicate.instance);
         controlledCreatureWithP1P1CounterFilter.add(TargetController.YOU.getControllerPredicate());
-        controlledCreatureWithP1P1CounterFilter.add(new CounterPredicate(CounterType.P1P1));
+        controlledCreatureWithP1P1CounterFilter.add(CounterType.P1P1.getPredicate());
     }
 
     public BasrisLieutenant(UUID ownerId, CardSetInfo setInfo) {

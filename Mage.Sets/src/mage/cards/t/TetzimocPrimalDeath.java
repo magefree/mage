@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(new CounterPredicate(CounterType.PREY));
+        filter.add(CounterType.PREY.getPredicate());
     }
 
     public TetzimocPrimalDeath(UUID ownerId, CardSetInfo setInfo) {

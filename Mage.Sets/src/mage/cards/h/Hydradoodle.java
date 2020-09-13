@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -17,13 +16,14 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class Hydradoodle extends CardImpl {
@@ -63,7 +63,7 @@ class HydradoodleEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("permanent with a counter");
 
     static {
-        filter.add(new CounterPredicate(null));
+        filter.add(CounterAnyPredicate.instance);
     }
 
     HydradoodleEffect() {
@@ -71,7 +71,7 @@ class HydradoodleEffect extends OneShotEffect {
         this.staticText = "roll X six-sided dice. {this} enters the battlefield with a number of +1/+1 counters on it equal to the total of those results";
     }
 
-    HydradoodleEffect(final HydradoodleEffect effect) {
+    private HydradoodleEffect(final HydradoodleEffect effect) {
         super(effect);
     }
 

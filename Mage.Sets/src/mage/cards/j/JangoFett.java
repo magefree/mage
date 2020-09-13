@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -138,7 +137,7 @@ class JangoFettEffect extends OneShotEffect {
         int count = 0;
         if (defenderId != null) {
             FilterCreaturePermanent bountyFilter = new FilterCreaturePermanent("creatures defending player controls with a bounty counter");
-            bountyFilter.add(new CounterPredicate(CounterType.BOUNTY));
+            bountyFilter.add(CounterType.BOUNTY.getPredicate());
             count = game.getBattlefield().countAll(bountyFilter, defenderId, game);
         }
 

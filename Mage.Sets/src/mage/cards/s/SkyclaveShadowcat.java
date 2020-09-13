@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class SkyclaveShadowcat extends CardImpl {
             = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public SkyclaveShadowcat(UUID ownerId, CardSetInfo setInfo) {
