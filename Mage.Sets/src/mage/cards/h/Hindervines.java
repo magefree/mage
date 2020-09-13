@@ -20,7 +20,7 @@ public final class Hindervines extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with no +1/+1 counters on them");
     
     static {
-        filter.add(Predicates.not(CounterType.P1P1).getPredicate());
+        filter.add(Predicates.not(CounterType.P1P1.getPredicate()));
     }
 
     public Hindervines(UUID ownerId, CardSetInfo setInfo) {

@@ -39,7 +39,7 @@ public final class ObsidianFireheart extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land without a blaze counter on it");
 
     static {
-        filter.add(Predicates.not(CounterType.BLAZE).getPredicate());
+        filter.add(Predicates.not(CounterType.BLAZE.getPredicate()));
     }
 
     public ObsidianFireheart(UUID ownerId, CardSetInfo setInfo) {
