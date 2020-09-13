@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import mage.MageObjectReference;
@@ -43,6 +42,10 @@ public class AttackedThisTurnWatcher extends Watcher {
         return this.attackedThisTurnCreaturesCounts;
     }
 
+    public int getAttackCount(Permanent permanent, Game game) {
+        return this.attackedThisTurnCreaturesCounts.getOrDefault(new MageObjectReference(permanent, game), 0);
+    }
+
     public boolean checkIfAttacked(Permanent permanent, Game game) {
         for (MageObjectReference mor : attackedThisTurnCreatures) {
             if (mor.refersTo(permanent, game)) {
@@ -58,5 +61,4 @@ public class AttackedThisTurnWatcher extends Watcher {
         this.attackedThisTurnCreatures.clear();
         this.attackedThisTurnCreaturesCounts.clear();
     }
-
 }

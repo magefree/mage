@@ -255,6 +255,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Carver", 113, Rarity.UNCOMMON, mage.cards.m.MindCarver.class));
         cards.add(new SetCardInfo("Mind Drain", 114, Rarity.COMMON, mage.cards.m.MindDrain.class));
         cards.add(new SetCardInfo("Molten Blast", 149, Rarity.COMMON, mage.cards.m.MoltenBlast.class));
+        cards.add(new SetCardInfo("Moraug, Fury of Akoum", 150, Rarity.MYTHIC, mage.cards.m.MoraugFuryOfAkoum.class));
         cards.add(new SetCardInfo("Moss-Pit Skeleton", 228, Rarity.UNCOMMON, mage.cards.m.MossPitSkeleton.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murasa Brute", 195, Rarity.COMMON, mage.cards.m.MurasaBrute.class));
