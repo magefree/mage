@@ -385,6 +385,8 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Tormenting Voice", 172, Rarity.COMMON, mage.cards.t.TormentingVoice.class));
         cards.add(new SetCardInfo("Tuktuk Rubblefort", 173, Rarity.COMMON, mage.cards.t.TuktukRubblefort.class));
         cards.add(new SetCardInfo("Turntimber Ascetic", 214, Rarity.COMMON, mage.cards.t.TurntimberAscetic.class));
+        cards.add(new SetCardInfo("Turntimber Symbiosis", 215, Rarity.MYTHIC, mage.cards.t.TurntimberSymbiosis.class));
+        cards.add(new SetCardInfo("Turntimber, Serpentine Wood", 215, Rarity.MYTHIC, mage.cards.t.TurntimberSerpentineWood.class));
         cards.add(new SetCardInfo("Umara Mystic", 238, Rarity.UNCOMMON, mage.cards.u.UmaraMystic.class));
         cards.add(new SetCardInfo("Umara Skyfalls", 86, Rarity.UNCOMMON, mage.cards.u.UmaraSkyfalls.class));
         cards.add(new SetCardInfo("Umara Wizard", 86, Rarity.UNCOMMON, mage.cards.u.UmaraWizard.class));
