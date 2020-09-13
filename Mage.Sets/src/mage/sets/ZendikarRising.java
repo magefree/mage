@@ -388,6 +388,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Umara Wizard", 86, Rarity.UNCOMMON, mage.cards.u.UmaraWizard.class));
         cards.add(new SetCardInfo("Utility Knife", 256, Rarity.COMMON, mage.cards.u.UtilityKnife.class));
         cards.add(new SetCardInfo("Valakut Awakening", 174, Rarity.RARE, mage.cards.v.ValakutAwakening.class));
+        cards.add(new SetCardInfo("Valakut Exploration", 175, Rarity.RARE, mage.cards.v.ValakutExploration.class));
         cards.add(new SetCardInfo("Valakut Stoneforge", 174, Rarity.RARE, mage.cards.v.ValakutStoneforge.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 131, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
         cards.add(new SetCardInfo("Vastwood Fortification", 216, Rarity.UNCOMMON, mage.cards.v.VastwoodFortification.class));
