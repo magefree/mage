@@ -54,7 +54,6 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCosts;
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
-    protected Costs<Cost> optionalCosts;
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
@@ -83,7 +82,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = new ManaCostsImpl<>();
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
-        this.optionalCosts = new CostsImpl<>();
         this.modes = new Modes();
     }
 
@@ -99,7 +97,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCosts = ability.manaCosts;
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
-        this.optionalCosts = ability.optionalCosts.copy();
         for (Watcher watcher : ability.getWatchers()) {
             watchers.add(watcher.copy());
         }
@@ -352,16 +349,6 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         } // end modes
-
-        // TODO: Handle optionalCosts at the same time as already OptionalAdditionalSourceCosts are handled.
-        for (Cost cost : optionalCosts) {
-            if (cost instanceof ManaCost) {
-                cost.clearPaid();
-                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + '?', this, game)) {
-                    manaCostsToPay.add((ManaCost) cost);
-                }
-            }
-        }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
         if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
@@ -691,11 +678,6 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public Costs<Cost> getOptionalCosts() {
-        return optionalCosts;
-    }
-
-    @Override
     public Effects getEffects() {
         return getModes().getMode().getEffects();
     }
@@ -847,13 +829,6 @@ public abstract class AbilityImpl implements Ability {
         if (cost != null) {
             this.manaCosts.add(cost);
             this.manaCostsToPay.add(cost);
-        }
-    }
-
-    @Override
-    public void addOptionalCost(Cost cost) {
-        if (cost != null) {
-            this.optionalCosts.add(cost);
         }
     }
 

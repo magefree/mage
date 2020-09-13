@@ -140,23 +140,6 @@ public interface Ability extends Controllable, Serializable {
     void addManaCost(ManaCost cost);
 
     /**
-     * TODO Method is unused, keep it around?
-     * <p>
-     * Gets all costs that are optional to this ability. These costs can be paid
-     * in addition to other costs to have other effects put into place.
-     *
-     * @return All {@link Costs} that can be paid above and beyond other costs.
-     */
-    Costs<Cost> getOptionalCosts();
-
-    /**
-     * Adds a {@link Cost} that is optional to this ability.
-     *
-     * @param cost The {@link Cost} to add to the optional costs.
-     */
-    void addOptionalCost(Cost cost);
-
-    /**
      * Retrieves the effects that are put into the place by the resolution of
      * this ability.
      *
