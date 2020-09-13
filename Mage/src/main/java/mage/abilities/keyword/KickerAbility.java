@@ -82,7 +82,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     public KickerAbility(final KickerAbility ability) {
         super(ability);
         for (OptionalAdditionalCost cost : ability.kickerCosts) {
-            this.kickerCosts.add((OptionalAdditionalCost) cost.copy());
+            this.kickerCosts.add(cost.copy());
         }
         this.keywordText = ability.keywordText;
         this.reminderText = ability.reminderText;
@@ -113,7 +113,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             cost.reset();
         }
         String key = getActivationKey(source, "", game);
-        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext();) {
+        for (Iterator<String> iterator = activations.keySet().iterator(); iterator.hasNext(); ) {
             String activationKey = iterator.next();
             if (activationKey.startsWith(key)
                     && activations.get(activationKey) > 0) {
@@ -192,15 +192,15 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                         //  canPay checks only single mana available, not total mana usage
                         if (kickerCost.canPay(ability, sourceId, ability.getControllerId(), game)
                                 && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt,
-                                        "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
+                                "Pay " + times + kickerCost.getText(false) + " ?", ability, game)) {
                             this.activateKicker(kickerCost, ability, game);
                             if (kickerCost instanceof Costs) {
-                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {
+                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext(); ) {
                                     Object kickerCostObject = itKickerCost.next();
                                     if ((kickerCostObject instanceof Costs)
                                             || (kickerCostObject instanceof CostsImpl)) {
                                         for (@SuppressWarnings("unchecked") Iterator<Cost> itDetails
-                                                = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {
+                                             = ((Costs) kickerCostObject).iterator(); itDetails.hasNext(); ) {
                                             addKickerCostsToAbility(itDetails.next(), ability, game);
                                         }
                                     } else {

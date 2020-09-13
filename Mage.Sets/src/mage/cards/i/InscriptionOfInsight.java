@@ -7,7 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.KickerWithAnyNumberModesAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,12 +29,11 @@ public final class InscriptionOfInsight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Kicker {2}{U}{U}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{U}{U}")));
+        this.addAbility(new KickerWithAnyNumberModesAbility(new ManaCostsImpl<>("{2}{U}{U}")));
 
         // Choose one. If this spell was kicked, choose any number instead.
-        this.getSpellAbility().getModes().setAllWhenKicked(true);
-
         // • Return up to two target creatures to their owners' hands.
+        this.getSpellAbility().getModes().setChooseText("choose one. If this spell was kicked, choose any number instead.");
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 

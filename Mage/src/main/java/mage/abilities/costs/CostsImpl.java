@@ -1,4 +1,3 @@
-
 package mage.abilities.costs;
 
 import java.util.ArrayList;
@@ -161,5 +160,4 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     public Costs<T> copy() {
         return new CostsImpl(this);
     }
-
 }

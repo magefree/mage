@@ -192,7 +192,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
     /**
      * Omniscience is not allowing me to cast spells for free. I'm playing a
      * Commander game against the Computer, if that helps.
-     *
+     * <p>
      * Edit: It's not letting me cast fused spells for free. Others seems to be
      * working.
      */
@@ -276,16 +276,23 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
         // Choose one - Barbed Lightning deals 3 damage to target creature; or Barbed Lightning deals 3 damage to target player.
         // Entwine {2} (Choose both if you pay the entwine cost.)
-        addCard(Zone.HAND, playerA, "Barbed Lightning", 1);
+        addCard(Zone.HAND, playerA, "Barbed Lightning", 1); // {2}{R}
 
         // Creature - 3/3 Swampwalk
         addCard(Zone.BATTLEFIELD, playerB, "Bog Wraith", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning", "Bog Wraith");
-        addTarget(playerA, playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
+        setChoice(playerA, "Yes"); // cast without cost
+        setChoice(playerA, "Yes"); // pay Entwine
+        addTarget(playerA, "Bog Wraith"); // target form mode 1
+        addTarget(playerA, playerB); // target for mode 2
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        showBattlefield("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Barbed Lightning", 1);
         assertGraveyardCount(playerB, "Bog Wraith", 1);
@@ -293,7 +300,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 17);
 
-        assertTapped("Plains", true); // plains have to be tapped because {2} from Entwine have to be paid
+        assertTappedCount("Plains", true, 2); // plains have to be tapped because {2} from Entwine have to be paid
     }
 
     /**

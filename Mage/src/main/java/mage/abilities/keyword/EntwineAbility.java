@@ -3,14 +3,19 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.costs.*;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.OptionalAdditionalCost;
+import mage.abilities.costs.OptionalAdditionalCostImpl;
+import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Iterator;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 702.40. Entwine
@@ -24,20 +29,23 @@ import java.util.Iterator;
  * 702.40b If the entwine cost was paid, follow the text of each of the modes in
  * the order written on the card when the spell resolves.
  *
- * @author LevelX2
+ * @author JayDi85
  */
 public class EntwineAbility extends StaticAbility implements OptionalAdditionalModeSourceCosts {
 
     private static final String keywordText = "Entwine";
+    protected static final String reminderText = "You may {cost} in addition to any other costs to use all modes.";
+
     protected OptionalAdditionalCost additionalCost;
+    protected Set<String> activations = new HashSet<>(); // same logic as KickerAbility: activations per zoneChangeCounter
 
     public EntwineAbility(String manaString) {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, "Choose both if you pay the entwine cost.", new ManaCostsImpl(manaString));
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString));
     }
 
     public EntwineAbility(Cost cost) {
-        this(cost, "Choose both if you pay the entwine cost.");
+        this(cost, reminderText);
     }
 
     public EntwineAbility(Cost cost, String reminderText) {
@@ -48,7 +56,10 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
 
     public EntwineAbility(final EntwineAbility ability) {
         super(ability);
-        additionalCost = ability.additionalCost;
+        if (ability.additionalCost != null) {
+            this.additionalCost = ability.additionalCost.copy();
+        }
+        this.activations.addAll(ability.activations);
     }
 
     @Override
@@ -57,61 +68,25 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     }
 
     @Override
-    public void addCost(Cost cost) {
-        if (additionalCost != null) {
-            ((Costs) additionalCost).add(cost);
-        }
-    }
-
-    @Override
-    public boolean isActivated() {
-        if (additionalCost != null) {
-            return additionalCost.isActivated();
-        }
-        return false;
-    }
-
-    public void resetCosts() {
-        if (additionalCost != null) {
-            additionalCost.reset();
-        }
-    }
-
-    @Override
-    public void changeModes(Ability ability, Game game) {
+    public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (!(ability instanceof SpellAbility)) {
             return;
         }
+
         Player player = game.getPlayer(ability.getControllerId());
         if (player == null) {
             return;
         }
-        this.resetCosts();
+
+        this.resetCosts(game, ability);
         if (additionalCost == null) {
             return;
         }
+
         if (additionalCost.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)
                 && player.chooseUse(Outcome.Benefit, "Pay " + additionalCost.getText(false) + " ?", ability, game)) {
-
-            additionalCost.activate();
-            int modeCount = ability.getModes().size();
-            ability.getModes().setAdditionalCost(this);
-            ability.getModes().setMinModes(modeCount);
-            ability.getModes().setMaxModes(modeCount);
-        }
-    }
-
-    @Override
-    public void addOptionalAdditionalModeCosts(Ability ability, Game game) {
-        if (additionalCost.isActivated()) {
-            for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
-                Cost cost = (Cost) it.next();
-                if (cost instanceof ManaCostsImpl) {
-                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                } else {
-                    ability.getCosts().add(cost.copy());
-                }
-            }
+            addCostsToAbility(additionalCost, ability);
+            activateCost(game, ability);
         }
     }
 
@@ -134,11 +109,52 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         }
     }
 
-    public String getReminderText() {
-        if (additionalCost != null) {
-            return additionalCost.getReminderText();
-        } else {
-            return "";
+    public void changeModes(Ability ability, Game game) {
+        if (!costWasActivated(ability, game)) {
+            return;
         }
+
+        // activate max modes all the time
+        int maxModes = ability.getModes().size();
+        ability.getModes().setMinModes(maxModes);
+        ability.getModes().setMaxModes(maxModes);
+    }
+
+    private void addCostsToAbility(Cost cost, Ability ability) {
+        ability.addCost(cost.copy());
+    }
+
+    private void resetCosts(Game game, Ability source) {
+        if (additionalCost != null) {
+            additionalCost.reset();
+        }
+
+        String key = getActivationKey(source, game);
+        this.activations.remove(key);
+    }
+
+    private void activateCost(Game game, Ability source) {
+        String key = getActivationKey(source, game);
+        this.activations.add(key);
+    }
+
+    public boolean costWasActivated(Ability ability, Game game) {
+        String key = getActivationKey(ability, game);
+        return this.activations.contains(key);
+    }
+
+    private String getActivationKey(Ability source, Game game) {
+        // same logic as KickerAbility, uses for source ability only
+        int zcc = 0;
+        if (source.getAbilityType() == AbilityType.TRIGGERED) {
+            zcc = source.getSourceObjectZoneChangeCounter();
+        }
+        if (zcc == 0) {
+            zcc = game.getState().getZoneChangeCounter(source.getSourceId());
+        }
+        if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
+            --zcc;
+        }
+        return String.valueOf(zcc);
     }
 }

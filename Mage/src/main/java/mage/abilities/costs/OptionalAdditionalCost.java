@@ -1,10 +1,11 @@
-
 package mage.abilities.costs;
+
+import mage.util.Copyable;
 
 /**
  * @author LevelX2
  */
-public interface OptionalAdditionalCost extends Cost {
+public interface OptionalAdditionalCost extends Cost, Copyable<OptionalAdditionalCost> {
 
     String getName();
 
@@ -29,20 +30,18 @@ public interface OptionalAdditionalCost extends Cost {
      * message.
      *
      * @param position - if there are multiple costs, it's the postion the cost
-     * is set (starting with 0)
+     *                 is set (starting with 0)
      * @return
      */
     String getCastSuffixMessage(int position);
 
     /**
      * If the player intends to pay the cost, the cost will be activated
-     *
      */
     void activate();
 
     /**
      * Reset the activate and count information
-     *
      */
     void reset();
 

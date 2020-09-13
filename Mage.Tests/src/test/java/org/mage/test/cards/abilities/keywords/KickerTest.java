@@ -400,6 +400,7 @@ public class KickerTest extends CardTestPlayerBase {
         assertTappedCount("Swamp", true, 5);
         assertGraveyardCount(playerA, "Marsh Casualties", 1);
         assertPowerToughness(playerB, "Centaur Courser", 1, 1);
-
     }
+
+
 }

@@ -1,9 +1,5 @@
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.*;
@@ -35,6 +31,11 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -227,21 +228,9 @@ public abstract class AbilityImpl implements Ability {
         }
         game.applyEffects();
 
-        /* 20130201 - 601.2b
-         * If the spell is modal the player announces the mode choice (see rule 700.2).
-         */
-        if (!getModes().choose(game, this)) {
-            return false;
-        }
-
         MageObject sourceObject = getSourceObject(game);
         if (getSourceObjectZoneChangeCounter() == 0) {
             setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
-        }
-        if (controller.isTestMode()) {
-            if (!controller.addTargets(this, game)) {
-                return false;
-            }
         }
 
         /* 20130201 - 601.2b
@@ -268,9 +257,6 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        if (getModes().getAdditionalCost() != null) {
-            getModes().getAdditionalCost().addOptionalAdditionalModeCosts(this, game);
-        }
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
@@ -311,8 +297,29 @@ public abstract class AbilityImpl implements Ability {
 
         handlePhyrexianManaCosts(game, sourceId, controller);
 
+        /* 20130201 - 601.2b
+         * If the spell is modal the player announces the mode choice (see rule 700.2).
+         */
+        // rules:
+        // You kick a spell as you cast it. You declare whether you're going to pay a kicker cost at the same
+        // time you'd choose a spell's mode, and then you actually pay it at the same time you pay the spell's mana cost.
+        // Kicking a spell is always optional.
+        if (!getModes().choose(game, this)) {
+            return false;
+        }
+
+        // unit tests only: it allows to add targets/choices by two ways:
+        // 1. From cast/activate command params (process it here)
+        // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
+        if (controller.isTestMode()) {
+            if (!controller.addTargets(this, game)) {
+                return false;
+            }
+        }
+
         for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
+
             //20121001 - 601.2c
             // 601.2c The player announces their choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -333,8 +340,10 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
+
             if (!getTargets().isEmpty()) {
                 Outcome outcome = getEffects().getOutcome(this);
+
                 // only activated abilities can be canceled by human user (not triggered)
                 boolean canCancel = this instanceof ActivatedAbility && controller.isHuman();
                 if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, canCancel)) {
@@ -434,7 +443,11 @@ public abstract class AbilityImpl implements Ability {
 
         boolean alternativeCostUsed = false;
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
+            // it's important to apply alternative cost first
+            // example: Omniscience gives free mana as alternative, but Entwine ability adds {2} as additional
             Abilities<Ability> abilities = CardUtil.getAbilities(sourceObject, game);
+
+            // 1. ALTERNATIVE COSTS
             for (Ability ability : abilities) {
                 // if cast for noMana no Alternative costs are allowed
                 if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
@@ -447,11 +460,7 @@ public abstract class AbilityImpl implements Ability {
                         }
                     }
                 }
-                if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
-                }
             }
-
             // controller specific alternate spell costs
             if (canUseAlternativeCost && !noMana && !alternativeCostUsed) {
                 if (this.getAbilityType() == AbilityType.SPELL
@@ -467,6 +476,13 @@ public abstract class AbilityImpl implements Ability {
                             }
                         }
                     }
+                }
+            }
+
+            // 2. ADDITIONAL COST
+            for (Ability ability : abilities) {
+                if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
+                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
                 }
             }
         }
@@ -806,7 +822,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void addCost(Cost cost) {
-        if (cost != null) {
+        if (cost == null) {
+            return;
+        }
+
+        if (cost instanceof Costs) {
+            // as list of costs
+            Costs<Cost> list = (Costs<Cost>) cost;
+            for (Cost single : list) {
+                addCost(single);
+            }
+        } else {
+            // as single cost
             if (cost instanceof ManaCost) {
                 this.addManaCost((ManaCost) cost);
             } else {
