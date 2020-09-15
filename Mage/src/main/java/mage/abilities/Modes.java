@@ -236,7 +236,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             if (card != null) {
                 for (Ability modeModifyingAbility : card.getAbilities(game)) {
                     if (modeModifyingAbility instanceof OptionalAdditionalModeSourceCosts) {
-                        // cost must check activation conditional in changeModes
+                        // cost must check activation condition in changeModes
                         ((OptionalAdditionalModeSourceCosts) modeModifyingAbility).changeModes(source, game);
                     }
                 }

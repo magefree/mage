@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- * Cost that can change ability's modes (example: Kicker or Entwine can make all modes selectabled).
+ * Cost that can change ability's modes (example: Kicker or Entwine can make all modes selectable).
  *
  * @author LevelX2
  */

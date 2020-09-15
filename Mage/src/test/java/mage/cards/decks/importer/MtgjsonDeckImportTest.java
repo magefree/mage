@@ -18,10 +18,11 @@ public class MtgjsonDeckImportTest {
                 return LOOKUP;
             }
         };
+
+        // offline deck from https://mtgjson.com/api/v5/decks/ArcaneTempo_GRN.json
         DeckCardLists deck = importer.importDeck(
                 "src/test/java/mage/cards/decks/importer/samples/testdeck.json", errors, false);
         assertEquals("Arcane Tempo", deck.getName());
-
         TestDeckChecker.checker()
                 .addMain("Goblin Electromancer", 4)
                 .addMain("Crackling Drake", 4)
@@ -41,6 +42,7 @@ public class MtgjsonDeckImportTest {
                 .addMain("Izzet Guildgate", 4)
                 .addMain("Island", 8)
                 .addMain("Mountain", 7)
+                //
                 .addSide("The Mirari Conjecture", 1)
                 .addSide("Beacon Bolt", 1)
                 .addSide("Negate", 3)
@@ -48,6 +50,7 @@ public class MtgjsonDeckImportTest {
                 .addSide("Fiery Cannonade", 3)
                 .addSide("Shivan Fire", 2)
                 .addSide("Disdainful Stroke", 2)
+                //
                 .verify(deck, 60, 15);
 
         assertEquals("", errors.toString());

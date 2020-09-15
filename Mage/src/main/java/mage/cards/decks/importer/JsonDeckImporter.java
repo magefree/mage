@@ -35,7 +35,6 @@ public abstract class JsonDeckImporter extends DeckImporter {
                 try { // Json parsing
                     JSONParser parser = new JSONParser();
                     JSONObject rootObj = (JSONObject) parser.parse(reader);
-                    deckList.setName((String) rootObj.get("name"));
                     readJson(rootObj, deckList);
 
                     if (sbMessage.length() > 0) {
