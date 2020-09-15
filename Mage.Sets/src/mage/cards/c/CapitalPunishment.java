@@ -43,7 +43,7 @@ class CapitalPunishmentDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public CapitalPunishmentDilemmaEffect() {
         super(Outcome.Detriment);
-        this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote";
+        this.staticText = "<i>Council's dilemma</i> &mdash; Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote";
     }
 
     public CapitalPunishmentDilemmaEffect(final CapitalPunishmentDilemmaEffect effect) {

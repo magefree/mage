@@ -32,7 +32,7 @@ public final class OrchardElemental extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Council's dilemma</i> &mdash When Orchard Elemental enters the battlefield, starting with you, each player votes for sprout or harvest. Put two +1/+1 counters on Orchard Elemental for each sprout vote. You gain 3 life for each harvest vote.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new OrchardElementalDilemmaEffect(), false, "<i>Council's dilemma</i> — "));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new OrchardElementalDilemmaEffect(), false, "<i>Council's dilemma</i> &mdash; "));
     }
 
     public OrchardElemental(final OrchardElemental card) {

@@ -47,7 +47,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
 
     public RallyTheRighteousUntapEffect() {
         super(Outcome.Untap);
-        staticText = "<i>Radiance</i> — Untap target creature and each other creature that shares a color with it";
+        staticText = "<i>Radiance</i> &mdash; Untap target creature and each other creature that shares a color with it";
     }
 
     public RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {

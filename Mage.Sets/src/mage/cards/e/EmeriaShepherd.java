@@ -42,7 +42,7 @@ public final class EmeriaShepherd extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Landfall</i> — Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand.
+        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand.
         // If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, new EmeriaShepherdReturnToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard(filter)));

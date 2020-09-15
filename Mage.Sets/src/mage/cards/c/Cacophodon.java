@@ -25,7 +25,7 @@ public final class Cacophodon extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // <i>Enrage</i> — Whenever Cacophodon is dealt damage, untap target permanent.
+        // <i>Enrage</i> &mdash; Whenever Cacophodon is dealt damage, untap target permanent.
         Ability ability = new DealtDamageToSourceTriggeredAbility(new UntapTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

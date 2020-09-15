@@ -24,7 +24,7 @@ public final class BelligerentWhiptail extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // <i>Landfall</i> — Whenever a land enters the battlefield under your control, Belligerent Whiptail gains first strike until end of turn.
+        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, Belligerent Whiptail gains first strike until end of turn.
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), false));
 
     }

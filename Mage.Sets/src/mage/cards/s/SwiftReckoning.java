@@ -32,7 +32,7 @@ public final class SwiftReckoning extends CardImpl {
     public SwiftReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, you may cast Swift Reckoning as though it had flash.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may cast Swift Reckoning as though it had flash.
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
         effect.setText("<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may cast {this} as though it had flash");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,

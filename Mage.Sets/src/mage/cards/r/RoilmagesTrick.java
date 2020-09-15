@@ -30,7 +30,7 @@ public final class RoilmagesTrick extends CardImpl {
     public RoilmagesTrick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
-        // <i>Converge</i> — Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast Roilmage's Trick.
+        // <i>Converge</i> &mdash; Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast Roilmage's Trick.
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 new SignInversionDynamicValue(ColorsOfManaSpentToCastCount.getInstance()), StaticValue.get(-0), Duration.EndOfTurn, filter, false,

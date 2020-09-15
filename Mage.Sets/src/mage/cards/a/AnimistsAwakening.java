@@ -27,7 +27,7 @@ public final class AnimistsAwakening extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
         // Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in any order.
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, untap those lands.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, untap those lands.
         this.getSpellAbility().addEffect(new AnimistsAwakeningEffect());
     }
 
@@ -46,7 +46,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
     public AnimistsAwakeningEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in any order."
-                + "<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, untap those lands";
+                + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, untap those lands";
     }
 
     public AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {

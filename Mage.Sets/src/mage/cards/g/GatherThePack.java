@@ -28,7 +28,7 @@ public final class GatherThePack extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Reveal the top five cards of your library. You may put a creature card from among them into your hand. Put the rest into your graveyard.
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one.
         this.getSpellAbility().addEffect(new GatherThePackEffect());
     }
 
@@ -51,7 +51,7 @@ class GatherThePackEffect extends OneShotEffect {
     public GatherThePackEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Reveal the top five cards of your library. You may put a creature card from among them into your hand. Put the rest into your graveyard."
-                + "<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one";
+                + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one";
     }
 
     @Override

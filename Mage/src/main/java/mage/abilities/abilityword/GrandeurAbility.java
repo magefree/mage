@@ -42,6 +42,6 @@ public class GrandeurAbility extends ActivatedAbilityImpl {
     
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Grandeur</i> — ").append(super.getRule()).toString();
+        return new StringBuilder("<i>Grandeur</i> &mdash; ").append(super.getRule()).toString();
     }
 }
