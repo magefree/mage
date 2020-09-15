@@ -3,6 +3,8 @@ package mage.cards.decks.importer;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -42,20 +44,20 @@ public class MtgjsonDeckImporter extends JsonDeckImporter {
     private void addBoardToList(JSONArray board, List<mage.cards.decks.DeckCardInfo> list, String deckSet) {
         board.forEach(arrayCard -> {
             JSONObject card = (JSONObject) arrayCard;
-            String name = (String) card.get("name");
+            String cardNum = (String) card.get("number");
+            String cardName = (String) card.get("name");
             String setCode = (String) card.get("setCode");
             if (setCode == null || setCode.isEmpty()) {
                 setCode = deckSet;
             }
 
-            int num = ((Number) card.get("count")).intValue();
-            Optional<CardInfo> cardLookup = getCardLookup().lookupCardInfo(name, setCode);
-            if (!cardLookup.isPresent()) {
-                sbMessage.append("Could not find card: '").append(name).append("'\n");
+            int count = ((Number) card.get("count")).intValue();
+            CardInfo foundedCard = CardRepository.instance.findCard(setCode, cardNum, true);
+            if (foundedCard == null) {
+            	sbMessage.append("Could not find card: '").append(cardName).append("'\n");
             } else {
-                CardInfo cardInfo = cardLookup.get();
-                for (int i = 0; i < num; i++) {
-                    list.add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+                for (int i = 0; i < count; i++) {
+                    list.add(new DeckCardInfo(foundedCard.getName(), foundedCard.getCardNumber(), foundedCard.getSetCode()));
                 }
             }
         });
