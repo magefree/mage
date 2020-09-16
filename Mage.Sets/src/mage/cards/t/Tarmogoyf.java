@@ -107,7 +107,7 @@ enum TarmogoyfHint implements Hint {
         String message = "" + types.size();
         if (types.size() > 0) {
             message += " (";
-            message += types.stream().reduce((a, b) -> a + ", " + b);
+            message += types.stream().reduce((a, b) -> a + ", " + b).orElse("");
             message += ')';
         }
         return "Card types in graveyards: " + message;
