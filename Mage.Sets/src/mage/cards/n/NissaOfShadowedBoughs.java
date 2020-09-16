@@ -51,6 +51,7 @@ public final class NissaOfShadowedBoughs extends CardImpl {
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new NissaOfShadowedBoughsLandEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
+        this.addAbility(ability);
 
         // −5: You may put a creature card with converted mana cost less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.
         this.addAbility(new LoyaltyAbility(new NissaOfShadowedBoughsCreatureEffect(), -5));
@@ -137,7 +138,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
         }
         TargetCard target;
         if (inHand < 1 || (inGrave > 0 && !player.chooseUse(
-                outcome, "Put a card from your hand or graveyard?",
+                outcome, "Put a creature card from your hand or graveyard onto the battlefield?",
                 null, "Hand", "Graveyard", source, game
         ))) {
             target = new TargetCardInYourGraveyard(0, 1, filter, true);
