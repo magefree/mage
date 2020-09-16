@@ -2,6 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,6 +26,7 @@ public final class BloodPrice extends CardImpl {
                 false, false, Zone.HAND, false,
                 false, true
         ));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
     private BloodPrice(final BloodPrice card) {
