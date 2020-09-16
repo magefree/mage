@@ -39,7 +39,7 @@ public final class ThroneOfMakindi extends CardImpl {
 
         // {T}, Remove a charge counter from Throne of Makindi: Add two mana of any one color. Spend this mana only to cast kicked spells.
         ability = new ConditionalAnyColorManaAbility(
-                new TapSourceCost(), 3, new ThroneOfMakindiManaBuilder(), true
+                new TapSourceCost(), 2, new ThroneOfMakindiManaBuilder(), true
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
