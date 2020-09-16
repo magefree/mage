@@ -25,7 +25,7 @@ public final class AlliedAssault extends CardImpl {
         ).setText("up to two target creatures each get +X/+X until end of turn, " +
                 "where X is the number of creatures in your party. " + PartyCount.getReminder()
         ));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addHint(PartyCountHint.instance);
     }
 
