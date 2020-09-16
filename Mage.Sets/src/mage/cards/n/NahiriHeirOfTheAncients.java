@@ -140,10 +140,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
         player.choose(outcome, target, source.getSourceId(), game);
-        Permanent equipment = game.getPermanent(target.getFirstTarget());
-        if (equipment != null && tokenCreature != null) {
-            equipment.attachTo(tokenCreature.getId(), game);
-        }
+        tokenCreature.addAttachment(target.getFirstTarget(), game);
         return true;
     }
 }
