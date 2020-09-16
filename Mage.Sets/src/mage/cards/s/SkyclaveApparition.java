@@ -90,6 +90,9 @@ class SkyclaveApparitionEffect extends OneShotEffect {
         ExileZone exile = game.getExile().getExileZone(
                 CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game))
         );
+        if (exile == null || exile.isEmpty()) {
+            return false;
+        }
         // From ZNR Release Notes:
         // https://magic.wizards.com/en/articles/archive/feature/zendikar-rising-release-notes-2020-09-10
         // If Skyclave Apparition's first ability exiled more than one card owned by a single player,
