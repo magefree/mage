@@ -23,9 +23,8 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -91,20 +90,21 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID playerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, playerId, game);
-        Set<SubType> subTypes = this.getTargets()
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        return card != null
+                && this
+                .getTargets()
                 .stream()
                 .map(game::getCard)
-                .map(card -> card.getSubtype(game))
+                .filter(Objects::nonNull)
+                .map(c -> c.getSubtype(game))
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
-        subTypes.removeIf(subType -> subType != SubType.FOREST && subType != SubType.PLAINS);
-        possibleTargets.removeIf(uuid -> {
-            Card card = game.getCard(uuid);
-            return card != null && subTypes.stream().anyMatch(subType -> card.hasSubtype(subType, game));
-        });
-        return possibleTargets;
+                .filter(subType -> subType == SubType.FOREST || subType == SubType.PLAINS)
+                .noneMatch(subType -> card.hasSubtype(subType, game));
     }
 }
 
