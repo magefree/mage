@@ -86,7 +86,7 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED
                 || event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST;
     }
 
@@ -96,7 +96,7 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
             attackedPlayerIds.clear();
             return false;
         }
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null
                     && creature.isControlledBy(controllerId)
@@ -156,7 +156,11 @@ class AkiriFearlessVoyagerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(0, 1, filter, true);
+        TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                && !player.chooseUse(outcome, "Unnattach an equipment from a creature you control?", source, game)) {
+            return false;
+        }
         player.choose(outcome, target, source.getSourceId(), game);
         Permanent equipment = game.getPermanent(target.getFirstTarget());
         if (equipment == null) {
@@ -166,7 +170,7 @@ class AkiriFearlessVoyagerEffect extends OneShotEffect {
         if (creature == null) {
             return false;
         }
-        equipment.unattach(game);
+        creature.removeAttachment(equipment.getId(), game);
         creature.tap(game);
         game.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
