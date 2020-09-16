@@ -139,7 +139,7 @@ class ZarethSanTheTricksterTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         FilterCard filter = new FilterPermanentCard(
-                "nonland permanent in " + opponent.getLogName() + "'s graveyard"
+                "permanent card in " + opponent.getLogName() + "'s graveyard"
         );
         filter.add(new OwnerIdPredicate(opponent.getId()));
         this.getTargets().clear();
