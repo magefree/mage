@@ -27,7 +27,7 @@ public final class KazanduMammoth extends CardImpl {
         this.secondSideCardClazz = mage.cards.k.KazanduValley.class;
 
         // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
-        this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn)));
+        this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
     }
 
     private KazanduMammoth(final KazanduMammoth card) {
