@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.Objects;
@@ -30,15 +31,15 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
         this.subtype.add(SubType.DEMON);
-        this.power = new MageInt(20);
-        this.toughness = new MageInt(20);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
         // Kicker {4}{B}
         this.addAbility(new KickerAbility(new ManaCostsImpl<>("{4}{B}")));
 
         // When you cast this spell, if it was kicked, each player loses half their life, rounded up.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), KickedCondition.instance,
+                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), ScourgeOfTheSkyclavesCondition.instance,
                 "When you cast this spell, if it was kicked, each player loses half their life, rounded up."
         ));
 
@@ -56,6 +57,25 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
     @Override
     public ScourgeOfTheSkyclaves copy() {
         return new ScourgeOfTheSkyclaves(this);
+    }
+}
+
+enum ScourgeOfTheSkyclavesCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getSpell(source.getSourceId());
+        if (spell == null) {
+            return false;
+        }
+        for (Ability ability : spell.getAbilities()) {
+            if (ability instanceof KickerAbility
+                    && ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility()) > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
