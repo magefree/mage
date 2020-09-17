@@ -35,8 +35,8 @@ public final class GlasspoolMimic extends CardImpl {
         // You may have Glasspool Mimic enter the battlefield as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
         this.addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, new GlasspoolMimicApplier()),
-                null, "You may have {this} enter the battlefield as a copy of a creature you control, " +
-                "except it's a Shapeshifter Rogue in addition to its other types", ""
+                true, null, "You may have {this} enter the battlefield as a copy of " +
+                "a creature you control, except it's a Shapeshifter Rogue in addition to its other types", ""
         ));
     }
 
