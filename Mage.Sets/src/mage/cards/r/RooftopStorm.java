@@ -48,7 +48,7 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
         filter.add(CardType.CREATURE.getPredicate());
     }
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility
             = new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SourceIsSpellCondition.instance, null, filter, true);
 
     public RooftopStormRuleEffect() {
@@ -65,6 +65,12 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
         return new RooftopStormRuleEffect(this);
     }
 
+    @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
+        super.init(source, game, activePlayerId);
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
+    }
+    
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

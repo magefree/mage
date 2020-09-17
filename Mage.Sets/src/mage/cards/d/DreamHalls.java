@@ -49,7 +49,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
         filter.add(new SharesColorWithSourcePredicate());
     }
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.instance);
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new DiscardCardCost(filter), SourceIsSpellCondition.instance);
 
     public DreamHallsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -64,7 +64,13 @@ class DreamHallsEffect extends ContinuousEffectImpl {
     public DreamHallsEffect copy() {
         return new DreamHallsEffect(this);
     }
-
+    
+    @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
+        super.init(source, game, activePlayerId);
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
+    }
+    
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

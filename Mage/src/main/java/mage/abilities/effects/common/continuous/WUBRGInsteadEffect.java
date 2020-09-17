@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -19,7 +20,7 @@ import mage.players.Player;
  */
 public class WUBRGInsteadEffect extends ContinuousEffectImpl {
 
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
 
     public WUBRGInsteadEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -33,6 +34,12 @@ public class WUBRGInsteadEffect extends ContinuousEffectImpl {
     @Override
     public WUBRGInsteadEffect copy() {
         return new WUBRGInsteadEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
+        super.init(source, game, activePlayerId);
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
     }
 
     @Override

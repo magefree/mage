@@ -192,16 +192,15 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
     /**
      * Omniscience is not allowing me to cast spells for free. I'm playing a
      * Commander game against the Computer, if that helps.
-     * <p>
+     *
      * Edit: It's not letting me cast fused spells for free. Others seems to be
      * working.
      */
     @Test
-    @Ignore  // targeting of fused/split spells not supported by testplayer
     public void testCastingFusedSpell() {
+        setStrictChooseMode(true);
+        
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
@@ -214,13 +213,18 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
          */
         addCard(Zone.HAND, playerA, "Far // Away");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Far // Away", "Silvercoat Lion^targetPlayer=PlayerB");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Far // Away");
+        setChoice(playerA, "Yes"); // Cast without paying its mana cost?
+        addTarget(playerA, "Silvercoat Lion");
+        addTarget(playerA, playerB);
         playerB.addTarget("Pillarfield Ox");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertHandCount(playerA, 1);
+        assertAllCommandsUsed();
+        
+        assertHandCount(playerA, "Silvercoat Lion", 1);        
         assertHandCount(playerB, 0);
 
         assertGraveyardCount(playerA, "Far // Away", 1);
@@ -228,6 +232,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Pillarfield Ox", 0);
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
     }
+    
 
     /**
      * If another effect (e.g. Future Sight) allows you to cast nonland cards
@@ -333,6 +338,47 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertHandCount(playerA, 3);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
+    }
+
+    // Not sure what the exact interaction is, but when Omniscience is on the field with Jodah, 
+    // if you say "no" to the Jodah cast option to get to the Omniscience option, then the game will initiate a rollback.     
+    
+    @Test
+    public void test_OmniscienceAndJodah() {
+        setStrictChooseMode(true);
+       
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        
+        // Flying
+        // You may pay WUBRG rather than pay the mana cost for spells that you cast.        
+        addCard(Zone.BATTLEFIELD, playerA, "Jodah, Archmage Eternal"); // Creature {1}{U}{R}{W} (4/3)
+
+        // You may cast nonland cards from your hand without paying their mana costs.
+        addCard(Zone.HAND, playerA, "Omniscience"); // Enchantment {7}{U}{U}{U}
+        
+        // Creature - 3/3 Swampwalk
+        addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience");
+        setChoice(playerA, "Yes"); // Pay alternative costs? ({W}{U}{B}{R}{G})   
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
+        // The order of the two alternate casting abilities is not fixed, so it's not clear which ability is asked for first
+        setChoice(playerA, "No"); // Pay alternative costs? ({W}{U}{B}{R}{G})   
+        setChoice(playerA, "Yes"); // Cast without paying its mana cost?
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        assertPermanentCount(playerA, "Omniscience", 1);
+        assertPermanentCount(playerA, "Bog Wraith", 1);
+
     }
 
     @Test

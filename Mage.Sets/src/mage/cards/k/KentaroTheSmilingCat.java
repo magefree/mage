@@ -60,7 +60,7 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
 		filterSamurai.add(SubType.SAMURAI.getPredicate());
 	}
 	
-    static final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
     		SourceIsSpellCondition.instance, null, filterSamurai, true, new ColorlessConvertedManaCost());
 	
     public KentaroTheSmilingCatCastingEffect() {
@@ -77,6 +77,12 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
         return new KentaroTheSmilingCatCastingEffect(this);
     }
 
+    @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
+        super.init(source, game, activePlayerId);
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
+    }
+    
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

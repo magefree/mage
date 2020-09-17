@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Iterator;
+import mage.MageObject;
 
 /**
  * @author LevelX2
@@ -135,7 +136,6 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 } else {
                     costChoiceText = alternativeCostsToCheck.isEmpty() ? "Cast without paying its mana cost?" : "Pay alternative costs? (" + alternativeCostsToCheck.getText() + ')';
                 }
-
                 if (alternativeCostsToCheck.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {
                     if (ability instanceof SpellAbility) {
