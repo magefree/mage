@@ -21,7 +21,7 @@ public class ExileAttachedEffect extends OneShotEffect {
 
     public ExileAttachedEffect() {
         super(Outcome.Exile);
-        staticText = "Exile enchanted creature";
+        staticText = "exile enchanted creature";
     }
 
     public ExileAttachedEffect(final ExileAttachedEffect effect) {

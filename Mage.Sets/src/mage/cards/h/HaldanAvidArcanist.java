@@ -50,13 +50,13 @@ public final class HaldanAvidArcanist extends CardImpl {
         return new HaldanAvidArcanist(this);
     }
 
-    static boolean checkCard(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!PakoArcaneRetriever.checkWatcher(affectedControllerId, game.getCard(sourceId), game)
+    static boolean checkCard(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (!PakoArcaneRetriever.checkWatcher(affectedControllerId, game.getCard(objectId), game)
                 || !source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
+                || game.getState().getZone(objectId) != Zone.EXILED) {
             return false;
         }
-        Card card = game.getCard(sourceId);
+        Card card = game.getCard(objectId);
         return card != null
                 && !card.isCreature()
                 && card.getCounters(game).containsKey(CounterType.FETCH);
