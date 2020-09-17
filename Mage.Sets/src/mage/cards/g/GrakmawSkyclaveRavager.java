@@ -92,7 +92,7 @@ class GrakmawSkyclaveRavagerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int counters = 0;
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        Permanent permanent = (Permanent) getValue("permanentLeftBattlefield");
         if (permanent != null) {
             counters = permanent.getCounters(game).getCount(CounterType.P1P1);
         }
