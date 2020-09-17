@@ -156,8 +156,14 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability
          */
-        TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION, // not used in implementation yet
+        TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
         /* TAKE_SPECIAL_ACTION, TAKEN_SPECIAL_ACTION,
+         targetId    id of the ability to activate / use
+         sourceId    sourceId of the object with that ability
+         playerId    player that tries to use this ability
+         */
+        TAKE_SPECIAL_MANA_PAYMENT, TAKEN_SPECIAL_MANA_PAYMENT,
+        /* TAKE_SPECIAL_MANA_PAYMENT, TAKEN_SPECIAL_MANA_PAYMENT
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability

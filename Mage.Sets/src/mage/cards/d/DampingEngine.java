@@ -56,7 +56,8 @@ public class DampingEngine extends CardImpl {
     public DampingEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells. That player may sacrifice a permanent for that player to ignore this effect until end of turn.
+        // A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells. 
+        // That player may sacrifice a permanent for that player to ignore this effect until end of turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingEngineEffect()));
         this.addAbility(new DampingEngineSpecialAction());
 

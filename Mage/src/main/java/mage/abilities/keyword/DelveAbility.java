@@ -126,6 +126,7 @@ class DelveSpecialAction extends SpecialAction {
 
     public DelveSpecialAction(AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
+        this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         this.addEffect(new DelveEffect());
     }
 

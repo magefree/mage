@@ -12,7 +12,8 @@ public enum AbilityType {
     TRIGGERED("Triggered", false),
     EVASION("Evasion", false),
     LOYALTY("Loyalty", false),
-    SPECIAL_ACTION("Special Action", false);
+    SPECIAL_ACTION("Special Action", false),
+    SPECIAL_MANA_PAYMENT("Special Mana Payment", false); // No activated ability and no special action. (e.g. Improvise, Delve)
 
     private final String text;
     private final boolean playCardAbility;
