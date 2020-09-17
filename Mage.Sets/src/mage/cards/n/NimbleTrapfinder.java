@@ -20,6 +20,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -54,7 +55,8 @@ public final class NimbleTrapfinder extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new GainAbilityAllEffect(new DealsCombatDamageToAPlayerTriggeredAbility(
                                 new DrawCardSourceControllerEffect(1), false
-                        ), Duration.EndOfTurn), TargetController.YOU, false
+                        ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES),
+                        TargetController.YOU, false
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, creatures you control gain " +
                 "\"Whenever this creature deals combat damage to a player, draw a card\" until end of turn."
@@ -132,8 +134,7 @@ class NimbleTrapfinderWatcher extends Watcher {
     }
 
     boolean checkPlayer(Permanent permanent, Game game) {
-        return permanent != null
-                && playerMap
+        return playerMap
                 .computeIfAbsent(permanent.getControllerId(), u -> new HashSet<>())
                 .stream()
                 .anyMatch(mor -> !mor.refersTo(permanent, game));
