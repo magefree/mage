@@ -8,6 +8,8 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
@@ -88,7 +90,11 @@ public class PermanentCard extends PermanentImpl {
             }
         } else {
             this.abilities = card.getAbilities().copy();
-            this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
+            // only set spellAbility to null if it has no targets IE: Dance of the Dead bug #7031
+            if (this.getSpellAbility() != null
+                    && this.getSpellAbility().getTargets().isEmpty()) {
+                this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
+            }
         }
         // adventure cards must show adventure spell info on battlefield too
         /*
