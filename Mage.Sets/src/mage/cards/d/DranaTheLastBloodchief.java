@@ -44,7 +44,9 @@ public final class DranaTheLastBloodchief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Drana, the Last Bloodchief attacks, defending player chooses a nonlegendary creature card in your graveyard. You return that card to the battlefield with a +1/+1 counter on it. The creature is a Vampire in addition to its other types.
-        this.addAbility(new AttacksTriggeredAbility(new DranaTheLastBloodchiefEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(
+                new DranaTheLastBloodchiefEffect(), false, "", SetTargetPointer.PLAYER
+        ));
     }
 
     private DranaTheLastBloodchief(final DranaTheLastBloodchief card) {
