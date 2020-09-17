@@ -687,6 +687,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
+        // TODO: remove when MDFCs are implemented
+        if (modalDFC) {
+            return null;
+        }
         // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
