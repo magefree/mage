@@ -114,8 +114,18 @@ class LeylineTyrantDamageEffect extends OneShotEffect {
                 0, player.getManaPool().getRed(),
                 "Announce the value for {X}", game, source
         );
-        ManaCosts cost = new ManaCostsImpl<>("{" + costX + "}");
-        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+        String manaString;
+        if (costX == 0) {
+            manaString = "{0}";
+        } else {
+            manaString = "";
+            for (int i = 0; i < costX; i++) {
+                manaString += "{R}";
+            }
+        }
+        ManaCosts cost = new ManaCostsImpl(manaString);
+        cost.clearPaid();
+        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
