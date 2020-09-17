@@ -118,7 +118,7 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
+        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, game.getPhase().getType(), false);
         game.getState().getTurnMods().add(combat);
         MoraugFuryOfAkoumDelayedTriggeredAbility delayedTriggeredAbility = new MoraugFuryOfAkoumDelayedTriggeredAbility();
         delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
