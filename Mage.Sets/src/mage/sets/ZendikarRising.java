@@ -12,16 +12,11 @@ import java.util.List;
  */
 public final class ZendikarRising extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList(
-            "Agadeem's Awakening",
+    private static final List<String> unfinishedLand = Arrays.asList(
             "Agadeem, the Undercrypt",
-            "Akoum Warrior",
             "Akoum Teeth",
-            "Bala Ged Recovery",
             "Bala Ged Sanctuary",
-            "Beyeen Veil",
             "Beyeen Coast",
-            "Blackbloom Rogue",
             "Blackbloom Bog",
             "Branchloft Pathway",
             "Boulderloft Pathway",
@@ -31,60 +26,67 @@ public final class ZendikarRising extends ExpansionSet {
             "Murkwater Pathway",
             "Cragcrown Pathway",
             "Timbercrown Pathway",
-            "Emeria's Call",
             "Emeria, Shattered Skyclave",
-            "Glasspool Mimic",
             "Glasspool Shore",
-            "Hagra Mauling",
             "Hagra Broodpit",
-            "Jwari Disruption",
             "Jwari Ruins",
-            "Kabira Takedown",
             "Kabira Plateau",
-            "Kazandu Mammoth",
             "Kazandu Valley",
-            "Kazuul's Fury",
             "Kazuul's Cliffs",
-            "Khalni Ambush",
             "Khalni Territory",
-            "Makindi Stampede",
             "Makindi Mesas",
-            "Malakir Rebirth",
             "Malakir Mire",
             "Needleverge Pathway",
             "Pillarverge Pathway",
-            "Ondu Inversion",
             "Ondu Skyruins",
-            "Pelakka Predation",
             "Pelakka Caverns",
             "Riverglide Pathway",
             "Lavaglide Pathway",
-            "Sea Gate Restoration",
             "Sea Gate, Reborn",
-            "Sejiri Shelter",
             "Sejiri Glacier",
-            "Shatterskull Smashing",
             "Shatterskull, the Hammer Pass",
-            "Silundi Vision",
             "Silundi Isle",
-            "Skyclave Cleric",
             "Skyclave Basilica",
-            "Song-Mad Treachery",
             "Song-Mad Ruins",
-            "Spikefield Hazard",
             "Spikefield Cave",
-            "Tangled Florahedron",
             "Tangled Vale",
-            "Turntimber Symbiosis",
             "Turntimber, Serpentine Wood",
-            "Umara Wizard",
             "Umara Skyfalls",
-            "Valakut Awakening",
             "Valakut Stoneforge",
-            "Vastwood Fortification",
             "Vastwood Thicket",
-            "Zof Consumption",
             "Zof Bloodbog"
+    );
+    private static final List<String> unfinishedNonland = Arrays.asList(
+            "Agadeem's Awakening",
+            "Akoum Warrior",
+            "Bala Ged Recovery",
+            "Beyeen Veil",
+            "Blackbloom Rogue",
+            "Emeria's Call",
+            "Glasspool Mimic",
+            "Hagra Mauling",
+            "Jwari Disruption",
+            "Kabira Takedown",
+            "Kazandu Mammoth",
+            "Kazuul's Fury",
+            "Khalni Ambush",
+            "Makindi Stampede",
+            "Malakir Rebirth",
+            "Ondu Inversion",
+            "Pelakka Predation",
+            "Sea Gate Restoration",
+            "Sejiri Shelter",
+            "Shatterskull Smashing",
+            "Silundi Vision",
+            "Skyclave Cleric",
+            "Song-Mad Treachery",
+            "Spikefield Hazard",
+            "Tangled Florahedron",
+            "Turntimber Symbiosis",
+            "Umara Wizard",
+            "Valakut Awakening",
+            "Vastwood Fortification",
+            "Zof Consumption"
     );
 
     private static final ZendikarRising instance = new ZendikarRising();
@@ -411,6 +413,15 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Zof Consumption", 132, Rarity.UNCOMMON, mage.cards.z.ZofConsumption.class));
         cards.add(new SetCardInfo("Zulaport Duelist", 88, Rarity.COMMON, mage.cards.z.ZulaportDuelist.class));
 
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanics are fully implemented
+        cards.removeIf(setCardInfo -> checkName(setCardInfo.getName())); // remove when mechanics are fully implemented
+    }
+
+    private static boolean checkName(String name) {
+        boolean keepNonland = false;
+        keepNonland = true; // comment out this line to test front faces of MDFCs
+        if (keepNonland && unfinishedNonland.contains(name)) {
+            return true;
+        }
+        return unfinishedLand.contains(name);
     }
 }
