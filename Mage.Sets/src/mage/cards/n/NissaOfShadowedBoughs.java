@@ -142,11 +142,10 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
                 null, "Hand", "Graveyard", source, game
         ))) {
             target = new TargetCardInYourGraveyard(0, 1, filter, true);
-            player.choose(outcome, player.getGraveyard(), target, game);
         } else {
-            target = new TargetCardInHand(0, 1, filter);
-            player.choose(outcome, player.getHand(), target, game);
+            target = new TargetCardInHand(filter);
         }
+        player.choose(outcome, target, source.getSourceId(), game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
