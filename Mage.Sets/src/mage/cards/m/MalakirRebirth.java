@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public final class MalakirRebirth extends CardImpl {
 
         // Choose target creature. You lose 2 life. Until end of turn, that creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         this.getSpellAbility().addEffect(new MalakirRebirthEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private MalakirRebirth(final MalakirRebirth card) {
