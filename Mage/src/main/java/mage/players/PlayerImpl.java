@@ -343,6 +343,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
 
         this.topCardRevealed = player.isTopCardRevealed();
@@ -356,6 +357,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
 
         this.clearCastSourceIdManaCosts();
+        this.castSourceIdWithAlternateMana.clear();
         this.castSourceIdWithAlternateMana.addAll(player.getCastSourceIdWithAlternateMana());
         for (Entry<UUID, ManaCosts<ManaCost>> entry : player.getCastSourceIdManaCosts().entrySet()) {
             this.castSourceIdManaCosts.put(entry.getKey(), (entry.getValue() == null ? null : entry.getValue().copy()));
