@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -107,11 +107,11 @@ class LeylineTyrantDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getManaPool().getRed() == 0) {
+        if (player == null) {
             return false;
         }
         int costX = player.announceXMana(
-                0, player.getManaPool().getRed(),
+                0, Integer.MAX_VALUE,
                 "Announce the value for {X}", game, source
         );
         String manaString;
@@ -123,7 +123,7 @@ class LeylineTyrantDamageEffect extends OneShotEffect {
                 manaString += "{R}";
             }
         }
-        ManaCosts cost = new ManaCostsImpl(manaString);
+        Cost cost = new ManaCostsImpl<>(manaString);
         cost.clearPaid();
         if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
             return false;
