@@ -1,11 +1,10 @@
 package mage.cards.s;
 
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public final class SpikefieldHazard extends CardImpl {
 
         // Spikefield Hazard deals 1 damage to any target. If a permanent dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn)
+        this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect()
                 .setText("If a permanent dealt damage this way would die this turn, exile it instead."));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
