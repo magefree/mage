@@ -9,7 +9,6 @@ import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 
 /**
  * @author noxx
@@ -45,11 +44,6 @@ public class DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility extends Tri
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-//        if (game.getPermanentOrLKIBattlefield(getSourceId()) == null) {
-//            return false;
-//        }
-
-//
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null) {
                 if (zEvent.getTarget().getId().equals(this.getSourceId())) {
@@ -67,18 +61,6 @@ public class DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility extends Tri
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
-//        Permanent sourcePermanent = null;
-//        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
-//            sourcePermanent = game.getPermanent(getSourceId());
-//        } else {
-//            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
-//                sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-//            }
-//        }
-//        if (sourcePermanent == null) {
-//            return false;
-//        }
-//        return hasSourceObjectAbility(game, sourcePermanent, event);
     }
 
     @Override
