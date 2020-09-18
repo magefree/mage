@@ -85,7 +85,7 @@ enum NimbleTrapfinderCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         NimbleTrapfinderWatcher watcher = game.getState().getWatcher(NimbleTrapfinderWatcher.class);
-        return watcher != null && watcher.checkPlayer(game.getPermanent(source.getSourceId()), game);
+        return watcher != null && watcher.checkPlayer(source.getSourceId(), game);
     }
 
     @Override
@@ -133,7 +133,11 @@ class NimbleTrapfinderWatcher extends Watcher {
         playerMap.clear();
     }
 
-    boolean checkPlayer(Permanent permanent, Game game) {
+    boolean checkPlayer(UUID sourceId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent == null) {
+            return !playerMap.computeIfAbsent(game.getOwnerId(sourceId), u -> new HashSet<>()).isEmpty();
+        }
         return playerMap
                 .computeIfAbsent(permanent.getControllerId(), u -> new HashSet<>())
                 .stream()
