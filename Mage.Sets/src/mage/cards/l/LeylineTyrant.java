@@ -2,7 +2,6 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -19,6 +18,7 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -39,7 +39,7 @@ public final class LeylineTyrant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LeylineTyrantManaEffect()));
 
         // When Leyline Tyrant dies, you may pay any amount of {R}. When you do, it deals that much damage to any target.
-        this.addAbility(new DiesTriggeredAbility(new LeylineTyrantDamageEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new LeylineTyrantDamageEffect()));
     }
 
     private LeylineTyrant(final LeylineTyrant card) {

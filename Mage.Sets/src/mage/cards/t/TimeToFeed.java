@@ -102,8 +102,8 @@ class TimeToFeedTextEffect extends OneShotEffect {
 
 class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID watchedCreatureId;
-    private int zoneChangeCounter;
+    private final UUID watchedCreatureId;
+    private final int zoneChangeCounter;
 
     public TimeToFeedDiesTriggeredAbility(UUID watchedCreatureId, int zoneChangeCounter) {
         super(new GainLifeEffect(3), Duration.EndOfTurn, false);

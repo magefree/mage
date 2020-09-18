@@ -2,7 +2,6 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -19,6 +18,7 @@ import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -42,7 +42,7 @@ public final class FirebladeCharger extends CardImpl {
         )));
 
         // When Fireblade Charger dies, it deals damage equal to its power to any target.
-        Ability ability = new DiesTriggeredAbility(
+        Ability ability = new DiesSourceTriggeredAbility(
                 new DamageTargetEffect(xValue).setText("it deals damage equal to its power to any target")
         );
         ability.addTarget(new TargetAnyTarget());

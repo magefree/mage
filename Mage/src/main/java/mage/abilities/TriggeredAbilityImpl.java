@@ -13,6 +13,8 @@ import mage.util.CardUtil;
 
 import java.util.Locale;
 import java.util.UUID;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -222,4 +224,37 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return optional;
     }
 
+    public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
+        // Get the source permanent of the ability 
+        MageObject sourceObject = null;
+        if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
+            sourceObject = game.getPermanent(source.getSourceId());
+        } else {
+            if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
+                sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            }
+        }
+        if (sourceObject == null) { // source is no permanent
+            sourceObject = game.getObject(source.getSourceId());
+            if (sourceObject == null || sourceObject.isPermanent()) {
+                return false; // No source object found => ability is not valid
+            }
+        }
+
+        if (!source.hasSourceObjectAbility(game, sourceObject, event)) {
+            return false; // the permanent does currently not have or before it dies the ability so no trigger
+        }
+        
+        // check now it is in graveyard (only if it is no token and was the target itself)
+        if (source.getSourceId().equals(event.getTargetId()) // source is also the target
+                && !(sourceObject instanceof PermanentToken) // it's no token
+                && sourceObject.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) { // It's in the next zone
+            Zone after = game.getState().getZone(source.getSourceId());
+            if (after == null || !Zone.GRAVEYARD.match(after)) { // Zone is not the graveyard
+                return false; // Moving to graveyard was replaced so no trigger
+            }
+        }
+
+        return true;
+    }
 }

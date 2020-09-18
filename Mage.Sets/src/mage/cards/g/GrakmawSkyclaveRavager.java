@@ -3,7 +3,6 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -22,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GrakmawSkyclaveRavagerToken;
 
 import java.util.UUID;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -59,7 +59,7 @@ public final class GrakmawSkyclaveRavager extends CardImpl {
         ));
 
         // When Grakmaw dies, create an X/X black and green Hydra creature token, where X is the number of +1/+1 counters on Grakmaw.
-        this.addAbility(new DiesTriggeredAbility(new GrakmawSkyclaveRavagerEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new GrakmawSkyclaveRavagerEffect()));
     }
 
     private GrakmawSkyclaveRavager(final GrakmawSkyclaveRavager card) {

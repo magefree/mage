@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -18,6 +17,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -45,7 +45,7 @@ public final class ExpeditionDiviner extends CardImpl {
 
         // As long as you control another Wizard, Expedition Diviner has "When this creature dies, draw a card."
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(1))),
+                new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1))),
                 condition, "As long as you control another Wizard, {this} has \"When this creature dies, draw a card.\""
         )));
     }

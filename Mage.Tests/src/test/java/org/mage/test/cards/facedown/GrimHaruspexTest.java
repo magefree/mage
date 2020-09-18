@@ -8,7 +8,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class GrimHaruspexTest extends CardTestPlayerBase {
     @Test
     public void testMorphed() {
+        setStrictChooseMode(true);
+        
         addCard(Zone.HAND, playerA, "Wrath of God");
+        // Morph {B}
+        // Whenever another nontoken creature you control dies, draw a card.        
         addCard(Zone.HAND, playerA, "Grim Haruspex");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
 
@@ -19,6 +23,8 @@ public class GrimHaruspexTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
+        assertAllCommandsUsed();
+        
         assertGraveyardCount(playerA, "Grim Haruspex", 1);
         assertHandCount(playerA, 0);
     }

@@ -2,7 +2,6 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,6 +11,7 @@ import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -26,7 +26,7 @@ public final class GuulDrazMucklord extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Guul Draz Mucklord dies, put a +1/+1 counter on target creature you control.
-        Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Ability ability = new DiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

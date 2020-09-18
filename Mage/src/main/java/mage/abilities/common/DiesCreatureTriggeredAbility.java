@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -79,6 +80,11 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 
     @Override

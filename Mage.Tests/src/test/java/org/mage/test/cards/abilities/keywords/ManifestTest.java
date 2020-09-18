@@ -400,6 +400,8 @@ public class ManifestTest extends CardTestPlayerBase {
      */
     @Test
     public void testWhisperwoodElemental() {
+        setStrictChooseMode(true);
+        
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Seismic Rupture deals 2 damage to each creature without flying.
         addCard(Zone.HAND, playerA, "Seismic Rupture", 1);
@@ -413,6 +415,7 @@ public class ManifestTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Seismic Rupture");
+        setChoice(playerB, "When {this} dies"); // Order of triggers
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

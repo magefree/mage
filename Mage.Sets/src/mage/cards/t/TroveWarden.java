@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
@@ -20,6 +19,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -50,7 +50,7 @@ public final class TroveWarden extends CardImpl {
         this.addAbility(ability);
 
         // When Trove Warden dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.
-        this.addAbility(new DiesTriggeredAbility(new TroveWardenEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new TroveWardenEffect()));
     }
 
     private TroveWarden(final TroveWarden card) {
