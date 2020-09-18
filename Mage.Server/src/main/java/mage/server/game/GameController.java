@@ -1262,7 +1262,11 @@ public class GameController implements GameCallback {
         sb.append("<font color='red'>FIX command called by ").append(user.getName()).append("</font>");
         sb.append("<font size='-2'>"); // font resize start for all next logs
         sb.append("<br>Game ID: ").append(game.getId());
-        sb.append("<br>Phase: ").append(game.getTurn().getPhaseType().toString()).append(" Step: ").append(game.getTurn().getStepType().toString());
+        if (game.getTurn().getPhaseType() == null) {
+            sb.append("<br>Phase: not started").append(" Step: not started");
+        } else {
+            sb.append("<br>Phase: ").append(game.getTurn().getPhaseType().toString()).append(" Step: ").append(game.getTurn().getStepType().toString());
+        }
         // pings info
         sb.append("<br>");
         sb.append(getPingsInfo());
