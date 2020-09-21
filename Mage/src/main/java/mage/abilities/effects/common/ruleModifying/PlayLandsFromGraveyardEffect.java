@@ -15,7 +15,7 @@ public class PlayLandsFromGraveyardEffect extends ContinuousEffectImpl {
 
     public PlayLandsFromGraveyardEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "You may play land cards from your graveyard";
+        this.staticText = "You may play lands from your graveyard";
     }
 
     public PlayLandsFromGraveyardEffect(final PlayLandsFromGraveyardEffect effect) {
