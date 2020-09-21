@@ -21,7 +21,7 @@ public final class ZofConsumption extends CardImpl {
 
         // Each opponent loses 4 life and you gain 4 life.
         this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(4));
-        this.getSpellAbility().addEffect(new GainLifeEffect(4).setText("and"));
+        this.getSpellAbility().addEffect(new GainLifeEffect(4).concatBy("and"));
     }
 
     private ZofConsumption(final ZofConsumption card) {
