@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -12,8 +10,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class LoseLifeOpponentsEffect extends OneShotEffect {
@@ -37,7 +36,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(opponentId);
             if (player != null) {
                 player.loseLife(amount.calculate(game, source, this), game, false);
@@ -53,6 +52,9 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
