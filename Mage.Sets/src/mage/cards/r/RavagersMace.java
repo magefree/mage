@@ -40,10 +40,12 @@ public final class RavagersMace extends CardImpl {
         this.addAbility(ability);
 
         // Equipped creature gets +1/+0 for each creature in your party and has menace.
-        ability = new SimpleStaticAbility(new BoostEquippedEffect(PartyCount.instance, StaticValue.get(0)));
+        ability = new SimpleStaticAbility(new BoostEquippedEffect(
+                PartyCount.instance, StaticValue.get(0)
+        ).setText("equipped creature gets +1/+0 for each creature in your party"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.EQUIPMENT
-        ).setText("and has menace"));
+        ).setText("and has menace. " + PartyCount.getReminder()));
         this.addAbility(ability.addHint(PartyCountHint.instance));
 
         // Equip {2}{B}{R}
