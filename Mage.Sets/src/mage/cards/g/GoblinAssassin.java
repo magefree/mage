@@ -52,6 +52,7 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
 
     GoblinAssassinTriggeredEffect() {
         super(Outcome.Sacrifice);
+        staticText = "each player flips a coin. Each player whose coin comes up tails sacrifices a creature";
     }
 
     private GoblinAssassinTriggeredEffect(final GoblinAssassinTriggeredEffect effect) {
