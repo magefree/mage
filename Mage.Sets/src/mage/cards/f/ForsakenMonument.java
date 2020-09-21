@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ForsakenMonument extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorles creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures");
     private static final FilterSpell filter2 = new FilterSpell("a colorless spell");
 
     static {
