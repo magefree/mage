@@ -33,7 +33,7 @@ public final class AcquisitionsExpert extends CardImpl {
                 new DiscardCardYouChooseTargetEffect(TargetController.ANY, PartyCount.instance)
                         .setText("target opponent reveals a number of cards from their hand " +
                                 "equal to the number of creatures in your party. You choose one of those cards. " +
-                                "That player discards that card." + PartyCount.getReminder())
+                                "That player discards that card. " + PartyCount.getReminder())
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(PartyCountHint.instance));

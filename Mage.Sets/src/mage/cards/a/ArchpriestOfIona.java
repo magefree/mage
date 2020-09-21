@@ -1,7 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -14,10 +12,12 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -34,7 +34,10 @@ public final class ArchpriestOfIona extends CardImpl {
 
         // Archpriest of Iona's power is equal to the number of creatures in your party.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(PartyCount.instance, Duration.EndOfGame)
+                Zone.ALL,
+                new SetPowerSourceEffect(
+                        PartyCount.instance, Duration.EndOfGame
+                ).setText("{this}'s power is equal to the number of creatures in your party. " + PartyCount.getReminder())
         ).addHint(PartyCountHint.instance));
 
         // At the beginning of combat on your turn, if you have a full party, target creature gets +1/+1 and gains flying until end of turn.
