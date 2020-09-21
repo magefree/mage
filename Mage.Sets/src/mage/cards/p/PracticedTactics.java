@@ -4,6 +4,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PartyCount;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.PartyCountHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,9 +24,10 @@ public final class PracticedTactics extends CardImpl {
 
         // Choose target attacking or blocking creature. Practiced Tactics deals damage to that creature equal to twice the number of creatures in your party.
         this.getSpellAbility().addEffect(new DamageTargetEffect(xValue)
-                .setText("choose target attacking or blocking creature. " +
-                        "{this} deals damage to that creature equal to twice the number of creatures in your party"));
+                .setText("choose target attacking or blocking creature. {this} deals damage to that creature " +
+                        "equal to twice the number of creatures in your party. " + PartyCount.getReminder()));
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
+        this.getSpellAbility().addHint(PartyCountHint.instance);
     }
 
     private PracticedTactics(final PracticedTactics card) {

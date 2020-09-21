@@ -27,7 +27,7 @@ public final class ConcertedDefense extends CardImpl {
         // Counter target noncreature spell unless its controller pays {1} plus an additional {1} for each creature in your party.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(xValue).setText(
                 "Counter target noncreature spell unless its controller pays {1} " +
-                        "plus an additional {1} for each creature in your party."
+                        "plus an additional {1} for each creature in your party. " + PartyCount.getReminder()
         ));
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.getSpellAbility().addHint(PartyCountHint.instance);
