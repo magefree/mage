@@ -63,9 +63,7 @@ enum MoraugFuryOfAkoumCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.isActivePlayer(source.getControllerId())
-                && (game.getPhase().getType() == TurnPhase.PRECOMBAT_MAIN
-                || game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN);
+        return game.isActivePlayer(source.getControllerId()) && game.getPhase().getType().isMain();
     }
 }
 
@@ -118,24 +116,23 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, game.getPhase().getType(), false);
+        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT,TurnPhase.COMBAT, false);
         game.getState().getTurnMods().add(combat);
-        MoraugFuryOfAkoumDelayedTriggeredAbility delayedTriggeredAbility = new MoraugFuryOfAkoumDelayedTriggeredAbility();
-        delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
-        game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
+        game.addDelayedTriggeredAbility(new MoraugFuryOfAkoumDelayedTriggeredAbility(combat.getId()), source);
         return true;
     }
 }
 
 class MoraugFuryOfAkoumDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID connectedTurnMod;
+    private final UUID connectedTurnMod;
     private boolean enabled;
 
-    MoraugFuryOfAkoumDelayedTriggeredAbility() {
+    MoraugFuryOfAkoumDelayedTriggeredAbility(UUID connectedTurnMod) {
         super(new UntapAllControllerEffect(
                 StaticFilters.FILTER_CONTROLLED_CREATURES
         ), Duration.EndOfTurn, true, false);
+        this.connectedTurnMod = connectedTurnMod;
     }
 
     private MoraugFuryOfAkoumDelayedTriggeredAbility(MoraugFuryOfAkoumDelayedTriggeredAbility ability) {
@@ -151,26 +148,22 @@ class MoraugFuryOfAkoumDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.PHASE_CHANGED || event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE;
+        return event.getType() == GameEvent.EventType.PHASE_CHANGED
+                || event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.PHASE_CHANGED && this.connectedTurnMod.equals(event.getSourceId())) {
+        if (event.getType() == GameEvent.EventType.PHASE_CHANGED
+                && this.connectedTurnMod.equals(event.getSourceId())) {
             enabled = true;
             return false;
         }
         if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE && enabled) {
-            // add additional post combat phase after that
-            game.getState().getTurnMods().add(new TurnMod(getControllerId(), TurnPhase.POSTCOMBAT_MAIN, TurnPhase.COMBAT, false));
             enabled = false;
             return true;
         }
         return false;
-    }
-
-    public void setConnectedTurnMod(UUID connectedTurnMod) {
-        this.connectedTurnMod = connectedTurnMod;
     }
 
     @Override
