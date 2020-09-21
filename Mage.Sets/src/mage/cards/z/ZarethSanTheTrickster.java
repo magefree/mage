@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class ZarethSanTheTrickster extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ROGUE, "unblocked attacking Rogue you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ROGUE, "an unblocked attacking Rogue you control");
 
     static {
         filter.add(UnblockedPredicate.instance);
