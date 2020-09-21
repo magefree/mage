@@ -25,6 +25,10 @@ public interface OptionalAdditionalCost extends Cost, Copyable<OptionalAdditiona
      */
     String getReminderText();
 
+    void setReminderText(String reminderText);
+
+    void setMinimumCost(int minimumCost);
+
     /**
      * Returns a text suffix for the game log, that can be added to the cast
      * message.

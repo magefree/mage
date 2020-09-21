@@ -4,9 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetKickerXValue;
 import mage.abilities.effects.OneShotEffect;
@@ -40,20 +37,18 @@ public final class ThievingSkydiver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker {X}. X can't be 0.
-        Ability ability = new KickerAbility(new ManaCostsImpl<>("{X}"));
-        for (VariableCost cost : ability.getManaCosts().getVariableCosts()) {
-            if (cost instanceof VariableManaCost) {
-                ((VariableManaCost) cost).setMinX(1);
-                break;
-            }
-        }
-        this.addAbility(ability);
+        KickerAbility kickerAbility = new KickerAbility("{X}");
+        kickerAbility.getKickerCosts().stream().forEach(cost -> {
+            cost.setMinimumCost(1);
+            cost.setReminderText(". X can't be 0.");
+        });
+        this.addAbility(kickerAbility);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
-        ability = new ConditionalInterveningIfTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.Custom), false),
                 KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
                 "gain control of target artifact with converted mana cost X or less. " +

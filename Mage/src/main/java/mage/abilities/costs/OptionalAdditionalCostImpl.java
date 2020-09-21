@@ -1,5 +1,7 @@
 package mage.abilities.costs;
 
+import mage.abilities.costs.mana.VariableManaCost;
+
 /**
  * @author LevelX2
  */
@@ -69,6 +71,20 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
             replace = reminderText.replace("{cost}", this.getText(true));
         }
         return replace;
+    }
+
+    @Override
+    public void setReminderText(String reminderText) {
+        this.reminderText = reminderText;
+    }
+
+    @Override
+    public void setMinimumCost(int minimumCost) {
+        for (VariableCost cost : this.getVariableCosts()) {
+            if (cost instanceof VariableManaCost) {
+                ((VariableManaCost) cost).setMinX(minimumCost);
+            }
+        }
     }
 
     /**

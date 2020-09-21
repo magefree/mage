@@ -247,7 +247,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             sb.append(' ').append(remarkText);
         }
 
-        return sb.toString();
+        return sb.toString().replace(" .",".");
     }
 
     @Override
