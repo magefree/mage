@@ -27,7 +27,7 @@ public final class CovetedPrize extends CardImpl {
         // This spell costs {1} less to cast for each creature in your party.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionForEachSourceEffect(1, PartyCount.instance)
-        ).addHint(PartyCountHint.instance));
+        ).addHint(PartyCountHint.instance).setRuleAtTheTop(true));
 
         // Search your library for a card, put it into your hand, then shuffle your library. If you have a full party, you may cast a spell with converted mana cost 4 or less from your hand without paying its mana cost.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));

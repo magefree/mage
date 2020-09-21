@@ -30,7 +30,7 @@ public final class ThwartTheGrave extends CardImpl {
         // This spell costs {1} less to cast for each creature in your party.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionForEachSourceEffect(1, PartyCount.instance)
-        ).addHint(PartyCountHint.instance));
+        ).addHint(PartyCountHint.instance).setRuleAtTheTop(true));
 
         // Return target creature card and up to one target Cleric, Rogue, Warrior, or Wizard creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("Return target creature card and up to one target Cleric, Rogue, Warrior, or Wizard creature card from your graveyard to the battlefield."));
