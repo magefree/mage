@@ -48,7 +48,7 @@ public final class VineGecko extends CardImpl {
 
         // The first kicked spell you cast each turn costs {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("the first kicked spell you cast each turn costs {1} less to cast")));
+                .setText("the first kicked spell you cast each turn costs {1} less to cast")), new VineGeckoWatcher());
 
         // Whenever you cast a kicked spell, put a +1/+1 counter on Vine Gecko.
         this.addAbility(new SpellCastControllerTriggeredAbility(
