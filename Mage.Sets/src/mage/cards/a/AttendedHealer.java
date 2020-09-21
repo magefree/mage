@@ -47,7 +47,8 @@ public final class AttendedHealer extends CardImpl {
 
         // {2}{W}: Another target Cleric gains lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
-                LifelinkAbility.getInstance(), Duration.EndOfTurn
+                LifelinkAbility.getInstance(), Duration.EndOfTurn,
+                "another target Cleric gains lifelink until end of turn"
         ), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -101,7 +102,7 @@ class AttendedHealerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you gain life for the first time each turn, create a 1/1 white Cat creature token.";
+        return "Whenever you gain life for the first time each turn, create a 1/1 white Cat creature token.";
     }
 
     @Override
