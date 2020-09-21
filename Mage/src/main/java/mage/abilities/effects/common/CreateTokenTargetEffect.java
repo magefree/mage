@@ -70,7 +70,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
 
         if (mode.getTargets().isEmpty()) {
-            sb.append("target player");
+            sb.append("that player");
         }
         else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
