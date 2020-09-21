@@ -64,7 +64,7 @@ public final class MyriadConstruct extends CardImpl {
                 new SacrificeSourceEffect().setText("sacrifice it"), StaticFilters.FILTER_SPELL_A
         );
         ability.addEffect(new CreateTokenEffect(new ConstructToken(), xValue2)
-                .setText("and create a number of 1/1 colourless Construct artifact creature tokens equal to its power"));
+                .setText("and create a number of 1/1 colorless Construct artifact creature tokens equal to its power"));
         this.addAbility(ability);
     }
 
