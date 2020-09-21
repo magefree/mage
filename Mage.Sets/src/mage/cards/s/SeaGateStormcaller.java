@@ -41,10 +41,9 @@ public final class SeaGateStormcaller extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
                 new CreateDelayedTriggeredAbilityEffect(new SeaGateStormcallerDelayedTriggeredAbility(true)),
                 new CreateDelayedTriggeredAbilityEffect(new SeaGateStormcallerDelayedTriggeredAbility(false)),
-                KickedCondition.instance, "When {this} enters the battlefield, " +
-                "copy the next instant or sorcery spell with converted mana cost 2 or less " +
-                "you cast this turn when you cast it. If {this} was kicked, copy that spell twice instead. " +
-                "You may choose new targets for the copies."
+                KickedCondition.instance, "copy the next instant or sorcery spell " +
+                "with converted mana cost 2 or less you cast this turn when you cast it. " +
+                "If {this} was kicked, copy that spell twice instead. You may choose new targets for the copies."
         )));
     }
 
