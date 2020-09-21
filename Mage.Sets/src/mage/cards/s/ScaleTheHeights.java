@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public final class ScaleTheHeights extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addEffect(new GainLifeEffect(2).setText("You gain 2 life."));
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
