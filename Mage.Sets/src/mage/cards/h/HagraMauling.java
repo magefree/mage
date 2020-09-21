@@ -75,4 +75,9 @@ enum HagraMaulingCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "an opponent controls no basic lands";
+    }
 }
