@@ -45,7 +45,7 @@ public final class JaceMirrorMage extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new JaceMirrorMageCopyEffect()),
                 KickedCondition.instance, "When {this} enters the battlefield, if {this} was kicked, " +
-                "create a token that's a copy of {this} except it's not legendary and its starting loyalty is 1."
+                "create a token that's a copy of {this}, except it's not legendary and its starting loyalty is 1."
         ));
 
         // +1: Scry 2.
