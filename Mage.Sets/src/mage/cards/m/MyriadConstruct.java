@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -51,7 +50,7 @@ public final class MyriadConstruct extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Kicker {3}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new KickerAbility("{3}"));
 
         // If Myriad Construct was kicked, it enters the battlefield with a +1/+1 counter on it for each nonbasic land your opponents control.
         this.addAbility(new EntersBattlefieldAbility(

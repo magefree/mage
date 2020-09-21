@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -21,7 +20,7 @@ public final class Cinderclasm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Kicker {R}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{R}")));
+        this.addAbility(new KickerAbility("{R}"));
 
         // Cinderclasm deals 1 damage to each creature. If it was kicked, it deals 2 damage to each creature instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

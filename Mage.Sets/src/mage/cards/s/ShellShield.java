@@ -1,10 +1,7 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -18,6 +15,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -27,7 +26,7 @@ public final class ShellShield extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Kicker {1}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new KickerAbility("{1}"));
 
         // Target creature you control gets +0/+3 until end of turn. If this spell was kicked, that creature also gains hexproof until end of turn.
         this.getSpellAbility().addEffect(new ShellShieldEffect());

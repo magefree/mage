@@ -1,10 +1,7 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -16,6 +13,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -25,7 +24,7 @@ public final class MightOfMurasa extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Kicker {2}{G}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new KickerAbility("{2}{G}"));
 
         // Target creature gets +3/+3 until end of turn. If this spell was kicked, that creature gets +5/+5 until end of turn instead.
         this.getSpellAbility().addEffect(new MightOfMurasaEffect());

@@ -1,7 +1,6 @@
 package mage.cards.r;
 
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -21,7 +20,7 @@ public final class RoilEruption extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Kicker {5}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{5}")));
+        this.addAbility(new KickerAbility("{5}"));
 
         // Roil Eruption deals 3 damage to any target. If this spell was kicked, it deals 5 damage instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

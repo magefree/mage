@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -33,7 +32,7 @@ public final class NullpriestOfOblivion extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker {3}{B}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}{B}")));
+        this.addAbility(new KickerAbility("{3}{B}"));
 
         // Menace
         this.addAbility(new MenaceAbility());

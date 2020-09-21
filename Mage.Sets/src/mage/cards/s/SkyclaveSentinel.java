@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -37,7 +36,7 @@ public final class SkyclaveSentinel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kicker {4}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{4}")));
+        this.addAbility(new KickerAbility("{4}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -7,7 +7,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,7 +39,7 @@ public final class ShatterskullCharger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kicker {2}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new KickerAbility("{2}"));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

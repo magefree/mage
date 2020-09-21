@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -27,9 +26,8 @@ public final class VastwoodSurge extends CardImpl {
     public VastwoodSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-
         // Kicker {4}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{4}")));
+        this.addAbility(new KickerAbility("{4}"));
 
         // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library. If this spell was kicked, put two +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(

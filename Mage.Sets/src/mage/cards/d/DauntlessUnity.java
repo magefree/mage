@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -24,7 +23,7 @@ public final class DauntlessUnity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Kicker {1}{W}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new KickerAbility("{1}{W}"));
 
         // Creatures you control get +1/+1 until end of turn. If this spell was kicked, those creatures get +2/+1 until end of turn instead.
         this.getSpellAbility().addEffect(new DauntlessUnityEffect());

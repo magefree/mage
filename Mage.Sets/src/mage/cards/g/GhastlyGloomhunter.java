@@ -3,7 +3,6 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -30,7 +29,7 @@ public final class GhastlyGloomhunter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker {3}{B}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}{B}")));
+        this.addAbility(new KickerAbility("{3}{B}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -24,7 +23,7 @@ public final class RoostOfDrakes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // Kicker {2}{U}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new KickerAbility("{2}{U}"));
 
         // When Roost of Drakes enters the battlefield, if it was kicked, create a 2/2 blue Drake creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

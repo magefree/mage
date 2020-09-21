@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -20,7 +19,7 @@ public final class FieldResearch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Kicker {2}{U}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new KickerAbility("{2}{U}"));
 
         // Draw two cards. If this spell was kicked, draw three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

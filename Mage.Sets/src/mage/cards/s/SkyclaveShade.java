@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -34,7 +33,7 @@ public final class SkyclaveShade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker {2}{B}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new KickerAbility("{2}{B}"));
 
         // Skyclave Shade can't block.
         this.addAbility(new CantBlockAbility());

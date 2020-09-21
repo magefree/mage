@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -34,7 +33,7 @@ public final class MossPitSkeleton extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Kicker {3}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new KickerAbility("{3}"));
 
         // If Moss-Pit Skeleton was kicked, it enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(

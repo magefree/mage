@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -38,7 +37,7 @@ public final class MurasaSproutling extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kicker {1}{G}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{1}{G}")));
+        this.addAbility(new KickerAbility("{1}{G}"));
 
         // When Murasa Sproutling enters the battlefield, if it was kicked, return target card with a kicker ability from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -36,7 +35,7 @@ public final class SeaGateStormcaller extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker {4}{U}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{4}{U}")));
+        this.addAbility(new KickerAbility("{4}{U}"));
 
         // When Sea Gate Stormcaller enters the battlefield, copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. If Sea Gate Stormcaller was kicked, copy that spell twice instead. You may choose new targets for the copies.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(

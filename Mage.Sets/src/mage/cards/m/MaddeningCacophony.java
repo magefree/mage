@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -23,7 +22,7 @@ public final class MaddeningCacophony extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Kicker {3}{U}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}{U}")));
+        this.addAbility(new KickerAbility("{3}{U}"));
 
         // Each opponent mills eight cards. If this spell was kicked, instead each opponent mills half their library, rounded up.
         this.getSpellAbility().addEffect(new MaddeningCacophonyEffect());

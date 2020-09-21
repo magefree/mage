@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -24,7 +23,7 @@ public final class BloodBeckoning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Kicker {3}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new KickerAbility("{3}"));
 
         // Return target creature card from your graveyard to your hand. If this spell was kicked, instead return two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()

@@ -1,21 +1,20 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.constants.SubType;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -31,7 +30,7 @@ public final class KitesailCleric extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kicker {2}{W}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new KickerAbility("{2}{W}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

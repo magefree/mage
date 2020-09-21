@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -35,7 +34,7 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Kicker {4}{B}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{4}{B}")));
+        this.addAbility(new KickerAbility("{4}{B}"));
 
         // When you cast this spell, if it was kicked, each player loses half their life, rounded up.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

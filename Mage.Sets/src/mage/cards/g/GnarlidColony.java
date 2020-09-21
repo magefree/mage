@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -39,7 +38,7 @@ public final class GnarlidColony extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Kicker {2}{G}
-        this.addAbility(new KickerAbility(new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new KickerAbility("{2}{G}"));
 
         // If Gnarlid Colony was kicked, it enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(

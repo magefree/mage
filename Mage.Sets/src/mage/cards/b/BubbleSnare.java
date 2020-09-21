@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
@@ -32,7 +31,7 @@ public final class BubbleSnare extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Kicker {2}{U}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new KickerAbility("{2}{U}"));
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

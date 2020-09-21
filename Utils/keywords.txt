@@ -53,7 +53,7 @@ Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
 Jump-start|card|
-Kicker|cost|
+Kicker|manaString|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|

@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -23,14 +22,14 @@ public final class SkyclaveRelic extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Kicker {3}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new KickerAbility("{3}"));
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
 
         // When Skyclave Relic enters the battlefield, if it was kicked, create two tapped tokens that are copies of Skyclave Relic.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2,true)),
+                new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2, true)),
                 KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
                 "create two tapped tokens that are copies of {this}."
         ));

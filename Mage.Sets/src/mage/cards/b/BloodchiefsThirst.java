@@ -1,10 +1,7 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -16,9 +13,10 @@ import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.targetadjustment.TargetAdjuster;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -29,7 +27,7 @@ public final class BloodchiefsThirst extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Kicker {2}{B}
-        this.addAbility(new KickerAbility(new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new KickerAbility("{2}{B}"));
 
         // Destroy target creature or planeswalker with converted mana cost 2 or less. If this spell was kicked, instead destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(
