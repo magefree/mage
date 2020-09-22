@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
+import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 import java.util.UUID;
@@ -45,7 +46,7 @@ public final class MoraugFuryOfAkoum extends CardImpl {
                 "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " +
                         "if it's your main phase, there's an additional combat phase after this phase. " +
                         "At the beginning of that combat, untap all creatures you control."
-        ));
+        ), new MoraugFuryOfAkoumWatcher());
     }
 
     private MoraugFuryOfAkoum(final MoraugFuryOfAkoum card) {
@@ -116,7 +117,18 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT,TurnPhase.COMBAT, false);
+        TurnPhase turnPhase = game.getPhase().getType();
+        for (TurnMod turnMod : game.getState().getTurnMods()) {
+            if ("moraug".equals(turnMod.getNote())
+                    && turnMod.getPlayerId().equals(source.getControllerId())
+                    && turnMod.getAfterPhase() == turnPhase) {
+                turnPhase = TurnPhase.COMBAT;
+                turnMod.setNote("moraugIgnore");
+                break;
+            }
+        }
+        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, turnPhase, false);
+        combat.setNote("moraug");
         game.getState().getTurnMods().add(combat);
         game.addDelayedTriggeredAbility(new MoraugFuryOfAkoumDelayedTriggeredAbility(combat.getId()), source);
         return true;
@@ -169,5 +181,24 @@ class MoraugFuryOfAkoumDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "At the beginning of that combat, untap all creatures you control";
+    }
+}
+
+class MoraugFuryOfAkoumWatcher extends Watcher {
+
+    MoraugFuryOfAkoumWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE) {
+            return;
+        }
+        for (TurnMod turnMod : game.getState().getTurnMods()) {
+            if ("moraug".equals(turnMod.getNote())) {
+                turnMod.setNote("moraugIgnore");
+            }
+        }
     }
 }

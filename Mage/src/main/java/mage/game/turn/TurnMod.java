@@ -26,6 +26,7 @@ public class TurnMod implements Serializable {
     private PhaseStep skipStep;
     private TurnPhase afterPhase;
     private PhaseStep afterStep;
+    private String note;
 
     // Turn mod that should be applied after current turn mod.
     // Implemented only for control player turn mod!
@@ -180,5 +181,13 @@ public class TurnMod implements Serializable {
 
     public void setSubsequentTurnMod(TurnMod subsequentTurnMod) {
         this.subsequentTurnMod = subsequentTurnMod;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 }
