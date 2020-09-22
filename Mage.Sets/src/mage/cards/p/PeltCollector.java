@@ -1,35 +1,35 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class PeltCollector extends CardImpl {
+
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1, 3);
 
     public PeltCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -40,19 +40,13 @@ public final class PeltCollector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature you control enters the battlefield or dies, if that creature's power is greater than Pelt Collector's, put a +1/+1 counter on Pelt Collector.
-        this.addAbility(new PeltCollectorAbility());
+        this.addAbility(new PeltCollectorTriggeredAbility());
 
         // As long as Pelt Collector has three or more +1/+1 counters on it, it has trample.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(
-                                TrampleAbility.getInstance(),
-                                Duration.WhileOnBattlefield
-                        ), new SourceHasCounterCondition(CounterType.P1P1, 3),
-                        "As long as {this} has three or more +1/+1 "
-                        + "counters on it, it has trample."
-                )
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(
+                        TrampleAbility.getInstance(), Duration.WhileOnBattlefield
+                ), condition, "As long as {this} has three or more +1/+1 counters on it, it has trample.")
         ));
     }
 
@@ -66,43 +60,52 @@ public final class PeltCollector extends CardImpl {
     }
 }
 
-class PeltCollectorAbility extends TriggeredAbilityImpl {
+class PeltCollectorTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PeltCollectorAbility() {
-        super(Zone.BATTLEFIELD, new PeltCollectorEffect());
+    PeltCollectorTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
-    public PeltCollectorAbility(PeltCollectorAbility ability) {
+    private PeltCollectorTriggeredAbility(PeltCollectorTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) 
-                || (event.getType() == GameEvent.EventType.ZONE_CHANGE 
-                && ((ZoneChangeEvent) event).isDiesEvent()) ; 
+        return (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD)
+                || (event.getType() == GameEvent.EventType.ZONE_CHANGE
+                && ((ZoneChangeEvent) event).isDiesEvent());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())
+                || !event.getPlayerId().equals(getControllerId())) {
             return false;
         }
         Permanent triggeringCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        Permanent sourceCreature = game.getPermanent(this.getSourceId());
-        if (isPowerGreater(sourceCreature, triggeringCreature)
-                && triggeringCreature.isCreature()
-                && triggeringCreature.isControlledBy(this.getControllerId())) {
-            this.getEffects().setTargetPointer(new FixedTarget(triggeringCreature, game));
-            return true;
+        if (triggeringCreature == null) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("permanentEnteredOrDied", triggeringCreature);
+        return true;
     }
 
-    public static boolean isPowerGreater(Permanent sourceCreature, Permanent newCreature) {
-        return sourceCreature != null && newCreature != null
-                && newCreature.getPower().getValue()
-                > sourceCreature.getPower().getValue();
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Permanent sourcePerm = getSourcePermanentIfItStillExists(game);
+        if (sourcePerm == null) {
+            return false;
+        }
+        Permanent permanent = null;
+        for (Effect effect : this.getEffects()) {
+            Object obj = effect.getValue("permanentEnteredOrDied");
+            if (obj instanceof Permanent) {
+                permanent = (Permanent) obj;
+                break;
+            }
+        }
+        return permanent != null && permanent.getPower().getValue() > sourcePerm.getPower().getValue();
     }
 
     @Override
@@ -113,33 +116,7 @@ class PeltCollectorAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public PeltCollectorAbility copy() {
-        return new PeltCollectorAbility(this);
-    }
-}
-
-class PeltCollectorEffect extends OneShotEffect {
-
-    public PeltCollectorEffect() {
-        super(Outcome.BoostCreature);
-    }
-
-    public PeltCollectorEffect(final PeltCollectorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PeltCollectorEffect copy() {
-        return new PeltCollectorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent triggeringCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        if (!PeltCollectorAbility.isPowerGreater(sourceCreature, triggeringCreature)) {
-            return false;
-        }
-        return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
+    public PeltCollectorTriggeredAbility copy() {
+        return new PeltCollectorTriggeredAbility(this);
     }
 }
