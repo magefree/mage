@@ -2,7 +2,6 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -29,7 +28,7 @@ public final class InscriptionOfInsight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Kicker {2}{U}{U}
-        this.addAbility(new KickerWithAnyNumberModesAbility(new ManaCostsImpl<>("{2}{U}{U}")));
+        this.addAbility(new KickerWithAnyNumberModesAbility("{2}{U}{U}"));
 
         // Choose one. If this spell was kicked, choose any number instead.
         // • Return up to two target creatures to their owners' hands.

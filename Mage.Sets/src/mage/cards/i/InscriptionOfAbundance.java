@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -33,7 +32,7 @@ public final class InscriptionOfAbundance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Kicker {2}{G}
-        this.addAbility(new KickerWithAnyNumberModesAbility(new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new KickerWithAnyNumberModesAbility("{2}{G}"));
 
         // Choose one. If this spell was kicked, choose any number instead.
         // • Put two +1/+1 counters on target creature.

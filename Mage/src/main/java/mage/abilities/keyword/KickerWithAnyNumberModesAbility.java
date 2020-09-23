@@ -12,6 +12,10 @@ import mage.game.Game;
  */
 public class KickerWithAnyNumberModesAbility extends KickerAbility implements OptionalAdditionalModeSourceCosts {
 
+    public KickerWithAnyNumberModesAbility(String manaString) {
+        super(manaString);
+    }
+
     public KickerWithAnyNumberModesAbility(Cost cost) {
         super(cost);
     }

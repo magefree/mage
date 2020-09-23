@@ -1,7 +1,6 @@
 package mage.cards.i;
 
 import mage.abilities.Mode;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
@@ -40,7 +39,7 @@ public final class InscriptionOfRuin extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Kicker {2}{B}{B}
-        this.addAbility(new KickerWithAnyNumberModesAbility(new ManaCostsImpl<>("{2}{B}{B}")));
+        this.addAbility(new KickerWithAnyNumberModesAbility("{2}{B}{B}"));
 
         // Choose one. If this spell was kicked, choose any number instead.
         // • Target opponent discards two cards.
