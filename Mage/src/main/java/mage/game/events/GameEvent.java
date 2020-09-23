@@ -1,14 +1,13 @@
 package mage.game.events;
 
-
+import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.constants.Zone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.ApprovingObject;
-import mage.MageIdentifier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -16,6 +15,7 @@ import mage.MageIdentifier;
 public class GameEvent implements Serializable {
 
     protected EventType type;
+    protected UUID id;
     protected UUID targetId;
     protected UUID sourceId;
     protected UUID playerId;
@@ -426,12 +426,12 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
+                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
@@ -440,6 +440,7 @@ public class GameEvent implements Serializable {
         this.playerId = playerId;
         this.flag = flag;
         this.approvingObject = approvingObject;
+        this.id = UUID.randomUUID();
     }
 
     public EventType getType() {
@@ -448,6 +449,10 @@ public class GameEvent implements Serializable {
 
     public UUID getCustomEventType() {
         return customEventType;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public UUID getTargetId() {
@@ -559,7 +564,7 @@ public class GameEvent implements Serializable {
             }
         }
     }
-    
+
     public boolean hasApprovingIdentifier(MageIdentifier identifier) {
         if (approvingObject == null) {
             return false;
