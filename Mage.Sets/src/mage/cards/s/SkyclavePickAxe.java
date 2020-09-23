@@ -73,11 +73,11 @@ class SkyclavePickAxeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent == null) {
+        if (permanent == null || game.getPermanent(permanent.getAttachedTo()) == null) {
             return false;
         }
         game.addEffect(new BoostTargetEffect(2, 2).setTargetPointer(
-                new FixedTarget(game.getPermanent(permanent.getAttachedTo()), game)
+                new FixedTarget(permanent.getAttachedTo(), game)
         ), source);
         return true;
     }
