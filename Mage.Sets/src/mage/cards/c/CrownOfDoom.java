@@ -35,7 +35,7 @@ public final class CrownOfDoom extends CardImpl {
     private static final FilterPlayer filter = new FilterPlayer("player other than {this}'s owner");
 
     static {
-        filter.add(new CrownOfDoomPredicate());
+        filter.add(CrownOfDoomPredicate.instance);
     }
 
     public CrownOfDoom(UUID ownerId, CardSetInfo setInfo) {
@@ -51,13 +51,11 @@ public final class CrownOfDoom extends CardImpl {
                 SetTargetPointer.PERMANENT,
                 true));
 
-        //TODO: Make ability properly copiable
-
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CrownOfDoomEffect(),
-                new ManaCostsImpl("{2}"),
+                new ManaCostsImpl<>("{2}"),
                 MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         ability.addHint(MyTurnHint.instance);
@@ -74,10 +72,8 @@ public final class CrownOfDoom extends CardImpl {
     }
 }
 
-class CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
-
-    public CrownOfDoomPredicate() {
-    }
+enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
