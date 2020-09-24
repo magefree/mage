@@ -121,16 +121,8 @@ class DranaTheLastBloodchiefSubtypeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature;
-        if (source.getTargets().getFirstTarget() == null) {
-            creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        } else {
-            creature = game.getPermanent(source.getTargets().getFirstTarget());
-            if (creature == null) {
-                creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
-            }
-        }
-        if (creature != null && mor.refersTo(creature, game)) {
+        Permanent creature = mor.getPermanent(game);
+        if (creature != null) {
             if (!creature.hasSubtype(SubType.VAMPIRE, game)) {
                 creature.getSubtype(game).add(SubType.VAMPIRE);
             }
