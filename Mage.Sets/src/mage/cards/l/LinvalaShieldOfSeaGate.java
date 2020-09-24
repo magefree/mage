@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -9,26 +7,25 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.FullPartyCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.hint.common.PartyCountHint;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.constants.*;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -57,13 +54,12 @@ public final class LinvalaShieldOfSeaGate extends CardImpl {
         // At the beginning of combat on your turn, if you have a full party, choose target nonland permanent an opponent controls. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new CantAttackBlockTargetEffect(Duration.UntilYourNextTurn),
+                        new LinvalaShieldOfSeaGateRestrictionEffect(),
                         TargetController.YOU, false
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, choose target nonland permanent an opponent controls. " +
                 "Until your next turn, it can't attack or block, and its activated abilities can't be activated."
         );
-        ability.addEffect(new LinvalaShieldOfSeaGateRestrictionEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.addHint(PartyCountHint.instance));
 
@@ -81,7 +77,7 @@ public final class LinvalaShieldOfSeaGate extends CardImpl {
     }
 }
 
-class LinvalaShieldOfSeaGateRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
+class LinvalaShieldOfSeaGateRestrictionEffect extends RestrictionEffect {
 
     LinvalaShieldOfSeaGateRestrictionEffect() {
         super(Duration.UntilYourNextTurn, Outcome.UnboostCreature);
@@ -102,13 +98,23 @@ class LinvalaShieldOfSeaGateRestrictionEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getSourceId().equals(this.getTargetPointer().getFirst(game, source));
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+        return false;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+        return false;
     }
 }
 
