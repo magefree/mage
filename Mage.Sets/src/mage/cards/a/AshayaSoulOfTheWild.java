@@ -3,6 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
@@ -10,9 +11,9 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -23,10 +24,10 @@ import java.util.UUID;
 /**
  * @author jmharmon
  */
-
 public final class AshayaSoulOfTheWild extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
+    private static final DynamicValue xValue
+            = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
 
     public AshayaSoulOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -37,10 +38,13 @@ public final class AshayaSoulOfTheWild extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Ashaya, Soul of the Wild’s power and toughness are each equal to the number of lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SetPowerToughnessSourceEffect(
+                xValue, Duration.EndOfGame
+        )));
 
         // Nontoken creatures you control are Forest lands in addition to their other types. (They’re still affected by summoning sickness.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshayaSoulOfTheWildEffect()));
+        this.addAbility(new SimpleStaticAbility(new AshayaSoulOfTheWildEffect()));
     }
 
     public AshayaSoulOfTheWild(final AshayaSoulOfTheWild card) {
@@ -55,14 +59,15 @@ public final class AshayaSoulOfTheWild extends CardImpl {
 
 class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(Predicates.not(TokenPredicate.instance));
     }
 
     public AshayaSoulOfTheWildEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Nontoken creatures you control are Forest lands in addition to their other types";
         this.dependencyTypes.add(DependencyType.BecomeForest);
     }
@@ -77,31 +82,20 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer subLayer, Ability source, Game game) {
-        for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    // land abilities are intrinsic, so add them here, not in layer 6
-                    if (!land.hasSubtype(SubType.FOREST, game)) {
-                        land.getSubtype(game).add(SubType.FOREST);
-                        if (!land.getAbilities(game).containsClass(GreenManaAbility.class)) {
-                            land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                        }
-                    }
-                    land.addCardType(CardType.LAND);
-                    break;
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                filter, source.getControllerId(), source.getSourceId(), game
+        )) {
+            if (!permanent.isLand()) {
+                permanent.addCardType(CardType.LAND);
+            }
+            if (!permanent.hasSubtype(SubType.FOREST, game)) {
+                permanent.getSubtype(game).add(SubType.FOREST);
+                if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
+                    permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                }
             }
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
     }
 }
