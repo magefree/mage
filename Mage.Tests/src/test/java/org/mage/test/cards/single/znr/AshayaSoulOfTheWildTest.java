@@ -35,6 +35,7 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
         assertType(ashaya, CardType.LAND, SubType.FOREST);
         assertType(ashaya, CardType.CREATURE, SubType.ELEMENTAL);
         assertAbility(playerA, ashaya, new GreenManaAbility(), true);
+        assertPowerToughness(playerA, ashaya, 5 + 1 + 1, 5 + 1 + 1);
 
         assertType(bear, CardType.LAND, SubType.FOREST);
         assertType(bear, CardType.CREATURE, SubType.BEAR);
@@ -57,12 +58,15 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
 
         assertAllCommandsUsed();
 
+        // Ashaya loses all abilities and types and becomes a 3/3 Elk creature
         assertType(ashaya, CardType.LAND, false);
         assertNotSubtype(ashaya, SubType.ELEMENTAL);
         assertNotSubtype(ashaya, SubType.FOREST);
         assertType(ashaya, CardType.CREATURE, SubType.ELK);
         assertAbility(playerA, ashaya, new GreenManaAbility(), false);
+        assertPowerToughness(playerA, ashaya, 3, 3);
 
+        // Ashaya lost its ability but it was already applied in a lower layer
         assertType(bear, CardType.LAND, SubType.FOREST);
         assertType(bear, CardType.CREATURE, SubType.BEAR);
         assertAbility(playerA, bear, new GreenManaAbility(), true);
