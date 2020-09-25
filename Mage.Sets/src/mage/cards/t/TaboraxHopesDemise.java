@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -37,7 +37,7 @@ public final class TaboraxHopesDemise extends CardImpl {
 
     private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1, 5);
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another nontoken creature you control");
+            = new FilterControlledCreaturePermanent("another nontoken creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
