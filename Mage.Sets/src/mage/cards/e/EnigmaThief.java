@@ -42,6 +42,8 @@ public final class EnigmaThief extends CardImpl {
         // When Enigma Thief enters the battlefield, for each opponent, return up to one target nonland permanent that player controls to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(true)
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"));
+        ability.setTargetAdjuster(EnigmaThiefAdjuster.instance);
+        this.addAbility(ability);
     }
 
     private EnigmaThief(final EnigmaThief card) {
