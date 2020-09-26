@@ -60,7 +60,7 @@ class WhispersteelDaggerCastFromExileEffect extends AsThoughEffectImpl {
 
     WhispersteelDaggerCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "you may cast a creature spell from that player's graveyard this turn, and";
+        staticText = "you may cast a creature spell from that player's graveyard this turn";
     }
 
     private WhispersteelDaggerCastFromExileEffect(final WhispersteelDaggerCastFromExileEffect effect) {
@@ -110,7 +110,7 @@ class WhispersteelDaggerSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     WhispersteelDaggerSpendAnyManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast that spell";
+        staticText = ", and you may spend mana as though it were mana of any color to cast that spell";
     }
 
     private WhispersteelDaggerSpendAnyManaEffect(final WhispersteelDaggerSpendAnyManaEffect effect) {
