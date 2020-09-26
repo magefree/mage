@@ -226,6 +226,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
             if (created) {
                 game.informPlayers(controller.getLogName() + " creates a " + permanent.getLogName() + " token");
+            } else {
+                game.informPlayers(permanent.getLogName() + " enters the battlefield as a token under " + controller.getLogName() + "'s control'");
             }
 
         }
