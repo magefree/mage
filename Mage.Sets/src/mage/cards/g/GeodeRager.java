@@ -37,6 +37,7 @@ public final class GeodeRager extends CardImpl {
         // Landfall — Whenever a land enters the battlefield under your control, goad each creature target player controls.
         Ability ability = new LandfallAbility(new GeodeRagerEffect());
         ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     private GeodeRager(final GeodeRager card) {
