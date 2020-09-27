@@ -2,6 +2,7 @@ package org.mage.test.cards.copy;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -134,5 +135,129 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Reckless Bushwhacker", 2);
         assertPowerToughness(playerA, "Memnite", 3, 1, Filter.ComparisonScope.All);
+    }
+
+    @Test
+    public void testBestow() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Nimbus Naiad");
+
+        setChoice(playerA, "No");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertPowerToughness(playerA, "Grizzly Bears", 6, 6);
+        assertPermanentCount(playerA, "Nimbus Naiad", 2);
+    }
+
+    @Test
+    public void testBestowRedirect() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Nimbus Naiad");
+
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
+        assertAbility(playerA, "Grizzly Bears", FlyingAbility.getInstance(), true);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
+        assertAbility(playerA, "Silvercoat Lion", FlyingAbility.getInstance(), true);
+
+        assertPermanentCount(playerA, "Nimbus Naiad", 2);
+    }
+
+    @Ignore // currently fails
+    @Test
+    public void testBestowFallOff() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Murder", 1);
+        addCard(Zone.HAND, playerA, "Nimbus Naiad");
+
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
+
+        setChoice(playerA, "No");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder", "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 0);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+
+        assertPermanentCount(playerA, "Nimbus Naiad", 2);
+    }
+
+    @Ignore // currently fails
+    @Test
+    public void testBestowRedirectFallOff() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Murder", 1);
+        addCard(Zone.HAND, playerA, "Nimbus Naiad");
+
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
+
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 0);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+
+        assertPermanentCount(playerA, "Nimbus Naiad", 2);
+    }
+
+    @Ignore // currently fails
+    @Test
+    public void testBestowIllegalTarget() {
+        makeTester();
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Murder", 1);
+        addCard(Zone.HAND, playerA, "Nimbus Naiad");
+
+        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        setChoice(playerA, "No");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Grizzly Bears");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Grizzly Bears", 0);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+
+        assertPermanentCount(playerA, "Nimbus Naiad", 2);
     }
 }
