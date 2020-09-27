@@ -194,6 +194,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         for (int i = 0; i < amount; i++) {
             PermanentToken newToken = new PermanentToken(token, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
             game.getState().addCard(newToken);
+            newToken.setZoneChangeCounter(token.getZoneChangeCounter(game), game);
             permanents.add(newToken);
             game.getPermanentsEntering().put(newToken.getId(), newToken);
             newToken.setTapped(tapped);

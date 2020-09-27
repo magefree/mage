@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
 import java.util.Iterator;
@@ -171,6 +172,9 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
             --zcc;
         }
+        if (game.getPermanentEntering(source.getSourceId()) instanceof PermanentToken) {
+            --zcc;
+        }
         return zcc + ((kickerCosts.size() > 1) ? costText : "");
     }
 
@@ -247,7 +251,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             sb.append(' ').append(remarkText);
         }
 
-        return sb.toString().replace(" .",".");
+        return sb.toString().replace(" .", ".");
     }
 
     @Override
