@@ -79,11 +79,6 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
@@ -112,16 +107,9 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() != Zone.GRAVEYARD) {
-            return false;
-        }
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent == null
-                || !game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            return false;
-        }
-        if (zEvent.getTarget() != null) { // if it comes from permanent, check if it was a creature on the battlefield
-            return zEvent.getTarget().isCreature();
-        } else return permanent.isCreature();
+        return zEvent.getTarget() != null
+                && zEvent.getTarget().isCreature()
+                && zEvent.getTarget().getControllerId() != source.getControllerId()
+                && zEvent.isDiesEvent();
     }
 }

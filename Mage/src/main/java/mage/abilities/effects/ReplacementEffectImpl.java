@@ -54,7 +54,7 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
 
     @Override
     public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not used for replacemnt effect.");
+        throw new UnsupportedOperationException("Not used for replacement effect.");
     }
 
 }
