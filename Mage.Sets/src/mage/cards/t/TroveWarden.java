@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
@@ -14,12 +15,12 @@ import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -82,11 +83,12 @@ class TroveWardenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Permanent permanent = (Permanent) getValue("permanentLeftBattlefield");
+        if (controller == null || permanent == null) {
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-                game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                game, permanent.getId(), permanent.getZoneChangeCounter(game)
         ));
         if (exileZone == null) {
             return true;
