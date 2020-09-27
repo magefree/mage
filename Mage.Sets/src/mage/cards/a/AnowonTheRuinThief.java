@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -161,7 +160,7 @@ class AnowonTheRuinThiefWatcher extends Watcher {
             return;
         }
         Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature == null || !creature.hasAbility(TrampleAbility.getInstance(), game)) {
+        if (creature == null || !creature.hasSubtype(SubType.ROGUE, game)) {
             return;
         }
         damageMap
