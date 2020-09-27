@@ -40,8 +40,7 @@ public class AttachEffect extends OneShotEffect {
             int zcc = game.getState().getZoneChangeCounter(sourcePermanent.getId());
             if (zcc == source.getSourceObjectZoneChangeCounter()
                     || zcc == source.getSourceObjectZoneChangeCounter() + 1
-                    || zcc == source.getSourceObjectZoneChangeCounter() + 2
-                    || zcc == source.getSourceObjectZoneChangeCounter() + 3) {
+                    || zcc == source.getSourceObjectZoneChangeCounter() + 2) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     return permanent.addAttachment(source.getSourceId(), game);

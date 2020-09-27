@@ -258,7 +258,6 @@ public class Spell extends StackObjImpl implements Card {
                 } else {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card);
-                    token.setZoneChangeCounter(card.getZoneChangeCounter(game) + 1, game);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedToken();
@@ -321,7 +320,6 @@ public class Spell extends StackObjImpl implements Card {
         } else if (isCopy()) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);
-            token.setZoneChangeCounter(card.getZoneChangeCounter(game) + 1, game);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
             token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false);
             return true;
