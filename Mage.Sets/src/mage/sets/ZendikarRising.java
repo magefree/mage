@@ -236,6 +236,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline Tyrant", 147, Rarity.MYTHIC, mage.cards.l.LeylineTyrant.class));
         cards.add(new SetCardInfo("Linvala, Shield of Sea Gate", 226, Rarity.RARE, mage.cards.l.LinvalaShieldOfSeaGate.class));
         cards.add(new SetCardInfo("Lithoform Blight", 109, Rarity.UNCOMMON, mage.cards.l.LithoformBlight.class));
+        cards.add(new SetCardInfo("Lithoform Engine", 245, Rarity.MYTHIC, mage.cards.l.LithoformEngine.class));
         cards.add(new SetCardInfo("Living Tempest", 65, Rarity.COMMON, mage.cards.l.LivingTempest.class));
         cards.add(new SetCardInfo("Lotus Cobra", 193, Rarity.RARE, mage.cards.l.LotusCobra.class));
         cards.add(new SetCardInfo("Lullmage's Domination", 66, Rarity.UNCOMMON, mage.cards.l.LullmagesDomination.class));
@@ -402,6 +403,7 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Vastwood Fortification", 216, Rarity.UNCOMMON, mage.cards.v.VastwoodFortification.class));
         cards.add(new SetCardInfo("Vastwood Surge", 217, Rarity.UNCOMMON, mage.cards.v.VastwoodSurge.class));
         cards.add(new SetCardInfo("Vastwood Thicket", 216, Rarity.UNCOMMON, mage.cards.v.VastwoodThicket.class));
+        cards.add(new SetCardInfo("Verazol, the Split Current", 239, Rarity.RARE, mage.cards.v.VerazolTheSplitCurrent.class));
         cards.add(new SetCardInfo("Veteran Adventurer", 218, Rarity.UNCOMMON, mage.cards.v.VeteranAdventurer.class));
         cards.add(new SetCardInfo("Vine Gecko", 219, Rarity.UNCOMMON, mage.cards.v.VineGecko.class));
         cards.add(new SetCardInfo("Wayward Guide-Beast", 176, Rarity.RARE, mage.cards.w.WaywardGuideBeast.class));

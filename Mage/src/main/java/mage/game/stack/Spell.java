@@ -9,10 +9,10 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
@@ -27,7 +27,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 
@@ -248,11 +250,25 @@ public class Spell extends StackObjImpl implements Card {
                         card.getSubtype(game).add(SubType.AURA);
                     }
                 }
-                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
+                UUID permId = null;
+                boolean flag = false;
+                if (!isCopy()) {
+                    permId = card.getId();
+                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+                } else {
+                    EmptyToken token = new EmptyToken();
+                    CardUtil.copyTo(token).from(card);
+                    // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+                    if (token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false)) {
+                        permId = token.getLastAddedToken();
+                        flag = true;
+                    }
+                }
+                if (flag) {
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
-                        Permanent permanent = game.getPermanent(card.getId());
+                        Permanent permanent = game.getPermanent(permId);
                         if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             if (!card.getCardType().contains(CardType.CREATURE)) {
@@ -260,6 +276,20 @@ public class Spell extends StackObjImpl implements Card {
                             }
                             card.getSubtype(game).remove(SubType.AURA);
                         }
+                    }
+                    if (isCopy()) {
+                        Permanent token = game.getPermanent(permId);
+                        if (token == null) {
+                            return false;
+                        }
+                        for (Ability ability2 : token.getAbilities()) {
+                            if (!bestow || ability2 instanceof BestowAbility) {
+                                ability2.getTargets().get(0).add(ability.getFirstTarget(), game);
+                                ability2.getEffects().get(0).apply(game, ability2);
+                                return ability2.resolve(game);
+                            }
+                        }
+                        return false;
                     }
                     return ability.resolve(game);
                 }
@@ -287,24 +317,27 @@ public class Spell extends StackObjImpl implements Card {
                 counter(null, game);
                 return false;
             }
+        } else if (isCopy()) {
+            EmptyToken token = new EmptyToken();
+            CardUtil.copyTo(token).from(card);
+            // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+            token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false);
+            return true;
         } else {
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }
 
     private boolean hasTargets(SpellAbility spellAbility, Game game) {
-        if (spellAbility.getModes().getSelectedModes().size() > 1) {
-            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                Mode mode = spellAbility.getModes().get(modeId);
-                if (!mode.getTargets().isEmpty()) {
-                    return true;
-                }
-
-            }
-            return false;
-        } else {
+        if (spellAbility.getModes().getSelectedModes().size() < 2) {
             return !spellAbility.getTargets().isEmpty();
         }
+        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+            if (!spellAbility.getModes().get(modeId).getTargets().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -19,6 +19,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     private final boolean useController;
     private final boolean useLKI;
     private String copyThatSpellName = "that spell";
+    private final boolean chooseTargets;
 
     public CopyTargetSpellEffect() {
         this(false);
@@ -29,9 +30,14 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     }
 
     public CopyTargetSpellEffect(boolean useController, boolean useLKI) {
+        this(useController, useLKI, true);
+    }
+
+    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets) {
         super(Outcome.Copy);
         this.useController = useController;
         this.useLKI = useLKI;
+        this.chooseTargets = chooseTargets;
     }
 
     public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
@@ -39,6 +45,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         this.useLKI = effect.useLKI;
         this.useController = effect.useController;
         this.copyThatSpellName = effect.copyThatSpellName;
+        this.chooseTargets = effect.chooseTargets;
     }
 
     public Effect withSpellName(String copyThatSpellName) {
@@ -58,7 +65,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
-            StackObject newStackObject = spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(), true);
+            StackObject newStackObject = spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(), chooseTargets);
             Player player = game.getPlayer(source.getControllerId());
             if (player != null && newStackObject instanceof Spell) {
                 String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
@@ -91,8 +98,9 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         } else {
             sb.append(copyThatSpellName);
         }
-        sb.append(". You may choose new targets for the copy");
-
+        if (chooseTargets) {
+            sb.append(". You may choose new targets for the copy");
+        }
         return sb.toString();
     }
 }

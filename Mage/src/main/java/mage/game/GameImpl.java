@@ -532,7 +532,6 @@ public abstract class GameImpl implements Game, Serializable {
         if (card == null) {
             card = (Card) state.getValue(GameState.COPIED_FROM_CARD_KEY + cardId.toString());
         }
-
         return card;
     }
 

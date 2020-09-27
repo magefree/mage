@@ -5,11 +5,11 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
+
 import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author ArcadeMode
  */
 public interface Token extends MageObject {
@@ -32,6 +32,8 @@ public interface Token extends MageObject {
     boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking);
 
     boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer);
+
+    boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created);
 
     void setPower(int power);
 
