@@ -1,10 +1,5 @@
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -17,14 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -32,8 +20,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author spjspj
  */
 public final class KessDissidentMage extends CardImpl {
@@ -91,21 +80,21 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!(source instanceof FlashbackAbility)
-                && affectedControllerId.equals(source.getControllerId())
-                && game.isActivePlayer(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null
-                    && (card.isInstant()
-                    || card.isSorcery())
-                    && game.getState().getZone(objectId).equals(Zone.GRAVEYARD)) {
-                // check if not already a card was cast this turn with this ability
-                KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
-                return watcher != null
-                        && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
-            }
+        if (source instanceof FlashbackAbility
+                || !affectedControllerId.equals(source.getControllerId())
+                || !game.isActivePlayer(source.getControllerId())) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(objectId);
+        if (card == null
+                || !card.isInstantOrSorcery()
+                || !game.getState().getZone(objectId).equals(Zone.GRAVEYARD)
+                || !card.isOwnedBy(source.getControllerId())) {
+            return false;
+        }
+        // check if not already a card was cast this turn with this ability
+        KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
+        return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
     }
 }
 
@@ -148,7 +137,7 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
             KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
             return (watcher != null
                     && source.getSourceId().equals(watcher.spellCastWasAllowedBy(
-                            new MageObjectReference(event.getTargetId(), game))));
+                    new MageObjectReference(event.getTargetId(), game))));
         }
         return false;
     }

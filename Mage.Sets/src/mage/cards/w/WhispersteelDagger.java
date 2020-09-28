@@ -95,7 +95,8 @@ class WhispersteelDaggerCastFromExileEffect extends AsThoughEffectImpl {
         WhispersteelDaggerWatcher watcher = game.getState().getWatcher(WhispersteelDaggerWatcher.class);
         if (watcher == null || !watcher.checkPermission(
                 affectedControllerId, targetId, source, game
-        ) || game.getState().getZone(sourceId) != Zone.GRAVEYARD) {
+        ) || (game.getState().getZone(sourceId) != Zone.GRAVEYARD
+                && game.getState().getZone(sourceId) != Zone.STACK)) {
             return false;
         }
         Card card = game.getCard(sourceId);
@@ -109,7 +110,7 @@ class WhispersteelDaggerCastFromExileEffect extends AsThoughEffectImpl {
 class WhispersteelDaggerSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     WhispersteelDaggerSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
         staticText = ", and you may spend mana as though it were mana of any color to cast that spell";
     }
 

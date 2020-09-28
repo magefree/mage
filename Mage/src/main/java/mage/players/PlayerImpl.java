@@ -11,7 +11,10 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
-import mage.abilities.costs.*;
+import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -1397,7 +1400,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         return false;
     }
-    
+
     protected boolean specialManaPayment(SpecialAction action, Game game) {
         //20091005 - 114
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TAKE_SPECIAL_MANA_PAYMENT,
@@ -1419,7 +1422,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         return false;
     }
-    
+
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
         if (ability == null) {
@@ -3570,8 +3573,14 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             if (fromAll || fromZone == Zone.GRAVEYARD) {
-                for (Card card : graveyard.getCards(game)) {
-                    getPlayableFromObjectAll(game, Zone.GRAVEYARD, card, availableMana, playable);
+                for (UUID playerId : game.getState().getPlayersInRange(getId(), game)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player == null) {
+                        continue;
+                    }
+                    for (Card card : player.getGraveyard().getCards(game)) {
+                        getPlayableFromObjectAll(game, Zone.GRAVEYARD, card, availableMana, playable);
+                    }
                 }
             }
 
