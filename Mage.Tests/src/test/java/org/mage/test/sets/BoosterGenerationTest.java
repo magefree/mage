@@ -134,23 +134,28 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertNotNull(booster);
         Assert.assertEquals("Pack contains 15 cards", 15, booster.size());
 
-        Assert.assertTrue("Slot 1 is white", booster.get(0).getColor(null).isWhite());
-        Assert.assertTrue("Slot 2 is white", booster.get(1).getColor(null).isWhite());
+        Assert.assertTrue("Slot 1 is white (" + booster.get(0).getName() + ')', booster.get(0).getColorIdentity().isWhite());
+        Assert.assertTrue("Slot 2 is white (" + booster.get(1).getName() + ')', booster.get(1).getColorIdentity().isWhite());
 
-        Assert.assertTrue("Slot 3 is blue", booster.get(2).getColor(null).isBlue());
-        Assert.assertTrue("Slot 4 is blue", booster.get(3).getColor(null).isBlue());
+        Assert.assertTrue("Slot 3 is blue (" + booster.get(2).getName() + ')', booster.get(2).getColorIdentity().isBlue());
+        Assert.assertTrue("Slot 4 is blue (" + booster.get(3).getName() + ')', booster.get(3).getColorIdentity().isBlue());
 
-        Assert.assertTrue("Slot 5 is black", booster.get(4).getColor(null).isBlack());
-        Assert.assertTrue("Slot 6 is black", booster.get(5).getColor(null).isBlack());
+        Assert.assertTrue("Slot 5 is black (" + booster.get(4).getName() + ')', booster.get(4).getColorIdentity().isBlack());
+        Assert.assertTrue("Slot 6 is black (" + booster.get(5).getName() + ')', booster.get(5).getColorIdentity().isBlack());
 
-        Assert.assertTrue("Slot 7 is red", booster.get(6).getColor(null).isRed());
-        Assert.assertTrue("Slot 8 is red", booster.get(7).getColor(null).isRed());
+        Assert.assertTrue("Slot 7 is red (" + booster.get(6).getName() + ')', booster.get(6).getColorIdentity().isRed());
+        Assert.assertTrue("Slot 8 is red (" + booster.get(7).getName() + ')', booster.get(7).getColorIdentity().isRed());
 
-        Assert.assertTrue("Slot 9 is green", booster.get(8).getColor(null).isGreen());
-        Assert.assertTrue("Slot 10 is green", booster.get(9).getColor(null).isGreen());
+        Assert.assertTrue("Slot 9 is green (" + booster.get(8).getName() + ')', booster.get(8).getColorIdentity().isGreen());
+        Assert.assertTrue("Slot 10 is green (" + booster.get(9).getName() + ')', booster.get(9).getColorIdentity().isGreen());
 
-        Assert.assertTrue("Slot 11 is multicolored", booster.get(10).getColor(null).isMulticolored());
-        Assert.assertTrue("Slot 12 is colorless", booster.get(11).getColor(null).isColorless());
+        Assert.assertTrue("Slot 11 is multicolored (" + booster.get(10).getName() + ')', booster.get(10).getColorIdentity().isMulticolored());
+        Assert.assertTrue(
+                "Slot 12 is colorless (" + booster.get(11).getName() + ')',
+                booster.get(11).getColor(null).isColorless()
+                        || booster.get(11).isLand()
+                        || booster.get(11).isArtifact()
+        );
 
         Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
     }
