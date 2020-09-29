@@ -75,6 +75,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mudhole", 62, Rarity.RARE, mage.cards.m.Mudhole.class, FULL_ART));
         cards.add(new SetCardInfo("Narset, Enlightened Master", 53, Rarity.MYTHIC, mage.cards.n.NarsetEnlightenedMaster.class));
         cards.add(new SetCardInfo("Necrotic Ooze", 133, Rarity.RARE, mage.cards.n.NecroticOoze.class));
+        cards.add(new SetCardInfo("Negan, the Cold-Blooded", 147, Rarity.MYTHIC, mage.cards.n.NeganTheColdBlooded.class));
         cards.add(new SetCardInfo("Nylea, God of the Hunt", 80, Rarity.MYTHIC, mage.cards.n.NyleaGodOfTheHunt.class, FULL_ART));
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 54, Rarity.MYTHIC, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class));
