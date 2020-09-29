@@ -1,31 +1,30 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author goesta
@@ -43,13 +42,13 @@ public final class ChainerNightmareAdept extends CardImpl {
 
         // Discard a card: You may cast a creature card from your graveyard this turn. 
         // Activate this ability only once each turn.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new ChainerNightmareAdeptContinuousEffect(), new DiscardCardCost());
-        this.addAbility(ability, new ChainerNightmareAdeptWatcher());
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(
+                Zone.BATTLEFIELD, new ChainerNightmareAdeptContinuousEffect(), new DiscardCardCost()
+        ), new ChainerNightmareAdeptWatcher());
 
         // Whenever a nontoken creature enters the battlefield under your control, 
         // if you didn't cast it from your hand, it gains haste until your next turn.
-        this.addAbility(new ChainerNightmareAdeptTriggeredAbility(), new CastFromHandWatcher());
+        this.addAbility(new ChainerNightmareAdeptTriggeredAbility());
     }
 
     private ChainerNightmareAdept(final ChainerNightmareAdept card) {
@@ -62,15 +61,20 @@ public final class ChainerNightmareAdept extends CardImpl {
     }
 }
 
-class ChainerNightmareAdeptContinuousEffect extends ContinuousEffectImpl {
+class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
 
     ChainerNightmareAdeptContinuousEffect() {
-        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may cast a creature card from your graveyard this turn.";
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "you may cast a creature spell from your graveyard this turn";
     }
 
-    ChainerNightmareAdeptContinuousEffect(final ChainerNightmareAdeptContinuousEffect effect) {
+    private ChainerNightmareAdeptContinuousEffect(final ChainerNightmareAdeptContinuousEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 
     @Override
@@ -79,92 +83,72 @@ class ChainerNightmareAdeptContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        ChainerNightmareAdeptWatcher watcher = game.getState().getWatcher(ChainerNightmareAdeptWatcher.class);
+        if (watcher != null) {
+            watcher.addPlayable(source, game);
+        }
+    }
 
-        if (player == null
-                || game.getActivePlayerId() == null
-                || !game.isActivePlayer(player.getId())) {
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        ChainerNightmareAdeptWatcher watcher = game.getState().getWatcher(ChainerNightmareAdeptWatcher.class);
+        if (watcher == null || !watcher.checkPermission(
+                affectedControllerId, source, game
+        ) || game.getState().getZone(sourceId) != Zone.GRAVEYARD) {
             return false;
         }
-
-        for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            ContinuousEffect effect = new ChainerNightmareAdeptCastFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId()));
-            game.addEffect(effect, source);
-        }
-        return true;
-    }
-}
-
-class ChainerNightmareAdeptCastFromGraveyardEffect extends AsThoughEffectImpl {
-
-    ChainerNightmareAdeptCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast one creature card from your graveyard";
-    }
-
-    ChainerNightmareAdeptCastFromGraveyardEffect(final ChainerNightmareAdeptCastFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ChainerNightmareAdeptCastFromGraveyardEffect copy() {
-        return new ChainerNightmareAdeptCastFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        if (card != null
-                && card.getId().equals(getTargetPointer().getFirst(game, source))
+        Card card = game.getCard(sourceId);
+        return card != null
+                && card.getOwnerId().equals(affectedControllerId)
                 && card.isCreature()
-                && card.getSpellAbility() != null
-                && affectedControllerId != null
-                && card.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)
-                && affectedControllerId.equals(source.getControllerId())) {
-            ChainerNightmareAdeptWatcher watcher = game.getState().getWatcher(
-                    ChainerNightmareAdeptWatcher.class, source.getSourceId());
-            return watcher != null
-                    && !watcher.isAbilityUsed();
-        }
-        return false;
+                && !card.isLand();
     }
 }
 
 class ChainerNightmareAdeptWatcher extends Watcher {
 
-    private boolean abilityUsed = false;
+    private final Map<MageObjectReference, Map<UUID, Integer>> morMap = new HashMap<>();
 
     ChainerNightmareAdeptWatcher() {
-        super(WatcherScope.CARD);
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getZone() == Zone.GRAVEYARD) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.isCreature()
-                    && abilityUsed == false) {
-                abilityUsed = true;
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            if (event.getAdditionalReference() == null) {
+                return;
             }
+            morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
+                    .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
+            return;
         }
     }
 
     @Override
     public void reset() {
+        morMap.clear();
         super.reset();
-        abilityUsed = false;
     }
 
-    public boolean isAbilityUsed() {
-        return abilityUsed;
+    boolean checkPermission(UUID playerId, Ability source, Game game) {
+        if (!playerId.equals(source.getControllerId())) {
+            return false;
+        }
+        MageObjectReference mor = new MageObjectReference(
+                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+        );
+        return morMap.computeIfAbsent(mor, m -> new HashMap<>()).getOrDefault(playerId, 0) > 0;
+    }
+
+    void addPlayable(Ability source, Game game) {
+        MageObjectReference mor = new MageObjectReference(
+                source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game
+        );
+        morMap.computeIfAbsent(mor, m -> new HashMap<>())
+                .compute(source.getControllerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
     }
 }
 
@@ -183,12 +167,13 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggere
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    public ChainerNightmareAdeptTriggeredAbility() {
+    ChainerNightmareAdeptTriggeredAbility() {
         super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, filter, false,
                 SetTargetPointer.PERMANENT, abilityText);
+        this.addWatcher(new CastFromHandWatcher());
     }
 
-    ChainerNightmareAdeptTriggeredAbility(final ChainerNightmareAdeptTriggeredAbility effect) {
+    private ChainerNightmareAdeptTriggeredAbility(final ChainerNightmareAdeptTriggeredAbility effect) {
         super(effect);
     }
 
