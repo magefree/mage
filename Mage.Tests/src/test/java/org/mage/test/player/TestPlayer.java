@@ -813,6 +813,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check library count: card name, count
+                        if (params[0].equals(CHECK_COMMAND_LIBRARY_COUNT) && params.length == 3) {
+                            assertLibraryCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check hand count: count
                         if (params[0].equals(CHECK_COMMAND_HAND_COUNT) && params.length == 2) {
                             assertHandCount(action, game, computerPlayer, Integer.parseInt(params[1]));
@@ -1345,6 +1352,17 @@ public class TestPlayer implements Player {
         }
 
         Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in graveyard zone with " + count + " instances", count, foundedCount);
+    }
+
+    private void assertLibraryCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
+        int foundedCount = 0;
+        for (Card card : player.getLibrary().getCards(game)) {
+            if (hasObjectTargetNameOrAlias(card, permanentName)) {
+                foundedCount++;
+            }
+        }
+
+        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in library with " + count + " instances", count, foundedCount);
     }
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
