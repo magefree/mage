@@ -179,6 +179,7 @@ Rivals of Ixalan|RivalsOfIxalan|
 Saviors of Kamigawa|SaviorsOfKamigawa|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
+Secret Lair Drop|SecretLairDrop|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|

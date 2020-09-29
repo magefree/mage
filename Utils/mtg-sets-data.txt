@@ -180,6 +180,7 @@ Return to Ravnica|RTR|
 Starter 2000|S00|
 Starter 1999|S99|
 Scourge|SCG|
+Secret Lair|SLD|
 Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|

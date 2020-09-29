@@ -68,6 +68,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 99, Rarity.RARE, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Marrow-Gnawer", 34, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
         cards.add(new SetCardInfo("Meren of Clan Nel Toth", 52, Rarity.MYTHIC, mage.cards.m.MerenOfClanNelToth.class));
+        cards.add(new SetCardInfo("Michonne, Ruthless Survivor", 146, Rarity.MYTHIC, mage.cards.m.MichonneRuthlessSurvivor.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 26, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mogis, God of Slaughter", 78, Rarity.MYTHIC, mage.cards.m.MogisGodOfSlaughter.class, FULL_ART));
         cards.add(new SetCardInfo("Mountain", 66, Rarity.LAND, mage.cards.basiclands.Mountain.class));
