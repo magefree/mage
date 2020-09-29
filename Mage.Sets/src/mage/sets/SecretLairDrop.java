@@ -49,6 +49,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Explore", 114, Rarity.RARE, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Fatal Push", 112, Rarity.RARE, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Gilded Goose", 93, Rarity.RARE, mage.cards.g.GildedGoose.class));
+        cards.add(new SetCardInfo("Glenn, the Voice of Calm", 145, Rarity.MYTHIC, mage.cards.g.GlennTheVoiceOfCalm.class));
         cards.add(new SetCardInfo("Goblin Bushwhacker", 17, Rarity.RARE, mage.cards.g.GoblinBushwhacker.class));
         cards.add(new SetCardInfo("Goblin King", 19, Rarity.RARE, mage.cards.g.GoblinKing.class));
         cards.add(new SetCardInfo("Goblin Lackey", 20, Rarity.RARE, mage.cards.g.GoblinLackey.class));
