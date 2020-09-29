@@ -39,6 +39,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodghast", 6, Rarity.RARE, mage.cards.b.Bloodghast.class));
         cards.add(new SetCardInfo("Captain Sisay", 51, Rarity.MYTHIC, mage.cards.c.CaptainSisay.class));
         cards.add(new SetCardInfo("Darksteel Colossus", 57, Rarity.MYTHIC, mage.cards.d.DarksteelColossus.class));
+        cards.add(new SetCardInfo("Daryl, Hunter of Walkers", 144, Rarity.MYTHIC, mage.cards.d.DarylHunterOfWalkers.class));
         cards.add(new SetCardInfo("Dig Through Time", 97, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Domri Rade", 88, Rarity.MYTHIC, mage.cards.d.DomriRade.class));
         cards.add(new SetCardInfo("Dovescape", 95, Rarity.RARE, mage.cards.d.Dovescape.class));
