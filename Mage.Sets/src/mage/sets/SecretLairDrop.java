@@ -24,11 +24,14 @@ public class SecretLairDrop extends ExpansionSet {
         final CardGraphicInfo FULL_ART = FULL_ART_BFZ_VARIOUS;
 
         cards.add(new SetCardInfo("Acidic Slime", 134, Rarity.RARE, mage.cards.a.AcidicSlime.class));
+        cards.add(new SetCardInfo("Admonition Angel", 154, Rarity.MYTHIC, mage.cards.a.AdmonitionAngel.class));
         cards.add(new SetCardInfo("Ajani Steadfast", 87, Rarity.MYTHIC, mage.cards.a.AjaniSteadfast.class));
         cards.add(new SetCardInfo("Ancient Grudge", 98, Rarity.RARE, mage.cards.a.AncientGrudge.class));
+        cards.add(new SetCardInfo("Anger of the Gods", 113, Rarity.RARE, mage.cards.a.AngerOfTheGods.class));
         cards.add(new SetCardInfo("Arahbo, Roar of the World", 25, Rarity.MYTHIC, mage.cards.a.ArahboRoarOfTheWorld.class));
         cards.add(new SetCardInfo("Arcbound Ravager", 56, Rarity.RARE, mage.cards.a.ArcboundRavager.class));
         cards.add(new SetCardInfo("Athreos, God of Passage", 76, Rarity.MYTHIC, mage.cards.a.AthreosGodOfPassage.class, FULL_ART));
+        cards.add(new SetCardInfo("Avenger of Zendikar", 158, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Baleful Strix", 94, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Birds of Paradise", 92, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Bitterblossom", 12, Rarity.MYTHIC, mage.cards.b.Bitterblossom.class));
@@ -43,6 +46,8 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Erebos, God of the Dead", 74, Rarity.MYTHIC, mage.cards.e.ErebosGodOfTheDead.class, FULL_ART));
         cards.add(new SetCardInfo("Eternal Witness", 43, Rarity.RARE, mage.cards.e.EternalWitness.class));
         cards.add(new SetCardInfo("Forest", 67, Rarity.LAND, mage.cards.basiclands.Forest.class));
+        cards.add(new SetCardInfo("Explore", 114, Rarity.RARE, mage.cards.e.Explore.class));
+        cards.add(new SetCardInfo("Fatal Push", 112, Rarity.RARE, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Gilded Goose", 93, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Goblin Bushwhacker", 17, Rarity.RARE, mage.cards.g.GoblinBushwhacker.class));
         cards.add(new SetCardInfo("Goblin King", 19, Rarity.RARE, mage.cards.g.GoblinKing.class));
@@ -78,6 +83,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Negan, the Cold-Blooded", 147, Rarity.MYTHIC, mage.cards.n.NeganTheColdBlooded.class));
         cards.add(new SetCardInfo("Nylea, God of the Hunt", 80, Rarity.MYTHIC, mage.cards.n.NyleaGodOfTheHunt.class, FULL_ART));
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 54, Rarity.MYTHIC, mage.cards.o.OonaQueenOfTheFae.class));
+        cards.add(new SetCardInfo("Opt", 111, Rarity.RARE, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class));
         cards.add(new SetCardInfo("Pharika, God of Affliction", 82, Rarity.MYTHIC, mage.cards.p.PharikaGodOfAffliction.class, FULL_ART));
         cards.add(new SetCardInfo("Phenax, God of Deception", 75, Rarity.MYTHIC, mage.cards.p.PhenaxGodOfDeception.class, FULL_ART));
@@ -105,6 +111,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm Crow", 60, Rarity.RARE, mage.cards.s.StormCrow.class, FULL_ART));
         cards.add(new SetCardInfo("Swamp", 65, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Swan Song", 91, Rarity.RARE, mage.cards.s.SwanSong.class));
+        cards.add(new SetCardInfo("Swords to Plowshares", 110, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tamiyo, Field Researcher", 89, Rarity.MYTHIC, mage.cards.t.TamiyoFieldResearcher.class));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 37, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 38, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class, NON_FULL_USE_VARIOUS));
@@ -113,9 +120,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Thassa, God of the Sea", 71, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class, FULL_ART));
         cards.add(new SetCardInfo("The Mimeoplasm", 136, Rarity.MYTHIC, mage.cards.t.TheMimeoplasm.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 11, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
-        cards.add(new SetCardInfo("Voidslime", 167, Rarity.RARE, mage.cards.v.Voidslime.class));
+        cards.add(new SetCardInfo("Voidslime", 137, Rarity.RARE, mage.cards.v.Voidslime.class));
         cards.add(new SetCardInfo("Vraska, Golgari Queen", 90, Rarity.MYTHIC, mage.cards.v.VraskaGolgariQueen.class));
         cards.add(new SetCardInfo("Walking Ballista", 58, Rarity.RARE, mage.cards.w.WalkingBallista.class));
+        cards.add(new SetCardInfo("Warren Instigator", 157, Rarity.MYTHIC, mage.cards.w.WarrenInstigator.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 81, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class, FULL_ART));
+        cards.add(new SetCardInfo("Zulaport Cutthroat", 156, Rarity.RARE, mage.cards.z.ZulaportCutthroat.class));
     }
 }
