@@ -44,6 +44,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
+        this.once = ability.once;
     }
 
     public void setOnce(boolean once) {
@@ -57,7 +58,6 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        game.applyEffects(); // Hooded Blightfang
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
             if (setTargetPointer) {
