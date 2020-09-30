@@ -1,27 +1,27 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.emblems.LilianaOfTheDarkRealmsEmblem;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class LilianaOfTheDarkRealms extends CardImpl {
@@ -41,10 +41,12 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
 
         // +1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), 1));
+
         // -3: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.
-        LoyaltyAbility ability = new LoyaltyAbility(new LilianaOfTheDarkRealmsEffect(), -3);
+        Ability ability = new LoyaltyAbility(new LilianaOfTheDarkRealmsEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+
         // -6: You get an emblem with "Swamps you control have '{tap}: Add {B}{B}{B}{B}.'"
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaOfTheDarkRealmsEmblem()), -6));
     }
@@ -59,19 +61,18 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
     }
 }
 
-class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
+class LilianaOfTheDarkRealmsEffect extends OneShotEffect {
 
-    private int amount;
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SWAMP);
 
-    public LilianaOfTheDarkRealmsEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        this.amount = 0;
-        this.staticText = "Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control";
+    LilianaOfTheDarkRealmsEffect() {
+        super(Outcome.Neutral);
+        staticText = "Target creature gets +X/+X or -X/-X until end of turn, " +
+                "where X is the number of Swamps you control.";
     }
 
-    public LilianaOfTheDarkRealmsEffect(final LilianaOfTheDarkRealmsEffect effect) {
+    private LilianaOfTheDarkRealmsEffect(final LilianaOfTheDarkRealmsEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -80,30 +81,24 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-
-        FilterLandPermanent filter = new FilterLandPermanent("Swamps");
-        filter.add(SubType.SWAMP.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        this.amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-
-        Player player = game.getPlayer(source.getControllerId());
-
-        String message = "Should the target creature get -X/-X instead of +X/+X?";
-        if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
-            this.amount *= -1;
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            target.addPower(amount);
-            target.addToughness(amount);
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
+        int swamps = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        if (swamps < 1) {
+            return false;
+        }
+        String plusMessage = "+" + swamps + "/+" + swamps;
+        String minusMessage = "-" + swamps + "/-" + swamps;
+        if (!player.chooseUse(
+                outcome, "Give " + plusMessage + " or " + minusMessage + "?",
+                null, plusMessage, minusMessage, source, game
+        )) {
+            swamps *= -1;
+        }
+        game.addEffect(new BoostTargetEffect(swamps, swamps, Duration.EndOfTurn), source);
+        return true;
     }
 }
