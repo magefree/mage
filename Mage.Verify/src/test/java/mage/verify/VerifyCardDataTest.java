@@ -257,9 +257,12 @@ public class VerifyCardDataTest {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
-            if (card.isSplitCard()) {
+            if (card instanceof SplitCard) {
                 check(((SplitCard) card).getLeftHalfCard(), cardIndex);
                 check(((SplitCard) card).getRightHalfCard(), cardIndex);
+            } else if (card instanceof ModalDoubleFacesCard) {
+                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex);
+                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -1351,7 +1354,7 @@ public class VerifyCardDataTest {
             Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
-            if (card instanceof SplitCard) {
+            if (card instanceof SplitCard || card instanceof ModalDoubleFacesCard) {
                 card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);

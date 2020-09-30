@@ -1,9 +1,6 @@
 package mage.deck;
 
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorErrorType;
@@ -199,21 +196,27 @@ public class TinyLeaders extends Constructed {
             return false;
         }
 
-        //905.5b - Converted mana cost must be 3 or less
+        // 906.5b
+        // Each card must have a converted mana cost of three or less. Cards with {x} in their mana cost count X
+        // as zero for this purpose. Split cards are legal only if both of their halves would be legal independently.
+        List<Integer> costs = new ArrayList<>();
         if (card instanceof SplitCard) {
-            if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ')', true);
-                return false;
-            }
-            if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ')', true);
-                return false;
-            }
-        } else if (card.getManaCost().convertedManaCost() > 3) {
-            addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ')', true);
-            return false;
+            costs.add(((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost());
+            costs.add(((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost());
+        } else if (card instanceof ModalDoubleFacesCard) {
+            costs.add(((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCost().convertedManaCost());
+            costs.add(((ModalDoubleFacesCard) card).getRightHalfCard().getManaCost().convertedManaCost());
+        } else {
+            costs.add(card.getManaCost().convertedManaCost());
         }
-        return true;
+
+        return costs.stream().allMatch(cost -> {
+            if (cost > 3) {
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid cost (" + cost + ')', true);
+                return false;
+            }
+            return true;
+        });
     }
 
     /**

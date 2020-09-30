@@ -24,7 +24,6 @@ public final class ParallaxTide extends CardImpl {
     public ParallaxTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
-
         // Fading 5
         this.addAbility(new FadingAbility(5, this));
 
@@ -34,7 +33,7 @@ public final class ParallaxTide extends CardImpl {
         this.addAbility(ability);
 
         // When Parallax Tide leaves the battlefield, each player returns to the battlefield all cards they own exiled with Parallax Tide.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), splitCard));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
     public ParallaxTide(final ParallaxTide card) {

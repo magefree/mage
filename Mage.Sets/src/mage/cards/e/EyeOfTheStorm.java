@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -21,7 +22,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author spjspj
@@ -127,9 +127,12 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                     // Check if owner of card is still in game
                     card = game.getCard(uuid);
                     if (card != null && game.getPlayer(card.getOwnerId()) != null) {
-                        if (card.isSplitCard()) {
+                        if (card instanceof SplitCard) {
                             copiedCards.add(((SplitCard) card).getLeftHalfCard());
                             copiedCards.add(((SplitCard) card).getRightHalfCard());
+                        } else if (card instanceof ModalDoubleFacesCard) {
+                            copiedCards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
+                            copiedCards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
                         } else {
                             copiedCards.add(card);
                         }

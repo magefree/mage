@@ -8,7 +8,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -85,14 +84,6 @@ class LiarsPendulumEffect extends OneShotEffect {
             boolean rightGuess = !opponentGuess;
 
             for (Card card : controller.getHand().getCards(game)) {
-                if (card.isSplitCard()) {
-                    SplitCard splitCard = (SplitCard) card;
-                    if (splitCard.getLeftHalfCard().getName().equals(cardName)) {
-                        rightGuess = opponentGuess;
-                    } else if (splitCard.getRightHalfCard().getName().equals(cardName)) {
-                        rightGuess = opponentGuess;
-                    }
-                }
                 if (CardUtil.haveSameNames(card, cardName, game)) {
                     rightGuess = opponentGuess;
                 }

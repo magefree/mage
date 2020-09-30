@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -16,38 +17,39 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author JayDi85
  */
-public abstract class SplitCard extends CardImpl {
+public abstract class ModalDoubleFacesCard extends CardImpl {
 
     protected Card leftHalfCard;
     protected Card rightHalfCard;
 
-    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
-        this(ownerId, setInfo, cardTypes, cardTypes, costsLeft, costsRight, spellAbilityType);
+    public ModalDoubleFacesCard(UUID ownerId, CardSetInfo setInfo,
+                                CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
+                                String secondSideName, CardType[] typesRight, SubType[] subTypesRight, String costsRight) {
+        super(ownerId, setInfo, typesLeft, costsLeft + costsRight, SpellAbilityType.MODAL);
+        // main card name must be same as left side
+        leftHalfCard = new ModalDoubleFacesCardHalfImpl(this.getOwnerId(), new CardSetInfo(setInfo.getName(), setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
+                typesLeft, subTypesLeft, costsLeft, this, SpellAbilityType.MODAL_LEFT);
+        rightHalfCard = new ModalDoubleFacesCardHalfImpl(this.getOwnerId(), new CardSetInfo(secondSideName, setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
+                typesRight, subTypesRight, costsRight, this, SpellAbilityType.MODAL_RIGHT);
+        this.modalDFC = true;
     }
 
-    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
-        super(ownerId, setInfo, CardType.mergeTypes(typesLeft, typesRight), costsLeft + costsRight, spellAbilityType);
-        String[] names = setInfo.getName().split(" // ");
-        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesLeft, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
-        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
-    }
-
-    public SplitCard(SplitCard card) {
+    public ModalDoubleFacesCard(ModalDoubleFacesCard card) {
         super(card);
         this.leftHalfCard = card.getLeftHalfCard().copy();
-        ((SplitCardHalf) leftHalfCard).setParentCard(this);
+        ((ModalDoubleFacesCardHalf) leftHalfCard).setParentCard(this);
         this.rightHalfCard = card.rightHalfCard.copy();
-        ((SplitCardHalf) rightHalfCard).setParentCard(this);
+        ((ModalDoubleFacesCardHalf) rightHalfCard).setParentCard(this);
     }
 
-    public SplitCardHalf getLeftHalfCard() {
-        return (SplitCardHalf) leftHalfCard;
+    public ModalDoubleFacesCardHalf getLeftHalfCard() {
+        return (ModalDoubleFacesCardHalf) leftHalfCard;
     }
 
-    public SplitCardHalf getRightHalfCard() {
-        return (SplitCardHalf) rightHalfCard;
+    public ModalDoubleFacesCardHalf getRightHalfCard() {
+        return (ModalDoubleFacesCardHalf) rightHalfCard;
     }
 
     @Override
@@ -112,9 +114,9 @@ public abstract class SplitCard extends CardImpl {
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch (ability.getSpellAbilityType()) {
-            case SPLIT_LEFT:
+            case MODAL_LEFT:
                 return this.getLeftHalfCard().cast(game, fromZone, ability, controllerId);
-            case SPLIT_RIGHT:
+            case MODAL_RIGHT:
                 return this.getRightHalfCard().cast(game, fromZone, ability, controllerId);
             default:
                 this.getLeftHalfCard().getSpellAbility().setControllerId(controllerId);
@@ -126,27 +128,12 @@ public abstract class SplitCard extends CardImpl {
     @Override
     public Abilities<Ability> getAbilities() {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-        for (Ability ability : super.getAbilities()) {
-            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
-            if (ability instanceof SpellAbility
-                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
-                continue;
-            }
-            allAbilites.add(ability);
-        }
+        allAbilites.addAll(super.getAbilities());
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());
         return allAbilites;
     }
 
-    /**
-     * Currently only gets the fuse SpellAbility if there is one, but generally
-     * gets any abilities on a split card as a whole, and not on either half
-     * individually.
-     *
-     * @return
-     */
     public Abilities<Ability> getSharedAbilities(Game game) {
         return super.getAbilities(game);
     }
@@ -154,15 +141,15 @@ public abstract class SplitCard extends CardImpl {
     @Override
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
+
+        // ignore default spell ability from main card (only halfes are actual)
         for (Ability ability : super.getAbilities(game)) {
-            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
-            if (ability instanceof SpellAbility
-                    && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
-                    || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
+            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
                 continue;
             }
             allAbilites.add(ability);
         }
+
         allAbilites.addAll(leftHalfCard.getAbilities(game));
         allAbilites.addAll(rightHalfCard.getAbilities(game));
         return allAbilites;
@@ -170,11 +157,7 @@ public abstract class SplitCard extends CardImpl {
 
     @Override
     public List<String> getRules() {
-        List<String> rules = new ArrayList<>();
-        if (getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            rules.add("--------------------------------------------------------------------------\nFuse (You may cast one or both halves of this card from your hand.)");
-        }
-        return rules;
+        return new ArrayList<>();
     }
 
     @Override
@@ -189,12 +172,13 @@ public abstract class SplitCard extends CardImpl {
 
     @Override
     public int getConvertedManaCost() {
-        // 202.3d The converted mana cost of a split card not on the stack or of a fused split spell on the
-        // stack is determined from the combined mana costs of its halves. Otherwise, while a split card is
-        // on the stack, the converted mana cost of the spell is determined by the mana cost of the half
-        // that was chosen to be cast. See rule 708, “Split Cards.”
+        // Rules:
+        // The converted mana cost of a modal double-faced card is based on the characteristics of the
+        // face that’s being considered. On the stack and battlefield, consider whichever face is up.
+        // In all other zones, consider only the front face. This is different than how the converted
+        // mana cost of a transforming double-faced card is determined.
 
-        // split card and it's halfes contains own mana costs, so no need to rewrite logic
-        return super.getConvertedManaCost();
+        // on stack or battlefield it must be half card with own cost
+        return getLeftHalfCard().getConvertedManaCost();
     }
 }

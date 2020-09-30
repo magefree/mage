@@ -16,6 +16,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -108,10 +109,12 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
             }
         } else {
             for (UUID cardToCheck : cardsToCheck) {
-                FilterCard nameFilter = new FilterCard();
                 Card card = game.getCard(cardToCheck);
                 if (card != null) {
-                    nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                    String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
+                    FilterCard nameFilter = new FilterCard();
+                    nameFilter.add(new NamePredicate(nameToSearch));
+
                     if (cardsToCheck.count(nameFilter, game) > 1) {
                         newPossibleTargets.add(cardToCheck);
                     }
@@ -133,8 +136,10 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
         }
         int possibleCards = 0;
         for (Card card : cardsToCheck.getCards(game)) {
+            String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
             FilterCard nameFilter = new FilterCard();
-            nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+            nameFilter.add(new NamePredicate(nameToSearch));
+
             if (cardsToCheck.count(nameFilter, game) > 1) {
                 ++possibleCards;
             }
@@ -149,10 +154,12 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
             if (card != null) {
                 if (targets.size() == 1) {
                     Card card2 = game.getCard(targets.entrySet().iterator().next().getKey());
-                    return card2 != null && card2.getName().equals(card.getName());
+                    return CardUtil.haveSameNames(card2, card);
                 } else {
+                    String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
                     FilterCard nameFilter = new FilterCard();
-                    nameFilter.add(new NamePredicate(card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                    nameFilter.add(new NamePredicate(nameToSearch));
+
                     Player player = game.getPlayer(card.getOwnerId());
                     return player != null && player.getHand().getCards(nameFilter, game).size() > 1;
                 }

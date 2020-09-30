@@ -1,9 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,30 +12,30 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Mindreaver extends CardImpl {
 
     public Mindreaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -121,16 +117,7 @@ class MindreaverNamePredicate implements Predicate<MageObject> {
                 cardNames.add(card.getName());
             }
         }
-        // If a player names a card, the player may name either half of a split card, but not both.
-        // A split card has the chosen name if one of its two names matches the chosen name.
-        if (input instanceof SplitCard) {
-            return cardNames.contains(((SplitCard) input).getLeftHalfCard().getName()) || cardNames.contains(((SplitCard) input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            SplitCard card = (SplitCard) ((Spell) input).getCard();
-            return cardNames.contains(card.getLeftHalfCard().getName()) || cardNames.contains(card.getRightHalfCard().getName());
-        } else {
-            return cardNames.contains(input.getName());
-        }
+        return cardNames.stream().anyMatch(needName -> CardUtil.haveSameNames(input, needName, game));
     }
 
     @Override

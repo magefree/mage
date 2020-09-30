@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.HellbentCondition;
@@ -12,7 +11,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -23,9 +21,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class InfernalTutor extends CardImpl {
@@ -89,7 +89,7 @@ class InfernalTutorEffect extends OneShotEffect {
                 FilterCard filterCard;
                 if (cardToReveal != null) {
                     controller.revealCards("from hand :" + sourceObject.getName(), new CardsImpl(cardToReveal), game);
-                    String nameToSearch = cardToReveal.isSplitCard() ? ((SplitCard) cardToReveal).getLeftHalfCard().getName() : cardToReveal.getName();
+                    String nameToSearch = CardUtil.getCardNameForSameNameSearch(cardToReveal);
                     filterCard = new FilterCard("card named " + nameToSearch);
                     filterCard.add(new NamePredicate(nameToSearch));
                 } else {

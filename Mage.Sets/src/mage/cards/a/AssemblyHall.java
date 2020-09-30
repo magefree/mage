@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,7 +11,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -23,9 +21,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class AssemblyHall extends CardImpl {
@@ -84,7 +84,7 @@ class AssemblyHallEffect extends OneShotEffect {
             return false;
         }
         controller.revealCards("from hand :" + sourceObject.getName(), new CardsImpl(cardToReveal), game);
-        String nameToSearch = cardToReveal.isSplitCard() ? ((SplitCard) cardToReveal).getLeftHalfCard().getName() : cardToReveal.getName();
+        String nameToSearch = CardUtil.getCardNameForSameNameSearch(cardToReveal);
         FilterCard filterCard = new FilterCard("card named " + nameToSearch);
         filterCard.add(new NamePredicate(nameToSearch));
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
