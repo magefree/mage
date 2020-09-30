@@ -13,13 +13,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class PeltCollectorTest extends CardTestPlayerBase {
 
-    private static final String pltclctr = "Pelt Collector";
-    private static final String slvrctln = "Silvercoat Lion";
-    private static final String trstn = "Trostani Discordant";
-    private static final String grzlybrs = "Grizzly Bears";
-    private static final String mrdr = "Murder";
-    private static final String cntrcrsr = "Centaur Courser";
-    private static final String gntgrwth = "Giant Growth";
+    private static final String collector = "Pelt Collector";
+    private static final String lion = "Silvercoat Lion";
+    private static final String trostani = "Trostani Discordant";
+    private static final String bear = "Grizzly Bears";
+    private static final String murder = "Murder";
+    private static final String courser = "Centaur Courser";
+    private static final String growth = "Giant Growth";
+    private static final String karstoderm = "Karstoderm";
 
     @Test
     public void test_Simple() {
@@ -29,13 +30,13 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         // Whenever another creature you control enters the battlefield or dies, if that creature's power is greater than Pelt Collector's, put a +1/+1 counter on Pelt Collector.
         // As long as Pelt Collector has three or more +1/+1 counters on it, it has trample.        
-        addCard(Zone.HAND, playerA, pltclctr, 1); // Creature {G}
-        addCard(Zone.HAND, playerA, slvrctln, 1); // Creature {1}{W}
+        addCard(Zone.HAND, playerA, collector, 1); // Creature {G}
+        addCard(Zone.HAND, playerA, lion, 1); // Creature {1}{W}
 
-        addCard(Zone.BATTLEFIELD, playerB, pltclctr, 1);// Creature {G}
+        addCard(Zone.BATTLEFIELD, playerB, collector, 1);// Creature {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pltclctr);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, slvrctln);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, collector);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -43,12 +44,12 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerB, pltclctr, 1, 1);
+        assertPowerToughness(playerB, collector, 1, 1);
 
-        assertPowerToughness(playerA, slvrctln, 2, 2);
-        assertPowerToughness(playerA, pltclctr, 2, 2);
-        assertAbility(playerA, pltclctr, TrampleAbility.getInstance(), false);
-        assertAbility(playerB, pltclctr, TrampleAbility.getInstance(), false);
+        assertPowerToughness(playerA, lion, 2, 2);
+        assertPowerToughness(playerA, collector, 2, 2);
+        assertAbility(playerA, collector, TrampleAbility.getInstance(), false);
+        assertAbility(playerB, collector, TrampleAbility.getInstance(), false);
     }
 
     /**
@@ -65,19 +66,19 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         // Whenever another creature you control enters the battlefield or dies, if that creature's power is greater than Pelt Collector's, put a +1/+1 counter on Pelt Collector.
         // As long as Pelt Collector has three or more +1/+1 counters on it, it has trample.        
-        addCard(Zone.HAND, playerA, pltclctr, 1); // Creature {G}
-        addCard(Zone.HAND, playerA, slvrctln, 1); // Creature {1}{W}
+        addCard(Zone.HAND, playerA, collector, 1); // Creature {G}
+        addCard(Zone.HAND, playerA, lion, 1); // Creature {1}{W}
         // Other creatures you control get +1/+1.
         // When Trostani Discordant enters the battlefield, create two 1/1 white Soldier creature tokens with lifelink.
         // At the beginning of your end step, each player gains control of all creatures they own.
-        addCard(Zone.HAND, playerA, trstn, 1); // Creature {3}{G}{W} /1/4)
+        addCard(Zone.HAND, playerA, trostani, 1); // Creature {3}{G}{W} /1/4)
 
-        addCard(Zone.BATTLEFIELD, playerB, pltclctr, 1);// Creature {G}
+        addCard(Zone.BATTLEFIELD, playerB, collector, 1);// Creature {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trstn);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trostani);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, pltclctr);
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, slvrctln);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, collector);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
@@ -85,14 +86,14 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerB, pltclctr, 1, 1);
+        assertPowerToughness(playerB, collector, 1, 1);
 
         assertPowerToughness(playerA, "Soldier", 2, 2, Filter.ComparisonScope.All);
 
-        assertPowerToughness(playerA, slvrctln, 3, 3);
-        assertPowerToughness(playerA, pltclctr, 3, 3);
-        assertAbility(playerA, pltclctr, TrampleAbility.getInstance(), false);
-        assertAbility(playerB, pltclctr, TrampleAbility.getInstance(), false);
+        assertPowerToughness(playerA, lion, 3, 3);
+        assertPowerToughness(playerA, collector, 3, 3);
+        assertAbility(playerA, collector, TrampleAbility.getInstance(), false);
+        assertAbility(playerB, collector, TrampleAbility.getInstance(), false);
 
     }
 
@@ -101,104 +102,144 @@ public class PeltCollectorTest extends CardTestPlayerBase {
     public void testEntersTrigger() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, pltclctr);
-        addCard(Zone.HAND, playerA, grzlybrs);
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, bear);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grzlybrs);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, pltclctr, 2, 2);
-        assertCounterCount(pltclctr, CounterType.P1P1, 1);
+        assertPowerToughness(playerA, collector, 2, 2);
+        assertCounterCount(collector, CounterType.P1P1, 1);
+    }
+
+    @Test
+    public void testEntersTrigger2() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, karstoderm);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, karstoderm);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, collector, 2, 2);
+        assertCounterCount(collector, CounterType.P1P1, 1);
     }
 
     @Test
     public void testDiesTrigger() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, pltclctr);
-        addCard(Zone.HAND, playerA, grzlybrs);
-        addCard(Zone.HAND, playerA, mrdr);
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, bear);
+        addCard(Zone.HAND, playerA, murder);
         addCard(Zone.BATTLEFIELD, playerA, "Bayou", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grzlybrs);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, mrdr, grzlybrs);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, murder, bear);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, pltclctr, 2, 2);
-        assertCounterCount(pltclctr, CounterType.P1P1, 1);
+        assertPowerToughness(playerA, collector, 2, 2);
+        assertCounterCount(collector, CounterType.P1P1, 1);
     }
 
     @Test
     public void testDiesTrigger2() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, pltclctr);
-        addCard(Zone.HAND, playerA, cntrcrsr);
-        addCard(Zone.HAND, playerA, mrdr);
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, courser);
+        addCard(Zone.HAND, playerA, murder);
         addCard(Zone.BATTLEFIELD, playerA, "Bayou", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cntrcrsr);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, mrdr, cntrcrsr);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, courser);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, murder, courser);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, pltclctr, 3, 3);
-        assertCounterCount(pltclctr, CounterType.P1P1, 2);
+        assertPowerToughness(playerA, collector, 3, 3);
+        assertCounterCount(collector, CounterType.P1P1, 2);
+    }
+
+    @Test
+    public void testDiesTrigger3() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, karstoderm);
+        addCard(Zone.HAND, playerA, murder);
+        addCard(Zone.BATTLEFIELD, playerA, "Bayou", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, karstoderm);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, murder, karstoderm);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertPowerToughness(playerA, collector, 3, 3);
+        assertCounterCount(collector, CounterType.P1P1, 2);
     }
 
     @Test
     public void testInterveningIf() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, pltclctr);
-        addCard(Zone.HAND, playerA, grzlybrs);
-        addCard(Zone.HAND, playerA, gntgrwth);
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, bear);
+        addCard(Zone.HAND, playerA, growth);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grzlybrs);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gntgrwth, pltclctr);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, growth, collector);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, pltclctr, 4, 4);
-        assertCounterCount(pltclctr, CounterType.P1P1, 0);
+        assertPowerToughness(playerA, collector, 4, 4);
+        assertCounterCount(collector, CounterType.P1P1, 0);
     }
 
     @Test
     public void testInterveningIf2() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, pltclctr);
-        addCard(Zone.HAND, playerA, grzlybrs);
+        addCard(Zone.BATTLEFIELD, playerA, collector);
+        addCard(Zone.HAND, playerA, bear);
         addCard(Zone.HAND, playerA, "Scar");
         addCard(Zone.BATTLEFIELD, playerA, "Bayou", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grzlybrs);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scar", grzlybrs);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scar", bear);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertAllCommandsUsed();
 
-        assertPowerToughness(playerA, pltclctr, 1, 1);
-        assertCounterCount(pltclctr, CounterType.P1P1, 0);
+        assertPowerToughness(playerA, collector, 1, 1);
+        assertCounterCount(collector, CounterType.P1P1, 0);
     }
 }
