@@ -1,8 +1,6 @@
 package mage.view;
 
 import com.google.gson.annotations.Expose;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -30,6 +28,9 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.util.CardUtil;
 import mage.util.SubTypeList;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -94,6 +95,8 @@ public class CardView extends SimpleCardView {
     protected ManaCosts rightSplitCosts;
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
+
+    protected boolean isModalDoubleFacesCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -186,6 +189,8 @@ public class CardView extends SimpleCardView {
         this.rightSplitCosts = cardView.rightSplitCosts == null ? null : cardView.rightSplitCosts.copy();
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
+
+        this.isModalDoubleFacesCard = cardView.isModalDoubleFacesCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -299,7 +304,7 @@ public class CardView extends SimpleCardView {
         }
 
         SplitCard splitCard = null;
-        if (card.isSplitCard()) {
+        if (card instanceof SplitCard) {
             splitCard = (SplitCard) card;
             rotate = (card.getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
         } else if (card instanceof Spell) {
@@ -315,6 +320,10 @@ public class CardView extends SimpleCardView {
                 case SPLIT_LEFT:
                 case SPLIT_RIGHT:
                     rotate = true;
+                    break;
+                case MODAL_LEFT:
+                case MODAL_RIGHT:
+                    rotate = false;
                     break;
             }
         }
@@ -334,6 +343,12 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeft = splitCard.getLeftHalfCard().getManaCost().getSymbols();
             this.manaCostRight = splitCard.getRightHalfCard().getManaCost().getSymbols();
+        } else if (card instanceof ModalDoubleFacesCard) {
+            this.isModalDoubleFacesCard = true;
+            ModalDoubleFacesCard mainCard = ((ModalDoubleFacesCard) card);
+            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+            this.manaCostLeft = mainCard.getLeftHalfCard().getManaCost().getSymbols();
+            this.manaCostRight = mainCard.getRightHalfCard().getManaCost().getSymbols();
         } else if (card instanceof AdventureCard) {
             AdventureCard adventureCard = ((AdventureCard) card);
             AdventureCardSpell adventureCardSpell = ((AdventureCardSpell) adventureCard.getSpellCard());
@@ -455,6 +470,7 @@ public class CardView extends SimpleCardView {
 
             // Determine what part of the art to slice out for spells on the stack which originate
             // from a split, fuse, or aftermath split card.
+            // Modal double faces cards draws as normal cards
             SpellAbilityType ty = spell.getSpellAbility().getSpellAbilityType();
             if (ty == SpellAbilityType.SPLIT_RIGHT || ty == SpellAbilityType.SPLIT_LEFT || ty == SpellAbilityType.SPLIT_FUSED) {
                 // Needs a special art rect

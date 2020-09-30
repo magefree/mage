@@ -57,7 +57,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean flipCard;
     protected String flipCardName;
     protected boolean usesVariousArt = false;
-    protected boolean splitCard;
     protected boolean morphCard;
     protected boolean modalDFC; // modal double faces card
 
@@ -139,7 +138,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
-        splitCard = card.splitCard;
         morphCard = card.morphCard;
         modalDFC = card.modalDFC;
 
@@ -563,10 +561,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     stackObject = game.getStack().getSpell(this.getId(), false);
                 }
 
-                if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
+                // handle half of Split Cards on stack
+                if (stackObject == null && (this instanceof SplitCard)) {
                     stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
                         stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(), false);
+                    }
+                }
+
+                // handle half of Modal Double Faces Cards on stack
+                if (stackObject == null && (this instanceof ModalDoubleFacesCard)) {
+                    stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getLeftHalfCard().getId(), false);
+                    if (stackObject == null) {
+                        stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getRightHalfCard().getId(), false);
                     }
                 }
 
@@ -687,10 +694,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
-        // TODO: remove when MDFCs are implemented
-        if (modalDFC) {
-            return null;
-        }
         // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
@@ -724,11 +727,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getFlipCardName() {
         return flipCardName;
-    }
-
-    @Override
-    public boolean isSplitCard() {
-        return splitCard;
     }
 
     @Override

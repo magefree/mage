@@ -1,11 +1,5 @@
 package mage.util;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -17,6 +11,8 @@ import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.cards.Card;
 import mage.cards.MeldCard;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -31,6 +27,13 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author nantuko
  */
@@ -39,10 +42,10 @@ public final class CardUtil {
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
     static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
-        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+            "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
@@ -875,6 +878,23 @@ public final class CardUtil {
             if (ability.isPresent() && permanent.getId().equals(ability.get().getSourceId())) {
                 effect.init(ability.get(), game, player.getId());
             }
+        }
+    }
+
+    /**
+     * Return card name for same name searching
+     *
+     * @param card
+     * @return
+     */
+    public static String getCardNameForSameNameSearch(Card card) {
+        // it's ok to return one name only cause NamePredicate can find same card by first name
+        if (card instanceof SplitCard) {
+            return ((SplitCard) card).getLeftHalfCard().getName();
+        } else if (card instanceof ModalDoubleFacesCard) {
+            return ((ModalDoubleFacesCard) card).getLeftHalfCard().getName();
+        } else {
+            return card.getName();
         }
     }
 }

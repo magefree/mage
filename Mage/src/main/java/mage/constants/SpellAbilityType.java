@@ -1,7 +1,6 @@
 package mage.constants;
 
 /**
- *
  * @author North
  */
 public enum SpellAbilityType {
@@ -13,7 +12,9 @@ public enum SpellAbilityType {
     SPLIT_FUSED("Split SpellAbility"),
     SPLIT_LEFT("LeftSplit SpellAbility"),
     SPLIT_RIGHT("RightSplit SpellAbility"),
-    MODE("Mode SpellAbility"),
+    MODAL("Modal SpellAbility"), // used for modal double faces cards
+    MODAL_LEFT("LeftModal SpellAbility"),
+    MODAL_RIGHT("RightModal SpellAbility"),
     SPLICE("Spliced SpellAbility"),
     ADVENTURE_SPELL("Adventure SpellAbility");
 

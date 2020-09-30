@@ -12,16 +12,17 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.target.TargetCard;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ReapIntellect extends CardImpl {
@@ -100,12 +101,11 @@ class ReapIntellectEffect extends OneShotEffect {
                 List<NamePredicate> names = new ArrayList<>();
                 FilterCard filterNamedCards = new FilterCard();
                 for (Card card : exiledCards.getCards(game)) {
+                    String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
                     if (exiledCards.size() == 1) {
-                        filterNamedCards.add(new NamePredicate(card.isSplitCard()
-                                ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                        filterNamedCards.add(new NamePredicate(nameToSearch));
                     } else {
-                        names.add(new NamePredicate(card.isSplitCard()
-                                ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName()));
+                        names.add(new NamePredicate(nameToSearch));
                     }
                 }
                 if (exiledCards.size() > 1) {

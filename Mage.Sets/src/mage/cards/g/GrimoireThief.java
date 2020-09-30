@@ -1,9 +1,5 @@
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -24,8 +20,12 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GrimoireThief extends CardImpl {
@@ -197,30 +197,24 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
             }
             // then counter any with the same name as the card exiled with Grimoire Thief
             for (Card card : cards.getCards(game)) {
-                for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+                for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
                     StackObject stackObject = iterator.next();
                     MageObject mageObject = game.getObject(card.getId());
-                    // handle split cards
+                    String name1;
+                    String name2;
                     if (mageObject instanceof SplitCard) {
-                        if (stackObject instanceof Spell
-                                && (stackObject.getName().contains(((SplitCard) mageObject).getLeftHalfCard().getName())
-                                || stackObject.getName().contains(((SplitCard) mageObject).getRightHalfCard().getName()))) {
-                            Spell spell = (Spell) stackObject;
-                            game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
-                            game.informPlayers(sourceObject.getLogName()
-                                    + ": the split-card spell named "
-                                    + spell.getName()
-                                    + " was countered.");
-                        }
+                        name1 = ((SplitCard) mageObject).getLeftHalfCard().getName();
+                        name2 = ((SplitCard) mageObject).getRightHalfCard().getName();
+                    } else {
+                        // modal double faces cards, adventure cards -- all have one name in non stack/battlefield zone
+                        name1 = mageObject.getName();
+                        name2 = name1;
                     }
-                    if (stackObject instanceof Spell
-                            && stackObject.getName().contains(card.getName())) {
+
+                    if (CardUtil.haveSameNames(stackObject, name1, game) || CardUtil.haveSameNames(stackObject, name2, game)) {
                         Spell spell = (Spell) stackObject;
-                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
-                        game.informPlayers(sourceObject.getLogName()
-                                + ": the spell named "
-                                + spell.getName()
-                                + " was countered.");
+                        game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+                        game.informPlayers(sourceObject.getLogName() + ": spell " + spell.getIdName() + " was countered.");
                     }
                 }
             }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.cards;
 
 import mage.constants.CardType;
@@ -14,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
@@ -59,6 +53,11 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
+    }
+
+    @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        return splitCardParent.removeFromZone(game, fromZone, sourceId);
     }
 
     @Override

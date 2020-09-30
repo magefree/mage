@@ -105,22 +105,39 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
             if (topCard == null || !topCard.getId().equals(objectIdToCast)) {
                 return false;
             }
-            if (!topCard.isLand()) {
-                if (topCard instanceof SplitCard) {
-                    SplitCardHalf leftCard = ((SplitCard) topCard).getLeftHalfCard();
-                    PayLifeCost lifeCost = new PayLifeCost(leftCard.getSpellAbility().getManaCosts().convertedManaCost());
-                    Costs leftCosts = new CostsImpl();
-                    leftCosts.add(lifeCost);
-                    leftCosts.addAll(leftCard.getSpellAbility().getCosts());
-                    player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCosts);
 
-                    SplitCardHalf rightCard = ((SplitCard) topCard).getRightHalfCard();
-                    lifeCost = new PayLifeCost(rightCard.getSpellAbility().getManaCosts().convertedManaCost());
-                    Costs rightCosts = new CostsImpl();
-                    rightCosts.add(lifeCost);
-                    rightCosts.addAll(rightCard.getSpellAbility().getCosts());
-                    player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCosts);
+            if (topCard instanceof SplitCard || topCard instanceof ModalDoubleFacesCard) {
+                // double faces cards
+                Card card1;
+                Card card2;
+                if (topCard instanceof SplitCard) {
+                    card1 = ((SplitCard) topCard).getLeftHalfCard();
+                    card2 = ((SplitCard) topCard).getRightHalfCard();
                 } else {
+                    card1 = ((ModalDoubleFacesCard) topCard).getLeftHalfCard();
+                    card2 = ((ModalDoubleFacesCard) topCard).getRightHalfCard();
+                }
+
+                // left
+                if (!card1.isLand()) {
+                    PayLifeCost lifeCost = new PayLifeCost(card1.getSpellAbility().getManaCosts().convertedManaCost());
+                    Costs newCosts = new CostsImpl();
+                    newCosts.add(lifeCost);
+                    newCosts.addAll(card1.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(card1.getId(), null, newCosts);
+                }
+
+                // right
+                if (!card2.isLand()) {
+                    PayLifeCost lifeCost = new PayLifeCost(card2.getSpellAbility().getManaCosts().convertedManaCost());
+                    Costs newCosts = new CostsImpl();
+                    newCosts.add(lifeCost);
+                    newCosts.addAll(card2.getSpellAbility().getCosts());
+                    player.setCastSourceIdWithAlternateMana(card2.getId(), null, newCosts);
+                }
+            } else {
+                // other single face cards
+                if (!topCard.isLand()) {
                     if (affectedAbility == null) {
                         affectedAbility = topCard.getSpellAbility();
                     } else {
@@ -134,7 +151,6 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
                 }
             }
             return true;
-
         }
         return false;
     }

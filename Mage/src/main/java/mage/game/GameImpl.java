@@ -244,17 +244,29 @@ public abstract class GameImpl implements Game, Serializable {
             card.setOwnerId(ownerId);
             gameCards.put(card.getId(), card);
             state.addCard(card);
-            if (card.isSplitCard()) {
+            if (card instanceof SplitCard) {
+                // left
                 Card leftCard = ((SplitCard) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
                 gameCards.put(leftCard.getId(), leftCard);
                 state.addCard(leftCard);
+                // right
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 gameCards.put(rightCard.getId(), rightCard);
                 state.addCard(rightCard);
-            }
-            if (card instanceof AdventureCard) {
+            } else if (card instanceof ModalDoubleFacesCard) {
+                // left
+                Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                leftCard.setOwnerId(ownerId);
+                gameCards.put(leftCard.getId(), leftCard);
+                state.addCard(leftCard);
+                // right
+                Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                rightCard.setOwnerId(ownerId);
+                gameCards.put(rightCard.getId(), rightCard);
+                state.addCard(rightCard);
+            } else if (card instanceof AdventureCard) {
                 Card spellCard = ((AdventureCard) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 gameCards.put(spellCard.getId(), spellCard);
@@ -1911,7 +1923,7 @@ public abstract class GameImpl implements Game, Serializable {
         Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
         while (copiedCards.hasNext()) {
             Card card = copiedCards.next();
-            if (card instanceof SplitCardHalf || card instanceof AdventureCardSpell) {
+            if (card instanceof SplitCardHalf || card instanceof AdventureCardSpell || card instanceof ModalDoubleFacesCardHalf) {
                 continue; // only the main card is moves, not the halves (cause halfes is not copied - it uses original card -- TODO: need to fix (bugs with same card copy)?
             }
             Zone zone = state.getZone(card.getId());

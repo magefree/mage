@@ -1,7 +1,5 @@
 package mage.cards.e;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -9,7 +7,6 @@ import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -22,19 +19,22 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author jonubuu
  */
 public final class Extirpate extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
-    
+
     static {
         filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), SuperType.BASIC.getPredicate())));
     }
-    
+
     public Extirpate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
@@ -46,11 +46,11 @@ public final class Extirpate extends CardImpl {
         this.getSpellAbility().addEffect(new ExtirpateEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
-    
+
     public Extirpate(final Extirpate card) {
         super(card);
     }
-    
+
     @Override
     public Extirpate copy() {
         return new Extirpate(this);
@@ -58,7 +58,7 @@ public final class Extirpate extends CardImpl {
 }
 
 class ExtirpateEffect extends OneShotEffect {
-    
+
     public ExtirpateEffect() {
         super(Outcome.Exile);
         this.staticText = "Choose target card in a graveyard other than "
@@ -66,16 +66,16 @@ class ExtirpateEffect extends OneShotEffect {
                 + "and library for any number of cards with the same name "
                 + "as that card and exile them. Then that player shuffles their library";
     }
-    
+
     public ExtirpateEffect(final ExtirpateEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ExtirpateEffect copy() {
         return new ExtirpateEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -90,7 +90,7 @@ class ExtirpateEffect extends OneShotEffect {
             // Exile all cards with the same name
             // Building a card filter with the name
             FilterCard filterNamedCard = new FilterCard();
-            String nameToSearch = chosenCard.isSplitCard() ? ((SplitCard) chosenCard).getLeftHalfCard().getName() : chosenCard.getName();
+            String nameToSearch = CardUtil.getCardNameForSameNameSearch(chosenCard);
             filterNamedCard.add(new NamePredicate(nameToSearch));
 
             // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
@@ -133,5 +133,5 @@ class ExtirpateEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }

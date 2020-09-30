@@ -2,6 +2,7 @@ package mage.filter.predicate.other;
 
 import mage.cards.AdventureCard;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
 import mage.cards.mock.MockCard;
 import mage.constants.SubType;
@@ -52,6 +53,8 @@ public class CardTextPredicate implements Predicate<Card> {
             String fullName = input.getName();
             if (input instanceof MockCard) {
                 fullName = ((MockCard) input).getFullName(true);
+            } else if (input instanceof ModalDoubleFacesCard) {
+                fullName = input.getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + ((ModalDoubleFacesCard) input).getRightHalfCard().getName();
             } else if (input instanceof AdventureCard) {
                 fullName = input.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + ((AdventureCard) input).getSpellCard().getName();
             }
@@ -67,14 +70,14 @@ public class CardTextPredicate implements Predicate<Card> {
             }
         }
 
-        //separate by spaces
+        // separate by spaces
         String[] tokens = text.toLowerCase(Locale.ENGLISH).split(" ");
         for (String token : tokens) {
             boolean found = false;
             if (!token.isEmpty()) {
                 // then try to find in rules
                 if (inRules) {
-                    if (input.isSplitCard()) {
+                    if (input instanceof SplitCard) {
                         for (String rule : ((SplitCard) input).getLeftHalfCard().getRules(game)) {
                             if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                                 found = true;
@@ -88,6 +91,22 @@ public class CardTextPredicate implements Predicate<Card> {
                             }
                         }
                     }
+
+                    if (input instanceof ModalDoubleFacesCard) {
+                        for (String rule : ((ModalDoubleFacesCard) input).getLeftHalfCard().getRules(game)) {
+                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        for (String rule : ((ModalDoubleFacesCard) input).getRightHalfCard().getRules(game)) {
+                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+
                     if (input instanceof AdventureCard) {
                         for (String rule : ((AdventureCard) input).getSpellCard().getRules(game)) {
                             if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
@@ -96,6 +115,7 @@ public class CardTextPredicate implements Predicate<Card> {
                             }
                         }
                     }
+
                     for (String rule : input.getRules(game)) {
                         if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                             found = true;

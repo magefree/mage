@@ -35,7 +35,6 @@ public class MockSplitCard extends SplitCard {
         this.usesVariousArt = card.usesVariousArt();
 
         this.color = card.getColor();
-        this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
         this.transformable = card.isDoubleFaced();

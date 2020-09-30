@@ -20,6 +20,7 @@ import java.util.List;
 public class MockCard extends CardImpl {
 
     static public String ADVENTURE_NAME_SEPARATOR = " // ";
+    static public String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
@@ -30,6 +31,7 @@ public class MockCard extends CardImpl {
     protected ManaCosts<ManaCost> manaCostLeft;
     protected ManaCosts<ManaCost> manaCostRight;
     protected String adventureSpellName;
+    protected String modalDoubleFacesSecondSideName;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -53,7 +55,6 @@ public class MockCard extends CardImpl {
         this.frameColor = card.getFrameColor();
         this.frameStyle = card.getFrameStyle();
 
-        this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
         this.transformable = card.isDoubleFaced();
@@ -64,6 +65,10 @@ public class MockCard extends CardImpl {
 
         if (card.isAdventureCard()) {
             this.adventureSpellName = card.getAdventureSpellName();
+        }
+
+        if (card.isModalDoubleFacesCard()) {
+            this.modalDoubleFacesSecondSideName = card.getModalDoubleFacesSecondSideName();
         }
 
         if (this.isPlaneswalker()) {
@@ -117,8 +122,14 @@ public class MockCard extends CardImpl {
     }
 
     public String getFullName(boolean showSecondName) {
+        if (!showSecondName) {
+            return getName();
+        }
+
         if (adventureSpellName != null) {
             return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
+        } else if (modalDoubleFacesSecondSideName != null) {
+            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + modalDoubleFacesSecondSideName;
         } else {
             return getName();
         }

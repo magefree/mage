@@ -715,11 +715,6 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean isSplitCard() {
-        return false;
-    }
-
-    @Override
     public boolean isTransformable() {
         return false;
     }

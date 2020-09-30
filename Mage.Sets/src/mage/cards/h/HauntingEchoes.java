@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.abilities.Ability;
@@ -6,7 +5,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -16,12 +14,12 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class HauntingEchoes extends CardImpl {
@@ -63,9 +61,10 @@ class HauntingEchoesEffect extends OneShotEffect {
                 if (!StaticFilters.FILTER_CARD_BASIC_LAND.match(card, game)) {
                     card.moveToExile(null, "", source.getSourceId(), game);
 
-                    FilterCard filterCard = new FilterCard("cards named " + card.getName());
-                    String nameToSearch = card.isSplitCard() ? ((SplitCard) card).getLeftHalfCard().getName() : card.getName();
+                    String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
+                    FilterCard filterCard = new FilterCard("cards named " + nameToSearch);
                     filterCard.add(new NamePredicate(nameToSearch));
+
                     int count = targetPlayer.getLibrary().count(filterCard, game);
                     TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
 

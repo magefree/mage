@@ -1602,6 +1602,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 needId1 = object.getId();
                 needId2 = ((SplitCard) object).getLeftHalfCard().getId();
                 needId3 = ((SplitCard) object).getRightHalfCard().getId();
+            } else if (object instanceof ModalDoubleFacesCard) {
+                needId1 = object.getId();
+                needId2 = ((ModalDoubleFacesCard) object).getLeftHalfCard().getId();
+                needId3 = ((ModalDoubleFacesCard) object).getRightHalfCard().getId();
             } else if (object instanceof AdventureCard) {
                 needId1 = object.getId();
                 needId2 = ((AdventureCard) object).getMainCard().getId();
@@ -3402,10 +3406,16 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // BASIC abilities
         if (object instanceof SplitCard) {
-            SplitCard splitCard = (SplitCard) object;
-            getPlayableFromObjectSingle(game, fromZone, splitCard.getLeftHalfCard(), splitCard.getLeftHalfCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, splitCard.getRightHalfCard(), splitCard.getRightHalfCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, splitCard, splitCard.getSharedAbilities(game), availableMana, output);
+            SplitCard mainCard = (SplitCard) object;
+            getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
+        }
+        if (object instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) object;
+            getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof AdventureCard) {
             // adventure must use different card characteristics for different spells (main or adventure)
             AdventureCard adventureCard = (AdventureCard) object;

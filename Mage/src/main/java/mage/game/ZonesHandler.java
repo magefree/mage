@@ -1,9 +1,7 @@
 package mage.game;
 
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
+import mage.abilities.keyword.TransformAbility;
+import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -19,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.*;
-import mage.abilities.keyword.TransformAbility;
 
 /**
  * Created by samuelsandeen on 9/6/16.
@@ -54,7 +51,7 @@ public final class ZonesHandler {
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -106,6 +103,10 @@ public final class ZonesHandler {
         if (!(targetCard instanceof Permanent) && targetCard != null) {
             if (targetCard instanceof MeldCard) {
                 cards = ((MeldCard) targetCard).getHalves();
+            } else if (targetCard instanceof ModalDoubleFacesCard) {
+                cards = new CardsImpl(targetCard);
+                cards.add(((ModalDoubleFacesCard) targetCard).getLeftHalfCard());
+                cards.add(((ModalDoubleFacesCard) targetCard).getRightHalfCard());
             } else {
                 cards = new CardsImpl(targetCard);
             }
@@ -174,13 +175,18 @@ public final class ZonesHandler {
                     throw new UnsupportedOperationException("to Zone " + toZone.toString() + " not supported yet");
             }
         }
+
         game.setZone(event.getTargetId(), event.getToZone());
-        if (targetCard instanceof MeldCard && cards != null) {
-            if (event.getToZone() != Zone.BATTLEFIELD) {
-                ((MeldCard) targetCard).setMelded(false, game);
-            }
+        if (cards != null && (targetCard instanceof MeldCard || targetCard instanceof ModalDoubleFacesCard)) {
+            // update other parts too
             for (Card card : cards.getCards(game)) {
                 game.setZone(card.getId(), event.getToZone());
+            }
+            // reset meld status
+            if (targetCard instanceof MeldCard) {
+                if (event.getToZone() != Zone.BATTLEFIELD) {
+                    ((MeldCard) targetCard).setMelded(false, game);
+                }
             }
         }
     }
@@ -203,7 +209,7 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();
@@ -232,10 +238,10 @@ public final class ZonesHandler {
         if (info.faceDown) {
             card.setFaceDown(true, game);
         } else if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
-            if (!card.isPermanent() 
+            if (!card.isPermanent()
                     && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
                 // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
-                    return false;
+                return false;
             }
         }
         if (!game.replaceEvent(event)) {
@@ -248,9 +254,10 @@ public final class ZonesHandler {
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
+                } else if (card instanceof ModalDoubleFacesCard) {
+                    throw new IllegalStateException("Try to move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
-                    // This should never happen.
-                    permanent = (Permanent) card;
+                    throw new IllegalStateException("Try to move permanent card to battlefield");
                 } else {
                     permanent = new PermanentCard(card, event.getPlayerId(), game);
                 }

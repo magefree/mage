@@ -3,13 +3,13 @@ package mage.abilities.effects;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.util.UUID;
-import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
-import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -22,7 +22,7 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
     public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
         this(type, duration, outcome, false);
     }
-    
+
     public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome, boolean consumable) {
         super(duration, outcome);
         this.type = type;
@@ -74,12 +74,12 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
      * Internal method to do the neccessary to allow the card from objectId to be cast or played (if it's a land) without paying any mana.
      * Additional costs (like sacrificing or discarding) have still to be payed.
      * Checks if the card is of the correct type or in the correct zone have to be done before.
-     * 
-     * @param objectId sourceId of the card to play
-     * @param source source ability that allows this effect
+     *
+     * @param objectId             sourceId of the card to play
+     * @param source               source ability that allows this effect
      * @param affectedControllerId player allowed to play the card
      * @param game
-     * @return 
+     * @return
      */
     protected boolean allowCardToPlayWithoutMana(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Player player = game.getPlayer(affectedControllerId);
@@ -89,9 +89,14 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         }
         if (!card.isLand()) {
             if (card instanceof SplitCard) {
-                SplitCardHalf leftCard = ((SplitCard) card).getLeftHalfCard();
+                Card leftCard = ((SplitCard) card).getLeftHalfCard();
                 player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
-                SplitCardHalf rightCard = ((SplitCard) card).getRightHalfCard();
+                Card rightCard = ((SplitCard) card).getRightHalfCard();
+                player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
+            } else if (card instanceof ModalDoubleFacesCard) {
+                Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
+                Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
                 player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
             } else {
                 player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
