@@ -289,7 +289,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        isAllCreatureTypes = value;
+        isAllCreatureTypes = value && (this.isTribal() || this.isCreature());
     }
 
     @Override

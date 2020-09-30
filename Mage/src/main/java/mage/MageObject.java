@@ -126,6 +126,10 @@ public interface MageObject extends MageItem, Serializable {
         return getCardType().contains(CardType.PLANESWALKER);
     }
 
+    default boolean isTribal() {
+        return getCardType().contains(CardType.TRIBAL);
+    }
+
     default boolean isPermanent() {
         return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
     }
