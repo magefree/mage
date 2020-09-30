@@ -24,6 +24,7 @@ public final class MoongloveChangeling extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }

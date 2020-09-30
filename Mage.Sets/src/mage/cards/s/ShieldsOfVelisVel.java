@@ -27,6 +27,7 @@ public final class ShieldsOfVelisVel extends CardImpl {
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         //Creatures target player controls get +0/+1 and gain all creature types until end of turn.

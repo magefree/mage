@@ -35,6 +35,7 @@ public final class Shapesharer extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // {2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.

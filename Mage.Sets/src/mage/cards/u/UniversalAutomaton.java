@@ -22,6 +22,7 @@ public final class UniversalAutomaton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
     }
 

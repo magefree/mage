@@ -24,6 +24,7 @@ public final class BladesOfVelisVel extends CardImpl {
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         
         // Up to two target creatures each get +2/+0 and gain all creature types until end of turn.

@@ -36,6 +36,7 @@ public final class MothdustChangeling extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
     }

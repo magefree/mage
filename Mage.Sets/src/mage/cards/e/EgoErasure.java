@@ -26,6 +26,7 @@ public final class EgoErasure extends CardImpl {
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         //Creatures target player controls get -2/+0 and lose all creature types until end of turn.

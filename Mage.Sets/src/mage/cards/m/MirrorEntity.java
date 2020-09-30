@@ -38,6 +38,7 @@ public final class MirrorEntity extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         // {X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types.
         DynamicValue variableMana = ManacostVariableValue.instance;

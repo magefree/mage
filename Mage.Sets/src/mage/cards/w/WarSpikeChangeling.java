@@ -24,6 +24,7 @@ public final class WarSpikeChangeling extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
