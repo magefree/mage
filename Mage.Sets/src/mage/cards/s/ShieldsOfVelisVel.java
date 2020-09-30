@@ -79,7 +79,7 @@ class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
-                permanent.addAbility(ChangelingAbility.getInstance(), source.getSourceId(), game);
+                permanent.setIsAllCreatureTypes(true);
             } else {
                 it.remove();
             }
