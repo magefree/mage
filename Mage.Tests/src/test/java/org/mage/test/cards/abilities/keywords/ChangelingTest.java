@@ -142,4 +142,23 @@ public class ChangelingTest extends CardTestPlayerBase {
         assertAbility(playerA, "Game-Trail Changeling", HasteAbility.getInstance(), false);
         assertAbility(playerA, "Game-Trail Changeling", ChangelingAbility.getInstance(), true);
     }
+
+    @Test
+    public void testLoseAbilities() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Game-Trail Changeling");
+        addCard(Zone.HAND, playerA, "Merfolk Trickster");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Trickster");
+        addTarget(playerA, "Game-Trail Changeling");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped("Game-Trail Changeling", true);
+        assertSubtype("Game-Trail Changeling", SubType.GOBLIN);
+        assertSubtype("Game-Trail Changeling", SubType.ELF);
+        assertSubtype("Game-Trail Changeling", SubType.SHAPESHIFTER);
+        assertAbility(playerB, "Game-Trail Changeling", ChangelingAbility.getInstance(), false);
+    }
 }
