@@ -65,7 +65,7 @@ class ManaEchoesEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             int foundCreatures = 0;
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-                if (permanent.shareSubtypes(perm, game)) {
+                if (permanent.shareCreatureTypes(perm, game)) {
                     foundCreatures++;
                 }
             }

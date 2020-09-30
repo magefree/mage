@@ -62,13 +62,13 @@ class FacesOfThePastEffect extends OneShotEffect {
             if (controller != null) {
                 if (controller.chooseUse(outcome, "Tap all untapped creatures that share a creature type with " + targetPermanent.getLogName() + "? (Otherwise, untaps all tapped)", source, game)) {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
-                        if (!permanent.isTapped() && targetPermanent.shareSubtypes(permanent, game)) {
+                        if (!permanent.isTapped() && targetPermanent.shareCreatureTypes(permanent, game)) {
                             permanent.tap(game);
                         }
                     }
                 } else {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
-                        if (permanent.isTapped() && targetPermanent.shareSubtypes(permanent, game)) {
+                        if (permanent.isTapped() && targetPermanent.shareCreatureTypes(permanent, game)) {
                             permanent.untap(game);
                         }
                     }

@@ -73,7 +73,7 @@ class ReturnFromExtinctionTarget extends TargetCardInYourGraveyard {
         if (targetOne == null || targetTwo == null) {
             return false;
         }
-        return targetOne.shareSubtypes(targetTwo, game);
+        return targetOne.shareCreatureTypes(targetTwo, game);
     }
 
     @Override

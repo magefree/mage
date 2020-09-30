@@ -61,7 +61,7 @@ class AlphaStatusDynamicValue implements DynamicValue {
             if (enchanted != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
                     if (!permanent.getId().equals(enchanted.getId())) {
-                        if (enchanted.shareSubtypes(permanent, game)) {
+                        if (enchanted.shareCreatureTypes(permanent, game)) {
                             xValue += 2;
                         }
                     }
