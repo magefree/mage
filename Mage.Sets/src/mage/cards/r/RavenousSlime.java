@@ -109,7 +109,7 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return zEvent.getTarget() != null
                 && zEvent.getTarget().isCreature()
-                && zEvent.getTarget().getControllerId() != source.getControllerId()
-                && zEvent.isDiesEvent();
+                && zEvent.isDiesEvent()
+                && game.getOpponents(source.getControllerId()).contains(zEvent.getTarget().getControllerId());
     }
 }
