@@ -98,7 +98,7 @@
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4469,6 +4469,7 @@
                               <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
                               <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
                               <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCardRenderShowAbilityTextOverlay" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -4480,6 +4481,8 @@
                           <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbCardRenderShowAbilityTextOverlay" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -4510,6 +4513,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderHideSetSymbolActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderShowAbilityTextOverlay">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Show ability text as overlay in big card view"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowAbilityTextOverlayActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -5744,7 +5755,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblURLServerList" max="32767" attributes="0"/>
-                              <Component id="txtURLServerList" max="32767" attributes="0"/>
+                              <Component id="txtURLServerList" pref="26" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
