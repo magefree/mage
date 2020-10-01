@@ -4,9 +4,11 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.cards.CardImpl;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
@@ -17,27 +19,37 @@ import mage.util.functions.ApplyToPermanent;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class GlasspoolMimic extends CardImpl {
+public final class GlasspoolMimic extends ModalDoubleFacesCard {
 
     public GlasspoolMimic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SHAPESHIFTER, SubType.ROGUE}, "{2}{U}",
+                "Glasspool Shore", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.subtype.add(SubType.SHAPESHIFTER);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.g.GlasspoolShore.class;
+        // 1.
+        // Glasspool Mimic
+        // Creature — Shapeshifter Rogue
+        this.getLeftHalfCard().setPT(new MageInt(0), new MageInt(0));
 
         // You may have Glasspool Mimic enter the battlefield as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
-        this.addAbility(new EntersBattlefieldAbility(
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, new GlasspoolMimicApplier()),
                 true, null, "You may have {this} enter the battlefield as a copy of " +
                 "a creature you control, except it's a Shapeshifter Rogue in addition to its other types.", ""
         ));
+
+        // 2.
+        // Glasspool Shore
+        // Land
+
+        // Glasspool Shore enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {U}.
+        this.getRightHalfCard().addAbility(new BlueManaAbility());
     }
 
     private GlasspoolMimic(final GlasspoolMimic card) {

@@ -1,25 +1,39 @@
 package mage.cards.n;
 
 import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class NeedlevergePathway extends CardImpl {
+public final class NeedlevergePathway extends ModalDoubleFacesCard {
 
     public NeedlevergePathway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{}, "",
+                "Pillarverge Pathway", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.p.PillarvergePathway.class;
+        // 1.
+        // Needleverge Pathway
+        // Land
 
         // {T}: Add {R}.
-        this.addAbility(new RedManaAbility());
+        this.getLeftHalfCard().addAbility(new RedManaAbility());
+
+        // 2.
+        // Pillarverge Pathway
+        // Land
+
+        // {T}: Add {W}.
+        this.getRightHalfCard().addAbility(new WhiteManaAbility());
     }
 
     private NeedlevergePathway(final NeedlevergePathway card) {

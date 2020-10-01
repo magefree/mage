@@ -1,10 +1,15 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -19,16 +24,35 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TurntimberSymbiosis extends CardImpl {
+public final class TurntimberSymbiosis extends ModalDoubleFacesCard {
 
     public TurntimberSymbiosis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{4}{G}{G}{G}",
+                "Turntimber, Serpentine Wood", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.t.TurntimberSerpentineWood.class;
+        // 1.
+        // Turntimber Symbiosis
+        // Sorcery
 
-        // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. If that card has converted mana cost 3 or less, it enters with three additional +1/+1 counters on it. Put the rest on the bottom of your library in a random order.
-        this.getSpellAbility().addEffect(new TurntimberSymbiosisEffect());
+        // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield.
+        // If that card has converted mana cost 3 or less, it enters with three additional +1/+1 counters on it.
+        // Put the rest on the bottom of your library in a random order.
+        this.getLeftHalfCard().getSpellAbility().addEffect(new TurntimberSymbiosisEffect());
+
+        // 2.
+        // Turntimber, Serpentine Wood
+        // Land
+
+        // As Turntimber, Serpentine Wood enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
+                new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
+                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+        ));
+
+        // {T}: Add {G}.
+        this.getRightHalfCard().addAbility(new GreenManaAbility());
     }
 
     private TurntimberSymbiosis(final TurntimberSymbiosis card) {
@@ -48,7 +72,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
         staticText = "Look at the top seven cards of your library. You may put a creature card " +
                 "from among them onto the battlefield. If that card has converted mana cost 3 or less, " +
                 "it enters with three additional +1/+1 counters on it. " +
-                "Put the rest on the bottom of your library in a random order.";
+                "Put the rest on the bottom of your library in a random order";
     }
 
     private TurntimberSymbiosisEffect(final TurntimberSymbiosisEffect effect) {
@@ -66,6 +90,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         TargetCard target = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
@@ -76,6 +101,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
             player.putCardsOnBottomOfLibrary(cards, game, source, false);
             return true;
         }
+
         boolean small = card.getConvertedManaCost() <= 3;
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(card.getId());

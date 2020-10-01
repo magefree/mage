@@ -1,27 +1,45 @@
 package mage.cards.z;
 
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class ZofConsumption extends CardImpl {
+public final class ZofConsumption extends ModalDoubleFacesCard {
 
     public ZofConsumption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{4}{B}{B}",
+                "Zof Bloodbog", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.z.ZofBloodbog.class;
+        // 1.
+        // Zof Consumption
+        // Sorcery
 
         // Each opponent loses 4 life and you gain 4 life.
-        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(4));
-        this.getSpellAbility().addEffect(new GainLifeEffect(4).concatBy("and"));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new LoseLifeOpponentsEffect(4));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new GainLifeEffect(4).concatBy("and"));
+
+        // 2.
+        // Zof Bloodbog
+        // Land
+
+        // Zof Bloodbog enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
     }
 
     private ZofConsumption(final ZofConsumption card) {

@@ -1,25 +1,38 @@
 package mage.cards.b;
 
+import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class BrightclimbPathway extends CardImpl {
+public final class BrightclimbPathway extends ModalDoubleFacesCard {
 
     public BrightclimbPathway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{}, "",
+                "Grimclimb Pathway", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.g.GrimclimbPathway.class;
+        // 1.
+        // Brightclimb Pathway
+        // Land
 
         // {T}: Add {W}.
-        this.addAbility(new WhiteManaAbility());
+        this.getLeftHalfCard().addAbility(new WhiteManaAbility());
+
+        // 2.
+        // Grimclimb Pathway
+        // Land
+
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
     }
 
     private BrightclimbPathway(final BrightclimbPathway card) {
