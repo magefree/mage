@@ -80,7 +80,7 @@ class EyeOfDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = new ArrayList<>();
         Target target = new TargetNonlandPermanent();
-        target.setNotTarget(false);
+        target.setNotTarget(true);
         PlayerList playerList = game.getPlayerList().copy();
         playerList.setCurrent(game.getActivePlayerId());
         Player player = game.getPlayer(game.getActivePlayerId());
