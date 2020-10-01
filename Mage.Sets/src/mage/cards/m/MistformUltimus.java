@@ -28,7 +28,7 @@ public final class MistformUltimus extends CardImpl {
         // Mistform Ultimus is every creature type.
         this.setIsAllCreatureTypes(true);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
-                "{this} is every creature type <i>(even if this card isn’t on the battlefield)</i>."
+                "{this} is every creature type <i>(even if this card isn't on the battlefield)</i>."
         )));
     }
 
