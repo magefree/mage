@@ -25,18 +25,18 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     private boolean loseTypes = false;
     protected boolean loseName = false;
 
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType, 
-            FilterPermanent filter, Duration duration, boolean loseColor) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType,
+                                    FilterPermanent filter, Duration duration, boolean loseColor) {
         this(token, theyAreStillType, filter, duration, loseColor, false, false);
     }
 
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType, 
-            FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType,
+                                    FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
         this(token, theyAreStillType, filter, duration, loseColor, loseName, false);
     }
 
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType, 
-            FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName, boolean loseTypes) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType,
+                                    FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName, boolean loseTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.theyAreStillType = theyAreStillType;
@@ -44,7 +44,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         this.loseColor = loseColor;
         this.loseName = loseName;
         this.loseTypes = loseTypes;
-        
+
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
@@ -87,83 +87,71 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         }
 
         for (Permanent permanent : affectedPermanents) {
-            if (permanent != null) {
-                switch (layer) {
-                    case TextChangingEffects_3:
-                        if (sublayer == SubLayer.NA) {
-                            if (loseName) {
-                                permanent.setName(token.getName());
-                            }
+            if (permanent == null) {
+                continue;
+            }
+            switch (layer) {
+                case TextChangingEffects_3:
+                    if (loseName) {
+                        permanent.setName(token.getName());
+                    }
+                    break;
+
+                case TypeChangingEffects_4:
+                    if (theyAreStillType != null || loseTypes) {
+                        permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+                    }
+                    for (SubType t : token.getSubtype(game)) {
+                        if (!permanent.hasSubtype(t, game)) {
+                            permanent.getSubtype(game).add(t);
                         }
-                        break;
+                    }
+                    permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
 
-                    case TypeChangingEffects_4:
-                        if (sublayer == SubLayer.NA) {
-                            if (theyAreStillType != null) {
-                                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                                permanent.getSubtype(game).addAll(token.getSubtype(game));
-                            } else {
-                                if (loseTypes) {
-                                    permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                                }
-
-                                for (SubType t : token.getSubtype(game)) {
-                                    if (!permanent.hasSubtype(t, game)) {
-                                        permanent.getSubtype(game).add(t);
-                                    }
-                                }
-                            }
-
-                            for (SuperType t : token.getSuperType()) {
-                                if (!permanent.getSuperType().contains(t)) {
-                                    permanent.addSuperType(t);
-                                }
-                            }
-
-                            for (CardType t : token.getCardType()) {
-                                if (!permanent.getCardType().contains(t)) {
-                                    permanent.addCardType(t);
-                                }
-                            }
+                    for (SuperType t : token.getSuperType()) {
+                        if (!permanent.getSuperType().contains(t)) {
+                            permanent.addSuperType(t);
                         }
-                        break;
+                    }
 
-                    case ColorChangingEffects_5:
-                        if (sublayer == SubLayer.NA) {
-                            if (this.loseColor) {
-                                permanent.getColor(game).setBlack(false);
-                                permanent.getColor(game).setGreen(false);
-                                permanent.getColor(game).setBlue(false);
-                                permanent.getColor(game).setWhite(false);
-                                permanent.getColor(game).setRed(false);
-                            }
-                            if (token.getColor(game).hasColor()) {
-                                permanent.getColor(game).addColor(token.getColor(game));
-                            }
+                    for (CardType t : token.getCardType()) {
+                        if (!permanent.getCardType().contains(t)) {
+                            permanent.addCardType(t);
                         }
-                        break;
+                    }
+                    break;
 
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            if (!token.getAbilities().isEmpty()) {
-                                for (Ability ability : token.getAbilities()) {
-                                    permanent.addAbility(ability, source.getSourceId(), game);
-                                }
-                            }
-                        }
-                        break;
+                case ColorChangingEffects_5:
+                    if (this.loseColor) {
+                        permanent.getColor(game).setWhite(false);
+                        permanent.getColor(game).setBlue(false);
+                        permanent.getColor(game).setBlack(false);
+                        permanent.getColor(game).setRed(false);
+                        permanent.getColor(game).setGreen(false);
+                    }
+                    if (token.getColor(game).hasColor()) {
+                        permanent.getColor(game).addColor(token.getColor(game));
+                    }
+                    break;
 
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
-                            int power = token.getPower().getValue();
-                            int toughness = token.getToughness().getValue();
-                            if (power != 0 && toughness != 0) {
-                                permanent.getPower().setValue(power);
-                                permanent.getToughness().setValue(toughness);
-                            }
+                case AbilityAddingRemovingEffects_6:
+                    if (!token.getAbilities().isEmpty()) {
+                        for (Ability ability : token.getAbilities()) {
+                            permanent.addAbility(ability, source.getSourceId(), game);
                         }
-                        break;
-                }
+                    }
+                    break;
+
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        int power = token.getPower().getValue();
+                        int toughness = token.getToughness().getValue();
+                        if (power != 0 && toughness != 0) {
+                            permanent.getPower().setValue(power);
+                            permanent.getToughness().setValue(toughness);
+                        }
+                    }
+                    break;
             }
         }
         return true;

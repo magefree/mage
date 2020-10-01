@@ -543,6 +543,16 @@ public enum SubType {
         return subTypes;
     }
 
+    public static Set<SubType> getEnchantmentTypes() {
+        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
+        for (SubType subType : values()) {
+            if (subType.getSubTypeSet() == SubTypeSet.EnchantmentType) {
+                subTypes.add(subType);
+            }
+        }
+        return subTypes;
+    }
+
     public static Set<SubType> getPlaneswalkerTypes() {
         Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType subType : values()) {
