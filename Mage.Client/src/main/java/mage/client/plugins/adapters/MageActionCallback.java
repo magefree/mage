@@ -610,7 +610,7 @@ public class MageActionCallback implements ActionCallback {
             // XXX: scaled to fit width
             bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode, image, mageCard.getOriginal().getRules(), mageCard.getOriginal().isToRotate());
             // if it's an ability, show only the ability text as overlay
-            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL) {
+            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL && isAbilityTextOverlayEnabled()) {
                 bigCard.showTextComponent();
             } else {
                 bigCard.hideTextComponent();
@@ -622,6 +622,10 @@ public class MageActionCallback implements ActionCallback {
             bigCard.addJXPanel(mageCard.getOriginal().getId(), panel);
         }
         enlargeredViewOpened = new Date();
+    }
+
+    private boolean isAbilityTextOverlayEnabled() {
+        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY, "true").equals("true");
     }
 
     private synchronized void startHideTimeout() {
