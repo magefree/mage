@@ -33,7 +33,6 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
                 typesLeft, subTypesLeft, costsLeft, this, SpellAbilityType.MODAL_LEFT);
         rightHalfCard = new ModalDoubleFacesCardHalfImpl(this.getOwnerId(), new CardSetInfo(secondSideName, setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
                 typesRight, subTypesRight, costsRight, this, SpellAbilityType.MODAL_RIGHT);
-        this.modalDFC = true;
     }
 
     public ModalDoubleFacesCard(ModalDoubleFacesCard card) {

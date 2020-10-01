@@ -58,8 +58,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String flipCardName;
     protected boolean usesVariousArt = false;
     protected boolean morphCard;
-    protected boolean modalDFC; // modal double faces card
-
     protected List<UUID> attachments = new ArrayList<>();
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
@@ -139,7 +137,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
-        modalDFC = card.modalDFC;
 
         this.attachments.addAll(card.attachments);
     }

@@ -449,9 +449,27 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
                         }
-                        CardDownloadData cardDownloadData = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+                        CardDownloadData cardDownloadData = new CardDownloadData(
+                                card.getFlipCardName(),
+                                card.getSetCode(),
+                                card.getCardNumber(),
+                                card.usesVariousArt(),
+                                0, "", "", false, card.isDoubleFaced(), card.isNightCard());
                         cardDownloadData.setFlipCard(true);
                         cardDownloadData.setFlippedSide(true);
+                        cardDownloadData.setType2(isType2);
+                        allCardsUrls.add(cardDownloadData);
+                    }
+                    if (card.isModalDoubleFacesCard()) {
+                        if (card.getModalDoubleFacesSecondSideName() == null || card.getModalDoubleFacesSecondSideName().trim().isEmpty()) {
+                            throw new IllegalStateException("MDF card can't have empty name.");
+                        }
+                        CardDownloadData cardDownloadData = new CardDownloadData(
+                                card.getModalDoubleFacesSecondSideName(),
+                                card.getSetCode(),
+                                card.getCardNumber(),
+                                card.usesVariousArt(),
+                                0, "", "", false, true, true);
                         cardDownloadData.setType2(isType2);
                         allCardsUrls.add(cardDownloadData);
                     }
