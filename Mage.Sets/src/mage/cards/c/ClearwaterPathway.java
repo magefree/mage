@@ -1,25 +1,38 @@
 package mage.cards.c;
 
+import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class ClearwaterPathway extends CardImpl {
+public final class ClearwaterPathway extends ModalDoubleFacesCard {
 
     public ClearwaterPathway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{}, "",
+                "Murkwater Pathway", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.m.MurkwaterPathway.class;
+        // 1.
+        // Clearwater Pathway
+        // Land
 
         // {T}: Add {U}.
-        this.addAbility(new BlueManaAbility());
+        this.getLeftHalfCard().addAbility(new BlueManaAbility());
+
+        // 2.
+        // Murkwater Pathway
+        // Land
+
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
     }
 
     private ClearwaterPathway(final ClearwaterPathway card) {

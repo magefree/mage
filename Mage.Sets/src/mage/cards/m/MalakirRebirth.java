@@ -1,35 +1,52 @@
 package mage.cards.m;
 
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.cards.CardImpl;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class MalakirRebirth extends CardImpl {
+public final class MalakirRebirth extends ModalDoubleFacesCard {
 
     public MalakirRebirth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.INSTANT}, new SubType[]{}, "{B}",
+                "Malakir Mire", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.m.MalakirMire.class;
+        // 1.
+        // Malakir Rebirth
+        // Instant
 
         // Choose target creature. You lose 2 life. Until end of turn, that creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."
-        this.getSpellAbility().addEffect(new MalakirRebirthEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getLeftHalfCard().getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2)
+                .setText("Choose target creature. You lose 2 life"));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(
+                new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false
+        ), Duration.EndOfTurn).setText("Until end of turn, that creature gains \"When this creature dies, return it to the battlefield tapped under its owner's control.\""));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        // 2.
+        // Malakir Mire
+        // Land
+
+        // Malakir Mire enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
     }
 
     private MalakirRebirth(final MalakirRebirth card) {
@@ -39,32 +56,5 @@ public final class MalakirRebirth extends CardImpl {
     @Override
     public MalakirRebirth copy() {
         return new MalakirRebirth(this);
-    }
-}
-
-class MalakirRebirthEffect extends OneShotEffect {
-
-    MalakirRebirthEffect() {
-        super(Outcome.Benefit);
-        staticText = "Choose target creature. You lose 2 life. Until end of turn, " +
-                "that creature gains \"When this creature dies, return it to the battlefield tapped under its owner's control.\"";
-    }
-
-    private MalakirRebirthEffect(final MalakirRebirthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MalakirRebirthEffect copy() {
-        return new MalakirRebirthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.addEffect(new GainAbilityTargetEffect(new DiesSourceTriggeredAbility(
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true, true), false
-        ), Duration.EndOfTurn), source);
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.loseLife(2, game, false) > 0;
     }
 }

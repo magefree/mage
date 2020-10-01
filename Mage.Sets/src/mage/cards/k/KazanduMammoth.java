@@ -1,10 +1,12 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -12,22 +14,33 @@ import mage.constants.SubType;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class KazanduMammoth extends CardImpl {
+public final class KazanduMammoth extends ModalDoubleFacesCard {
 
     public KazanduMammoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELEPHANT}, "{1}{G}{G}",
+                "Kazandu Valley", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.subtype.add(SubType.ELEPHANT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.k.KazanduValley.class;
+        // 1.
+        // Kazandu Mammoth
+        // Creature — Elephant
+        this.getLeftHalfCard().setPT(new MageInt(3), new MageInt(3));
 
         // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
-        this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
+        this.getLeftHalfCard().addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
+
+        // 2.
+        // Kazandu Valley
+        // Land
+
+        // Kazandu Valley enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {G}.
+        this.getRightHalfCard().addAbility(new GreenManaAbility());
     }
 
     private KazanduMammoth(final KazanduMammoth card) {

@@ -1,15 +1,18 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
-import mage.cards.CardImpl;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -23,27 +26,41 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HagraMauling extends CardImpl {
+public final class HagraMauling extends ModalDoubleFacesCard {
 
     private static final Hint hint = new ConditionHint(
             HagraMaulingCondition.instance, "An opponent controls no basic lands"
     );
 
     public HagraMauling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.INSTANT}, new SubType[]{}, "{2}{B}{B}",
+                "Hagra Broodpit", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.h.HagraBroodpit.class;
+        // 1.
+        // Hagra Mauling
+        // Instant
 
         // This spell costs {1} less to cast if an opponent controls no basic lands.
-        this.addAbility(new SimpleStaticAbility(
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(1, HagraMaulingCondition.instance).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Destroy target creature.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addHint(hint);
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getLeftHalfCard().getSpellAbility().addHint(hint);
+
+        // 2.
+        // Hagra Broodpit
+        // Land
+
+        // Hagra Broodpit enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
     }
 
     private HagraMauling(final HagraMauling card) {

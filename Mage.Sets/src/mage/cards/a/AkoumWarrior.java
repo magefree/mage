@@ -22,15 +22,21 @@ public final class AkoumWarrior extends ModalDoubleFacesCard {
                 "Akoum Teeth", new CardType[]{CardType.LAND}, new SubType[]{}, ""
         );
 
+        // 1.
         // Akoum Warrior
         // Creature — Minotaur Warrior
         this.getLeftHalfCard().setPT(new MageInt(4), new MageInt(5));
+
         // Trample
         this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
+        // 2.
         // Akoum Teeth
+        // Land
+
         // Akoum Teeth enters the battlefield tapped.
         this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
         // {T}: Add {R}.
         this.getRightHalfCard().addAbility(new RedManaAbility());
     }

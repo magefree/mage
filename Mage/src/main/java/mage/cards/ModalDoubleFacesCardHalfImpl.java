@@ -7,6 +7,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
     public ModalDoubleFacesCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, SubType[] cardSubTypes,
                                         String costs, ModalDoubleFacesCard parentCard, SpellAbilityType spellAbilityType) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
+        this.subtype.addAll(Arrays.asList(cardSubTypes));
         this.parentCard = parentCard;
     }
 
