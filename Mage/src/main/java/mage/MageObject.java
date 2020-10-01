@@ -202,6 +202,9 @@ public interface MageObject extends MageItem, Serializable {
                 .stream()
                 .map(SubType::getSubTypeSet)
                 .anyMatch(SubTypeSet.CreatureType::equals);
+        if (!isAnyA || !isAnyB) {
+            return false;
+        }
         if (isAllA) {
             return isAllB || isAnyB;
         }
@@ -210,7 +213,7 @@ public interface MageObject extends MageItem, Serializable {
                 .getSubtype(game)
                 .stream()
                 .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                .anyMatch(subType -> this.hasSubtype(subType, game)));
+                .anyMatch(subType -> otherCard.hasSubtype(subType, game)));
     }
 
     boolean isAllCreatureTypes();
