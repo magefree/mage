@@ -70,10 +70,10 @@ public final class AgelessSentinels extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent == null) {
+            if (permanent == null || (!permanent.isCreature() && !permanent.isTribal())) {
                 return false;
             }
-            permanent.getSubtype(game).clear();
+            permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
             permanent.setIsAllCreatureTypes(false);
             permanent.getSubtype(game).add(SubType.BIRD, SubType.GIANT);
             return true;

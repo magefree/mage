@@ -98,6 +98,8 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements Sou
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.CREATURE);
+                        permanent.setIsAllCreatureTypes(false);
+                        permanent.getSubtype(game).clear();
                         permanent.getSubtype(game).add(SubType.GIANT);
                     }
                     break;

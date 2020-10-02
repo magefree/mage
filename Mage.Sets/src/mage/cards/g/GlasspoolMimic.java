@@ -54,6 +54,9 @@ class GlasspoolMimicApplier extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+        if (!permanent.isCreature() || !permanent.isTribal()) {
+            return true;
+        }
         permanent.getSubtype(game).add(SubType.SHAPESHIFTER);
         permanent.getSubtype(game).add(SubType.ROGUE);
         return true;
@@ -61,6 +64,9 @@ class GlasspoolMimicApplier extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+        if (!mageObject.isCreature() || !mageObject.isTribal()) {
+            return true;
+        }
         mageObject.getSubtype(game).add(SubType.SHAPESHIFTER);
         mageObject.getSubtype(game).add(SubType.ROGUE);
         return true;

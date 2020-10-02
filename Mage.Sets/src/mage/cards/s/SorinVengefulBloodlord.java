@@ -95,7 +95,7 @@ enum SorinVengefulBloodlordAdjuster implements TargetAdjuster {
 class SorinVengefulBloodlordEffect extends ContinuousEffectImpl {
     SorinVengefulBloodlordEffect() {
         super(Duration.Custom, Outcome.Neutral);
-        staticText = "That creature is a vampire in addition to its other types";
+        staticText = "That creature is a Vampire in addition to its other types";
     }
 
     private SorinVengefulBloodlordEffect(final SorinVengefulBloodlordEffect effect) {
@@ -118,7 +118,7 @@ class SorinVengefulBloodlordEffect extends ContinuousEffectImpl {
                 creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
             }
         }
-        if (creature != null) {
+        if (creature != null && (creature.isCreature() || creature.isTribal())) {
             if (sublayer == SubLayer.NA) {
                 if (!creature.hasSubtype(SubType.VAMPIRE, game)) {
                     creature.getSubtype(game).add(SubType.VAMPIRE);

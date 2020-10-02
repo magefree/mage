@@ -30,7 +30,8 @@ public final class PhantasmalImage extends CardImpl {
     private static final ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
         public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-            if (!permanent.hasSubtype(SubType.ILLUSION, game)) {
+            if ((permanent.isCreature() || permanent.isTribal())
+                    && !permanent.hasSubtype(SubType.ILLUSION, game)) {
                 permanent.getSubtype(game).add(SubType.ILLUSION);
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
@@ -41,7 +42,8 @@ public final class PhantasmalImage extends CardImpl {
 
         @Override
         public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-            if (!mageObject.hasSubtype(SubType.ILLUSION, game)) {
+            if ((mageObject.isCreature() || mageObject.isTribal())
+                    && !mageObject.hasSubtype(SubType.ILLUSION, game)) {
                 mageObject.getSubtype(game).add(SubType.ILLUSION);
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities

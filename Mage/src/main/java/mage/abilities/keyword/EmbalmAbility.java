@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.ObjectColor;
@@ -19,7 +18,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class EmbalmAbility extends ActivatedAbilityImpl {
@@ -90,7 +88,7 @@ class EmbalmEffect extends OneShotEffect {
         CardUtil.copyTo(token).from(card); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         token.getColor(game).setColor(ObjectColor.WHITE);
         if (!token.hasSubtype(SubType.ZOMBIE, game)) {
-            token.getSubtype(game).add(0, SubType.ZOMBIE);
+            token.getSubtype(game).add(SubType.ZOMBIE);
         }
         token.getManaCost().clear();
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source.getSourceId(), controller.getId()));
