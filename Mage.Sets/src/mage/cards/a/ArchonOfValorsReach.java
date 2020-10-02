@@ -19,11 +19,12 @@ import mage.game.events.GameEvent;
 import java.util.Arrays;
 import java.util.UUID;
 
+import static mage.game.events.GameEvent.EventType.CAST_SPELL;
+
 /**
  * @author TheElk801
  */
 public final class ArchonOfValorsReach extends CardImpl {
-
     public ArchonOfValorsReach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
 
@@ -74,26 +75,29 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Object savedType = game.getState().getValue(source.getSourceId() + "_type");
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (savedType instanceof String && sourceCard != null) {
+        Card card = game.getCard(event.getSourceId());
+        if (savedType instanceof String && card != null) {
             CardType cardType = CardType.fromString((String) savedType);
-            return "You can't cast " + cardType.toString() + " spells (" + sourceCard.getIdName() + ").";
+            return "You can't cast " + cardType.toString() + " spells (" + card.getIdName() + ").";
         }
         return null;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
+        return event.getType() == CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Object savedType = game.getState().getValue(source.getSourceId() + "_type");
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (savedType instanceof String && sourceCard != null) {
+        Card card = game.getCard(event.getSourceId());
+
+        if (savedType instanceof String && card != null) {
             CardType cardType = CardType.fromString((String) savedType);
-            return cardType != null && sourceCard != null && sourceCard.getCardType().contains(cardType);
+            if (cardType != null && card != null && card.getCardType().contains(cardType)) {
+                return true;
+            }
         }
         return false;
     }
