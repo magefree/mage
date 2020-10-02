@@ -65,7 +65,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
+        if (event.getPlayerId().equals(getControllerId()) && game.getStack().getStackObject(event.getSourceId()) instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
             if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                 Effect effect = this.getEffects().get(0);
