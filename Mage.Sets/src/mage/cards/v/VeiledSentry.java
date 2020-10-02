@@ -71,8 +71,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 veiledSentry.getCardType().clear();
-                veiledSentry.setIsAllCreatureTypes(false);
-                veiledSentry.getSubtype(game).clear();
+                veiledSentry.removeAllSubTypes(game);
                 veiledSentry.addCardType(CardType.CREATURE);
                 veiledSentry.addSubType(game, SubType.ILLUSION);
                 break;

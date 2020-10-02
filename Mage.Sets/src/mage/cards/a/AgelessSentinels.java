@@ -73,8 +73,7 @@ public final class AgelessSentinels extends CardImpl {
             if (permanent == null) {
                 return false;
             }
-            permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-            permanent.setIsAllCreatureTypes(false);
+            permanent.removeAllCreatureTypes(game);
             permanent.addSubType(game, SubType.BIRD, SubType.GIANT);
             return true;
         }

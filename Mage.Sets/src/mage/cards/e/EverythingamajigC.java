@@ -153,8 +153,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
                 if (!permanent.isCreature()) {
                     permanent.addCardType(CardType.CREATURE);
                 }
-                permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-                permanent.setIsAllCreatureTypes(false);
+                permanent.removeAllCreatureTypes(game);
                 permanent.addSubType(game, SubType.CONSTRUCT);
                 break;
             case PTChangingEffects_7:

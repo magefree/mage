@@ -78,12 +78,10 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             switch (loseType) {
                                 case ALL:
                                 case ALL_BUT_COLOR:
-                                    permanent.getSubtype(game).clear();
-                                    permanent.setIsAllCreatureTypes(false);
+                                    permanent.removeAllSubTypes(game);
                                     break;
                                 case ABILITIES_SUBTYPE:
-                                    permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-                                    permanent.setIsAllCreatureTypes(false);
+                                    permanent.removeAllCreatureTypes(game);
                                     break;
                             }
                             for (SubType t : token.getSubtype(game)) {

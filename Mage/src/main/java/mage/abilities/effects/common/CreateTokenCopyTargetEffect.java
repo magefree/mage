@@ -200,8 +200,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.getToughness().modifyBaseValue(tokenToughness);
         }
         if (onlySubType != null) {
-            token.setIsAllCreatureTypes(false);
-            token.getSubtype(game).removeAll(SubType.getCreatureTypes());
+            token.removeAllCreatureTypes(game);
             token.addSubType(game, onlySubType);
         }
         if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {

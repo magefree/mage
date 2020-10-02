@@ -38,8 +38,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         if (target == null) {
             return true;
         }
-        target.setIsAllCreatureTypes(false);
-        target.getSubtype(game).removeAll(SubType.getCreatureTypes());
+        target.removeAllCreatureTypes(game);
         target.getSubtype(game).addAll(setSubtypes);
         return true;
     }

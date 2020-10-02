@@ -77,8 +77,7 @@ class EgoErasureLoseEffect extends ContinuousEffectImpl {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
-                permanent.setIsAllCreatureTypes(false);
-                permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+                permanent.removeAllCreatureTypes(game);
             } else {
                 it.remove();
             }

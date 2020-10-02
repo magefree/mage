@@ -102,7 +102,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         permanent.addCardType(t);
                     }
                     if (theyAreStillType != null || loseTypes) {
-                        permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+                        permanent.removeAllCreatureTypes(game);
                     }
                     for (SubType t : token.getSubtype(game)) {
                         permanent.addSubType(game, t);

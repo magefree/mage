@@ -173,6 +173,16 @@ public interface MageObject extends MageItem, Serializable {
         }
     }
 
+    default void removeAllSubTypes(Game game) {
+        getSubtype(game).clear();
+        setIsAllCreatureTypes(false);
+    }
+
+    default void removeAllCreatureTypes(Game game) {
+        getSubtype(game).removeAll(SubType.getCreatureTypes());
+        setIsAllCreatureTypes(false);
+    }
+
     /**
      * Checks whether two cards share card types.
      *

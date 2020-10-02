@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,23 +12,16 @@ import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class OpalTitan extends CardImpl {
@@ -98,8 +90,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements Sou
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.CREATURE);
-                        permanent.setIsAllCreatureTypes(false);
-                        permanent.getSubtype(game).clear();
+                        permanent.removeAllSubTypes(game);
                         permanent.addSubType(game, SubType.GIANT);
                     }
                     break;

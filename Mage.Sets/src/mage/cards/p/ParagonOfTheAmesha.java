@@ -80,8 +80,7 @@ public final class ParagonOfTheAmesha extends CardImpl {
             if (permanent == null) {
                 return false;
             }
-            permanent.setIsAllCreatureTypes(false);
-            permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+            permanent.removeAllCreatureTypes(game);
             permanent.addSubType(game, SubType.ANGEL);
             return true;
         }

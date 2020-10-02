@@ -71,8 +71,7 @@ class WishfulMerfolkEffect extends ContinuousEffectImpl {
                 permanent.removeAbility(DefenderAbility.getInstance(), source.getSourceId(), game);
                 break;
             case TypeChangingEffects_4:
-                permanent.setIsAllCreatureTypes(false);
-                permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+                permanent.removeAllCreatureTypes(game);
                 permanent.addSubType(game, SubType.HUMAN);
                 break;
         }

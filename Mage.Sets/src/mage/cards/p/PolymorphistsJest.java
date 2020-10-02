@@ -79,8 +79,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
             }
             switch (layer) {
                 case TypeChangingEffects_4:
-                    permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-                    permanent.setIsAllCreatureTypes(false);
+                    permanent.removeAllCreatureTypes(game);
                     permanent.addSubType(game, SubType.FROG);
                     break;
                 case ColorChangingEffects_5:

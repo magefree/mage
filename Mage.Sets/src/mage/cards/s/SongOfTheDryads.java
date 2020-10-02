@@ -88,8 +88,7 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 permanent.getCardType().clear();
                 permanent.addCardType(CardType.LAND);
-                permanent.getSubtype(game).clear();
-                permanent.setIsAllCreatureTypes(false);
+                permanent.removeAllSubTypes(game);
                 permanent.addSubType(game, SubType.FOREST);
                 permanent.removeAllAbilities(source.getSourceId(), game);
                 permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);

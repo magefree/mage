@@ -57,8 +57,7 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
             }
             flag = true;
             if (loseOther) {
-                permanent.setIsAllCreatureTypes(false);
-                permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+                permanent.removeAllCreatureTypes(game);
             }
             for (SubType subtype : subtypes) {
                 permanent.addSubType(game, subtype);

@@ -127,8 +127,7 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.CREATURE);
-                        permanent.getSubtype(game).clear();
-                        permanent.setIsAllCreatureTypes(false);
+                        permanent.removeAllSubTypes(game);
                         permanent.addSubType(game, SubType.DRAGON);
                     }
                     break;

@@ -91,8 +91,7 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.CREATURE);
-                        permanent.getSubtype(game).clear();
-                        permanent.setIsAllCreatureTypes(false);
+                        permanent.removeAllSubTypes(game);
                         permanent.addSubType(game, SubType.DRAGON);
                         permanent.getSuperType().clear();
                         permanent.addSuperType(SuperType.LEGENDARY);
