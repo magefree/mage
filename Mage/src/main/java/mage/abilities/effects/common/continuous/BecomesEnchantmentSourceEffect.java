@@ -13,10 +13,9 @@ import mage.game.permanent.Permanent;
 public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
     public BecomesEnchantmentSourceEffect() {
-        super(Duration.Custom, Outcome.AddAbility);
+        super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.AddAbility);
         staticText = "{this} becomes an Enchantment";
         dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
-
     }
 
     public BecomesEnchantmentSourceEffect(final BecomesEnchantmentSourceEffect effect) {
@@ -35,34 +34,16 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl impleme
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getCardType().clear();
-                        if (!permanent.getCardType().contains(CardType.ENCHANTMENT)) {
-                            permanent.getCardType().add(CardType.ENCHANTMENT);
-                        }
-                        permanent.getSubtype(game).retainAll(SubType.getEnchantmentTypes());
-                    }
-                    break;
-            }
-            return true;
-        }
-        this.discard();
-        return false;
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        return false;
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
+        if (permanent == null) {
+            this.discard();
+            return false;
+        }
+        permanent.getCardType().clear();
+        permanent.getCardType().add(CardType.ENCHANTMENT);
+        permanent.getSubtype(game).retainAll(SubType.getEnchantmentTypes());
+        permanent.setIsAllCreatureTypes(false);
+        return true;
     }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return Layer.TypeChangingEffects_4 == layer;
-    }
-
 }

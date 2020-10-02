@@ -182,7 +182,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (startingLoyalty != -1) {
             token.setStartingLoyalty(startingLoyalty);
         }
-        if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
+        if (additionalCardType != null) {
             token.addCardType(additionalCardType);
         }
         if (hasHaste) {

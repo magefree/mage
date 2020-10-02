@@ -71,9 +71,6 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     break;
                             }
                             for (CardType t : token.getCardType()) {
-                                if (permanent.getCardType().contains(t)) {
-                                    continue;
-                                }
                                 permanent.addCardType(t);
                             }
 

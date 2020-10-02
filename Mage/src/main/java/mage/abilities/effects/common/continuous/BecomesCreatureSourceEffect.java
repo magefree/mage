@@ -94,9 +94,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     permanent.getCardType().clear();
                 }
                 for (CardType cardType : token.getCardType()) {
-                    if (permanent.getCardType().contains(cardType)) {
-                        continue;
-                    }
                     permanent.addCardType(cardType);
                 }
 

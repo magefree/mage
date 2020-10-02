@@ -115,9 +115,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                     }
 
                     for (CardType t : token.getCardType()) {
-                        if (!permanent.getCardType().contains(t)) {
-                            permanent.addCardType(t);
-                        }
+                        permanent.addCardType(t);
                     }
                     break;
 

@@ -271,9 +271,7 @@ public class Spell extends StackObjImpl implements Card {
                         Permanent permanent = game.getPermanent(permId);
                         if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            if (!card.getCardType().contains(CardType.CREATURE)) {
-                                card.addCardType(CardType.CREATURE);
-                            }
+                            card.addCardType(CardType.CREATURE);
                             card.getSubtype(game).remove(SubType.AURA);
                         }
                     }

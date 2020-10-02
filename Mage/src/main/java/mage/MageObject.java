@@ -155,7 +155,18 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addCardType(CardType cardType) {
-        getCardType().add(cardType);
+        if (!getCardType().contains(cardType)) {
+            getCardType().add(cardType);
+        }
+    }
+
+    default void addSubType(Game game, SubType... subTypes) {
+        for (SubType subType : subTypes) {
+            if (subType.canGain(this)
+                    && !hasSubtype(subType, game)) {
+                getSubtype(game).add(subType);
+            }
+        }
     }
 
     /**
