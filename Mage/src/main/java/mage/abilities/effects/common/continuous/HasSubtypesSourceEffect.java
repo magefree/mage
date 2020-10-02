@@ -16,9 +16,7 @@ public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
 
     public HasSubtypesSourceEffect(SubType... subTypes) {
         super(Duration.EndOfGame, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        for (SubType subType : subtypes) {
-            subtypes.add(subTypes);
-        }
+        subtypes.add(subTypes);
         this.staticText = setText();
     }
 
