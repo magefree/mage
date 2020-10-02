@@ -4,6 +4,7 @@ import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
@@ -1245,6 +1246,10 @@ public class VerifyCardDataTest {
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
+        }
+
+        if (card.getAbilities().contains(ChangelingAbility.getInstance()) && !card.isAllCreatureTypes()) {
+            fail(card, "abilities", "card has Changeling but doesn't have isAllCreatureTypes set to true");
         }
 
         // special check: missing or wrong ability/effect hints
