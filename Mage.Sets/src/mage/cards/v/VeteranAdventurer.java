@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.VigilanceAbility;
@@ -24,15 +24,13 @@ public final class VeteranAdventurer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
 
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
-        this.subtype.add(SubType.ROGUE);
-        this.subtype.add(SubType.WARRIOR);
-        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Veteran Adventurer is also a Cleric, Rogue, Warrior, and Wizard.
-        this.addAbility(new SimpleStaticAbility(new InfoEffect("{this} is also a Cleric, Rogue, Warrior, and Wizard")));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new HasSubtypesSourceEffect(SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD)
+        ));
 
         // This spell costs {1} less to cast for each creature in your party.
         this.addAbility(new SimpleStaticAbility(

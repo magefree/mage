@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,16 +23,12 @@ public final class StoneworkPackbeast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
 
         this.subtype.add(SubType.BEAST);
-        this.subtype.add(SubType.CLERIC);
-        this.subtype.add(SubType.ROGUE);
-        this.subtype.add(SubType.WARRIOR);
-        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Stonework Packbeast is also a Cleric, Rogue, Warrior, and Wizard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("{this} is also a Cleric, Rogue, Warrior, and Wizard")
+                Zone.ALL, new HasSubtypesSourceEffect(SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD)
         ));
 
         // {2}: Add one mana of any color.
