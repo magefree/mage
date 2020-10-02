@@ -168,7 +168,7 @@ public interface MageObject extends MageItem, Serializable {
         for (SubType subType : subTypes) {
             if (subType.canGain(this)
                     && !hasSubtype(subType, game)) {
-                addSubType(game, subType);
+                getSubtype(game).add(subType);
             }
         }
     }
