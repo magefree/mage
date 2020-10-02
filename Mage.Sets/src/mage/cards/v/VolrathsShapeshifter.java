@@ -84,6 +84,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
             permanent.addCardType(type);
         }
 
+        permanent.setIsAllCreatureTypes(card.isAllCreatureTypes());
         permanent.getSubtype(game).clear();
         for (SubType type : card.getSubtype(game)) {
             if (!permanent.hasSubtype(type, game)) {
