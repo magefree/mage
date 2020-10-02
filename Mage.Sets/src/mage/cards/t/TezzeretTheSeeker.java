@@ -134,7 +134,6 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
                             if (!permanent.isCreature()) {
                                 permanent.addCardType(CardType.CREATURE);
                             }
-                            permanent.getSubtype(game).clear();
                         }
                         break;
                     case PTChangingEffects_7:

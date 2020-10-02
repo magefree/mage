@@ -135,6 +135,7 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         permanent.setIsAllCreatureTypes(copied.isAllCreatureTypes());
         permanent.getSubtype(game).clear();
         permanent.getSubtype(game).addAll(copied.getSubtype(game));
+        permanent.setIsAllCreatureTypes(copied.isAllCreatureTypes());
         permanent.getColor(game).setColor(copied.getColor(game));
         permanent.removeAllAbilities(source.getSourceId(), game);
         for (Ability ability : copied.getAbilities()) {

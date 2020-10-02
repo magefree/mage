@@ -1,24 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl implements SourceEffect {
@@ -53,10 +42,10 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl impleme
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
-                        permanent.getSubtype(game).clear();
                         if (!permanent.getCardType().contains(CardType.ENCHANTMENT)) {
                             permanent.getCardType().add(CardType.ENCHANTMENT);
                         }
+                        permanent.getSubtype(game).retainAll(SubType.getEnchantmentTypes());
                     }
                     break;
             }

@@ -1,10 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -24,6 +19,11 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -179,7 +179,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.getSuperType().remove(SuperType.LEGENDARY);
         }
 
-        if (startingLoyalty!=-1){
+        if (startingLoyalty != -1) {
             token.setStartingLoyalty(startingLoyalty);
         }
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
@@ -199,12 +199,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.removePTCDA();
             token.getToughness().modifyBaseValue(tokenToughness);
         }
+        if (onlySubType != null && !token.hasSubtype(onlySubType, game)) {
+            token.setIsAllCreatureTypes(false);
+            token.getSubtype(game).removeAll(SubType.getCreatureTypes());
+            token.getSubtype(game).add(onlySubType);
+        }
         if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {
             token.getSubtype(game).add(additionalSubType);
-        }
-        if (onlySubType != null && !token.hasSubtype(onlySubType, game)) {
-            token.getSubtype(game).clear();
-            token.getSubtype(game).add(onlySubType);
         }
         if (color != null) {
             token.getColor(game).setColor(color);
