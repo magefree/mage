@@ -1,5 +1,7 @@
 package org.mage.test.cards.single.thb;
 
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
@@ -47,6 +49,8 @@ public class OneWithTheStarsTest extends CardTestPlayerBase {
         assertNotSubtype(knight, SubType.HUMAN);
         assertNotSubtype(knight, SubType.KNIGHT);
         assertNotSubtype(knight, SubType.DRAGON);
+        assertAbility(playerA, knight, FlyingAbility.getInstance(), true);
+        assertAbility(playerA, knight, TrampleAbility.getInstance(), true);
     }
 
     @Test
