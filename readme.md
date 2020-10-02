@@ -110,6 +110,7 @@ More details about [memory settings](https://stackoverflow.com/a/57839720/840169
 Full project documentation and instructions for developers can be found in [wiki pages](http://github.com/magefree/mage/wiki/). 
 
 First steps for Xmage's developers:
-* [Developer Getting Started](http://github.com/magefree/mage/wiki/Developer-Getting-Started)
-* [Developer Notes](http://github.com/magefree/mage/wiki/Developer-Notes)
-* [Developer Testing Tools](http://github.com/magefree/mage/wiki/Developer-Testing-Tools)
+* [Setting up your Development Environment](https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment)
+* [Development Testing Tools](https://github.com/magefree/mage/wiki/Development-Testing-Tools)
+* [Development Workflow](https://github.com/magefree/mage/wiki/Development-Workflow)
+* [Development HOWTO Guides](https://github.com/magefree/mage/wiki/Development-HOWTO-Guides)
