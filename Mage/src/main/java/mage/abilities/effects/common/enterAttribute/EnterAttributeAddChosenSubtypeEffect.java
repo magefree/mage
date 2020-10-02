@@ -35,9 +35,7 @@ public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
         if (permanent != null && subtype != null) {
-            if (!permanent.hasSubtype(subtype, game)) {
-                permanent.getSubtype(game).add(subtype);
-            }
+            permanent.addSubType(game, subtype);
             return true;
         }
         return false;

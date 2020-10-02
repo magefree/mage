@@ -145,7 +145,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                 lion.getCardType().clear();
                 lion.addCardType(CardType.ENCHANTMENT);
                 lion.getSubtype(game).clear();
-                lion.getSubtype(game).add(SubType.AURA);
+                lion.addSubType(game, SubType.AURA);
                 break;
             case AbilityAddingRemovingEffects_6:
                 List<Ability> toRemove = new ArrayList<>();

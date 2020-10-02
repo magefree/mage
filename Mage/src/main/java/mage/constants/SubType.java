@@ -533,6 +533,23 @@ public enum SubType {
         return subTypeSet;
     }
 
+    public boolean canGain(MageObject mageObject) {
+        switch (subTypeSet) {
+            case CreatureType:
+                return mageObject.isCreature() || mageObject.isTribal();
+            case BasicLandType:
+            case NonBasicLandType:
+                return mageObject.isLand();
+            case EnchantmentType:
+                return mageObject.isEnchantment();
+            case ArtifactType:
+                return mageObject.isArtifact();
+            case PlaneswalkerType:
+                return mageObject.isPlaneswalker();
+        }
+        return false;
+    }
+
     public static Set<SubType> getArtifactTypes() {
         Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
         for (SubType subType : values()) {

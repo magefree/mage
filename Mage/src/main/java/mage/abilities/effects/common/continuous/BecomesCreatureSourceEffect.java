@@ -103,10 +103,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 }
                 if (!token.getSubtype(game).isEmpty()) {
                     for (SubType subType : token.getSubtype(game)) {
-                        if (permanent.hasSubtype(subType, game)) {
-                            continue;
-                        }
-                        permanent.getSubtype(game).add(subType);
+                        permanent.addSubType(game, subType);
                     }
                 }
                 permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());

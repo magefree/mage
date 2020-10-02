@@ -5,18 +5,12 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.EnchantAbility;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements SourceEffect {
@@ -58,9 +52,7 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.hasSubtype(SubType.AURA, game)) {
-                            permanent.getSubtype(game).add(SubType.AURA);
-                        }
+                        permanent.addSubType(game, SubType.AURA);
                     }
                     break;
                 case AbilityAddingRemovingEffects_6:

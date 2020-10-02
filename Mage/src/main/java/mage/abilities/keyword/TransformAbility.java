@@ -55,7 +55,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getSubtype(game).clear();
         permanent.setIsAllCreatureTypes(sourceCard.isAllCreatureTypes());
         for (SubType type : sourceCard.getSubtype(game)) {
-            permanent.getSubtype(game).add(type);
+            permanent.addSubType(game, type);
         }
         permanent.getSuperType().clear();
         for (SuperType type : sourceCard.getSuperType()) {

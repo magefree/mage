@@ -71,10 +71,7 @@ public final class UrsineChampion extends CardImpl {
             }
             permanent.setIsAllCreatureTypes(false);
             permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-            if (permanent.isCreature() || permanent.isTribal()) {
-                permanent.getSubtype(game).add(SubType.BEAR);
-                permanent.getSubtype(game).add(SubType.BERSERKER);
-            }
+            permanent.addSubType(game, SubType.BEAR, SubType.BERSERKER);
             return true;
         }
     }

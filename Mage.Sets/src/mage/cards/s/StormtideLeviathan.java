@@ -82,9 +82,7 @@ public final class StormtideLeviathan extends CardImpl {
                     StaticFilters.FILTER_LAND, source.getControllerId(), game
             )) {
                 // land abilities are intrinsic, so add them here, not in layer 6
-                if (!land.hasSubtype(SubType.ISLAND, game)) {
-                    land.getSubtype(game).add(SubType.ISLAND);
-                }
+                land.addSubType(game, SubType.ISLAND);
                 if (!land.getAbilities(game).containsClass(BlueManaAbility.class)) {
                     land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                 }

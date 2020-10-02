@@ -100,7 +100,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl implements Sou
                         permanent.addCardType(CardType.CREATURE);
                         permanent.setIsAllCreatureTypes(false);
                         permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.GIANT);
+                        permanent.addSubType(game, SubType.GIANT);
                     }
                     break;
                 case AbilityAddingRemovingEffects_6:

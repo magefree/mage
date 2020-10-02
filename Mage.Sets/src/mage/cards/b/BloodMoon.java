@@ -72,7 +72,7 @@ public final class BloodMoon extends CardImpl {
                         // So the ability removing has to be done before Layer 6
                         // Lands have their mana ability intrinsically, so that is added in layer 4
                         land.getSubtype(game).removeAll(SubType.getLandTypes());
-                        land.getSubtype(game).add(SubType.MOUNTAIN);
+                        land.addSubType(game, SubType.MOUNTAIN);
                         land.removeAllAbilities(source.getSourceId(), game);
                         land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                         break;

@@ -85,15 +85,9 @@ public final class SlumberingTora extends CardImpl {
             }
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (!permanent.isArtifact()) {
-                        permanent.addCardType(CardType.ARTIFACT);
-                    }
-                    if (!permanent.isCreature()) {
-                        permanent.addCardType(CardType.CREATURE);
-                    }
-                    if (!permanent.hasSubtype(SubType.CAT, game)) {
-                        permanent.getSubtype(game).add(SubType.CAT);
-                    }
+                    permanent.addCardType(CardType.ARTIFACT);
+                    permanent.addCardType(CardType.CREATURE);
+                    permanent.addSubType(game, SubType.CAT);
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {

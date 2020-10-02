@@ -121,14 +121,10 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
         if (permanent != null) {
             switch (layer) {
                 case ColorChangingEffects_5:
-                    if (permanent.isCreature() || permanent.isTribal()) {
-                        permanent.getColor(game).setBlack(true);
-                    }
+                    permanent.getColor(game).setBlack(true);
                     break;
                 case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).add(SubType.ZOMBIE);
-                    }
+                    permanent.addSubType(game, SubType.ZOMBIE);
                     break;
             }
             return true;

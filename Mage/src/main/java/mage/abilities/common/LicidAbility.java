@@ -117,7 +117,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     licid.getCardType().clear();
                     licid.addCardType(CardType.ENCHANTMENT);
                     licid.getSubtype(game).clear();
-                    licid.getSubtype(game).add(SubType.AURA);
+                    licid.addSubType(game, SubType.AURA);
                     break;
                 case AbilityAddingRemovingEffects_6:
                     List<Ability> toRemove = new ArrayList<>();

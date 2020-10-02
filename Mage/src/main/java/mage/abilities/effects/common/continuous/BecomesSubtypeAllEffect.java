@@ -64,9 +64,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
                 permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
             }
             for (SubType subtype : subtypes) {
-                if (!permanent.hasSubtype(subtype, game)) {
-                    permanent.getSubtype(game).add(subtype);
-                }
+                permanent.addSubType(game, subtype);
             }
         }
         if (!flag && duration == Duration.Custom) {

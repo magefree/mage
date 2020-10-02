@@ -118,7 +118,7 @@ class RealmwrightEffect extends ContinuousEffectImpl {
             if (land == null || land.hasSubtype(choice, game)) {
                 continue;
             }
-            land.getSubtype(game).add(choice);
+            land.addSubType(game, choice);
             land.addAbility(ability, source.getSourceId(), game);
         }
         return true;

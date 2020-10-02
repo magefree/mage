@@ -81,14 +81,15 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     break;
 
                 case TypeChangingEffects_4:
+                    for (CardType t : token.getCardType()) {
+                        permanent.addCardType(t);
+                    }
                     if (loseAllAbilities || removeSubtypes) {
                         permanent.setIsAllCreatureTypes(false);
                         permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
                     }
                     for (SubType t : token.getSubtype(game)) {
-                        if (!permanent.hasSubtype(t, game)) {
-                            permanent.getSubtype(game).add(t);
-                        }
+                        permanent.addSubType(game, t);
                     }
 
                     for (SuperType t : token.getSuperType()) {
@@ -97,9 +98,6 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                         }
                     }
 
-                    for (CardType t : token.getCardType()) {
-                        permanent.addCardType(t);
-                    }
                     break;
 
                 case ColorChangingEffects_5:

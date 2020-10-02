@@ -71,7 +71,7 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
                 }
                 permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
                 permanent.setIsAllCreatureTypes(false);
-                permanent.getSubtype(game).add(SubType.CONSTRUCT);
+                permanent.addSubType(game, SubType.CONSTRUCT);
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {

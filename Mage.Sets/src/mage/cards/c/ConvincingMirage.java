@@ -102,7 +102,7 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
             return false;
         }
         land.getSubtype(game).removeAll(SubType.getLandTypes());
-        land.getSubtype(game).add(choice);
+        land.addSubType(game, choice);
         land.removeAllAbilities(source.getSourceId(), game);
         switch (choice) {
             case FOREST:

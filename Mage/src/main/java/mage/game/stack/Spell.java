@@ -247,7 +247,7 @@ public class Spell extends StackObjImpl implements Card {
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
                     if (!card.getSubtype(game).contains(SubType.AURA)) {
-                        card.getSubtype(game).add(SubType.AURA);
+                        card.addSubType(game, SubType.AURA);
                     }
                 }
                 UUID permId = null;

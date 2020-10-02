@@ -120,7 +120,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
                 continue;
             }
             land.getSubtype(game).removeAll(SubType.getLandTypes());
-            land.getSubtype(game).add(targetBasicLandType);
+            land.addSubType(game, targetBasicLandType);
             land.removeAllAbilities(source.getSourceId(), game);
             switch (targetBasicLandType) {
                 case FOREST:

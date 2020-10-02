@@ -84,9 +84,7 @@ public final class DragonsoulKnight extends CardImpl {
             }
             permanent.setIsAllCreatureTypes(false);
             permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-            if (permanent.isCreature() || permanent.isTribal()) {
-                permanent.getSubtype(game).add(SubType.DRAGON);
-            }
+            permanent.addSubType(game, SubType.DRAGON);
             return true;
         }
     }

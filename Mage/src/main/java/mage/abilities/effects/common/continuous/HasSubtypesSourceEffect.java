@@ -33,14 +33,11 @@ public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject == null || (!sourceObject.isCreature() || sourceObject.isTribal())) {
+        if (sourceObject == null) {
             return false;
         }
         for (SubType subType : subtypes) {
-            if (sourceObject.hasSubtype(subType, game)) {
-                continue;
-            }
-            sourceObject.getSubtype(game).add(subType);
+            sourceObject.addSubType(game, subType);
         }
         return true;
     }

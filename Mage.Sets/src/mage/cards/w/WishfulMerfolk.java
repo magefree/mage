@@ -73,9 +73,7 @@ class WishfulMerfolkEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 permanent.setIsAllCreatureTypes(false);
                 permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-                if (permanent.isCreature() || permanent.isTribal()) {
-                    permanent.getSubtype(game).add(SubType.HUMAN);
-                }
+                permanent.addSubType(game, SubType.HUMAN);
                 break;
         }
         return true;

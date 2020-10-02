@@ -16,7 +16,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author brikr
  */
 public final class DralnusCrusade extends CardImpl {
@@ -53,9 +52,7 @@ class DralnusCrusadeEffect extends ContinuousEffectImpl {
         for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, source.getControllerId(), source.getSourceId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (!permanent.hasSubtype(SubType.ZOMBIE, game)) {
-                        permanent.getSubtype(game).add(SubType.ZOMBIE);
-                    }
+                    permanent.addSubType(game, SubType.ZOMBIE);
                     break;
                 case ColorChangingEffects_5:
                     permanent.getColor(game).setColor(ObjectColor.BLACK);

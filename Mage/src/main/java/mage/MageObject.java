@@ -143,6 +143,9 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addSuperType(SuperType superType) {
+        if (getSuperType().contains(superType)) {
+            return;
+        }
         getSuperType().add(superType);
     }
 
@@ -155,16 +158,17 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addCardType(CardType cardType) {
-        if (!getCardType().contains(cardType)) {
-            getCardType().add(cardType);
+        if (getCardType().contains(cardType)) {
+            return;
         }
+        getCardType().add(cardType);
     }
 
     default void addSubType(Game game, SubType... subTypes) {
         for (SubType subType : subTypes) {
             if (subType.canGain(this)
                     && !hasSubtype(subType, game)) {
-                getSubtype(game).add(subType);
+                addSubType(game, subType);
             }
         }
     }

@@ -82,10 +82,7 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
                     continue;
                 }
                 permanent.getManaCost().clear();
-                if ((permanent.isCreature() || permanent.isTribal())
-                        && !permanent.hasSubtype(SubType.ZOMBIE, game)) {
-                    permanent.getSubtype(game).add(SubType.ZOMBIE);
-                }
+                permanent.addSubType(game, SubType.ZOMBIE);
                 permanent.getColor(game).setColor(ObjectColor.WHITE);
             }
         }

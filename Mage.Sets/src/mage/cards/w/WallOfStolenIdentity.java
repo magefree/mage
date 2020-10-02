@@ -109,18 +109,14 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new ApplyToPermanent() {
             @Override
             public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-                if (permanent.isTribal() || permanent.isCreature()) {
-                    permanent.getSubtype(game).add(SubType.WALL);
-                }
+                permanent.addSubType(game, SubType.WALL);
                 permanent.getAbilities().add(DefenderAbility.getInstance());
                 return true;
             }
 
             @Override
             public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-                if (mageObject.isTribal() || mageObject.isCreature()) {
-                    mageObject.getSubtype(game).add(SubType.WALL);
-                }
+                mageObject.addSubType(game, SubType.WALL);
                 mageObject.getAbilities().add(DefenderAbility.getInstance());
                 return true;
             }

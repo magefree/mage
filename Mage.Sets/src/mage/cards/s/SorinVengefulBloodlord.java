@@ -118,12 +118,8 @@ class SorinVengefulBloodlordEffect extends ContinuousEffectImpl {
                 creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
             }
         }
-        if (creature != null && (creature.isCreature() || creature.isTribal())) {
-            if (sublayer == SubLayer.NA) {
-                if (!creature.hasSubtype(SubType.VAMPIRE, game)) {
-                    creature.getSubtype(game).add(SubType.VAMPIRE);
-                }
-            }
+        if (creature != null) {
+            creature.addSubType(game, SubType.VAMPIRE);
             return true;
         } else {
             this.used = true;

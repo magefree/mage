@@ -90,7 +90,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                     token.getColor(game).setColor(ObjectColor.BLACK);
                     token.setIsAllCreatureTypes(false);
                     token.getSubtype(game).removeAll(SubType.getCreatureTypes());
-                    token.getSubtype(game).add(SubType.ZOMBIE);
+                    token.addSubType(game, SubType.ZOMBIE);
                     if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
                         Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
                         if (tokenPermanent != null) {

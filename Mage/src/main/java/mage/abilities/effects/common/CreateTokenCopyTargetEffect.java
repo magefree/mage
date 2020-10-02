@@ -199,13 +199,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.removePTCDA();
             token.getToughness().modifyBaseValue(tokenToughness);
         }
-        if (onlySubType != null && !token.hasSubtype(onlySubType, game)) {
+        if (onlySubType != null) {
             token.setIsAllCreatureTypes(false);
             token.getSubtype(game).removeAll(SubType.getCreatureTypes());
-            token.getSubtype(game).add(onlySubType);
+            token.addSubType(game, onlySubType);
         }
         if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {
-            token.getSubtype(game).add(additionalSubType);
+            token.addSubType(game, additionalSubType);
         }
         if (color != null) {
             token.getColor(game).setColor(color);
