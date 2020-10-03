@@ -63,6 +63,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Defy Gravity", 38, Rarity.COMMON, mage.cards.d.DefyGravity.class));
         cards.add(new SetCardInfo("Dwarven Bloodboiler", 84, Rarity.RARE, mage.cards.d.DwarvenBloodboiler.class));
         cards.add(new SetCardInfo("Dwarven Driller", 85, Rarity.UNCOMMON, mage.cards.d.DwarvenDriller.class));
+        cards.add(new SetCardInfo("Dwarven Scorcher", 86, Rarity.COMMON, mage.cards.d.DwarvenScorcher.class));
         cards.add(new SetCardInfo("Earsplitting Rats", 65, Rarity.COMMON, mage.cards.e.EarsplittingRats.class));
         cards.add(new SetCardInfo("Elephant Guide", 111, Rarity.UNCOMMON, mage.cards.e.ElephantGuide.class));
         cards.add(new SetCardInfo("Ember Shot", 87, Rarity.COMMON, mage.cards.e.EmberShot.class));
