@@ -97,6 +97,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Reaper King", 9, Rarity.MYTHIC, mage.cards.r.ReaperKing.class));
         cards.add(new SetCardInfo("Regal Caracal", 23, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Rest in Peace", 96, Rarity.RARE, mage.cards.r.RestInPeace.class));
+        cards.add(new SetCardInfo("Rick, Steadfast Leader", 143, Rarity.MYTHIC, mage.cards.r.RickSteadfastLeader.class));
         cards.add(new SetCardInfo("Saskia the Unyielding", 55, Rarity.MYTHIC, mage.cards.s.SaskiaTheUnyielding.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 135, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Serum Visions", 29, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
