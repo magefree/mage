@@ -1,0 +1,93 @@
+package mage.cards.p;
+
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.CompositeCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.players.Player;
+
+import java.util.UUID;
+
+/**
+ * @author TheElk801
+ */
+public final class PreferredSelection extends CardImpl {
+
+    public PreferredSelection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+
+        // At the beginning of your upkeep, look at the top two cards of your library. You may sacrifice Preferred Selection and pay {2}{G}{G}. If you do, put one of those cards into your hand. If you don't, put one of those cards on the bottom of your library.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new PreferredSelectionEffect(), TargetController.YOU, false
+        ));
+    }
+
+    private PreferredSelection(final PreferredSelection card) {
+        super(card);
+    }
+
+    @Override
+    public PreferredSelection copy() {
+        return new PreferredSelection(this);
+    }
+}
+
+class PreferredSelectionEffect extends OneShotEffect {
+
+    PreferredSelectionEffect() {
+        super(Outcome.Benefit);
+        staticText = "At the beginning of your upkeep, look at the top two cards of your library. " +
+                "You may sacrifice {this} and pay {2}{G}{G}. If you do, put one of those cards into your hand. " +
+                "If you don't, put one of those cards on the bottom of your library.";
+    }
+
+    private PreferredSelectionEffect(final PreferredSelectionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public PreferredSelectionEffect copy() {
+        return new PreferredSelectionEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 2));
+        player.lookAtCards(source, "Top two cards", cards, game);
+        Cost cost = new CompositeCost(
+                new SacrificeSourceCost(), new ManaCostsImpl<>("{2}{G}{G}"),
+                "sacrifice this permanent and pay {2}{G}{G}"
+        );
+        return new DoIfCostPaid(
+                new LookLibraryAndPickControllerEffect(
+                        StaticValue.get(2), false, StaticValue.get(1),
+                        StaticFilters.FILTER_CARD, Zone.HAND, true, false
+                ),
+                new LookLibraryAndPickControllerEffect(
+                        StaticValue.get(2), false, StaticValue.get(1),
+                        StaticFilters.FILTER_CARD, Zone.HAND, true, false,
+                        false, Zone.LIBRARY, false, true, false
+                ), cost
+        ).apply(game, source);
+    }
+}

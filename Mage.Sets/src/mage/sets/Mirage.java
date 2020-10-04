@@ -232,6 +232,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Political Trickery", 81, Rarity.RARE, mage.cards.p.PoliticalTrickery.class));
         cards.add(new SetCardInfo("Polymorph", 82, Rarity.RARE, mage.cards.p.Polymorph.class));
         cards.add(new SetCardInfo("Power Sink", 83, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Preferred Selection", 233, Rarity.RARE, mage.cards.p.PreferredSelection.class));
         cards.add(new SetCardInfo("Prismatic Boon", 274, Rarity.UNCOMMON, mage.cards.p.PrismaticBoon.class));
         cards.add(new SetCardInfo("Prismatic Circle", 34, Rarity.COMMON, mage.cards.p.PrismaticCircle.class));
         cards.add(new SetCardInfo("Prismatic Lace", 84, Rarity.RARE, mage.cards.p.PrismaticLace.class));
