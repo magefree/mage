@@ -34,7 +34,7 @@ public final class CharmingPrince extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature you own");
 
     static {
-        filter.add(TargetController.YOU.getOwnerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
     }
 
