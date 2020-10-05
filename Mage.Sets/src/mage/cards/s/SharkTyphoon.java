@@ -69,7 +69,7 @@ class SharkTyphoonCastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
         int xValue = 0;
         if (spell != null) {
             xValue = spell.getConvertedManaCost();
