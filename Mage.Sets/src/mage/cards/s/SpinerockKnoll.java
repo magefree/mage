@@ -1,28 +1,26 @@
-
 package mage.cards.s;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.IntCompareCondition;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.HideawayPlayEffect;
 import mage.abilities.keyword.HideawayAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.ComparisonType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -39,11 +37,11 @@ public final class SpinerockKnoll extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {R}, {tap}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new HideawayPlayEffect(),
-                new ColoredManaCost(ColoredManaSymbol.R),
-                new SpinerockKnollCondition());
+        Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
+                new HideawayPlayEffect(), SpinerockKnollCondition.instance,
+                "you may play the exiled card without paying its mana cost " +
+                        "if an opponent was dealt 7 or more damage this turn"
+        ), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new SpinerockKnollWatcher());
     }
@@ -58,25 +56,21 @@ public final class SpinerockKnoll extends CardImpl {
     }
 }
 
-class SpinerockKnollCondition extends IntCompareCondition {
-
-    SpinerockKnollCondition() {
-        super(ComparisonType.MORE_THAN, 6);
-    }
+enum SpinerockKnollCondition implements Condition {
+    instance;
 
     @Override
-    protected int getInputValue(Game game, Ability source) {
-        int maxDamageReceived = 0;
-        SpinerockKnollWatcher watcher = game.getState().getWatcher(SpinerockKnollWatcher.class, source.getSourceId());
-        if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                int damageReceived = watcher.getDamageReceived(opponentId);
-                if (damageReceived > maxDamageReceived) {
-                    maxDamageReceived = damageReceived;
-                }
+    public boolean apply(Game game, Ability source) {
+        SpinerockKnollWatcher watcher = game.getState().getWatcher(SpinerockKnollWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            if (watcher.getDamageReceived(opponentId) >= 7) {
+                return true;
             }
         }
-        return maxDamageReceived;
+        return false;
     }
 
     @Override
@@ -87,22 +81,20 @@ class SpinerockKnollCondition extends IntCompareCondition {
 
 class SpinerockKnollWatcher extends Watcher {
 
-    private final Map<UUID, Integer> amountOfDamageReceivedThisTurn = new HashMap<>(1);
+    private final Map<UUID, Integer> amountOfDamageReceivedThisTurn = new HashMap<>();
 
     SpinerockKnollWatcher() {
-        super(WatcherScope.CARD);
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
-            UUID playerId = event.getPlayerId();
-            if (playerId != null) {
-                Integer amount = amountOfDamageReceivedThisTurn.getOrDefault(playerId, 0);
-                amount += event.getAmount();
-                amountOfDamageReceivedThisTurn.put(playerId, amount);
-            }
+        if (event.getType() != EventType.DAMAGED_PLAYER) {
+            return;
         }
+        Integer amount = amountOfDamageReceivedThisTurn.compute(
+                event.getPlayerId(), (u, i) -> i == null ? event.getAmount() : Integer.sum(event.getAmount(), i)
+        );
     }
 
     public int getDamageReceived(UUID playerId) {
@@ -111,6 +103,7 @@ class SpinerockKnollWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfDamageReceivedThisTurn.clear();
     }
 }
