@@ -35,7 +35,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Athreos, God of Passage", 76, Rarity.MYTHIC, mage.cards.a.AthreosGodOfPassage.class, FULL_ART));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 516, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class));
         cards.add(new SetCardInfo("Ashiok, Dream Render", 528, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class));
-        cards.add(new SetCardInfo("Athreos, God of Passage", 76, Rarity.MYTHIC, mage.cards.a.AthreosGodOfPassage.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 158, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Baleful Strix", 94, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Birds of Paradise", 92, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
