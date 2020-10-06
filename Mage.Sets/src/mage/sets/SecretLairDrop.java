@@ -73,6 +73,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 85, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", 86, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 99, Rarity.RARE, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Lucille", 581, Rarity.MYTHIC, mage.cards.l.Lucille.class));
         cards.add(new SetCardInfo("Marrow-Gnawer", 34, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
         cards.add(new SetCardInfo("Meren of Clan Nel Toth", 52, Rarity.MYTHIC, mage.cards.m.MerenOfClanNelToth.class));
         cards.add(new SetCardInfo("Michonne, Ruthless Survivor", 146, Rarity.MYTHIC, mage.cards.m.MichonneRuthlessSurvivor.class));
