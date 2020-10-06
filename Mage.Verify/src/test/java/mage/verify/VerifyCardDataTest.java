@@ -21,6 +21,7 @@ import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.sets.TherosBeyondDeath;
+import mage.util.CardUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
@@ -69,6 +70,10 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_SCRYFALL_DOWNLOAD_SETS = "SCRYFALL_DOWNLOAD_SETS";
     private static final String SKIP_LIST_WRONG_CARD_NUMBERS = "WRONG_CARD_NUMBERS";
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
+    private static final List<String> evergreenKeywords = Arrays.asList(
+            "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof",
+            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender"
+    );
 
     static {
         // skip lists for checks (example: unstable cards with same name may have different stats)
@@ -1430,6 +1435,20 @@ public class VerifyCardDataTest {
         // planeswalker fix [-7]: xxx
         if (refText.contains("[") && refText.contains("]")) {
             refText = refText.replace("[", "").replace("]", "");
+        }
+
+        // evergreen keyword fix
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (Arrays
+                    .stream(s.split(", "))
+                    .map(String::toLowerCase)
+                    .allMatch(evergreenKeywords::contains)) {
+                String replacement = Arrays
+                        .stream(s.split(", "))
+                        .map(CardUtil::getTextWithFirstCharUpperCase)
+                        .reduce("", (a, b) -> a + "\n" + b);
+                refText = refText.replace(s, replacement);
+            }
         }
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
