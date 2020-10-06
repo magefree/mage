@@ -1417,6 +1417,19 @@ public class VerifyCardDataTest {
 
         }
     }*/
+    private static final boolean compareText(String cardText, String refText, String name) {
+        if (cardText.equals(refText)) {
+            return true;
+        }
+        if (cardText.replace(name, name.split(", ")[0]).equals(refText)) {
+            return true;
+        }
+        if (cardText.replace(name, name.split(" ")[0]).equals(refText)) {
+            return true;
+        }
+        return false;
+    }
+
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
         if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE)) {
@@ -1446,8 +1459,8 @@ public class VerifyCardDataTest {
                 String replacement = Arrays
                         .stream(s.split(", "))
                         .map(CardUtil::getTextWithFirstCharUpperCase)
-                        .reduce("", (a, b) -> a + "\n" + b);
-                refText = refText.replace(s, replacement);
+                        .reduce("", (a, b) -> a + '\n' + b);
+                refText = refText.replace(s, replacement.substring(1));
             }
         }
 
@@ -1466,7 +1479,7 @@ public class VerifyCardDataTest {
             boolean isAbilityFounded = false;
             for (int j = 0; j <= refRules.length - 1; j++) {
                 String refRule = refRules[j];
-                if (cardRules[i].equals(refRule)) {
+                if (compareText(cardRules[i], refRule, card.getName())) {
                     cardRules[i] = "+ " + cardRules[i];
                     refRules[j] = "+ " + refRules[j];
                     isAbilityFounded = true;
