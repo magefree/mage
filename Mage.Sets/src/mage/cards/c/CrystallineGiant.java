@@ -69,7 +69,7 @@ class CrystallineGiantEffect extends OneShotEffect {
     CrystallineGiantEffect() {
         super(Outcome.Benefit);
         staticText = "choose a kind of counter at random that {this} doesn't have on it from among " +
-                "flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance or +1/+1. " +
+                "flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, and +1/+1. " +
                 "Put a counter of that kind on {this}";
     }
 

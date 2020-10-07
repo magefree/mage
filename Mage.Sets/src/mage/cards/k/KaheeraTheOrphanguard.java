@@ -58,7 +58,7 @@ public final class KaheeraTheOrphanguard extends CardImpl {
         // Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur, or Beast gets +1/+1 and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostAllEffect(
                 1, 1, Duration.WhileOnBattlefield, filter, true
-        ).setText("Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur or Beast gets +1/+1"));
+        ).setText("Each other creature you control that's a Cat, Elemental, Nightmare, Dinosaur, or Beast gets +1/+1"));
         ability.addEffect(new GainAbilityAllEffect(
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, "and has vigilance"
         ));
