@@ -46,7 +46,7 @@ public final class SionaCaptainOfThePyleas extends CardImpl {
                         StaticValue.get(7), false, StaticValue.get(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND,
                         true, false, false
-                ).setBackInRandomOrder(true).setText("Look at the top seven cards of your library. " +
+                ).setBackInRandomOrder(true).setText("look at the top seven cards of your library. " +
                         "You may reveal an Aura card from among them and put it into your hand. " +
                         "Put the rest on the bottom of your library in a random order.")
         ));

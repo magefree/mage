@@ -72,7 +72,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof",
-            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender"
+            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance"
     );
 
     static {
@@ -1487,7 +1487,7 @@ public class VerifyCardDataTest {
                 }
             }
 
-            if (!isAbilityFounded) {
+            if (!isAbilityFounded && cardRules[i].length() > 0) {
                 isFine = false;
                 warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRules[i] + "]");
                 cardRules[i] = "- " + cardRules[i];

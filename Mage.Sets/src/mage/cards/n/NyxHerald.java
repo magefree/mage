@@ -47,7 +47,7 @@ public final class NyxHerald extends CardImpl {
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains trample"));
+        ).setText("and gains trample until end of turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

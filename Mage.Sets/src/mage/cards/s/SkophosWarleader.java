@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,11 +19,23 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SkophosWarleader extends CardImpl {
+
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent("another creature or an enchantment");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
+        ));
+        filter.add(AnotherPredicate.instance);
+    }
 
     public SkophosWarleader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -35,9 +46,6 @@ public final class SkophosWarleader extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {R}, Sacrifice another creature or enchantment: Skophos Warleader gets +1/+0 and gains menace until end of turn.
-        FilterControlledPermanent filter = new FilterControlledPermanent("another creature or enchantment");
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
-        filter.add(AnotherPredicate.instance);
         Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn)
                         .setText("{this} gets +1/+0"),

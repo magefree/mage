@@ -30,13 +30,13 @@ public class ExileFromGraveCost extends CostImpl {
         target.setNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
-            this.text = "Exile "
+            this.text = "exile "
                     + (target.getNumberOfTargets() == 1 && target.getMaxNumberOfTargets() == Integer.MAX_VALUE ? "one or more"
                     : ((target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
                     + CardUtil.numberToText(target.getMaxNumberOfTargets()))
                     + ' ' + target.getTargetName();
         } else {
-            this.text = "Exile " 
+            this.text = "exile "
                     + (target.getTargetName().startsWith("card ") ? "a ":"") 
                     + target.getTargetName();
         }
@@ -54,7 +54,7 @@ public class ExileFromGraveCost extends CostImpl {
     public ExileFromGraveCost(TargetCardInASingleGraveyard target) {
         target.setNotTarget(true);
         this.addTarget(target);
-        this.text = "Exile " + target.getTargetName();
+        this.text = "exile " + target.getTargetName();
     }
 
     public ExileFromGraveCost(final ExileFromGraveCost cost) {
