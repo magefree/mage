@@ -74,6 +74,6 @@ enum SpeakerOfTheHeavensCondition implements Condition {
 
     @Override
     public String toString() {
-        return "you have at least 7 more life than your starting life total and only any time you could cast a sorcery";
+        return "you have at least 7 life more than your starting life total and only any time you could cast a sorcery";
     }
 }

@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class ThievesGuildEnforcer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ROGUE, "{this} or another Rogue");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ROGUE, "Rogue");
 
     public ThievesGuildEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

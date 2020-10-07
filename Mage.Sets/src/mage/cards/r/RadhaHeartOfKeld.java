@@ -49,9 +49,9 @@ public final class RadhaHeartOfKeld extends CardImpl {
 
         // You may look at the top card of your library any time, and you may play lands from the top of your library.
         LookAtTopCardOfLibraryAnyTimeEffect lookEffect = new LookAtTopCardOfLibraryAnyTimeEffect();
-        lookEffect.overrideRuleText("You may look at the top card of your library any time, ");
+        lookEffect.overrideRuleText("You may look at the top card of your library any time");
         PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(filter);
-        playEffect.overrideRuleText("and you may play lands from the top of your library");
+        playEffect.overrideRuleText(", and you may play lands from the top of your library");
 
         SimpleStaticAbility lookAndPlayAbility = new SimpleStaticAbility(lookEffect);
         lookAndPlayAbility.addEffect(playEffect);
