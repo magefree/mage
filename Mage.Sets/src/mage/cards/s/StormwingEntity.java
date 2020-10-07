@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -21,6 +19,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -83,5 +84,10 @@ enum StormwingEntityCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "you've cast an instant or sorcery spell this turn";
     }
 }

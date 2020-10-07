@@ -32,6 +32,7 @@ public final class SanguineIndulgence extends CardImpl {
         // This spell costs {3} less to cast if you've gained 3 or more life this turn.
         this.addAbility(new SimpleStaticAbility(
                         Zone.ALL, new SpellCostReductionSourceEffect(3, condition)
+                        .setText("this spell costs {3} less to cast if you've gained 3 or more life this turn")
                 ).addHint(hint).setRuleAtTheTop(true),
                 new PlayerGainedLifeWatcher());
 

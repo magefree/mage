@@ -51,7 +51,7 @@ public final class AlpineHoundmaster extends CardImpl {
         // Whenever Alpine Houndmaster attacks, it gets +X/+0 until end of turn, where X is the number of other attacking creatures.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 xValue, StaticValue.get(0), Duration.EndOfTurn, true
-        ), false));
+        ).setText("it gets +X/+0 until end of turn, where X is the number of other attacking creatures"), false));
     }
 
     private AlpineHoundmaster(final AlpineHoundmaster card) {

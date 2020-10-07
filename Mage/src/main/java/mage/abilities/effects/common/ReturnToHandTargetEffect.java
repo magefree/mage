@@ -93,18 +93,19 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() >= 1) {
             sb.append("up to ");
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
-        }
-        else if (!(target.getMinNumberOfTargets() == 1 || target.getMaxNumberOfTargets() == 1)) {
+        } else if (!(target.getMinNumberOfTargets() == 1 || target.getMaxNumberOfTargets() == 1)) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
         }
         if (!target.getTargetName().contains("target")) {
             sb.append("target ");
         }
         sb.append(target.getTargetName());
-        if(target.getMaxNumberOfTargets() > 1) {
-            sb.append(" to their owners' hands");
+        if (target.getMaxNumberOfTargets() > 1 && !target.getTargetName().endsWith("s")) {
+            sb.append('s');
         }
-        else {
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(" to their owners' hands");
+        } else {
             sb.append(" to its owner's hand");
         }
         return sb.toString();
