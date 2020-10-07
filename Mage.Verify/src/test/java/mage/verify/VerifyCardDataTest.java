@@ -1463,6 +1463,15 @@ public class VerifyCardDataTest {
                 refText = refText.replace(s, replacement.substring(1));
             }
         }
+        // modal spell fix
+        if (refText.contains("•")) {
+            refText = refText
+                    .replace("—\n•", " —\n•")
+                    .replace("  —", " —")
+                    .replace("—\n•", "-<br>&bull ")
+                    .replace("\n•", "<br>&bull ");
+            refText += "<br>";
+        }
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
