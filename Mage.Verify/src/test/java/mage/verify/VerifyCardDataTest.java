@@ -1470,6 +1470,7 @@ public class VerifyCardDataTest {
                     .replace("—\n•", "-<br>&bull ")
                     .replace("\n•", "<br>&bull ");
             refText += "<br>";
+            refText = refText.replace("<br>", "\n");
         }
         // mana ability fix
         for (String s : refText.split("[\\$\\\n]")) {
@@ -1491,7 +1492,13 @@ public class VerifyCardDataTest {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
         }
 
-        String[] cardRules = card.getRules().toArray(new String[0]);
+        String[] cardRules = card
+                .getRules()
+                .stream()
+                .reduce("", (a, b) -> a + '\n' + b)
+                .replace("<br>", "\n")
+                .replace("<br/>", "\n")
+                .split("[\\$\\\n]");
         for (int i = 0; i < cardRules.length; i++) {
             cardRules[i] = prepareRule(card.getName(), cardRules[i]);
         }
