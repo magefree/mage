@@ -1449,7 +1449,6 @@ public class VerifyCardDataTest {
         if (refText.contains("[") && refText.contains("]")) {
             refText = refText.replace("[", "").replace("]", "");
         }
-
         // evergreen keyword fix
         for (String s : refText.split("[\\$\\\n]")) {
             if (Arrays
@@ -1472,6 +1471,20 @@ public class VerifyCardDataTest {
                     .replace("\n•", "<br>&bull ");
             refText += "<br>";
         }
+        // mana ability fix
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!s.startsWith("{T}: Add {") || !s.contains("} or {")) {
+                continue;
+            }
+            String newStr = "";
+            for (String c : s.split("[\\{\\}]")) {
+                if ("WUBRG".contains(c) && c.length() > 0) {
+                    newStr += "{T}: Add {" + c + "}.\n";
+                }
+            }
+            refText = refText.replace(s, newStr);
+        }
+
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
