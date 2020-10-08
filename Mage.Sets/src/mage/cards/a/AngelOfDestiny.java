@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,6 +13,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -40,8 +41,9 @@ public final class AngelOfDestiny extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever a creature you control deals combat damage to a player, you and that player each gain that much life.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new AngelOfDestinyGainLifeEffect(), false, true
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
+                new AngelOfDestinyGainLifeEffect(), StaticFilters.FILTER_CONTROLLED_A_CREATURE,
+                false, SetTargetPointer.NONE, true, true
         ));
 
         // At the beginning of your end step, if you have at least 15 life more than your starting life total, each player Angel of Destiny attacked this turn loses the game.

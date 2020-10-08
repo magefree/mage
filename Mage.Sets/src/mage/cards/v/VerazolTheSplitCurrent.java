@@ -40,7 +40,7 @@ public final class VerazolTheSplitCurrent extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DoIfCostPaid(
                         new CopyTargetSpellEffect(false, true)
-                                .withSpellName("that spell"),
+                                .setText("copy that spell. You may choose new targets for that copy"),
                         new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))
                 ), StaticFilters.FILTER_SPELL_KICKED_A, false, true
         ));

@@ -28,9 +28,10 @@ public final class FarsightAdept extends CardImpl {
 
         // When Farsight Adept enters the battlefield, you and target opponent each draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you and")
+                new DrawCardSourceControllerEffect(1).setText("you")
         );
-        ability.addEffect(new DrawCardTargetEffect(1).setText("target opponent each draw a card"));
+        ability.addEffect(new DrawCardTargetEffect(1)
+                .setText("target opponent each draw a card").concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

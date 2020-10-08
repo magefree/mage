@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -23,7 +24,6 @@ public class MillCardsTargetEffect extends OneShotEffect {
     public MillCardsTargetEffect(DynamicValue numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
-        this.staticText = setText();
     }
 
     public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
@@ -46,8 +46,18 @@ public class MillCardsTargetEffect extends OneShotEffect {
         return false;
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder("target player mills ");
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        StringBuilder sb = new StringBuilder("target ");
+        if (!mode.getTargets().isEmpty()) {
+            sb.append(mode.getTargets().get(0).getTargetName());
+        } else {
+            sb.append("player");
+        }
+        sb.append(" mills ");
         if (numberCards.toString().equals("1")) {
             sb.append("a card");
         } else {

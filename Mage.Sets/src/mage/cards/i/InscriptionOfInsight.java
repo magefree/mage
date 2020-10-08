@@ -37,7 +37,7 @@ public final class InscriptionOfInsight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // • Scry 2, then draw two cards.
-        Mode mode = new Mode(new ScryEffect(2));
+        Mode mode = new Mode(new ScryEffect(2).setText("scry 2"));
         mode.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
         this.getSpellAbility().addMode(mode);
 

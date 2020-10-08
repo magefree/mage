@@ -11,7 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -20,6 +21,9 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PyroclasticHellion extends CardImpl {
+
+    private static final FilterControlledPermanent filter
+            = new FilterControlledLandPermanent("a land you control");
 
     public PyroclasticHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -34,7 +38,7 @@ public final class PyroclasticHellion extends CardImpl {
                         new DamagePlayersEffect(2, TargetController.OPPONENT),
                         false, "{this} deals 2 damage to each opponent"
                 ), new ReturnToHandChosenControlledPermanentCost(
-                        new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)
+                        new TargetControlledPermanent(filter)
                 ), "Return a land you control to its owner's hand?")
         ));
     }

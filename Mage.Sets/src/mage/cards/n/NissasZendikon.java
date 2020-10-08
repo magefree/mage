@@ -41,7 +41,7 @@ public final class NissasZendikon extends CardImpl {
 
         // Enchanted land is a 4/4 Elemental creature with reach and haste. It's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new NissasZendikonToken(), "Enchanted land is a 4/4 Elemental creature with reach and haste.  It's still a land",
+                new NissasZendikonToken(), "Enchanted land is a 4/4 Elemental creature with reach and haste. It's still a land",
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR
         )));
 
