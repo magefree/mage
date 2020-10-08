@@ -38,7 +38,7 @@ public final class VivienNaturesAvenger extends CardImpl {
 
         // −1: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(
-                StaticFilters.FILTER_CARD_CREATURE_A, Zone.HAND, Zone.HAND, false, false
+                StaticFilters.FILTER_CARD_CREATURE, Zone.HAND, Zone.HAND, false, false
         ), -1));
 
         // −6: Target creature gets +10/+10 and gains trample until end of turn.

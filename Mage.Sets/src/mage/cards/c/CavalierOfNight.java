@@ -55,12 +55,12 @@ public final class CavalierOfNight extends CardImpl {
 
         // When Cavalier of Night enters the battlefield, you may sacrifice another creature. When you do, destroy target creature an opponent controls.
         ReflexiveTriggeredAbility triggeredAbility = new ReflexiveTriggeredAbility(
-                new DestroyTargetEffect(), false, "Sacrifice a creature?"
+                new DestroyTargetEffect(), false, "destroy target creature an opponent controls"
         );
         triggeredAbility.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
                 triggeredAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter)),
-                "destroy target creature an opponent controls"
+                "Sacrifice a creature?"
         )));
 
         // When Cavalier of Night dies, return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.

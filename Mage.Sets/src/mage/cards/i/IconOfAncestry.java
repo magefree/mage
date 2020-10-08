@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,6 +17,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -39,14 +40,13 @@ public final class IconOfAncestry extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
         // Creatures you control of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(
-                new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)
-        ));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, false
+        )));
 
         // {3}, {T}: Look at the top three cards of your library. You may reveal a creature card of the
         // chosen type from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        FilterCreatureCard filter2 = new FilterCreatureCard("creature card that matches the chosen subtype");
-        Ability ability = new SimpleActivatedAbility(new IconOfAncestryEffect(filter2), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new IconOfAncestryEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -63,22 +63,26 @@ public final class IconOfAncestry extends CardImpl {
 
 class IconOfAncestryEffect extends LookLibraryAndPickControllerEffect {
 
-    public IconOfAncestryEffect(FilterCreatureCard filter) {
-        super(StaticValue.get(3), false, StaticValue.get(1), filter, Zone.LIBRARY, false,
-                true, false, Zone.HAND, true, false, false);
+    public IconOfAncestryEffect() {
+        super(StaticValue.get(3), false, StaticValue.get(1), new FilterCreatureCard(
+                        "creature card that matches the chosen subtype"
+                ), Zone.LIBRARY, false, true, false,
+                Zone.HAND, true, false, false);
         this.setOutcome(Outcome.AIDontUseIt);
         this.setBackInRandomOrder(true);
+        staticText = "look at the top three cards of your library. " +
+                "You may reveal a creature card of the chosen type from among them and put it into your hand. " +
+                "Put the rest on the bottom of your library in a random order";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
-        if (subtype != null) {
-            filter.add(subtype.getPredicate());
-            filter.setMessage("creature card of subtype " + subtype.toString());
-        } else {
+        if (subtype == null) {
             return false;
         }
+        filter.add(subtype.getPredicate());
+        filter.setMessage(subtype.toString() + " creature card");
         return super.apply(game, source);
     }
 
