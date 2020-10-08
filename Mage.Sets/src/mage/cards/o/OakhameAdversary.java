@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class OakhameAdversary extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("your opponent controls a green permanent");
+            = new FilterPermanent("an opponent controls a green permanent");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

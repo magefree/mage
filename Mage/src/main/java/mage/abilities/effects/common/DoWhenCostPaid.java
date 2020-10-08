@@ -86,6 +86,7 @@ public class DoWhenCostPaid extends OneShotEffect {
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("remove")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("tap")
                 && !costText.toLowerCase(Locale.ENGLISH).startsWith("pay")) {
             sb.append("pay ");
         }

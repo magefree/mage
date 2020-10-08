@@ -29,7 +29,7 @@ public final class QueenOfIce extends AdventureCard {
 
         // Whenever Queen of Ice deals combat damage to a creature, tap that creature. It doesn't untap during its controller's next untap step.
         Ability ability = new DealsDamageToACreatureTriggeredAbility(
-                new TapTargetEffect().setText("tap that creature"),
+                new TapTargetEffect().setText("that creature"),
                 true, false, true
         );
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect()

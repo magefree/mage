@@ -44,7 +44,7 @@ public final class YorvoLordOfGarenbrig extends CardImpl {
         // Yorvo, Lord of Garenbrig enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)),
-                "{this} enters the battlefield with four +1/+1 counters on it"
+                "with four +1/+1 counters on it"
         ));
 
         // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on Yorvo. Then if that creature's power is greater than Yorvo's power, put another +1/+1 counter on Yorvo.

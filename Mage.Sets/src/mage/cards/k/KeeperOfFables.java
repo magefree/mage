@@ -88,6 +88,6 @@ class KeeperOfFablesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card";
+        return "Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card.";
     }
 }

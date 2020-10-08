@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -15,8 +14,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public class SacrificeEffect extends OneShotEffect {
@@ -98,7 +98,9 @@ public class SacrificeEffect extends OneShotEffect {
                 sb.append(" sacrifice ");
             }
         }
-        sb.append(CardUtil.numberToText(count.toString(), "a")).append(' ');
+        if (!filter.getMessage().startsWith("another")) {
+            sb.append(CardUtil.numberToText(count.toString(), "a")).append(' ');
+        }
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }

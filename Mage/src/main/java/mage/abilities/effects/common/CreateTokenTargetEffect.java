@@ -71,8 +71,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
 
         if (mode.getTargets().isEmpty()) {
             sb.append("that player");
-        }
-        else {
+        } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
 
@@ -90,11 +89,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             }
             sb.append(token.getDescription());
             if (token.getDescription().endsWith("token")) {
-                sb.append("s ");
+                sb.append("s");
             }
-            int tokenLocation = sb.indexOf("token ");
+            int tokenLocation = sb.indexOf("token");
             if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens");
             }
         }
         if (attacking) {

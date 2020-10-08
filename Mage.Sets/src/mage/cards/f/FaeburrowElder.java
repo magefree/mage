@@ -8,8 +8,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -84,7 +84,7 @@ enum FaeburrowElderValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each color among permanents you control";
+        return "color among permanents you control";
     }
 }
 

@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
@@ -29,7 +30,7 @@ import java.util.UUID;
 public final class FerventChampion extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent(SubType.KNIGHT, "another target attacking Knight");
+            = new FilterControlledPermanent(SubType.KNIGHT, "another target attacking Knight you control");
 
     static {
         filter.add(AttackingPredicate.instance);
@@ -90,20 +91,20 @@ class FerventChampionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof EquipAbility 
+        if (abilityToModify instanceof EquipAbility
                 && abilityToModify.isControlledBy(source.getControllerId())) {
             if (game != null && game.inCheckPlayableState()) {
                 return !abilityToModify.getTargets().isEmpty() &&
-                    abilityToModify.getTargets().get(0).canTarget(source.getSourceId(), abilityToModify, game);
+                        abilityToModify.getTargets().get(0).canTarget(source.getSourceId(), abilityToModify, game);
             } else {
-               return abilityToModify
-                .getTargets()
-                .stream()
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(source.getSourceId()::equals); 
+                return abilityToModify
+                        .getTargets()
+                        .stream()
+                        .map(Target::getTargets)
+                        .flatMap(Collection::stream)
+                        .anyMatch(source.getSourceId()::equals);
             }
-            
+
         }
         return false;
     }

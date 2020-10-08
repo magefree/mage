@@ -31,9 +31,6 @@ public final class MemoryTheft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. You may put a card that has an Adventure that player owns from exile into that player's graveyard.
-        this.getSpellAbility().addEffect(
-                new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY)
-        );
         this.getSpellAbility().addEffect(new MemoryTheftEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -68,6 +65,9 @@ class MemoryTheftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        new DiscardCardYouChooseTargetEffect(
+                StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY
+        ).apply(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
         if (controller == null || player == null) {

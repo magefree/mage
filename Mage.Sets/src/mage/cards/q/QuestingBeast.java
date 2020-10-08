@@ -152,6 +152,6 @@ class QuestingBeastTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to an opponent, " +
-                "it deals that much damage to target planeswalker that player controls";
+                "it deals that much damage to target planeswalker that player controls.";
     }
 }

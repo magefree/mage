@@ -50,15 +50,16 @@ public final class RowanFearlessSparkmage extends CardImpl {
 
         // −2: Rowan, Fearless Sparkmage deals 1 damage to each of up to two target creatures. Those creatures can't block this turn.
         ability = new LoyaltyAbility(new DamageTargetEffect(1)
-                .setText("deals 1 damage to each of up to two target creatures."), -2);
+                .setText("{this} deals 1 damage to each of up to two target creatures."), -2);
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("Those creatures can't block this turn."));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
         // −9: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
-        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, filter), -9);
-        ability.addEffect(new UntapAllEffect(filter).setText("until end of turn. Untap them."));
+        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, filter)
+                .setText("gain control of all creatures until end of turn."), -9);
+        ability.addEffect(new UntapAllEffect(filter).setText("Untap them."));
         ability.addEffect(new GainAbilityAllEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("They gain haste until end of turn"));

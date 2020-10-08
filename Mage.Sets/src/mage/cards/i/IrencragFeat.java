@@ -25,7 +25,6 @@ public final class IrencragFeat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}{R}");
 
         // Add seven {R}. You can cast only one more spell this turn.
-        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(7)));
         this.getSpellAbility().addEffect(new IrencragFeatEffect());
     }
 
@@ -57,6 +56,7 @@ class IrencragFeatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        new BasicManaEffect(Mana.RedMana(7)).apply(game, source);
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         if (watcher == null) {
             return false;

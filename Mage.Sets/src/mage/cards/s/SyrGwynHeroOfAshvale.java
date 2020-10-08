@@ -8,23 +8,19 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.EquippedPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.abilities.keyword.EquipAbility;
-import mage.constants.Outcome;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -32,7 +28,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class SyrGwynHeroOfAshvale extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("an equipped creature you control");
+            = new FilterControlledCreaturePermanent("equipped creature you control");
     private static final FilterPermanent filter2
             = new FilterControlledPermanent(SubType.EQUIPMENT);
     private static final FilterControlledCreaturePermanent filter3
@@ -59,16 +55,18 @@ public final class SyrGwynHeroOfAshvale extends CardImpl {
 
         // Whenever an equipped creature you control attacks, you draw a card and you lose 1 life.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you draw a card and"), false, filter
+                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false, filter
         );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 
         // Equipment you control have equip Knight {0}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new EquipAbility(Outcome.AddAbility, new GenericManaCost(0), new TargetControlledCreaturePermanent(filter3)),
-                Duration.WhileOnBattlefield, filter2
-        )));
+                new EquipAbility(
+                        Outcome.AddAbility, new GenericManaCost(0),
+                        new TargetControlledCreaturePermanent(filter3)
+                ), Duration.WhileOnBattlefield, filter2
+        ).setText("Equipment you control have equip Knight {0}.")));
     }
 
     private SyrGwynHeroOfAshvale(final SyrGwynHeroOfAshvale card) {
