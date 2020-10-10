@@ -123,7 +123,7 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.not(SubType.AURA.getPredicate()));
-        filter.add(SubType.AURA.getPredicate());
+        filter2.add(SubType.AURA.getPredicate());
     }
 
     public EstridTheMaskedGraveyardEffect() {
