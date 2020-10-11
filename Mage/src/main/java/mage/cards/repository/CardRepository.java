@@ -58,7 +58,6 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-
             eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
@@ -490,7 +489,7 @@ public enum CardRepository {
         try {
             String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("'", "''");
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
-                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + '\'',
+                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());
             List<CardInfo> result = new ArrayList<>();
             for (CardInfo cardinfo : rawResults) {
