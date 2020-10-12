@@ -31,6 +31,7 @@ public class Brawl extends Constructed {
         banned.add("Oko, Thief of Crowns");
         banned.add("Sorcerous Spyglass");
         banned.add("Teferi, Time Raveler");
+        banned.add("Omnath, Locus of Creation");
         banned.add("Winota, Joiner of Forces");
     }
 
