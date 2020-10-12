@@ -25,10 +25,10 @@ public class Historic extends Constructed {
         }
         // Regular ban list
         banned.add("Agent of Treachery");
-        banned.add("Burning-Tree Emissary");
         banned.add("Fires of Invention");
         banned.add("Nexus of Fate");
         banned.add("Oko, Thief of Crowns");
+        banned.add("Omnath, Locus of Creation");
         banned.add("Once Upon a Time");
         banned.add("Teferi, Time Raveler");
         banned.add("Veil of Summer");
