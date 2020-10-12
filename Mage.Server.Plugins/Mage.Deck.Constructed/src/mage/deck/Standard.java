@@ -19,12 +19,16 @@ public class Standard extends Constructed {
 
         banned.add("Agent of Treachery");
         banned.add("Cauldron Familiar");
+        banned.add("Escape to the Wilds");
         banned.add("Field of the Dead");
         banned.add("Fires of Invention");
         banned.add("Growth Spiral");
+        banned.add("Lucky Clover");
         banned.add("Oko, Thief of Crowns");
+        banned.add("Omnath, Locus of Creation");
         banned.add("Once Upon a Time");
         banned.add("Teferi, Time Raveler");
+        banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Wilderness Reclamation");
         banned.add("Veil of Summer");
     }
