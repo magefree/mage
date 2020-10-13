@@ -13,6 +13,8 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
     private static final String maaka = "Feral Maaka";
     private static final String khenra = "Defiant Khenra";
     private static final String rings = "Rings of Brighthearth";
+    private static final String swamp = "Swamp";
+    private static final String reanimate = "Reanimate";
 
     @Test
     public void testChainer() {
@@ -68,5 +70,27 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, khenra, 0);
 
         assertLife(playerB, 20 - 2 - 2);
+    }
+
+    @Test
+    public void testChainerOpponent() {
+        addCard(Zone.BATTLEFIELD, playerA, chainer);
+        addCard(Zone.BATTLEFIELD, playerA, swamp);
+        addCard(Zone.HAND, playerA, reanimate);
+        addCard(Zone.GRAVEYARD, playerB, maaka);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, reanimate, maaka);
+
+        attack(1, playerA, maaka);
+
+        setStopAt(1, PhaseStep.END_TURN);
+
+        execute();
+
+        assertPermanentCount(playerA, maaka, 1);
+        assertGraveyardCount(playerB, maaka, 0);
+        assertAbility(playerA, maaka, HasteAbility.getInstance(), true);
+        assertLife(playerA, 20 - 2);
+        assertLife(playerB, 20 - 2);
     }
 }

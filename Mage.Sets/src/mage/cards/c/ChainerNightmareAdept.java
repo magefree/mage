@@ -189,6 +189,6 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggere
         }
 
         CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-        return watcher != null && !watcher.spellWasCastFromHand(event.getSourceId());
+        return watcher != null && !watcher.spellWasCastFromHand(event.getTargetId());
     }
 }
