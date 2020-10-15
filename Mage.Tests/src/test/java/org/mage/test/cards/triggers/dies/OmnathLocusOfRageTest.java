@@ -1,7 +1,10 @@
 package org.mage.test.cards.triggers.dies;
 
+import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -65,5 +68,36 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 17);
 
+    }
+
+    @Test
+    public void testDiesTriggeredAbilityProtection() {
+        addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Rage", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.HAND, playerB, "Doom Blade", 1);
+        addCard(Zone.HAND, playerB, "Stave Off", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Scrubland", 3);
+
+        addTarget(playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade", "Omnath, Locus of Rage");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        setChoice(playerB, "Green");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Stave Off", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Doom Blade", 1);
+        assertGraveyardCount(playerB, "Stave Off", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Omnath, Locus of Rage", 1);
+
+        Permanent lion = getPermanent("Silvercoat Lion");
+        Assert.assertTrue("Lion has protection from green", lion.getAbilities(currentGame).containsClass(ProtectionAbility.class));
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
     }
 }
