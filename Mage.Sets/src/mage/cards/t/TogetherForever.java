@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,8 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -24,16 +22,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801, jeffwadsworth
  */
 public final class TogetherForever extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a counter on it");
 
     static {
-        filter.add(CounterType.P1P1.getPredicate());
+        filter.add(CounterAnyPredicate.instance);
     }
 
     public TogetherForever(UUID ownerId, CardSetInfo setInfo) {
