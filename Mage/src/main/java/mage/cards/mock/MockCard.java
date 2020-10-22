@@ -6,6 +6,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
+import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
@@ -31,7 +32,7 @@ public class MockCard extends CardImpl {
     protected ManaCosts<ManaCost> manaCostLeft;
     protected ManaCosts<ManaCost> manaCostRight;
     protected String adventureSpellName;
-    protected String modalDoubleFacesSecondSideName;
+    protected boolean isModalDoubleFacesCard;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -68,7 +69,10 @@ public class MockCard extends CardImpl {
         }
 
         if (card.isModalDoubleFacesCard()) {
-            this.modalDoubleFacesSecondSideName = card.getModalDoubleFacesSecondSideName();
+            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getCard();
+            CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
+            this.secondSideCard = new MockCard(mdfSecondSide);
+            this.isModalDoubleFacesCard = true;
         }
 
         if (this.isPlaneswalker()) {
@@ -128,8 +132,8 @@ public class MockCard extends CardImpl {
 
         if (adventureSpellName != null) {
             return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
-        } else if (modalDoubleFacesSecondSideName != null) {
-            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + modalDoubleFacesSecondSideName;
+        } else if (isModalDoubleFacesCard) {
+            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.secondSideCard.getName();
         } else {
             return getName();
         }
@@ -155,5 +159,11 @@ public class MockCard extends CardImpl {
 
     private Ability textAbilityFromString(final String text) {
         return new MockAbility(text);
+    }
+
+    @Override
+    public boolean isTransformable() {
+        // must enable toggle mode in deck editor (switch between card sides);
+        return super.isTransformable() || this.isModalDoubleFacesCard;
     }
 }
