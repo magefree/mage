@@ -76,7 +76,7 @@ public class CardView extends SimpleCardView {
     protected CardView ability;
     protected int type;
 
-    protected boolean transformable;
+    protected boolean transformable; // can toggle one card side to another (transformable cards, modal double faces)
     protected CardView secondCardFace;
     protected boolean transformed;
 
@@ -444,17 +444,28 @@ public class CardView extends SimpleCardView {
             this.isToken = false;
         }
 
+        // transformable, double faces cards
         Card secondSideCard = card.getSecondCardFace();
         if (secondSideCard != null) {
             this.secondCardFace = new CardView(secondSideCard);
             this.alternateName = secondCardFace.getName();
             this.originalName = card.getName();
         }
+
         this.flipCard = card.isFlipCard();
         if (card.isFlipCard() && card.getFlipCardName() != null) {
             this.alternateName = card.getFlipCardName();
             this.originalName = card.getName();
         }
+
+        /*
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
+            this.secondCardFace = new CardView(mdfCard.getRightHalfCard());
+            this.alternateName = mdfCard.getRightHalfCard().getName();
+            this.originalName = card.getName();
+        }
+        */
 
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;
@@ -887,7 +898,7 @@ public class CardView extends SimpleCardView {
     }
 
     /**
-     * Name of the other side (transform), flipped, or copying card name.
+     * Name of the other side (transform), flipped, modal double faces card or copying card name.
      *
      * @return name
      */

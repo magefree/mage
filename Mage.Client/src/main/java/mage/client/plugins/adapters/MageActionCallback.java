@@ -579,7 +579,10 @@ public class MageActionCallback implements ActionCallback {
                             break;
                         case ALTERNATE:
                             if (cardView.getAlternateName() != null) {
-                                if (cardView instanceof PermanentView && !cardView.isFlipCard() && !cardView.canTransform() && ((PermanentView) cardView).isCopy()) {
+                                if (cardView instanceof PermanentView
+                                        && !cardView.isFlipCard()
+                                        && !cardView.canTransform()
+                                        && ((PermanentView) cardView).isCopy()) {
                                     image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
                                 } else {
                                     image = ImageCache.getImageOriginalAlternateName(cardView);
