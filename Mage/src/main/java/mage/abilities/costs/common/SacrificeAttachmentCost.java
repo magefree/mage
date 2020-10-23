@@ -11,13 +11,13 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public class UnattachCost extends UseAttachedCost {
+public class SacrificeAttachmentCost extends UseAttachedCost {
 
-    public UnattachCost() {
+    public SacrificeAttachmentCost() {
         super();
     }
 
-    public UnattachCost(final UnattachCost cost) {
+    public SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
         super(cost);
     }
 
@@ -34,7 +34,8 @@ public class UnattachCost extends UseAttachedCost {
             if (!this.mageObjectReference.refersTo(attachmentId, game)) {
                 continue;
             }
-            paid = permanent.removeAttachment(attachmentId, game);
+            Permanent attachment = game.getPermanent(attachmentId);
+            paid = attachment != null && attachment.sacrifice(sourceId, game);
             if (paid) {
                 break;
             }
@@ -44,12 +45,12 @@ public class UnattachCost extends UseAttachedCost {
     }
 
     @Override
-    public UnattachCost copy() {
-        return new UnattachCost(this);
+    public SacrificeAttachmentCost copy() {
+        return new SacrificeAttachmentCost(this);
     }
 
     @Override
     public String getText() {
-        return "unattach " + this.name;
+        return "sacrifice " + this.name;
     }
 }
