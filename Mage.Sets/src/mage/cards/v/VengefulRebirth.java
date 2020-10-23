@@ -48,7 +48,9 @@ class VengefulRebirthEffect extends OneShotEffect {
 
     public VengefulRebirthEffect() {
         super(Outcome.DrawCard);
-        staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to any target";
+        staticText = "Return target card from your graveyard to your hand. " +
+                "If you return a nonland card to your hand this way, " +
+                "{this} deals damage equal to that card's converted mana cost to any target";
     }
 
     public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
@@ -63,23 +65,27 @@ class VengefulRebirthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = (Card) game.getObject(source.getFirstTarget());
-        if (controller != null && card != null && controller.removeFromGraveyard(card, game)) {
-            controller.moveCards(card, Zone.HAND, source, game);
-            if (!card.isLand()) {
-                int damage = card.getConvertedManaCost();
-                Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-                if (permanent != null) {
-                    permanent.damage(damage, source.getSourceId(), game, false, true);
-                }
-                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
-                if (targetPlayer != null) {
-                    targetPlayer.damage(damage, source.getSourceId(), game);
-                }
-            }
+        Card card = game.getCard(source.getFirstTarget());
+        if (controller == null || card == null) {
+            return false;
+        }
+        if (!controller.moveCards(card, Zone.HAND, source, game)) {
+            return false;
+        }
+        if (card.isLand()) {
             return true;
         }
-        return false;
+        int damage = card.getConvertedManaCost();
+        Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (permanent != null) {
+            permanent.damage(damage, source.getSourceId(), game, false, true);
+            return true;
+        }
+        Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
+        if (targetPlayer != null) {
+            targetPlayer.damage(damage, source.getSourceId(), game);
+        }
+        return true;
     }
 
 }
