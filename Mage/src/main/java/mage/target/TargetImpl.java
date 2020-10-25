@@ -117,7 +117,11 @@ public abstract class TargetImpl implements Target {
                 || targetName.startsWith("an ")
                 || targetName.startsWith("any ")) {
             return "Select " + targetName + suffix;
-        } else if (targetName.startsWith("a") || targetName.startsWith("e") || targetName.startsWith("i") || targetName.startsWith("o") || targetName.startsWith("u")) {
+        }
+        if (getMinNumberOfTargets() == 0 && getMaxNumberOfTargets() == 1) {
+            return "Select up to one " + targetName + suffix;
+        }
+        if (targetName.startsWith("a") || targetName.startsWith("e") || targetName.startsWith("i") || targetName.startsWith("o") || targetName.startsWith("u")) {
             return "Select an " + targetName + suffix;
         }
         return "Select a " + targetName + suffix;
