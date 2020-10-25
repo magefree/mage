@@ -63,7 +63,7 @@ class UnclaimedTerritoryManaBuilder extends ConditionalManaBuilder {
         }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (controller != null && sourceObject != null && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spent to cast creatures of type " + creatureType + ")");
         }
