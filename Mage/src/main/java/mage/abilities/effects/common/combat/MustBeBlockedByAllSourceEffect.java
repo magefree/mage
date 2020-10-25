@@ -1,6 +1,10 @@
 package mage.abilities.effects.common.combat;
 
+import java.awt.*;
 import java.util.UUID;
+
+import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
@@ -65,6 +69,21 @@ public class MustBeBlockedByAllSourceEffect extends RequirementEffect {
     @Override
     public MustBeBlockedByAllSourceEffect copy() {
         return new MustBeBlockedByAllSourceEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+
+        MustBeBlockedByAllSourceEffect.initMustBeBlockedInfo(game, source, source.getSourceId());
+    }
+
+    public static void initMustBeBlockedInfo(Game game, Ability source, UUID permanentId) {
+        Permanent permanent = game.getPermanent(permanentId);
+        if (permanent != null) {
+            InfoEffect.addCardHintToPermanent(game, source, permanent,
+                    new StaticHint("Must be blocked by all able blockers", Color.green), Duration.EndOfTurn);
+        }
     }
 
 }
