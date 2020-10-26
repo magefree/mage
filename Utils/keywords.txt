@@ -27,6 +27,7 @@ Dredge|number|
 Echo|manaString|
 Embalm|cost, card|
 Enchant|type|
+Encore|cost|
 Entwine|manaString|
 Eternalize|cost, card|
 Evoke|card, manaString|
