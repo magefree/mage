@@ -12,12 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.target.Target;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCardInGraveyardOrBattlefield;
 
 import java.util.UUID;
@@ -27,7 +25,13 @@ import java.util.UUID;
  */
 public final class AngelOfSerenity extends CardImpl {
 
-    private static final String rule = "you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.";
+    private static final String rule = "you may exile up to three other target creatures " +
+            "from the battlefield and/or creature cards from graveyards.";
+    private static final FilterPermanent filter = new FilterCreaturePermanent("other target creatures");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public AngelOfSerenity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
@@ -40,12 +44,12 @@ public final class AngelOfSerenity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
-        FilterCreaturePermanent filterBattle = new FilterCreaturePermanent("other target creatures");
-        filterBattle.add(Predicates.not(new CardIdPredicate(this.getId())));
-        FilterCreatureCard filterGrave = StaticFilters.FILTER_CARD_CREATURE;
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect().setText(rule), true);
-        Target target = new TargetCardInGraveyardOrBattlefield(0, 3, filterGrave, filterBattle);
-        ability.addTarget(target);
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new ExileTargetForSourceEffect().setText(rule), true
+        );
+        ability.addTarget(new TargetCardInGraveyardOrBattlefield(
+                0, 3, StaticFilters.FILTER_CARD_CREATURE, filter
+        ));
         this.addAbility(ability);
 
         // When Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.
