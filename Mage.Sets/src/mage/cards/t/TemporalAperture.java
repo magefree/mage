@@ -120,7 +120,7 @@ class TemporalApertureTopCardCastEffect extends AsThoughEffectImpl {
                 if (controller != null
                         && game.getState().getZone(objectId) == Zone.LIBRARY) {
                     if (controller.getLibrary().getFromTop(game).equals(card)) {
-                        if (objectCard == card && objectCard.getSpellAbility() != null) { // only if castable
+                        if (objectCard == card && (objectCard.getSpellAbility() != null || objectCard.isLand())) { // only if castable or land
                             allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
                             return true;
                         }
