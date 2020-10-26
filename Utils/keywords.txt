@@ -70,6 +70,7 @@ Mutate|card, manaString|
 Myriad|new|
 Ninjutsu|cost|
 Outlast|cost|
+Partner|instance|
 Persist|new|
 Phasing|instance|
 Plainscycling|cost|
