@@ -36,6 +36,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Interpret the Signs", 75, Rarity.UNCOMMON, mage.cards.i.InterpretTheSigns.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 27, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Mana Confluence", 721, Rarity.MYTHIC, mage.cards.m.ManaConfluence.class));
+        cards.add(new SetCardInfo("Marble Diamond", 323, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Mask of Memory", 324, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Mindless Automaton", 326, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Phyrexian Triniform", 331, Rarity.MYTHIC, mage.cards.p.PhyrexianTriniform.class));
@@ -51,6 +52,8 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Undergrowth Stadium", 359, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
         cards.add(new SetCardInfo("Vampiric Tutor", 156, Rarity.MYTHIC, mage.cards.v.VampiricTutor.class));
         cards.add(new SetCardInfo("Vault of Champions", 360, Rarity.RARE, mage.cards.v.VaultOfChampions.class));
+        cards.add(new SetCardInfo("Vial Smasher the Fierce", 540, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));
         cards.add(new SetCardInfo("Warden of Evos Isle", 106, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
+        cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
     }
 }
