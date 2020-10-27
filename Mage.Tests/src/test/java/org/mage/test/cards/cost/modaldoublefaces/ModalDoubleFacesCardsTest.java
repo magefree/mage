@@ -1,7 +1,10 @@
 package org.mage.test.cards.cost.modaldoublefaces;
 
+import mage.cards.Card;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -158,6 +161,78 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Characteristics() {
+        // rules:
+        // While a double-faced card isn’t on the stack or battlefield, consider only the characteristics
+        // of its front face. For example, the above card has only the characteristics of Sejiri Shelter
+        // in the graveyard, even if it was Sejiri Glacier on the battlefield before it was put into the
+        // graveyard. Notably, this means that Sejiri Shelter is a nonland card even though you could play
+        // it as a land
+        removeAllCardsFromHand(playerA);
+        removeAllCardsFromLibrary(playerA);
+
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        // stats in hand
+        Assert.assertEquals(1, getHandCards(playerA).size());
+        Card card = getHandCards(playerA).get(0);
+        Assert.assertFalse("must be non land", card.isLand());
+        Assert.assertTrue("must be creature", card.isCreature());
+        Assert.assertTrue("must be minotaur", card.getSubtype(currentGame).contains(SubType.MINOTAUR));
+        Assert.assertEquals("power", 4, card.getPower().getValue());
+        Assert.assertEquals("toughness", 5, card.getToughness().getValue());
+    }
+
+    @Test
+    public void test_PlayFromNonHand_GraveyardByFlashback() {
+        removeAllCardsFromHand(playerA);
+        removeAllCardsFromLibrary(playerA);
+
+        // Emeria's Call - Sorcery {4}{W}{W}{W}
+        // Emeria, Shattered Skyclave - land
+        // Create two 4/4 white Angel Warrior creature tokens with flying. Non-Angel creatures you control gain indestructible until your next turn.
+        addCard(Zone.GRAVEYARD, playerA, "Emeria's Call");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        //
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback
+        // until end of turn. The flashback cost is equal to its mana cost.
+        addCard(Zone.HAND, playerA, "Snapcaster Mage"); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        checkGraveyardCount("grave before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emeria's Call", 1);
+        checkPlayableAbility("can't play as sorcery", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Emeria's Call", false);
+        checkPlayableAbility("can't play as land", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Emeria, Shattered Skyclave", false);
+
+        // cast Snapcaster and give flashback
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        addTarget(playerA, "Emeria's Call");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("grave before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emeria's Call", 1);
+        checkPlayableAbility("can play", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback", true);
+
+        // cast as sorcery with flashback
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("exile after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emeria's Call", 1);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emeria's Call", 0);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Emeria, Shattered Skyclave", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Snapcaster Mage", 1);
     }
 
     @Test
