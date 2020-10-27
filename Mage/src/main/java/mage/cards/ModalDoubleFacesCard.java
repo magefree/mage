@@ -1,18 +1,21 @@
 package mage.cards;
 
+import mage.MageInt;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.SubTypeList;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,8 +71,8 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, sourceId, game, flag, appliedEffects)) {
-            game.getState().setZone(getLeftHalfCard().getId(), toZone);
-            game.getState().setZone(getRightHalfCard().getId(), toZone);
+            game.getState().setZone(leftHalfCard.getId(), toZone);
+            game.getState().setZone(rightHalfCard.getId(), toZone);
             return true;
         }
         return false;
@@ -78,16 +81,16 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     @Override
     public void setZone(Zone zone, Game game) {
         super.setZone(zone, game);
-        game.setZone(getLeftHalfCard().getId(), zone);
-        game.setZone(getRightHalfCard().getId(), zone);
+        game.setZone(leftHalfCard.getId(), zone);
+        game.setZone(rightHalfCard.getId(), zone);
     }
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
             Zone currentZone = game.getState().getZone(getId());
-            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
-            game.getState().setZone(getRightHalfCard().getId(), currentZone);
+            game.getState().setZone(leftHalfCard.getId(), currentZone);
+            game.getState().setZone(rightHalfCard.getId(), currentZone);
             return true;
         }
         return false;
@@ -106,27 +109,64 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
             return;
         }
         super.updateZoneChangeCounter(game, event);
-        getLeftHalfCard().updateZoneChangeCounter(game, event);
-        getRightHalfCard().updateZoneChangeCounter(game, event);
+        leftHalfCard.updateZoneChangeCounter(game, event);
+        rightHalfCard.updateZoneChangeCounter(game, event);
     }
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch (ability.getSpellAbilityType()) {
             case MODAL_LEFT:
-                return this.getLeftHalfCard().cast(game, fromZone, ability, controllerId);
+                return this.leftHalfCard.cast(game, fromZone, ability, controllerId);
             case MODAL_RIGHT:
-                return this.getRightHalfCard().cast(game, fromZone, ability, controllerId);
+                return this.rightHalfCard.cast(game, fromZone, ability, controllerId);
             default:
-                this.getLeftHalfCard().getSpellAbility().setControllerId(controllerId);
-                this.getRightHalfCard().getSpellAbility().setControllerId(controllerId);
+                if (this.leftHalfCard.getSpellAbility() != null)
+                    this.leftHalfCard.getSpellAbility().setControllerId(controllerId);
+                if (this.rightHalfCard.getSpellAbility() != null)
+                    this.rightHalfCard.getSpellAbility().setControllerId(controllerId);
                 return super.cast(game, fromZone, ability, controllerId);
         }
+    }
+
+
+    @Override
+    public ArrayList<CardType> getCardType() {
+        // CardImpl's constructor can call some code on init, so you must check left/right before
+        // it's a bad workaround
+        return leftHalfCard != null ? leftHalfCard.getCardType() : cardType;
+    }
+
+    @Override
+    public SubTypeList getSubtype(Game game) {
+        // rules: While a double-faced card isn’t on the stack or battlefield, consider only the characteristics of its front face.
+
+        // CardImpl's constructor can call some code on init, so you must check left/right before
+        return leftHalfCard != null ? leftHalfCard.getSubtype(game) : subtype;
+    }
+
+    @Override
+    public boolean hasSubtype(SubType subtype, Game game) {
+        return leftHalfCard.hasSubtype(subtype, game);
+    }
+
+    @Override
+    public EnumSet<SuperType> getSuperType() {
+        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override
     public Abilities<Ability> getAbilities() {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
+
+        // ignore default spell ability from main card (only halfes are actual)
+        for (Ability ability : super.getAbilities()) {
+            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
+                continue;
+            }
+            allAbilites.add(ability);
+        }
+
         allAbilites.addAll(super.getAbilities());
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());
@@ -134,7 +174,8 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     public Abilities<Ability> getSharedAbilities(Game game) {
-        return super.getAbilities(game);
+        // no shared abilities for mdf cards (e.g. must be left or right only)
+        return new AbilitiesImpl<>();
     }
 
     @Override
@@ -155,8 +196,18 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
-    public List<String> getRules() {
-        return new ArrayList<>();
+    public boolean hasAbility(Ability ability, Game game) {
+        return super.hasAbility(ability, game);
+    }
+
+    @Override
+    public ObjectColor getColor(Game game) {
+        return leftHalfCard.getColor(game);
+    }
+
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        return leftHalfCard.getFrameColor(game);
     }
 
     @Override
@@ -170,6 +221,11 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
+    public ManaCosts<ManaCost> getManaCost() {
+        return leftHalfCard.getManaCost();
+    }
+
+    @Override
     public int getConvertedManaCost() {
         // Rules:
         // The converted mana cost of a modal double-faced card is based on the characteristics of the
@@ -178,6 +234,16 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         // mana cost of a transforming double-faced card is determined.
 
         // on stack or battlefield it must be half card with own cost
-        return getLeftHalfCard().getConvertedManaCost();
+        return leftHalfCard.getConvertedManaCost();
+    }
+
+    @Override
+    public MageInt getPower() {
+        return leftHalfCard.getPower();
+    }
+
+    @Override
+    public MageInt getToughness() {
+        return leftHalfCard.getToughness();
     }
 }

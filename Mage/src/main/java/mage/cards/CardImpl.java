@@ -309,7 +309,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // workaround to add dynamic flashback ability from main card to all parts (example: Snapcaster Mage gives flashback to split card)
         if (!this.getId().equals(this.getMainCard().getId())) {
             CardState mainCardState = game.getState().getCardState(this.getMainCard().getId());
-            if (mainCardState != null
+            if (this.getSpellAbility() != null // lands can't be casted (haven't spell ability), so ignore it
+                    && mainCardState != null
                     && !mainCardState.hasLostAllAbilities()
                     && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
                 FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant() ? TimingRule.INSTANT : TimingRule.SORCERY);
