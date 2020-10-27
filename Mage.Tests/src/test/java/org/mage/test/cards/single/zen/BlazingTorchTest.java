@@ -22,11 +22,13 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.BATTLEFIELD, playerA, torch);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T},", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
@@ -39,15 +41,21 @@ public class BlazingTorchTest extends CardTestPlayerBase {
     public void testCardCopied() {
         addCard(Zone.BATTLEFIELD, playerA, plains, 2);
         addCard(Zone.BATTLEFIELD, playerA, lion);
+        // You may have Masterwork of Ingenuity enter the battlefield as a copy of any Equipment on the battlefield.
         addCard(Zone.HAND, playerA, masterwork);
         addCard(Zone.BATTLEFIELD, playerB, torch);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, masterwork);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, torch);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T},", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
@@ -69,11 +77,13 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         setChoice(playerB, torch);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, halo);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T},", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20); // Ability resolves as it's from the equipped creature but damage is from torch and is prevented
