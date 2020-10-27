@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -113,7 +114,8 @@ class EscapeToTheWildsMayPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
         return source.isControlledBy(affectedControllerId)
-                && getTargetPointer().getTargets(game, source).contains(sourceId);
+                && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
     }
 }

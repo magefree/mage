@@ -119,7 +119,8 @@ class LightUpTheStageMayPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
         return source.isControlledBy(affectedControllerId)
-                && getTargetPointer().getTargets(game, source).contains(sourceId);
+                && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
     }
 }
