@@ -1,9 +1,12 @@
 package org.mage.test.cards.cost.modaldoublefaces;
 
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.game.permanent.PermanentCard;
+import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -233,6 +236,233 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
+    }
+
+    @Test
+    public void test_Zones_AfterCast() {
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // prepare mdf permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        Card card = currentGame.getState().getBattlefield().getAllPermanents()
+                .stream()
+                .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(card);
+        Assert.assertEquals("permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getId()));
+        Assert.assertEquals("main permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getMainCard().getId()));
+        Assert.assertEquals("half card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getId()));
+        Assert.assertEquals("main card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getMainCard().getId()));
+    }
+
+    @Test
+    public void test_Zones_AfterExile() {
+        // {2}, {tap}: Exile target permanent you control.
+        addCard(Zone.BATTLEFIELD, playerA, "Synod Sanctum");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // prepare mdf permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // exile
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, ", "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkExileCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        Card card = currentGame.getState().getExile().getAllCards(currentGame)
+                .stream()
+                .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(card);
+        Assert.assertTrue("must be mdf card", card instanceof ModalDoubleFacesCard);
+        ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
+        Assert.assertEquals("card must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getId()));
+        Assert.assertEquals("left part must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getLeftHalfCard().getId()));
+        Assert.assertEquals("right part must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getRightHalfCard().getId()));
+    }
+
+    @Test
+    public void test_ExileAndReturnToBattlefield_AsCreature() {
+        // rules:
+        // If an effect puts a double-faced card onto the battlefield, it enters with its front face up. If that
+        // front face can’t be put onto the battlefield, it doesn’t enter the battlefield. For example, if an
+        // effect exiles Sejiri Glacier and returns it to the battlefield, it remains in exile because an instant
+        // can’t be put onto the battlefield.
+
+        // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Venser, the Sojourner");
+        //
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // prepare mdf permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // exile
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkExileCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // return at the end
+        showBattlefield("hmm b", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showExile("hmm e", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showGraveyard("hmm g", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPermanentCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkExileCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ExileAndReturnToBattlefield_AsLand() {
+        // rules:
+        // If an effect puts a double-faced card onto the battlefield, it enters with its front face up. If that
+        // front face can’t be put onto the battlefield, it doesn’t enter the battlefield. For example, if an
+        // effect exiles Sejiri Glacier and returns it to the battlefield, it remains in exile because an instant
+        // can’t be put onto the battlefield.
+
+        // SO it can't return card as land
+
+        // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Venser, the Sojourner");
+        //
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // prepare mdf permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // exile
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkExileCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // return at the end
+        showBattlefield("hmm b", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showExile("hmm e", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        showGraveyard("hmm g", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPermanentCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkExileCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ChooseName_AsCreature() {
+        // rules:
+        // If an effect instructs a player to choose a card name, the name of either face may be chosen. If that
+        // effect or a linked ability refers to a spell with the chosen name being cast and/or a land with the
+        // chosen name being played, it considers only the chosen name, not the other face’s name.
+
+        // Choose a card name. Until your next turn, spells with the chosen name can’t be cast and lands with the chosen name can’t be played.
+        addCard(Zone.HAND, playerA, "Conjurer's Ban"); // {W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        //
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // can play before
+        checkPlayableAbility("can play creature before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("can play land before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        // make restrict for creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conjurer's Ban");
+        setChoice(playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("can't play creature after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", false);
+        checkPlayableAbility("can play land after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        // can play again later
+        checkPlayableAbility("can play creature again", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("can play land again", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ChooseName_AsLand() {
+        // rules:
+        // If an effect instructs a player to choose a card name, the name of either face may be chosen. If that
+        // effect or a linked ability refers to a spell with the chosen name being cast and/or a land with the
+        // chosen name being played, it considers only the chosen name, not the other face’s name.
+
+        // Choose a card name. Until your next turn, spells with the chosen name can’t be cast and lands with the chosen name can’t be played.
+        addCard(Zone.HAND, playerA, "Conjurer's Ban"); // {W}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        //
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // can play before
+        checkPlayableAbility("can play creature before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("can play land before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        // make restrict for land
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conjurer's Ban");
+        setChoice(playerA, "Akoum Teeth");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("can play creature after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("can't play land after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", false);
+
+        // can play again later
+        checkPlayableAbility("can play creature again", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("can play land again", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 
     @Test
