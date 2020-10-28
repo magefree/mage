@@ -45,6 +45,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Interpret the Signs", 75, Rarity.UNCOMMON, mage.cards.i.InterpretTheSigns.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 27, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kitesail Corsair", 76, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
+        cards.add(new SetCardInfo("Kitesail Skirmisher", 77, Rarity.COMMON, mage.cards.k.KitesailSkirmisher.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
         cards.add(new SetCardInfo("Maelstrom Colossus", 322, Rarity.COMMON, mage.cards.m.MaelstromColossus.class));
         cards.add(new SetCardInfo("Maelstrom Wanderer", 526, Rarity.MYTHIC, mage.cards.m.MaelstromWanderer.class));
