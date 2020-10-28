@@ -136,16 +136,10 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
@@ -153,21 +147,39 @@ public enum CardRepository {
         return names;
     }
 
+    private void addNewNames(CardInfo card, Set<String> namesList) {
+        // require before call: qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName"...);
+
+        // normal names
+        int result = card.getName().indexOf(" // ");
+        if (result > 0) {
+            namesList.add(card.getName().substring(0, result));
+            namesList.add(card.getName().substring(result + 4));
+        } else {
+            namesList.add(card.getName());
+        }
+
+        // additional names from double side cards
+        if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
+            namesList.add(card.getSecondSideName());
+        }
+        if (card.getModalDoubleFacesSecondSideName() != null && !card.getModalDoubleFacesSecondSideName().isEmpty()) {
+            namesList.add(card.getModalDoubleFacesSecondSideName());
+        }
+        if (card.getFlipCardName() != null && !card.getFlipCardName().isEmpty()) {
+            namesList.add(card.getFlipCardName());
+        }
+    }
+
     public Set<String> getNonLandNames() {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
@@ -188,7 +200,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             Where where = qb.where();
             where.and(
                     where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
@@ -196,13 +208,7 @@ public enum CardRepository {
             );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
@@ -215,17 +221,11 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             qb.where().not().like("supertypes", new SelectArg('%' + SuperType.BASIC.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
@@ -238,17 +238,11 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting creature names from DB : " + ex);
@@ -261,17 +255,11 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.ARTIFACT.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB : " + ex);
@@ -284,7 +272,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             Where where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
@@ -292,13 +280,7 @@ public enum CardRepository {
             );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB : " + ex);
@@ -310,7 +292,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name");
+            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
             Where where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
@@ -318,13 +300,7 @@ public enum CardRepository {
             );
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                int result = card.getName().indexOf(" // ");
-                if (result > 0) {
-                    names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result + 4));
-                } else {
-                    names.add(card.getName());
-                }
+                addNewNames(card, names);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB : " + ex);

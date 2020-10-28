@@ -109,6 +109,8 @@ public class CardInfo {
     @DatabaseField
     protected String modalDoubleFacesSecondSideName;
 
+    // if you add new field with card side name then update CardRepository.addNewNames too
+
     public enum ManaCostSide {
         LEFT, RIGHT, ALL
     }
