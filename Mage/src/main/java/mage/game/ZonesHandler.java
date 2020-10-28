@@ -107,12 +107,14 @@ public final class ZonesHandler {
                 // meld/group cards must be independent (use can choose order)
                 cardsToMove = ((MeldCard) targetCard).getHalves();
                 cardsToUpdate = cardsToMove;
-            } else if (targetCard instanceof ModalDoubleFacesCard) {
+            } else if (targetCard instanceof ModalDoubleFacesCard
+                    || targetCard instanceof ModalDoubleFacesCardHalf) {
                 // mdf cards must be moved as single object, but each half must be updated separetly
-                cardsToMove = new CardsImpl(targetCard);
-                cardsToUpdate = new CardsImpl(targetCard);
-                cardsToUpdate.add(((ModalDoubleFacesCard) targetCard).getLeftHalfCard());
-                cardsToUpdate.add(((ModalDoubleFacesCard) targetCard).getRightHalfCard());
+                ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) targetCard.getMainCard();
+                cardsToMove = new CardsImpl(mdfCard);
+                cardsToUpdate = new CardsImpl(mdfCard);
+                cardsToUpdate.add(mdfCard.getLeftHalfCard());
+                cardsToUpdate.add(mdfCard.getRightHalfCard());
             } else {
                 cardsToMove = new CardsImpl(targetCard);
                 cardsToUpdate = cardsToMove;
@@ -185,23 +187,28 @@ public final class ZonesHandler {
             }
         }
 
+        // update zone in main
         game.setZone(event.getTargetId(), event.getToZone());
-        if (cardsToUpdate != null && (targetCard instanceof MeldCard || targetCard instanceof ModalDoubleFacesCard)) {
-            // update other parts too (meld cards, mdf cards)
+
+        // update zone in other parts (meld cards, mdf half cards)
+        if (cardsToUpdate != null) {
             for (Card card : cardsToUpdate.getCards(game)) {
-                game.setZone(card.getId(), event.getToZone());
-            }
-            // reset meld status
-            if (targetCard instanceof MeldCard) {
-                if (event.getToZone() != Zone.BATTLEFIELD) {
-                    ((MeldCard) targetCard).setMelded(false, game);
+                if (!card.getId().equals(event.getTargetId())) {
+                    game.setZone(card.getId(), event.getToZone());
                 }
+            }
+        }
+
+        // reset meld status
+        if (targetCard instanceof MeldCard) {
+            if (event.getToZone() != Zone.BATTLEFIELD) {
+                ((MeldCard) targetCard).setMelded(false, game);
             }
         }
     }
 
     public static Card getTargetCard(Game game, UUID targetId) {
-        Card card =  game.getCard(targetId);
+        Card card = game.getCard(targetId);
         if (card != null) {
             return card;
         }
