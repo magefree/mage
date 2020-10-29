@@ -50,6 +50,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Farhaven Elf", 225, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
         cards.add(new SetCardInfo("Forceful Denial", 69, Rarity.COMMON, mage.cards.f.ForcefulDenial.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 228, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
+        cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 71, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Halana, Kessig Ranger", 231, Rarity.UNCOMMON, mage.cards.h.HalanaKessigRanger.class));
         cards.add(new SetCardInfo("Horizon Scholar", 73, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Ikra Shidiqi, the Usurper", 519, Rarity.MYTHIC, mage.cards.i.IkraShidiqiTheUsurper.class));
