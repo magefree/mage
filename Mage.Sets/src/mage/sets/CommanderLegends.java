@@ -56,6 +56,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Immaculate Magistrate", 234, Rarity.RARE, mage.cards.i.ImmaculateMagistrate.class));
         cards.add(new SetCardInfo("Imperious Perfect", 235, Rarity.UNCOMMON, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Interpret the Signs", 75, Rarity.UNCOMMON, mage.cards.i.InterpretTheSigns.class));
+        cards.add(new SetCardInfo("Kamahl, Heart of Krosa", 237, Rarity.MYTHIC, mage.cards.k.KamahlHeartOfKrosa.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 27, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kitesail Corsair", 76, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
         cards.add(new SetCardInfo("Kitesail Skirmisher", 77, Rarity.COMMON, mage.cards.k.KitesailSkirmisher.class));
