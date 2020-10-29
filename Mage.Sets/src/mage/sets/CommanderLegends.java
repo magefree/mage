@@ -96,6 +96,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Rebbec, Architect of Ascension", 42, Rarity.UNCOMMON, mage.cards.r.RebbecArchitectOfAscension.class));
         cards.add(new SetCardInfo("Rejuvenating Springs", 354, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class));
         cards.add(new SetCardInfo("Reliquary Tower", 488, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
+        cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 197, Rarity.UNCOMMON, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Run Away Together", 87, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Sandstone Oracle", 336, Rarity.UNCOMMON, mage.cards.s.SandstoneOracle.class));
         cards.add(new SetCardInfo("Sengir, the Dark Baron", 149, Rarity.RARE, mage.cards.s.SengirTheDarkBaron.class));
