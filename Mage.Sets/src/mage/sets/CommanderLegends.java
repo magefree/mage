@@ -72,6 +72,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 529, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class));
         cards.add(new SetCardInfo("Phyrexian Rager", 142, Rarity.COMMON, mage.cards.p.PhyrexianRager.class));
         cards.add(new SetCardInfo("Phyrexian Triniform", 331, Rarity.MYTHIC, mage.cards.p.PhyrexianTriniform.class));
+        cards.add(new SetCardInfo("Profane Transfusion", 145, Rarity.MYTHIC, mage.cards.p.ProfaneTransfusion.class));
         cards.add(new SetCardInfo("Prophetic Prism", 334, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Prossh, Skyraider of Kher", 530, Rarity.MYTHIC, mage.cards.p.ProsshSkyraiderOfKher.class));
         cards.add(new SetCardInfo("Prying Eyes", 86, Rarity.COMMON, mage.cards.p.PryingEyes.class));
