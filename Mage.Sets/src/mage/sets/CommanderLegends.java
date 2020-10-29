@@ -79,6 +79,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Prossh, Skyraider of Kher", 530, Rarity.MYTHIC, mage.cards.p.ProsshSkyraiderOfKher.class));
         cards.add(new SetCardInfo("Prying Eyes", 86, Rarity.COMMON, mage.cards.p.PryingEyes.class));
         cards.add(new SetCardInfo("Queen Marchesa", 531, Rarity.MYTHIC, mage.cards.q.QueenMarchesa.class));
+        cards.add(new SetCardInfo("Radiant, Serra Archangel", 40, Rarity.UNCOMMON, mage.cards.r.RadiantSerraArchangel.class));
         cards.add(new SetCardInfo("Raise the Alarm", 41, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));
         cards.add(new SetCardInfo("Rebbec, Architect of Ascension", 42, Rarity.UNCOMMON, mage.cards.r.RebbecArchitectOfAscension.class));
         cards.add(new SetCardInfo("Rejuvenating Springs", 354, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class));
