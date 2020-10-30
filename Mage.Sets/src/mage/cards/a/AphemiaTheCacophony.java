@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class AphemiaTheCacophony extends CardImpl {
 
-    private static final FilterCard filter = new FilterEnchantmentCard();
+    private static final FilterCard filter = new FilterEnchantmentCard("an enchantment card");
 
     public AphemiaTheCacophony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");

@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -68,7 +67,7 @@ class LockjawSnapperEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new CounterPredicate(CounterType.M1M1));
+        filter.add(CounterType.M1M1.getPredicate());
         if (game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).isEmpty()) {
             return true;
         }

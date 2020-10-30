@@ -9,7 +9,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;

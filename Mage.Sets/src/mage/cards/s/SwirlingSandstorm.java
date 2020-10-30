@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -32,7 +32,7 @@ public final class SwirlingSandstorm extends CardImpl {
         // Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
         Effect effect = new ConditionalOneShotEffect(
                 new DamageAllEffect(5, filter),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "<i>Threshold</i> &mdash; {this} deals 5 damage to each creature without flying if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
     }

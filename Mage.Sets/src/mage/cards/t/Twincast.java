@@ -20,7 +20,7 @@ public final class Twincast extends CardImpl {
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
     public Twincast(final Twincast card) {

@@ -1,10 +1,6 @@
 package mage.cards.k;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -16,14 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -31,8 +20,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author spjspj
  */
 public final class KessDissidentMage extends CardImpl {
@@ -51,7 +41,8 @@ public final class KessDissidentMage extends CardImpl {
 
         // During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new KessDissidentMageCastFromGraveyardEffect());
+                new KessDissidentMageCastFromGraveyardEffect())
+                .setIdentifier(MageIdentifier.KessDissidentMageWatcher);
         ability.addEffect(new KessDissidentMageReplacementEffect());
         this.addAbility(ability, new KessDissidentMageWatcher());
     }
@@ -69,7 +60,7 @@ public final class KessDissidentMage extends CardImpl {
 class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     KessDissidentMageCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
         staticText = "During each of your turns, you may cast an instant or sorcery card from your graveyard";
     }
 
@@ -89,21 +80,21 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!(source instanceof FlashbackAbility)
-                && affectedControllerId.equals(source.getControllerId())
-                && game.isActivePlayer(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null
-                    && (card.isInstant()
-                    || card.isSorcery())
-                    && game.getState().getZone(objectId).equals(Zone.GRAVEYARD)) {
-                // check if not already a card was cast this turn with this ability
-                KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
-                return watcher != null
-                        && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
-            }
+        if (source instanceof FlashbackAbility
+                || !affectedControllerId.equals(source.getControllerId())
+                || !game.isActivePlayer(source.getControllerId())) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(objectId);
+        if (card == null
+                || !card.isInstantOrSorcery()
+                || !game.getState().getZone(objectId).equals(Zone.GRAVEYARD)
+                || !card.isOwnedBy(source.getControllerId())) {
+            return false;
+        }
+        // check if not already a card was cast this turn with this ability
+        KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
+        return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
     }
 }
 
@@ -146,7 +137,7 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
             KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
             return (watcher != null
                     && source.getSourceId().equals(watcher.spellCastWasAllowedBy(
-                            new MageObjectReference(event.getTargetId(), game))));
+                    new MageObjectReference(event.getTargetId(), game))));
         }
         return false;
     }
@@ -164,16 +155,13 @@ class KessDissidentMageWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getZone() == Zone.GRAVEYARD) {
+        if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
+                && event.hasApprovingIdentifier(MageIdentifier.KessDissidentMageWatcher)) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (event.getAdditionalReference() != null
-                    && event.getAdditionalReference().getSourceId() != null
-                    && (spell.isInstant()
-                    || spell.isSorcery())) {
-                allowingObjects.add(event.getAdditionalReference());
+            if (spell != null) {
+                allowingObjects.add(event.getAdditionalReference().getApprovingMageObjectReference());
                 castSpells.put(new MageObjectReference(spell.getMainCard().getId(), game),
-                        event.getAdditionalReference().getSourceId());
+                        event.getAdditionalReference().getApprovingAbility().getSourceId());
             }
         }
     }

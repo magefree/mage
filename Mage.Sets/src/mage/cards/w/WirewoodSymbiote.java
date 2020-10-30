@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -12,24 +10,25 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jonubuu
  */
 public final class WirewoodSymbiote extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
 
     static {
         filter.add(SubType.ELF.getPredicate());
     }
 
     public WirewoodSymbiote(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(1);

@@ -26,7 +26,7 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, ugin); // starts with 7 Loyality counters
 
         addCard(Zone.BATTLEFIELD, playerA, kira);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage", kira); // Ugin ability
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {this} deals 3 damage", kira); // Ugin ability
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -44,7 +44,7 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Unsummon", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, kira);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage", kira); // Ugin ability
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {this} deals 3 damage", kira); // Ugin ability
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsummon", kira);
 
@@ -62,8 +62,8 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, ugin); // starts with 7 Loyality counters
 
         addCard(Zone.BATTLEFIELD, playerA, kira);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to", kira); // Ugin ability
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to", kira); // Ugin ability
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {this} deals 3 damage to", kira); // Ugin ability
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {this} deals 3 damage to", kira); // Ugin ability
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();

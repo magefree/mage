@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.*;
@@ -14,7 +13,6 @@ import mage.players.Player;
 
 import java.util.UUID;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.target.targetpointer.FixedTargets;
 
 /**
  * @author TheElk801

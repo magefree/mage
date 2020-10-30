@@ -288,8 +288,27 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player A should be able to create only 3 different mana options", 2, options.size());
+        Assert.assertEquals("Player A should be able to create only 2 different mana options", 2, options.size());
         assertManaOptions("{C}{C}{Any}", options);
         assertManaOptions("{C}{Any}{Any}", options);
     }
+    
+    @Test
+    public void testWithCalciformPools() {
+        // {T}: Add {C}.
+        // {1}, {T}: Put a storage counter on Calciform Pools.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.        
+        addCard(Zone.BATTLEFIELD, playerA, "Calciform Pools", 1);
+        // {T}: Add one mana of any type that a land you control could produce.        
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player A should be able to create only 3 different mana options", 3, options.size());
+        assertManaOptions("{C}{C}", options);
+        assertManaOptions("{C}{W}", options);
+        assertManaOptions("{C}{U}", options);
+    }    
 }

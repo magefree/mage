@@ -11,7 +11,7 @@ import mage.cards.repository.CardRepository;
 public class DekDeckImporter extends PlainTextDeckImporter {
 
     @Override
-    protected void readLine(String line, DeckCardLists deckList) {
+    protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
 
         if (line.isEmpty() || line.startsWith("#") || !line.contains("<Cards CatID")) {
             return;
@@ -27,24 +27,24 @@ public class DekDeckImporter extends PlainTextDeckImporter {
             } else {
                 for (int i = 0; i < cardCount; i++) {
                     DeckCardInfo deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
-                    if(isSideboard) {
+                    if (isSideboard) {
                         deckList.getSideboard().add(deckCardInfo);
                     } else {
                         deckList.getCards().add(deckCardInfo);
                     }
                 }
             }
-        }catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             sbMessage.append("Invalid number: ").append(extractAttribute(line, "Quantity")).append(" at line ").append(lineCount).append('\n');
         }
 
     }
 
     private String extractAttribute(String line, String name) {
-        String searchString = name+"=\"";
-        int startDelim = line.indexOf(searchString)+searchString.length();
+        String searchString = name + "=\"";
+        int startDelim = line.indexOf(searchString) + searchString.length();
         int endDelim = line.substring(startDelim).indexOf('\"');
-        return line.substring(startDelim, startDelim+endDelim);
+        return line.substring(startDelim, startDelim + endDelim);
     }
 
 }

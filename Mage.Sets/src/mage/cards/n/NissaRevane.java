@@ -1,7 +1,7 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -15,13 +15,13 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author maurer.it_at_gmail.com
  */
 public final class NissaRevane extends CardImpl {
@@ -35,7 +35,7 @@ public final class NissaRevane extends CardImpl {
     }
 
     public NissaRevane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(2));
@@ -62,11 +62,7 @@ public final class NissaRevane extends CardImpl {
 
 class NissaRevaneGainLifeEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(SubType.ELF.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ELF);
 
     public NissaRevaneGainLifeEffect() {
         super(Outcome.GainLife);

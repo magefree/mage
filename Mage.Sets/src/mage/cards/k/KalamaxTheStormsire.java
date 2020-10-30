@@ -2,7 +2,6 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;

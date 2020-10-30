@@ -1,7 +1,6 @@
 package mage.cards.k;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -27,6 +26,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -156,7 +156,7 @@ class KnowledgePoolEffect2 extends OneShotEffect {
                     if (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
-                            player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
                         }
                     }
                 }

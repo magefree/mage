@@ -1,19 +1,20 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ArrowStorm extends CardImpl {
@@ -33,6 +34,8 @@ public final class ArrowStorm extends CardImpl {
                 RaidCondition.instance,
                 "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, instead {this} deals 5 damage to that permanent or player and the damage can't be prevented"));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
+        this.getSpellAbility().setAbilityWord(AbilityWord.RAID);
+        this.getSpellAbility().addHint(RaidHint.instance);
     }
 
     public ArrowStorm(final ArrowStorm card) {

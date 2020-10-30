@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -6,6 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -13,12 +13,20 @@ import mage.game.events.GameEvent;
  */
 public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    boolean setTargetPointer;
+
     public BecomesBlockedSourceTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, false);
+    }
+
+    public BecomesBlockedSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
+        super(zone, effect, optional);
+        this.setTargetPointer = setTargetPointer;
     }
 
     public BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -28,6 +36,11 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // set the defending player via targetPointer
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(
+                    new FixedTarget(game.getCombat().getDefendingPlayerId(getSourceId(), game)));
+        }
         return event.getTargetId().equals(this.getSourceId());
     }
 

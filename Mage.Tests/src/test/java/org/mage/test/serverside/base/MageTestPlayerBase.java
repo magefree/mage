@@ -1,9 +1,14 @@
 package org.mage.test.serverside.base;
 
+import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,6 +16,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -31,6 +37,7 @@ import org.mage.test.player.TestPlayer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -104,6 +111,8 @@ public abstract class MageTestPlayerBase {
         Logger.getRootLogger().setLevel(Level.DEBUG);
         logger.debug("Starting MAGE tests");
         logger.debug("Logging level: " + logger.getLevel());
+        logger.debug("Default charset: " + Charset.defaultCharset());
+
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
@@ -141,7 +150,6 @@ public abstract class MageTestPlayerBase {
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + '/' + plugin.getJar()).toURI().toURL());
-            logger.info("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
@@ -379,8 +387,15 @@ public abstract class MageTestPlayerBase {
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
                                             CardType cardType, String spellCost, Zone putAtZone) {
+        addCustomCardWithAbility(customName, controllerPlayer, ability, spellAbility, cardType, spellCost, putAtZone, null);
+    }
+
+    protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
+                                            CardType cardType, String spellCost, Zone putAtZone, SubType... additionalSubTypes) {
         CustomTestCard.clearCustomAbilities(customName);
         CustomTestCard.addCustomAbility(customName, spellAbility, ability);
+        CustomTestCard.clearAdditionalSubtypes(customName);
+        CustomTestCard.addAdditionalSubtypes(customName, additionalSubTypes);
 
         CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
         PermanentCard card = new PermanentCard(new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost), controllerPlayer.getId(), currentGame);
@@ -405,6 +420,27 @@ public abstract class MageTestPlayerBase {
                 Assert.fail("Unsupported zone: " + putAtZone);
         }
     }
+
+    /**
+     * Add cost modification effect to the game (all cast cost will be increaded or decreased for controller)
+     *
+     * @param controller
+     * @param modificationAmount
+     */
+    protected void addCustomEffect_SpellCostModification(TestPlayer controller, int modificationAmount) {
+        Effect effect;
+        if (modificationAmount >= 0) {
+            effect = new SpellsCostIncreasingAllEffect(modificationAmount, StaticFilters.FILTER_CARD, TargetController.YOU);
+        } else {
+            effect = new SpellsCostReductionAllEffect(StaticFilters.FILTER_CARD, -1 * modificationAmount, false, true);
+        }
+
+        addCustomCardWithAbility(
+                "cost modification " + controller.getName(),
+                controller,
+                new SimpleStaticAbility(effect)
+        );
+    }
 }
 
 // custom card with global abilities list to init (can contains abilities per card name)
@@ -412,6 +448,7 @@ class CustomTestCard extends CardImpl {
 
     static private final Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
     static private final Map<String, SpellAbility> spellAbilitiesList = new HashMap<>(); // card name -> spell ability
+    static private final Map<String, Set<SubType>> subTypesList = new HashMap<>(); // card name -> additional subtypes
 
     static void addCustomAbility(String cardName, SpellAbility spellAbility, Ability ability) {
         if (!abilitiesList.containsKey(cardName)) {
@@ -428,6 +465,16 @@ class CustomTestCard extends CardImpl {
         spellAbilitiesList.remove(cardName);
     }
 
+    static void addAdditionalSubtypes(String cardName, SubType... subtypes) {
+        if (subtypes != null) {
+            subTypesList.computeIfAbsent(cardName, s -> new HashSet<>()).addAll(Arrays.asList(subtypes.clone()));
+        }
+    }
+
+    static void clearAdditionalSubtypes(String cardName) {
+        subTypesList.remove(cardName);
+    }
+
     CustomTestCard(UUID ownerId, CardSetInfo setInfo, CardType cardType, String spellCost) {
         super(ownerId, setInfo, new CardType[]{cardType}, spellCost);
 
@@ -440,6 +487,17 @@ class CustomTestCard extends CardImpl {
             for (Ability ability : extraAbitilies) {
                 this.addAbility(ability.copy());
             }
+        }
+
+        Set<SubType> subTypeSet = subTypesList.get(setInfo.getName());
+        if (subTypeSet != null) {
+            for (SubType subType : subTypeSet) {
+                this.subtype.add(subType);
+            }
+        }
+        if (cardType == CardType.CREATURE) {
+            this.power = new MageInt(1);
+            this.toughness = new MageInt(1);
         }
     }
 

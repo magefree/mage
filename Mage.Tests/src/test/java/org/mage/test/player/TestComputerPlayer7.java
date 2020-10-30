@@ -1,15 +1,11 @@
 package org.mage.test.player;
 
-import mage.MageObject;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.SpellAbility;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.player.ai.ComputerPlayer7;
 import mage.target.Target;
 
-import java.util.LinkedHashMap;
 import java.util.UUID;
 
 /**

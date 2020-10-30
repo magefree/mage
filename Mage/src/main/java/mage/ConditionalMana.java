@@ -52,7 +52,7 @@ public class ConditionalMana extends Mana implements Serializable {
 
     public ConditionalMana(final ConditionalMana conditionalMana) {
         super(conditionalMana);
-        conditions = conditionalMana.conditions;
+        conditions.addAll(conditionalMana.conditions);
         scope = conditionalMana.scope;
         staticText = conditionalMana.staticText;
         manaProducerId = conditionalMana.manaProducerId;
@@ -65,6 +65,10 @@ public class ConditionalMana extends Mana implements Serializable {
 
     public void setComparisonScope(Filter.ComparisonScope scope) {
         this.scope = scope;
+    }
+
+    public List<Condition> getConditions() {
+        return conditions;
     }
 
     public boolean apply(Ability ability, Game game, UUID manaProducerId, Cost costToPay) {
@@ -171,6 +175,24 @@ public class ConditionalMana extends Mana implements Serializable {
                 colorless = 0;
                 break;
         }
+    }
+
+    @Override
+    public void add(Mana mana) {
+        if (mana instanceof ConditionalMana) {
+            for (Condition condition : ((ConditionalMana) mana).getConditions()) {
+                addCondition(condition);
+            }
+        }
+        super.add(mana);
+    }
+  
+    public String getConditionString() {
+        String condStr = "[";
+        for (Condition condition : conditions) {
+            condStr += condition.getManaText();
+        }
+        return condStr + "]";
     }
 
     public void add(ManaType manaType, int amount) {

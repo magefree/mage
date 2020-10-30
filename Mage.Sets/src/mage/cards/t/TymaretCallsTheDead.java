@@ -5,7 +5,7 @@ import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -58,7 +58,7 @@ public final class TymaretCallsTheDead extends CardImpl {
 
 class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
 
-    private static final Effect millEffect = new PutTopCardOfLibraryIntoGraveControllerEffect(3);
+    private static final Effect millEffect = new MillCardsControllerEffect(3);
     private static final Effect tokenEffect = new CreateTokenEffect(new ZombieToken());
     private static final FilterCard filter = new FilterCard("creature or enchantment card from your graveyard");
 

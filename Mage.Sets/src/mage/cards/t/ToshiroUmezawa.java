@@ -1,8 +1,8 @@
 package mage.cards.t;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -94,7 +94,7 @@ class ToshiroUmezawaEffect extends OneShotEffect {
                     && controller.getGraveyard().contains(card.getId())) { // must be in graveyard
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(card, game, false),
-                        game, false, new MageObjectReference(source.getSourceObject(game), game));
+                        game, false, new ApprovingObject(source, game));
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 game.addEffect(new ToshiroUmezawaReplacementEffect(card.getId()), source);
             }

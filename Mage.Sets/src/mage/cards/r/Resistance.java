@@ -6,21 +6,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
-import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

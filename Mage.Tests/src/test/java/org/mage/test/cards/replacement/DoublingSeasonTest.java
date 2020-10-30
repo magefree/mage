@@ -194,10 +194,11 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
     }
 
     /**
-     * Gatherer Ruling:
-     * 10/1/2005: Planeswalkers will enter the battlefield with double the normal amount of loyalty counters. However,
-     * if you activate an ability whose cost has you put loyalty counters on a planeswalker, the number you put on isn't doubled.
-     * This is because those counters are put on as a cost, not as an effect.
+     * Gatherer Ruling: 10/1/2005: Planeswalkers will enter the battlefield with
+     * double the normal amount of loyalty counters. However, if you activate an
+     * ability whose cost has you put loyalty counters on a planeswalker, the
+     * number you put on isn't doubled. This is because those counters are put
+     * on as a cost, not as an effect.
      */
     @Test
     public void testPlaneswalkerLoyalty() {
@@ -218,7 +219,8 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
     }
 
     /**
-     * +1 cost is not affected by double, but replace event like Pir, Imaginative Rascal will be affected
+     * +1 cost is not affected by double, but replace event like Pir,
+     * Imaginative Rascal will be affected
      * https://github.com/magefree/mage/issues/5802
      */
     @Test
@@ -250,4 +252,27 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, "Chandra, Fire Artisan", CounterType.LOYALTY, 4 + (1 + 1) * 2);
     }
+
+    @Test
+    public void testPlaneswalkerCreatesToken() {
+        setStrictChooseMode(true);
+
+        // +1: Create a 2/2 black Zombie creature token.
+        // -4: Each player sacrifices two creatures.
+        // -9: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
+        addCard(Zone.BATTLEFIELD, playerA, "Liliana, Dreadhorde General");
+        // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
+        // If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season"); //
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Zombie", 2);
+    }
+
 }

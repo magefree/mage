@@ -331,7 +331,7 @@ public final class Amonkhet extends ExpansionSet {
     public List<CardInfo> getSpecialLand() {
         if (savedSpecialLand.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("MPS-AKH");
+            criteria.setCodes("MP2");
             criteria.minCardNumber(1);
             criteria.maxCardNumber(30);
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));

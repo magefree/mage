@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -19,8 +18,10 @@ public final class ZendikarExpeditions extends ExpansionSet {
 
     private ZendikarExpeditions() {
         super("Zendikar Expeditions", "EXP", ExpansionSet.buildDate(2015, 10, 2), SetType.PROMOTIONAL);
+        this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Ancient Tomb", 36, Rarity.MYTHIC, mage.cards.a.AncientTomb.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Arid Mesa", 24, Rarity.MYTHIC, mage.cards.a.AridMesa.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 8, Rarity.MYTHIC, mage.cards.b.BloodCrypt.class, FULL_ART_BFZ_VARIOUS));

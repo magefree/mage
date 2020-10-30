@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -48,7 +48,7 @@ public final class Gloomdrifter extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(new EntersBattlefieldTriggeredAbility(
             new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false))),
-            new CardsInControllerGraveCondition(7),
+            new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, nonblack creatures get -2/-2 until end of turn.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

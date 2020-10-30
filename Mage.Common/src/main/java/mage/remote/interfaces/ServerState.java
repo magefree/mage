@@ -3,7 +3,6 @@ package mage.remote.interfaces;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import mage.remote.MageRemoteException;
 import mage.view.MatchView;

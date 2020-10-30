@@ -51,7 +51,6 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.subtypes.addAll(effect.subtypes);
         this.loseOther = effect.loseOther;
-        this.loseOther = effect.loseOther;
     }
 
     @Override

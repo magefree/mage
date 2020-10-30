@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class YdwenEfreet extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Ydwen Efreet blocks, flip a coin. If you lose the flip, remove Ydwen Efreet from combat and it can't block this turn. Creatures it was blocking that had become blocked by only Ydwen Efreet this combat become unblocked.
-        this.addAbility(new BlocksTriggeredAbility(new YdwenEfreetEffect(), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new YdwenEfreetEffect(), false));
     }
 
     public YdwenEfreet(final YdwenEfreet card) {

@@ -63,7 +63,7 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
 
     VeteranBodyguardEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {source} instead";
+        staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {this} instead";
     }
 
     VeteranBodyguardEffect(final VeteranBodyguardEffect effect) {

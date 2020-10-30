@@ -2,7 +2,7 @@
 package mage.cards.k;
 
 import java.util.UUID;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -25,7 +25,7 @@ public final class KamahlsSledge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Threshold - If seven or more cards are in your graveyard, instead Kamahl's Sledge deals 4 damage to that creature and 4 damage to that creature's controller.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetControllerEffect(4),
-            new CardsInControllerGraveCondition(7),
+            new CardsInControllerGraveyardCondition(7),
             "<br><br><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead {this} deals 4 damage to that creature and 4 damage to that creature's controller."));
     }
 

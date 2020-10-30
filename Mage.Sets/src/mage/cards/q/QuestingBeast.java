@@ -82,7 +82,7 @@ class QuestingBeastPreventionEffect extends ContinuousRuleModifyingEffectImpl {
 
     QuestingBeastPreventionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Combat damage that would be dealt by creatures you control can't be prevented.";
+        staticText = "Combat damage that would be dealt by creatures you control can't be prevented";
     }
 
     private QuestingBeastPreventionEffect(final QuestingBeastPreventionEffect effect) {
@@ -152,6 +152,6 @@ class QuestingBeastTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to an opponent, " +
-                "it deals that much damage to target planeswalker that player controls";
+                "it deals that much damage to target planeswalker that player controls.";
     }
 }

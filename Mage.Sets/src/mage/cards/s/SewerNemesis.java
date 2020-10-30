@@ -10,7 +10,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChoosePlayerEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -90,7 +90,7 @@ class CardsInTargetOpponentsGraveyardCount implements DynamicValue {
 class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl {
 
     public SewerNemesisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(1), false);
+        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), false);
     }
 
     public SewerNemesisTriggeredAbility(final SewerNemesisTriggeredAbility ability) {

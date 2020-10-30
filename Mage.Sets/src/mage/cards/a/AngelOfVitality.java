@@ -59,7 +59,7 @@ class AngelOfVitalityEffect extends ReplacementEffectImpl {
 
     AngelOfVitalityEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would gain life, you gain that much life plus one instead";
+        staticText = "If you would gain life, you gain that much life plus 1 instead";
     }
 
     private AngelOfVitalityEffect(final AngelOfVitalityEffect effect) {

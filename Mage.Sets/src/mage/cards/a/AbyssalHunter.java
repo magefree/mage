@@ -35,7 +35,7 @@ public final class AbyssalHunter extends CardImpl {
         // {B}, {tap}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{B}"));
         Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
-        effect.setText("{source} deals damage equal to {source}'s power to that creature.");
+        effect.setText("{this} deals damage equal to {this}'s power to that creature.");
         ability.addEffect(effect);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

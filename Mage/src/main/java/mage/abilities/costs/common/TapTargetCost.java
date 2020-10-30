@@ -23,7 +23,7 @@ public class TapTargetCost extends CostImpl {
         this.target.setNotTarget(true); // costs are never targeted
         this.target.setRequired(false); // can be cancel by user
         this.text
-                = new StringBuilder("Tap ")
+                = new StringBuilder("tap ")
                 .append((target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") || target.getTargetName().startsWith("another"))
                         ? "" : CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ')
                 .append(target.getTargetName()).toString();

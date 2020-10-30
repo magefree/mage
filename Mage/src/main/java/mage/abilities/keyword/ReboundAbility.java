@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +18,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * This ability has no effect by default and will always return false on the
@@ -189,7 +189,7 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect {
                 && reboundCard != null) {
             game.getState().setValue("PlayFromNotOwnHandZone" + reboundCard.getId(), Boolean.TRUE);
             Boolean cardWasCast = player.cast(player.chooseAbilityForCast(reboundCard, game, true),
-                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + reboundCard.getId(), null);
             return cardWasCast;
         }

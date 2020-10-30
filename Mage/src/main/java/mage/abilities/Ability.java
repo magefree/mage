@@ -23,6 +23,8 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.MageIdentifier;
+import mage.abilities.costs.common.TapSourceCost;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -136,23 +138,6 @@ public interface Ability extends Controllable, Serializable {
      * @param cost The {@link ManaCost} to add.
      */
     void addManaCost(ManaCost cost);
-
-    /**
-     * TODO Method is unused, keep it around?
-     * <p>
-     * Gets all costs that are optional to this ability. These costs can be paid
-     * in addition to other costs to have other effects put into place.
-     *
-     * @return All {@link Costs} that can be paid above and beyond other costs.
-     */
-    Costs<Cost> getOptionalCosts();
-
-    /**
-     * Adds a {@link Cost} that is optional to this ability.
-     *
-     * @param cost The {@link Cost} to add to the optional costs.
-     */
-    void addOptionalCost(Cost cost);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of
@@ -366,6 +351,19 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
+    
+    /**
+     * Returns true if the ability has a tap itself in their costs
+     * @return 
+     */
+    default boolean hasTapCost() {
+        for (Cost cost : this.getCosts()) {
+            if (cost instanceof TapSourceCost) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns true if this ability has to be shown as topmost of all the rules
@@ -536,4 +534,8 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     boolean isSameInstance(Ability ability);
+    
+    MageIdentifier getIdentifier(); 
+
+    AbilityImpl setIdentifier(MageIdentifier mageIdentifier);
 }

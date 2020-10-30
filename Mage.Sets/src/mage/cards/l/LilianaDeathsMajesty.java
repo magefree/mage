@@ -6,7 +6,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class LilianaDeathsMajesty extends CardImpl {
 
         // +1: Create a 2/2 black Zombie creature token. Put the top two cards of your library into your graveyard.
         LoyaltyAbility ability = new LoyaltyAbility(new CreateTokenEffect(new ZombieToken()), 1);
-        ability.addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(2));
+        ability.addEffect(new MillCardsControllerEffect(2));
         this.addAbility(ability);
 
         // -3: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.

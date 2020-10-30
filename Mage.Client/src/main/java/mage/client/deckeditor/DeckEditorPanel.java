@@ -9,6 +9,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
+import mage.client.components.LegalityLabel;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
@@ -27,12 +28,11 @@ import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.dnd.DropTarget;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.HierarchyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -48,19 +48,21 @@ import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 public class DeckEditorPanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
+    private static final Border LEGALITY_LABEL_BORDER_SELECTED = BorderFactory.createLineBorder(Color.gray, 2);
+    private static final Border LEGALITY_LABEL_BORDER_EMPTY = BorderFactory.createEmptyBorder();
+
     private final JFileChooser fcSelectDeck;
     private final JFileChooser fcImportDeck;
     private final JFileChooser fcExportDeck;
-    private Deck deck = new Deck();
     private final Map<UUID, Card> temporaryCards = new HashMap<>(); // Cards dragged out of one part of the view into another
-    private boolean isShowCardInfo = false;
+    private final String LAST_DECK_FOLDER = "lastDeckFolder";
+    private Deck deck = new Deck();
     private UUID tableId;
     private DeckEditorMode mode;
     private int timeout;
     private javax.swing.Timer countdown;
     private UpdateDeckTask updateDeckTask;
     private int timeToSubmit = -1;
-    private final String LAST_DECK_FOLDER = "lastDeckFolder";
 
     public DeckEditorPanel() {
         initComponents();
@@ -105,6 +107,38 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        // deck legality cards selection
+        Arrays.stream(deckLegalityDisplay.getComponents())
+                .filter(c -> c instanceof LegalityLabel)
+                .forEach(c -> {
+                    c.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            List<String> cardNames = new ArrayList<>();
+                            LegalityLabel label = (LegalityLabel) e.getComponent();
+                            label.getValidator().getErrorsList().stream()
+                                    .map(DeckValidatorError::getCardName)
+                                    .filter(Objects::nonNull)
+                                    .forEach(cardNames::add);
+                            deckArea.getDeckList().deselectAll();
+                            deckArea.getDeckList().selectByName(cardNames);
+                            deckArea.getSideboardList().deselectAll();
+                            deckArea.getSideboardList().selectByName(cardNames);
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            LegalityLabel label = (LegalityLabel) e.getComponent();
+                            label.setBorder(LEGALITY_LABEL_BORDER_SELECTED);
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            LegalityLabel label = (LegalityLabel) e.getComponent();
+                            label.setBorder(LEGALITY_LABEL_BORDER_EMPTY);
+                        }
+                    });
+                });
     }
 
     /**
@@ -187,11 +221,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
-                if (mode == DeckEditorMode.SIDEBOARDING) {
-                    this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
-                } else /*(if (mode == LIMITED_BUILDING)*/ {
-                    this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
-                }
+                /*(if (mode == LIMITED_BUILDING)*/
+                /*limitedBuildingOrientation = */
+                this.deckArea.setOrientation(/*limitedBuildingOrientation = */mode != DeckEditorMode.SIDEBOARDING);
                 this.cardSelector.setVisible(false);
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
@@ -479,14 +511,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 @Override
                 protected boolean handleFilesDrop(boolean move, List<File> files) {
-                    loadDeck(files.get(0).getAbsolutePath());
+                    loadDeck(files.get(0).getAbsolutePath(), true);
                     return true;
                 }
 
                 @Override
                 protected boolean handlePlainTextDrop(boolean move, String text) {
                     String tmpFile = DeckUtil.writeTextToTempFile(text);
-                    loadDeck(tmpFile);
+                    loadDeck(tmpFile, false);
                     return true;
                 }
             }));
@@ -679,7 +711,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     StringBuilder errorMessages = new StringBuilder();
                     Deck newDeck = null;
 
-                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages));
+                    newDeck = Deck.load(importer.importDeck(file.getPath(), errorMessages, true)); // file will be auto-fixed and saved on simple errors
                     processAndShowImportErrors(errorMessages);
 
                     if (newDeck != null) {
@@ -711,7 +743,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         dialog.showDialog();
 
         if (!dialog.getTmpPath().isEmpty()) {
-            loadDeck(dialog.getTmpPath());
+            loadDeck(dialog.getTmpPath(), false);
         }
     }
 
@@ -725,7 +757,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             try {
-                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages), true, true);
+                deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages, false), true, true);
                 processAndShowImportErrors(errorMessages);
 
                 if (deckToAppend != null) {
@@ -819,11 +851,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean loadDeck(String file) {
+    private boolean loadDeck(String file, boolean saveAutoFixedFile) {
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder errorMessages = new StringBuilder();
-            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages), true, true);
+            Deck newDeck = Deck.load(DeckImporter.importDeckFromFile(file, errorMessages, saveAutoFixedFile), true, true);
             processAndShowImportErrors(errorMessages);
 
             if (newDeck != null) {
@@ -857,7 +889,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         if (cardInfoPane != null && System.getProperty("testCardInfo") != null) {
             cardInfoPane.setPreferredSize(new Dimension(170, 150));
             cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 0, 0)));
-            isShowCardInfo = true;
         } else {
             cardInfoPane = new JLabel();
             cardInfoPane.setVisible(false);
@@ -1343,7 +1374,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 Deck newDeck = null;
                 StringBuilder errorMessages = new StringBuilder();
 
-                newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages), true, true);
+                newDeck = Deck.load(DeckImporter.importDeckFromFile(file.getPath(), errorMessages, true), true, true);
                 processAndShowImportErrors(errorMessages);
 
                 if (newDeck != null) {
@@ -1394,7 +1425,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         try {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             String path = DeckGenerator.generateDeck();
-            deck = Deck.load(DeckImporter.importDeckFromFile(path), true, true);
+            deck = Deck.load(DeckImporter.importDeckFromFile(path, false), true, true);
         } catch (GameException ex) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);
         } catch (DeckGeneratorException ex) {
@@ -1449,7 +1480,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckLegalityDisplay.setVisible(true);
         this.deckLegalityDisplay.validateDeck(deck);
     }//GEN-LAST:event_btnLegalityActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;

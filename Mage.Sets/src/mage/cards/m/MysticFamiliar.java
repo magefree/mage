@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -36,10 +36,10 @@ public final class MysticFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Familiar gets +1/+1 and has protection from black.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.BLACK)),
-        new CardsInControllerGraveCondition(7), "and has protection from black"));
+        new CardsInControllerGraveyardCondition(7), "and has protection from black"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

@@ -20,7 +20,6 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;

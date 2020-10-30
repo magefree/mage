@@ -60,8 +60,8 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Dromar's Charm", 105, Rarity.UNCOMMON, mage.cards.d.DromarsCharm.class));
         cards.add(new SetCardInfo("Eladamri's Call", 106, Rarity.RARE, mage.cards.e.EladamrisCall.class));
         cards.add(new SetCardInfo("Ertai's Trickery", 24, Rarity.UNCOMMON, mage.cards.e.ErtaisTrickery.class));
-        cards.add(new SetCardInfo("Ertai, the Corrupted", "107a", Rarity.RARE, mage.cards.e.ErtaiTheCorrupted.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ertai, the Corrupted", "107b", Rarity.RARE, mage.cards.e.ErtaiTheCorrupted.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ertai, the Corrupted", 107, Rarity.RARE, mage.cards.e.ErtaiTheCorrupted.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ertai, the Corrupted", "107*", Rarity.RARE, mage.cards.e.ErtaiTheCorrupted.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Escape Routes", 25, Rarity.COMMON, mage.cards.e.EscapeRoutes.class));
         cards.add(new SetCardInfo("Exotic Disease", 43, Rarity.UNCOMMON, mage.cards.e.ExoticDisease.class));
         cards.add(new SetCardInfo("Falling Timber", 79, Rarity.COMMON, mage.cards.f.FallingTimber.class));
@@ -141,8 +141,8 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Singe", 71, Rarity.COMMON, mage.cards.s.Singe.class));
         cards.add(new SetCardInfo("Sinister Strength", 54, Rarity.COMMON, mage.cards.s.SinisterStrength.class));
         cards.add(new SetCardInfo("Sisay's Ingenuity", 33, Rarity.COMMON, mage.cards.s.SisaysIngenuity.class));
-        cards.add(new SetCardInfo("Skyship Weatherlight", "133a", Rarity.RARE, mage.cards.s.SkyshipWeatherlight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Skyship Weatherlight", "133b", Rarity.RARE, mage.cards.s.SkyshipWeatherlight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyship Weatherlight", 133, Rarity.RARE, mage.cards.s.SkyshipWeatherlight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyship Weatherlight", "133*", Rarity.RARE, mage.cards.s.SkyshipWeatherlight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyshroud Blessing", 92, Rarity.UNCOMMON, mage.cards.s.SkyshroudBlessing.class));
         cards.add(new SetCardInfo("Slay", 55, Rarity.UNCOMMON, mage.cards.s.Slay.class));
         cards.add(new SetCardInfo("Sleeping Potion", 34, Rarity.COMMON, mage.cards.s.SleepingPotion.class));
@@ -159,8 +159,8 @@ public final class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Sunscape Battlemage", 16, Rarity.UNCOMMON, mage.cards.s.SunscapeBattlemage.class));
         cards.add(new SetCardInfo("Sunscape Familiar", 17, Rarity.COMMON, mage.cards.s.SunscapeFamiliar.class));
         cards.add(new SetCardInfo("Surprise Deployment", 18, Rarity.UNCOMMON, mage.cards.s.SurpriseDeployment.class));
-        cards.add(new SetCardInfo("Tahngarth, Talruum Hero", "74a", Rarity.RARE, mage.cards.t.TahngarthTalruumHero.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tahngarth, Talruum Hero", "74b", Rarity.RARE, mage.cards.t.TahngarthTalruumHero.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tahngarth, Talruum Hero", 74, Rarity.RARE, mage.cards.t.TahngarthTalruumHero.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tahngarth, Talruum Hero", "74*", Rarity.RARE, mage.cards.t.TahngarthTalruumHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminal Moraine", 142, Rarity.UNCOMMON, mage.cards.t.TerminalMoraine.class));
         cards.add(new SetCardInfo("Terminate", 128, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Thornscape Battlemage", 94, Rarity.UNCOMMON, mage.cards.t.ThornscapeBattlemage.class));

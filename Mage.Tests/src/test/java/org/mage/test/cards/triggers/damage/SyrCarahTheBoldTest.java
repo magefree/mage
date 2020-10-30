@@ -28,7 +28,7 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
 
         // 1 - triggers on ability damage
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkLife("damage 1", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1);
 
@@ -72,7 +72,7 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
         checkExileCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
 
         // activate damage - 2x damage with copy
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
         setChoice(playerA, "No"); // no new target for copy
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkLife("damage 2", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1 - 1);

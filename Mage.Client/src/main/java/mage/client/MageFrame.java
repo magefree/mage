@@ -55,6 +55,7 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
+import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.imageio.ImageIO;
@@ -67,6 +68,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -234,10 +236,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         RepositoryUtil.bootstrapLocalDb();
         // re-create database on empty (e.g. after new build cleaned db on startup)
         if (RepositoryUtil.CARD_DB_RECREATE_BY_CLIENT_SIDE && RepositoryUtil.isDatabaseEmpty()) {
-            LOGGER.info("DB: creating cards database");
+            LOGGER.info("DB: creating cards database...");
             CardScanner.scan();
             LOGGER.info("Done.");
         }
+
+        // IMAGES CHECK
+        LOGGER.info("Images: search broken files...");
+        CardImageUtils.checkAndFixImageFiles();
 
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
             RateCard.bootstrapCardsAndRatings();
@@ -1268,6 +1274,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         LOGGER.info("Starting MAGE client version " + VERSION);
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
+        LOGGER.info("Default charset: " + Charset.defaultCharset());
+        if (!Charset.defaultCharset().toString().equals("UTF-8")) {
+            LOGGER.warn("WARNING, found wrong default charset. You must:");
+            LOGGER.warn("* Open launcher -> settings -> java -> client java options");
+            LOGGER.warn("* Insert additional command at the the end: -Dfile.encoding=UTF-8");
+        }
 
         startTime = System.currentTimeMillis();
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.fatal(null, e));
@@ -1638,6 +1650,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (whatsNewDialog != null) {
             whatsNewDialog.checkUpdatesAndShow(forceToShowPage);
         }
+    }
+
+    public boolean isGameFrameActive(UUID gameId) {
+        if (activeFrame != null && activeFrame instanceof GamePane) {
+            return ((GamePane) activeFrame).getGameId().equals(gameId);
+        }
+        return false;
     }
 }
 

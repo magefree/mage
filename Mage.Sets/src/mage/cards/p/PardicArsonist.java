@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -36,7 +36,7 @@ public final class PardicArsonist extends CardImpl {
         gainedAbility.addTarget(new TargetAnyTarget());
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilitySourceEffect(gainedAbility), new CardsInControllerGraveCondition(7),
+            new GainAbilitySourceEffect(gainedAbility), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, it deals 3 damage to any target.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

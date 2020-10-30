@@ -11,7 +11,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;

@@ -14,12 +14,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class AboshanCephalidEmperor extends CardImpl {
 
-    static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("untapped Cephalid you control");
+    static final FilterControlledPermanent filter1 = new FilterControlledPermanent("untapped Cephalid you control");
     static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
 
     static {
@@ -45,7 +45,7 @@ public final class AboshanCephalidEmperor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap an untapped Cephalid you control: Tap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter1, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter1)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 

@@ -201,7 +201,7 @@ public class MageServerImpl implements MageServer {
                     // check if user can create another table
                     int notStartedTables = user.getNumberOfNotStartedTables();
                     if (notStartedTables > 1) {
-                        user.showUserMessage("Create table", "You have already " + notStartedTables + " not started table" + (notStartedTables == 1 ? "" : "s") + ". You can't create another.");
+                        user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
                         throw new MageException("No message");
                     }
                     // check AI players max
@@ -1327,7 +1327,7 @@ public class MageServerImpl implements MageServer {
             // check if user can create another table
             int notStartedTables = user.getNumberOfNotStartedTables();
             if (notStartedTables > 1) {
-                user.showUserMessage("Create table", "You have already " + notStartedTables + " not started table" + (notStartedTables == 1 ? "" : "s") + ". You can't create another.");
+                user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
                 throw new MageException("No message");
             }
             // check if the user itself satisfies the quitRatio requirement.

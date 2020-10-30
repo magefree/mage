@@ -8,7 +8,7 @@ import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.Planes;
@@ -36,7 +36,7 @@ public class LetheLakePlane extends Plane {
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target player puts the top ten cards of their library into their graveyard
-        Effect chaosEffect = new PutTopCardOfLibraryIntoGraveTargetEffect(10);
+        Effect chaosEffect = new MillCardsTargetEffect(10);
         Target chaosTarget = new TargetPlayer();
 
         List<Effect> chaosEffects = new ArrayList<Effect>();

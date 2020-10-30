@@ -1,6 +1,5 @@
 package mage.game.stack;
 
-import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -10,10 +9,10 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
@@ -28,9 +27,13 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -218,9 +221,6 @@ public class Spell extends StackObjImpl implements Card {
                     if (spellAbilityCheckTargetsAndDeactivateModes(spellAbility, game)) {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                             spellAbility.getModes().setActiveMode(modeId);
-                            if (spellAbility.getSpellAbilityType() != SpellAbilityType.SPLICE) {
-                                updateOptionalCosts(index);
-                            }
                             result |= spellAbility.resolve(game);
                         }
                         index++;
@@ -241,7 +241,6 @@ public class Spell extends StackObjImpl implements Card {
             return false;
         } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
-                updateOptionalCosts(0);
                 boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
                     // Must be removed first time, after that will be removed by continous effect
@@ -251,11 +250,25 @@ public class Spell extends StackObjImpl implements Card {
                         card.getSubtype(game).add(SubType.AURA);
                     }
                 }
-                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
+                UUID permId = null;
+                boolean flag = false;
+                if (!isCopy()) {
+                    permId = card.getId();
+                    flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+                } else {
+                    EmptyToken token = new EmptyToken();
+                    CardUtil.copyTo(token).from(card);
+                    // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+                    if (token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false)) {
+                        permId = token.getLastAddedToken();
+                        flag = true;
+                    }
+                }
+                if (flag) {
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
-                        Permanent permanent = game.getPermanent(card.getId());
+                        Permanent permanent = game.getPermanent(permId);
                         if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             if (!card.getCardType().contains(CardType.CREATURE)) {
@@ -263,6 +276,20 @@ public class Spell extends StackObjImpl implements Card {
                             }
                             card.getSubtype(game).remove(SubType.AURA);
                         }
+                    }
+                    if (isCopy()) {
+                        Permanent token = game.getPermanent(permId);
+                        if (token == null) {
+                            return false;
+                        }
+                        for (Ability ability2 : token.getAbilities()) {
+                            if (!bestow || ability2 instanceof BestowAbility) {
+                                ability2.getTargets().get(0).add(ability.getFirstTarget(), game);
+                                ability2.getEffects().get(0).apply(game, ability2);
+                                return ability2.resolve(game);
+                            }
+                        }
+                        return false;
                     }
                     return ability.resolve(game);
                 }
@@ -273,7 +300,6 @@ public class Spell extends StackObjImpl implements Card {
             }
             // Aura has no legal target and its a bestow enchantment -> Add it to battlefield as creature
             if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-                updateOptionalCosts(0);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent instanceof PermanentCard) {
@@ -291,25 +317,27 @@ public class Spell extends StackObjImpl implements Card {
                 counter(null, game);
                 return false;
             }
+        } else if (isCopy()) {
+            EmptyToken token = new EmptyToken();
+            CardUtil.copyTo(token).from(card);
+            // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+            token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false);
+            return true;
         } else {
-            updateOptionalCosts(0);
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }
 
     private boolean hasTargets(SpellAbility spellAbility, Game game) {
-        if (spellAbility.getModes().getSelectedModes().size() > 1) {
-            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                Mode mode = spellAbility.getModes().get(modeId);
-                if (!mode.getTargets().isEmpty()) {
-                    return true;
-                }
-
-            }
-            return false;
-        } else {
+        if (spellAbility.getModes().getSelectedModes().size() < 2) {
             return !spellAbility.getTargets().isEmpty();
         }
+        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+            if (!spellAbility.getModes().get(modeId).getTargets().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -324,7 +352,7 @@ public class Spell extends StackObjImpl implements Card {
      */
     private boolean spellAbilityCheckTargetsAndDeactivateModes(SpellAbility spellAbility, Game game) {
         boolean legalModes = false;
-        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext();) {
+        for (Iterator<UUID> iterator = spellAbility.getModes().getSelectedModes().iterator(); iterator.hasNext(); ) {
             UUID nextSelectedModeId = iterator.next();
             Mode mode = spellAbility.getModes().get(nextSelectedModeId);
             if (!mode.getTargets().isEmpty()) {
@@ -359,30 +387,6 @@ public class Spell extends StackObjImpl implements Card {
         } else {
             return spellAbility.getTargets().stillLegal(spellAbility, game);
         }
-    }
-
-    /**
-     * As we have ability in the stack, we need to update optional costs in
-     * original card. This information will be used later by effects, e.g. to
-     * determine whether card was kicked or not. E.g. Desolation Angel
-     */
-    private void updateOptionalCosts(int index) {
-        spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId()).ifPresent(abilityOrig
-                -> {
-            for (Object object : spellAbilities.get(index).getOptionalCosts()) {
-                Cost cost = (Cost) object;
-                for (Cost costOrig : abilityOrig.getOptionalCosts()) {
-                    if (cost.getId().equals(costOrig.getId())) {
-                        if (cost.isPaid()) {
-                            costOrig.setPaid();
-                        } else {
-                            costOrig.clearPaid();
-                        }
-                        break;
-                    }
-                }
-            }
-        });
     }
 
     @Override
@@ -611,6 +615,10 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public int getStartingLoyalty() {
         return card.getStartingLoyalty();
+    }
+
+    @Override
+    public void setStartingLoyalty(int startingLoyalty) {
     }
 
     @Override

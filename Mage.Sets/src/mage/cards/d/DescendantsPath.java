@@ -1,8 +1,8 @@
 package mage.cards.d;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -89,7 +89,7 @@ class DescendantsPathEffect extends OneShotEffect {
                         if (controller.chooseUse(Outcome.Benefit, "Cast the card?", source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                             controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game, true, new ApprovingObject(source, game));
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         } else {
                             game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");

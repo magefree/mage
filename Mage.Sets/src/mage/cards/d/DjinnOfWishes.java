@@ -2,9 +2,9 @@
 package mage.cards.d;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -78,7 +78,7 @@ class DjinnOfWishesEffect extends OneShotEffect {
             Cards cards = new CardsImpl(card);
             controller.revealCards(sourceObject.getIdName(), cards, game);
             if (!controller.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", source, game)
-                    || !controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                    || !controller.playCard(card, game, true, true, new ApprovingObject(source, game))) {
                 controller.moveCards(card, Zone.EXILED, source, game);
             }
             return true;

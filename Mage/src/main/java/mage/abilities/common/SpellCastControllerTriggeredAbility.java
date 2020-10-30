@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -11,7 +10,6 @@ import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
@@ -67,7 +65,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 if (rememberSource) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId(), game));
                 }
                 return true;
             }

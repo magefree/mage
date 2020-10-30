@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class TolarianSerpent extends CardImpl {
         // At the beginning of your upkeep, put the top seven cards of your library into your graveyard.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, 
                 "beginning of your upkeep", 
-                new PutTopCardOfLibraryIntoGraveControllerEffect(7), false));
+                new MillCardsControllerEffect(7), false));
     }
 
     public TolarianSerpent(final TolarianSerpent card) {

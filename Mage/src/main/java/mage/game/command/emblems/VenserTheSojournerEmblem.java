@@ -14,7 +14,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -44,7 +43,6 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
      * If true, the source that triggered the ability will be set as target to
      * effect.
      */
-    protected boolean rememberSource = false;
 
     public VenserTheSojournerSpellCastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.COMMAND, effect, optional);
@@ -54,7 +52,6 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     public VenserTheSojournerSpellCastTriggeredAbility(final VenserTheSojournerSpellCastTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
-        this.rememberSource = ability.rememberSource;
     }
 
     @Override
@@ -66,12 +63,7 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, game)) {
-                if (rememberSource) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
-                }
-                return true;
-            }
+            return spell != null && filter.match(spell, game);
         }
         return false;
     }

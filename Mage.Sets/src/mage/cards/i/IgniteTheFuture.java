@@ -2,7 +2,6 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
@@ -16,7 +15,6 @@ import mage.players.Player;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.target.targetpointer.FixedTargets;
 
 /**
  * @author TheElk801

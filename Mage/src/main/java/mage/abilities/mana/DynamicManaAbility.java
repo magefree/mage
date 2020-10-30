@@ -1,8 +1,6 @@
 
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -77,17 +75,6 @@ public class DynamicManaAbility extends ActivatedManaAbilityImpl {
     @Override
     public DynamicManaAbility copy() {
         return new DynamicManaAbility(this);
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        List<Mana> netMana = new ArrayList<>();
-        if (game != null) {
-            // TODO: effects from replacement effects like Mana Reflection are not considered yet
-            // TODO: effects that need a X payment (e.g. Mage-Ring Network) return always 0
-            netMana.addAll(manaEffect.getNetMana(game, this));
-        }
-        return netMana;
     }
 
     @Override

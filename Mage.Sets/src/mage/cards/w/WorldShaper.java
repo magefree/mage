@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +33,7 @@ public final class WorldShaper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever World Shaper attacks, you may put the top three cards of your library into your graveyard.
-        this.addAbility(new AttacksTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(3), true));
+        this.addAbility(new AttacksTriggeredAbility(new MillCardsControllerEffect(3), true));
 
         // When World Shaper dies, put all land cards from your graveyard onto the battlefield tapped.
         this.addAbility(new DiesSourceTriggeredAbility(new WorldShaperEffect(), false));

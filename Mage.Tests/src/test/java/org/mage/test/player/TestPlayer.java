@@ -1,15 +1,6 @@
 package org.mage.test.player;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import mage.MageItem;
-import mage.MageObject;
-import mage.MageObjectReference;
-import mage.Mana;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -63,6 +54,13 @@ import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
@@ -76,6 +74,9 @@ public class TestPlayer implements Player {
     private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
+    public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
+    public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
+    public static final String SKIP_FAILED_COMMAND = "[skip_failed_command]"; // skip next command in player's queue (can remove cast commands after try to activate)
     public static final String BLOCK_SKIP = "[block_skip]";
     public static final String ATTACK_SKIP = "[attack_skip]";
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
@@ -577,7 +578,8 @@ public class TestPlayer implements Player {
                     if (groups.length > 2 && !checkExecuteCondition(groups, game)) {
                         break;
                     }
-                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true)) { // add wrong action log?
+                    // must process all duplicated abilities (aliases need objects to search)
+                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true, Zone.ALL, false)) { // add wrong action log?
                         if (hasAbilityTargetNameOrAlias(game, ability, groups[0])) {
                             int bookmark = game.bookmarkState();
                             ActivatedAbility newAbility = ability.copy();
@@ -590,7 +592,14 @@ public class TestPlayer implements Player {
                                 foundNoAction = 0; // Reset enless loop check because of no action
                                 return true;
                             } else {
-                                game.restoreState(bookmark, ability.getRule());
+                                computerPlayer.restoreState(bookmark, ability.getRule(), game);
+
+                                // skip failed command
+                                if (!choices.isEmpty() && choices.get(0).equals(SKIP_FAILED_COMMAND)) {
+                                    actions.remove(action);
+                                    choices.remove(0);
+                                    return true;
+                                }
                             }
                             groupsForTargetHandling = null;
                         }
@@ -605,7 +614,7 @@ public class TestPlayer implements Player {
 
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
-                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
+                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -614,7 +623,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else if (mageObject instanceof Card) {
-                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -623,7 +632,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else {
-                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -635,7 +644,7 @@ public class TestPlayer implements Player {
                     }
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
-                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
+                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, getId(), game)) {
                             if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])
                                     && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
                                 Ability newManaAbility = manaAbility.copy();
@@ -1110,13 +1119,13 @@ public class TestPlayer implements Player {
 
         List<String> data = cards.stream()
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
-                + c.getIdName()
-                + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
-                + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
-                + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
-                + ", " + (c.isTapped() ? "Tapped" : "Untapped")
-                + getPrintableAliases(", [", c.getId(), "]")
-                + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
+                        + c.getIdName()
+                        + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
+                        + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
+                        + (c.isPlaneswalker() ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
+                        + ", " + (c.isTapped() ? "Tapped" : "Untapped")
+                        + getPrintableAliases(", [", c.getId(), "]")
+                        + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -1140,12 +1149,12 @@ public class TestPlayer implements Player {
 
         List<String> data = abilities.stream()
                 .map(a -> (a.getZone() + " -> "
-                + a.getSourceObject(game).getIdName() + " -> "
-                + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
-                + (a.toString().length() > 0
-                ? a.toString().substring(0, Math.min(20, a.toString().length()))
-                : a.getClass().getSimpleName())
-                + "..."))
+                        + a.getSourceObject(game).getIdName() + " -> "
+                        + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
+                        + (a.toString().length() > 0
+                        ? a.toString().substring(0, Math.min(20, a.toString().length()))
+                        : a.getClass().getSimpleName())
+                        + "..."))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -1560,7 +1569,7 @@ public class TestPlayer implements Player {
         UUID defenderId = null;
         boolean mustAttackByAction = false;
         boolean madeAttackByAction = false;
-        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
+        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
 
             // aiXXX commands
@@ -1909,6 +1918,16 @@ public class TestPlayer implements Player {
 
         assertAliasSupportInChoices(true);
         if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                Assert.assertTrue("found skip choice, but it require more choices, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                choices.remove(0);
+                return true;
+            }
+
             List<Integer> usedChoices = new ArrayList<>();
             List<UUID> usedTargets = new ArrayList<>();
 
@@ -2141,7 +2160,7 @@ public class TestPlayer implements Player {
             // skip targets
             if (targets.get(0).equals(TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
-                        + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
                 return true;
@@ -2432,7 +2451,7 @@ public class TestPlayer implements Player {
             //Assert.fail("Wrong target");
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "; " + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
@@ -2452,7 +2471,7 @@ public class TestPlayer implements Player {
 
         this.chooseStrictModeFailed("choice", game,
                 "Triggered list (total " + abilities.size() + "):\n"
-                + abilities.stream().map(a -> getInfo(a, game)).collect(Collectors.joining("\n")));
+                        + abilities.stream().map(a -> getInfo(a, game)).collect(Collectors.joining("\n")));
         return computerPlayer.chooseTriggeredAbility(abilities, game);
     }
 
@@ -2815,15 +2834,15 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+    public boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject) {
         // TestPlayer, ComputerPlayer always call inherited cast() from PlayerImpl
         // that's why chooseSpellAbilityForCast will be ignored in TestPlayer, see workaround with TestComputerPlayerXXX
-        return computerPlayer.cast(ability, game, noMana, reference);
+        return computerPlayer.cast(ability, game, noMana, approvingObject);
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference) {
-        return computerPlayer.playCard(card, game, noMana, ignoreTiming, reference);
+    public boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject) {
+        return computerPlayer.playCard(card, game, noMana, ignoreTiming, approvingObject);
     }
 
     @Override
@@ -3362,10 +3381,15 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPayLifeCost() {
-        return computerPlayer.canPayLifeCost();
+    public boolean canPayLifeCost(Ability ability) {
+        return computerPlayer.canPayLifeCost(ability);
     }
-
+    
+    @Override
+    public boolean getCanPayLifeCost() {
+        return computerPlayer.getCanPayLifeCost();
+    }
+    
     @Override
     public void setCanPayLifeCost(boolean canPayLifeCost) {
         computerPlayer.setCanPayLifeCost(canPayLifeCost);
@@ -3701,7 +3725,7 @@ public class TestPlayer implements Player {
             // skip targets
             if (targets.get(0).equals(TARGET_SKIP)) {
                 Assert.assertTrue("found skip target, but it require more targets, needs "
-                        + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
                 return false; // false in chooseTargetAmount = stop to choose
@@ -3742,7 +3766,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "; " + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 
@@ -3769,6 +3793,13 @@ public class TestPlayer implements Player {
         if (!computerPlayer.getManaPool().isAutoPayment()) {
             if (!choices.isEmpty()) {
                 // manual pay by mana clicks/commands
+
+                // simulate cancel on mana payment (e.g. user press on cancel button)
+                if (choices.get(0).equals(MANA_CANCEL)) {
+                    choices.remove(0);
+                    return false;
+                }
+
                 String choice = choices.get(0);
                 boolean choiceUsed = false;
                 boolean choiceRemoved = false;
@@ -4006,11 +4037,6 @@ public class TestPlayer implements Player {
     @Override
     public void addPhyrexianToColors(FilterMana colors) {
         computerPlayer.addPhyrexianToColors(colors);
-    }
-
-    @Override
-    public void removePhyrexianFromColors(FilterMana colors) {
-        computerPlayer.removePhyrexianFromColors(colors);
     }
 
     @Override

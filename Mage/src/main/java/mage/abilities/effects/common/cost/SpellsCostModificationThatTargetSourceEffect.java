@@ -1,18 +1,19 @@
 package mage.abilities.effects.common.cost;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -111,21 +112,25 @@ public class SpellsCostModificationThatTargetSourceEffect extends CostModificati
                 return false;
         }
 
-        Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-        if (spell != null && this.spellFilter.match(spell, game)) {
-            // real cast with put on stack
+        Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+        if (spellCard == null || !this.spellFilter.match(spellCard, game)) {
+            return false;
+        }
+
+        if (game.getStack().getStackObject(abilityToModify.getId()) != null) {
+            // real cast
             Set<UUID> allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
             return allTargets.contains(source.getSourceId());
         } else {
-            // get playable and other staff without put on stack
-            // used at least for flashback ability because Flashback ability doesn't use stack
+            // playable
             Set<UUID> allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
+
             switch (this.getModificationType()) {
                 case REDUCE_COST:
-                    // reduce all the time
+                    // must reduce all the time
                     return allTargets.contains(source.getSourceId());
                 case INCREASE_COST:
-                    // increase if can't target another (e.g. user can choose another target without cost increase)
+                    // must increase if can't target another (e.g. user can choose another target without cost increase)
                     return allTargets.contains(source.getSourceId()) && allTargets.size() <= 1;
             }
         }

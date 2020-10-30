@@ -29,7 +29,8 @@ public final class RageScarredBerserker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Rage-Scarred Berserker enters the battlefield, target creature you control gets +1/+0 and gains indestructible until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 0));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 0)
+                .setText("target creature you control gets +1/+0"));
         ability.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains indestructible until end of turn"));

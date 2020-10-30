@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,7 +37,7 @@ public final class CentaurGarden extends CardImpl {
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new BoostTargetEffect(+3,+3, Duration.EndOfTurn),
             new ManaCostsImpl("{G}"),
-            new CardsInControllerGraveCondition(7));
+            new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
         thresholdAbility.addTarget(new TargetCreaturePermanent());

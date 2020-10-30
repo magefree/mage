@@ -23,6 +23,7 @@ public final class ConstructedFormats {
     public static final String PIONEER = "- Pioneer";
     public static final String MODERN = "- Modern";
     public static final String VINTAGE_LEGACY = "- Vintage / Legacy";
+    public static final String HISTORIC = "- Historic";
     public static final String JOKE = "- Joke Sets";
     public static final String CUSTOM = "- Custom";
     public static final Standard STANDARD_CARDS = new Standard();
@@ -32,6 +33,7 @@ public final class ConstructedFormats {
     private static final Date frontierDate = new GregorianCalendar(2014, Calendar.JULY, 18 - 1).getTime();
     private static final Date pioneerDate = new GregorianCalendar(2012, Calendar.OCTOBER, 5 - 1).getTime();
     private static final Date modernDate = new GregorianCalendar(2003, Calendar.JULY, 28 - 1).getTime();
+    private static final Date historicDate = new GregorianCalendar(2017, Calendar.SEPTEMBER, 29 - 1).getTime();
 
     // for all sets just return empty list
     private static final List<String> all = new ArrayList<>();
@@ -87,6 +89,7 @@ public final class ConstructedFormats {
         underlyingSetCodesPerFormat.put(PIONEER, new ArrayList<>());
         underlyingSetCodesPerFormat.put(MODERN, new ArrayList<>());
         underlyingSetCodesPerFormat.put(VINTAGE_LEGACY, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(HISTORIC, new ArrayList<>());
         underlyingSetCodesPerFormat.put(JOKE, new ArrayList<>());
         underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
@@ -121,6 +124,11 @@ public final class ConstructedFormats {
 
             // vintage/legacy (any set, TODO: even ?custom set?)
             underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
+
+            // historic
+            if (set.getType().isHistoricLegal() && set.getReleaseDate().after(historicDate)) {
+                underlyingSetCodesPerFormat.get(HISTORIC).add(set.getCode());
+            }
 
             // standard (dependent on current date)
             if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
@@ -257,6 +265,7 @@ public final class ConstructedFormats {
         if (!formats.isEmpty()) {
             formats.add(0, CUSTOM);
             formats.add(0, JOKE);
+            formats.add(0, HISTORIC);
             formats.add(0, VINTAGE_LEGACY);
             formats.add(0, MODERN);
             formats.add(0, PIONEER);

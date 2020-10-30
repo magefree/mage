@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class GiantBadger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Giant Badger blocks, it gets +2/+2 until end of turn.
-        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
     public GiantBadger(final GiantBadger card) {

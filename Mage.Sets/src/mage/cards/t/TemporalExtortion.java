@@ -45,7 +45,7 @@ class TemporalExtortionCounterSourceEffect extends OneShotEffect {
 
     public TemporalExtortionCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "any player may pay half their life, rounded up. If a player does, counter {source}";
+        staticText = "any player may pay half their life, rounded up. If a player does, counter {this}";
     }
 
     public TemporalExtortionCounterSourceEffect(final TemporalExtortionCounterSourceEffect effect) {

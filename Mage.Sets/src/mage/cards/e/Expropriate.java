@@ -51,7 +51,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public ExpropriateDilemmaEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Council's dilemma</i> — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it";
+        this.staticText = "<i>Council's dilemma</i> &mdash; Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it";
     }
 
     public ExpropriateDilemmaEffect(final ExpropriateDilemmaEffect effect) {

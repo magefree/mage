@@ -2,7 +2,7 @@
 package mage.abilities.common;
 
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;

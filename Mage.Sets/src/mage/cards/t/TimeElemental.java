@@ -10,7 +10,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;

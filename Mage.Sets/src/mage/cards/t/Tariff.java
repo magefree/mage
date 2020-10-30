@@ -71,7 +71,7 @@ class TariffEffect extends OneShotEffect {
         do {
             processPlayer(game, source, player);
             player = playerList.getNext(game, false);
-        } while (!player.getId().equals(game.getActivePlayerId()));
+        } while (player != null && !player.getId().equals(game.getActivePlayerId()));
 
         return true;
     }

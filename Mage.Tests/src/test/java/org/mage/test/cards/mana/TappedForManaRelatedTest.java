@@ -4,6 +4,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -168,7 +169,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Castle Sengir", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.UPKEEP);
         execute();
 
         assertAllCommandsUsed();
@@ -201,24 +202,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         assertManaOptions("{R}", manaOptions);
     }
 
-    @Test
-    public void TestCrystallineCrawler() {
-        setStrictChooseMode(true);
-        // Converge - Crystalline Crawler enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
-        // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color.
-        // {T}: Put a +1/+1 counter on Crystalline Crawler.
-        addCard(Zone.BATTLEFIELD, playerA, "Crystalline Crawler", 1);
-        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crystalline Crawler", CounterType.P1P1, 2);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertAllCommandsUsed();
-
-        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{Any}{Any}", manaOptions);
-    }
 
     @Test
     @Ignore  // Because this is no mana ability, this mana will not be calculated during available mana calculation
@@ -258,44 +242,7 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         assertManaOptions("{U}{U}{U}{U}", manaOptions);
     }
 
-    @Test
-    public void TestFarrelitePriest() {
-        setStrictChooseMode(true);
-        // {1}: Add {W}. If this ability has been activated four or more times this turn, sacrifice Farrelite Priest at the beginning of the next end step.
-        addCard(Zone.BATTLEFIELD, playerA, "Farrelite Priest", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertAllCommandsUsed();
-
-        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 5, manaOptions.size());
-        assertManaOptions("{W}{W}{W}{W}", manaOptions);
-        assertManaOptions("{W}{W}{W}{B}", manaOptions);
-        assertManaOptions("{W}{W}{B}{B}", manaOptions);
-        assertManaOptions("{W}{B}{B}{B}", manaOptions);
-        assertManaOptions("{B}{B}{B}{B}", manaOptions);
-    }
-
-    @Test
-    public void TestMorselhoarder() {
-        setStrictChooseMode(true);
-        // Morselhoarder enters the battlefield with two -1/-1 counters on it.
-        // Remove a -1/-1 counter from Morselhoarder: Add one mana of any color.
-        addCard(Zone.BATTLEFIELD, playerA, "Morselhoarder", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertAllCommandsUsed();
-
-        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        assertManaOptions("{B}{B}{Any}{Any}{Any}{Any}", manaOptions);
-    }
 
     @Test
     public void TestChromaticOrrery() {
@@ -314,4 +261,84 @@ public class TappedForManaRelatedTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{C}{C}{C}{C}", manaOptions);
     }
+
+    @Test
+    public void TestViridianJoiner() {
+        setStrictChooseMode(true);
+        
+        // {T}: Add an amount of {G} equal to Viridian Joiner's power.
+        addCard(Zone.HAND, playerA, "Viridian Joiner", 1); // Creature {2}{G}  1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        addCard(Zone.HAND, playerB, "Giant Growth", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Viridian Joiner");
+        
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB,  "Giant Growth", "Viridian Joiner");
+        
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerB, "Giant Growth", 1);
+        assertPowerToughness(playerA, "Viridian Joiner", 4, 5);
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+    }    
+    
+    @Test
+    public void TestPriestOfYawgmoth() {
+        setStrictChooseMode(true);
+        
+        // {T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's converted mana cost.     
+        addCard(Zone.BATTLEFIELD, playerA, "Priest of Yawgmoth", 1); // Creature {1}{B}  1/2
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Abandoned Sarcophagus", 1); // {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Accorder's Shield", 1);  // {0}
+        addCard(Zone.BATTLEFIELD, playerA, "Adarkar Sentinel", 1); // {5}
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{B}{B}{B}{B}{B}", manaOptions);
+    }    
+
+    @Test
+    public void TestParadiseMantle() {
+        setStrictChooseMode(true);
+        
+        // Equipped creature has "{T}: Add one mana of any color."
+        // Equip {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Paradise Mantle", 1); // Creature {1}{B}  1/2
+
+        // Flying;
+        // {2}, {untap}: Add one mana of any color.        
+        addCard(Zone.BATTLEFIELD, playerA, "Pili-Pala", 1); // Artifact Creature (1/1)
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);  
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        addTarget(playerA, "Pili-Pala"); // Select a creature you control
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAllCommandsUsed();
+        
+        Permanent pp = getPermanent("Pili-Pala");
+        Assert.assertTrue("Pili-Pala has 1 attachment", pp.getAttachments().size() == 1);
+        
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertManaOptions("{Any}", manaOptions);
+    }    
+    
 }

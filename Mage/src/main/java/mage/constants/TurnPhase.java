@@ -1,15 +1,14 @@
 package mage.constants;
 
 /**
- *
  * @author North
  */
 public enum TurnPhase {
-    BEGINNING ("Beginning"),
-    PRECOMBAT_MAIN ("Precombat Main"),
-    COMBAT ("Combat"),
-    POSTCOMBAT_MAIN ("Postcombat Main"),
-    END ("End");
+    BEGINNING("Beginning"),
+    PRECOMBAT_MAIN("Precombat Main"),
+    COMBAT("Combat"),
+    POSTCOMBAT_MAIN("Postcombat Main"),
+    END("End");
 
     private final String text;
 
@@ -22,4 +21,7 @@ public enum TurnPhase {
         return text;
     }
 
+    public boolean isMain() {
+        return this == PRECOMBAT_MAIN || this == POSTCOMBAT_MAIN;
+    }
 }

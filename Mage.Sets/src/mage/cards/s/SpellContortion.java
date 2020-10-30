@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.costs.mana.GenericManaCost;

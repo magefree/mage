@@ -65,6 +65,7 @@ class JayaBallardCastFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
         if (card != null
+                && card.isOwnedBy(affectedControllerId)
                 && affectedControllerId.equals(source.getControllerId())
                 && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)
                 && Zone.GRAVEYARD.equals(game.getState().getZone(card.getId()))) {

@@ -18,7 +18,7 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
     private final FilterObject filter;
 
     public GainAbilitySpellsEffect(Ability ability, FilterObject filter) {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
         staticText = filter.getMessage() + " have " + ability.getRule();

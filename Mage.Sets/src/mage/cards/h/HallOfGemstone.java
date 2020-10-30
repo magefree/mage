@@ -2,7 +2,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;

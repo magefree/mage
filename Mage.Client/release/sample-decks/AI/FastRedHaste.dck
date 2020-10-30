@@ -7,7 +7,7 @@ NAME:FastRedHaste
 1 [C16:16] Charging Cinderhorn
 1 [M13:200] Akroma's Memorial
 1 [RAV:193] Boros Swiftblade
-1 [3ED:296] Plateau
+1 [3ED:284] Plateau
 1 [EMN:149] Weaver of Lightning
 1 [BNG:108] Satyr Firedancer
 1 [WTH:93] Cinder Giant
@@ -16,7 +16,7 @@ NAME:FastRedHaste
 1 [BFZ:150] Outnumber
 1 [M14:139] Flames of the Firebrand
 1 [INV:11] Crimson Acolyte
-1 [LEG:247] Hammerheim
+1 [LEG:302] Hammerheim
 1 [KLD:246] Inspiring Vantage
 1 [DGM:107] Tajic, Blade of the Legion
 1 [GTC:97] Legion Loyalist
@@ -32,7 +32,7 @@ NAME:FastRedHaste
 1 [ISD:4] Avacynian Priest
 1 [ODY:200] Lava Blister
 1 [EVE:139] Figure of Destiny
-1 [LEG:175] Clergy of the Holy Nimbus
+1 [LEG:6] Clergy of the Holy Nimbus
 1 [LEG:133] Beasts of Bogardan
 1 [DTK:151] Roast
 1 [ME4:113] Fire Imp
@@ -55,7 +55,7 @@ NAME:FastRedHaste
 1 [HOU:92] Firebrand Archer
 1 [AVR:141] Hound of Griselbrand
 1 [ONS:189] Blistering Firecat
-1 [VIS:125] Zhalfirin Crusader
+1 [VIS:25] Zhalfirin Crusader
 1 [RAV:243] Boros Recruit
 1 [ROE:15] Caravan Escort
 1 [C14:40] Volcanic Offering
@@ -73,5 +73,5 @@ NAME:FastRedHaste
 1 [DTK:134] Draconic Roar
 1 [2ED:245] Gauntlet of Might
 1 [ONS:199] Dwarven Blastminer
-LAYOUT MAIN:(1,8)(CARD_TYPE,false,50)|([KLD:236])([M13:200],[RAV:255],[2ED:245])([BNG:108])([M15:35],[C16:16],[EMN:149],[KLD:130],[TSB:72],[ISD:23],[ISD:4],[LEG:133],[ZEN:127],[HOU:104],[HOU:103],[AVR:141],[ONS:189],[RAV:243],[ROE:15],[SOI:190],[KTK:118],[MMQ:53],[ONS:199],[DKA:93],[WTH:93],[DGM:56],[INV:11],[DGM:107],[GTC:97],[USG:11],[AKH:21],[M12:133],[LEG:175],[ME4:113],[M11:129],[OGW:105],[M13:148],[M10:34],[HOU:92],[VIS:125],[EVE:139],[KTK:11],[DIS:10],[RAV:193],[GTC:215])([SOI:28])([ZEN:119],[CHK:40],[C14:40],[M11:149],[DTK:134],[8ED:200],[ZEN:142],[WWK:90],[TSP:180],[BFZ:150],[HOU:20],[FUT:115],[RAV:213],[DKA:84])([DOM:262],[DOM:250],[DOM:250],[DOM:250],[DOM:250],[KLD:246],[OGW:175],[DOM:262],[DOM:262],[DOM:262],[DOM:262],[DOM:250],[LEG:247],[DOM:262],[DOM:262],[DOM:262],[DOM:262],[DOM:250],[DOM:250],[DOM:262],[DOM:262],[3ED:296],[DOM:250],[DOM:262],[DOM:262],[DOM:262],[DOM:262],[DOM:250],[DOM:250],[DOM:250],[DOM:250],[DOM:262])([ODY:193],[XLN:145],[DTK:151],[ODY:193],[ORI:143],[ODY:200],[C15:28],[M14:139])
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,50)|([KLD:236])([M13:200],[RAV:255],[2ED:245])([BNG:108])([M15:35],[C16:16],[EMN:149],[KLD:130],[TSB:72],[ISD:23],[ISD:4],[LEG:133],[ZEN:127],[HOU:104],[HOU:103],[AVR:141],[ONS:189],[RAV:243],[ROE:15],[SOI:190],[KTK:118],[MMQ:53],[ONS:199],[DKA:93],[WTH:93],[DGM:56],[INV:11],[DGM:107],[GTC:97],[USG:11],[AKH:21],[M12:133],[LEG:6],[ME4:113],[M11:129],[OGW:105],[M13:148],[M10:34],[HOU:92],[VIS:25],[EVE:139],[KTK:11],[DIS:10],[RAV:193],[GTC:215])([SOI:28])([ZEN:119],[CHK:40],[C14:40],[M11:149],[DTK:134],[8ED:200],[ZEN:142],[WWK:90],[TSP:180],[BFZ:150],[HOU:20],[FUT:115],[RAV:213],[DKA:84])([DOM:262],[DOM:250],[DOM:250],[DOM:250],[DOM:250],[KLD:246],[OGW:175],[DOM:262],[DOM:262],[DOM:262],[DOM:262],[DOM:250],[LEG:302],[DOM:262],[DOM:262],[DOM:262],[DOM:262],[DOM:250],[DOM:250],[DOM:262],[DOM:262],[3ED:284],[DOM:250],[DOM:262],[DOM:262],[DOM:262],[DOM:262],[DOM:250],[DOM:250],[DOM:250],[DOM:250],[DOM:262])([ODY:193],[XLN:145],[DTK:151],[ODY:193],[ORI:143],[ODY:200],[C15:28],[M14:139])
 LAYOUT SIDEBOARD:(0,0)(CMC,true,50)|

@@ -152,8 +152,7 @@ class ManaCanBeSpentAsAnyColorEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && game.getState().getPlayersInRange(controller.getId(), game).contains(affectedControllerId);
+        return game.getState().getPlayersInRange(source.getControllerId(), game).contains(affectedControllerId);
     }
 
     @Override

@@ -5,7 +5,7 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.AdaptAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.SimpleManaAbility;

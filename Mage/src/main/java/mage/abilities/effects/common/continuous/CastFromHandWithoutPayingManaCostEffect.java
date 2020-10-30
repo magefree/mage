@@ -20,9 +20,8 @@ import java.util.UUID;
 
 public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImpl {
 
-    private final FilterCard filter;
-    private final boolean fromHand;
-
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility;
+    
     public CastFromHandWithoutPayingManaCostEffect() {
         this(StaticFilters.FILTER_CARDS_NON_LAND, true);
     }
@@ -33,8 +32,13 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
 
     public CastFromHandWithoutPayingManaCostEffect(FilterCard filter, boolean fromHand, Duration duration) {
         super(duration, Outcome.Detriment);
-        this.filter = filter;
-        this.fromHand = fromHand;
+        Condition condition;
+        if (fromHand) {
+            condition = new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance);
+        } else {
+            condition = SourceIsSpellCondition.instance;
+        }        
+        this.alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, condition, null, filter, true);
         this.staticText = "You may cast " + filter.getMessage()
                 + (fromHand ? " from your hand" : "")
                 + " without paying their mana costs";
@@ -42,8 +46,7 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
 
     private CastFromHandWithoutPayingManaCostEffect(final CastFromHandWithoutPayingManaCostEffect effect) {
         super(effect);
-        this.filter = effect.filter;
-        this.fromHand = effect.fromHand;
+        this.alternativeCastingCostAbility = effect.alternativeCastingCostAbility;
     }
 
     @Override
@@ -52,20 +55,18 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     }
 
     @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
+        super.init(source, game, activePlayerId);
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        Condition condition;
-        if (fromHand) {
-            condition = new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance);
-        } else {
-            condition = SourceIsSpellCondition.instance;
-        }
-        controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
-                null, condition, null, filter, true
-        ));
+        controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
         return true;
     }
 
@@ -92,7 +93,7 @@ enum IsBeingCastFromHandCondition implements Condition {
         }
         if (object instanceof Spell) { // needed to check if it can be cast by alternate cost
             Spell spell = (Spell) object;
-            return spell.getFromZone() == Zone.HAND;
+            return Zone.HAND.equals(spell.getFromZone());
         }
         if (object instanceof Card) { // needed for the check what's playable
             Card card = (Card) object;

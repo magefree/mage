@@ -456,9 +456,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Update Seats Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Seats Task error", ex);
         } catch (CancellationException ex) {
         }

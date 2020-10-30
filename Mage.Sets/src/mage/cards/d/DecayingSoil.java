@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -55,7 +55,7 @@ public final class DecayingSoil extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
-                        new CardsInControllerGraveCondition(7),
+                        new CardsInControllerGraveyardCondition(7),
                         "As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

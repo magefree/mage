@@ -135,6 +135,6 @@ class MindreaverNamePredicate implements Predicate<MageObject> {
 
     @Override
     public String toString() {
-        return "spell with the same name as a card exiled with {source}";
+        return "spell with the same name as a card exiled with {this}";
     }
 }

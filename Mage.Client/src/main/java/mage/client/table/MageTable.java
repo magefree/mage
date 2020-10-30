@@ -23,6 +23,10 @@ public class MageTable extends JTable {
     public MageTable(TableInfo tableInfo) {
         this.tableInfo = tableInfo;
     }
+    
+    public void setTableInfo(TableInfo tableInfo) {
+        this.tableInfo = tableInfo;
+    }
 
     @Override
     public String getToolTipText(MouseEvent e) {
@@ -43,11 +47,15 @@ public class MageTable extends JTable {
     protected JTableHeader createDefaultTableHeader() {
         // default tooltip for headers
         return new JTableHeader(columnModel) {
+            @Override
             public String getToolTipText(MouseEvent e) {
                 // html tooltip
                 java.awt.Point p = e.getPoint();
                 int colIndex = columnModel.getColumnIndexAtX(p.x);
                 TableColumn col = columnModel.getColumn(colIndex);
+                if (colIndex < 0) {
+                    return "";
+                }
                 int realIndex = col.getModelIndex();
 
                 String tip;

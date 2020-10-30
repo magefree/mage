@@ -12,7 +12,7 @@ public enum Duration {
     EndOfTurn("until end of turn", true, true),
     UntilYourNextTurn("until your next turn", true, true),
     UntilEndOfYourNextTurn("until the end of your next turn", true, true),
-    UntilSourceLeavesBattlefield("until {source} leaves the battlefield", true, false), // supported for continuous layered effects
+    UntilSourceLeavesBattlefield("until {this} leaves the battlefield", true, false), // supported for continuous layered effects
     EndOfCombat("until end of combat", true, true),
     EndOfStep("until end of phase step", true, true),
     Custom("", true, true);

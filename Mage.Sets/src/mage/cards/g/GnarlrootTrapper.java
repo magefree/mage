@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.ConditionalMana;
@@ -21,20 +20,19 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class GnarlrootTrapper extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("attacking ELf you control");
 
     static {
         filter.add(AttackingPredicate.instance);
@@ -42,7 +40,7 @@ public final class GnarlrootTrapper extends CardImpl {
     }
 
     public GnarlrootTrapper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
@@ -57,7 +55,7 @@ public final class GnarlrootTrapper extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target attacking Elf you control gains deathtouch until end of turn. <i>(Any amount of damage it deals to a creature is enough to destroy it.)</i>");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 
     }
@@ -91,10 +89,8 @@ class GnarlrootTrapperManaCondition extends CreatureCastManaCondition {
     public boolean apply(Game game, Ability source) {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.hasSubtype(SubType.ELF, game)
-                    && object.isCreature()) {
-                return true;
-            }
+            return object != null && object.hasSubtype(SubType.ELF, game)
+                    && object.isCreature();
         }
         return false;
     }

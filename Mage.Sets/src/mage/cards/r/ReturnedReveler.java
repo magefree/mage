@@ -4,7 +4,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class ReturnedReveler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Returned Reveler dies, each player puts the top three cards of their library into their graveyard.
-        this.addAbility(new DiesSourceTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.ANY)));
+        this.addAbility(new DiesSourceTriggeredAbility(new MillCardsEachPlayerEffect(3, TargetController.ANY)));
     }
 
     public ReturnedReveler(final ReturnedReveler card) {

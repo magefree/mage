@@ -40,7 +40,7 @@ public final class PsychicRebuttal extends CardImpl {
         // Counter target instant or sorcery spell that targets you.
         this.getSpellAbility().addEffect(new PsychicRebuttalEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
     }
 
     public PsychicRebuttal(final PsychicRebuttal card) {
@@ -58,7 +58,7 @@ class PsychicRebuttalEffect extends OneShotEffect {
     public PsychicRebuttalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target instant or sorcery spell that targets you."
-                + "<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy";
+                + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy";
     }
 
     public PsychicRebuttalEffect(final PsychicRebuttalEffect effect) {

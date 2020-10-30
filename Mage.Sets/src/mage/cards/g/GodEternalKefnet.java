@@ -2,8 +2,8 @@ package mage.cards.g;
 
 import java.awt.*;
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.GodEternalDiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -98,7 +98,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
             you.moveCardToHandWithInfo(copiedCard, source.getSourceId(), game, true); // The copy is created in and cast from your hand.
-            you.cast(copiedCard.getSpellAbility(), game, false, new MageObjectReference(source.getSourceObject(game), game));
+            you.cast(copiedCard.getSpellAbility(), game, false, new ApprovingObject(source, game));
         }
 
         // draw (return false for default draw)

@@ -54,7 +54,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
 
     public BrainGorgersCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "any player may sacrifice a creature. If a player does, counter {source}";
+        staticText = "any player may sacrifice a creature. If a player does, counter {this}";
     }
 
     public BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {

@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class ChillOfForeboding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Each player puts the top five cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(5, TargetController.ANY));
+        this.getSpellAbility().addEffect(new MillCardsEachPlayerEffect(5, TargetController.ANY));
 
         // Flashback {7}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), TimingRule.SORCERY));

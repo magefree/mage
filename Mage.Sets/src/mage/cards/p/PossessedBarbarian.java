@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -52,18 +52,18 @@ public final class PossessedBarbarian extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // Threshold - As long as seven or more cards are in your graveyard, Possessed Barbarian gets +1/+1, is black, and has "{2}{B}, {tap}: Destroy target red creature."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
 
         Effect effect = new ConditionalContinuousEffect(new BecomesColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
-            new CardsInControllerGraveCondition(7), ", is black");
+            new CardsInControllerGraveyardCondition(7), ", is black");
         ability.addEffect(effect);
 
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}"));
         gainedAbility.addCost(new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(gainedAbility),
-            new CardsInControllerGraveCondition(7), ", and has \"{2}{B}, {T}: Destroy target red creature.\"");
+            new CardsInControllerGraveyardCondition(7), ", and has \"{2}{B}, {T}: Destroy target red creature.\"");
         ability.addEffect(effect);
 
         ability.setAbilityWord(AbilityWord.THRESHOLD);

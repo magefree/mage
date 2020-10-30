@@ -1,16 +1,13 @@
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.KickerAbility;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
-import java.util.List;
 
 /**
  * @author JayDi85

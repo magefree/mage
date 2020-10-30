@@ -102,6 +102,6 @@ class WolfwillowHavenTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds an additional {G}";
+        return "Whenever enchanted land is tapped for mana, its controller adds an additional {G}.";
     }
 }

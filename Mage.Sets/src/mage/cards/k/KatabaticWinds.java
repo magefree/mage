@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -119,14 +118,12 @@ class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability.isPresent()
+        return ability.isPresent()
                 && object != null
                 && object.isCreature()
                 && object.getAbilities().contains(FlyingAbility.getInstance())
-                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())) {
-            return ability.get().getCosts().stream().anyMatch((cost) -> (cost instanceof TapSourceCost));
-        }
-        return false;
+                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())
+                && ability.get().hasTapCost();
     }
 
     @Override

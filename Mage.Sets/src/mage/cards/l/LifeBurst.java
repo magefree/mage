@@ -31,7 +31,7 @@ public final class LifeBurst extends CardImpl {
         // Target player gains 4 life, then gains 4 life for each card named Life Burst in each graveyard.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(4));
         Effect effect = new GainLifeTargetEffect(new MultipliedValue(new CardsInAllGraveyardsCount(filter), 4));
-        effect.setText(", then gains 4 life for each card named {source} in each graveyard");
+        effect.setText(", then gains 4 life for each card named {this} in each graveyard");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

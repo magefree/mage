@@ -40,7 +40,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import java.util.*;
-import java.util.Map.Entry;
 
 import static mage.client.dialog.PreferencesDialog.*;
 
@@ -206,9 +205,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnExpansionSearch.setVisible(false);
         this.limited = true;
         this.cards.clear();
-        for (Card card : sideboard) {
-            this.cards.add(card);
-        }
+        this.cards.addAll(sideboard);
         filterCards();
     }
 

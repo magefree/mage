@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Watcher stores with which creature subtypes a player made combat damage to

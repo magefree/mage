@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -44,7 +44,7 @@ public final class RebornHero extends CardImpl {
                         new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DoIfCostPaid(
                                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{W}{W}")
                         ))),
-                        new CardsInControllerGraveCondition(7),
+                        new CardsInControllerGraveyardCondition(7),
                         "As long as seven or more cards are in your graveyard, "
                         + "{this} has \"When {this} dies, you may pay {W}{W}. "
                         + "If you do, return {this} to the battlefield under your control.\""

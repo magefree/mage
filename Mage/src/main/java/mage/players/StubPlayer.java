@@ -226,11 +226,6 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public void removePhyrexianFromColors(FilterMana colors) {
-        
-    }
-
-    @Override
     public FilterMana getPhyrexianColors() {
         return (new FilterMana());
     }

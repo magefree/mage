@@ -21,7 +21,6 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetControlledPermanent;
 
@@ -35,7 +34,7 @@ public final class TrapDigger extends CardImpl {
     private static final FilterAttackingCreature filter2 = new FilterAttackingCreature("attacking creature without flying");
 
     static {
-        filter1.add(new CounterPredicate(CounterType.TRAP));
+        filter1.add(CounterType.TRAP.getPredicate());
         filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

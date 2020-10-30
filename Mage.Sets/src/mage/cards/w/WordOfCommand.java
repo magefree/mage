@@ -1,7 +1,6 @@
 package mage.cards.w;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -25,6 +24,7 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author L_J
@@ -119,7 +119,7 @@ class WordOfCommandEffect extends OneShotEffect {
                 boolean canPlay = checkPlayability(card, targetPlayer, game, source);
                 while (canPlay
                         && targetPlayer.canRespond()
-                        && !targetPlayer.playCard(card, game, false, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                        && !targetPlayer.playCard(card, game, false, true, new ApprovingObject(source, game))) {
                     SpellAbility spellAbility = card.getSpellAbility();
                     if (spellAbility != null) {
                         spellAbility.getManaCostsToPay().clear();

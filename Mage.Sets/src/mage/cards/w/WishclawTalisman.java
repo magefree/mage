@@ -41,7 +41,7 @@ public final class WishclawTalisman extends CardImpl {
         // Wishclaw Talisman enters the battlefield with three wish counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.WISH.createInstance(3)),
-                "{this} enters the battlefield with three wish counters on it"
+                "with three wish counters on it"
         ));
 
         // {1}, {T}, Remove a wish counter from Wishclaw Talisman: Search your library for a card, put it into your hand, then shuffle your library. An opponent gains control of Wishclaw Talisman. Activate this ability only during your turn.

@@ -70,6 +70,6 @@ class WickedAkubaPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
 
     @Override
     public String toString() {
-        return "(Player dealt damage by {source} this turn)";
+        return "(Player dealt damage by {this} this turn)";
     }
 }

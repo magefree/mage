@@ -21,7 +21,7 @@ public final class ElementalTokenWithHaste extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C20", "MBP", "OGW", "SOK", "MRD");
+        availableImageSetCodes = Arrays.asList("C20", "PMEI", "OGW", "SOK", "MRD");
     }
 
     public ElementalTokenWithHaste(final ElementalTokenWithHaste token) {

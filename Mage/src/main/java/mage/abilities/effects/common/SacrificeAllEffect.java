@@ -88,7 +88,8 @@ public class SacrificeAllEffect extends OneShotEffect {
             sb.append(amount.toString());
             sb.append(' ');
         } else if (!filter.getMessage().startsWith("a ")) {
-            sb.append(CardUtil.numberToText(amount.toString(), "a "));
+            sb.append(CardUtil.numberToText(amount.toString(), "a"));
+            sb.append(' ');
         }
         sb.append(filter.getMessage());
         staticText = sb.toString();

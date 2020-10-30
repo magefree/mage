@@ -60,7 +60,7 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
     
     KjeldoranRoyalGuardEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
-        staticText = "All combat damage that would be dealt to you by unblocked creatures this turn is dealt to {source} instead";
+        staticText = "All combat damage that would be dealt to you by unblocked creatures this turn is dealt to {this} instead";
     }
 
     KjeldoranRoyalGuardEffect(final KjeldoranRoyalGuardEffect effect) {

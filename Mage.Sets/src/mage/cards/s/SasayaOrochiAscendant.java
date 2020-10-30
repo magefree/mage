@@ -9,7 +9,7 @@ import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.common.RevealHandSourceControllerCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;

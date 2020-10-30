@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common.enterAttribute;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;

@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -111,7 +110,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(new CounterPredicate(CounterType.HIT));
+        filter.add(CounterType.HIT.getPredicate());
     }
 
     public EtrataTheSilencerEffect() {

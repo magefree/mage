@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -152,7 +151,7 @@ class BombSquadBeginningEffect extends OneShotEffect {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a fuse counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.FUSE));
+        filter.add(CounterType.FUSE.getPredicate());
     }
 
     public BombSquadBeginningEffect() {

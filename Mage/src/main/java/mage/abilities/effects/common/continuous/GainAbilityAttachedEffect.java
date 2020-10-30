@@ -15,6 +15,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     protected Ability ability;
     protected AttachmentType attachmentType;
     protected boolean independentEffect;
+    protected String targetObjectName;
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
         this(ability, attachmentType, Duration.WhileOnBattlefield);
@@ -25,7 +26,12 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration, String rule) {
+        this(ability, attachmentType, duration, rule, "creature");
+    }
+
+    public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration, String rule, String targetObjectName) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.targetObjectName = targetObjectName;
         this.ability = ability;
         this.attachmentType = attachmentType;
         switch (duration) {
@@ -54,6 +60,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
         this.attachmentType = effect.attachmentType;
         this.independentEffect = effect.independentEffect;
+        this.targetObjectName = effect.targetObjectName;
     }
 
     @Override
@@ -96,13 +103,13 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append(attachmentType.verb());
-        sb.append(" creature ");
+        sb.append(" " + targetObjectName + " ");
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");
         } else {
             sb.append("gains ");
         }
-        sb.append(ability.getRule("this creature"));
+        sb.append(ability.getRule("this " + targetObjectName));
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }

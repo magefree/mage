@@ -68,7 +68,7 @@ class ArcTrailEffect extends OneShotEffect {
 
     private ArcTrailEffect() {
         super(Outcome.Damage);
-        staticText = "{source} deals 2 damage to any target and 1 damage to another target";
+        staticText = "{this} deals 2 damage to any target and 1 damage to another target";
     }
 
     @Override

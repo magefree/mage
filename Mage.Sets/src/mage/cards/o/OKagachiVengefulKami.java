@@ -1,36 +1,29 @@
-
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.watchers.common.PlayersAttackedLastTurnWatcher;
+import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
- *
- * @author spjspj
+ * @author TheElk801
  */
 public final class OKagachiVengefulKami extends CardImpl {
 
@@ -50,12 +43,10 @@ public final class OKagachiVengefulKami extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever O-Kagachi, Vengeful Kami deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls
-        OKagachiVengefulKamiTriggeredAbility ability = new OKagachiVengefulKamiTriggeredAbility();
-        ability.addWatcher(new PlayersAttackedLastTurnWatcher());
-        this.addAbility(ability);
+        this.addAbility(new OKagachiVengefulKamiTriggeredAbility());
     }
 
-    public OKagachiVengefulKami(final OKagachiVengefulKami card) {
+    private OKagachiVengefulKami(final OKagachiVengefulKami card) {
         super(card);
     }
 
@@ -67,18 +58,13 @@ public final class OKagachiVengefulKami extends CardImpl {
 
 class OKagachiVengefulKamiTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean madeDamge = false;
-    private Set<UUID> damagedPlayers = new HashSet<>();
-
-    public OKagachiVengefulKamiTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new OKagachiVengefulKamiEffect(), false);
+    OKagachiVengefulKamiTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);
+        this.addWatcher(new OKagachiVengefulKamiWatcher());
     }
 
-    public OKagachiVengefulKamiTriggeredAbility(final OKagachiVengefulKamiTriggeredAbility ability) {
+    private OKagachiVengefulKamiTriggeredAbility(final OKagachiVengefulKamiTriggeredAbility ability) {
         super(ability);
-        this.madeDamge = ability.madeDamge;
-        this.damagedPlayers = new HashSet<>();
-        this.damagedPlayers.addAll(ability.damagedPlayers);
     }
 
     @Override
@@ -93,55 +79,68 @@ class OKagachiVengefulKamiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            UUID damagedPlayerId = game.getCombat().getDefenderId(sourceId);
-            UUID you = this.getControllerId();
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId())) {
-                PlayersAttackedLastTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedLastTurnWatcher.class);
-                if (watcher != null && watcher.attackedLastTurn(damagedPlayerId, you)) {
-                    FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent defending player controls");
-                    filter.add(new ControllerIdPredicate(damagedPlayerId));
-                    this.getTargets().clear();
-                    TargetPermanent target = new TargetPermanent(filter);
-                    this.addTarget(target);
+        Player player = game.getPlayer(event.getTargetId());
+        if (player == null
+                || !((DamagedPlayerEvent) event).isCombatDamage()
+                || !event.getSourceId().equals(getSourceId())) {
+            return false;
+        }
+        this.getEffects().setValue("damagedPlayer", event.getTargetId());
+        FilterPermanent filter = new FilterNonlandPermanent("nonland permanent controlled by " + player.getName());
+        filter.add(new ControllerIdPredicate(event.getTargetId()));
+        this.getTargets().clear();
+        this.addTarget(new TargetPermanent(filter));
+        return true;
+    }
 
-                    return true;
-                }
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        OKagachiVengefulKamiWatcher watcher = game.getState().getWatcher(OKagachiVengefulKamiWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
+        UUID playerId = null;
+        for (Effect effect : this.getEffects()) {
+            Object obj = effect.getValue("damagedPlayer");
+            if (obj instanceof UUID) {
+                playerId = (UUID) obj;
+                break;
             }
         }
-        return false;
+        return watcher.checkPlayer(getControllerId(), playerId);
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls";
+        return "Whenever {this} deals combat damage to a player, " +
+                "if that player attacked you during their last turn, " +
+                "exile target nonland permanent that player controls";
     }
 }
 
-class OKagachiVengefulKamiEffect extends OneShotEffect {
+class OKagachiVengefulKamiWatcher extends Watcher {
 
-    public OKagachiVengefulKamiEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "if that player attacked you during their last turn, exile target nonland permanent that player controls";
-    }
+    private final Map<UUID, Set<UUID>> playerMap = new HashMap<>();
 
-    public OKagachiVengefulKamiEffect(final OKagachiVengefulKamiEffect effect) {
-        super(effect);
+    OKagachiVengefulKamiWatcher() {
+        super(WatcherScope.GAME);
     }
 
     @Override
-    public OKagachiVengefulKamiEffect copy() {
-        return new OKagachiVengefulKamiEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return new ExileTargetEffect().apply(game, source);
+    public void watch(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case BEGINNING_PHASE_PRE:
+                playerMap.remove(game.getActivePlayerId());
+                return;
+            case ATTACKER_DECLARED:
+                playerMap.computeIfAbsent(event.getPlayerId(), x -> new HashSet<>()).add(event.getTargetId());
+                return;
         }
-        return false;
+    }
+
+    boolean checkPlayer(UUID attackerId, UUID defenderId) {
+        return attackerId != null
+                && defenderId != null
+                && playerMap.computeIfAbsent(attackerId, x -> new HashSet<>()).contains(defenderId);
     }
 }

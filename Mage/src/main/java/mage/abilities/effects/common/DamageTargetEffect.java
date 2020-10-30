@@ -24,7 +24,7 @@ public class DamageTargetEffect extends OneShotEffect {
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer;
-    protected String sourceName = "{source}";
+    protected String sourceName = "{this}";
 
     public DamageTargetEffect(int amount) {
         this(StaticValue.get(amount), true);

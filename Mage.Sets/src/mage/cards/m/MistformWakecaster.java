@@ -12,7 +12,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;

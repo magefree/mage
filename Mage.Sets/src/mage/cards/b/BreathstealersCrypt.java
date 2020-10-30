@@ -1,15 +1,12 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -19,7 +16,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class BreathstealersCrypt extends CardImpl {
@@ -28,8 +24,7 @@ public final class BreathstealersCrypt extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
 
         // If a player would draw a card, instead they draw a card and reveals it. If it's a creature card, that player discards it unless they pay 3 life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BreathstealersCryptEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new BreathstealersCryptEffect()));
     }
 
     public BreathstealersCrypt(final BreathstealersCrypt card) {
@@ -44,12 +39,13 @@ public final class BreathstealersCrypt extends CardImpl {
 
 class BreathstealersCryptEffect extends ReplacementEffectImpl {
 
-    public BreathstealersCryptEffect() {
+    BreathstealersCryptEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseLife);
-        staticText = "If a player would draw a card, instead they draw a card and reveal it. If it's a creature card, that player discards it unless they pay 3 life";
+        staticText = "If a player would draw a card, instead they draw a card and reveal it. " +
+                "If it's a creature card, that player discards it unless they pay 3 life";
     }
 
-    public BreathstealersCryptEffect(final BreathstealersCryptEffect effect) {
+    private BreathstealersCryptEffect(final BreathstealersCryptEffect effect) {
         super(effect);
     }
 
@@ -66,29 +62,28 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            Cards oldHand = player.getHand().copy();
-            if (player.drawCards(1, event.getSourceId(), game, event.getAppliedEffects()) > 0) {
-                Cards drawnCards = player.getHand().copy();
-                drawnCards.removeAll(oldHand);
-                player.revealCards(source, "The card drawn from " + player.getName() + "'s library.", drawnCards, game);
-                for (Card cardDrawn : drawnCards.getCards(game)) {
-                    if (cardDrawn.isCreature()) {
-                        game.informPlayers("The card drawn by " + player.getName() + " is a creature card.  He/she must pay 3 life or that card gets discarded.");
-                        PayLifeCost cost = new PayLifeCost(3);
-                        if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                                && player.chooseUse(outcome, "Do you wish to pay 3 life to keep the card " + cardDrawn.getIdName() + "?  If not, you discard it.", source, game)) {
-                            cost.pay(source, game, source.getSourceId(), player.getId(), true, cost);
-                        } else {
-                            game.informPlayers("The cost of 3 life was not paid by " + player.getName() + ", so " + cardDrawn.getIdName() + " will be discarded.");
-                            player.discard(cardDrawn, source, game);
-                        }
-                    }
-                }
-            }
+        if (player == null) {
+            return false;
+        }
+        Card cardDrawn = player.getLibrary().getFromTop(game);
+        // Gatherer ruling (2007-02-01)
+        // If the draw is replaced by another effect, none of the rest of Fa’adiyah Seer’s ability applies,
+        // even if the draw is replaced by another draw (such as with Enduring Renewal).
+        if (cardDrawn == null || player.drawCards(1, event.getSourceId(), game, event.getAppliedEffects()) != 1) {
             return true;
         }
-        return false;
+        player.revealCards(source, new CardsImpl(cardDrawn), game);
+        if (!cardDrawn.isCreature()) {
+            return true;
+        }
+        game.informPlayers("The card drawn by " + player.getName() + " is a creature card.  They discard that card unless they pay 3 life.");
+        PayLifeCost cost = new PayLifeCost(3);
+        if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+                || !player.chooseUse(outcome, "Pay 3 life or discard " + cardDrawn.getIdName() + "?", null, "Pay 3 life", "Discard", source, game)
+                || !cost.pay(source, game, source.getSourceId(), player.getId(), true, cost)) {
+            player.discard(cardDrawn, source, game);
+        }
+        return true;
     }
 
     @Override

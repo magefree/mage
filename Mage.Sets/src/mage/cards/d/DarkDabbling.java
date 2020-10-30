@@ -30,7 +30,7 @@ public final class DarkDabbling extends CardImpl {
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control.
         this.getSpellAbility().addEffect(new DarkDabblingEffect());
     }
 
@@ -48,7 +48,7 @@ class DarkDabblingEffect extends OneShotEffect {
 
     public DarkDabblingEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control";
+        this.staticText = "<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control";
     }
 
     public DarkDabblingEffect(final DarkDabblingEffect effect) {

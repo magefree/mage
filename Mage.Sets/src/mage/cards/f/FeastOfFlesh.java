@@ -34,7 +34,7 @@ public final class FeastOfFlesh extends CardImpl {
         Effect effect1 = new DamageTargetEffect(value);
         effect1.setText("Feast of Flesh deals X damage to target creature");
         Effect effect2 = new GainLifeEffect(value);
-        effect2.setText("and you gain X life, where X is 1 plus the number of cards named {source} in all graveyards");
+        effect2.setText("and you gain X life, where X is 1 plus the number of cards named {this} in all graveyards");
         this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addEffect(effect2);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

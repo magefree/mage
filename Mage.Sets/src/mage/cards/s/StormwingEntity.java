@@ -1,8 +1,5 @@
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,12 +15,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.watchers.common.SpellsCastWatcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -44,7 +42,7 @@ public final class StormwingEntity extends CardImpl {
         // This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
                 new ManaCostsImpl("{2}{U}"), StormwingEntityCondition.instance
-        )).setRuleAtTheTop(true).addHint(hint), new StormwingEntityWatcher());
+        )).setRuleAtTheTop(true).addHint(hint), new SpellsCastWatcher());
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -71,38 +69,25 @@ enum StormwingEntityCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StormwingEntityWatcher watcher = game.getState().getWatcher(StormwingEntityWatcher.class);
-        return watcher != null && watcher.checkPlayer(source.getControllerId());
-    }
-}
-
-class StormwingEntityWatcher extends Watcher {
-
-    private final Set<UUID> playerMap = new HashSet<>();
-
-    StormwingEntityWatcher() {
-        super(WatcherScope.GAME);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        if (watcher == null) {
+            return false;
+        }
+        List<Spell> spells = watcher.getSpellsCastThisTurn(source.getControllerId());
+        if (spells == null) {
+            return false;
+        }
+        for (Spell spell : spells) {
+            if (!spell.getSourceId().equals(source.getSourceId())
+                    && spell.isInstantOrSorcery()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
-            return;
-        }
-        Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery()) {
-            return;
-        }
-        playerMap.add(event.getPlayerId());
-    }
-
-    @Override
-    public void reset() {
-        playerMap.clear();
-        super.reset();
-    }
-
-    boolean checkPlayer(UUID playerId) {
-        return playerMap.contains(playerId);
+    public String toString() {
+        return "you've cast an instant or sorcery spell this turn";
     }
 }

@@ -26,7 +26,7 @@ public final class WaveWingElemental extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Landfall</i> — Whenever a land enters the battlefield under your control, Wave-Wing Elemental gets +2/+2 until end of turn.
+        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, Wave-Wing Elemental gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
 
     }

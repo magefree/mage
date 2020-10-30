@@ -191,12 +191,8 @@ public final class GuiDisplayUtil {
         // counters
         if (card.getMageObjectType().canHaveCounters()) {
             java.util.List<CounterView> counters = new ArrayList<>();
-            if (card instanceof PermanentView) {
-                if (card.getCounters() != null) {
-                    counters = new ArrayList<>(card.getCounters());
-                }
-            } else if (card.getCounters() != null) {
-                counters = new ArrayList<>(card.getCounters());
+            if (card.getCounters() != null) {
+                counters.addAll(card.getCounters());
             }
             if (!counters.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
@@ -406,9 +402,7 @@ public final class GuiDisplayUtil {
     }
 
     private static String replaceNamesInRule(String rule, String cardName) {
-        String res = rule.replaceAll("\\{this\\}", cardName.isEmpty() ? "this" : cardName);
-        res = res.replaceAll("\\{source\\}", cardName.isEmpty() ? "this" : cardName);
-        return res;
+        return rule.replaceAll("\\{this\\}", cardName.isEmpty() ? "this" : cardName);
     }
 
     private static String getResourcePath(String image) {

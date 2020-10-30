@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class VisionsOfBrutality extends CardImpl {
 
     public VisionsOfBrutality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add(SubType.AURA);
 
         // Devoid
@@ -79,8 +78,14 @@ class VisionsOfBrutalityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
+            // In the case that the enchantment is blinked
+            Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            if (enchantment == null) {
+                // It was not blinked, use the standard method
+                enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            }
+            if (enchantment != null 
+                    && enchantment.getAttachedTo() != null) {
                 Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
                 if (enchanted != null) {
                     Player controllerEnchanted = game.getPlayer(enchanted.getControllerId());

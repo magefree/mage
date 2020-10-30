@@ -60,8 +60,8 @@ class HighcliffFelidarEffect extends OneShotEffect {
 
     HighcliffFelidarEffect() {
         super(Outcome.Benefit);
-        staticText = "for each opponent, choose a creature with the greatest power " +
-                "among creatures that player controls. Destroy those creatures.";
+        staticText = "for each opponent, choose a creature with the greatest power "
+                + "among creatures that player controls. Destroy those creatures.";
     }
 
     private HighcliffFelidarEffect(final HighcliffFelidarEffect effect) {
@@ -75,8 +75,8 @@ class HighcliffFelidarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         Set<UUID> toDestroy = new HashSet();
@@ -93,18 +93,17 @@ class HighcliffFelidarEffect extends OneShotEffect {
                             .mapToInt(MageInt::getValue)
                             .max()
                             .orElse(Integer.MIN_VALUE);
-                    if (maxPower == Integer.MIN_VALUE) {
-                        return;
-                    }
-                    FilterPermanent filter = new FilterCreaturePermanent(
-                            "creature with the greatest power controlled by " + opponent.getName()
-                    );
-                    filter.add(new ControllerIdPredicate(opponent.getId()));
-                    filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, maxPower));
-                    TargetPermanent target = new TargetPermanent(filter);
-                    target.setNotTarget(true);
-                    if (player.choose(outcome, target, source.getSourceId(), game)) {
-                        toDestroy.add(target.getFirstTarget());
+                    if (maxPower > Integer.MIN_VALUE) {
+                        FilterPermanent filter = new FilterCreaturePermanent(
+                                "creature with the greatest power controlled by " + opponent.getName()
+                        );
+                        filter.add(new ControllerIdPredicate(opponent.getId()));
+                        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, maxPower));
+                        TargetPermanent target = new TargetPermanent(filter);
+                        target.setNotTarget(true);
+                        if (controller.choose(outcome, target, source.getSourceId(), game)) {
+                            toDestroy.add(target.getFirstTarget());
+                        }
                     }
                 });
         toDestroy.stream()
@@ -116,7 +115,6 @@ class HighcliffFelidarEffect extends OneShotEffect {
 }
 
 // I realized after writing all this that the ability doesn't target but I like this code too much to erase it
-
 //enum HighcliffFelidarAdjuster implements TargetAdjuster {
 //    instance;
 //

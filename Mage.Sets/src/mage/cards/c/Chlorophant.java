@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -36,7 +36,7 @@ public final class Chlorophant extends CardImpl {
         effect.setText("At the beginning of your upkeep, you may put another +1/+1 counter on {this}.");
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"At the beginning of your upkeep, you may put another +1/+1 counter on {this}.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

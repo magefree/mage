@@ -34,7 +34,7 @@ public final class KorEntanglers extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // <i>Rally</i> — Whenever Kor Entanglers or another Ally enters the battlefield under your control, tap target creature an opponent controls.
+        // <i>Rally</i> &mdash; Whenever Kor Entanglers or another Ally enters the battlefield under your control, tap target creature an opponent controls.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

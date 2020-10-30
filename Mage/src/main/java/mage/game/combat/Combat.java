@@ -278,12 +278,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                 handleBanding(attacker, game);
                 // This can only be used to modify the event, the attack can't be replaced here
                 game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
+                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
             }
         }
         attackersTappedByAttack.clear();
 
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackingPlayerId, attackingPlayerId));
+        game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackingPlayerId, attackingPlayerId));
         if (!game.isSimulation()) {
             Player player = game.getPlayer(attackingPlayerId);
             if (player != null) {
@@ -1234,25 +1234,28 @@ public class Combat implements Serializable, Copyable<Combat> {
         Player attackingPlayer = game.getPlayer(attackingPlayerId);
         if (attackingPlayer != null) {
             PlayerList players;
+            Player opponent;
             switch (game.getAttackOption()) {
                 case LEFT:
                     players = game.getState().getPlayerList(attackingPlayerId);
-                    while (attackingPlayer.isInGame()) {
-                        Player opponent = players.getNext(game, false);
+                    opponent = players.getNext(game, false);
+                    while (opponent != null && attackingPlayer.isInGame()) {
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             attackablePlayers.add(opponent.getId());
                             break;
                         }
+                        opponent = players.getNext(game, false);
                     }
                     break;
                 case RIGHT:
                     players = game.getState().getPlayerList(attackingPlayerId);
-                    while (attackingPlayer.isInGame()) {
-                        Player opponent = players.getPrevious(game);
+                    opponent = players.getPrevious(game);
+                    while (opponent != null && attackingPlayer.isInGame()) {
                         if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
                             attackablePlayers.add(opponent.getId());
                             break;
                         }
+                        opponent = players.getPrevious(game);
                     }
                     break;
                 case MULTIPLE:

@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 
 import java.util.UUID;
 
@@ -29,9 +28,9 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
         filter.add(AnotherPredicate.instance);
-        filter2.add(new CounterPredicate(CounterType.P1P1));
+        filter2.add(CounterType.P1P1.getPredicate());
     }
 
     public ZeganaUtopianSpeaker(UUID ownerId, CardSetInfo setInfo) {

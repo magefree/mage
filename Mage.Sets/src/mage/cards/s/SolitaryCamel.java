@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -45,7 +45,7 @@ public final class SolitaryCamel extends CardImpl {
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance()),
                 new OrCondition(
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveCondition(1, filterDesertCard)),
+                        new CardsInControllerGraveyardCondition(1, filterDesertCard)),
                 "{this} has lifelink as long as you control a desert or there is a desert card in your graveyard."));
         this.addAbility(ability);
     }

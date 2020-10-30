@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +27,7 @@ public final class TemperedVeteran extends CardImpl {
             = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public TemperedVeteran(UUID ownerId, CardSetInfo setInfo) {

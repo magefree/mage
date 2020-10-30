@@ -22,9 +22,7 @@ public class TournamentMatchesTableModel extends AbstractTableModel {
         List<TournamentGameView> views = new ArrayList<>();
         watchingAllowed = tournament.isWatchingAllowed();
         for (RoundView round : tournament.getRounds()) {
-            for (TournamentGameView game : round.getGames()) {
-                views.add(game);
-            }
+            views.addAll(round.getGames());
         }
         games = views.toArray(new TournamentGameView[0]);
         this.fireTableDataChanged();

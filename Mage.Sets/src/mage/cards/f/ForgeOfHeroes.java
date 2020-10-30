@@ -30,7 +30,7 @@ public final class ForgeOfHeroes extends CardImpl {
 
     static {
         filter.add(CommanderPredicate.instance);
-        filter.add(new EnteredThisTurnPredicate());
+        filter.add(EnteredThisTurnPredicate.instance);
     }
 
     public ForgeOfHeroes(UUID ownerId, CardSetInfo setInfo) {

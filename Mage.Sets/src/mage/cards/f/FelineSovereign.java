@@ -126,6 +126,6 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls";
+        return "Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.";
     }
 }

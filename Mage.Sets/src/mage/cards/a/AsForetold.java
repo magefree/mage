@@ -83,17 +83,14 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
  */
 class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
 
-    private UUID sourceAsForetold;
     private boolean wasActivated;
 
-    AsForetoldAlternativeCost(UUID sourceAsForetold, int timeCounters) {
+    AsForetoldAlternativeCost(int timeCounters) {
         super(new ManaCostsImpl("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
-        this.sourceAsForetold = sourceAsForetold;
     }
 
     private AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {
         super(ability);
-        this.sourceAsForetold = ability.sourceAsForetold;
         this.wasActivated = ability.wasActivated;
     }
 
@@ -105,7 +102,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
-        Permanent asForetold = game.getPermanent(sourceAsForetold);
+        Permanent asForetold = game.getPermanent(getSourceId());
         if (controller != null
                 && asForetold != null) {
             if (controller.chooseUse(Outcome.Neutral, "Do you wish to use "
@@ -156,8 +153,9 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
                 if (wasItUsed == null) {
                     int timeCounters = sourcePermanent.getCounters(game).getCount("time");
-                    controller.getAlternativeSourceCosts().add(
-                            new AsForetoldAlternativeCost(sourcePermanent.getId(), timeCounters));
+                    AsForetoldAlternativeCost alternateCostAbility = new AsForetoldAlternativeCost(timeCounters);
+                    alternateCostAbility.setSourceId(source.getSourceId());
+                    controller.getAlternativeSourceCosts().add(alternateCostAbility);
                 }
                 // Return true even if we didn't add the alt cost. We still applied the effect
                 return true;

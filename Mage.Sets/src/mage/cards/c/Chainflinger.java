@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -40,7 +40,7 @@ public final class Chainflinger extends CardImpl {
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new DamageTargetEffect(2),
             new ManaCostsImpl("{2}{R}"),
-            new CardsInControllerGraveCondition(7));
+            new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addTarget(new TargetAnyTarget());
         thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);

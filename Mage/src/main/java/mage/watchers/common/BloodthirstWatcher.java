@@ -7,7 +7,6 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
-import java.util.UUID;
 
 /**
  * Must be installed to player for proper Bloodthirst work

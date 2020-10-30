@@ -25,32 +25,26 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public enum ServerMessagesUtil {
     instance;
-    private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
+
+    private static final Logger LOGGER = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
-    private ScheduledExecutorService updateExecutor;
 
     private final List<String> messages = new ArrayList<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
-
-    private static String pathToExternalMessages = null;
-
     private static boolean ignore = false;
 
     private static long startDate;
     private static final AtomicInteger gamesStarted = new AtomicInteger(0);
+    private static final AtomicInteger gamesEnded = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
+    private static final AtomicInteger tournamentsEnded = new AtomicInteger(0);
     private static final AtomicInteger lostConnection = new AtomicInteger(0);
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
-    static {
-        pathToExternalMessages = System.getProperty("messagesPath");
-    }
-
     ServerMessagesUtil() {
-        updateExecutor = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, 5 * 60, TimeUnit.SECONDS);
     }
-
 
     public List<String> getMessages() {
         lock.readLock().lock();
@@ -62,10 +56,9 @@ public enum ServerMessagesUtil {
     }
 
     private void reloadMessages() {
-        log.debug("Reading server messages...");
+        LOGGER.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
-        List<String> newMessages = new ArrayList<>();
-        newMessages.addAll(motdMessages);
+        List<String> newMessages = new ArrayList<>(motdMessages);
         newMessages.add(getServerStatistics());
         newMessages.add(getServerStatistics2());
 
@@ -82,54 +75,36 @@ public enum ServerMessagesUtil {
         if (ignore) {
             return Collections.emptyList();
         }
-        File externalFile = null;
-        if (pathToExternalMessages != null) {
-            externalFile = new File(pathToExternalMessages);
-            if (!externalFile.exists()) {
-                log.warn("Couldn't find server.msg.txt using external path: " + pathToExternalMessages);
-                pathToExternalMessages = null; // not to repeat error action again
-                externalFile = null;
-            } else if (!externalFile.canRead()) {
-                log.warn("Couldn't read (no access) server.msg.txt using external path: " + pathToExternalMessages);
-                pathToExternalMessages = null; // not to repeat error action again
-            }
-        }
+
         InputStream is = null;
-        if (externalFile != null) {
-            try {
-                is = new FileInputStream(externalFile);
-            } catch (Exception f) {
-                log.error(f, f);
-                pathToExternalMessages = null; // not to repeat error action again
-            }
+        File file = new File(SERVER_MSG_TXT_FILE);
+        if (!file.exists() || !file.canRead()) {
+            LOGGER.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
         } else {
-            File file = new File(SERVER_MSG_TXT_FILE);
-            if (!file.exists() || !file.canRead()) {
-                log.warn("Couldn't find server.msg.txt using path: " + SERVER_MSG_TXT_FILE);
-            } else {
-                try {
-                    is = new FileInputStream(file);
-                } catch (Exception f) {
-                    log.error(f, f);
-                    ignore = true;
-                }
+            try {
+                is = new FileInputStream(file);
+                ignore = false;
+            } catch (Exception f) {
+                LOGGER.error(f, f);
+                ignore = true;
             }
         }
+
         if (is == null) {
-            log.warn("Couldn't find server.msg");
             return Collections.emptyList();
         }
 
         List<String> newMessages = new ArrayList<>();
         try (Scanner scanner = new Scanner(is)) {
             while (scanner.hasNextLine()) {
-                String message = scanner.nextLine();
-                if (!message.trim().isEmpty()) {
-                    newMessages.add(message.trim());
+                String message = scanner.nextLine().trim();
+                if (message.startsWith("//") || message.isEmpty()) {
+                    continue;
                 }
+                newMessages.add(message.trim());
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         } finally {
             StreamUtils.closeQuietly(is);
         }
@@ -139,13 +114,10 @@ public enum ServerMessagesUtil {
     private String getServerStatistics() {
         long current = System.currentTimeMillis();
         long hours = ((current - startDate) / (1000 * 60 * 60));
-        StringBuilder statistics = new StringBuilder("Server uptime: ");
-        statistics.append(hours);
-        statistics.append(" hour(s), games played: ");
-        statistics.append(gamesStarted.get());
-        statistics.append(" tournaments started: ");
-        statistics.append(tournamentsStarted.get());
-        return statistics.toString();
+        String statistics = "Server uptime: " + hours + " hour(s)"
+                + "; Games started: " + gamesStarted.get() + ", ended: " + gamesEnded.get()
+                + "; Tourneys started: " + tournamentsStarted.get() + ", ended: " + tournamentsEnded.get();
+        return statistics;
     }
 
     private String getServerStatistics2() {
@@ -154,19 +126,11 @@ public enum ServerMessagesUtil {
         if (minutes == 0) {
             minutes = 1;
         }
-        StringBuilder statistics = new StringBuilder("Disconnects: ");
-        statistics.append(lostConnection.get());
-        statistics.append(" avg/hour ").append(lostConnection.get() * 60 / minutes);
-        statistics.append(" Reconnects: ").append(reconnects.get());
-        statistics.append(" avg/hour ").append(reconnects.get() * 60 / minutes);
-        return statistics.toString();
+        String statistics = "Disconnects: " + lostConnection.get() + ", avg/hour: " + lostConnection.get() * 60 / minutes
+                + "; Reconnects: " + reconnects.get() + ", avg/hour: " + reconnects.get() * 60 / minutes;
+        return statistics;
     }
 
-    //    private Timer timer = new Timer(1000 * 60, new ActionListener() {
-//        public void actionPerformed(ActionEvent e) {
-//            reloadMessages();
-//        }
-//    });
     public void setStartDate(long milliseconds) {
         startDate = milliseconds;
     }
@@ -178,11 +142,25 @@ public enum ServerMessagesUtil {
         } while (!gamesStarted.compareAndSet(value, value + 1));
     }
 
+    public void incGamesEnded() {
+        int value;
+        do {
+            value = gamesEnded.get();
+        } while (!gamesEnded.compareAndSet(value, value + 1));
+    }
+
     public void incTournamentsStarted() {
         int value;
         do {
             value = tournamentsStarted.get();
         } while (!tournamentsStarted.compareAndSet(value, value + 1));
+    }
+
+    public void incTournamentsEnded() {
+        int value;
+        do {
+            value = tournamentsEnded.get();
+        } while (!tournamentsEnded.compareAndSet(value, value + 1));
     }
 
     public void incReconnects() {

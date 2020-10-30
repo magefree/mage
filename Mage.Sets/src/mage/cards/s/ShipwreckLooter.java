@@ -1,21 +1,22 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.constants.SubType;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ShipwreckLooter extends CardImpl {
@@ -33,6 +34,8 @@ public final class ShipwreckLooter extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true)),
                 RaidCondition.instance,
                 "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, you may draw a card. If you do, discard a card.");
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

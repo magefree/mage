@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class EyeCollector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Eye Collector deals combat damage to a player, each player puts the top card of their library into their graveyard.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.ANY), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MillCardsEachPlayerEffect(1, TargetController.ANY), false));
     }
 
     private EyeCollector(final EyeCollector card) {

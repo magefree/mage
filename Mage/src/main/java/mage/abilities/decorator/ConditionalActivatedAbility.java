@@ -73,7 +73,9 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         }
         String conditionText = condition.toString();
         String additionalText = "if ";
-        if (conditionText.startsWith("during")) {
+        if (conditionText.startsWith("during")
+                || conditionText.startsWith("before")
+                || conditionText.startsWith("if")) {
             additionalText = "";
         }
         return super.getRule() + " Activate this ability only " + additionalText + condition.toString() + ".";

@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterAbility;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.ability.ArtifactSourcePredicate;
 import mage.target.common.TargetActivatedAbility;

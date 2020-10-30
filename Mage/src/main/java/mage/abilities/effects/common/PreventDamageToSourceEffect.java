@@ -60,7 +60,7 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
         } else {
             sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
-        sb.append("{source} ");
+        sb.append("{this} ");
         if (duration == EndOfTurn) {
             sb.append("this turn");
         } else {

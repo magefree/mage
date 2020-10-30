@@ -173,6 +173,7 @@ class ConvokeSpecialAction extends SpecialAction {
 
     public ConvokeSpecialAction(ManaCost unpaid, AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
+        this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
         this.addEffect(new ConvokeEffect(unpaid));
     }

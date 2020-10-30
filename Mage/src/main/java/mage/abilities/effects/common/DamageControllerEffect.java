@@ -19,7 +19,7 @@ public class DamageControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected boolean preventable;
-    private String sourceName = "{source}";
+    private String sourceName = "{this}";
 
     public DamageControllerEffect(int amount, String whoDealDamageName) {
         this(amount, true, whoDealDamageName);

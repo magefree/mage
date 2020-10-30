@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.HashSet;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -15,7 +16,9 @@ import mage.target.common.TargetCardInLibrary;
 import mage.util.ManaUtil;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import mage.cards.Card;
 
 /**
  * @author LevelX2
@@ -58,6 +61,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> toBattlefield = new HashSet<>();
         if (controller != null) {
             int xSum = 0;
             xSum += ManaUtil.playerPaysXGenericMana(false, "Collective Voyage", controller, source, game);
@@ -74,10 +78,17 @@ class CollectiveVoyageEffect extends OneShotEffect {
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.searchLibrary(target, source, game)) {
-                        player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
-                        player.shuffleLibrary(source, game);
+                        toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));
                     }
+                }
+            }
+            // must happen simultaneously Rule 101.4
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, true, false, true, null);
 
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    player.shuffleLibrary(source, game);
                 }
             }
             // prevent undo

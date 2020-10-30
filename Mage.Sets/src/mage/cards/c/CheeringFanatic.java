@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -10,18 +8,19 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect.TypeOfName;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class CheeringFanatic extends CardImpl {
@@ -67,6 +66,9 @@ class CheeringFanaticEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         new ChooseACardNameEffect(TypeOfName.ALL).apply(game, source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (cardName == null) {
+            return false;
+        }
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(cardName));
         ContinuousEffect effect = new SpellsCostReductionAllEffect(filter, 1);

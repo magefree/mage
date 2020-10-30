@@ -56,7 +56,7 @@ public final class ProteanThaumaturge extends CardImpl {
         Ability ability = new ConstellationAbility(new CopyPermanentEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 new ProteanThaumaturgeApplyToPermanent(), true
-        ).setText("have {this} become a copy of another target creature, except it has this ability"), true, false);
+        ).setText("{this} become a copy of another target creature, except it has this ability"), true, false);
         ability.addTarget(new TargetPermanent(filter));
         return ability;
     }

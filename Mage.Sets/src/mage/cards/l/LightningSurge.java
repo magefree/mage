@@ -2,7 +2,7 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -27,7 +27,7 @@ public final class LightningSurge extends CardImpl {
         // Threshold - If seven or more cards are in your graveyard, instead Lightning Surge deals 6 damage to that creature or player and the damage can't be prevented.
         Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(6, false),
                 new DamageTargetEffect(4),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "{this} deals 4 damage to any target.<br/><br/><i>Threshold</i> &mdash; {this} deals 6 damage to that permanent or player and the damage can't be prevented instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);

@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,7 +52,7 @@ class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public RenegadeKrasisTriggeredAbility() {

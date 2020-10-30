@@ -129,7 +129,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         assertManaOptions("{R}{R}{R}{R}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{R}{G}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{R}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{R}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);       
     }
 
 }

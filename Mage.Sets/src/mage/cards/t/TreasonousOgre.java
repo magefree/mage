@@ -5,6 +5,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.dynamicvalue.common.ControllerLifeDividedValue;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.DethroneAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -31,7 +33,10 @@ public final class TreasonousOgre extends CardImpl {
         // Dethrone
         this.addAbility(new DethroneAbility());
         // Pay 3 life: Add {R}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(ColoredManaSymbol.R), new PayLifeCost(3)));
+        
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
+                new BasicManaEffect(new Mana(ColoredManaSymbol.R), new ControllerLifeDividedValue(3)), 
+                new PayLifeCost(3)));
     }
 
     public TreasonousOgre(final TreasonousOgre card) {

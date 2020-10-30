@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerSourceEffect;
@@ -31,7 +31,7 @@ public final class DeepSeaTerror extends CardImpl {
         // Deep-Sea Terror can't attack unless there are seven or more cards in your graveyard.
         Effect effect = new ConditionalRestrictionEffect(
                 new CantAttackAnyPlayerSourceEffect(Duration.WhileOnBattlefield),
-                new InvertCondition(new CardsInControllerGraveCondition(7)));
+                new InvertCondition(new CardsInControllerGraveyardCondition(7)));
         effect.setText("{this} can't attack unless there are seven or more cards in your graveyard");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

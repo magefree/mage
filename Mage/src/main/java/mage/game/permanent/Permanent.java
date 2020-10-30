@@ -1,8 +1,5 @@
 package mage.game.permanent;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -12,6 +9,10 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public interface Permanent extends Card, Controllable {
 
@@ -105,7 +106,7 @@ public interface Permanent extends Card, Controllable {
      * @param source
      * @param game
      * @param silentMode - use it to ignore warning message for users (e.g. for
-     * checking only)
+     *                   checking only)
      * @return
      */
     boolean cantBeAttachedBy(MageObject source, Game game, boolean silentMode);
@@ -148,11 +149,11 @@ public interface Permanent extends Card, Controllable {
 
     boolean sacrifice(UUID sourceId, Game game);
 
-    boolean regenerate(UUID sourceId, Game game);
+    boolean regenerate(Ability source, Game game);
 
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
-    boolean fight(Permanent fightTarget, Ability source, Game game,boolean batchTrigger);
+    boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
 
     boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
 
@@ -221,7 +222,7 @@ public interface Permanent extends Card, Controllable {
 
     /**
      * @param defenderId id of planeswalker or player to attack - can be empty
-     * to check generally
+     *                   to check generally
      * @param game
      * @return
      */

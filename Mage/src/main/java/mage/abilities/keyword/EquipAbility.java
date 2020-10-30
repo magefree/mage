@@ -14,7 +14,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class EquipAbility extends ActivatedAbilityImpl {
-
+  
     public EquipAbility(int cost) {
         this(Outcome.AddAbility, new GenericManaCost(cost));
     }
@@ -26,7 +26,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     public EquipAbility(Outcome outcome, Cost cost, Target target) {
         super(Zone.BATTLEFIELD, new EquipEffect(outcome), cost);
         this.addTarget(target);
-        this.timing = TimingRule.SORCERY;
+        this.timing = TimingRule.SORCERY;        
     }
 
     public EquipAbility(final EquipAbility ability) {
@@ -40,7 +40,13 @@ public class EquipAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Equip " + costs.getText() + manaCosts.getText() + " <i>(" + manaCosts.getText() + ": Attach to target creature you control. Equip only as a sorcery.)</i>";
+        String targetText = getTargets().get(0) != null ? getTargets().get(0).getFilter().getMessage() : "creature";
+        
+        return "Equip "  
+                + (targetText.equals("creature you control") ? "" : targetText + " ")
+                + costs.getText() 
+                + manaCosts.getText() 
+                + " <i>(" + manaCosts.getText() + ": Attach to target " + targetText + " you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)</i>";
     }
 
 }

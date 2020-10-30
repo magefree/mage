@@ -16,7 +16,7 @@ public final class ElephantToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C14", "CNS", "DDD", "MM2", "WWK", "OGW", "C15", "DD3GVL", "MM3", "CMA", "MH1"));
+        tokenImageSets.addAll(Arrays.asList("C14", "CNS", "DDD", "MM2", "WWK", "OGW", "C15", "GVL", "MM3", "CMA", "MH1"));
     }
 
     public ElephantToken() {

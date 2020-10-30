@@ -19,6 +19,9 @@ public class GolemSkinGauntletsTest extends CardTestPlayerBase {
     @Test
     public void testBoostOnEquip() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        // Equipped creature doesn't untap during its controller's untap step.
+        // Equipped creature has "{T}: This creature deals 2 damage to any target."
+        // Equip {4)        
         addCard(Zone.BATTLEFIELD, playerA, "Heavy Arbalest");
         addCard(Zone.BATTLEFIELD, playerA, "Golem-Skin Gauntlets");
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");

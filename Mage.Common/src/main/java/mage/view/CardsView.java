@@ -1,5 +1,7 @@
 package mage.view;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -14,9 +16,6 @@ import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -88,6 +87,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     isPermanent = true;
                     break;
                 case STACK:
+                case HAND: // Miracle
+                case LIBRARY:
+                case OUTSIDE:
                     sourceObject = game.getObject(ability.getSourceId());
                     if (sourceObject instanceof Card) {
                         isCard = true;

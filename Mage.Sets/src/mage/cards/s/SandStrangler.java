@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -44,7 +44,7 @@ public final class SandStrangler extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), true),
                 new OrCondition(
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveCondition(1, filterDesertCard)),
+                        new CardsInControllerGraveyardCondition(1, filterDesertCard)),
                 "When {this} enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, you may have {this} deal 3 damage to target creature.");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

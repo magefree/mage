@@ -4,7 +4,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.ManaEffect;
 import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -12,6 +11,8 @@ import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import mage.constants.ManaType;
 
 /**
  * @author North
@@ -114,6 +115,11 @@ public class DynamicManaEffect extends ManaEffect {
         }
         netMana.add(computedMana);
         return netMana;
+    }
+
+    @Override
+    public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
+        return ManaType.getManaTypesFromManaList(baseMana);
     }
 
     @Override

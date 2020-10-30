@@ -2,7 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
-import mage.MageObjectReference;
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -73,7 +73,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
             if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
                 }
             }
         }

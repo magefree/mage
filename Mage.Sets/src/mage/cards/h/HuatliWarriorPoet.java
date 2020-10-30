@@ -137,7 +137,7 @@ class HuatliWarriorPoetDamageEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{source} deals "
+        return "{this} deals "
                 + amount.toString()
                 + " damage divided as you choose among any number of target "
                 + mode.getTargets().get(0).getTargetName()

@@ -127,6 +127,7 @@ class AssistSpecialAction extends SpecialAction {
 
     AssistSpecialAction(ManaCost unpaid, AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
+        this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
         this.addEffect(new AssistEffect(unpaid));
     }

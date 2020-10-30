@@ -4,7 +4,6 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.ManaEffect;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 

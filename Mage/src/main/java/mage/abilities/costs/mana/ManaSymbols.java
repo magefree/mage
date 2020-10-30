@@ -7,7 +7,6 @@ import mage.constants.ColoredManaSymbol;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

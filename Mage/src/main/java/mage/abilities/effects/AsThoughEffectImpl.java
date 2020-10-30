@@ -17,16 +17,23 @@ import mage.players.Player;
 public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements AsThoughEffect {
 
     protected AsThoughEffectType type;
+    boolean consumable;
 
     public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
+        this(type, duration, outcome, false);
+    }
+    
+    public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome, boolean consumable) {
         super(duration, outcome);
         this.type = type;
         this.effectType = EffectType.ASTHOUGH;
+        this.consumable = consumable;
     }
 
     public AsThoughEffectImpl(final AsThoughEffectImpl effect) {
         super(effect);
         this.type = effect.type;
+        this.consumable = effect.consumable;
     }
 
     @Override
@@ -91,6 +98,11 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean isConsumable() {
+        return consumable;
     }
 
 }

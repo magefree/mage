@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -21,6 +20,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -46,8 +47,9 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterNonBlack, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelOfJubilationEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelOfJubilationSacrificeFilterEffect()));
+        Ability ability = new SimpleStaticAbility(new AngelOfJubilationEffect());
+        ability.addEffect(new AngelOfJubilationSacrificeFilterEffect());
+        this.addAbility(ability);
     }
 
     public AngelOfJubilation(final AngelOfJubilation card) {
@@ -64,7 +66,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
     public AngelOfJubilationEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players can't pay life or sacrifice creatures to cast spells or activate abilities";
+        staticText = "Players can't pay life or sacrifice creatures to cast spells";
     }
 
     public AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
@@ -91,7 +93,7 @@ class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl 
 
     public AngelOfJubilationSacrificeFilterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
-        staticText = "Players can't pay life or sacrifice creatures to cast spells or activate abilities";
+        staticText = "or activate abilities";
     }
 
     protected AngelOfJubilationSacrificeFilterEffect(AngelOfJubilationSacrificeFilterEffect effect) {

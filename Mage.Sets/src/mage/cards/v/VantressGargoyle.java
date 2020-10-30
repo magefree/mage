@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class VantressGargoyle extends CardImpl {
 
         // {T}: Each player puts the top card of their library into their graveyard.
         this.addAbility(new SimpleActivatedAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.ANY), new TapSourceCost()
+                new MillCardsEachPlayerEffect(1, TargetController.ANY), new TapSourceCost()
         ));
     }
 

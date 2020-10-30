@@ -1,5 +1,11 @@
 package mage.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -25,13 +31,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
  * @author nantuko
  */
@@ -40,10 +39,10 @@ public final class CardUtil {
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
     static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
-            "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
@@ -242,7 +241,8 @@ public final class CardUtil {
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
      * @param convertToGeneric  colored mana does reduce generic mana if no
-     *                          appropriate colored mana is in the costs included
+     *                          appropriate colored mana is in the costs
+     *                          included
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
@@ -462,9 +462,7 @@ public final class CardUtil {
     }
 
     public static String replaceSourceName(String message, String sourceName) {
-        message = message.replace("{this}", sourceName);
-        message = message.replace("{source}", sourceName);
-        return message;
+        return message.replace("{this}", sourceName);
     }
 
     public static String booleanToFlipName(boolean flip) {
@@ -767,8 +765,12 @@ public final class CardUtil {
         // +0/-1 must be -0/-1
         String signedP = String.format("%1$+d", power);
         String signedT = String.format("%1$+d", toughness);
-        if (signedP.equals("+0") && signedT.startsWith("-")) signedP = "-0";
-        if (signedT.equals("+0") && signedP.startsWith("-")) signedT = "-0";
+        if (signedP.equals("+0") && signedT.startsWith("-")) {
+            signedP = "-0";
+        }
+        if (signedT.equals("+0") && signedP.startsWith("-")) {
+            signedT = "-0";
+        }
 
         return signedP + "/" + signedT;
     }

@@ -3,7 +3,6 @@
 package mage.server;
 
 import java.rmi.Remote;
-import java.util.Optional;
 import java.util.UUID;
 
 /**

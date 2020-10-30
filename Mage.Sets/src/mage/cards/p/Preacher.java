@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
-import mage.abilities.condition.CompoundCondition;
-import mage.abilities.condition.common.SourceHasRemainedInSameZoneCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;

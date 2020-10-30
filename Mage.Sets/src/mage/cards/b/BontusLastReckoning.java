@@ -11,7 +11,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *

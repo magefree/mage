@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class CodeSlice extends CardImpl {
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new CounterPredicate(CounterType.BOUNTY));
+        filter.add(CounterType.BOUNTY.getPredicate());
     }
 
     public CodeSlice(UUID ownerId, CardSetInfo setInfo) {

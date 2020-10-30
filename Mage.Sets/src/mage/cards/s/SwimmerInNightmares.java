@@ -46,7 +46,7 @@ public final class SwimmerInNightmares extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
                 SwimmerInNightmaresCondition.instance,
-                "{this} +3/+0 as long as there are ten or more cards in a single graveyard"
+                "{this} gets +3/+0 as long as there are ten or more cards in a single graveyard"
         )).addHint(new ValueHint("Max cards in single graveyard", SwimmerInNightmaresCardsInSingleGraveyardValue.instance)));
 
         // Swimmer in Nightmares can't be blocked as long as you control an Ashiok planeswalker.
@@ -77,8 +77,9 @@ enum SwimmerInNightmaresCardsInSingleGraveyardValue implements DynamicValue {
                 .stream()
                 .map(game::getPlayer)
                 .map(Player::getGraveyard)
-                .map(HashSet::size)
-                .mapToInt(x -> x).max().orElse(0);
+                .mapToInt(HashSet::size)
+                .max()
+                .orElse(0);
     }
 
     @Override

@@ -34,7 +34,7 @@ import java.util.UUID;
  * started before running them. In case you want to debug these tests, use
  * -Ddebug.mage that would disable client-server request timeout.
  * <p>
- * Then it's also better to use -Xms256M -Xmx512M JVM options for these stests.
+ * Then it's also better to use -Xms256M -Xmx512M JVM options for these tests.
  *
  * @author JayDi85
  */
@@ -59,46 +59,60 @@ public class LoadTest {
         Deck deck;
 
         deck = DeckTestUtils.buildRandomDeck("G", false);
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in G",
                     card.getColorIdentity().isGreen());
         }
 
         deck = DeckTestUtils.buildRandomDeck("U", false);
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in U",
                     card.getColorIdentity().isBlue());
         }
 
         deck = DeckTestUtils.buildRandomDeck("BR", false);
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BR",
                     card.getColorIdentity().isBlack() || card.getColorIdentity().isRed());
         }
 
         deck = DeckTestUtils.buildRandomDeck("BUG", false);
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in BUG",
                     card.getColorIdentity().isBlack() || card.getColorIdentity().isBlue() || card.getColorIdentity().isGreen());
         }
 
         // lands
         deck = DeckTestUtils.buildRandomDeck("UR", true);
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in UR",
                     card.getColorIdentity().isBlue() || card.getColorIdentity().isRed());
             Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
         }
 
         deck = DeckTestUtils.buildRandomDeck("B", true);
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
             Assert.assertEquals("card " + card.getName() + " must be basic land ", Rarity.LAND, card.getRarity());
         }
 
         // allowed sets
         deck = DeckTestUtils.buildRandomDeck("B", true, "GRN");
+        Assert.assertNotNull(deck);
         for (Card card : deck.getCards()) {
+            Assert.assertNotNull(card);
             Assert.assertTrue("card " + card.getName() + " color " + card.getColorIdentity().toString() + " must be in B", card.getColorIdentity().isBlack());
             Assert.assertEquals("card " + card.getName() + " have wrong set code " + card.getExpansionSetCode(), "GRN", card.getExpansionSetCode());
         }

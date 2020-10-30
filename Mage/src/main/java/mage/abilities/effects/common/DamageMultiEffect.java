@@ -22,7 +22,7 @@ import java.util.UUID;
 public class DamageMultiEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    private String sourceName = "{source}";
+    private String sourceName = "{this}";
     private final Set<MageObjectReference> damagedSet = new HashSet<>();
 
     public DamageMultiEffect(int amount) {

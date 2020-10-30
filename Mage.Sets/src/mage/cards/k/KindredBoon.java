@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.TargetPermanent;
 /**
  *
@@ -31,7 +30,7 @@ public final class KindredBoon extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filterDivinity = new FilterControlledCreaturePermanent("Each creature you control with a divinity counter on it");
     static {
-        filterDivinity.add(new CounterPredicate(CounterType.DIVINITY));
+        filterDivinity.add(CounterType.DIVINITY.getPredicate());
     }
 
     public KindredBoon(UUID ownerId, CardSetInfo setInfo) {

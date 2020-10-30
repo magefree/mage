@@ -2,9 +2,9 @@
 package mage.cards.m;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -96,7 +96,7 @@ class MindclawShamanEffect extends OneShotEffect {
                                     + "paying its mana cost?", source, game)) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
                                     controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                            game, true, new ApprovingObject(source, game));
                                     game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
                             } else {
                                 game.informPlayers(sourceObject.getLogName() + ": " 

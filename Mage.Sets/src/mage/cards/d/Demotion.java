@@ -3,13 +3,9 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockActivateAttachedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

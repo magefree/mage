@@ -135,7 +135,12 @@ public class AddCountersSourceEffect extends OneShotEffect {
         } else if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
             sb.append("X ");
         } else {
-            sb.append("a ");
+            //if counter name starts with a vowel use 'an' instead of 'a' 
+            if ("aeiou".indexOf(counter.getName().toLowerCase(Locale.ENGLISH).charAt(0)) >= 0 ){
+                sb.append("an ");
+            } else {
+                sb.append("a ");
+            }
             plural = false;
         }
         sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");

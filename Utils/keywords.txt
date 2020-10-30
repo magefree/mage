@@ -27,6 +27,7 @@ Dredge|number|
 Echo|manaString|
 Embalm|cost, card|
 Enchant|type|
+Encore|cost|
 Entwine|manaString|
 Eternalize|cost, card|
 Evoke|card, manaString|
@@ -53,6 +54,7 @@ Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
 Jump-start|card|
+Kicker|manaString|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
@@ -68,6 +70,7 @@ Mutate|card, manaString|
 Myriad|new|
 Ninjutsu|cost|
 Outlast|cost|
+Partner|instance|
 Persist|new|
 Phasing|instance|
 Plainscycling|cost|

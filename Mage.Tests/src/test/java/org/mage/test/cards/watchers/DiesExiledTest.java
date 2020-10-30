@@ -28,7 +28,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kumano's Blessing", "Prodigal Pyromancer");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals 1 damage to", "Sejiri Merfolk");
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -53,7 +53,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Frostwielder");
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to ", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals 1 damage to ", "Sejiri Merfolk");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -78,7 +78,7 @@ public class DiesExiledTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kumano, Master Yamabushi");
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: {source} deals 1 damage to ", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{R}: {this} deals 1 damage to ", "Sejiri Merfolk");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

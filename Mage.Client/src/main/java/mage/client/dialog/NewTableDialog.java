@@ -525,7 +525,7 @@ public class NewTableDialog extends MageDialog {
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
                     PlayerType.HUMAN, 1,
-                    DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile()),
+                    DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                     this.txtPassword.getText())) {
                 for (TablePlayerPanel player : players) {
                     if (player.getPlayerType() != PlayerType.HUMAN) {
@@ -540,11 +540,7 @@ public class NewTableDialog extends MageDialog {
                 this.hideDialog();
                 return;
             }
-        } catch (FileNotFoundException ex) {
-            handleError(ex);
-        } catch (IOException ex) {
-            handleError(ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | IOException ex) {
             handleError(ex);
         }
         // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -618,7 +614,7 @@ public class NewTableDialog extends MageDialog {
         options.setMinimumRating((Integer) this.spnMinimumRating.getValue());
         options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
         options.setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         return options;

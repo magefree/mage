@@ -2,22 +2,16 @@ package mage.cards.e;
 
 import mage.ConditionalMana;
 import mage.MageInt;
-import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
 
 import java.util.UUID;
 

@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.modal;
 
 import mage.abilities.keyword.SwampwalkAbility;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class ChooseOneTest extends CardTestPlayerBase {
@@ -48,8 +46,10 @@ public class ChooseOneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Funeral Charm", "Silvercoat Lion");
         setModeChoice(playerA, "2");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Funeral Charm", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 4, 1);

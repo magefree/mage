@@ -30,7 +30,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
         this.loseType = loseType;
         staticText = text;
     }
-    
+
     public BecomesCreatureAttachedEffect(Token token, String text, Duration duration, LoseType loseType, Outcome outcome) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, outcome);
         this.token = token;
@@ -79,7 +79,12 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                 case ALL:
                                 case ALL_BUT_COLOR:
                                 case ABILITIES_SUBTYPE:
-                                    permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                                    if (permanent.isLand()) {
+                                        permanent.getSubtype(game).retainAll(SubType.getLandTypes());
+                                    } else {
+                                        permanent.getSubtype(game).clear();
+                                    }
+                                    permanent.setIsAllCreatureTypes(false);
                                     break;
                             }
                             for (SubType t : token.getSubtype(game)) {

@@ -79,11 +79,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
+    public static final String KEY_CARD_IMAGES_THREADS_DEFAULT = "3";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
 
     public static final String KEY_CARD_RENDERING_FALLBACK = "cardRenderingFallback";
     public static final String KEY_CARD_RENDERING_REMINDER_TEXT = "cardRenderingReminderText";
+    public static final String KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY = "cardRenderingAbilityTextOverlay";
     public static final String KEY_CARD_RENDERING_SET_SYMBOL = "cardRenderingSetSymbol";
 
     public static final String KEY_BACKGROUND_IMAGE = "backgroundImage";
@@ -319,7 +321,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
-            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default Theme"));
+            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
+            logger.info("Using GUI theme: " + currentTheme.getName());
         }
 
         return currentTheme;
@@ -340,6 +343,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static CardLanguage getPrefImagesLanguage() {
         return CardLanguage.valueByCode(getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
+    }
+
+    public static Integer getPrefDownloadThreads() {
+        return Integer.parseInt(getCachedValue(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
     }
 
     private static class ImageFileFilter extends FileFilter {
@@ -485,7 +492,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtImageFolderPath = new javax.swing.JTextField();
         btnBrowseImageLocation = new javax.swing.JButton();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
@@ -494,6 +501,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbCardRenderImageFallback = new javax.swing.JCheckBox();
         cbCardRenderShowReminderText = new javax.swing.JCheckBox();
         cbCardRenderHideSetSymbol = new javax.swing.JCheckBox();
+        cbCardRenderShowAbilityTextOverlay = new javax.swing.JCheckBox();
         panelBackgroundImages = new javax.swing.JPanel();
         cbUseDefaultBackground = new javax.swing.JCheckBox();
         txtBackgroundImagePath = new javax.swing.JTextField();
@@ -546,7 +554,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtURLServerList = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<ProxyType>();
+        cbProxyType = new javax.swing.JComboBox<>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -587,7 +595,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabThemes = new javax.swing.JPanel();
         themesCategory = new javax.swing.JPanel();
         lbSelectLabel = new javax.swing.JLabel();
-        cbTheme = new javax.swing.JComboBox<ThemeType>();
+        cbTheme = new javax.swing.JComboBox<>();
         lbThemeHint = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
@@ -861,7 +869,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(23, Short.MAX_VALUE))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -1555,12 +1563,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         cbPreferedImageLanguage.setMaximumRowCount(20);
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         labelPreferedImageLanguage.setText("Default images language:");
         labelPreferedImageLanguage.setFocusable(false);
 
-        labelNumberOfDownloadThreads.setText("Number of download threads:");
+        labelNumberOfDownloadThreads.setText("Default download threads:");
 
         cbNumberOfDownloadThreads.setMaximumRowCount(20);
         cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
@@ -1639,6 +1647,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        cbCardRenderShowAbilityTextOverlay.setText("Show ability text as overlay in big card view");
+        cbCardRenderShowAbilityTextOverlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCardRenderShowAbilityTextOverlayActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1647,7 +1662,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(cbCardRenderImageFallback)
                                         .add(cbCardRenderShowReminderText)
-                                        .add(cbCardRenderHideSetSymbol))
+                                        .add(cbCardRenderHideSetSymbol)
+                                        .add(cbCardRenderShowAbilityTextOverlay))
                                 .add(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1656,6 +1672,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(cbCardRenderImageFallback)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cbCardRenderShowReminderText)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbCardRenderShowAbilityTextOverlay)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cbCardRenderHideSetSymbol)
                                 .add(0, 0, Short.MAX_VALUE))
@@ -2388,7 +2406,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .add(connection_serversLayout.createSequentialGroup()
                                 .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                         .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jLabel17))
         );
@@ -2930,6 +2948,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbCardRenderShowReminderText, KEY_CARD_RENDERING_REMINDER_TEXT, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbCardRenderShowAbilityTextOverlay, KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY, "true", "false", UPDATE_CACHE_POLICY);
 
         // sounds
         save(prefs, dialog.cbEnableGameSounds, KEY_SOUNDS_GAME_ON, "true", "false", UPDATE_CACHE_POLICY);
@@ -3276,6 +3295,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbThemeActionPerformed
 
+    private void cbCardRenderShowAbilityTextOverlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCardRenderShowAbilityTextOverlayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCardRenderShowAbilityTextOverlayActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -3464,13 +3487,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
-        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
+        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, KEY_CARD_IMAGES_THREADS_DEFAULT));
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
         load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false");
         load(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true");
         load(prefs, dialog.cbCardRenderShowReminderText, KEY_CARD_RENDERING_REMINDER_TEXT, "true");
+        load(prefs, dialog.cbCardRenderShowAbilityTextOverlay, KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY, "true");
+
 
         //add background load precedure
         prop = prefs.get(KEY_BACKGROUND_IMAGE_DEFAULT, "true");
@@ -3761,10 +3786,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (CACHE.containsKey(key)) {
             return CACHE.get(key);
         } else {
-            Preferences prefs = MageFrame.getPreferences();
-            String value = prefs.get(key, def);
+            String value = MageFrame.getPreferences().get(key, def);
             if (value == null) {
-                return null;
+                return def;
             }
             CACHE.put(key, value);
             return value;
@@ -3991,6 +4015,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox cbBattlefieldFeedbackColorizingMode;
     private javax.swing.JCheckBox cbCardRenderHideSetSymbol;
     private javax.swing.JCheckBox cbCardRenderImageFallback;
+    private javax.swing.JCheckBox cbCardRenderShowAbilityTextOverlay;
     private javax.swing.JCheckBox cbCardRenderShowReminderText;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
     private javax.swing.JCheckBox cbDraftLogAutoSave;

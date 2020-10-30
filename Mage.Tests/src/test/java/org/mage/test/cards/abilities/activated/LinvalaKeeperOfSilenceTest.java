@@ -6,7 +6,6 @@ import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 
 /**
  * Created by Derek M on 3/6/2017.

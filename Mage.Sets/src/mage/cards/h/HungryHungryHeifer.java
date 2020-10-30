@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -9,20 +8,17 @@ import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class HungryHungryHeifer extends CardImpl {
@@ -53,7 +49,7 @@ class HungryHungryHeiferEffect extends OneShotEffect {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a permanent you control with a counter on it");
 
     static {
-        filter.add(new CounterPredicate(null));
+        filter.add(CounterAnyPredicate.instance);
     }
 
     public HungryHungryHeiferEffect() {

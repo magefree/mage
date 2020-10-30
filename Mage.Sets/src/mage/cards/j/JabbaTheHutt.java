@@ -22,7 +22,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HunterToken;
@@ -39,7 +38,7 @@ public final class JabbaTheHutt extends CardImpl {
     private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("creature an opponent control with a bounty counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.BOUNTY));
+        filter.add(CounterType.BOUNTY.getPredicate());
     }
 
     public JabbaTheHutt(UUID ownerId, CardSetInfo setInfo) {

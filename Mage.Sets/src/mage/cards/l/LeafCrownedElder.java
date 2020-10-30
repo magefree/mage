@@ -2,8 +2,8 @@
 package mage.cards.l;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.KinshipAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -63,7 +63,7 @@ class LeafCrownedElderPlayEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
             if (controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " without paying its mana cost?", source, game)) {
-                controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game));
+                controller.playCard(card, game, true, true, new ApprovingObject(source, game));
             }
             return true;
         }

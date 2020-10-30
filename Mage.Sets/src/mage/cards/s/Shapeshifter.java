@@ -1,9 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,8 +18,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author MarcoMarin / HCrescent
  */
 public final class Shapeshifter extends CardImpl {
@@ -116,8 +115,8 @@ class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            String lastChosen = (String) game.getState().getValue(source.getSourceId().toString() + "_Shapeshifter");
+        String lastChosen = (String) game.getState().getValue(source.getSourceId().toString() + "_Shapeshifter");
+        if (permanent != null && lastChosen != null) {
             int lastChosenNumber = Integer.parseInt(lastChosen);
             permanent.getPower().modifyBaseValue(lastChosenNumber);
             permanent.getToughness().modifyBaseValue(7 - lastChosenNumber);

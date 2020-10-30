@@ -150,7 +150,7 @@ class JaceCunningCastawayCopyEffect extends OneShotEffect {
             return false;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 2);
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+        effect.setTargetPointer(new FixedTarget(permanent, game));
         effect.setIsntLegendary(true);
         return effect.apply(game, source);
     }

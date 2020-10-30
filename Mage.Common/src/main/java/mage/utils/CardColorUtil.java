@@ -1,8 +1,6 @@
 package mage.utils;
 
 import mage.ObjectColor;
-import mage.cards.MagePermanent;
-import mage.constants.CardType;
 import mage.view.CardView;
 
 import java.util.List;

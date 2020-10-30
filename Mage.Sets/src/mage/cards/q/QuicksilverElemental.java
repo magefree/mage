@@ -109,7 +109,8 @@ class QuickSilverElementalBlueManaEffect extends AsThoughEffectImpl implements A
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        return objectId.equals(source.getSourceId()) && affectedControllerId.equals(source.getControllerId());
+        return objectId.equals(source.getSourceId()) 
+                && source.isControlledBy(affectedControllerId);
     }
 
     @Override

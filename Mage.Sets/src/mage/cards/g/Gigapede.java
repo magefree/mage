@@ -74,7 +74,7 @@ class GigapedeTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {source} is in your graveyard, you may discard a card. If you do, return {source} to your hand";
+        return "At the beginning of your upkeep, if {this} is in your graveyard, you may discard a card. If you do, return {this} to your hand";
     }
     
 }

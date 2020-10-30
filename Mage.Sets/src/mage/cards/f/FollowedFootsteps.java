@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -14,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -29,7 +29,7 @@ import mage.target.targetpointer.FixedTarget;
 public final class FollowedFootsteps extends CardImpl {
 
     public FollowedFootsteps(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -71,12 +71,19 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-        if (target != null) {
-            Effect effect = new CreateTokenCopyTargetEffect();
-            effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
-            return effect.apply(game, source);
+        // In the case that Followed Footsteps is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
+        if (enchantment != null) {
+            Permanent target = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
+            if (target != null) {
+                Effect effect = new CreateTokenCopyTargetEffect();
+                effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+                return effect.apply(game, source);
+            }
         }
         return false;
     }

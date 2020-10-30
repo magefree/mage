@@ -6,7 +6,6 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterAbility;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.ability.ArtifactSourcePredicate;
 import mage.target.common.TargetActivatedAbility;

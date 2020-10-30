@@ -1,12 +1,6 @@
 package mage.cards;
 
 import com.google.common.collect.ImmutableList;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -32,6 +26,10 @@ import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -61,6 +59,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
+    protected boolean modalDFC; // modal double faces card
 
     protected List<UUID> attachments = new ArrayList<>();
 
@@ -127,20 +126,23 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
+        tokenSetCode = card.tokenSetCode;
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
         transformable = card.transformable;
-        if (transformable) {
-            secondSideCardClazz = card.secondSideCardClazz;
-            nightCard = card.nightCard;
-        }
-        spellAbility = null; // will be set on first getSpellAbility call if card has one.
+        secondSideCardClazz = card.secondSideCardClazz;
+        secondSideCard = null; // will be set on first getSecondCardFace call if card has one
+        nightCard = card.nightCard;
 
+        spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
-        splitCard = card.splitCard;
         usesVariousArt = card.usesVariousArt;
+        splitCard = card.splitCard;
+        morphCard = card.morphCard;
+        modalDFC = card.modalDFC;
+
         this.attachments.addAll(card.attachments);
     }
 
@@ -352,6 +354,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         for (Ability subAbility : ability.getSubAbilities()) {
             abilities.add(subAbility);
         }
+
+        // verify check: draw effect can't be rollback after mana usage (example: Chromatic Sphere)
+        // (player can cheat with cancel button to see next card)
+        // verify test will catch that errors
+        if (ability instanceof ActivatedManaAbilityImpl) {
+            ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
+            String rule = manaAbility.getRule().toLowerCase(Locale.ENGLISH);
+            if (manaAbility.getEffects().stream().anyMatch(e -> e.getOutcome().equals(Outcome.DrawCard))
+                    || rule.contains("reveal ")
+                    || rule.contains("draw ")) {
+                if (manaAbility.isUndoPossible()) {
+                    throw new IllegalArgumentException("Ability contains draw/reveal effect, but isUndoPossible is true. Ability: "
+                            + ability.getClass().getSimpleName() + "; " + ability.getRule());
+                }
+            }
+        }
+
+
     }
 
     protected void addAbilities(List<Ability> abilities) {
@@ -395,10 +415,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      * Dynamic cost modification for card (process only own abilities). Example:
      * if it need stack related info (like real targets) then must check two
      * states (game.inCheckPlayableState):
-     *
+     * <p>
      * 1. In playable state it must check all possible use cases (e.g. allow to
      * reduce on any available target and modes)
-     *
+     * <p>
      * 2. In real cast state it must check current use case (e.g. real selected
      * targets and modes)
      *
@@ -667,6 +687,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
+        // TODO: remove when MDFCs are implemented
+        if (modalDFC) {
+            return null;
+        }
+        // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
@@ -675,14 +700,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             return secondSideCard;
         }
 
-        List<ExpansionSet.SetCardInfo> cardInfo = Sets.findSet(expansionSetCode).findCardInfoByClass(secondSideCardClazz);
-        if (cardInfo.isEmpty()) {
+        // must be non strict search in any sets, not one set
+        // example: if set contains only one card side
+        // method used in cards database creating, so can't use repository here
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(secondSideCardClazz, expansionSetCode);
+        if (info == null) {
             return null;
         }
-
-        ExpansionSet.SetCardInfo info = cardInfo.get(0);
-        return secondSideCard = createCard(secondSideCardClazz,
-                new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+        secondSideCard = createCard(secondSideCardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+        return secondSideCard;
     }
 
     @Override

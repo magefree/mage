@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -36,7 +36,7 @@ public final class AetherMembrane extends CardImpl {
         // Whenever Aether Membrane blocks a creature, return that creature to its owner's hand at end of combat.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return that creature to its owner's hand at end of combat");
-        this.addAbility(new BlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
     public AetherMembrane(final AetherMembrane card) {

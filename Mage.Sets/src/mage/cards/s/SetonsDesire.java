@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -44,7 +44,7 @@ public final class SetonsDesire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Threshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
-        Effect effect = new ConditionalRequirementEffect(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA), new CardsInControllerGraveCondition(7));
+        Effect effect = new ConditionalRequirementEffect(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA), new CardsInControllerGraveyardCondition(7));
         effect.setText("As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.setAbilityWord(AbilityWord.THRESHOLD);

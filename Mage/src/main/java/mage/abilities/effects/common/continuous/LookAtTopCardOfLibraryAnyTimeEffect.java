@@ -27,6 +27,9 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
+            return false;
+        }        
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;

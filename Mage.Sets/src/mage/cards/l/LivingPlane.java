@@ -2,7 +2,6 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
@@ -12,8 +11,6 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 
 /**

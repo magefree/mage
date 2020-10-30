@@ -26,6 +26,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 
 /**
  * @author L_J
@@ -87,7 +88,8 @@ class ManaCacheEffect extends OneShotEffect {
 class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
 
     public ManaCacheManaAbility() {
-        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(1)), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
+        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE)),
+                new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
     }
 

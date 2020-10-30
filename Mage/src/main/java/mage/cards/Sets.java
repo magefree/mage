@@ -11,7 +11,6 @@ import mage.filter.FilterMana;
 import mage.util.ClassScanner;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 
 import java.util.*;
 
@@ -27,7 +26,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return instance;
     }
 
-    private Set<String> customSets = new HashSet<>();
+    private final Set<String> customSets = new HashSet<>();
 
     private Sets() {
         List<String> packages = new ArrayList<>();
@@ -200,4 +199,21 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return null;
     }
 
+    public static ExpansionSet.SetCardInfo findCardByClass(Class<?> clazz, String preferedSetCode) {
+        ExpansionSet.SetCardInfo info = null;
+        if (instance.containsKey(preferedSetCode)) {
+            info = instance.get(preferedSetCode).findCardInfoByClass(clazz).stream().findFirst().orElse(null);
+        }
+
+        if (info == null) {
+            for (Map.Entry<String, ExpansionSet> entry : instance.entrySet()) {
+                info = entry.getValue().findCardInfoByClass(clazz).stream().findFirst().orElse(null);
+                if (info != null) {
+                    break;
+                }
+            }
+        }
+
+        return info;
+    }
 }

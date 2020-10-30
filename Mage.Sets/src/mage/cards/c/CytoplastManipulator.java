@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -20,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -31,7 +29,7 @@ public final class CytoplastManipulator extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }    
 
     public CytoplastManipulator(UUID ownerId, CardSetInfo setInfo) {

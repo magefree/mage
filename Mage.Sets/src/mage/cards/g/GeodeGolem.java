@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -22,6 +21,7 @@ import mage.watchers.common.CommanderPlaysCountWatcher;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author spjspj, JayDi85
@@ -117,7 +117,7 @@ class GeodeGolemEffect extends OneShotEffect {
                 if (commander.getSpellAbility() != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + commander.getId(), Boolean.TRUE);
                     Boolean commanderWasCast = controller.cast(controller.chooseAbilityForCast(commander, game, true),
-                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + commander.getId(), null);
                     return commanderWasCast;
                 } else {

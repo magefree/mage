@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -16,8 +14,9 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class WanderwineProphets extends CardImpl {
@@ -41,7 +40,7 @@ public final class WanderwineProphets extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
                 new AddExtraTurnControllerEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))
-        ), true);
+        ), false);
         this.addAbility(ability);
 
     }

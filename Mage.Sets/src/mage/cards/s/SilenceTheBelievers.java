@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
@@ -7,8 +6,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -20,19 +19,17 @@ import java.util.List;
 import java.util.UUID;
 
 
-
 /**
- *
  * @author LevelX2
  */
 public final class SilenceTheBelievers extends CardImpl {
 
     public SilenceTheBelievers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
 
         // Strive - Silence the Believers costs 2B more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{B}"));
+
         // Exile any number of target creatures and all Auras attached to them.
         this.getSpellAbility().addEffect(new SilenceTheBelieversExileEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
@@ -69,11 +66,11 @@ class SilenceTheBelieversExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID targetId: this.getTargetPointer().getTargets(game, source)) {
+            for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
                     List<UUID> attachments = new ArrayList<>(creature.getAttachments());
-                    for (UUID attachmentId: attachments) {
+                    for (UUID attachmentId : attachments) {
                         Permanent attachment = game.getPermanent(attachmentId);
                         if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
                             controller.moveCardToExileWithInfo(attachment, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);

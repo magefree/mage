@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.LinkedHashSet;
@@ -36,7 +35,7 @@ import mage.players.Player;
 public final class NissaNaturesArtisan extends CardImpl {
 
     public NissaNaturesArtisan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
@@ -45,14 +44,18 @@ public final class NissaNaturesArtisan extends CardImpl {
         // +3: You gain 3 life.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(3), 3));
 
-        // -4: Reveal the top two cards of your library. Put all land cards from among them onto the battlefield and the rest into your hand.
+        // -4: Reveal the top two cards of your library. Put all land cards from among 
+        // them onto the battlefield and the rest into your hand.
         this.addAbility(new LoyaltyAbility(new NissaNaturesArtisanEffect(), -4));
 
         // -12: Creatures you control get +5/+5 and gain trample until end of turn.
         Effect effect = new BoostControlledEffect(5, 5, Duration.EndOfTurn);
         effect.setText("Creature you control get +5/+5");
         LoyaltyAbility ability = new LoyaltyAbility(effect, -12);
-        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect2 = new GainAbilityControlledEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect2.setText("and gain trample until end of turn");
+        ability.addEffect(effect2);
         this.addAbility(ability);
     }
 
@@ -70,7 +73,8 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
 
     public NissaNaturesArtisanEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top two cards of your library. Put all land cards from among them onto the battlefield and the rest into your hand";
+        staticText = "Reveal the top two cards of your library. Put all land cards "
+                + "from among them onto the battlefield and the rest into your hand";
     }
 
     public NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
@@ -88,11 +92,13 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();
-            for (Card card : cards.getCards(new FilterLandCard(), source.getSourceId(), source.getControllerId(), game)) {
+            for (Card card : cards.getCards(new FilterLandCard(),
+                    source.getSourceId(), source.getControllerId(), game)) {
                 cards.remove(card);
                 toBattlefield.add(card);
             }
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source,
+                    game, false, false, true, null);
             controller.moveCards(cards, Zone.HAND, source, game);
         }
         return true;

@@ -1,6 +1,5 @@
 package org.mage.test.cards.abilities.oneshot.sacrifice;
 
-import mage.abilities.keyword.ShroudAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;

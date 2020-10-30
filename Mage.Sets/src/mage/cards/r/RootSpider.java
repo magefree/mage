@@ -4,7 +4,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -32,7 +32,7 @@ public final class RootSpider extends CardImpl {
         effect.setText("it gets +1/+0");
         Effect effect2 = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect2.setText("and gains first strike until end of turn");
-        Ability ability = new BlocksTriggeredAbility(effect, false);
+        Ability ability = new BlocksSourceTriggeredAbility(effect, false);
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

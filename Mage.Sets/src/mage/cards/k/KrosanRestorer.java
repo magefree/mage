@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -40,7 +40,7 @@ public final class KrosanRestorer extends CardImpl {
         ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new UntapTargetEffect(),
                 new TapSourceCost(),
-                new CardsInControllerGraveCondition(7));
+                new CardsInControllerGraveyardCondition(7));
         ability.addTarget(new TargetLandPermanent(0, 3, new FilterLandPermanent(), false));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

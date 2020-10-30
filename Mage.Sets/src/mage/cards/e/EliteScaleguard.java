@@ -16,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -30,7 +29,7 @@ public final class EliteScaleguard extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public EliteScaleguard(UUID ownerId, CardSetInfo setInfo) {

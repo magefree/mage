@@ -79,7 +79,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
         if (game != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                String mes = String.format("Select color of %d mana to add it", this.amount);
+                String mes = String.format("Select a color of mana to add %d of it", this.amount);
                 if (mes != null) {
                     ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
                     if (controller.choose(outcome, choice, game)) {

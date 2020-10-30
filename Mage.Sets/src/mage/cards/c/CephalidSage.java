@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -32,7 +32,7 @@ public final class CephalidSage extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Cephalid Sage has "When Cephalid Sage enters the battlefield, draw three cards, then discard two cards."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 2))),
-            new CardsInControllerGraveCondition(7),
+            new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, draw three cards, then discard two cards.\""));
             ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

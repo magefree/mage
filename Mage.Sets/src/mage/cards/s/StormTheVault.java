@@ -3,13 +3,10 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -20,7 +17,6 @@ import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 
 /**

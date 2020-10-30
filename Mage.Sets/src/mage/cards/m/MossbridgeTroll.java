@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,11 +10,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -27,8 +21,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MossbridgeTroll extends CardImpl {
@@ -81,7 +76,7 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent mossbridgeTroll = game.getPermanent(event.getTargetId());
         if (mossbridgeTroll != null && event.getAmount() == 0) { // 1=noRegen
-            return mossbridgeTroll.regenerate(source.getSourceId(), game);
+            return mossbridgeTroll.regenerate(source, game);
         }
         return false;
     }

@@ -4,8 +4,6 @@ package mage.cards.g;
 import java.io.ObjectStreamException;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;

@@ -134,21 +134,20 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Player player = game.getPlayer(affectedControllerId);
         EnumSet<CardType> usedCardTypes = EnumSet.noneOf(CardType.class);
 
         if (game.getState().getValue(source.getSourceId().toString() + "cardTypes") != null) {
             usedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "cardTypes");
         }
-        //TODO add code for adding additional costs to the card
         if (player != null
-                && sourceId != null
-                && sourceId.equals(getTargetPointer().getFirst(game, source))
+                && objectId != null
+                && objectId.equals(getTargetPointer().getFirst(game, source))
                 && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(sourceId);
+            Card card = game.getCard(objectId);
             if (card != null
-                    && game.getState().getZone(sourceId) == Zone.EXILED) {
+                    && game.getState().getZone(objectId) == Zone.EXILED) {
                 EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
                 for (CardType cardT : card.getCardType()) {
                     if (!usedCardTypes.contains(cardT)) {
@@ -174,11 +173,10 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
                             }
                             usedCardTypes.add(CardType.fromString(choice.getChoice()));
                         }
-                        usedCardTypes.addAll(unusedCardTypes);
-                        player.setCastSourceIdWithAlternateMana(sourceId, null, card.getSpellAbility().getCosts());
-                        // TODO- This does not correctly work when you cancel the cast (has to be done by watcher I guess)
+                        usedCardTypes.addAll(unusedCardTypes);                        
                         game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
                     }
+                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                     return true;
                 }
             }

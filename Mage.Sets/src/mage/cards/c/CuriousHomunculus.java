@@ -43,7 +43,7 @@ public final class CuriousHomunculus extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, false),
-                new InstantOrSorceryCardsInControllerGraveCondition(3),
+                new InstantOrSorceryCardsInControllerGraveyardCondition(3),
                 "At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform {this}"));
     }
 
@@ -57,11 +57,11 @@ public final class CuriousHomunculus extends CardImpl {
     }
 }
 
-class InstantOrSorceryCardsInControllerGraveCondition implements Condition {
+class InstantOrSorceryCardsInControllerGraveyardCondition implements Condition {
 
     private int value;
 
-    public InstantOrSorceryCardsInControllerGraveCondition(int value) {
+    public InstantOrSorceryCardsInControllerGraveyardCondition(int value) {
         this.value = value;
     }
 

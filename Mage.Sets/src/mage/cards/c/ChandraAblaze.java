@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -28,6 +27,7 @@ import mage.target.common.TargetDiscard;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author North
@@ -171,7 +171,7 @@ class ChandraAblazeEffect5 extends OneShotEffect {
                 if (player.choose(outcome, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                        player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
                         cards.remove(card);
                     }
                 }

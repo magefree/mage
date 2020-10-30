@@ -1,7 +1,6 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,6 +14,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.players.PlayerList;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.RandomUtil;
@@ -108,7 +108,7 @@ class WildfireDevilsEffect extends OneShotEffect {
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
         Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true,
-                new MageObjectReference(source.getSourceObject(game), game));
+                new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
         return cardWasCast;
     }

@@ -9,8 +9,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,14 +44,14 @@ public final class JunglePatrol extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // {1}{G}, {tap}: Create a 0/1 green Wall creature token with defender named Wood.
+        // {1}{G}, {T}: Create a 0/1 green Wall creature token with defender named Wood.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WoodToken()), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // Sacrifice a token named Wood: Add {R}.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BasicManaEffect(Mana.RedMana(1)),
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
+                new BasicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)),
                 new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 

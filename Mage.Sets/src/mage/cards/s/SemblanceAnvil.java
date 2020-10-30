@@ -110,9 +110,6 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                 && abilityToModify.isControlledBy(source.getControllerId())) {
             Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
             if (spellCard != null) {
-                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
-                }
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     List<UUID> imprinted = permanent.getImprinted();

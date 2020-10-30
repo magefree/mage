@@ -2,7 +2,7 @@
 1 [THS:127] Lightning Strike
 1 [7ED:339] Mountain
 1 [INV:343] Mountain
-1 [ZEN:263] Mountain
+1 [ZEN:242a] Mountain
 1 [APC:140] Caves of Koilos
 3 [KTK:22] Seeker of the Way
 1 [THS:227] Temple of Silence
@@ -15,11 +15,11 @@
 1 [DDL:22] Magma Jet
 3 [THS:4] Chained to the Rocks
 1 [10E:348] Battlefield Forge
-1 [PO2:157] Mountain
+1 [M21:269] Mountain
 1 [SOM:238] Swamp
 1 [DDO:1] Elspeth, Sun's Champion
-1 [JR:43] Bloodstained Mire
-2 [MBP:98] Goblin Rabblemaster
+1 [G09:6] Bloodstained Mire
+2 [M15:145] Goblin Rabblemaster
 1 [KTK:31] Wingmate Roc
 2 [KTK:97] Arc Lightning
 1 [9ED:320] Caves of Koilos
@@ -35,14 +35,14 @@
 1 [TPR:262] Mountain
 SB: 1 [ULG:7] Erase
 SB: 1 [THS:15] Glare of Heresy
-SB: 1 [MBP:75] Chandra, Pyromaster
+SB: 1 [M15:134] Chandra, Pyromaster
 SB: 2 [THS:112] Anger of the Gods
 SB: 1 [THS:101] Read the Bones
 SB: 1 [KTK:104] Burn Away
 SB: 1 [THS:107] Thoughtseize
 SB: 1 [C14:158] Read the Bones
 SB: 1 [KTK:186] Mardu Charm
-SB: 1 [MGDC:38] Utter End
+SB: 1 [KTK:210] Utter End
 SB: 1 [KTK:9] Erase
 SB: 2 [KTK:8] End Hostilities
 SB: 1 [THS:9] Elspeth, Sun's Champion

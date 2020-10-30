@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -18,11 +18,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.Graveyard;
-import mage.players.Player;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -30,7 +26,7 @@ import java.util.UUID;
  */
 public final class ThievesGuildEnforcer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ROGUE, "{this} or another Rogue");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ROGUE, "Rogue");
 
     public ThievesGuildEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -45,7 +41,7 @@ public final class ThievesGuildEnforcer extends CardImpl {
 
         // Whenever Thieves' Guild Enforcer or another Rogue enters the battlefield under your control, each opponent mills two cards.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
+                new MillCardsEachPlayerEffect(
                         2, TargetController.OPPONENT
                 ), filter, false, true
         ));
@@ -53,13 +49,13 @@ public final class ThievesGuildEnforcer extends CardImpl {
         // As long as an opponent has eight or more cards in their graveyard, Thieves' Guild Enforcer gets +2/+1 and has deathtouch.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
-                ThievesGuildEnforcerCondition.instance, "as long as an opponent " +
+                CardsInOpponentGraveyardCondition.EIGHT, "as long as an opponent " +
                 "has eight or more cards in their graveyard, {this} gets +2/+1"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield
-        ), ThievesGuildEnforcerCondition.instance, "and has deathtouch"));
-        this.addAbility(ability);
+        ), CardsInOpponentGraveyardCondition.EIGHT, "and has deathtouch"));
+        this.addAbility(ability.addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }
 
     private ThievesGuildEnforcer(final ThievesGuildEnforcer card) {
@@ -69,21 +65,5 @@ public final class ThievesGuildEnforcer extends CardImpl {
     @Override
     public ThievesGuildEnforcer copy() {
         return new ThievesGuildEnforcer(this);
-    }
-}
-
-enum ThievesGuildEnforcerCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game
-                .getOpponents(source.getControllerId())
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .map(Player::getGraveyard)
-                .mapToInt(Graveyard::size)
-                .anyMatch(i -> i >= 8);
     }
 }

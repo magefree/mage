@@ -22,7 +22,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.util.CardUtil;

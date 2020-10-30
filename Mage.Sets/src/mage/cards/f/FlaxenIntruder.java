@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,8 +36,10 @@ public final class FlaxenIntruder extends AdventureCard {
                 new DestroyTargetEffect(), false, "destroy target artifact or enchantment"
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        Cost cost = new SacrificeSourceCost();
+        cost.setText("sacrifice it");
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoWhenCostPaid(
-                ability, new SacrificeSourceCost(), "Sacrifice {this}?"
+                ability, cost, "Sacrifice {this}?"
         ), false));
 
         // Welcome Home

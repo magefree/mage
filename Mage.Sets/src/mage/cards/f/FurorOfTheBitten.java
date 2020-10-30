@@ -34,7 +34,7 @@ public final class FurorOfTheBitten extends CardImpl {
         // Enchanted creature gets +2/+2 and attacks each turn if able.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Effect effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("and attacks each turn if able");
+        effect.setText("and attacks each combat if able");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

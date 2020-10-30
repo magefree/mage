@@ -22,7 +22,6 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *

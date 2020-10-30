@@ -196,7 +196,7 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
                 && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
             // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
-            return affectedControllerId.equals(source.getControllerId());
+            return source.isControlledBy(affectedControllerId);
         } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
             // object has moved zone so effect can be discarted
             this.discard();

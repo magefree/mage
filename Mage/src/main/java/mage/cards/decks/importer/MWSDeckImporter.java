@@ -1,23 +1,21 @@
-
 package mage.cards.decks.importer;
-
-import java.util.List;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.util.RandomUtil;
 
+import java.util.List;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class MWSDeckImporter extends PlainTextDeckImporter {
 
     @Override
-    protected void readLine(String line, DeckCardLists deckList) {
+    protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
+
         if (line.isEmpty() || line.startsWith("//")) {
             return;
         }
@@ -47,7 +45,7 @@ public class MWSDeckImporter extends PlainTextDeckImporter {
                 if (!cards.isEmpty()) {
                     cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
                 }
-            } 
+            }
             if (cardInfo == null) {
                 cardInfo = getCardLookup().lookupCardInfo(lineName).orElse(null);
             }

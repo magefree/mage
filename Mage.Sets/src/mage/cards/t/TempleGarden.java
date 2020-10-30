@@ -23,7 +23,7 @@ public final class TempleGarden extends CardImpl {
         this.subtype.add(SubType.FOREST);
         this.subtype.add(SubType.PLAINS);
 
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, it enters the battlefield tapped"));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

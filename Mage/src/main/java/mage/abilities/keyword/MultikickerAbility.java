@@ -2,6 +2,7 @@
 
 package mage.abilities.keyword;
 
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.OptionalAdditionalCost;
 

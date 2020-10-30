@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class ShardOfBrokenGlass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
 
         // Whenever equipped creature attacks, you may put the top two cards of your library into your graveyard.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(2), true));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new MillCardsControllerEffect(2), true));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));

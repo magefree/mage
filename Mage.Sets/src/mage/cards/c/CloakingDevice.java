@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -94,7 +93,12 @@ class CloakingDeviceLoseLifeDefendingPlayerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player defender = game.getPlayer(game.getCombat().getDefendingPlayerId(enchantment.getAttachedTo(), game));
             if (defender != null) {

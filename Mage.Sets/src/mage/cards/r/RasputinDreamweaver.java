@@ -14,6 +14,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -47,7 +48,9 @@ public final class RasputinDreamweaver extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance(7)), "seven dream counters on it"));
 
         // Remove a dream counter from Rasputin: Add {C}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1),
+                new RemoveCountersSourceCost(CounterType.DREAM.createInstance()),
+                new CountersSourceCount(CounterType.DREAM)));
 
         // Remove a dream counter from Rasputin: Prevent the next 1 damage that would be dealt to Rasputin this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));

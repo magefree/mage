@@ -60,9 +60,6 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
         if (abilityToModify instanceof SpellAbility) {
             Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
             if (spellCard != null) {
-                if (((SpellAbility) abilityToModify).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                    spellCard = ((SpellAbility) abilityToModify).getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCard, game);
-                }
                 return !spellCard.isArtifact();
             }
         }

@@ -20,6 +20,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 
 /**
  * @author TheElk801
@@ -49,7 +50,7 @@ public final class KykarWindsFury extends CardImpl {
 
         // Sacrifice a Spirit: Add {R}.
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1)),
+                Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)),
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))
         ));
     }

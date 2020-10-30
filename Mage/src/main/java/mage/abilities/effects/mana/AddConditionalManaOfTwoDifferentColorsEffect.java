@@ -8,7 +8,6 @@ package mage.abilities.effects.mana;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ManaChoice;
 import mage.game.Game;

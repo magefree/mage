@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class CardPanelRenderImpl extends CardPanel {
 
@@ -219,7 +220,12 @@ public class CardPanelRenderImpl extends CardPanel {
     }
 
     // Map of generated images
-    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder.newBuilder().softValues().build();
+    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
+            .newBuilder()
+            .maximumSize(3000)
+            .expireAfterAccess(60, TimeUnit.MINUTES)
+            .softValues()
+            .build();
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
@@ -369,10 +375,8 @@ public class CardPanelRenderImpl extends CardPanel {
                             }
                         }
                     });
-                } catch (Exception e) {
+                } catch (Exception | Error e) {
                     e.printStackTrace();
-                } catch (Error err) {
-                    err.printStackTrace();
                 }
             });
         }

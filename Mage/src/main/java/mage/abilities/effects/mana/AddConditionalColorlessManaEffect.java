@@ -6,6 +6,7 @@
 package mage.abilities.effects.mana;
 
 import mage.Mana;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 
 /**
@@ -15,7 +16,11 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 public class AddConditionalColorlessManaEffect extends AddConditionalManaEffect {
 
     public AddConditionalColorlessManaEffect(int amount, ConditionalManaBuilder manaBuilder) {
-        super(Mana.ColorlessMana(amount), manaBuilder);
+        this(amount, manaBuilder, null);
+    }
+
+    public AddConditionalColorlessManaEffect(int amount, ConditionalManaBuilder manaBuilder, DynamicValue netAmount) {
+        super(Mana.ColorlessMana(amount), manaBuilder, netAmount);
     }
 
     public AddConditionalColorlessManaEffect(final AddConditionalColorlessManaEffect effect) {

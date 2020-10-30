@@ -1,8 +1,5 @@
 package mage.cards;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -14,6 +11,10 @@ import mage.constants.SetType;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -76,6 +77,12 @@ public abstract class ExpansionSet implements Serializable {
         public CardGraphicInfo getGraphicInfo() {
             return this.graphicInfo;
         }
+
+        public boolean isFullArt() {
+            return this.graphicInfo != null
+                    && this.graphicInfo.getFrameStyle() != null
+                    && this.graphicInfo.getFrameStyle().isFullArt();
+        }
     }
 
     protected final List<SetCardInfo> cards = new ArrayList<>();
@@ -133,6 +140,12 @@ public abstract class ExpansionSet implements Serializable {
 
     public Date getReleaseDate() {
         return releaseDate;
+    }
+
+    public int getReleaseYear() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.getReleaseDate());
+        return cal.get(Calendar.YEAR);
     }
 
     public ExpansionSet getParentSet() {

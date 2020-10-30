@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -13,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 
@@ -23,7 +21,7 @@ import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 public final class OdricMasterTactician extends CardImpl {
 
     public OdricMasterTactician(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -76,15 +74,15 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private class ChooseBlockersRedundancyWatcherIncrementEffect extends OneShotEffect {
-    
+
         ChooseBlockersRedundancyWatcherIncrementEffect() {
             super(Outcome.Neutral);
         }
-    
+
         ChooseBlockersRedundancyWatcherIncrementEffect(final ChooseBlockersRedundancyWatcherIncrementEffect effect) {
             super(effect);
         }
-    
+
         @Override
         public boolean apply(Game game, Ability source) {
             ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
@@ -94,7 +92,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
             }
             return false;
         }
-    
+
         @Override
         public ChooseBlockersRedundancyWatcherIncrementEffect copy() {
             return new ChooseBlockersRedundancyWatcherIncrementEffect(this);
@@ -130,8 +128,11 @@ class OdricMasterTacticianChooseBlockersEffect extends ContinuousRuleModifyingEf
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (source.isControlledBy(event.getPlayerId())) {
+            return false; // Don't replace the own call to selectBlockers
+        }
         ChooseBlockersRedundancyWatcher watcher = game.getState().getWatcher(ChooseBlockersRedundancyWatcher.class);
-        if(watcher == null){
+        if (watcher == null) {
             return false;
         }
         watcher.decrement();

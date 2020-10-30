@@ -36,10 +36,10 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 52;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 231;
+    private static final long CARD_CONTENT_VERSION = 232;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
-    private RepositoryEventSource eventSource = new RepositoryEventSource();
+    private final RepositoryEventSource eventSource = new RepositoryEventSource();
 
     CardRepository() {
         File file = new File("db");
@@ -58,7 +58,6 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-
             eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
@@ -180,6 +179,7 @@ public enum CardRepository {
     public Boolean haveSnowLands(String setCode) {
         return setCode.equals("CSP")
                 || setCode.equals("MH1")
+                || setCode.equals("SLD")
                 || setCode.equals("ME2")
                 || setCode.equals("ICE");
     }
@@ -334,11 +334,22 @@ public enum CardRepository {
     }
 
     public CardInfo findCard(String setCode, String cardNumber) {
+        return findCard(setCode, cardNumber, true);
+    }
+
+    public CardInfo findCard(String setCode, String cardNumber, boolean ignoreNightCards) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.limit(1L).where().eq("setCode", new SelectArg(setCode))
-                    .and().eq("cardNumber", new SelectArg(cardNumber))
-                    .and().eq("nightCard", new SelectArg(false));
+            if (ignoreNightCards) {
+                queryBuilder.limit(1L).where()
+                        .eq("setCode", new SelectArg(setCode))
+                        .and().eq("cardNumber", new SelectArg(cardNumber))
+                        .and().eq("nightCard", new SelectArg(false));
+            } else {
+                queryBuilder.limit(1L).where()
+                        .eq("setCode", new SelectArg(setCode))
+                        .and().eq("cardNumber", new SelectArg(cardNumber));
+            }
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
                 return result.get(0);
@@ -394,14 +405,21 @@ public enum CardRepository {
     }
 
     public CardInfo findPreferedCoreExpansionCard(String name, boolean caseInsensitive, String preferedSetCode) {
-
         List<CardInfo> cards;
         if (caseInsensitive) {
             cards = findCardsCaseInsensitive(name);
         } else {
             cards = findCards(name);
         }
+        return findPreferedOrLatestCard(cards, preferedSetCode);
+    }
 
+    public CardInfo findPreferedCoreExpansionCardByClassName(String canonicalClassName, String preferedSetCode) {
+        List<CardInfo> cards = findCardsByClass(canonicalClassName);
+        return findPreferedOrLatestCard(cards, preferedSetCode);
+    }
+
+    private CardInfo findPreferedOrLatestCard(List<CardInfo> cards, String preferedSetCode) {
         if (!cards.isEmpty()) {
             Date lastReleaseDate = null;
             Date lastExpansionDate = null;
@@ -457,11 +475,21 @@ public enum CardRepository {
         return Collections.emptyList();
     }
 
+    public List<CardInfo> findCardsByClass(String canonicalClassName) {
+        try {
+            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+            queryBuilder.where().eq("className", new SelectArg(canonicalClassName));
+            return cardDao.query(queryBuilder.prepare());
+        } catch (SQLException ex) {
+        }
+        return Collections.emptyList();
+    }
+
     public List<CardInfo> findCardsCaseInsensitive(String name) {
         try {
             String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("'", "''");
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
-                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + '\'',
+                    "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower_name = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());
             List<CardInfo> result = new ArrayList<>();
             for (CardInfo cardinfo : rawResults) {

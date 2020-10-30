@@ -1,10 +1,5 @@
 package mage.game.command;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -28,6 +23,12 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import mage.util.SubTypeList;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author spjspj
@@ -219,6 +220,10 @@ public class Plane implements CommandObject {
     @Override
     public int getStartingLoyalty() {
         return 0;
+    }
+
+    @Override
+    public void setStartingLoyalty(int startingLoyalty) {
     }
 
     @Override

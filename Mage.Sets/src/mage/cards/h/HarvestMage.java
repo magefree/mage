@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -84,9 +83,14 @@ class HarvestMageReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();
-        new AddManaOfAnyColorEffect().apply(game,source);
-        mana.setToMana(new Mana(0,0,0,0,0,0,0,0));
-        return true;
+        if (game != null && game.inCheckPlayableState()) {
+            mana.setToMana(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
+            return false;
+        } else {
+            new AddManaOfAnyColorEffect().apply(game, source);
+            mana.setToMana(new Mana(0, 0, 0, 0, 0, 0, 0, 0));
+            return true;
+        }
     }
 
     @Override

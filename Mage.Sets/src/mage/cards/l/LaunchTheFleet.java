@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -14,8 +12,9 @@ import mage.constants.Duration;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LaunchTheFleet extends CardImpl {

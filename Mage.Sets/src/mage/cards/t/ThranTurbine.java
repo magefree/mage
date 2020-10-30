@@ -17,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 

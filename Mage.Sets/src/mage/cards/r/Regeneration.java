@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,16 +12,16 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Regeneration extends CardImpl {
 
     public Regeneration(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -31,6 +29,7 @@ public final class Regeneration extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // {G}: Regenerate enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{G}")));
     }

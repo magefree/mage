@@ -6,16 +6,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -46,31 +42,5 @@ public final class EpitaphGolem extends CardImpl {
     @Override
     public EpitaphGolem copy() {
         return new EpitaphGolem(this);
-    }
-}
-
-class EpitaphGolemGraveyardToLibraryEffect extends OneShotEffect {
-
-    public EpitaphGolemGraveyardToLibraryEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Put target card from your graveyard on the bottom of your library";
-    }
-
-    public EpitaphGolemGraveyardToLibraryEffect(final EpitaphGolemGraveyardToLibraryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EpitaphGolemGraveyardToLibraryEffect copy() {
-        return new EpitaphGolemGraveyardToLibraryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return controller.putCardsOnBottomOfLibrary(game.getCard(getTargetPointer().getFirst(game, source)), game, source, true);
-        }
-        return false;
     }
 }

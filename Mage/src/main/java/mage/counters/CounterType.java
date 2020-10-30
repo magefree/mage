@@ -1,6 +1,9 @@
 package mage.counters;
 
 import mage.abilities.keyword.*;
+import mage.cards.Card;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  * Enum for counters, names and instances.
@@ -161,9 +164,11 @@ public enum CounterType {
     WISH("wish");
 
     private final String name;
+    private final CounterPredicate predicate;
 
     CounterType(String name) {
         this.name = name;
+        this.predicate = new CounterPredicate(this);
     }
 
     /**
@@ -248,5 +253,32 @@ public enum CounterType {
             }
         }
         return null;
+    }
+
+    public CounterPredicate getPredicate() {
+        return predicate;
+    }
+
+    private static class CounterPredicate implements Predicate<Card> {
+
+        private final CounterType counter;
+
+        private CounterPredicate(CounterType counter) {
+            this.counter = counter;
+        }
+
+        @Override
+        public boolean apply(Card input, Game game) {
+            if (counter == null) {
+                return !input.getCounters(game).keySet().isEmpty();
+            } else {
+                return input.getCounters(game).containsKey(counter);
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "CounterType(" + counter.getName() + ')';
+        }
     }
 }

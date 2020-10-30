@@ -31,7 +31,7 @@ public final class NissasPilgrimage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand.  Then shuffle your library.
-        // <i>Spell Mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.
+        // <i>Spell Mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.
         this.getSpellAbility().addEffect(new NissasPilgrimageEffect());
     }
 
@@ -57,7 +57,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
     public NissasPilgrimageEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand.  Then shuffle your library."
-                + "<br><i>Spell Mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.";
+                + "<br><i>Spell Mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.";
     }
 
     public NissasPilgrimageEffect(final NissasPilgrimageEffect effect) {

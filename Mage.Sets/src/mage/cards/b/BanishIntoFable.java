@@ -81,6 +81,12 @@ class BanishIntoFableTriggeredAbility extends CastSourceTriggeredAbility {
     public BanishIntoFableTriggeredAbility copy() {
         return new BanishIntoFableTriggeredAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "When you cast this spell from your hand, copy it if you control an artifact, " +
+                "then copy it if you control an enchantment. You may choose new targets for the copies.";
+    }
 }
 
 class BanishIntoFableEffect extends OneShotEffect {

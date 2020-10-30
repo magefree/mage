@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -104,7 +104,7 @@ class RippleEffect extends OneShotEffect {
             while (player.canRespond() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
-                    player.cast(card.getSpellAbility(), game, true, new MageObjectReference(source.getSourceObject(game), game));
+                    player.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
                     cards.remove(card);
                 }
                 target1.clearChosen();

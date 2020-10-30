@@ -1,15 +1,16 @@
 package mage.client.util;
 
-import static com.google.common.cache.CacheBuilder.newBuilder;
-
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-
 import com.google.common.base.Function;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.ForwardingLoadingCache;
 import com.google.common.cache.LoadingCache;
 import org.apache.log4j.Logger;
+
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+import static com.google.common.cache.CacheBuilder.newBuilder;
 
 public class SoftValuesLoadingCache<K, V> extends ForwardingLoadingCache<K, Optional<V>> {
 
@@ -17,7 +18,11 @@ public class SoftValuesLoadingCache<K, V> extends ForwardingLoadingCache<K, Opti
     private static final Logger logger = Logger.getLogger(SoftValuesLoadingCache.class);
 
     public SoftValuesLoadingCache(CacheLoader<K, Optional<V>> loader) {
-        cache = newBuilder().softValues().build(loader);
+        cache = newBuilder()
+                .maximumSize(3000)
+                .expireAfterAccess(60, TimeUnit.MINUTES)
+                .softValues()
+                .build(loader);
     }
 
     @Override

@@ -1,8 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,16 +11,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.SplitCard;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -34,14 +23,16 @@ import mage.target.TargetSpell;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class JestersScepter extends CardImpl {
 
     public JestersScepter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // When Jester's Scepter enters the battlefield, exile the top five cards of target player's library face down.
         Ability ability = new EntersBattlefieldTriggeredAbility(new JestersScepterEffect(), false);
@@ -213,14 +204,11 @@ class JestersScepterCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            // In case of Split Card
             String nameOfExiledCardPayment = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment");
             String nameOfExiledCardPayment2 = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment2");
-            if (nameOfExiledCardPayment != null) {
-                if (nameOfExiledCardPayment.equals(spell.getCard().getName())
-                        || (nameOfExiledCardPayment2 != null) && nameOfExiledCardPayment2.equals(spell.getCard().getName())) {
-                    return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
-                }
+            if (CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment, game)
+                    || CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment2, game)) {
+                return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
             }
         }
         return false;

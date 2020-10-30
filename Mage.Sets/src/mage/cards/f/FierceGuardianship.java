@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.hint.common.ControlACommanderHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +21,9 @@ public final class FierceGuardianship extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // If you control a commander, you may cast this spell without paying its mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(null, ControlACommanderCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(null, ControlACommanderCondition.instance)
+                .addHint(ControlACommanderHint.instance)
+        );
 
         // Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

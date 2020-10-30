@@ -79,7 +79,7 @@ class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you play a land, if it wasn't the first land you played this turn, {source} deals 1 damage to you";
+        return "Whenever you play a land, if it wasn't the first land you played this turn, {this} deals 1 damage to you";
     }
 
 }

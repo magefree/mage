@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
@@ -35,7 +35,7 @@ public final class InfectedVermin extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new DamageEverythingEffect(3),
                 new ManaCostsImpl("{3}{B}"),
-                new CardsInControllerGraveCondition(7));
+                new CardsInControllerGraveyardCondition(7));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

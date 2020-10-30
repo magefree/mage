@@ -253,7 +253,7 @@ public final class HourOfDevastation extends ExpansionSet {
     public List<CardInfo> getSpecialLand() {
         if (savedSpecialLand.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
-            criteria.setCodes("MPS-AKH");
+            criteria.setCodes("MP2");
             criteria.minCardNumber(31);
             criteria.maxCardNumber(54);
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));

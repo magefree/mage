@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -15,14 +13,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SlaughterGames extends CardImpl {
 
     public SlaughterGames(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
 
         // Slaughter Games can't be countered.
         Effect effect = new CantBeCounteredSourceEffect();
@@ -60,6 +59,9 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
     @Override
     public boolean apply(Game game, Ability source) {
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        if (cardName == null) {
+            return false;
+        }
         return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
     }
 

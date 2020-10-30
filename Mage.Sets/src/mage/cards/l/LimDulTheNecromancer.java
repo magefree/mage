@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -24,8 +22,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class LimDulTheNecromancer extends CardImpl {
@@ -47,7 +46,7 @@ public final class LimDulTheNecromancer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl("{1}{B}")), true, filter, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl("{1}{B}")), false, filter, true));
 
         // {1}{B}: Regenerate target Zombie.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{B}"));

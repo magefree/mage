@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
@@ -71,9 +70,8 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
 
         if (mode.getTargets().isEmpty()) {
-            sb.append("target player");
-        }
-        else {
+            sb.append("that player");
+        } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
 
@@ -91,11 +89,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             }
             sb.append(token.getDescription());
             if (token.getDescription().endsWith("token")) {
-                sb.append("s ");
+                sb.append("s");
             }
-            int tokenLocation = sb.indexOf("token ");
+            int tokenLocation = sb.indexOf("token");
             if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens");
             }
         }
         if (attacking) {

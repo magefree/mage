@@ -1,31 +1,23 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class KopalaWardenOfWaves extends CardImpl {
@@ -40,10 +32,10 @@ public final class KopalaWardenOfWaves extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Spells your opponents cast that target a Merfolk you control cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostModificationEffect1()));
 
         // Abilities your opponents activate that target a Merfolk you control cost {2} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostReductionEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostModificationEffect2()));
     }
 
     public KopalaWardenOfWaves(final KopalaWardenOfWaves card) {
@@ -54,77 +46,51 @@ public final class KopalaWardenOfWaves extends CardImpl {
     public KopalaWardenOfWaves copy() {
         return new KopalaWardenOfWaves(this);
     }
-}
 
-class KopalaWardenOfWavesCostReductionEffect extends CostModificationEffectImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Merfolk you control");
-    private static final String effectText = "Spells your opponents cast that target a Merfolk you control cost {2} more to cast";
-
-    static {
-        filter.add(SubType.MERFOLK.getPredicate());
+    static boolean isTargetCompatible(Permanent permanent, Ability source, Game game) {
+        // target a Merfolk you control
+        return permanent.isControlledBy(source.getControllerId())
+                && permanent.hasSubtype(SubType.MERFOLK, game);
     }
 
-    KopalaWardenOfWavesCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = effectText;
-    }
-
-    KopalaWardenOfWavesCostReductionEffect(KopalaWardenOfWavesCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, -2);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.SPELL) {
-            if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
-                    Mode mode = abilityToModify.getModes().get(modeId);
-                    for (Target target : mode.getTargets()) {
-                        for (UUID targetUUID : target.getTargets()) {
-                            Permanent creature = game.getPermanent(targetUUID);
-                            if (creature != null
-                                    && filter.match(creature, game)
-                                    && creature.isControlledBy(source.getControllerId())) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+    static boolean isAbilityCompatible(Ability abilityToModify, Ability source, Game game) {
+        if (!game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public KopalaWardenOfWavesCostReductionEffect copy() {
-        return new KopalaWardenOfWavesCostReductionEffect(this);
-    }
+        Set<UUID> allTargets;
+        if (game.getStack().getStackObject(abilityToModify.getId()) != null) {
+            // real cast
+            allTargets = CardUtil.getAllSelectedTargets(abilityToModify, game);
+        } else {
+            // playable
+            allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
 
+            // can target without cost increase
+            if (allTargets.stream()
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .anyMatch(permanent -> !isTargetCompatible(permanent, source, game))) {
+                return false;
+            }
+            ;
+        }
+
+        return allTargets.stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .anyMatch(permanent -> isTargetCompatible(permanent, source, game));
+    }
 }
 
-class KopalaWardenOfWavesCostReductionEffect2 extends CostModificationEffectImpl {
+class KopalaWardenOfWavesCostModificationEffect1 extends CostModificationEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Merfolk you control");
-    private static final String effectText = "Abilities your opponents activate that target a Merfolk you control cost {2} more to activate";
-
-    static {
-        filter.add(SubType.MERFOLK.getPredicate());
-    }
-
-    KopalaWardenOfWavesCostReductionEffect2() {
+    KopalaWardenOfWavesCostModificationEffect1() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = effectText;
+        this.staticText = "Spells your opponents cast that target a Merfolk you control cost {2} more to cast";
     }
 
-    KopalaWardenOfWavesCostReductionEffect2(KopalaWardenOfWavesCostReductionEffect2 effect) {
+    KopalaWardenOfWavesCostModificationEffect1(KopalaWardenOfWavesCostModificationEffect1 effect) {
         super(effect);
     }
 
@@ -136,26 +102,49 @@ class KopalaWardenOfWavesCostReductionEffect2 extends CostModificationEffectImpl
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED) {
-            if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (Target target : abilityToModify.getTargets()) {
-                    for (UUID targetUUID : target.getTargets()) {
-                        Permanent creature = game.getPermanent(targetUUID);
-                        if (creature != null
-                                && filter.match(creature, game)
-                                && creature.isControlledBy(source.getControllerId())) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (!(abilityToModify instanceof SpellAbility)) {
+            return false;
         }
-        return false;
+
+        return KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
     }
 
     @Override
-    public KopalaWardenOfWavesCostReductionEffect2 copy() {
-        return new KopalaWardenOfWavesCostReductionEffect2(this);
+    public KopalaWardenOfWavesCostModificationEffect1 copy() {
+        return new KopalaWardenOfWavesCostModificationEffect1(this);
+    }
+
+}
+
+class KopalaWardenOfWavesCostModificationEffect2 extends CostModificationEffectImpl {
+
+    KopalaWardenOfWavesCostModificationEffect2() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
+        this.staticText = "Abilities your opponents activate that target a Merfolk you control cost {2} more to activate";
+    }
+
+    KopalaWardenOfWavesCostModificationEffect2(KopalaWardenOfWavesCostModificationEffect2 effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        CardUtil.increaseCost(abilityToModify, 2);
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (!(abilityToModify instanceof ActivatedAbility)) {
+            return false;
+        }
+
+        return KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
+    }
+
+    @Override
+    public KopalaWardenOfWavesCostModificationEffect2 copy() {
+        return new KopalaWardenOfWavesCostModificationEffect2(this);
     }
 
 }

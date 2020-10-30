@@ -60,6 +60,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
         if (controller != null) {
             int repeat = source.getManaCostsToPay().getX();
             for (int i = 1; i <= repeat; i++) {
+                
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null) {
@@ -85,7 +86,6 @@ class TormentOfHailfireEffect extends OneShotEffect {
                         opponent.loseLife(3, game, false);
                     }
                 }
-                
             }
             return true;
         }

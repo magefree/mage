@@ -115,6 +115,7 @@ class ImproviseSpecialAction extends SpecialAction {
 
     public ImproviseSpecialAction(ManaCost unpaid, AlternateManaPaymentAbility manaAbility) {
         super(Zone.ALL, manaAbility);
+        this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         setRuleVisible(false);
         this.addEffect(new ImproviseEffect(unpaid));
     }

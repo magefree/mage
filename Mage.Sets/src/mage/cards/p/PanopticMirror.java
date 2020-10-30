@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageObjectReference;
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -150,7 +150,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                 if (controller.chooseUse(outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
                     controller.cast(controller.chooseAbilityForCast(copy, game, true),
-                            game, true, new MageObjectReference(source.getSourceObject(game), game));
+                            game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), null);
                 }
             }

@@ -21,6 +21,9 @@ public final class NinthEdition extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
 
+        // scryfall combines Ninth Edition and Ninth Edition Box sets in one, but xmage must split it
+        // reason: remove box's cards from booster? TODO: implement booster ignore settings for cards instead max card number
+
         cards.add(new SetCardInfo("Adarkar Wastes", 317, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Air Elemental", 58, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 286, Rarity.RARE, mage.cards.a.AladdinsRing.class));

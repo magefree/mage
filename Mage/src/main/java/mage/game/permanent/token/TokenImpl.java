@@ -1,9 +1,5 @@
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
@@ -17,6 +13,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -158,6 +159,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, attackedPlayer, true);
+    }
+
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -168,14 +174,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         lastAddedTokenIds.clear();
 
         CreateTokenEvent event = new CreateTokenEvent(sourceId, controllerId, amount, this);
-        if (!game.replaceEvent(event)) {
-            putOntoBattlefieldHelper(event, game, tapped, attacking, attackedPlayer);
+        if (!created || !game.replaceEvent(event)) {
+            putOntoBattlefieldHelper(event, game, tapped, attacking, attackedPlayer, created);
             return true;
         }
         return false;
     }
 
-    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, boolean tapped, boolean attacking, UUID attackedPlayer) {
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
         Player controller = game.getPlayer(event.getPlayerId());
         Token token = event.getToken();
         int amount = event.getAmount();
@@ -212,14 +218,16 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 ((TokenImpl) token).lastAddedTokenId = permanent.getId();
             }
             game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
-            if (permanent instanceof PermanentToken) {
+            if (permanent instanceof PermanentToken && created) {
                 game.addSimultaneousEvent(new CreatedTokenEvent(event.getSourceId(), (PermanentToken) permanent));
             }
             if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                 game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
             }
-            if (!game.isSimulation()) {
+            if (created) {
                 game.informPlayers(controller.getLogName() + " creates a " + permanent.getLogName() + " token");
+            } else {
+                game.informPlayers(permanent.getLogName() + " enters the battlefield as a token under " + controller.getLogName() + "'s control'");
             }
 
         }

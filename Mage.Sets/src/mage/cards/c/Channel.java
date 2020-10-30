@@ -14,6 +14,7 @@ import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -75,6 +76,7 @@ class ChannelSpecialAction extends SpecialAction {
 
     ChannelSpecialAction() {
         super();
+        this.abilityType = AbilityType.SPECIAL_MANA_PAYMENT;
         this.addCost(new PayLifeCost(1));
         this.addEffect(new BasicManaEffect(Mana.ColorlessMana(1)));
     }

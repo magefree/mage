@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -46,7 +45,7 @@ public final class Masters25 extends ExpansionSet {
         cards.add(new SetCardInfo("Griffin Protector", 17, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
         cards.add(new SetCardInfo("Karona's Zealot", 18, Rarity.UNCOMMON, mage.cards.k.KaronasZealot.class));
         cards.add(new SetCardInfo("Knight of the Skyward Eye", 19, Rarity.COMMON, mage.cards.k.KnightOfTheSkywardEye.class));
-        cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 20, Rarity.UNCOMMON, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 20, Rarity.UNCOMMON, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Kor Firewalker", 21, Rarity.UNCOMMON, mage.cards.k.KorFirewalker.class));
         cards.add(new SetCardInfo("Loyal Sentry", 22, Rarity.COMMON, mage.cards.l.LoyalSentry.class));
         cards.add(new SetCardInfo("Luminarch Ascension", 23, Rarity.RARE, mage.cards.l.LuminarchAscension.class));

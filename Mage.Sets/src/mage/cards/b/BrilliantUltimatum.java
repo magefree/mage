@@ -3,8 +3,8 @@ package mage.cards.b;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -111,7 +111,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 if (controller.chooseTarget(Outcome.PlayForFree, selectedPile, targetExiledCard, source, game)) {
                     Card card = selectedPile.get(targetExiledCard.getFirstTarget(), game);
                     controller.canPlayLand();
-                    if (controller.playCard(card, game, true, true, new MageObjectReference(source.getSourceObject(game), game))) {
+                    if (controller.playCard(card, game, true, true, new ApprovingObject(source, game))) {
                         selectedPileCards.remove(card);
                         selectedPile.remove(card);
                     }

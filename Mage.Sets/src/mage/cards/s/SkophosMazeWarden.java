@@ -99,6 +99,6 @@ class SkophosMazeWardenTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever another creature becomes the target of an ability of a land you control " +
-                "named Labyrinth of Skophos, you may have {this} fight that creature";
+                "named Labyrinth of Skophos, you may have {this} fight that creature.";
     }
 }

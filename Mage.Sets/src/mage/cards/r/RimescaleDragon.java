@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class RimescaleDragon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with ice counters");
 
     static {
-        filter.add(new CounterPredicate(CounterType.ICE));
+        filter.add(CounterType.ICE.getPredicate());
     }
 
     public RimescaleDragon(UUID ownerId, CardSetInfo setInfo) {

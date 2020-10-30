@@ -1,9 +1,5 @@
 package mage.designations;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -20,23 +16,27 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.Copyable;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
-public abstract class Designation implements MageObject {
+public abstract class Designation implements MageObject, Copyable<Designation> {
 
-    private static EnumSet emptySet = EnumSet.noneOf(CardType.class);
-    private static List emptyList = new ArrayList<>();
-    private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCostsImpl emptyCost = new ManaCostsImpl();
+    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final ManaCostsImpl emptyCost = new ManaCostsImpl();
 
     private String name;
-    private DesignationType designationType;
+    private final DesignationType designationType;
     private UUID id;
-    private FrameStyle frameStyle;
+    private final FrameStyle frameStyle;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
@@ -57,13 +57,14 @@ public abstract class Designation implements MageObject {
     }
 
     public Designation(final Designation designation) {
-        this.id = designation.id;
         this.name = designation.name;
         this.designationType = designation.designationType;
+        this.id = designation.id;
         this.frameStyle = designation.frameStyle;
         this.copy = designation.copy;
         this.copyFrom = (designation.copyFrom != null ? designation.copyFrom.copy() : null);
         this.abilites = designation.abilites.copy();
+        this.expansionSetCodeForImage = designation.expansionSetCodeForImage;
         this.unique = designation.unique;
     }
 
@@ -205,6 +206,10 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+    }
+
+    @Override
     public void adjustCosts(Ability ability, Game game) {
     }
 
@@ -262,5 +267,4 @@ public abstract class Designation implements MageObject {
     public boolean isUnique() {
         return unique;
     }
-
 }

@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.DefenderAbility;
@@ -34,7 +34,7 @@ public final class ElderLandWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Elder Land Wurm blocks, it loses defender.
-        this.addAbility(new BlocksTriggeredAbility(new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), false, false, true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), false, false, true));
     }
 
     public ElderLandWurm(final ElderLandWurm card) {

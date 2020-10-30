@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -47,7 +47,7 @@ public final class CentaurChieftain extends CardImpl {
         gainedAbility.addEffect(effect);
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilitySourceEffect(gainedAbility), new CardsInControllerGraveCondition(7),
+            new GainAbilitySourceEffect(gainedAbility), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, creatures you control get +1/+1 and gain trample until end of turn.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

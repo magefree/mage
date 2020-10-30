@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -70,7 +70,7 @@ class ToweringWaveMysticTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(event.getAmount()));
+        this.addEffect(new MillCardsTargetEffect(event.getAmount()));
         return true;
     }
 

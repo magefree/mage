@@ -8,12 +8,6 @@ package mage.client.util;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import javax.annotation.Nullable;
-
-import com.google.common.base.Function;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
 /**

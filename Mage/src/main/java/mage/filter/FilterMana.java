@@ -85,6 +85,30 @@ public class FilterMana implements Serializable {
         this.colorless = colorless;
     }
 
+    public boolean isMulticolored() {
+        return getColorCount() > 1;
+    }
+
+    public int getColorCount() {
+        int colorCount = 0;
+        if (this.white) {
+            colorCount += 1;
+        }
+        if (this.blue) {
+            colorCount += 1;
+        }
+        if (this.black) {
+            colorCount += 1;
+        }
+        if (this.red) {
+            colorCount += 1;
+        }
+        if (this.green) {
+            colorCount += 1;
+        }
+        return colorCount;
+    }
+
     public FilterMana copy() {
         return new FilterMana(this);
     }

@@ -3,7 +3,6 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;

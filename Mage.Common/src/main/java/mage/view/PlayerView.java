@@ -31,6 +31,7 @@ public class PlayerView implements Serializable {
 
     private final UUID playerId;
     private final String name;
+    private final boolean controlled; // gui: player is current user
     private final int life;
     private final Counters counters;
     private final int wins;
@@ -64,6 +65,7 @@ public class PlayerView implements Serializable {
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         this.playerId = player.getId();
         this.name = player.getName();
+        this.controlled = player.getId().equals(createdForPlayerId);
         this.life = player.getLife();
         this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
@@ -162,6 +164,10 @@ public class PlayerView implements Serializable {
                 return permanent.getControllerId().equals(playerId);
             }
         }
+    }
+
+    public boolean getControlled() {
+        return this.controlled;
     }
 
     public int getLife() {

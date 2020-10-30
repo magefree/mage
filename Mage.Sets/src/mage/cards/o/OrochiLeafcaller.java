@@ -25,6 +25,8 @@ public final class OrochiLeafcaller extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        
+        // {G}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G)));
     }
 

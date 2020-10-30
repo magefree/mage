@@ -2,9 +2,9 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.ApprovingObject;
 import mage.MageItem;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -101,9 +101,23 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isCanGainLife();
 
+    /**
+     * Is the player allowed to pay life for casting spells or activate activated abilities
+     * 
+     * @param canPayLifeCost 
+     */
+    
     void setCanPayLifeCost(boolean canPayLifeCost);
+    
+    boolean getCanPayLifeCost();
 
-    boolean canPayLifeCost();
+    /**
+     * Can the player pay life to cast or activate the given ability
+     *
+     * @param Ability
+     * @return
+     */
+    boolean canPayLifeCost(Ability Ability);
 
     void setCanPaySacrificeCostFilter(FilterPermanent filter);
 
@@ -313,7 +327,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects);
 
-    boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference);
+    boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject);
 
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
@@ -361,17 +375,17 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Plays a card if possible
      *
-     * @param card         the card that can be cast
+     * @param card            the card that can be cast
      * @param game
-     * @param noMana       if it's a spell i can be cast without paying mana
-     * @param ignoreTiming if it's cast during the resolution of another spell
-     *                     no sorcery or play land timing restriction are
-     *                     checked. For a land it has to be the turn of the
-     *                     player playing that card.
-     * @param reference    mage object that allows to play the card
+     * @param noMana          if it's a spell i can be cast without paying mana
+     * @param ignoreTiming    if it's cast during the resolution of another
+     *                        spell no sorcery or play land timing restriction
+     *                        are checked. For a land it has to be the turn of
+     *                        the player playing that card.
+     * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
-    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, MageObjectReference reference);
+    boolean playCard(Card card, Game game, boolean noMana, boolean ignoreTiming, ApprovingObject approvingObject);
 
     /**
      * @param card         the land card to play
@@ -444,6 +458,13 @@ public interface Player extends MageItem, Copyable<Player> {
     void setStoredBookmark(int bookmark);
 
     void resetStoredBookmark(Game game);
+
+    default void restoreState(int bookmark, String text, Game game) {
+        game.restoreState(bookmark, text);
+        if (getStoredBookmark() >= bookmark) {
+            resetStoredBookmark(game);
+        }
+    }
 
     void revealCards(Ability source, Cards cards, Game game);
 
@@ -926,10 +947,18 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Designation> getDesignations();
 
+    /**
+     * Set the mana colors the user can pay with 2 life instead
+     *
+     * @param colors
+     */
     void addPhyrexianToColors(FilterMana colors);
 
-    void removePhyrexianFromColors(FilterMana colors);
-
+    /**
+     * Mana colors the player can pay instead with 2 life
+     *
+     * @return
+     */
     FilterMana getPhyrexianColors();
 
 }

@@ -22,7 +22,7 @@ public class CantBeCounteredSourceAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return  "{this} can't be countered.";
+        return  "This spell can't be countered.";
     }
 
     @Override

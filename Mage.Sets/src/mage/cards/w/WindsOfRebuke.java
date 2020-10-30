@@ -2,7 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class WindsOfRebuke extends CardImpl {
         // Return target nonland permanent to its owner's hand. Each player puts the top two cards of their library into their graveyard.
         getSpellAbility().addTarget(new TargetNonlandPermanent());
         getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
+        getSpellAbility().addEffect(new MillCardsEachPlayerEffect(2, TargetController.ANY));
     }
 
     public WindsOfRebuke(final WindsOfRebuke card) {

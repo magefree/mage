@@ -39,7 +39,7 @@ class PleaForPowerEffect extends OneShotEffect {
 
     PleaForPowerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards";
+        this.staticText = "<i>Will of the council</i> &mdash; Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards";
     }
 
     PleaForPowerEffect(final PleaForPowerEffect effect) {

@@ -10,7 +10,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

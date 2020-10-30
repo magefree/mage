@@ -18,7 +18,6 @@ import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.themes.ThemeType;
 import mage.client.util.Event;
 import mage.client.util.*;
 import mage.client.util.audio.AudioManager;
@@ -612,6 +611,21 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlBattlefield.add(topPanel, panelC);
         panelC.gridy = 1;
         this.pnlBattlefield.add(bottomPanel, panelC);
+
+        // TODO: combat arrows aren't visible on re-connect, must click on avatar to update correctrly
+        //  reason: panels aren't visible/located here, so battlefieldpanel see wrong sizes
+        // recalc all component sizes and update permanents/arrows positions
+        // if you don't do it here then will catch wrong arrows drawing on re-connect (no sortLayout calls)
+        /*
+        this.validate();
+        for (Map.Entry<UUID, PlayAreaPanel> p : players.entrySet()) {
+            PlayerView playerView = game.getPlayers().stream().filter(view -> view.getPlayerId().equals(p.getKey())).findFirst().orElse(null);
+            if (playerView != null) {
+                p.getValue().getBattlefieldPanel().updateSize();
+                p.getValue().update(null, playerView, null);
+            }
+        }
+         */
     }
 
     public synchronized void updateGame(GameView game) {
@@ -1611,7 +1625,7 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setVisible(false);
 
         boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
-        
+
         btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
         btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
         btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN, displayButtonText); // F4
@@ -2355,7 +2369,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_NEXT_TURN);
 
@@ -2379,7 +2392,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_END_STEP);
 
@@ -2397,7 +2409,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_MAIN_STEP);
 
@@ -2406,7 +2417,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_YOUR_TURN);
 
@@ -2415,7 +2425,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_SKIP_STACK);
 
@@ -2424,7 +2433,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnSkipToEndStepBeforeYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_PRIOR_END);
 
@@ -2433,7 +2441,6 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
-    	this.feedbackPanel.setLastResponse();
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
         skipButtons.activateSkipButton("");
 
@@ -2775,9 +2782,7 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
     protected void done() {
         try {
             get();
-        } catch (InterruptedException ex) {
-            logger.fatal("Replay Match Task error", ex);
-        } catch (ExecutionException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Replay Match Task error", ex);
         } catch (CancellationException ex) {
         }

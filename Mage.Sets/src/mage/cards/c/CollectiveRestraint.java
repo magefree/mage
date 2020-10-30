@@ -46,7 +46,7 @@ class CollectiveRestraintPayManaToAttackAllEffect extends CantAttackYouUnlessPay
 
     CollectiveRestraintPayManaToAttackAllEffect() {
         super(null, false);
-        staticText = "Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types you control.";
+        staticText = "Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control.";
     }
 
     CollectiveRestraintPayManaToAttackAllEffect(CollectiveRestraintPayManaToAttackAllEffect effect) {

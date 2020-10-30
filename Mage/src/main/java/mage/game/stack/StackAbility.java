@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -219,6 +220,10 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+    }
+
+    @Override
     public Zone getZone() {
         return this.ability.getZone();
     }
@@ -374,15 +379,6 @@ public class StackAbility extends StackObjImpl implements Ability {
         if (card != null) {
             card.adjustTargets(ability, game);
         }
-    }
-
-    @Override
-    public Costs<Cost> getOptionalCosts() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void addOptionalCost(Cost cost) {
     }
 
     @Override
@@ -690,4 +686,15 @@ public class StackAbility extends StackObjImpl implements Ability {
                 || (this.getOriginalId().equals(ability.getOriginalId()))
                 || (this.getClass() == ability.getClass() && this.getRule().equals(ability.getRule()));
     }
+
+    @Override
+    public MageIdentifier getIdentifier() {
+        return ability.getIdentifier();
+    }
+
+    @Override
+    public AbilityImpl setIdentifier(MageIdentifier identifier) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
 }

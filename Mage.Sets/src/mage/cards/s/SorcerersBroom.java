@@ -70,6 +70,6 @@ class SorcerersBroomTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you sacrifice another permanent, you may pay {3}. " +
-                "If you do, create a token that's a copy of {this}";
+                "If you do, create a token that's a copy of {this}.";
     }
 }

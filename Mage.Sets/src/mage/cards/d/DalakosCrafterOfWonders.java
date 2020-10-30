@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class DalakosCrafterOfWonders extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("equipped creatures you control");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("equipped creatures");
 
     static {
         filter.add(EquippedPredicate.instance);

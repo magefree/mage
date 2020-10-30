@@ -396,7 +396,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
-            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
+            throw new Exception("Wrong parameters for image: collector id: " + collectorId + ", card set: " + cardSet);
         }
         if (card.isFlippedSide()) { //doesn't support rotated images
             return null;
@@ -446,6 +446,11 @@ public enum MythicspoilerComSource implements CardImageSource {
     }
 
     @Override
+    public boolean isCardSource() {
+        return true;
+    }
+
+    @Override
     public void doPause(String httpImageUrl) {
     }
 
@@ -454,4 +459,8 @@ public enum MythicspoilerComSource implements CardImageSource {
         return new ArrayList<>(supportedSets);
     }
 
+    @Override
+    public boolean isCardImageProvided(String setCode, String cardName) {
+        return supportedSets.contains(setCode);
+    }
 }

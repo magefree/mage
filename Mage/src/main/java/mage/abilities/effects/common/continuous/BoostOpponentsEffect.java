@@ -7,6 +7,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -22,7 +23,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
     protected FilterCreaturePermanent filter;
 
     public BoostOpponentsEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"));
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
     public BoostOpponentsEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {

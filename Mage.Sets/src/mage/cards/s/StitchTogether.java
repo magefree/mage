@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -27,7 +27,7 @@ public final class StitchTogether extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new ReturnFromGraveyardToHandTargetEffect(),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "Return target creature card from your graveyard to your hand. <br/><br/><i>Threshold</i> &mdash; Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

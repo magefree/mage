@@ -6,7 +6,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class DrownInFilth extends CardImpl {
 
         // Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Effect effect = new PutTopCardOfLibraryIntoGraveControllerEffect(4);
+        Effect effect = new MillCardsControllerEffect(4);
         effect.setText("Choose target creature. Mill four cards");
         this.getSpellAbility().addEffect(effect);
         DynamicValue landCards = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterLandCard()));

@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class CabalRitual extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalManaEffect(
                 new BasicManaEffect(Mana.BlackMana(5)),
                 new BasicManaEffect(Mana.BlackMana(3)),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "Add {B}{B}{B}.<br/><br/><i>Threshold</i> &mdash; Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard"));
     }
 

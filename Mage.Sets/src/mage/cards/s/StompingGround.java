@@ -23,7 +23,7 @@ public final class StompingGround extends CardImpl {
         this.subtype.add(SubType.MOUNTAIN);
         this.subtype.add(SubType.FOREST);
 
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, it enters the battlefield tapped"));
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

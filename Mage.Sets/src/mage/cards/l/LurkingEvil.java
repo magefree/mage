@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -59,7 +58,7 @@ class LurkingEvilCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        return controller != null && (controller.getLife() < 1 || controller.canPayLifeCost());
+        return controller != null && (controller.getLife() < 1 || controller.canPayLifeCost(ability));
     }
 
     @Override

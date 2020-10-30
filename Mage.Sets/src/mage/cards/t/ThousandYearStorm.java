@@ -19,7 +19,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;

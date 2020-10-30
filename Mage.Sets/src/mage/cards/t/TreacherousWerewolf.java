@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -36,11 +36,11 @@ public final class TreacherousWerewolf extends CardImpl {
 
         // Threshold - As long as seven or more cards are in your graveyard, Treacherous Werewolf gets +2/+2 and has "When Treacherous Werewolf dies, you lose 4 life."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
                 "As long as seven or more cards are in your graveyard, {this} gets +2/+2"));
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new LoseLifeSourceControllerEffect(4))),
-                new CardsInControllerGraveCondition(7), "and has \"When {this} dies, you lose 4 life.\""
+                new CardsInControllerGraveyardCondition(7), "and has \"When {this} dies, you lose 4 life.\""
         );
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.THRESHOLD);

@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -35,6 +34,7 @@ public final class JaceCunningCastawayIllusionToken extends TokenImpl {
         super(token);
     }
 
+    @Override
     public JaceCunningCastawayIllusionToken copy() {
         return new JaceCunningCastawayIllusionToken(this);
     }
@@ -64,7 +64,6 @@ class IllusionTokenTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
         if (event.getTargetId().equals(this.getSourceId()) && eventSourceObject instanceof Spell) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
         return false;

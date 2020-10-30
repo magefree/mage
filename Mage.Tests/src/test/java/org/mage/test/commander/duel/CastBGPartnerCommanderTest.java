@@ -1,26 +1,14 @@
 package org.mage.test.commander.duel;
 
-import java.io.FileNotFoundException;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.GameException;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
 /**
- *
- * @author LevelX2 ReyhanCommanderDeck
+ * @author LevelX2
  */
 public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
-
-    @Override
-    protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        setDecknamePlayerA("ReyhanCommanderDeck.dck");  // Commander Reyhan, Last of the Abzan {1}{B}{G}
-        //                                                         + Ikra Shidiqi, the Usurper
-        setDecknamePlayerB("CommanderDuel_UW.dck"); // Commander = Daxos of Meletis
-        return super.createNewGameAndPlayers();
-    }
 
     /**
      * With commander rule changes 6/2020 Reyhan goes to exile first before it
@@ -29,6 +17,10 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
      */
     @Test
     public void testExileReyhan() {
+        addCard(Zone.COMMAND, playerA, "Reyhan, Last of the Abzan", 1);
+        addCard(Zone.COMMAND, playerA, "Ikra Shidiqi, the Usurper", 1);
+        addCard(Zone.COMMAND, playerB, "Daxos of Meletis", 1);
+
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
@@ -63,6 +55,10 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
 
     @Test
     public void testCastBothPartnerCommanders() {
+        addCard(Zone.COMMAND, playerA, "Reyhan, Last of the Abzan", 1);
+        addCard(Zone.COMMAND, playerA, "Ikra Shidiqi, the Usurper", 1);
+        addCard(Zone.COMMAND, playerB, "Daxos of Meletis", 1);
+
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
@@ -70,7 +66,7 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
         // Whenever a creature you control dies or is put into the command zone,
         // if it had one or more +1/+1 counters on it, you may put that many +1/+1 counters on target creature.
         // Partner (You can have two commanders if both have partner.)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reyhan, Last of the Abzan"); // Creature 0/0
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reyhan, Last of the Abzan"); // {1}{B}{G} Creature 0/0
 
         // Menace
         // Whenever a creature you control deals combat damage to a player, you gain life equal to that creature's toughness.

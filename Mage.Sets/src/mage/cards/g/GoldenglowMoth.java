@@ -4,7 +4,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class GoldenglowMoth extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Goldenglow Moth blocks, you may gain 4 life.
-        this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(4), true));
+        this.addAbility(new BlocksSourceTriggeredAbility(new GainLifeEffect(4), true));
 
     }
 

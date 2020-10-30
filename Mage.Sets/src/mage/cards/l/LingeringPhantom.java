@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,8 +13,9 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LingeringPhantom extends CardImpl {
@@ -37,9 +36,9 @@ public final class LingeringPhantom extends CardImpl {
         // Whenever you cast a historic spell, you may pay {B}. If you do, return Lingering Phantom from your graveyard to your hand.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect()
-                        .setText("return {this} from your graveyard to your hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                        new ManaCostsImpl("{B}")),
-                filter, true, false
+                .setText("return {this} from your graveyard to your hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                new ManaCostsImpl("{B}")),
+                filter, false, false
         ));
     }
 

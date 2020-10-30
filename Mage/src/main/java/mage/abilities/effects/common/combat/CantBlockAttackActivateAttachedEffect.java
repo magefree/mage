@@ -12,8 +12,12 @@ import mage.game.permanent.Permanent;
 public class CantBlockAttackActivateAttachedEffect extends RestrictionEffect {
 
     public CantBlockAttackActivateAttachedEffect() {
+        this("creature");
+    }
+
+    public CantBlockAttackActivateAttachedEffect(String enchantedName) {
         super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
+        staticText = "Enchanted " + enchantedName + " can't attack or block, and its activated abilities can't be activated";
     }
 
     public CantBlockAttackActivateAttachedEffect(final CantBlockAttackActivateAttachedEffect effect) {

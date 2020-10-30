@@ -29,22 +29,22 @@ public abstract class AbstractProperties implements Properties {
 
     @Override
     public <T> Property<T> property(String name) {
-        return property(name, new BasicProperty<T>());
+        return property(name, new BasicProperty<>());
     }
 
     @Override
     public <E> List<E> list(String name) {
-        return list(name, new ArrayList<E>());
+        return list(name, new ArrayList<>());
     }
 
     @Override
     public <E> Set<E> set(String name) {
-        return set(name, new HashSet<E>());
+        return set(name, new HashSet<>());
     }
 
     @Override
     public <K, V> Map<K, V> map(String name) {
-        return map(name, new HashMap<K, V>());
+        return map(name, new HashMap<>());
     }
 
 }

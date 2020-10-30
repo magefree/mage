@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class PsychicCorrosion extends CardImpl {
 
         // Whenever you draw a card, each opponent puts the top two cards of their library into their graveyard.
         this.addAbility(new DrawCardControllerTriggeredAbility(
-                new PutTopCardOfLibraryIntoGraveEachPlayerEffect(
+                new MillCardsEachPlayerEffect(
                         2, TargetController.OPPONENT
                 ), false
         ));

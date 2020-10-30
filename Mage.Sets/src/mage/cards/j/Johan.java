@@ -4,7 +4,6 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;

@@ -1,12 +1,12 @@
-
 package mage.cards.f;
 
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerAttackedWatcher;
@@ -30,6 +30,8 @@ public final class FirecannonBlast extends CardImpl {
                 "{this} deals 3 damage to target creature.<br><i>Raid</i> &mdash; {this} deals 6 damage instead if you attacked this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
+        this.getSpellAbility().setAbilityWord(AbilityWord.RAID);
+        this.getSpellAbility().addHint(RaidHint.instance);
     }
 
     public FirecannonBlast(final FirecannonBlast card) {

@@ -1,0 +1,174 @@
+package mage.sets;
+
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
+
+/**
+ * https://mtg.gamepedia.com/Legendary_Cube
+ * https://scryfall.com/sets/pz1
+ */
+public class LegendaryCubePrizePack extends ExpansionSet {
+
+    private static final LegendaryCubePrizePack instance = new LegendaryCubePrizePack();
+
+    public static LegendaryCubePrizePack getInstance() {
+        return instance;
+    }
+
+    private LegendaryCubePrizePack() {
+        super("Legendary Cube Prize Pack", "PZ1", ExpansionSet.buildDate(2015, 11, 18), SetType.MAGIC_ONLINE);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Abyssal Persecutor", 38, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
+        cards.add(new SetCardInfo("Aethersnatch", 18, Rarity.RARE, mage.cards.a.Aethersnatch.class));
+        cards.add(new SetCardInfo("Anger", 53, Rarity.UNCOMMON, mage.cards.a.Anger.class));
+        cards.add(new SetCardInfo("Animar, Soul of Elements", 93, Rarity.MYTHIC, mage.cards.a.AnimarSoulOfElements.class));
+        cards.add(new SetCardInfo("Anya, Merciless Angel", 94, Rarity.RARE, mage.cards.a.AnyaMercilessAngel.class));
+        cards.add(new SetCardInfo("Arachnogenesis", 70, Rarity.UNCOMMON, mage.cards.a.Arachnogenesis.class));
+        cards.add(new SetCardInfo("Arcane Sanctum", 134, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
+        cards.add(new SetCardInfo("Arjun, the Shifting Flame", 95, Rarity.RARE, mage.cards.a.ArjunTheShiftingFlame.class));
+        cards.add(new SetCardInfo("Awaken the Sky Tyrant", 54, Rarity.RARE, mage.cards.a.AwakenTheSkyTyrant.class));
+        cards.add(new SetCardInfo("Banshee of the Dread Choir", 39, Rarity.UNCOMMON, mage.cards.b.BansheeOfTheDreadChoir.class));
+        cards.add(new SetCardInfo("Basalt Monolith", 120, Rarity.UNCOMMON, mage.cards.b.BasaltMonolith.class));
+        cards.add(new SetCardInfo("Bastion Protector", 1, Rarity.UNCOMMON, mage.cards.b.BastionProtector.class));
+        cards.add(new SetCardInfo("Behemoth Sledge", 96, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
+        cards.add(new SetCardInfo("Blade of Selves", 121, Rarity.UNCOMMON, mage.cards.b.BladeOfSelves.class));
+        cards.add(new SetCardInfo("Bloodspore Thrinax", 71, Rarity.RARE, mage.cards.b.BloodsporeThrinax.class));
+        cards.add(new SetCardInfo("Bojuka Bog", 135, Rarity.UNCOMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Brainstorm", 19, Rarity.UNCOMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Brawn", 72, Rarity.UNCOMMON, mage.cards.b.Brawn.class));
+        cards.add(new SetCardInfo("Broodbirth Viper", 20, Rarity.UNCOMMON, mage.cards.b.BroodbirthViper.class));
+        cards.add(new SetCardInfo("Caller of the Pack", 73, Rarity.UNCOMMON, mage.cards.c.CallerOfThePack.class));
+        cards.add(new SetCardInfo("Centaur Vinecrasher", 74, Rarity.RARE, mage.cards.c.CentaurVinecrasher.class));
+        cards.add(new SetCardInfo("Chaos Warp", 55, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Command Beacon", 136, Rarity.UNCOMMON, mage.cards.c.CommandBeacon.class));
+        cards.add(new SetCardInfo("Command Tower", 137, Rarity.UNCOMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Compulsive Research", 21, Rarity.UNCOMMON, mage.cards.c.CompulsiveResearch.class));
+        cards.add(new SetCardInfo("Containment Priest", 2, Rarity.RARE, mage.cards.c.ContainmentPriest.class));
+        cards.add(new SetCardInfo("Corpse Augur", 40, Rarity.RARE, mage.cards.c.CorpseAugur.class));
+        cards.add(new SetCardInfo("Crumbling Necropolis", 138, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
+        cards.add(new SetCardInfo("Cultivate", 75, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Dack Fayden", 97, Rarity.MYTHIC, mage.cards.d.DackFayden.class));
+        cards.add(new SetCardInfo("Daretti, Scrap Savant", 56, Rarity.MYTHIC, mage.cards.d.DarettiScrapSavant.class));
+        cards.add(new SetCardInfo("Dawnbreak Reclaimer", 3, Rarity.RARE, mage.cards.d.DawnbreakReclaimer.class));
+        cards.add(new SetCardInfo("Daxos the Returned", 98, Rarity.RARE, mage.cards.d.DaxosTheReturned.class));
+        cards.add(new SetCardInfo("Daxos's Torment", 41, Rarity.RARE, mage.cards.d.DaxossTorment.class));
+        cards.add(new SetCardInfo("Deadly Tempest", 42, Rarity.RARE, mage.cards.d.DeadlyTempest.class));
+        cards.add(new SetCardInfo("Deceiver Exarch", 22, Rarity.UNCOMMON, mage.cards.d.DeceiverExarch.class));
+        cards.add(new SetCardInfo("Decree of Pain", 43, Rarity.RARE, mage.cards.d.DecreeOfPain.class));
+        cards.add(new SetCardInfo("Deep Analysis", 23, Rarity.UNCOMMON, mage.cards.d.DeepAnalysis.class));
+        cards.add(new SetCardInfo("Desertion", 24, Rarity.RARE, mage.cards.d.Desertion.class));
+        cards.add(new SetCardInfo("Diaochan, Artful Beauty", 57, Rarity.RARE, mage.cards.d.DiaochanArtfulBeauty.class));
+        cards.add(new SetCardInfo("Dragonlair Spider", 99, Rarity.RARE, mage.cards.d.DragonlairSpider.class));
+        cards.add(new SetCardInfo("Dread Summons", 44, Rarity.RARE, mage.cards.d.DreadSummons.class));
+        cards.add(new SetCardInfo("Dreadship Reef", 139, Rarity.UNCOMMON, mage.cards.d.DreadshipReef.class));
+        cards.add(new SetCardInfo("Dream Pillager", 58, Rarity.RARE, mage.cards.d.DreamPillager.class));
+        cards.add(new SetCardInfo("Duplicant", 122, Rarity.RARE, mage.cards.d.Duplicant.class));
+        cards.add(new SetCardInfo("Edric, Spymaster of Trest", 100, Rarity.RARE, mage.cards.e.EdricSpymasterOfTrest.class));
+        cards.add(new SetCardInfo("Electrolyze", 101, Rarity.UNCOMMON, mage.cards.e.Electrolyze.class));
+        cards.add(new SetCardInfo("Eternal Witness", 76, Rarity.UNCOMMON, mage.cards.e.EternalWitness.class));
+        cards.add(new SetCardInfo("Ezuri's Predation", 77, Rarity.RARE, mage.cards.e.EzurisPredation.class));
+        cards.add(new SetCardInfo("Ezuri, Claw of Progress", 102, Rarity.RARE, mage.cards.e.EzuriClawOfProgress.class));
+        cards.add(new SetCardInfo("Fact or Fiction", 25, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
+        cards.add(new SetCardInfo("Faithless Looting", 59, Rarity.UNCOMMON, mage.cards.f.FaithlessLooting.class));
+        cards.add(new SetCardInfo("Fiery Confluence", 60, Rarity.RARE, mage.cards.f.FieryConfluence.class));
+        cards.add(new SetCardInfo("Firespout", 103, Rarity.UNCOMMON, mage.cards.f.Firespout.class));
+        cards.add(new SetCardInfo("Flametongue Kavu", 61, Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class));
+        cards.add(new SetCardInfo("Flusterstorm", 26, Rarity.RARE, mage.cards.f.Flusterstorm.class));
+        cards.add(new SetCardInfo("Freyalise, Llanowar's Fury", 78, Rarity.MYTHIC, mage.cards.f.FreyaliseLlanowarsFury.class));
+        cards.add(new SetCardInfo("Fungal Reaches", 140, Rarity.UNCOMMON, mage.cards.f.FungalReaches.class));
+        cards.add(new SetCardInfo("Ghave, Guru of Spores", 104, Rarity.MYTHIC, mage.cards.g.GhaveGuruOfSpores.class));
+        cards.add(new SetCardInfo("Ghostly Prison", 4, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
+        cards.add(new SetCardInfo("Gigantoplasm", 27, Rarity.RARE, mage.cards.g.Gigantoplasm.class));
+        cards.add(new SetCardInfo("Goblin Sharpshooter", 62, Rarity.RARE, mage.cards.g.GoblinSharpshooter.class));
+        cards.add(new SetCardInfo("Grasp of Fate", 5, Rarity.UNCOMMON, mage.cards.g.GraspOfFate.class));
+        cards.add(new SetCardInfo("Great Oak Guardian", 79, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
+        cards.add(new SetCardInfo("Harmonize", 80, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
+        cards.add(new SetCardInfo("Herald of the Host", 6, Rarity.UNCOMMON, mage.cards.h.HeraldOfTheHost.class));
+        cards.add(new SetCardInfo("Homeward Path", 141, Rarity.RARE, mage.cards.h.HomewardPath.class));
+        cards.add(new SetCardInfo("Hull Breach", 105, Rarity.UNCOMMON, mage.cards.h.HullBreach.class));
+        cards.add(new SetCardInfo("Illusory Ambusher", 28, Rarity.RARE, mage.cards.i.IllusoryAmbusher.class));
+        cards.add(new SetCardInfo("Invigorate", 81, Rarity.UNCOMMON, mage.cards.i.Invigorate.class));
+        cards.add(new SetCardInfo("Jungle Shrine", 142, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("Kaalia of the Vast", 106, Rarity.MYTHIC, mage.cards.k.KaaliaOfTheVast.class));
+        cards.add(new SetCardInfo("Kalemne's Captain", 7, Rarity.RARE, mage.cards.k.KalemnesCaptain.class));
+        cards.add(new SetCardInfo("Kalemne, Disciple of Iroas", 107, Rarity.RARE, mage.cards.k.KalemneDiscipleOfIroas.class));
+        cards.add(new SetCardInfo("Karlov of the Ghost Council", 108, Rarity.RARE, mage.cards.k.KarlovOfTheGhostCouncil.class));
+        cards.add(new SetCardInfo("Kaseto, Orochi Archmage", 109, Rarity.RARE, mage.cards.k.KasetoOrochiArchmage.class));
+        cards.add(new SetCardInfo("Khalni Garden", 143, Rarity.UNCOMMON, mage.cards.k.KhalniGarden.class));
+        cards.add(new SetCardInfo("Krosan Grip", 82, Rarity.UNCOMMON, mage.cards.k.KrosanGrip.class));
+        cards.add(new SetCardInfo("Krosan Verge", 144, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Lightning Greaves", 123, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Loyal Retainers", 8, Rarity.RARE, mage.cards.l.LoyalRetainers.class));
+        cards.add(new SetCardInfo("Maelstrom Wanderer", 110, Rarity.MYTHIC, mage.cards.m.MaelstromWanderer.class));
+        cards.add(new SetCardInfo("Magus of the Wheel", 63, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
+        cards.add(new SetCardInfo("Marchesa, the Black Rose", 111, Rarity.MYTHIC, mage.cards.m.MarchesaTheBlackRose.class));
+        cards.add(new SetCardInfo("Mazirek, Kraul Death Priest", 112, Rarity.RARE, mage.cards.m.MazirekKraulDeathPriest.class));
+        cards.add(new SetCardInfo("Meren of Clan Nel Toth", 113, Rarity.RARE, mage.cards.m.MerenOfClanNelToth.class));
+        cards.add(new SetCardInfo("Meteor Blast", 64, Rarity.RARE, mage.cards.m.MeteorBlast.class));
+        cards.add(new SetCardInfo("Mind's Eye", 124, Rarity.RARE, mage.cards.m.MindsEye.class));
+        cards.add(new SetCardInfo("Mirari's Wake", 115, Rarity.RARE, mage.cards.m.MirarisWake.class));
+        cards.add(new SetCardInfo("Mirror Match", 29, Rarity.RARE, mage.cards.m.MirrorMatch.class));
+        cards.add(new SetCardInfo("Mizzix of the Izmagnus", 116, Rarity.RARE, mage.cards.m.MizzixOfTheIzmagnus.class));
+        cards.add(new SetCardInfo("Mizzix's Mastery", 65, Rarity.RARE, mage.cards.m.MizzixsMastery.class));
+        cards.add(new SetCardInfo("Molten Slagheap", 145, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
+        cards.add(new SetCardInfo("Mystic Confluence", 30, Rarity.RARE, mage.cards.m.MysticConfluence.class));
+        cards.add(new SetCardInfo("Nahiri, the Lithomancer", 9, Rarity.MYTHIC, mage.cards.n.NahiriTheLithomancer.class));
+        cards.add(new SetCardInfo("Nest Invader", 83, Rarity.UNCOMMON, mage.cards.n.NestInvader.class));
+        cards.add(new SetCardInfo("Ob Nixilis of the Black Oath", 45, Rarity.MYTHIC, mage.cards.o.ObNixilisOfTheBlackOath.class));
+        cards.add(new SetCardInfo("Oreskos Explorer", 10, Rarity.UNCOMMON, mage.cards.o.OreskosExplorer.class));
+        cards.add(new SetCardInfo("Pathbreaker Ibex", 84, Rarity.RARE, mage.cards.p.PathbreakerIbex.class));
+        cards.add(new SetCardInfo("Propaganda", 31, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        cards.add(new SetCardInfo("Punishing Fire", 66, Rarity.UNCOMMON, mage.cards.p.PunishingFire.class));
+        cards.add(new SetCardInfo("Rancor", 85, Rarity.UNCOMMON, mage.cards.r.Rancor.class));
+        cards.add(new SetCardInfo("Reya Dawnbringer", 11, Rarity.MYTHIC, mage.cards.r.ReyaDawnbringer.class));
+        cards.add(new SetCardInfo("Rhystic Study", 32, Rarity.RARE, mage.cards.r.RhysticStudy.class));
+        cards.add(new SetCardInfo("Righteous Confluence", 12, Rarity.RARE, mage.cards.r.RighteousConfluence.class));
+        cards.add(new SetCardInfo("Rite of the Raging Storm", 67, Rarity.RARE, mage.cards.r.RiteOfTheRagingStorm.class));
+        cards.add(new SetCardInfo("Sakura-Tribe Elder", 86, Rarity.UNCOMMON, mage.cards.s.SakuraTribeElder.class));
+        cards.add(new SetCardInfo("Saltcrusted Steppe", 146, Rarity.UNCOMMON, mage.cards.s.SaltcrustedSteppe.class));
+        cards.add(new SetCardInfo("Sandstone Oracle", 125, Rarity.RARE, mage.cards.s.SandstoneOracle.class));
+        cards.add(new SetCardInfo("Savage Lands", 147, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
+        cards.add(new SetCardInfo("Scourge of Nel Toth", 46, Rarity.RARE, mage.cards.s.ScourgeOfNelToth.class));
+        cards.add(new SetCardInfo("Scroll Rack", 126, Rarity.RARE, mage.cards.s.ScrollRack.class));
+        cards.add(new SetCardInfo("Scytheclaw", 127, Rarity.RARE, mage.cards.s.Scytheclaw.class));
+        cards.add(new SetCardInfo("Seal of the Guildpact", 128, Rarity.RARE, mage.cards.s.SealOfTheGuildpact.class));
+        cards.add(new SetCardInfo("Seaside Citadel", 148, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
+        cards.add(new SetCardInfo("Shardless Agent", 117, Rarity.RARE, mage.cards.s.ShardlessAgent.class));
+        cards.add(new SetCardInfo("Shielded by Faith", 13, Rarity.UNCOMMON, mage.cards.s.ShieldedByFaith.class));
+        cards.add(new SetCardInfo("Skullwinder", 87, Rarity.UNCOMMON, mage.cards.s.Skullwinder.class));
+        cards.add(new SetCardInfo("Sol Ring", 129, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Spirit Mantle", 14, Rarity.UNCOMMON, mage.cards.s.SpiritMantle.class));
+        cards.add(new SetCardInfo("Swiftfoot Boots", 130, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Sylvan Library", 88, Rarity.RARE, mage.cards.s.SylvanLibrary.class));
+        cards.add(new SetCardInfo("Synthetic Destiny", 33, Rarity.RARE, mage.cards.s.SyntheticDestiny.class));
+        cards.add(new SetCardInfo("Teferi, Temporal Archmage", 34, Rarity.MYTHIC, mage.cards.t.TeferiTemporalArchmage.class));
+        cards.add(new SetCardInfo("Temple of the False God", 149, Rarity.RARE, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("The Mimeoplasm", 114, Rarity.MYTHIC, mage.cards.t.TheMimeoplasm.class));
+        cards.add(new SetCardInfo("Thief of Blood", 47, Rarity.RARE, mage.cards.t.ThiefOfBlood.class));
+        cards.add(new SetCardInfo("Thought Vessel", 131, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
+        cards.add(new SetCardInfo("Thran Dynamo", 132, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
+        cards.add(new SetCardInfo("Titania, Protector of Argoth", 89, Rarity.RARE, mage.cards.t.TitaniaProtectorOfArgoth.class));
+        cards.add(new SetCardInfo("Toxic Deluge", 48, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
+        cards.add(new SetCardInfo("Tragic Slip", 49, Rarity.UNCOMMON, mage.cards.t.TragicSlip.class));
+        cards.add(new SetCardInfo("True-Name Nemesis", 35, Rarity.MYTHIC, mage.cards.t.TrueNameNemesis.class));
+        cards.add(new SetCardInfo("Vela the Night-Clad", 118, Rarity.RARE, mage.cards.v.VelaTheNightClad.class));
+        cards.add(new SetCardInfo("Verdant Confluence", 90, Rarity.RARE, mage.cards.v.VerdantConfluence.class));
+        cards.add(new SetCardInfo("Viscera Seer", 50, Rarity.UNCOMMON, mage.cards.v.VisceraSeer.class));
+        cards.add(new SetCardInfo("Vow of Duty", 15, Rarity.UNCOMMON, mage.cards.v.VowOfDuty.class));
+        cards.add(new SetCardInfo("Vow of Flight", 36, Rarity.UNCOMMON, mage.cards.v.VowOfFlight.class));
+        cards.add(new SetCardInfo("Vow of Lightning", 68, Rarity.UNCOMMON, mage.cards.v.VowOfLightning.class));
+        cards.add(new SetCardInfo("Vow of Malice", 51, Rarity.UNCOMMON, mage.cards.v.VowOfMalice.class));
+        cards.add(new SetCardInfo("Vow of Wildness", 91, Rarity.UNCOMMON, mage.cards.v.VowOfWildness.class));
+        cards.add(new SetCardInfo("Wall of Blossoms", 92, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
+        cards.add(new SetCardInfo("Wall of Omens", 16, Rarity.UNCOMMON, mage.cards.w.WallOfOmens.class));
+        cards.add(new SetCardInfo("Warchief Giant", 69, Rarity.UNCOMMON, mage.cards.w.WarchiefGiant.class));
+        cards.add(new SetCardInfo("Wonder", 37, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
+        cards.add(new SetCardInfo("Worn Powerstone", 133, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
+        cards.add(new SetCardInfo("Wrath of God", 17, Rarity.RARE, mage.cards.w.WrathOfGod.class));
+        cards.add(new SetCardInfo("Wretched Confluence", 52, Rarity.RARE, mage.cards.w.WretchedConfluence.class));
+        cards.add(new SetCardInfo("Zedruu the Greathearted", 119, Rarity.MYTHIC, mage.cards.z.ZedruuTheGreathearted.class));
+     }
+}

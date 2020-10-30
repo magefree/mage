@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class TriadOfFates extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filterCounter.add(new CounterPredicate(CounterType.FATE));
+        filterCounter.add(CounterType.FATE.getPredicate());
     }
 
     public TriadOfFates(UUID ownerId, CardSetInfo setInfo) {

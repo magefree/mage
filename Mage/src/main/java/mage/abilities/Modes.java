@@ -32,10 +32,10 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private TargetController modeChooser;
     private boolean eachModeMoreThanOnce; // each mode can be selected multiple times during one choice
     private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
-    private OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts = null; // only set if costs have to be paid
     private Filter maxModesFilter = null; // calculates the max number of available modes
     private boolean isRandom = false;
     private String chooseText = null;
+    private boolean resetEachTurn = false;
 
     public Modes() {
         this.currentMode = new Mode();
@@ -64,11 +64,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.modeChooser = modes.modeChooser;
         this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
         this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
-        this.optionalAdditionalModeSourceCosts = modes.optionalAdditionalModeSourceCosts;
         this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
 
         this.isRandom = modes.isRandom;
         this.chooseText = modes.chooseText;
+        this.resetEachTurn = modes.resetEachTurn;
         if (modes.getSelectedModes().isEmpty()) {
             this.currentMode = values().iterator().next();
         } else {
@@ -215,6 +215,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public boolean choose(Game game, Ability source) {
+        if (this.isResetEachTurn()) {
+            if (this.getTurnNum(game, source) != game.getTurnNum()) {
+                this.clearAlreadySelectedModes(source, game);
+                this.setTurnNum(game, source);
+            }
+        }
         if (this.size() > 1) {
             this.clearSelectedModes();
             if (this.isRandom) {
@@ -222,15 +228,18 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                 this.addSelectedMode(modes.get(RandomUtil.nextInt(modes.size())).getId());
                 return true;
             }
+
             // check if mode modifying abilities exist
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                for (Ability modeModifyingAbility : card.getAbilities()) {
+                for (Ability modeModifyingAbility : card.getAbilities(game)) {
                     if (modeModifyingAbility instanceof OptionalAdditionalModeSourceCosts) {
+                        // cost must check activation condition in changeModes
                         ((OptionalAdditionalModeSourceCosts) modeModifyingAbility).changeModes(source, game);
                     }
                 }
             }
+
             // check if all modes can be activated automatically
             if (this.size() == this.getMinModes() && !isEachModeMoreThanOnce()) {
                 Set<UUID> onceSelectedModes = null;
@@ -326,6 +335,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         }
     }
 
+    private void clearAlreadySelectedModes(Ability source, Game game) {
+        for (UUID modeId : getAlreadySelectedModes(source, game)) {
+            String key = getKey(source, game, modeId);
+            game.getState().setValue(key, false);
+        }
+    }
+
     /**
      * Adds a mode as selected. If the mode is already selected, it copies the
      * mode and adds it to the duplicate modes
@@ -362,7 +378,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         Set<UUID> onceSelectedModes = new HashSet<>();
         for (UUID modeId : this.keySet()) {
             Object exist = game.getState().getValue(getKey(source, game, modeId));
-            if (exist != null) {
+            if (exist == Boolean.TRUE) {
                 onceSelectedModes.add(modeId);
             }
         }
@@ -372,6 +388,20 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     // creates the key the selected modes are saved with to the state values
     private String getKey(Ability source, Game game, UUID modeId) {
         return source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + modeId.toString();
+    }
+
+    private static int getTurnNum(Game game, Ability source) {
+        String key = source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "turnNum";
+        Object object = game.getState().getValue(key);
+        if (object instanceof Integer) {
+            return (Integer) object;
+        }
+        return 0;
+    }
+
+    private static void setTurnNum(Game game, Ability source) {
+        String key = source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + "turnNum";
+        game.getState().setValue(key, game.getTurnNum());
     }
 
     /**
@@ -428,6 +458,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         if (isEachModeOnlyOnce()) {
             sb.append(" that hasn't been chosen");
         }
+        if (isResetEachTurn()) {
+            sb.append(" this turn");
+        }
 
         if (isEachModeMoreThanOnce()) {
             sb.append(". You may choose the same mode more than once.");
@@ -446,10 +479,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     }
 
     public String getText(String sourceName) {
-        String text = getText();
-        text = text.replace("{this}", sourceName);
-        text = text.replace("{source}", sourceName);
-        return text;
+        return getText().replace("{this}", sourceName);
     }
 
     public boolean isEachModeOnlyOnce() {
@@ -468,16 +498,16 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.eachModeMoreThanOnce = eachModeMoreThanOnce;
     }
 
-    public OptionalAdditionalModeSourceCosts getAdditionalCost() {
-        return optionalAdditionalModeSourceCosts;
-    }
-
-    public void setAdditionalCost(OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts) {
-        this.optionalAdditionalModeSourceCosts = optionalAdditionalModeSourceCosts;
-    }
-
     public void setRandom(boolean isRandom) {
         this.isRandom = isRandom;
+    }
+
+    public boolean isResetEachTurn() {
+        return resetEachTurn;
+    }
+
+    public void setResetEachTurn(boolean resetEachTurn) {
+        this.resetEachTurn = resetEachTurn;
     }
 
     public void setChooseText(String chooseText) {

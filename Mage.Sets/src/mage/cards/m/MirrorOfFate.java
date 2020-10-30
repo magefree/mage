@@ -19,7 +19,6 @@ import mage.filter.predicate.Predicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 
 /**

@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;

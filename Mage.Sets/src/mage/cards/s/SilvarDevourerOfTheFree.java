@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.PartnerWithAbility;

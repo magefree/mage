@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -41,7 +40,7 @@ public final class HaphazardBombardment extends CardImpl {
         // At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random.
         FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter.add(new CounterPredicate(CounterType.AIM));
+        filter.add(CounterType.AIM.getPredicate());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect(), false),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, false),
                 "At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random"));
@@ -126,7 +125,7 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
         // that don't have indestructible.
         FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        filter.add(new CounterPredicate(CounterType.AIM));
+        filter.add(CounterType.AIM.getPredicate());
         filter.add(Predicates.not(new AbilityPredicate(IndestructibleAbility.class)));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         if (!permanents.isEmpty()) {

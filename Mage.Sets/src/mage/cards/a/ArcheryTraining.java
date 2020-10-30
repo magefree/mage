@@ -1,37 +1,33 @@
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingOrBlockingCreature;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ArcheryTraining extends CardImpl {
-
-    private static final String rule = "This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on {this}.";
 
     public ArcheryTraining(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
@@ -46,14 +42,12 @@ public final class ArcheryTraining extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put an arrow counter on Archery Training.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.ARROW.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(
+                CounterType.ARROW.createInstance(), true
+        ), TargetController.YOU, true));
 
         // Enchanted creature has "{tap}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on Archery Training."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new CountersSourceCount(CounterType.ARROW)).setText(rule), new TapSourceCost());
-        gainedAbility.addTarget(new TargetAttackingOrBlockingCreature());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
-
+        this.addAbility(new SimpleStaticAbility(new ArcheryTrainingEffect()));
     }
 
     public ArcheryTraining(final ArcheryTraining card) {
@@ -63,5 +57,67 @@ public final class ArcheryTraining extends CardImpl {
     @Override
     public ArcheryTraining copy() {
         return new ArcheryTraining(this);
+    }
+}
+
+class ArcheryTrainingEffect extends ContinuousEffectImpl {
+
+    ArcheryTrainingEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);
+        staticText = "enchanted creature has \"{T}: This creature deals X damage " +
+                "to target attacking or blocking creature, where X is the number of arrow counters on {this}.\"";
+    }
+
+    private ArcheryTrainingEffect(final ArcheryTrainingEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ArcheryTrainingEffect copy() {
+        return new ArcheryTrainingEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent aura = game.getPermanent(source.getSourceId());
+        if (aura == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(aura.getAttachedTo());
+        if (permanent == null) {
+            return false;
+        }
+        String rule = "this creature deals X damage to target attacking or blocking creature, " +
+                "where X is the number of arrow counters on " + aura.getName();
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(new ArcheryTrainingValue(aura)).setText(rule), new TapSourceCost()
+        );
+        ability.addTarget(new TargetAttackingOrBlockingCreature());
+        permanent.addAbility(ability, source.getSourceId(), game);
+        return true;
+    }
+}
+
+class ArcheryTrainingValue implements DynamicValue {
+
+    private final Permanent permanent;
+
+    ArcheryTrainingValue(Permanent permanent) {
+        this.permanent = permanent;
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return permanent == null ? 0 : permanent.getCounters(game).getCount(CounterType.ARROW);
+    }
+
+    @Override
+    public ArcheryTrainingValue copy() {
+        return new ArcheryTrainingValue(this.permanent);
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }

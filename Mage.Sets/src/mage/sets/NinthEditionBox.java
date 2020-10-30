@@ -17,14 +17,14 @@ public final class NinthEditionBox extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Coral Eel", 3, Rarity.COMMON, mage.cards.c.CoralEel.class));
-        cards.add(new SetCardInfo("Eager Cadet", 1, Rarity.COMMON, mage.cards.e.EagerCadet.class));
-        cards.add(new SetCardInfo("Enormous Baloth", 9, Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
-        cards.add(new SetCardInfo("Giant Octopus", 4, Rarity.COMMON, mage.cards.g.GiantOctopus.class));
-        cards.add(new SetCardInfo("Goblin Raider", 8, Rarity.COMMON, mage.cards.g.GoblinRaider.class));
-        cards.add(new SetCardInfo("Index", 5, Rarity.COMMON, mage.cards.i.Index.class));
-        cards.add(new SetCardInfo("Spined Wurm", 10, Rarity.COMMON, mage.cards.s.SpinedWurm.class));
-        cards.add(new SetCardInfo("Vengeance", 2, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
-        cards.add(new SetCardInfo("Vizzerdrix", 7, Rarity.RARE, mage.cards.v.Vizzerdrix.class));
+        cards.add(new SetCardInfo("Coral Eel", "S3", Rarity.COMMON, mage.cards.c.CoralEel.class));
+        cards.add(new SetCardInfo("Eager Cadet", "S1", Rarity.COMMON, mage.cards.e.EagerCadet.class));
+        cards.add(new SetCardInfo("Enormous Baloth", "S9", Rarity.UNCOMMON, mage.cards.e.EnormousBaloth.class));
+        cards.add(new SetCardInfo("Giant Octopus", "S4", Rarity.COMMON, mage.cards.g.GiantOctopus.class));
+        cards.add(new SetCardInfo("Goblin Raider", "S8", Rarity.COMMON, mage.cards.g.GoblinRaider.class));
+        cards.add(new SetCardInfo("Index", "S5", Rarity.COMMON, mage.cards.i.Index.class));
+        cards.add(new SetCardInfo("Spined Wurm", "S10", Rarity.COMMON, mage.cards.s.SpinedWurm.class));
+        cards.add(new SetCardInfo("Vengeance", "S2", Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
+        cards.add(new SetCardInfo("Vizzerdrix", "S7", Rarity.RARE, mage.cards.v.Vizzerdrix.class));
     }
 }

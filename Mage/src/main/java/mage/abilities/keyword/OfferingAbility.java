@@ -1,11 +1,17 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
+import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+import mage.abilities.costs.mana.HybridManaCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -39,7 +45,7 @@ import mage.util.GameLog;
  *
  * @author LevelX2
  */
-public class OfferingAbility extends StaticAbility {
+public class OfferingAbility extends StaticAbility implements AlternateManaPaymentAbility {
 
     private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
@@ -71,6 +77,47 @@ public class OfferingAbility extends StaticAbility {
     public String getRule(boolean all) {
         String subtype = filter.getMessage();
         return subtype + " offering <i>(You may cast this card any time you could cast an instant by sacrificing a " + subtype + " and paying the difference in mana costs between this and the sacrificed " + subtype + ". Mana cost includes color.)</i>";
+    }
+
+    @Override
+    public ActivationManaAbilityStep useOnActivationManaAbilityStep() {
+        return ActivationManaAbilityStep.NORMAL;
+    }
+
+    @Override
+    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+        // No special Action
+    }
+
+    @Override
+    public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {
+        ManaOptions additionalManaOptionsForThisAbility = new ManaOptions();
+
+        // Creatures from the offerd type
+        game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
+                .stream()
+                .forEach(permanent -> {
+                    ManaOptions manaOptionsForThisPermanent = new ManaOptions();
+                    for (ManaCost manaCost : permanent.getSpellAbility().getManaCosts()) {
+                        if (manaCost instanceof HybridManaCost) {
+                            ManaOptions manaOptionsForHybrid = new ManaOptions();
+                            for (Mana mana : manaCost.getManaOptions()) {
+                                manaOptionsForHybrid.add(mana);
+                            }
+                            manaOptionsForThisPermanent.addMana(manaOptionsForHybrid);
+                        } else {
+                            manaOptionsForThisPermanent.addMana(manaCost.getMana());
+                        }
+                    }
+                    for(Mana mana : manaOptionsForThisPermanent) {
+                        additionalManaOptionsForThisAbility.add(mana);
+                    }
+                    
+                }
+                );
+
+        additionalManaOptionsForThisAbility.removeDuplicated();
+        return additionalManaOptionsForThisAbility;
     }
 }
 
@@ -145,8 +192,8 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                         game.addEffect(effect, source);
                         game.getState().setValue("offering_ok_" + card.getId(), true);
                         game.getState().setValue("offering_Id_" + card.getId(), activationId);
-                        game.informPlayers(player.getLogName() + " announces to offer " 
-                                + offer.getLogName() + " to cast " 
+                        game.informPlayers(player.getLogName() + " announces to offer "
+                                + offer.getLogName() + " to cast "
                                 + GameLog.getColoredObjectName(spellToCast));// No id name to prevent to offer hand card knowledge after cancel casting
                         return true;
                     }
@@ -192,7 +239,7 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl {
         if (game.inCheckPlayableState()) { // Cost modifaction does not work correctly for checking available spells
             return false;
         }
-        if (abilityToModify.getSourceId().equals(source.getSourceId()) 
+        if (abilityToModify.getSourceId().equals(source.getSourceId())
                 && abilityToModify instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {

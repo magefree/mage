@@ -1,6 +1,6 @@
 package mage.abilities.keyword;
 
-import mage.MageObjectReference;
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -144,7 +144,7 @@ class MiracleEffect extends OneShotEffect {
             // replace with the new cost
             costRef.clear();
             costRef.add(miracleCosts);
-            controller.cast(abilityToCast, game, false, new MageObjectReference(source.getSourceObject(game), game));
+            controller.cast(abilityToCast, game, false, new ApprovingObject(source, game));
             return true;
         }
         return false;

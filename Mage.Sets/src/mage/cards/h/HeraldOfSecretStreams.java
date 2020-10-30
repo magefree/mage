@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class HeraldOfSecretStreams extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with +1/+1 counters on them");
 
     static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
+        filter.add(CounterType.P1P1.getPredicate());
     }
 
     public HeraldOfSecretStreams(UUID ownerId, CardSetInfo setInfo) {

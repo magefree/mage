@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *

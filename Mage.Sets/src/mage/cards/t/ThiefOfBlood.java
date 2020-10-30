@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -10,24 +8,25 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ThiefOfBlood extends CardImpl {
 
     public ThiefOfBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.subtype.add(SubType.VAMPIRE);
@@ -39,7 +38,7 @@ public final class ThiefOfBlood extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new ThiefOfBloodEffect(), null, "As {this} enters the battlefield, remove all counters from all permanents. {this} enters the battlefield with a +1/+1 counter on it for each counter removed this way", null));
     }
 
-    public ThiefOfBlood(final ThiefOfBlood card) {
+    private ThiefOfBlood(final ThiefOfBlood card) {
         super(card);
     }
 
@@ -54,7 +53,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("permanent with a counter");
 
     static {
-        filter.add(new CounterPredicate(null));
+        filter.add(CounterAnyPredicate.instance);
     }
 
     ThiefOfBloodEffect() {
@@ -62,7 +61,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
         this.staticText = "remove all counters from all permanents. {this} enters the battlefield with a +1/+1 counter on it for each counter removed this way";
     }
 
-    ThiefOfBloodEffect(final ThiefOfBloodEffect effect) {
+    private ThiefOfBloodEffect(final ThiefOfBloodEffect effect) {
         super(effect);
     }
 

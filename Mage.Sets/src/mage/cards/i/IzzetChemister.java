@@ -1,7 +1,6 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -25,6 +24,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -118,7 +118,7 @@ class IzzetChemisterCastFromExileEffect extends OneShotEffect {
                     if (card != null) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(card, game, true), game, true,
-                                new MageObjectReference(source.getSourceObject(game), game));
+                                new ApprovingObject(source, game));
                         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         cardsToExile.remove(card);
                     } else {

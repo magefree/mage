@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class TasigurTheGoldenFang extends CardImpl {
         this.addAbility(new DelveAbility());
 
         // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(new PutTopCardOfLibraryIntoGraveControllerEffect(2), new ManaCostsImpl("{2}{G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(2), new ManaCostsImpl("{2}{G/U}{G/U}"));
         ability.addEffect(new TasigurTheGoldenFangEffect());
         this.addAbility(ability);
     }

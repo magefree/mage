@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

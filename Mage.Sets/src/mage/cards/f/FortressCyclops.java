@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class FortressCyclops extends CardImpl {
         // Whenever Fortress Cyclops attacks, it gets +3/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3,0, Duration.EndOfTurn), false));
         // Whenever Fortress Cyclops blocks, it gets +0/+3 until end of turn.
-        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(0,3, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0,3, Duration.EndOfTurn), false));
     }
 
     public FortressCyclops(final FortressCyclops card) {

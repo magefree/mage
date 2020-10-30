@@ -7,7 +7,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterAbility;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.target.common.TargetActivatedAbility;

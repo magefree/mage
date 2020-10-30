@@ -1,7 +1,7 @@
 
 package mage.cards.t;
 
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class ThermalBlast extends CardImpl {
         // Threshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5), new DamageTargetEffect(3),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "{this} deals 3 damage to target creature.<br><i>Threshold</i> &mdash; " +
                         "{this} deals 5 damage instead if seven or more cards are in your graveyard."
         ));

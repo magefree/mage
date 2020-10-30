@@ -1,0 +1,160 @@
+package mage.sets;
+
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
+
+/**
+ * https://scryfall.com/sets/peld
+ */
+public class ThroneOfEldrainePromos extends ExpansionSet {
+
+    private static final ThroneOfEldrainePromos instance = new ThroneOfEldrainePromos();
+
+    public static ThroneOfEldrainePromos getInstance() {
+        return instance;
+    }
+
+    private ThroneOfEldrainePromos() {
+        super("Throne of Eldraine Promos", "PELD", ExpansionSet.buildDate(2019, 10, 4), SetType.PROMOTIONAL);
+        this.hasBoosters = false;
+        this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Acclaimed Contender", "1p", Rarity.RARE, mage.cards.a.AcclaimedContender.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Acclaimed Contender", "1s", Rarity.RARE, mage.cards.a.AcclaimedContender.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ayara, First of Locthwain", "75p", Rarity.RARE, mage.cards.a.AyaraFirstOfLocthwain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ayara, First of Locthwain", "75s", Rarity.RARE, mage.cards.a.AyaraFirstOfLocthwain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blacklance Paragon", "79p", Rarity.RARE, mage.cards.b.BlacklanceParagon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blacklance Paragon", "79s", Rarity.RARE, mage.cards.b.BlacklanceParagon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bonecrusher Giant", "115p", Rarity.RARE, mage.cards.b.BonecrusherGiant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bonecrusher Giant", "115s", Rarity.RARE, mage.cards.b.BonecrusherGiant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brazen Borrower", "39p", Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brazen Borrower", "39s", Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Ardenvale", "238p", Rarity.RARE, mage.cards.c.CastleArdenvale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Ardenvale", "238s", Rarity.RARE, mage.cards.c.CastleArdenvale.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Embereth", "239p", Rarity.RARE, mage.cards.c.CastleEmbereth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Embereth", "239s", Rarity.RARE, mage.cards.c.CastleEmbereth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Garenbrig", "240p", Rarity.RARE, mage.cards.c.CastleGarenbrig.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Garenbrig", "240s", Rarity.RARE, mage.cards.c.CastleGarenbrig.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Locthwain", "241p", Rarity.RARE, mage.cards.c.CastleLocthwain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Locthwain", "241s", Rarity.RARE, mage.cards.c.CastleLocthwain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Vantress", "242p", Rarity.RARE, mage.cards.c.CastleVantress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Castle Vantress", "242s", Rarity.RARE, mage.cards.c.CastleVantress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Charming Prince", "8p", Rarity.RARE, mage.cards.c.CharmingPrince.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Charming Prince", "8s", Rarity.RARE, mage.cards.c.CharmingPrince.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clackbridge Troll", "84p", Rarity.RARE, mage.cards.c.ClackbridgeTroll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clackbridge Troll", "84s", Rarity.RARE, mage.cards.c.ClackbridgeTroll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dance of the Manse", "186p", Rarity.RARE, mage.cards.d.DanceOfTheManse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dance of the Manse", "186s", Rarity.RARE, mage.cards.d.DanceOfTheManse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Doom Foretold", "187p", Rarity.RARE, mage.cards.d.DoomForetold.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Doom Foretold", "187s", Rarity.RARE, mage.cards.d.DoomForetold.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Embercleave", "120p", Rarity.MYTHIC, mage.cards.e.Embercleave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Embercleave", "120s", Rarity.MYTHIC, mage.cards.e.Embercleave.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emry, Lurker of the Loch", "43p", Rarity.RARE, mage.cards.e.EmryLurkerOfTheLoch.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emry, Lurker of the Loch", "43s", Rarity.RARE, mage.cards.e.EmryLurkerOfTheLoch.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Escape to the Wilds", "189p", Rarity.RARE, mage.cards.e.EscapeToTheWilds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Escape to the Wilds", "189s", Rarity.RARE, mage.cards.e.EscapeToTheWilds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fabled Passage", "244p", Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fabled Passage", "244s", Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fae of Wishes", "44p", Rarity.RARE, mage.cards.f.FaeOfWishes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fae of Wishes", "44s", Rarity.RARE, mage.cards.f.FaeOfWishes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Faeburrow Elder", "190p", Rarity.RARE, mage.cards.f.FaeburrowElder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Faeburrow Elder", "190s", Rarity.RARE, mage.cards.f.FaeburrowElder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Feasting Troll King", "152p", Rarity.RARE, mage.cards.f.FeastingTrollKing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Feasting Troll King", "152s", Rarity.RARE, mage.cards.f.FeastingTrollKing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fervent Champion", "124p", Rarity.RARE, mage.cards.f.FerventChampion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fervent Champion", "124s", Rarity.RARE, mage.cards.f.FerventChampion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fires of Invention", "125p", Rarity.RARE, mage.cards.f.FiresOfInvention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fires of Invention", "125s", Rarity.RARE, mage.cards.f.FiresOfInvention.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Folio of Fancies", "46p", Rarity.RARE, mage.cards.f.FolioOfFancies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Folio of Fancies", "46s", Rarity.RARE, mage.cards.f.FolioOfFancies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gadwick, the Wizened", "48p", Rarity.RARE, mage.cards.g.GadwickTheWizened.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gadwick, the Wizened", "48s", Rarity.RARE, mage.cards.g.GadwickTheWizened.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garruk, Cursed Huntsman", "191p", Rarity.MYTHIC, mage.cards.g.GarrukCursedHuntsman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garruk, Cursed Huntsman", "191s", Rarity.MYTHIC, mage.cards.g.GarrukCursedHuntsman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Giant Killer", "14p", Rarity.RARE, mage.cards.g.GiantKiller.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Giant Killer", "14s", Rarity.RARE, mage.cards.g.GiantKiller.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gilded Goose", "160p", Rarity.RARE, mage.cards.g.GildedGoose.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gilded Goose", "160s", Rarity.RARE, mage.cards.g.GildedGoose.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Happily Ever After", "16p", Rarity.RARE, mage.cards.h.HappilyEverAfter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Happily Ever After", "16s", Rarity.RARE, mage.cards.h.HappilyEverAfter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Harmonious Archon", "17p", Rarity.MYTHIC, mage.cards.h.HarmoniousArchon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Harmonious Archon", "17s", Rarity.MYTHIC, mage.cards.h.HarmoniousArchon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hushbringer", "18p", Rarity.RARE, mage.cards.h.Hushbringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hushbringer", "18s", Rarity.RARE, mage.cards.h.Hushbringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Irencrag Feat", "127p", Rarity.RARE, mage.cards.i.IrencragFeat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Irencrag Feat", "127s", Rarity.RARE, mage.cards.i.IrencragFeat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Irencrag Pyromancer", "128p", Rarity.RARE, mage.cards.i.IrencragPyromancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Irencrag Pyromancer", "128s", Rarity.RARE, mage.cards.i.IrencragPyromancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Linden, the Steadfast Queen", "20p", Rarity.RARE, mage.cards.l.LindenTheSteadfastQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Linden, the Steadfast Queen", "20s", Rarity.RARE, mage.cards.l.LindenTheSteadfastQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lochmere Serpent", "195p", Rarity.RARE, mage.cards.l.LochmereSerpent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lochmere Serpent", "195s", Rarity.RARE, mage.cards.l.LochmereSerpent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lovestruck Beast", "165p", Rarity.RARE, mage.cards.l.LovestruckBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lovestruck Beast", "165s", Rarity.RARE, mage.cards.l.LovestruckBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midnight Clock", "54p", Rarity.RARE, mage.cards.m.MidnightClock.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midnight Clock", "54s", Rarity.RARE, mage.cards.m.MidnightClock.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirrormade", "55p", Rarity.RARE, mage.cards.m.Mirrormade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirrormade", "55s", Rarity.RARE, mage.cards.m.Mirrormade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Murderous Rider", "97p", Rarity.RARE, mage.cards.m.MurderousRider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Murderous Rider", "97s", Rarity.RARE, mage.cards.m.MurderousRider.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oathsworn Knight", "98p", Rarity.RARE, mage.cards.o.OathswornKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oathsworn Knight", "98s", Rarity.RARE, mage.cards.o.OathswornKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oko, Thief of Crowns", "197p", Rarity.MYTHIC, mage.cards.o.OkoThiefOfCrowns.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oko, Thief of Crowns", "197s", Rarity.MYTHIC, mage.cards.o.OkoThiefOfCrowns.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Once Upon a Time", "169p", Rarity.RARE, mage.cards.o.OnceUponATime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Once Upon a Time", "169s", Rarity.RARE, mage.cards.o.OnceUponATime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Opportunistic Dragon", "133p", Rarity.RARE, mage.cards.o.OpportunisticDragon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Opportunistic Dragon", "133s", Rarity.RARE, mage.cards.o.OpportunisticDragon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Outlaws' Merriment", "198p", Rarity.MYTHIC, mage.cards.o.OutlawsMerriment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Outlaws' Merriment", "198s", Rarity.MYTHIC, mage.cards.o.OutlawsMerriment.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Piper of the Swarm", "100p", Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Piper of the Swarm", "100s", Rarity.RARE, mage.cards.p.PiperOfTheSwarm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Questing Beast", "171p", Rarity.MYTHIC, mage.cards.q.QuestingBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Questing Beast", "171s", Rarity.MYTHIC, mage.cards.q.QuestingBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rankle, Master of Pranks", "101p", Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rankle, Master of Pranks", "101s", Rarity.MYTHIC, mage.cards.r.RankleMasterOfPranks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Realm-Cloaked Giant", "26p", Rarity.MYTHIC, mage.cards.r.RealmCloakedGiant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Realm-Cloaked Giant", "26s", Rarity.MYTHIC, mage.cards.r.RealmCloakedGiant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Return of the Wildspeaker", "172p", Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Return of the Wildspeaker", "172s", Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Robber of the Rich", "138p", Rarity.MYTHIC, mage.cards.r.RobberOfTheRich.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Robber of the Rich", "138s", Rarity.MYTHIC, mage.cards.r.RobberOfTheRich.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sorcerous Spyglass", "233p", Rarity.RARE, mage.cards.s.SorcerousSpyglass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sorcerous Spyglass", "233s", Rarity.RARE, mage.cards.s.SorcerousSpyglass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stolen by the Fae", "66p", Rarity.RARE, mage.cards.s.StolenByTheFae.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stolen by the Fae", "66s", Rarity.RARE, mage.cards.s.StolenByTheFae.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stonecoil Serpent", "235p", Rarity.RARE, mage.cards.s.StonecoilSerpent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stonecoil Serpent", "235s", Rarity.RARE, mage.cards.s.StonecoilSerpent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stormfist Crusader", "203p", Rarity.RARE, mage.cards.s.StormfistCrusader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stormfist Crusader", "203s", Rarity.RARE, mage.cards.s.StormfistCrusader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sundering Stroke", "144p", Rarity.RARE, mage.cards.s.SunderingStroke.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sundering Stroke", "144s", Rarity.RARE, mage.cards.s.SunderingStroke.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Cauldron of Eternity", "82p", Rarity.MYTHIC, mage.cards.t.TheCauldronOfEternity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Cauldron of Eternity", "82s", Rarity.MYTHIC, mage.cards.t.TheCauldronOfEternity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Circle of Loyalty", "9p", Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Circle of Loyalty", "9s", Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Great Henge", "161p", Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Great Henge", "161s", Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Magic Mirror", "51p", Rarity.MYTHIC, mage.cards.t.TheMagicMirror.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Magic Mirror", "51s", Rarity.MYTHIC, mage.cards.t.TheMagicMirror.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Royal Scions", "199p", Rarity.MYTHIC, mage.cards.t.TheRoyalScions.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Royal Scions", "199s", Rarity.MYTHIC, mage.cards.t.TheRoyalScions.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Torbran, Thane of Red Fell", "147p", Rarity.RARE, mage.cards.t.TorbranThaneOfRedFell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Torbran, Thane of Red Fell", "147s", Rarity.RARE, mage.cards.t.TorbranThaneOfRedFell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vantress Gargoyle", "71p", Rarity.RARE, mage.cards.v.VantressGargoyle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vantress Gargoyle", "71s", Rarity.RARE, mage.cards.v.VantressGargoyle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wicked Wolf", "181p", Rarity.RARE, mage.cards.w.WickedWolf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wicked Wolf", "181s", Rarity.RARE, mage.cards.w.WickedWolf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wildborn Preserver", "182p", Rarity.RARE, mage.cards.w.WildbornPreserver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wildborn Preserver", "182s", Rarity.RARE, mage.cards.w.WildbornPreserver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wishclaw Talisman", "110p", Rarity.RARE, mage.cards.w.WishclawTalisman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wishclaw Talisman", "110s", Rarity.RARE, mage.cards.w.WishclawTalisman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Witch's Vengeance", "111p", Rarity.RARE, mage.cards.w.WitchsVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Witch's Vengeance", "111s", Rarity.RARE, mage.cards.w.WitchsVengeance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worthy Knight", "36p", Rarity.RARE, mage.cards.w.WorthyKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Worthy Knight", "36s", Rarity.RARE, mage.cards.w.WorthyKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yorvo, Lord of Garenbrig", "185p", Rarity.RARE, mage.cards.y.YorvoLordOfGarenbrig.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yorvo, Lord of Garenbrig", "185s", Rarity.RARE, mage.cards.y.YorvoLordOfGarenbrig.class, NON_FULL_USE_VARIOUS));
+     }
+}

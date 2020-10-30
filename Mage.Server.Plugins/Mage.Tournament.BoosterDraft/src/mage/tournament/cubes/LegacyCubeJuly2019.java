@@ -1,4 +1,3 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
@@ -295,7 +294,7 @@ public class LegacyCubeJuly2019 extends DraftCube {
         cubeCards.add(new CardIdentity("Kodama's Reach", ""));
         cubeCards.add(new CardIdentity("Kolaghan's Command", ""));
         cubeCards.add(new CardIdentity("Koth of the Hammer", ""));
-        cubeCards.add(new CardIdentity("Kozilek, Butcher of Truths", ""));
+        cubeCards.add(new CardIdentity("Kozilek, Butcher of Truth", ""));
         cubeCards.add(new CardIdentity("Kytheon, Hero of Akros", ""));
         cubeCards.add(new CardIdentity("Land Tax", ""));
         cubeCards.add(new CardIdentity("Languish", ""));

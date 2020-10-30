@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.ulg;
 
-import mage.abilities.Ability;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -9,7 +8,6 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import java.util.List;
 
 /**
  * Created by escplan9

@@ -69,7 +69,7 @@ class ChromaticOrreryEffect extends AsThoughEffectImpl implements AsThoughManaEf
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return true;
+        return source.isControlledBy(affectedControllerId);
     }
 
     @Override

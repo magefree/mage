@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObjectReference;
@@ -16,13 +14,12 @@ import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEffect {
     private DynamicValue power;
     private DynamicValue toughness;
-    private boolean lockedIn;
+    private final boolean lockedIn;
 
     public BoostSourceEffect(int power, int toughness, Duration duration) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, false);
@@ -36,7 +33,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
      * @param power
      * @param toughness
      * @param duration
-     * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
+     * @param lockedIn  if true, power and toughness will be calculated only once, when the ability resolves
      */
     public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
@@ -94,18 +91,13 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
         StringBuilder sb = new StringBuilder();
         sb.append("{this} gets ");
         String p = power.toString();
-        if(!p.startsWith("-")) {
+        if (!p.startsWith("-")) {
             sb.append('+');
         }
         sb.append(p).append('/');
         String t = toughness.toString();
-        if(!t.startsWith("-")){
-            if(t.startsWith("-")) {
-                sb.append('-');
-            }
-            else {
-                sb.append('+');
-            }
+        if (!t.startsWith("-")) {
+            sb.append('+');
         }
         sb.append(t);
         if (duration != Duration.WhileOnBattlefield) {

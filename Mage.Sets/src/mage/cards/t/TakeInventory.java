@@ -29,7 +29,7 @@ public final class TakeInventory extends CardImpl {
         // Draw a card, then draw cards equal to the number of cards named Take Inventory in your graveyard.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         Effect effect = new DrawCardSourceControllerEffect(new CardsInControllerGraveyardCount(filter));
-        effect.setText(", then draw cards equal to the number of cards named {source} in your graveyard");
+        effect.setText(", then draw cards equal to the number of cards named {this} in your graveyard");
         this.getSpellAbility().addEffect(effect);
     }
 

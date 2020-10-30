@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.Card;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ class TheMendingOfDominariaFirstEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        new PutTopCardOfLibraryIntoGraveControllerEffect(2).apply(game, source);
+        new MillCardsControllerEffect(2).apply(game, source);
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)

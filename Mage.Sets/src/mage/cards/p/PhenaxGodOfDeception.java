@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -44,7 +44,7 @@ public final class PhenaxGodOfDeception extends CardImpl {
 
         // Creatures you control have "{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness."
         Ability ability = new SimpleActivatedAbility(
-                new PutTopCardOfLibraryIntoGraveTargetEffect(SourcePermanentToughnessValue.getInstance())
+                new MillCardsTargetEffect(SourcePermanentToughnessValue.getInstance())
                         .setText("Target player mills X cards, where X is this creature's toughness"), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(

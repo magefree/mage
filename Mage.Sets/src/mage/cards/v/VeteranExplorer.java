@@ -1,13 +1,15 @@
-
 package mage.cards.v;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -68,35 +70,44 @@ class VeteranExplorerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> toBattlefield = new HashSet<>();
+        List<Player> usingPlayers = new ArrayList<>();
         if (controller != null) {
-            List<Player> usingPlayers = new ArrayList<>();
-            this.chooseAndSearchLibrary(usingPlayers, controller, source, game);
+            toBattlefield.addAll(this.chooseAndSearchLibrary(usingPlayers, controller, source, game));
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (!playerId.equals(controller.getId())) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        this.chooseAndSearchLibrary(usingPlayers, player, source, game);
-                    }
+                Player player = game.getPlayer(playerId);
+                if (player != null
+                        && !player.equals(controller)) {
+                    toBattlefield.addAll(this.chooseAndSearchLibrary(usingPlayers, player, source, game));
                 }
             }
+
+            // must happen simultaneously Rule 101.4
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
+
+            // only those players that searched can shuffle
             for (Player player : usingPlayers) {
-                player.shuffleLibrary(source, game);
+                if (player != null) {
+                    player.shuffleLibrary(source, game);
+                }
             }
             return true;
         }
         return false;
     }
 
-    private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, Ability source, Game game) {
+    private Set<Card> chooseAndSearchLibrary(List<Player> usingPlayers, Player player, Ability source, Game game) {
+        Set<Card> toBattlefield = new HashSet<>();
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", source, game)) {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
             if (player.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
-                    player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
+                    toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));
                 }
             }
         }
+        return toBattlefield;
     }
 
 }

@@ -70,7 +70,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 4));
     }
 
-    private static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.instance, null, filter, true);
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.instance, null, filter, true);
 
     public AlurenRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -84,6 +84,12 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     @Override
     public AlurenRuleEffect copy() {
         return new AlurenRuleEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game, UUID activePlayerId) {
+        super.init(source, game, activePlayerId);
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
     }
 
     @Override

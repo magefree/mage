@@ -55,8 +55,8 @@ public final class BlindZealot extends CardImpl {
 
 class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
 
-     BlindZealotTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), true);
+    BlindZealotTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), false);
     }
 
     private BlindZealotTriggeredAbility(final BlindZealotTriggeredAbility ability) {
@@ -91,6 +91,6 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, you may sacrifice it. "
-                + "If you do, destroy target creature that player controls";
+                + "If you do, destroy target creature that player controls.";
     }
 }

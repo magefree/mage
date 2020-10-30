@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

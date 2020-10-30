@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -40,7 +40,7 @@ public final class StoneTongueBasilisk extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, all creatures able to block Stone-Tongue Basilisk do so.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalRequirementEffect(
                 new MustBeBlockedByAllSourceEffect(),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "As long as seven or more cards are in your graveyard,  all creatures able to block {this} do so"
         ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);

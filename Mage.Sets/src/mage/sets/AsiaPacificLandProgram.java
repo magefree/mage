@@ -18,8 +18,10 @@ public final class AsiaPacificLandProgram extends ExpansionSet {
     }
 
     private AsiaPacificLandProgram() {
-        super("Asia Pacific Land Program", "APAC", ExpansionSet.buildDate(1997, 10, 13), SetType.PROMOTIONAL);
+        super("Asia Pacific Land Program", "PALP", ExpansionSet.buildDate(1997, 10, 13), SetType.PROMOTIONAL);
         this.hasBoosters = false;
+        this.hasBasicLands = true;
+
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 11, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));

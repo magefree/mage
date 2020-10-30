@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class Aurification extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a gold counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.GOLD));
+        filter.add(CounterType.GOLD.getPredicate());
     }
 
     static final String rule = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";

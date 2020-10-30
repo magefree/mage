@@ -8,7 +8,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**

@@ -1,6 +1,7 @@
 package mage;
 
 import java.util.*;
+
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -15,6 +16,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
 import mage.cards.FrameStyle;
+import mage.cards.mock.MockCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -160,6 +162,15 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+        for (Ability ab : getAbilities()) {
+            if (ab instanceof PlaneswalkerEntersWithLoyaltyCountersAbility) {
+                ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).setStartingLoyalty(startingLoyalty);
+            }
+        }
+    }
+
+    @Override
     public ObjectColor getColor(Game game) {
         return color;
     }
@@ -167,42 +178,20 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public ObjectColor getFrameColor(Game game) {
         // For lands, add any colors of mana the land can produce to
-        // its frame colors.
-        if (this.isLand()) {
+        // its frame colors while game is active to represent ability changes during the game.
+        if (this.isLand() && !(this instanceof MockCard)) {
             ObjectColor cl = frameColor.copy();
+            Set<ManaType> manaTypes = EnumSet.noneOf(ManaType.class);
             for (Ability ab : getAbilities()) {
                 if (ab instanceof ActivatedManaAbilityImpl) {
-                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl) ab;
-                    try {
-                        List<Mana> manaAdded = mana.getNetMana(game);
-                        for (Mana m : manaAdded) {
-                            if (m.getAny() > 0) {
-                                return new ObjectColor("WUBRG");
-                            }
-                            if (m.getWhite() > 0) {
-                                cl.setWhite(true);
-                            }
-                            if (m.getBlue() > 0) {
-                                cl.setBlue(true);
-                            }
-                            if (m.getBlack() > 0) {
-                                cl.setBlack(true);
-                            }
-                            if (m.getRed() > 0) {
-                                cl.setRed(true);
-                            }
-                            if (m.getGreen() > 0) {
-                                cl.setGreen(true);
-                            }
-                        }
-                    } catch (NullPointerException e) {
-                        // Ability depends on game
-                        // but no game passed
-                        // All such abilities are 5-color ones
-                        return new ObjectColor("WUBRG");
-                    }
+                    manaTypes.addAll(((ActivatedManaAbilityImpl) ab).getProducableManaTypes(game));
                 }
             }
+            cl.setWhite(manaTypes.contains(ManaType.WHITE));
+            cl.setBlue(manaTypes.contains(ManaType.BLUE));
+            cl.setBlack(manaTypes.contains(ManaType.BLACK));
+            cl.setRed(manaTypes.contains(ManaType.RED));
+            cl.setGreen(manaTypes.contains(ManaType.GREEN));
             return cl;
         } else {
             // For everything else, just return the frame colors
@@ -328,7 +317,7 @@ public abstract class MageObjectImpl implements MageObject {
      */
     @Override
     public void removePTCDA() {
-        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext();) {
+        for (Iterator<Ability> iter = this.getAbilities().iterator(); iter.hasNext(); ) {
             Ability ability = iter.next();
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {

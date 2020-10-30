@@ -24,7 +24,7 @@ public final class SiegehornCeratops extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Enrage</i> — Whenever Siegehorn Ceratops is dealt damage, put two +1/+1 counters on it.
+        // <i>Enrage</i> &mdash; Whenever Siegehorn Ceratops is dealt damage, put two +1/+1 counters on it.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))
                         .setText("put two +1/+1 counter on it"), false, true));

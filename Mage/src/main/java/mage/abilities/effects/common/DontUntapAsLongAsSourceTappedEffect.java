@@ -18,7 +18,7 @@ public class DontUntapAsLongAsSourceTappedEffect extends ConditionalContinuousRu
 
     public DontUntapAsLongAsSourceTappedEffect() {
         super(new DontUntapInControllersUntapStepTargetEffect(Duration.Custom), SourceTappedCondition.instance);
-        staticText = "It doesn't untap during its controller's untap step for as long as {source} remains tapped.";
+        staticText = "It doesn't untap during its controller's untap step for as long as {this} remains tapped.";
     }
 
     public DontUntapAsLongAsSourceTappedEffect(final DontUntapAsLongAsSourceTappedEffect effect) {

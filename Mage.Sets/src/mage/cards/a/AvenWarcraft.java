@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
@@ -60,7 +60,7 @@ class AvenWarcraftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (new CardsInControllerGraveCondition(7).apply(game, source)) {
+        if (new CardsInControllerGraveyardCondition(7).apply(game, source)) {
             game.addEffect(new GainProtectionFromColorAllEffect(
                     Duration.EndOfTurn,
                     StaticFilters.FILTER_CONTROLLED_CREATURES

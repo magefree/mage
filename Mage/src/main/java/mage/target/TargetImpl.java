@@ -12,14 +12,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -112,9 +105,9 @@ public abstract class TargetImpl implements Target {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);
             if (getMaxNumberOfTargets() > 0 && getMaxNumberOfTargets() != Integer.MAX_VALUE) {
-                sb.append(" (").append(targets.size()).append('/').append(getMaxNumberOfTargets()).append(')');
+                sb.append(" (selected ").append(targets.size()).append(" of ").append(getMaxNumberOfTargets()).append(')');
             } else {
-                sb.append(" (").append(targets.size()).append(')');
+                sb.append(" (selected ").append(targets.size()).append(')');
             }
             sb.append(suffix);
             return sb.toString();

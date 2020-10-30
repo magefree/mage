@@ -1,6 +1,7 @@
-
 package mage.cards.e;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -21,7 +22,7 @@ import mage.players.Player;
 public final class EmptyTheCatacombs extends CardImpl {
 
     public EmptyTheCatacombs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Each player returns all creature cards from their graveyard to their hand.
         this.getSpellAbility().addEffect(new EmptyTheCatacombsEffect());
@@ -57,14 +58,24 @@ class EmptyTheCatacombsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (Card card : player.getGraveyard().getCards(filter, game)) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+        Set<Card> toHand = new HashSet<>();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    for (Card card : player.getGraveyard().getCards(filter, game)) {
+                        if (card != null) {
+                            toHand.add(card);
+                        }
+                    }
                 }
             }
+
+            // must happen simultaneously Rule 101.4
+            controller.moveCards(toHand, Zone.HAND, source, game, false, false, true, null);
+            return true;
         }
-        return true;
+        return false;
     }
 }

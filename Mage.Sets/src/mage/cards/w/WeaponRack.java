@@ -29,7 +29,7 @@ public final class WeaponRack extends CardImpl {
         // Weapon Rack enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                "{this} enters the battlefield with three +1/+1 counters on it"
+                "with three +1/+1 counters on it"
         ));
 
         // {T}: Move a +1/+1 counter from Weapon Rack onto target creature. Activate this ability only any time you could cast a sorcery.

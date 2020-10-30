@@ -8,7 +8,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class SequesteredStash extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4},{T}, Sacrifice Sequestered Stash: Put the top five cards of your library into your graveyard. Then you may put an artifact card from your graveyard on top of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(5), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(5), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new SequesteredStashEffect());

@@ -3,7 +3,6 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -16,8 +15,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *

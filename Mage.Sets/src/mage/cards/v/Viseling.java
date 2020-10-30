@@ -46,7 +46,7 @@ class ViselingEffect extends OneShotEffect {
 
     public ViselingEffect() {
         super(Outcome.Damage);
-        this.staticText = "{source} deals X damage to that player, where X is the number of cards in their hand minus 4";
+        this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     public ViselingEffect(final ViselingEffect effect) {

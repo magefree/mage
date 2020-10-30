@@ -3,8 +3,6 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +23,7 @@ public final class Powerleech extends CardImpl {
     public Powerleech(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
-        // Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {tap} in its activation cost, you gain 1 life.
+        // Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.
         this.addAbility(new PowerleechTriggeredAbility());
     }
 
@@ -75,17 +73,8 @@ class PowerleechTriggeredAbility extends TriggeredAbilityImpl {
             if (stackAbility == null) {
                 return false;
             }
-            boolean triggerable = true;
-            for (Cost cost : stackAbility.getCosts()) {
-                if (cost instanceof TapSourceCost) {
-                    triggerable = false;
-                    break;
-                }
-            }
-            if (!triggerable) {
-                return false;
-            }
-            return player.hasOpponent(permanent.getControllerId(), game);
+            return !stackAbility.hasTapCost() 
+                    && player.hasOpponent(permanent.getControllerId(), game);
         }
         if (event.getType() == GameEvent.EventType.TAPPED) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());

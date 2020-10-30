@@ -12,6 +12,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
@@ -42,10 +43,11 @@ public final class CrypticTrilobite extends CardImpl {
                 new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())
         ));
 
-        // Remove a +1/+1 counter from Cryptic Trilobite: Add {C}{C}. Spend this mana only to activate abilities.
+        // Remove a +1/+1 counter from Cryptic Trilobite: Add {C}{C}. Spend this mana only to activate abilities.        
         this.addAbility(new ConditionalColorlessManaAbility(
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance()),
-                2, new CrypticTrilobiteManaBuilder()
+                2, new CrypticTrilobiteManaBuilder(),
+                new CountersSourceCount(CounterType.P1P1)
         ));
 
         // {1}, {T}: Put a +1/+1 counter on Cryptic Trilobite.

@@ -1,23 +1,24 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class StormFleetArsonist extends CardImpl {
@@ -36,6 +37,8 @@ public final class StormFleetArsonist extends CardImpl {
                 RaidCondition.instance,
                 "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, target opponent sacrifices a permanent.");
         ability.addTarget(new TargetOpponent());
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

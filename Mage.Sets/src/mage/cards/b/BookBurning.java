@@ -41,7 +41,7 @@ class BookBurningMillEffect extends OneShotEffect {
 
     public BookBurningMillEffect() {
         super(Outcome.Detriment);
-        staticText = "Any player may have {source} deal 6 damage to them. If no one does, target player mills six cards";
+        staticText = "Any player may have {this} deal 6 damage to them. If no one does, target player mills six cards";
     }
 
     public BookBurningMillEffect(final BookBurningMillEffect effect) {

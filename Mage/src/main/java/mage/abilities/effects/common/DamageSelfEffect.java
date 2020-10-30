@@ -47,7 +47,7 @@ public class DamageSelfEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("{source} deals ").append(amount).append(" damage to itself");
+        sb.append("{this} deals ").append(amount).append(" damage to itself");
         return sb.toString();
     }
 }

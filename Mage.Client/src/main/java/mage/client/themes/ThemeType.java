@@ -4,7 +4,7 @@ import java.awt.*;
 
 public enum ThemeType {
     // https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/_nimbusDefaults.html
-    DEFAULT("Default Theme",
+    DEFAULT("Default",
             "",
             true,
             false,
@@ -13,17 +13,17 @@ public enum ThemeType {
             true,
             true,
             true,
-            new Color(169,176,190), // nimbusBlueGrey
-            new Color(214,217,223), // control
-            new Color(255,255,255), // nimbusLightBackground
-            new Color(242,242,189), // info
-            new Color(51,98,140), // nimbusBase
+            new Color(169, 176, 190), // nimbusBlueGrey
+            new Color(214, 217, 223), // control
+            new Color(255, 255, 255), // nimbusLightBackground
+            new Color(242, 242, 189), // info
+            new Color(51, 98, 140), // nimbusBase
             null, // mageToolbar
             new Color(200, 200, 180, 200), // playerPanel_inactiveBackgroundColor
             new Color(200, 255, 200, 200), // playerPanel_activeBackgroundColor
             new Color(131, 94, 83, 200) // playerPanel_deadBackgroundColor
     ),
-    GREY("GREY",
+    GREY("Grey",
             "grey-theme/",
             false,
             false,
@@ -42,7 +42,7 @@ public enum ThemeType {
             new Color(180, 234, 180, 200), // playerPanel_activeBackgroundColor
             new Color(99, 99, 99, 200) // playerPanel_deadBackgroundColor
     ),
-    SUNSET_VAPORWAVE("Sunset Vaporwave",
+    SUNSET_VAPORWAVE("Vaporwave Sunset",
             "16bit-theme/",
             true,
             true,

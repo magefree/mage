@@ -17,7 +17,7 @@ import java.util.UUID;
 public class DamagePlayersEffect extends OneShotEffect {
     private DynamicValue amount;
     private TargetController controller;
-    private String sourceName = "{source}";
+    private String sourceName = "{this}";
 
     public DamagePlayersEffect(int amount) {
         this(Outcome.Damage, StaticValue.get(amount));

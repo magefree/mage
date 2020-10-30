@@ -25,7 +25,7 @@ public final class UnlikelyAid extends CardImpl {
         ).setText("Target creature gets +2/+0"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains indestructable until end of turn"));
+        ).setText("and gains indestructible until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

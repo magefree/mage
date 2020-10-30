@@ -10,7 +10,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;

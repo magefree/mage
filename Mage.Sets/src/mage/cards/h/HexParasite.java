@@ -47,7 +47,7 @@ public final class HexParasite extends CardImpl {
 class HexParasiteEffect extends OneShotEffect {
 
     HexParasiteEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.AIDontUseIt);
         staticText = "Remove up to X counters from target permanent. For each counter removed this way, {this} gets +1/+0 until end of turn";
     }
 
@@ -64,18 +64,19 @@ class HexParasiteEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         TargetPermanent target = (TargetPermanent) source.getTargets().get(0);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
-        Player player = game.getPlayer(source.getControllerId());
-        if (permanent != null && player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (permanent != null
+                && controller != null) {
             int toRemove = source.getManaCostsToPay().getX();
             int removed = 0;
             String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
             for (String counterName : counterNames) {
-                if (player.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
+                if (controller.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
                     if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
                         permanent.removeCounters(counterName, 1, game);
                         removed++;
                     } else {
-                        int amount = player.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", game);
+                        int amount = controller.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", game);
                         if (amount > 0) {
                             removed += amount;
                             permanent.removeCounters(counterName, amount, game);

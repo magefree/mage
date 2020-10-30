@@ -43,7 +43,7 @@ public class UndercityReachesPlane extends Plane {
         this.setPlaneType(Planes.PLANE_UNDERCITY_REACHES);
         this.setExpansionSetCodeForImage("PCA");
 
-        // Whenever a creature deals combat damage to a player, its controller may a draw a card
+        // Whenever a creature deals combat damage to a player, its controller may draw a card.
         Ability ability = new UndercityReachesTriggeredAbility();
 
         this.getAbilities().add(ability);
@@ -68,7 +68,7 @@ public class UndercityReachesPlane extends Plane {
 class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
 
     public UndercityReachesTriggeredAbility() {
-        super(Zone.COMMAND, null, true);
+        super(Zone.COMMAND, null, false); // effect must be optional
     }
 
     public UndercityReachesTriggeredAbility(final UndercityReachesTriggeredAbility ability) {
@@ -98,9 +98,9 @@ class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null) {
-                Effect effect = new DrawCardTargetEffect(StaticValue.get(1), false, true);
+                Effect effect = new DrawCardTargetEffect(StaticValue.get(1), true, false);
                 effect.setTargetPointer(new FixedTarget(creature.getControllerId()));
-                effect.apply(game, null);
+                effect.apply(game, this);
                 return true;
             }
         }

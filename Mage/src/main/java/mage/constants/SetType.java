@@ -7,6 +7,7 @@ public enum SetType {
     EXPANSION("Expansion"),
     CORE("Core"),
     MAGIC_ONLINE("Magic Online"),
+    MAGIC_ARENA("Magic Arena"),
     SUPPLEMENTAL("Supplemental"),
     SUPPLEMENTAL_STANDARD_LEGAL("Standard Legal Supplemental"),
     SUPPLEMENTAL_MODERN_LEGAL("Modern Legal Supplemental"),
@@ -46,5 +47,10 @@ public enum SetType {
     public boolean isModernLegal() {
         // any official sets that was in modern (standard + Modern Horizons)
         return this.isStandardLegal() || this == SetType.SUPPLEMENTAL_MODERN_LEGAL;
+    }
+
+    public boolean isHistoricLegal() {
+        // any set made for standard or specifically for arena
+        return this.isStandardLegal() || this == SetType.MAGIC_ARENA;
     }
 }

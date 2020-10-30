@@ -2,8 +2,8 @@
 package mage.cards.g;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -92,7 +92,7 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
                 Card spellCard = spell.getCard();
                 if (spellCard != null 
                         && controller.chooseUse(Outcome.PlayForFree, "Play " + spellCard.getIdName() + " for free?", source, game)) {
-                    controller.playCard(spellCard, game, true, true, new MageObjectReference(source.getSourceObject(game), game));
+                    controller.playCard(spellCard, game, true, true, new ApprovingObject(source, game));
                 }
                 return true;
             }

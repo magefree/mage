@@ -95,7 +95,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                     for (UUID cardId : target.getTargets()) {
                         Card card = cards.get(cardId, game);
                         if (card != null) {
-                            if (controller.canPayLifeCost()
+                            if (controller.canPayLifeCost(source)
                                     && controller.getLife() >= 4
                                     && controller.chooseUse(outcome, "Pay 4 life for " + card.getLogName() + "? (Otherwise it's put on top of your library)", source, game)) {
                                 controller.loseLife(4, game, false);

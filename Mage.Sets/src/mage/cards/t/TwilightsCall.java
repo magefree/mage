@@ -1,12 +1,14 @@
-
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -63,12 +65,20 @@ class TwilightsCallEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game), Zone.BATTLEFIELD, source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> toBattlefield = new HashSet<>();
+        if (controller != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    toBattlefield.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+                }
             }
+
+            // must happen simultaneously Rule 101.4
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
+            return true;
         }
-        return true;
+        return false;
     }
 }

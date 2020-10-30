@@ -87,7 +87,7 @@ class NetherShadowTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {source} is in your graveyard with three or more creature cards above it, you may put {source} onto the battlefield.";
+        return "At the beginning of your upkeep, if {this} is in your graveyard with three or more creature cards above it, you may put {this} onto the battlefield.";
     }
     
     

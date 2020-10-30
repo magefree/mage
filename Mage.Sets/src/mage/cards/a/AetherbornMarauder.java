@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -77,7 +76,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control to remove +1/+1 counters from");
             filter.add(AnotherPredicate.instance);
-            filter.add(new CounterPredicate(CounterType.P1P1));
+            filter.add(CounterType.P1P1.getPredicate());
             boolean firstRun = true;
             while (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
                 if (controller.chooseUse(outcome, "Move " + (firstRun ? "any" : "more") + " +1/+1 counters from other permanents you control to " + sourceObject.getLogName() + '?', source, game)) {

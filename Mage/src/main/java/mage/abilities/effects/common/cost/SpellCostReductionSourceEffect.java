@@ -67,7 +67,7 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
             sb.append(this.condition.toString());
         }
         if (this.amount.toString().equals("X")) {
-            sb.append(", where {X} is ").append(this.amount.getMessage());
+            sb.append(", where X is ").append(this.amount.getMessage());
         }
         this.staticText = sb.toString();
     }

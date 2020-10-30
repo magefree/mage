@@ -267,7 +267,7 @@ public LegendaryCube() {
         cubeCards.add(new CardIdentity("Kolaghan's Command", ""));
         cubeCards.add(new CardIdentity("Kolaghan, the Storm's Fury", ""));
         cubeCards.add(new CardIdentity("Konda's Banner", ""));
-        cubeCards.add(new CardIdentity("Kongming, 'Sleeping Dragon'", ""));
+        cubeCards.add(new CardIdentity("Kongming, \"Sleeping Dragon\"", ""));
         cubeCards.add(new CardIdentity("Kozilek, Butcher of Truth", ""));
         cubeCards.add(new CardIdentity("Krenko, Mob Boss", ""));
         cubeCards.add(new CardIdentity("Kresh the Bloodbraided", ""));

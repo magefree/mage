@@ -26,7 +26,7 @@ public final class ChandrasMagmutt extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {T}: Chandra's Magmutt deals 1 damage to target player or planeswalker.
+        // {T}: Chandra's Magmutt deals 1 damage to target player or planeswalker.<
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

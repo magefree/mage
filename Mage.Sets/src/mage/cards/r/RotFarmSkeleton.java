@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
+import mage.abilities.costs.common.MillCardsCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class RotFarmSkeleton extends CardImpl {
         
         // 2{B}{G}, Put the top four cards of your library into your graveyard: Return Rot Farm Skeleton from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{2}{B}{G}"));
-        ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost(4));
+        ability.addCost(new MillCardsCost(4));
         this.addAbility(ability);
 
     }

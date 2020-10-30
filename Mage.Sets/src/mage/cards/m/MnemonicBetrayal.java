@@ -129,7 +129,7 @@ class MnemonicBetrayalCastFromExileEffect extends AsThoughEffectImpl {
         }
         return objectId.equals(card.getId())
                 && card.getZoneChangeCounter(game) == zoneCounter
-                && affectedControllerId.equals(source.getControllerId())
+                && source.isControlledBy(affectedControllerId)
                 && !card.isLand();  // cast only not play
     }
 }
@@ -166,7 +166,7 @@ class MnemonicBetrayalAnyColorEffect extends AsThoughEffectImpl implements AsTho
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(card.getId())
                 && card.getZoneChangeCounter(game) <= zoneCounter + 1
-                && affectedControllerId.equals(source.getControllerId())) {
+                && source.isControlledBy(affectedControllerId)) {
             return true;
         } else {
             if (objectId.equals(card.getId())) {

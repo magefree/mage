@@ -170,6 +170,6 @@ class PowerLowerEqualSourcePredicate implements ObjectPlayerPredicate<ObjectPlay
 
     @Override
     public String toString() {
-        return "creature with power less than or equal to {source}'s power";
+        return "creature with power less than or equal to {this}'s power";
     }
 }

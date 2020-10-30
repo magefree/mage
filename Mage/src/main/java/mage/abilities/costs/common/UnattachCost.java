@@ -1,64 +1,55 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.UseAttachedCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- * @author Galatolol
+ * @author TheElk801
  */
-public class UnattachCost extends CostImpl {
+public class UnattachCost extends UseAttachedCost {
 
-    protected UUID sourceEquipmentId;
-
-    public UnattachCost(String name, UUID sourceId) {
-        this.text = "Unattach " + name;
-        this.sourceEquipmentId = sourceId;
+    public UnattachCost() {
+        super();
     }
 
     public UnattachCost(final UnattachCost cost) {
         super(cost);
-        this.sourceEquipmentId = cost.sourceEquipmentId;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
-                    paid = permanent.removeAttachment(attachmentId, game);
-                    if (paid) {
-                        break;
-                    }
-                }
-            }
-
+        if (mageObjectReference == null) {
+            return false;
         }
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent == null) {
+            return paid;
+        }
+        for (UUID attachmentId : permanent.getAttachments()) {
+            if (!this.mageObjectReference.refersTo(attachmentId, game)) {
+                continue;
+            }
+            paid = permanent.removeAttachment(attachmentId, game);
+            if (paid) {
+                break;
+            }
+        }
+
         return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            for (UUID attachmentId : permanent.getAttachments()) {
-                Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getId().equals(sourceEquipmentId)) {
-                    return true;
-                }
-            }
-
-        }
-        return false;
     }
 
     @Override
     public UnattachCost copy() {
         return new UnattachCost(this);
+    }
+
+    @Override
+    public String getText() {
+        return "unattach " + this.name;
     }
 }

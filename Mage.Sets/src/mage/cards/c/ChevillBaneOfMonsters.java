@@ -17,8 +17,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -34,16 +32,15 @@ public final class ChevillBaneOfMonsters extends CardImpl {
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
     private static final FilterPermanent filter3
             = new FilterPermanent("a permanent an opponent controls with a bounty counter on it");
-    private static final Predicate predicate = new CounterPredicate(CounterType.BOUNTY);
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(predicate);
+        filter.add(CounterType.BOUNTY.getPredicate());
 
         filter2.add(TargetController.OPPONENT.getControllerPredicate());
 
         filter3.add(TargetController.OPPONENT.getControllerPredicate());
-        filter3.add(predicate);
+        filter3.add(CounterType.BOUNTY.getPredicate());
     }
 
     private static final Condition condition

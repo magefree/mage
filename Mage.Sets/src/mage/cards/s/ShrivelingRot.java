@@ -35,6 +35,7 @@ public final class ShrivelingRot extends CardImpl {
         // Choose one -
         // Until end of turn, whenever a creature is dealt damage, destroy it.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotDestroyTriggeredAbility()));
+        
         // Until end of turn, whenever a creature dies, that creature's controller loses life equal to its toughness.
         Mode mode = new Mode();
         mode.addEffect(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotLoseLifeTriggeredAbility()));

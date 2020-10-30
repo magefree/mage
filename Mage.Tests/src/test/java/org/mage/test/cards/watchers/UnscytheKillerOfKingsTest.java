@@ -31,7 +31,7 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Prodigal Pyromancer");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to ", "Sejiri Merfolk");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals 1 damage to ", "Sejiri Merfolk");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -52,7 +52,7 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to ", "Craw Wurm");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals 1 damage to ", "Craw Wurm");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm", "Equip", StackClause.WHILE_NOT_ON_STACK);
 

@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
@@ -17,23 +15,24 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author Luna Skyrise
  */
 public final class ForsakenCity extends CardImpl {
-    
-     private static final FilterCard filter = new FilterCard("a card from your hand");
+
+    private static final FilterCard filter = new FilterCard("a card from your hand");
 
     public ForsakenCity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Forsaken City doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        
+
         // At the beginning of your upkeep, you may exile a card from your hand. If you do, untap Forsaken City.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new UntapSourceEffect(), new ExileFromHandCost(new TargetCardInHand(filter))), TargetController.YOU, true));
-        
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new UntapSourceEffect(), new ExileFromHandCost(new TargetCardInHand(filter))), TargetController.YOU, false));
+
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }

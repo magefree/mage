@@ -9,7 +9,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;

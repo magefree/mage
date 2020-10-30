@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -22,6 +21,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -97,7 +97,7 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new MageObjectReference(source.getSourceObject(game), game));
+                game, true, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         if (!cardWasCast || !card.isInstantOrSorcery()) {
             return true;

@@ -1,7 +1,7 @@
 
 package mage.cards.f;
 
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -28,7 +28,7 @@ public final class FarWanderings extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.");
         this.getSpellAbility().addEffect(effect);
     }

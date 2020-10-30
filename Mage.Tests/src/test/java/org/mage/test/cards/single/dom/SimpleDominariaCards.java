@@ -5,7 +5,6 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import javax.ws.rs.POST;
 
 public class SimpleDominariaCards extends CardTestPlayerBase {
 

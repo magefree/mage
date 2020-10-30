@@ -18,7 +18,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -37,7 +36,7 @@ public final class RageForger extends CardImpl {
         filter.add(SubType.SHAMAN.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
-        filterAttack.add(new CounterPredicate(CounterType.P1P1));
+        filterAttack.add(CounterType.P1P1.getPredicate());
     }
 
     public RageForger(UUID ownerId, CardSetInfo setInfo) {

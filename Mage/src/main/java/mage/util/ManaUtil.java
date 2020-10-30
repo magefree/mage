@@ -549,7 +549,7 @@ public final class ManaUtil {
             }
 
             if (!payed) {
-                game.restoreState(bookmark, restoreContextName);
+                player.restoreState(bookmark, restoreContextName, game);
                 game.fireUpdatePlayersEvent();
             } else {
                 game.removeBookmark(bookmark);

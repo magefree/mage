@@ -6,7 +6,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.mana.DoUnlessAnyPlayerPaysManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;

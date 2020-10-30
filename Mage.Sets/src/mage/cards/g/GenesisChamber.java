@@ -18,7 +18,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MyrToken;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 

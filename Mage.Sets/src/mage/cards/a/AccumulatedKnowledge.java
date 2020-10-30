@@ -30,7 +30,7 @@ public final class AccumulatedKnowledge extends CardImpl {
         // Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         Effect effect = new DrawCardSourceControllerEffect(new CardsInAllGraveyardsCount(filter));
-        effect.setText(", then draw cards equal to the number of cards named {source} in all graveyards");
+        effect.setText(", then draw cards equal to the number of cards named {this} in all graveyards");
         this.getSpellAbility().addEffect(effect);
     }
 

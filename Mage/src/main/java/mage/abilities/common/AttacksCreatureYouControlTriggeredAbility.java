@@ -44,6 +44,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
+        this.once = ability.once;
     }
 
     public void setOnce(boolean once) {

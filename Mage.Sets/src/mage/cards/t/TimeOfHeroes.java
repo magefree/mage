@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class TimeOfHeroes extends CardImpl {
     
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(new CounterPredicate(CounterType.LEVEL));
+        filter.add(CounterType.LEVEL.getPredicate());
     }
 
     public TimeOfHeroes(UUID ownerId, CardSetInfo setInfo) {

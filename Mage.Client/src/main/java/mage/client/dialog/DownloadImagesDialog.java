@@ -19,9 +19,9 @@ public class DownloadImagesDialog extends MageDialog {
     public static final int RET_CANCEL = 0;
     public static final int RET_OK = 1;
 
-    private Dimension sizeModeMessageOnly;
-    private Dimension sizeModeMessageAndControls;
-    private Map<Component, Boolean> actionsControlStates = new HashMap<>();
+    private final Dimension sizeModeMessageOnly;
+    private final Dimension sizeModeMessageAndControls;
+    private final Map<Component, Boolean> actionsControlStates = new HashMap<>();
 
 
     /**
@@ -34,9 +34,9 @@ public class DownloadImagesDialog extends MageDialog {
         // fix for panelInfo (it's resets aligmentX after netbeans designer opened)
         panelInfo.setAlignmentX(CENTER_ALIGNMENT);
 
-        // save default sizes
+        // save default sizes (WARNING, you must sync it manually with designer sizes)
         //
-        this.sizeModeMessageAndControls = new Dimension(580, 330); // dialog -> properties -> designer size
+        this.sizeModeMessageAndControls = new Dimension(716, 329); // dialog -> properties -> code tab -> designer size
         //
         this.sizeModeMessageOnly = new Dimension(this.sizeModeMessageAndControls.getSize());
         sizeModeMessageOnly.height = 25 * 4;
@@ -95,6 +95,10 @@ public class DownloadImagesDialog extends MageDialog {
         return this.comboLanguage;
     }
 
+    public JComboBox getDownloadThreadsCombo() {
+        return this.comboDownloadThreads;
+    }
+
     public JComboBox getSetsCombo() {
         return this.comboSets;
     }
@@ -142,6 +146,7 @@ public class DownloadImagesDialog extends MageDialog {
         enableActionControl(enable, comboSets);
         enableActionControl(enable, buttonSearchSet);
         enableActionControl(enable, comboLanguage);
+        enableActionControl(enable, comboDownloadThreads);
         enableActionControl(enable, checkboxRedownload);
     }
 
@@ -214,9 +219,12 @@ public class DownloadImagesDialog extends MageDialog {
         panelSourceLeft = new javax.swing.JPanel();
         labelSource = new javax.swing.JLabel();
         comboSource = new javax.swing.JComboBox<>();
-        panelSourceRight = new javax.swing.JPanel();
+        panelSourceCenter = new javax.swing.JPanel();
         labelLanguage = new javax.swing.JLabel();
         comboLanguage = new javax.swing.JComboBox<>();
+        panelSourceRight = new javax.swing.JPanel();
+        labelDownloadThreads = new javax.swing.JLabel();
+        comboDownloadThreads = new javax.swing.JComboBox<>();
         panelMode = new javax.swing.JPanel();
         panelModeInner = new javax.swing.JPanel();
         labelMode = new javax.swing.JLabel();
@@ -295,19 +303,33 @@ public class DownloadImagesDialog extends MageDialog {
 
         panelSource.add(panelSourceLeft);
 
-        panelSourceRight.setAlignmentX(0.0F);
-        panelSourceRight.setMaximumSize(new java.awt.Dimension(130, 32767));
-        panelSourceRight.setMinimumSize(new java.awt.Dimension(130, 30));
-        panelSourceRight.setPreferredSize(new java.awt.Dimension(130, 100));
-        panelSourceRight.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+        panelSourceCenter.setAlignmentX(0.0F);
+        panelSourceCenter.setMaximumSize(new java.awt.Dimension(130, 32767));
+        panelSourceCenter.setMinimumSize(new java.awt.Dimension(130, 10));
+        panelSourceCenter.setPreferredSize(new java.awt.Dimension(130, 100));
+        panelSourceCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         labelLanguage.setText("Language:");
-        panelSourceRight.add(labelLanguage);
+        panelSourceCenter.add(labelLanguage);
 
         comboLanguage.setMaximumRowCount(15);
         comboLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-        comboLanguage.setPreferredSize(new java.awt.Dimension(90, 25));
-        panelSourceRight.add(comboLanguage);
+        comboLanguage.setPreferredSize(new java.awt.Dimension(110, 25));
+        panelSourceCenter.add(comboLanguage);
+
+        panelSource.add(panelSourceCenter);
+
+        panelSourceRight.setMinimumSize(new java.awt.Dimension(150, 30));
+        panelSourceRight.setPreferredSize(new java.awt.Dimension(150, 35));
+        panelSourceRight.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
+        labelDownloadThreads.setText("Download threads:");
+        panelSourceRight.add(labelDownloadThreads);
+
+        comboDownloadThreads.setMaximumRowCount(15);
+        comboDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        comboDownloadThreads.setPreferredSize(new java.awt.Dimension(110, 25));
+        panelSourceRight.add(comboDownloadThreads);
 
         panelSource.add(panelSourceRight);
 
@@ -350,11 +372,11 @@ public class DownloadImagesDialog extends MageDialog {
 
         panelRedownload.setAlignmentX(0.0F);
         panelRedownload.setMaximumSize(new java.awt.Dimension(130, 32767));
-        panelRedownload.setMinimumSize(new java.awt.Dimension(130, 30));
-        panelRedownload.setPreferredSize(new java.awt.Dimension(130, 100));
+        panelRedownload.setMinimumSize(new java.awt.Dimension(280, 30));
+        panelRedownload.setPreferredSize(new java.awt.Dimension(280, 100));
         panelRedownload.setLayout(new java.awt.BorderLayout());
 
-        checkboxRedownload.setText("<html>Re-download selected images");
+        checkboxRedownload.setText("<html>Re-download all images");
         checkboxRedownload.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         panelRedownload.add(checkboxRedownload, java.awt.BorderLayout.CENTER);
         panelRedownload.add(filler1, java.awt.BorderLayout.PAGE_END);
@@ -431,6 +453,7 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.JButton buttonSearchSet;
     private javax.swing.JButton buttonStop;
     private javax.swing.JCheckBox checkboxRedownload;
+    private javax.swing.JComboBox<String> comboDownloadThreads;
     private javax.swing.JComboBox<String> comboLanguage;
     private javax.swing.JComboBox<String> comboSets;
     private javax.swing.JComboBox<String> comboSource;
@@ -444,6 +467,7 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.Box.Filler fillerProgress1;
     private javax.swing.Box.Filler fillerProgress2;
     private javax.swing.Box.Filler fillerglobal2;
+    private javax.swing.JLabel labelDownloadThreads;
     private javax.swing.JLabel labelGlobal;
     private javax.swing.JLabel labelInfo;
     private javax.swing.JLabel labelLanguage;
@@ -458,6 +482,7 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.JPanel panelProgress;
     private javax.swing.JPanel panelRedownload;
     private javax.swing.JPanel panelSource;
+    private javax.swing.JPanel panelSourceCenter;
     private javax.swing.JPanel panelSourceLeft;
     private javax.swing.JPanel panelSourceRight;
     private javax.swing.JProgressBar progress;

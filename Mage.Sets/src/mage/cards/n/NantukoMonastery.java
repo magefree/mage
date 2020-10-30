@@ -4,7 +4,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class NantukoMonastery extends CardImpl {
         // Threshold - {G}{W}: Nantuko Monastery becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate this ability only if seven or more cards are in your graveyard.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
             new NantukoMonasteryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{G}{W}"),
-            new CardsInControllerGraveCondition(7));
+            new CardsInControllerGraveyardCondition(7));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

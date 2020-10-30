@@ -242,7 +242,7 @@ public class MageActionCallback implements ActionCallback {
         if (this.startedDragging && prevCardPanel != null && card != null) {
             for (Component component : card.getCardArea().getComponents()) {
                 if (component instanceof CardPanel) {
-                    if (cardPanels.contains((CardPanel) component)) {
+                    if (cardPanels.contains(component)) {
                         component.setLocation(component.getLocation().x, component.getLocation().y - GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                 }
@@ -316,7 +316,7 @@ public class MageActionCallback implements ActionCallback {
         for (Component component : container.getComponents()) {
             if (component instanceof CardPanel) {
                 if (!component.equals(card)) {
-                    if (!cardPanels.contains((CardPanel) component)) {
+                    if (!cardPanels.contains(component)) {
                         component.setLocation(component.getLocation().x, component.getLocation().y + GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                     cardPanels.add((CardPanel) component);
@@ -332,7 +332,7 @@ public class MageActionCallback implements ActionCallback {
     private void sortLayout(List<CardPanel> cards, CardPanel source, boolean includeSource) {
         source.getLocation().x -= COMPARE_GAP_X; // this creates nice effect
 
-        cards.sort((cp1, cp2) -> Integer.valueOf(cp1.getLocation().x).compareTo(cp2.getLocation().x));
+        cards.sort(Comparator.comparingInt(cp -> cp.getLocation().x));
 
         int dx = 0;
         boolean createdGapForSource = false;
@@ -610,7 +610,7 @@ public class MageActionCallback implements ActionCallback {
             // XXX: scaled to fit width
             bigCard.setCard(mageCard.getOriginal().getId(), enlargeMode, image, mageCard.getOriginal().getRules(), mageCard.getOriginal().isToRotate());
             // if it's an ability, show only the ability text as overlay
-            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL) {
+            if (mageCard.getOriginal().isAbility() && enlargeMode == EnlargeMode.NORMAL && isAbilityTextOverlayEnabled()) {
                 bigCard.showTextComponent();
             } else {
                 bigCard.hideTextComponent();
@@ -622,6 +622,10 @@ public class MageActionCallback implements ActionCallback {
             bigCard.addJXPanel(mageCard.getOriginal().getId(), panel);
         }
         enlargeredViewOpened = new Date();
+    }
+
+    private boolean isAbilityTextOverlayEnabled() {
+        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY, "true").equals("true");
     }
 
     private synchronized void startHideTimeout() {

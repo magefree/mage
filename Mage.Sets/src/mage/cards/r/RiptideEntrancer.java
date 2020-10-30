@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -11,8 +10,8 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -21,8 +20,9 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RiptideEntrancer extends CardImpl {
@@ -58,7 +58,7 @@ class RiptideEntrancerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(
                 new GainControlTargetEffect(Duration.Custom),
                 new SacrificeSourceCost()
-        ), true);
+        ), false);
     }
 
     public RiptideEntrancerTriggeredAbility(final RiptideEntrancerTriggeredAbility ability) {

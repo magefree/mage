@@ -4,7 +4,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class DivineSacrament extends CardImpl {
         // Threshold - White creatures get an additional +1/+1 as long as seven or more cards are in your graveyard.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                     new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false),
-                    new CardsInControllerGraveCondition(7),
+                    new CardsInControllerGraveyardCondition(7),
                     "If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
                 ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);

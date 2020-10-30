@@ -52,6 +52,6 @@ public class SourcePermanentToughnessValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "{source}'s toughness";
+        return "{this}'s toughness";
     }
 }

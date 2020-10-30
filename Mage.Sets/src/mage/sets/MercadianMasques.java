@@ -67,6 +67,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Cave Sense", 179, Rarity.COMMON, mage.cards.c.CaveSense.class));
         cards.add(new SetCardInfo("Ceremonial Guard", 182, Rarity.COMMON, mage.cards.c.CeremonialGuard.class));
         cards.add(new SetCardInfo("Chambered Nautilus", 64, Rarity.UNCOMMON, mage.cards.c.ChamberedNautilus.class));
+        cards.add(new SetCardInfo("Chameleon Spirit", 65, Rarity.UNCOMMON, mage.cards.c.ChameleonSpirit.class));
         cards.add(new SetCardInfo("Charisma", 66, Rarity.RARE, mage.cards.c.Charisma.class));
         cards.add(new SetCardInfo("Charm Peddler", 6, Rarity.COMMON, mage.cards.c.CharmPeddler.class));
         cards.add(new SetCardInfo("Charmed Griffin", 7, Rarity.UNCOMMON, mage.cards.c.CharmedGriffin.class));
@@ -83,6 +84,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Unconscious", 236, Rarity.RARE, mage.cards.c.CollectiveUnconscious.class));
         cards.add(new SetCardInfo("Common Cause", 13, Rarity.RARE, mage.cards.c.CommonCause.class));
         cards.add(new SetCardInfo("Conspiracy", 127, Rarity.RARE, mage.cards.c.Conspiracy.class));
+        cards.add(new SetCardInfo("Cornered Market", 14, Rarity.RARE, mage.cards.c.CorneredMarket.class));
         cards.add(new SetCardInfo("Corrupt Official", 128, Rarity.RARE, mage.cards.c.CorruptOfficial.class));
         cards.add(new SetCardInfo("Counterspell", 69, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Cowardice", 70, Rarity.RARE, mage.cards.c.Cowardice.class));
@@ -167,6 +169,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Ignoble Soldier", 22, Rarity.UNCOMMON, mage.cards.i.IgnobleSoldier.class));
         cards.add(new SetCardInfo("Indentured Djinn", 85, Rarity.UNCOMMON, mage.cards.i.IndenturedDjinn.class));
         cards.add(new SetCardInfo("Instigator", 140, Rarity.RARE, mage.cards.i.Instigator.class));
+        cards.add(new SetCardInfo("Insubordination", 141, Rarity.COMMON, mage.cards.i.Insubordination.class));
         cards.add(new SetCardInfo("Intimidation", 142, Rarity.UNCOMMON, mage.cards.i.Intimidation.class));
         cards.add(new SetCardInfo("Invigorate", 254, Rarity.COMMON, mage.cards.i.Invigorate.class));
         cards.add(new SetCardInfo("Inviolability", 23, Rarity.COMMON, mage.cards.i.Inviolability.class));
@@ -234,7 +237,9 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 332, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 333, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Port Inspector", 90, Rarity.COMMON, mage.cards.p.PortInspector.class));
         cards.add(new SetCardInfo("Power Matrix", 309, Rarity.RARE, mage.cards.p.PowerMatrix.class));
+        cards.add(new SetCardInfo("Pretender's Claim", 151, Rarity.UNCOMMON, mage.cards.p.PretendersClaim.class));
         cards.add(new SetCardInfo("Primeval Shambler", 152, Rarity.UNCOMMON, mage.cards.p.PrimevalShambler.class));
         cards.add(new SetCardInfo("Puffer Extract", 310, Rarity.UNCOMMON, mage.cards.p.PufferExtract.class));
         cards.add(new SetCardInfo("Pulverize", 207, Rarity.RARE, mage.cards.p.Pulverize.class));
@@ -256,12 +261,14 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Reverent Mantra", 44, Rarity.RARE, mage.cards.r.ReverentMantra.class));
         cards.add(new SetCardInfo("Revive", 262, Rarity.UNCOMMON, mage.cards.r.Revive.class));
         cards.add(new SetCardInfo("Righteous Aura", 45, Rarity.UNCOMMON, mage.cards.r.RighteousAura.class));
+        cards.add(new SetCardInfo("Righteous Indignation", 46, Rarity.UNCOMMON, mage.cards.r.RighteousIndignation.class));
         cards.add(new SetCardInfo("Rishadan Airship", 91, Rarity.COMMON, mage.cards.r.RishadanAirship.class));
         cards.add(new SetCardInfo("Rishadan Brigand", 92, Rarity.RARE, mage.cards.r.RishadanBrigand.class));
         cards.add(new SetCardInfo("Rishadan Cutpurse", 93, Rarity.COMMON, mage.cards.r.RishadanCutpurse.class));
         cards.add(new SetCardInfo("Rishadan Footpad", 94, Rarity.UNCOMMON, mage.cards.r.RishadanFootpad.class));
         cards.add(new SetCardInfo("Rishadan Pawnshop", 311, Rarity.RARE, mage.cards.r.RishadanPawnshop.class));
         cards.add(new SetCardInfo("Rishadan Port", 324, Rarity.RARE, mage.cards.r.RishadanPort.class));
+        cards.add(new SetCardInfo("Robber Fly", 209, Rarity.UNCOMMON, mage.cards.r.RobberFly.class));
         cards.add(new SetCardInfo("Rock Badger", 210, Rarity.UNCOMMON, mage.cards.r.RockBadger.class));
         cards.add(new SetCardInfo("Rouse", 157, Rarity.COMMON, mage.cards.r.Rouse.class));
         cards.add(new SetCardInfo("Rushwood Dryad", 263, Rarity.COMMON, mage.cards.r.RushwoodDryad.class));
@@ -344,6 +351,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Dragon", 221, Rarity.RARE, mage.cards.t.TwoHeadedDragon.class));
         cards.add(new SetCardInfo("Undertaker", 167, Rarity.COMMON, mage.cards.u.Undertaker.class));
         cards.add(new SetCardInfo("Unmask", 168, Rarity.RARE, mage.cards.u.Unmask.class));
+        cards.add(new SetCardInfo("Unnatural Hunger", 169, Rarity.RARE, mage.cards.u.UnnaturalHunger.class));
         cards.add(new SetCardInfo("Uphill Battle", 222, Rarity.UNCOMMON, mage.cards.u.UphillBattle.class));
         cards.add(new SetCardInfo("Vendetta", 170, Rarity.COMMON, mage.cards.v.Vendetta.class));
         cards.add(new SetCardInfo("Venomous Breath", 281, Rarity.UNCOMMON, mage.cards.v.VenomousBreath.class));

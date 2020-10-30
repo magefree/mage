@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -10,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class RegenerateAllEffect extends OneShotEffect {
@@ -18,7 +16,7 @@ public class RegenerateAllEffect extends OneShotEffect {
     private final FilterPermanent filter;
 
     public RegenerateAllEffect(FilterPermanent filter) {
-        super(Outcome.DestroyPermanent);
+        super(Outcome.Regenerate);
         this.filter = filter;
         staticText = "Regenerate each " + filter.getMessage();
     }
@@ -42,5 +40,4 @@ public class RegenerateAllEffect extends OneShotEffect {
         }
         return true;
     }
-
 }

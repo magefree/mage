@@ -40,7 +40,7 @@ public final class SafeHaven extends CardImpl {
                         new SacrificeSourceCost()
                 ),
                 TargetController.YOU,
-                true);
+                false);
         this.addAbility(ability);
     }
 

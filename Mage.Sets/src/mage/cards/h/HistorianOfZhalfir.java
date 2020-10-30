@@ -34,8 +34,8 @@ public final class HistorianOfZhalfir extends CardImpl {
         // Whenever Historian of Zhalfir attacks, if you control a Teferi planeswalker, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
-                condition, "Whenever {this} attacks, if you control a Teferi planeswalker, draw a card")
-        );
+                condition, "Whenever {this} attacks, if you control a Teferi planeswalker, draw a card."
+        ));
     }
 
     private HistorianOfZhalfir(final HistorianOfZhalfir card) {

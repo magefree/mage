@@ -27,7 +27,7 @@ public final class GoblinArsonist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Goblin Arsonist dies, you may have it deal 1 damage to any target.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(1), true);
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(1).setText("it deal 1 damage to any target"), true);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

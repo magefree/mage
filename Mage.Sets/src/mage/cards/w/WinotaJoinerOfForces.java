@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class WinotaJoinerOfForces extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent(" non-Human creature you control");
+            = new FilterControlledCreaturePermanent("non-Human creature you control");
 
     static {
         filter.add(Predicates.not(SubType.HUMAN.getPredicate()));

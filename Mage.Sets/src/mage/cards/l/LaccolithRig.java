@@ -1,9 +1,8 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EnchantedCreatureBlockedTriggeredAbility;
+import mage.abilities.common.BecomesBlockedAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -30,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class LaccolithRig extends CardImpl {
 
     public LaccolithRig(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -41,7 +40,7 @@ public final class LaccolithRig extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
-        Ability ability2 = new EnchantedCreatureBlockedTriggeredAbility(new LaccolithRigEffect(), true);
+        Ability ability2 = new BecomesBlockedAttachedTriggeredAbility(new LaccolithRigEffect(), true);
         ability2.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new AssignNoCombatDamageSourceEffect(Duration.Custom, true).setText("")), Duration.EndOfTurn, "If you do, the first creature assigns no combat damage this turn");
         ability2.addEffect(effect);
@@ -76,7 +75,15 @@ class LaccolithRigEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
+        if (enchantment == null) {
+            return false;
+        }
         Permanent ownCreature = game.getPermanent(enchantment.getAttachedTo());
         if (ownCreature != null) {
             int damage = ownCreature.getPower().getValue();

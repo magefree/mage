@@ -90,6 +90,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                             permanent.getCardType().clear();
                         }
                         for (CardType cardType : token.getCardType()) {
+                            if (permanent.getCardType().contains(cardType)) {
+                                continue;
+                            }
                             permanent.addCardType(cardType);
                         }
 
@@ -97,7 +100,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                             permanent.getSubtype(game).retainAll(SubType.getLandTypes());
                         }
                         if (!token.getSubtype(game).isEmpty()) {
-                            permanent.getSubtype(game).addAll(token.getSubtype(game));
+                            for (SubType subType : token.getSubtype(game)) {
+                                if (permanent.hasSubtype(subType, game)) {
+                                    continue;
+                                }
+                                permanent.getSubtype(game).add(subType);
+                            }
                         }
                         permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
                     }

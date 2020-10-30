@@ -1,13 +1,12 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -16,8 +15,9 @@ import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.PlayerAttackedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RepeatingBarrage extends CardImpl {
@@ -35,6 +35,7 @@ public final class RepeatingBarrage extends CardImpl {
                 new ManaCostsImpl("{3}{R}{R}"),
                 RaidCondition.instance);
         ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

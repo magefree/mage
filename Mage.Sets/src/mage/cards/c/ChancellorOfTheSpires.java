@@ -6,7 +6,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -68,7 +68,7 @@ public final class ChancellorOfTheSpires extends CardImpl {
 class ChancellorOfTheSpiresDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheSpiresDelayedTriggeredAbility() {
-        super(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(7, TargetController.OPPONENT));
+        super(new MillCardsEachPlayerEffect(7, TargetController.OPPONENT));
     }
 
     private ChancellorOfTheSpiresDelayedTriggeredAbility(ChancellorOfTheSpiresDelayedTriggeredAbility ability) {

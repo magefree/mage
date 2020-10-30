@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class MentalNote extends CardImpl {
 
 
         // Put the top two cards of your library into your graveyard.
-        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(2));
+        this.getSpellAbility().addEffect(new MillCardsControllerEffect(2));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

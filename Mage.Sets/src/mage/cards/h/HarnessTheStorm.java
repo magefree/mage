@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.MageObjectReference;
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -111,7 +111,7 @@ class HarnessTheStormEffect extends OneShotEffect {
                 if (controller.chooseUse(outcome.Benefit, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                     controller.cast(controller.chooseAbilityForCast(card, game, false),
-                            game, false, new MageObjectReference(source.getSourceObject(game), game));
+                            game, false, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                 }
             }

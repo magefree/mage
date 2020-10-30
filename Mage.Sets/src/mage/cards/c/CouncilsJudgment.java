@@ -47,7 +47,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
 
     CouncilsJudgmentEffect() {
         super(Outcome.Exile);
-        this.staticText = "<i>Will of the council</i> — Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes";
+        this.staticText = "<i>Will of the council</i> &mdash; Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes";
     }
 
     CouncilsJudgmentEffect(final CouncilsJudgmentEffect effect) {

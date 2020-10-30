@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class HuntToExtinction extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a bounty counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.BOUNTY));
+        filter.add(CounterType.BOUNTY.getPredicate());
     }
 
     public HuntToExtinction(UUID ownerId, CardSetInfo setInfo) {

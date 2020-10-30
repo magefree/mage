@@ -2,7 +2,6 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;

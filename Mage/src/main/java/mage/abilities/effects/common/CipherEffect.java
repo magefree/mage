@@ -1,12 +1,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.Card;
@@ -20,6 +18,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * FAQ 2013/01/11
@@ -120,7 +119,7 @@ class CipherStoreEffect extends OneShotEffect {
             SpellAbility ability = copyCard.getSpellAbility();
             // remove the cipher effect from the copy
             ability.getEffects().removeIf(effect -> effect instanceof CipherEffect);
-            controller.cast(ability, game, true, new MageObjectReference(source.getSourceObject(game), game));
+            controller.cast(ability, game, true, new ApprovingObject(source, game));
 
         }
 

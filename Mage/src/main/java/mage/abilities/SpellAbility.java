@@ -1,7 +1,6 @@
 package mage.abilities;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -12,11 +11,11 @@ import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.Optional;
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -83,8 +82,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 return ActivationStatus.getFalse();
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            MageObjectReference permittingSource = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
-            if (permittingSource == null) {
+            ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
+            if (approvingObject == null) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
                     return ActivationStatus.getFalse();
@@ -119,7 +118,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
 
                 } else {
-                    return new ActivationStatus(canChooseTarget(game), permittingSource);
+                    return new ActivationStatus(canChooseTarget(game), approvingObject);
                 }
             }
         }
@@ -236,12 +235,25 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return this;
     }
 
+    /**
+     * Returns a card object with the spell characteristics like calor, types,
+     * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
+     * characteristics don't include the creature type.
+     *
+     * @param game
+     * @return card object with the spell characteristics
+     */
     public Card getCharacteristics(Game game) {
-        Spell spell = game.getSpell(this.getId());
-        if (spell != null) {
-            return spell;
+        Card spellCharacteristics = game.getSpell(this.getId());
+        if (spellCharacteristics == null) {
+            spellCharacteristics = game.getCard(this.getSourceId());
         }
-        return game.getCard(this.getSourceId());
+        if (spellCharacteristics != null) {
+            if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, game);
+            }
+        }
+        return spellCharacteristics;
     }
 
     public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {

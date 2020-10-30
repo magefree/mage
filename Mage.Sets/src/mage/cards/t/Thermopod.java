@@ -7,7 +7,9 @@ import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -37,7 +39,7 @@ public final class Thermopod extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
         // Sacrifice a creature: Add {R}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1),
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 

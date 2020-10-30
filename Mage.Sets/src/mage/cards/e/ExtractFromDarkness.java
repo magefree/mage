@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
+import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class ExtractFromDarkness extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
 
         // Each player puts the top two cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));
+        this.getSpellAbility().addEffect(new MillCardsEachPlayerEffect(2, TargetController.ANY));
 
         // Then put a creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ExtractFromDarknessEffect());

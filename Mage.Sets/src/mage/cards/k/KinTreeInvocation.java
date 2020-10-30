@@ -4,8 +4,6 @@ package mage.cards.k;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -18,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
-import mage.util.SubTypeList;
 
 /**
  *

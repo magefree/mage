@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -30,7 +30,7 @@ public final class RancidEarth extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new RancidEarthEffect(),
                 new DestroyTargetEffect(),
-                new CardsInControllerGraveCondition(7),
+                new CardsInControllerGraveyardCondition(7),
                 "Destroy target land.<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player."));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }

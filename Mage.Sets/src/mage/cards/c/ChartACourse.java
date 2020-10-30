@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,6 +27,8 @@ public final class ChartACourse extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ChartACourseEffect());
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
+        // this.getSpellAbility().setAbilityWord(AbilityWord.RAID); // no raid ability, only same conditional
+        this.getSpellAbility().addHint(RaidHint.instance);
     }
 
     private ChartACourse(final ChartACourse card) {

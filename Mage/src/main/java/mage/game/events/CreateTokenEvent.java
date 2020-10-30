@@ -1,6 +1,5 @@
 package mage.game.events;
 
-import mage.game.Game;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;

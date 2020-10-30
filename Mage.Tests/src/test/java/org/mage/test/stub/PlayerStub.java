@@ -1,7 +1,6 @@
 package org.mage.test.stub;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -41,6 +40,7 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.ApprovingObject;
 import mage.Mana;
 
 /**
@@ -179,9 +179,14 @@ public class PlayerStub implements Player {
     public void setCanPayLifeCost(boolean canPayLifeCost) {
 
     }
-
+    
     @Override
-    public boolean canPayLifeCost() {
+    public boolean getCanPayLifeCost() {
+        return false;
+    }
+    
+    @Override
+    public boolean canPayLifeCost(Ability ability) {
         return false;
     }
 
@@ -535,7 +540,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean cast(SpellAbility ability, Game game, boolean noMana, MageObjectReference reference) {
+    public boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject) {
         return false;
     }
 
@@ -599,7 +604,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, MageObjectReference reference) {
+    public boolean playCard(Card card, Game game, boolean noMana, boolean checkTiming, ApprovingObject approvingObject) {
         return false;
     }
 
@@ -1405,11 +1410,6 @@ public class PlayerStub implements Player {
 
     @Override
     public void addPhyrexianToColors(FilterMana colors) {
-
-    }
-
-    @Override
-    public void removePhyrexianFromColors(FilterMana colors) {
 
     }
 

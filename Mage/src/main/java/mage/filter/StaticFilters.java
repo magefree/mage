@@ -6,6 +6,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.KickedPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -213,6 +214,12 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_ARTIFACT.setLockedFilter(true);
+    }
+
+    public static final FilterArtifactPermanent FILTER_PERMANENT_ARTIFACTS = new FilterArtifactPermanent("artifacts");
+
+    static {
+        FILTER_PERMANENT_ARTIFACTS.setLockedFilter(true);
     }
 
     public static final FilterArtifactPermanent FILTER_PERMANENT_ARTIFACT_AN = new FilterArtifactPermanent("an artifact");
@@ -441,8 +448,22 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A.add(
-                Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        CardType.PLANESWALKER.getPredicate()
+                ));
         FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterPermanent("creature or planeswalker");
+
+    static {
+        FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.add(
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        CardType.PLANESWALKER.getPredicate()
+                ));
+        FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
@@ -507,7 +528,7 @@ public final class StaticFilters {
         FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
     }
 
-    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS = new FilterStackObject("spell or ability and opponent controls");
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS = new FilterStackObject("a spell or ability an opponent controls");
 
     static {
         FILTER_SPELL_OR_ABILITY_OPPONENTS.add(TargetController.OPPONENT.getControllerPredicate());
@@ -591,6 +612,24 @@ public final class StaticFilters {
                 CardType.SORCERY.getPredicate()
         ));
         FILTER_SPELLS_INSTANT_OR_SORCERY.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_INSTANT_SORCERY_WIZARD = new FilterSpell("an instant, sorcery, or Wizard spell");
+
+    static {
+        FILTER_SPELL_INSTANT_SORCERY_WIZARD.add(Predicates.or(
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate(),
+                SubType.WIZARD.getPredicate()
+        ));
+        FILTER_SPELL_INSTANT_SORCERY_WIZARD.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_KICKED_A = new FilterSpell("a kicked spell");
+
+    static {
+        FILTER_SPELL_KICKED_A.add(KickedPredicate.instance);
+        FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");

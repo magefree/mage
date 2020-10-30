@@ -2,8 +2,8 @@ package mage.cards.m;
 
 import java.util.List;
 import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -123,7 +123,7 @@ class MindsDilationEffect extends OneShotEffect {
                                 + " without paying its mana cost from exile?", source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                             controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                    game, true, new MageObjectReference(source.getSourceObject(game), game));
+                                    game, true, new ApprovingObject(source, game));
                             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                         }
                     }

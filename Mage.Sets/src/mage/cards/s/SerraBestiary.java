@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.Optional;
@@ -7,7 +6,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
@@ -94,7 +92,12 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
         if (enchantment == null) {
             return false;
         }
@@ -104,16 +107,12 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
         }
         MageObject object = game.getObject(event.getSourceId());
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability.isPresent()
+        return ability.isPresent()
                 && object != null
                 && object.isCreature()
                 && object.getId().equals(enchantedCreature.getId())
-                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())) {
-            if (ability.get().getCosts().stream().anyMatch((cost) -> (cost instanceof TapSourceCost))) {
-                return true;
-            }
-        }
-        return false;
+                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId())
+                && ability.get().hasTapCost();
     }
 
     @Override

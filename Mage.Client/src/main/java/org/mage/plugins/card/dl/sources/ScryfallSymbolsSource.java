@@ -9,13 +9,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mage.MageException;
-import mage.util.StreamUtils;
-import org.jsoup.select.Elements;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.utils.CardImageUtils;
 
-import javax.swing.text.Document;
 
 import static org.mage.card.arcane.ManaSymbols.getSymbolFileNameAsSVG;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;

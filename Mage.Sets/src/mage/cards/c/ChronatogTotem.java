@@ -3,7 +3,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -25,8 +24,6 @@ import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 
 /**

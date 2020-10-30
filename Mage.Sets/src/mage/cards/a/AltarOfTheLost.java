@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -11,6 +10,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ import mage.game.stack.Spell;
 public final class AltarOfTheLost extends CardImpl {
 
     public AltarOfTheLost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Altar of the Lost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -71,6 +71,16 @@ class AltarOfTheLostManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
+        if (game != null && game.inCheckPlayableState()) {
+            if (object instanceof Card && game.getState().getZone(source.getSourceId()).equals(Zone.GRAVEYARD)) {
+                for (Ability ability : ((Card) object).getAbilities(game)) {
+                    if (ability instanceof FlashbackAbility) {
+                        return true;
+                    }
+                }
+            }
+
+        }
         if (object instanceof Spell && ((Spell) object).getFromZone() == Zone.GRAVEYARD) {
             for (Ability ability : ((Spell) object).getAbilities(game)) {
                 if (ability instanceof FlashbackAbility) {

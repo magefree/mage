@@ -3,12 +3,12 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -29,15 +29,6 @@ import java.util.UUID;
  */
 public final class MobilizedDistrict extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
-    static final DynamicValue cardsCount = new PermanentsOnBattlefieldCount(filter);
-
     public MobilizedDistrict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
@@ -45,17 +36,14 @@ public final class MobilizedDistrict extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4}: Mobilized District becomes a 3/3 Citizen creature with vigilance until end of turn. It's still a land. This ability costs {1} less to activate for each legendary creature and planeswalker you control.
-        // TODO: Make ability properly copiable
         Ability ability = new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new MobilizedDistrictToken(), "land", Duration.EndOfTurn
         ).setText("{this} becomes a 3/3 Citizen creature with vigilance until end of turn. " +
                 "It's still a land. This ability costs {1} less to activate " +
                 "for each legendary creature and planeswalker you control."
         ), new GenericManaCost(4));
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new MobilizedDistrictCostIncreasingEffect(ability.getOriginalId())
-        ).addHint(new ValueHint("Legendary creatures and planeswalkers you control", cardsCount)));
+        ability.setCostAdjuster(MobilizedDistrictAdjuster.instance);
+        this.addAbility(ability.addHint(MobilizedDistrictAdjuster.getHint()));
     }
 
     private MobilizedDistrict(final MobilizedDistrict card) {
@@ -65,6 +53,33 @@ public final class MobilizedDistrict extends CardImpl {
     @Override
     public MobilizedDistrict copy() {
         return new MobilizedDistrict(this);
+    }
+}
+
+enum MobilizedDistrictAdjuster implements CostAdjuster {
+    instance;
+
+    private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
+
+    static {
+        filter.add(SuperType.LEGENDARY.getPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
+
+    static final DynamicValue cardsCount = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Legendary creatures and planeswalkers you control", cardsCount);
+
+    public static Hint getHint() {
+        return hint;
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller != null) {
+            int count = cardsCount.calculate(game, ability, null);
+            CardUtil.reduceCost(ability, count);
+        }
     }
 }
 
@@ -85,40 +100,5 @@ class MobilizedDistrictToken extends TokenImpl {
 
     public MobilizedDistrictToken copy() {
         return new MobilizedDistrictToken(this);
-    }
-}
-
-class MobilizedDistrictCostIncreasingEffect extends CostModificationEffectImpl {
-
-    private final UUID originalId;
-
-    MobilizedDistrictCostIncreasingEffect(UUID originalId) {
-        super(Duration.EndOfGame, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.originalId = originalId;
-    }
-
-    private MobilizedDistrictCostIncreasingEffect(final MobilizedDistrictCostIncreasingEffect effect) {
-        super(effect);
-        this.originalId = effect.originalId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int count = MobilizedDistrict.cardsCount.calculate(game, source, this);
-            CardUtil.reduceCost(abilityToModify, count);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getOriginalId().equals(originalId);
-    }
-
-    @Override
-    public MobilizedDistrictCostIncreasingEffect copy() {
-        return new MobilizedDistrictCostIncreasingEffect(this);
     }
 }

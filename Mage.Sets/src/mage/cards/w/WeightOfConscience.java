@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.HashSet;
@@ -33,7 +32,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class WeightOfConscience extends CardImpl {
 
     public WeightOfConscience(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -79,8 +78,15 @@ class WeightOfConscienceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && enchantment != null && enchantment.getAttachedTo() != null) {
+        // In the case that the enchantment is blinked
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (enchantment == null) {
+            // It was not blinked, use the standard method
+            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
+        if (controller != null 
+                && enchantment != null 
+                && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
                 controller.moveCardsToExile(creature, source, game, true, null, "");
@@ -93,6 +99,7 @@ class WeightOfConscienceEffect extends OneShotEffect {
 class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
 
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creatures you control that share a creature type");
+
     static {
         filterUntapped.add(Predicates.not(TappedPredicate.instance));
     }
@@ -121,8 +128,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                         }
                     }
                 }
-            }
-            // Choosing second target
+            } // Choosing second target
             else {
                 UUID firstTargetId = this.getTargets().get(0);
                 Permanent firstTargetCreature = game.getPermanent(firstTargetId);
@@ -165,8 +171,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     Permanent firstTarget = game.getPermanent(this.getTargets().get(0));
                     if (firstTarget != null && firstTarget.shareSubtypes(targetPermanent, game)) {
                         return true;

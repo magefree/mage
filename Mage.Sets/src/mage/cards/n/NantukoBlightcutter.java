@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -47,7 +47,7 @@ public final class NantukoBlightcutter extends CardImpl {
         // Threshold - Nantuko Blightcutter gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(count, count, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new BoostSourceEffect(count, count, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "{this} gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

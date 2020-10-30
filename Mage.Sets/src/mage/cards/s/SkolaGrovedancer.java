@@ -5,7 +5,7 @@ import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class SkolaGrovedancer extends CardImpl {
 
         // {2}{G}: Put the top card of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(
-                new PutTopCardOfLibraryIntoGraveControllerEffect(1), new ManaCostsImpl("{2}{G}")
+                new MillCardsControllerEffect(1), new ManaCostsImpl("{2}{G}")
         ));
     }
 

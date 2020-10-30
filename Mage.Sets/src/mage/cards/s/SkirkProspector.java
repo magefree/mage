@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +35,9 @@ public final class SkirkProspector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice a Goblin: Add {R}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), 
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true)),
+                new PermanentsOnBattlefieldCount(filter)));
     }
 
     public SkirkProspector(final SkirkProspector card) {

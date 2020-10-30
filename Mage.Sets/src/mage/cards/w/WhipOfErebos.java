@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -30,8 +28,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WhipOfErebos extends CardImpl {
@@ -41,19 +40,25 @@ public final class WhipOfErebos extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
 
         // Creatures you control have lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_CONTROLLED_CREATURES
+        )));
+
         // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield.
         // It gains haste. Exile it at the beginning of the next end step.
         // If it would leave the battlefield, exile it instead of putting it anywhere else.
         // Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl("{2}{B}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                Zone.BATTLEFIELD, new WhipOfErebosEffect(), new ManaCostsImpl("{2}{B}{B}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addEffect(new WhipOfErebosReplacementEffect());
         this.addAbility(ability);
     }
 
-    public WhipOfErebos(final WhipOfErebos card) {
+    private WhipOfErebos(final WhipOfErebos card) {
         super(card);
     }
 
@@ -65,12 +70,12 @@ public final class WhipOfErebos extends CardImpl {
 
 class WhipOfErebosEffect extends OneShotEffect {
 
-    public WhipOfErebosEffect() {
+    WhipOfErebosEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public WhipOfErebosEffect(final WhipOfErebosEffect effect) {
+    private WhipOfErebosEffect(final WhipOfErebosEffect effect) {
         super(effect);
     }
 
@@ -111,7 +116,7 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
         staticText = "If it would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    WhipOfErebosReplacementEffect(final WhipOfErebosReplacementEffect effect) {
+    private WhipOfErebosReplacementEffect(final WhipOfErebosReplacementEffect effect) {
         super(effect);
     }
 

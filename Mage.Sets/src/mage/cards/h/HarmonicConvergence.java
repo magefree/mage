@@ -8,13 +8,9 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 import java.util.*;
 import mage.cards.Cards;

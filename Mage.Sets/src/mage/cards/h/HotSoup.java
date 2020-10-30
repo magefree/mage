@@ -6,7 +6,6 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.keyword.EquipAbility;

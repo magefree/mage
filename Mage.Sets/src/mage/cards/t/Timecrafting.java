@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public final class Timecrafting extends CardImpl {
 
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent with a time counter on it or suspended card");
     static {
-        filter.getPermanentFilter().add(new CounterPredicate(CounterType.TIME));
+        filter.getPermanentFilter().add(CounterType.TIME.getPredicate());
     }
 
     public Timecrafting(UUID ownerId, CardSetInfo setInfo) {

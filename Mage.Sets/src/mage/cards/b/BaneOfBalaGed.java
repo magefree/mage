@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;

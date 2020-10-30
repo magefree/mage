@@ -3,7 +3,6 @@ package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.ManaEffect;
 import mage.choices.ManaChoice;
 import mage.game.Game;
 import mage.players.Player;

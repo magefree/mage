@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class LeafkinAvenger extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you control with power 4 or greater");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with power 4 or greater you control");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));

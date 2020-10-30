@@ -17,7 +17,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;

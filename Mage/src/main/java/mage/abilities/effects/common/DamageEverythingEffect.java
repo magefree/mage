@@ -22,7 +22,7 @@ public class DamageEverythingEffect extends OneShotEffect {
     private DynamicValue amount;
     private FilterPermanent filter;
     private UUID damageSource;
-    private String sourceName = "{source}";
+    private String sourceName = "{this}";
 
     public DamageEverythingEffect(int amount) {
         this(StaticValue.get(amount), new FilterCreaturePermanent());

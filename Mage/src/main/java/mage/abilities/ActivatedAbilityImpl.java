@@ -1,7 +1,6 @@
 package mage.abilities;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -20,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -184,7 +184,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             return ActivationStatus.getFalse();
         }
         //20091005 - 602.5d/602.5e
-        MageObjectReference permittingObject = game.getContinuousEffects()
+        ApprovingObject approvingObject = game.getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,
                         this,
@@ -192,11 +192,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                         game);
         if (timing == TimingRule.INSTANT
                 || game.canPlaySorcery(playerId)
-                || null != permittingObject) {
+                || null != approvingObject) {
             if (costs.canPay(this, sourceId, playerId, game)
                     && canChooseTarget(game)) {
                 this.activatorId = playerId;
-                return new ActivationStatus(true, permittingObject);
+                return new ActivationStatus(true, approvingObject);
             }
         }
         return ActivationStatus.getFalse();

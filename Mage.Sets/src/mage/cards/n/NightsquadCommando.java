@@ -5,8 +5,10 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.HumanSoldierToken;
@@ -29,10 +31,12 @@ public final class NightsquadCommando extends CardImpl {
 
         // When Nightsquad Commando enters the battlefield, if you attacked this turn, create a 1/1 white Human Soldier creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())),
-                RaidCondition.instance, "When {this} enters the battlefield, " +
-                "if you attacked this turn, create a 1/1 white Human Soldier creature token."
-        ), new PlayerAttackedWatcher());
+                        new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())),
+                        RaidCondition.instance, "When {this} enters the battlefield, " +
+                        "if you attacked this turn, create a 1/1 white Human Soldier creature token.")
+                        .setAbilityWord(AbilityWord.RAID)
+                        .addHint(RaidHint.instance),
+                new PlayerAttackedWatcher());
     }
 
     private NightsquadCommando(final NightsquadCommando card) {

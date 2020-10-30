@@ -38,8 +38,6 @@ public final class NimDeathmantle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
-
         // Equipped creature gets +2/+2, has intimidate, and is a black Zombie.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.EQUIPMENT)));
@@ -48,6 +46,10 @@ public final class NimDeathmantle extends CardImpl {
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.
         this.addAbility(new NimDeathmantleTriggeredAbility());
+
+        // Equip {4}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        
     }
 
     public NimDeathmantle(final NimDeathmantle card) {
@@ -91,7 +93,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
                 && !(permanent instanceof PermanentToken)
                 && permanent.isCreature()) {
 
-            getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game) +1));
             return true;
         }
         return false;
@@ -99,7 +101,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.";
+        return "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach {this} to it.";
     }
 }
 
@@ -122,8 +124,8 @@ class NimDeathmantleEffect extends OneShotEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (controller != null && equipment != null) {
             if (controller.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + '?', source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                cost.clearPaid();                
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {                    
                     UUID target = targetPointer.getFirst(game, source);
                     if (target != null) {
                         Card card = game.getCard(target);

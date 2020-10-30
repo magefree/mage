@@ -163,6 +163,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<String, Object> entry : state.values.entrySet()) {
             if (entry.getValue() instanceof HashSet) {
                 this.values.put(entry.getKey(), ((HashSet) entry.getValue()).clone());
+            } else if (entry.getValue() instanceof EnumSet) {
+                this.values.put(entry.getKey(), ((EnumSet) entry.getValue()).clone());
             } else {
                 this.values.put(entry.getKey(), entry.getValue());
             }
@@ -986,7 +988,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * object may be changed by AI simulation or rollbacks, because the Value
      * objects are not copied as the state class is copied. Mutable supported:
      * HashSet with immutable entries (e.g. HashSet< UUID > or HashSet< String
-     * >)
+     * > and EnumSets)
      *
      * @param valueId
      * @param value

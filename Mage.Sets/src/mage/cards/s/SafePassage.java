@@ -22,6 +22,7 @@ public final class SafePassage extends CardImpl {
     public SafePassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
+        // Prevent all damage that would be dealt to you and creatures you control this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
     }
 

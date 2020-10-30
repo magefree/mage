@@ -32,7 +32,7 @@ public final class OranRiefInvoker extends CardImpl {
 
         // {8}: Oran-Rief Invoker gets +5/+5 and gains trample until end of turn.
         Effect effect = new BoostSourceEffect(5, 5, Duration.EndOfTurn);
-        effect.setText("{source} gets +5/+5");
+        effect.setText("{this} gets +5/+5");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(8));
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");

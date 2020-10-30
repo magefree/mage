@@ -1,9 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -11,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.common.DeliriumHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -25,8 +23,11 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class EmrakulThePromisedEnd extends CardImpl {
@@ -47,7 +48,7 @@ public final class EmrakulThePromisedEnd extends CardImpl {
         // Emrakul, the Promised End costs {1} less to cast for each card type among cards in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new EmrakulThePromisedEndCostReductionEffect());
         ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DeliriumHint.instance));
 
         // When you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
         ability = new CastSourceTriggeredAbility(new EmrakulThePromisedEndGainControlEffect());
