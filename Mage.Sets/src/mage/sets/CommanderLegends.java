@@ -81,6 +81,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Mask of Memory", 324, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Meteoric Mace", 192, Rarity.UNCOMMON, mage.cards.m.MeteoricMace.class));
         cards.add(new SetCardInfo("Mindless Automaton", 326, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
+        cards.add(new SetCardInfo("Mnemonic Deluge", 82, Rarity.MYTHIC, mage.cards.m.MnemonicDeluge.class));
         cards.add(new SetCardInfo("Mulldrifter", 400, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Myriad Landscape", 487, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 514, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
