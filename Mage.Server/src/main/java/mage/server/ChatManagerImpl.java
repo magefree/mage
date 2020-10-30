@@ -5,7 +5,7 @@ import mage.cards.repository.CardRepository;
 import mage.game.Game;
 import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
-import mage.server.managers.IChatManager;
+import mage.server.managers.ChatManager;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
@@ -26,16 +26,16 @@ import java.util.stream.Collectors;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ChatManager implements IChatManager {
+public class ChatManagerImpl implements ChatManager {
 
-    private static final Logger logger = Logger.getLogger(ChatManager.class);
+    private static final Logger logger = Logger.getLogger(ChatManagerImpl.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
 
     private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
-    public ChatManager(ManagerFactory managerFactory) {
+    public ChatManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

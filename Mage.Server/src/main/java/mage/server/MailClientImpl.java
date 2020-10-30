@@ -1,7 +1,7 @@
 package mage.server;
 
-import mage.server.managers.IConfigSettings;
-import mage.server.managers.IMailClient;
+import mage.server.managers.ConfigSettings;
+import mage.server.managers.MailClient;
 import org.apache.log4j.Logger;
 
 import javax.mail.Message;
@@ -12,13 +12,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class MailClient implements IMailClient {
+public class MailClientImpl implements MailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
 
-    private final IConfigSettings config;
+    private final ConfigSettings config;
 
-    public MailClient(IConfigSettings config) {
+    public MailClientImpl(ConfigSettings config) {
         this.config = config;
     }
 

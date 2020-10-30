@@ -1,29 +1,29 @@
 package mage.server.managers;
 
 public interface ManagerFactory {
-    IChatManager chatManager();
+    ChatManager chatManager();
 
-    IDraftManager draftManager();
+    DraftManager draftManager();
 
-    IGameManager gameManager();
+    GameManager gameManager();
 
-    IGamesRoomManager gamesRoomManager();
+    GamesRoomManager gamesRoomManager();
 
-    IMailClient mailClient();
+    MailClient mailClient();
 
-    IMailClient mailgunClient();
+    MailClient mailgunClient();
 
-    IReplayManager replayManager();
+    ReplayManager replayManager();
 
-    ISessionManager sessionManager();
+    SessionManager sessionManager();
 
-    ITableManager tableManager();
+    TableManager tableManager();
 
-    IUserManager userManager();
+    UserManager userManager();
 
-    IConfigSettings configSettings();
+    ConfigSettings configSettings();
 
-    IThreadExecutor threadExecutor();
+    ThreadExecutor threadExecutor();
 
-    ITournamentManager tournamentManager();
+    TournamentManager tournamentManager();
 }

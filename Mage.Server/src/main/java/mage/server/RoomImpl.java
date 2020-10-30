@@ -1,6 +1,6 @@
 package mage.server;
 
-import mage.server.managers.IChatManager;
+import mage.server.managers.ChatManager;
 
 import java.util.UUID;
 
@@ -12,7 +12,7 @@ public abstract class RoomImpl implements Room {
     private final UUID chatId;
     private final UUID roomId;
 
-    public RoomImpl(IChatManager chatManager) {
+    public RoomImpl(ChatManager chatManager) {
         roomId = UUID.randomUUID();
         chatId = chatManager.createChatSession("Room " + roomId);
     }

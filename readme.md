@@ -58,6 +58,13 @@ Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for m
 
 [Wiki page](https://github.com/magefree/mage/wiki) contains detail information about private or public server setup.
 
+### Server options
+
+The XMage server locates by default the configuration file from the current working directory to the relative path `config/config.xml`
+(`config\config.xml` in Windows). To change this location, start the server with the property `xmage.config.path` set
+to the desired location, for example `-Dxmage.config.path=config/otherconfig.xml`. The option can be set from the 
+XMageLauncher in `Settings > Java > Server java options`.
+
 ## Troubleshooting / FAQ
 
 Github issues page contain [popular problems and fixes](https://github.com/magefree/mage/issues?q=is%3Aissue+label%3AFAQ+):

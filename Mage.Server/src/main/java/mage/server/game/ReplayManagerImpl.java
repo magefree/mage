@@ -1,6 +1,6 @@
 package mage.server.game;
 
-import mage.server.managers.IReplayManager;
+import mage.server.managers.ReplayManager;
 import mage.server.managers.ManagerFactory;
 
 import java.util.UUID;
@@ -9,12 +9,12 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ReplayManager implements IReplayManager {
+public class ReplayManagerImpl implements ReplayManager {
 
     private final ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<>();
     private final ManagerFactory managerFactory;
 
-    public ReplayManager(ManagerFactory managerFactory) {
+    public ReplayManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

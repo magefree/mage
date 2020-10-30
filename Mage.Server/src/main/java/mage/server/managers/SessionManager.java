@@ -10,7 +10,7 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
-public interface ISessionManager {
+public interface SessionManager {
     Optional<Session> getSession(@Nonnull String sessionId);
 
     void createSession(String sessionId, InvokerCallbackHandler callbackHandler);

@@ -23,7 +23,7 @@ import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
 import mage.players.Player;
 import mage.server.game.GameFactory;
-import mage.server.managers.IConfigSettings;
+import mage.server.managers.ConfigSettings;
 import mage.server.util.ConfigFactory;
 import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
@@ -116,7 +116,7 @@ public abstract class MageTestPlayerBase {
         logger.debug("Default charset: " + Charset.defaultCharset());
 
         deleteSavedGames();
-        IConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
+        ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
         for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * A base class for fluent, immutable, composable builders.
+ *
+ * @see <a href="https://github.com/fburato/functionalutils/blob/master/utils/src/main/java/com/github/fburato/functionalutils/utils/Builder.java">Builder</a>
+ */
 public abstract class FluentBuilder<ToBuild, RealBuilder extends FluentBuilder<ToBuild, RealBuilder>> {
 
     final ArrayList<Consumer<RealBuilder>> buildSequence;

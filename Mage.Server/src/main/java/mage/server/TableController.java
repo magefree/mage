@@ -84,7 +84,7 @@ public class TableController {
         if (userId != null) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
             if (!user.isPresent()) {
-                logger.fatal(new StringBuilder("User for userId ").append(userId).append(" could not be retrieved from UserManager").toString());
+                logger.fatal(new StringBuilder("User for userId ").append(userId).append(" could not be retrieved from UserManagerImpl").toString());
                 controllerName = "[unknown]";
             } else {
                 controllerName = user.get().getName();

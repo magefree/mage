@@ -5,7 +5,7 @@ import mage.server.util.config.Plugin;
 
 import java.util.List;
 
-public interface IConfigSettings {
+public interface ConfigSettings {
     String getServerAddress();
 
     String getServerName();

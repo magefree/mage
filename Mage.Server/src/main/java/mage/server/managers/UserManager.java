@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface IUserManager {
+public interface UserManager {
     Optional<User> createUser(String userName, String host, AuthorizedUser authorizedUser);
 
     Optional<User> getUser(UUID userId);

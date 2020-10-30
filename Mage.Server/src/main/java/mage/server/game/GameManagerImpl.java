@@ -5,7 +5,7 @@ import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.Game;
 import mage.game.GameOptions;
-import mage.server.managers.IGameManager;
+import mage.server.managers.GameManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.GameView;
 
@@ -22,13 +22,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class GameManager implements IGameManager {
+public class GameManagerImpl implements GameManager {
 
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
     private final ReadWriteLock gameControllersLock = new ReentrantReadWriteLock();
 
-    public GameManager(ManagerFactory managerFactory) {
+    public GameManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

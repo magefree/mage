@@ -14,7 +14,7 @@ import mage.remote.Connection;
 import mage.server.draft.CubeFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
-import mage.server.managers.IConfigSettings;
+import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
@@ -53,6 +53,11 @@ public final class Main {
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
+    /**
+     * The property that holds the path to the configuration file. Defaults to "config/config.xml".
+     *
+     * To set up a different one, start the application with the java option "-Dxmage.config.path=&lt;path&gt;"
+     */
     private static final String configPathProp = "xmage.config.path";
 
     private static final File pluginFolder = new File("plugins");
@@ -238,7 +243,7 @@ public final class Main {
         ServerMessagesUtil.instance.setStartDate(System.currentTimeMillis());
     }
 
-    static boolean isAlreadyRunning(IConfigSettings config, InvokerLocator serverLocator) {
+    static boolean isAlreadyRunning(ConfigSettings config, InvokerLocator serverLocator) {
         Map<String, String> metadata = new HashMap<>();
         metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(config.getSocketWriteTimeout()));
         metadata.put("generalizeSocketException", "true");

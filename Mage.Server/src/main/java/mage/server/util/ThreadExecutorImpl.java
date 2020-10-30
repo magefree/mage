@@ -1,14 +1,14 @@
 package mage.server.util;
 
-import mage.server.managers.IConfigSettings;
-import mage.server.managers.IThreadExecutor;
+import mage.server.managers.ConfigSettings;
+import mage.server.managers.ThreadExecutor;
 
 import java.util.concurrent.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ThreadExecutor implements IThreadExecutor {
+public class ThreadExecutorImpl implements ThreadExecutor {
     private final ExecutorService callExecutor;
     private final ExecutorService gameExecutor;
     private final ScheduledExecutorService timeoutExecutor;
@@ -25,7 +25,7 @@ public class ThreadExecutor implements IThreadExecutor {
      * resource consuming process.
      */
 
-    public ThreadExecutor(IConfigSettings config) {
+    public ThreadExecutorImpl(ConfigSettings config) {
         callExecutor = Executors.newCachedThreadPool();
         gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
         timeoutExecutor = Executors.newScheduledThreadPool(4);

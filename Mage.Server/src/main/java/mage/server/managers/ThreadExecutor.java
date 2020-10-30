@@ -3,7 +3,7 @@ package mage.server.managers;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 
-public interface IThreadExecutor {
+public interface ThreadExecutor {
     int getActiveThreads(ExecutorService executerService);
 
     ExecutorService getCallExecutor();

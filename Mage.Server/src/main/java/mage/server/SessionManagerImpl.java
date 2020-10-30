@@ -2,7 +2,7 @@ package mage.server;
 
 import mage.MageException;
 import mage.players.net.UserData;
-import mage.server.managers.ISessionManager;
+import mage.server.managers.SessionManager;
 import mage.server.managers.ManagerFactory;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -14,14 +14,14 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SessionManager implements ISessionManager {
+public class SessionManagerImpl implements SessionManager {
 
-    private static final Logger logger = Logger.getLogger(SessionManager.class);
+    private static final Logger logger = Logger.getLogger(SessionManagerImpl.class);
 
     private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<>();
 
-    public SessionManager(ManagerFactory managerFactory) {
+    public SessionManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

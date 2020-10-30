@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public interface ITournamentManager {
+public interface TournamentManager {
     Optional<TournamentController> getTournamentController(UUID tournamentId);
 
     void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId);

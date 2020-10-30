@@ -2,7 +2,7 @@ package mage.server.managers;
 
 import java.util.UUID;
 
-public interface IReplayManager {
+public interface ReplayManager {
     void replayGame(UUID gameId, UUID userId);
 
     void startReplay(UUID gameId, UUID userId);

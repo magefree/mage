@@ -5,19 +5,19 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import mage.server.managers.IConfigSettings;
-import mage.server.managers.IMailClient;
+import mage.server.managers.ConfigSettings;
+import mage.server.managers.MailClient;
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.core.MediaType;
 
-public class MailgunClient implements IMailClient {
+public class MailgunClientImpl implements MailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
 
-    private final IConfigSettings config;
+    private final ConfigSettings config;
 
-    public MailgunClient(IConfigSettings config) {
+    public MailgunClientImpl(ConfigSettings config) {
         this.config = config;
     }
 

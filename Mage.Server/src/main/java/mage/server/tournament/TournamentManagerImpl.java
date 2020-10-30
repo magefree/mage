@@ -2,7 +2,7 @@ package mage.server.tournament;
 
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
-import mage.server.managers.ITournamentManager;
+import mage.server.managers.TournamentManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
@@ -15,12 +15,12 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentManager implements ITournamentManager {
+public class TournamentManagerImpl implements TournamentManager {
 
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
 
-    public TournamentManager(ManagerFactory managerFactory) {
+    public TournamentManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 
@@ -46,7 +46,7 @@ public class TournamentManager implements ITournamentManager {
         if (tournamentController != null) {
             tournamentController.quit(userId);
         } else {
-            Logger.getLogger(TournamentManager.class).error("Tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
+            Logger.getLogger(TournamentManagerImpl.class).error("Tournament controller missing  tournamentid: " + tournamentId + " userId: " + userId);
         }
     }
 

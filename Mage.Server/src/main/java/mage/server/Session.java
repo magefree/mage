@@ -7,7 +7,7 @@ import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.server.game.GamesRoom;
-import mage.server.managers.IConfigSettings;
+import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.SystemUtil;
 import mage.util.RandomUtil;
@@ -115,7 +115,7 @@ public class Session {
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
         }
-        IConfigSettings config = managerFactory.configSettings();
+        ConfigSettings config = managerFactory.configSettings();
         if (userName.length() < config.getMinUserNameLength()) {
             return "User name may not be shorter than " + config.getMinUserNameLength() + " characters";
         }
@@ -135,7 +135,7 @@ public class Session {
     }
 
     private String validatePassword(String password, String userName) {
-        IConfigSettings config = managerFactory.configSettings();
+        ConfigSettings config = managerFactory.configSettings();
         if (password.length() < config.getMinPasswordLength()) {
             return "Password may not be shorter than " + config.getMinPasswordLength() + " characters";
         }

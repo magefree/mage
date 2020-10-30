@@ -1,13 +1,13 @@
 package mage.server.util;
 
-import mage.server.managers.IConfigSettings;
+import mage.server.managers.ConfigSettings;
 import mage.server.util.config.Config;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 
 import java.util.List;
 
-public class ConfigWrapper implements IConfigSettings {
+public class ConfigWrapper implements ConfigSettings {
 
     private final Config config;
 

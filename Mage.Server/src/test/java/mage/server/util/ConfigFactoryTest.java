@@ -4,6 +4,8 @@ import mage.server.util.config.Config;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Paths;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -22,7 +24,7 @@ public class ConfigFactoryTest {
     @DisplayName("should fail if config is malformed")
     void failOnMalformed() {
         assertThatExceptionOfType(ConfigurationException.class)
-                .isThrownBy(() -> ConfigFactory.loadFromFile("config/config_error.xml"));
+                .isThrownBy(() -> ConfigFactory.loadFromFile(Paths.get("src", "test", "resources", "config_error.xml").toString()));
     }
 
     @Test

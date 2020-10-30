@@ -1,7 +1,7 @@
 package mage.server;
 
 import mage.server.User.UserState;
-import mage.server.managers.IUserManager;
+import mage.server.managers.UserManager;
 import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
@@ -20,13 +20,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UserManager implements IUserManager {
+public class UserManagerImpl implements UserManager {
 
     private static final int SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS = 30; // send to chat info about disconnection troubles, must be more than ping timeout
     private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
     private static final int SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS = 8 * 60; // removes from users list
 
-    private static final Logger logger = Logger.getLogger(UserManager.class);
+    private static final Logger logger = Logger.getLogger(UserManagerImpl.class);
 
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
     protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -40,7 +40,7 @@ public class UserManager implements IUserManager {
 
     private ExecutorService USER_EXECUTOR;
 
-    public UserManager(ManagerFactory managerFactory) {
+    public UserManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

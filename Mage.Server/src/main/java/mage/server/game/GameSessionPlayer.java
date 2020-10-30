@@ -11,7 +11,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.Player;
 import mage.server.User;
-import mage.server.managers.IUserManager;
+import mage.server.managers.UserManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -28,7 +28,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     private static final Logger logger = Logger.getLogger(GameSessionPlayer.class);
 
-    private final IUserManager userManager;
+    private final UserManager userManager;
     private final UUID playerId;
 
     private final ExecutorService callExecutor;

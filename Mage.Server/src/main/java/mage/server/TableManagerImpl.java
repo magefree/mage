@@ -14,7 +14,7 @@ import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
 import mage.players.PlayerType;
 import mage.server.game.GameController;
-import mage.server.managers.ITableManager;
+import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
 import org.apache.log4j.Logger;
 
@@ -33,12 +33,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class TableManager implements ITableManager {
+public class TableManagerImpl implements TableManager {
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
+    // protected static ScheduledExecutorService expireExecutor = ThreadExecutorImpl.getInstance().getExpireExecutor();
     private final ManagerFactory managerFactory;
-    private final Logger logger = Logger.getLogger(TableManager.class);
+    private final Logger logger = Logger.getLogger(TableManagerImpl.class);
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
@@ -54,7 +54,7 @@ public class TableManager implements ITableManager {
      */
     private static final int EXPIRE_CHECK_PERIOD = 10;
 
-    public TableManager(ManagerFactory managerFactory) {
+    public TableManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 
@@ -206,7 +206,7 @@ public class TableManager implements ITableManager {
                     controller.leaveTable(userId);
                 }
             } else {
-                logger.error("TableManager.userQuitTournamentSubTables table == null - userId " + userId);
+                logger.error("TableManagerImpl.userQuitTournamentSubTables table == null - userId " + userId);
             }
         }
     }

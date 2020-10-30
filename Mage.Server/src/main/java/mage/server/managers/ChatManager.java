@@ -9,7 +9,7 @@ import mage.view.ChatMessage;
 import java.util.List;
 import java.util.UUID;
 
-public interface IChatManager {
+public interface ChatManager {
     UUID createChatSession(String info);
 
     void joinChat(UUID chatId, UUID userId);

@@ -5,7 +5,7 @@ import mage.server.game.GamesRoom;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface IGamesRoomManager {
+public interface GamesRoomManager {
     UUID createRoom();
 
     UUID getMainRoomId();

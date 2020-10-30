@@ -19,7 +19,7 @@ import mage.game.tournament.TournamentPlayer;
 import mage.players.PlayerType;
 import mage.server.User;
 import mage.server.draft.DraftController;
-import mage.server.managers.ITableManager;
+import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -216,7 +216,7 @@ public class TournamentController {
 
     private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {
         try {
-            ITableManager tableManager = managerFactory.tableManager();
+            TableManager tableManager = managerFactory.tableManager();
             Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
             table.setTournamentSubTable(true);
             table.setTournament(tournament);
@@ -259,7 +259,7 @@ public class TournamentController {
 
     private void startMultiplayerMatch(MultiplayerRound round, MatchOptions matchOptions) {
         try {
-            ITableManager tableManager = managerFactory.tableManager();
+            TableManager tableManager = managerFactory.tableManager();
             Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
             table.setTournamentSubTable(true);
             table.setTournament(tournament);

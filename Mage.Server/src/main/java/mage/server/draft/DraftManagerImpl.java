@@ -1,7 +1,7 @@
 package mage.server.draft;
 
 import mage.game.draft.Draft;
-import mage.server.managers.IDraftManager;
+import mage.server.managers.DraftManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.DraftPickView;
 
@@ -14,12 +14,12 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftManager implements IDraftManager {
+public class DraftManagerImpl implements DraftManager {
 
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<>();
 
-    public DraftManager(ManagerFactory managerFactory) {
+    public DraftManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

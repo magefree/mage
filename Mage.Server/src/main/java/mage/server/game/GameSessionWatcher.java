@@ -6,7 +6,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.Player;
 import mage.server.User;
-import mage.server.managers.IUserManager;
+import mage.server.managers.UserManager;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
@@ -25,13 +25,13 @@ public class GameSessionWatcher {
 
     protected static final Logger logger = Logger.getLogger(GameSessionWatcher.class);
 
-    private final IUserManager userManager;
+    private final UserManager userManager;
     protected final UUID userId;
     protected final Game game;
     protected boolean killed = false;
     protected final boolean isPlayer;
 
-    public GameSessionWatcher(IUserManager userManager, UUID userId, Game game, boolean isPlayer) {
+    public GameSessionWatcher(UserManager userManager, UUID userId, Game game, boolean isPlayer) {
         this.userManager = userManager;
         this.userId = userId;
         this.game = game;

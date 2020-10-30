@@ -1,6 +1,6 @@
 package mage.server.game;
 
-import mage.server.managers.IGamesRoomManager;
+import mage.server.managers.GamesRoomManager;
 import mage.server.managers.ManagerFactory;
 import org.apache.log4j.Logger;
 
@@ -11,16 +11,16 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class GamesRoomManager implements IGamesRoomManager {
+public class GamesRoomManagerImpl implements GamesRoomManager {
 
     private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<>();
     private UUID mainRoomId;
     private UUID mainChatId;
-    private static final Logger logger = Logger.getLogger(GamesRoomManager.class);
+    private static final Logger logger = Logger.getLogger(GamesRoomManagerImpl.class);
 
 
-    public GamesRoomManager(ManagerFactory managerFactory) {
+    public GamesRoomManagerImpl(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
 

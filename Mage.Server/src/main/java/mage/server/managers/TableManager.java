@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ITableManager {
+public interface TableManager {
     Table createTable(UUID roomId, UUID userId, MatchOptions options);
 
     Table createTable(UUID roomId, MatchOptions options);
