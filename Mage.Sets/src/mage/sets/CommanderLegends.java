@@ -45,6 +45,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Court of Cunning", 63, Rarity.RARE, mage.cards.c.CourtOfCunning.class));
         cards.add(new SetCardInfo("Demonic Lore", 118, Rarity.UNCOMMON, mage.cards.d.DemonicLore.class));
         cards.add(new SetCardInfo("Dragon Mantle", 174, Rarity.COMMON, mage.cards.d.DragonMantle.class));
+        cards.add(new SetCardInfo("Emberwilde Captain", 175, Rarity.RARE, mage.cards.e.EmberwildeCaptain.class));
         cards.add(new SetCardInfo("Entourage of Trest", 224, Rarity.COMMON, mage.cards.e.EntourageOfTrest.class));
         cards.add(new SetCardInfo("Exquisite Huntmaster", 122, Rarity.COMMON, mage.cards.e.ExquisiteHuntmaster.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
