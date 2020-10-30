@@ -18,6 +18,7 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInGraveyard;
 import mage.watchers.Watcher;
 
@@ -33,7 +34,7 @@ public final class GhostOfRamirezDePietro extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("creatures with toughness 3 or greater");
     private static final FilterCard filter2
-            = new FilterCard("card in any graveyard that has been discarded or milled this turn");
+            = new FilterCard("card in a graveyard that was discarded or put there from a library this turn");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.MORE_THAN, 2));
@@ -54,11 +55,11 @@ public final class GhostOfRamirezDePietro extends CardImpl {
                 new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)
         ));
 
-        // Whenever Ghost of Ramirez DePietro deals combat damage to a player, choose up to one target card in any graveyard that has been discarded or milled this turn. Put that card into its owner's hand.
+        // Whenever Ghost of Ramirez DePietro deals combat damage to a player, choose up to one target card in a graveyard that was discarded or put there from a library this turn. Put that card into its owner's hand.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect()
-                        .setText("choose up to one target card in any graveyard that has been discarded " +
-                                "or milled this turn. Put that card into its owner's hand"),
+                        .setText("choose up to one target card in a graveyard that was discarded " +
+                                "or put there from a library this turn. Put that card into its owner's hand"),
                 false
         );
         ability.addTarget(new TargetCardInGraveyard(filter2));
@@ -98,11 +99,18 @@ class GhostOfRamirezDePietroWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD
-                || event.getType() == GameEvent.EventType.MILLED_CARD) {
-            morSet.add(new MageObjectReference(event.getTargetId(), game));
+        switch (event.getType()) {
+            case ZONE_CHANGE:
+                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+                if (zEvent.getFromZone() != Zone.LIBRARY
+                        || zEvent.getToZone() != Zone.GRAVEYARD) {
+                    break;
+                }
+            case DISCARDED_CARD:
+                morSet.add(new MageObjectReference(event.getTargetId(), game));
+            default:
+                break;
         }
-        return;
     }
 
     @Override
