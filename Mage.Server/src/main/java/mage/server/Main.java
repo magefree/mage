@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -52,9 +53,11 @@ public final class Main {
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
+    private static final String configPathProp = "xmage.config.path";
 
     private static final File pluginFolder = new File("plugins");
     private static final File extensionFolder = new File("extensions");
+    private static final String defaultConfigPath = Paths.get("config", "config.xml").toString();
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
@@ -69,7 +72,6 @@ public final class Main {
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
-        final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
         String adminPassword = "";
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
@@ -81,6 +83,13 @@ public final class Main {
                 fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
         }
+
+        final String configPath = Optional.ofNullable(System.getProperty(configPathProp))
+                .orElse(defaultConfigPath);
+
+        logger.info(String.format("Reading configuration from path=%s", configPath));
+        final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
+
 
         if (config.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");

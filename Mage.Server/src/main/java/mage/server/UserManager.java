@@ -40,7 +40,6 @@ public class UserManager implements IUserManager {
 
     private ExecutorService USER_EXECUTOR;
 
-    // TODO externalise start of threads
     public UserManager(ManagerFactory managerFactory) {
         this.managerFactory = managerFactory;
     }
