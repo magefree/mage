@@ -115,7 +115,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Sidar Kondo of Jamuraa", 535, Rarity.MYTHIC, mage.cards.s.SidarKondoOfJamuraa.class));
         cards.add(new SetCardInfo("Silas Renn, Seeker Adept", 536, Rarity.MYTHIC, mage.cards.s.SilasRennSeekerAdept.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 96, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
-        cards.add(new SetCardInfo("Sky Diamond", 341, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class));
+        cards.add(new SetCardInfo("Sky Diamond", 341, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Slash the Ranks", 47, Rarity.RARE, mage.cards.s.SlashTheRanks.class));
         cards.add(new SetCardInfo("Spectator Seating", 356, Rarity.RARE, mage.cards.s.SpectatorSeating.class));
         cards.add(new SetCardInfo("Staff of Domination", 343, Rarity.RARE, mage.cards.s.StaffOfDomination.class));
@@ -132,6 +132,6 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Vial Smasher the Fierce", 540, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));
         cards.add(new SetCardInfo("Warden of Evos Isle", 106, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
-        cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
+        cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.MYTHIC, mage.cards.z.ZurTheEnchanter.class));
     }
 }

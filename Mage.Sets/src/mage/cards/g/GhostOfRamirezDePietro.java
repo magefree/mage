@@ -62,7 +62,7 @@ public final class GhostOfRamirezDePietro extends CardImpl {
                 false
         );
         ability.addTarget(new TargetCardInGraveyard(filter2));
-        this.addAbility(ability);
+        this.addAbility(ability, new GhostOfRamirezDePietroWatcher());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
