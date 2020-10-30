@@ -77,6 +77,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Mask of Memory", 324, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Meteoric Mace", 192, Rarity.UNCOMMON, mage.cards.m.MeteoricMace.class));
         cards.add(new SetCardInfo("Mindless Automaton", 326, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
+        cards.add(new SetCardInfo("Mulldrifter", 400, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Myriad Landscape", 487, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 514, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
         cards.add(new SetCardInfo("Natural Reclamation", 245, Rarity.COMMON, mage.cards.n.NaturalReclamation.class));
@@ -103,6 +104,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 197, Rarity.UNCOMMON, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Run Away Together", 87, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Sandstone Oracle", 336, Rarity.UNCOMMON, mage.cards.s.SandstoneOracle.class));
+        cards.add(new SetCardInfo("Scroll Rack", 337, Rarity.MYTHIC, mage.cards.s.ScrollRack.class));
         cards.add(new SetCardInfo("Sengir, the Dark Baron", 149, Rarity.RARE, mage.cards.s.SengirTheDarkBaron.class));
         cards.add(new SetCardInfo("Siani, Eye of the Storm", 95, Rarity.UNCOMMON, mage.cards.s.SianiEyeOfTheStorm.class));
         cards.add(new SetCardInfo("Sidar Kondo of Jamuraa", 535, Rarity.MYTHIC, mage.cards.s.SidarKondoOfJamuraa.class));
