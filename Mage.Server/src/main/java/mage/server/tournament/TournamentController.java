@@ -17,14 +17,10 @@ import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
 import mage.players.PlayerType;
-import mage.server.ChatManager;
-import mage.server.TableManager;
 import mage.server.User;
-import mage.server.UserManager;
 import mage.server.draft.DraftController;
-import mage.server.draft.DraftManager;
-import mage.server.game.GamesRoomManager;
-import mage.server.util.ThreadExecutor;
+import mage.server.managers.ITableManager;
+import mage.server.managers.ManagerFactory;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
@@ -44,6 +40,7 @@ public class TournamentController {
 
     private static final Logger logger = Logger.getLogger(TournamentController.class);
 
+    private final ManagerFactory managerFactory;
     private final UUID chatId;
     private final UUID tableId;
     private boolean started = false;
@@ -51,9 +48,10 @@ public class TournamentController {
     private ConcurrentMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<>();
     private final ConcurrentMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<>();
 
-    public TournamentController(Tournament tournament, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
+    public TournamentController(ManagerFactory managerFactory, Tournament tournament, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
+        this.managerFactory = managerFactory;
         this.userPlayerMap = userPlayerMap;
-        chatId = ChatManager.instance.createChatSession("Tournament " + tournament.getId());
+        chatId = managerFactory.chatManager().createChatSession("Tournament " + tournament.getId());
         this.tournament = tournament;
         this.tableId = tableId;
         init();
@@ -67,7 +65,7 @@ public class TournamentController {
                             checkPlayersState();
                             break;
                         case INFO:
-                            ChatManager.instance.broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, null, MessageType.STATUS, null);
+                            managerFactory.chatManager().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, null, MessageType.STATUS, null);
                             logger.debug(tournament.getId() + " " + event.getMessage());
                             break;
                         case START_DRAFT:
@@ -122,7 +120,7 @@ public class TournamentController {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
                 logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
-                ChatManager.instance.broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+                managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
             }
         }
         checkStart();
@@ -132,7 +130,7 @@ public class TournamentController {
         UUID playerId = userPlayerMap.get(userId);
         if (playerId == null) {
             if (logger.isDebugEnabled()) {
-                UserManager.instance.getUser(userId).ifPresent(user
+                managerFactory.userManager().getUser(userId).ifPresent(user
                         -> logger.debug(user.getName() + " shows tournament panel  tournamentId: " + tournament.getId()));
 
             }
@@ -143,16 +141,16 @@ public class TournamentController {
             return;
         }
         // first join of player
-        TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
+        TournamentSession tournamentSession = new TournamentSession(managerFactory, tournament, userId, tableId, playerId);
         tournamentSessions.put(playerId, tournamentSession);
-        Optional<User> _user = UserManager.instance.getUser(userId);
+        Optional<User> _user = managerFactory.userManager().getUser(userId);
         if (_user.isPresent()) {
             User user = _user.get();
             user.addTournament(playerId, tournament.getId());
             TournamentPlayer player = tournament.getPlayer(playerId);
             player.setJoined();
             logger.debug("player " + player.getPlayer().getName() + " - client has joined tournament " + tournament.getId());
-            ChatManager.instance.broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+            managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
             checkStart();
         } else {
             logger.error("User not found  userId: " + userId + "   tournamentId: " + tournament.getId());
@@ -174,7 +172,7 @@ public class TournamentController {
 
     private void checkStart() {
         if (!started && allJoined()) {
-            ThreadExecutor.instance.getCallExecutor().execute(this::startTournament);
+            managerFactory.threadExecutor().getCallExecutor().execute(this::startTournament);
         }
     }
 
@@ -211,15 +209,15 @@ public class TournamentController {
             tournamentSession.tournamentOver();
         }
         this.tournamentSessions.clear();
-        TableManager.instance.endTournament(tableId, tournament);
+        managerFactory.tableManager().endTournament(tableId, tournament);
         tournament.cleanUpOnTournamentEnd();
 
     }
 
     private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {
         try {
-            TableManager tableManager = TableManager.instance;
-            Table table = tableManager.createTable(GamesRoomManager.instance.getMainRoomId(), matchOptions);
+            ITableManager tableManager = managerFactory.tableManager();
+            Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
             table.setTournamentSubTable(true);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
@@ -261,8 +259,8 @@ public class TournamentController {
 
     private void startMultiplayerMatch(MultiplayerRound round, MatchOptions matchOptions) {
         try {
-            TableManager tableManager = TableManager.instance;
-            Table table = tableManager.createTable(GamesRoomManager.instance.getMainRoomId(), matchOptions);
+            ITableManager tableManager = managerFactory.tableManager();
+            Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
             table.setTournamentSubTable(true);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
@@ -287,16 +285,16 @@ public class TournamentController {
     }
 
     private void startDraft(Draft draft) {
-        TableManager.instance.startDraft(tableId, draft);
+        managerFactory.tableManager().startDraft(tableId, draft);
     }
 
     private void construct() {
-        TableManager.instance.construct(tableId);
+        managerFactory.tableManager().construct(tableId);
     }
 
     private void initTournament() {
-        if (TableManager.instance.getTable(tableId).getState() != TableState.DUELING) {
-            TableManager.instance.initTournament(tableId);
+        if (managerFactory.tableManager().getTable(tableId).getState() != TableState.DUELING) {
+            managerFactory.tableManager().initTournament(tableId);
         }
     }
 
@@ -305,7 +303,7 @@ public class TournamentController {
             TournamentSession tournamentSession = tournamentSessions.get(playerId);
             tournamentSession.construct(timeout);
             getPlayerUserId(playerId).ifPresent(userId -> {
-                UserManager.instance.getUser(userId).ifPresent(user -> {
+                managerFactory.userManager().getUser(userId).ifPresent(user -> {
                     user.addConstructing(playerId, tournamentSession);
                     TournamentPlayer player = tournament.getPlayer(playerId);
                     player.setState(TournamentPlayerState.CONSTRUCTING);
@@ -319,7 +317,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                ChatManager.instance.broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted their tournament deck", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerSubmittedDeck);
+                managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted their tournament deck", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerSubmittedDeck);
             }
         }
     }
@@ -338,7 +336,7 @@ public class TournamentController {
                 tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck());
             } else {
                 StringBuilder sb = new StringBuilder();
-                UserManager.instance.getUser(userId).ifPresent(user
+                managerFactory.userManager().getUser(userId).ifPresent(user
                         -> sb.append(user.getName()));
 
                 sb.append(" - no deck found for auto submit");
@@ -380,16 +378,16 @@ public class TournamentController {
             if (tournament.isDoneConstructing()) {
                 info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
                 // quit active matches of that tournament
-                TableManager.instance.userQuitTournamentSubTables(tournament.getId(), userId);
+                managerFactory.tableManager().userQuitTournamentSubTables(tournament.getId(), userId);
                 status = TourneyQuitStatus.DURING_ROUND;
             } else if (tournamentPlayer.getState() == TournamentPlayerState.DRAFTING) {
                 info = "during Draft phase";
                 if (!checkToReplaceDraftPlayerByAi(userId, tournamentPlayer)) {
                     this.abortDraftTournament();
                 } else {
-                    DraftManager.instance.getController(tableId).ifPresent(draftController -> {
+                    managerFactory.draftManager().getController(tableId).ifPresent(draftController -> {
                         draftController.getDraftSession(playerId).ifPresent(draftSession
-                                -> DraftManager.instance.kill(draftSession.getDraftId(), userId));
+                                -> managerFactory.draftManager().kill(draftSession.getDraftId(), userId));
 
                     });
                 }
@@ -404,7 +402,7 @@ public class TournamentController {
             tournamentPlayer.setQuit(info, status);
             tournament.quit(playerId);
             tournamentSession.quit();
-            ChatManager.instance.broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
+            managerFactory.chatManager().broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
         }
     }
 
@@ -417,8 +415,8 @@ public class TournamentController {
         }
         // replace player that quits with draft bot
         if (humans > 1) {
-            Optional<User> user = UserManager.instance.getUser(userId);
-            TableManager.instance.getController(tableId).ifPresent(tableController -> {
+            Optional<User> user = managerFactory.userManager().getUser(userId);
+            managerFactory.tableManager().getController(tableId).ifPresent(tableController -> {
 
                 String replacePlayerName = "Draftbot";
                 if (user.isPresent()) {
@@ -430,7 +428,7 @@ public class TournamentController {
                     user.get().removeTable(leavingPlayer.getPlayer().getId());
                     user.get().removeTournament(leavingPlayer.getPlayer().getId());
                 }
-                ChatManager.instance.broadcast(chatId, "", leavingPlayer.getPlayer().getLogName() + " was replaced by draftbot", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+                managerFactory.chatManager().broadcast(chatId, "", leavingPlayer.getPlayer().getLogName() + " was replaced by draftbot", MessageColor.BLACK, true, null, MessageType.STATUS, null);
             });
             return true;
         }
@@ -447,7 +445,7 @@ public class TournamentController {
 
     private void abortDraftTournament() {
         tournament.setAbort(true);
-        DraftManager.instance.getController(tableId).ifPresent(DraftController::abortDraft);
+        managerFactory.draftManager().getController(tableId).ifPresent(DraftController::abortDraft);
     }
 
     public boolean isAbort() {
@@ -472,7 +470,7 @@ public class TournamentController {
     }
 
     public void cleanUpOnRemoveTournament() {
-        ChatManager.instance.destroyChatSession(chatId);
+        managerFactory.chatManager().destroyChatSession(chatId);
     }
 
     /**
@@ -490,7 +488,7 @@ public class TournamentController {
             if (tournamentPlayer != null) {
                 if (!tournamentPlayer.hasQuit()) {
                     if (tournamentPlayer.getPlayer().isHuman()) {
-                        Optional<User> user = UserManager.instance.getUser(entry.getKey());
+                        Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
                         if (!user.isPresent()) {
                             logger.debug("Tournament user is missing but player active -> start quit - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
                             // active tournament player but the user is no longer online

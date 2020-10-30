@@ -1,9 +1,10 @@
 package mage.server;
 
 import mage.server.User.UserState;
+import mage.server.managers.IUserManager;
+import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
-import mage.server.util.ThreadExecutor;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 
@@ -19,8 +20,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public enum UserManager {
-    instance;
+public class UserManager implements IUserManager {
 
     private static final int SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS = 30; // send to chat info about disconnection troubles, must be more than ping timeout
     private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
@@ -32,24 +32,32 @@ public enum UserManager {
     protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private List<UserView> userInfoList = new ArrayList<>();
+    private final ManagerFactory managerFactory;
 
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
 
-    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.instance.getCallExecutor();
+    private ExecutorService USER_EXECUTOR;
 
-    UserManager() {
+    // TODO externalise start of threads
+    public UserManager(ManagerFactory managerFactory) {
+        this.managerFactory = managerFactory;
+    }
+
+    public void init() {
+        USER_EXECUTOR = managerFactory.threadExecutor().getCallExecutor();
         expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
 
         userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, 4, 4, TimeUnit.SECONDS);
     }
 
+    @Override
     public Optional<User> createUser(String userName, String host, AuthorizedUser authorizedUser) {
         if (getUserByName(userName).isPresent()) {
             return Optional.empty(); //user already exists
         }
-        User user = new User(userName, host, authorizedUser);
+        User user = new User(managerFactory, userName, host, authorizedUser);
         final Lock w = lock.writeLock();
         w.lock();
         try {
@@ -60,6 +68,7 @@ public enum UserManager {
         return Optional.of(user);
     }
 
+    @Override
     public Optional<User> getUser(UUID userId) {
         if (!users.containsKey(userId)) {
             //logger.warn(String.format("User with id %s could not be found", userId), new Throwable()); // TODO: remove after session freezes fixed
@@ -69,6 +78,7 @@ public enum UserManager {
         }
     }
 
+    @Override
     public Optional<User> getUserByName(String userName) {
         final Lock r = lock.readLock();
         r.lock();
@@ -81,6 +91,7 @@ public enum UserManager {
 
     }
 
+    @Override
     public Collection<User> getUsers() {
         List<User> userList = new ArrayList<>();
         final Lock r = lock.readLock();
@@ -93,6 +104,7 @@ public enum UserManager {
         return userList;
     }
 
+    @Override
     public boolean connectToSession(String sessionId, UUID userId) {
         if (userId != null) {
             User user = users.get(userId);
@@ -104,19 +116,19 @@ public enum UserManager {
         return false;
     }
 
+    @Override
     public void disconnect(UUID userId, DisconnectReason reason) {
-        Optional<User> user = UserManager.instance.getUser(userId);
+        Optional<User> user = getUser(userId);
         if (user.isPresent()) {
             user.get().setSessionId("");
             if (reason == DisconnectReason.Disconnected) {
                 removeUserFromAllTablesAndChat(userId, reason);
                 user.get().setUserState(UserState.Offline);
-            } else {
-//                ChatManager.instance.sendLostConnectionMessage(userId, reason);
             }
         }
     }
 
+    @Override
     public boolean isAdmin(UUID userId) {
         if (userId != null) {
             User user = users.get(userId);
@@ -127,6 +139,7 @@ public enum UserManager {
         return false;
     }
 
+    @Override
     public void removeUserFromAllTablesAndChat(final UUID userId, final DisconnectReason reason) {
         if (userId != null) {
             getUser(userId).ifPresent(user
@@ -135,7 +148,7 @@ public enum UserManager {
                         try {
                             logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
                             user.removeUserFromAllTables(reason);
-                            ChatManager.instance.removeUser(user.getId(), reason);
+                            managerFactory.chatManager().removeUser(user.getId(), reason);
                             logger.debug("USER REMOVE END - " + user.getName());
                         } catch (Exception ex) {
                             handleException(ex);
@@ -146,13 +159,14 @@ public enum UserManager {
         }
     }
 
+    @Override
     public void informUserOpponents(final UUID userId, final String message) {
         if (userId != null) {
             getUser(userId).ifPresent(user
                     -> USER_EXECUTOR.execute(
                     () -> {
                         try {
-                            ChatManager.instance.sendMessageToUserChats(user.getId(), message);
+                            managerFactory.chatManager().sendMessageToUserChats(user.getId(), message);
                         } catch (Exception ex) {
                             handleException(ex);
                         }
@@ -161,6 +175,7 @@ public enum UserManager {
         }
     }
 
+    @Override
     public boolean extendUserSession(UUID userId, String pingInfo) {
         if (userId != null) {
             User user = users.get(userId);
@@ -245,7 +260,7 @@ public enum UserManager {
     private void updateUserInfoList() {
         try {
             List<UserView> newUserInfoList = new ArrayList<>();
-            for (User user : UserManager.instance.getUsers()) {
+            for (User user : getUsers()) {
                 newUserInfoList.add(new UserView(
                         user.getName(),
                         user.getHost(),
@@ -266,10 +281,12 @@ public enum UserManager {
         }
     }
 
+    @Override
     public List<UserView> getUserInfoList() {
         return userInfoList;
     }
 
+    @Override
     public void handleException(Exception ex) {
         if (ex != null) {
             logger.fatal("User manager exception ", ex);
@@ -281,6 +298,7 @@ public enum UserManager {
         }
     }
 
+    @Override
     public String getUserHistory(String userName) {
         Optional<User> user = getUserByName(userName);
         if (user.isPresent()) {
@@ -295,6 +313,7 @@ public enum UserManager {
         return "User " + userName + " not found";
     }
 
+    @Override
     public void updateUserHistory() {
         USER_EXECUTOR.execute(() -> {
             for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {

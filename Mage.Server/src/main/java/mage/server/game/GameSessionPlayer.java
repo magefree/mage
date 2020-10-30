@@ -11,8 +11,8 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.Player;
 import mage.server.User;
-import mage.server.UserManager;
-import mage.server.util.ThreadExecutor;
+import mage.server.managers.IUserManager;
+import mage.server.managers.ManagerFactory;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
@@ -28,12 +28,15 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     private static final Logger logger = Logger.getLogger(GameSessionPlayer.class);
 
+    private final IUserManager userManager;
     private final UUID playerId;
 
-    private static final ExecutorService callExecutor = ThreadExecutor.instance.getCallExecutor();
+    private final ExecutorService callExecutor;
 
-    public GameSessionPlayer(Game game, UUID userId, UUID playerId) {
-        super(userId, game, true);
+    public GameSessionPlayer(ManagerFactory managerFactory, Game game, UUID userId, UUID playerId) {
+        super(managerFactory.userManager(), userId, game, true);
+        this.userManager = managerFactory.userManager();
+        callExecutor = managerFactory.threadExecutor().getCallExecutor();
         this.playerId = playerId;
     }
 
@@ -44,14 +47,14 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void ask(final String question, final Map<String, Serializable> options) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ASK, game.getId(), new GameClientMessage(getGameView(), question, options)))
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ASK, game.getId(), new GameClientMessage(getGameView(), question, options)))
             );
         }
     }
 
     public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user -> {
+            userManager.getUser(userId).ifPresent(user -> {
                 user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_TARGET, game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
             });
 
@@ -60,13 +63,13 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void select(final String message, final Map<String, Serializable> options) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_SELECT, game.getId(), new GameClientMessage(getGameView(), message, options))));
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_SELECT, game.getId(), new GameClientMessage(getGameView(), message, options))));
         }
     }
 
     public void chooseAbility(final AbilityPickerView abilities) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user
+            userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_CHOOSE_ABILITY, game.getId(), abilities)));
         }
 
@@ -74,7 +77,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user
+            userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_CHOOSE_PILE, game.getId(), new GameClientMessage(message, pile1, pile2))));
         }
 
@@ -82,7 +85,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void chooseChoice(final Choice choice) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user
+            userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_CHOOSE_CHOICE, game.getId(), new GameClientMessage(choice))));
         }
 
@@ -90,14 +93,14 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void playMana(final String message, final Map<String, Serializable> options) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user
+            userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_PLAY_MANA, game.getId(), new GameClientMessage(getGameView(), message, options))));
         }
     }
 
     public void playXMana(final String message) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user
+            userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_PLAY_XMANA, game.getId(), new GameClientMessage(getGameView(), message))));
 
         }
@@ -105,7 +108,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void getAmount(final String message, final int min, final int max) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user -> {
+            userManager.getUser(userId).ifPresent(user -> {
                 user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_AMOUNT, game.getId(), new GameClientMessage(message, min, max)));
             });
         }
@@ -113,15 +116,15 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void endGameInfo(Table table) {
         if (!killed) {
-            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.END_GAME_INFO, game.getId(), getGameEndView(playerId, table))));
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.END_GAME_INFO, game.getId(), getGameEndView(playerId, table))));
 
         }
     }
 
     public void requestPermissionToRollbackTurn(UUID requestingUserId, int numberTurns) {
         if (!killed) {
-            Optional<User> requestingUser = UserManager.instance.getUser(requestingUserId);
-            Optional<User> requestedUser = UserManager.instance.getUser(userId);
+            Optional<User> requestingUser = userManager.getUser(requestingUserId);
+            Optional<User> requestedUser = userManager.getUser(userId);
             if (requestedUser.isPresent() && requestingUser.isPresent()) {
                 String message;
                 switch (numberTurns) {
@@ -147,8 +150,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void requestPermissionToSeeHandCards(UUID watcherId) {
         if (!killed) {
-            Optional<User> watcher = UserManager.instance.getUser(watcherId);
-            Optional<User> user = UserManager.instance.getUser(userId);
+            Optional<User> watcher = userManager.getUser(watcherId);
+            Optional<User> user = userManager.getUser(userId);
             if (user.isPresent() && watcher.isPresent()) {
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
                         "User request",
@@ -217,7 +220,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
     }
 
     public void removeGame() {
-        UserManager.instance.getUser(userId).ifPresent(user -> user.removeGame(playerId));
+        userManager.getUser(userId).ifPresent(user -> user.removeGame(playerId));
 
     }
 

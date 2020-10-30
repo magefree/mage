@@ -1,11 +1,11 @@
-package mage.server.util;
+package mage.server.managers;
 
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 
 import java.util.List;
 
-public interface ConfigSettingsContract {
+public interface IConfigSettings {
     String getServerAddress();
 
     String getServerName();

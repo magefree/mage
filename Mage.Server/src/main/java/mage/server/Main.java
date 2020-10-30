@@ -14,12 +14,11 @@ import mage.remote.Connection;
 import mage.server.draft.CubeFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
+import mage.server.managers.IConfigSettings;
+import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
-import mage.server.util.ConfigSettings;
-import mage.server.util.PluginClassLoader;
-import mage.server.util.ServerMessagesUtil;
-import mage.server.util.SystemUtil;
+import mage.server.util.*;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
@@ -70,7 +69,7 @@ public final class Main {
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
-
+        final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
         String adminPassword = "";
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
@@ -83,7 +82,7 @@ public final class Main {
             }
         }
 
-        if (ConfigSettings.instance.isAuthenticationActivated()) {
+        if (config.isAuthenticationActivated()) {
             logger.info("Check authorized user DB version ...");
             if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
                 logger.fatal("Failed to start server.");
@@ -148,7 +147,6 @@ public final class Main {
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
@@ -206,11 +204,12 @@ public final class Main {
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
         connection.setPort(config.getPort());
+        final ManagerFactory managerFactory = new MainManagerFactory(config);
         try {
             // Parameter: serializationtype => jboss
             InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
-            if (!isAlreadyRunning(serverLocator)) {
-                server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
+            if (!isAlreadyRunning(config, serverLocator)) {
+                server = new MageTransporterServer(managerFactory, serverLocator, new MageServerImpl(managerFactory, adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler(managerFactory));
                 server.start();
                 logger.info("Started MAGE server - listening on " + connection.toString());
 
@@ -230,9 +229,9 @@ public final class Main {
         ServerMessagesUtil.instance.setStartDate(System.currentTimeMillis());
     }
 
-    static boolean isAlreadyRunning(InvokerLocator serverLocator) {
+    static boolean isAlreadyRunning(IConfigSettings config, InvokerLocator serverLocator) {
         Map<String, String> metadata = new HashMap<>();
-        metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(ConfigSettings.instance.getSocketWriteTimeout()));
+        metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(config.getSocketWriteTimeout()));
         metadata.put("generalizeSocketException", "true");
         try {
             MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
@@ -248,16 +247,22 @@ public final class Main {
 
     static class ClientConnectionListener implements ConnectionListener {
 
+        private final ManagerFactory managerFactory;
+
+        public ClientConnectionListener(ManagerFactory managerFactory) {
+            this.managerFactory = managerFactory;
+        }
+
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
             String sessionId = client.getSessionId();
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 logger.trace("Session not found : " + sessionId);
             } else {
                 UUID userId = session.get().getUserId();
                 StringBuilder sessionInfo = new StringBuilder();
-                Optional<User> user = UserManager.instance.getUser(userId);
+                Optional<User> user = managerFactory.userManager().getUser(userId);
                 if (user.isPresent()) {
                     sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
                 } else {
@@ -267,12 +272,12 @@ public final class Main {
                 if (throwable instanceof ClientDisconnectedException) {
                     // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    //managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
+                    managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                     logger.debug("Stack Trace", throwable);
                 } else {
-                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
                         if (throwable == null) {
@@ -292,11 +297,11 @@ public final class Main {
 
         protected Connector connector;
 
-        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
+        public MageTransporterServer(ManagerFactory managerFactory, InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
             connector.addInvocationHandler("callback", serverInvocationHandler);
-            connector.setLeasePeriod(ConfigSettings.instance.getLeasePeriod());
-            connector.addConnectionListener(new ClientConnectionListener());
+            connector.setLeasePeriod(managerFactory.configSettings().getLeasePeriod());
+            connector.addConnectionListener(new ClientConnectionListener(managerFactory));
         }
 
         public Connector getConnector() throws Exception {
@@ -312,6 +317,12 @@ public final class Main {
     }
 
     static class MageServerInvocationHandler implements ServerInvocationHandler {
+
+        private final ManagerFactory managerFactory;
+
+        public MageServerInvocationHandler(ManagerFactory managerFactory) {
+            this.managerFactory = managerFactory;
+        }
 
         @Override
         public void setMBeanServer(MBeanServer server) {
@@ -333,9 +344,9 @@ public final class Main {
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
-            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.instance.getSecondaryBindPort());
-            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.instance.getBacklogSize());
-            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.instance.getNumAcceptThreads());
+            ((BisocketServerInvoker) invoker).setSecondaryBindPort(managerFactory.configSettings().getSecondaryBindPort());
+            ((BisocketServerInvoker) invoker).setBacklog(managerFactory.configSettings().getBacklogSize());
+            ((BisocketServerInvoker) invoker).setNumAcceptThreads(managerFactory.configSettings().getNumAcceptThreads());
         }
 
         @Override
@@ -344,7 +355,7 @@ public final class Main {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             try {
                 String sessionId = handler.getClientSessionId();
-                SessionManager.instance.createSession(sessionId, callbackHandler);
+                managerFactory.sessionManager().createSession(sessionId, callbackHandler);
             } catch (Throwable ex) {
                 logger.fatal("", ex);
             }
@@ -362,7 +373,7 @@ public final class Main {
             } else {
                 host = "localhost";
             }
-            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
             if (!session.isPresent()) {
                 logger.error("Session not found : " + sessionId);
             } else {
@@ -375,7 +386,7 @@ public final class Main {
         public void removeListener(InvokerCallbackHandler callbackHandler) {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
-            SessionManager.instance.disconnect(sessionId, DisconnectReason.Disconnected);
+            managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.Disconnected);
         }
 
     }

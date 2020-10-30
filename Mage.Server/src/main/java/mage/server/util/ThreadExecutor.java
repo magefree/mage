@@ -1,24 +1,18 @@
-
 package mage.server.util;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import mage.server.managers.IConfigSettings;
+import mage.server.managers.IThreadExecutor;
+
+import java.util.concurrent.*;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public enum ThreadExecutor {
-instance;
-    private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
-    private static final ExecutorService userExecutor = Executors.newCachedThreadPool();
-    private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.instance.getMaxGameThreads());
-    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(4);
-    private static final ScheduledExecutorService timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
+public class ThreadExecutor implements IThreadExecutor {
+    private final ExecutorService callExecutor;
+    private final ExecutorService gameExecutor;
+    private final ScheduledExecutorService timeoutExecutor;
+    private final ScheduledExecutorService timeoutIdleExecutor;
 
     /**
      * noxx: what the settings below do is setting the ability to keep OS
@@ -26,17 +20,20 @@ instance;
      * within this time period, the thread may be discarded. But anyway if new
      * game is created later, new OS/java thread will be created for it taking
      * MaxGameThreads limit into account.
-     *
+     * <p>
      * This all is done for performance reasons as creating new OS threads is
      * resource consuming process.
      */
-    static {
+
+    public ThreadExecutor(IConfigSettings config) {
+        callExecutor = Executors.newCachedThreadPool();
+        gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
+        timeoutExecutor = Executors.newScheduledThreadPool(4);
+        timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
+
         ((ThreadPoolExecutor) callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) callExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) callExecutor).setThreadFactory(new XMageThreadFactory("CALL"));
-        ((ThreadPoolExecutor) userExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
-        ((ThreadPoolExecutor) userExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor) userExecutor).setThreadFactory(new XMageThreadFactory("USER"));
         ((ThreadPoolExecutor) gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) gameExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) gameExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
@@ -49,6 +46,7 @@ instance;
     }
 
 
+    @Override
     public int getActiveThreads(ExecutorService executerService) {
         if (executerService instanceof ThreadPoolExecutor) {
             return ((ThreadPoolExecutor) executerService).getActiveCount();
@@ -56,18 +54,22 @@ instance;
         return -1;
     }
 
+    @Override
     public ExecutorService getCallExecutor() {
         return callExecutor;
     }
 
+    @Override
     public ExecutorService getGameExecutor() {
         return gameExecutor;
     }
 
+    @Override
     public ScheduledExecutorService getTimeoutExecutor() {
         return timeoutExecutor;
     }
 
+    @Override
     public ScheduledExecutorService getTimeoutIdleExecutor() {
         return timeoutIdleExecutor;
     }

@@ -3,6 +3,7 @@ package mage.server;
 import mage.game.Game;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
+import mage.server.managers.ManagerFactory;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -25,6 +26,7 @@ public class ChatSession {
     private static final Logger logger = Logger.getLogger(ChatSession.class);
     private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
+    private final ManagerFactory managerFactory;
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     private final ConcurrentMap<UUID, String> clients = new ConcurrentHashMap<>();
@@ -32,14 +34,15 @@ public class ChatSession {
     private final Date createTime;
     private final String info;
 
-    public ChatSession(String info) {
+    public ChatSession(ManagerFactory managerFactory, String info) {
+        this.managerFactory = managerFactory;
         chatId = UUID.randomUUID();
         this.createTime = new Date();
         this.info = info;
     }
 
     public void join(UUID userId) {
-        UserManager.instance.getUser(userId).ifPresent(user -> {
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
             if (!clients.containsKey(userId)) {
                 String userName = user.getName();
                 final Lock w = lock.writeLock();
@@ -121,7 +124,7 @@ public class ChatSession {
                 r.unlock();
             }
             for (UUID userId : chatUserIds) {
-                Optional<User> user = UserManager.instance.getUser(userId);
+                Optional<User> user = managerFactory.userManager().getUser(userId);
                 if (user.isPresent()) {
                     user.get().fireCallback(clientCallback);
                 } else {

@@ -1,25 +1,32 @@
 package mage.server;
 
-import java.util.Properties;
+import mage.server.managers.IConfigSettings;
+import mage.server.managers.IMailClient;
+import org.apache.log4j.Logger;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import mage.server.util.ConfigSettings;
-import org.apache.log4j.Logger;
+import java.util.Properties;
 
-public final class MailClient {
+public class MailClient implements IMailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
 
-    public static boolean sendMessage(String email, String subject, String text) {
+    private final IConfigSettings config;
+
+    public MailClient(IConfigSettings config) {
+        this.config = config;
+    }
+
+    public boolean sendMessage(String email, String subject, String text) {
         if (email.isEmpty()) {
             logger.info("Email is not sent because the address is empty");
             return false;
         }
-        ConfigSettings config = ConfigSettings.instance;
 
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtps.host", config.getMailSmtpHost());
@@ -30,7 +37,7 @@ public final class MailClient {
 
         Session session = Session.getDefaultInstance(properties);
 
-        try{
+        try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(config.getMailFromAddress()));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
@@ -44,7 +51,7 @@ public final class MailClient {
             trnsport.close();
 
             return true;
-        }catch (MessagingException ex) {
+        } catch (MessagingException ex) {
             logger.error("Error sending message to " + email, ex);
         }
         return false;

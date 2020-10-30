@@ -1,11 +1,10 @@
-
-
 package mage.server;
+
+import mage.server.managers.IChatManager;
 
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class RoomImpl implements Room {
@@ -13,9 +12,9 @@ public abstract class RoomImpl implements Room {
     private final UUID chatId;
     private final UUID roomId;
 
-    public RoomImpl() {
+    public RoomImpl(IChatManager chatManager) {
         roomId = UUID.randomUUID();
-        chatId = ChatManager.instance.createChatSession("Room " + roomId);
+        chatId = chatManager.createChatSession("Room " + roomId);
     }
 
     /**
@@ -33,7 +32,6 @@ public abstract class RoomImpl implements Room {
     public UUID getRoomId() {
         return roomId;
     }
-
 
 
 }

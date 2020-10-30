@@ -5,8 +5,8 @@ import mage.cards.repository.CardRepository;
 import mage.game.Game;
 import mage.server.exceptions.UserNotFoundException;
 import mage.server.game.GameController;
-import mage.server.game.GameManager;
-import mage.server.game.GamesRoomManager;
+import mage.server.managers.IChatManager;
+import mage.server.managers.ManagerFactory;
 import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -26,21 +26,27 @@ import java.util.stream.Collectors;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public enum ChatManager {
+public class ChatManager implements IChatManager {
 
-    instance;
     private static final Logger logger = Logger.getLogger(ChatManager.class);
     private static final HashMap<String, String> userMessages = new HashMap<>();
 
+    private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
+    public ChatManager(ManagerFactory managerFactory) {
+        this.managerFactory = managerFactory;
+    }
+
+    @Override
     public UUID createChatSession(String info) {
-        ChatSession chatSession = new ChatSession(info);
+        ChatSession chatSession = new ChatSession(managerFactory, info);
         chatSessions.put(chatSession.getChatId(), chatSession);
         return chatSession.getChatId();
     }
 
+    @Override
     public void joinChat(UUID chatId, UUID userId) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -51,10 +57,12 @@ public enum ChatManager {
 
     }
 
+    @Override
     public void clearUserMessageStorage() {
         userMessages.clear();
     }
 
+    @Override
     public void leaveChat(UUID chatId, UUID userId) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null && chatSession.hasUser(userId)) {
@@ -62,6 +70,7 @@ public enum ChatManager {
         }
     }
 
+    @Override
     public void destroyChatSession(UUID chatId) {
         if (chatId != null) {
             ChatSession chatSession = chatSessions.get(chatId);
@@ -84,11 +93,12 @@ public enum ChatManager {
 
     final Pattern cardNamePattern = Pattern.compile("\\[(.*?)\\]");
 
+    @Override
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, Game game, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                Optional<User> user = UserManager.instance.getUserByName(userName);
+                Optional<User> user = managerFactory.userManager().getUserByName(userName);
                 if (user.isPresent()) {
                     if (!performUserCommand(user.get(), message, chatId, false)) {
                         performUserCommand(user.get(), message, chatId, true);
@@ -98,7 +108,7 @@ public enum ChatManager {
             }
 
             if (messageType != MessageType.GAME && !userName.isEmpty()) {
-                Optional<User> u = UserManager.instance.getUserByName(userName);
+                Optional<User> u = managerFactory.userManager().getUserByName(userName);
                 if (u.isPresent()) {
 
                     User user = u.get();
@@ -184,12 +194,12 @@ public enum ChatManager {
         }
 
         if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
-            message += "<br/>" + UserManager.instance.getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
+            message += "<br/>" + managerFactory.userManager().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
         if (command.equals("ME")) {
-            message += "<br/>" + UserManager.instance.getUserHistory(user.getName());
+            message += "<br/>" + managerFactory.userManager().getUserHistory(user.getName());
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -200,7 +210,7 @@ public enum ChatManager {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
                     UUID id = java.util.UUID.fromString(gameId.substring(5));
-                    for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
+                    for (Entry<UUID, GameController> entry : managerFactory.gameManager().getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
                             if (controller != null) {
@@ -221,7 +231,7 @@ public enum ChatManager {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
                     UUID id = java.util.UUID.fromString(gameId.substring(5));
-                    for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
+                    for (Entry<UUID, GameController> entry : managerFactory.gameManager().getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
                             if (controller != null) {
@@ -242,7 +252,7 @@ public enum ChatManager {
                 String gameId = session.getInfo();
                 if (gameId.startsWith("Game ")) {
                     UUID id = java.util.UUID.fromString(gameId.substring(5));
-                    for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
+                    for (Entry<UUID, GameController> entry : managerFactory.gameManager().getGameController().entrySet()) {
                         if (entry.getKey().equals(id)) {
                             GameController controller = entry.getValue();
                             if (controller != null) {
@@ -281,7 +291,7 @@ public enum ChatManager {
             if (first > 1) {
                 String userToName = rest.substring(0, first);
                 rest = rest.substring(first + 1).trim();
-                Optional<User> userTo = UserManager.instance.getUserByName(userToName);
+                Optional<User> userTo = managerFactory.userManager().getUserByName(userToName);
                 if (userTo.isPresent()) {
                     if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo.get(), rest)) {
                         message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
@@ -312,8 +322,9 @@ public enum ChatManager {
      * @param color
      * @throws mage.server.exceptions.UserNotFoundException
      */
+    @Override
     public void broadcast(UUID userId, String message, MessageColor color) throws UserNotFoundException {
-        UserManager.instance.getUser(userId).ifPresent(user -> {
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
             getChatSessions()
                     .stream()
                     .filter(chat -> chat.hasUser(userId))
@@ -322,8 +333,9 @@ public enum ChatManager {
         });
     }
 
+    @Override
     public void sendReconnectMessage(UUID userId) {
-        UserManager.instance.getUser(userId).ifPresent(user
+        managerFactory.userManager().getUser(userId).ifPresent(user
                 -> getChatSessions()
                 .stream()
                 .filter(chat -> chat.hasUser(userId))
@@ -331,8 +343,9 @@ public enum ChatManager {
 
     }
 
+    @Override
     public void sendLostConnectionMessage(UUID userId, DisconnectReason reason) {
-        UserManager.instance.getUser(userId).ifPresent(user -> sendMessageToUserChats(userId, user.getName() + " " + reason.getMessage()));
+        managerFactory.userManager().getUser(userId).ifPresent(user -> sendMessageToUserChats(userId, user.getName() + " " + reason.getMessage()));
     }
 
     /**
@@ -341,10 +354,11 @@ public enum ChatManager {
      * @param userId
      * @param message
      */
+    @Override
     public void sendMessageToUserChats(UUID userId, String message) {
-        UserManager.instance.getUser(userId).ifPresent(user -> {
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
             List<ChatSession> chatSessions = getChatSessions().stream()
-                    .filter(chat -> !chat.getChatId().equals(GamesRoomManager.instance.getMainChatId())) // ignore main lobby
+                    .filter(chat -> !chat.getChatId().equals(managerFactory.gamesRoomManager().getMainChatId())) // ignore main lobby
                     .filter(chat -> chat.hasUser(userId))
                     .collect(Collectors.toList());
 
@@ -355,6 +369,7 @@ public enum ChatManager {
         });
     }
 
+    @Override
     public void removeUser(UUID userId, DisconnectReason reason) {
         for (ChatSession chatSession : getChatSessions()) {
             if (chatSession.hasUser(userId)) {
@@ -363,6 +378,7 @@ public enum ChatManager {
         }
     }
 
+    @Override
     public List<ChatSession> getChatSessions() {
         final Lock r = lock.readLock();
         r.lock();

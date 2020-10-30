@@ -14,9 +14,8 @@ import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
 import mage.players.PlayerType;
 import mage.server.game.GameController;
-import mage.server.game.GameManager;
-import mage.server.game.GamesRoomManager;
-import mage.server.util.ThreadExecutor;
+import mage.server.managers.ITableManager;
+import mage.server.managers.ManagerFactory;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
@@ -34,11 +33,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public enum TableManager {
-    instance;
+public class TableManager implements ITableManager {
     protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
+    private final ManagerFactory managerFactory;
     private final Logger logger = Logger.getLogger(TableManager.class);
     private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
@@ -55,10 +54,14 @@ public enum TableManager {
      */
     private static final int EXPIRE_CHECK_PERIOD = 10;
 
-    TableManager() {
+    public TableManager(ManagerFactory managerFactory) {
+        this.managerFactory = managerFactory;
+    }
+
+    public void init() {
         expireExecutor.scheduleAtFixedRate(() -> {
             try {
-                ChatManager.instance.clearUserMessageStorage();
+                managerFactory.chatManager().clearUserMessageStorage();
                 checkTableHealthState();
             } catch (Exception ex) {
                 logger.fatal("Check table health state job error:", ex);
@@ -66,22 +69,25 @@ public enum TableManager {
         }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
     }
 
+    @Override
     public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
-        TableController tableController = new TableController(roomId, userId, options);
+        TableController tableController = new TableController(managerFactory, roomId, userId, options);
         putControllers(tableController.getTable().getId(), tableController);
         putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
     }
 
+    @Override
     public Table createTable(UUID roomId, MatchOptions options) {
-        TableController tableController = new TableController(roomId, null, options);
+        TableController tableController = new TableController(managerFactory, roomId, null, options);
         putControllers(tableController.getTable().getId(), tableController);
         putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
     }
 
+    @Override
     public Table createTournamentTable(UUID roomId, UUID userId, TournamentOptions options) {
-        TableController tableController = new TableController(roomId, userId, options);
+        TableController tableController = new TableController(managerFactory, roomId, userId, options);
         putControllers(tableController.getTable().getId(), tableController);
         putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
@@ -107,10 +113,12 @@ public enum TableManager {
         }
     }
 
+    @Override
     public Table getTable(UUID tableId) {
         return tables.get(tableId);
     }
 
+    @Override
     public Optional<Match> getMatch(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             return Optional.of(controllers.get(tableId).getMatch());
@@ -118,6 +126,7 @@ public enum TableManager {
         return Optional.empty();
     }
 
+    @Override
     public Collection<Table> getTables() {
         Collection<Table> newTables = new ArrayList<>();
         final Lock r = tablesLock.readLock();
@@ -130,6 +139,7 @@ public enum TableManager {
         return newTables;
     }
 
+    @Override
     public Collection<TableController> getControllers() {
         Collection<TableController> newControllers = new ArrayList<>();
         final Lock r = controllersLock.readLock();
@@ -142,6 +152,7 @@ public enum TableManager {
         return newControllers;
     }
 
+    @Override
     public Optional<TableController> getController(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             return Optional.of(controllers.get(tableId));
@@ -149,6 +160,7 @@ public enum TableManager {
         return Optional.empty();
     }
 
+    @Override
     public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList, password);
@@ -156,6 +168,7 @@ public enum TableManager {
         return false;
     }
 
+    @Override
     public boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTournament(userId, name, playerType, skill, deckList, password);
@@ -163,11 +176,12 @@ public enum TableManager {
         return false;
     }
 
+    @Override
     public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
         }
-        UserManager.instance.getUser(userId).ifPresent(user -> {
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
             user.removeSideboarding(tableId);
             user.showUserMessage("Submit deck", "Table no longer active");
 
@@ -176,6 +190,7 @@ public enum TableManager {
         return true;
     }
 
+    @Override
     public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).updateDeck(userId, deckList);
@@ -183,6 +198,7 @@ public enum TableManager {
     }
 
     // removeUserFromAllTablesAndChat user from all tournament sub tables
+    @Override
     public void userQuitTournamentSubTables(UUID userId) {
         for (TableController controller : getControllers()) {
             if (controller.getTable() != null) {
@@ -196,6 +212,7 @@ public enum TableManager {
     }
 
     // removeUserFromAllTablesAndChat user from all sub tables of a tournament
+    @Override
     public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
         for (TableController controller : getControllers()) {
             if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
@@ -206,6 +223,7 @@ public enum TableManager {
         }
     }
 
+    @Override
     public boolean isTableOwner(UUID tableId, UUID userId) {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).isOwner(userId);
@@ -213,13 +231,14 @@ public enum TableManager {
         return false;
     }
 
+    @Override
     public boolean removeTable(UUID userId, UUID tableId) {
-        if (isTableOwner(tableId, userId) || UserManager.instance.isAdmin(userId)) {
+        if (isTableOwner(tableId, userId) || managerFactory.userManager().isAdmin(userId)) {
             logger.debug("Table remove request - userId: " + userId + " tableId: " + tableId);
             TableController tableController = controllers.get(tableId);
             if (tableController != null) {
                 tableController.leaveTableAll();
-                ChatManager.instance.destroyChatSession(tableController.getChatId());
+                managerFactory.chatManager().destroyChatSession(tableController.getChatId());
                 removeTable(tableId);
             }
             return true;
@@ -227,6 +246,7 @@ public enum TableManager {
         return false;
     }
 
+    @Override
     public void leaveTable(UUID userId, UUID tableId) {
         TableController tableController = controllers.get(tableId);
         if (tableController != null) {
@@ -234,6 +254,7 @@ public enum TableManager {
         }
     }
 
+    @Override
     public Optional<UUID> getChatId(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             return Optional.of(controllers.get(tableId).getChatId());
@@ -248,11 +269,12 @@ public enum TableManager {
      * @param roomId
      * @param tableId
      */
+    @Override
     public void startMatch(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch(userId);
             // chat of start dialog can be killed
-            ChatManager.instance.destroyChatSession(controllers.get(tableId).getChatId());
+            managerFactory.chatManager().destroyChatSession(controllers.get(tableId).getChatId());
         }
     }
 
@@ -262,25 +284,29 @@ public enum TableManager {
      * @param roomId
      * @param tableId
      */
+    @Override
     public void startTournamentSubMatch(UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch();
         }
     }
 
+    @Override
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startTournament(userId);
-            ChatManager.instance.destroyChatSession(controllers.get(tableId).getChatId());
+            managerFactory.chatManager().destroyChatSession(controllers.get(tableId).getChatId());
         }
     }
 
+    @Override
     public void startDraft(UUID tableId, Draft draft) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startDraft(draft);
         }
     }
 
+    @Override
     public boolean watchTable(UUID userId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).watchTable(userId);
@@ -288,6 +314,7 @@ public enum TableManager {
         return false;
     }
 
+    @Override
     public void endGame(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             if (controllers.get(tableId).endGameAndStartNextGame()) {
@@ -296,42 +323,49 @@ public enum TableManager {
         }
     }
 
+    @Override
     public void endDraft(UUID tableId, Draft draft) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).endDraft(draft);
         }
     }
 
+    @Override
     public void endTournament(UUID tableId, Tournament tournament) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).endTournament(tournament);
         }
     }
 
+    @Override
     public void swapSeats(UUID tableId, UUID userId, int seatNum1, int seatNum2) {
         if (controllers.containsKey(tableId) && isTableOwner(tableId, userId)) {
             controllers.get(tableId).swapSeats(seatNum1, seatNum2);
         }
     }
 
+    @Override
     public void construct(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).construct();
         }
     }
 
+    @Override
     public void initTournament(UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).initTournament();
         }
     }
 
+    @Override
     public void addPlayer(UUID userId, UUID tableId, TournamentPlayer player) throws GameException {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).addPlayer(userId, player.getPlayer(), player.getPlayerType(), player.getDeck());
         }
     }
 
+    @Override
     public void removeTable(UUID tableId) {
         TableController tableController = controllers.get(tableId);
         if (tableController != null) {
@@ -365,21 +399,22 @@ public enum TableManager {
             // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
             if (table.getState() != TableState.FINISHED) {
                 if (game != null) {
-                    GameManager.instance.removeGame(game.getId());
+                    managerFactory.gameManager().removeGame(game.getId());
                     // something goes wrong, so don't add it to ended stats
                 }
-                GamesRoomManager.instance.removeTable(tableId);
+                managerFactory.gamesRoomManager().removeTable(tableId);
             }
 
         }
     }
 
+    @Override
     public void debugServerState() {
         logger.debug("--- Server state ----------------------------------------------");
-        Collection<User> users = UserManager.instance.getUsers();
+        Collection<User> users = managerFactory.userManager().getUsers();
         logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
         for (User user : users) {
-            Optional<Session> session = SessionManager.instance.getSession(user.getSessionId());
+            Optional<Session> session = managerFactory.sessionManager().getSession(user.getSessionId());
             String sessionState = "N";
             if (session.isPresent()) {
                 if (session.get().isLocked()) {
@@ -393,14 +428,14 @@ public enum TableManager {
                     + " | " + sessionState
                     + " | " + user.getName() + " (" + user.getUserState().toString() + " - " + user.getPingInfo() + ')');
         }
-        List<ChatSession> chatSessions = ChatManager.instance.getChatSessions();
+        List<ChatSession> chatSessions = managerFactory.chatManager().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
         for (ChatSession chatSession : chatSessions) {
             logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
         }
-        logger.debug("------- Games: " + GameManager.instance.getNumberActiveGames() + " --------------------------------------------");
-        logger.debug(" Active Game Worker: " + ThreadExecutor.instance.getActiveThreads(ThreadExecutor.instance.getGameExecutor()));
-        for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
+        logger.debug("------- Games: " + managerFactory.gameManager().getNumberActiveGames() + " --------------------------------------------");
+        logger.debug(" Active Game Worker: " + managerFactory.threadExecutor().getActiveThreads(managerFactory.threadExecutor().getGameExecutor()));
+        for (Entry<UUID, GameController> entry : managerFactory.gameManager().getGameController().entrySet()) {
             logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
         }
         logger.debug("--- Server state END ------------------------------------------");
