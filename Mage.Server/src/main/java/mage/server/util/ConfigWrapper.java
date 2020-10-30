@@ -1,33 +1,17 @@
-
 package mage.server.util;
 
-import java.io.File;
-import java.util.List;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import mage.server.util.config.Config;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
-import org.apache.log4j.Logger;
 
-/**
- * @author BetaSteward_at_googlemail.com
- */
-public enum ConfigSettings implements ConfigSettingsContract {
-    instance;
-    private final Logger logger = Logger.getLogger(ConfigSettings.class);
+import java.util.List;
 
-    private Config config;
+public class ConfigWrapper implements ConfigSettingsContract {
 
-    ConfigSettings() {
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance("mage.server.util.config");
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            config = (Config) unmarshaller.unmarshal(new File("config/config.xml"));
-        } catch (JAXBException ex) {
-            logger.fatal("ConfigSettings error", ex);
-        }
+    private final Config config;
+
+    public ConfigWrapper(final Config config) {
+        this.config = config;
     }
 
     public String getServerAddress() {
