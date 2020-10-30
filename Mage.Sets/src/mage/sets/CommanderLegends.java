@@ -36,6 +36,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Bladegriff Prototype", 300, Rarity.RARE, mage.cards.b.BladegriffPrototype.class));
         cards.add(new SetCardInfo("Brazen Freebooter", 164, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
         cards.add(new SetCardInfo("Briarblade Adept", 111, Rarity.COMMON, mage.cards.b.BriarbladeAdept.class));
+        cards.add(new SetCardInfo("Brinelin, the Moon Kraken", 60, Rarity.UNCOMMON, mage.cards.b.BrinelinTheMoonKraken.class));
         cards.add(new SetCardInfo("Cast Down", 112, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
         cards.add(new SetCardInfo("Charcoal Diamond", 303, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
         cards.add(new SetCardInfo("Coastline Marauders", 168, Rarity.UNCOMMON, mage.cards.c.CoastlineMarauders.class));
