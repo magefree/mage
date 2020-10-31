@@ -62,6 +62,8 @@ enum WarRoomValue implements DynamicValue {
             return 0;
         }
         ObjectColor color = new ObjectColor();
+        // if no commander then cost can't be paid
+        boolean hasCommander = false;
         for (UUID commanderId : game.getCommandersIds(controller)) {
             Card commander = game.getCard(commanderId);
             if (commander == null) {
@@ -83,8 +85,9 @@ enum WarRoomValue implements DynamicValue {
             if (commanderMana.isGreen()) {
                 color.setGreen(true);
             }
+            hasCommander = true;
         }
-        return color.getColorCount();
+        return hasCommander ? color.getColorCount() : Integer.MAX_VALUE;
     }
 
     @Override
