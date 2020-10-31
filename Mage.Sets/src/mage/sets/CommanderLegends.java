@@ -155,6 +155,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Vault of Champions", 360, Rarity.RARE, mage.cards.v.VaultOfChampions.class));
         cards.add(new SetCardInfo("Vial Smasher the Fierce", 540, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));
         cards.add(new SetCardInfo("Vow of Torment", 159, Rarity.UNCOMMON, mage.cards.v.VowOfTorment.class));
+        cards.add(new SetCardInfo("War Room", 361, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Warden of Evos Isle", 106, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.MYTHIC, mage.cards.z.ZurTheEnchanter.class));
