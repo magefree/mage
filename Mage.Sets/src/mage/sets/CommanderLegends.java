@@ -98,6 +98,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 188, Rarity.UNCOMMON, mage.cards.k.KedissEmberclawFamiliar.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 27, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Keleth, Sunmane Familiar", 28, Rarity.UNCOMMON, mage.cards.k.KelethSunmaneFamiliar.class));
+        cards.add(new SetCardInfo("Keskit, the Flesh Sculptor", 131, Rarity.UNCOMMON, mage.cards.k.KeskitTheFleshSculptor.class));
         cards.add(new SetCardInfo("Kinsbaile Courier", 29, Rarity.COMMON, mage.cards.k.KinsbaileCourier.class));
         cards.add(new SetCardInfo("Kitesail Corsair", 76, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
         cards.add(new SetCardInfo("Kitesail Skirmisher", 77, Rarity.COMMON, mage.cards.k.KitesailSkirmisher.class));
