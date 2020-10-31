@@ -158,6 +158,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Soul's Might", 257, Rarity.COMMON, mage.cards.s.SoulsMight.class));
         cards.add(new SetCardInfo("Spectator Seating", 356, Rarity.RARE, mage.cards.s.SpectatorSeating.class));
         cards.add(new SetCardInfo("Staff of Domination", 343, Rarity.RARE, mage.cards.s.StaffOfDomination.class));
+        cards.add(new SetCardInfo("Staunch Throneguard", 344, Rarity.COMMON, mage.cards.s.StaunchThroneguard.class));
         cards.add(new SetCardInfo("Supreme Will", 102, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
         cards.add(new SetCardInfo("Sweet-Gum Recluse", 260, Rarity.RARE, mage.cards.s.SweetGumRecluse.class));
         cards.add(new SetCardInfo("Tevesh Szat, Doom of Fools", 153, Rarity.MYTHIC, mage.cards.t.TeveshSzatDoomOfFools.class));
