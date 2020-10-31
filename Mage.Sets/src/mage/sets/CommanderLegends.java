@@ -58,6 +58,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 306, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Confiscate", 62, Rarity.UNCOMMON, mage.cards.c.Confiscate.class));
         cards.add(new SetCardInfo("Court Street Denizen", 17, Rarity.COMMON, mage.cards.c.CourtStreetDenizen.class));
+        cards.add(new SetCardInfo("Court of Bounty", 220, Rarity.RARE, mage.cards.c.CourtOfBounty.class));
         cards.add(new SetCardInfo("Court of Cunning", 63, Rarity.RARE, mage.cards.c.CourtOfCunning.class));
         cards.add(new SetCardInfo("Court of Grace", 16, Rarity.RARE, mage.cards.c.CourtOfGrace.class));
         cards.add(new SetCardInfo("Cuombajj Witches", 116, Rarity.UNCOMMON, mage.cards.c.CuombajjWitches.class));
