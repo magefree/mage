@@ -33,6 +33,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Amphin Mutineer", 55, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
         cards.add(new SetCardInfo("Ancestral Blade", 5, Rarity.COMMON, mage.cards.a.AncestralBlade.class));
         cards.add(new SetCardInfo("Ancient Animus", 215, Rarity.COMMON, mage.cards.a.AncientAnimus.class));
+        cards.add(new SetCardInfo("Apex Devastator", 217, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
         cards.add(new SetCardInfo("Arcane Signet", 297, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archon of Coronation", 9, Rarity.MYTHIC, mage.cards.a.ArchonOfCoronation.class));
         cards.add(new SetCardInfo("Armillary Sphere", 298, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
