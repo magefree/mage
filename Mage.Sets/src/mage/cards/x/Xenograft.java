@@ -1,8 +1,6 @@
 
 package mage.cards.x;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,8 +13,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Xenograft extends CardImpl {
@@ -54,16 +54,16 @@ class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        if (subType != null) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-            for (Permanent permanent : permanents) {
-                if (permanent != null && !permanent.hasSubtype(subType, game)) {
-                    permanent.getSubtype(game).add(subType);
-                }
-            }
-            return true;
+        if (subType == null) {
+            return false;
         }
-        return false;
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
+        for (Permanent permanent : permanents) {
+            if (permanent != null) {
+                permanent.addSubType(game, subType);
+            }
+        }
+        return true;
     }
 
     @Override

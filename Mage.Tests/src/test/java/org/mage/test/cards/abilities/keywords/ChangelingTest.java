@@ -2,7 +2,10 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.Ability;
+import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -10,7 +13,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class ChangelingTest extends CardTestPlayerBase {
@@ -80,7 +82,7 @@ public class ChangelingTest extends CardTestPlayerBase {
     /**
      * NOTE: As of 05/06/2017 this test is failing due to a bug in code.
      * See issue #3316
-     *
+     * <p>
      * Kaseto, Orochi Archmage do not give Chameleon Colossus +2/+2 , even though Chameleon Colossus should have the "snake" type
      */
     @Test
@@ -103,10 +105,10 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Chameleon Colossus");
 
         /* Nessian Asp {4}{G} - 4/5
-        *  Creature — Snake
-        *  Reach
-        *  {6}{G}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)
-        */
+         *  Creature — Snake
+         *  Reach
+         *  {6}{G}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Nessian Asp");
 
 
@@ -121,5 +123,42 @@ public class ChangelingTest extends CardTestPlayerBase {
         // Check the changeling - Was a 4/4 but +2/+2 from Kaseto's ability
         assertPowerToughness(playerA, "Chameleon Colossus", 6, 6);
 
+    }
+
+    @Test
+    public void testLoseAllCreatureTypes() {
+        addCard(Zone.BATTLEFIELD, playerA, "Game-Trail Changeling");
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Chieftain");
+        addCard(Zone.HAND, playerA, "Nameless Inversion");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nameless Inversion", "Game-Trail Changeling");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // Should have no creature types but still have the Changeling ability
+        assertPowerToughness(playerA, "Game-Trail Changeling", 7, 1);
+        assertNotSubtype("Game-Trail Changeling", SubType.SHAPESHIFTER);
+        assertAbility(playerA, "Game-Trail Changeling", HasteAbility.getInstance(), false);
+        assertAbility(playerA, "Game-Trail Changeling", ChangelingAbility.getInstance(), true);
+    }
+
+    @Test
+    public void testLoseAbilities() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Game-Trail Changeling");
+        addCard(Zone.HAND, playerA, "Merfolk Trickster");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Trickster");
+        addTarget(playerA, "Game-Trail Changeling");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped("Game-Trail Changeling", true);
+        assertSubtype("Game-Trail Changeling", SubType.GOBLIN);
+        assertSubtype("Game-Trail Changeling", SubType.ELF);
+        assertSubtype("Game-Trail Changeling", SubType.SHAPESHIFTER);
+        assertAbility(playerB, "Game-Trail Changeling", ChangelingAbility.getInstance(), false);
     }
 }

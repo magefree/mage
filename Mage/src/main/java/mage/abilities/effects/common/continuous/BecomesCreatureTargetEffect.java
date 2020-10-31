@@ -70,82 +70,68 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         boolean result = false;
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                switch (layer) {
-                    case TextChangingEffects_3:
-                        if (sublayer == SubLayer.NA) {
-                            if (loseName) {
-                                permanent.setName(token.getName());
-                            }
-                        }
-                        break;
-
-                    case TypeChangingEffects_4:
-                        if (sublayer == SubLayer.NA) {
-                            if (loseAllAbilities) {
-                                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                                permanent.getCardType().clear(); // remove all CardTypes
-                                permanent.getSubtype(game).addAll(token.getSubtype(game));
-                            } else {
-                                if (removeSubtypes) {
-                                    permanent.getSubtype(game).clear();
-                                }
-                                for (SubType t : token.getSubtype(game)) {
-                                    if (!permanent.hasSubtype(t, game)) {
-                                        permanent.getSubtype(game).add(t);
-                                    }
-                                }
-                            }
-
-                            for (SuperType t : token.getSuperType()) {
-                                if (!permanent.getSuperType().contains(t)) {
-                                    permanent.addSuperType(t);
-                                }
-                            }
-
-                            for (CardType t : token.getCardType()) {
-                                if (!permanent.getCardType().contains(t)) {
-                                    permanent.addCardType(t);
-                                }
-                            }
-                        }
-                        break;
-
-                    case ColorChangingEffects_5:
-                        if (sublayer == SubLayer.NA) {
-                            if (loseAllAbilities) {
-                                permanent.getColor(game).setBlack(false);
-                                permanent.getColor(game).setGreen(false);
-                                permanent.getColor(game).setBlue(false);
-                                permanent.getColor(game).setWhite(false);
-                                permanent.getColor(game).setBlack(false);
-                            }
-                            if (token.getColor(game).hasColor()) {
-                                permanent.getColor(game).setColor(token.getColor(game));
-                            }
-                        }
-                        break;
-
-                    case AbilityAddingRemovingEffects_6:
-                        if (loseAllAbilities && !keepAbilities) {
-                            permanent.removeAllAbilities(source.getSourceId(), game);
-                        }
-                        if (sublayer == SubLayer.NA) {
-                            if (!token.getAbilities().isEmpty()) {
-                                for (Ability ability : token.getAbilities()) {
-                                    permanent.addAbility(ability, source.getSourceId(), game);
-                                }
-                            }
-                        }
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) { //  CDA can only define a characteristic of either the card or token it comes from.
-                            permanent.getToughness().setValue(token.getToughness().getValue());
-                            permanent.getPower().setValue(token.getPower().getValue());
-                        }
-                }
-                result = true;
+            if (permanent == null) {
+                continue;
             }
+            switch (layer) {
+                case TextChangingEffects_3:
+                    if (loseName) {
+                        permanent.setName(token.getName());
+                    }
+                    break;
+
+                case TypeChangingEffects_4:
+                    for (CardType t : token.getCardType()) {
+                        permanent.addCardType(t);
+                    }
+                    if (loseAllAbilities || removeSubtypes) {
+                        permanent.removeAllCreatureTypes(game);
+                    }
+                    for (SubType t : token.getSubtype(game)) {
+                        permanent.addSubType(game, t);
+                    }
+
+                    for (SuperType t : token.getSuperType()) {
+                        if (!permanent.getSuperType().contains(t)) {
+                            permanent.addSuperType(t);
+                        }
+                    }
+
+                    break;
+
+                case ColorChangingEffects_5:
+                    if (loseAllAbilities) {
+                        permanent.getColor(game).setWhite(false);
+                        permanent.getColor(game).setBlue(false);
+                        permanent.getColor(game).setBlack(false);
+                        permanent.getColor(game).setRed(false);
+                        permanent.getColor(game).setGreen(false);
+                    }
+                    if (token.getColor(game).hasColor()) {
+                        permanent.getColor(game).setColor(token.getColor(game));
+                    }
+                    break;
+
+                case AbilityAddingRemovingEffects_6:
+                    if (loseAllAbilities && !keepAbilities) {
+                        permanent.removeAllAbilities(source.getSourceId(), game);
+                    }
+                    if (sublayer == SubLayer.NA) {
+                        if (!token.getAbilities().isEmpty()) {
+                            for (Ability ability : token.getAbilities()) {
+                                permanent.addAbility(ability, source.getSourceId(), game);
+                            }
+                        }
+                    }
+                    break;
+
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) { //  CDA can only define a characteristic of either the card or token it comes from.
+                        permanent.getToughness().setValue(token.getToughness().getValue());
+                        permanent.getPower().setValue(token.getPower().getValue());
+                    }
+            }
+            result = true;
         }
         if (!result && this.duration == Duration.Custom) {
             this.discard();

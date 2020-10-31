@@ -1,5 +1,6 @@
 package org.mage.test.cards.continuous;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -8,29 +9,33 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ChangelingTest extends CardTestPlayerBase {
 
     // Mistform Ultimus is every creature type
-    private final String ultimus = "Mistform Ultimus";
+    private static final String ultimus = "Mistform Ultimus";
     // each creature gets +1/+1 for each creature you control that shares a creatureype
-    private final String coatOfArms = "Coat of Arms";
+    private static final String coatOfArms = "Coat of Arms";
     // all merfolk get +1/+1
-    private final String lordOfAtlantis = "Lord of Atlantis";
+    private static final String lordOfAtlantis = "Lord of Atlantis";
     // all illusions get +1/+1
-    private final String lordOfUnreal = "Lord of the Unreal";
+    private static final String lordOfUnreal = "Lord of the Unreal";
     // mutavault becomes a token that is all creature types
-    private final String mutavault = "Mutavault";
-
+    private static final String mutavault = "Mutavault";
+    // vehicles have no creature type
+    private static final String copter = "Smuggler's Copter";
     // 2/2 changeling
-    private final String woodlandChangeling = "Woodland Changeling";
+    private static final String woodlandChangeling = "Woodland Changeling";
 
     @Test
-    public void coatOfArmsTest(){
+    public void coatOfArmsTest() {
         addCard(Zone.BATTLEFIELD, playerA, ultimus);
         addCard(Zone.BATTLEFIELD, playerA, coatOfArms);
         addCard(Zone.BATTLEFIELD, playerA, lordOfAtlantis);
         addCard(Zone.BATTLEFIELD, playerA, lordOfUnreal);
         addCard(Zone.BATTLEFIELD, playerA, mutavault);
+        addCard(Zone.BATTLEFIELD, playerA, copter);
         addCard(Zone.BATTLEFIELD, playerA, woodlandChangeling, 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Until end of turn {this} becomes");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew");
+        setChoice(playerA, ultimus);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -54,10 +59,15 @@ public class ChangelingTest extends CardTestPlayerBase {
         coat of arms: +5
          */
         assertPowerToughness(playerA, mutavault, 9, 9);
+         /*
+        smuggler's copter; +3
+         */
+        assertType(copter, CardType.CREATURE, true);
+        assertPowerToughness(playerA, copter, 3, 3);
     }
 
     @Test
-    public void testMetallicMimicChangelingTrigger(){
+    public void testMetallicMimicChangelingTrigger() {
         // all creatures with the chosen subtype come into play with a +1/+1 counter
         final String mimic = "Metallic Mimic";
 

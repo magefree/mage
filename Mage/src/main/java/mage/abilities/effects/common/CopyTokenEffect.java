@@ -31,10 +31,11 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         for (CardType type : token.getCardType()) {
             permanent.addCardType(type);
         }
-        permanent.getSubtype(game).clear();
+        permanent.removeAllSubTypes(game);
         for (SubType type : token.getSubtype(game)) {
-            permanent.getSubtype(game).add(type);
+            permanent.addSubType(game, type);
         }
+        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
         permanent.getSuperType().clear();
         for (SuperType type : token.getSuperType()) {
             permanent.addSuperType(type);

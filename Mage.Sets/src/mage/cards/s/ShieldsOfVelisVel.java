@@ -27,6 +27,7 @@ public final class ShieldsOfVelisVel extends CardImpl {
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         //Creatures target player controls get +0/+1 and gain all creature types until end of turn.
@@ -78,7 +79,7 @@ class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
-                permanent.addAbility(ChangelingAbility.getInstance(), source.getSourceId(), game);
+                permanent.setIsAllCreatureTypes(true);
             } else {
                 it.remove();
             }

@@ -1,6 +1,7 @@
 package org.mage.test.cards.continuous;
 
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -296,6 +297,49 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
             }
 
         }
+    }
 
+    @Test
+    public void testKeepOtherTypes() {
+        // Dragonshift (2013-04-15)
+        // Each affected creature will lose all other colors and creature types and be only red, blue, and a Dragon.
+        // Each will retain any other types it may have had, such as artifact.
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Gingerbrute");
+        addCard(Zone.HAND, playerA, "Dragonshift");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragonshift", "Gingerbrute");
+
+        setStopAt(1, PhaseStep.END_TURN);
+
+        execute();
+
+        // Food is an artifact subtype and should not be removed
+        assertType("Gingerbrute", CardType.ARTIFACT, SubType.FOOD);
+        // Golem is a creature subtype and should be removed
+        assertType("Gingerbrute", CardType.CREATURE, SubType.DRAGON);
+        assertNotSubtype("Gingerbrute", SubType.GOLEM);
+    }
+
+    @Test
+    public void testKeepOtherTypes2() {
+        // Dragonshift (2013-04-15)
+        // Each affected creature will lose all other colors and creature types and be only red, blue, and a Dragon.
+        // Each will retain any other types it may have had, such as artifact.
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Gingerbrute");
+        addCard(Zone.HAND, playerA, "Dragonshift");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragonshift with overload");
+
+        setStopAt(1, PhaseStep.END_TURN);
+
+        execute();
+
+        // Food is an artifact subtype and should not be removed
+        assertType("Gingerbrute", CardType.ARTIFACT, SubType.FOOD);
+        // Golem is a creature subtype and should be removed
+        assertType("Gingerbrute", CardType.CREATURE, SubType.DRAGON);
+        assertNotSubtype("Gingerbrute", SubType.GOLEM);
     }
 }

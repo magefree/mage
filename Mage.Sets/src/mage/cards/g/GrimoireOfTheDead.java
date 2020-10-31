@@ -1,9 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -24,14 +21,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class GrimoireOfTheDead extends CardImpl {
 
     public GrimoireOfTheDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         addSuperType(SuperType.LEGENDARY);
 
         // {1}, {tap}, Discard a card: Put a study counter on Grimoire of the Dead.
@@ -121,14 +121,10 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
         if (permanent != null) {
             switch (layer) {
                 case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getColor(game).setBlack(true);
-                    }
+                    permanent.getColor(game).setBlack(true);
                     break;
                 case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).add(SubType.ZOMBIE);
-                    }
+                    permanent.addSubType(game, SubType.ZOMBIE);
                     break;
             }
             return true;

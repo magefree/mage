@@ -79,7 +79,7 @@ class DescendantsPathEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     boolean found = false;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                        if (card.shareSubtypes(permanent, game)) {
+                        if (card.shareCreatureTypes(permanent, game)) {
                             found = true;
                             break;
                         }

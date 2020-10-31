@@ -1,24 +1,24 @@
 package mage;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.SubTypeList;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -126,6 +126,10 @@ public interface MageObject extends MageItem, Serializable {
         return getCardType().contains(CardType.PLANESWALKER);
     }
 
+    default boolean isTribal() {
+        return getCardType().contains(CardType.TRIBAL);
+    }
+
     default boolean isPermanent() {
         return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
     }
@@ -139,6 +143,9 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addSuperType(SuperType superType) {
+        if (getSuperType().contains(superType)) {
+            return;
+        }
         getSuperType().add(superType);
     }
 
@@ -151,7 +158,29 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void addCardType(CardType cardType) {
+        if (getCardType().contains(cardType)) {
+            return;
+        }
         getCardType().add(cardType);
+    }
+
+    default void addSubType(Game game, SubType... subTypes) {
+        for (SubType subType : subTypes) {
+            if (subType.canGain(this)
+                    && !hasSubtype(subType, game)) {
+                getSubtype(game).add(subType);
+            }
+        }
+    }
+
+    default void removeAllSubTypes(Game game) {
+        getSubtype(game).clear();
+        setIsAllCreatureTypes(false);
+    }
+
+    default void removeAllCreatureTypes(Game game) {
+        getSubtype(game).removeAll(SubType.getCreatureTypes());
+        setIsAllCreatureTypes(false);
     }
 
     /**
@@ -180,27 +209,36 @@ public interface MageObject extends MageItem, Serializable {
         return false;
     }
 
-    default boolean shareSubtypes(Card otherCard, Game game) {
-
-        if (otherCard == null) {
-            throw new IllegalArgumentException("Params can't be null");
+    default boolean shareCreatureTypes(Card otherCard, Game game) {
+        if (!isCreature() && !isTribal()) {
+            return false;
         }
-
-        if (this.isCreature() && otherCard.isCreature()) {
-            if (this.hasAbility(ChangelingAbility.getInstance(), game)
-                    || this.isAllCreatureTypes()
-                    || otherCard.hasAbility(ChangelingAbility.getInstance(), game)
-                    || otherCard.isAllCreatureTypes()) {
-                return true;
-            }
+        if (!otherCard.isCreature() && !otherCard.isTribal()) {
+            return false;
         }
-        for (SubType subtype : this.getSubtype(game)) {
-            if (otherCard.hasSubtype(subtype, game)) {
-                return true;
-            }
+        boolean isAllA = this.isAllCreatureTypes();
+        boolean isAnyA = isAllA || this.getSubtype(game)
+                .stream()
+                .map(SubType::getSubTypeSet)
+                .anyMatch(SubTypeSet.CreatureType::equals);
+        boolean isAllB = otherCard.isAllCreatureTypes();
+        boolean isAnyB = isAllB || otherCard
+                .getSubtype(game)
+                .stream()
+                .map(SubType::getSubTypeSet)
+                .anyMatch(SubTypeSet.CreatureType::equals);
+        if (!isAnyA || !isAnyB) {
+            return false;
         }
-
-        return false;
+        if (isAllA) {
+            return isAllB || isAnyB;
+        }
+        return isAnyA
+                && (isAllB || this
+                .getSubtype(game)
+                .stream()
+                .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
+                .anyMatch(subType -> otherCard.hasSubtype(subType, game)));
     }
 
     boolean isAllCreatureTypes();

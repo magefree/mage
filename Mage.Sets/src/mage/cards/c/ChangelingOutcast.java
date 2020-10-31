@@ -24,6 +24,7 @@ public final class ChangelingOutcast extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // Changeling Outcast can't block and can't be blocked.

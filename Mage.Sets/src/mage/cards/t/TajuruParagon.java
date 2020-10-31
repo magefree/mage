@@ -7,11 +7,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -31,16 +33,12 @@ public final class TajuruParagon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
         this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.CLERIC);
-        this.subtype.add(SubType.ROGUE);
-        this.subtype.add(SubType.WARRIOR);
-        this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Tajuru Paragon is also a Cleric, Rogue, Warrior, and Wizard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("{this} is also a Cleric, Rogue, Warrior, and Wizard")
+                Zone.ALL, new HasSubtypesSourceEffect(SubType.CLERIC, SubType.ROGUE, SubType.WARRIOR, SubType.WIZARD)
         ));
 
         // Kicker {3}
@@ -115,27 +113,6 @@ class TajuruParagonPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        boolean isAllA = permanent.isAllCreatureTypes()
-                || permanent.hasAbility(ChangelingAbility.getInstance(), game);
-        boolean isAnyA = isAllA || permanent.getSubtype(game)
-                .stream()
-                .map(SubType::getSubTypeSet)
-                .anyMatch(SubTypeSet.CreatureType::equals);
-        boolean isAllB = input.isAllCreatureTypes()
-                || input.hasAbility(ChangelingAbility.getInstance(), game);
-        boolean isAnyB = isAllB || input
-                .getSubtype(game)
-                .stream()
-                .map(SubType::getSubTypeSet)
-                .anyMatch(SubTypeSet.CreatureType::equals);
-        if (isAllA) {
-            return isAllB || isAnyB;
-        }
-        return isAnyA
-                && (isAllB || permanent
-                .getSubtype(game)
-                .stream()
-                .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                .anyMatch(subType -> input.hasSubtype(subType, game)));
+        return permanent != null && input != null && permanent.shareCreatureTypes(input, game);
     }
 }

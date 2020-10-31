@@ -134,7 +134,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                 Permanent firstTargetCreature = game.getPermanent(firstTargetId);
                 if (firstTargetCreature != null) {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
-                        if (!permanent.getId().equals(firstTargetId) && firstTargetCreature.shareSubtypes(permanent, game)) {
+                        if (!permanent.getId().equals(firstTargetId) && firstTargetCreature.shareCreatureTypes(permanent, game)) {
                             possibleTargets.add(permanent.getId());
                         }
                     }
@@ -148,7 +148,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         for (Permanent permanent1 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
             for (Permanent permanent2 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, game)) {
-                if (!Objects.equals(permanent1, permanent2) && permanent1.shareSubtypes(permanent2, game)) {
+                if (!Objects.equals(permanent1, permanent2) && permanent1.shareCreatureTypes(permanent2, game)) {
                     return true;
                 }
             }
@@ -173,7 +173,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
                     }
                 } else {
                     Permanent firstTarget = game.getPermanent(this.getTargets().get(0));
-                    if (firstTarget != null && firstTarget.shareSubtypes(targetPermanent, game)) {
+                    if (firstTarget != null && firstTarget.shareCreatureTypes(targetPermanent, game)) {
                         return true;
                     }
                 }

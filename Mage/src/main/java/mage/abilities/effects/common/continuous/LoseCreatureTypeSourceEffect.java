@@ -24,7 +24,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
      * @param lessThan
      */
     public LoseCreatureTypeSourceEffect(DynamicValue dynamicValue, int lessThan) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.dynamicValue = dynamicValue;
         this.lessThan = lessThan;
         setText();
@@ -53,31 +53,22 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         if (dynamicValue.calculate(game, source, this) >= lessThan) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getCardType().remove(CardType.CREATURE);
-                        permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                        if (permanent.isAttacking() || permanent.getBlocking() > 0) {
-                            permanent.removeFromCombat(game);
-                        }
-                    }
-                    break;
-            }
-            return true;
+        if (permanent == null) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+        permanent.getCardType().remove(CardType.CREATURE);
+        if (!permanent.isTribal()) {
+            permanent.removeAllCreatureTypes(game);
+        }
+        if (permanent.isAttacking() || permanent.getBlocking() > 0) {
+            permanent.removeFromCombat(game);
+        }
+        return true;
     }
 
     private void setText() {
@@ -86,10 +77,4 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
         sb.append(CardUtil.numberToText(lessThan)).append(", {this} isn't a creature");
         staticText = sb.toString();
     }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
-    }
-
 }

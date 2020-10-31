@@ -1,25 +1,26 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceCardType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Arrays;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author nantuko
  */
 public final class CreepingRenaissance extends CardImpl {
@@ -58,40 +59,27 @@ class CreepingRenaissanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice typeChoice = new ChoiceImpl();
-            typeChoice.setMessage("Choose permanent type");
-
-            typeChoice.getChoices().add(CardType.ARTIFACT.toString());
-            typeChoice.getChoices().add(CardType.CREATURE.toString());
-            typeChoice.getChoices().add(CardType.ENCHANTMENT.toString());
-            typeChoice.getChoices().add(CardType.LAND.toString());
-            typeChoice.getChoices().add(CardType.PLANESWALKER.toString());
-
-            if (controller.choose(Outcome.ReturnToHand, typeChoice, game)) {
-                String typeName = typeChoice.getChoice();
-                CardType chosenType = null;
-                for (CardType cardType : CardType.values()) {
-                    if (cardType.toString().equals(typeName)) {
-                        chosenType = cardType;
-                    }
-                }
-                if (chosenType != null) {
-                    for (Card card : controller.getGraveyard().getCards(game)) {
-                        if (card.getCardType().contains(chosenType)) {
-                            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        }
-                    }
-                    return true;
-                }
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Choice typeChoice = new ChoiceCardType(true, Arrays.stream(CardType.values()).filter(CardType::isPermanentType).collect(Collectors.toList()));
+        typeChoice.setMessage("Choose a permanent type");
+
+        if (!controller.choose(Outcome.ReturnToHand, typeChoice, game)) {
+            return false;
+        }
+        String typeName = typeChoice.getChoice();
+        CardType chosenType = CardType.fromString(typeChoice.getChoice());
+        if (chosenType == null) {
+            return false;
+        }
+        FilterCard filter = new FilterCard(chosenType.toString().toLowerCase() + " card");
+        filter.add(chosenType.getPredicate());
+        return controller.moveCards(controller.getGraveyard().getCards(filter, source.getSourceId(), controller.getId(), game), Zone.HAND, source, game);
     }
 
     @Override
     public CreepingRenaissanceEffect copy() {
         return new CreepingRenaissanceEffect(this);
     }
-
 }

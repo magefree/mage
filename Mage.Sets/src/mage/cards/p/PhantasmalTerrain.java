@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -8,28 +7,18 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class PhantasmalTerrain extends CardImpl {
@@ -60,14 +49,14 @@ public final class PhantasmalTerrain extends CardImpl {
         return new PhantasmalTerrain(this);
     }
 
-    class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
+    private static class PhantasmalTerrainContinuousEffect extends ContinuousEffectImpl {
 
-        public PhantasmalTerrainContinuousEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Neutral);
-            this.staticText = "enchanted land is the chosen type";
+        private PhantasmalTerrainContinuousEffect() {
+            super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
+            staticText = "Enchanted land is the chosen type";
         }
 
-        public PhantasmalTerrainContinuousEffect(final PhantasmalTerrainContinuousEffect effect) {
+        private PhantasmalTerrainContinuousEffect(final PhantasmalTerrainContinuousEffect effect) {
             super(effect);
         }
 
@@ -77,72 +66,60 @@ public final class PhantasmalTerrain extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            SubType choice = SubType.byDescription((String) game.getState()
-                    .getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
-            if (choice != null) {
-                if (choice.equals(SubType.MOUNTAIN)) {
-                    dependencyTypes.add(DependencyType.BecomeMountain);
-                }
-                if (choice.equals(SubType.FOREST)) {
+        public void init(Ability source, Game game) {
+            super.init(source, game);
+            SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+            switch (choice) {
+                case FOREST:
                     dependencyTypes.add(DependencyType.BecomeForest);
-                }
-                if (choice.equals(SubType.SWAMP)) {
-                    dependencyTypes.add(DependencyType.BecomeSwamp);
-                }
-                if (choice.equals(SubType.ISLAND)) {
-                    dependencyTypes.add(DependencyType.BecomeIsland);
-                }
-                if (choice.equals(SubType.PLAINS)) {
+                    break;
+                case PLAINS:
                     dependencyTypes.add(DependencyType.BecomePlains);
-                }
+                    break;
+                case MOUNTAIN:
+                    dependencyTypes.add(DependencyType.BecomeMountain);
+                    break;
+                case ISLAND:
+                    dependencyTypes.add(DependencyType.BecomeIsland);
+                    break;
+                case SWAMP:
+                    dependencyTypes.add(DependencyType.BecomeSwamp);
+                    break;
             }
-            if (enchantment != null
-                    && enchantment.getAttachedTo() != null
-                    && choice != null) {
-                Permanent land = game.getPermanent(enchantment.getAttachedTo());
-                if (land != null) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
-                                land.getSubtype(game).clear();
-                                land.getSubtype(game).add(choice);
-                                land.removeAllAbilities(source.getSourceId(), game);
-
-                                // land ability is intrinsic, so apply at this layer, not layer 6
-                                if (choice.equals(SubType.FOREST)) {
-                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.PLAINS)) {
-                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.MOUNTAIN)) {
-                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.ISLAND)) {
-                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.SWAMP)) {
-                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                                }
-                            }
-                            break;
-                    }
-                    return true;
-                }
-            }
-            return false;
         }
 
         @Override
         public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.TypeChangingEffects_4;
+            Permanent enchantment = game.getPermanent(source.getSourceId());
+            SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+            if (enchantment == null || enchantment.getAttachedTo() == null || choice == null) {
+                return false;
+            }
+            Permanent land = game.getPermanent(enchantment.getAttachedTo());
+            if (land == null) {
+                return false;
+            }
+            land.getSubtype(game).removeAll(SubType.getLandTypes());
+            land.addSubType(game, choice);
+            land.removeAllAbilities(source.getSourceId(), game);
+            switch (choice) {
+                case FOREST:
+                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                    break;
+                case PLAINS:
+                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                    break;
+                case MOUNTAIN:
+                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                    break;
+                case ISLAND:
+                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                    break;
+                case SWAMP:
+                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                    break;
+            }
+            return true;
         }
     }
 }

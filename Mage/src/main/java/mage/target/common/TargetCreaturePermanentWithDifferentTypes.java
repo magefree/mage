@@ -37,7 +37,7 @@ public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePer
                     Permanent selectedCreature = game.getPermanent(targetId);
                     if (selectedCreature != null 
                             && !creature.getId().equals(selectedCreature.getId())) {
-                        if (creature.shareSubtypes(selectedCreature, game)) {
+                        if (creature.shareCreatureTypes(selectedCreature, game)) {
                             return false;
                         }
                     }

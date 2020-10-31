@@ -1,10 +1,7 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
@@ -16,8 +13,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.SubTypeList;
+
+import java.util.UUID;
 
 /**
  * @author EvilGeek
@@ -69,8 +70,10 @@ class StandardizeEffect extends OneShotEffect {
             chosenType = typeChoice.getChoice();
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
-                ContinuousEffect effect = new BecomesSubtypeAllEffect(Duration.EndOfTurn, SubType.byDescription(chosenType));
-                game.addEffect(effect, source);
+                game.addEffect(new BecomesSubtypeAllEffect(
+                        Duration.EndOfTurn, new SubTypeList(SubType.byDescription(chosenType)),
+                        StaticFilters.FILTER_PERMANENT_CREATURE, true
+                ), source);
                 return true;
             }
 

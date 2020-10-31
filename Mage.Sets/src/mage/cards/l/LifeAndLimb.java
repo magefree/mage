@@ -70,18 +70,13 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.addCardType(CardType.CREATURE);
-                        if (!permanent.hasSubtype(SubType.SAPROLING, game)) {
-                            permanent.getSubtype(game).add(SubType.SAPROLING);
-                        }
-
-                        // land abilities are intrinsic, so add them here, not in layer 6
-                        if (!permanent.hasSubtype(SubType.FOREST, game)) {
-                            permanent.getSubtype(game).add(SubType.FOREST);
-                            if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
-                                permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                            }
-                        }
                         permanent.addCardType(CardType.LAND);
+                        permanent.addSubType(game, SubType.SAPROLING);
+                        // land abilities are intrinsic, so add them here, not in layer 6
+                        permanent.addSubType(game, SubType.FOREST);
+                        if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
+                            permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                        }
                         break;
                     case ColorChangingEffects_5:
                         permanent.getColor(game).setColor(ObjectColor.GREEN);

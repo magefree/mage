@@ -127,8 +127,8 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().clear();
                         permanent.addCardType(CardType.CREATURE);
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.DRAGON);
+                        permanent.removeAllSubTypes(game);
+                        permanent.addSubType(game, SubType.DRAGON);
                     }
                     break;
                 case ColorChangingEffects_5:

@@ -78,19 +78,14 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             switch (loseType) {
                                 case ALL:
                                 case ALL_BUT_COLOR:
+                                    permanent.removeAllSubTypes(game);
+                                    break;
                                 case ABILITIES_SUBTYPE:
-                                    if (permanent.isLand()) {
-                                        permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                                    } else {
-                                        permanent.getSubtype(game).clear();
-                                    }
-                                    permanent.setIsAllCreatureTypes(false);
+                                    permanent.removeAllCreatureTypes(game);
                                     break;
                             }
                             for (SubType t : token.getSubtype(game)) {
-                                if (!permanent.hasSubtype(t, game)) {
-                                    permanent.getSubtype(game).add(t);
-                                }
+                                permanent.addSubType(game, t);
                             }
                         }
                         break;
@@ -98,11 +93,11 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
                             if (loseType == LoseType.ALL || loseType == LoseType.COLOR) {
-                                permanent.getColor(game).setBlack(false);
-                                permanent.getColor(game).setGreen(false);
-                                permanent.getColor(game).setBlue(false);
                                 permanent.getColor(game).setWhite(false);
+                                permanent.getColor(game).setBlue(false);
+                                permanent.getColor(game).setBlack(false);
                                 permanent.getColor(game).setRed(false);
+                                permanent.getColor(game).setGreen(false);
                             }
                             if (token.getColor(game).hasColor()) {
                                 permanent.getColor(game).addColor(token.getColor(game));

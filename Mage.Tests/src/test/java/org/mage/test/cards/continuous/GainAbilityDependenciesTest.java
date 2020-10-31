@@ -82,7 +82,6 @@ public class GainAbilityDependenciesTest extends CardTestPlayerBase {
         // equip
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Elephant");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkAbility("must have all type ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elephant", ChangelingAbility.class, true);
 
         // attack with +1 token
         attack(3, playerA, "Elephant", playerB);

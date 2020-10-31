@@ -35,6 +35,7 @@ public final class ValiantChangeling extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ValiantChangelingCostReductionEffect()));
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // Double strike

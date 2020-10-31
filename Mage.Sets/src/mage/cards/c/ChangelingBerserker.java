@@ -24,6 +24,7 @@ public final class ChangelingBerserker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         
         // Haste

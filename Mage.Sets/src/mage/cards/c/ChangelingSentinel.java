@@ -22,6 +22,7 @@ public final class ChangelingSentinel extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
     }

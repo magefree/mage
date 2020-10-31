@@ -40,10 +40,8 @@ public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (layer == Layer.TypeChangingEffects_4) {
-            for (Permanent object: game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
-                if (!object.hasSubtype(this.subType, game)) {
-                    object.getSubtype(game).add(this.subType);
-                }
+            for (Permanent object : game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
+                object.addSubType(game, this.subType);
             }
         }
 

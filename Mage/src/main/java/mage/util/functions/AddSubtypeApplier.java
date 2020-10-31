@@ -28,7 +28,7 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         if (!permanent.hasSubtype(subtype, game)) {
-            permanent.getSubtype(game).add(subtype);
+            permanent.addSubType(game, subtype);
         }
         return true;
     }
@@ -36,7 +36,7 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
         if (!mageObject.hasSubtype(subtype, game)) {
-            mageObject.getSubtype(game).add(subtype);
+            mageObject.addSubType(game, subtype);
         }
         return true;
     }

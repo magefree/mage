@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -24,8 +23,9 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AshiokNightmareWeaver extends CardImpl {
@@ -149,7 +149,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 class AshiokNightmareWeaverAddTypeEffect extends ContinuousEffectImpl {
 
     public AshiokNightmareWeaverAddTypeEffect() {
-        super(Duration.Custom, Outcome.Neutral);
+        super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "That creature is a Nightmare in addition to its other types";
     }
 
@@ -163,33 +163,15 @@ class AshiokNightmareWeaverAddTypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (creature != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        creature.getSubtype(game).add(SubType.NIGHTMARE);
-                    }
-                    break;
-            }
-            return true;
-        } else {
-            this.used = true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        return false;
+        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (creature == null) {
+            this.used = true;
+            return false;
+        }
+        creature.addSubType(game, SubType.NIGHTMARE);
+        return true;
     }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
-    }
-
 }
 
 class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {

@@ -1,7 +1,5 @@
 package mage;
 
-import java.util.*;
-
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -11,7 +9,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
@@ -20,9 +17,10 @@ import mage.cards.mock.MockCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
+
+import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -230,25 +228,10 @@ public abstract class MageObjectImpl implements MageObject {
         if (value == null) {
             return false;
         }
-        SubTypeList subtypes = this.getSubtype(game);
-        if (subtypes.contains(value)) {
+        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes()) {
             return true;
-        } else {
-            // checking for Changeling
-            // first make sure input parameter is a creature subtype
-            // if not, then ChangelingAbility doesn't matter
-            if (value.getSubTypeSet() != SubTypeSet.CreatureType) {
-                return false;
-            }
-            // as it is a creature subtype, then check the existence of Changeling
-            Abilities<Ability> checkList;
-            if (this instanceof Permanent) {
-                checkList = ((Permanent) this).getAbilities(game);
-            } else {
-                checkList = abilities;
-            }
-            return checkList.contains(ChangelingAbility.getInstance()) || isAllCreatureTypes();
         }
+        return getSubtype(game).contains(value);
     }
 
     @Override
@@ -289,7 +272,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        isAllCreatureTypes = value;
+        isAllCreatureTypes = value && (this.isTribal() || this.isCreature());
     }
 
     @Override

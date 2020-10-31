@@ -9,8 +9,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
@@ -127,7 +127,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
 
     public ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
-        setText();
+        staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
     }
 
     public ChimericStaffEffect(final ChimericStaffEffect effect) {
@@ -142,35 +142,33 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.addCardType(CardType.CREATURE);
-                        permanent.getSubtype(game).add(SubType.CONSTRUCT);
-                    }
-                    break;
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
-                        int xValue = source.getManaCostsToPay().getX();
-                        if (xValue != 0) {
-                            permanent.getPower().setValue(xValue);
-                            permanent.getToughness().setValue(xValue);
-                        }
-                    }
-            }
-            return true;
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        switch (layer) {
+            case TypeChangingEffects_4:
+                if (!permanent.isArtifact()) {
+                    permanent.addCardType(CardType.ARTIFACT);
+                }
+                if (!permanent.isCreature()) {
+                    permanent.addCardType(CardType.CREATURE);
+                }
+                permanent.removeAllCreatureTypes(game);
+                permanent.addSubType(game, SubType.CONSTRUCT);
+                break;
+            case PTChangingEffects_7:
+                if (sublayer == SubLayer.SetPT_7b) {
+                    int xValue = source.getManaCostsToPay().getX();
+                    permanent.getPower().setValue(xValue);
+                    permanent.getToughness().setValue(xValue);
+                }
+        }
+        return true;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
-    }
-
-    private void setText() {
-        staticText = duration.toString() + " {this} becomes an X/X Construct artifact creature";
     }
 
     @Override

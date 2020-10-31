@@ -74,20 +74,21 @@ class ChooseACreature extends OneShotEffect {
         if (sourceObject == null) {
             sourceObject = game.getObject(source.getSourceId());
         }
-        if (controller != null 
-                && sourceObject != null) {
-            Target target = new TargetCreaturePermanent();
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                controller.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
-                if (chosenPermanent != null) {
-                    game.getState().setValue(source.getSourceId().toString() + INFO_KEY, chosenPermanent.copy());
-                }
-            }
+        if (controller == null
+                || sourceObject == null) {
+            return false;
+        }
+        Target target = new TargetCreaturePermanent();
+        target.setNotTarget(true);
+        if (!target.canChoose(source.getSourceId(), controller.getId(), game)) {
             return true;
         }
-        return false;
+        controller.choose(Outcome.Copy, target, source.getSourceId(), game);
+        Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
+        if (chosenPermanent != null) {
+            game.getState().setValue(source.getSourceId().toString() + INFO_KEY, chosenPermanent.copy());
+        }
+        return true;
     }
 
     @Override
@@ -108,46 +109,41 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         Permanent copied = (Permanent) game.getState().getValue(source.getSourceId().toString() + ChooseACreature.INFO_KEY);
-        if (enchantment != null 
-                && copied != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null 
-                    && layer == Layer.CopyEffects_1) {
-                permanent.setName(copied.getName());
-                permanent.getManaCost().clear();
-                permanent.getManaCost().addAll(copied.getManaCost());
-                permanent.setExpansionSetCode(copied.getExpansionSetCode());
-                permanent.getSuperType().clear();
-                for (SuperType t : copied.getSuperType()) {
-                    permanent.addSuperType(t);
-                }
-                permanent.getCardType().clear();
-                for (CardType cardType : copied.getCardType()) {
-                    permanent.addCardType(cardType);
-                }
-                permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                for (SubType subType : copied.getSubtype(game)) {
-                    permanent.getSubtype(game).add(subType);
-                }
-                permanent.getColor(game).setColor(copied.getColor(game));
-                permanent.removeAllAbilities(source.getSourceId(), game);
-                for (Ability ability : copied.getAbilities()) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
-                }
-                permanent.getPower().setValue(copied.getPower().getBaseValue());
-                permanent.getToughness().setValue(copied.getToughness().getBaseValue());
-                return true;
-            }
+        if (enchantment == null
+                || copied == null) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        if (permanent == null) {
+            return false;
+        }
+        permanent.setName(copied.getName());
+        permanent.getManaCost().clear();
+        permanent.getManaCost().addAll(copied.getManaCost());
+        permanent.setExpansionSetCode(copied.getExpansionSetCode());
+        permanent.getSuperType().clear();
+        for (SuperType t : copied.getSuperType()) {
+            permanent.addSuperType(t);
+        }
+        permanent.getCardType().clear();
+        for (CardType cardType : copied.getCardType()) {
+            permanent.addCardType(cardType);
+        }
+        permanent.removeAllSubTypes(game);
+        permanent.setIsAllCreatureTypes(copied.isAllCreatureTypes());
+        permanent.getSubtype(game).addAll(copied.getSubtype(game));
+        permanent.setIsAllCreatureTypes(copied.isAllCreatureTypes());
+        permanent.getColor(game).setColor(copied.getColor(game));
+        permanent.removeAllAbilities(source.getSourceId(), game);
+        for (Ability ability : copied.getAbilities()) {
+            permanent.addAbility(ability, source.getSourceId(), game);
+        }
+        permanent.getPower().setValue(copied.getPower().getBaseValue());
+        permanent.getToughness().setValue(copied.getToughness().getBaseValue());
+        return true;
     }
 
     @Override

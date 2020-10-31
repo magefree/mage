@@ -247,7 +247,7 @@ public class Spell extends StackObjImpl implements Card {
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
                     if (!card.getSubtype(game).contains(SubType.AURA)) {
-                        card.getSubtype(game).add(SubType.AURA);
+                        card.addSubType(game, SubType.AURA);
                     }
                 }
                 UUID permId = null;
@@ -271,9 +271,7 @@ public class Spell extends StackObjImpl implements Card {
                         Permanent permanent = game.getPermanent(permId);
                         if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            if (!card.getCardType().contains(CardType.CREATURE)) {
-                                card.addCardType(CardType.CREATURE);
-                            }
+                            card.addCardType(CardType.CREATURE);
                             card.getSubtype(game).remove(SubType.AURA);
                         }
                     }

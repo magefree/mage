@@ -28,6 +28,7 @@ public final class WebweaverChangeling extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // Reach

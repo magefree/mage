@@ -35,8 +35,8 @@ public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (perm != null && !perm.hasSubtype(addedSubtype, game)) {
-                perm.getSubtype(game).add(addedSubtype);
+            if (perm != null) {
+                perm.addSubType(game, addedSubtype);
             }
         }
         return true;
