@@ -37,6 +37,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 297, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archon of Coronation", 9, Rarity.MYTHIC, mage.cards.a.ArchonOfCoronation.class));
         cards.add(new SetCardInfo("Armillary Sphere", 298, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
+        cards.add(new SetCardInfo("Armix, Filigree Thrasher", 108, Rarity.UNCOMMON, mage.cards.a.ArmixFiligreeThrasher.class));
         cards.add(new SetCardInfo("Aurora Phoenix", 161, Rarity.RARE, mage.cards.a.AuroraPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 12, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Averna, the Chaos Bloom", 269, Rarity.RARE, mage.cards.a.AvernaTheChaosBloom.class));
