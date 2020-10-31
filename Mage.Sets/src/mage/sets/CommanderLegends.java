@@ -121,6 +121,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Null Caller", 140, Rarity.UNCOMMON, mage.cards.n.NullCaller.class));
         cards.add(new SetCardInfo("Numa, Joraga Chieftain", 246, Rarity.UNCOMMON, mage.cards.n.NumaJoragaChieftain.class));
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 288, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
+        cards.add(new SetCardInfo("Obeka, Brute Chronologist", 289, Rarity.RARE, mage.cards.o.ObekaBruteChronologist.class));
         cards.add(new SetCardInfo("Omenspeaker", 83, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
         cards.add(new SetCardInfo("Path of Ancestry", 353, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Patron of the Valiant", 37, Rarity.UNCOMMON, mage.cards.p.PatronOfTheValiant.class));
