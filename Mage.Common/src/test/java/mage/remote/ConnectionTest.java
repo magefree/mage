@@ -36,7 +36,7 @@ public class ConnectionTest {
         return new ConnectionBuilder();
     }
 
-    class TestsTemplate {
+    static class TestsTemplate {
         final ConnectionBuilder testeeBuilder;
 
         TestsTemplate(ConnectionBuilder testeeBuilder) {

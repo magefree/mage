@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <server serverAddress="address"
+            serverName="name"
+            port="1"
+            secondaryBindPort="2"
+            backlogSize="3"
+            numAcceptThreads="4"
+            maxPoolSize="5"
+            leasePeriod="6"
+            socketWriteTimeout="7"
+            maxGameThreads="8"
+            maxSecondsIdle="9"
+            minUserNameLength="10"
+            maxUserNameLength="11"
+            invalidUserNamePattern="pattern"
+            minPasswordLength="12"
+            maxPasswordLength="13"
+            maxAiOpponents="14"
+            saveGameActivated="true"
+            authenticationActivated="true"
+            googleAccount="account"
+            mailgunApiKey="apikey"
+            mailgunDomain="domain"
+            mailSmtpHost="smtphost"
+            mailSmtpPort="smtpport"
+            mailUser="user"
+            mailPassword="password"
+            mailFromAddress="fromaddress"
+            multihome="true">
+        <home internal="internal_home_1" external="external_home_1" port="15" />
+        <home internal="internal_home_2" external="external_home_2" port="16"  externalport="17" secondaryport="18"/>
+    </server>
+    <playerTypes>
+        <playerType name="playername" jar="player.jar" className="foo.bar.Player"/>
+    </playerTypes>
+    <gameTypes>
+        <gameType name="gamename" jar="game.jar" className="foo.bar.Game" typeName="foo.bar.GameType"/>
+    </gameTypes>
+    <tournamentTypes>
+        <tournamentType name="tournamentname" jar="tournamentname.jar" className="foo.bar.Tournament" typeName="foo.bar.TournamentType"/>
+    </tournamentTypes>
+    <draftCubes>
+        <draftCube name="cubename" jar="cube.jar" className="foo.bar.Cube"/>
+    </draftCubes>
+    <deckTypes>
+        <deckType name="deckname" jar="deck.jar" className="foo.bar.Deck"/>
+    </deckTypes>
+</config>

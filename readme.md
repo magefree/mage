@@ -68,6 +68,81 @@ The XMage server locates by default the configuration file from the current work
 to the desired location, for example `-Dxmage.config.path=config/otherconfig.xml`. The option can be set from the 
 XMageLauncher in `Settings > Java > Server java options`.
 
+### Server connection
+
+The server can be configured in two ways: with a single home or with multiple homes. An _home_ is a reachable host which
+can be resolved by a client and which accepts connections from the client. For example, `xmage.de:17171` is a home, 
+since `xmage.de` is domain which can be resolved to an ip and which has an xmage server backing the socket.
+
+Single home configurations are adequate for LAN deployments and for the deployment of public servers. In fact, in a LAN
+it is possible to define as home the ip of the server and in a public server it is possible to define as home the public domain.
+
+Multi home configuration are ideal for NAT backed deployments. Multi home configurations allows, in fact, to bind the server
+to a local socket but publish different resolvable IPs or domains for clients to connect to.
+
+In order to configure a server in single home mode, alter the configuration file as follows:
+
+```xml
+<config>
+    <server serverAddress="<reachable ip or domain>"
+            port="<available port>"
+            secondaryBindPort="<available port>"
+     />
+</config>
+```
+
+Replace the `serverAddress` with the reachable ip or domain, `port` for the port that servers the application. Depending
+on the specific configuration, you might not need to specify a secondary port.
+
+In order to configure a server in multi home mode, alter the configuration file as follows:
+
+```xml
+<config>
+    <server multihome="true">
+        <home internal="<interface of the server>" external="<reachable ip or domain>" port="<port>" />
+        <home internal="<interface of the server>" 
+              external="<reachable ip or domain>" 
+              port="<available port>" 
+              externalport="<available port>" 
+              secondaryport="<available port>" />
+    </server>
+</config>
+```
+
+The minimal configuration requires to specify the `internal`, `external` and `port` attribute for a home. The way the
+home is configured is by indicating as `external` an ip or domain reachable by the clients and as `externalport` an available
+and open port on that address. The connections reaching that address are then directed to the interface associate to the socket `internal:port`.
+The connection details in the `server` attributes are ignored when `multihome` is enabled.
+
+To exemplify, let's assume that you want to host a server on a computer that sits behind a NAT. For illustration purposes,
+let's assume that the lan IP of the server is `192.168.1.2`, the public IP of the server is `9.9.9.9` and that port forwarding
+is configured to direct connections reaching port `17171` and `17172` at the public ip to `9.9.9.9` to `192.168.1.2`. Let's also assume
+that a client `A` is connecting to the server from the lan and client `B` is connecting to the server from the public internet.
+
+In this setup, the server configuration should be as follows:
+
+```xml
+<config>
+    <server multihome="true">
+        <home internal="0.0.0.0" external="192.168.1.2" port="17173" />
+        <home internal="0.0.0.0" 
+              external="9.9.9.9" 
+              port="17171" 
+              secondaryport="17172" />
+    </server>
+</config>
+```
+
+Since the homes don't have `externalport` defined, they are configured to replicate the `port` attribute (i.e. value `17173` nad `17173`).
+
+Using `0.0.0.0` in the internal host binds the server to all interfaces, but you can limit it to a specific interface if you
+wish to do so (in this case, `192.168.1.2` would be a valid bind).
+
+Client `A` can then connect to the server using address `192.168.1.2:17173` while client `B` can connect to the server
+using address `9.9.9.9:17171`.
+
+The `external` address can be replaced with a valid domain that resolves to the ip if you own such a domain defined.
+
 ## Troubleshooting / FAQ
 
 Github issues page contain [popular problems and fixes](https://github.com/magefree/mage/issues?q=is%3Aissue+label%3AFAQ+):
