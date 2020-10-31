@@ -76,7 +76,7 @@ public class FatesealEffect extends OneShotEffect {
                 }
                 // move cards to the top of the library
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
-                game.fireEvent(new GameEvent(GameEvent.EventType.FATESEAL, opponent.getId(), source.getSourceId(), source.getControllerId()));
+                game.fireEvent(new GameEvent(GameEvent.EventType.FATESEALED, opponent.getId(), source.getSourceId(), source.getControllerId()));
                 controller.setTopCardRevealed(revealed);
                 return true;
             }

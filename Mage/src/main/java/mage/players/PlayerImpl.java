@@ -4528,9 +4528,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean scry(int value, Ability source, Game game) {
-        game.informPlayers(getLogName() + " scries " + value);
+        GameEvent event = new GameEvent(EventType.SCRY, getId(), source == null
+                ? null : source.getSourceId(), getId(), value, true);
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        game.informPlayers(getLogName() + " scries " + event.getAmount());
         Cards cards = new CardsImpl();
-        cards.addAll(getLibrary().getTopCards(game, value));
+        cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
@@ -4540,8 +4545,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             cards.removeAll(target.getTargets());
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
-        game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, getId(), source == null
-                ? null : source.getSourceId(), getId(), value, true));
+        game.fireEvent(new GameEvent(GameEvent.EventType.SCRIED, getId(), source == null
+                ? null : source.getSourceId(), getId(), event.getAmount(), true));
         return true;
     }
 
