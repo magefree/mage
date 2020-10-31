@@ -60,6 +60,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Entourage of Trest", 224, Rarity.COMMON, mage.cards.e.EntourageOfTrest.class));
         cards.add(new SetCardInfo("Exquisite Huntmaster", 122, Rarity.COMMON, mage.cards.e.ExquisiteHuntmaster.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
+        cards.add(new SetCardInfo("Fall from Favor", 68, Rarity.COMMON, mage.cards.f.FallFromFavor.class));
         cards.add(new SetCardInfo("Farhaven Elf", 225, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
         cards.add(new SetCardInfo("First Response", 22, Rarity.UNCOMMON, mage.cards.f.FirstResponse.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 128, Rarity.COMMON, mage.cards.f.FleshbagMarauder.class));
