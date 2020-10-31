@@ -64,6 +64,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Forceful Denial", 69, Rarity.COMMON, mage.cards.f.ForcefulDenial.class));
         cards.add(new SetCardInfo("Furnace Celebration", 181, Rarity.UNCOMMON, mage.cards.f.FurnaceCelebration.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 228, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
+        cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 275, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 71, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Gift of Paradise", 229, Rarity.COMMON, mage.cards.g.GiftOfParadise.class));
         cards.add(new SetCardInfo("Gor Muldrak, Amphinologist", 277, Rarity.RARE, mage.cards.g.GorMuldrakAmphinologist.class));
