@@ -106,6 +106,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Cartographer", 30, Rarity.COMMON, mage.cards.k.KorCartographer.class));
         cards.add(new SetCardInfo("Krark, the Thumbless", 189, Rarity.RARE, mage.cards.k.KrarkTheThumbless.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
+        cards.add(new SetCardInfo("Laboratory Drudge", 78, Rarity.RARE, mage.cards.l.LaboratoryDrudge.class));
         cards.add(new SetCardInfo("Livio, Oathsworn Sentinel", 31, Rarity.RARE, mage.cards.l.LivioOathswornSentinel.class));
         cards.add(new SetCardInfo("Ludevic, Necro-Alchemist", 525, Rarity.MYTHIC, mage.cards.l.LudevicNecroAlchemist.class));
         cards.add(new SetCardInfo("Maelstrom Colossus", 322, Rarity.COMMON, mage.cards.m.MaelstromColossus.class));
