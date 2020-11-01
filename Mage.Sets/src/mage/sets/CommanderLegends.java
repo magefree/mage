@@ -192,6 +192,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Thought Vessel", 346, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thrasios, Triton Hero", 538, Rarity.MYTHIC, mage.cards.t.ThrasiosTritonHero.class));
         cards.add(new SetCardInfo("Three Visits", 261, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
+        cards.add(new SetCardInfo("Tormod, the Desecrator", 155, Rarity.UNCOMMON, mage.cards.t.TormodTheDesecrator.class));
         cards.add(new SetCardInfo("Training Center", 358, Rarity.RARE, mage.cards.t.TrainingCenter.class));
         cards.add(new SetCardInfo("Tymna the Weaver", 539, Rarity.MYTHIC, mage.cards.t.TymnaTheWeaver.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 359, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));

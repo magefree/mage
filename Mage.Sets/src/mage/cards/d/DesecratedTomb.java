@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -13,8 +13,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.token.BatToken;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DesecratedTomb extends CardImpl {
@@ -38,11 +40,11 @@ public final class DesecratedTomb extends CardImpl {
 
 class DesecratedTombTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DesecratedTombTriggeredAbility() {
+    DesecratedTombTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BatToken()), false);
     }
 
-    public DesecratedTombTriggeredAbility(final DesecratedTombTriggeredAbility ability) {
+    private DesecratedTombTriggeredAbility(final DesecratedTombTriggeredAbility ability) {
         super(ability);
     }
 
@@ -54,22 +56,16 @@ class DesecratedTombTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null && Zone.GRAVEYARD == zEvent.getFromZone()
+        return zEvent != null
+                && Zone.GRAVEYARD == zEvent.getFromZone()
                 && Zone.GRAVEYARD != zEvent.getToZone()
-                && zEvent.getCards() != null) {
-            for (Card card : zEvent.getCards()) {
-                if (card != null) {
-                    UUID cardOwnerId = card.getOwnerId();
-                    if (cardOwnerId != null
-                            && card.isOwnedBy(getControllerId())
-                            && card.isCreature()) {
-                        return true;
-                    }
-                }
-
-            }
-        }
-        return false;
+                && zEvent.getCards() != null
+                && zEvent.getCards()
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(MageObject::isCreature)
+                .map(Card::getOwnerId)
+                .anyMatch(getControllerId()::equals);
     }
 
     @Override
@@ -79,6 +75,7 @@ class DesecratedTombTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more creature cards leave your graveyard, create a 1/1 black Bat creature token with flying";
+        return "Whenever one or more creature cards leave your graveyard, " +
+                "create a 1/1 black Bat creature token with flying.";
     }
 }
