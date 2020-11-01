@@ -56,8 +56,6 @@ public class ClientCallback implements Serializable {
         } else {
             this.data = CompressUtil.compress(data);
         }
-
-        this.data = data;
     }
 
     public void decompressData() {
