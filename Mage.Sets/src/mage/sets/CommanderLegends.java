@@ -113,6 +113,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Ludevic, Necro-Alchemist", 525, Rarity.MYTHIC, mage.cards.l.LudevicNecroAlchemist.class));
         cards.add(new SetCardInfo("Maelstrom Colossus", 322, Rarity.COMMON, mage.cards.m.MaelstromColossus.class));
         cards.add(new SetCardInfo("Maelstrom Wanderer", 526, Rarity.MYTHIC, mage.cards.m.MaelstromWanderer.class));
+        cards.add(new SetCardInfo("Magus of the Order", 242, Rarity.RARE, mage.cards.m.MagusOfTheOrder.class));
         cards.add(new SetCardInfo("Makeshift Munitions", 191, Rarity.COMMON, mage.cards.m.MakeshiftMunitions.class));
         cards.add(new SetCardInfo("Mana Confluence", 721, Rarity.MYTHIC, mage.cards.m.ManaConfluence.class));
         cards.add(new SetCardInfo("Marble Diamond", 323, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
