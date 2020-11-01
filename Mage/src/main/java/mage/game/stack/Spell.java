@@ -178,6 +178,12 @@ public class Spell extends StackObjImpl implements Card {
                     + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
         }
 
+        if (card instanceof ModalDoubleFacesCardHalf) {
+            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), mdfCard)
+                    + " as mdf side of " + GameLog.getColoredObjectIdName(mdfCard);
+        }
+
         return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());
     }
 

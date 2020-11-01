@@ -1,5 +1,6 @@
 package mage.util;
 
+import com.google.common.collect.ImmutableList;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -9,6 +10,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.cards.Card;
 import mage.cards.MeldCard;
 import mage.cards.ModalDoubleFacesCard;
@@ -26,6 +29,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
+import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -38,6 +42,10 @@ import java.util.stream.Collectors;
  * @author nantuko
  */
 public final class CardUtil {
+
+    private static final Logger logger = Logger.getLogger(CardUtil.class);
+
+    public static final List<String> RULES_ERROR_INFO = ImmutableList.of("Exception occurred in rules generation");
 
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
@@ -896,5 +904,55 @@ public final class CardUtil {
         } else {
             return card.getName();
         }
+    }
+
+    public static List<String> getCardRulesWithAdditionalInfo(UUID cardId, String cardName,
+                                                              Abilities<Ability> rulesSource, Abilities<Ability> hintAbilities) {
+        return getCardRulesWithAdditionalInfo(null, cardId, cardName, rulesSource, hintAbilities);
+    }
+
+    /**
+     * Prepare rules list from abilities
+     *
+     * @param rulesSource abilities list to show as rules
+     * @param hintsSource abilities list to show as card hints only (you can add additional hints here; exameple: from second or transformed side)
+     */
+    public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
+                                                              Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
+        try {
+            List<String> rules = rulesSource.getRules(cardName);
+
+            if (game != null) {
+
+                // debug state
+                for (String data : game.getState().getCardState(cardId).getInfo().values()) {
+                    rules.add(data);
+                }
+
+                // ability hints
+                List<String> abilityHints = new ArrayList<>();
+                if (HintUtils.ABILITY_HINTS_ENABLE) {
+                    for (Ability ability : hintsSource) {
+                        for (Hint hint : ability.getHints()) {
+                            String s = hint.getText(game, ability);
+                            if (s != null && !s.isEmpty()) {
+                                abilityHints.add(s);
+                            }
+                        }
+                    }
+                }
+
+                // restrict hints only for permanents, not cards
+                // total hints
+                if (!abilityHints.isEmpty()) {
+                    rules.add(HintUtils.HINT_START_MARK);
+                    HintUtils.appendHints(rules, abilityHints);
+                }
+            }
+            return rules;
+        } catch (Exception e) {
+            logger.error("Exception in rules generation for card: " + cardName, e);
+        }
+        return RULES_ERROR_INFO;
     }
 }

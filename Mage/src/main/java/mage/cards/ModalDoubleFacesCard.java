@@ -12,6 +12,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 import mage.util.SubTypeList;
 
 import java.util.ArrayList;
@@ -157,20 +158,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
-
-        // ignore default spell ability from main card (only halfes are actual)
-        for (Ability ability : super.getAbilities()) {
-            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
-                continue;
-            }
-            allAbilites.add(ability);
-        }
-
-        allAbilites.addAll(super.getAbilities());
-        allAbilites.addAll(leftHalfCard.getAbilities());
-        allAbilites.addAll(rightHalfCard.getAbilities());
-        return allAbilites;
+        return getInnerAbilities(false);
     }
 
     public Abilities<Ability> getSharedAbilities(Game game) {
@@ -180,6 +168,10 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
 
     @Override
     public Abilities<Ability> getAbilities(Game game) {
+        return getInnerAbilities(game, false);
+    }
+
+    private Abilities<Ability> getInnerAbilities(Game game, boolean showOnlyMainSide) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
 
         // ignore default spell ability from main card (only halfes are actual)
@@ -191,8 +183,48 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         }
 
         allAbilites.addAll(leftHalfCard.getAbilities(game));
-        allAbilites.addAll(rightHalfCard.getAbilities(game));
+        if (!showOnlyMainSide) {
+            allAbilites.addAll(rightHalfCard.getAbilities(game));
+        }
+
         return allAbilites;
+    }
+
+    private Abilities<Ability> getInnerAbilities(boolean showOnlyMainSide) {
+        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
+
+        // ignore default spell ability from main card (only halfes are actual)
+        for (Ability ability : super.getAbilities()) {
+            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
+                continue;
+            }
+            allAbilites.add(ability);
+        }
+
+        allAbilites.addAll(leftHalfCard.getAbilities());
+        if (!showOnlyMainSide) {
+            allAbilites.addAll(rightHalfCard.getAbilities());
+        }
+
+        return allAbilites;
+    }
+
+    @Override
+    public List<String> getRules() {
+        // rules must show only main side (another side visible by toggle/transform button in GUI)
+        // card hints from both sides
+        return CardUtil.getCardRulesWithAdditionalInfo(this.getId(), this.getName(),
+                this.getInnerAbilities(true), this.getInnerAbilities(false)
+        );
+    }
+
+    @Override
+    public List<String> getRules(Game game) {
+        // rules must show only main side (another side visible by toggle/transform button in GUI)
+        // card hints from both sides
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(),
+                this.getInnerAbilities(game, true), this.getInnerAbilities(game, false)
+        );
     }
 
     @Override

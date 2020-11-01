@@ -100,4 +100,10 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
         this.power = power;
         this.toughness = toughness;
     }
+
+    @Override
+    public String getIdName() {
+        // id must send to main card (popup card hint in game logs)
+        return getName() + " [" + parentCard.getId().toString().substring(0, 3) + ']';
+    }
 }

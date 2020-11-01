@@ -1309,7 +1309,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                         card.getId(), card.getId(), playerId, activationStatus.getApprovingObject());
                 landEventAfter.setZone(cardZoneBefore);
                 game.fireEvent(landEventAfter);
-                game.fireInformEvent(getLogName() + " plays " + card.getLogName());
+
+                String playText = getLogName() + " plays " + card.getLogName();
+                if (card instanceof ModalDoubleFacesCardHalf) {
+                    ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+                    playText = getLogName() + " plays " + GameLog.replaceNameByColoredName(card, card.getName(), mdfCard)
+                            + " as MDF side of " + GameLog.getColoredObjectIdName(mdfCard);
+                }
+                game.fireInformEvent(playText);
                 // game.removeBookmark(bookmark);
                 resetStoredBookmark(game); // prevent undo after playing a land
                 return true;
