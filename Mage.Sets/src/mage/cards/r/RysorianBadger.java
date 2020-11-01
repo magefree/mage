@@ -1,29 +1,21 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
-import mage.cards.Card;
-import mage.constants.SubType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.DefendingPlayerOwnsCardPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RysorianBadger extends CardImpl {
@@ -31,7 +23,7 @@ public final class RysorianBadger extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards from defending player's graveyard");
 
     static {
-        filter.add(new DefendingPlayerOwnsCardPredicate());
+        filter.add(DefendingPlayerOwnsCardPredicate.instance);
     }
 
     public RysorianBadger(UUID ownerId, CardSetInfo setInfo) {

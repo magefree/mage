@@ -158,6 +158,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Radiant, Serra Archangel", 40, Rarity.UNCOMMON, mage.cards.r.RadiantSerraArchangel.class));
         cards.add(new SetCardInfo("Raise the Alarm", 41, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));
         cards.add(new SetCardInfo("Rakdos, Lord of Riots", 532, Rarity.MYTHIC, mage.cards.r.RakdosLordOfRiots.class));
+        cards.add(new SetCardInfo("Rakshasa Debaser", 146, Rarity.RARE, mage.cards.r.RakshasaDebaser.class));
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 545, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Ravos, Soultender", 533, Rarity.MYTHIC, mage.cards.r.RavosSoultender.class));
         cards.add(new SetCardInfo("Rebbec, Architect of Ascension", 42, Rarity.UNCOMMON, mage.cards.r.RebbecArchitectOfAscension.class));

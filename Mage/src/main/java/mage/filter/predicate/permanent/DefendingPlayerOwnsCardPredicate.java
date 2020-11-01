@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import mage.cards.Card;
@@ -7,10 +6,10 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 
 /**
- *
  * @author TheElk801
  */
-public class DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+public enum DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
@@ -19,6 +18,6 @@ public class DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredi
 
     @Override
     public String toString() {
-        return "Another";
+        return "";
     }
 }

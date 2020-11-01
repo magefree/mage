@@ -24,7 +24,7 @@ public final class GravenAbomination extends CardImpl {
     private static final FilterCard filter = new FilterCard("card from defending player's graveyard");
 
     static {
-        filter.add(new DefendingPlayerOwnsCardPredicate());
+        filter.add(DefendingPlayerOwnsCardPredicate.instance);
     }
 
     public GravenAbomination(UUID ownerId, CardSetInfo setInfo) {
