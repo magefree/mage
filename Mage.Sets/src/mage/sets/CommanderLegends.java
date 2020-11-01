@@ -102,6 +102,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kinsbaile Courier", 29, Rarity.COMMON, mage.cards.k.KinsbaileCourier.class));
         cards.add(new SetCardInfo("Kitesail Corsair", 76, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
         cards.add(new SetCardInfo("Kitesail Skirmisher", 77, Rarity.COMMON, mage.cards.k.KitesailSkirmisher.class));
+        cards.add(new SetCardInfo("Kodama of the East Tree", 239, Rarity.RARE, mage.cards.k.KodamaOfTheEastTree.class));
         cards.add(new SetCardInfo("Kor Cartographer", 30, Rarity.COMMON, mage.cards.k.KorCartographer.class));
         cards.add(new SetCardInfo("Krark, the Thumbless", 189, Rarity.RARE, mage.cards.k.KrarkTheThumbless.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
