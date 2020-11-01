@@ -3,10 +3,7 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -42,7 +39,9 @@ public final class ChandraFlamecaller extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraDrawEffect(), 0));
 
         // -X: Chandra, Flamecaller deals X damage to each creature.
-        this.addAbility(new LoyaltyAbility(new DamageAllEffect(ChandraXValue.getDefault(), StaticFilters.FILTER_PERMANENT_CREATURE)));
+        this.addAbility(new LoyaltyAbility(new DamageAllEffect(
+                GetXLoyaltyValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
+        )));
     }
 
     public ChandraFlamecaller(final ChandraFlamecaller card) {
@@ -110,39 +109,5 @@ class ChandraDrawEffect extends OneShotEffect {
         int amount = player.discard(player.getHand(), source, game).size();
         player.drawCards(amount + 1, source.getSourceId(), game);
         return true;
-    }
-}
-
-class ChandraXValue implements DynamicValue {
-
-    private static final ChandraXValue defaultValue = new ChandraXValue();
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                return ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return defaultValue;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    public static ChandraXValue getDefault() {
-        return defaultValue;
     }
 }

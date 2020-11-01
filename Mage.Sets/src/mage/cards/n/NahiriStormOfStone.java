@@ -5,12 +5,9 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
@@ -27,7 +24,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -67,7 +63,7 @@ public final class NahiriStormOfStone extends CardImpl {
         this.addAbility(ability);
 
         // -X: Nahiri, Storm of Stone deals X damage to target tapped creature.
-        ability = new LoyaltyAbility(new DamageTargetEffect(NahiriStormOfStoneValue.instance));
+        ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -79,34 +75,5 @@ public final class NahiriStormOfStone extends CardImpl {
     @Override
     public NahiriStormOfStone copy() {
         return new NahiriStormOfStone(this);
-    }
-}
-
-enum NahiriStormOfStoneValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                return ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

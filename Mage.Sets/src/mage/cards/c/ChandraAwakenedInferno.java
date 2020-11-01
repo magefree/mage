@@ -4,10 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -55,7 +52,7 @@ public final class ChandraAwakenedInferno extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DamageAllEffect(3, filter), -3));
 
         // -X: Chandra, Awakened Inferno deals X damage to target creature or planeswalker. If a permanent dealt damage this way would die this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new DamageTargetEffect(ChandraAwakenedInfernoXValue.instance));
+        Ability ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
         ability.addEffect(
                 new ExileTargetIfDiesEffect()
                         .setText("If a permanent dealt damage this way would die this turn, exile it instead.")
@@ -97,34 +94,5 @@ class ChandraAwakenedInfernoEffect extends OneShotEffect {
             game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObjectIfItStillExists(game), playerId);
         }
         return true;
-    }
-}
-
-enum ChandraAwakenedInfernoXValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                return ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
     }
 }
