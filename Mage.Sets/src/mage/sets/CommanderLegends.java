@@ -95,6 +95,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Roar", 23, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Intangible Virtue", 24, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Interpret the Signs", 75, Rarity.UNCOMMON, mage.cards.i.InterpretTheSigns.class));
+        cards.add(new SetCardInfo("Jeska, Thrice Reborn", 186, Rarity.MYTHIC, mage.cards.j.JeskaThriceReborn.class));
         cards.add(new SetCardInfo("Jeweled Lotus", 319, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
         cards.add(new SetCardInfo("Kamahl, Heart of Krosa", 237, Rarity.MYTHIC, mage.cards.k.KamahlHeartOfKrosa.class));
         cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 188, Rarity.UNCOMMON, mage.cards.k.KedissEmberclawFamiliar.class));

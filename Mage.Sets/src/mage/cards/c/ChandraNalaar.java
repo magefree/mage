@@ -1,14 +1,9 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -18,12 +13,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public final class ChandraNalaar extends CardImpl {
@@ -41,7 +36,7 @@ public final class ChandraNalaar extends CardImpl {
         this.addAbility(ability1);
 
         // -X: Chandra Nalaar deals X damage to target creature.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(ChandraNalaarXValue.getDefault()));
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
 
@@ -66,36 +61,3 @@ public final class ChandraNalaar extends CardImpl {
     }
 }
 
-class ChandraNalaarXValue implements DynamicValue {
-
-    private static final ChandraNalaarXValue defaultValue = new ChandraNalaarXValue();
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                return ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return defaultValue;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    public static ChandraNalaarXValue getDefault() {
-        return defaultValue;
-    }
-}
