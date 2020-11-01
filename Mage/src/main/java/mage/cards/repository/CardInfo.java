@@ -198,14 +198,7 @@ public class CardInfo {
                 rulesList.add(rule);
             }
         } else if (card instanceof ModalDoubleFacesCard) {
-            for (String rule : ((ModalDoubleFacesCard) card).getLeftHalfCard().getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-            for (String rule : ((ModalDoubleFacesCard) card).getRightHalfCard().getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
+            // mdf card return main side's rules only (GUI can toggle it to another side)
             for (String rule : card.getRules()) {
                 length += rule.length();
                 rulesList.add(rule);

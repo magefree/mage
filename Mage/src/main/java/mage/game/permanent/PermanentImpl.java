@@ -264,7 +264,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // ability hints
             List<String> abilityHints = new ArrayList<>();
             if (HintUtils.ABILITY_HINTS_ENABLE) {
-                for (Ability ability : abilities) {
+                for (Ability ability : getAbilities(game)) {
                     for (Hint hint : ability.getHints()) {
                         String s = hint.getText(game, ability);
                         if (s != null && !s.isEmpty()) {
@@ -341,7 +341,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             return rules;
         } catch (Exception e) {
-            return rulesError;
+            return CardUtil.RULES_ERROR_INFO;
         }
     }
 

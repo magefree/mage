@@ -417,7 +417,6 @@ public class CardView extends SimpleCardView {
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSuperType();
         this.color = card.getColor(game);
-        this.transformable = card.isTransformable();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
 
@@ -436,7 +435,7 @@ public class CardView extends SimpleCardView {
                 this.tokenDescriptor = card.getTokenDescriptor();
             }
             //
-            // set code und card number for token copies to get the image
+            // set code and card number for token copies to get the image
             this.rules = card.getRules(game);
             this.type = ((PermanentToken) card).getToken().getTokenType();
         } else {
@@ -445,6 +444,8 @@ public class CardView extends SimpleCardView {
         }
 
         // transformable, double faces cards
+        this.transformable = card.isTransformable();
+
         Card secondSideCard = card.getSecondCardFace();
         if (secondSideCard != null) {
             this.secondCardFace = new CardView(secondSideCard);
@@ -458,14 +459,13 @@ public class CardView extends SimpleCardView {
             this.originalName = card.getName();
         }
 
-        /*
         if (card instanceof ModalDoubleFacesCard) {
+            this.transformable = true; // enable GUI day/night button
             ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
             this.secondCardFace = new CardView(mdfCard.getRightHalfCard());
             this.alternateName = mdfCard.getRightHalfCard().getName();
             this.originalName = card.getName();
         }
-        */
 
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;

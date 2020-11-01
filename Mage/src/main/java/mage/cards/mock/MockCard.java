@@ -78,7 +78,6 @@ public class MockCard extends CardImpl {
         if (this.isPlaneswalker()) {
             String startingLoyaltyString = card.getStartingLoyalty();
             if (startingLoyaltyString.isEmpty()) {
-                //Logger.getLogger(MockCard.class).warn("Planeswalker `" + this.name + "` has empty starting loyalty.");
             } else {
                 try {
                     this.startingLoyalty = Integer.parseInt(startingLoyaltyString);
