@@ -47,7 +47,6 @@ public final class VizierOfManyFaces extends CardImpl {
 
         // Embalm {3}{U}{U}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}{U}"), this));
-
     }
 
     public VizierOfManyFaces(final VizierOfManyFaces card) {
@@ -70,21 +69,21 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
         for (Permanent entering : game.getPermanentsEntering().values()) {
-            if (entering.getId().equals(copyToObjectId) && entering instanceof PermanentToken) {
-                UUID originalCardId = ((PermanentToken) entering).getToken().getCopySourceCard().getId();
-                EmbalmedThisTurnWatcher watcher = game.getState().getWatcher(EmbalmedThisTurnWatcher.class);
-                if (watcher != null) {
-                    for (MageObjectReference mor : watcher.getEmbalmedThisTurnCards()) {
-                        if (Objects.equals(mor.getSourceId(), originalCardId) && game.getState().getZoneChangeCounter(originalCardId) == mor.getZoneChangeCounter()) {
-                            permanent.getManaCost().clear();
-                            if (!permanent.hasSubtype(SubType.ZOMBIE, game)) {
-                                permanent.getSubtype(game).add(SubType.ZOMBIE);
-                            }
-                            permanent.getColor(game).setColor(ObjectColor.WHITE);
-
-                        }
-                    }
+            if (!entering.getId().equals(copyToObjectId) || !(entering instanceof PermanentToken)) {
+                continue;
+            }
+            UUID originalCardId = ((PermanentToken) entering).getToken().getCopySourceCard().getId();
+            EmbalmedThisTurnWatcher watcher = game.getState().getWatcher(EmbalmedThisTurnWatcher.class);
+            if (watcher == null) {
+                continue;
+            }
+            for (MageObjectReference mor : watcher.getEmbalmedThisTurnCards()) {
+                if (!Objects.equals(mor.getSourceId(), originalCardId) || game.getState().getZoneChangeCounter(originalCardId) != mor.getZoneChangeCounter()) {
+                    continue;
                 }
+                permanent.getManaCost().clear();
+                permanent.addSubType(game, SubType.ZOMBIE);
+                permanent.getColor(game).setColor(ObjectColor.WHITE);
             }
         }
         return true;
@@ -117,5 +116,4 @@ class EmbalmedThisTurnWatcher extends Watcher {
         super.reset();
         embalmedThisTurnTokens.clear();
     }
-
 }

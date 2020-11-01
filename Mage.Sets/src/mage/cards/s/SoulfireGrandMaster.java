@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,11 +10,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.AdventureCardSpell;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCardHalf;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
@@ -25,6 +22,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -142,15 +141,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
                     && event.getTargetId().equals(spellId)) {
                 if (game.getStack().getFirst() instanceof Spell) {
                     Card cardOfSpell = ((Spell) game.getStack().getFirst()).getCard();
-                    if (cardOfSpell instanceof SplitCardHalf) {
-                        return ((SplitCardHalf) cardOfSpell).getParentCard().getId().equals(spellId);
-                    } else if (cardOfSpell instanceof AdventureCardSpell) {
-                        return (((AdventureCardSpell) cardOfSpell).getParentCard().getId().equals(spellId));
-                    } else {
-                        if (cardOfSpell.getId().equals(spellId)) {
-                            return true;
-                        }
-                    }
+                    return cardOfSpell.getMainCard().getId().equals(spellId);
                 }
             }
         }

@@ -1,28 +1,22 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class AgelessSentinels extends CardImpl {
@@ -43,7 +37,7 @@ public final class AgelessSentinels extends CardImpl {
         // When Ageless Sentinels blocks, it becomes a Bird Giant, and it loses defender.
         Ability ability = new BlocksSourceTriggeredAbility(new AgelessSentinelsEffect(), false, false, true);
         Effect effect = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect.setText("and it loses defender");
+        effect.setText(", and it loses defender");
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -60,8 +54,8 @@ public final class AgelessSentinels extends CardImpl {
     private class AgelessSentinelsEffect extends ContinuousEffectImpl {
 
         public AgelessSentinelsEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-            staticText = "it becomes a Bird Giant,";
+            super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
+            staticText = "it becomes a Bird Giant";
         }
 
         public AgelessSentinelsEffect(final AgelessSentinelsEffect effect) {
@@ -74,25 +68,14 @@ public final class AgelessSentinels extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent == null) {
                 return false;
             }
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.BIRD, SubType.GIANT);
-                    }
-                    break;
-            }
+            permanent.removeAllCreatureTypes(game);
+            permanent.addSubType(game, SubType.BIRD, SubType.GIANT);
             return true;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
         }
 
         @Override

@@ -59,7 +59,7 @@ class StoneforgeMasterworkDynamicValue implements DynamicValue {
             if (equipped != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceAbility.getControllerId(), game)) {
                     if (!permanent.getId().equals(equipped.getId())) {
-                        if (equipped.shareSubtypes(permanent, game)) {
+                        if (equipped.shareCreatureTypes(permanent, game)) {
                             xValue++;
                         }
                     }

@@ -48,7 +48,7 @@ public final class Dragonshift extends CardImpl {
                         .withColor("UR")
                         .withSubType(SubType.DRAGON)
                         .withAbility(FlyingAbility.getInstance()),
-                null, filter, Duration.EndOfTurn, true));
+                null, filter, Duration.EndOfTurn, true, false, true));
         this.addAbility(ability);
     }
 

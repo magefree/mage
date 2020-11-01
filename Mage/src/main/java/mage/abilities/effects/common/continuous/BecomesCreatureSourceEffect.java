@@ -82,78 +82,66 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         } else {
             permanent = game.getPermanent(source.getSourceId());
         }
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        if (losePreviousTypes) {
-                            permanent.getCardType().clear();
-                        }
-                        for (CardType cardType : token.getCardType()) {
-                            if (permanent.getCardType().contains(cardType)) {
-                                continue;
-                            }
-                            permanent.addCardType(cardType);
-                        }
-
-                        if (theyAreStillType != null && theyAreStillType.isEmpty() || theyAreStillType == null && permanent.isLand()) {
-                            permanent.getSubtype(game).retainAll(SubType.getLandTypes());
-                        }
-                        if (!token.getSubtype(game).isEmpty()) {
-                            for (SubType subType : token.getSubtype(game)) {
-                                if (permanent.hasSubtype(subType, game)) {
-                                    continue;
-                                }
-                                permanent.getSubtype(game).add(subType);
-                            }
-                        }
-                        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
-                    }
-                    break;
-
-                case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
-                        if (token.getColor(game).hasColor()) {
-                            permanent.getColor(game).setColor(token.getColor(game));
-                        }
-                    }
-                    break;
-
-                case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        if (loseAbilities) {
-                            permanent.removeAllAbilities(source.getSourceId(), game);
-                        }
-                        for (Ability ability : token.getAbilities()) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
-                        }
-                    }
-                    break;
-
-                case PTChangingEffects_7:
-                    if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
-                            || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
-                        if (power != null) {
-                            permanent.getPower().setValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
-                        } else if (token.getPower() != null) {
-                            permanent.getPower().setValue(token.getPower().getValue());
-                        }
-                        if (toughness != null) {
-                            permanent.getToughness().setValue(toughness.calculate(game, source, this));
-                        } else if (token.getToughness() != null) {
-                            permanent.getToughness().setValue(token.getToughness().getValue());
-                        }
-                    }
-                    break;
+        if (permanent == null) {
+            if (duration == Duration.Custom) {
+                this.discard();
             }
+            return false;
+        }
+        switch (layer) {
+            case TypeChangingEffects_4:
+                if (losePreviousTypes) {
+                    permanent.getCardType().clear();
+                }
+                for (CardType cardType : token.getCardType()) {
+                    permanent.addCardType(cardType);
+                }
 
-            return true;
+                if (theyAreStillType != null && theyAreStillType.isEmpty()
+                        || theyAreStillType == null && permanent.isLand()) {
+                    permanent.removeAllCreatureTypes(game);
+                }
+                if (!token.getSubtype(game).isEmpty()) {
+                    for (SubType subType : token.getSubtype(game)) {
+                        permanent.addSubType(game, subType);
+                    }
+                }
+                permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
+                break;
 
-        } else if (duration == Duration.Custom) {
-            this.discard();
+            case ColorChangingEffects_5:
+                if (token.getColor(game).hasColor()) {
+                    permanent.getColor(game).setColor(token.getColor(game));
+                }
+                break;
+
+            case AbilityAddingRemovingEffects_6:
+                if (loseAbilities) {
+                    permanent.removeAllAbilities(source.getSourceId(), game);
+                }
+                for (Ability ability : token.getAbilities()) {
+                    permanent.addAbility(ability, source.getSourceId(), game);
+                }
+                break;
+
+            case PTChangingEffects_7:
+                if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
+                        || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
+                    if (power != null) {
+                        permanent.getPower().setValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
+                    } else if (token.getPower() != null) {
+                        permanent.getPower().setValue(token.getPower().getValue());
+                    }
+                    if (toughness != null) {
+                        permanent.getToughness().setValue(toughness.calculate(game, source, this));
+                    } else if (token.getToughness() != null) {
+                        permanent.getToughness().setValue(token.getToughness().getValue());
+                    }
+                }
+                break;
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -171,7 +159,10 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.AbilityAddingRemovingEffects_6
+                || layer == Layer.ColorChangingEffects_5
+                || layer == Layer.TypeChangingEffects_4;
     }
 
 }

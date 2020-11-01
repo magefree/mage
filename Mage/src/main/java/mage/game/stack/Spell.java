@@ -178,6 +178,12 @@ public class Spell extends StackObjImpl implements Card {
                     + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
         }
 
+        if (card instanceof ModalDoubleFacesCardHalf) {
+            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), mdfCard)
+                    + " as mdf side of " + GameLog.getColoredObjectIdName(mdfCard);
+        }
+
         return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());
     }
 
@@ -247,7 +253,7 @@ public class Spell extends StackObjImpl implements Card {
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
                     if (!card.getSubtype(game).contains(SubType.AURA)) {
-                        card.getSubtype(game).add(SubType.AURA);
+                        card.addSubType(game, SubType.AURA);
                     }
                 }
                 UUID permId = null;
@@ -271,9 +277,7 @@ public class Spell extends StackObjImpl implements Card {
                         Permanent permanent = game.getPermanent(permId);
                         if (permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
-                            if (!card.getCardType().contains(CardType.CREATURE)) {
-                                card.addCardType(CardType.CREATURE);
-                            }
+                            card.addCardType(CardType.CREATURE);
                             card.getSubtype(game).remove(SubType.AURA);
                         }
                     }
@@ -712,11 +716,6 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public String getFlipCardName() {
         return null;
-    }
-
-    @Override
-    public boolean isSplitCard() {
-        return false;
     }
 
     @Override

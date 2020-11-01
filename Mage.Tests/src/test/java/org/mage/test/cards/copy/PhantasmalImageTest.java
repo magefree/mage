@@ -1,25 +1,25 @@
 package org.mage.test.cards.copy;
 
+import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.junit.Assert.*;
+
 /**
  * @author noxx
- *
+ * <p>
  * Card: You may have {this} enter the battlefield as a copy of any creature on
  * the battlefield, except it's an Illusion in addition to its other types and
  * it gains "When this creature becomes the target of a spell or ability,
  * sacrifice it."
- *
  */
 public class PhantasmalImageTest extends CardTestPlayerBase {
 
@@ -130,6 +130,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     //  CardTestPlayerAPIImpl.assertPowerToughness:351->CardTestPlayerAPIImpl.assertPowerToughness:337
     // There is no such creature under player's control with specified power&toughness, player=PlayerA,
     // cardName=Ravager of the Fells (found similar: 1, one of them: power=8 toughness=8)
+
     /**
      * Tests copying already transformed creature Makes sure it still has "When
      * this creature becomes the target of a spell or ability, sacrifice it"
@@ -313,7 +314,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * the "When this creature becomes the target of a spell or ability,
      * sacrifice it." ability. I did not pay attention to see if it failed to
      * become an illusion too.
-     *
      */
     @Test
     public void testCopiedFrostTitan() {
@@ -426,13 +426,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     /**
      * Action Game State 1 -----------------> Game State 2 (On 'field) (Move to
      * GY) (In graveyard)
-     *
+     * <p>
      * LTB abilities such as Persist are expceptional in that they trigger based
      * on their existence and state of objects before the event (Game State 1,
      * when the card is on the battlefield) rather than after (Game State 2,
      * when the card is in the graveyard). It doesn't matter that the LTB
      * ability doesn't exist in Game State 2. [CR 603.6d]
-     *
+     * <p>
      * 603.6d Normally, objects that exist immediately after an event are
      * checked to see if the event matched any trigger conditions. Continuous
      * effects that exist at that time are used to determine what the trigger
@@ -446,13 +446,12 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * planeswalks away from a plane will trigger based on their existence, and
      * the appearance of objects, prior to the event rather than afterward. The
      * game has to “look back in time” to determine if these abilities trigger.
-     *
+     * <p>
      * Example: Two creatures are on the battlefield along with an artifact that
      * has the ability “Whenever a creature dies, you gain 1 life.” Someone
      * plays a spell that destroys all artifacts, creatures, and enchantments.
      * The artifact's ability triggers twice, even though the artifact goes to
      * its owner's graveyard at the same time as the creatures.
-     *
      */
     @Test
     public void testPersist() {
@@ -549,7 +548,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * battlefield. 12:29: Phantasmal Image [466] died 12:29: HipSomHap puts a
      * Wurm [7d0] token onto the battlefield 12:29: HipSomHap puts a Wurm [186]
      * token onto the battlefield
-     *
+     * <p>
      * To the best of my knowledge, the Phantasmal Image [466], which entered
      * the battlefield as a Wurmcoil Engine, should grant tokens through the
      * Dies-trigger as well, right?
@@ -609,5 +608,70 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Elemental", 1);
         assertPermanentCount(playerA, "Elemental", 1);
 
+    }
+
+    @Test
+    public void testAnimatedArtifact() {
+        addCard(Zone.BATTLEFIELD, playerB, "Chimeric Staff");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+
+        setChoice(playerB, "X=1");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}");
+
+        setChoice(playerA, "Chimeric Staff");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        Permanent staffA = getPermanent("Chimeric Staff", playerA);
+        assertTrue("Phantasmal Image should be an artifact", staffA.isArtifact());
+        assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature());
+        assertTrue("Phantasmal Image should not be an Illusion", !staffA.hasSubtype(SubType.ILLUSION, currentGame));
+        assertTrue("Phantasmal Image should not be a Construct", !staffA.hasSubtype(SubType.CONSTRUCT, currentGame));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+
+        Permanent staffB = getPermanent("Chimeric Staff", playerB);
+        assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact());
+        assertTrue("Chimeric Staff should be a creature", staffB.isCreature());
+        assertTrue("Chimeric Staff should be a Construct", staffB.hasSubtype(SubType.CONSTRUCT, currentGame));
+    }
+
+    @Test
+    public void testAnimatedTribal() {
+        addCard(Zone.BATTLEFIELD, playerB, "Cloak and Dagger");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Karn's Touch");
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Touch", "Cloak and Dagger");
+
+        setChoice(playerA, "Cloak and Dagger");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAllCommandsUsed();
+
+        Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
+        assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact());
+        assertTrue("Phantasmal Image should be tribal", cloakA.isTribal());
+        assertTrue("Phantasmal Image should not be a creature", !cloakA.isCreature());
+        assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
+        assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
+        assertTrue("Phantasmal Image should be an Equipment", cloakA.hasSubtype(SubType.EQUIPMENT, currentGame));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+
+        Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
+        assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact());
+        assertTrue("Cloak and Dagger should be a creature", cloakB.isCreature());
+        assertTrue("Cloak and Dagger should be tribal", cloakB.isTribal());
+        assertTrue("Cloak and Dagger should be a Rogue", cloakB.hasSubtype(SubType.ROGUE, currentGame));
+        assertTrue("Cloak and Dagger should be an Equipment", cloakB.hasSubtype(SubType.EQUIPMENT, currentGame));
     }
 }

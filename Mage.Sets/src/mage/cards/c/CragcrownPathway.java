@@ -1,26 +1,40 @@
 package mage.cards.c;
 
+import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
 import java.util.UUID;
 
-import mage.abilities.keyword.TransformAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class CragcrownPathway extends CardImpl {
+public final class CragcrownPathway extends ModalDoubleFacesCard {
 
     public CragcrownPathway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{}, "",
+                "Timbercrown Pathway", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.secondSideCardClazz = mage.cards.t.TimbercrownPathway.class;
+        // 1.
+        // Cragcrown Pathway
+        // Land
 
         // {T}: Add {R}.
-        this.addAbility(new RedManaAbility());
-        this.addAbility(new TransformAbility());
+        this.getLeftHalfCard().addAbility(new RedManaAbility());
+        this.getLeftHalfCard().addAbility(new TransformAbility());
+
+        // 2.
+        // Timbercrown Pathway
+        // Land
+
+        // {T}: Add {G}.
+        this.getRightHalfCard().addAbility(new GreenManaAbility());
     }
 
     private CragcrownPathway(final CragcrownPathway card) {

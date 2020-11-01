@@ -22,20 +22,6 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         this.setText();
     }
 
-    /*public SetCardSubtypeAttachedEffect(SubType setSubtype, Duration duration, AttachmentType attachmentType) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        this.setSubtypes.add(setSubtype);
-        this.attachmentType = attachmentType;
-        setText();
-    }
-
-    public SetCardSubtypeAttachedEffect(List<String> setSubtypes, Duration duration, AttachmentType attachmentType) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        this.setSubtypes.addAll(setSubtypes);
-        this.attachmentType = attachmentType;
-        setText();
-    }*/
-
     public SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
         super(effect);
         this.setSubtypes = effect.setSubtypes;
@@ -45,13 +31,15 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null) {
-                target.getSubtype(game).retainAll(SubType.getLandTypes());
-                target.getSubtype(game).addAll(setSubtypes);
-            }
+        if (equipment == null || equipment.getAttachedTo() == null) {
+            return true;
         }
+        Permanent target = game.getPermanent(equipment.getAttachedTo());
+        if (target == null) {
+            return true;
+        }
+        target.removeAllCreatureTypes(game);
+        target.getSubtype(game).addAll(setSubtypes);
         return true;
     }
 

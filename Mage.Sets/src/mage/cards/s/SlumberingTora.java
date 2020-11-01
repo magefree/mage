@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -17,23 +16,24 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SlumberingTora extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Spirit or Arcane card");
-    
+
     static {
-        filter.add(Predicates.or(SubType.SPIRIT.getPredicate(),SubType.ARCANE.getPredicate()));
-    }    
+        filter.add(Predicates.or(SubType.SPIRIT.getPredicate(), SubType.ARCANE.getPredicate()));
+    }
 
     public SlumberingTora(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         // {2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn,
         // where X is the discarded card's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SlumberingToraEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new SlumberingToraEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         this.addAbility(ability);
     }
@@ -46,15 +46,18 @@ public final class SlumberingTora extends CardImpl {
     public SlumberingTora copy() {
         return new SlumberingTora(this);
     }
-    
+
     private static class SlumberingToraEffect extends ContinuousEffectImpl {
 
-        public SlumberingToraEffect() {
+        private int convManaCosts = 0;
+
+        private SlumberingToraEffect() {
             super(Duration.EndOfTurn, Outcome.BecomeCreature);
-            setText();
+            staticText = "{this} becomes an X/X Cat artifact creature until end of turn, " +
+                    "where X is the discarded card's converted mana cost";
         }
 
-        public SlumberingToraEffect(final SlumberingToraEffect effect) {
+        private SlumberingToraEffect(final SlumberingToraEffect effect) {
             super(effect);
         }
 
@@ -64,32 +67,35 @@ public final class SlumberingTora extends CardImpl {
         }
 
         @Override
+        public void init(Ability source, Game game) {
+            super.init(source, game);
+            for (Cost cost : source.getCosts()) {
+                if (cost instanceof DiscardTargetCost && !((DiscardTargetCost) cost).getCards().isEmpty()) {
+                    convManaCosts = ((DiscardTargetCost) cost).getCards().get(0).getConvertedManaCost();
+                    return;
+                }
+            }
+        }
+
+        @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                        if (sublayer == SubLayer.NA) {
-                            permanent.addCardType(CardType.CREATURE);
-                            permanent.getSubtype(game).add(SubType.CAT);
-                        }
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
-                            int convManaCosts = 0;
-                            for (Cost cost: source.getCosts()) {
-                                if (cost instanceof DiscardTargetCost && !((DiscardTargetCost) cost).getCards().isEmpty()) {
-                                    convManaCosts = ((DiscardTargetCost)cost).getCards().get(0).getConvertedManaCost();
-                                    break;
-                                }
-                            }
-                            permanent.getPower().setValue(convManaCosts);
-                            permanent.getToughness().setValue(convManaCosts);
-                        }
-                }
-                return true;
+            if (permanent == null) {
+                return false;
             }
-            return false;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.addCardType(CardType.ARTIFACT);
+                    permanent.addCardType(CardType.CREATURE);
+                    permanent.addSubType(game, SubType.CAT);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setValue(convManaCosts);
+                        permanent.getToughness().setValue(convManaCosts);
+                    }
+            }
+            return true;
         }
 
         @Override
@@ -97,14 +103,9 @@ public final class SlumberingTora extends CardImpl {
             return false;
         }
 
-        private void setText() {
-            staticText = "{this} becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's converted mana cost";
-        }
-
         @Override
         public boolean hasLayer(Layer layer) {
             return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
         }
     }
-
 }

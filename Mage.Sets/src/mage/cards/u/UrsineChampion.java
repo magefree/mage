@@ -1,26 +1,20 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class UrsineChampion extends CardImpl {
@@ -53,14 +47,14 @@ public final class UrsineChampion extends CardImpl {
         return new UrsineChampion(this);
     }
 
-    private class UrsineChampionEffect extends ContinuousEffectImpl {
+    private static class UrsineChampionEffect extends ContinuousEffectImpl {
 
-        public UrsineChampionEffect() {
-            super(Duration.EndOfTurn, Outcome.BecomeCreature);
-            setText();
+        private UrsineChampionEffect() {
+            super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
+            staticText = "and becomes a Bear Berserker until end of turn";
         }
 
-        public UrsineChampionEffect(final UrsineChampionEffect effect) {
+        private UrsineChampionEffect(final UrsineChampionEffect effect) {
             super(effect);
         }
 
@@ -70,35 +64,14 @@ public final class UrsineChampion extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent == null) {
                 return false;
             }
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.BEAR);
-                        permanent.getSubtype(game).add(SubType.BERSERKER);
-                    }
-                    break;
-            }
+            permanent.removeAllCreatureTypes(game);
+            permanent.addSubType(game, SubType.BEAR, SubType.BERSERKER);
             return true;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        private void setText() {
-            staticText = "and becomes a Bear Berserker until end of turn";
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.TypeChangingEffects_4;
         }
     }
 }

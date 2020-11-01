@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author jmharmon
  */
 
@@ -32,7 +31,7 @@ public final class WishfulMerfolk extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {1}{U}: Wishful Merfolk loses defender and becomes a Human until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WishfulMerfolkEffect(), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new WishfulMerfolkEffect(), new ManaCostsImpl("{1}{U}")));
     }
 
     public WishfulMerfolk(final WishfulMerfolk card) {
@@ -64,23 +63,19 @@ class WishfulMerfolkEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.removeAbility(DefenderAbility.getInstance(), source.getSourceId(), game);
-                    }
-                    break;
-                case TypeChangingEffects_4:
-                    if (permanent.getSubtype(game).contains(SubType.MERFOLK)) {
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.HUMAN);
-                    }
-                    break;
-            }
-            return true;
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        switch (layer) {
+            case AbilityAddingRemovingEffects_6:
+                permanent.removeAbility(DefenderAbility.getInstance(), source.getSourceId(), game);
+                break;
+            case TypeChangingEffects_4:
+                permanent.removeAllCreatureTypes(game);
+                permanent.addSubType(game, SubType.HUMAN);
+                break;
+        }
+        return true;
     }
 
     @Override

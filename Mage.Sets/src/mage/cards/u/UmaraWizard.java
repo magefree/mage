@@ -1,11 +1,14 @@
 package mage.cards.u;
 
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -14,26 +17,36 @@ import mage.filter.StaticFilters;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class UmaraWizard extends CardImpl {
+public final class UmaraWizard extends ModalDoubleFacesCard {
 
     public UmaraWizard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.MERFOLK, SubType.WIZARD}, "{4}{U}",
+                "Umara Skyfalls", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
-
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.u.UmaraSkyfalls.class;
+        // 1.
+        // Umara Wizard
+        // Creature — Merfolk Wizard
+        this.getLeftHalfCard().setPT(new MageInt(4), new MageInt(3));
 
         // Whenever you cast an instant, sorcery, or Wizard spell, Umara Wizard gains flying until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 StaticFilters.FILTER_SPELL_INSTANT_SORCERY_WIZARD, false
         ));
+
+        // 2.
+        // Umara Skyfalls
+        // Land
+
+        // Umara Skyfalls enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {U}.
+        this.getRightHalfCard().addAbility(new BlueManaAbility());
     }
 
     private UmaraWizard(final UmaraWizard card) {

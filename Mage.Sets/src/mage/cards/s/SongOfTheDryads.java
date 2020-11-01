@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -9,20 +8,14 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SongOfTheDryads extends CardImpl {
@@ -40,7 +33,6 @@ public final class SongOfTheDryads extends CardImpl {
 
         // Enchanted permanent is a colorless Forest land.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesColorlessForestLandEffect()));
-
     }
 
     public SongOfTheDryads(final SongOfTheDryads card) {
@@ -55,13 +47,13 @@ public final class SongOfTheDryads extends CardImpl {
 
 class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
 
-    public BecomesColorlessForestLandEffect() {
+    BecomesColorlessForestLandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Enchanted permanent is a colorless Forest land";
         dependencyTypes.add(DependencyType.BecomeForest);
     }
 
-    public BecomesColorlessForestLandEffect(final BecomesColorlessForestLandEffect effect) {
+    private BecomesColorlessForestLandEffect(final BecomesColorlessForestLandEffect effect) {
         super(effect);
     }
 
@@ -78,38 +70,36 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null) {
-                switch (layer) {
-                    case ColorChangingEffects_5:
-                        permanent.getColor(game).setWhite(false);
-                        permanent.getColor(game).setGreen(false);
-                        permanent.getColor(game).setBlack(false);
-                        permanent.getColor(game).setBlue(false);
-                        permanent.getColor(game).setRed(false);
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                        break;
-                    case TypeChangingEffects_4:
-                        permanent.removeAllAbilities(source.getSourceId(), game);
-                        permanent.getCardType().clear();
-                        permanent.addCardType(CardType.LAND);
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.FOREST);
-                        break;
-                }
-                return true;
-            }
+        if (enchantment == null || enchantment.getAttachedTo() == null) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        if (permanent == null) {
+            return false;
+        }
+        switch (layer) {
+            case ColorChangingEffects_5:
+                permanent.getColor(game).setWhite(false);
+                permanent.getColor(game).setGreen(false);
+                permanent.getColor(game).setBlack(false);
+                permanent.getColor(game).setBlue(false);
+                permanent.getColor(game).setRed(false);
+                break;
+            case TypeChangingEffects_4:
+                permanent.getCardType().clear();
+                permanent.addCardType(CardType.LAND);
+                permanent.removeAllSubTypes(game);
+                permanent.addSubType(game, SubType.FOREST);
+                permanent.removeAllAbilities(source.getSourceId(), game);
+                permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                break;
+        }
+        return true;
     }
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6
-                || layer == Layer.ColorChangingEffects_5
+        return layer == Layer.ColorChangingEffects_5
                 || layer == Layer.TypeChangingEffects_4;
     }
 }

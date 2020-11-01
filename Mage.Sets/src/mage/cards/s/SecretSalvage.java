@@ -1,16 +1,9 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -21,9 +14,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SecretSalvage extends CardImpl {
@@ -72,9 +67,11 @@ class SecretSalvageEffect extends OneShotEffect {
             Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
             if (targetCard != null) {
                 controller.moveCards(targetCard, Zone.EXILED, source, game);
+
+                String nameToSearch = CardUtil.getCardNameForSameNameSearch(targetCard);
                 FilterCard nameFilter = new FilterCard();
-                String nameToSearch = targetCard.isSplitCard() ? ((SplitCard) targetCard).getLeftHalfCard().getName() : targetCard.getName();
                 nameFilter.add(new NamePredicate(nameToSearch));
+
                 TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, nameFilter);
                 if (controller.searchLibrary(target, source, game)) {
                     if (!target.getTargets().isEmpty()) {

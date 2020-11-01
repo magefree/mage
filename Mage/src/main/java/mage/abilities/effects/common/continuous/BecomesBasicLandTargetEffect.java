@@ -123,7 +123,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                             landTypesToAdd.clear();
                             for (SubType subtype : landTypes) {
                                 if (!land.hasSubtype(subtype, game)) {
-                                    land.getSubtype(game).add(subtype);
+                                    land.addSubType(game, subtype);
                                     landTypesToAdd.add(subtype);
                                 }
                             }

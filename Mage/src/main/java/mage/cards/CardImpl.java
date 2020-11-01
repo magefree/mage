@@ -1,13 +1,10 @@
 package mage.cards;
 
-import com.google.common.collect.ImmutableList;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
@@ -22,6 +19,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
 import mage.watchers.Watcher;
@@ -57,10 +55,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean flipCard;
     protected String flipCardName;
     protected boolean usesVariousArt = false;
-    protected boolean splitCard;
     protected boolean morphCard;
-    protected boolean modalDFC; // modal double faces card
-
     protected List<UUID> attachments = new ArrayList<>();
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
@@ -139,9 +134,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
-        splitCard = card.splitCard;
         morphCard = card.morphCard;
-        modalDFC = card.modalDFC;
 
         this.attachments.addAll(card.attachments);
     }
@@ -223,52 +216,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         game.getState().getCardState(objectId).addInfo(key, value);
     }
 
-    protected static final List<String> rulesError = ImmutableList.of("Exception occurred in rules generation");
-
     @Override
     public List<String> getRules() {
-        try {
-            return getAbilities().getRules(this.getName());
-        } catch (Exception e) {
-            logger.info("Exception in rules generation for card: " + this.getName(), e);
-        }
-        return rulesError;
+        Abilities<Ability> sourceAbilities = this.getAbilities();
+        return CardUtil.getCardRulesWithAdditionalInfo(this.getId(), this.getName(), sourceAbilities, sourceAbilities);
     }
 
     @Override
     public List<String> getRules(Game game) {
-        try {
-            List<String> rules = getAbilities(game).getRules(getName());
-            if (game != null) {
-                // debug state
-                for (String data : game.getState().getCardState(objectId).getInfo().values()) {
-                    rules.add(data);
-                }
-                // ability hints
-                List<String> abilityHints = new ArrayList<>();
-                if (HintUtils.ABILITY_HINTS_ENABLE) {
-                    for (Ability ability : abilities) {
-                        for (Hint hint : ability.getHints()) {
-                            String s = hint.getText(game, ability);
-                            if (s != null && !s.isEmpty()) {
-                                abilityHints.add(s);
-                            }
-                        }
-                    }
-                }
-
-                // restrict hints only for permanents, not cards
-                // total hints
-                if (!abilityHints.isEmpty()) {
-                    rules.add(HintUtils.HINT_START_MARK);
-                    HintUtils.appendHints(rules, abilityHints);
-                }
-            }
-            return rules;
-        } catch (Exception e) {
-            logger.error("Exception in rules generation for card: " + this.getName(), e);
-        }
-        return rulesError;
+        Abilities<Ability> sourceAbilities = this.getAbilities(game);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(), sourceAbilities, sourceAbilities);
     }
 
     /**
@@ -314,7 +271,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // workaround to add dynamic flashback ability from main card to all parts (example: Snapcaster Mage gives flashback to split card)
         if (!this.getId().equals(this.getMainCard().getId())) {
             CardState mainCardState = game.getState().getCardState(this.getMainCard().getId());
-            if (mainCardState != null
+            if (this.getSpellAbility() != null // lands can't be casted (haven't spell ability), so ignore it
+                    && mainCardState != null
                     && !mainCardState.hasLostAllAbilities()
                     && mainCardState.getAbilities().containsClass(FlashbackAbility.class)) {
                 FlashbackAbility flash = new FlashbackAbility(this.getManaCost(), this.isInstant() ? TimingRule.INSTANT : TimingRule.SORCERY);
@@ -563,10 +521,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     stackObject = game.getStack().getSpell(this.getId(), false);
                 }
 
-                if (stackObject == null && (this instanceof SplitCard)) { // handle if half of Split cast is on the stack
+                // handle half of Split Cards on stack
+                if (stackObject == null && (this instanceof SplitCard)) {
                     stackObject = game.getStack().getSpell(((SplitCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
                         stackObject = game.getStack().getSpell(((SplitCard) this).getRightHalfCard().getId(), false);
+                    }
+                }
+
+                // handle half of Modal Double Faces Cards on stack
+                if (stackObject == null && (this instanceof ModalDoubleFacesCard)) {
+                    stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getLeftHalfCard().getId(), false);
+                    if (stackObject == null) {
+                        stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getRightHalfCard().getId(), false);
                     }
                 }
 
@@ -687,10 +654,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
-        // TODO: remove when MDFCs are implemented
-        if (modalDFC) {
-            return null;
-        }
         // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
@@ -724,11 +687,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getFlipCardName() {
         return flipCardName;
-    }
-
-    @Override
-    public boolean isSplitCard() {
-        return splitCard;
     }
 
     @Override

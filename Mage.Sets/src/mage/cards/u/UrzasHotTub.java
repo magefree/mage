@@ -1,7 +1,5 @@
-
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,10 +8,7 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
@@ -25,14 +20,15 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public class UrzasHotTub extends CardImpl {
 
     public UrzasHotTub(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, Discard a card: Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasHotTubEffect(), new ManaCostsImpl("{2}"));
@@ -95,21 +91,23 @@ class UrzasHotTubPredicate implements Predicate<MageObject> {
     public boolean apply(MageObject input, Game game) {
         String name = input.getName();
         if (input instanceof SplitCard) {
-            return sharesWordWithName(((SplitCard)input).getLeftHalfCard().getName()) || sharesWordWithName(((SplitCard)input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED){
-            SplitCard card = (SplitCard) ((Spell)input).getCard();
+            return sharesWordWithName(((SplitCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((SplitCard) input).getRightHalfCard().getName());
+        } else if (input instanceof ModalDoubleFacesCard) {
+            return sharesWordWithName(((ModalDoubleFacesCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((ModalDoubleFacesCard) input).getRightHalfCard().getName());
+        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+            SplitCard card = (SplitCard) ((Spell) input).getCard();
             return sharesWordWithName(card.getLeftHalfCard().getName()) || sharesWordWithName(card.getRightHalfCard().getName());
         } else {
             if (name.contains(" // ")) {
                 String leftName = name.substring(0, name.indexOf(" // "));
-                String rightName = name.substring(name.indexOf(" // ") + 4, name.length());
+                String rightName = name.substring(name.indexOf(" // ") + 4);
                 return sharesWordWithName(leftName) || sharesWordWithName(rightName);
             } else {
                 return sharesWordWithName(name);
             }
         }
     }
-    
+
     private boolean sharesWordWithName(String str) {
         if (referenceName == null || referenceName == "") {
             return false;

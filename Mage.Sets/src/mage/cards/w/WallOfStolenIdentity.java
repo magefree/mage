@@ -3,28 +3,32 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
 import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -46,11 +50,8 @@ public final class WallOfStolenIdentity extends CardImpl {
 
         // You may have Wall of Stolen Identity enter the battlefield as a copy of any creature on the battlefield, except it's a wall in addition to its other types and it has defender. When you do, tap the copied creature and it doesn't untap during its controller's untap step for as long as you control Wall of Stolen Identity.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(
-                        new WallOfStolenIdentityCopyEffect(),
-                        rule,
-                        true));
+                new EntersBattlefieldEffect(new WallOfStolenIdentityCopyEffect(), rule, true)
+        );
         this.addAbility(ability);
     }
 
@@ -86,53 +87,54 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
             permanent = game.getPermanentEntering(source.getSourceId());
         }
         final Permanent sourcePermanent = permanent;
-        if (controller != null
-                && sourcePermanent != null) {
-            Target target = new TargetPermanent(new FilterCreaturePermanent("target creature (you copy from)"));
-            target.setRequired(true);
-            if (source instanceof SimpleStaticAbility) {
-                target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
-                target.setRequired(false);
-                target.setNotTarget(true);
-            }
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                controller.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
-                if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new ApplyToPermanent() {
-                        @Override
-                        public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-                            permanent.getSubtype(game).add(SubType.WALL);
-                            permanent.getAbilities().add(DefenderAbility.getInstance());
-                            return true;
-                        }
-
-                        @Override
-                        public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-                            mageObject.getSubtype(game).add(SubType.WALL);
-                            mageObject.getAbilities().add(DefenderAbility.getInstance());
-                            return true;
-                        }
-
-                    });
-
-                    copyFromPermanent.tap(game);
-                    // Incredibly, you can't just add a fixed target to a continuousrulemodifyingeffect, thus the workaround.
-                    ContinuousRuleModifyingEffect effect = new DontUntapInControllersUntapStepSourceEffect();
-                    Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-                    ContinuousEffect effect2 = new GainAbilityTargetEffect(ability, Duration.Custom);
-                    ConditionalContinuousEffect conditionalEffect = new ConditionalContinuousEffect(
-                            effect2, new WallOfStolenIdentityCondition(
-                                    source, 
-                                    source.getControllerId(), 
-                                    sourcePermanent.getZoneChangeCounter(game)), "");
-                    conditionalEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-                    game.addEffect(conditionalEffect, source);
-                    return true;
-                }
-            }
+        if (controller == null
+                || sourcePermanent == null) {
+            return false;
         }
-        return false;
+        Target target = new TargetPermanent(new FilterCreaturePermanent("target creature (you copy from)"));
+        target.setRequired(true);
+        if (source instanceof SimpleStaticAbility) {
+            target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
+            target.setRequired(false);
+            target.setNotTarget(true);
+        }
+        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            return false;
+        }
+        controller.choose(Outcome.Copy, target, source.getSourceId(), game);
+        Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
+        if (copyFromPermanent == null) {
+            return false;
+        }
+        game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new ApplyToPermanent() {
+            @Override
+            public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+                permanent.addSubType(game, SubType.WALL);
+                permanent.getAbilities().add(DefenderAbility.getInstance());
+                return true;
+            }
+
+            @Override
+            public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+                mageObject.addSubType(game, SubType.WALL);
+                mageObject.getAbilities().add(DefenderAbility.getInstance());
+                return true;
+            }
+        });
+
+        copyFromPermanent.tap(game);
+        // Incredibly, you can't just add a fixed target to a continuousrulemodifyingeffect, thus the workaround.
+        ContinuousRuleModifyingEffect effect = new DontUntapInControllersUntapStepSourceEffect();
+        Ability ability = new SimpleStaticAbility(effect);
+        ContinuousEffect effect2 = new GainAbilityTargetEffect(ability, Duration.Custom);
+        ConditionalContinuousEffect conditionalEffect = new ConditionalContinuousEffect(
+                effect2, new WallOfStolenIdentityCondition(
+                source,
+                source.getControllerId(),
+                sourcePermanent.getZoneChangeCounter(game)), "");
+        conditionalEffect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+        game.addEffect(conditionalEffect, source);
+        return true;
     }
 
     @Override

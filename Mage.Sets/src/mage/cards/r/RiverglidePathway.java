@@ -3,23 +3,36 @@ package mage.cards.r;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class RiverglidePathway extends CardImpl {
+public final class RiverglidePathway extends ModalDoubleFacesCard {
 
     public RiverglidePathway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{}, "",
+                "Lavaglide Pathway", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.l.LavaglidePathway.class;
+        // 1.
+        // Riverglide Pathway
+        // Land
 
         // {T}: Add {U}.
-        this.addAbility(new RedManaAbility());
+        this.getLeftHalfCard().addAbility(new RedManaAbility());
+
+        // 2.
+        // Lavaglide Pathway
+        // Land
+
+        // {T}: Add {R}.
+        this.getRightHalfCard().addAbility(new RedManaAbility());
     }
 
     private RiverglidePathway(final RiverglidePathway card) {

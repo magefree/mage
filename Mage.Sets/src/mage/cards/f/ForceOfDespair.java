@@ -30,7 +30,7 @@ public final class ForceOfDespair extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter2.add(new EnteredThisTurnPredicate());
+        filter2.add(EnteredThisTurnPredicate.instance);
     }
 
     public ForceOfDespair(UUID ownerId, CardSetInfo setInfo) {

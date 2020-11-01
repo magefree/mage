@@ -1,24 +1,31 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.*;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCardHalf;
 import mage.cards.SplitCardHalf;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * Aftermath
- *
+ * <p>
  * TODO: Implement once we get details on the comprehensive rules meaning of the
  * ability
- *
+ * <p>
  * Current text is a shell copied from Flashback
  *
  * @author stravant
@@ -113,9 +120,7 @@ class AftermathCantCastFromHand extends ContinuousRuleModifyingEffectImpl {
         Card card = game.getCard(event.getSourceId());
         if (card != null && card.getId().equals(source.getSourceId())) {
             Zone zone = game.getState().getZone(card.getId());
-            if (zone != null && (zone != Zone.GRAVEYARD)) {
-                return true;
-            }
+            return zone != null && (zone != Zone.GRAVEYARD);
         }
         return false;
     }
@@ -155,14 +160,16 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
                 sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
                 sourceId = sourceCard.getId();
             }
+            if (sourceCard instanceof ModalDoubleFacesCardHalf) {
+                sourceCard = ((ModalDoubleFacesCardHalf) sourceCard).getParentCard();
+                sourceId = sourceCard.getId();
+            }
 
             if (event.getTargetId().equals(sourceId)) {
                 // Moving this spell from stack to yard
                 Spell spell = game.getStack().getSpell(source.getSourceId());
-                if (spell != null && spell.getFromZone() == Zone.GRAVEYARD) {
-                    // And this spell was cast from the graveyard, so we need to exile it
-                    return true;
-                }
+                // And this spell was cast from the graveyard, so we need to exile it
+                return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
             }
         }
         return false;
@@ -173,6 +180,9 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
         Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard instanceof SplitCardHalf) {
             sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
+        }
+        if (sourceCard instanceof ModalDoubleFacesCardHalf) {
+            sourceCard = ((ModalDoubleFacesCardHalf) sourceCard).getParentCard();
         }
         if (sourceCard != null) {
             Player player = game.getPlayer(sourceCard.getOwnerId());

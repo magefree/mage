@@ -3,12 +3,10 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.effects.common.continuous.GainAllCreatureTypesAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -26,9 +24,7 @@ public final class AmorphousAxe extends CardImpl {
 
         // Equipped creature gets +3/+0 and is every creature type.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 0));
-        ability.addEffect(new GainAbilityAttachedEffect(
-                ChangelingAbility.getInstance(), AttachmentType.EQUIPMENT
-        ).setText("and is every creature type"));
+        ability.addEffect(new GainAllCreatureTypesAttachedEffect());
         this.addAbility(ability);
 
         // Equip {3}

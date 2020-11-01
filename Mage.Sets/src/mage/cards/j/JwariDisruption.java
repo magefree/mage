@@ -1,28 +1,45 @@
 package mage.cards.j;
 
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.cards.CardImpl;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class JwariDisruption extends CardImpl {
+public final class JwariDisruption extends ModalDoubleFacesCard {
 
     public JwariDisruption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.INSTANT}, new SubType[]{}, "{1}{U}",
+                "Jwari Ruins", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.j.JwariDisruption.class;
+        // 1.
+        // Jwari Disruption
+        // Instant
 
         // Counter target spell unless its controller pays {1}.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
-        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getLeftHalfCard().getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell());
+
+        // 2.
+        // Jwari Ruins
+        // Land
+
+        // Jwari Ruins enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {U}.
+        this.getRightHalfCard().addAbility(new BlueManaAbility());
     }
 
     private JwariDisruption(final JwariDisruption card) {

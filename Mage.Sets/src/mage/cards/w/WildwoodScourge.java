@@ -33,7 +33,7 @@ public final class WildwoodScourge extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // Whenever one or more +1/+1 counters are put on another non-Hydra creature you control, put a +1/+1 counter on Wildwood Scourge.
-        this.addAbility(new EnduringScalelordTriggeredAbility());
+        this.addAbility(new WildwoodScourgeTriggeredAbility());
     }
 
     private WildwoodScourge(final WildwoodScourge card) {
@@ -46,19 +46,19 @@ public final class WildwoodScourge extends CardImpl {
     }
 }
 
-class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
+class WildwoodScourgeTriggeredAbility extends TriggeredAbilityImpl {
 
-    EnduringScalelordTriggeredAbility() {
+    WildwoodScourgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    private EnduringScalelordTriggeredAbility(final EnduringScalelordTriggeredAbility ability) {
+    private WildwoodScourgeTriggeredAbility(final WildwoodScourgeTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public EnduringScalelordTriggeredAbility copy() {
-        return new EnduringScalelordTriggeredAbility(this);
+    public WildwoodScourgeTriggeredAbility copy() {
+        return new WildwoodScourgeTriggeredAbility(this);
     }
 
     @Override
@@ -73,11 +73,11 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent == null) {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
-            return (permanent != null
+            return permanent != null
                     && !event.getTargetId().equals(this.getSourceId())
                     && permanent.isCreature()
-                    && !permanent.getSubtype(game).contains(SubType.HYDRA)
-                    && permanent.isControlledBy(this.getControllerId()));
+                    && !permanent.hasSubtype(SubType.HYDRA, game)
+                    && permanent.isControlledBy(this.getControllerId());
         }
         return false;
     }

@@ -32,7 +32,6 @@ public abstract class SplitCard extends CardImpl {
         String[] names = setInfo.getName().split(" // ");
         leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesLeft, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
         rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
-        this.splitCard = true;
     }
 
     public SplitCard(SplitCard card) {
@@ -186,5 +185,16 @@ public abstract class SplitCard extends CardImpl {
         leftHalfCard.setOwnerId(ownerId);
         rightHalfCard.getAbilities().setControllerId(ownerId);
         rightHalfCard.setOwnerId(ownerId);
+    }
+
+    @Override
+    public int getConvertedManaCost() {
+        // 202.3d The converted mana cost of a split card not on the stack or of a fused split spell on the
+        // stack is determined from the combined mana costs of its halves. Otherwise, while a split card is
+        // on the stack, the converted mana cost of the spell is determined by the mana cost of the half
+        // that was chosen to be cast. See rule 708, “Split Cards.”
+
+        // split card and it's halfes contains own mana costs, so no need to rewrite logic
+        return super.getConvertedManaCost();
     }
 }

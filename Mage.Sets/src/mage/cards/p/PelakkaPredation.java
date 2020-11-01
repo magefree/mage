@@ -1,10 +1,14 @@
 package mage.cards.p;
 
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -13,9 +17,9 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class PelakkaPredation extends CardImpl {
+public final class PelakkaPredation extends ModalDoubleFacesCard {
 
     private static final FilterCard filter = new FilterCard("a card from it with converted mana cost 3 or greater");
 
@@ -24,14 +28,28 @@ public final class PelakkaPredation extends CardImpl {
     }
 
     public PelakkaPredation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{B}",
+                "Pelakka Caverns", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.p.PelakkaCaverns.class;
+        // 1.
+        // Pelakka Predation
+        // Sorcery
 
         // Target opponent reveals their hand. You may choose a card from it with converted mana cost 3 or greater. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
+        this.getLeftHalfCard().getSpellAbility().addTarget(new TargetOpponent());
+
+        // 2.
+        // Pelakka Caverns
+        // Land
+
+        // Pelakka Caverns enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {B}.
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
     }
 
     private PelakkaPredation(final PelakkaPredation card) {

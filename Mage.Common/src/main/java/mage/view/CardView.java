@@ -1,8 +1,6 @@
 package mage.view;
 
 import com.google.gson.annotations.Expose;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -30,6 +28,9 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.util.CardUtil;
 import mage.util.SubTypeList;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -75,7 +76,7 @@ public class CardView extends SimpleCardView {
     protected CardView ability;
     protected int type;
 
-    protected boolean transformable;
+    protected boolean transformable; // can toggle one card side to another (transformable cards, modal double faces)
     protected CardView secondCardFace;
     protected boolean transformed;
 
@@ -94,6 +95,8 @@ public class CardView extends SimpleCardView {
     protected ManaCosts rightSplitCosts;
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
+
+    protected boolean isModalDoubleFacesCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -186,6 +189,8 @@ public class CardView extends SimpleCardView {
         this.rightSplitCosts = cardView.rightSplitCosts == null ? null : cardView.rightSplitCosts.copy();
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
+
+        this.isModalDoubleFacesCard = cardView.isModalDoubleFacesCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -299,7 +304,7 @@ public class CardView extends SimpleCardView {
         }
 
         SplitCard splitCard = null;
-        if (card.isSplitCard()) {
+        if (card instanceof SplitCard) {
             splitCard = (SplitCard) card;
             rotate = (card.getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
         } else if (card instanceof Spell) {
@@ -315,6 +320,10 @@ public class CardView extends SimpleCardView {
                 case SPLIT_LEFT:
                 case SPLIT_RIGHT:
                     rotate = true;
+                    break;
+                case MODAL_LEFT:
+                case MODAL_RIGHT:
+                    rotate = false;
                     break;
             }
         }
@@ -334,6 +343,12 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeft = splitCard.getLeftHalfCard().getManaCost().getSymbols();
             this.manaCostRight = splitCard.getRightHalfCard().getManaCost().getSymbols();
+        } else if (card instanceof ModalDoubleFacesCard) {
+            this.isModalDoubleFacesCard = true;
+            ModalDoubleFacesCard mainCard = ((ModalDoubleFacesCard) card);
+            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+            this.manaCostLeft = mainCard.getLeftHalfCard().getManaCost().getSymbols();
+            this.manaCostRight = mainCard.getRightHalfCard().getManaCost().getSymbols();
         } else if (card instanceof AdventureCard) {
             AdventureCard adventureCard = ((AdventureCard) card);
             AdventureCardSpell adventureCardSpell = ((AdventureCardSpell) adventureCard.getSpellCard());
@@ -402,7 +417,6 @@ public class CardView extends SimpleCardView {
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSuperType();
         this.color = card.getColor(game);
-        this.transformable = card.isTransformable();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
 
@@ -421,7 +435,7 @@ public class CardView extends SimpleCardView {
                 this.tokenDescriptor = card.getTokenDescriptor();
             }
             //
-            // set code und card number for token copies to get the image
+            // set code and card number for token copies to get the image
             this.rules = card.getRules(game);
             this.type = ((PermanentToken) card).getToken().getTokenType();
         } else {
@@ -429,15 +443,27 @@ public class CardView extends SimpleCardView {
             this.isToken = false;
         }
 
+        // transformable, double faces cards
+        this.transformable = card.isTransformable();
+
         Card secondSideCard = card.getSecondCardFace();
         if (secondSideCard != null) {
             this.secondCardFace = new CardView(secondSideCard);
             this.alternateName = secondCardFace.getName();
             this.originalName = card.getName();
         }
+
         this.flipCard = card.isFlipCard();
         if (card.isFlipCard() && card.getFlipCardName() != null) {
             this.alternateName = card.getFlipCardName();
+            this.originalName = card.getName();
+        }
+
+        if (card instanceof ModalDoubleFacesCard) {
+            this.transformable = true; // enable GUI day/night button
+            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
+            this.secondCardFace = new CardView(mdfCard.getRightHalfCard());
+            this.alternateName = mdfCard.getRightHalfCard().getName();
             this.originalName = card.getName();
         }
 
@@ -455,6 +481,7 @@ public class CardView extends SimpleCardView {
 
             // Determine what part of the art to slice out for spells on the stack which originate
             // from a split, fuse, or aftermath split card.
+            // Modal double faces cards draws as normal cards
             SpellAbilityType ty = spell.getSpellAbility().getSpellAbilityType();
             if (ty == SpellAbilityType.SPLIT_RIGHT || ty == SpellAbilityType.SPLIT_LEFT || ty == SpellAbilityType.SPLIT_FUSED) {
                 // Needs a special art rect
@@ -871,7 +898,7 @@ public class CardView extends SimpleCardView {
     }
 
     /**
-     * Name of the other side (transform), flipped, or copying card name.
+     * Name of the other side (transform), flipped, modal double faces card or copying card name.
      *
      * @return name
      */

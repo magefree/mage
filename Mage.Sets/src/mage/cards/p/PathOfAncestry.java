@@ -5,23 +5,18 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.CommanderColorIdentityManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SubTypeSet;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -92,8 +87,7 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null || (spell.getSubtype(game).isEmpty()
-                && !spell.hasAbility(ChangelingAbility.getInstance(), game))) {
+        if (spell == null) {
             return false;
         }
         Player player = game.getPlayer(getControllerId());
@@ -101,7 +95,6 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         boolean isAllA = false;
-        Set<SubType> subTypeSet = new HashSet<>();
         for (UUID commanderId : game.getCommandersIds(player)) {
             Card commander = game.getPermanent(commanderId);
             if (commander == null) {
@@ -110,19 +103,11 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
             if (commander == null) {
                 continue;
             }
-            if (commander.isAllCreatureTypes()
-                    || commander.hasAbility(ChangelingAbility.getInstance(), game)) {
-                isAllA = true;
-                break;
+            if (spell.getCard().shareCreatureTypes(commander, game)) {
+                return true;
             }
-            subTypeSet.addAll(commander.getSubtype(game));
         }
-        subTypeSet.removeIf(subType -> subType.getSubTypeSet() != SubTypeSet.CreatureType);
-        if (subTypeSet.isEmpty() && !isAllA) {
-            return false;
-        }
-        return spell.hasAbility(ChangelingAbility.getInstance(), game)
-                || spell.getSubtype(game).stream().anyMatch(subTypeSet::contains);
+        return false;
     }
 
     @Override

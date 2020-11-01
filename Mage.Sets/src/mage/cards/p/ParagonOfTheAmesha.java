@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,14 +17,15 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ParagonOfTheAmesha extends CardImpl {
 
     public ParagonOfTheAmesha(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
 
@@ -37,18 +36,17 @@ public final class ParagonOfTheAmesha extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {W}{U}{B}{R}{G}: Until end of turn, Paragon of the Amesha becomes an Angel, gets +3/+3, and gains flying and lifelink.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ParagonOfTheAmeshaEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(new ParagonOfTheAmeshaEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
         Effect effect = new BoostSourceEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("gets +3/+3,");
+        effect.setText(", gets +3/+3");
         ability.addEffect(effect);
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying");
+        effect.setText(", and gains flying");
         ability.addEffect(effect);
         effect = new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and lifelink");
         ability.addEffect(effect);
         this.addAbility(ability);
-
     }
 
     public ParagonOfTheAmesha(final ParagonOfTheAmesha card) {
@@ -62,12 +60,12 @@ public final class ParagonOfTheAmesha extends CardImpl {
 
     private static class ParagonOfTheAmeshaEffect extends ContinuousEffectImpl {
 
-        public ParagonOfTheAmeshaEffect() {
-            super(Duration.EndOfTurn, Outcome.BecomeCreature);
-            setText();
+        private ParagonOfTheAmeshaEffect() {
+            super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
+            staticText = "Until end of turn, {this} becomes an Angel";
         }
 
-        public ParagonOfTheAmeshaEffect(final ParagonOfTheAmeshaEffect effect) {
+        private ParagonOfTheAmeshaEffect(final ParagonOfTheAmeshaEffect effect) {
             super(effect);
         }
 
@@ -77,34 +75,14 @@ public final class ParagonOfTheAmesha extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent == null) {
                 return false;
             }
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.ANGEL);
-                    }
-                    break;
-            }
+            permanent.removeAllCreatureTypes(game);
+            permanent.addSubType(game, SubType.ANGEL);
             return true;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        private void setText() {
-            staticText = "Until end of turn, {this} becomes an Angel, ";
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.TypeChangingEffects_4;
         }
     }
 }

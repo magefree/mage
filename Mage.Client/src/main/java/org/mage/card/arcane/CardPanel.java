@@ -819,9 +819,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
                 this.setTemporary(null);
             }
         }
+
+        // switch card names for render
         String temp = this.getGameCard().getAlternateName();
         this.getGameCard().setAlternateName(this.getGameCard().getOriginalName());
         this.getGameCard().setOriginalName(temp);
+
         updateArtImage();
     }
 

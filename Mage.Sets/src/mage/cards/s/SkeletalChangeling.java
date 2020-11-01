@@ -26,6 +26,7 @@ public final class SkeletalChangeling extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         // {1}{B}: Regenerate Skeletal Changeling.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));

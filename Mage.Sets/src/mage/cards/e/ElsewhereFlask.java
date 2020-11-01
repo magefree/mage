@@ -1,8 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -17,14 +14,15 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.constants.*;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ElsewhereFlask extends CardImpl {
@@ -36,7 +34,7 @@ public final class ElsewhereFlask extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Sacrifice Elsewhere Flask: Choose a basic land type. Each land you control becomes that type until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElsewhereFlaskEffect(), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new ElsewhereFlaskEffect(), new SacrificeSourceCost()));
     }
 
     public ElsewhereFlask(final ElsewhereFlask card) {
@@ -80,13 +78,11 @@ class ElsewhereFlaskEffect extends OneShotEffect {
 
 class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
-
-    public ElsewhereFlaskContinuousEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
+    ElsewhereFlaskContinuousEffect() {
+        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
     }
 
-    public ElsewhereFlaskContinuousEffect(final ElsewhereFlaskContinuousEffect effect) {
+    private ElsewhereFlaskContinuousEffect(final ElsewhereFlaskContinuousEffect effect) {
         super(effect);
     }
 
@@ -98,64 +94,68 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                affectedObjectList.add(new MageObjectReference(permanent, game));
-            }
-        }
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
-        if (choice != null) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
-                Permanent land = it.next().getPermanent(game);
-                if (land != null) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
-                                land.getSubtype(game).clear();
-                                land.getSubtype(game).add(choice);
-                            }
-                            break;
-                        case AbilityAddingRemovingEffects_6:
-                            if (sublayer == SubLayer.NA) {
-                                land.getAbilities().clear();
-                                if (choice.equals(SubType.FOREST)) {
-                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.PLAINS)) {
-                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.MOUNTAIN)) {
-                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.ISLAND)) {
-                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                                }
-                                if (choice.equals(SubType.SWAMP)) {
-                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                                }
-                            }
-                            break;
-                    }
-                } else {
-                    it.remove();
-                }
-            }
-            return true;
+        switch (choice) {
+            case FOREST:
+                dependencyTypes.add(DependencyType.BecomeForest);
+                break;
+            case PLAINS:
+                dependencyTypes.add(DependencyType.BecomePlains);
+                break;
+            case MOUNTAIN:
+                dependencyTypes.add(DependencyType.BecomeMountain);
+                break;
+            case ISLAND:
+                dependencyTypes.add(DependencyType.BecomeIsland);
+                break;
+            case SWAMP:
+                dependencyTypes.add(DependencyType.BecomeSwamp);
+                break;
         }
-        return false;
+        if (this.affectedObjectsSet) {
+            game.getBattlefield()
+                    .getActivePermanents(
+                            StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
+                            source.getControllerId(), source.getSourceId(), game
+                    ).stream()
+                    .map(permanent -> new MageObjectReference(permanent, game))
+                    .forEach(affectedObjectList::add);
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
+        if (choice == null) {
+            return false;
+        }
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
+            Permanent land = it.next().getPermanent(game);
+            if (land == null) {
+                it.remove();
+                continue;
+            }
+            land.getSubtype(game).removeAll(SubType.getLandTypes());
+            land.addSubType(game, choice);
+            land.removeAllAbilities(source.getSourceId(), game);
+            switch (choice) {
+                case FOREST:
+                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                    break;
+                case PLAINS:
+                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                    break;
+                case MOUNTAIN:
+                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                    break;
+                case ISLAND:
+                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                    break;
+                case SWAMP:
+                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                    break;
+            }
+        }
+        return true;
     }
 }

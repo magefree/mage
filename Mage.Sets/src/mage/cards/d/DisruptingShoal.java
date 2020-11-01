@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.ObjectColor;
@@ -11,7 +10,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -27,13 +25,12 @@ import mage.target.common.TargetCardInHand;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DisruptingShoal extends CardImpl {
 
     public DisruptingShoal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
         this.subtype.add(SubType.ARCANE);
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
@@ -86,16 +83,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                    if (card instanceof SplitCard) {
-                        if (((SplitCard) card).getLeftHalfCard().getConvertedManaCost() == amount) {
-                            return true;
-                        }
-                        if (((SplitCard) card).getRightHalfCard().getConvertedManaCost() == amount) {
-                            return true;
-                        }
-                    } else if (card.getConvertedManaCost() == amount) {
-                        return true;
-                    }
+                    return card.getConvertedManaCost() == amount;
                 }
                 return false;
             }

@@ -152,7 +152,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
                                 if (targetObject.hasSubtype(fromSubType, game)) {
                                     targetObject.getSubtype(game).remove(fromSubType);
                                     if (!targetObject.hasSubtype(toSubType, game)) {
-                                        targetObject.getSubtype(game).add(toSubType);
+                                        targetObject.addSubType(game, toSubType);
                                     }
                                 }
                                 break;

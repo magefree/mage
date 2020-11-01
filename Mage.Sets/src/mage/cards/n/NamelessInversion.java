@@ -25,6 +25,7 @@ public final class NamelessInversion extends CardImpl {
 
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
         
         // Target creature gets +3/-3 and loses all creature types until end of turn.

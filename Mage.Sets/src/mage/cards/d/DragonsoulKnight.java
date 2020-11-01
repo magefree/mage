@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,14 +18,15 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DragonsoulKnight extends CardImpl {
 
     public DragonsoulKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
 
@@ -37,12 +37,12 @@ public final class DragonsoulKnight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {W}{U}{B}{R}{G}: Until end of turn, Dragonsoul Knight becomes a Dragon, gets +5/+3, and gains flying and trample.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DragonsoulKnightEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DragonsoulKnightEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
         Effect effect = new BoostSourceEffect(5, 3, Duration.EndOfTurn);
-        effect.setText("gets +5/+3");
+        effect.setText(", gets +5/+3");
         ability.addEffect(effect);
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying");
+        effect.setText(", and gains flying");
         ability.addEffect(effect);
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and trample");
@@ -60,14 +60,14 @@ public final class DragonsoulKnight extends CardImpl {
         return new DragonsoulKnight(this);
     }
 
-    private class DragonsoulKnightEffect extends ContinuousEffectImpl {
+    private static class DragonsoulKnightEffect extends ContinuousEffectImpl {
 
-        public DragonsoulKnightEffect() {
-            super(Duration.EndOfTurn, Outcome.BecomeCreature);
-            setText();
+        private DragonsoulKnightEffect() {
+            super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
+            staticText = "Until end of turn, {this} becomes a Dragon";
         }
 
-        public DragonsoulKnightEffect(final DragonsoulKnightEffect effect) {
+        private DragonsoulKnightEffect(final DragonsoulKnightEffect effect) {
             super(effect);
         }
 
@@ -77,34 +77,14 @@ public final class DragonsoulKnight extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent == null) {
                 return false;
             }
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype(game).clear();
-                        permanent.getSubtype(game).add(SubType.DRAGON);
-                    }
-                    break;
-            }
+            permanent.removeAllCreatureTypes(game);
+            permanent.addSubType(game, SubType.DRAGON);
             return true;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        private void setText() {
-            staticText = "Until end of turn, {this} becomes a Dragon, ";
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.TypeChangingEffects_4;
         }
     }
 }

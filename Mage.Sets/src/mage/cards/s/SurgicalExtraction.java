@@ -5,7 +5,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
@@ -15,12 +14,13 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
-import mage.target.TargetCard;
 
 /**
  * @author North
@@ -82,8 +82,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
         if (chosenCard != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());
             if (owner != null) {
-                String nameToSearch = chosenCard.isSplitCard()
-                        ? ((SplitCard) chosenCard).getLeftHalfCard().getName() : chosenCard.getName();
+                String nameToSearch = CardUtil.getCardNameForSameNameSearch(chosenCard);
                 FilterCard filterNamedCard = new FilterCard("card named " + nameToSearch);
                 filterNamedCard.add(new NamePredicate(nameToSearch));
 

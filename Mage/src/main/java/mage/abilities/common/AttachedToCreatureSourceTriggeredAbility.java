@@ -7,10 +7,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-import static mage.constants.CardType.CREATURE;
-
 /**
- *
  * @author htrajan
  */
 public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -33,7 +30,7 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent attachedPermanent = game.getPermanent(event.getTargetId());
-        return attachedPermanent != null && attachedPermanent.getCardType().contains(CREATURE);
+        return attachedPermanent != null && attachedPermanent.isCreature();
     }
 
     @Override

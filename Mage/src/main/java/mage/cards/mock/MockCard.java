@@ -6,6 +6,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
+import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MockCard extends CardImpl {
 
     static public String ADVENTURE_NAME_SEPARATOR = " // ";
+    static public String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
@@ -30,6 +32,7 @@ public class MockCard extends CardImpl {
     protected ManaCosts<ManaCost> manaCostLeft;
     protected ManaCosts<ManaCost> manaCostRight;
     protected String adventureSpellName;
+    protected boolean isModalDoubleFacesCard;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -53,7 +56,6 @@ public class MockCard extends CardImpl {
         this.frameColor = card.getFrameColor();
         this.frameStyle = card.getFrameStyle();
 
-        this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
         this.transformable = card.isDoubleFaced();
@@ -66,10 +68,16 @@ public class MockCard extends CardImpl {
             this.adventureSpellName = card.getAdventureSpellName();
         }
 
+        if (card.isModalDoubleFacesCard()) {
+            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getCard();
+            CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
+            this.secondSideCard = new MockCard(mdfSecondSide);
+            this.isModalDoubleFacesCard = true;
+        }
+
         if (this.isPlaneswalker()) {
             String startingLoyaltyString = card.getStartingLoyalty();
             if (startingLoyaltyString.isEmpty()) {
-                //Logger.getLogger(MockCard.class).warn("Planeswalker `" + this.name + "` has empty starting loyalty.");
             } else {
                 try {
                     this.startingLoyalty = Integer.parseInt(startingLoyaltyString);
@@ -117,8 +125,14 @@ public class MockCard extends CardImpl {
     }
 
     public String getFullName(boolean showSecondName) {
+        if (!showSecondName) {
+            return getName();
+        }
+
         if (adventureSpellName != null) {
             return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
+        } else if (isModalDoubleFacesCard) {
+            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.secondSideCard.getName();
         } else {
             return getName();
         }
@@ -144,5 +158,11 @@ public class MockCard extends CardImpl {
 
     private Ability textAbilityFromString(final String text) {
         return new MockAbility(text);
+    }
+
+    @Override
+    public boolean isTransformable() {
+        // must enable toggle mode in deck editor (switch between card sides);
+        return super.isTransformable() || this.isModalDoubleFacesCard;
     }
 }

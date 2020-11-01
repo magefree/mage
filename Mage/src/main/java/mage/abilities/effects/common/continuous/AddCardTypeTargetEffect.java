@@ -1,20 +1,15 @@
-
 package mage.abilities.effects.common.continuous;
+
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author nantuko
@@ -48,9 +43,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 for (CardType cardType : addedCardTypes) {
-                    if (!target.getCardType().contains(cardType)) {
-                        target.addCardType(cardType);
-                    }
+                    target.addCardType(cardType);
                 }
                 result = true;
             }

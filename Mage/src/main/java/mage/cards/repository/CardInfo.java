@@ -3,8 +3,6 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -16,6 +14,9 @@ import mage.constants.*;
 import mage.util.CardUtil;
 import mage.util.SubTypeList;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author North
@@ -103,6 +104,12 @@ public class CardInfo {
     protected boolean adventureCard;
     @DatabaseField
     protected String adventureSpellName;
+    @DatabaseField
+    protected boolean modalDoubleFacesCard;
+    @DatabaseField
+    protected String modalDoubleFacesSecondSideName;
+
+    // if you add new field with card side name then update CardRepository.addNewNames too
 
     public enum ManaCostSide {
         LEFT, RIGHT, ALL
@@ -121,7 +128,7 @@ public class CardInfo {
         this.toughness = card.getToughness().toString();
         this.convertedManaCost = card.getConvertedManaCost();
         this.rarity = card.getRarity();
-        this.splitCard = card.isSplitCard();
+        this.splitCard = card instanceof SplitCard;
         this.splitCardFuse = card.getSpellAbility() != null && card.getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED;
         this.splitCardAftermath = card.getSpellAbility() != null && card.getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH;
 
@@ -140,6 +147,11 @@ public class CardInfo {
             this.adventureSpellName = ((AdventureCard) card).getSpellCard().getName();
         }
 
+        if (card instanceof ModalDoubleFacesCard) {
+            this.modalDoubleFacesCard = true;
+            this.modalDoubleFacesSecondSideName = ((ModalDoubleFacesCard) card).getRightHalfCard().getName();
+        }
+
         this.frameStyle = card.getFrameStyle().toString();
         this.frameColor = card.getFrameColor(null).toString();
         this.variousArt = card.getUsesVariousArt();
@@ -153,13 +165,17 @@ public class CardInfo {
         this.setSubtypes(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toList()));
         this.setSuperTypes(card.getSuperType());
 
-        // mana cost can contains multiple cards (split left/right, card/adventure)
+        // mana cost can contains multiple cards (split left/right, modal double faces, card/adventure)
         if (card instanceof SplitCard) {
             List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCost().getSymbols();
             List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCost().getSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
+        } else if (card instanceof ModalDoubleFacesCard) {
+            List<String> manaCostLeft = ((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCost().getSymbols();
+            List<String> manaCostRight = ((ModalDoubleFacesCard) card).getRightHalfCard().getManaCost().getSymbols();
+            this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else if (card instanceof AdventureCard) {
-            List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCost().getSymbols(); // Spell from left like MTGA
+            List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCost().getSymbols();
             List<String> manaCostRight = card.getManaCost().getSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else {
@@ -177,6 +193,12 @@ public class CardInfo {
                 length += rule.length();
                 rulesList.add(rule);
             }
+            for (String rule : card.getRules()) {
+                length += rule.length();
+                rulesList.add(rule);
+            }
+        } else if (card instanceof ModalDoubleFacesCard) {
+            // mdf card return main side's rules only (GUI can toggle it to another side)
             for (String rule : card.getRules()) {
                 length += rule.length();
                 rulesList.add(rule);
@@ -222,7 +244,6 @@ public class CardInfo {
                 }
             }
             if (this.startingLoyalty == null) {
-                //Logger.getLogger(CardInfo.class).warn("Planeswalker `" + card.getName() + "` missing starting loyalty");
                 this.startingLoyalty = "";
             }
         } else {
@@ -446,5 +467,13 @@ public class CardInfo {
 
     public String getAdventureSpellName() {
         return adventureSpellName;
+    }
+
+    public boolean isModalDoubleFacesCard() {
+        return modalDoubleFacesCard;
+    }
+
+    public String getModalDoubleFacesSecondSideName() {
+        return modalDoubleFacesSecondSideName;
     }
 }

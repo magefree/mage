@@ -3,11 +3,8 @@ package mage.constants;
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.util.SubTypeList;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public enum SubType {
@@ -468,6 +465,22 @@ public enum SubType {
         }
     }
 
+    private static final Set<SubType> landTypes = new HashSet<>();
+    private static final Map<SubTypeSet, Set<SubType>> subTypeSetMap = new HashMap<>();
+
+    static {
+        for (SubTypeSet subTypeSet : SubTypeSet.values()) {
+            subTypeSetMap.put(
+                    subTypeSet,
+                    Arrays.stream(values())
+                            .filter(subType -> subType.getSubTypeSet() == subTypeSet)
+                            .collect(Collectors.toSet())
+            );
+        }
+        landTypes.addAll(subTypeSetMap.get(SubTypeSet.BasicLandType));
+        landTypes.addAll(subTypeSetMap.get(SubTypeSet.NonBasicLandType));
+    }
+
     private final SubTypeSet subTypeSet;
     private final String description;
     private final boolean customSet;
@@ -534,49 +547,46 @@ public enum SubType {
         return subTypeSet;
     }
 
-    public static Set<SubType> getArtifactTypes() {
-        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
-        for (SubType subType : values()) {
-            if (subType.getSubTypeSet() == SubTypeSet.ArtifactType) {
-                subTypes.add(subType);
-            }
+    public boolean canGain(MageObject mageObject) {
+        switch (subTypeSet) {
+            case CreatureType:
+                return mageObject.isCreature() || mageObject.isTribal();
+            case BasicLandType:
+            case NonBasicLandType:
+                return mageObject.isLand();
+            case EnchantmentType:
+                return mageObject.isEnchantment();
+            case ArtifactType:
+                return mageObject.isArtifact();
+            case PlaneswalkerType:
+                return mageObject.isPlaneswalker();
         }
-        return subTypes;
+        return false;
+    }
+
+    public static Set<SubType> getArtifactTypes() {
+        return subTypeSetMap.get(SubTypeSet.ArtifactType);
+    }
+
+    public static Set<SubType> getEnchantmentTypes() {
+        return subTypeSetMap.get(SubTypeSet.EnchantmentType);
     }
 
     public static Set<SubType> getPlaneswalkerTypes() {
-        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
-        for (SubType subType : values()) {
-            if (subType.getSubTypeSet() == SubTypeSet.PlaneswalkerType) {
-                subTypes.add(subType);
-            }
-        }
-        return subTypes;
+        return subTypeSetMap.get(SubTypeSet.PlaneswalkerType);
+
     }
 
     public static Set<SubType> getCreatureTypes() {
-        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
-        for (SubType subType : values()) {
-            if (subType.getSubTypeSet() == SubTypeSet.CreatureType) {
-                subTypes.add(subType);
-            }
-        }
-        return subTypes;
+        return subTypeSetMap.get(SubTypeSet.CreatureType);
+
     }
 
     public static Set<SubType> getBasicLands() {
-        return Arrays.stream(values())
-                .filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType)
-                .collect(Collectors.toSet());
+        return subTypeSetMap.get(SubTypeSet.BasicLandType);
     }
 
-    public static SubTypeList getLandTypes() {
-        SubTypeList landTypes = new SubTypeList();
-        for (SubType subType : values()) {
-            if (subType.getSubTypeSet() == SubTypeSet.BasicLandType || subType.getSubTypeSet() == SubTypeSet.NonBasicLandType) {
-                landTypes.add(subType);
-            }
-        }
+    public static Set<SubType> getLandTypes() {
         return landTypes;
     }
 }

@@ -1,9 +1,5 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-import static java.util.Collections.emptyList;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -12,6 +8,7 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
 import mage.designations.Designation;
@@ -39,6 +36,12 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -626,6 +629,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
+
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
@@ -799,7 +803,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -835,9 +839,13 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         // TODO Watchers?
         // TODO Abilities?
-        if (card.isSplitCard()) {
+        if (card instanceof SplitCard) {
             removeCopiedCard(((SplitCard) card).getLeftHalfCard());
             removeCopiedCard(((SplitCard) card).getRightHalfCard());
+        }
+        if (card instanceof ModalDoubleFacesCard) {
+            removeCopiedCard(((ModalDoubleFacesCard) card).getLeftHalfCard());
+            removeCopiedCard(((ModalDoubleFacesCard) card).getRightHalfCard());
         }
         if (card instanceof AdventureCard) {
             removeCopiedCard(((AdventureCard) card).getSpellCard());
@@ -1194,21 +1202,34 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public Card copyCard(Card cardToCopy, Ability source, Game game) {
+        // main card
         Card copiedCard = cardToCopy.copy();
         copiedCard.assignNewId();
         copiedCard.setOwnerId(source.getControllerId());
         copiedCard.setCopy(true, cardToCopy);
         copiedCards.put(copiedCard.getId(), copiedCard);
         addCard(copiedCard);
-        if (copiedCard.isSplitCard()) {
+
+        // other faces
+        if (copiedCard instanceof SplitCard) {
+            // left
             Card leftCard = ((SplitCard) copiedCard).getLeftHalfCard(); // TODO: must be new ID (bugs with same card copy)?
             copiedCards.put(leftCard.getId(), leftCard);
             addCard(leftCard);
+            // right
             Card rightCard = ((SplitCard) copiedCard).getRightHalfCard();
             copiedCards.put(rightCard.getId(), rightCard);
             addCard(rightCard);
-        }
-        if (copiedCard instanceof AdventureCard) {
+        } else if (copiedCard instanceof ModalDoubleFacesCard) {
+            // left
+            Card leftCard = ((ModalDoubleFacesCard) copiedCard).getLeftHalfCard(); // TODO: must be new ID (bugs with same card copy)?
+            copiedCards.put(leftCard.getId(), leftCard);
+            addCard(leftCard);
+            // right
+            Card rightCard = ((ModalDoubleFacesCard) copiedCard).getRightHalfCard();
+            copiedCards.put(rightCard.getId(), rightCard);
+            addCard(rightCard);
+        } else if (copiedCard instanceof AdventureCard) {
             Card spellCard = ((AdventureCard) copiedCard).getSpellCard();
             copiedCards.put(spellCard.getId(), spellCard);
             addCard(spellCard);

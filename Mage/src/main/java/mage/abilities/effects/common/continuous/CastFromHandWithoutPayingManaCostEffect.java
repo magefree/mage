@@ -9,6 +9,7 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.AdventureCardSpell;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCardHalf;
 import mage.cards.SplitCardHalf;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -22,7 +23,7 @@ import java.util.UUID;
 public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImpl {
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility;
-    
+
     public CastFromHandWithoutPayingManaCostEffect() {
         this(StaticFilters.FILTER_CARDS_NON_LAND, true);
     }
@@ -38,7 +39,7 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
             condition = new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance);
         } else {
             condition = SourceIsSpellCondition.instance;
-        }        
+        }
         this.alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, condition, null, filter, true);
         this.staticText = "You may cast " + filter.getMessage()
                 + (fromHand ? " from your hand" : "")
@@ -88,9 +89,9 @@ enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell) {
-            UUID splitCardId = ((Card) object).getMainCard().getId();
-            object = game.getObject(splitCardId);
+        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacesCardHalf) {
+            UUID mainCardId = ((Card) object).getMainCard().getId();
+            object = game.getObject(mainCardId);
         }
         if (object instanceof Spell) { // needed to check if it can be cast by alternate cost
             Spell spell = (Spell) object;

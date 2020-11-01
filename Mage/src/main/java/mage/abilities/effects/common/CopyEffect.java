@@ -103,10 +103,11 @@ public class CopyEffect extends ContinuousEffectImpl {
         for (CardType type : copyFromObject.getCardType()) {
             permanent.addCardType(type);
         }
-        permanent.getSubtype(game).clear();
-        for (SubType type : copyFromObject.getSubtype(game)) {
-            permanent.getSubtype(game).add(type);
-        }
+
+        permanent.removeAllSubTypes(game);
+        permanent.getSubtype(game).addAll(copyFromObject.getSubtype(game));
+        permanent.setIsAllCreatureTypes(copyFromObject.isAllCreatureTypes());
+
         permanent.getSuperType().clear();
         for (SuperType type : copyFromObject.getSuperType()) {
             permanent.addSuperType(type);

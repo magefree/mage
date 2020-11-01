@@ -77,7 +77,7 @@ public final class Conversion extends CardImpl {
                     case TypeChangingEffects_4:
                         if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
                             land.getSubtype(game).removeAll(SubType.getLandTypes());
-                            land.getSubtype(game).add(SubType.PLAINS);
+                            land.addSubType(game, SubType.PLAINS);
                             land.removeAllAbilities(source.getSourceId(), game);
                             land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                             break;

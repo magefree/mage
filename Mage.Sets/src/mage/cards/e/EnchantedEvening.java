@@ -1,19 +1,18 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class EnchantedEvening extends CardImpl {
@@ -22,11 +21,7 @@ public final class EnchantedEvening extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}");
 
         // All permanents are enchantments in addition to their other types.
-        Effect effect = new EnchangedEveningEffect(CardType.ENCHANTMENT, 
-                Duration.WhileOnBattlefield, new FilterPermanent());
-        effect.setText("All permanents are enchantments in addition to their other types");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
+        this.addAbility(new SimpleStaticAbility(new EnchangedEveningEffect()));
     }
 
     public EnchantedEvening(final EnchantedEvening card) {
@@ -39,31 +34,27 @@ public final class EnchantedEvening extends CardImpl {
     }
 
     // need to be enclosed class for dependent check of continuous effects
-    static class EnchangedEveningEffect extends ContinuousEffectImpl {
+    private static class EnchangedEveningEffect extends ContinuousEffectImpl {
 
-        private final CardType addedCardType;
-        private final FilterPermanent filter;
-
-        public EnchangedEveningEffect(CardType addedCardType, Duration duration, FilterPermanent filter) {
-            super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-            this.addedCardType = addedCardType;
-            this.filter = filter;
+        private EnchangedEveningEffect() {
+            super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
             this.dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
             this.dependencyTypes.add(DependencyType.AuraAddingRemoving);
+            this.staticText = "All permanents are enchantments in addition to their other types";
         }
 
-        public EnchangedEveningEffect(final EnchangedEveningEffect effect) {
+        private EnchangedEveningEffect(final EnchangedEveningEffect effect) {
             super(effect);
-            this.addedCardType = effect.addedCardType;
-            this.filter = effect.filter;
         }
 
         @Override
         public boolean apply(Game game, Ability source) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-                if (permanent != null
-                        && !permanent.getCardType().contains(addedCardType)) {
-                    permanent.addCardType(addedCardType);
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                    StaticFilters.FILTER_PERMANENT, source.getControllerId(),
+                    source.getSourceId(), game
+            )) {
+                if (permanent != null) {
+                    permanent.addCardType(CardType.ENCHANTMENT);
                 }
             }
             return true;

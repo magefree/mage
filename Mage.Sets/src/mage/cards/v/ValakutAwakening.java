@@ -1,13 +1,13 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.mana.RedManaAbility;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -19,16 +19,30 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ValakutAwakening extends CardImpl {
+public final class ValakutAwakening extends ModalDoubleFacesCard {
 
     public ValakutAwakening(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.INSTANT}, new SubType[]{}, "{2}{R}",
+                "Valakut Stoneforge", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.v.ValakutStoneforge.class;
+        // 1.
+        // Valakut Awakening
+        // Instant
 
         // Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.
-        this.getSpellAbility().addEffect(new ValakutAwakeningEffect());
+        this.getLeftHalfCard().getSpellAbility().addEffect(new ValakutAwakeningEffect());
+
+        // 2.
+        // Valakut Stoneforge
+        // Land
+
+        // Valakut Stoneforge enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {R}.
+        this.getRightHalfCard().addAbility(new RedManaAbility());
     }
 
     private ValakutAwakening(final ValakutAwakening card) {
@@ -69,9 +83,6 @@ class ValakutAwakeningEffect extends OneShotEffect {
         );
         player.choose(outcome, player.getHand(), targetCard, game);
         Cards cards = new CardsImpl(targetCard.getTargets());
-        if (cards.isEmpty()) {
-            return false;
-        }
         player.putCardsOnBottomOfLibrary(cards, game, source, true);
         player.drawCards(cards.size() + 1, source.getSourceId(), game);
         return true;

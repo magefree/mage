@@ -1,26 +1,43 @@
 package mage.cards.m;
 
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.cards.CardImpl;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class MakindiStampede extends CardImpl {
+public final class MakindiStampede extends ModalDoubleFacesCard {
 
     public MakindiStampede(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{3}{W}{W}",
+                "Makindi Mesas", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.m.MakindiMesas.class;
+        // 1.
+        // Makindi Stampede
+        // Sorcery
 
         // Creatures you control get +2/+2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn));
+
+        // 2.
+        // Makindi Mesas
+        // Land
+
+        // Makindi Mesas enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new EntersBattlefieldTappedAbility());
+
+        // {T}: Add {W}.
+        this.getRightHalfCard().addAbility(new WhiteManaAbility());
     }
 
     private MakindiStampede(final MakindiStampede card) {

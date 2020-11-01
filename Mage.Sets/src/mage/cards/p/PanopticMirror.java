@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -9,11 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -24,8 +19,9 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class PanopticMirror extends CardImpl {
@@ -83,7 +79,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(outcome.PlayForFree, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.PlayForFree, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Panoptic Mirror", source.getSourceId(), game);
@@ -129,9 +125,12 @@ class PanopticMirrorCastEffect extends OneShotEffect {
             for (UUID uuid : PanopticMirror.getImprinted()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
-                    if (card.isSplitCard()) {
+                    if (card instanceof SplitCard) {
                         cards.add(((SplitCard) card).getLeftHalfCard());
                         cards.add(((SplitCard) card).getRightHalfCard());
+                    } else if (card instanceof ModalDoubleFacesCard) {
+                        cards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
+                        cards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
                     } else {
                         cards.add(card);
                     }
@@ -147,7 +146,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
             }
             if (cardToCopy != null) {
                 Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
-                if (controller.chooseUse(outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
+                if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + copy.getId(), Boolean.TRUE);
                     controller.cast(controller.chooseAbilityForCast(copy, game, true),
                             game, true, new ApprovingObject(source, game));

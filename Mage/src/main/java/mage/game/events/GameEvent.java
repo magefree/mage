@@ -91,6 +91,7 @@ public class GameEvent implements Serializable {
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         MILL_CARDS,
+        MILLED_CARD,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -249,13 +250,17 @@ public class GameEvent implements Serializable {
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
-        FLIP_COIN, COIN_FLIPPED, SCRY, SURVEIL, SURVEILED, FATESEAL,
+        SCRY, SCRIED,
+        SURVEIL, SURVEILED,
+        FATESEALED,
+        FLIP_COIN, COIN_FLIPPED,
         ROLL_DICE, DICE_ROLLED,
         ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
         LIFE_PAID,
+        CASCADE_LAND,
         //permanent events
         ENTERS_THE_BATTLEFIELD_SELF, /* 616.1a If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15),
                                         one of them must be chosen. If not, proceed to rule 616.1b. */

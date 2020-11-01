@@ -1,8 +1,5 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.ArrayList;
-import java.util.Locale;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -10,6 +7,9 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * @author emerald000
@@ -46,9 +46,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
             for (CardType cardType : addedCardTypes) {
-                if (!permanent.getCardType().contains(cardType)) {
-                    permanent.addCardType(cardType);
-                }
+                permanent.addCardType(cardType);
             }
             return true;
         } else if (this.getDuration() == Duration.Custom) {

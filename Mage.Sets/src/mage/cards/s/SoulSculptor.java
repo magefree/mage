@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -10,29 +9,22 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import static mage.constants.Layer.TypeChangingEffects_4;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class SoulSculptor extends CardImpl {
 
-    final String rule = "Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.";
+    private static final String rule = "Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.";
 
     public SoulSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -42,7 +34,7 @@ public final class SoulSculptor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}: Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -90,27 +82,23 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getCardType().clear();
-                        permanent.getSubtype(game).clear();
-                        if (!permanent.getCardType().contains(CardType.ENCHANTMENT)) {
-                            permanent.getCardType().add(CardType.ENCHANTMENT);
-                        }
-                    }
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.getAbilities().clear();
-                    }
-                    break;
-            }
-            return true;
+        if (permanent == null) {
+            this.discard();
+            return false;
         }
-        this.discard();
-        return false;
+        switch (layer) {
+            case TypeChangingEffects_4:
+                permanent.getCardType().clear();
+                permanent.getSubtype(game).retainAll(SubType.getEnchantmentTypes());
+                permanent.getCardType().add(CardType.ENCHANTMENT);
+                break;
+            case AbilityAddingRemovingEffects_6:
+                if (sublayer == SubLayer.NA) {
+                    permanent.getAbilities().clear();
+                }
+                break;
+        }
+        return true;
     }
 
     @Override

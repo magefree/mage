@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,10 +9,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
@@ -23,9 +21,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ShimianSpecter extends CardImpl {
@@ -103,9 +103,7 @@ class ShimianSpecterEffect extends OneShotEffect {
             FilterCard filterNamedCards = new FilterCard();
             String nameToSearch = "---";// so no card matches
             if (chosenCard != null) {
-                nameToSearch = chosenCard.isSplitCard()
-                        ? ((SplitCard) chosenCard).getLeftHalfCard().getName()
-                        : chosenCard.getName();
+                nameToSearch = CardUtil.getCardNameForSameNameSearch(chosenCard);
             }
             filterNamedCards.add(new NamePredicate(nameToSearch));
 

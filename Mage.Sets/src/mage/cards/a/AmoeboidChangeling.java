@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAllCreatureTypesTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAllCreatureTypesTargetEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
@@ -27,13 +28,13 @@ public final class AmoeboidChangeling extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // {tap}: Target creature gains all creature types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, null, false, Layer.TypeChangingEffects_4, SubLayer.NA), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                new GainAllCreatureTypesTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-
         this.addAbility(ability);
 
         // {tap}: Target creature loses all creature types until end of turn.

@@ -1,8 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
-import java.util.regex.Pattern;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,18 +8,21 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+import java.util.regex.Pattern;
+
 /**
- *
  * @author L_J
  */
 public final class DoubleHeader extends CardImpl {
@@ -34,7 +34,7 @@ public final class DoubleHeader extends CardImpl {
     }
 
     public DoubleHeader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.DRAKE);
 
         this.power = new MageInt(2);
@@ -68,14 +68,16 @@ class DoubleHeaderPredicate implements Predicate<MageObject> {
     public boolean apply(MageObject input, Game game) {
         String name = input.getName();
         if (input instanceof SplitCard) {
-            return hasTwoWords(((SplitCard)input).getLeftHalfCard().getName()) || hasTwoWords(((SplitCard)input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED){
-            SplitCard card = (SplitCard) ((Spell)input).getCard();
+            return hasTwoWords(((SplitCard) input).getLeftHalfCard().getName()) || hasTwoWords(((SplitCard) input).getRightHalfCard().getName());
+        } else if (input instanceof ModalDoubleFacesCard) {
+            return hasTwoWords(((ModalDoubleFacesCard) input).getLeftHalfCard().getName()) || hasTwoWords(((ModalDoubleFacesCard) input).getRightHalfCard().getName());
+        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+            SplitCard card = (SplitCard) ((Spell) input).getCard();
             return hasTwoWords(card.getLeftHalfCard().getName()) || hasTwoWords(card.getRightHalfCard().getName());
         } else {
             if (name.contains(" // ")) {
                 String leftName = name.substring(0, name.indexOf(" // "));
-                String rightName = name.substring(name.indexOf(" // ") + 4, name.length());
+                String rightName = name.substring(name.indexOf(" // ") + 4);
                 return hasTwoWords(leftName) || hasTwoWords(rightName);
             } else {
                 return hasTwoWords(name);

@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -9,24 +8,16 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import static mage.constants.Layer.PTChangingEffects_7;
-import static mage.constants.Layer.TypeChangingEffects_4;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VeiledSentry extends CardImpl {
@@ -79,15 +70,10 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                if (sublayer == SubLayer.NA) {
-                    veiledSentry.getCardType().clear();
-                    if (!veiledSentry.isCreature()) {
-                        veiledSentry.addCardType(CardType.CREATURE);
-                    }
-                    if (!veiledSentry.getSubtype(game).contains(SubType.ILLUSION)) {
-                        veiledSentry.getSubtype(game).add(SubType.ILLUSION);
-                    }
-                }
+                veiledSentry.getCardType().clear();
+                veiledSentry.removeAllSubTypes(game);
+                veiledSentry.addCardType(CardType.CREATURE);
+                veiledSentry.addSubType(game, SubType.ILLUSION);
                 break;
 
             case PTChangingEffects_7:

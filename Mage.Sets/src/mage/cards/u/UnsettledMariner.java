@@ -31,6 +31,7 @@ public final class UnsettledMariner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Changeling
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.

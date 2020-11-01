@@ -1,9 +1,7 @@
 package mage.game;
 
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
+import mage.abilities.keyword.TransformAbility;
+import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -19,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 import java.util.*;
-import mage.abilities.keyword.TransformAbility;
 
 /**
  * Created by samuelsandeen on 9/6/16.
@@ -54,7 +51,7 @@ public final class ZonesHandler {
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -101,42 +98,57 @@ public final class ZonesHandler {
         ZoneChangeEvent event = info.event;
         Zone toZone = event.getToZone();
         Card targetCard = getTargetCard(game, event.getTargetId());
-        Cards cards = null;
-        // If we're moving a token it shouldn't be put into any zone as an object.
+
+        Cards cardsToMove = null; // moving real cards
+        Cards cardsToUpdate = null; // updating all card's parts
+        // if we're moving a token it shouldn't be put into any zone as an object.
         if (!(targetCard instanceof Permanent) && targetCard != null) {
             if (targetCard instanceof MeldCard) {
-                cards = ((MeldCard) targetCard).getHalves();
+                // meld/group cards must be independent (use can choose order)
+                cardsToMove = ((MeldCard) targetCard).getHalves();
+                cardsToUpdate = cardsToMove;
+            } else if (targetCard instanceof ModalDoubleFacesCard
+                    || targetCard instanceof ModalDoubleFacesCardHalf) {
+                // mdf cards must be moved as single object, but each half must be updated separetly
+                ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) targetCard.getMainCard();
+                cardsToMove = new CardsImpl(mdfCard);
+                cardsToUpdate = new CardsImpl(mdfCard);
+                cardsToUpdate.add(mdfCard.getLeftHalfCard());
+                cardsToUpdate.add(mdfCard.getRightHalfCard());
             } else {
-                cards = new CardsImpl(targetCard);
+                cardsToMove = new CardsImpl(targetCard);
+                cardsToUpdate = cardsToMove;
             }
             Player owner = game.getPlayer(targetCard.getOwnerId());
             switch (toZone) {
                 case HAND:
-                    for (Card card : cards.getCards(game)) {
+                    for (Card card : cardsToMove.getCards(game)) {
                         game.getPlayer(card.getOwnerId()).getHand().add(card);
                     }
                     break;
                 case GRAVEYARD:
                     for (Card card : chooseOrder(
-                            "order to put in graveyard (last chosen will be on top)", cards, owner, game)) {
+                            "order to put in graveyard (last chosen will be on top)", cardsToMove, owner, game)) {
                         game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
                     }
                     break;
                 case LIBRARY:
                     if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
+                        // on top
                         for (Card card : chooseOrder(
-                                "order to put on top of library (last chosen will be topmost)", cards, owner, game)) {
+                                "order to put on top of library (last chosen will be topmost)", cardsToMove, owner, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
                         }
-                    } else { // buttom
+                    } else {
+                        // on bottom
                         for (Card card : chooseOrder(
-                                "order to put on bottom of library (last chosen will be bottommost)", cards, owner, game)) {
+                                "order to put on bottom of library (last chosen will be bottommost)", cardsToMove, owner, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
                         }
                     }
                     break;
                 case EXILED:
-                    for (Card card : cards.getCards(game)) {
+                    for (Card card : cardsToMove.getCards(game)) {
                         if (info instanceof ZoneChangeInfo.Exile && ((ZoneChangeInfo.Exile) info).id != null) {
                             ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
                             game.getExile().createZone(exileInfo.id, exileInfo.name).add(card);
@@ -147,13 +159,13 @@ public final class ZonesHandler {
                     break;
                 case COMMAND:
                     // There should never be more than one card here.
-                    for (Card card : cards.getCards(game)) {
+                    for (Card card : cardsToMove.getCards(game)) {
                         game.addCommander(new Commander(card));
                     }
                     break;
                 case STACK:
                     // There should never be more than one card here.
-                    for (Card card : cards.getCards(game)) {
+                    for (Card card : cardsToMove.getCards(game)) {
                         Spell spell;
                         if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
                             spell = ((ZoneChangeInfo.Stack) info).spell;
@@ -174,28 +186,39 @@ public final class ZonesHandler {
                     throw new UnsupportedOperationException("to Zone " + toZone.toString() + " not supported yet");
             }
         }
+
+        // update zone in main
         game.setZone(event.getTargetId(), event.getToZone());
-        if (targetCard instanceof MeldCard && cards != null) {
+
+        // update zone in other parts (meld cards, mdf half cards)
+        if (cardsToUpdate != null) {
+            for (Card card : cardsToUpdate.getCards(game)) {
+                if (!card.getId().equals(event.getTargetId())) {
+                    game.setZone(card.getId(), event.getToZone());
+                }
+            }
+        }
+
+        // reset meld status
+        if (targetCard instanceof MeldCard) {
             if (event.getToZone() != Zone.BATTLEFIELD) {
                 ((MeldCard) targetCard).setMelded(false, game);
-            }
-            for (Card card : cards.getCards(game)) {
-                game.setZone(card.getId(), event.getToZone());
             }
         }
     }
 
     public static Card getTargetCard(Game game, UUID targetId) {
-        if (game.getCard(targetId) != null) {
-            return game.getCard(targetId);
+        Card card = game.getCard(targetId);
+        if (card != null) {
+            return card;
         }
-        if (game.getMeldCard(targetId) != null) {
-            return game.getMeldCard(targetId);
+
+        card = game.getMeldCard(targetId);
+        if (card != null) {
+            return card;
         }
-        if (game.getPermanent(targetId) != null) {
-            return game.getPermanent(targetId);
-        }
-        return null;
+
+        return game.getPermanent(targetId);
     }
 
     private static boolean maybeRemoveFromSourceZone(ZoneChangeInfo info, Game game) {
@@ -203,7 +226,7 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();
@@ -232,10 +255,10 @@ public final class ZonesHandler {
         if (info.faceDown) {
             card.setFaceDown(true, game);
         } else if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
-            if (!card.isPermanent() 
+            if (!card.isPermanent()
                     && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
                 // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
-                    return false;
+                return false;
             }
         }
         if (!game.replaceEvent(event)) {
@@ -248,9 +271,10 @@ public final class ZonesHandler {
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
+                } else if (card instanceof ModalDoubleFacesCard) {
+                    throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
-                    // This should never happen.
-                    permanent = (Permanent) card;
+                    throw new IllegalStateException("Unexpected trying of move permanent to battlefield instead card");
                 } else {
                     permanent = new PermanentCard(card, event.getPlayerId(), game);
                 }

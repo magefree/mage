@@ -59,7 +59,7 @@ public final class CardScanner {
                             new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
                             errorsList);
                     if (card != null) {
-                        cardsToAdd.add(new CardInfo(card));
+                        cardsToAdd.add(new CardInfo(card)); // normal, transformed, adventure, modal double faces -- all must have single face in db
                         if (card instanceof SplitCard) {
                             SplitCard splitCard = (SplitCard) card;
                             cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));

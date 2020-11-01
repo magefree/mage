@@ -5,14 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.ExileZone;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.common.TargetCardInExile;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -25,7 +29,8 @@ public class CascadeAbility extends TriggeredAbilityImpl {
             + "nonland card that costs less."
             + " You may cast it without paying its mana cost. "
             + "Put the exiled cards on the bottom in a random order.)</i>";
-    private boolean withReminder;
+    private final boolean withReminder;
+    private static final FilterCard filter = new FilterLandCard("land card (to put onto the battlefield)");
 
     public CascadeAbility() {
         this(true);
@@ -36,7 +41,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
         this.withReminder = withReminder;
     }
 
-    public CascadeAbility(final CascadeAbility ability) {
+    private CascadeAbility(final CascadeAbility ability) {
         super(ability);
         this.withReminder = ability.withReminder;
     }
@@ -71,11 +76,11 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
 class CascadeEffect extends OneShotEffect {
 
-    public CascadeEffect() {
+    CascadeEffect() {
         super(Outcome.PutCardInPlay);
     }
 
-    public CascadeEffect(CascadeEffect effect) {
+    private CascadeEffect(CascadeEffect effect) {
         super(effect);
     }
 
@@ -86,8 +91,7 @@ class CascadeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        ExileZone exile = game.getExile().createZone(source.getSourceId(),
-                controller.getName() + " Cascade");
+        Cards cards = new CardsImpl();
         card = game.getCard(source.getSourceId());
         if (card == null) {
             return false;
@@ -98,33 +102,43 @@ class CascadeEffect extends OneShotEffect {
             if (card == null) {
                 break;
             }
-            controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
+            cards.add(card);
+            controller.moveCards(card, Zone.EXILED, source, game);
         } while (controller.canRespond()
-                && (card.isLand()
-                || !cardThatCostsLess(sourceCost, card, game)));
+                && (card.isLand() || card.getConvertedManaCost() >= sourceCost));
 
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
-        if (card != null) {
-            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-            }
+        GameEvent event = GameEvent.getEvent(
+                GameEvent.EventType.CASCADE_LAND, source.getSourceId(),
+                source.getSourceId(), source.getControllerId(), 0
+        );
+        game.replaceEvent(event);
+        if (event.getAmount() > 0) {
+            TargetCardInExile target = new TargetCardInExile(
+                    0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true
+            );
+            controller.choose(Outcome.PutCardInPlay, cards, target, game);
+            controller.moveCards(
+                    new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD,
+                    source, game, true, false, false, null
+            );
+        }
+        if (card != null && controller.chooseUse(
+                outcome, "Use cascade effect on " + card.getLogName() + '?', source, game
+        )) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    game, true, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
         // Move the remaining cards to the buttom of the library in a random order
-        return controller.putCardsOnBottomOfLibrary(new CardsImpl(exile), game, source, false);
+        cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
+        return controller.putCardsOnBottomOfLibrary(cards, game, source, false);
     }
 
     @Override
     public CascadeEffect copy() {
         return new CascadeEffect(this);
-    }
-
-    private boolean cardThatCostsLess(int value, Card card, Game game) {
-
-        return card.getConvertedManaCost() < value;
-
     }
 }

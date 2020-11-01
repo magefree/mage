@@ -4,6 +4,7 @@ import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
@@ -108,9 +109,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
-        skipListAddName(SKIP_LIST_SUBTYPE, "ZNR", "Veteran Adventurer"); // TODO: additional types must be added by effect, not direct?
-        skipListAddName(SKIP_LIST_SUBTYPE, "ZNR", "Stonework Packbeast"); // TODO: additional types must be added by effect, not direct?
-        skipListAddName(SKIP_LIST_SUBTYPE, "ZNR", "Tajuru Paragon"); // TODO: additional types must be added by effect, not direct?
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -259,9 +257,12 @@ public class VerifyCardDataTest {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
-            if (card.isSplitCard()) {
+            if (card instanceof SplitCard) {
                 check(((SplitCard) card).getLeftHalfCard(), cardIndex);
                 check(((SplitCard) card).getRightHalfCard(), cardIndex);
+            } else if (card instanceof ModalDoubleFacesCard) {
+                check(((ModalDoubleFacesCard) card).getLeftHalfCard(), cardIndex);
+                check(((ModalDoubleFacesCard) card).getRightHalfCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -1252,6 +1253,10 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
+        if (card.getAbilities().contains(ChangelingAbility.getInstance()) && !card.isAllCreatureTypes()) {
+            fail(card, "abilities", "card has Changeling but doesn't have isAllCreatureTypes set to true");
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
@@ -1349,7 +1354,7 @@ public class VerifyCardDataTest {
             Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
-            if (card instanceof SplitCard) {
+            if (card instanceof SplitCard || card instanceof ModalDoubleFacesCard) {
                 card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);

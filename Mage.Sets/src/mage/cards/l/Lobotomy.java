@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -18,9 +16,11 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Lobotomy extends CardImpl {
@@ -83,8 +83,8 @@ class LobotomyEffect extends OneShotEffect {
             FilterCard filterNamedCards = new FilterCard();
             String nameToSearch = "---";// so no card matches
             if (chosenCard != null) {
-                nameToSearch = chosenCard.isSplitCard() ? ((SplitCard) chosenCard).getLeftHalfCard().getName() : chosenCard.getName();
-                filterNamedCards.setMessage("cards named " + chosenCard.getName());
+                nameToSearch = CardUtil.getCardNameForSameNameSearch(chosenCard);
+                filterNamedCards.setMessage("cards named " + nameToSearch);
             }
             filterNamedCards.add(new NamePredicate(nameToSearch));
             Cards cardsToExile = new CardsImpl();

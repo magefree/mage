@@ -1,12 +1,9 @@
-
 package mage.cards.c;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -15,27 +12,24 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class CallToTheKindred extends CardImpl {
 
     public CallToTheKindred(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -43,6 +37,7 @@ public final class CallToTheKindred extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+
         // At the beginning of your upkeep, you may look at the top five cards of your library.
         // If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield,
         // then you put the rest of those cards on the bottom of your library in any order.
@@ -61,12 +56,14 @@ public final class CallToTheKindred extends CardImpl {
 
 class CallToTheKindredEffect extends OneShotEffect {
 
-    public CallToTheKindredEffect() {
+    CallToTheKindredEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "look at the top five cards of your library. If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield, then you put the rest of those cards on the bottom of your library in any order";
+        this.staticText = "look at the top five cards of your library. If you do, you may put a creature card " +
+                "that shares a creature type with enchanted creature from among them onto the battlefield, " +
+                "then you put the rest of those cards on the bottom of your library in any order";
     }
 
-    public CallToTheKindredEffect(final CallToTheKindredEffect effect) {
+    private CallToTheKindredEffect(final CallToTheKindredEffect effect) {
         super(effect);
     }
 
@@ -90,36 +87,33 @@ class CallToTheKindredEffect extends OneShotEffect {
         }
 
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
-        controller.lookAtCards(enchantment.getIdName(), cards, game);
-
         FilterCreatureCard filter = new FilterCreatureCard();
+        filter.add(new CallToTheKindredPredicate(creature));
 
-        if (!creature.getAbilities().contains(ChangelingAbility.getInstance())) {
-            StringBuilder sb = new StringBuilder("creature card with at least one subtype from: ");
-            List<Predicate<MageObject>> subtypes = new ArrayList<>();
-            for (SubType subtype : creature.getSubtype(game)) {
-                subtypes.add(subtype.getPredicate());
-                sb.append(subtype).append(", ");
-            }
-            filter.add(Predicates.or(subtypes));
-            sb.delete(sb.length() - 2, sb.length());
-            filter.setMessage(sb.toString());
-        } else {
-            filter.setMessage("creature card that shares a creature type with enchanted creature");
-        }
-
-        if (cards.count(filter, game) > 0 && controller.chooseUse(Outcome.DrawCard, "Do you wish to put a creature card onto the battlefield?", source, game)) {
-            TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-
-            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
+        if (cards.count(filter, game) > 0) {
+            TargetCard target = new TargetCardInLibrary(0, 1, filter);
+            controller.choose(Outcome.PutCreatureInPlay, cards, target, game);
+            Card card = cards.get(target.getFirstTarget(), game);
+            if (card != null) {
+                cards.remove(card);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
+    }
+}
+
+class CallToTheKindredPredicate implements Predicate<Card> {
+
+    private final Permanent permanent;
+
+    CallToTheKindredPredicate(Permanent permanent) {
+        this.permanent = permanent;
+    }
+
+    @Override
+    public boolean apply(Card input, Game game) {
+        return permanent != null && input != null && permanent.shareCreatureTypes(input, game);
     }
 }

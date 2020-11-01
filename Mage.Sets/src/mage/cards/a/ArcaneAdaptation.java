@@ -116,8 +116,8 @@ class ConspyEffect extends ContinuousEffectImpl {
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                     new FilterControlledCreaturePermanent(), source.getControllerId(), game);
             for (Permanent creature : creatures) {
-                if (creature != null && !creature.hasSubtype(subType, game)) {
-                    creature.getSubtype(game).add(subType);
+                if (creature != null) {
+                    creature.addSubType(game, subType);
                 }
             }
             return true;

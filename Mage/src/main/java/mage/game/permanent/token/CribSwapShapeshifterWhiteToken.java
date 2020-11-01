@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
@@ -19,6 +17,7 @@ public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
         subtype.add(SubType.SHAPESHIFTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
+        setIsAllCreatureTypes(true);
         addAbility(ChangelingAbility.getInstance());
     }
 

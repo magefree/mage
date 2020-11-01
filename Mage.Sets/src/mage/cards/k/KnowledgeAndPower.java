@@ -58,7 +58,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SCRY;
+        return event.getType() == EventType.SCRIED;
     }
 
     @Override

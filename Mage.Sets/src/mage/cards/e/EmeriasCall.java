@@ -1,10 +1,14 @@
 package mage.cards.e;
 
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.CardImpl;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -16,9 +20,9 @@ import mage.game.permanent.token.AngelWarriorToken;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class EmeriasCall extends CardImpl {
+public final class EmeriasCall extends ModalDoubleFacesCard {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("Non-Angel creatures you control");
@@ -28,14 +32,34 @@ public final class EmeriasCall extends CardImpl {
     }
 
     public EmeriasCall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}{W}");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{4}{W}{W}{W}",
+                "Emeria, Shattered Skyclave", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
+
+        // 1.
+        // Emeria's Call
+        // Sorcery
 
         // Create two 4/4 white Angel Warrior creature tokens with flying. Non-Angel creatures you control gain indestructible until your next turn.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelWarriorToken(), 2));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(
+        this.getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new AngelWarriorToken(), 2));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityAllEffect(
                 IndestructibleAbility.getInstance(),
                 Duration.UntilYourNextTurn, filter
         ));
+
+        // 2.
+        // Emeria, Shattered Skyclave
+        // Land
+
+        // As Emeria, Shattered Skyclave enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
+                new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
+                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+        ));
+
+        // {T}: Add {W}.
+        this.getRightHalfCard().addAbility(new WhiteManaAbility());
     }
 
     private EmeriasCall(final EmeriasCall card) {

@@ -136,7 +136,7 @@ class TeveshSzatDoomOfFoolsCommanderEffect extends OneShotEffect {
     TeveshSzatDoomOfFoolsCommanderEffect() {
         super(Outcome.Benefit);
         staticText = "Gain control of all commanders. Put all commanders " +
-                "from the commander zone onto the battlefield under your control.";
+                "from the command zone onto the battlefield under your control.";
     }
 
     private TeveshSzatDoomOfFoolsCommanderEffect(final TeveshSzatDoomOfFoolsCommanderEffect effect) {

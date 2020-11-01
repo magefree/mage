@@ -74,7 +74,7 @@ public final class Glaciers extends CardImpl {
                         // the land mana ability is intrinsic, so apply at this layer not layer 6
                         if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
                             land.getSubtype(game).removeAll(SubType.getLandTypes());
-                            land.getSubtype(game).add(SubType.PLAINS);
+                            land.addSubType(game, SubType.PLAINS);
                             land.removeAllAbilities(source.getSourceId(), game);
                             land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                             break;

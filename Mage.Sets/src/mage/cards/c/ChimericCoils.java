@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -15,17 +13,18 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ChimericCoils extends CardImpl {
 
     public ChimericCoils(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of thhe next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericCoilsEffect(), new ManaCostsImpl("{X}{1}"));
+        Ability ability = new SimpleActivatedAbility(new ChimericCoilsEffect(), new ManaCostsImpl("{X}{1}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())));
         this.addAbility(ability);
     }
@@ -43,8 +42,8 @@ public final class ChimericCoils extends CardImpl {
 class ChimericCoilsEffect extends ContinuousEffectImpl {
 
     public ChimericCoilsEffect() {
-        super(Duration.EndOfTurn, Outcome.BecomeCreature);
-        setText();
+        super(Duration.Custom, Outcome.BecomeCreature);
+        staticText = "{this} becomes an X/X Construct artifact creature";
     }
 
     public ChimericCoilsEffect(final ChimericCoilsEffect effect) {
@@ -59,33 +58,33 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.addCardType(CardType.CREATURE);
-                        permanent.getSubtype(game).add(SubType.CONSTRUCT);
-                    }
-                    break;
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
-                        int xValue = source.getManaCostsToPay().getX();
-                        permanent.getPower().setValue(xValue);
-                        permanent.getToughness().setValue(xValue);
-                    }
-            }
-            return true;
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        switch (layer) {
+            case TypeChangingEffects_4:
+                if (!permanent.isArtifact()) {
+                    permanent.addCardType(CardType.ARTIFACT);
+                }
+                if (!permanent.isCreature()) {
+                    permanent.addCardType(CardType.CREATURE);
+                }
+                permanent.removeAllCreatureTypes(game);
+                permanent.addSubType(game, SubType.CONSTRUCT);
+                break;
+            case PTChangingEffects_7:
+                if (sublayer == SubLayer.SetPT_7b) {
+                    int xValue = source.getManaCostsToPay().getX();
+                    permanent.getPower().setValue(xValue);
+                    permanent.getToughness().setValue(xValue);
+                }
+        }
+        return true;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
-    }
-
-    private void setText() {
-        staticText = duration.toString() + " {this} becomes an X/X Construct artifact creature";
     }
 
     @Override

@@ -23,8 +23,8 @@ public class AddChosenSubtypeEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
-            if (subType != null && !permanent.hasSubtype(subType, game)) {
-                permanent.getSubtype(game).add(subType);
+            if (subType != null) {
+                permanent.addSubType(game, subType);
             }
         }
         return true;

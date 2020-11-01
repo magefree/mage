@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -18,14 +16,15 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.game.command.Commander;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class CelestialDawn extends CardImpl {
@@ -89,8 +88,8 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
                     land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                     break;
                 case TypeChangingEffects_4:
-                    land.getSubtype(game).clear();
-                    land.getSubtype(game).add(SubType.PLAINS);
+                    land.getSubtype(game).removeAll(SubType.getLandTypes());
+                    land.addSubType(game, SubType.PLAINS);
                     break;
             }
         }

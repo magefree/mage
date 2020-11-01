@@ -86,9 +86,9 @@ public enum ScryfallImageSource implements CardImageSource {
             }
         }
 
-        // double faced card
+        // double faced cards (modal double faces cards too)
         // the front face can be downloaded normally
-        // the back face is prepared beforehand
+        // the back face is prepared before hand
         if (baseUrl == null && card.isTwoFacedCard() && !card.isSecondSide()) {
             baseUrl = "https://api.scryfall.com/cards/" + formatSetName(card.getSet(), isToken) + "/"
                     + card.getCollectorId() + "/" + localizedCode + "?format=image";

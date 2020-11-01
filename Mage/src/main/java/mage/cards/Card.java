@@ -1,7 +1,5 @@
 package mage.cards;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -16,6 +14,9 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+import java.util.UUID;
+
 public interface Card extends MageObject {
 
     UUID getOwnerId();
@@ -29,8 +30,9 @@ public interface Card extends MageObject {
     /**
      * For cards: return all basic and dynamic abilities
      * For permanents: return all basic and dynamic abilities
+     *
      * @param game
-     * @return 
+     * @return
      */
     Abilities<Ability> getAbilities(Game game);
 
@@ -62,8 +64,6 @@ public interface Card extends MageObject {
 
     String getFlipCardName();
 
-    boolean isSplitCard();
-
     boolean isTransformable();
 
     void setTransformable(boolean transformable);
@@ -76,21 +76,23 @@ public interface Card extends MageObject {
 
     void addInfo(String key, String value, Game game);
 
+    // WARNING, don't add new move/remove methods (if you add then you must override it in all multi-part cards like Split or MDF)
+
     /**
      * Moves the card to the specified zone
      *
      * @param zone
      * @param sourceId
      * @param game
-     * @param flag If zone
-     * <ul>
-     * <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on
-     * bottom</li></ul></li>
-     * <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
-     * untapped</li></ul></li>
-     * <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from
-     * Battlefield</li></ul></li>
-     * </ul>
+     * @param flag     If zone
+     *                 <ul>
+     *                 <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on
+     *                 bottom</li></ul></li>
+     *                 <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
+     *                 untapped</li></ul></li>
+     *                 <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from
+     *                 Battlefield</li></ul></li>
+     *                 </ul>
      * @return true if card was moved to zone
      */
     boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
@@ -100,8 +102,8 @@ public interface Card extends MageObject {
     /**
      * Moves the card to an exile zone
      *
-     * @param exileId set to null for generic exile zone
-     * @param name used for exile zone with the specified exileId
+     * @param exileId  set to null for generic exile zone
+     * @param name     used for exile zone with the specified exileId
      * @param sourceId
      * @param game
      * @return true if card was moved to zone
@@ -112,6 +114,7 @@ public interface Card extends MageObject {
 
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
 
+    // WARNING, don't add new move/remove methods (if you add then you must override it in all multi-parts card like Split Half or MDF Half)
     boolean removeFromZone(Game game, Zone fromZone, UUID sourceId);
 
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);

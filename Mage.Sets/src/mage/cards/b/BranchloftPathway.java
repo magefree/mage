@@ -1,25 +1,38 @@
 package mage.cards.b;
 
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author JayDi85
  */
-public final class BranchloftPathway extends CardImpl {
+public final class BranchloftPathway extends ModalDoubleFacesCard {
 
     public BranchloftPathway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+        super(ownerId, setInfo,
+                new CardType[]{CardType.LAND}, new SubType[]{}, "",
+                "Boulderloft Pathway", new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
-        this.modalDFC = true;
-        this.secondSideCardClazz = mage.cards.b.BoulderloftPathway.class;
+        // 1.
+        // Branchloft Pathway
+        // Land
 
         // {T}: Add {G}.
-        this.addAbility(new GreenManaAbility());
+        this.getLeftHalfCard().addAbility(new GreenManaAbility());
+
+        // 2.
+        // Boulderloft Pathway
+        // Land
+
+        // {T}: Add {W}.
+        this.getRightHalfCard().addAbility(new WhiteManaAbility());
     }
 
     private BranchloftPathway(final BranchloftPathway card) {

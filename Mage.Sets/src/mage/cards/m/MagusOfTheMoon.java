@@ -78,7 +78,7 @@ public final class MagusOfTheMoon extends CardImpl {
                         // So the ability removing has to be done before Layer 6
                         land.removeAllAbilities(source.getSourceId(), game);
                         land.getSubtype(game).removeAll(SubType.getLandTypes());
-                        land.getSubtype(game).add(SubType.MOUNTAIN);
+                        land.addSubType(game, SubType.MOUNTAIN);
                         // Mountains have the red mana ability intrinsically so the ability must be added in this layer
                         land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                         break;

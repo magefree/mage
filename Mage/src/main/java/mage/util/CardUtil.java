@@ -1,11 +1,6 @@
 package mage.util;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.google.common.collect.ImmutableList;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -15,8 +10,12 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.cards.Card;
 import mage.cards.MeldCard;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -30,19 +29,31 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.functions.CopyTokenFunction;
+import org.apache.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author nantuko
  */
 public final class CardUtil {
 
+    private static final Logger logger = Logger.getLogger(CardUtil.class);
+
+    public static final List<String> RULES_ERROR_INFO = ImmutableList.of("Exception occurred in rules generation");
+
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
     static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
-        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+            "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
@@ -876,5 +887,72 @@ public final class CardUtil {
                 effect.init(ability.get(), game, player.getId());
             }
         }
+    }
+
+    /**
+     * Return card name for same name searching
+     *
+     * @param card
+     * @return
+     */
+    public static String getCardNameForSameNameSearch(Card card) {
+        // it's ok to return one name only cause NamePredicate can find same card by first name
+        if (card instanceof SplitCard) {
+            return ((SplitCard) card).getLeftHalfCard().getName();
+        } else if (card instanceof ModalDoubleFacesCard) {
+            return ((ModalDoubleFacesCard) card).getLeftHalfCard().getName();
+        } else {
+            return card.getName();
+        }
+    }
+
+    public static List<String> getCardRulesWithAdditionalInfo(UUID cardId, String cardName,
+                                                              Abilities<Ability> rulesSource, Abilities<Ability> hintAbilities) {
+        return getCardRulesWithAdditionalInfo(null, cardId, cardName, rulesSource, hintAbilities);
+    }
+
+    /**
+     * Prepare rules list from abilities
+     *
+     * @param rulesSource abilities list to show as rules
+     * @param hintsSource abilities list to show as card hints only (you can add additional hints here; exameple: from second or transformed side)
+     */
+    public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
+                                                              Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
+        try {
+            List<String> rules = rulesSource.getRules(cardName);
+
+            if (game != null) {
+
+                // debug state
+                for (String data : game.getState().getCardState(cardId).getInfo().values()) {
+                    rules.add(data);
+                }
+
+                // ability hints
+                List<String> abilityHints = new ArrayList<>();
+                if (HintUtils.ABILITY_HINTS_ENABLE) {
+                    for (Ability ability : hintsSource) {
+                        for (Hint hint : ability.getHints()) {
+                            String s = hint.getText(game, ability);
+                            if (s != null && !s.isEmpty()) {
+                                abilityHints.add(s);
+                            }
+                        }
+                    }
+                }
+
+                // restrict hints only for permanents, not cards
+                // total hints
+                if (!abilityHints.isEmpty()) {
+                    rules.add(HintUtils.HINT_START_MARK);
+                    HintUtils.appendHints(rules, abilityHints);
+                }
+            }
+            return rules;
+        } catch (Exception e) {
+            logger.error("Exception in rules generation for card: " + cardName, e);
+        }
+        return RULES_ERROR_INFO;
     }
 }

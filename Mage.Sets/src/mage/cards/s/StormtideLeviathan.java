@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,28 +10,23 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class StormtideLeviathan extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying or islandwalk");
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("Creatures without flying or islandwalk");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -48,12 +42,12 @@ public final class StormtideLeviathan extends CardImpl {
 
         // Islandwalk (This creature can't be blocked as long as defending player controls an Island.)
         this.addAbility(new IslandwalkAbility());
-        // All lands are Islands in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));
-        // Creatures without flying or islandwalk can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
 
+        // All lands are Islands in addition to their other types.
+        this.addAbility(new SimpleStaticAbility(new StormtideLeviathanEffect()));
+
+        // Creatures without flying or islandwalk can't attack.
+        this.addAbility(new SimpleStaticAbility(new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public StormtideLeviathan(final StormtideLeviathan card) {
@@ -67,13 +61,13 @@ public final class StormtideLeviathan extends CardImpl {
 
     class StormtideLeviathanEffect extends ContinuousEffectImpl {
 
-        public StormtideLeviathanEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        private StormtideLeviathanEffect() {
+            super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
             staticText = "All lands are Islands in addition to their other types";
             this.dependencyTypes.add(DependencyType.BecomeIsland);
         }
 
-        public StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
+        private StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
             super(effect);
         }
 
@@ -83,32 +77,17 @@ public final class StormtideLeviathan extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Game game, Ability source) {
             for (Permanent land : game.getBattlefield().getActivePermanents(
-                    new FilterLandPermanent(), source.getControllerId(), game)) {
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                        // land abilities are intrinsic, so add them here, not in layer 6
-                        if (!land.hasSubtype(SubType.ISLAND, game)) {
-                            land.getSubtype(game).add(SubType.ISLAND);
-                            if (!land.getAbilities(game).containsClass(BlueManaAbility.class)) {
-                                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                            }
-                        }
-                        break;
+                    StaticFilters.FILTER_LAND, source.getControllerId(), game
+            )) {
+                // land abilities are intrinsic, so add them here, not in layer 6
+                land.addSubType(game, SubType.ISLAND);
+                if (!land.getAbilities(game).containsClass(BlueManaAbility.class)) {
+                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                 }
             }
             return true;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.TypeChangingEffects_4;
         }
     }
 }

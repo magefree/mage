@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -29,8 +28,9 @@ import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Necromancy extends CardImpl {
@@ -175,18 +175,12 @@ class NecromancyChangeAbilityEffect extends ContinuousEffectImpl implements Sour
         if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (sublayer == SubLayer.NA) {
-                        if (!permanent.hasSubtype(SubType.AURA, game)) {
-                            permanent.getSubtype(game).add(SubType.AURA);
-                        }
-                    }
+                    permanent.addSubType(game, SubType.AURA);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        permanent.addAbility(newAbility, source.getSourceId(), game);
-                        permanent.getSpellAbility().getTargets().clear();
-                        permanent.getSpellAbility().getTargets().add(target);
-                    }
+                    permanent.addAbility(newAbility, source.getSourceId(), game);
+                    permanent.getSpellAbility().getTargets().clear();
+                    permanent.getSpellAbility().getTargets().add(target);
             }
             return true;
         }

@@ -204,15 +204,32 @@ public class TestCardRenderDialog extends MageDialog {
         game.addPlayer(playerOpponent, deck);
 
         List<CardView> cardViews = new ArrayList<>();
-        ///*
+        /* // test morphed
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false)); // mountain
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true)); // Judith, the Scourge Diva
-        //*/
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", true, false, true)); // morphed
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
+        //*/
+
+        /* //test emblems
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false)); // Noxious Groodion
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false)); // Knight of Sorrows
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false)); // Bedeck // Bedazzle
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false)); // Conqueror's Galleon
+        cardViews.add(createEmblem(new AjaniAdversaryOfTyrantsEmblem())); // Emblem Ajani
+        cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
+        //*/
+
+        //* //test split, transform and mdf in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
+        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
+        cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        //*/
 
         // duplicate cards
         if (checkBoxGenerateManyCards.isSelected()) {
@@ -225,17 +242,6 @@ public class TestCardRenderDialog extends MageDialog {
                 }
             }
         }
-
-        /*
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false)); // Noxious Groodion
-
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false)); // Knight of Sorrows
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false)); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false)); // Bedeck // Bedazzle
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false)); // Conqueror's Galleon
-        cardViews.add(createEmblem(new AjaniAdversaryOfTyrantsEmblem())); // Emblem Ajani
-        cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
-        //*/
 
         BigCard big = new BigCard();
         CardsView view = new CardsView(cardViews);
