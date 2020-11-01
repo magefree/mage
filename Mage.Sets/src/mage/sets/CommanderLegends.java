@@ -159,6 +159,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Sandstone Oracle", 336, Rarity.UNCOMMON, mage.cards.s.SandstoneOracle.class));
         cards.add(new SetCardInfo("Scroll Rack", 337, Rarity.MYTHIC, mage.cards.s.ScrollRack.class));
         cards.add(new SetCardInfo("Sengir, the Dark Baron", 149, Rarity.RARE, mage.cards.s.SengirTheDarkBaron.class));
+        cards.add(new SetCardInfo("Seraphic Greatsword", 45, Rarity.MYTHIC, mage.cards.s.SeraphicGreatsword.class));
         cards.add(new SetCardInfo("Siani, Eye of the Storm", 95, Rarity.UNCOMMON, mage.cards.s.SianiEyeOfTheStorm.class));
         cards.add(new SetCardInfo("Sidar Kondo of Jamuraa", 535, Rarity.MYTHIC, mage.cards.s.SidarKondoOfJamuraa.class));
         cards.add(new SetCardInfo("Silas Renn, Seeker Adept", 536, Rarity.MYTHIC, mage.cards.s.SilasRennSeekerAdept.class));
