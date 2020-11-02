@@ -60,6 +60,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Charcoal Diamond", 303, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
         cards.add(new SetCardInfo("Coastline Marauders", 168, Rarity.UNCOMMON, mage.cards.c.CoastlineMarauders.class));
         cards.add(new SetCardInfo("Coiling Oracle", 443, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
+        cards.add(new SetCardInfo("Colfenor, the Last Yew", 274, Rarity.RARE, mage.cards.c.ColfenorTheLastYew.class));
         cards.add(new SetCardInfo("Command Beacon", 349, Rarity.RARE, mage.cards.c.CommandBeacon.class));
         cards.add(new SetCardInfo("Command Tower", 350, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 306, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
