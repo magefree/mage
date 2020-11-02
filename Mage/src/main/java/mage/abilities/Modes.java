@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -36,6 +37,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     private boolean isRandom = false;
     private String chooseText = null;
     private boolean resetEachTurn = false;
+    private Condition moreCondition;
 
     public Modes() {
         this.currentMode = new Mode();
@@ -214,6 +216,10 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.put(mode.getId(), mode);
     }
 
+    public void setMoreCondition(Condition moreCondition) {
+        this.moreCondition = moreCondition;
+    }
+
     public boolean choose(Game game, Ability source) {
         if (this.isResetEachTurn()) {
             if (this.getTurnNum(game, source) != game.getTurnNum()) {
@@ -279,6 +285,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             // player chooses modes manually
             this.currentMode = null;
             int currentMaxModes = this.getMaxModes();
+            if (moreCondition != null && moreCondition.apply(game, source)) {
+                currentMaxModes = Integer.MAX_VALUE;
+            }
             if (getMaxModesFilter() != null) {
                 if (maxModesFilter instanceof FilterPlayer) {
                     currentMaxModes = 0;
