@@ -129,6 +129,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Confluence", 721, Rarity.MYTHIC, mage.cards.m.ManaConfluence.class));
         cards.add(new SetCardInfo("Marble Diamond", 323, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Mask of Memory", 324, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
+        cards.add(new SetCardInfo("Merchant Raiders", 81, Rarity.UNCOMMON, mage.cards.m.MerchantRaiders.class));
         cards.add(new SetCardInfo("Meteoric Mace", 192, Rarity.UNCOMMON, mage.cards.m.MeteoricMace.class));
         cards.add(new SetCardInfo("Mindless Automaton", 326, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mnemonic Deluge", 82, Rarity.MYTHIC, mage.cards.m.MnemonicDeluge.class));
