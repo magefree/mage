@@ -82,6 +82,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
         cards.add(new SetCardInfo("Fact or Fiction", 396, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Fall from Favor", 68, Rarity.COMMON, mage.cards.f.FallFromFavor.class));
+        cards.add(new SetCardInfo("Falthis, Shadowcat Familiar", 126, Rarity.UNCOMMON, mage.cards.f.FalthisShadowcatFamiliar.class));
         cards.add(new SetCardInfo("Farhaven Elf", 225, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
         cards.add(new SetCardInfo("Fertilid", 226, Rarity.COMMON, mage.cards.f.Fertilid.class));
         cards.add(new SetCardInfo("Filigree Familiar", 308, Rarity.UNCOMMON, mage.cards.f.FiligreeFamiliar.class));
