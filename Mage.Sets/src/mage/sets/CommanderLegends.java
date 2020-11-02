@@ -177,6 +177,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Run Away Together", 87, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Sandstone Oracle", 336, Rarity.UNCOMMON, mage.cards.s.SandstoneOracle.class));
         cards.add(new SetCardInfo("Sanitarium Skeleton", 148, Rarity.COMMON, mage.cards.s.SanitariumSkeleton.class));
+        cards.add(new SetCardInfo("Scholar of the Ages", 93, Rarity.UNCOMMON, mage.cards.s.ScholarOfTheAges.class));
         cards.add(new SetCardInfo("Scroll Rack", 337, Rarity.MYTHIC, mage.cards.s.ScrollRack.class));
         cards.add(new SetCardInfo("Sengir, the Dark Baron", 149, Rarity.RARE, mage.cards.s.SengirTheDarkBaron.class));
         cards.add(new SetCardInfo("Seraphic Greatsword", 45, Rarity.MYTHIC, mage.cards.s.SeraphicGreatsword.class));
