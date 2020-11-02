@@ -15,6 +15,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -69,30 +70,12 @@ class ShamanOfForgottenWaysManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public ConditionalMana build(Object... options) {
-        return new ShamanOfForgottenWaysConditionalMana(this.mana);
+        return new CreatureCastConditionalMana(this.mana);
     }
 
     @Override
     public String getRule() {
         return "Spend this mana only to cast creature spells";
-    }
-}
-
-class ShamanOfForgottenWaysConditionalMana extends ConditionalMana {
-
-    public ShamanOfForgottenWaysConditionalMana(Mana mana) {
-        super(mana);
-        this.staticText = "Spend this mana only to cast creature spells";
-        addCondition(new ShamanOfForgottenWaysManaCondition());
-    }
-}
-
-class ShamanOfForgottenWaysManaCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject object = source.getSourceObject(game);
-        return object instanceof Spell && object.isCreature();
     }
 }
 
