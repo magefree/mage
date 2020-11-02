@@ -148,6 +148,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Perilous Myr", 330, Rarity.COMMON, mage.cards.p.PerilousMyr.class));
         cards.add(new SetCardInfo("Phyrexian Rager", 142, Rarity.COMMON, mage.cards.p.PhyrexianRager.class));
         cards.add(new SetCardInfo("Phyrexian Triniform", 331, Rarity.MYTHIC, mage.cards.p.PhyrexianTriniform.class));
+        cards.add(new SetCardInfo("Plague Reaver", 143, Rarity.RARE, mage.cards.p.PlagueReaver.class));
         cards.add(new SetCardInfo("Prava of the Steel Legion", 38, Rarity.UNCOMMON, mage.cards.p.PravaOfTheSteelLegion.class));
         cards.add(new SetCardInfo("Preordain", 84, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Profane Transfusion", 145, Rarity.MYTHIC, mage.cards.p.ProfaneTransfusion.class));
