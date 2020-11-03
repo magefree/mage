@@ -106,6 +106,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon Scholar", 73, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Horizon Stone", 315, Rarity.RARE, mage.cards.h.HorizonStone.class));
         cards.add(new SetCardInfo("Hunter's Insight", 232, Rarity.UNCOMMON, mage.cards.h.HuntersInsight.class));
+        cards.add(new SetCardInfo("Ich-Tekik, Salvage Splicer", 580, Rarity.UNCOMMON, mage.cards.i.IchTekikSalvageSplicer.class));
         cards.add(new SetCardInfo("Ikra Shidiqi, the Usurper", 519, Rarity.MYTHIC, mage.cards.i.IkraShidiqiTheUsurper.class));
         cards.add(new SetCardInfo("Immaculate Magistrate", 234, Rarity.RARE, mage.cards.i.ImmaculateMagistrate.class));
         cards.add(new SetCardInfo("Imoti, Celebrant of Bounty", 280, Rarity.UNCOMMON, mage.cards.i.ImotiCelebrantOfBounty.class));
