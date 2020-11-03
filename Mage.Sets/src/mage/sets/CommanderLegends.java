@@ -83,6 +83,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Entourage of Trest", 224, Rarity.COMMON, mage.cards.e.EntourageOfTrest.class));
         cards.add(new SetCardInfo("Exquisite Huntmaster", 122, Rarity.COMMON, mage.cards.e.ExquisiteHuntmaster.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
+        cards.add(new SetCardInfo("Eyeblight Massacre", 125, Rarity.UNCOMMON, mage.cards.e.EyeblightMassacre.class));
         cards.add(new SetCardInfo("Fact or Fiction", 396, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Faith's Fetters", 20, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Fall from Favor", 68, Rarity.COMMON, mage.cards.f.FallFromFavor.class));
@@ -97,6 +98,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Forceful Denial", 69, Rarity.COMMON, mage.cards.f.ForcefulDenial.class));
         cards.add(new SetCardInfo("Furnace Celebration", 181, Rarity.UNCOMMON, mage.cards.f.FurnaceCelebration.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 228, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
+        cards.add(new SetCardInfo("Generous Gift", 375, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghastly Demise", 129, Rarity.COMMON, mage.cards.g.GhastlyDemise.class));
         cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 275, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 71, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
@@ -120,6 +122,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Jeweled Lotus", 319, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
         cards.add(new SetCardInfo("Kamahl's Will", 238, Rarity.RARE, mage.cards.k.KamahlsWill.class));
         cards.add(new SetCardInfo("Kamahl, Heart of Krosa", 237, Rarity.MYTHIC, mage.cards.k.KamahlHeartOfKrosa.class));
+        cards.add(new SetCardInfo("Karametra, God of Harvests", 522, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
         cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 188, Rarity.UNCOMMON, mage.cards.k.KedissEmberclawFamiliar.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 27, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Keleth, Sunmane Familiar", 28, Rarity.UNCOMMON, mage.cards.k.KelethSunmaneFamiliar.class));
@@ -128,6 +131,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kitesail Corsair", 76, Rarity.COMMON, mage.cards.k.KitesailCorsair.class));
         cards.add(new SetCardInfo("Kitesail Skirmisher", 77, Rarity.COMMON, mage.cards.k.KitesailSkirmisher.class));
         cards.add(new SetCardInfo("Kodama of the East Tree", 239, Rarity.RARE, mage.cards.k.KodamaOfTheEastTree.class));
+        cards.add(new SetCardInfo("Kodama's Reach", 429, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kor Cartographer", 30, Rarity.COMMON, mage.cards.k.KorCartographer.class));
         cards.add(new SetCardInfo("Krark, the Thumbless", 189, Rarity.RARE, mage.cards.k.KrarkTheThumbless.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
@@ -183,10 +187,12 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 545, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Ravos, Soultender", 533, Rarity.MYTHIC, mage.cards.r.RavosSoultender.class));
         cards.add(new SetCardInfo("Rebbec, Architect of Ascension", 42, Rarity.UNCOMMON, mage.cards.r.RebbecArchitectOfAscension.class));
+        cards.add(new SetCardInfo("Reclamation Sage", 248, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Rejuvenating Springs", 354, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class));
         cards.add(new SetCardInfo("Reliquary Tower", 488, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Reshape the Earth", 683, Rarity.MYTHIC, mage.cards.r.ReshapeTheEarth.class));
         cards.add(new SetCardInfo("Return to Dust", 43, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+        cards.add(new SetCardInfo("Reyhan, Last of the Abzan", 534, Rarity.MYTHIC, mage.cards.r.ReyhanLastOfTheAbzan.class));
         cards.add(new SetCardInfo("Rings of Brighthearth", 335, Rarity.RARE, mage.cards.r.RingsOfBrighthearth.class));
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 197, Rarity.UNCOMMON, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Run Away Together", 87, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
