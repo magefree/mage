@@ -48,6 +48,7 @@ public final class GnostroVoiceOfTheCrags extends CardImpl {
 
         // • You gain X life.
         ability.addMode(new Mode(new GainLifeEffect(GnostroVoiceOfTheCragsValue.instance).setText("you gain X life")));
+        this.addAbility(ability);
     }
 
     private GnostroVoiceOfTheCrags(final GnostroVoiceOfTheCrags card) {
