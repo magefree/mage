@@ -206,6 +206,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Supreme Will", 102, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
         cards.add(new SetCardInfo("Sweet-Gum Recluse", 260, Rarity.RARE, mage.cards.s.SweetGumRecluse.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 474, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Szat's Will", 152, Rarity.RARE, mage.cards.s.SzatsWill.class));
         cards.add(new SetCardInfo("Tana, the Bloodsower", 537, Rarity.MYTHIC, mage.cards.t.TanaTheBloodsower.class));
         cards.add(new SetCardInfo("Tevesh Szat, Doom of Fools", 153, Rarity.MYTHIC, mage.cards.t.TeveshSzatDoomOfFools.class));
         cards.add(new SetCardInfo("Thalisse, Reverent Medium", 291, Rarity.UNCOMMON, mage.cards.t.ThalisseReverentMedium.class));
