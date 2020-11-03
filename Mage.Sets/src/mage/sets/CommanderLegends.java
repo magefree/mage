@@ -152,6 +152,8 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Natural Reclamation", 245, Rarity.COMMON, mage.cards.n.NaturalReclamation.class));
         cards.add(new SetCardInfo("Necrotic Hex", 137, Rarity.RARE, mage.cards.n.NecroticHex.class));
         cards.add(new SetCardInfo("Nekusar, the Mindrazer", 529, Rarity.MYTHIC, mage.cards.n.NekusarTheMindrazer.class));
+        cards.add(new SetCardInfo("Nevinyrral's Disk", 328, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
+        cards.add(new SetCardInfo("Nevinyrral, Urborg Tyrant", 287, Rarity.RARE, mage.cards.n.NevinyrralUrborgTyrant.class));
         cards.add(new SetCardInfo("Nightshade Harvester", 138, Rarity.RARE, mage.cards.n.NightshadeHarvester.class));
         cards.add(new SetCardInfo("Ninth Bridge Patrol", 33, Rarity.COMMON, mage.cards.n.NinthBridgePatrol.class));
         cards.add(new SetCardInfo("Noxious Dragon", 139, Rarity.UNCOMMON, mage.cards.n.NoxiousDragon.class));
