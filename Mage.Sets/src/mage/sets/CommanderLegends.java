@@ -64,6 +64,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Colfenor, the Last Yew", 274, Rarity.RARE, mage.cards.c.ColfenorTheLastYew.class));
         cards.add(new SetCardInfo("Command Beacon", 349, Rarity.RARE, mage.cards.c.CommandBeacon.class));
         cards.add(new SetCardInfo("Command Tower", 350, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Commander's Plate", 692, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Commander's Sphere", 306, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Confiscate", 62, Rarity.UNCOMMON, mage.cards.c.Confiscate.class));
         cards.add(new SetCardInfo("Court Street Denizen", 17, Rarity.COMMON, mage.cards.c.CourtStreetDenizen.class));
