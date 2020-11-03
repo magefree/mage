@@ -42,6 +42,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Armillary Sphere", 298, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
         cards.add(new SetCardInfo("Armix, Filigree Thrasher", 108, Rarity.UNCOMMON, mage.cards.a.ArmixFiligreeThrasher.class));
         cards.add(new SetCardInfo("Armorcraft Judge", 218, Rarity.UNCOMMON, mage.cards.a.ArmorcraftJudge.class));
+        cards.add(new SetCardInfo("Armory of Iroas", 299, Rarity.UNCOMMON, mage.cards.a.ArmoryOfIroas.class));
         cards.add(new SetCardInfo("Aurora Phoenix", 161, Rarity.RARE, mage.cards.a.AuroraPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 12, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Averna, the Chaos Bloom", 269, Rarity.RARE, mage.cards.a.AvernaTheChaosBloom.class));
@@ -83,9 +84,9 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Entourage of Trest", 224, Rarity.COMMON, mage.cards.e.EntourageOfTrest.class));
         cards.add(new SetCardInfo("Exquisite Huntmaster", 122, Rarity.COMMON, mage.cards.e.ExquisiteHuntmaster.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
-        cards.add(new SetCardInfo("Eyeblight Massacre", 125, Rarity.UNCOMMON, mage.cards.e.EyeblightMassacre.class));
+        cards.add(new SetCardInfo("Eyeblight Massacre", 125, Rarity.COMMON, mage.cards.e.EyeblightMassacre.class));
         cards.add(new SetCardInfo("Fact or Fiction", 396, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
-        cards.add(new SetCardInfo("Faith's Fetters", 20, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
+        cards.add(new SetCardInfo("Faith's Fetters", 20, Rarity.UNCOMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Fall from Favor", 68, Rarity.COMMON, mage.cards.f.FallFromFavor.class));
         cards.add(new SetCardInfo("Falthis, Shadowcat Familiar", 126, Rarity.UNCOMMON, mage.cards.f.FalthisShadowcatFamiliar.class));
         cards.add(new SetCardInfo("Farhaven Elf", 225, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
@@ -98,6 +99,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Forceful Denial", 69, Rarity.COMMON, mage.cards.f.ForcefulDenial.class));
         cards.add(new SetCardInfo("Furnace Celebration", 181, Rarity.UNCOMMON, mage.cards.f.FurnaceCelebration.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 228, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
+        cards.add(new SetCardInfo("Galestrike", 70, Rarity.UNCOMMON, mage.cards.g.Galestrike.class));
         cards.add(new SetCardInfo("Generous Gift", 375, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghastly Demise", 129, Rarity.COMMON, mage.cards.g.GhastlyDemise.class));
         cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 275, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
@@ -144,6 +146,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Order", 242, Rarity.RARE, mage.cards.m.MagusOfTheOrder.class));
         cards.add(new SetCardInfo("Makeshift Munitions", 191, Rarity.COMMON, mage.cards.m.MakeshiftMunitions.class));
         cards.add(new SetCardInfo("Mana Confluence", 721, Rarity.MYTHIC, mage.cards.m.ManaConfluence.class));
+        cards.add(new SetCardInfo("Mana Drain", 80, Rarity.MYTHIC, mage.cards.m.ManaDrain.class));
         cards.add(new SetCardInfo("Marble Diamond", 323, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Mask of Memory", 324, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Merchant Raiders", 81, Rarity.UNCOMMON, mage.cards.m.MerchantRaiders.class));
@@ -246,6 +249,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Wildheart Invoker", 263, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
         cards.add(new SetCardInfo("Wrong Turn", 107, Rarity.RARE, mage.cards.w.WrongTurn.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
+        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 542, Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
         cards.add(new SetCardInfo("Zara, Renegade Recruiter", 294, Rarity.RARE, mage.cards.z.ZaraRenegadeRecruiter.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.MYTHIC, mage.cards.z.ZurTheEnchanter.class));
     }
