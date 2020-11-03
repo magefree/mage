@@ -235,6 +235,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Wildheart Invoker", 263, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
         cards.add(new SetCardInfo("Wrong Turn", 107, Rarity.RARE, mage.cards.w.WrongTurn.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
+        cards.add(new SetCardInfo("Zara, Renegade Recruiter", 294, Rarity.RARE, mage.cards.z.ZaraRenegadeRecruiter.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.MYTHIC, mage.cards.z.ZurTheEnchanter.class));
     }
 }
