@@ -43,6 +43,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Armillary Sphere", 298, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
         cards.add(new SetCardInfo("Armix, Filigree Thrasher", 108, Rarity.UNCOMMON, mage.cards.a.ArmixFiligreeThrasher.class));
         cards.add(new SetCardInfo("Armorcraft Judge", 218, Rarity.UNCOMMON, mage.cards.a.ArmorcraftJudge.class));
+        cards.add(new SetCardInfo("Armored Skyhunter", 617, Rarity.RARE, mage.cards.a.ArmoredSkyhunter.class));
         cards.add(new SetCardInfo("Armory of Iroas", 299, Rarity.UNCOMMON, mage.cards.a.ArmoryOfIroas.class));
         cards.add(new SetCardInfo("Aurora Phoenix", 161, Rarity.RARE, mage.cards.a.AuroraPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 12, Rarity.RARE, mage.cards.a.AustereCommand.class));
