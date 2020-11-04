@@ -127,6 +127,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kamahl's Will", 238, Rarity.RARE, mage.cards.k.KamahlsWill.class));
         cards.add(new SetCardInfo("Kamahl, Heart of Krosa", 237, Rarity.MYTHIC, mage.cards.k.KamahlHeartOfKrosa.class));
         cards.add(new SetCardInfo("Kangee's Lieutenant", 26, Rarity.COMMON, mage.cards.k.KangeesLieutenant.class));
+        cards.add(new SetCardInfo("Kangee, Sky Warden", 283, Rarity.UNCOMMON, mage.cards.k.KangeeSkyWarden.class));
         cards.add(new SetCardInfo("Karametra, God of Harvests", 522, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
         cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 188, Rarity.UNCOMMON, mage.cards.k.KedissEmberclawFamiliar.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 27, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
