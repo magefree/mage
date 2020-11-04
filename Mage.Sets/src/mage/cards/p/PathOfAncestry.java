@@ -72,18 +72,14 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-        if (sourcePermanent == null) {
-            return false;
-        }
-        boolean found = false;
-        for (Ability ability : sourcePermanent.getAbilities()) {
-            if (ability instanceof CommanderColorIdentityManaAbility
-                    && ability.getOriginalId().toString().equals(event.getData())) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
+        if (sourcePermanent == null
+                || sourcePermanent
+                .getAbilities(game)
+                .stream()
+                .filter(CommanderColorIdentityManaAbility.class::isInstance)
+                .map(Ability::getOriginalId)
+                .map(UUID::toString)
+                .noneMatch(event.getData()::equals)) {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
@@ -94,7 +90,6 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
         if (player == null) {
             return false;
         }
-        boolean isAllA = false;
         for (UUID commanderId : game.getCommandersIds(player)) {
             Card commander = game.getPermanent(commanderId);
             if (commander == null) {

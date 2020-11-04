@@ -107,6 +107,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 275, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 71, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Gift of Paradise", 229, Rarity.COMMON, mage.cards.g.GiftOfParadise.class));
+        cards.add(new SetCardInfo("Gilanra, Caller of Wirewood", 230, Rarity.UNCOMMON, mage.cards.g.GilanraCallerOfWirewood.class));
         cards.add(new SetCardInfo("Gnostro, Voice of the Crags", 276, Rarity.RARE, mage.cards.g.GnostroVoiceOfTheCrags.class));
         cards.add(new SetCardInfo("Gor Muldrak, Amphinologist", 277, Rarity.RARE, mage.cards.g.GorMuldrakAmphinologist.class));
         cards.add(new SetCardInfo("Halana, Kessig Ranger", 231, Rarity.UNCOMMON, mage.cards.h.HalanaKessigRanger.class));
