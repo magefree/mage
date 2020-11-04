@@ -34,7 +34,7 @@ public final class PromiseOfTomorrow extends CardImpl {
 
         // Whenever a creature you control dies, exile it.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new ExileTargetForSourceEffect(), false,
+                new ExileTargetForSourceEffect().setText("exile it"), false,
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, true
         ));
 

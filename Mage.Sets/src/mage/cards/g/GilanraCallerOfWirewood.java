@@ -6,6 +6,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.PartnerAbility;
+import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,8 +36,9 @@ public final class GilanraCallerOfWirewood extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Add {G}. When you spend this mana to cast a spell with converted mana cost 6 or greater, draw a card.
-        Ability ability = new GreenManaAbility();
+        BasicManaAbility ability = new GreenManaAbility();
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new GilanraCallerOfWirewoodTriggeredAbility()));
+        ability.setUndoPossible(false);
         this.addAbility(ability);
 
         // Partner
