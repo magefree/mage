@@ -78,6 +78,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Court of Grace", 16, Rarity.RARE, mage.cards.c.CourtOfGrace.class));
         cards.add(new SetCardInfo("Crow of Dark Tidings", 115, Rarity.COMMON, mage.cards.c.CrowOfDarkTidings.class));
         cards.add(new SetCardInfo("Cuombajj Witches", 116, Rarity.UNCOMMON, mage.cards.c.CuombajjWitches.class));
+        cards.add(new SetCardInfo("Dawnglade Regent", 222, Rarity.RARE, mage.cards.d.DawngladeRegent.class));
         cards.add(new SetCardInfo("Demonic Lore", 118, Rarity.UNCOMMON, mage.cards.d.DemonicLore.class));
         cards.add(new SetCardInfo("Deranged Assistant", 65, Rarity.COMMON, mage.cards.d.DerangedAssistant.class));
         cards.add(new SetCardInfo("Derevi, Empyrial Tactician", 518, Rarity.MYTHIC, mage.cards.d.DereviEmpyrialTactician.class));
