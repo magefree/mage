@@ -84,6 +84,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Eligeth, Crossroads Augur", 66, Rarity.RARE, mage.cards.e.EligethCrossroadsAugur.class));
         cards.add(new SetCardInfo("Emberwilde Captain", 175, Rarity.RARE, mage.cards.e.EmberwildeCaptain.class));
         cards.add(new SetCardInfo("Entourage of Trest", 224, Rarity.COMMON, mage.cards.e.EntourageOfTrest.class));
+        cards.add(new SetCardInfo("Esior, Wardwing Familiar", 67, Rarity.UNCOMMON, mage.cards.e.EsiorWardwingFamiliar.class));
         cards.add(new SetCardInfo("Exquisite Huntmaster", 122, Rarity.COMMON, mage.cards.e.ExquisiteHuntmaster.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
         cards.add(new SetCardInfo("Eyeblight Massacre", 125, Rarity.COMMON, mage.cards.e.EyeblightMassacre.class));
