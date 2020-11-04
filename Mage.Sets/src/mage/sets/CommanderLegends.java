@@ -27,6 +27,7 @@ public final class CommanderLegends extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 361;
 
+        cards.add(new SetCardInfo("Abrade", 410, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Acidic Slime", 421, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Akiri, Line-Slinger", 515, Rarity.MYTHIC, mage.cards.a.AkiriLineSlinger.class));
         cards.add(new SetCardInfo("Alena, Kessig Trapper", 160, Rarity.UNCOMMON, mage.cards.a.AlenaKessigTrapper.class));
@@ -103,7 +104,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Forceful Denial", 69, Rarity.COMMON, mage.cards.f.ForcefulDenial.class));
         cards.add(new SetCardInfo("Furnace Celebration", 181, Rarity.UNCOMMON, mage.cards.f.FurnaceCelebration.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 228, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
-        cards.add(new SetCardInfo("Galestrike", 70, Rarity.UNCOMMON, mage.cards.g.Galestrike.class));
+        cards.add(new SetCardInfo("Galestrike", 70, Rarity.COMMON, mage.cards.g.Galestrike.class));
         cards.add(new SetCardInfo("Generous Gift", 375, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghastly Demise", 129, Rarity.COMMON, mage.cards.g.GhastlyDemise.class));
         cards.add(new SetCardInfo("Ghen, Arcanum Weaver", 275, Rarity.RARE, mage.cards.g.GhenArcanumWeaver.class));
@@ -117,6 +118,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon Scholar", 73, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Horizon Stone", 315, Rarity.RARE, mage.cards.h.HorizonStone.class));
         cards.add(new SetCardInfo("Hullbreacher", 74, Rarity.RARE, mage.cards.h.Hullbreacher.class));
+        cards.add(new SetCardInfo("Humble Defector", 184, Rarity.UNCOMMON, mage.cards.h.HumbleDefector.class));
         cards.add(new SetCardInfo("Hunter's Insight", 232, Rarity.UNCOMMON, mage.cards.h.HuntersInsight.class));
         cards.add(new SetCardInfo("Ich-Tekik, Salvage Splicer", 580, Rarity.UNCOMMON, mage.cards.i.IchTekikSalvageSplicer.class));
         cards.add(new SetCardInfo("Ikra Shidiqi, the Usurper", 519, Rarity.MYTHIC, mage.cards.i.IkraShidiqiTheUsurper.class));
@@ -131,7 +133,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Jeweled Lotus", 319, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
         cards.add(new SetCardInfo("Kamahl's Will", 238, Rarity.RARE, mage.cards.k.KamahlsWill.class));
         cards.add(new SetCardInfo("Kamahl, Heart of Krosa", 237, Rarity.MYTHIC, mage.cards.k.KamahlHeartOfKrosa.class));
-        cards.add(new SetCardInfo("Kangee's Lieutenant", 26, Rarity.COMMON, mage.cards.k.KangeesLieutenant.class));
+        cards.add(new SetCardInfo("Kangee's Lieutenant", 26, Rarity.UNCOMMON, mage.cards.k.KangeesLieutenant.class));
         cards.add(new SetCardInfo("Kangee, Sky Warden", 283, Rarity.UNCOMMON, mage.cards.k.KangeeSkyWarden.class));
         cards.add(new SetCardInfo("Karametra, God of Harvests", 522, Rarity.MYTHIC, mage.cards.k.KarametraGodOfHarvests.class));
         cards.add(new SetCardInfo("Kediss, Emberclaw Familiar", 188, Rarity.UNCOMMON, mage.cards.k.KedissEmberclawFamiliar.class));
@@ -145,6 +147,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kodama's Reach", 429, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kor Cartographer", 30, Rarity.COMMON, mage.cards.k.KorCartographer.class));
         cards.add(new SetCardInfo("Krark, the Thumbless", 189, Rarity.RARE, mage.cards.k.KrarkTheThumbless.class));
+        cards.add(new SetCardInfo("Kraum, Ludevic's Opus", 523, Rarity.MYTHIC, mage.cards.k.KraumLudevicsOpus.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
         cards.add(new SetCardInfo("Laboratory Drudge", 78, Rarity.RARE, mage.cards.l.LaboratoryDrudge.class));
         cards.add(new SetCardInfo("Lathiel, the Bounteous Dawn", 295, Rarity.RARE, mage.cards.l.LathielTheBounteousDawn.class));
@@ -260,7 +263,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Wildheart Invoker", 263, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
         cards.add(new SetCardInfo("Wrong Turn", 107, Rarity.RARE, mage.cards.w.WrongTurn.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
-        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 542, Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
+        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 542, Rarity.MYTHIC, mage.cards.y.YurikoTheTigersShadow.class));
         cards.add(new SetCardInfo("Zara, Renegade Recruiter", 294, Rarity.RARE, mage.cards.z.ZaraRenegadeRecruiter.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.MYTHIC, mage.cards.z.ZurTheEnchanter.class));
     }
