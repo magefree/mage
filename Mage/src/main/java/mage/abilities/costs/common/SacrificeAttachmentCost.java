@@ -35,7 +35,9 @@ public class SacrificeAttachmentCost extends UseAttachedCost {
                 continue;
             }
             Permanent attachment = game.getPermanent(attachmentId);
-            paid = attachment != null && attachment.sacrifice(sourceId, game);
+            paid = attachment != null
+                    && attachment.isControlledBy(controllerId)
+                    && attachment.sacrifice(sourceId, game);
             if (paid) {
                 break;
             }

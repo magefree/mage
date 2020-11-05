@@ -47,7 +47,7 @@ public final class BlazingTorch extends CardImpl {
 
         // Equipped creature has "{tap}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to any target."
         this.addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
-                "equipped creature has \"{tap}, Sacrifice {this}: {this} deals 2 damage to any target.\"",
+                "equipped creature has \"{T}, Sacrifice {this}: {this} deals 2 damage to any target.\"",
                 new BlazingTorchEffect(), new TargetAnyTarget(), new SacrificeAttachmentCost(), new TapSourceCost()
         )));
 
