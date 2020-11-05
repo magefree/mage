@@ -461,6 +461,20 @@ public class ScryfallImageSupportTokens {
             put("ZNR/Kor Warrior", "https://api.scryfall.com/cards/tznr/4/en?format=image");
             put("ZNR/Plant", "https://api.scryfall.com/cards/tznr/8/en?format=image");
 
+            // ZNC
+            put("ZNC/Beast", "https://api.scryfall.com/cards/tznc/7/en?format=image");
+            put("ZNC/Bird", "https://api.scryfall.com/cards/tznc/1/en?format=image");
+            put("ZNC/Elemental/1", "https://api.scryfall.com/cards/tznc/10/en?format=image"); // 5/5
+            put("ZNC/Elemental/2", "https://api.scryfall.com/cards/tznc/8/en?format=image"); // 2/2
+            put("ZNC/Faerie Rogue", "https://api.scryfall.com/cards/tznc/3/en?format=image");
+            //put("ZNC/Germ", "https://api.scryfall.com/cards/tznc/4/en?format=image"); // must be in chest or antology
+            put("ZNC/Goblin Rogue", "https://api.scryfall.com/cards/tznc/5/en?format=image");
+            put("ZNC/Kor Ally", "https://api.scryfall.com/cards/tznc/2/en?format=image");
+            put("ZNC/Rat", "https://api.scryfall.com/cards/tznc/6/en?format=image");
+            put("ZNC/Saproling", "https://api.scryfall.com/cards/tznc/9/en?format=image");
+            put("ZNC/Thopter", "https://api.scryfall.com/cards/tznc/11/en?format=image");
+
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

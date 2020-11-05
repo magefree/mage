@@ -4,20 +4,12 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author LevelX2
  */
 public final class RatToken extends TokenImpl {
-
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("GTC", "ELD"));
-    }
 
     public RatToken() {
         super("Rat", "1/1 black Rat creature token");
@@ -27,7 +19,7 @@ public final class RatToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = tokenImageSets;
+        availableImageSetCodes = Arrays.asList("C17", "CHK", "GTC", "SHM", "STH", "TPR", "ELD", "ZNC");
     }
 
     public RatToken(final RatToken token) {

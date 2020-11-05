@@ -489,6 +489,7 @@ public class ScryfallImageSupportCards {
             add("2XM"); // Double Masters
             add("AKR"); // Amonkhet Remastered
             add("ZNR"); // Zendikar Rising
+            add("ZNC"); // Zendikar Rising Commander
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
         }

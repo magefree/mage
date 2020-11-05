@@ -42,7 +42,8 @@ public final class SaprolingToken extends TokenImpl {
                 "DOM", // 3 different token images
                 "C19",
                 "C20",
-                "M21"
+                "M21",
+                "ZNC"
         ));
     }
 

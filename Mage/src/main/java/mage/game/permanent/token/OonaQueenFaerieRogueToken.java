@@ -10,9 +10,9 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public final class OonaQueenFaerieToken extends TokenImpl {
+public final class OonaQueenFaerieRogueToken extends TokenImpl {
 
-    public OonaQueenFaerieToken() {
+    public OonaQueenFaerieRogueToken() {
         super("Faerie Rogue", "1/1 blue and black Faerie Rogue creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -23,11 +23,11 @@ public final class OonaQueenFaerieToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public OonaQueenFaerieToken(final OonaQueenFaerieToken token) {
+    public OonaQueenFaerieRogueToken(final OonaQueenFaerieRogueToken token) {
         super(token);
     }
 
-    public OonaQueenFaerieToken copy() {
-        return new OonaQueenFaerieToken(this);
+    public OonaQueenFaerieRogueToken copy() {
+        return new OonaQueenFaerieRogueToken(this);
     }
 }

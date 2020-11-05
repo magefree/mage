@@ -22,7 +22,7 @@ public final class BirdToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN", "MH1", "C20", "M21"));
+        availableImageSetCodes.addAll(Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN", "MH1", "C20", "M21", "ZNC"));
     }
 
     public BirdToken(final BirdToken token) {

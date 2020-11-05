@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,24 +7,17 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.choices.ChoiceColor;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.OonaQueenFaerieToken;
+import mage.game.permanent.token.OonaQueenFaerieRogueToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class OonaQueenOfTheFae extends CardImpl {
@@ -42,6 +33,7 @@ public final class OonaQueenOfTheFae extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // {X}{UB}: Choose a color. Target opponent exiles the top X cards of their library. For each card of the chosen color exiled this way, create a 1/1 blue and black Faerie Rogue creature token with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OonaQueenOfTheFaeEffect(), new ManaCostsImpl("{X}{U/B}"));
         ability.addTarget(new TargetOpponent());
@@ -93,7 +85,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         }
         controller.moveCards(cardsToExile, Zone.EXILED, source, game);
         if (cardsWithColor > 0) {
-            new CreateTokenEffect(new OonaQueenFaerieToken(), cardsWithColor).apply(game, source);
+            new CreateTokenEffect(new OonaQueenFaerieRogueToken(), cardsWithColor).apply(game, source);
         }
         game.informPlayers("Oona: " + cardsWithColor + " Token" + (cardsWithColor != 1 ? "s" : "") + " created");
         return true;
