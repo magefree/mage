@@ -111,6 +111,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Filigree Familiar", 308, Rarity.COMMON, mage.cards.f.FiligreeFamiliar.class));
         cards.add(new SetCardInfo("Fire Diamond", 309, Rarity.COMMON, mage.cards.f.FireDiamond.class));
         cards.add(new SetCardInfo("First Response", 22, Rarity.UNCOMMON, mage.cards.f.FirstResponse.class));
+        cards.add(new SetCardInfo("Flamekin Herald", 179, Rarity.RARE, mage.cards.f.FlamekinHerald.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 128, Rarity.COMMON, mage.cards.f.FleshbagMarauder.class));
         cards.add(new SetCardInfo("Flood of Recollection", 61, Rarity.COMMON, mage.cards.f.FloodOfRecollection.class));
         cards.add(new SetCardInfo("Forceful Denial", 69, Rarity.COMMON, mage.cards.f.ForcefulDenial.class));
