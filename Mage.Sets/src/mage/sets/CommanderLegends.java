@@ -119,6 +119,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Glacian, Powerstone Engineer", 72, Rarity.UNCOMMON, mage.cards.g.GlacianPowerstoneEngineer.class));
         cards.add(new SetCardInfo("Gnostro, Voice of the Crags", 276, Rarity.RARE, mage.cards.g.GnostroVoiceOfTheCrags.class));
         cards.add(new SetCardInfo("Gor Muldrak, Amphinologist", 277, Rarity.RARE, mage.cards.g.GorMuldrakAmphinologist.class));
+        cards.add(new SetCardInfo("Guildless Commons", 351, Rarity.UNCOMMON, mage.cards.g.GuildlessCommons.class));
         cards.add(new SetCardInfo("Halana, Kessig Ranger", 231, Rarity.UNCOMMON, mage.cards.h.HalanaKessigRanger.class));
         cards.add(new SetCardInfo("Horizon Scholar", 73, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Horizon Stone", 315, Rarity.RARE, mage.cards.h.HorizonStone.class));
