@@ -38,6 +38,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Ancient Animus", 215, Rarity.COMMON, mage.cards.a.AncientAnimus.class));
         cards.add(new SetCardInfo("Annoyed Altisaur", 216, Rarity.COMMON, mage.cards.a.AnnoyedAltisaur.class));
         cards.add(new SetCardInfo("Apex Devastator", 217, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
+        cards.add(new SetCardInfo("Arcane Denial", 393, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 297, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archelos, Lagoon Mystic", 268, Rarity.RARE, mage.cards.a.ArchelosLagoonMystic.class));
         cards.add(new SetCardInfo("Archon of Coronation", 9, Rarity.MYTHIC, mage.cards.a.ArchonOfCoronation.class));
@@ -73,6 +74,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Plate", 692, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Commander's Sphere", 306, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Confiscate", 62, Rarity.UNCOMMON, mage.cards.c.Confiscate.class));
+        cards.add(new SetCardInfo("Counterspell", 395, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Court Street Denizen", 17, Rarity.COMMON, mage.cards.c.CourtStreetDenizen.class));
         cards.add(new SetCardInfo("Court of Ambition", 114, Rarity.RARE, mage.cards.c.CourtOfAmbition.class));
         cards.add(new SetCardInfo("Court of Bounty", 220, Rarity.RARE, mage.cards.c.CourtOfBounty.class));
@@ -131,6 +133,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Roar", 23, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Intangible Virtue", 24, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Interpret the Signs", 75, Rarity.UNCOMMON, mage.cards.i.InterpretTheSigns.class));
+        cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 520, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
         cards.add(new SetCardInfo("Jeska's Will", 187, Rarity.RARE, mage.cards.j.JeskasWill.class));
         cards.add(new SetCardInfo("Jeska, Thrice Reborn", 186, Rarity.MYTHIC, mage.cards.j.JeskaThriceReborn.class));
         cards.add(new SetCardInfo("Jeweled Lotus", 319, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
@@ -153,7 +156,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kraum, Ludevic's Opus", 523, Rarity.MYTHIC, mage.cards.k.KraumLudevicsOpus.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
         cards.add(new SetCardInfo("Laboratory Drudge", 78, Rarity.RARE, mage.cards.l.LaboratoryDrudge.class));
-        cards.add(new SetCardInfo("Lathiel, the Bounteous Dawn", 295, Rarity.RARE, mage.cards.l.LathielTheBounteousDawn.class));
+        cards.add(new SetCardInfo("Lathiel, the Bounteous Dawn", 285, Rarity.RARE, mage.cards.l.LathielTheBounteousDawn.class));
         cards.add(new SetCardInfo("Livio, Oathsworn Sentinel", 31, Rarity.RARE, mage.cards.l.LivioOathswornSentinel.class));
         cards.add(new SetCardInfo("Ludevic, Necro-Alchemist", 525, Rarity.MYTHIC, mage.cards.l.LudevicNecroAlchemist.class));
         cards.add(new SetCardInfo("Maelstrom Colossus", 322, Rarity.COMMON, mage.cards.m.MaelstromColossus.class));
@@ -227,6 +230,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Sifter Wurm", 254, Rarity.UNCOMMON, mage.cards.s.SifterWurm.class));
         cards.add(new SetCardInfo("Silas Renn, Seeker Adept", 536, Rarity.MYTHIC, mage.cards.s.SilasRennSeekerAdept.class));
         cards.add(new SetCardInfo("Siren Stormtamer", 96, Rarity.UNCOMMON, mage.cards.s.SirenStormtamer.class));
+        cards.add(new SetCardInfo("Sisay's Ring", 340, Rarity.COMMON, mage.cards.s.SisaysRing.class));
         cards.add(new SetCardInfo("Sky Diamond", 341, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Slash the Ranks", 47, Rarity.RARE, mage.cards.s.SlashTheRanks.class));
         cards.add(new SetCardInfo("Soul's Fire", 200, Rarity.COMMON, mage.cards.s.SoulsFire.class));
@@ -250,6 +254,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Training Center", 358, Rarity.RARE, mage.cards.t.TrainingCenter.class));
         cards.add(new SetCardInfo("Tymna the Weaver", 539, Rarity.MYTHIC, mage.cards.t.TymnaTheWeaver.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 359, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
+        cards.add(new SetCardInfo("Universal Solvent", 347, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
         cards.add(new SetCardInfo("Valakut Invoker", 206, Rarity.COMMON, mage.cards.v.ValakutInvoker.class));
         cards.add(new SetCardInfo("Vampiric Tutor", 156, Rarity.MYTHIC, mage.cards.v.VampiricTutor.class));
         cards.add(new SetCardInfo("Vault of Champions", 360, Rarity.RARE, mage.cards.v.VaultOfChampions.class));
