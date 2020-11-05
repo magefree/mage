@@ -27,6 +27,7 @@ public final class CommanderLegends extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 361;
 
+        cards.add(new SetCardInfo("Abomination of Llanowar", 265, Rarity.UNCOMMON, mage.cards.a.AbominationOfLlanowar.class));
         cards.add(new SetCardInfo("Abrade", 410, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Acidic Slime", 421, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Akiri, Line-Slinger", 515, Rarity.MYTHIC, mage.cards.a.AkiriLineSlinger.class));
