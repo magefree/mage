@@ -31,7 +31,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Acidic Slime", 421, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Akiri, Line-Slinger", 515, Rarity.MYTHIC, mage.cards.a.AkiriLineSlinger.class));
         cards.add(new SetCardInfo("Akroma's Will", 615, Rarity.RARE, mage.cards.a.AkromasWill.class));
-        cards.add(new SetCardInfo("Akroma, Vision of Ixidor", 547, Rarity.MYTHIC, mage.cards.a.AkromaVisionOfIxidor.class));
+        cards.add(new SetCardInfo("Akroma, Vision of Ixidor", 2, Rarity.MYTHIC, mage.cards.a.AkromaVisionOfIxidor.class));
         cards.add(new SetCardInfo("Alena, Kessig Trapper", 160, Rarity.UNCOMMON, mage.cards.a.AlenaKessigTrapper.class));
         cards.add(new SetCardInfo("Amareth, the Lustrous", 266, Rarity.RARE, mage.cards.a.AmarethTheLustrous.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 55, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
@@ -47,7 +47,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Armillary Sphere", 298, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));
         cards.add(new SetCardInfo("Armix, Filigree Thrasher", 108, Rarity.UNCOMMON, mage.cards.a.ArmixFiligreeThrasher.class));
         cards.add(new SetCardInfo("Armorcraft Judge", 218, Rarity.UNCOMMON, mage.cards.a.ArmorcraftJudge.class));
-        cards.add(new SetCardInfo("Armored Skyhunter", 617, Rarity.RARE, mage.cards.a.ArmoredSkyhunter.class));
+        cards.add(new SetCardInfo("Armored Skyhunter", 11, Rarity.RARE, mage.cards.a.ArmoredSkyhunter.class));
         cards.add(new SetCardInfo("Armory of Iroas", 299, Rarity.UNCOMMON, mage.cards.a.ArmoryOfIroas.class));
         cards.add(new SetCardInfo("Aurora Phoenix", 161, Rarity.RARE, mage.cards.a.AuroraPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 12, Rarity.RARE, mage.cards.a.AustereCommand.class));
@@ -62,6 +62,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Brazen Freebooter", 164, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
         cards.add(new SetCardInfo("Briarblade Adept", 111, Rarity.COMMON, mage.cards.b.BriarbladeAdept.class));
         cards.add(new SetCardInfo("Brinelin, the Moon Kraken", 60, Rarity.UNCOMMON, mage.cards.b.BrinelinTheMoonKraken.class));
+        cards.add(new SetCardInfo("Bruse Tarl, Boorish Herder", 517, Rarity.MYTHIC, mage.cards.b.BruseTarlBoorishHerder.class));
         cards.add(new SetCardInfo("Cage of Hands", 14, Rarity.COMMON, mage.cards.c.CageOfHands.class));
         cards.add(new SetCardInfo("Captain's Call", 15, Rarity.COMMON, mage.cards.c.CaptainsCall.class));
         cards.add(new SetCardInfo("Cast Down", 112, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
@@ -72,7 +73,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Colfenor, the Last Yew", 274, Rarity.RARE, mage.cards.c.ColfenorTheLastYew.class));
         cards.add(new SetCardInfo("Command Beacon", 349, Rarity.RARE, mage.cards.c.CommandBeacon.class));
         cards.add(new SetCardInfo("Command Tower", 350, Rarity.COMMON, mage.cards.c.CommandTower.class));
-        cards.add(new SetCardInfo("Commander's Plate", 692, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
+        cards.add(new SetCardInfo("Commander's Plate", 305, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Commander's Sphere", 306, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Confiscate", 62, Rarity.UNCOMMON, mage.cards.c.Confiscate.class));
         cards.add(new SetCardInfo("Counterspell", 395, Rarity.COMMON, mage.cards.c.Counterspell.class));
@@ -90,6 +91,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Doomed Traveler", 19, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
         cards.add(new SetCardInfo("Dragon Mantle", 174, Rarity.COMMON, mage.cards.d.DragonMantle.class));
         cards.add(new SetCardInfo("Eligeth, Crossroads Augur", 66, Rarity.RARE, mage.cards.e.EligethCrossroadsAugur.class));
+        cards.add(new SetCardInfo("Elvish Visionary", 223, Rarity.COMMON, mage.cards.e.ElvishVisionary.class));
         cards.add(new SetCardInfo("Emberwilde Captain", 175, Rarity.RARE, mage.cards.e.EmberwildeCaptain.class));
         cards.add(new SetCardInfo("Entourage of Trest", 224, Rarity.COMMON, mage.cards.e.EntourageOfTrest.class));
         cards.add(new SetCardInfo("Esior, Wardwing Familiar", 67, Rarity.UNCOMMON, mage.cards.e.EsiorWardwingFamiliar.class));
@@ -119,6 +121,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Gilanra, Caller of Wirewood", 230, Rarity.UNCOMMON, mage.cards.g.GilanraCallerOfWirewood.class));
         cards.add(new SetCardInfo("Glacian, Powerstone Engineer", 72, Rarity.UNCOMMON, mage.cards.g.GlacianPowerstoneEngineer.class));
         cards.add(new SetCardInfo("Gnostro, Voice of the Crags", 276, Rarity.RARE, mage.cards.g.GnostroVoiceOfTheCrags.class));
+        cards.add(new SetCardInfo("Golem Artisan", 311, Rarity.UNCOMMON, mage.cards.g.GolemArtisan.class));
         cards.add(new SetCardInfo("Gor Muldrak, Amphinologist", 277, Rarity.RARE, mage.cards.g.GorMuldrakAmphinologist.class));
         cards.add(new SetCardInfo("Guildless Commons", 351, Rarity.UNCOMMON, mage.cards.g.GuildlessCommons.class));
         cards.add(new SetCardInfo("Halana, Kessig Ranger", 231, Rarity.UNCOMMON, mage.cards.h.HalanaKessigRanger.class));
@@ -127,7 +130,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Hullbreacher", 74, Rarity.RARE, mage.cards.h.Hullbreacher.class));
         cards.add(new SetCardInfo("Humble Defector", 184, Rarity.UNCOMMON, mage.cards.h.HumbleDefector.class));
         cards.add(new SetCardInfo("Hunter's Insight", 232, Rarity.UNCOMMON, mage.cards.h.HuntersInsight.class));
-        cards.add(new SetCardInfo("Ich-Tekik, Salvage Splicer", 580, Rarity.UNCOMMON, mage.cards.i.IchTekikSalvageSplicer.class));
+        cards.add(new SetCardInfo("Ich-Tekik, Salvage Splicer", 233, Rarity.UNCOMMON, mage.cards.i.IchTekikSalvageSplicer.class));
         cards.add(new SetCardInfo("Ikra Shidiqi, the Usurper", 519, Rarity.MYTHIC, mage.cards.i.IkraShidiqiTheUsurper.class));
         cards.add(new SetCardInfo("Immaculate Magistrate", 234, Rarity.RARE, mage.cards.i.ImmaculateMagistrate.class));
         cards.add(new SetCardInfo("Imoti, Celebrant of Bounty", 280, Rarity.UNCOMMON, mage.cards.i.ImotiCelebrantOfBounty.class));
@@ -171,9 +174,12 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Marble Diamond", 323, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Mask of Memory", 324, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Merchant Raiders", 81, Rarity.UNCOMMON, mage.cards.m.MerchantRaiders.class));
+        cards.add(new SetCardInfo("Meteor Golem", 325, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Meteoric Mace", 192, Rarity.UNCOMMON, mage.cards.m.MeteoricMace.class));
         cards.add(new SetCardInfo("Mindless Automaton", 326, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mnemonic Deluge", 82, Rarity.MYTHIC, mage.cards.m.MnemonicDeluge.class));
+        cards.add(new SetCardInfo("Moss Diamond", 327, Rarity.UNCOMMON, mage.cards.m.MossDiamond.class));
+        cards.add(new SetCardInfo("Muldrotha, the Gravetide", 527, Rarity.MYTHIC, mage.cards.m.MuldrothaTheGravetide.class));
         cards.add(new SetCardInfo("Mulldrifter", 400, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Myriad Landscape", 487, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 514, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
@@ -249,6 +255,8 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftfoot Boots", 474, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Szat's Will", 152, Rarity.RARE, mage.cards.s.SzatsWill.class));
         cards.add(new SetCardInfo("Tana, the Bloodsower", 537, Rarity.MYTHIC, mage.cards.t.TanaTheBloodsower.class));
+        cards.add(new SetCardInfo("Temur Battle Rage", 417, Rarity.COMMON, mage.cards.t.TemurBattleRage.class));
+        cards.add(new SetCardInfo("Terramorphic Expanse", 357, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tevesh Szat, Doom of Fools", 153, Rarity.MYTHIC, mage.cards.t.TeveshSzatDoomOfFools.class));
         cards.add(new SetCardInfo("Thalisse, Reverent Medium", 291, Rarity.UNCOMMON, mage.cards.t.ThalisseReverentMedium.class));
         cards.add(new SetCardInfo("Thorn of the Black Rose", 154, Rarity.COMMON, mage.cards.t.ThornOfTheBlackRose.class));
@@ -272,6 +280,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Vow of Wildness", 262, Rarity.UNCOMMON, mage.cards.v.VowOfWildness.class));
         cards.add(new SetCardInfo("War Room", 361, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Warden of Evos Isle", 106, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
+        cards.add(new SetCardInfo("Welding Sparks", 210, Rarity.COMMON, mage.cards.w.WeldingSparks.class));
         cards.add(new SetCardInfo("Wild Celebrants", 212, Rarity.COMMON, mage.cards.w.WildCelebrants.class));
         cards.add(new SetCardInfo("Wildheart Invoker", 263, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
         cards.add(new SetCardInfo("Wrong Turn", 107, Rarity.RARE, mage.cards.w.WrongTurn.class));
