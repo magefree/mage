@@ -188,6 +188,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Mulldrifter", 400, Rarity.UNCOMMON, mage.cards.m.Mulldrifter.class));
         cards.add(new SetCardInfo("Myriad Landscape", 487, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Nadier's Nightblade", 136, Rarity.UNCOMMON, mage.cards.n.NadiersNightblade.class));
+        cards.add(new SetCardInfo("Nadier, Agent of the Duskenel", 135, Rarity.UNCOMMON, mage.cards.n.NadierAgentOfTheDuskenel.class));
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 514, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
         cards.add(new SetCardInfo("Natural Reclamation", 245, Rarity.COMMON, mage.cards.n.NaturalReclamation.class));
         cards.add(new SetCardInfo("Necrotic Hex", 137, Rarity.RARE, mage.cards.n.NecroticHex.class));
