@@ -36,6 +36,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Alena, Kessig Trapper", 160, Rarity.UNCOMMON, mage.cards.a.AlenaKessigTrapper.class));
         cards.add(new SetCardInfo("Amareth, the Lustrous", 266, Rarity.RARE, mage.cards.a.AmarethTheLustrous.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 55, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
+        cards.add(new SetCardInfo("Anara, World Familiar", 214, Rarity.UNCOMMON, mage.cards.a.AnaraWorldFamiliar.class));
         cards.add(new SetCardInfo("Ancestral Blade", 5, Rarity.COMMON, mage.cards.a.AncestralBlade.class));
         cards.add(new SetCardInfo("Ancient Animus", 215, Rarity.COMMON, mage.cards.a.AncientAnimus.class));
         cards.add(new SetCardInfo("Annoyed Altisaur", 216, Rarity.COMMON, mage.cards.a.AnnoyedAltisaur.class));
