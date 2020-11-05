@@ -5,13 +5,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public final class AngelToken extends TokenImpl {
-
-    static final private List<String> tokenImageSets = new ArrayList<>();
 
     public AngelToken() {
         super("Angel", "4/4 white Angel creature token with flying");

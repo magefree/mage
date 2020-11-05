@@ -1426,3 +1426,16 @@
 # Jumpstart uses tokens and emblems from M21 set,
 # TODO: check scryfall for JMP tokens after set's release
 |Generate|TOK:JMP|Unicorn|||UnicornToken|
+
+# ZNR
+|Generate|TOK:ZNR|Angel Warrior|||AngelWarriorToken|
+|Generate|TOK:ZNR|Cat|||CatToken3|
+|Generate|TOK:ZNR|Cat Beast|||CatBeastToken|
+|Generate|TOK:ZNR|Construct|||ConstructToken|
+|Generate|TOK:ZNR|Goblin Construct|||RelicRobberToken|
+|Generate|TOK:ZNR|Drake|||DrakeToken|
+|Generate|TOK:ZNR|Hydra|||GrakmawSkyclaveRavagerHydraToken|
+|Generate|TOK:ZNR|Illusion|||CustomIllusionToken|
+|Generate|TOK:ZNR|Insect|||InsectToken|
+|Generate|TOK:ZNR|Kor Warrior|||KorWarriorToken|
+|Generate|TOK:ZNR|Plant|||PlantToken|

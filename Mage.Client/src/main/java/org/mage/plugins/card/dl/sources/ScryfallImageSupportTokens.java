@@ -448,6 +448,18 @@ public class ScryfallImageSupportTokens {
             put("M21/Weird", "https://api.scryfall.com/cards/tm21/13/en?format=image");
             put("M21/Zombie", "https://api.scryfall.com/cards/tm21/7/en?format=image");
 
+            // ZNR
+            put("ZNR/Angel Warrior", "https://api.scryfall.com/cards/tznr/1/en?format=image");
+            put("ZNR/Cat Beast", "https://api.scryfall.com/cards/tznr/3/en?format=image");
+            put("ZNR/Cat", "https://api.scryfall.com/cards/tznr/2/en?format=image");
+            put("ZNR/Construct", "https://api.scryfall.com/cards/tznr/10/en?format=image");
+            put("ZNR/Drake", "https://api.scryfall.com/cards/tznr/5/en?format=image");
+            put("ZNR/Goblin Construct", "https://api.scryfall.com/cards/tznr/11/en?format=image");
+            put("ZNR/Hydra", "https://api.scryfall.com/cards/tznr/9/en?format=image");
+            put("ZNR/Illusion", "https://api.scryfall.com/cards/tznr/6/en?format=image");
+            put("ZNR/Insect", "https://api.scryfall.com/cards/tznr/7/en?format=image");
+            put("ZNR/Kor Warrior", "https://api.scryfall.com/cards/tznr/4/en?format=image");
+            put("ZNR/Plant", "https://api.scryfall.com/cards/tznr/8/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -17,7 +17,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.InscriptionOfInsightToken;
+import mage.game.permanent.token.CustomIllusionToken;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
@@ -104,7 +104,7 @@ class SkyclaveApparitionEffect extends OneShotEffect {
                 card.getOwnerId(), (u, i) -> i == null ? card.getConvertedManaCost() : Integer.sum(card.getConvertedManaCost(), i)
         ));
         for (Map.Entry<UUID, Integer> entry : map.entrySet()) {
-            new InscriptionOfInsightToken(entry.getValue()).putOntoBattlefield(
+            new CustomIllusionToken(entry.getValue()).putOntoBattlefield(
                     1, game, source.getSourceId(), entry.getKey()
             );
         }

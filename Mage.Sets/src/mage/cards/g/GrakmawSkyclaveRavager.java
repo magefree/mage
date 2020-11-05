@@ -3,6 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -18,10 +19,9 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.GrakmawSkyclaveRavagerToken;
+import mage.game.permanent.token.GrakmawSkyclaveRavagerHydraToken;
 
 import java.util.UUID;
-import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -96,7 +96,7 @@ class GrakmawSkyclaveRavagerEffect extends OneShotEffect {
         if (permanent != null) {
             counters = permanent.getCounters(game).getCount(CounterType.P1P1);
         }
-        return new GrakmawSkyclaveRavagerToken(counters).putOntoBattlefield(
+        return new GrakmawSkyclaveRavagerHydraToken(counters).putOntoBattlefield(
                 1, game, source.getSourceId(), source.getControllerId()
         );
     }

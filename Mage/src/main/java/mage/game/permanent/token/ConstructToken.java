@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -16,6 +18,8 @@ public final class ConstructToken extends TokenImpl {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("ZNR");
     }
 
     public ConstructToken(final ConstructToken token) {

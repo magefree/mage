@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.InscriptionOfInsightToken;
+import mage.game.permanent.token.CustomIllusionToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -80,8 +80,8 @@ class InscriptionOfInsightEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int cardsInHand = player.getHand().size();
-        return new InscriptionOfInsightToken(player.getHand().size()).putOntoBattlefield(
+
+        return new CustomIllusionToken(player.getHand().size()).putOntoBattlefield(
                 1, game, source.getSourceId(), source.getFirstTarget()
         );
     }

@@ -1,28 +1,18 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class InsectToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("M10", "MM2", "SOI"));
-    }
-
     public InsectToken() {
-        this((String)null);
+        this((String) null);
     }
 
     public InsectToken(String setCode) {
@@ -34,7 +24,7 @@ public final class InsectToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = tokenImageSets;
+        availableImageSetCodes = Arrays.asList("M10", "MM2", "SOI", "ZNR");
     }
 
     public InsectToken(final InsectToken token) {

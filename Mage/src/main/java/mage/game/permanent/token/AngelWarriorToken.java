@@ -5,6 +5,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 public final class AngelWarriorToken extends TokenImpl {
 
     public AngelWarriorToken() {
@@ -15,7 +17,10 @@ public final class AngelWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("ZNR");
     }
 
     public AngelWarriorToken(final AngelWarriorToken token) {

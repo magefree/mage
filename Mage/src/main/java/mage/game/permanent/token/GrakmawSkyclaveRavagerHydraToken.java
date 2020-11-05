@@ -4,12 +4,14 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
-public final class GrakmawSkyclaveRavagerToken extends TokenImpl {
+public final class GrakmawSkyclaveRavagerHydraToken extends TokenImpl {
 
-    public GrakmawSkyclaveRavagerToken(int xValue) {
+    public GrakmawSkyclaveRavagerHydraToken(int xValue) {
         super("Hydra", "X/X black and green Hydra creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -17,13 +19,15 @@ public final class GrakmawSkyclaveRavagerToken extends TokenImpl {
         subtype.add(SubType.HYDRA);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+
+        availableImageSetCodes = Arrays.asList("ZNR");
     }
 
-    private GrakmawSkyclaveRavagerToken(final GrakmawSkyclaveRavagerToken token) {
+    private GrakmawSkyclaveRavagerHydraToken(final GrakmawSkyclaveRavagerHydraToken token) {
         super(token);
     }
 
-    public GrakmawSkyclaveRavagerToken copy() {
-        return new GrakmawSkyclaveRavagerToken(this);
+    public GrakmawSkyclaveRavagerHydraToken copy() {
+        return new GrakmawSkyclaveRavagerHydraToken(this);
     }
 }
