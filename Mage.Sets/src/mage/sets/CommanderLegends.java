@@ -220,6 +220,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Rings of Brighthearth", 335, Rarity.RARE, mage.cards.r.RingsOfBrighthearth.class));
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 197, Rarity.UNCOMMON, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Run Away Together", 87, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
+        cards.add(new SetCardInfo("Sakashima of a Thousand Faces", 89, Rarity.MYTHIC, mage.cards.s.SakashimaOfAThousandFaces.class));
         cards.add(new SetCardInfo("Sakashima's Protege", 90, Rarity.RARE, mage.cards.s.SakashimasProtege.class));
         cards.add(new SetCardInfo("Sandstone Oracle", 336, Rarity.UNCOMMON, mage.cards.s.SandstoneOracle.class));
         cards.add(new SetCardInfo("Sanitarium Skeleton", 148, Rarity.COMMON, mage.cards.s.SanitariumSkeleton.class));
