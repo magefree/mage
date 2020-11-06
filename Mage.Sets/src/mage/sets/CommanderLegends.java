@@ -162,6 +162,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Fall from Favor", 68, Rarity.COMMON, mage.cards.f.FallFromFavor.class));
         cards.add(new SetCardInfo("Falthis, Shadowcat Familiar", 126, Rarity.UNCOMMON, mage.cards.f.FalthisShadowcatFamiliar.class));
         cards.add(new SetCardInfo("Farhaven Elf", 225, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
+        cards.add(new SetCardInfo("Fathom Fleet Swordjack", 177, Rarity.UNCOMMON, mage.cards.f.FathomFleetSwordjack.class));
         cards.add(new SetCardInfo("Fathom Mage", 445, Rarity.RARE, mage.cards.f.FathomMage.class));
         cards.add(new SetCardInfo("Feast of Succession", 127, Rarity.UNCOMMON, mage.cards.f.FeastOfSuccession.class));
         cards.add(new SetCardInfo("Fencing Ace", 21, Rarity.UNCOMMON, mage.cards.f.FencingAce.class));
