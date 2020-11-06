@@ -518,6 +518,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Word of Seizing", 420, Rarity.RARE, mage.cards.w.WordOfSeizing.class));
         cards.add(new SetCardInfo("Workshop Assistant", 348, Rarity.COMMON, mage.cards.w.WorkshopAssistant.class));
         cards.add(new SetCardInfo("Wrong Turn", 107, Rarity.RARE, mage.cards.w.WrongTurn.class));
+        cards.add(new SetCardInfo("Wyleth, Soul of Steel", 362, Rarity.MYTHIC, mage.cards.w.WylethSoulOfSteel.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 441, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 542, Rarity.MYTHIC, mage.cards.y.YurikoTheTigersShadow.class));
