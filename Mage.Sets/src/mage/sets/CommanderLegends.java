@@ -30,6 +30,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Abomination of Llanowar", 265, Rarity.UNCOMMON, mage.cards.a.AbominationOfLlanowar.class));
         cards.add(new SetCardInfo("Abrade", 410, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Acidic Slime", 421, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
+        cards.add(new SetCardInfo("Aesi, Tyrant of Gyre Strait", 365, Rarity.MYTHIC, mage.cards.a.AesiTyrantOfGyreStrait.class));
         cards.add(new SetCardInfo("Akiri, Line-Slinger", 515, Rarity.MYTHIC, mage.cards.a.AkiriLineSlinger.class));
         cards.add(new SetCardInfo("Akroma's Will", 3, Rarity.RARE, mage.cards.a.AkromasWill.class));
         cards.add(new SetCardInfo("Akroma, Vision of Ixidor", 2, Rarity.MYTHIC, mage.cards.a.AkromaVisionOfIxidor.class));
