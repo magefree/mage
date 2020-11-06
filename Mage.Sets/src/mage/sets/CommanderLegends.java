@@ -271,6 +271,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Portent of Betrayal", 194, Rarity.COMMON, mage.cards.p.PortentOfBetrayal.class));
         cards.add(new SetCardInfo("Prava of the Steel Legion", 38, Rarity.UNCOMMON, mage.cards.p.PravaOfTheSteelLegion.class));
         cards.add(new SetCardInfo("Preordain", 84, Rarity.COMMON, mage.cards.p.Preordain.class));
+        cards.add(new SetCardInfo("Pride of the Perfect", 144, Rarity.UNCOMMON, mage.cards.p.PrideOfThePerfect.class));
         cards.add(new SetCardInfo("Profane Transfusion", 145, Rarity.MYTHIC, mage.cards.p.ProfaneTransfusion.class));
         cards.add(new SetCardInfo("Promise of Tomorrow", 39, Rarity.RARE, mage.cards.p.PromiseOfTomorrow.class));
         cards.add(new SetCardInfo("Prophetic Prism", 334, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
