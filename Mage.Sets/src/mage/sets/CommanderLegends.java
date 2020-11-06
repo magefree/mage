@@ -475,6 +475,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Tromokratis", 408, Rarity.RARE, mage.cards.t.Tromokratis.class));
         cards.add(new SetCardInfo("Trove Tracker", 104, Rarity.COMMON, mage.cards.t.TroveTracker.class));
         cards.add(new SetCardInfo("Trusty Packbeast", 53, Rarity.COMMON, mage.cards.t.TrustyPackbeast.class));
+        cards.add(new SetCardInfo("Tuya Bearclaw", 292, Rarity.UNCOMMON, mage.cards.t.TuyaBearclaw.class));
         cards.add(new SetCardInfo("Tymna the Weaver", 539, Rarity.MYTHIC, mage.cards.t.TymnaTheWeaver.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 388, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 359, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
