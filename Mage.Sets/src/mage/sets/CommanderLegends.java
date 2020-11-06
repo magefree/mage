@@ -358,6 +358,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 488, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renegade Tactics", 195, Rarity.COMMON, mage.cards.r.RenegadeTactics.class));
         cards.add(new SetCardInfo("Reshape the Earth", 249, Rarity.MYTHIC, mage.cards.r.ReshapeTheEarth.class));
+        cards.add(new SetCardInfo("Response // Resurgence", 449, Rarity.RARE, mage.cards.r.ResponseResurgence.class));
         cards.add(new SetCardInfo("Retreat to Kazandu", 435, Rarity.UNCOMMON, mage.cards.r.RetreatToKazandu.class));
         cards.add(new SetCardInfo("Return to Dust", 43, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Revenant", 147, Rarity.UNCOMMON, mage.cards.r.Revenant.class));
@@ -498,6 +499,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Vow of Wildness", 262, Rarity.UNCOMMON, mage.cards.v.VowOfWildness.class));
         cards.add(new SetCardInfo("War Room", 361, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Warden of Evos Isle", 106, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
+        cards.add(new SetCardInfo("Wear // Tear", 456, Rarity.UNCOMMON, mage.cards.w.WearTear.class));
         cards.add(new SetCardInfo("Welding Sparks", 210, Rarity.COMMON, mage.cards.w.WeldingSparks.class));
         cards.add(new SetCardInfo("Whelming Wave", 409, Rarity.RARE, mage.cards.w.WhelmingWave.class));
         cards.add(new SetCardInfo("White Sun's Zenith", 391, Rarity.RARE, mage.cards.w.WhiteSunsZenith.class));
