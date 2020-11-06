@@ -174,6 +174,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Immaculate Magistrate", 234, Rarity.RARE, mage.cards.i.ImmaculateMagistrate.class));
         cards.add(new SetCardInfo("Imoti, Celebrant of Bounty", 280, Rarity.UNCOMMON, mage.cards.i.ImotiCelebrantOfBounty.class));
         cards.add(new SetCardInfo("Imperious Perfect", 235, Rarity.UNCOMMON, mage.cards.i.ImperiousPerfect.class));
+        cards.add(new SetCardInfo("Impulsive Pilferer", 185, Rarity.COMMON, mage.cards.i.ImpulsivePilferer.class));
         cards.add(new SetCardInfo("Ingenuity Engine", 317, Rarity.UNCOMMON, mage.cards.i.IngenuityEngine.class));
         cards.add(new SetCardInfo("Inspiring Roar", 23, Rarity.COMMON, mage.cards.i.InspiringRoar.class));
         cards.add(new SetCardInfo("Intangible Virtue", 24, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
