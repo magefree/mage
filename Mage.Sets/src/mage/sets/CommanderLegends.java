@@ -166,6 +166,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Fertilid", 226, Rarity.COMMON, mage.cards.f.Fertilid.class));
         cards.add(new SetCardInfo("Fiery Cannonade", 178, Rarity.COMMON, mage.cards.f.FieryCannonade.class));
         cards.add(new SetCardInfo("Filigree Familiar", 308, Rarity.COMMON, mage.cards.f.FiligreeFamiliar.class));
+        cards.add(new SetCardInfo("Fin-Clade Fugitives", 227, Rarity.COMMON, mage.cards.f.FinCladeFugitives.class));
         cards.add(new SetCardInfo("Fire Diamond", 309, Rarity.COMMON, mage.cards.f.FireDiamond.class));
         cards.add(new SetCardInfo("Fireshrieker", 462, Rarity.UNCOMMON, mage.cards.f.Fireshrieker.class));
         cards.add(new SetCardInfo("First Response", 22, Rarity.UNCOMMON, mage.cards.f.FirstResponse.class));

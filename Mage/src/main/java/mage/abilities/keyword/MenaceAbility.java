@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public class MenaceAbility extends StaticAbility { // Menace may not be a Singleton because the source ability is needed in the continuous effect
@@ -33,7 +26,7 @@ public class MenaceAbility extends StaticAbility { // Menace may not be a Single
     }
 
     @Override
-    public Ability copy() {
+    public MenaceAbility copy() {
         return new MenaceAbility(this);
     }
 
@@ -45,5 +38,4 @@ public class MenaceAbility extends StaticAbility { // Menace may not be a Single
         }
         return res;
     }
-
 }

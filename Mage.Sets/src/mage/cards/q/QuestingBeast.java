@@ -3,11 +3,10 @@ package mage.cards.q;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.keyword.DauntAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -15,9 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -33,13 +30,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class QuestingBeast extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creatures with power 2 or less");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-    }
 
     public QuestingBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -59,7 +49,7 @@ public final class QuestingBeast extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Questing Beast can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new DauntAbility());
 
         // Combat damage that would be dealt by creatures you control can't be prevented.
         this.addAbility(new SimpleStaticAbility(new QuestingBeastPreventionEffect()));

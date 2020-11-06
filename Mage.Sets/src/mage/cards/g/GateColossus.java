@@ -3,20 +3,17 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.GateYouControlCount;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.GateYouControlHint;
+import mage.abilities.keyword.DauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -26,12 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GateColossus extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-    }
 
     public GateColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
@@ -47,7 +38,7 @@ public final class GateColossus extends CardImpl {
         );
 
         // Gate Colossus can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new DauntAbility());
 
         // Whenever a Gate enters the battlefield under your control, you may put Gate Colossus from your graveyard on top of your library.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(

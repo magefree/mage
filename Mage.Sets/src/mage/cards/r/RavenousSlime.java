@@ -2,17 +2,14 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.DauntAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -26,13 +23,6 @@ import java.util.UUID;
  */
 public final class RavenousSlime extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creatures with power 2 or less");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-    }
-
     public RavenousSlime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -41,13 +31,10 @@ public final class RavenousSlime extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ravenous Slime can't be blocked by creatures with power 2 or less.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new DauntAbility());
 
         // If a creature an opponent controls would die, instead exile it and put a number of +1/+1 counters equal to that creature's power on Ravenous Slime.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new RavenousSlimeEffect()
-        ));
+        this.addAbility(new SimpleStaticAbility(new RavenousSlimeEffect()));
     }
 
     public RavenousSlime(final RavenousSlime card) {
