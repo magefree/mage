@@ -251,6 +251,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Cartographer", 30, Rarity.COMMON, mage.cards.k.KorCartographer.class));
         cards.add(new SetCardInfo("Krark, the Thumbless", 189, Rarity.RARE, mage.cards.k.KrarkTheThumbless.class));
         cards.add(new SetCardInfo("Kraum, Ludevic's Opus", 523, Rarity.MYTHIC, mage.cards.k.KraumLudevicsOpus.class));
+        cards.add(new SetCardInfo("Kwain, Itinerant Meddler", 284, Rarity.RARE, mage.cards.k.KwainItinerantMeddler.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
         cards.add(new SetCardInfo("Laboratory Drudge", 78, Rarity.RARE, mage.cards.l.LaboratoryDrudge.class));
         cards.add(new SetCardInfo("Lathiel, the Bounteous Dawn", 285, Rarity.RARE, mage.cards.l.LathielTheBounteousDawn.class));
