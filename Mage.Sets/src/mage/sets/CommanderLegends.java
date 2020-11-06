@@ -366,6 +366,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Toggo, Goblin Weaponsmith", 204, Rarity.UNCOMMON, mage.cards.t.ToggoGoblinWeaponsmith.class));
         cards.add(new SetCardInfo("Tormod, the Desecrator", 155, Rarity.UNCOMMON, mage.cards.t.TormodTheDesecrator.class));
         cards.add(new SetCardInfo("Training Center", 358, Rarity.RARE, mage.cards.t.TrainingCenter.class));
+        cards.add(new SetCardInfo("Triumphant Reckoning", 52, Rarity.MYTHIC, mage.cards.t.TriumphantReckoning.class));
         cards.add(new SetCardInfo("Trusty Packbeast", 53, Rarity.COMMON, mage.cards.t.TrustyPackbeast.class));
         cards.add(new SetCardInfo("Tymna the Weaver", 539, Rarity.MYTHIC, mage.cards.t.TymnaTheWeaver.class));
         cards.add(new SetCardInfo("Undergrowth Stadium", 359, Rarity.RARE, mage.cards.u.UndergrowthStadium.class));
