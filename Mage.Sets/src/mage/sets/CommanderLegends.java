@@ -140,6 +140,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Dualcaster Mage", 412, Rarity.RARE, mage.cards.d.DualcasterMage.class));
         cards.add(new SetCardInfo("Elder Deep-Fiend", 368, Rarity.RARE, mage.cards.e.ElderDeepFiend.class));
         cards.add(new SetCardInfo("Eligeth, Crossroads Augur", 66, Rarity.RARE, mage.cards.e.EligethCrossroadsAugur.class));
+        cards.add(new SetCardInfo("Elvish Doomsayer", 120, Rarity.COMMON, mage.cards.e.ElvishDoomsayer.class));
         cards.add(new SetCardInfo("Elvish Dreadlord", 121, Rarity.RARE, mage.cards.e.ElvishDreadlord.class));
         cards.add(new SetCardInfo("Elvish Visionary", 223, Rarity.COMMON, mage.cards.e.ElvishVisionary.class));
         cards.add(new SetCardInfo("Emberwilde Captain", 175, Rarity.RARE, mage.cards.e.EmberwildeCaptain.class));
