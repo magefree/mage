@@ -61,6 +61,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Austere Command", 12, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Aven Surveyor", 57, Rarity.COMMON, mage.cards.a.AvenSurveyor.class));
         cards.add(new SetCardInfo("Averna, the Chaos Bloom", 269, Rarity.RARE, mage.cards.a.AvernaTheChaosBloom.class));
+        cards.add(new SetCardInfo("Azure Fleet Admiral", 58, Rarity.COMMON, mage.cards.a.AzureFleetAdmiral.class));
         cards.add(new SetCardInfo("Belbe, Corrupted Observer", 270, Rarity.RARE, mage.cards.b.BelbeCorruptedObserver.class));
         cards.add(new SetCardInfo("Biowaste Blob", 219, Rarity.RARE, mage.cards.b.BiowasteBlob.class));
         cards.add(new SetCardInfo("Bitter Revelation", 109, Rarity.COMMON, mage.cards.b.BitterRevelation.class));
