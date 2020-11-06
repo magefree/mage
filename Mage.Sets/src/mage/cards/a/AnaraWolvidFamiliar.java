@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class AnaraWorldFamiliar extends CardImpl {
+public final class AnaraWolvidFamiliar extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
@@ -30,7 +30,7 @@ public final class AnaraWorldFamiliar extends CardImpl {
         filter.add(CommanderPredicate.instance);
     }
 
-    public AnaraWorldFamiliar(UUID ownerId, CardSetInfo setInfo) {
+    public AnaraWolvidFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -52,12 +52,12 @@ public final class AnaraWorldFamiliar extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    private AnaraWorldFamiliar(final AnaraWorldFamiliar card) {
+    private AnaraWolvidFamiliar(final AnaraWolvidFamiliar card) {
         super(card);
     }
 
     @Override
-    public AnaraWorldFamiliar copy() {
-        return new AnaraWorldFamiliar(this);
+    public AnaraWolvidFamiliar copy() {
+        return new AnaraWolvidFamiliar(this);
     }
 }

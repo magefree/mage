@@ -30,7 +30,7 @@ public final class AmarethTheLustrous extends CardImpl {
     }
 
     public AmarethTheLustrous(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
