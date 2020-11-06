@@ -101,6 +101,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Court of Bounty", 220, Rarity.RARE, mage.cards.c.CourtOfBounty.class));
         cards.add(new SetCardInfo("Court of Cunning", 63, Rarity.RARE, mage.cards.c.CourtOfCunning.class));
         cards.add(new SetCardInfo("Court of Grace", 16, Rarity.RARE, mage.cards.c.CourtOfGrace.class));
+        cards.add(new SetCardInfo("Crimson Fleet Commodore", 171, Rarity.COMMON, mage.cards.c.CrimsonFleetCommodore.class));
         cards.add(new SetCardInfo("Crow of Dark Tidings", 115, Rarity.COMMON, mage.cards.c.CrowOfDarkTidings.class));
         cards.add(new SetCardInfo("Crushing Vines", 221, Rarity.COMMON, mage.cards.c.CrushingVines.class));
         cards.add(new SetCardInfo("Cuombajj Witches", 116, Rarity.UNCOMMON, mage.cards.c.CuombajjWitches.class));
