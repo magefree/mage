@@ -57,7 +57,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Armix, Filigree Thrasher", 108, Rarity.UNCOMMON, mage.cards.a.ArmixFiligreeThrasher.class));
         cards.add(new SetCardInfo("Armorcraft Judge", 218, Rarity.UNCOMMON, mage.cards.a.ArmorcraftJudge.class));
         cards.add(new SetCardInfo("Armored Skyhunter", 11, Rarity.RARE, mage.cards.a.ArmoredSkyhunter.class));
-        cards.add(new SetCardInfo("Armory of Iroas", 299, Rarity.UNCOMMON, mage.cards.a.ArmoryOfIroas.class));
+        cards.add(new SetCardInfo("Armory of Iroas", 299, Rarity.COMMON, mage.cards.a.ArmoryOfIroas.class));
         cards.add(new SetCardInfo("Aurora Phoenix", 161, Rarity.RARE, mage.cards.a.AuroraPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 12, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Aven Surveyor", 57, Rarity.COMMON, mage.cards.a.AvenSurveyor.class));
@@ -77,7 +77,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Boarding Party", 163, Rarity.COMMON, mage.cards.b.BoardingParty.class));
         cards.add(new SetCardInfo("Bonesplitter", 458, Rarity.COMMON, mage.cards.b.Bonesplitter.class));
         cards.add(new SetCardInfo("Boros Charm", 442, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
-        cards.add(new SetCardInfo("Boros Garrison", 477, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
+        cards.add(new SetCardInfo("Boros Garrison", 477, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildgate", 478, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Boros Signet", 459, Rarity.COMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Brago, King Eternal", 516, Rarity.MYTHIC, mage.cards.b.BragoKingEternal.class));
@@ -452,7 +452,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Sweet-Gum Recluse", 260, Rarity.RARE, mage.cards.s.SweetGumRecluse.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 474, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Sword of Vengeance", 475, Rarity.RARE, mage.cards.s.SwordOfVengeance.class));
-        cards.add(new SetCardInfo("Swords to Plowshares", 387, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Swords to Plowshares", 387, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Szat's Will", 152, Rarity.RARE, mage.cards.s.SzatsWill.class));
         cards.add(new SetCardInfo("Tana, the Bloodsower", 537, Rarity.MYTHIC, mage.cards.t.TanaTheBloodsower.class));
         cards.add(new SetCardInfo("Temur Battle Rage", 417, Rarity.COMMON, mage.cards.t.TemurBattleRage.class));

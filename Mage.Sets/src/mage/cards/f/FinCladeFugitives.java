@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DauntAbility;
 import mage.abilities.keyword.EncoreAbility;
@@ -21,6 +22,8 @@ public final class FinCladeFugitives extends CardImpl {
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SALAMANDER);
         this.subtype.add(SubType.ROGUE);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(4);
 
         // Fin-Clade Fugitives can't be blocked by creatures with power 2 or less.
         this.addAbility(new DauntAbility());
