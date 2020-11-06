@@ -91,6 +91,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case ANY:
             case ACTIVE:
+            case EACH_PLAYER:
                 if (setTargetPointer && getTargets().isEmpty()) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
