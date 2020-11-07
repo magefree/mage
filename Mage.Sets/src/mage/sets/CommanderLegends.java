@@ -90,6 +90,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Anger", 166, Rarity.UNCOMMON, mage.cards.b.BurningAnger.class));
         cards.add(new SetCardInfo("Burnished Hart", 302, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Cage of Hands", 14, Rarity.COMMON, mage.cards.c.CageOfHands.class));
+        cards.add(new SetCardInfo("Captain Vargus Wrath", 273, Rarity.UNCOMMON, mage.cards.c.CaptainVargusWrath.class));
         cards.add(new SetCardInfo("Captain's Call", 15, Rarity.COMMON, mage.cards.c.CaptainsCall.class));
         cards.add(new SetCardInfo("Cast Down", 112, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
         cards.add(new SetCardInfo("Champion of the Flame", 167, Rarity.COMMON, mage.cards.c.ChampionOfTheFlame.class));

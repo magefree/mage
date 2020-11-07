@@ -77,7 +77,7 @@ public final class JeskaThriceReborn extends CardImpl {
 enum JeskaThriceRebornValue implements DynamicValue {
     instance;
     private static final Hint hint = new ValueHint(
-            "Number of times you've cast a commander this turn", instance
+            "Number of times you've cast a commander this game", instance
     );
 
     @Override
