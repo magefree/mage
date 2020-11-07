@@ -82,7 +82,7 @@ class PortRazerEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return permanent.getId().equals(source.getSourceId());
     }
 }
 
@@ -110,6 +110,6 @@ class PortRazerWatcher extends Watcher {
     }
 
     boolean checkAttacker(Permanent permanent, UUID defenderId) {
-        return attackMap.computeIfAbsent(permanent.getId(), x -> new HashSet<>()).contains(defenderId);
+        return !attackMap.computeIfAbsent(permanent.getId(), x -> new HashSet<>()).contains(defenderId);
     }
 }
