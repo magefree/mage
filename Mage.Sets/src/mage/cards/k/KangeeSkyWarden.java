@@ -56,12 +56,12 @@ public final class KangeeSkyWarden extends CardImpl {
 
         // Whenever Kangee, Sky Warden attacks, attacking creatures with flying get +2/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(
-                2, 0, Duration.WhileOnBattlefield, filter1, false
+                2, 0, Duration.EndOfTurn, filter1, false
         ), false));
 
         // Whenever Kangee blocks, blocking creatures with flying get +0/+2 until end of turn.
         this.addAbility(new BlocksTriggeredAbility(new BoostAllEffect(
-                0, 2, Duration.WhileOnBattlefield, filter2, false
+                0, 2, Duration.EndOfTurn, filter2, false
         ), false));
     }
 
