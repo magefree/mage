@@ -46,6 +46,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Armaments", 296, Rarity.UNCOMMON, mage.cards.a.AngelicArmaments.class));
         cards.add(new SetCardInfo("Angelic Gift", 7, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Annoyed Altisaur", 216, Rarity.COMMON, mage.cards.a.AnnoyedAltisaur.class));
+        cards.add(new SetCardInfo("Anointer of Valor", 8, Rarity.COMMON, mage.cards.a.AnointerOfValor.class));
         cards.add(new SetCardInfo("Apex Devastator", 217, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
         cards.add(new SetCardInfo("Aqueous Form", 56, Rarity.COMMON, mage.cards.a.AqueousForm.class));
         cards.add(new SetCardInfo("Arcane Denial", 393, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));

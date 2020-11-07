@@ -56,6 +56,7 @@ public class DoWhenCostPaid extends OneShotEffect {
         cost.clearPaid();
         int bookmark = game.bookmarkState();
         if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+            ability.getEffects().setTargetPointer(getTargetPointer());
             game.fireReflexiveTriggeredAbility(ability, source);
             player.resetStoredBookmark(game);
             return true;
