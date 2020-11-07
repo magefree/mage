@@ -514,6 +514,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Warden of Evos Isle", 106, Rarity.UNCOMMON, mage.cards.w.WardenOfEvosIsle.class));
         cards.add(new SetCardInfo("Wear // Tear", 456, Rarity.UNCOMMON, mage.cards.w.WearTear.class));
         cards.add(new SetCardInfo("Welding Sparks", 210, Rarity.COMMON, mage.cards.w.WeldingSparks.class));
+        cards.add(new SetCardInfo("Wheel of Misfortune", 211, Rarity.RARE, mage.cards.w.WheelOfMisfortune.class));
         cards.add(new SetCardInfo("Whelming Wave", 409, Rarity.RARE, mage.cards.w.WhelmingWave.class));
         cards.add(new SetCardInfo("White Sun's Zenith", 391, Rarity.RARE, mage.cards.w.WhiteSunsZenith.class));
         cards.add(new SetCardInfo("Wickerbough Elder", 440, Rarity.COMMON, mage.cards.w.WickerboughElder.class));
