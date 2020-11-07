@@ -464,6 +464,10 @@ public class GameEvent implements Serializable {
         return targetId;
     }
 
+    public void setTargetId(UUID targetId) {
+        this.targetId = targetId;
+    }
+
     public UUID getSourceId() {
         return sourceId;
     }

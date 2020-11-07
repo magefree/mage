@@ -492,4 +492,61 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_Single_GlasspoolMimic_NormalPlay() {
+        // https://github.com/magefree/mage/issues/7174
+
+        // Glasspool Mimic
+        // You may have Glasspool Mimic enter the battlefield as a copy of a creature you control, except it’s a Shapeshifter Rogue in addition to its other types.
+        addCard(Zone.HAND, playerA, "Glasspool Mimic"); // {2}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+
+        // cast and make copy of bear
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glasspool Mimic");
+        setChoice(playerA, "Yes"); // as copy
+        setChoice(playerA, "Balduvian Bears"); // copy of
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 2);
+    }
+
+    @Test
+    public void test_Single_GlasspoolMimic_FromNonHand() {
+        // https://github.com/magefree/mage/issues/7174
+
+        // Glasspool Mimic
+        // You may have Glasspool Mimic enter the battlefield as a copy of a creature you control, except it’s a Shapeshifter Rogue in addition to its other types.
+        addCard(Zone.HAND, playerA, "Glasspool Mimic"); // {2}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1);
+        //
+        // Aether Vial
+        // {T}: You may put a creature card with converted mana cost equal to the number of charge counters on Aether Vial from your hand onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Aether Vial", 1);
+
+        // prepare charge counters
+        setChoice(playerA, "Yes"); // +1 charge on turn 1
+        setChoice(playerA, "Yes"); // +1 charge on turn 3
+        setChoice(playerA, "Yes"); // +1 charge on turn 5
+
+        // put card from hand to battlefield
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: You may put a creature card");
+        setChoice(playerA, "Yes"); // put card
+        setChoice(playerA, "Glasspool Mimic"); // select card with cmc 3 from hand
+        //
+        setChoice(playerA, "Yes"); // put to battlefield as copy
+        setChoice(playerA, "Balduvian Bears"); // copy of
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Balduvian Bears", 2);
+    }
 }

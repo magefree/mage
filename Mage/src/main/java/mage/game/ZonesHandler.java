@@ -64,6 +64,23 @@ public final class ZonesHandler {
                 }
             }
         }
+
+        // process Modal Double Faces cards (e.g. put card from hand)
+        // rules:
+        // If an effect puts a double-faced card onto the battlefield, it enters with its front face up.
+        // If that front face can’t be put onto the battlefield, it doesn’t enter the battlefield.
+        // For example, if an effect exiles Sejiri Glacier and returns it to the battlefield,
+        // it remains in exile because an instant can’t be put onto the battlefield.
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
+            ZoneChangeInfo info = itr.next();
+            if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
+                Card card = game.getCard(info.event.getTargetId());
+                if (card instanceof ModalDoubleFacesCard) {
+                    info.event.setTargetId(((ModalDoubleFacesCard) card).getLeftHalfCard().getId());
+                }
+            }
+        }
+
         zoneChangeInfos.removeIf(zoneChangeInfo -> !maybeRemoveFromSourceZone(zoneChangeInfo, game));
         int createOrder = 0;
         for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
@@ -243,6 +260,7 @@ public final class ZonesHandler {
             meld.updateZoneChangeCounter(game, unmelded.subInfo.get(unmelded.subInfo.size() - 1).event);
             return true;
         }
+
         // Handle all normal cases
         ZoneChangeEvent event = info.event;
         Card card = getTargetCard(game, event.getTargetId());
@@ -272,6 +290,7 @@ public final class ZonesHandler {
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
                 } else if (card instanceof ModalDoubleFacesCard) {
+                    // main mdf card must be processed before that call (e.g. only halfes can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
                     throw new IllegalStateException("Unexpected trying of move permanent to battlefield instead card");
