@@ -61,7 +61,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
             if (setTargetPointer) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
+                this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
             }
             return true;
         }

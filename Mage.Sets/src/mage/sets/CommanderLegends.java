@@ -366,6 +366,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Retreat to Kazandu", 435, Rarity.UNCOMMON, mage.cards.r.RetreatToKazandu.class));
         cards.add(new SetCardInfo("Return to Dust", 43, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Revenant", 147, Rarity.UNCOMMON, mage.cards.r.Revenant.class));
+        cards.add(new SetCardInfo("Reyav, Master Smith", 290, Rarity.UNCOMMON, mage.cards.r.ReyavMasterSmith.class));
         cards.add(new SetCardInfo("Reyhan, Last of the Abzan", 534, Rarity.MYTHIC, mage.cards.r.ReyhanLastOfTheAbzan.class));
         cards.add(new SetCardInfo("Ring of Thune", 468, Rarity.UNCOMMON, mage.cards.r.RingOfThune.class));
         cards.add(new SetCardInfo("Ring of Valkas", 469, Rarity.UNCOMMON, mage.cards.r.RingOfValkas.class));
