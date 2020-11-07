@@ -201,6 +201,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Growth Spiral", 446, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Guildless Commons", 351, Rarity.UNCOMMON, mage.cards.g.GuildlessCommons.class));
         cards.add(new SetCardInfo("Halana, Kessig Ranger", 231, Rarity.UNCOMMON, mage.cards.h.HalanaKessigRanger.class));
+        cards.add(new SetCardInfo("Hamza, Guardian of Arashin", 278, Rarity.UNCOMMON, mage.cards.h.HamzaGuardianOfArashin.class));
         cards.add(new SetCardInfo("Harmonize", 427, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Haunted Cloak", 313, Rarity.COMMON, mage.cards.h.HauntedCloak.class));
         cards.add(new SetCardInfo("Hero's Blade", 314, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
