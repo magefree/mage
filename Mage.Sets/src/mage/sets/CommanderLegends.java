@@ -35,6 +35,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Akroma's Will", 3, Rarity.RARE, mage.cards.a.AkromasWill.class));
         cards.add(new SetCardInfo("Akroma, Vision of Ixidor", 2, Rarity.MYTHIC, mage.cards.a.AkromaVisionOfIxidor.class));
         cards.add(new SetCardInfo("Alena, Kessig Trapper", 160, Rarity.UNCOMMON, mage.cards.a.AlenaKessigTrapper.class));
+        cards.add(new SetCardInfo("Alharu, Solemn Ritualist", 4, Rarity.UNCOMMON, mage.cards.a.AlharuSolemnRitualist.class));
         cards.add(new SetCardInfo("Amareth, the Lustrous", 266, Rarity.RARE, mage.cards.a.AmarethTheLustrous.class));
         cards.add(new SetCardInfo("Ambush Viper", 213, Rarity.COMMON, mage.cards.a.AmbushViper.class));
         cards.add(new SetCardInfo("Amorphous Axe", 295, Rarity.COMMON, mage.cards.a.AmorphousAxe.class));
