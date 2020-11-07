@@ -82,6 +82,6 @@ class KrarkTheThumblessEffect extends OneShotEffect {
             game.getStack().remove(spell, game);
             return true;
         }
-        return game.getSpell(spell.getId()) == null && player.moveCards(spell, Zone.HAND, source, game);
+        return game.getSpell(spell.getId()) != null && player.moveCards(spell, Zone.HAND, source, game);
     }
 }
