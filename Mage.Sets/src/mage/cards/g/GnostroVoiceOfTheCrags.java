@@ -17,6 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -99,6 +100,12 @@ class GnostroVoiceOfTheCragsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        return player != null && player.scry(
+                GnostroVoiceOfTheCragsValue.instance.calculate(game, source, this), source, game
+        );
     }
 }
