@@ -156,6 +156,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Expedite", 413, Rarity.COMMON, mage.cards.e.Expedite.class));
         cards.add(new SetCardInfo("Explore", 426, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Explorer's Scope", 461, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
+        cards.add(new SetCardInfo("Explosion of Riches", 176, Rarity.UNCOMMON, mage.cards.e.ExplosionOfRiches.class));
         cards.add(new SetCardInfo("Exquisite Huntmaster", 122, Rarity.COMMON, mage.cards.e.ExquisiteHuntmaster.class));
         cards.add(new SetCardInfo("Eyeblight Assassin", 123, Rarity.COMMON, mage.cards.e.EyeblightAssassin.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 124, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
