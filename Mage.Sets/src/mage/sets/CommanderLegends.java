@@ -429,6 +429,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Slayers' Stronghold", 494, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Slinn Voda, the Rising Deep", 405, Rarity.UNCOMMON, mage.cards.s.SlinnVodaTheRisingDeep.class));
         cards.add(new SetCardInfo("Slith Ascendant", 49, Rarity.COMMON, mage.cards.s.SlithAscendant.class));
+        cards.add(new SetCardInfo("Slurrk, All-Ingesting", 256, Rarity.UNCOMMON, mage.cards.s.SlurrkAllIngesting.class));
         cards.add(new SetCardInfo("Sol Ring", 472, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Soul of Eternity", 50, Rarity.RARE, mage.cards.s.SoulOfEternity.class));
         cards.add(new SetCardInfo("Soul's Fire", 200, Rarity.COMMON, mage.cards.s.SoulsFire.class));
