@@ -454,6 +454,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Stormtide Leviathan", 407, Rarity.RARE, mage.cards.s.StormtideLeviathan.class));
         cards.add(new SetCardInfo("Strategic Planning", 101, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
         cards.add(new SetCardInfo("Strength of the Pack", 259, Rarity.UNCOMMON, mage.cards.s.StrengthOfThePack.class));
+        cards.add(new SetCardInfo("Stumpsquall Hydra", 367, Rarity.RARE, mage.cards.s.StumpsquallHydra.class));
         cards.add(new SetCardInfo("Sunforger", 473, Rarity.RARE, mage.cards.s.Sunforger.class));
         cards.add(new SetCardInfo("Sunhome, Fortress of the Legion", 496, Rarity.UNCOMMON, mage.cards.s.SunhomeFortressOfTheLegion.class));
         cards.add(new SetCardInfo("Sunset Pyramid", 345, Rarity.UNCOMMON, mage.cards.s.SunsetPyramid.class));
