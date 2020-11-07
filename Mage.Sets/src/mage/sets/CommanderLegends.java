@@ -496,6 +496,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Vivid Grove", 501, Rarity.UNCOMMON, mage.cards.v.VividGrove.class));
         cards.add(new SetCardInfo("Volcanic Dragon", 207, Rarity.UNCOMMON, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Volcanic Fallout", 418, Rarity.UNCOMMON, mage.cards.v.VolcanicFallout.class));
+        cards.add(new SetCardInfo("Volcanic Torrent", 208, Rarity.UNCOMMON, mage.cards.v.VolcanicTorrent.class));
         cards.add(new SetCardInfo("Vow of Duty", 54, Rarity.UNCOMMON, mage.cards.v.VowOfDuty.class));
         cards.add(new SetCardInfo("Vow of Flight", 105, Rarity.UNCOMMON, mage.cards.v.VowOfFlight.class));
         cards.add(new SetCardInfo("Vow of Lightning", 209, Rarity.UNCOMMON, mage.cards.v.VowOfLightning.class));
