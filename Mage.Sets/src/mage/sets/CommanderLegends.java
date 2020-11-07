@@ -76,6 +76,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Blighted Woodland", 476, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
         cards.add(new SetCardInfo("Blim, Comedic Genius", 272, Rarity.RARE, mage.cards.b.BlimComedicGenius.class));
         cards.add(new SetCardInfo("Boarding Party", 163, Rarity.COMMON, mage.cards.b.BoardingParty.class));
+        cards.add(new SetCardInfo("Body of Knowledge", 59, Rarity.RARE, mage.cards.b.BodyOfKnowledge.class));
         cards.add(new SetCardInfo("Bonesplitter", 458, Rarity.COMMON, mage.cards.b.Bonesplitter.class));
         cards.add(new SetCardInfo("Boros Charm", 442, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Boros Garrison", 477, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
