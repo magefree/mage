@@ -75,6 +75,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Bladebrand", 110, Rarity.COMMON, mage.cards.b.Bladebrand.class));
         cards.add(new SetCardInfo("Bladegriff Prototype", 300, Rarity.RARE, mage.cards.b.BladegriffPrototype.class));
         cards.add(new SetCardInfo("Blasphemous Act", 162, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Blazing Sunsteel", 364, Rarity.RARE, mage.cards.b.BlazingSunsteel.class));
         cards.add(new SetCardInfo("Blighted Woodland", 476, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
         cards.add(new SetCardInfo("Blim, Comedic Genius", 272, Rarity.RARE, mage.cards.b.BlimComedicGenius.class));
         cards.add(new SetCardInfo("Boarding Party", 163, Rarity.COMMON, mage.cards.b.BoardingParty.class));
