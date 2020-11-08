@@ -241,6 +241,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Jeska, Thrice Reborn", 186, Rarity.MYTHIC, mage.cards.j.JeskaThriceReborn.class));
         cards.add(new SetCardInfo("Jeweled Lotus", 319, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
         cards.add(new SetCardInfo("Jungle Basin", 484, Rarity.UNCOMMON, mage.cards.j.JungleBasin.class));
+        cards.add(new SetCardInfo("Juri, Master of the Revue", 282, Rarity.UNCOMMON, mage.cards.j.JuriMasterOfTheRevue.class));
         cards.add(new SetCardInfo("Kamahl's Will", 238, Rarity.RARE, mage.cards.k.KamahlsWill.class));
         cards.add(new SetCardInfo("Kamahl, Heart of Krosa", 237, Rarity.MYTHIC, mage.cards.k.KamahlHeartOfKrosa.class));
         cards.add(new SetCardInfo("Kangee's Lieutenant", 26, Rarity.UNCOMMON, mage.cards.k.KangeesLieutenant.class));
