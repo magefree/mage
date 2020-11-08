@@ -1,5 +1,6 @@
 package mage.game.permanent;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -1220,8 +1221,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canAttackInPrinciple(UUID defenderId, Game game) {
-        if (hasSummoningSickness()
-                && null == game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, null, this.getControllerId(), game)) {
+        ApprovingObject approvingObject = game.getContinuousEffects().asThough(
+                this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, null, defenderId, game
+        );
+        if (hasSummoningSickness() && approvingObject == null) {
             return false;
         }
         //20101001 - 508.1c

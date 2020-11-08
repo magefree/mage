@@ -191,6 +191,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 510, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 483, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Foundry Inspector", 310, Rarity.COMMON, mage.cards.f.FoundryInspector.class));
+        cards.add(new SetCardInfo("Frenzied Saddlebrute", 180, Rarity.UNCOMMON, mage.cards.f.FrenziedSaddlebrute.class));
         cards.add(new SetCardInfo("Furnace Celebration", 181, Rarity.UNCOMMON, mage.cards.f.FurnaceCelebration.class));
         cards.add(new SetCardInfo("Fyndhorn Elves", 228, Rarity.COMMON, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Galestrike", 70, Rarity.COMMON, mage.cards.g.Galestrike.class));
