@@ -438,6 +438,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Soul of Eternity", 50, Rarity.RARE, mage.cards.s.SoulOfEternity.class));
         cards.add(new SetCardInfo("Soul's Fire", 200, Rarity.COMMON, mage.cards.s.SoulsFire.class));
         cards.add(new SetCardInfo("Soul's Might", 257, Rarity.COMMON, mage.cards.s.SoulsMight.class));
+        cards.add(new SetCardInfo("Soulfire Eruption", 201, Rarity.MYTHIC, mage.cards.s.SoulfireEruption.class));
         cards.add(new SetCardInfo("Spark Harvest", 150, Rarity.COMMON, mage.cards.s.SparkHarvest.class));
         cards.add(new SetCardInfo("Sparktongue Dragon", 202, Rarity.COMMON, mage.cards.s.SparktongueDragon.class));
         cards.add(new SetCardInfo("Spectator Seating", 356, Rarity.RARE, mage.cards.s.SpectatorSeating.class));
