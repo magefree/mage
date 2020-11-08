@@ -1104,9 +1104,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
             if (!(source.hasSubtype(SubType.AURA, game)
                     && !ability.removesAuras())
-                    && !source.getId().equals(ability.getAuraIdNotToBeRemoved())
-                    && !ability.canTarget(source, game)) {
-                return true;
+                    && !(source.hasSubtype(SubType.EQUIPMENT, game)
+                    && !ability.removesEquipment())) {
+                if (!source.getId().equals(ability.getAuraIdNotToBeRemoved())
+                        && !ability.canTarget(source, game)) {
+                    return !ability.getDoesntRemoveControlled() || isControlledBy(game.getControllerId(source.getId()));
+                }
             }
         }
         return game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.STAY_ATTACHED, objectId, source.getId(), null), null, game, silentMode);

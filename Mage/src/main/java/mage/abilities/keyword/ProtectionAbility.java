@@ -25,6 +25,8 @@ public class ProtectionAbility extends StaticAbility {
 
     protected Filter filter;
     protected boolean removeAuras;
+    protected boolean removeEquipment;
+    protected boolean doesntRemoveControlled;
     protected static List<ObjectColor> colors = new ArrayList<>();
     protected UUID auraIdNotToBeRemoved; // defines an Aura objectId that will not be removed from this protection ability
 
@@ -32,6 +34,8 @@ public class ProtectionAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, null);
         this.filter = filter;
         this.removeAuras = true;
+        this.removeEquipment = true;
+        this.doesntRemoveControlled = false;
         this.auraIdNotToBeRemoved = null;
     }
 
@@ -39,6 +43,8 @@ public class ProtectionAbility extends StaticAbility {
         super(ability);
         this.filter = ability.filter.copy();
         this.removeAuras = ability.removeAuras;
+        this.removeEquipment = ability.removeEquipment;
+        this.doesntRemoveControlled = ability.doesntRemoveControlled;
         this.auraIdNotToBeRemoved = ability.auraIdNotToBeRemoved;
     }
 
@@ -97,14 +103,14 @@ public class ProtectionAbility extends StaticAbility {
                 return true;
             }
         }
-        
+
         // Emrakul, the Aeons Torn
         if (filter instanceof FilterStackObject) {
             if (filter.match(source, game)) {
                 return (!source.isInstantOrSorcery());
             }
         }
-        
+
         if (filter instanceof FilterObject) {
             return !filter.match(source, game);
         }
@@ -136,6 +142,22 @@ public class ProtectionAbility extends StaticAbility {
 
     public boolean removesAuras() {
         return removeAuras;
+    }
+
+    public void setRemoveEquipment(boolean removeEquipment) {
+        this.removeEquipment = removeEquipment;
+    }
+
+    public boolean removesEquipment() {
+        return removeEquipment;
+    }
+
+    public void setDoesntRemoveControlled(boolean doesntRemoveControlled) {
+        this.doesntRemoveControlled = doesntRemoveControlled;
+    }
+
+    public boolean getDoesntRemoveControlled() {
+        return doesntRemoveControlled;
     }
 
     public List<ObjectColor> getColors() {
