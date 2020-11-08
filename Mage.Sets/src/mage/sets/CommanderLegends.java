@@ -50,6 +50,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Anointer of Valor", 8, Rarity.COMMON, mage.cards.a.AnointerOfValor.class));
         cards.add(new SetCardInfo("Apex Devastator", 217, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
         cards.add(new SetCardInfo("Aqueous Form", 56, Rarity.COMMON, mage.cards.a.AqueousForm.class));
+        cards.add(new SetCardInfo("Araumi of the Dead Tide", 267, Rarity.UNCOMMON, mage.cards.a.AraumiOfTheDeadTide.class));
         cards.add(new SetCardInfo("Arcane Denial", 393, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 297, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archelos, Lagoon Mystic", 268, Rarity.RARE, mage.cards.a.ArchelosLagoonMystic.class));
