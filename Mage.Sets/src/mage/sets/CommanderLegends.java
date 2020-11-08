@@ -126,6 +126,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 424, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cuombajj Witches", 116, Rarity.UNCOMMON, mage.cards.c.CuombajjWitches.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 370, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
+        cards.add(new SetCardInfo("Dargo, the Shipwrecker", 172, Rarity.UNCOMMON, mage.cards.d.DargoTheShipwrecker.class));
         cards.add(new SetCardInfo("Daring Saboteur", 64, Rarity.UNCOMMON, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Dawn Charm", 371, Rarity.UNCOMMON, mage.cards.d.DawnCharm.class));
         cards.add(new SetCardInfo("Dawnglade Regent", 222, Rarity.RARE, mage.cards.d.DawngladeRegent.class));
