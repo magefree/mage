@@ -3364,6 +3364,12 @@ public abstract class GameImpl implements Game, Serializable {
         if (monarchId.equals(getMonarchId())) { // Nothing happens if you're already the monarch
             return;
         }
+        if (replaceEvent(GameEvent.getEvent(
+                GameEvent.EventType.BECOME_MONARCH,
+                monarchId, source.getSourceId(), monarchId
+        ))) {
+            return;
+        }
         Player newMonarch = getPlayer(monarchId);
         if (getMonarchId() == null) {
             getState().addDesignation(new Monarch(), this, monarchId);

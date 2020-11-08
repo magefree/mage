@@ -296,6 +296,7 @@ public class GameEvent implements Serializable {
          amount      not used for this event
          flag        not used for this event
          */
+        BECOME_MONARCH,
         BECOMES_MONARCH,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,

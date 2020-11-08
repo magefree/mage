@@ -235,6 +235,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 506, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Lane Denizen", 236, Rarity.COMMON, mage.cards.i.IvyLaneDenizen.class));
         cards.add(new SetCardInfo("Jalum Tome", 318, Rarity.COMMON, mage.cards.j.JalumTome.class));
+        cards.add(new SetCardInfo("Jared Carthalion, True Heir", 281, Rarity.RARE, mage.cards.j.JaredCarthalionTrueHeir.class));
         cards.add(new SetCardInfo("Jaya's Immolating Inferno", 415, Rarity.RARE, mage.cards.j.JayasImmolatingInferno.class));
         cards.add(new SetCardInfo("Jeska's Will", 187, Rarity.RARE, mage.cards.j.JeskasWill.class));
         cards.add(new SetCardInfo("Jeska, Thrice Reborn", 186, Rarity.MYTHIC, mage.cards.j.JeskaThriceReborn.class));
