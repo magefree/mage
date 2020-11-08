@@ -482,6 +482,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Thrasios, Triton Hero", 538, Rarity.MYTHIC, mage.cards.t.ThrasiosTritonHero.class));
         cards.add(new SetCardInfo("Three Visits", 261, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
         cards.add(new SetCardInfo("Tiana, Ship's Caretaker", 454, Rarity.UNCOMMON, mage.cards.t.TianaShipsCaretaker.class));
+        cards.add(new SetCardInfo("Timely Ward", 363, Rarity.RARE, mage.cards.t.TimelyWard.class));
         cards.add(new SetCardInfo("Toggo, Goblin Weaponsmith", 204, Rarity.UNCOMMON, mage.cards.t.ToggoGoblinWeaponsmith.class));
         cards.add(new SetCardInfo("Tormod, the Desecrator", 155, Rarity.UNCOMMON, mage.cards.t.TormodTheDesecrator.class));
         cards.add(new SetCardInfo("Training Center", 358, Rarity.RARE, mage.cards.t.TrainingCenter.class));
