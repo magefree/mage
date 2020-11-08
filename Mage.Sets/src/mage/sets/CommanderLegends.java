@@ -211,6 +211,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Hans Eriksson", 279, Rarity.RARE, mage.cards.h.HansEriksson.class));
         cards.add(new SetCardInfo("Harmonize", 427, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Haunted Cloak", 313, Rarity.COMMON, mage.cards.h.HauntedCloak.class));
+        cards.add(new SetCardInfo("Hellkite Courser", 183, Rarity.MYTHIC, mage.cards.h.HellkiteCourser.class));
         cards.add(new SetCardInfo("Hero's Blade", 314, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
         cards.add(new SetCardInfo("Horizon Scholar", 73, Rarity.UNCOMMON, mage.cards.h.HorizonScholar.class));
         cards.add(new SetCardInfo("Horizon Stone", 315, Rarity.RARE, mage.cards.h.HorizonStone.class));
