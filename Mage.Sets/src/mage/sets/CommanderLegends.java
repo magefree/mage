@@ -382,6 +382,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Ripscale Predator", 196, Rarity.COMMON, mage.cards.r.RipscalePredator.class));
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 197, Rarity.UNCOMMON, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Rogue's Passage", 489, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rootweaver Druid", 250, Rarity.RARE, mage.cards.r.RootweaverDruid.class));
         cards.add(new SetCardInfo("Rummaging Goblin", 198, Rarity.COMMON, mage.cards.r.RummagingGoblin.class));
         cards.add(new SetCardInfo("Run Away Together", 87, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Rupture Spire", 355, Rarity.COMMON, mage.cards.r.RuptureSpire.class));
