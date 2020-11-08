@@ -13,6 +13,8 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
+import mage.util.ManaUtil;
+import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.List;
 import java.util.UUID;
@@ -179,5 +181,14 @@ public interface Card extends MageObject {
 
     default boolean isOwnedBy(UUID controllerId) {
         return getOwnerId().equals(controllerId);
+    }
+
+    default boolean commanderCost(Game game, Ability source, Ability abilityToModify) {
+        CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
+        int castCount = watcher.getPlaysCount(getId());
+        if (castCount > 0) {
+            abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
+        }
+        return true;
     }
 }

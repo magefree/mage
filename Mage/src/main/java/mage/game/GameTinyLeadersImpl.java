@@ -59,7 +59,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     commander.moveToZone(Zone.COMMAND, null, this, true);
                     Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
                     ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, false, "Commander"));
-                    ability.addEffect(new CommanderCostModification(commander.getId()));
+                    ability.addEffect(new CommanderCostModification(commander));
                     // Commander rule #4 was removed Jan. 18, 2016
                     // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                     CommanderInfoWatcher watcher = new CommanderInfoWatcher("Commander", commander.getId(), false);

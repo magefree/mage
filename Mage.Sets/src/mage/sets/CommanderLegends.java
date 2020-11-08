@@ -269,6 +269,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 524, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
         cards.add(new SetCardInfo("Laboratory Drudge", 78, Rarity.RARE, mage.cards.l.LaboratoryDrudge.class));
         cards.add(new SetCardInfo("Lathiel, the Bounteous Dawn", 285, Rarity.RARE, mage.cards.l.LathielTheBounteousDawn.class));
+        cards.add(new SetCardInfo("Liesa, Shroud of Dusk", 286, Rarity.RARE, mage.cards.l.LiesaShroudOfDusk.class));
         cards.add(new SetCardInfo("Lifecrafter's Gift", 240, Rarity.COMMON, mage.cards.l.LifecraftersGift.class));
         cards.add(new SetCardInfo("Lightning-Rig Crew", 190, Rarity.UNCOMMON, mage.cards.l.LightningRigCrew.class));
         cards.add(new SetCardInfo("Livio, Oathsworn Sentinel", 31, Rarity.RARE, mage.cards.l.LivioOathswornSentinel.class));

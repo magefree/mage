@@ -60,7 +60,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
 
         // basic commmander restrict (oathbreaker may ask to move, signature force to move)
         commanderAbility.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary, isSignatureSpell, getCommanderTypeName(commander)));
-        commanderAbility.addEffect(new CommanderCostModification(commander.getId()));
+        commanderAbility.addEffect(new CommanderCostModification(commander));
 
         // signature spell restrict (spell can be casted on player's commander on battlefield)
         if (isSignatureSpell) {
