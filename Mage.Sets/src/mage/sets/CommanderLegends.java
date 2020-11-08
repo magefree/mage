@@ -488,6 +488,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Tormod, the Desecrator", 155, Rarity.UNCOMMON, mage.cards.t.TormodTheDesecrator.class));
         cards.add(new SetCardInfo("Training Center", 358, Rarity.RARE, mage.cards.t.TrainingCenter.class));
         cards.add(new SetCardInfo("Transguild Promenade", 499, Rarity.COMMON, mage.cards.t.TransguildPromenade.class));
+        cards.add(new SetCardInfo("Trench Behemoth", 366, Rarity.RARE, mage.cards.t.TrenchBehemoth.class));
         cards.add(new SetCardInfo("Triumphant Reckoning", 52, Rarity.MYTHIC, mage.cards.t.TriumphantReckoning.class));
         cards.add(new SetCardInfo("Tromokratis", 408, Rarity.RARE, mage.cards.t.Tromokratis.class));
         cards.add(new SetCardInfo("Trove Tracker", 104, Rarity.COMMON, mage.cards.t.TroveTracker.class));
