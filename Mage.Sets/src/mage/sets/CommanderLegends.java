@@ -69,6 +69,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Azure Fleet Admiral", 58, Rarity.COMMON, mage.cards.a.AzureFleetAdmiral.class));
         cards.add(new SetCardInfo("Beast Within", 423, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Belbe, Corrupted Observer", 270, Rarity.RARE, mage.cards.b.BelbeCorruptedObserver.class));
+        cards.add(new SetCardInfo("Bell Borca, Spectral Sergeant", 271, Rarity.RARE, mage.cards.b.BellBorcaSpectralSergeant.class));
         cards.add(new SetCardInfo("Benevolent Blessing", 13, Rarity.COMMON, mage.cards.b.BenevolentBlessing.class));
         cards.add(new SetCardInfo("Biowaste Blob", 219, Rarity.RARE, mage.cards.b.BiowasteBlob.class));
         cards.add(new SetCardInfo("Bitter Revelation", 109, Rarity.COMMON, mage.cards.b.BitterRevelation.class));
