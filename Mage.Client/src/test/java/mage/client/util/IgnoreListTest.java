@@ -63,12 +63,12 @@ public class IgnoreListTest {
 
     @Test
     public void ignoreMaxSize() throws Exception {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 500; i++) {
             IgnoreList.ignore("test.com.xx", "" + i);
         }
         final String r = IgnoreList.ignore("test.com.xx", "lul");
-        assertEquals(r, "Your ignore list is too big (max 100), remove a user to be able to add a new one.");
-        assertThat(IgnoreList.getIgnoredUsers("test.com.xx").size(), is(100));
+        assertEquals(r, "Your ignore list is too big (max 500), remove a user to be able to add a new one.");
+        assertThat(IgnoreList.getIgnoredUsers("test.com.xx").size(), is(500));
     }
 
     @Test

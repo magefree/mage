@@ -517,7 +517,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_Single_GlasspoolMimic_FromNonHand() {
+    public void test_Single_GlasspoolMimic_PutToHand() {
         // https://github.com/magefree/mage/issues/7174
 
         // Glasspool Mimic
