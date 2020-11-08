@@ -103,6 +103,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
     private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
+    private boolean manaBurn = false;
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -1089,6 +1090,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             state.clearAbilities();
         }
         cardAttribute.clear();
+        this.setManaBurn(false);
     }
 
     public void clear() {
@@ -1268,5 +1270,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     void setCommanderShouldStay(Card card, Game game) {
         commandersToStay.add(new MageObjectReference(card, game));
+    }
+
+    public void setManaBurn(boolean manaBurn) {
+        this.manaBurn = manaBurn;
+    }
+
+    public boolean isManaBurn() {
+        return manaBurn;
     }
 }

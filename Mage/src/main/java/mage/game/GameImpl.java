@@ -1540,7 +1540,10 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void emptyManaPools() {
         for (Player player : getPlayers().values()) {
-            player.getManaPool().emptyPool(this);
+            int amount = player.getManaPool().emptyPool(this);
+            if (state.isManaBurn() && amount > 0) {
+                player.loseLife(amount, this, false);
+            }
         }
     }
 

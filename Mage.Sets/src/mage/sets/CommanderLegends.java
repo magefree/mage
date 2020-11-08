@@ -544,6 +544,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Xenagos, God of Revels", 541, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 441, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", 542, Rarity.MYTHIC, mage.cards.y.YurikoTheTigersShadow.class));
+        cards.add(new SetCardInfo("Yurlok of Scorch Thrash", 293, Rarity.RARE, mage.cards.y.YurlokOfScorchThrash.class));
         cards.add(new SetCardInfo("Zara, Renegade Recruiter", 294, Rarity.RARE, mage.cards.z.ZaraRenegadeRecruiter.class));
         cards.add(new SetCardInfo("Zedruu the Greathearted", 543, Rarity.MYTHIC, mage.cards.z.ZedruuTheGreathearted.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 544, Rarity.MYTHIC, mage.cards.z.ZurTheEnchanter.class));
