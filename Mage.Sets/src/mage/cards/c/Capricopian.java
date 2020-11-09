@@ -122,6 +122,7 @@ class CapricopianEffect extends OneShotEffect {
         if (newPlayer == null) {
             return false;
         }
+        game.getCombat().removeAttacker(permanent.getId(), game);
         return game.getCombat().addAttackingCreature(permanent.getId(), game, newPlayer.getId());
     }
 }
