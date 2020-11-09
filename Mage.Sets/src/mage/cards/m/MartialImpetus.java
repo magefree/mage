@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -30,7 +29,6 @@ public final class MartialImpetus extends CardImpl {
 
     static {
         filter.add(MartialImpetusPredicate.instance);
-        filter.add(AnotherPredicate.instance);
     }
 
     public MartialImpetus(UUID ownerId, CardSetInfo setInfo) {
@@ -71,10 +69,12 @@ enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<ObjectSource
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject() != null
-                && input.getObject().isAttacking()
-                && game
-                .getOpponents(input.getPlayerId())
-                .contains(game.getCombat().getDefenderId(input.getObject().getId()));
+        Permanent attachedTo = game.getPermanentOrLKIBattlefield(game.getPermanent(input.getSourceId()).getAttachedTo());
+        return attachedTo != null  // check the creature that the aura is attached to, not the aura itself
+                && input.getObject() != null  // creature being checked for predicate
+                && input.getObject() != attachedTo // must be other creature
+                && input.getObject().isAttacking() // attacking
+                && game.getOpponents(attachedTo.getControllerId()) // must be attacking an opponent
+                        .contains(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game));
     }
 }
