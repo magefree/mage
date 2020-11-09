@@ -453,6 +453,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Spectator Seating", 356, Rarity.RARE, mage.cards.s.SpectatorSeating.class));
         cards.add(new SetCardInfo("Spectral Searchlight", 342, Rarity.COMMON, mage.cards.s.SpectralSearchlight.class));
         cards.add(new SetCardInfo("Sphinx of Uthuun", 406, Rarity.RARE, mage.cards.s.SphinxOfUthuun.class));
+        cards.add(new SetCardInfo("Sphinx of the Second Sun", 99, Rarity.MYTHIC, mage.cards.s.SphinxOfTheSecondSun.class));
         cards.add(new SetCardInfo("Spirit Mantle", 385, Rarity.UNCOMMON, mage.cards.s.SpiritMantle.class));
         cards.add(new SetCardInfo("Spitting Image", 453, Rarity.RARE, mage.cards.s.SpittingImage.class));
         cards.add(new SetCardInfo("Spontaneous Mutation", 100, Rarity.COMMON, mage.cards.s.SpontaneousMutation.class));
