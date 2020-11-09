@@ -58,7 +58,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new BellBorcaSpectralSergeantEffect(), TargetController.YOU, false
-        ));
+        ), new BelbeCorruptedObserverWatcher());
     }
 
     private BellBorcaSpectralSergeant(final BellBorcaSpectralSergeant card) {

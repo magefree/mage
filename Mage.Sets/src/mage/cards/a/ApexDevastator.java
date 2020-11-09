@@ -17,8 +17,8 @@ public final class ApexDevastator extends CardImpl {
     public ApexDevastator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}{G}{G}");
 
-        this.subtype.add(SubType.HYDRA);
         this.subtype.add(SubType.CHIMERA);
+        this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 
