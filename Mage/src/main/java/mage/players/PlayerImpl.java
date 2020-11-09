@@ -46,6 +46,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.game.match.MatchPlayer;
@@ -3346,7 +3347,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         // special mana to pay spell cost
         ManaOptions manaFull = availableMana.copy();
         if (ability instanceof SpellAbility) {
-            for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
+            // For commanders, we need to check alternate mana against the real card (not CommanderObject)
+            MageObject checkObject;
+            if (object instanceof Commander){
+                checkObject = game.getCard(((Commander) object).getSourceId());
+            } else {
+                checkObject = object;
+            }
+            for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(checkObject, game).stream()
                     .filter(a -> a instanceof AlternateManaPaymentAbility)
                     .map(a -> (AlternateManaPaymentAbility) a)
                     .collect(Collectors.toList())) {

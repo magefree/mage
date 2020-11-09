@@ -3,16 +3,15 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Styxo
@@ -65,6 +64,14 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
             for (Card card : player.getGraveyard().getCards(game)) {
                 if (filter.match(card, game)) {
                     game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (UUID commanderId : game.getCommandersIds(player)) {
+                if (game.getState().getZone(commanderId) == Zone.COMMAND) {
+                    Card commander = game.getCard(commanderId);
+                    if (filter.match(commander, game)) {
+                        game.getState().addOtherAbility(commander, ability);
+                    }
                 }
             }
             for (StackObject stackObject : game.getStack()) {
