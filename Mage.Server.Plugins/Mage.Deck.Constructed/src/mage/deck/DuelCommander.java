@@ -2,7 +2,6 @@
 package mage.deck;
 
 /**
- *
  * @author LevelX2
  */
 public class DuelCommander extends Commander {
@@ -28,6 +27,7 @@ public class DuelCommander extends Commander {
         banned.add("Fireblast");
         banned.add("Food Chain");
         banned.add("Gaea's Cradle");
+        banned.add("Genesis Storm");
         banned.add("Grim Monolith");
         banned.add("Hermit Druid");
         banned.add("High Tide");
@@ -63,9 +63,9 @@ public class DuelCommander extends Commander {
         banned.add("Temporal Manipulation");
         banned.add("Thassa's Oracle");
         banned.add("The Tabernacle at Pendrell Vale");
+        banned.add("Timetwister");
         banned.add("Time Vault");
         banned.add("Time Walk");
-        banned.add("Timetwister");
         banned.add("Time Warp");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
