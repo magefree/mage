@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -21,8 +22,9 @@ import mage.game.permanent.token.CustomIllusionToken;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -99,13 +101,17 @@ class SkyclaveApparitionEffect extends OneShotEffect {
         // that player creates a token with power and toughness equal to the sum of those cards' converted mana costs.
         // If the first ability exiled cards owned by more than one player, each of those players creates a token
         // with power and toughness equal to the sum of the converted mana costs of all cards exiled by the first ability.
-        Map<UUID, Integer> map = new HashMap<>();
-        exile.getCards(game).stream().forEach(card -> map.compute(
-                card.getOwnerId(), (u, i) -> i == null ? card.getConvertedManaCost() : Integer.sum(card.getConvertedManaCost(), i)
-        ));
-        for (Map.Entry<UUID, Integer> entry : map.entrySet()) {
-            new CustomIllusionToken(entry.getValue()).putOntoBattlefield(
-                    1, game, source.getSourceId(), entry.getKey()
+        Set<UUID> owners = new HashSet<>();
+        int totalCMC = exile
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(card -> owners.add(card.getOwnerId()) ? card : card)
+                .mapToInt(MageObject::getConvertedManaCost)
+                .sum();
+        for (UUID playerId : owners) {
+            new CustomIllusionToken(totalCMC).putOntoBattlefield(
+                    1, game, source.getSourceId(), playerId
             );
         }
         return true;
