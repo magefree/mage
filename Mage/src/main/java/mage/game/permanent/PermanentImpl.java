@@ -980,7 +980,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     countersToRemove = getCounters(game).getCount(CounterType.LOYALTY);
                 }
                 removeCounters(CounterType.LOYALTY.getName(), countersToRemove, game);
-                game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
+                DamagedEvent damagedEvent = new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat);
+                game.fireEvent(damagedEvent);
+                game.getState().addSimultaneousDamage(damagedEvent, game);
                 return actualDamage;
             }
         }
@@ -1011,7 +1013,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 } else {
                     this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);
                 }
-                game.fireEvent(new DamagedCreatureEvent(objectId, sourceId, controllerId, actualDamage, combat));
+                DamagedEvent damagedEvent = new DamagedCreatureEvent(objectId, sourceId, controllerId, actualDamage, combat);
+                game.fireEvent(damagedEvent);
+                game.getState().addSimultaneousDamage(damagedEvent, game);
                 return actualDamage;
             }
         }

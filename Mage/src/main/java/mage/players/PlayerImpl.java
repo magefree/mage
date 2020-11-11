@@ -2157,7 +2157,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             Player player = game.getPlayer(sourceControllerId);
                             new SquirrelToken().putOntoBattlefield(actualDamage, game, sourceId, player.getId());
                         }
-                        game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
+                        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage);
+                        game.fireEvent(damagedEvent);
+                        game.getState().addSimultaneousDamage(damagedEvent, game);
                         return actualDamage;
                     }
                 }

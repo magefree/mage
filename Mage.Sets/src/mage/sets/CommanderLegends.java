@@ -287,6 +287,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Order", 242, Rarity.RARE, mage.cards.m.MagusOfTheOrder.class));
         cards.add(new SetCardInfo("Make a Stand", 32, Rarity.UNCOMMON, mage.cards.m.MakeAStand.class));
         cards.add(new SetCardInfo("Makeshift Munitions", 191, Rarity.COMMON, mage.cards.m.MakeshiftMunitions.class));
+        cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 79, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
         cards.add(new SetCardInfo("Mana Confluence", 721, Rarity.MYTHIC, mage.cards.m.ManaConfluence.class));
         cards.add(new SetCardInfo("Mana Drain", 80, Rarity.MYTHIC, mage.cards.m.ManaDrain.class));
         cards.add(new SetCardInfo("Marath, Will of the Wild", 527, Rarity.MYTHIC, mage.cards.m.MarathWillOfTheWild.class));

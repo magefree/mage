@@ -18,9 +18,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
 import mage.game.command.Plane;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.*;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -730,6 +728,21 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean hasSimultaneousEvents() {
         return !simultaneousEvents.isEmpty();
+    }
+
+    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
+        boolean flag = false;
+        for (GameEvent event : simultaneousEvents) {
+            if ((event instanceof DamagedBatchEvent)
+                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
+                ((DamagedBatchEvent) event).addEvent(damagedEvent);
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+        }
     }
 
     public void handleEvent(GameEvent event, Game game) {

@@ -100,6 +100,7 @@ public class GameEvent implements Serializable {
          flag        true = comabat damage - other damage = false
          */
         DAMAGED_PLAYER,
+        DAMAGED_PLAYER_BATCH,
         DAMAGE_CAUSES_LIFE_LOSS,
         PLAYER_LIFE_CHANGE,
         GAIN_LIFE, GAINED_LIFE,
@@ -311,8 +312,8 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
-        DAMAGE_CREATURE, DAMAGED_CREATURE,
-        DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
+        DAMAGE_CREATURE, DAMAGED_CREATURE, DAMAGED_CREATURE_BATCH,
+        DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER, DAMAGED_PLANESWALKER_BATCH,
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
