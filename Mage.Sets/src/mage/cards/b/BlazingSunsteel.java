@@ -33,7 +33,9 @@ public final class BlazingSunsteel extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 for each opponent you have.
-        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(OpponentsCount.instance, StaticValue.get(0))));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
+                OpponentsCount.instance, StaticValue.get(0)
+        ).setText("equipped creature gets +1/+0 for each opponent you have")));
 
         // Whenever equipped creature is dealt damage, it deals that much damage to any target.
         this.addAbility(new BlazingSunsteelTriggeredAbility());

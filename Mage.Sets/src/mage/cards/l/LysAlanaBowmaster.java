@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -17,13 +15,14 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class LysAlanaBowmaster extends CardImpl {
 
-    private static final FilterSpell filterElf = new FilterSpell("Elf");
+    private static final FilterSpell filterElf = new FilterSpell("an Elf spell");
     private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
@@ -32,14 +31,15 @@ public final class LysAlanaBowmaster extends CardImpl {
     }
 
     public LysAlanaBowmaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(ReachAbility.getInstance());
-        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2), filterElf, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2)
+                .setText("{this} deal 2 damage to target creature with flying"), filterElf, true);
         ability.addTarget(new TargetCreaturePermanent(filterFlying));
         this.addAbility(ability);
     }

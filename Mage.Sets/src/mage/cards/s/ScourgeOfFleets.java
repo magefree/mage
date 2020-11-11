@@ -56,7 +56,7 @@ class ScourgeOfFleetsEffect extends OneShotEffect {
 
     public ScourgeOfFleetsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return each creature your opponents control with toughness X or less, where X is the number of Islands you control";
+        this.staticText = "return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control";
     }
 
     public ScourgeOfFleetsEffect(final ScourgeOfFleetsEffect effect) {

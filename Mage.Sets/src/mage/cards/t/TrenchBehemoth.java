@@ -16,6 +16,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
 
@@ -42,7 +43,11 @@ public final class TrenchBehemoth extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a land enters the battlefield under your control, target creature an opponent controls attacks during its controller's next combat phase if able.
-        ability = new EntersBattlefieldControlledTriggeredAbility(new TrenchBehemothEffect(), StaticFilters.FILTER_LAND_A);
+        ability = new EntersBattlefieldControlledTriggeredAbility(
+                new TrenchBehemothEffect(), StaticFilters.FILTER_LAND_A
+        );
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private TrenchBehemoth(final TrenchBehemoth card) {

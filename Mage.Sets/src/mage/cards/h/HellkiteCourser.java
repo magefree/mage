@@ -39,7 +39,7 @@ public final class HellkiteCourser extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Hellkite Courser enters the battlefield, you may put a commander you own from the command zone onto the battlefield. It gains haste. Return it to the command zone at the beginning of the next end step.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new HellkiteCourserEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new HellkiteCourserEffect(), true));
     }
 
     private HellkiteCourser(final HellkiteCourser card) {

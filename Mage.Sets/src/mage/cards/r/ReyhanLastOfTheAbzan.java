@@ -117,6 +117,6 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control dies or is put into the command zone, if it had one or more +1/+1 counters on it, you may put that may +1/+1 counters on target creature.";
+        return "Whenever a creature you control dies or is put into the command zone, if it had one or more +1/+1 counters on it, you may put that many +1/+1 counters on target creature.";
     }
 }

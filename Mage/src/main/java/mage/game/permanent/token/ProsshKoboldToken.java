@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class ProsshKoboldToken extends TokenImpl {
 
     public ProsshKoboldToken() {
-        super("Kobolds of Kher Keep", "0/1 red Kobold creature tokens");
+        super("Kobolds of Kher Keep", "0/1 red Kobold creature tokens named Kobolds of Kher Keep");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.KOBOLD);

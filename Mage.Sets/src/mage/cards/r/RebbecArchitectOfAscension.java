@@ -45,7 +45,7 @@ public final class RebbecArchitectOfAscension extends CardImpl {
         // Artifacts you control have protection from each converted mana cost among artifacts you control.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new ProtectionAbility(filter), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_ARTIFACT
+                StaticFilters.FILTER_PERMANENT_ARTIFACTS
         )));
 
         // Partner

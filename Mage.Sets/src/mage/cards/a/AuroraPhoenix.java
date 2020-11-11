@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class AuroraPhoenix extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with cascade");
+    private static final FilterSpell filter = new FilterSpell("a spell with cascade");
 
     static {
         filter.add(new AbilityPredicate(CascadeAbility.class));

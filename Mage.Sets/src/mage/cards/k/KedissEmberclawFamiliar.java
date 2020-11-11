@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class KedissEmberclawFamiliar extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("commander you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a commander you control");
 
     static {
         filter.add(CommanderPredicate.instance);

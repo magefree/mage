@@ -50,6 +50,7 @@ public final class SweetGumRecluse extends CardImpl {
         // When Sweet-Gum Recluse enters the battlefield, put three +1/+1 counters on each of any number of target creatures that entered the battlefield this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(3))
+                        .setText("put three +1/+1 counters on each of any number of target creatures that entered the battlefield this turn")
         );
         ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter, false));
         this.addAbility(ability);

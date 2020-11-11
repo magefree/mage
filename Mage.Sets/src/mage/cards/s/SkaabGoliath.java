@@ -27,7 +27,7 @@ public final class SkaabGoliath extends CardImpl {
         this.toughness = new MageInt(9);
 
         // As an additional cost to cast Skaab Goliath, exile two creature cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, 2, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)));
         this.addAbility(TrampleAbility.getInstance());
     }
 

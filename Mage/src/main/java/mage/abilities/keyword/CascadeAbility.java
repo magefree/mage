@@ -60,7 +60,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Cascade");
+        StringBuilder sb = new StringBuilder("cascade");
         if (withReminder) {
             sb.append(REMINDERTEXT);
         }

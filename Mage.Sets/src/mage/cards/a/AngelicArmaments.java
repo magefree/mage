@@ -1,8 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.AddCardColorAttachedEffect;
@@ -15,20 +14,29 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 
+import java.util.UUID;
+
 /**
  * @author noxx
  */
 public final class AngelicArmaments extends CardImpl {
 
     public AngelicArmaments(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2, has flying, and is a white Angel in addition to its other colors and types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect(SubType.ANGEL, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FlyingAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText(", has flying"));
+        ability.addEffect(new AddCardColorAttachedEffect(
+                ObjectColor.WHITE, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT
+        ).setText(", and is"));
+        ability.addEffect(new AddCardSubtypeAttachedEffect(
+                SubType.ANGEL, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT
+        ).setText("white Angel in addition to its other colors and types").concatBy("a"));
+        this.addAbility(ability);
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));

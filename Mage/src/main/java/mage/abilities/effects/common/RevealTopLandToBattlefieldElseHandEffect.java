@@ -14,7 +14,7 @@ public class RevealTopLandToBattlefieldElseHandEffect extends OneShotEffect {
 
     public RevealTopLandToBattlefieldElseHandEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand";
+        this.staticText = "reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand";
     }
 
     public RevealTopLandToBattlefieldElseHandEffect(final RevealTopLandToBattlefieldElseHandEffect effect) {

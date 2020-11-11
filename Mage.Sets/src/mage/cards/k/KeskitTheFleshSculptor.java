@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class KeskitTheFleshSculptor extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("three other artifacts and/or creatures");
+            = new FilterControlledPermanent("other artifacts and/or creatures");
 
     static {
         filter.add(AnotherPredicate.instance);

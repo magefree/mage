@@ -58,7 +58,7 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
 
     public RakdosLordOfRiotsCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast {this} unless an opponent lost life this turn";
+        staticText = "You can't cast this spell unless an opponent lost life this turn";
     }
 
     public RakdosLordOfRiotsCantCastEffect(final RakdosLordOfRiotsCantCastEffect effect) {

@@ -1,11 +1,9 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -13,12 +11,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class BorosCharm extends CardImpl {
@@ -30,11 +28,9 @@ public final class BorosCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         //or permanents you control are indestructible this turn
-        Mode mode = new Mode();
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent(), false);
-        effect.setText("permanents you control are indestructible this turn");
-        mode.addEffect(effect);
-        this.getSpellAbility().addMode(mode);
+        this.getSpellAbility().addMode(new Mode(new GainAbilityControlledEffect(
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+        )));
         //or target creature gains double strike until end of turn.
         Mode mode2 = new Mode();
         mode2.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));

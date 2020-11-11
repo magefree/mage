@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public final class CoerciveRecruiter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.PIRATE);
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.PIRATE, "Pirate");
 
     public CoerciveRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -44,6 +45,7 @@ public final class CoerciveRecruiter extends CardImpl {
         ability.addEffect(new AddCardSubTypeTargetEffect(
                 SubType.PIRATE, Duration.EndOfTurn
         ).setText("and becomes a Pirate in addition to its other types"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

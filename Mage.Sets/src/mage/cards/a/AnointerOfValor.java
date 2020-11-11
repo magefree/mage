@@ -39,7 +39,7 @@ public final class AnointerOfValor extends CardImpl {
                                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                                 false, "put a +1/+1 counter on that creature"
                         ), new GenericManaCost(3), "Pay {3}?"
-                ), false, StaticFilters.FILTER_PERMANENT_CREATURE_A,
+                ), false, StaticFilters.FILTER_PERMANENT_CREATURE,
                 SetTargetPointer.PERMANENT, false
         ));
     }

@@ -24,9 +24,9 @@ public final class NecroticHex extends CardImpl {
         ));
 
         // You create six tapped 2/2 black creature tokens.
-        this.getSpellAbility().addEffect(
-                new CreateTokenEffect(new ZombieToken(), 6).concatBy("<br>You")
-        );
+        this.getSpellAbility().addEffect(new CreateTokenEffect(
+                new ZombieToken(), 6, true, false
+        ).concatBy("<br>You"));
     }
 
     private NecroticHex(final NecroticHex card) {

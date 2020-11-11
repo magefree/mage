@@ -5,19 +5,19 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author TheElk801
  */
 public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public SacrificePermanentTriggeredAbility(Effect effect) {
-        this(effect, new FilterPermanent());
+        this(effect, StaticFilters.FILTER_PERMANENT_A);
     }
 
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter) {

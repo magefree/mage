@@ -31,7 +31,7 @@ public final class MindlessAutomaton extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Mindless Automaton enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),"with two +1/+1 counters on it"));
         
         // {1}, Discard a card: Put a +1/+1 counter on Mindless Automaton.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));

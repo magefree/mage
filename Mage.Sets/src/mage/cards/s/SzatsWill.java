@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public final class SzatsWill extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("a creature they control with the greatest power");
+            = new FilterControlledCreaturePermanent("creature they control with the greatest power");
 
     static {
         filter.add(SzatsWillPredicate.instance);

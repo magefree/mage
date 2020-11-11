@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -14,15 +9,14 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
 
-    SubType subtype = null;
+    private SubType subtype = null;
 
     public BoostAllOfChosenSubtypeEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        super(power, toughness, duration, new FilterCreaturePermanent("All creatures of the chosen type"), excludeSource);
+        super(power, toughness, duration, new FilterCreaturePermanent("creatures of the chosen type"), excludeSource);
     }
 
     public BoostAllOfChosenSubtypeEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
@@ -56,5 +50,4 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
             discard();
         }
     }
-
 }

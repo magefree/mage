@@ -210,6 +210,12 @@ public final class StaticFilters {
         FILTER_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_A = new FilterPermanent("a permanent");
+
+    static {
+        FILTER_PERMANENT_A.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENTS = new FilterPermanent("permanents");
 
     static {

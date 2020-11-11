@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import mage.MageInt;
@@ -12,8 +11,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -27,7 +26,7 @@ import java.util.UUID;
 public final class WickerboughElder extends CardImpl {
 
     public WickerboughElder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.SHAMAN);
 
@@ -35,7 +34,8 @@ public final class WickerboughElder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Wickerbough Elder enters the battlefield with a -1/-1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)), "with a -1/-1 counter on it"));
+
         // {G}, Remove a -1/-1 counter from Wickerbough Elder: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(1)));

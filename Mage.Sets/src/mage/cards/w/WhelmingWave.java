@@ -33,7 +33,7 @@ public final class WhelmingWave extends CardImpl {
 
         // Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses and Serpents.
         Effect effect = new ReturnToHandFromBattlefieldAllEffect(filter);
-        effect.setText("Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses and Serpents");
+        effect.setText("Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses, and Serpents");
         this.getSpellAbility().addEffect(effect);
     }
 

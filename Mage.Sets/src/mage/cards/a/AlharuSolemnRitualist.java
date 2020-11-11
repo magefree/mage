@@ -52,6 +52,7 @@ public final class AlharuSolemnRitualist extends CardImpl {
         // When Alharu, Solemn Ritualist enters the battlefield, put a +1/+1 counter on each of up to two other target creatures.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                        .setText("put a +1/+1 counter on each of up to two other target creatures")
         );
         ability.addTarget(new TargetPermanent(0, 2, filter, false));
         this.addAbility(ability);

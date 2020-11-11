@@ -62,7 +62,7 @@ class KaradorGhostChieftainCostReductionEffect extends CostModificationEffectImp
 
     KaradorGhostChieftainCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each creature card in your graveyard";
+        staticText = "this spell costs {1} less to cast for each creature card in your graveyard";
     }
 
     KaradorGhostChieftainCostReductionEffect(KaradorGhostChieftainCostReductionEffect effect) {
@@ -99,7 +99,7 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     KaradorGhostChieftainCastFromGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PutCreatureInPlay, true);
-        staticText = "During each of your turns, you may cast one creature card from your graveyard";
+        staticText = "During each of your turns, you may cast a creature card from your graveyard";
     }
 
     KaradorGhostChieftainCastFromGraveyardEffect(final KaradorGhostChieftainCastFromGraveyardEffect effect) {

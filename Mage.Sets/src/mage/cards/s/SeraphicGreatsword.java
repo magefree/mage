@@ -38,7 +38,7 @@ public final class SeraphicGreatsword extends CardImpl {
         this.addAbility(new SeraphicGreatswordTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(4));
     }
 
     private SeraphicGreatsword(final SeraphicGreatsword card) {
