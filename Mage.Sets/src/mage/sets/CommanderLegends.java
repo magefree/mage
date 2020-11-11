@@ -91,6 +91,7 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("Brass Herald", 301, Rarity.UNCOMMON, mage.cards.b.BrassHerald.class));
         cards.add(new SetCardInfo("Brass Squire", 460, Rarity.UNCOMMON, mage.cards.b.BrassSquire.class));
         cards.add(new SetCardInfo("Brazen Freebooter", 164, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
+        cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 165, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));
         cards.add(new SetCardInfo("Briarblade Adept", 111, Rarity.COMMON, mage.cards.b.BriarbladeAdept.class));
         cards.add(new SetCardInfo("Brinelin, the Moon Kraken", 60, Rarity.UNCOMMON, mage.cards.b.BrinelinTheMoonKraken.class));
         cards.add(new SetCardInfo("Bruse Tarl, Boorish Herder", 517, Rarity.MYTHIC, mage.cards.b.BruseTarlBoorishHerder.class));
