@@ -168,6 +168,7 @@ class EncoreSacrificeEffect extends OneShotEffect {
 
     private EncoreSacrificeEffect(final EncoreSacrificeEffect effect) {
         super(effect);
+        this.mageObjectReferenceSet.addAll(effect.mageObjectReferenceSet);
     }
 
     @Override
