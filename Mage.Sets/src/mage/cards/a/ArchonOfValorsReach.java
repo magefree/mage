@@ -43,8 +43,15 @@ public final class ArchonOfValorsReach extends CardImpl {
 
         // As Archon of Valor's Reach enters the battlefield, choose artifact, enchantment, instant, sorcery, or planeswalker.
         this.addAbility(new AsEntersBattlefieldAbility(
-                new ChooseCardTypeEffect(Outcome.Benefit, Arrays.asList(CardType.ARTIFACT, CardType.ENCHANTMENT, CardType.INSTANT, CardType.PLANESWALKER))
-                        .setText("choose artifact, enchantment, instant, sorcery, or planeswalker")
+                new ChooseCardTypeEffect(
+                        Outcome.Benefit,
+                        Arrays.asList(
+                                CardType.ARTIFACT,
+                                CardType.ENCHANTMENT,
+                                CardType.INSTANT,
+                                CardType.SORCERY,
+                                CardType.PLANESWALKER
+                        )).setText("choose artifact, enchantment, instant, sorcery, or planeswalker")
         ));
 
         // Players can't cast spells of the chosen type.
