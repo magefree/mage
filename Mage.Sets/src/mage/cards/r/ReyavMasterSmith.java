@@ -45,7 +45,7 @@ public final class ReyavMasterSmith extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
                 new GainAbilityTargetEffect(
                         DoubleStrikeAbility.getInstance(), Duration.EndOfTurn,
-                        "that creature gains double strike until end of turn."
+                        "that creature gains double strike until end of turn"
                 ), false, filter, true
         ));
     }

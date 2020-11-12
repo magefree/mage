@@ -32,10 +32,10 @@ public final class AngelicArmaments extends CardImpl {
         ).setText(", has flying"));
         ability.addEffect(new AddCardColorAttachedEffect(
                 ObjectColor.WHITE, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT
-        ).setText(", and is"));
+        ).setText(","));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.ANGEL, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT
-        ).setText("white Angel in addition to its other colors and types").concatBy("a"));
+        ).setText("is a white Angel in addition to its other colors and types").concatBy("and"));
         this.addAbility(ability);
 
         // Equip {4}

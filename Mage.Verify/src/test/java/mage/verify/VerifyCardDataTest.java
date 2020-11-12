@@ -53,7 +53,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "M20"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "CMR"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: fix sample decks if it contains errors like wrong card numbers
 
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();

@@ -24,7 +24,7 @@ public final class PhyrexianRager extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), false
+                new DrawCardSourceControllerEffect(1).setText("you draw a card"), false
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

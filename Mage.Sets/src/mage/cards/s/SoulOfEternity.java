@@ -32,7 +32,7 @@ public final class SoulOfEternity extends CardImpl {
                 Zone.ALL,
                 new SetPowerToughnessSourceEffect(
                         ControllerLifeCount.instance, Duration.EndOfGame
-                )
+                ).setText("{this}'s power and toughness are each equal to your life total")
         ));
 
         // Encore {7}{W}{W}

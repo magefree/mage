@@ -25,7 +25,7 @@ public class IsPhaseCondition implements Condition {
 
     @Override
     public String toString() {
-        return new StringBuilder("during ").append(turnPhase).toString();
+        return new StringBuilder("during ").append(turnPhase).toString().toLowerCase();
     }
 
 }

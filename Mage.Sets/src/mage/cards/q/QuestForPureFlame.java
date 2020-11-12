@@ -1,10 +1,9 @@
-
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -21,8 +20,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class QuestForPureFlame extends CardImpl {
@@ -34,9 +34,14 @@ public final class QuestForPureFlame extends CardImpl {
         this.addAbility(new QuestForPureFlameTriggeredAbility());
 
         // Remove four quest counters from Quest for Pure Flame and sacrifice it: If any source you control would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuestForPureFlameEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(4)));
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(
+                new QuestForPureFlameEffect(),
+                new CompositeCost(
+                        new RemoveCountersSourceCost(CounterType.QUEST.createInstance(4)),
+                        new SacrificeSourceCost(),
+                        "Remove four quest counters from {this} and sacrifice it"
+                )
+        ));
     }
 
     public QuestForPureFlame(final QuestForPureFlame card) {
@@ -51,11 +56,11 @@ public final class QuestForPureFlame extends CardImpl {
 
 class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
 
-    public QuestForPureFlameTriggeredAbility() {
+    QuestForPureFlameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
     }
 
-    public QuestForPureFlameTriggeredAbility(final QuestForPureFlameTriggeredAbility ability) {
+    private QuestForPureFlameTriggeredAbility(final QuestForPureFlameTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,12 +90,13 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
 
 class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
-    public QuestForPureFlameEffect() {
+    QuestForPureFlameEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "If any source you control would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead";
+        staticText = "If any source you control would deal damage to a permanent or player this turn, " +
+                "it deals double that damage to that permanent or player instead";
     }
 
-    public QuestForPureFlameEffect(final QuestForPureFlameEffect effect) {
+    private QuestForPureFlameEffect(final QuestForPureFlameEffect effect) {
         super(effect);
     }
 

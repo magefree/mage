@@ -20,8 +20,8 @@ public final class NecroticHex extends CardImpl {
 
         // Each player sacrifices six creatures.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(
-                2, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+                6, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+        ).setText("each player sacrifices six creatures"));
 
         // You create six tapped 2/2 black creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(

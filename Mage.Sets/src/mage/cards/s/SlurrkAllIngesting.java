@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SlurrkAllIngesting extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
     static {
         filter.add(CounterType.P1P1.getPredicate());

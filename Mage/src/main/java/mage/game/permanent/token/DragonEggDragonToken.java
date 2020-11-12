@@ -18,7 +18,7 @@ import mage.constants.Zone;
 public final class DragonEggDragonToken extends TokenImpl {
 
     public DragonEggDragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying and \"{R}: This creature gets +1/+0 until end of turn");
+        super("Dragon", "2/2 red Dragon creature token with flying and \"{R}: This creature gets +1/+0 until end of turn.\"");
         this.setOriginalExpansionSetCode("M14");
         cardType.add(CardType.CREATURE);
         color.setRed(true);

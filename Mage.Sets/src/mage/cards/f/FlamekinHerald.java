@@ -33,7 +33,7 @@ public final class FlamekinHerald extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Commander spells you cast have cascade.
-        this.addAbility(new SimpleStaticAbility(new GainAbilitySpellsEffect(new CascadeAbility(), filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilitySpellsEffect(new CascadeAbility(false), filter)));
     }
 
     private FlamekinHerald(final FlamekinHerald card) {

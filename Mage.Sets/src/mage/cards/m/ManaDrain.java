@@ -47,7 +47,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
 
     public ManaDrainCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. At the beginning of your next main phase, add X mana of {C}, where X is that spell's converted mana cost";
+        this.staticText = "Counter target spell. At the beginning of your next main phase, add an amount of {C} equal to that spell's converted mana cost";
     }
 
     public ManaDrainCounterEffect(final ManaDrainCounterEffect effect) {

@@ -44,7 +44,7 @@ class SoulsFireEffect extends OneShotEffect {
 
     public SoulsFireEffect() {
         super(Outcome.Damage);
-        this.staticText = "Target creature you control on the battlefield deals damage equal to its power to any target";
+        this.staticText = "Target creature you control deals damage equal to its power to any target";
     }
 
     public SoulsFireEffect(final SoulsFireEffect effect) {

@@ -41,7 +41,7 @@ public final class SakashimasProtege extends CardImpl {
 
         // You may have Sakashima's Protege enter the battlefield as a copy of any permanent that entered the battlefield this turn.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter)
-                .setText("you may have {this} enter the battlefield as a copy of any permanent that entered the battlefield this turn"), true));
+                .setText("as a copy of any permanent that entered the battlefield this turn"), true));
     }
 
     private SakashimasProtege(final SakashimasProtege card) {
