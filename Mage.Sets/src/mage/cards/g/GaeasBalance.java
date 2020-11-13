@@ -2,25 +2,19 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -37,7 +31,7 @@ public final class GaeasBalance extends CardImpl {
         ));
 
         // Search your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new GaeasBalanceEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new GaeasBalanceTarget()));
     }
 
     private GaeasBalance(final GaeasBalance card) {
@@ -50,54 +44,55 @@ public final class GaeasBalance extends CardImpl {
     }
 }
 
-class GaeasBalanceEffect extends OneShotEffect {
+class GaeasBalanceTarget extends TargetCardInLibrary {
 
-    private static final FilterCard plainsFilter = new FilterLandCard("a Plains land card");
-    private static final FilterCard islandFilter = new FilterLandCard("an Island land card");
-    private static final FilterCard swampFilter = new FilterLandCard("a Swamp land card");
-    private static final FilterCard mountainFilter = new FilterLandCard("a Mountain land card");
-    private static final FilterCard forestFilter = new FilterLandCard("a Forest land card");
+    private static final FilterCard filter = new FilterLandCard("a land card of each basic land type");
 
     static {
-        plainsFilter.add(SubType.PLAINS.getPredicate());
-        islandFilter.add(SubType.ISLAND.getPredicate());
-        swampFilter.add(SubType.SWAMP.getPredicate());
-        mountainFilter.add(SubType.MOUNTAIN.getPredicate());
-        forestFilter.add(SubType.FOREST.getPredicate());
+        filter.add(Predicates.or(
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate(),
+                SubType.FOREST.getPredicate()
+        ));
     }
 
-    private static final List<FilterCard> filterList = Arrays.asList(
-            plainsFilter, islandFilter, swampFilter, mountainFilter, forestFilter
+    private static final SubTypeAssignment subTypeAssigner = new SubTypeAssignment(
+            SubType.PLAINS,
+            SubType.ISLAND,
+            SubType.SWAMP,
+            SubType.MOUNTAIN,
+            SubType.FOREST
     );
 
-    GaeasBalanceEffect() {
-        super(Outcome.Benefit);
-        staticText = "Search your library for a land card of each basic land type " +
-                "and put them onto the battlefield. Then shuffle your library.";
+    GaeasBalanceTarget() {
+        super(0, 5, filter);
     }
 
-    private GaeasBalanceEffect(final GaeasBalanceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GaeasBalanceEffect copy() {
-        return new GaeasBalanceEffect(this);
+    private GaeasBalanceTarget(final GaeasBalanceTarget target) {
+        super(target);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+    public GaeasBalanceTarget copy() {
+        return new GaeasBalanceTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        filterList.stream().map(TargetCardInLibrary::new).forEachOrdered(target -> {
-            player.searchLibrary(target, source, game, target.getFilter().getMessage().contains("Forest"));
-            cards.add(target.getFirstTarget());
-        });
-        player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        player.shuffleLibrary(source, game);
-        return true;
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return subTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }
