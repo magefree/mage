@@ -3273,19 +3273,10 @@ public class TestPlayer implements Player {
         return computerPlayer.searchLibrary(target, source, game);
     }
 
-    @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
-        return computerPlayer.searchLibrary(target, source, game, triggerEvents);
-    }
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
         return computerPlayer.searchLibrary(target, source, game, targetPlayerId);
-    }
-
-    @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
-        return computerPlayer.searchLibrary(target, source, game, targetPlayerId, triggerEvents);
     }
 
     @Override
@@ -3402,12 +3393,12 @@ public class TestPlayer implements Player {
     public boolean canPayLifeCost(Ability ability) {
         return computerPlayer.canPayLifeCost(ability);
     }
-    
+
     @Override
     public boolean getCanPayLifeCost() {
         return computerPlayer.getCanPayLifeCost();
     }
-    
+
     @Override
     public void setCanPayLifeCost(boolean canPayLifeCost) {
         computerPlayer.setCanPayLifeCost(canPayLifeCost);

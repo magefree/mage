@@ -1,6 +1,8 @@
 package org.mage.test.stub;
 
+import mage.ApprovingObject;
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -40,8 +42,6 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.ApprovingObject;
-import mage.Mana;
 
 /**
  * @author Quercitron
@@ -179,12 +179,12 @@ public class PlayerStub implements Player {
     public void setCanPayLifeCost(boolean canPayLifeCost) {
 
     }
-    
+
     @Override
     public boolean getCanPayLifeCost() {
         return false;
     }
-    
+
     @Override
     public boolean canPayLifeCost(Ability ability) {
         return false;
@@ -580,17 +580,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
-        return false;
-    }
-
-    @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
-        return false;
-    }
-
-    @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
         return false;
     }
 
@@ -1045,19 +1035,19 @@ public class PlayerStub implements Player {
 
     @Override
     public void addAvailableTriggeredMana(List<Mana> availableTriggeredMan) {
-    
-    } 
-    
+
+    }
+
     @Override
     public List<List<Mana>> getAvailableTriggeredMana() {
         return null;
     }
-    
+
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         return 0;
     }
-    
+
     @Override
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
         return null;

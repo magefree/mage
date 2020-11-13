@@ -2603,21 +2603,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game) {
-        return searchLibrary(target, source, game, playerId, true);
-    }
-
-    @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents) {
-        return searchLibrary(target, source, game, playerId, triggerEvents);
+        return searchLibrary(target, source, game, playerId);
     }
 
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
-        return searchLibrary(target, source, game, targetPlayerId, true);
-    }
-
-    @Override
-    public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents) {
         //20091005 - 701.14c
         Library searchedLibrary = null;
         String searchInfo = null;
@@ -2636,59 +2626,57 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY,
                 targetPlayerId, source.getSourceId(), playerId, Integer.MAX_VALUE);
-        if (!game.replaceEvent(event)) {
-            if (!game.isSimulation()) {
-                game.informPlayers(searchInfo);
-            }
-            TargetCardInLibrary newTarget = target.copy();
-            int count;
-            int librarySearchLimit = event.getAmount();
-            List<Card> cardsFromTop = null;
-            do {
-                // TODO: prevent shuffling from moving the visualized cards
-                if (librarySearchLimit == Integer.MAX_VALUE) {
-                    count = searchedLibrary.count(target.getFilter(), game);
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        if (!game.isSimulation()) {
+            game.informPlayers(searchInfo);
+        }
+        TargetCardInLibrary newTarget = target.copy();
+        int count;
+        int librarySearchLimit = event.getAmount();
+        List<Card> cardsFromTop = null;
+        do {
+            // TODO: prevent shuffling from moving the visualized cards
+            if (librarySearchLimit == Integer.MAX_VALUE) {
+                count = searchedLibrary.count(target.getFilter(), game);
+            } else {
+                Player targetPlayer = game.getPlayer(targetPlayerId);
+                if (targetPlayer == null) {
+                    return false;
+                }
+                if (cardsFromTop == null) {
+                    cardsFromTop = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
                 } else {
-                    Player targetPlayer = game.getPlayer(targetPlayerId);
-                    if (targetPlayer == null) {
-                        return false;
-                    }
-                    if (cardsFromTop == null) {
-                        cardsFromTop = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
-                    } else {
-                        cardsFromTop.retainAll(targetPlayer.getLibrary().getCards(game));
-                    }
-                    newTarget.setCardLimit(Math.min(librarySearchLimit, cardsFromTop.size()));
-                    count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
+                    cardsFromTop.retainAll(targetPlayer.getLibrary().getCards(game));
                 }
+                newTarget.setCardLimit(Math.min(librarySearchLimit, cardsFromTop.size()));
+                count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
+            }
 
-                if (count < target.getNumberOfTargets()) {
-                    newTarget.setMinNumberOfTargets(count);
-                }
-                if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
-                    if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library,
-                            game, targetPlayerId)) { // for handling Panglacial Wurm
-                        newTarget.clearChosen();
-                        continue;
-                    }
-                    target.getTargets().clear();
-                    for (UUID targetId : newTarget.getTargets()) {
-                        target.add(targetId, game);
-                    }
-
-                } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library,
+            if (count < target.getNumberOfTargets()) {
+                newTarget.setMinNumberOfTargets(count);
+            }
+            if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
+                if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library,
                         game, targetPlayerId)) { // for handling Panglacial Wurm
                     newTarget.clearChosen();
                     continue;
                 }
-                if (triggerEvents) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+                target.getTargets().clear();
+                for (UUID targetId : newTarget.getTargets()) {
+                    target.add(targetId, game);
                 }
-                break;
-            } while (true);
-            return true;
-        }
-        return false;
+
+            } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library,
+                    game, targetPlayerId)) { // for handling Panglacial Wurm
+                newTarget.clearChosen();
+                continue;
+            }
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+            break;
+        } while (true);
+        return true;
     }
 
     @Override

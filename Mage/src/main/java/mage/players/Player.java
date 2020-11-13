@@ -1,7 +1,5 @@
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.ApprovingObject;
 import mage.MageItem;
 import mage.MageObject;
@@ -40,6 +38,9 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -103,12 +104,12 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Is the player allowed to pay life for casting spells or activate activated abilities
-     * 
-     * @param canPayLifeCost 
+     *
+     * @param canPayLifeCost
      */
-    
+
     void setCanPayLifeCost(boolean canPayLifeCost);
-    
+
     boolean getCanPayLifeCost();
 
     /**
@@ -345,19 +346,15 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game);
 
-    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, boolean triggerEvents);
-
-    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId);
-
     /**
      * @param target
      * @param source
      * @param game
      * @param targetPlayerId player whose library will be searched
-     * @param triggerEvents  whether searching will trigger any game events
      * @return true if search was successful
      */
-    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId, boolean triggerEvents);
+
+    boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId);
 
     /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
