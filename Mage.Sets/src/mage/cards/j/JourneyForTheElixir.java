@@ -1,27 +1,21 @@
 package mage.cards.j;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class JourneyForTheElixir extends CardImpl {
@@ -30,7 +24,7 @@ public final class JourneyForTheElixir extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new JourneyForTheElixirEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new JourneyForTheElixirTarget()));
     }
 
     public JourneyForTheElixir(final JourneyForTheElixir card) {
@@ -43,81 +37,66 @@ public final class JourneyForTheElixir extends CardImpl {
     }
 }
 
-class JourneyForTheElixirEffect extends OneShotEffect {
+class JourneyForTheElixirTarget extends TargetCardInLibrary {
 
-    private static final FilterCard filter = new FilterCard("card named Jiang Yanggu");
+    private static final String name = "Jiang Yanggu";
+    private static final FilterCard filter
+            = new FilterCard("a basic land card and a card named Jiang Yanggu");
 
     static {
-        filter.add(new NamePredicate("Jiang Yanggu"));
+        filter.add(Predicates.or(
+                Predicates.and(
+                        SuperType.BASIC.getPredicate(),
+                        CardType.LAND.getPredicate()
+                ),
+                new NamePredicate(name)
+        ));
     }
 
-    public JourneyForTheElixirEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "search your library and graveyard for a basic land card "
-                + "and a card named Jiang Yanggu, reveal them, "
-                + "put them into your hand, then shuffle your library";
+    JourneyForTheElixirTarget() {
+        super(0, 2, filter);
     }
 
-    public JourneyForTheElixirEffect(final JourneyForTheElixirEffect effect) {
-        super(effect);
+    private JourneyForTheElixirTarget(final JourneyForTheElixirTarget target) {
+        super(target);
     }
 
     @Override
-    public JourneyForTheElixirEffect copy() {
-        return new JourneyForTheElixirEffect(this);
+    public JourneyForTheElixirTarget copy() {
+        return new JourneyForTheElixirTarget(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
-        boolean walkerFound = false;
-        boolean landFound = false;
-        Cards cardsToHand = new CardsImpl();
-        if (player.chooseUse(outcome, "Search your graveyard?", source, game)) {
-            TargetCardInGraveyard targetWalker = new TargetCardInGraveyard(0, 1, filter);
-            targetWalker.setNotTarget(true);
-            if (player.choose(outcome, targetWalker, source.getSourceId(), game)) {
-                Card card = game.getCard(targetWalker.getFirstTarget());
-                if (card != null) {
-                    cardsToHand.add(card);
-                    walkerFound = true;
-                }
-            }
-            TargetCardInGraveyard targetLand = new TargetCardInGraveyard(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND_A);
-            targetLand.setNotTarget(true);
-            if (player.choose(outcome, targetLand, source.getSourceId(), game)) {
-                Card card = game.getCard(targetLand.getFirstTarget());
-                if (card != null) {
-                    cardsToHand.add(card);
-                    landFound = true;
-                }
-            }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
         }
-        if (!walkerFound || !landFound) {
-            TargetCardInLibrary targetWalker = new TargetCardInLibrary(0, 1, filter);
-            targetWalker.setNotTarget(true);
-            if (!walkerFound && player.searchLibrary(targetWalker, source, game, false)) {
-                Card card = game.getCard(targetWalker.getFirstTarget());
-                if (card != null) {
-                    cardsToHand.add(card);
-                }
-            }
-            TargetCardInLibrary targetLand = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_BASIC_LAND_A);
-            targetLand.setNotTarget(true);
-            if (!landFound && player.searchLibrary(targetLand, source, game, false)) {
-                Card card = game.getCard(targetLand.getFirstTarget());
-                if (card != null) {
-                    cardsToHand.add(card);
-                }
-            }
+        if (this.getTargets().isEmpty()) {
+            return true;
         }
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, player.getId(), player.getId()));
-        player.revealCards(source, cardsToHand, game);
-        player.moveCards(cardsToHand, Zone.HAND, source, game);
-        player.shuffleLibrary(source, game);
+        Cards cards = new CardsImpl(this.getTargets());
+        if (card.isBasic()
+                && card.isLand()
+                && cards
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(MageObject::isBasic)
+                .anyMatch(MageObject::isLand)) {
+            return false;
+        }
+        if (name.equals(card.getName())
+                && cards
+                .getCards(game)
+                .stream()
+                .map(MageObject::getName)
+                .anyMatch(name::equals)) {
+            return false;
+        }
         return true;
     }
 }
