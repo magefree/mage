@@ -7,12 +7,11 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.common.SubTypeAssignment;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -21,8 +20,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.Collection;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -75,6 +72,8 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
         ));
     }
 
+    private static final SubTypeAssignment subTypeAssigner = new SubTypeAssignment(SubType.FOREST, SubType.PLAINS);
+
     YasharnImplacableEarthTarget() {
         super(0, 2, filter);
     }
@@ -94,16 +93,15 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
             return false;
         }
         Card card = game.getCard(id);
-        return card != null
-                && this
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .map(c -> c.getSubtype(game))
-                .flatMap(Collection::stream)
-                .filter(subType -> subType == SubType.FOREST || subType == SubType.PLAINS)
-                .noneMatch(subType -> card.hasSubtype(subType, game));
+        if (card == null) {
+            return false;
+        }
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return subTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }
 

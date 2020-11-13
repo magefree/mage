@@ -1,29 +1,26 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.CardTypeAssignment;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SwitchPowerToughnessTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.SplitCard;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class InvertInvent extends SplitCard {
@@ -38,7 +35,7 @@ public final class InvertInvent extends SplitCard {
 
         // Invent
         // Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle your library.
-        this.getRightHalfCard().getSpellAbility().addEffect(new InventEffect());
+        this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new InventTarget(), true));
     }
 
     public InvertInvent(final InvertInvent card) {
@@ -53,13 +50,13 @@ public final class InvertInvent extends SplitCard {
 
 class InvertEffect extends OneShotEffect {
 
-    public InvertEffect() {
+    InvertEffect() {
         super(Outcome.Benefit);
         this.staticText = "Switch the power and toughness of "
                 + "each of up to two target creatures until end of turn.";
     }
 
-    public InvertEffect(final InvertEffect effect) {
+    private InvertEffect(final InvertEffect effect) {
         super(effect);
     }
 
@@ -79,56 +76,40 @@ class InvertEffect extends OneShotEffect {
     }
 }
 
-class InventEffect extends OneShotEffect {
+class InventTarget extends TargetCardInLibrary {
 
-    private static final FilterCard filter1 = new FilterCard("instant card");
-    private static final FilterCard filter2 = new FilterCard("sorcery card");
+    private static final FilterCard filter
+            = new FilterInstantOrSorceryCard("an instant card and/or a sorcery card");
+    private static final CardTypeAssignment cardTypeAssigner
+            = new CardTypeAssignment(CardType.INSTANT, CardType.SORCERY);
 
-    static {
-        filter1.add(CardType.INSTANT.getPredicate());
-        filter2.add(CardType.SORCERY.getPredicate());
+    InventTarget() {
+        super(0, 2, filter);
     }
 
-    public InventEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Search your library for an instant card "
-                + "and/or a sorcery card, reveal them, "
-                + "put them into your hand, then shuffle your library.";
-    }
-
-    public InventEffect(final InventEffect effect) {
-        super(effect);
+    private InventTarget(final InventTarget target) {
+        super(target);
     }
 
     @Override
-    public InventEffect copy() {
-        return new InventEffect(this);
+    public InventTarget copy() {
+        return new InventTarget(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        TargetCardInLibrary target = new TargetCardInLibrary(filter1);
-        if (player.searchLibrary(target, source, game, false)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                cards.add(card);
-            }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
         }
-        target = new TargetCardInLibrary(filter2);
-        if (player.searchLibrary(target, source, game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                cards.add(card);
-            }
+        if (this.getTargets().isEmpty()) {
+            return true;
         }
-        player.revealCards(source, cards, game);
-        player.moveCards(cards, Zone.HAND, source, game);
-        player.shuffleLibrary(source, game);
-        return true;
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }
