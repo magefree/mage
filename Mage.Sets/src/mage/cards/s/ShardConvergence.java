@@ -1,35 +1,31 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class ShardConvergence extends CardImpl {
 
     public ShardConvergence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new ShardConvergenceEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
+                new ShardConvergenceTarget(), true
+        ));
     }
 
     public ShardConvergence(final ShardConvergence card) {
@@ -42,51 +38,54 @@ public final class ShardConvergence extends CardImpl {
     }
 }
 
-class ShardConvergenceEffect extends OneShotEffect {
-    ShardConvergenceEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library";
+class ShardConvergenceTarget extends TargetCardInLibrary {
+
+    private static final FilterCard filter
+            = new FilterCard("a Plains card, an Island card, a Swamp card, and a Mountain card");
+
+    static {
+        filter.add(Predicates.or(
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate()
+        ));
     }
 
-    ShardConvergenceEffect(final ShardConvergenceEffect effect) {
-        super(effect);
+    private static final SubTypeAssignment subTypeAssigner = new SubTypeAssignment(
+            SubType.PLAINS,
+            SubType.ISLAND,
+            SubType.SWAMP,
+            SubType.MOUNTAIN
+    );
+
+    ShardConvergenceTarget() {
+        super(0, 4, filter);
+    }
+
+    private ShardConvergenceTarget(final ShardConvergenceTarget target) {
+        super(target);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+    public ShardConvergenceTarget copy() {
+        return new ShardConvergenceTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
-
-        Cards cards = new CardsImpl();
-
-        searchLand(player, source, game, cards, "Plains");
-        searchLand(player, source, game, cards, "Island");
-        searchLand(player, source, game, cards, "Swamp");
-        searchLand(player, source, game, cards, "Mountain");
-
-        player.revealCards("Shard Convergence", cards, game);
-        player.shuffleLibrary(source, game);
-
-        return true;
-    }
-
-    private void searchLand(Player player, Ability source, Game game, Cards cards, String subtype) {
-        FilterLandCard filter = new FilterLandCard(subtype);
-        filter.add(SubType.byDescription(subtype).getPredicate());
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, source, game)) {
-            Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-            if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                cards.add(card);
-            }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
         }
-    }
-
-    @Override
-    public ShardConvergenceEffect copy() {
-        return new ShardConvergenceEffect(this);
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return subTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }

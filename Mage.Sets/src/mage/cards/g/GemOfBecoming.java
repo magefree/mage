@@ -1,35 +1,37 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GemOfBecoming extends CardImpl {
 
     public GemOfBecoming(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}, {tap}, Sacrifice Gem of Becoming: Search your library for an Island card, a Swamp card, and a Mountain card.
         // Reveal those cards and put them into your hand. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GemOfBecomingEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(
+                new SearchLibraryPutInHandEffect(
+                        new GemOfBecomingTarget(), true
+                ), new GenericManaCost(3)
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -45,51 +47,52 @@ public final class GemOfBecoming extends CardImpl {
     }
 }
 
-class GemOfBecomingEffect extends OneShotEffect {
+class GemOfBecomingTarget extends TargetCardInLibrary {
 
-    public GemOfBecomingEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Search your library for an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library";
+    private static final FilterCard filter
+            = new FilterCard("an Island card, a Swamp card, and a Mountain card");
+
+    static {
+        filter.add(Predicates.or(
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate()
+        ));
     }
 
-    public GemOfBecomingEffect(final GemOfBecomingEffect effect) {
-        super(effect);
+    private static final SubTypeAssignment subTypeAssigner = new SubTypeAssignment(
+            SubType.ISLAND,
+            SubType.SWAMP,
+            SubType.MOUNTAIN
+    );
+
+    GemOfBecomingTarget() {
+        super(0, 3, filter);
+    }
+
+    private GemOfBecomingTarget(final GemOfBecomingTarget target) {
+        super(target);
     }
 
     @Override
-    public GemOfBecomingEffect copy() {
-        return new GemOfBecomingEffect(this);
+    public GemOfBecomingTarget copy() {
+        return new GemOfBecomingTarget(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
-
-        Cards cards = new CardsImpl();
-
-        searchLand(player, source, game, cards, "Island");
-        searchLand(player, source, game, cards, "Swamp");
-        searchLand(player, source, game, cards, "Mountain");
-
-        player.revealCards("Gem of Becoming", cards, game);
-        player.shuffleLibrary(source, game);
-
-        return false;
-    }
-
-    private void searchLand(Player player, Ability source, Game game, Cards cards, String subtype) {
-        FilterLandCard filter = new FilterLandCard(subtype);
-        filter.add(SubType.byDescription(subtype).getPredicate());
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, source, game)) {
-            Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-            if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                cards.add(card);
-            }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
         }
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return subTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }

@@ -2,17 +2,24 @@ package mage.cards.j;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -24,7 +31,7 @@ public final class JourneyForTheElixir extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new JourneyForTheElixirTarget()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new JourneyForTheElixirLibraryTarget()));
     }
 
     public JourneyForTheElixir(final JourneyForTheElixir card) {
@@ -37,7 +44,43 @@ public final class JourneyForTheElixir extends CardImpl {
     }
 }
 
-class JourneyForTheElixirTarget extends TargetCardInLibrary {
+class JourneyForTheElixirEffect extends OneShotEffect {
+
+    JourneyForTheElixirEffect() {
+        super(Outcome.Benefit);
+        staticText = "Search your library and graveyard for a basic land card and a card named Jiang Yanggu, " +
+                "reveal them, put them into your hand, then shuffle your library.";
+    }
+
+    private JourneyForTheElixirEffect(final JourneyForTheElixirEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public JourneyForTheElixirEffect copy() {
+        return new JourneyForTheElixirEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        TargetCardInLibrary targetCardInLibrary = new JourneyForTheElixirLibraryTarget();
+        player.searchLibrary(targetCardInLibrary, source, game);
+        Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
+        TargetCard target = new JourneyForTheElixirGraveyardTarget(cards);
+        player.choose(outcome, target, source.getSourceId(), game);
+        cards.addAll(target.getTargets());
+        player.revealCards(source, cards, game);
+        player.moveCards(cards, Zone.HAND, source, game);
+        player.shuffleLibrary(source, game);
+        return true;
+    }
+}
+
+class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
 
     private static final String name = "Jiang Yanggu";
     private static final FilterCard filter
@@ -53,17 +96,17 @@ class JourneyForTheElixirTarget extends TargetCardInLibrary {
         ));
     }
 
-    JourneyForTheElixirTarget() {
+    JourneyForTheElixirLibraryTarget() {
         super(0, 2, filter);
     }
 
-    private JourneyForTheElixirTarget(final JourneyForTheElixirTarget target) {
+    private JourneyForTheElixirLibraryTarget(final JourneyForTheElixirLibraryTarget target) {
         super(target);
     }
 
     @Override
-    public JourneyForTheElixirTarget copy() {
-        return new JourneyForTheElixirTarget(this);
+    public JourneyForTheElixirLibraryTarget copy() {
+        return new JourneyForTheElixirLibraryTarget(this);
     }
 
     @Override
@@ -98,5 +141,72 @@ class JourneyForTheElixirTarget extends TargetCardInLibrary {
             return false;
         }
         return true;
+    }
+}
+
+class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
+
+    private static final String name = "Jiang Yanggu";
+    private static final FilterCard filter
+            = new FilterCard("a basic land card and a card named Jiang Yanggu");
+
+    static {
+        filter.add(Predicates.or(
+                Predicates.and(
+                        SuperType.BASIC.getPredicate(),
+                        CardType.LAND.getPredicate()
+                ),
+                new NamePredicate(name)
+        ));
+    }
+
+    private final Cards cards = new CardsImpl();
+
+    JourneyForTheElixirGraveyardTarget(Cards cards) {
+        super(0, Integer.MAX_VALUE, filter, true);
+        this.cards.addAll(cards);
+    }
+
+    private JourneyForTheElixirGraveyardTarget(final JourneyForTheElixirGraveyardTarget target) {
+        super(target);
+        this.cards.addAll(cards);
+    }
+
+    @Override
+    public JourneyForTheElixirGraveyardTarget copy() {
+        return new JourneyForTheElixirGraveyardTarget(this);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID playerId, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceId, playerId, game);
+        Cards alreadyTargeted = new CardsImpl(this.getTargets());
+        alreadyTargeted.addAll(cards);
+        boolean hasBasic = alreadyTargeted
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(MageObject::isLand)
+                .anyMatch(MageObject::isBasic);
+        possibleTargets.removeIf(uuid -> {
+            Card card = game.getCard(uuid);
+            return card != null
+                    && hasBasic
+                    && card.isLand()
+                    && card.isBasic();
+        });
+        boolean hasYanggu = alreadyTargeted
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(MageObject::getName)
+                .anyMatch(name::equals);
+        possibleTargets.removeIf(uuid -> {
+            Card card = game.getCard(uuid);
+            return card != null
+                    && hasYanggu
+                    && name.equals(card.getName());
+        });
+        return possibleTargets;
     }
 }

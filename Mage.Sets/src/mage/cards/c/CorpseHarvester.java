@@ -1,29 +1,27 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CorpseHarvester extends CardImpl {
@@ -37,7 +35,9 @@ public final class CorpseHarvester extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{B}, {tap}, Sacrifice a creature: Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseHarvesterEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(
+                new KrosanVergeTarget(), true
+        ), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
@@ -53,46 +53,48 @@ public final class CorpseHarvester extends CardImpl {
     }
 }
 
-class CorpseHarvesterEffect extends OneShotEffect {
+class KrosanVergeTarget extends TargetCardInLibrary {
 
-    CorpseHarvesterEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library";
+    private static final FilterCard filter
+            = new FilterCard("a Zombie card and a Swamp card");
+
+    static {
+        filter.add(Predicates.or(
+                SubType.ZOMBIE.getPredicate(),
+                SubType.SWAMP.getPredicate()
+        ));
     }
 
-    CorpseHarvesterEffect(final CorpseHarvesterEffect effect) {
-        super(effect);
+    private static final SubTypeAssignment subTypeAssigner
+            = new SubTypeAssignment(SubType.ZOMBIE, SubType.SWAMP);
+
+    KrosanVergeTarget() {
+        super(0, 2, filter);
+    }
+
+    private KrosanVergeTarget(final KrosanVergeTarget target) {
+        super(target);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
+    public KrosanVergeTarget copy() {
+        return new KrosanVergeTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        searchCard(you, source, game, cards, "Zombie");
-        searchCard(you, source, game, cards, "Swamp");
-        you.revealCards("Corpse Harvester", cards, game);
-        you.shuffleLibrary(source, game);
-        return true;
-    }
-
-    private void searchCard(Player player, Ability source, Game game, Cards cards, String subtype) {
-        FilterCard filter = new FilterCard(subtype);
-        filter.add(SubType.byDescription(subtype).getPredicate());
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, source, game)) {
-            Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-            if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                cards.add(card);
-            }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
         }
-    }
-
-    @Override
-    public CorpseHarvesterEffect copy() {
-        return new CorpseHarvesterEffect(this);
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return subTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }
