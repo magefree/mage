@@ -1,31 +1,32 @@
-
 package mage.cards.c;
 
-import java.util.*;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author North
  */
 public final class ClarionUltimatum extends CardImpl {
 
     public ClarionUltimatum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}{W}{W}{W}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}{W}{W}{W}{U}{U}");
 
         // Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ClarionUltimatumEffect());
@@ -45,7 +46,9 @@ class ClarionUltimatumEffect extends OneShotEffect {
 
     public ClarionUltimatumEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library";
+        this.staticText = "Choose five permanents you control. For each of those permanents, " +
+                "you may search your library for a card with the same name as that permanent. " +
+                "Put those cards onto the battlefield tapped, then shuffle your library";
     }
 
     public ClarionUltimatumEffect(final ClarionUltimatumEffect effect) {
@@ -59,41 +62,79 @@ class ClarionUltimatumEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        Player controller = game.getPlayer(source.getControllerId());
-        int permanentsCount = game.getBattlefield().getAllActivePermanents(source.getControllerId()).size();
-        if (controller == null || permanentsCount < 1) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-
-        TargetControlledPermanent permanentsTarget = new TargetControlledPermanent(Math.min(permanentsCount, 5));
-        controller.choose(Outcome.Benefit, permanentsTarget, source.getSourceId(), game);
-
-        Set<Card> chosenCards = new LinkedHashSet<>();
-        List<String> namesFiltered = new ArrayList<>();
-        List<UUID> permanents = permanentsTarget.getTargets();
-        for (UUID permanentId : permanents) {
-            Permanent permanent = game.getPermanent(permanentId);
-            final String cardName = permanent.getName();
-            if (!namesFiltered.contains(cardName)) {
-                if (controller.chooseUse(Outcome.PutCardInPlay, "Search for " + cardName + " in your library?", source, game)) {
-                    FilterCard filter = new FilterCard("card named " + cardName);
-                    filter.add(new NamePredicate(cardName));
-                    TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                    if (controller.searchLibrary(target, source, game)) {
-                        Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                        if (card != null) {
-                            chosenCards.add(card);
-                        }
-                    }
-                } else {
-                    namesFiltered.add(cardName);
-                }
-            }
-        }
-
-        controller.moveCards(chosenCards, Zone.BATTLEFIELD, source, game, true, false, false, null);
-        controller.shuffleLibrary(source, game);
+        int permCount = game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT,
+                source.getSourceId(), source.getControllerId(), game
+        );
+        TargetPermanent targetPermanent = new TargetControlledPermanent(Math.max(permCount, 5));
+        targetPermanent.setNotTarget(true);
+        player.choose(outcome, targetPermanent, source.getSourceId(), game);
+        Set<String> names = targetPermanent
+                .getTargets()
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(MageObject::getName)
+                .collect(Collectors.toSet());
+        TargetCardInLibrary targetCardInLibrary = new ClarionUltimatumTarget(names);
+        player.searchLibrary(targetCardInLibrary, source, game);
+        Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
+        player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+        player.shuffleLibrary(source, game);
         return true;
+    }
+}
+
+class ClarionUltimatumTarget extends TargetCardInLibrary {
+
+    private final Map<String, Integer> nameMap = new HashMap<>();
+
+    ClarionUltimatumTarget(Set<String> names) {
+        super(0, names.size(), makeFilter(names));
+        this.populateNameMap(names);
+    }
+
+    private ClarionUltimatumTarget(final ClarionUltimatumTarget target) {
+        super(target);
+        this.nameMap.putAll(target.nameMap);
+    }
+
+    @Override
+    public ClarionUltimatumTarget copy() {
+        return new ClarionUltimatumTarget(this);
+    }
+
+    private static FilterCard makeFilter(Set<String> names) {
+        FilterCard filter = new FilterCard();
+        filter.add(Predicates.or(names.stream().map(name -> new NamePredicate(name)).collect(Collectors.toSet())));
+        return filter;
+    }
+
+    private void populateNameMap(Set<String> names) {
+        names.stream().forEach(name -> this.nameMap.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        Map<String, Integer> alreadyChosen = new HashMap<>();
+        this.getTargets()
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(MageObject::getName)
+                .forEach(name -> alreadyChosen.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+        return nameMap.getOrDefault(card.getName(), 0)
+                > alreadyChosen.getOrDefault(card.getName(), 0);
     }
 }

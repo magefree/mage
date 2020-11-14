@@ -1,31 +1,25 @@
-
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author North
  */
 public final class DoublingChant extends CardImpl {
@@ -52,7 +46,9 @@ class DoublingChantEffect extends OneShotEffect {
 
     public DoublingChantEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library";
+        this.staticText = "For each creature you control, " +
+                "you may search your library for a creature card with the same name as that creature. " +
+                "Put those cards onto the battlefield, then shuffle your library";
     }
 
     public DoublingChantEffect(final DoublingChantEffect effect) {
@@ -66,43 +62,73 @@ class DoublingChantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-        Set<Card> chosenCards = new HashSet<>();
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-        if (creatures.isEmpty()) {
-            //9/22/2011: If you control no creatures when Doubling Chant resolves, you may still search your library and you must shuffle your library.
-            if (controller.chooseUse(Outcome.PutCreatureInPlay, "Search in your library?", source, game)) {
-                FilterCreatureCard filter = new FilterCreatureCard("nothing (no valid card available)");
-                filter.add(new NamePredicate("creatureName"));
-                TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-                controller.searchLibrary(target, source, game);
-            }
-        }
-        for (Permanent creature : creatures) {
-            final String creatureName = creature.getName();
-            List<CardIdPredicate> uuidPredicates = new ArrayList<>();
-            if (controller.chooseUse(Outcome.PutCreatureInPlay, "Search for " + creatureName + " in your library?", source, game)) {
-                FilterCreatureCard filter = new FilterCreatureCard("creature card named " + creatureName);
-                filter.add(new NamePredicate(creatureName));
-                if (!uuidPredicates.isEmpty()) { // Prevent to select a card twice
-                    filter.add(Predicates.not(Predicates.or(uuidPredicates)));
-                }
-                TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                if (controller.searchLibrary(target, source, game)) {
-                    Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                    if (card != null) {
-                        chosenCards.add(card);
-                        uuidPredicates.add(new CardIdPredicate(card.getId()));
-                    }
-                }
-            }
-
-        }
-        controller.moveCards(chosenCards, Zone.BATTLEFIELD, source, game);
-        controller.shuffleLibrary(source, game);
+        Set<String> names = game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_CREATURE,
+                source.getControllerId(), source.getSourceId(), game
+        )
+                .stream()
+                .filter(Objects::nonNull)
+                .map(MageObject::getName)
+                .collect(Collectors.toSet());
+        TargetCardInLibrary targetCardInLibrary = new DoublingChantTarget(names);
+        player.searchLibrary(targetCardInLibrary, source, game);
+        Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
+        player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        player.shuffleLibrary(source, game);
         return true;
+    }
+}
+
+class DoublingChantTarget extends TargetCardInLibrary {
+
+    private final Map<String, Integer> nameMap = new HashMap<>();
+
+    DoublingChantTarget(Set<String> names) {
+        super(0, names.size(), makeFilter(names));
+        this.populateNameMap(names);
+    }
+
+    private DoublingChantTarget(final DoublingChantTarget target) {
+        super(target);
+        this.nameMap.putAll(target.nameMap);
+    }
+
+    @Override
+    public DoublingChantTarget copy() {
+        return new DoublingChantTarget(this);
+    }
+
+    private static FilterCard makeFilter(Set<String> names) {
+        FilterCard filter = new FilterCreatureCard();
+        filter.add(Predicates.or(names.stream().map(name -> new NamePredicate(name)).collect(Collectors.toSet())));
+        return filter;
+    }
+
+    private void populateNameMap(Set<String> names) {
+        names.stream().forEach(name -> this.nameMap.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        Map<String, Integer> alreadyChosen = new HashMap<>();
+        this.getTargets()
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(MageObject::getName)
+                .forEach(name -> alreadyChosen.compute(name, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+        return nameMap.getOrDefault(card.getName(), 0)
+                > alreadyChosen.getOrDefault(card.getName(), 0);
     }
 }
