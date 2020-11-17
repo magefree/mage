@@ -79,9 +79,7 @@ class CadaverousBloomManaEffect extends BasicManaEffect {
                             getManaTemplate().getColorless() * count
                     );
                         
-                    if (count > 0) {
-                        netMana.add(mana);
-                    }
+                    netMana.add(mana);
                 }
             }
             return netMana;
