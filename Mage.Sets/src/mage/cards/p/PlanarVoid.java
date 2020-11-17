@@ -1,10 +1,7 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +11,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class PlanarVoid extends CardImpl {
@@ -39,11 +37,11 @@ public final class PlanarVoid extends CardImpl {
 
 class PlanarVoidTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PlanarVoidTriggeredAbility() {
+    PlanarVoidTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);
     }
 
-    public PlanarVoidTriggeredAbility(final PlanarVoidTriggeredAbility ability) {
+    private PlanarVoidTriggeredAbility(final PlanarVoidTriggeredAbility ability) {
         super(ability);
     }
 
@@ -60,14 +58,12 @@ class PlanarVoidTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD && !event.getTargetId().equals(getSourceId())) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-                return true;
-            }
+        if (zEvent.getToZone() != Zone.GRAVEYARD
+                || event.getTargetId().equals(getSourceId())) {
+            return false;
         }
-        return false;
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        return true;
     }
 
     @Override
