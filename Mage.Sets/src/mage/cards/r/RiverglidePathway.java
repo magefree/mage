@@ -1,7 +1,7 @@
 package mage.cards.r;
 
+import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class RiverglidePathway extends ModalDoubleFacesCard {
         // Land
 
         // {T}: Add {U}.
-        this.getLeftHalfCard().addAbility(new RedManaAbility());
+        this.getLeftHalfCard().addAbility(new BlueManaAbility());
 
         // 2.
         // Lavaglide Pathway
