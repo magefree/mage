@@ -104,7 +104,7 @@ class GnostroVoiceOfTheCragsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player != null && player.scry(
+        return player.scry (
                 GnostroVoiceOfTheCragsValue.instance.calculate(game, source, this), source, game
         );
     }
