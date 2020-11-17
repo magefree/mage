@@ -102,7 +102,7 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
 
         if (savedType instanceof String && card != null) {
             CardType cardType = CardType.fromString((String) savedType);
-            if (cardType != null && card != null && card.getCardType().contains(cardType)) {
+            if (cardType != null && card.getCardType().contains(cardType)) {
                 return true;
             }
         }
