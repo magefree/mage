@@ -105,7 +105,7 @@ class OathOfLimDulEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Boolean sacrificeDone = false;
+        boolean sacrificeDone = false;
         int numberSacrificed = 0;
         int numberToDiscard = 0;
         int numberOfControlledPermanents = 0;
