@@ -241,38 +241,41 @@ public abstract class GameImpl implements Game, Serializable {
             if (card instanceof PermanentCard) {
                 card = ((PermanentCard) card).getCard();
             }
+
+            // main card
             card.setOwnerId(ownerId);
-            gameCards.put(card.getId(), card);
-            state.addCard(card);
+            addCardToState(card);
+
+            // parts
             if (card instanceof SplitCard) {
                 // left
                 Card leftCard = ((SplitCard) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
-                gameCards.put(leftCard.getId(), leftCard);
-                state.addCard(leftCard);
+                addCardToState(leftCard);
                 // right
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
-                gameCards.put(rightCard.getId(), rightCard);
-                state.addCard(rightCard);
+                addCardToState(rightCard);
             } else if (card instanceof ModalDoubleFacesCard) {
                 // left
                 Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
-                gameCards.put(leftCard.getId(), leftCard);
-                state.addCard(leftCard);
+                addCardToState(leftCard);
                 // right
                 Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
-                gameCards.put(rightCard.getId(), rightCard);
-                state.addCard(rightCard);
+                addCardToState(rightCard);
             } else if (card instanceof AdventureCard) {
                 Card spellCard = ((AdventureCard) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
-                gameCards.put(spellCard.getId(), spellCard);
-                state.addCard(spellCard);
+                addCardToState(spellCard);
             }
         }
+    }
+
+    private void addCardToState(Card card) {
+        gameCards.put(card.getId(), card);
+        state.addCard(card);
     }
 
     @Override

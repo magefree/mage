@@ -117,25 +117,57 @@ public final class ZonesHandler {
         Card targetCard = getTargetCard(game, event.getTargetId());
 
         Cards cardsToMove = null; // moving real cards
-        Cards cardsToUpdate = null; // updating all card's parts
+        Map<Zone, Cards> cardsToUpdate = new LinkedHashMap<>(); // updating all card's parts (must be ordered LinkedHashMap)
+        cardsToUpdate.put(toZone, new CardsImpl());
+        cardsToUpdate.put(Zone.OUTSIDE, new CardsImpl());
         // if we're moving a token it shouldn't be put into any zone as an object.
         if (!(targetCard instanceof Permanent) && targetCard != null) {
             if (targetCard instanceof MeldCard) {
                 // meld/group cards must be independent (use can choose order)
                 cardsToMove = ((MeldCard) targetCard).getHalves();
-                cardsToUpdate = cardsToMove;
+                cardsToUpdate.get(toZone).addAll(cardsToMove);
             } else if (targetCard instanceof ModalDoubleFacesCard
                     || targetCard instanceof ModalDoubleFacesCardHalf) {
-                // mdf cards must be moved as single object, but each half must be updated separetly
+                // mdf cards must be moved as single object, but each half must be updated separately
                 ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) targetCard.getMainCard();
                 cardsToMove = new CardsImpl(mdfCard);
-                cardsToUpdate = new CardsImpl(mdfCard);
-                cardsToUpdate.add(mdfCard.getLeftHalfCard());
-                cardsToUpdate.add(mdfCard.getRightHalfCard());
+                cardsToUpdate.get(toZone).add(mdfCard);
+                // example: cast left side
+                // result:
+                // * main to battlefield
+                // * left to battlefield
+                // * right to outside (it helps to ignore all triggers and other effects from that card)
+                switch (toZone) {
+                    case STACK:
+                    case BATTLEFIELD:
+                        if (targetCard.getId().equals(mdfCard.getLeftHalfCard().getId())) {
+                            // play left
+                            cardsToUpdate.get(toZone).add(mdfCard.getLeftHalfCard());
+                            cardsToUpdate.get(Zone.OUTSIDE).add(mdfCard.getRightHalfCard());
+                        } else if (targetCard.getId().equals(mdfCard.getRightHalfCard().getId())) {
+                            // play right
+                            cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
+                            cardsToUpdate.get(Zone.OUTSIDE).add(mdfCard.getLeftHalfCard());
+                        } else {
+                            // cast mdf (only on stack)
+                            if (!toZone.equals(Zone.STACK)) {
+                                throw new IllegalStateException("Wrong mdf card move to " + toZone + " in placeInDestinationZone");
+                            }
+                            cardsToUpdate.get(toZone).add(mdfCard.getLeftHalfCard());
+                            cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
+                        }
+                        break;
+                    default:
+                        // move all parts
+                        cardsToUpdate.get(toZone).add(mdfCard.getLeftHalfCard());
+                        cardsToUpdate.get(toZone).add(mdfCard.getRightHalfCard());
+                        break;
+                }
             } else {
                 cardsToMove = new CardsImpl(targetCard);
-                cardsToUpdate = cardsToMove;
+                cardsToUpdate.get(toZone).addAll(cardsToMove);
             }
+
             Player owner = game.getPlayer(targetCard.getOwnerId());
             switch (toZone) {
                 case HAND:
@@ -208,13 +240,13 @@ public final class ZonesHandler {
         game.setZone(event.getTargetId(), event.getToZone());
 
         // update zone in other parts (meld cards, mdf half cards)
-        if (cardsToUpdate != null) {
-            for (Card card : cardsToUpdate.getCards(game)) {
+        cardsToUpdate.entrySet().forEach(entry -> {
+            for (Card card : entry.getValue().getCards(game)) {
                 if (!card.getId().equals(event.getTargetId())) {
-                    game.setZone(card.getId(), event.getToZone());
+                    game.setZone(card.getId(), entry.getKey());
                 }
             }
-        }
+        });
 
         // reset meld status
         if (targetCard instanceof MeldCard) {

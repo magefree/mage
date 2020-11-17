@@ -614,7 +614,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
-        effects.addEffect(effect, source);
+        addEffect(effect, null, source);
     }
 
     public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
@@ -625,9 +625,17 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-//    public void addMessage(String message) {
-//        this.messages.add(message);
-//    }
+    private void addTrigger(TriggeredAbility ability, MageObject attachedTo) {
+        addTrigger(ability, null, attachedTo);
+    }
+
+    private void addTrigger(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
+        if (sourceId == null) {
+            triggers.add(ability, attachedTo);
+        } else {
+            triggers.add(ability, sourceId, attachedTo);
+        }
+    }
 
     /**
      * Returns a list of all players of the game ignoring range or if a player
@@ -839,6 +847,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addCard(Card card) {
         setZone(card.getId(), Zone.OUTSIDE);
+
+        // dirty hack to fix double triggers, see https://github.com/magefree/mage/issues/7187
+        // main mdf card don't have attached abilities, only parts contains it
+        if (card instanceof ModalDoubleFacesCard) {
+            return;
+        }
+
+        // add card's abilities to game
         for (Ability ability : card.getAbilities()) {
             addAbility(ability, null, card);
         }
@@ -888,7 +904,7 @@ public class GameState implements Serializable, Copyable<GameState> {
                 }
             }
         } else if (ability instanceof TriggeredAbility) {
-            this.triggers.add((TriggeredAbility) ability, attachedTo);
+            addTrigger((TriggeredAbility) ability, null, attachedTo);
         }
     }
 
@@ -911,8 +927,7 @@ public class GameState implements Serializable, Copyable<GameState> {
                 }
             }
         } else if (ability instanceof TriggeredAbility) {
-            // TODO: add sources for triggers - the same way as in addEffect: sources
-            this.triggers.add((TriggeredAbility) ability, sourceId, attachedTo);
+            addTrigger((TriggeredAbility) ability, sourceId, attachedTo);
         }
 
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now

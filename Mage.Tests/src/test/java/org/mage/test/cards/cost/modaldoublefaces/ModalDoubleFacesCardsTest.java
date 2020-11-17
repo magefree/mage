@@ -549,4 +549,48 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Balduvian Bears", 2);
     }
+
+    @Test
+    public void test_ETB_OnlySideCardsCanAddAbilitiesToGame() {
+        // possible bug: double triggers (loadCard adds abilities from main + side cards instead side card only)
+        // https://github.com/magefree/mage/issues/7187
+
+        // Skyclave Cleric
+        // creature 1/3
+        // When Skyclave Cleric enters the battlefield, you gain 2 life.
+        addCard(Zone.HAND, playerA, "Skyclave Cleric"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Skyclave Cleric");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerA, 20 + 2); // +2 from 1 etb trigger
+    }
+
+    @Test
+    public void test_ETB_OnlyActualSideCardCanRaiseTriggers() {
+        // possible bug: you play one card but game raise triggers from another side too
+        // https://github.com/magefree/mage/issues/7180
+
+        // Kazandu Mammoth
+        // creature 3/3
+        // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
+        //
+        // Kazandu Valley
+        // land
+        addCard(Zone.HAND, playerA, "Kazandu Mammoth"); // {1}{G}{G}
+
+        // play land, but no landfall triggers from other side
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kazandu Valley");
+        checkStackSize("no triggers", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }

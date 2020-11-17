@@ -1149,7 +1149,11 @@ public class TestPlayer implements Player {
     }
 
     private void printAbilities(Game game, List<? extends Ability> abilities) {
-        System.out.println("Total abilities: " + (abilities != null ? abilities.size() : 0));
+        printAbilities("Total abilities", game, abilities);
+    }
+
+    private void printAbilities(String info, Game game, List<? extends Ability> abilities) {
+        System.out.println(info + ": " + (abilities != null ? abilities.size() : 0));
         if (abilities == null) {
             return;
         }
@@ -1484,6 +1488,9 @@ public class TestPlayer implements Player {
     }
 
     private void assertStackSize(PlayerAction action, Game game, int needStackSize) {
+        if (game.getStack().size() != needStackSize) {
+            printAbilities("Current stack", game, game.getStack().stream().map(StackObject::getStackAbility).collect(Collectors.toList()));
+        }
         Assert.assertEquals(action.getActionName() + " - stack size must be " + needStackSize + " but is " + game.getStack().size(), needStackSize, game.getStack().size());
     }
 
