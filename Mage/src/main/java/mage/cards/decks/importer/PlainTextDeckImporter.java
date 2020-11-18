@@ -40,7 +40,7 @@ public abstract class PlainTextDeckImporter extends DeckImporter {
         sbMessage.setLength(0);
         try {
             try (Scanner scanner = new Scanner(f)) {
-                Boolean canFix = true;
+                boolean canFix = true;
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
                     FixedInfo fixedInfo = new FixedInfo(line);

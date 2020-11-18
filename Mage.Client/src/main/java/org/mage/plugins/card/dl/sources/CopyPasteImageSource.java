@@ -149,15 +149,13 @@ public enum CopyPasteImageSource implements CardImageSource {
             viewMissingCards = false;
             String displayMissingCardsStr = "Up to the first 20 cards are:\n";
             String missingCardsStr = "";
-            if (this.missingCards != null) {
-                for (String card : this.missingCards) {
-                    if (count < 20) {
-                        displayMissingCardsStr = displayMissingCardsStr + card + "\n";
-                    }
-                    missingCardsStr = missingCardsStr + card + "\n";
-
-                    count++;
+            for (String card : this.missingCards) {
+                if (count < 20) {
+                    displayMissingCardsStr = displayMissingCardsStr + card + "\n";
                 }
+                missingCardsStr = missingCardsStr + card + "\n";
+
+                count++;
             }
             StringSelection stringSelection = new StringSelection(missingCardsStr);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
