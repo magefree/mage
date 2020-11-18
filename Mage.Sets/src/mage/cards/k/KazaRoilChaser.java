@@ -76,6 +76,7 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
     private KazaRoilChaserEffect(final KazaRoilChaserEffect effect) {
         super(effect);
         this.spellsCast = effect.spellsCast;
+        this.wizardCount = effect.wizardCount;
     }
 
     @Override
