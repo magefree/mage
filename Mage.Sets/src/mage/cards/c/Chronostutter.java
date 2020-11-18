@@ -60,7 +60,7 @@ class ChronostutterEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                controller.putCardOnTopXOfLibrary(permanent, game, source, 2);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, 2, true);
             }
             return true;
         }

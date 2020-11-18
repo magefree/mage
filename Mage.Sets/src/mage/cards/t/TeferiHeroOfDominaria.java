@@ -87,7 +87,7 @@ class TeferiHeroOfDominariaSecondEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                controller.putCardOnTopXOfLibrary(permanent, game, source, 3);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, 3, true);
             }
             return true;
         }

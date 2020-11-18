@@ -83,11 +83,11 @@ class CommitEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                return controller.putCardOnTopXOfLibrary(permanent, game, source, 2);
+                return controller.putCardOnTopXOfLibrary(permanent, game, source, 2, true);
             }
             Spell spell = game.getStack().getSpell(source.getFirstTarget());
             if (spell != null) {
-                return controller.putCardOnTopXOfLibrary(spell, game, source, 2);
+                return controller.putCardOnTopXOfLibrary(spell, game, source, 2, true);
             }
         }
         return false;

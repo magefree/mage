@@ -73,7 +73,7 @@ class TimeOutEffect extends OneShotEffect {
                     return false;
                 }
                 int amount = controller.rollDice(game, 6);
-                controller.putCardOnTopXOfLibrary(permanent, game, source, amount);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, amount, true);
                 return true;
             }
         }

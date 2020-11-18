@@ -126,7 +126,7 @@ class EnigmaSphinxEffect extends OneShotEffect {
         }
         Card card = (Card) source.getSourceObjectIfItStillExists(game);
         if (card != null) {
-            controller.putCardOnTopXOfLibrary(card, game, source, 3);
+            controller.putCardOnTopXOfLibrary(card, game, source, 3, true);
         }
         return true;
     }

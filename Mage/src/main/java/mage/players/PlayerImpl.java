@@ -1002,7 +1002,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
+    public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop, boolean withName) {
         if (card.isOwnedBy(getId())) {
             if (library.size() + 1 < xFromTheTop) {
                 putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
@@ -1013,7 +1013,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (cardInLib != null && cardInLib.getId().equals(card.getId())) { // check needed because e.g. commander can go to command zone
                         cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
-                        game.informPlayers(cardInLib.getLogName()
+                        game.informPlayers(withName ? cardInLib.getLogName() : "A card"
                                 + " is put into "
                                 + getLogName()
                                 + "'s library "
@@ -1025,7 +1025,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         } else {
-            return game.getPlayer(card.getOwnerId()).putCardOnTopXOfLibrary(card, game, source, xFromTheTop);
+            return game.getPlayer(card.getOwnerId()).putCardOnTopXOfLibrary(card, game, source, xFromTheTop, withName);
         }
         return true;
     }

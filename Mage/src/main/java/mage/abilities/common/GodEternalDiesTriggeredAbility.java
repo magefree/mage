@@ -106,6 +106,6 @@ class GodEternalEffect extends OneShotEffect {
         if (card == null || card.getZoneChangeCounter(game) - 1 != mor.getZoneChangeCounter()) {
             return false;
         }
-        return player.putCardOnTopXOfLibrary(card, game, source, 3);
+        return player.putCardOnTopXOfLibrary(card, game, source, 3, true);
     }
 }

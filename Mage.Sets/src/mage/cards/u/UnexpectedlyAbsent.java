@@ -60,7 +60,7 @@ class UnexpectedlyAbsentEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                controller.putCardOnTopXOfLibrary(permanent, game, source, source.getManaCostsToPay().getX() + 1);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, source.getManaCostsToPay().getX() + 1, true);
                 return true;
             }
         }

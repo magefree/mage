@@ -61,7 +61,8 @@ class LongTermPlansEffect extends OneShotEffect {
                 Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
                     player.shuffleLibrary(source, game);
-                    player.putCardOnTopXOfLibrary(card, game, source, 3);
+                    // must hides the card name from other players
+                    player.putCardOnTopXOfLibrary(card, game, source, 3, false);
                 }
             }
             return true;

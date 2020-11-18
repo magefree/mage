@@ -61,7 +61,7 @@ class OustEffect extends OneShotEffect {
             if (owner == null || controller == null) {
                 return false;
             }
-            owner.putCardOnTopXOfLibrary(permanent, game, source, 2);
+            owner.putCardOnTopXOfLibrary(permanent, game, source, 2, true);
             controller.gainLife(3, game, source);
         }
         return true;

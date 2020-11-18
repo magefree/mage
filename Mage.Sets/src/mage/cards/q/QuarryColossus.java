@@ -72,7 +72,7 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
             if (owner != null) {
                 int plains = game.getBattlefield().countAll(new FilterPermanent(
                         SubType.PLAINS, "Plains you control"), source.getControllerId(), game);
-                controller.putCardOnTopXOfLibrary(permanent, game, source, plains);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, plains, true);
                 return true;
             }
         }

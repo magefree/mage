@@ -84,7 +84,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                 }
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
                 if (spellCard != null) {
-                    controller.putCardOnTopXOfLibrary(spellCard, game, source, 7);
+                    controller.putCardOnTopXOfLibrary(spellCard, game, source, 7, true);
                 }
             }
             return true;
