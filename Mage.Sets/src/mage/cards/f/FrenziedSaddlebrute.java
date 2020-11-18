@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -18,9 +19,10 @@ public final class FrenziedSaddlebrute extends CardImpl {
 
     public FrenziedSaddlebrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
-
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
