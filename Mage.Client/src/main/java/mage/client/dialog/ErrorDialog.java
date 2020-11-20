@@ -64,7 +64,7 @@ public class ErrorDialog extends MageDialog {
         jTextArea1.setEditable(false);
         jTextArea1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jTextArea1.setRows(2);
-        jTextArea1.setText("An error has occurred on the MAGE server. Your last action will be rollbacked.\nPlease post the following report here: http://www.slightlymagic.net/forum/posting.php?mode=reply&f=70&t=3116");
+        jTextArea1.setText("An error has occurred on the MAGE server. Your last action will be rollbacked.\nPlease post the following report here: https://github.com/magefree/mage/issues");
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
