@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -93,6 +94,22 @@ class GilanraCallerOfWirewoodTriggeredAbility extends DelayedTriggeredAbility {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         return spell != null && spell.getConvertedManaCost() >= 6;
+    }
+
+    @Override
+    public boolean isInactive(Game game) {
+        if (super.isInactive(game)) {
+            return true;
+        }
+
+        // must remove effect on empty mana pool to fix accumulate bug
+        Player player = game.getPlayer(this.getControllerId());
+        if (player == null) {
+            return true;
+        }
+
+        // if no mana in pool then it can be discarded
+        return player.getManaPool().getManaItems().stream().noneMatch(m -> m.getSourceId().equals(getSourceId()));
     }
 
     @Override
