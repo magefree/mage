@@ -30,7 +30,7 @@ public final class PathOfAncestry extends CardImpl {
         // Path of Ancestry enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // T: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1.
+        // {T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1.
         Ability ability = new CommanderColorIdentityManaAbility();
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new PathOfAncestryTriggeredAbility()));
         this.addAbility(ability);
@@ -103,6 +103,22 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInactive(Game game) {
+        if (super.isInactive(game)) {
+            return true;
+        }
+
+        // must remove effect on empty mana pool to fix accumulate bug
+        Player player = game.getPlayer(this.getControllerId());
+        if (player == null) {
+            return true;
+        }
+
+        // if no mana in pool then it can be discarded
+        return player.getManaPool().getManaItems().stream().noneMatch(m -> m.getSourceId().equals(getSourceId()));
     }
 
     @Override
