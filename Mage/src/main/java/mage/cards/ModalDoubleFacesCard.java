@@ -3,10 +3,7 @@ package mage.cards;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
+import mage.abilities.*;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.constants.*;
@@ -171,12 +168,24 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         return getInnerAbilities(game, false);
     }
 
+    private boolean isIgnoreDefaultAbility(Ability ability) {
+        // ignore default play/spell ability from main card (only halfes are actual)
+        // default abilities added on card creation from card type and can't be skipped
+
+        // skip cast spell
+        if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
+            return true;
+        }
+
+        // skip play land
+        return ability instanceof PlayLandAbility;
+    }
+
     private Abilities<Ability> getInnerAbilities(Game game, boolean showOnlyMainSide) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
 
-        // ignore default spell ability from main card (only halfes are actual)
         for (Ability ability : super.getAbilities(game)) {
-            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
+            if (isIgnoreDefaultAbility(ability)) {
                 continue;
             }
             allAbilites.add(ability);
@@ -193,9 +202,8 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     private Abilities<Ability> getInnerAbilities(boolean showOnlyMainSide) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
 
-        // ignore default spell ability from main card (only halfes are actual)
         for (Ability ability : super.getAbilities()) {
-            if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
+            if (isIgnoreDefaultAbility(ability)) {
                 continue;
             }
             allAbilites.add(ability);

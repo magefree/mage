@@ -197,6 +197,23 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_DoubleLands_IgnoreDefaultAbilities() {
+        // https://github.com/magefree/mage/issues/7197
+
+        // Branchloft Pathway - land
+        // Boulderloft Pathway - land
+        addCard(Zone.HAND, playerA, "Branchloft Pathway");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        // possible bug: duplicated abilities list in main card
+        Assert.assertEquals("must have only 2 play abilities", 2, playerA.getPlayable(currentGame, true).size());
+    }
+
+    @Test
     public void test_PlayFromNonHand_GraveyardByFlashback() {
         removeAllCardsFromHand(playerA);
         removeAllCardsFromLibrary(playerA);
