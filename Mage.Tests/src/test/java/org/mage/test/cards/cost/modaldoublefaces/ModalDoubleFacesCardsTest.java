@@ -118,8 +118,8 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel");
 
         checkLibraryCount("library before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
-        checkPlayableAbility("can play as land", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
-        checkPlayableAbility("can play as creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+        checkPlayableAbility("can play as creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("can play as land", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
 
         // play as creature
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
@@ -134,6 +134,64 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 6); // creature life pay instead mana
+    }
+
+    @Test
+    public void test_PlayFromNonHand_SecondSideAsLand_ByRadhaHeartOfKeld() {
+        removeAllCardsFromHand(playerA);
+        removeAllCardsFromLibrary(playerA);
+
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.LIBRARY, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // You may look at the top card of your library any time, and you may play lands from the top of your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Radha, Heart of Keld");
+
+        checkLibraryCount("library before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkPlayableAbility("can't play as creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", false);
+        checkPlayableAbility("can play as land", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        // play as land
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth");
+        checkLibraryCount("library after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_PlayFromNonHand_SecondSideAsLand_CrucibleOfWorlds() {
+        removeAllCardsFromHand(playerA);
+        removeAllCardsFromLibrary(playerA);
+
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.GRAVEYARD, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // You may play lands from your graveyard.
+        addCard(Zone.BATTLEFIELD, playerA, "Crucible of Worlds");
+
+        checkGraveyardCount("graveyard before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkPlayableAbility("can't play as creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", false);
+        checkPlayableAbility("can play as land", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+
+        // play as land
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth");
+        checkLibraryCount("library after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 
     @Test

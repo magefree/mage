@@ -515,7 +515,15 @@ public class ContinuousEffects implements Serializable {
             UUID idToCheck;
             if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
                 idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
-            } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof ModalDoubleFacesCardHalf) {
+            } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof ModalDoubleFacesCardHalf
+                    && !type.needPlayCardAbility()) {
+                // each mdf side uses own characteristics to check for playing, all other cases must use main card
+                // rules:
+                // "If an effect allows you to play a land or cast a spell from among a group of cards,
+                // you may play or cast a modal double-faced card with any face that fits the criteria
+                // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
+                // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
+                // That effect doesn't allow you to cast Sejiri Shelter."
                 idToCheck = ((ModalDoubleFacesCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
             } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof AdventureCardSpell
                     && !type.needPlayCardAbility()) {
@@ -525,7 +533,9 @@ public class ContinuousEffects implements Serializable {
                 Card card = game.getCard(objectId);
                 if (card instanceof SplitCardHalf) {
                     idToCheck = ((SplitCardHalf) card).getParentCard().getId();
-                } else if (card instanceof ModalDoubleFacesCardHalf) {
+                } else if (card instanceof ModalDoubleFacesCardHalf
+                        && !type.needPlayCardAbility()) {
+                    // each mdf side uses own characteristics to check for playing, all other cases must use main card
                     idToCheck = ((ModalDoubleFacesCardHalf) card).getParentCard().getId();
                 } else if (card instanceof AdventureCardSpell
                         && !type.needPlayCardAbility()) {

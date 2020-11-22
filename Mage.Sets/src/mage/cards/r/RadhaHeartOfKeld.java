@@ -30,6 +30,7 @@ import java.util.UUID;
  * @author arcox
  */
 public final class RadhaHeartOfKeld extends CardImpl {
+
     private static final FilterCard filter = new FilterLandCard("play land cards");
 
     public RadhaHeartOfKeld(UUID ownerId, CardSetInfo setInfo) {

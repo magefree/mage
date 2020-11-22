@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardEffect;
+import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class AncientGreenwarden extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // You may play lands from your graveyard.
-        this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect()));
 
         // If a land entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new AncientGreenwardenEffect()));
