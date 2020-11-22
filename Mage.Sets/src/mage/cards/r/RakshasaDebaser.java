@@ -44,7 +44,7 @@ public final class RakshasaDebaser extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect().setText(rule), false
         );
-        ability.addTarget(new TargetCardInGraveyard());
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
         // Encore {6}{B}{B}
