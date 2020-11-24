@@ -973,7 +973,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         GameEvent event = new DamagePlaneswalkerEvent(objectId, sourceId, controllerId, damage, preventable, combat);
         event.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(event)) {
-            int actualDamage = event.getAmount();
+            int actualDamage = checkProtectionAbilities(event, sourceId, game);
             if (actualDamage > 0) {
                 int countersToRemove = actualDamage;
                 if (countersToRemove > getCounters(game).getCount(CounterType.LOYALTY)) {
