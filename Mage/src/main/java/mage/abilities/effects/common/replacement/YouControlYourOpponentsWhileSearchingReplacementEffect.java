@@ -16,7 +16,7 @@ public class YouControlYourOpponentsWhileSearchingReplacementEffect extends Repl
 
     public YouControlYourOpponentsWhileSearchingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You control your opponents while they’re searching their libraries";
+        staticText = "You control your opponents while they're searching their libraries";
     }
 
     YouControlYourOpponentsWhileSearchingReplacementEffect(final YouControlYourOpponentsWhileSearchingReplacementEffect effect) {
