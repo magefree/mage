@@ -66,8 +66,10 @@ class OrahSkyclaveHierophantTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (!zEvent.isDiesEvent()
+                ||  !zEvent.getTarget().isControlledBy(getControllerId())
                 || (!zEvent.getTarget().hasSubtype(SubType.CLERIC, game)
-                && !zEvent.getTarget().getId().equals(getSourceId()))) {
+                    && !zEvent.getTarget().getId().equals(getSourceId()))
+                ) {
             return false;
         }
         FilterCard filterCard = new FilterCard(
