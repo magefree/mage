@@ -1302,7 +1302,7 @@ public class TestPlayer implements Player {
             printStart("Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
             printEnd();
-            Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances");
+            Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but founded " + foundedCount);
         }
     }
 
@@ -2526,7 +2526,8 @@ public class TestPlayer implements Player {
 
         this.chooseStrictModeFailed("choice", game, getInfo(source, game)
                 + "\nMessage: " + message
-                + "\nChoices: " + (trueText != null ? trueText : "Yes") + " - " + (falseText != null ? falseText : "No"));
+                + "\nChoices: " + (trueText != null ? trueText : "Yes") + " - " + (falseText != null ? falseText : "No")
+                + ((trueText != null || falseText != null) ? "\nUse Yes/No in unit tests for text choices." : ""));
         return computerPlayer.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
     }
 

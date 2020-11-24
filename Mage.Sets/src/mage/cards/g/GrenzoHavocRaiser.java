@@ -5,7 +5,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.*;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -13,18 +14,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -158,11 +156,8 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
                     // Add effects only if the card has a spellAbility (e.g. not for lands).
                     if (card.getSpellAbility() != null) {
                         // allow to cast the card
-                        game.addEffect(new GrenzoHavocRaiserCastFromExileEffect(card.getId(), exileId), source);
                         // and you may spend mana as though it were mana of any color to cast it
-                        ContinuousEffect effect = new GrenzoHavocRaiserSpendAnyManaEffect();
-                        effect.setTargetPointer(new FixedTarget(card.getId()));
-                        game.addEffect(effect, source);
+                        CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.EndOfTurn);
                     }
                 }
                 return true;
@@ -170,80 +165,4 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class GrenzoHavocRaiserCastFromExileEffect extends AsThoughEffectImpl {
-
-    private UUID cardId;
-    private UUID exileId;
-
-    public GrenzoHavocRaiserCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
-        this.cardId = cardId;
-        this.exileId = exileId;
-    }
-
-    public GrenzoHavocRaiserCastFromExileEffect(final GrenzoHavocRaiserCastFromExileEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-        this.exileId = effect.exileId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public GrenzoHavocRaiserCastFromExileEffect copy() {
-        return new GrenzoHavocRaiserCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(cardId) && source.isControlledBy(affectedControllerId)) {
-            ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-            return exileZone != null && exileZone.contains(cardId);
-        }
-        return false;
-    }
-}
-
-class GrenzoHavocRaiserSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public GrenzoHavocRaiserSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast it";
-    }
-
-    public GrenzoHavocRaiserSpendAnyManaEffect(final GrenzoHavocRaiserSpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public GrenzoHavocRaiserSpendAnyManaEffect copy() {
-        return new GrenzoHavocRaiserSpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, ((FixedTarget) getTargetPointer()).getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
-    }
-
 }

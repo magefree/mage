@@ -120,6 +120,10 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // You may cast that card as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
         addCard(Zone.HAND, playerA, "Hostage Taker"); // {2}{U}{B}
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}.");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}.");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
         addTarget(playerA, "Silvercoat Lion");
 

@@ -10,6 +10,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
+import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.cards.Card;
@@ -28,6 +30,7 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
 
@@ -954,5 +957,57 @@ public final class CardUtil {
             logger.error("Exception in rules generation for card: " + cardName, e);
         }
         return RULES_ERROR_INFO;
+    }
+
+    /**
+     * Take control under another player, use it in inner effects like Word of Commands. Don't forget to end it in same code.
+     *
+     * @param game
+     * @param controller
+     * @param targetPlayer
+     * @param givePauseForResponse if you want to give controller time to watch opponent's hand (if you remove control effect in the end of code)
+     */
+    public static void takeControlUnderPlayerStart(Game game, Player controller, Player targetPlayer, boolean givePauseForResponse) {
+        controller.controlPlayersTurn(game, targetPlayer.getId());
+        if (givePauseForResponse) {
+            while (controller.canRespond()) {
+                if (controller.chooseUse(Outcome.Benefit, "You got control of " + targetPlayer.getLogName()
+                                + ". Use switch hands button to view opponent's hand.", null,
+                        "Continue", "Wait", null, game)) {
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Return control under another player, use it in inner effects like Word of Commands.
+     *
+     * @param game
+     * @param controller
+     * @param targetPlayer
+     */
+    public static void takeControlUnderPlayerEnd(Game game, Player controller, Player targetPlayer) {
+        targetPlayer.setGameUnderYourControl(true, false);
+        if (!targetPlayer.getTurnControlledBy().equals(controller.getId())) {
+            controller.getPlayersUnderYourControl().remove(targetPlayer.getId());
+        }
+    }
+
+    /**
+     * Add effects to game that allows to play/cast card from current zone and spend mana as any type for it.
+     * Effects will be discarded/ignored on any card movements or blinks (after ZCC change)
+     *
+     * @param game
+     * @param card
+     * @param duration
+     */
+    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration) {
+        // Effect can be used for cards in zones and permanents on battlefield
+        // So there is a workaround to get real ZCC (PermanentCard's ZCC is static, but it must be from Card's ZCC)
+        // Example: Hostage Taker
+        int zcc = game.getState().getZoneChangeCounter(card.getId());
+        game.addEffect(new CanPlayCardControllerEffect(game, card.getId(), zcc, duration), source);
+        game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration).setTargetPointer(new FixedTarget(card.getId(), zcc)), source);
     }
 }

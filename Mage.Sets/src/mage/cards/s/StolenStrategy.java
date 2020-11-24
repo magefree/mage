@@ -4,8 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -13,12 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -84,11 +79,8 @@ class StolenStrategyEffect extends OneShotEffect {
                 // Add effects only if the card has a spellAbility (e.g. not for lands).
                 if (!card.isLand() && card.getSpellAbility() != null) {
                     // allow to cast the card
-                    game.addEffect(new StolenStrategyCastFromExileEffect(card.getId(), exileId), source);
                     // and you may spend mana as though it were mana of any color to cast it
-                    ContinuousEffect effect = new StolenStrategySpendAnyManaEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.EndOfTurn);
                 }
             }
         }
@@ -98,8 +90,8 @@ class StolenStrategyEffect extends OneShotEffect {
 
 class StolenStrategyCastFromExileEffect extends AsThoughEffectImpl {
 
-    private UUID cardId;
-    private UUID exileId;
+    private final UUID cardId;
+    private final UUID exileId;
 
     public StolenStrategyCastFromExileEffect(UUID cardId, UUID exileId) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
@@ -132,42 +124,4 @@ class StolenStrategyCastFromExileEffect extends AsThoughEffectImpl {
         }
         return false;
     }
-}
-
-class StolenStrategySpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public StolenStrategySpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast it";
-    }
-
-    public StolenStrategySpendAnyManaEffect(final StolenStrategySpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public StolenStrategySpendAnyManaEffect copy() {
-        return new StolenStrategySpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
-    }
-
 }

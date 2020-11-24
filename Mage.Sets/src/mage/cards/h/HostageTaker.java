@@ -4,9 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
@@ -15,16 +12,12 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -99,89 +92,8 @@ class HostageTakerExileEffect extends OneShotEffect {
         // move card to exile
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         controller.moveCardToExileWithInfo(card, exileId, permanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
-        // allow to cast the card
-        game.addEffect(new HostageTakerCastFromExileEffect(card.getId(), exileId), source);
-        // and you may spend mana as though it were mana of any color to cast it
-        ContinuousEffect effect = new HostageTakerSpendAnyManaEffect();
-        effect.setTargetPointer(new FixedTarget(card.getId(), game));
-        game.addEffect(effect, source);
+        // allow to cast the card and you may spend mana as though it were mana of any color to cast it
+        CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.Custom);
         return true;
-    }
-}
-
-class HostageTakerCastFromExileEffect extends AsThoughEffectImpl {
-
-    private UUID cardId;
-    private UUID exileId;
-
-    HostageTakerCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.cardId = cardId;
-        this.exileId = exileId;
-    }
-
-    private HostageTakerCastFromExileEffect(final HostageTakerCastFromExileEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-        this.exileId = effect.exileId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public HostageTakerCastFromExileEffect copy() {
-        return new HostageTakerCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!sourceId.equals(cardId) || !source.isControlledBy(affectedControllerId)) {
-            return false;
-        }
-        ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-        if (exileZone != null && exileZone.contains(cardId)) {
-            return true;
-        }
-        discard();
-        return false;
-    }
-}
-
-class HostageTakerSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    HostageTakerSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-    }
-
-    private HostageTakerSpendAnyManaEffect(final HostageTakerSpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public HostageTakerSpendAnyManaEffect copy() {
-        return new HostageTakerSpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }

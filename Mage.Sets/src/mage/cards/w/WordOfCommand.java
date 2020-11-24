@@ -1,5 +1,6 @@
 package mage.cards.w;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -22,9 +23,9 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author L_J
@@ -95,13 +96,7 @@ class WordOfCommandEffect extends OneShotEffect {
             }
 
             // You control that player until Word of Command finishes resolving
-            controller.controlPlayersTurn(game, targetPlayer.getId());
-            while (controller.canRespond()) {
-                if (controller.chooseUse(Outcome.Benefit, "Resolve " + sourceObject.getLogName() + " now" + (card != null ? " and play " + card.getLogName() : "") + '?', source, game)) {
-                    // this is used to give the controller a little space to utilize their player controlling effect (look at face down creatures, hand, etc.)
-                    break;
-                }
-            }
+            CardUtil.takeControlUnderPlayerStart(game, controller, targetPlayer, true);
 
             // The player plays that card if able
             if (card != null) {
@@ -156,10 +151,7 @@ class WordOfCommandEffect extends OneShotEffect {
             if (wordOfCommand != null) {
                 wordOfCommand.setCommandedBy(controller.getId()); // You control the player until Word of Command finishes resolving
             } else {
-                targetPlayer.setGameUnderYourControl(true, false);
-                if (!targetPlayer.getTurnControlledBy().equals(controller.getId())) {
-                    controller.getPlayersUnderYourControl().remove(targetPlayer.getId());
-                }
+                CardUtil.takeControlUnderPlayerEnd(game, controller, targetPlayer);
             }
             return true;
         }

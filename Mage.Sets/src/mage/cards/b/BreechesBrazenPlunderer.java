@@ -1,11 +1,8 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.PartnerAbility;
@@ -16,9 +13,7 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPlayerBatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
@@ -149,79 +144,8 @@ class BreechesBrazenPlundererEffect extends OneShotEffect {
             return false;
         }
         for (Card card : cards.getCards(game)) {
-            game.addEffect(new BreechesBrazenPlundererCastEffect(new MageObjectReference(card, game)), source);
-            game.addEffect(new BreechesBrazenPlundererManaEffect().setTargetPointer(new FixedTarget(card, game)), source);
+            CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.EndOfTurn);
         }
         return true;
-    }
-}
-
-class BreechesBrazenPlundererCastEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    BreechesBrazenPlundererCastEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.mor = mor;
-    }
-
-    private BreechesBrazenPlundererCastEffect(final BreechesBrazenPlundererCastEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public BreechesBrazenPlundererCastEffect copy() {
-        return new BreechesBrazenPlundererCastEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (mor.getCard(game) == null) {
-            discard();
-            return false;
-        }
-        return mor.refersTo(sourceId, game) && source.isControlledBy(affectedControllerId);
-    }
-}
-
-class BreechesBrazenPlundererManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    BreechesBrazenPlundererManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    private BreechesBrazenPlundererManaEffect(final BreechesBrazenPlundererManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public BreechesBrazenPlundererManaEffect copy() {
-        return new BreechesBrazenPlundererManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }

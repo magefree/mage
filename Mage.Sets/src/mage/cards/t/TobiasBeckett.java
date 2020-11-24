@@ -4,9 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BountyAbility;
@@ -15,16 +12,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetOpponentsCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -89,11 +82,8 @@ class TobiasBeckettEffect extends OneShotEffect {
                         // Add effects only if the card has a spellAbility (e.g. not for lands).
                         if (card.getSpellAbility() != null) {
                             // allow to cast the card
-                            game.addEffect(new TobiasBeckettCastFromExileEffect(card.getId(), exileId), source);
                             // and you may spend mana as though it were mana of any color to cast it
-                            ContinuousEffect effect = new TobiasBeckettSpendAnyManaEffect();
-                            effect.setTargetPointer(new FixedTarget(card.getId()));
-                            game.addEffect(effect, source);
+                            CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.Custom);
                         }
                     }
                     return true;
@@ -107,82 +97,4 @@ class TobiasBeckettEffect extends OneShotEffect {
     public TobiasBeckettEffect copy() {
         return new TobiasBeckettEffect(this);
     }
-}
-
-// Based on GrenzoHavocRaiserCastFromExileEffect
-class TobiasBeckettCastFromExileEffect extends AsThoughEffectImpl {
-
-    private UUID cardId;
-    private UUID exileId;
-
-    public TobiasBeckettCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast that card and you may spend mana as though it were mana of any color to cast it";
-        this.cardId = cardId;
-        this.exileId = exileId;
-    }
-
-    public TobiasBeckettCastFromExileEffect(final TobiasBeckettCastFromExileEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-        this.exileId = effect.exileId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public TobiasBeckettCastFromExileEffect copy() {
-        return new TobiasBeckettCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(cardId) && source.isControlledBy(affectedControllerId)) {
-            ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-            return exileZone != null && exileZone.contains(cardId);
-        }
-        return false;
-    }
-}
-
-// Based on GrenzoHavocRaiserSpendAnyManaEffect
-class TobiasBeckettSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public TobiasBeckettSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast it";
-    }
-
-    public TobiasBeckettSpendAnyManaEffect(final TobiasBeckettSpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public TobiasBeckettSpendAnyManaEffect copy() {
-        return new TobiasBeckettSpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
-    }
-
 }

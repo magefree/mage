@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -15,17 +13,18 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
  */
 public final class Mindslaver extends CardImpl {
 
     public Mindslaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
         addSuperType(SuperType.LEGENDARY);
 
-        // {4}, {tap}, Sacrifice Mindslaver: You control target player during that player's next turn.
+        // {4}, {T}, Sacrifice Mindslaver: You control target player during that player's next turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ControlTargetPlayerNextTurnEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

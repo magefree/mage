@@ -1,10 +1,7 @@
 package mage.players;
 
 import com.google.common.collect.ImmutableMap;
-import mage.ApprovingObject;
-import mage.ConditionalMana;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.ActivatedAbility.ActivationStatus;
 import mage.abilities.common.PassAbility;
@@ -28,7 +25,6 @@ import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -38,6 +34,7 @@ import mage.designations.DesignationType;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
@@ -2609,73 +2606,97 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean searchLibrary(TargetCardInLibrary target, Ability source, Game game, UUID targetPlayerId) {
         //20091005 - 701.14c
-        Library searchedLibrary = null;
-        String searchInfo = null;
-        if (targetPlayerId.equals(playerId)) {
-            searchInfo = getLogName() + " searches their library";
-            searchedLibrary = library;
+
+        // searching control can be intercepted by another player, see Opposition Agent
+        SearchLibraryEvent searchEvent = new SearchLibraryEvent(targetPlayerId, source.getSourceId(), playerId, Integer.MAX_VALUE);
+        if (game.replaceEvent(searchEvent)) {
+            return false;
+        }
+
+        Player targetPlayer = game.getPlayer(targetPlayerId);
+        Player searchingPlayer = this;
+        Player searchingController = game.getPlayer(searchEvent.getSearchingControllerId());
+        if (targetPlayer == null || searchingController == null) {
+            return false;
+        }
+
+        String searchInfo = searchingPlayer.getLogName();
+        if (!searchingPlayer.getId().equals(searchingController.getId())) {
+            searchInfo = searchInfo + " under control of " + searchingPlayer.getLogName();
+        }
+        if (targetPlayer.getId().equals(searchingPlayer.getId())) {
+            searchInfo = searchInfo + " searches their library";
         } else {
-            Player targetPlayer = game.getPlayer(targetPlayerId);
-            if (targetPlayer != null) {
-                searchInfo = getLogName() + " searches the library of " + targetPlayer.getLogName();
-                searchedLibrary = targetPlayer.getLibrary();
-            }
+            searchInfo = searchInfo + " searches the library of " + targetPlayer.getLogName();
         }
-        if (searchedLibrary == null) {
-            return false;
-        }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY,
-                targetPlayerId, source.getSourceId(), playerId, Integer.MAX_VALUE);
-        if (game.replaceEvent(event)) {
-            return false;
-        }
+
         if (!game.isSimulation()) {
             game.informPlayers(searchInfo);
         }
+
+        // https://www.reddit.com/r/magicTCG/comments/jj8gh9/opposition_agent_and_panglacial_wurm_interaction/
+        // You must take full player control while searching, e.g. you can cast opponent's cards by Panglacial Wurm effect:
+        // * While you’re searching your library, you may cast Panglacial Wurm from your library.
+        // So use here same code as Word of Command
+        // P.S. no needs in searchingController, but it helps with unit tests, see TakeControlWhileSearchingLibraryTest
+        boolean takeControl = false;
+        if (!searchingPlayer.getId().equals(searchingController.getId())) {
+            CardUtil.takeControlUnderPlayerStart(game, searchingController, searchingPlayer, true);
+            takeControl = true;
+        }
+
+        Library searchingLibrary = targetPlayer.getLibrary();
         TargetCardInLibrary newTarget = target.copy();
         int count;
-        int librarySearchLimit = event.getAmount();
+        int librarySearchLimit = searchEvent.getAmount();
         List<Card> cardsFromTop = null;
         do {
             // TODO: prevent shuffling from moving the visualized cards
             if (librarySearchLimit == Integer.MAX_VALUE) {
-                count = searchedLibrary.count(target.getFilter(), game);
+                count = searchingLibrary.count(target.getFilter(), game);
             } else {
-                Player targetPlayer = game.getPlayer(targetPlayerId);
-                if (targetPlayer == null) {
-                    return false;
-                }
                 if (cardsFromTop == null) {
-                    cardsFromTop = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
+                    cardsFromTop = new ArrayList<>(searchingLibrary.getTopCards(game, librarySearchLimit));
                 } else {
-                    cardsFromTop.retainAll(targetPlayer.getLibrary().getCards(game));
+                    cardsFromTop.retainAll(searchingLibrary.getCards(game));
                 }
                 newTarget.setCardLimit(Math.min(librarySearchLimit, cardsFromTop.size()));
-                count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
+                count = Math.min(searchingLibrary.count(target.getFilter(), game), librarySearchLimit);
             }
 
             if (count < target.getNumberOfTargets()) {
                 newTarget.setMinNumberOfTargets(count);
             }
-            if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
-                if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library,
-                        game, targetPlayerId)) { // for handling Panglacial Wurm
+
+            // handling Panglacial Wurm - cast cards while searching from own library
+            if (targetPlayer.getId().equals(searchingPlayer.getId())) {
+                if (handleCastableCardsWhileLibrarySearching(library, game, targetPlayer)) {
+                    // clear all choices to start from scratch (casted cards must be removed from library)
                     newTarget.clearChosen();
                     continue;
                 }
+            }
+
+            if (newTarget.choose(Outcome.Neutral, searchingController.getId(), targetPlayer.getId(), game)) {
                 target.getTargets().clear();
                 for (UUID targetId : newTarget.getTargets()) {
                     target.add(targetId, game);
                 }
-
-            } else if (targetPlayerId.equals(playerId) && handleLibraryCastableCards(library,
-                    game, targetPlayerId)) { // for handling Panglacial Wurm
-                newTarget.clearChosen();
-                continue;
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
+
+            // END SEARCH
+            if (takeControl) {
+                CardUtil.takeControlUnderPlayerEnd(game, searchingController, searchingPlayer);
+                game.informPlayers("Control of " + searchingPlayer.getLogName() + " is back");
+            }
+
+            LibrarySearchedEvent searchedEvent = new LibrarySearchedEvent(targetPlayer.getId(), source.getSourceId(), searchingPlayer.getId(), target);
+            if (game.replaceEvent(searchedEvent)) {
+                return false;
+            }
             break;
         } while (true);
+
         return true;
     }
 
@@ -2690,58 +2711,53 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private boolean handleLibraryCastableCards(Library library, Game game, UUID targetPlayerId) {
-        // for handling Panglacial Wurm
-        boolean alreadyChosenUse = false;
-        Map<UUID, String> libraryCastableCardTracker = new HashMap<>();
-        searchForCards:
-        do {
-            for (Card card : library.getCards(game)) {
-                for (Ability ability : card.getAbilities()) {
-                    if (ability.getClass() == WhileSearchingPlayFromLibraryAbility.class) {
-                        libraryCastableCardTracker.put(card.getId(), card.getIdName());
-                    }
-                }
+    private boolean handleCastableCardsWhileLibrarySearching(Library library, Game game, Player targetPlayer) {
+        // must return true after cast try (to restart searching process without casted cards)
+        // uses for handling Panglacial Wurm:
+        // * While you're searching your library, you may cast Panglacial Wurm from your library.
+
+        List<UUID> castableCards = library.getCards(game).stream()
+                .filter(card -> card.getAbilities(game).containsClass(WhileSearchingPlayFromLibraryAbility.class))
+                .map(MageItem::getId)
+                .collect(Collectors.toList());
+        if (castableCards.size() == 0) {
+            return false;
+        }
+
+        // only humans can use it
+        if (!targetPlayer.isHuman() && !targetPlayer.isTestMode()) {
+            return false;
+        }
+
+        if (!targetPlayer.chooseUse(Outcome.AIDontUseIt, "Library have " + castableCards.size() + " castable cards on searching. Do you want to cast it?", null, game)) {
+            return false;
+        }
+
+        boolean casted = false;
+        TargetCard targetCard = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
+        targetCard.setTargetName("card to cast from library");
+        targetCard.setNotTarget(true);
+        while (castableCards.size() > 0) {
+            targetCard.clearChosen();
+            if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, game)) {
+                break;
             }
-            if (!libraryCastableCardTracker.isEmpty()) {
-                Player player = game.getPlayer(targetPlayerId);
-                if (player != null) {
-                    if (player.isHuman() && (alreadyChosenUse || player.chooseUse(Outcome.AIDontUseIt,
-                            "Cast a creature card from your library? (choose \"No\" to finish search)", null, game))) {
-                        ChoiceImpl chooseCard = new ChoiceImpl();
-                        chooseCard.setMessage("Which creature do you wish to cast from your library?");
-                        Set<String> choice = new LinkedHashSet<>();
-                        for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                            choice.add(new AbstractMap.SimpleEntry<>(entry).getValue());
-                        }
-                        chooseCard.setChoices(choice);
-                        while (!choice.isEmpty()) {
-                            if (player.choose(Outcome.AIDontUseIt, chooseCard, game)) {
-                                String chosenCard = chooseCard.getChoice();
-                                for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                                    if (chosenCard.equals(entry.getValue())) {
-                                        Card card = game.getCard(entry.getKey());
-                                        if (card != null) {
-                                            // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
-                                            player.cast(card.getSpellAbility(), game, false, null);
-                                        }
-                                        chooseCard.clearChoice();
-                                        libraryCastableCardTracker.clear();
-                                        alreadyChosenUse = true;
-                                        continue searchForCards;
-                                    }
-                                }
-                                continue;
-                            }
-                            break;
-                        }
-                        return true;
-                    }
-                }
+
+            Card card = game.getCard(targetCard.getFirstTarget());
+            if (card == null) {
+                break;
             }
-            break;
-        } while (alreadyChosenUse);
-        return alreadyChosenUse;
+
+            // AI NOTICE: if you want AI implement here then remove selected card from castable after each
+            // choice (otherwise you catch infinite freeze on uncastable use case)
+
+            // casting selected card
+            // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
+            targetPlayer.cast(targetPlayer.chooseAbilityForCast(card, game, false), game, false, null);
+            castableCards.remove(card.getId());
+            casted = true;
+        }
+        return casted;
     }
 
     @Override

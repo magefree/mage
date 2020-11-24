@@ -1,24 +1,21 @@
 package mage.cards.c;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -94,78 +91,7 @@ class CovetousUrgeEffect extends OneShotEffect {
         if (card.getSpellAbility() == null) {
             return true;
         }
-        game.addEffect(new CovetousUrgeCastFromExileEffect(new MageObjectReference(card, game)), source);
-        game.addEffect(new CovetousUrgeSpendAnyManaEffect().setTargetPointer(new FixedTarget(card, game)), source);
+        CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.Custom);
         return true;
-    }
-}
-
-class CovetousUrgeCastFromExileEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    CovetousUrgeCastFromExileEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.mor = mor;
-    }
-
-    private CovetousUrgeCastFromExileEffect(final CovetousUrgeCastFromExileEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CovetousUrgeCastFromExileEffect copy() {
-        return new CovetousUrgeCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (mor.getCard(game) == null) {
-            discard();
-            return false;
-        }
-        return mor.refersTo(sourceId, game) && source.isControlledBy(affectedControllerId);
-    }
-}
-
-class CovetousUrgeSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    CovetousUrgeSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-    }
-
-    private CovetousUrgeSpendAnyManaEffect(final CovetousUrgeSpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CovetousUrgeSpendAnyManaEffect copy() {
-        return new CovetousUrgeSpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }

@@ -456,6 +456,8 @@ public final class CommanderLegends extends ExpansionSet {
         cards.add(new SetCardInfo("On Serra's Wings", 380, Rarity.UNCOMMON, mage.cards.o.OnSerrasWings.class));
         cards.add(new SetCardInfo("Opal Palace", 352, Rarity.COMMON, mage.cards.o.OpalPalace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Opal Palace", 707, Rarity.COMMON, mage.cards.o.OpalPalace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Opposition Agent", 141, Rarity.RARE, mage.cards.o.OppositionAgent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Opposition Agent", 651, Rarity.RARE, mage.cards.o.OppositionAgent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Open the Armory", 34, Rarity.UNCOMMON, mage.cards.o.OpenTheArmory.class));
         cards.add(new SetCardInfo("Ordeal of Nylea", 247, Rarity.UNCOMMON, mage.cards.o.OrdealOfNylea.class));
         cards.add(new SetCardInfo("Oreskos Explorer", 381, Rarity.UNCOMMON, mage.cards.o.OreskosExplorer.class));
