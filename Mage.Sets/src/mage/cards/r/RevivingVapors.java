@@ -1,15 +1,9 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -18,14 +12,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RevivingVapors extends CardImpl {
 
     public RevivingVapors(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
 
         // Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard.
         this.getSpellAbility().addEffect(new RevivingVaporsEffect());
@@ -62,12 +57,14 @@ class RevivingVaporsEffect extends OneShotEffect {
 
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
         if (!cards.isEmpty()) {
+            // Reveal the top three cards of your library and put one of them into your hand
             controller.revealCards(sourceObject.getName(), cards, game);
             Card card = null;
             if (cards.size() == 1) {
                 card = cards.getRandom(game);
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
+                target.setNotTarget(true);
                 target.setRequired(true);
                 if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                     card = cards.get(target.getFirstTarget(), game);
@@ -76,7 +73,12 @@ class RevivingVaporsEffect extends OneShotEffect {
             if (card != null) {
                 cards.remove(card);
                 controller.moveCards(card, Zone.HAND, source, game);
+
+                // You gain life equal to that card's converted mana cost
+                controller.gainLife(card.getConvertedManaCost(), game, source);
             }
+
+            // Put all other cards revealed this way into your graveyard
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;

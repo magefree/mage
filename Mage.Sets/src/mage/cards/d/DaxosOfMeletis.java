@@ -85,10 +85,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                     // move card to exile
                     controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
                     // player gains life
-                    int cmc = card.getConvertedManaCost();
-                    if (cmc > 0) {
-                        controller.gainLife(cmc, game, source);
-                    }
+                    controller.gainLife(card.getConvertedManaCost(), game, source);
                     // Add effects only if the card has a spellAbility (e.g. not for lands).
                     if (card.getSpellAbility() != null) {
                         // allow to cast the card
