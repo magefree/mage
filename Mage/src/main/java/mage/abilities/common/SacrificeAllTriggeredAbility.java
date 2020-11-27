@@ -57,7 +57,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case OPPONENT:
                 Player controller = game.getPlayer(getControllerId());
-                if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
+                if (controller == null || controller.hasOpponent(event.getPlayerId(), game)) {
                     sacrificed = true;
                 }
                 break;
