@@ -609,8 +609,16 @@ public class VerifyCardDataTest {
                 String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number;
                 foundedJsonCards.add(code);
 
+                // CHECK: only lands can use full art in current version;
+                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
+                boolean isLand = card.getRarity().equals(Rarity.LAND);
+                if (card.isFullArt() && !isLand) {
+                    errorsList.add("Error: only lands can use full art setting: "
+                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
                 // CHECK: must use full art setting
-                if (jsonCard.isFullArt && !card.isFullArt()) {
+                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
                     errorsList.add("Error: card must use full art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
@@ -1429,10 +1437,7 @@ public class VerifyCardDataTest {
         if (cardText.replace(name, name.split(", ")[0]).equals(refText)) {
             return true;
         }
-        if (cardText.replace(name, name.split(" ")[0]).equals(refText)) {
-            return true;
-        }
-        return false;
+        return cardText.replace(name, name.split(" ")[0]).equals(refText);
     }
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
