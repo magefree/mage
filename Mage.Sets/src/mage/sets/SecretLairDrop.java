@@ -155,11 +155,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Visions", 31, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", 32, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sliver Overlord", 10, Rarity.MYTHIC, mage.cards.s.SliverOverlord.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 5, Rarity.RARE, mage.cards.s.SnowCoveredForest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 2, Rarity.RARE, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 4, Rarity.RARE, mage.cards.s.SnowCoveredMountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.RARE, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.RARE, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 5, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Island", 2, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 4, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 1, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sorin, Vengeful Bloodlord", 524, Rarity.RARE, mage.cards.s.SorinVengefulBloodlord.class));
         cards.add(new SetCardInfo("Sower of Temptation", 120, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
         cards.add(new SetCardInfo("Spell Pierce", 41, Rarity.RARE, mage.cards.s.SpellPierce.class));
