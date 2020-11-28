@@ -2055,7 +2055,7 @@ public class TestPlayer implements Player {
                         Set<UUID> possibleCards = target.possibleTargets(sourceId, abilityControllerId, game);
                         CheckTargetsList:
                         for (UUID targetId : possibleCards) {
-                            MageObject targetObject = game.getObject(targetId);
+                            MageObject targetObject = game.getCard(targetId);
                             if (hasObjectTargetNameOrAlias(targetObject, possibleChoice)) {
                                 if (target.canTarget(targetObject.getId(), game)) {
                                     // only unique targets

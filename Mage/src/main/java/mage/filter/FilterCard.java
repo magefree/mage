@@ -12,6 +12,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
+ * Works with cards only. For objects like commanders you must override your canTarget method.
+ *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */

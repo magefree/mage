@@ -47,6 +47,14 @@ public abstract class TargetObject extends TargetImpl {
         return sb.toString().trim();
     }
 
+    /**
+     * Warning, don't use with non card objects here like commanders/emblems/etc. If you want it then
+     * override canTarget in your own target.
+     *
+     * @param id
+     * @param game
+     * @return
+     */
     @Override
     public boolean canTarget(UUID id, Game game) {
         MageObject object = game.getObject(id);

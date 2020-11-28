@@ -10,9 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -158,7 +156,7 @@ public class TargetCard extends TargetObject {
                     case LIBRARY:
                         for (Card card : player.getLibrary().getUniqueCards(game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
-                                if (filter.match(card, game)) {
+                                if (filter.match(card, sourceId, sourceControllerId, game)) {
                                     possibleTargets.add(card.getId());
                                 }
                             }
@@ -167,9 +165,22 @@ public class TargetCard extends TargetObject {
                     case EXILED:
                         for (Card card : game.getExile().getPermanentExile().getCards(game)) {
                             if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
-                                if (filter.match(card, player.getId(), game)) {
+                                if (filter.match(card, sourceId, sourceControllerId, game)) {
                                     possibleTargets.add(card.getId());
                                 }
+                            }
+                        }
+                        break;
+                    case COMMAND:
+                        List<Card> possibleCards = game.getCommandersIds(player).stream()
+                                .map(game::getCard)
+                                .filter(Objects::nonNull)
+                                .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
+                                .filter(card -> filter.match(card, sourceId, sourceControllerId, game))
+                                .collect(Collectors.toList());
+                        for (Card card : possibleCards) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                                possibleTargets.add(card.getId());
                             }
                         }
                         break;
@@ -192,7 +203,11 @@ public class TargetCard extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Game game) {
-        return super.canTarget(id, game);
+        // copy-pasted from super but with card instead object
+        Card card = game.getCard(id);
+        return card != null
+                && zone != null && zone.match(game.getState().getZone(id))
+                && getFilter() != null && getFilter().match(card, game);
     }
 
     @Override
