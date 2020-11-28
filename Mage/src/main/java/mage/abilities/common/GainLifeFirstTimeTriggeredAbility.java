@@ -32,6 +32,7 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.when = when;
         this.addWatcher(new GainLifeFirstTimeWatcher());
+        this.addHint(hint);
     }
 
     private GainLifeFirstTimeTriggeredAbility(final GainLifeFirstTimeTriggeredAbility ability) {
