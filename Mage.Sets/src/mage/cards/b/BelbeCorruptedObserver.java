@@ -4,7 +4,11 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -20,6 +24,8 @@ import java.util.*;
  */
 public final class BelbeCorruptedObserver extends CardImpl {
 
+    private static final Hint hint = new ValueHint("Opponents who lost life that turn", BelbeCorruptedObserverDynamicValue.instance);
+
     public BelbeCorruptedObserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
 
@@ -32,7 +38,7 @@ public final class BelbeCorruptedObserver extends CardImpl {
         // At the beginning of each player's postcombat main phase, that player adds {C}{C} for each of your opponents who lost life this turn.
         this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(
                 new BelbeCorruptedObserverEffect(), TargetController.ANY, false
-        ), new BelbeCorruptedObserverWatcher());
+        ).addHint(hint), new BelbeCorruptedObserverWatcher());
     }
 
     private BelbeCorruptedObserver(final BelbeCorruptedObserver card) {
@@ -64,19 +70,22 @@ class BelbeCorruptedObserverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        BelbeCorruptedObserverWatcher watcher = game.getState().getWatcher(BelbeCorruptedObserverWatcher.class);
-        if (player == null || watcher == null) {
+        if (player == null) {
             return false;
         }
-        int playerCount = watcher.getOpponentCount(source.getControllerId());
-        player.getManaPool().addMana(Mana.ColorlessMana(2 * playerCount), game, source);
-        return true;
+
+        int playerCount = BelbeCorruptedObserverDynamicValue.instance.calculate(game, source, this);
+        if (playerCount > 0) {
+            player.getManaPool().addMana(Mana.ColorlessMana(2 * playerCount), game, source);
+            return true;
+        }
+        return false;
     }
 }
 
 class BelbeCorruptedObserverWatcher extends Watcher {
 
-    private final Map<UUID, Set<UUID>> playerMap = new HashMap<>();
+    private final Map<UUID, Set<UUID>> opponentsWhoLostLife = new HashMap<>();
 
     BelbeCorruptedObserverWatcher() {
         super(WatcherScope.GAME);
@@ -87,20 +96,43 @@ class BelbeCorruptedObserverWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.LOST_LIFE) {
             return;
         }
-        game.getOpponents(event.getPlayerId())
-                .stream()
-                .map(uuid -> playerMap
-                        .computeIfAbsent(uuid, x -> new HashSet<>())
-                        .add(event.getPlayerId()));
+        game.getOpponents(event.getPlayerId()).forEach(uuid -> {
+            opponentsWhoLostLife
+                    .computeIfAbsent(uuid, x -> new HashSet<>())
+                    .add(event.getPlayerId());
+        });
     }
 
     @Override
     public void reset() {
-        playerMap.clear();
+        opponentsWhoLostLife.clear();
         super.reset();
     }
 
-    int getOpponentCount(UUID playerId) {
-        return playerMap.computeIfAbsent(playerId, x -> new HashSet<>()).size();
+    int getOpponentCount(UUID controllerId) {
+        return opponentsWhoLostLife.computeIfAbsent(controllerId, x -> new HashSet<>()).size();
+    }
+}
+
+enum BelbeCorruptedObserverDynamicValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        BelbeCorruptedObserverWatcher watcher = game.getState().getWatcher(BelbeCorruptedObserverWatcher.class);
+        if (watcher != null) {
+            return watcher.getOpponentCount(sourceAbility.getControllerId());
+        }
+        return 0;
+    }
+
+    @Override
+    public DynamicValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }
