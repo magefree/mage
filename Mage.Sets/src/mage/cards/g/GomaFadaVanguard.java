@@ -52,7 +52,8 @@ public final class GomaFadaVanguard extends CardImpl {
         // Whenever Goma Fada Vanguard attacks, target creature an opponent controls with power less than or equal to the number of Warriors you control can't block this turn.
         Ability ability = new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability.addHint(hint));
+        ability.addHint(hint);
+        this.addAbility(ability);
     }
 
     private GomaFadaVanguard(final GomaFadaVanguard card) {

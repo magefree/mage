@@ -52,7 +52,7 @@ public final class LoneRider extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new TransformSourceEffect(true), TargetController.NEXT, false
                 ), condition, ruleText
-        ), new PlayerGainedLifeWatcher());
+        ).addHint(hint), new PlayerGainedLifeWatcher());
     }
 
     private LoneRider(final LoneRider card) {
