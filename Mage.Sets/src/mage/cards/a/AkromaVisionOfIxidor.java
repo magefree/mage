@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.*;
@@ -14,6 +15,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
 import java.util.UUID;
@@ -110,7 +112,9 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
                     .mapToInt(b -> b ? 1 : 0)
                     .sum();
             if (count > 0) {
-                game.addEffect(new BoostTargetEffect(count, count, Duration.EndOfTurn), source);
+                ContinuousEffect effect = new BoostTargetEffect(count, count, Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                game.addEffect(effect, source);
             }
         }
         return true;
