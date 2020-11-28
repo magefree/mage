@@ -2085,7 +2085,7 @@ public class HumanPlayer extends PlayerImpl {
                 boolean done = false;
                 while (!done && canRespond()) {
 
-                    String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes()
+                    String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
                             + ", min " + modes.getMinModes() + ")";
                     if (obj != null) {
                         message = message + "<br>" + obj.getLogName();

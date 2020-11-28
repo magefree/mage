@@ -1924,7 +1924,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         log.debug("chooseMode");
-        if (modes.getMode() != null && modes.getMaxModes() == modes.getSelectedModes().size()) {
+        if (modes.getMode() != null && modes.getMaxModes(game, source) == modes.getSelectedModes().size()) {
             // mode was already set by the AI
             return modes.getMode();
         }

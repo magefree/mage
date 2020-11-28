@@ -1869,7 +1869,7 @@ public class TestPlayer implements Player {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
+        if (!modesSet.isEmpty() && modes.getMaxModes(game, source) > modes.getSelectedModes().size()) {
             // set mode to null to select less than maximum modes if multiple modes are allowed
             if (modesSet.get(0) == null) {
                 modesSet.remove(0);

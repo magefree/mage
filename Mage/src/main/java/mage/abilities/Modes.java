@@ -76,6 +76,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         } else {
             this.currentMode = get(modes.getMode().getId()); // need fix?
         }
+        this.moreCondition = modes.moreCondition;
     }
 
     public Modes copy() {
@@ -190,8 +191,41 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.maxModesFilter = maxModesFilter;
     }
 
-    public int getMaxModes() {
-        return this.maxModes;
+    /**
+     * Return real affected max modes in current game. Use null params for default max modes value.
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    public int getMaxModes(Game game, Ability source) {
+        int realMaxModes = this.maxModes;
+        if (game == null || source == null) {
+            return realMaxModes;
+        }
+
+        // use case: make all modes chooseable
+        if (moreCondition != null && moreCondition.apply(game, source)) {
+            realMaxModes = Integer.MAX_VALUE;
+        }
+
+        // use case: limit max modes by opponents (wtf?!)
+        if (getMaxModesFilter() != null) {
+            if (this.maxModesFilter instanceof FilterPlayer) {
+                realMaxModes = 0;
+                for (UUID targetPlayerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                    Player targetPlayer = game.getPlayer(targetPlayerId);
+                    if (((FilterPlayer) this.maxModesFilter).match(targetPlayer, source.getSourceId(), source.getControllerId(), game)) {
+                        realMaxModes++;
+                    }
+                }
+                if (realMaxModes > this.maxModes) {
+                    realMaxModes = this.maxModes;
+                }
+            }
+        }
+
+        return realMaxModes;
     }
 
     public void setModeChooser(TargetController modeChooser) {
@@ -222,9 +256,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public boolean choose(Game game, Ability source) {
         if (this.isResetEachTurn()) {
-            if (this.getTurnNum(game, source) != game.getTurnNum()) {
+            if (getTurnNum(game, source) != game.getTurnNum()) {
                 this.clearAlreadySelectedModes(source, game);
-                this.setTurnNum(game, source);
+                setTurnNum(game, source);
             }
         }
         if (this.size() > 1) {
@@ -284,24 +318,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
             // player chooses modes manually
             this.currentMode = null;
-            int currentMaxModes = this.getMaxModes();
-            if (moreCondition != null && moreCondition.apply(game, source)) {
-                currentMaxModes = Integer.MAX_VALUE;
-            }
-            if (getMaxModesFilter() != null) {
-                if (maxModesFilter instanceof FilterPlayer) {
-                    currentMaxModes = 0;
-                    for (UUID targetPlayerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-                        Player targetPlayer = game.getPlayer(targetPlayerId);
-                        if (((FilterPlayer) maxModesFilter).match(targetPlayer, source.getSourceId(), source.getControllerId(), game)) {
-                            currentMaxModes++;
-                        }
-                    }
-                    if (currentMaxModes > this.getMaxModes()) {
-                        currentMaxModes = this.getMaxModes();
-                    }
-                }
-            }
+            int currentMaxModes = this.getMaxModes(game, source);
+
             while (this.selectedModes.size() < currentMaxModes) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
@@ -446,19 +464,19 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             sb.append(chooseText);
         } else if (this.getMaxModesFilter() != null) {
             sb.append("choose one or more. Each mode must target ").append(getMaxModesFilter().getMessage());
-        } else if (this.getMinModes() == 0 && this.getMaxModes() == 1) {
+        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
             sb.append("choose up to one");
-        } else if (this.getMinModes() == 0 && this.getMaxModes() == 3) {
+        } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 3) {
             sb.append("choose any number");
-        } else if (this.getMinModes() == 1 && this.getMaxModes() > 2) {
+        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) > 2) {
             sb.append("choose one or more");
-        } else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
+        } else if (this.getMinModes() == 1 && this.getMaxModes(null, null) == 2) {
             sb.append("choose one or both");
-        } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
+        } else if (this.getMinModes() == 2 && this.getMaxModes(null, null) == 2) {
             sb.append("choose two");
-        } else if (this.getMinModes() == 3 && this.getMaxModes() == 3) {
+        } else if (this.getMinModes() == 3 && this.getMaxModes(null, null) == 3) {
             sb.append("choose three");
-        } else if (this.getMinModes() == 4 && this.getMaxModes() == 4) {
+        } else if (this.getMinModes() == 4 && this.getMaxModes(null, null) == 4) {
             sb.append("choose four");
         } else {
             sb.append("choose one");
