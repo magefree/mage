@@ -63,16 +63,15 @@ class BacklashEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
         Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
-        if (targetCreature != null) {
-            applied = targetCreature.tap(game);
+        if (targetCreature != null && !targetCreature.isTapped()) {
             Player controller = game.getPlayer(targetCreature.getControllerId());
             if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game);
-                applied = true;
+                targetCreature.tap(game);
+                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game);
+                return true;
             }
         }
-        return applied;
+        return false;
     }
 }
