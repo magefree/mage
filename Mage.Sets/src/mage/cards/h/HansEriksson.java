@@ -21,6 +21,8 @@ import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -111,10 +113,12 @@ class HansErikssonEffect extends OneShotEffect {
         if (defenderId != null) {
             game.getCombat().addAttackerToCombat(permanent.getId(), defenderId, game);
         }
+        Effect fightEffect = new FightTargetSourceEffect();
+        fightEffect.setTargetPointer(new FixedTarget(permanent, game));
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new FightTargetSourceEffect(), false,
+                fightEffect, false,
                 "When you put a creature card onto the battlefield this way, it fights {this}"
-        );
+        );        
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
