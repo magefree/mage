@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -17,6 +18,7 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import static org.apache.log4j.LogMF.info;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
@@ -165,16 +167,29 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             game.addPermanent(permanent, 0);
             card.setZone(Zone.BATTLEFIELD, game);
             if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {
+                String attachToName = null;
                 if (targetCard != null) {
                     permanent.attachTo(targetCard.getId(), game);
+                    attachToName = targetCard.getLogName();
                 } else if (targetPermanent != null) {
                     targetPermanent.addAttachment(permanent.getId(), game);
+                    attachToName = targetPermanent.getLogName();
                 } else if (targetPlayer != null) {
                     targetPlayer.addAttachment(permanent.getId(), game);
+                    attachToName = targetPlayer.getLogName();
                 }
                 game.applyEffects();
 
                 game.fireEvent(zoneChangeEvent);
+                if (!game.isSimulation()) {
+                    if (controllingPlayer != null && fromZone != null && permanent != null) {
+                        game.informPlayers(controllingPlayer.getLogName() + " puts "
+                                + (card.getLogName()) + " from "
+                                + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield attached to "
+                                + attachToName
+                        );
+                    }
+                }
                 return true;
             }
 
