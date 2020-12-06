@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
 import java.util.List;
@@ -73,7 +73,7 @@ class FloodOfTearsEffect extends OneShotEffect {
             nonlands.forEach(cards::add);
             boolean putIntoPlay = nonlands.stream()
                     .filter(permanent -> permanent.isControlledBy(player.getId()))
-                    .filter(permanent -> !(permanent instanceof Token))
+                    .filter(permanent -> !(permanent instanceof PermanentToken))
                     .count() > 3;
             player.moveCards(cards, Zone.HAND, source, game);
             if (putIntoPlay) {
