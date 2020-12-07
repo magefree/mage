@@ -44,12 +44,7 @@ public class Standard extends Constructed {
         List<String> codes = new ArrayList<>();
         GregorianCalendar current = new GregorianCalendar();
         List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
-        Collections.sort(sets, new Comparator<ExpansionSet>() {
-            @Override
-            public int compare(final ExpansionSet lhs, ExpansionSet rhs) {
-                return lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1;
-            }
-        });
+        sets.sort((lhs, rhs) -> lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1);
         int fallSetsAdded = 0;
         Date earliestDate = null;
         // Get the second most recent fall set that's been released.

@@ -30,9 +30,7 @@ public final class Config {
         try {
             File file = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
             p.load(new FileInputStream(new File(file.getParent() + File.separator + "AIMinimax.properties")));
-        } catch (IOException ex) {
-            logger.fatal("", ex);
-        } catch (URISyntaxException ex) {
+        } catch (IOException | URISyntaxException ex) {
             logger.fatal("", ex);
         }
 //        maxDepth = Integer.parseInt(p.getProperty("maxDepth"));

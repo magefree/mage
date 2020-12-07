@@ -295,7 +295,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 MCTSNode.logHitMiss();
             } else {
                 long startTime = System.nanoTime();
-                long endTime = startTime + (thinkTime * 1000000000l);
+                long endTime = startTime + (thinkTime * 1000000000L);
                 MCTSNode current;
                 int simCount = 0;
                 while (true) {

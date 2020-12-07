@@ -21,7 +21,7 @@ public final class Statistics {
     }
 
     private static void displayPlayedOnlyOnce(List<Integer> games) {
-        Integer oneGame = 0;
+        int oneGame = 0;
         for (Integer numberOfGames : games) {
             if (numberOfGames == 1) {
                 oneGame++;
@@ -33,14 +33,8 @@ public final class Statistics {
 
     private static List<Integer> displayTop3(Map<String, Integer> nicknames) {
         Collection<Integer> values = nicknames.values();
-        List<Integer> games = new ArrayList<>();
-        games.addAll(values);
-        Collections.sort(games, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer i1, Integer i2) {
-                return i2.compareTo(i1);
-            }
-        });
+        List<Integer> games = new ArrayList<>(values);
+        games.sort(Comparator.reverseOrder());
 
         // Top-3
         List<Integer> numbersToFind = new ArrayList<>();

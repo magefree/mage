@@ -39,7 +39,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         cbPlayerType.setModel(new DefaultComboBoxModel(SessionHandler.getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
         if (ClientDefaultSettings.otherPlayerIndex != null) {
-            Integer index = Integer.parseInt(ClientDefaultSettings.otherPlayerIndex);
+            int index = Integer.parseInt(ClientDefaultSettings.otherPlayerIndex);
             if (index >= cbPlayerType.getItemCount()) {
                 cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
             } else {

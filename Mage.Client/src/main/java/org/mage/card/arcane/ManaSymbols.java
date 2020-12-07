@@ -813,8 +813,8 @@ public final class ManaSymbols {
     public static String replaceSetCodeWithHTML(String set, String rarity, int size) {
         if (setImagesExist.containsKey(set)) {
             int factor = size / 15 + 1;
-            Integer width = setImagesExist.get(set).width * factor;
-            Integer height = setImagesExist.get(set).height * factor;
+            int width = setImagesExist.get(set).width * factor;
+            int height = setImagesExist.get(set).height * factor;
             return "<img src='" + filePathToUrl(getResourceSetsPath(ResourceSetSize.SMALL)) + set + '-' + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
         } else {
             return set;

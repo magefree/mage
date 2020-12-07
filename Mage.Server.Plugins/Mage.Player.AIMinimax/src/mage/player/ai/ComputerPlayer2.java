@@ -238,7 +238,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
                     for (UUID targetId: target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) ability.copy();
-                        SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
+                        SearchEffect newEffect = getSearchEffect(newAbility);
                         newEffect.getTarget().addTarget(targetId, newAbility, sim);
                         sim.getStack().push(newAbility);
                         SimulationNode newNode = new SimulationNode(node, sim, ability.getControllerId());
@@ -258,12 +258,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     protected void addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            }
-        });
+        FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
         long startTime = System.nanoTime();
         pool.execute(task);
         try {

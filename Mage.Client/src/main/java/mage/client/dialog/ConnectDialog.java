@@ -134,7 +134,7 @@ public class ConnectDialog extends MageDialog {
             if (p == null || !p.equals(Proxy.NO_PROXY)) {
                 try {
                     String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                    Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
+                    int port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
                     p = new Proxy(type, new InetSocketAddress(address, port));
                 } catch (Exception ex) {
                     throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);

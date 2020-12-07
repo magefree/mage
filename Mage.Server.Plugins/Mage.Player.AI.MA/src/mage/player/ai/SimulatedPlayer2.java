@@ -49,9 +49,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
         this.suggested = new ArrayList<>();
-        for (String s : player.suggested) {
-            this.suggested.add(s);
-        }
+        this.suggested.addAll(player.suggested);
 
     }
 
@@ -107,9 +105,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             if (options.isEmpty()) {
                 allActions.add(ability);
             } else {
-                for (Ability option : options) {
-                    allActions.add(option);
-                }
+                allActions.addAll(options);
             }
         }
     }
@@ -341,12 +337,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             }
         }
         List list = new ArrayList<>(engagements.values());
-        Collections.sort(list, new Comparator<Combat>() {
-            @Override
-            public int compare(Combat o1, Combat o2) {
-                return Integer.valueOf(o2.getGroups().size()).compareTo(Integer.valueOf(o1.getGroups().size()));
-            }
-        });
+        list.sort((Comparator<Combat>) (o1, o2) -> Integer.compare(o2.getGroups().size(), o1.getGroups().size()));
         return list;
     }
 

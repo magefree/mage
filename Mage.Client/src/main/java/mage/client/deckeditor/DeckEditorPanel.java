@@ -964,21 +964,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"))); // NOI18N
         btnNew.setText("NEW");
         btnNew.setIconTextGap(2);
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewActionPerformed(evt);
-            }
-        });
+        btnNew.addActionListener(evt -> btnNewActionPerformed(evt));
 
         btnGenDeck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
         btnGenDeck.setText("Random");
         btnGenDeck.setIconTextGap(1);
         btnGenDeck.setName("btnGenDeck"); // NOI18N
-        btnGenDeck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenDeckActionPerformed(evt);
-            }
-        });
+        btnGenDeck.addActionListener(evt -> btnGenDeckActionPerformed(evt));
 
         javax.swing.GroupLayout panelDeckCreateLayout = new javax.swing.GroupLayout(panelDeckCreate);
         panelDeckCreate.setLayout(panelDeckCreateLayout);
@@ -1007,21 +999,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
         btnLoad.setText("LOAD");
         btnLoad.setIconTextGap(2);
-        btnLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadActionPerformed(evt);
-            }
-        });
+        btnLoad.addActionListener(evt -> btnLoadActionPerformed(evt));
 
         btnImport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_in.png"))); // NOI18N
         btnImport.setText("Import");
         btnImport.setIconTextGap(2);
         btnImport.setName("btnImport"); // NOI18N
-        btnImport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImportActionPerformed(evt);
-            }
-        });
+        btnImport.addActionListener(evt -> btnImportActionPerformed(evt));
 
         javax.swing.GroupLayout panelDeckLoadLayout = new javax.swing.GroupLayout(panelDeckLoad);
         panelDeckLoad.setLayout(panelDeckLoadLayout);
@@ -1050,21 +1034,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/sideboard_out.png"))); // NOI18N
         btnSave.setText("SAVE");
         btnSave.setIconTextGap(2);
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
+        btnSave.addActionListener(evt -> btnSaveActionPerformed(evt));
 
         btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/deck_out.png"))); // NOI18N
         btnExport.setText("Export");
         btnExport.setIconTextGap(2);
         btnExport.setName("btnImport"); // NOI18N
-        btnExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportActionPerformed(evt);
-            }
-        });
+        btnExport.addActionListener(evt -> btnExportActionPerformed(evt));
 
         javax.swing.GroupLayout panelDeckSaveLayout = new javax.swing.GroupLayout(panelDeckSave);
         panelDeckSave.setLayout(panelDeckSaveLayout);
@@ -1094,22 +1070,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnSubmit.setText("SUBMIT");
         btnSubmit.setIconTextGap(2);
         btnSubmit.setName("btnSubmit"); // NOI18N
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
-            }
-        });
+        btnSubmit.addActionListener(evt -> btnSubmitActionPerformed(evt));
 
         btnSubmitTimer.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         btnSubmitTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
         btnSubmitTimer.setText("<html>Submit<br>in 1 min");
         btnSubmitTimer.setIconTextGap(2);
         btnSubmitTimer.setName("btnSubmitTimer"); // NOI18N
-        btnSubmitTimer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitTimerActionPerformed(evt);
-            }
-        });
+        btnSubmitTimer.addActionListener(evt -> btnSubmitTimerActionPerformed(evt));
 
         javax.swing.GroupLayout panelDeckDraftLayout = new javax.swing.GroupLayout(panelDeckDraft);
         panelDeckDraft.setLayout(panelDeckDraftLayout);
@@ -1142,20 +1110,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnAddLand.setText("Lands");
         btnAddLand.setIconTextGap(2);
         btnAddLand.setName("btnAddLand"); // NOI18N
-        btnAddLand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddLandActionPerformed(evt);
-            }
-        });
+        btnAddLand.addActionListener(evt -> btnAddLandActionPerformed(evt));
 
         btnLegality.setText("Validate");
         btnLegality.setIconTextGap(2);
         btnLegality.setName("btnLegality"); // NOI18N
-        btnLegality.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLegalityActionPerformed(evt);
-            }
-        });
+        btnLegality.addActionListener(evt -> btnLegalityActionPerformed(evt));
 
         javax.swing.GroupLayout panelDeckLandsLayout = new javax.swing.GroupLayout(panelDeckLands);
         panelDeckLands.setLayout(panelDeckLandsLayout);
@@ -1184,17 +1144,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         btnExit.setText("Exit");
         btnExit.setIconTextGap(2);
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
+        btnExit.addActionListener(evt -> btnExitActionPerformed(evt));
 
-        txtTimeRemaining.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimeRemainingActionPerformed(evt);
-            }
-        });
+        txtTimeRemaining.addActionListener(evt -> txtTimeRemainingActionPerformed(evt));
 
         javax.swing.GroupLayout panelDeckExitLayout = new javax.swing.GroupLayout(panelDeckExit);
         panelDeckExit.setLayout(panelDeckExitLayout);

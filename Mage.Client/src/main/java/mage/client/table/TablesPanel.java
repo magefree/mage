@@ -351,22 +351,19 @@ public class TablesPanel extends javax.swing.JPanel {
         });*/
 
         // seats sorter (free tables must be first)
-        activeTablesSorter.setComparator(TablesTableModel.COLUMN_SEATS, new Comparator<String>() {
-            @Override
-            public int compare(String v1, String v2) {
-                int[] seats1 = parseSeatsInfo(v1);
-                int[] seats2 = parseSeatsInfo(v2);
-                boolean free1 = seats1[0] != seats1[1];
-                boolean free2 = seats2[0] != seats2[1];
+        activeTablesSorter.setComparator(TablesTableModel.COLUMN_SEATS, (Comparator<String>) (v1, v2) -> {
+            int[] seats1 = parseSeatsInfo(v1);
+            int[] seats2 = parseSeatsInfo(v2);
+            boolean free1 = seats1[0] != seats1[1];
+            boolean free2 = seats2[0] != seats2[1];
 
-                // free seats go first
-                if (free1 || free2) {
-                    return Boolean.compare(free2, free1);
-                }
-
-                // all other seats go without sorts
-                return 0;
+            // free seats go first
+            if (free1 || free2) {
+                return Boolean.compare(free2, free1);
             }
+
+            // all other seats go without sorts
+            return 0;
         });
 
         // default sort by created date (last games from above)

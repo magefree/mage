@@ -531,7 +531,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                         break;
                     }
                     for (int i = 0; i < cardsImages.size(); i++) {
-                        Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
+                        int multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
                         if (i == 0) {
                             if (multiverseId == firstMultiverseIdLastPage) {
                                 break Pages;
@@ -553,7 +553,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                                         cardName = cardName.substring(0, pos1);
                                     }
                                 }
-                                Integer preferredMultiverseId = getLocalizedMultiverseId(getCurrentLanguage(), multiverseId);
+                                int preferredMultiverseId = getLocalizedMultiverseId(getCurrentLanguage(), multiverseId);
                                 setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferredMultiverseId));
                             }
                         }
@@ -602,7 +602,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                         colNumb = cardInfo.getCardNumber();
                     }
                 }
-                Integer landMultiverseId = Integer.parseInt(variation.attr("href").replaceAll("[^\\d]", ""));
+                int landMultiverseId = Integer.parseInt(variation.attr("href").replaceAll("[^\\d]", ""));
                 setLinks.put((cardName).toLowerCase(Locale.ENGLISH) + colNumb, generateLink(landMultiverseId));
                 iteration++;
             }
@@ -622,11 +622,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
         String languageName = languageAliases.get(preferredLanguage);
         Map<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
-        if (localizedLanguageIds.containsKey(languageName)) {
-            return localizedLanguageIds.get(languageName);
-        } else {
-            return multiverseId;
-        }
+        return localizedLanguageIds.getOrDefault(languageName, multiverseId);
     }
 
     private Map<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {

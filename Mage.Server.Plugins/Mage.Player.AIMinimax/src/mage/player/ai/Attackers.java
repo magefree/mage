@@ -17,9 +17,7 @@ public class Attackers extends TreeMap<Integer, List<Permanent>> {
     public List<Permanent> getAttackers() {
         List<Permanent> attackers = new ArrayList<>();
         for (List<Permanent> l: this.values()) {
-            for (Permanent permanent: l) {
-                attackers.add(permanent);
-            }
+            attackers.addAll(l);
         }
         return attackers;
     }

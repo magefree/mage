@@ -84,14 +84,11 @@ public final class CombatUtil {
     }
 
     public static void sortByPower(List<Permanent> permanents, final boolean ascending) {
-        Collections.sort(permanents, new Comparator<Permanent>() {
-            @Override
-            public int compare(Permanent o1, Permanent o2) {
-                if (ascending) {
-                    return o2.getPower().getValue() - o1.getPower().getValue();
-                } else {
-                    return o1.getPower().getValue() - o2.getPower().getValue();
-                }
+        permanents.sort((o1, o2) -> {
+            if (ascending) {
+                return o2.getPower().getValue() - o1.getPower().getValue();
+            } else {
+                return o1.getPower().getValue() - o2.getPower().getValue();
             }
         });
     }
@@ -100,12 +97,7 @@ public final class CombatUtil {
         if (creatures.isEmpty()) {
             return null;
         }
-        Collections.sort(creatures, new Comparator<Permanent>() {
-            @Override
-            public int compare(Permanent o1, Permanent o2) {
-                return o2.getPower().getValue() - o1.getPower().getValue();
-            }
-        });
+        creatures.sort((o1, o2) -> o2.getPower().getValue() - o1.getPower().getValue());
         return creatures.get(0);
     }
 

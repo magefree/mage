@@ -345,7 +345,7 @@ public final class SystemUtil {
                     // choice dialog
                     Map<String, String> list = new LinkedHashMap<>();
                     Map<String, Integer> sort = new LinkedHashMap<>();
-                    for (Integer i = 0; i < groups.size(); i++) {
+                    for (int i = 0; i < groups.size(); i++) {
                         list.put(Integer.toString(i + 1), groups.get(i).getPrintNameWithStats());
                         sort.put(Integer.toString(i + 1), i);
                     }

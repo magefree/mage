@@ -78,9 +78,7 @@ public class CounterPluginImpl implements CounterPlugin {
                 }
             } catch (EOFException e) {
                 // do nothing
-            } catch (IOException e) {
-                throw new PluginException(e);
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 throw new PluginException(e);
             }
 
@@ -119,9 +117,7 @@ public class CounterPluginImpl implements CounterPlugin {
                 }
             } catch (EOFException e) {
                 return 0;
-            } catch (IOException e) {
-                throw new PluginException(e);
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 throw new PluginException(e);
             }
         } else {
