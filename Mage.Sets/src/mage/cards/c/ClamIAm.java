@@ -63,7 +63,7 @@ class ClamIAmEffect extends ReplacementEffectImpl {
             if (numSides == 6 && event.getAmount() == 3) {
                 if (player.chooseUse(outcome, "Reroll the die?", source, game)) {
                     game.informPlayers(player.getLogName() + " chose to reroll the die.");
-                    event.setAmount(player.rollDice(game, 6));
+                    event.setAmount(player.rollDice(source, game, 6));
                 }
             }
         }

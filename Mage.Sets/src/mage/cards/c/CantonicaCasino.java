@@ -51,8 +51,8 @@ class CantonicaCasinoEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             // Roll two six-sided dice
-            int dice1 = you.rollDice(game, 6);
-            int dice2 = you.rollDice(game, 6);
+            int dice1 = you.rollDice(source, game, 6);
+            int dice2 = you.rollDice(source, game, 6);
 
             if (dice1 == dice2) {
                 // If you roll doubles, gain 10 life

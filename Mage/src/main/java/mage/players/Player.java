@@ -86,8 +86,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param source can be null for default game events like mana burn
      * @param atCombat was the source combat damage
+     * @param attackerId id of the attacker for combat events (can be null)
      * @return
      */
+    int loseLife(int amount, Game game, Ability source, boolean atCombat, UUID attackerId);
+
     int loseLife(int amount, Game game, Ability source, boolean atCombat);
 
     /**
@@ -441,15 +444,15 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects);
 
-    int rollDice(Game game, int numSides);
+    int rollDice(Ability source, Game game, int numSides);
 
-    int rollDice(Game game, List<UUID> appliedEffects, int numSides);
+    int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides);
 
-    PlanarDieRoll rollPlanarDie(Game game);
+    PlanarDieRoll rollPlanarDie(Ability source, Game game);
 
-    PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects);
+    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects);
 
-    PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
+    PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
 
     Card discardOne(boolean random, boolean payForCost, Ability source, Game game);
 

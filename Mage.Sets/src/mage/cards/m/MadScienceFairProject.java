@@ -65,7 +65,7 @@ class MadScienceFairManaEffect extends ManaEffect {
         if (game != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int amount = controller.rollDice(game, 6);
+                int amount = controller.rollDice(source, game, 6);
                 if (amount <= 3) {
                     return Mana.ColorlessMana(1);
                 } else {

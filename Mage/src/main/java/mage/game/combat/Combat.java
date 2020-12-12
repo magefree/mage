@@ -290,7 +290,11 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!game.isSimulation()) {
             Player player = game.getPlayer(attackingPlayerId);
             if (player != null) {
-                game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
+                if (groups.size() > 0) {
+                    game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
+                } else {
+                    game.informPlayers(player.getLogName() + " skip attack");
+                }
             }
         }
     }
@@ -615,7 +619,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Add info about attacker blocked by blocker to the game log
      */
     private void logBlockerInfo(Player defender, Game game) {
-        boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no ned to sow the attacked player
+        boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no need to saw the attacked player
         for (CombatGroup group : game.getCombat().getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {

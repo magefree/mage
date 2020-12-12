@@ -71,8 +71,8 @@ class GarbageElementalCEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int thisRoll = controller.rollDice(game, 6);
-            int thatRoll = controller.rollDice(game, 6);
+            int thisRoll = controller.rollDice(source, game, 6);
+            int thatRoll = controller.rollDice(source, game, 6);
 
             Token token = new GoblinToken();
             return token.putOntoBattlefield(Math.abs(thatRoll - thisRoll), game, source, source.getControllerId());

@@ -67,7 +67,7 @@ class SparkFiendEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int roll = controller.rollDice(game, 6) + controller.rollDice(game, 6);
+            int roll = controller.rollDice(source, game, 6) + controller.rollDice(source, game, 6);
             MageObject mageObject = game.getObject(source.getSourceId());
             if (mageObject instanceof Permanent) {
                 Permanent sourcePermanent = (Permanent) mageObject;
@@ -112,7 +112,7 @@ class SparkFiendUpkeepEffect extends OneShotEffect {
         if (controller != null) {
             if (game.getState().getValue("SparkFiend" + source.getSourceId().toString()) != null
                     && (Integer) game.getState().getValue("SparkFiend" + source.getSourceId().toString()) != 0) {
-                int roll = controller.rollDice(game, 6) + controller.rollDice(game, 6);
+                int roll = controller.rollDice(source, game, 6) + controller.rollDice(source, game, 6);
                 MageObject mageObject = game.getObject(source.getSourceId());
                 if (mageObject instanceof Permanent) {
                     Permanent sourcePermanent = (Permanent) mageObject;

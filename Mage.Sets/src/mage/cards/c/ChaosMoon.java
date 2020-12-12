@@ -119,7 +119,7 @@ class ChaosMoonOddTriggeredAbility extends DelayedTriggeredManaAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (land != null && filter.match(land, game)) {
+        if (land != null && filter.match(land, getSourceId(), getControllerId(), game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(land.getControllerId()));
             }

@@ -7,11 +7,9 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
 import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.hint.Hint;
@@ -1017,6 +1015,7 @@ public final class CardUtil {
 
     /**
      * Pay life in effects
+     *
      * @param lifeToPay
      * @param player
      * @param source
@@ -1045,5 +1044,35 @@ public final class CardUtil {
         }
 
         return false;
+    }
+
+    /**
+     * Generates source log name to insert into log messages
+     *
+     * @param game
+     * @param sourceId
+     * @param namePrefix   if source object exists then that will be added before name
+     * @param namePostfix  if source object exists then that will be added after name
+     * @param nonFoundText if source object not exists then it will be used
+     * @return
+     */
+    public static String getSourceLogName(Game game, String namePrefix, UUID sourceId, String namePostfix, String nonFoundText) {
+        MageObject sourceObject = game.getObject(sourceId);
+        return (sourceObject == null ? nonFoundText : namePrefix + sourceObject.getLogName() + namePostfix);
+    }
+
+    public static String getSourceLogName(Game game, String namePrefix, Ability source, String namePostfix, String nonFoundText) {
+        return getSourceLogName(game, namePrefix, source == null ? null : source.getSourceId(), namePostfix, nonFoundText);
+    }
+
+    public static String getSourceLogName(Game game, Ability source) {
+        return CardUtil.getSourceLogName(game, " (source: ", source, ")", "");
+    }
+
+    public static String getSourceLogName(Game game, Ability source, UUID ignoreSourceId) {
+        if (ignoreSourceId != null && source != null && ignoreSourceId.equals(source.getSourceId())) {
+            return "";
+        }
+        return CardUtil.getSourceLogName(game, " (source: ", source, ")", "");
     }
 }

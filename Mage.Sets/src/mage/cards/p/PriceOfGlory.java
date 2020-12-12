@@ -52,8 +52,10 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA
-                && !game.inCheckPlayableState();        
+        if (game.inCheckPlayableState()) {
+            return false;
+        }
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override

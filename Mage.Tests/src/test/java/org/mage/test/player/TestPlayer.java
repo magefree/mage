@@ -3044,6 +3044,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat, UUID attackerId) {
+        return computerPlayer.loseLife(amount, game, source, atCombat, attackerId);
+    }
+
+    @Override
     public int loseLife(int amount, Game game, Ability source, boolean atCombat) {
         return computerPlayer.loseLife(amount, game, source, atCombat);
     }
@@ -3300,13 +3305,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int rollDice(Game game, int numSides) {
-        return computerPlayer.rollDice(game, numSides);
+    public int rollDice(Ability source, Game game, int numSides) {
+        return computerPlayer.rollDice(source, game, numSides);
     }
 
     @Override
-    public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
-        return computerPlayer.rollDice(game, appliedEffects, numSides);
+    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+        return computerPlayer.rollDice(source, game, appliedEffects, numSides);
     }
 
     @Override
@@ -4007,17 +4012,17 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

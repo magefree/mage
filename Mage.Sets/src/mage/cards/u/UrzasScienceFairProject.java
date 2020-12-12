@@ -72,7 +72,7 @@ class UrzasScienceFairProjectEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int amount = controller.rollDice(game, 6);
+            int amount = controller.rollDice(source, game, 6);
 
             Effect effect = null;
             // 1 - -2/-2 until end of turn.

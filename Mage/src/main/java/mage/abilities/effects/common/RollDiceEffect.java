@@ -47,7 +47,7 @@ public class RollDiceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && mageObject != null) {
-            controller.rollDice(game, numSides);                
+            controller.rollDice(source, game, numSides);
             return true;
         }
         return false;

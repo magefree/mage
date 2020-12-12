@@ -97,7 +97,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
         if (controller != null) {
             discard();
-            int amount = controller.rollDice(game, 6);
+            int amount = controller.rollDice(source, game, 6);
             event.setAmount(event.getAmount() + amount);
             return true;
         }
@@ -139,7 +139,7 @@ class TheBigIdeaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int amount = controller.rollDice(game, 6);
+            int amount = controller.rollDice(source, game, 6);
             return new CreateTokenEffect(new BrainiacToken(), amount).apply(game, source);
         }
         return false;

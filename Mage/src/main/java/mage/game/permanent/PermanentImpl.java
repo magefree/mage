@@ -1153,9 +1153,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         logName = this.getLogName();
                     }
                     if (this.isCreature()) {
-                        game.informPlayers(logName + " died");
+                        game.informPlayers(logName + " died" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
                     } else {
-                        game.informPlayers(logName + " was destroyed");
+                        game.informPlayers(logName + " was destroyed" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
                     }
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DESTROYED_PERMANENT, objectId, source, controllerId));
@@ -1174,7 +1174,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             moveToZone(Zone.GRAVEYARD, source, game, false);
             Player player = game.getPlayer(getControllerId());
             if (player != null && !game.isSimulation()) {
-                game.informPlayers(player.getLogName() + " sacrificed " + this.getLogName());
+                game.informPlayers(player.getLogName() + " sacrificed " + this.getLogName() + CardUtil.getSourceLogName(game, source));
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SACRIFICED_PERMANENT, objectId, source, controllerId));
             return true;

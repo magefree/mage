@@ -812,7 +812,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         // write info to game log first so game log infos from triggered or replacement effects follow in the game log
         if (!game.isSimulation()) {
-            game.informPlayers(getLogName() + " discards " + card.getLogName());
+            game.informPlayers(getLogName() + " discards " + card.getLogName() + CardUtil.getSourceLogName(game, source));
         }
         /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
          * when a card is discarded (such as madness) still work, even though that card never reaches
@@ -962,9 +962,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (cards.isEmpty()) {
             return true;
         }
-        game.informPlayers(getLogName() + " shuffels " + CardUtil.numberToText(cards.size(), "a")
+        game.informPlayers(getLogName() + " shuffles " + CardUtil.numberToText(cards.size(), "a")
                 + " card" + (cards.size() == 1 ? "" : "s")
-                + " into their library.");
+                + " into their library" + CardUtil.getSourceLogName(game, source));
         boolean status = moveCards(cards, Zone.LIBRARY, source, game);
         shuffleLibrary(source, game);
         return status;
@@ -995,7 +995,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 + getLogName()
                                 + "'s library "
                                 + CardUtil.numberToOrdinalText(xFromTheTop)
-                                + " from the top");
+                                + " from the top" + CardUtil.getSourceLogName(game, source, cardInLib.getId()));
                     }
                 } else {
                     return false;
@@ -1501,7 +1501,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if ((ability.isUsesStack()
                         || ability.getRuleVisible())
                         && !game.isSimulation()) {
-                    game.informPlayers(ability.getGameLogMessage(game));
+                    game.informPlayers(getLogName() + ability.getGameLogMessage(game));
                 }
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
@@ -1648,7 +1648,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, source, playerId))) {
             this.library.shuffle();
             if (!game.isSimulation()) {
-                game.informPlayers(getLogName() + "'s library is shuffled");
+                game.informPlayers(getLogName() + "'s library is shuffled" + CardUtil.getSourceLogName(game, source));
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, source, playerId));
         }
@@ -1694,6 +1694,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     sb.append(", ");
                 }
             }
+            sb.append(CardUtil.getSourceLogName(game, source));
             game.informPlayers(sb.toString());
         }
     }
@@ -1991,7 +1992,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int loseLife(int amount, Game game, Ability source, boolean atCombat) {
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat, UUID attackerId) {
         if (!canLoseLife || !this.isInGame()) {
             return 0;
         }
@@ -2000,7 +2001,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!game.replaceEvent(event)) {
             this.life = CardUtil.subtractWithOverflowCheck(this.life, event.getAmount());
             if (!game.isSimulation()) {
-                game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life");
+                UUID needId = attackerId;
+                if (needId == null) {
+                    needId = source == null ? null : source.getSourceId();
+                }
+                game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life"
+                        + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
             if (amount > 0) {
                 game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
@@ -2009,6 +2015,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             return amount;
         }
         return 0;
+    }
+
+    @Override
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat) {
+        return loseLife(amount, game, source, atCombat, null);
     }
 
     @Override
@@ -2034,7 +2045,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // this.life += event.getAmount();
             this.life = CardUtil.addWithOverflowCheck(this.life, event.getAmount());
             if (!game.isSimulation()) {
-                game.informPlayers(this.getLogName() + " gains " + event.getAmount() + " life");
+                game.informPlayers(this.getLogName() + " gains " + event.getAmount() + " life" + CardUtil.getSourceLogName(game, source));
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE,
                     playerId, source, playerId, event.getAmount()));
@@ -2101,7 +2112,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
                                     playerId, source, playerId, actualDamage, combatDamage);
                             if (!game.replaceEvent(damageToLifeLossEvent)) {
-                                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage);
+                                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
                             }
                         }
                         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
@@ -2128,7 +2139,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(damage + " damage "
                         + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
                         + " to " + getLogName()
-                        + (damage > 1 ? " were" : "was") + " prevented because of protection.");
+                        + (damage > 1 ? " were" : "was") + " prevented because of protection");
             }
         }
         return 0;
@@ -2592,7 +2603,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         if (!game.isSimulation()) {
-            game.informPlayers(searchInfo);
+            game.informPlayers(searchInfo + CardUtil.getSourceLogName(game, source));
         }
 
         // https://www.reddit.com/r/magicTCG/comments/jj8gh9/opposition_agent_and_panglacial_wurm_interaction/
@@ -2648,7 +2659,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // END SEARCH
             if (takeControl) {
                 CardUtil.takeControlUnderPlayerEnd(game, searchingController, searchingPlayer);
-                game.informPlayers("Control of " + searchingPlayer.getLogName() + " is back");
+                game.informPlayers("Control of " + searchingPlayer.getLogName() + " is back" + CardUtil.getSourceLogName(game, source));
             }
 
             LibrarySearchedEvent searchedEvent = new LibrarySearchedEvent(targetPlayer.getId(), source, searchingPlayer.getId(), target);
@@ -2745,7 +2756,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
         event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
-        game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult()));
+        game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult())
+                + CardUtil.getSourceLogName(game, source));
         if (event.getFlipCount() > 1) {
             boolean canChooseHeads = event.getResult();
             boolean canChooseTails = !event.getResult();
@@ -2766,7 +2778,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
         }
         if (event.isWinnable()) {
-            game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip");
+            game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip"
+                    + CardUtil.getSourceLogName(game, source));
         }
         event.setAppliedEffects(appliedEffects);
         game.fireEvent(event.createFlippedEvent());
@@ -2777,31 +2790,30 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int rollDice(Game game, int numSides) {
-        return this.rollDice(game, null, numSides);
+    public int rollDice(Ability source, Game game, int numSides) {
+        return this.rollDice(source, game, null, numSides);
     }
 
     /**
+     * @param source
      * @param game
      * @param appliedEffects
      * @param numSides       Number of sides the dice has
      * @return the number that the player rolled
      */
     @Override
-    public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
+    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
         int result = RandomUtil.nextInt(numSides) + 1;
         if (!game.isSimulation()) {
             game.informPlayers("[Roll a die] " + getLogName() + " rolled a "
-                    + result + " on a " + numSides + " sided die");
+                    + result + " on a " + numSides + " sided die" + CardUtil.getSourceLogName(game, source));
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId,
-                null, playerId, result, true);
+        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_DICE, playerId, source, playerId, result, true);
         event.setAppliedEffects(appliedEffects);
         event.setAmount(result);
         event.setData(numSides + "");
         if (!game.replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, null,
-                    playerId, event.getAmount(), event.getFlag());
+            GameEvent ge = new GameEvent(GameEvent.EventType.DICE_ROLLED, playerId, source, playerId, event.getAmount(), event.getFlag());
             ge.setData(numSides + "");
             game.fireEvent(ge);
         }
@@ -2809,13 +2821,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game) {
-        return this.rollPlanarDie(game, null);
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
+        return this.rollPlanarDie(source, game, null);
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects) {
-        return rollPlanarDie(game, appliedEffects, 2, 2);
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
+        return rollPlanarDie(source, game, appliedEffects, 2, 2);
     }
 
     /**
@@ -2829,7 +2841,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * or NilRoll
      */
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
         int result = RandomUtil.nextInt(9) + 1;
         PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;
         if (numberChaosSides + numberPlanarSides > 9) {
@@ -2843,15 +2855,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (!game.isSimulation()) {
             game.informPlayers("[Roll the planar die] " + getLogName()
-                    + " rolled a " + roll + " on the planar die");
+                    + " rolled a " + roll + " on the planar die" + CardUtil.getSourceLogName(game, source));
         }
         GameEvent event = new GameEvent(GameEvent.EventType.ROLL_PLANAR_DIE,
-                playerId, null, playerId, result, true);
+                playerId, source, playerId, result, true);
         event.setAppliedEffects(appliedEffects);
         event.setData(roll + "");
         if (!game.replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANAR_DIE_ROLLED,
-                    playerId, null, playerId, event.getAmount(), event.getFlag());
+                    playerId, source, playerId, event.getAmount(), event.getFlag());
             ge.setData(roll + "");
             game.fireEvent(ge);
         }
@@ -4078,7 +4090,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
                                         + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
-                                        + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                                        + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield"
+                                        + CardUtil.getSourceLogName(game, source, permanent.getId()));
                             }
                         }
                     }
@@ -4180,7 +4193,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
                         + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' '
-                        + (card.isOwnedBy(this.getId()) ? "into their hand" : "into its owner's hand")
+                        + (card.isOwnedBy(this.getId()) ? "into their hand" : "into its owner's hand"
+                        + CardUtil.getSourceLogName(game, source, card.getId()))
                 );
             }
             result = true;
@@ -4275,6 +4289,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 } else {
                     sb.append("it into its owner's graveyard");
                 }
+                sb.append(CardUtil.getSourceLogName(game, source, card.getId()));
                 game.informPlayers(sb.toString());
             }
             result = true;
@@ -4307,6 +4322,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         sb.append(" of ").append(player.getLogName()).append("'s library");
                     }
                 }
+                sb.append(CardUtil.getSourceLogName(game, source, card.getId()));
                 game.informPlayers(sb.toString());
             }
             result = true;
@@ -4338,6 +4354,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         sb.append(" to ").append(player.getLogName()).append("'s command zone");
                     }
                 }
+                sb.append(CardUtil.getSourceLogName(game, source, card.getId()));
                 game.informPlayers(sb.toString());
             }
             result = true;
@@ -4370,7 +4387,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
                             + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
                             + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                            + ' ' : "") + "to the exile zone");
+                            + ' ' : "") + "to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
                 }
 
             }
@@ -4505,7 +4522,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game.replaceEvent(event)) {
             return false;
         }
-        game.informPlayers(getLogName() + " scries " + event.getAmount());
+        game.informPlayers(getLogName() + " scries " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
@@ -4527,7 +4544,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game.replaceEvent(event)) {
             return false;
         }
-        game.informPlayers(getLogName() + " surveils " + event.getAmount());
+        game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
         cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {

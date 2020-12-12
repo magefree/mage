@@ -153,8 +153,8 @@ class GoToJailUpkeepEffect extends OneShotEffect {
             Player opponent = game.getPlayer(opponentId);
 
             if (opponent != null) {
-                int thisRoll = opponent.rollDice(game, 6);
-                int thatRoll = opponent.rollDice(game, 6);
+                int thisRoll = opponent.rollDice(source, game, 6);
+                int thatRoll = opponent.rollDice(source, game, 6);
                 if (thisRoll == thatRoll) {
                     return permanent.sacrifice(source, game);
                 }

@@ -1,4 +1,3 @@
-
 package mage.abilities.mana;
 
 

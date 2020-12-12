@@ -122,6 +122,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat, UUID attackerId) {
+        return 0;
+    }
+
+    @Override
     public int loseLife(int amount, Game game, Ability source, boolean atCombat) {
         return 0;
     }
@@ -625,12 +630,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int rollDice(Game game, int numSides) {
+    public int rollDice(Ability source, Game game, int numSides) {
         return 1;
     }
 
     @Override
-    public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
+    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
         return 1;
     }
 
@@ -1330,17 +1335,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
