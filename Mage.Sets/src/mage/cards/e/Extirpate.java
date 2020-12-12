@@ -98,7 +98,7 @@ class ExtirpateEffect extends OneShotEffect {
             // search cards in graveyard
             for (Card checkCard : owner.getGraveyard().getCards(game)) {
                 if (checkCard.getName().equals(chosenCard.getName())) {
-                    controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                    controller.moveCardToExileWithInfo(checkCard, null, "", source, game, Zone.GRAVEYARD, true);
                 }
             }
 
@@ -111,7 +111,7 @@ class ExtirpateEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card targetCard = owner.getHand().get(targetId, game);
                     if (targetCard != null) {
-                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);
+                        controller.moveCardToExileWithInfo(targetCard, null, "", source, game, Zone.HAND, true);
                     }
                 }
             }
@@ -124,7 +124,7 @@ class ExtirpateEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card targetCard = owner.getLibrary().getCard(targetId, game);
                     if (targetCard != null) {
-                        controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                        controller.moveCardToExileWithInfo(targetCard, null, "", source, game, Zone.LIBRARY, true);
                     }
                 }
             }

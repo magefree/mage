@@ -27,7 +27,7 @@ public class CombatDamageStep extends Step {
 
     @Override
     public void priority(Game game, UUID activePlayerId, boolean resuming) {
-        game.fireEvent(new GameEvent(EventType.COMBAT_DAMAGE_STEP_PRIORITY, null, null, activePlayerId));
+        game.fireEvent(new GameEvent(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY, null, null, activePlayerId));
         super.priority(game, activePlayerId, resuming);
     }
 

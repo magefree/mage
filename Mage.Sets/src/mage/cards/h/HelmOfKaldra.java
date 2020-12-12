@@ -117,17 +117,17 @@ class HelmOfKaldraEffect extends OneShotEffect {
                 if (kaldra != null) {
                     // Attach helm to the token
                     for (Permanent kaldrasHelm : game.getBattlefield().getAllActivePermanents(HelmOfKaldra.filterHelm, source.getControllerId(), game)) {
-                        kaldra.addAttachment(kaldrasHelm.getId(), game);
+                        kaldra.addAttachment(kaldrasHelm.getId(), source, game);
                         break;
                     }
                     // Attach shield to the token
                     for (Permanent kaldrasShield : game.getBattlefield().getAllActivePermanents(HelmOfKaldra.filterShield, source.getControllerId(), game)) {
-                        kaldra.addAttachment(kaldrasShield.getId(), game);
+                        kaldra.addAttachment(kaldrasShield.getId(), source, game);
                         break;
                     }
                     // Attach sword to the token
                     for (Permanent kaldrasSword : game.getBattlefield().getAllActivePermanents(HelmOfKaldra.filterSword, source.getControllerId(), game)) {
-                        kaldra.addAttachment(kaldrasSword.getId(), game);
+                        kaldra.addAttachment(kaldrasSword.getId(), source, game);
                         break;
                     }
 

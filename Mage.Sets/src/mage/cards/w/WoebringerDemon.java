@@ -75,18 +75,18 @@ class WoebringerDemonEffect extends OneShotEffect {
             if (currentPlayer != null) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
                 target.setNotTarget(true);
-                if (target.canChoose(currentPlayer.getId(), game)) {
+                if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)) {
                     currentPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
+                        permanent.sacrifice(source, game);
                         return true;
                     }
                 }
             }
             Permanent sourceObject = game.getPermanent(source.getSourceId());
             if (sourceObject != null && sourceObject.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()) {
-                sourceObject.sacrifice(source.getSourceId(), game);
+                sourceObject.sacrifice(source, game);
             }
             return true;
         }

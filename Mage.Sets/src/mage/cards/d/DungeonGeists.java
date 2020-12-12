@@ -79,7 +79,9 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP || event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.LOST_CONTROL;
+        return event.getType() == GameEvent.EventType.UNTAP
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE
+                || event.getType() == GameEvent.EventType.LOST_CONTROL;
     }
 
     @Override
@@ -135,7 +137,9 @@ class DungeonGeistsWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL
+                && event.getPlayerId().equals(controllerId)
+                && event.getTargetId().equals(sourceId)) {
             condition = true;
             game.replaceEvent(event);
             return;

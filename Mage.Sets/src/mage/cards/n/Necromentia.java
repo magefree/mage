@@ -118,7 +118,7 @@ class NecromentiaEffect extends OneShotEffect {
             if (numberOfCardsExiledFromHand > 0) {
                 game.getState().applyEffects(game);
                 Token zombieToken = new ZombieToken();
-                zombieToken.putOntoBattlefield(numberOfCardsExiledFromHand, game, source.getId(), targetPlayer.getId());
+                zombieToken.putOntoBattlefield(numberOfCardsExiledFromHand, game, source, targetPlayer.getId());
             }
             return true;
         }

@@ -63,7 +63,6 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> lands = new HashSet<>();
-
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if(player != null) {
@@ -71,7 +70,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");
                     filter.add(landName.getPredicate());
                     Target target = new TargetControlledPermanent(1, 1, filter, true);
-                    if (target.canChoose(player.getId(), game)) {
+                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                         player.chooseTarget(outcome, target, source, game);
                         lands.add(target.getFirstTarget());
                     }
@@ -80,7 +79,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, game)) {
             if (!lands.contains(permanent.getId())) {
-                permanent.sacrifice(permanent.getId(), game);
+                permanent.sacrifice(source, game);
             }
         }
         return true;

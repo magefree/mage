@@ -171,7 +171,7 @@ public abstract class Phase implements Serializable {
     public void postPriority(Game game, UUID activePlayerId) {
         currentStep.endStep(game, activePlayerId);
         //20091005 - 500.4/703.4n
-        game.emptyManaPools();
+        game.emptyManaPools(null);
         //20091005 - 500.9
         playExtraSteps(game, currentStep.getType());
     }

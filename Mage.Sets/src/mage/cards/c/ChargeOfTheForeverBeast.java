@@ -71,6 +71,6 @@ class ChargeOfTheForeverBeastEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        return permanent.damage(card.getPower().getValue(), source.getSourceId(), game) > 0;
+        return permanent.damage(card.getPower().getValue(), source.getSourceId(), source, game) > 0;
     }
 }

@@ -60,9 +60,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
         if (damage < 1) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(
-                source.getFirstTarget(), damage, source.getSourceId(), game, false, true
-        );
+        game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         if (player == null) {
             return true;
@@ -70,7 +68,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
         for (Permanent perm : game.getBattlefield().getAllActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game
         )) {
-            perm.damage(damage, source.getSourceId(), game);
+            perm.damage(damage, source.getSourceId(), source, game);
         }
         return true;
     }

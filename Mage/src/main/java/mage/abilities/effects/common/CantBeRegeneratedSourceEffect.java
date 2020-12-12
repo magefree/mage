@@ -37,7 +37,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.REGENERATE;
+        return event.getType() == GameEvent.EventType.REGENERATE;
     }
 
     @Override

@@ -68,7 +68,7 @@ class FlamesOfTheRazeBoarEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.damage(4, source.getSourceId(), game);
+        permanent.damage(4, source.getSourceId(), source, game);
         if (!FerociousCondition.instance.apply(game, source)) {
             return true;
         }

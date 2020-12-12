@@ -72,10 +72,10 @@ class NinThePainArtistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(source.getManaCostsToPay().getX(), source.getSourceId(), game, false, true);
+            permanent.damage(source.getManaCostsToPay().getX(), source.getSourceId(), source, game, false, true);
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.drawCards(source.getManaCostsToPay().getX(), source.getSourceId(), game);
+                player.drawCards(source.getManaCostsToPay().getX(), source, game);
             }
             return true;
         }

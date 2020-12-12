@@ -60,11 +60,11 @@ class GalvanicBombardmentCardsInControllerGraveyardCount implements DynamicValue
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
-        Player controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
-                amount += controller.getGraveyard().count(filter, source.getSourceId(), source.getControllerId(), game);
+                amount += controller.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
             }
         return amount + 2;
     }

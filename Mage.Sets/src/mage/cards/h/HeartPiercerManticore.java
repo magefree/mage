@@ -86,7 +86,7 @@ class HeartPiercerManticoreSacrificeEffect extends OneShotEffect {
             return false;
         }
         int power = toSacrifice.getPower().getValue();
-        if (!toSacrifice.sacrifice(source.getSourceId(), game)) {
+        if (!toSacrifice.sacrifice(source, game)) {
             return false;
         }
         ReflexiveTriggeredAbility trigger = new ReflexiveTriggeredAbility(

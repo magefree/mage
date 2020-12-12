@@ -98,7 +98,7 @@ class GrimReminderEffect extends OneShotEffect {
                         for (UUID playerId : watcher.getPlayersCastSpell(cardName)) {
                             Player player = game.getPlayer(playerId);
                             if (player != null) {
-                                player.loseLife(6, game, false);
+                                player.loseLife(6, game, source, false);
                             }
                         }
                     }

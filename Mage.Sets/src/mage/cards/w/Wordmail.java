@@ -62,8 +62,8 @@ class WordmailCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        Permanent aura = game.getPermanent(source.getSourceId());
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent aura = game.getPermanent(sourceAbility.getSourceId());
         if (aura != null) {
             Permanent permanent = game.getPermanent(aura.getAttachedTo());
             if (permanent != null) {

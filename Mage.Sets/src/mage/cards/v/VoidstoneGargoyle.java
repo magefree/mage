@@ -124,7 +124,7 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ACTIVATE_ABILITY) {
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             MageObject object = game.getObject(event.getSourceId());
             String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
             return CardUtil.haveSameNames(object, cardName, game);

@@ -138,7 +138,7 @@ class KayaOrzhovUsurperDamageEffect extends OneShotEffect {
                 count += 1;
             }
         }
-        player.damage(count, source.getSourceId(), game);
+        player.damage(count, source.getSourceId(), source, game);
         controller.gainLife(count, game, source);
         return true;
     }

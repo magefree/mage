@@ -27,11 +27,11 @@ public abstract class UseAttachedCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         if (mageObjectReference == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(source.getSourceId());
         return permanent != null
                 && permanent
                 .getAttachments()

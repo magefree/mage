@@ -83,7 +83,7 @@ class SoulRansomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         } else {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
@@ -94,7 +94,7 @@ class SoulRansomEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        controller.drawCards(2, source.getSourceId(), game);
+        controller.drawCards(2, source, game);
         return true;
     }
 }

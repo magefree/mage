@@ -114,7 +114,7 @@ class HalanaKessigRangerDamageEffect extends OneShotEffect {
         if (permanent1 == null || !permanent1.isCreature() || permanent2 == null) {
             return false;
         }
-        permanent2.damage(permanent1.getPower().getValue(), permanent1.getId(), game);
+        permanent2.damage(permanent1.getPower().getValue(), permanent1.getId(), source, game);
         return true;
     }
 }

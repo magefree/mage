@@ -14,8 +14,8 @@ public enum TargetConvertedManaCost implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        Card card = game.getCard(source.getFirstTarget());
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Card card = game.getCard(sourceAbility.getFirstTarget());
         if (card != null) {
             return card.getConvertedManaCost();
         }

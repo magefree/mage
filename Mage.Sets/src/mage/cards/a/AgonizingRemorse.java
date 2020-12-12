@@ -89,7 +89,7 @@ class AgonizingRemorseEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        controller.loseLife(1, game, false);
+        controller.loseLife(1, game, source, false);
         return true;
     }
 }

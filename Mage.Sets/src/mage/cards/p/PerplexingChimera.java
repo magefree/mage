@@ -107,7 +107,7 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -191,7 +191,7 @@ class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.changeControllerId(this.getTargetPointer().getFirst(game, source), game);
+            return permanent.changeControllerId(this.getTargetPointer().getFirst(game, source), game, source);
         } else {
             discard(); // if card once left the battlefield the effect can be discarded
         }

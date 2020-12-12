@@ -72,8 +72,8 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
             Player player = game.getPlayer(controllerId);
             if(player != null) {
                 for (UUID targetId : targets.get(0).getTargets()) {
@@ -81,7 +81,7 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
                     if (card == null) {
                         return false;
                     }
-                    paid |= player.discard(card, null, game);
+                    paid |= player.discard(card, true, source, game);
 
                 }
             }
@@ -90,8 +90,8 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override
@@ -121,7 +121,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
         if (spell != null) {
             HisokaMinamoSenseiDiscardTargetCost cost = (HisokaMinamoSenseiDiscardTargetCost) source.getCosts().get(0);
             if (cost != null && cost.getDiscardedCard().getConvertedManaCost() == spell.getConvertedManaCost()) {
-                return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
+                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
             }
         }
         return false;

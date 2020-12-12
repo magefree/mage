@@ -83,7 +83,7 @@ class RagManDiscardEffect extends OneShotEffect {
 
             if (!creatureCardsInHand.isEmpty()) {
                 Card card = creatureCardsInHand.getRandom(game);
-                player.discard(card, source, game);
+                player.discard(card, false, source, game);
 
             }
 

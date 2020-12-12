@@ -83,7 +83,7 @@ class TourachsChantEffect extends OneShotEffect {
                 }
             }
             if (!paid) {
-                player.damage(3, source.getSourceId(), game);
+                player.damage(3, source.getSourceId(), source, game);
             }
             return true;
         }

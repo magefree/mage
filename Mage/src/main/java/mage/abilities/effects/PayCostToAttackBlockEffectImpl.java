@@ -82,9 +82,9 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             case ATTACK:
                 return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
             case BLOCK:
-                return event.getType() == EventType.DECLARE_BLOCKER;
+                return event.getType() == GameEvent.EventType.DECLARE_BLOCKER;
             case ATTACK_AND_BLOCK:
-                return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER;
+                return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER;
         }
         return false;
     }
@@ -106,16 +106,16 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             String chooseText;
-            if (event.getType() == EventType.DECLARE_ATTACKER) {
+            if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
                 chooseText = "Pay " + attackBlockManaTax.getText() + " to attack?";
             } else {
                 chooseText = "Pay " + attackBlockManaTax.getText() + " to block?";
             }
             attackBlockManaTax.clearPaid();
-            if (attackBlockManaTax.canPay(source, source.getSourceId(), player.getId(), game)
+            if (attackBlockManaTax.canPay(source, source, player.getId(), game)
                     && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
                 if (attackBlockManaTax instanceof ManaCostsImpl) {
-                    if (attackBlockManaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
+                    if (attackBlockManaTax.payOrRollback(source, game, source, event.getPlayerId())) {
                         return false;
                     }
                 }
@@ -129,10 +129,10 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             attackBlockOtherTax.clearPaid();
-            if (attackBlockOtherTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
+            if (attackBlockOtherTax.canPay(source, source, event.getPlayerId(), game)
                     && player.chooseUse(Outcome.Neutral,
-                            attackBlockOtherTax.getText() + " to " + (event.getType() == EventType.DECLARE_ATTACKER ? "attack?" : "block?"), source, game)) {
-                if (attackBlockOtherTax.pay(source, game, source.getSourceId(), event.getPlayerId(), false, null)) {
+                            attackBlockOtherTax.getText() + " to " + (event.getType() == GameEvent.EventType.DECLARE_ATTACKER ? "attack?" : "block?"), source, game)) {
+                if (attackBlockOtherTax.pay(source, game, source, event.getPlayerId(), false, null)) {
                     return false;
                 }
             }

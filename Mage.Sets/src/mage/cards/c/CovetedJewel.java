@@ -127,7 +127,7 @@ class CovetedJewelControlEffect extends ContinuousEffectImpl {
             this.discard();
             return false;
         }
-        permanent.changeControllerId(getTargetPointer().getFirst(game, source), game);
+        permanent.changeControllerId(getTargetPointer().getFirst(game, source), game, source);
         return true;
     }
 }

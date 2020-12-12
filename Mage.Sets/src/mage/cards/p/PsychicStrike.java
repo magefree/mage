@@ -59,7 +59,7 @@ class PsychicStrikeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean countered = false;
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+        if (game.getStack().counter(source.getFirstTarget(), source, game)) {
             countered = true;
         }
         if (stackObject != null) {

@@ -57,11 +57,11 @@ class RoilingTerrainEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetedLand = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetedLand != null) {
-            targetedLand.destroy(source.getSourceId(), game, true);
+            targetedLand.destroy(source, game, true);
             Player targetController = game.getPlayer(targetedLand.getControllerId());
             if (targetController != null) {
                 int landsInGraveyard = targetController.getGraveyard().count(new FilterLandCard(), game);
-                targetController.damage(landsInGraveyard, source.getSourceId(), game);
+                targetController.damage(landsInGraveyard, source.getSourceId(), source, game);
             }
             return true;
         }

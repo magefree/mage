@@ -103,7 +103,7 @@ public class WishEffect extends OneShotEffect {
                         card = game.getCard(target.getFirstTarget());
                     }
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        card.moveToZone(Zone.HAND, source, game, false);
                         if (reveal) {
                             Cards revealCard = new CardsImpl();
                             revealCard.add(card);

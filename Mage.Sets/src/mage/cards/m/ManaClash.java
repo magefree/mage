@@ -67,10 +67,10 @@ class ManaClashEffect extends OneShotEffect {
                     bothHeads = true;
                 }
                 if (!controllerFlip) {
-                    controller.damage(1, source.getSourceId(), game);
+                    controller.damage(1, source.getSourceId(), source, game);
                 }
                 if (!opponentFlip) {
-                    targetOpponent.damage(1, source.getSourceId(), game);
+                    targetOpponent.damage(1, source.getSourceId(), source, game);
                 }
             }
             return true;

@@ -78,7 +78,7 @@ class DeadshotDamageEffect extends OneShotEffect {
             int damage = ownCreature.getPower().getValue();
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
-                targetCreature.damage(damage, ownCreature.getId(), game, false, true);
+                targetCreature.damage(damage, ownCreature.getId(), source, game, false, true);
                 return true;
             }
         }

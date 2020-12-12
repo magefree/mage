@@ -60,7 +60,6 @@ public interface Target extends Serializable {
 
     List<? extends Target> getTargetOptions(Ability source, Game game);
 
-    //methods for non-targets
     boolean canChoose(UUID sourceControllerId, Game game);
 
     Set<UUID> possibleTargets(UUID sourceControllerId, Game game);

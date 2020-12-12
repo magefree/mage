@@ -69,7 +69,7 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
                 if (player != null && !player.flipCoin(source, game, false)) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
                     target.setNotTarget(true);
-                    if (target.canChoose(player.getId(), game)) {
+                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
@@ -78,7 +78,7 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
             for (UUID permID : perms) {
                 Permanent permanent = game.getPermanent(permID);
                 if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
             }
             return true;

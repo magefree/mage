@@ -107,7 +107,7 @@ class ThranTomeEffect extends OneShotEffect {
         }
 
         // draw 2
-        controller.drawCards(2, source.getSourceId(), game);
+        controller.drawCards(2, source, game);
         return true;
     }
 }

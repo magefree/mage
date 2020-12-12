@@ -119,18 +119,18 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (land != null && player != null) {
             if (land.hasSubtype(SubType.MOUNTAIN, game)) {
-                player.damage(2, source.getSourceId(), game);
+                player.damage(2, source.getSourceId(), source, game);
             } else {
-                player.damage(1, source.getSourceId(), game);
+                player.damage(1, source.getSourceId(), source, game);
             }
             return true;
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (land != null && permanent != null) {
             if (land.hasSubtype(SubType.MOUNTAIN, game)) {
-                permanent.damage(2, source.getSourceId(), game);
+                permanent.damage(2, source.getSourceId(), source, game);
             } else {
-                permanent.damage(1, source.getSourceId(), game);
+                permanent.damage(1, source.getSourceId(), source, game);
             }
             return true;
         }

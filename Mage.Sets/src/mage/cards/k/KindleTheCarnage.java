@@ -62,7 +62,7 @@ class KindleTheCarnageEffect extends OneShotEffect {
             while (hand != null
                     && hand.size() > 0
                     && controller.chooseUse(Outcome.AIDontUseIt, "Discard a card randomly from your hand?", source, game)) {
-                Card discardedCard = controller.discardOne(true, source, game);
+                Card discardedCard = controller.discardOne(true, false, source, game);
                 if (discardedCard != null) {
                     new DamageAllEffect(discardedCard.getConvertedManaCost(), new FilterCreaturePermanent()).apply(game, source);
                 }

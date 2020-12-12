@@ -69,10 +69,10 @@ class DismantleEffect extends OneShotEffect {
             if (permanent != null) {
                 int counterCount = 0;
                 counterCount = permanent.getCounters(game).values().stream().map((counter) -> counter.getCount()).reduce(counterCount, Integer::sum);
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
                 if (counterCount > 0) {
                     Target target = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent("an artifact you control"), true);
-                    if (target.canChoose(controller.getId(), game)) {
+                    if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
                         controller.chooseTarget(Outcome.Benefit, target, source, game);
                         Permanent artifact = game.getPermanent(target.getFirstTarget());
                         Counter counter;

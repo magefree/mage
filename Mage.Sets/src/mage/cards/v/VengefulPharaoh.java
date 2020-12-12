@@ -94,12 +94,12 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.DAMAGED_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ((event.getType() == EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.getControllerId()))
+        if ((event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.getControllerId()))
                 && ((DamagedEvent) event).isCombatDamage()) {
             if (!game.getPhase().getStep().equals(stepTriggeredPlayer) || game.getTurnNum() != turnTriggeredPlayer) {
                 stepTriggeredPlayer = game.getPhase().getStep();
@@ -107,7 +107,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType() == EventType.DAMAGED_PLANESWALKER && ((DamagedEvent) event).isCombatDamage()) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER && ((DamagedEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.isControlledBy(this.getControllerId())) {
                 if (!game.getPhase().getStep().equals(stepTriggeredPlansewalker) || game.getTurnNum() != turnTriggeredPlaneswalker) {
@@ -149,9 +149,9 @@ class VengefulPharaohEffect extends OneShotEffect {
         if (card != null && controller != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
-            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+            controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
             return true;
         }
         return false;

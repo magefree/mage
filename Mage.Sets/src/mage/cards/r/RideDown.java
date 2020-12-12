@@ -85,7 +85,7 @@ class RideDownEffect extends OneShotEffect {
                         break;
                     }
                 }
-                blockingCreature.destroy(source.getSourceId(), game, false);
+                blockingCreature.destroy(source, game, false);
             }
             return true;
         }

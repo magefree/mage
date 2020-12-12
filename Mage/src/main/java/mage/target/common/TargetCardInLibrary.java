@@ -54,7 +54,7 @@ public class TargetCardInLibrary extends TargetCard {
     }
 
     @Override
-    public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Game game) {
+    public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Game game) { // TODO: wtf sourceId named as targetPlayerId?!
         Player player = game.getPlayer(playerId);
         Player targetPlayer = game.getPlayer(targetPlayerId);
         if (targetPlayer == null) {

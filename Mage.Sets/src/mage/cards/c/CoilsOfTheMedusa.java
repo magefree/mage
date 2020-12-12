@@ -93,7 +93,7 @@ class CoilsOfTheMedusaDestroyEffect extends OneShotEffect {
                 while (!blockers.isEmpty()) {
                     Permanent blocker = game.getPermanent(blockers.remove(0));
                     if (!blocker.hasAbility(DefenderAbility.getInstance(), game)) {
-                        blocker.destroy(source.getSourceId(), game, false);
+                        blocker.destroy(source, game, false);
                     }
                 }
                 return true;

@@ -62,7 +62,7 @@ class EaterOfTheDeadEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Card card = game.getCard(source.getFirstTarget());
         if (sourcePermanent != null && sourcePermanent.isTapped() && card != null) {
-            card.moveToExile(null, "Eater of the Dead", source.getSourceId(), game);
+            card.moveToExile(null, "Eater of the Dead", source, game);
             sourcePermanent.untap(game);
         }
         return false;

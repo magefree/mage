@@ -60,7 +60,7 @@ class IgniteMemoriesEffect extends OneShotEffect {
                 if (card != null) {
                     revealed.add(card);
                     controller.revealCards(sourceObject.getIdName(), revealed, game);
-                    controller.damage(card.getConvertedManaCost(), source.getSourceId(), game);
+                    controller.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
                     return true;
                 }
                 return false;

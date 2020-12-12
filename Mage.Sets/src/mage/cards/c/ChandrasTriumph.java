@@ -78,6 +78,6 @@ class ChandrasTriumphEffect extends OneShotEffect {
         if (!game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).isEmpty()) {
             damage = 5;
         }
-        return permanent.damage(damage, source.getSourceId(), game) > 0;
+        return permanent.damage(damage, source.getSourceId(), source, game) > 0;
     }
 }

@@ -90,7 +90,7 @@ class KeldonFirebombersEffect extends OneShotEffect {
             }
         }
         for (Permanent land : landsToSacrifice) {
-            land.sacrifice(source.getSourceId(), game);
+            land.sacrifice(source, game);
         }
         return true;
     }

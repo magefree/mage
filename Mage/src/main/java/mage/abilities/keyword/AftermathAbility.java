@@ -143,9 +143,9 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent evt, Ability source, Game game) {
-        ZoneChangeEvent event = (ZoneChangeEvent) evt;
-        if (event.getFromZone() == Zone.STACK && event.getToZone() != Zone.EXILED) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() != Zone.EXILED) {
             // Moving something from stack to somewhere else
 
             // Get the source id, getting the whole split card's ID, because
@@ -165,7 +165,7 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
                 sourceId = sourceCard.getId();
             }
 
-            if (event.getTargetId().equals(sourceId)) {
+            if (zEvent.getTargetId().equals(sourceId)) {
                 // Moving this spell from stack to yard
                 Spell spell = game.getStack().getSpell(source.getSourceId());
                 // And this spell was cast from the graveyard, so we need to exile it

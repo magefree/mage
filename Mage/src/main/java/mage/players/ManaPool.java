@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
+import mage.game.events.ManaPaidEvent;
 import mage.game.stack.Spell;
 
 /**
@@ -141,8 +142,7 @@ public class ManaPool implements Serializable {
                 continue;
             }
             if (mana.get(usableManaType) > 0) {
-                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
-                event.setData(mana.getOriginalId().toString());
+                GameEvent event = new ManaPaidEvent(ability, mana.getSourceId(), mana.getFlag(), mana.getOriginalId());
                 game.fireEvent(event);
                 usedManaToPay.increase(usableManaType);
                 mana.remove(usableManaType);
@@ -309,7 +309,7 @@ public class ManaPool implements Serializable {
     public void addMana(Mana manaToAdd, Game game, Ability source, boolean emptyOnTurnsEnd) {
         if (manaToAdd != null) {
             Mana mana = manaToAdd.copy();
-            if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), playerId, mana))) {
+            if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source, playerId, mana))) {
                 if (mana instanceof ConditionalMana) {
                     ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game),
                             ((ConditionalMana) mana).getManaProducerOriginalId() != null
@@ -325,7 +325,7 @@ public class ManaPool implements Serializable {
                     }
                     this.manaItems.add(item);
                 }
-                ManaEvent manaEvent = new ManaEvent(EventType.MANA_ADDED, source.getId(), source.getSourceId(), playerId, mana);
+                ManaEvent manaEvent = new ManaEvent(EventType.MANA_ADDED, source.getId(), source, playerId, mana);
                 manaEvent.setData(mana.toString());
                 game.fireEvent(manaEvent);
             }
@@ -370,8 +370,7 @@ public class ManaPool implements Serializable {
             if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
                 mana.set(manaType, mana.get(manaType) - 1);
                 usedManaToPay.increase(manaType);
-                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAID, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag());
-                event.setData(mana.getManaProducerOriginalId().toString());
+                GameEvent event = new ManaPaidEvent(ability, mana.getManaProducerId(), mana.getFlag(), mana.getManaProducerOriginalId());
                 game.fireEvent(event);
                 break;
             }

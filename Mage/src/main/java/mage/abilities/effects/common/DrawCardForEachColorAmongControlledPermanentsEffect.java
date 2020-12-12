@@ -49,7 +49,7 @@ public class DrawCardForEachColorAmongControlledPermanentsEffect extends OneShot
                     colors.add(ObjectColor.WHITE);
                 }
             }
-            controller.drawCards(colors.size(), source.getSourceId(), game);
+            controller.drawCards(colors.size(), source, game);
             return true;
         }
         return false;

@@ -82,11 +82,11 @@ class FieryBombardmentEffect extends OneShotEffect {
         if (damage > 0) {
             Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (player != null) {
-                player.damage(damage, source.getSourceId(), game);
+                player.damage(damage, source.getSourceId(), source, game);
             } else {
                 Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (creature != null) {
-                    creature.damage(damage, source.getSourceId(), game, false, true);
+                    creature.damage(damage, source.getSourceId(), source, game, false, true);
                 }
             }
         }

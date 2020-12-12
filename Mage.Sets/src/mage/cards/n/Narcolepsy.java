@@ -100,7 +100,7 @@ class NarcolepsyEffect extends OneShotEffect {
         if (narcolepsy != null) {
             Permanent enchanted = game.getPermanent(narcolepsy.getAttachedTo());
             if (enchanted != null) {
-                enchanted.tap(game);
+                enchanted.tap(source, game);
                 return true;
             }
         }

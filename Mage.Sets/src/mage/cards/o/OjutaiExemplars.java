@@ -97,10 +97,10 @@ class OjutaiExemplarsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent ojutaiExemplars = game.getPermanent(source.getSourceId());
         if (ojutaiExemplars != null) {
-            if (ojutaiExemplars.moveToExile(source.getSourceId(), "Ojutai Exemplars", source.getSourceId(), game)) {
+            if (ojutaiExemplars.moveToExile(source.getSourceId(), "Ojutai Exemplars", source, game)) {
                 Card card = game.getExile().getCard(source.getSourceId(), game);
                 if (card != null) {
-                    return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, true);
+                    return card.moveToZone(Zone.BATTLEFIELD, source, game, true);
                 }
             }
         }

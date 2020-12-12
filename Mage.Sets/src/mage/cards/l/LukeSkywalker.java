@@ -76,7 +76,7 @@ class LukeSkywalkerCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(ability.getSourceId());
         if (permanent != null) {
             return (permanent.getCounters(game).getCount(CounterType.P1P1)) > 0;
@@ -85,11 +85,11 @@ class LukeSkywalkerCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getSourceId());
         if (permanent != null) {
             int countersCount = permanent.getCounters(game).getCount(CounterType.P1P1);
-            permanent.removeCounters(CounterType.P1P1.createInstance(countersCount), game);
+            permanent.removeCounters(CounterType.P1P1.createInstance(countersCount), source, game);
             this.paid = true;
             return true;
         }

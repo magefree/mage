@@ -78,7 +78,7 @@ class VolcanicEruptionEffect extends OneShotEffect {
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
-                if (permanent.destroy(source.getSourceId(), game, false)) {
+                if (permanent.destroy(source, game, false)) {
                     if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                         destroyedCount++;
                     }
@@ -89,12 +89,12 @@ class VolcanicEruptionEffect extends OneShotEffect {
         if (destroyedCount > 0) {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
             for (Permanent permanent : permanents) {
-                permanent.damage(destroyedCount, source.getSourceId(), game, false, true);
+                permanent.damage(destroyedCount, source.getSourceId(), source, game, false, true);
             }
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.damage(destroyedCount, source.getSourceId(), game);
+                    player.damage(destroyedCount, source.getSourceId(), source, game);
                 }
             }
         }

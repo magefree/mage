@@ -75,7 +75,7 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
         return false;

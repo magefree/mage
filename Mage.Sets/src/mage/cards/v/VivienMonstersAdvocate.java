@@ -101,7 +101,7 @@ class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);
             if (permanent == null) {

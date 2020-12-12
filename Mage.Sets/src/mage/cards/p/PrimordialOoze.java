@@ -71,9 +71,9 @@ class PrimordialOozeEffect extends OneShotEffect {
             int counter = sourceObject.getCounters(game).getCount(CounterType.P1P1);
             Cost cost = new ManaCostsImpl<>("{" + counter + '}');
             if (!(controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to prevent taking " + counter + " damage from " + sourceObject.getLogName() + "?", source, game)
-                    && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null))) {
-                sourceObject.tap(game);
-                controller.damage(counter, source.getSourceId(), game);
+                    && cost.pay(source, game, source, controller.getId(), false, null))) {
+                sourceObject.tap(source, game);
+                controller.damage(counter, source.getSourceId(), source, game);
             }
             return true;
         }

@@ -74,7 +74,7 @@ class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOSES;
+        return event.getType() == GameEvent.EventType.LOSES;
     }
 
     @Override
@@ -112,7 +112,7 @@ class BloodTyrantEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.loseLife(1, game, false) > 0) {
+                    if (player.loseLife(1, game, source, false) > 0) {
                         counters++;
                     }
                 }

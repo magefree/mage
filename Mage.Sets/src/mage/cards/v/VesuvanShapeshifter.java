@@ -163,7 +163,7 @@ class VesuvanShapeshifterFaceDownEffect extends OneShotEffect {
                 }
             }
 
-            permanent.turnFaceDown(game, source.getControllerId());
+            permanent.turnFaceDown(source, game, source.getControllerId());
             permanent.setManifested(false);
             permanent.setMorphed(true);
             return permanent.isFaceDown(game);

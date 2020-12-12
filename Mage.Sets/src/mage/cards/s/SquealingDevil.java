@@ -83,7 +83,7 @@ class SquealingDevilEffect extends OneShotEffect {
             if (player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
                 int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     Permanent permanent = game.getPermanent(source.getFirstTarget());
                     if (permanent != null && permanent.isCreature()) {
                         ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);

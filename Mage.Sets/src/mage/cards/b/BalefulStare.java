@@ -70,7 +70,7 @@ class BalefulStareEffect extends OneShotEffect {
                    count++;
                }
             }
-            controller.drawCards(count, source.getSourceId(), game);
+            controller.drawCards(count, source, game);
             return true;
         }
         return false;

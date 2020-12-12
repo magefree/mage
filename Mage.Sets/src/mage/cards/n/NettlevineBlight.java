@@ -89,7 +89,7 @@ class NettlevineBlightEffect extends OneShotEffect {
             Permanent enchantedPermanent = game.getPermanent(nettlevineBlight.getAttachedTo());
             if (enchantedPermanent != null) {
                 newController = game.getPlayer(enchantedPermanent.getControllerId());
-                enchantedPermanent.sacrifice(source.getSourceId(), game);
+                enchantedPermanent.sacrifice(source, game);
             }
             if (newController != null) {
                 FilterPermanent filter = new FilterPermanent("creature or land permanent you control");
@@ -106,7 +106,7 @@ class NettlevineBlightEffect extends OneShotEffect {
                         Card nettlevineBlightCard = game.getCard(source.getSourceId());
                         if (nettlevineBlightCard != null) {
                             game.getState().setValue("attachTo:" + nettlevineBlight.getId(), chosenPermanent);
-                            chosenPermanent.addAttachment(nettlevineBlight.getId(), game);
+                            chosenPermanent.addAttachment(nettlevineBlight.getId(), source, game);
                             return true;
                         }
                     }

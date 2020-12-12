@@ -74,7 +74,7 @@ class StringOfDisappearancesEffect extends OneShotEffect {
             return true;
         }
         Cost cost = new ManaCostsImpl("{U}{U}");
-        if (!cost.pay(source, game, source.getSourceId(), affectedPlayer.getId(), false, null)) {
+        if (!cost.pay(source, game, source, affectedPlayer.getId(), false, null)) {
             return true;
         }
         Spell spell = game.getStack().getSpell(source.getSourceId());

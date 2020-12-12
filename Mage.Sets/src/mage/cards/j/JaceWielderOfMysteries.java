@@ -127,7 +127,7 @@ class JaceWielderOfMysteriesEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(7, source.getSourceId(), game);
+        player.drawCards(7, source, game);
         if (!player.getLibrary().hasCards()) {
             player.won(game);
         }

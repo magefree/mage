@@ -63,7 +63,7 @@ class GenerousGiftEffect extends OneShotEffect {
             return false;
         }
         Player player = game.getPlayer(permanent.getControllerId());
-        permanent.destroy(source.getSourceId(), game, false);
+        permanent.destroy(source, game, false);
         if (player == null) {
             return false;
         }

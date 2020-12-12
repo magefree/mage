@@ -3,8 +3,10 @@ package mage.server.util;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -245,10 +247,6 @@ public final class SystemUtil {
         return com;
     }
 
-    public static void addCardsForTesting(Game game) {
-        addCardsForTesting(game, null, null);
-    }
-
     /**
      * Replaces cards in player's hands by specified in config/init.txt.<br/>
      * <br/>
@@ -267,6 +265,10 @@ public final class SystemUtil {
      * @param game
      */
     public static void addCardsForTesting(Game game, String fileSource, Player feedbackPlayer) {
+
+        // fake test ability for triggers and events
+        Ability fakeSourceAbility = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        fakeSourceAbility.setControllerId(feedbackPlayer.getId());
 
         try {
             String fileName = fileSource;
@@ -341,31 +343,25 @@ public final class SystemUtil {
                 // need to ask
                 logger.info("Found " + groups.size() + " groups. Need to select.");
 
-                if (feedbackPlayer != null) {
-                    // choice dialog
-                    Map<String, String> list = new LinkedHashMap<>();
-                    Map<String, Integer> sort = new LinkedHashMap<>();
-                    for (Integer i = 0; i < groups.size(); i++) {
-                        list.put(Integer.toString(i + 1), groups.get(i).getPrintNameWithStats());
-                        sort.put(Integer.toString(i + 1), i);
-                    }
-
-                    Choice groupChoice = new ChoiceImpl(false);
-                    groupChoice.setMessage("Choose commands group to run");
-                    groupChoice.setKeyChoices(list);
-                    groupChoice.setSortData(sort);
-
-                    if (feedbackPlayer.choose(Outcome.Benefit, groupChoice, game)) {
-                        String need = groupChoice.getChoiceKey();
-                        if ((need != null) && list.containsKey(need)) {
-                            runGroup = groups.get(Integer.parseInt(need) - 1);
-                        }
-                    }
-                } else {
-                    // select default
-                    runGroup = groups.get(0);
+                // choice dialog
+                Map<String, String> list = new LinkedHashMap<>();
+                Map<String, Integer> sort = new LinkedHashMap<>();
+                for (int i = 0; i < groups.size(); i++) {
+                    list.put(Integer.toString(i + 1), groups.get(i).getPrintNameWithStats());
+                    sort.put(Integer.toString(i + 1), i);
                 }
 
+                Choice groupChoice = new ChoiceImpl(false);
+                groupChoice.setMessage("Choose commands group to run");
+                groupChoice.setKeyChoices(list);
+                groupChoice.setSortData(sort);
+
+                if (feedbackPlayer.choose(Outcome.Benefit, groupChoice, game)) {
+                    String need = groupChoice.getChoiceKey();
+                    if ((need != null) && list.containsKey(need)) {
+                        runGroup = groups.get(Integer.parseInt(need) - 1);
+                    }
+                }
             }
 
             if (runGroup == null) {
@@ -381,85 +377,79 @@ public final class SystemUtil {
 
                 Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId()).iterator().next());
 
+                String info;
                 switch (runGroup.name) {
 
                     case COMMAND_SHOW_OPPONENT_HAND:
                         if (opponent != null) {
-                            String info = getCardsListForSpecialInform(game, opponent.getHand(), runGroup.commands);
+                            info = getCardsListForSpecialInform(game, opponent.getHand(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
                         }
                         break;
 
                     case COMMAND_SHOW_OPPONENT_LIBRARY:
                         if (opponent != null) {
-                            String info = getCardsListForSpecialInform(game, opponent.getLibrary().getCardList(), runGroup.commands);
+                            info = getCardsListForSpecialInform(game, opponent.getLibrary().getCardList(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
                         }
                         break;
 
                     case COMMAND_SHOW_MY_HAND:
-                        if (feedbackPlayer != null) {
-                            String info = getCardsListForSpecialInform(game, feedbackPlayer.getHand(), runGroup.commands);
+                            info = getCardsListForSpecialInform(game, feedbackPlayer.getHand(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
-                        }
                         break;
 
                     case COMMAND_SHOW_MY_LIBRARY:
-                        if (feedbackPlayer != null) {
-                            String info = getCardsListForSpecialInform(game, feedbackPlayer.getLibrary().getCardList(), runGroup.commands);
+                            info = getCardsListForSpecialInform(game, feedbackPlayer.getLibrary().getCardList(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
-                        }
                         break;
 
                     case COMMAND_ACTIVATE_OPPONENT_ABILITY:
                         // WARNING, maybe very bugged if called in wrong priority
                         // uses choose triggered ability dialog to select it
-                        if (feedbackPlayer != null) {
-                            UUID savedPriorityPlayer = null;
-                            if (game.getActivePlayerId() != opponent.getId()) {
-                                savedPriorityPlayer = game.getActivePlayerId();
-                            }
+                        UUID savedPriorityPlayer = null;
+                        if (game.getActivePlayerId() != opponent.getId()) {
+                            savedPriorityPlayer = game.getActivePlayerId();
+                        }
 
-                            // change active player to find and play selected abilities (it's danger and buggy code)
-                            if (savedPriorityPlayer != null) {
-                                game.getState().setPriorityPlayerId(opponent.getId());
-                                game.firePriorityEvent(opponent.getId());
-                            }
+                        // change active player to find and play selected abilities (it's danger and buggy code)
+                        if (savedPriorityPlayer != null) {
+                            game.getState().setPriorityPlayerId(opponent.getId());
+                            game.firePriorityEvent(opponent.getId());
+                        }
 
-                            List<ActivatedAbility> abilities = opponent.getPlayable(game, true);
-                            Map<String, String> choices = new HashMap<>();
-                            abilities.forEach(ability -> {
-                                MageObject object = ability.getSourceObject(game);
-                                choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
-                            });
-                            // TODO: set priority for us?
-                            Choice choice = new ChoiceImpl();
-                            choice.setMessage("Choose playable ability to activate by opponent " + opponent.getName());
-                            choice.setKeyChoices(choices);
-                            if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {
-                                String needId = choice.getChoiceKey();
-                                Optional<ActivatedAbility> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
-                                if (ability.isPresent()) {
-                                    // TODO: set priority for player?
-                                    ActivatedAbility activatedAbility = ability.get();
-                                    game.informPlayers(feedbackPlayer.getLogName() + " as another player " + opponent.getLogName()
-                                            + " trying to force an activate ability: " + activatedAbility.getGameLogMessage(game));
-                                    if (opponent.activateAbility(activatedAbility, game)) {
-                                        game.informPlayers("Force to activate ability: DONE");
-                                    } else {
-                                        game.informPlayers("Force to activate ability: FAIL");
-                                    }
+                        List<ActivatedAbility> abilities = opponent.getPlayable(game, true);
+                        Map<String, String> choices = new HashMap<>();
+                        abilities.forEach(ability -> {
+                            MageObject object = ability.getSourceObject(game);
+                            choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
+                        });
+                        // TODO: set priority for us?
+                        Choice choice = new ChoiceImpl();
+                        choice.setMessage("Choose playable ability to activate by opponent " + opponent.getName());
+                        choice.setKeyChoices(choices);
+                        if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {
+                            String needId = choice.getChoiceKey();
+                            Optional<ActivatedAbility> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
+                            if (ability.isPresent()) {
+                                // TODO: set priority for player?
+                                ActivatedAbility activatedAbility = ability.get();
+                                game.informPlayers(feedbackPlayer.getLogName() + " as another player " + opponent.getLogName()
+                                        + " trying to force an activate ability: " + activatedAbility.getGameLogMessage(game));
+                                if (opponent.activateAbility(activatedAbility, game)) {
+                                    game.informPlayers("Force to activate ability: DONE");
+                                } else {
+                                    game.informPlayers("Force to activate ability: FAIL");
                                 }
                             }
-                            // restore original priority player
-                            if (savedPriorityPlayer != null) {
-                                game.getState().setPriorityPlayerId(savedPriorityPlayer);
-                                game.firePriorityEvent(savedPriorityPlayer);
-                            }
+                        }
+                        // restore original priority player
+                        if (savedPriorityPlayer != null) {
+                            game.getState().setPriorityPlayerId(savedPriorityPlayer);
+                            game.firePriorityEvent(savedPriorityPlayer);
                         }
                         break;
                 }
-
                 return;
             }
 
@@ -508,7 +498,7 @@ public final class SystemUtil {
                     Constructor<?> cons = c.getConstructor();
                     Object token = cons.newInstance();
                     if (token instanceof mage.game.permanent.token.Token) {
-                        ((mage.game.permanent.token.Token) token).putOntoBattlefield(command.Amount, game, null, player.getId(), false, false);
+                        ((mage.game.permanent.token.Token) token).putOntoBattlefield(command.Amount, game, fakeSourceAbility, player.getId(), false, false);
                         continue;
                     }
                 } else if ("emblem".equalsIgnoreCase(command.zone)) {
@@ -528,7 +518,7 @@ public final class SystemUtil {
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {
                     for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
                         if (perm.getName().equals(command.cardName) && perm.getCardType().contains(CardType.PLANESWALKER)) {
-                            perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), null, game);
+                            perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), fakeSourceAbility, game);
                         }
                     }
                     continue;
@@ -551,7 +541,7 @@ public final class SystemUtil {
 
                     // move card from exile to stack
                     for (Card card : cardsToLoad) {
-                        putCardToZone(game, player, card, Zone.STACK);
+                        putCardToZone(fakeSourceAbility, game, player, card, Zone.STACK);
                     }
 
                     continue;
@@ -626,7 +616,7 @@ public final class SystemUtil {
                 } else {
                     // as other card
                     for (Card card : cardsToLoad) {
-                        putCardToZone(game, player, card, gameZone);
+                        putCardToZone(fakeSourceAbility, game, player, card, gameZone);
                     }
                 }
             }
@@ -636,13 +626,14 @@ public final class SystemUtil {
     }
 
     /**
-     * Put card to specified (battlefield zone will be tranformed to permanent with initialized effects)
+     * Put card to specified zone (battlefield zone will be tranformed to permanent with initialized effects)
+     * Use it for cheats and tests only
      */
-    private static void putCardToZone(Game game, Player player, Card card, Zone zone) {
+    private static void putCardToZone(Ability source, Game game, Player player, Card card, Zone zone) {
         // TODO: replace by player.move?
         switch (zone) {
             case BATTLEFIELD:
-                CardUtil.putCardOntoBattlefieldWithEffects(game, card, player);
+                CardUtil.putCardOntoBattlefieldWithEffects(source, game, card, player);
                 break;
             case LIBRARY:
                 card.setZone(Zone.LIBRARY, game);

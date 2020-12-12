@@ -44,7 +44,7 @@ public class TapSourceEffect extends OneShotEffect {
             if (withoutTrigger) {
                 permanent.setTapped(true);
             } else {
-                permanent.tap(game);
+                permanent.tap(source, game);
             }
             return true;
         }

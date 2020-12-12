@@ -68,10 +68,10 @@ class BrightflameEffect extends OneShotEffect {
         int damageDealt = 0;
         if (target != null) {
             ObjectColor color = target.getColor(game);
-            damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), game);
+            damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
             for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
-                    damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+                    damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
                 }
             }
 

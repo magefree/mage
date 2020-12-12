@@ -69,7 +69,7 @@ class KwainItinerantMeddlerEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.chooseUse(outcome, "Draw a card?", source, game)
-                    && player.drawCards(1, source.getSourceId(), game) > 0) {
+                    && player.drawCards(1, source, game) > 0) {
                 players.add(player);
             }
         }

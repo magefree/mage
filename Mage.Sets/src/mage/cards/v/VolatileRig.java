@@ -76,8 +76,8 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COMBAT_DAMAGE_STEP_POST
-                || event.getType() == EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST
+                || event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
 
     @Override
@@ -87,7 +87,7 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
          * (for example, multiple blocking creatures), its first triggered ability
          * will trigger only once.
          */
-        if (triggerdThisCombatStep && event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
+        if (triggerdThisCombatStep && event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
             triggerdThisCombatStep = false;
         }
 
@@ -128,7 +128,7 @@ class VolatileRigEffect extends OneShotEffect {
             if (!player.flipCoin(source, game, true)) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
-                    return permanent.sacrifice(source.getSourceId(), game);
+                    return permanent.sacrifice(source, game);
                 }
             }
         }
@@ -160,12 +160,12 @@ class VolatileRigEffect2 extends OneShotEffect {
 
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
                 for (Permanent permanent : permanents) {
-                    permanent.damage(4, source.getSourceId(), game, false, true);
+                    permanent.damage(4, source.getSourceId(), source, game, false, true);
                 }
                 for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
                     Player damageToPlayer = game.getPlayer(playerId);
                     if (damageToPlayer != null) {
-                        damageToPlayer.damage(4, source.getSourceId(), game);
+                        damageToPlayer.damage(4, source.getSourceId(), source, game);
                     }
                 }
                 return true;

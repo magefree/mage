@@ -67,6 +67,7 @@ public final class SithRavager extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
+            // non combat lose life
             return !event.getFlag() && game.getOpponents(game.getControllerId(getSourceId())).contains(event.getPlayerId());
         }
 

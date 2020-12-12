@@ -46,7 +46,7 @@ class LivingWeaponEffect extends CreateTokenEffect {
             if (super.apply(game, source)) {
                 Permanent p = game.getPermanent(this.getLastAddedTokenId());
                 if (p != null) {
-                    p.addAttachment(source.getSourceId(), game);
+                    p.addAttachment(source.getSourceId(), source, game);
                     return true;
                 }
             }

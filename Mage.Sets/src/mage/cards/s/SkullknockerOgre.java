@@ -64,8 +64,8 @@ class SkullknockerOgreEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (player.discard(1, true, source, game).size() > 0) {
-            player.drawCards(1, source.getSourceId(), game);
+        if (player.discard(1, true, false, source, game).size() > 0) {
+            player.drawCards(1, source, game);
         }
         return true;
     }

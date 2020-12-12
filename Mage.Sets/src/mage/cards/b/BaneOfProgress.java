@@ -71,7 +71,7 @@ class BaneOfProgressEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int destroyedPermanents = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (permanent.destroy(source.getSourceId(), game, false)) {
+            if (permanent.destroy(source, game, false)) {
                 destroyedPermanents++;
             }
         }

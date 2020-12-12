@@ -59,7 +59,7 @@ class VisionsOfBeyondEffect extends OneShotEffect {
                 }
             }
         }
-        sourcePlayer.drawCards(count, source.getSourceId(), game);
+        sourcePlayer.drawCards(count, source, game);
         return true;
     }
 

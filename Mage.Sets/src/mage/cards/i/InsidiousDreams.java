@@ -92,7 +92,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
                     Card card = chosen.get(targetToLib.getFirstTarget(), game);
                     if (card != null) {
                         chosen.remove(card);
-                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
+                        controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, true, false);
 
                     }
                     targetToLib.clearChosen();
@@ -100,7 +100,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
 
                 if (chosen.size() == 1) {
                     Card card = chosen.get(chosen.iterator().next(), game);
-                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
+                    controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, true, false);
                 }
             }
             return true;

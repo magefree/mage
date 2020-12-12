@@ -88,11 +88,11 @@ class LiegeOfThePitEffect extends OneShotEffect {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
                 return true;
             }
         } else {
-            player.damage(7, source.getSourceId(), game);
+            player.damage(7, source.getSourceId(), source, game);
             return true;
         }
         return false;

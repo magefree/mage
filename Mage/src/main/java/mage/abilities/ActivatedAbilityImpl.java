@@ -193,7 +193,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         if (timing == TimingRule.INSTANT
                 || game.canPlaySorcery(playerId)
                 || null != approvingObject) {
-            if (costs.canPay(this, sourceId, playerId, game)
+            if (costs.canPay(this, this, playerId, game)
                     && canChooseTarget(game)) {
                 this.activatorId = playerId;
                 return new ActivationStatus(true, approvingObject);

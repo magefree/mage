@@ -72,7 +72,7 @@ class TapDefendingPlayerLandEffect extends OneShotEffect {
             if (defendingPlayer != null) {
                 List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, defendingPlayer.getId(), game);
                 for (Permanent land : permanents) {
-                    land.tap(game);
+                    land.tap(source, game);
                 }
                 return true;
             }

@@ -63,7 +63,7 @@ class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
@@ -104,10 +104,10 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect {
             return false;
         }
         cost.clearPaid();
-        if (cost.pay(source, game, source.getSourceId(), payee.getId(), false, null)) {
+        if (cost.pay(source, game, source, payee.getId(), false, null)) {
             return false;
         }
-        return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        return token.putOntoBattlefield(1, game, source, source.getControllerId());
     }
 
     @Override

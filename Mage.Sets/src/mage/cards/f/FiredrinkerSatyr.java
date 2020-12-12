@@ -72,7 +72,7 @@ class FiredrinkerSatyrDealDamageEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game);
+                player.damage(amount, source.getSourceId(), source, game);
                 return true;
             }
         }

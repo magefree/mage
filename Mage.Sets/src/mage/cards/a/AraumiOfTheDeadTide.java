@@ -88,7 +88,7 @@ class AraumiOfTheDeadTideCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return paid;
@@ -96,7 +96,7 @@ class AraumiOfTheDeadTideCost extends CostImpl {
         int oppCount = game.getOpponents(controllerId).size();
         TargetCard target = new TargetCardInYourGraveyard(oppCount, StaticFilters.FILTER_CARD);
         target.setNotTarget(true);
-        player.choose(Outcome.Exile, target, sourceId, game);
+        player.choose(Outcome.Exile, target, source.getSourceId(), game);
         Cards cards = new CardsImpl(target.getTargets());
         if (cards.size() < oppCount) {
             return paid;
@@ -111,7 +111,7 @@ class AraumiOfTheDeadTideCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         return player != null && player.getGraveyard().size() >= game.getOpponents(controllerId).size();
     }

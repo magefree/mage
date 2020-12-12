@@ -49,8 +49,8 @@ class ElectrostaticBoltDamageValue implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent targetPermanent = game.getPermanent(sourceAbility.getFirstTarget());
         if(targetPermanent != null) {
             if(filter.match(targetPermanent, game)) {
                 return 4;

@@ -79,9 +79,9 @@ class SpellSyphonEffect extends OneShotEffect {
                     game.informPlayers("Spell Syphon: no blue permanents in controller's battlefield.");
                 } else {
                     Cost cost = ManaUtil.createManaCost(amount, false);
-                    if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
+                    if (!cost.pay(source, game, source, spell.getControllerId(), false)) {
                         game.informPlayers("Spell Syphon: cost wasn't payed - countering target spell.");
-                        return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+                        return game.getStack().counter(source.getFirstTarget(), source, game);
                     }
                 }
             }

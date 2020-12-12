@@ -62,7 +62,7 @@ class BookBurningMillEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.chooseUse(Outcome.Detriment, "Have " + sourceObject.getLogName() + " deal 6 damage to you?", source, game)) {
                     millCards = false;
-                    player.damage(6, source.getSourceId(), game);
+                    player.damage(6, source.getSourceId(), source, game);
                     game.informPlayers(player.getLogName() + " has " + sourceObject.getLogName() + " deal 6 damage to them");
                 }
             }

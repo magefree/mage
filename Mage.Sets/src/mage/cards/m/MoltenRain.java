@@ -63,7 +63,7 @@ class MoltenRainEffect extends OneShotEffect {
         if (permanent != null && !permanent.isBasic()) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.damage(2, source.getSourceId(), game);
+                player.damage(2, source.getSourceId(), source, game);
                 return true;
             }
         }

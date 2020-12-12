@@ -67,14 +67,14 @@ class UrzasTomeEffect extends OneShotEffect {
         if (controller != null
                 && controller.chooseUse(Outcome.Exile, "Exile a historic card from your graveyard?", source, game)) {
             Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterHistoricCard()));
-            if (cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
-                if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
+            if (cost.canPay(source, source, controller.getId(), game)) {
+                if (cost.pay(source, game, source, controller.getId(), false, null)) {
                     return true;
                 }
             }
         }
         if (controller != null) {
-            controller.discard(1, false, source, game);
+            controller.discard(1, false, false, source, game);
             return true;
         }
         return false;

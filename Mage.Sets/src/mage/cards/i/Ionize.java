@@ -60,9 +60,9 @@ class IonizeEffect extends OneShotEffect {
         if (spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
 
-            result = game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            result = game.getStack().counter(source.getFirstTarget(), source, game);
             if (spellController != null) {
-                spellController.damage(2, source.getSourceId(), game);
+                spellController.damage(2, source.getSourceId(), source, game);
             }
         }
         return result;

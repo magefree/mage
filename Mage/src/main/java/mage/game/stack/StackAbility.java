@@ -20,6 +20,8 @@ import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.CopiedStackObjectEvent;
+import mage.game.events.CopyStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -90,7 +92,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         if (!game.isSimulation()) {
             game.informPlayers("Ability has been fizzled: " + getRule());
         }
-        counter(null, game);
+        counter(null, /*this*/ game);
         game.getStack().remove(this, game);
         return false;
     }
@@ -100,13 +102,13 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void counter(UUID sourceId, Game game) {
+    public void counter(Ability source, Game game) {
         // zone, owner, top ignored
-        this.counter(sourceId, game, Zone.GRAVEYARD, true, ZoneDetail.TOP);
+        this.counter(source, game, Zone.GRAVEYARD, true, ZoneDetail.TOP);
     }
 
     @Override
-    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+    public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);
@@ -579,7 +581,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
         StackAbility newStackAbility = null;
-        GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.COPY_STACKOBJECT, this.getId(), source.getSourceId(), newControllerId, amount);
+        GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
             return null;
         }
@@ -596,7 +598,7 @@ public class StackAbility extends StackObjImpl implements Ability {
                     newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game, false);
                 }
             }
-            game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+            game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
         }
         return newStackAbility;
     }

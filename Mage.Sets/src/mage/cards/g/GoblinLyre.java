@@ -66,11 +66,11 @@ class GoblinLyreEffect extends OneShotEffect {
             if (controller.flipCoin(source, game, true)) {
                 int damage = CreaturesYouControlCount.instance.calculate(game, source, this);
                 if (opponent != null) {
-                    return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), game, false, true) > 0;
+                    return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true) > 0;
                 }
             } else {
                 int damage = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), opponent.getId(), game).size();
-                return controller.damage(damage, source.getSourceId(), game) > 0;
+                return controller.damage(damage, source.getSourceId(), source, game) > 0;
             }
         }
         return false;

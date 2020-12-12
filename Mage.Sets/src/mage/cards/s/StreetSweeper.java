@@ -84,7 +84,7 @@ class StreetSweeperDestroyEffect extends OneShotEffect {
                 Permanent aura = game.getPermanent(uuid);
                 if(aura != null && aura.hasSubtype(SubType.AURA, game))
                 {
-                    aura.destroy(source.getSourceId(), game, false);
+                    aura.destroy(source, game, false);
                 }
             }
             return true;

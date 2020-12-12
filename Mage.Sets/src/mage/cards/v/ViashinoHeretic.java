@@ -72,9 +72,9 @@ class ViashinoHereticEffect extends OneShotEffect {
         if (permanent != null) {
             int couvertedManaCost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
             if (player != null) {
-                player.damage(couvertedManaCost, source.getSourceId(), game);
+                player.damage(couvertedManaCost, source.getSourceId(), source, game);
             }
             return true;
         }

@@ -63,7 +63,7 @@ class TrickbindCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        if (stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+        if (stackObject != null && game.getStack().counter(source.getFirstTarget(), source, game)) {
             TrickbindCantActivateEffect effect = new TrickbindCantActivateEffect();
             effect.setTargetPointer(new FixedTarget(stackObject.getSourceId()));
             game.getContinuousEffects().addEffect(effect, source);

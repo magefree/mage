@@ -34,7 +34,7 @@ public class DiscardHandAllEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.discard(player.getHand(), source, game);
+            player.discard(player.getHand(), false, source, game);
         }
         return true;
     }

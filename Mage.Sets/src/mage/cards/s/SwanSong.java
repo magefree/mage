@@ -69,12 +69,12 @@ class SwanSongEffect extends OneShotEffect {
         boolean countered = false;
         for (UUID targetId : targetPointer.getTargets(game, source)) {
             Spell spell = game.getStack().getSpell(targetId);
-            if (game.getStack().counter(targetId, source.getSourceId(), game)) {
+            if (game.getStack().counter(targetId, source, game)) {
                 countered = true;
             }
             if (spell != null) {
                 Token token = new SwanSongBirdToken();
-                token.putOntoBattlefield(1, game, source.getSourceId(), spell.getControllerId());
+                token.putOntoBattlefield(1, game, source, spell.getControllerId());
             }
         }
         return countered;

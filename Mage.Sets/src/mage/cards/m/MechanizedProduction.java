@@ -82,7 +82,7 @@ class MechanizedProductionEffect extends OneShotEffect {
             if (enchantedArtifact != null) {
                 EmptyToken token = new EmptyToken();
                 CardUtil.copyTo(token).from(enchantedArtifact);
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(1, game, source, source.getControllerId());
             }
             Map<String, Integer> countNames = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game)) {

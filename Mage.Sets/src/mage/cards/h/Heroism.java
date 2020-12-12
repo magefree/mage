@@ -91,7 +91,7 @@ class HeroismEffect extends OneShotEffect {
                 String message = "Pay " + cost.getText() + "? If you don't, " + permanent.getLogName() + "'s combat damage will be prevented this turn.";
                 if (player != null) {
                     if (player.chooseUse(Outcome.Neutral, message, source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                        if (cost.pay(source, game, source, player.getId(), false, null)) {
                             game.informPlayers(player.getLogName() + " paid " + cost.getText() + " for " + permanent.getLogName());
 
                         } else {

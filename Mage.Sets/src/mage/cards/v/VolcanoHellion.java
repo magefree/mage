@@ -74,9 +74,9 @@ class VolcanoHellionEffect extends OneShotEffect {
         if (controller != null) {
             int amount = controller.getAmount(0, Integer.MAX_VALUE, "Choose the amount of damage to deliver to you and a target creature.  The damage can't be prevented.", game);
             if (amount > 0) {
-                controller.damage(amount, source.getSourceId(), game, false, false);
+                controller.damage(amount, source.getSourceId(), source, game, false, false);
                 if (permanent != null) {
-                    permanent.damage(amount, source.getSourceId(), game, false, false);
+                    permanent.damage(amount, source.getSourceId(), source, game, false, false);
                 }
                 return true;
             }

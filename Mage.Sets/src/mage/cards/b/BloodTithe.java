@@ -49,7 +49,7 @@ class BloodTitheEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int lifeLost = 0;
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            lifeLost += game.getPlayer(opponentId).loseLife(3, game, false);
+            lifeLost += game.getPlayer(opponentId).loseLife(3, game, source, false);
         }
         game.getPlayer(source.getControllerId()).gainLife(lifeLost, game, source);
         return true;

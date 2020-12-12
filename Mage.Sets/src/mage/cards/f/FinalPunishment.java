@@ -43,11 +43,11 @@ public final class FinalPunishment extends CardImpl {
 class FinalPunishmentAmount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         AmountOfDamageAPlayerReceivedThisTurnWatcher watcher
             = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
         if(watcher != null) {
-            return watcher.getAmountOfDamageReceivedThisTurn(source.getFirstTarget());
+            return watcher.getAmountOfDamageReceivedThisTurn(sourceAbility.getFirstTarget());
         }
         return 0;
     }

@@ -72,7 +72,7 @@ class PurphorossInterventionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token token = new PurphorossInterventionToken(source.getManaCostsToPay().getX());
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         token.getLastAddedTokenIds()
                 .stream()
                 .forEach(uuid -> game.addDelayedTriggeredAbility(

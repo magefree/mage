@@ -70,7 +70,7 @@ class PoisonControllerTargetCreatureEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.addCounters(CounterType.POISON.createInstance(), game);
+                player.addCounters(CounterType.POISON.createInstance(), source, game);
             }
             return true;
         }

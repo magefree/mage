@@ -74,11 +74,11 @@ class HungryHungryHeiferEffect extends OneShotEffect {
             if (controller.chooseUse(outcome, "Remove a counter from a permanent you control?", source, game)) {
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
                 RemoveCounterCost cost = new RemoveCounterCost(target);
-                if (cost.pay(null, game, source.getSourceId(), controller.getId(), true)) {
+                if (cost.pay(null, game, source, controller.getId(), true)) {
                     return true;
                 }
             }
-            sourceObject.sacrifice(source.getSourceId(), game);
+            sourceObject.sacrifice(source, game);
             return true;
         }
         return false;

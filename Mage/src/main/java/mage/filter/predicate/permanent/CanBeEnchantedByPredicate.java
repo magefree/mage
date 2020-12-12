@@ -18,7 +18,7 @@ public class CanBeEnchantedByPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return !input.cantBeAttachedBy(auraEnchantment, game, true);
+        return !input.cantBeAttachedBy(auraEnchantment, null, game, true);
     }
 
     @Override

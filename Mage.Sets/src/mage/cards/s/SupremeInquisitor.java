@@ -91,7 +91,7 @@ class SupremeInquisitorEffect extends OneShotEffect {
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);
                     if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
+                        player.moveCardToExileWithInfo(card, null, null, source, game, Zone.LIBRARY, true);
                     }
                 }
             }

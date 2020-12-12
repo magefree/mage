@@ -58,7 +58,7 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -93,7 +93,7 @@ class VigilForTheLostEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ManaCostsImpl cost = new ManaCostsImpl("{X}");
         cost.clearPaid();
-        if (cost.payOrRollback(source, game, source.getSourceId(), source.getControllerId())) {
+        if (cost.payOrRollback(source, game, source, source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.gainLife(cost.getX(), game, source);

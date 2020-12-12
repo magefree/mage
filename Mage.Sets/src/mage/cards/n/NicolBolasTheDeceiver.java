@@ -90,17 +90,17 @@ class NicolBolasTheDeceiverFirstEffect extends OneShotEffect {
                         if (opponent.choose(outcome, target, source.getSourceId(), game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                                 return true;
                             }
                         }
                     }
                     if (!opponent.getHand().isEmpty() && opponent.chooseUse(outcome, "Discard a card?",
                             "Otherwise you lose 3 life.", "Discard", "Lose 3 life", source, game)) {
-                        opponent.discardOne(false, source, game);
+                        opponent.discardOne(false, false, source, game);
                         return true;
                     }
-                    opponent.loseLife(3, game, false);
+                    opponent.loseLife(3, game, source, false);
 
                 }
             }

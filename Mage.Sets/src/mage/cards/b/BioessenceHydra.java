@@ -116,7 +116,9 @@ class BioessenceHydraTriggeredAbility extends TriggeredAbilityImpl {
                     && permanent.isPlaneswalker()
                     && permanent.isControlledBy(this.getControllerId())) {
                 this.getEffects().clear();
-                this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
+                if (event.getAmount() > 0) {
+                    this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
+                }
                 return true;
             }
         }

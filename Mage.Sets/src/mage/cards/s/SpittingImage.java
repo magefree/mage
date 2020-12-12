@@ -66,7 +66,7 @@ class SpittingImageEffect extends OneShotEffect {
         if (permanent != null) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(permanent);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }
         return false;

@@ -91,7 +91,7 @@ class BecomesRenownedSourceEffect extends OneShotEffect {
             }
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue), true).apply(game, source);
             permanent.setRenowned(true);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWNED, source.getSourceId(), source.getSourceId(), source.getControllerId(), renownValue));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWNED, source.getSourceId(), source, source.getControllerId(), renownValue));
             return true;
         }
         return false;

@@ -66,7 +66,7 @@ class CerebralVortexEffect extends OneShotEffect {
         if (targetPlayer != null) {
             CerebralVortexWatcher watcher = game.getState().getWatcher(CerebralVortexWatcher.class);
             if (watcher != null) {
-                targetPlayer.damage(watcher.getDraws(targetPlayer.getId()), source.getSourceId(), game);
+                targetPlayer.damage(watcher.getDraws(targetPlayer.getId()), source.getSourceId(), source, game);
                 return true;
             }
         }
@@ -84,7 +84,7 @@ class CerebralVortexWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DREW_CARD) {
+        if (event.getType() == GameEvent.EventType.DREW_CARD) {
             int count = 1;
             if (draws.containsKey(event.getPlayerId())) {
                 count += draws.get(event.getPlayerId());

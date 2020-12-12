@@ -128,7 +128,7 @@ class TragicArroganceffect extends OneShotEffect {
                 if (player != null) {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, playerId, game)) {
                         if (!choosenPermanent.contains(permanent)) {
-                            permanent.sacrifice(playerId, game);
+                            permanent.sacrifice(source, game);
                         }
                     }
                 }

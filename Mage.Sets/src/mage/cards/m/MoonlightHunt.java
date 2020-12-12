@@ -68,7 +68,7 @@ class MoonlightHuntEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && targetCreature != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true);
+                targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true);
             }
             return true;
         }

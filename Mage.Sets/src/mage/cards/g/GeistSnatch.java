@@ -56,9 +56,9 @@ class GeistSnatchCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+        game.getStack().counter(source.getFirstTarget(), source, game);
         Token token = new SpiritBlueToken();
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 }

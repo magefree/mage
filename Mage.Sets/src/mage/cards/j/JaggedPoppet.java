@@ -76,7 +76,7 @@ class JaggedPoppetDealsDamageEffect extends OneShotEffect {
 
             if (amount > 0) {
                 //Call the player discard function discarding cards equal to damage
-                player.discard(amount, false, source, game);
+                player.discard(amount, false, false, source, game);
             }
             return true;
         }
@@ -111,7 +111,7 @@ class JaggedPoppetDealtDamageEffect extends OneShotEffect {
 
             if (amount > 0) {
                 //Call the player discard function discarding cards equal to damage
-                player.discard(amount, false, source, game);
+                player.discard(amount, false, false, source, game);
             }
             return true;
         }

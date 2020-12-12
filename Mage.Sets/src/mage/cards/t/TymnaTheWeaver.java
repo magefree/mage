@@ -80,9 +80,9 @@ class TymnaTheWeaverEffect extends OneShotEffect {
             if (watcher != null) {
                 int cardsToDraw = watcher.opponentsThatGotCombatDamage(source.getControllerId(), game);
                 Cost cost = new PayLifeCost(cardsToDraw);
-                if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
-                        && cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
-                    controller.drawCards(cardsToDraw, source.getSourceId(), game);
+                if (cost.canPay(source, source, source.getControllerId(), game)
+                        && cost.pay(source, game, source, source.getControllerId(), false)) {
+                    controller.drawCards(cardsToDraw, source, game);
                 }
                 return true;
             }
@@ -102,7 +102,7 @@ class TymnaTheWeaverWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
             if (dEvent.isCombatDamage()) {
                 if (players.containsKey(event.getTargetId())) { // opponenets can die before number of opponents are checked

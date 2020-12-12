@@ -80,7 +80,7 @@ class AshlingThePilgrimEffect extends OneShotEffect {
             if (counters < 1) {
                 return false;
             }
-            sourcePermanent.removeCounters(CounterType.P1P1.createInstance(counters), game);
+            sourcePermanent.removeCounters(CounterType.P1P1.createInstance(counters), source, game);
             return new DamageEverythingEffect(counters, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
         }
         return true;

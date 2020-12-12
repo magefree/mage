@@ -44,7 +44,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
@@ -100,16 +100,16 @@ class AnnihilatorEffect extends OneShotEffect {
             int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), player.getId(), game));
             if (amount > 0) {
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);
-                if (target.canChoose(player.getId(), game)) {
+                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                     while (player.canRespond()
-                            && target.canChoose(player.getId(), game)
+                            && target.canChoose(source.getSourceId(), player.getId(), game)
                             && !target.isChosen()) {
                         player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                     }
                     target.getTargets().stream()
                             .map(game::getPermanent)
                             .filter(Objects::nonNull)
-                            .forEach(permanent -> permanent.sacrifice(source.getSourceId(), game));
+                            .forEach(permanent -> permanent.sacrifice(source, game));
                 }
                 return true;
             }

@@ -81,7 +81,7 @@ class RakdosTheShowstopperEffect extends OneShotEffect {
                     && !permanent.hasSubtype(SubType.DEVIL, game)
                     && !permanent.hasSubtype(SubType.IMP, game)
                     && !player.flipCoin(source, game, false)) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
         return true;

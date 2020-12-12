@@ -68,7 +68,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source.getSourceId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source, game)) {
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {
@@ -149,7 +149,7 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             return event.getTargetId().equals(objectToReturn.getSourceId());
         }
         return false;

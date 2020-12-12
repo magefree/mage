@@ -59,7 +59,7 @@ class TotemArmorEffect extends ReplacementEffectImpl {
             Permanent equipedPermanent = game.getPermanent(event.getTargetId());
             if (equipedPermanent != null) {
                 equipedPermanent.removeAllDamage(game);
-                sourcePermanent.destroy(source.getSourceId(), game, false);
+                sourcePermanent.destroy(source, game, false);
                 return true;
             }
         }

@@ -1,6 +1,7 @@
 
 package mage.cards.h;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -65,12 +66,12 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PAID_CUMULATIVE_UPKEEP;
+        return event.getType() == GameEvent.EventType.PAID_CUMULATIVE_UPKEEP;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId() != null && event.getSourceId().equals(this.getSourceId());
+        return event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

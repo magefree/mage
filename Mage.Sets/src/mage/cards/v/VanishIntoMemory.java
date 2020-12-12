@@ -72,7 +72,7 @@ class VanishIntoMemoryEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && permanent != null && sourceObject != null) {
             if (controller.moveCardsToExile(permanent, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                controller.drawCards(permanent.getPower().getValue(), source.getSourceId(), game);
+                controller.drawCards(permanent.getPower().getValue(), source, game);
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {
@@ -139,7 +139,7 @@ class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
@@ -153,7 +153,7 @@ class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
         if (permanent != null) {
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                you.discard(permanent.getToughness().getValue(), false, source, game);
+                you.discard(permanent.getToughness().getValue(), false, false, source, game);
             }
         }
         return false;

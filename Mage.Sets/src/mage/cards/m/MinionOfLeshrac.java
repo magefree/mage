@@ -90,12 +90,12 @@ class MinionLeshracEffect extends OneShotEffect {
             TargetControlledPermanent target = new TargetControlledPermanent(filterCreature);
             SacrificeTargetCost cost = new SacrificeTargetCost(target);
             if (controller.chooseUse(Outcome.AIDontUseIt, "Do you wish to sacrifice another creature to prevent the 5 damage to you?", source, game)
-                    && cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
-                    && cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+                    && cost.canPay(source, source, source.getControllerId(), game)
+                    && cost.pay(source, game, source, source.getControllerId(), true)) {
                 return true;
             }
-            if (controller.damage(5, minionLeshrac.getId(), game) > 0) {
-                minionLeshrac.tap(game);
+            if (controller.damage(5, minionLeshrac.getId(), source, game) > 0) {
+                minionLeshrac.tap(source, game);
                 return true;
             }
         }

@@ -79,7 +79,7 @@ class GoblinGameEffect extends OneShotEffect {
         for (Player player : game.getPlayers().values()) {
             if (player != null) {
                 game.informPlayers(player.getLogName() + " chose number " + numberChosen.get(player));
-                player.loseLife(numberChosen.get(player), game, false);
+                player.loseLife(numberChosen.get(player), game, source, false);
             }
         }
         for (Player player : game.getPlayers().values()) {
@@ -88,7 +88,7 @@ class GoblinGameEffect extends OneShotEffect {
                     game.informPlayers(player.getLogName() + " chose the lowest number");
                     Integer amount = (int) Math.ceil(player.getLife() / 2f);
                     if (amount > 0) {
-                        player.loseLife(amount, game, false);
+                        player.loseLife(amount, game, source, false);
                     }
                 }
             }

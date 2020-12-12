@@ -87,7 +87,7 @@ class TangleWireEffect extends OneShotEffect {
             for (UUID uuid : target.getTargets()) {
                 Permanent selectedPermanent = game.getPermanent(uuid);
                 if ( selectedPermanent != null ) {
-                    abilityApplied |= selectedPermanent.tap(game);
+                    abilityApplied |= selectedPermanent.tap(source, game);
                 }
             }
 

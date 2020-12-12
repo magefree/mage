@@ -32,21 +32,21 @@ public class PutCardFromHandOnTopOfLibraryCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         TargetCardInHand targetCardInHand = new TargetCardInHand();
         targetCardInHand.setRequired(false);
         Card card;
-        if (targetCardInHand.canChoose(controllerId, game)
-                && controller.choose(Outcome.PreventDamage, targetCardInHand, sourceId, game)) {
+        if (targetCardInHand.canChoose(source.getSourceId(), controllerId, game)
+                && controller.choose(Outcome.PreventDamage, targetCardInHand, source.getSourceId(), game)) {
             card = game.getCard(targetCardInHand.getFirstTarget());
-            paid = card != null && controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.HAND, true, true);
+            paid = card != null && controller.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, true);
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         return (controller != null
                 && !controller.getHand().isEmpty());

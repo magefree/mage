@@ -60,13 +60,13 @@ class SoulquakeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+            permanent.moveToZone(Zone.HAND, source, game, true);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (Card card : player.getGraveyard().getCards(filter2, game)) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    card.moveToZone(Zone.HAND, source, game, true);
                 }
             }
         }

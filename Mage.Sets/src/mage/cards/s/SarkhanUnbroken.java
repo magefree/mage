@@ -82,7 +82,7 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(1, source.getSourceId(), game);
+            controller.drawCards(1, source, game);
 
             game.fireUpdatePlayersEvent();
 

@@ -74,7 +74,7 @@ class HeatStrokeEffect extends OneShotEffect {
         for (MageObjectReference mor : toDestroy) {
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null && permanent.isCreature() && inROI.contains(permanent)){
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
                 toRet = true;
             }
         }

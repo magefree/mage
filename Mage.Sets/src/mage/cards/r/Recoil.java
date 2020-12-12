@@ -64,7 +64,7 @@ class RecoilEffect extends OneShotEffect {
         Player controller = game.getPlayer(target.getControllerId());
         if (controller != null) {
             controller.moveCards(target, Zone.HAND, source, game);
-            controller.discard(1, false, source, game);
+            controller.discard(1, false, false, source, game);
             return true;
         }
         return false;

@@ -73,7 +73,7 @@ class FesteringWoundEffect extends OneShotEffect {
         UUID id = this.getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(id);
         if (player != null) {
-            player.damage(amount, source.getSourceId(), game);
+            player.damage(amount, source.getSourceId(), source, game);
             return true;
         }
         return false;

@@ -100,7 +100,7 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token token = new RedElementalToken();
-        token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(2, game, source, source.getControllerId());
 
         token.getLastAddedTokenIds().stream().forEach(permId -> {
             Permanent permanent = game.getPermanent(permId);
@@ -205,12 +205,7 @@ class ChandraAcolyteOfFlameReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(this.cardId);
-        if (controller != null && card != null) {
-            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.STACK, true);
-            return true;
-        }
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
         return false;
     }
 

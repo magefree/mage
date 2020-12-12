@@ -77,7 +77,7 @@ class GallopingLizrogEffect extends OneShotEffect {
                 = new RemoveVariableCountersTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE, CounterType.P1P1);
         int toPay = variableCost.announceXValue(source, game);
         Cost cost = variableCost.getFixedCostsFromAnnouncedValue(toPay);
-        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+        if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;
         }
         return new AddCountersSourceEffect(

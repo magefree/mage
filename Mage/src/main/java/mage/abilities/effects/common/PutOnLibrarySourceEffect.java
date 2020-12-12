@@ -49,12 +49,12 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
             return false;
         }
         if (sourceObject instanceof Permanent) {
-            ((Permanent) sourceObject).moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
+            ((Permanent) sourceObject).moveToZone(Zone.LIBRARY, source, game, onTop);
             return true;
         } else if (sourceObject instanceof Card && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             for (Player player : game.getPlayers().values()) {
                 if (player.getGraveyard().contains(sourceObject.getId())) {
-                    ((Card) sourceObject).moveToZone(Zone.LIBRARY, source.getSourceId(), game, onTop);
+                    ((Card) sourceObject).moveToZone(Zone.LIBRARY, source, game, onTop);
                     return true;
                 }
             }

@@ -73,7 +73,7 @@ class GolgothianSylexEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-             permanent.sacrifice(source.getSourceId(), game);
+             permanent.sacrifice(source, game);
         }
         return true;
     }

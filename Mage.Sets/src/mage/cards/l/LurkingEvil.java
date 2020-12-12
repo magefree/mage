@@ -17,8 +17,10 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -56,25 +58,26 @@ class LurkingEvilCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         return controller != null && (controller.getLife() < 1 || controller.canPayLifeCost(ability));
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            int currentLife = controller.getLife();
-            int lifeToPay = (currentLife + currentLife % 2) / 2; // Divide by two and round up.
-            if (lifeToPay < 0) {
-                this.paid = true;
-            } else {
-                this.paid = (controller.loseLife(lifeToPay, game, false) == lifeToPay);
-            }
-            return this.paid;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        int currentLife = controller.getLife();
+        int lifeToPay = Math.max(0, (currentLife + currentLife % 2) / 2); // Divide by two and round up.
+        if (lifeToPay <= 0) {
+            this.paid = true;
+        } else {
+            this.paid = CardUtil.tryPayLife(lifeToPay, controller, source, game);
+        }
+        return this.paid;
     }
 
     @Override

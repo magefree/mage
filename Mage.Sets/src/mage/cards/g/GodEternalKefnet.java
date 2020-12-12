@@ -97,7 +97,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             Card blueprint = topCard.copy();
             blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
-            you.moveCardToHandWithInfo(copiedCard, source.getSourceId(), game, true); // The copy is created in and cast from your hand.
+            you.moveCardToHandWithInfo(copiedCard, source, game, true); // The copy is created in and cast from your hand.
             you.cast(copiedCard.getSpellAbility(), game, false, new ApprovingObject(source, game));
         }
 
@@ -107,7 +107,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DRAW_CARD;
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     String getAppliedMark(Game game, Ability source) {

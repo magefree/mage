@@ -55,9 +55,9 @@ class CivicSaberColorCount implements DynamicValue {
     }
  
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = game.getPermanent(sourceAbility.getSourceId());
         if (equipment != null) {
             Permanent permanent = game.getPermanent(equipment.getAttachedTo());
             if (permanent != null) {

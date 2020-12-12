@@ -63,7 +63,7 @@ class InterpretTheSignsEffect extends OneShotEffect {
             return true;
         }
         controller.revealCards(source, new CardsImpl(card), game);
-        controller.drawCards(card.getConvertedManaCost(), source.getSourceId(), game);
+        controller.drawCards(card.getConvertedManaCost(), source, game);
         return true;
     }
 }

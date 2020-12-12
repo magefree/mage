@@ -42,17 +42,17 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+            if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), game)) {
                 Set<Card> permanentsToReturn = new HashSet<>();
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;
                     }
-                    permanentsToReturn.add((Card) permanent);
+                    permanentsToReturn.add(permanent);
                 }
                 controller.moveCards(permanentsToReturn, Zone.HAND, ability, game);
                 paid = true;
@@ -62,8 +62,8 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

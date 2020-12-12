@@ -85,7 +85,7 @@ public final class RockHydra extends CardImpl {
             preventDamageAction(event, source, game);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                permanent.removeCounters(CounterType.P1P1.createInstance(damage), game); //MTG ruling Rock Hydra loses counters even if the damage isn't prevented
+                permanent.removeCounters(CounterType.P1P1.createInstance(damage), source, game); //MTG ruling Rock Hydra loses counters even if the damage isn't prevented
             }
             return false;
         }

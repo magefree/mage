@@ -94,7 +94,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
                     // TODO: add AI support to find max number of possible activations (from available mana)
                     //  canPay checks only single mana available, not total mana usage
-                    if (additionalCost.canPay(ability, sourceId, ability.getControllerId(), game)
+                    if (additionalCost.canPay(ability, this, ability.getControllerId(), game)
                             && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt,
                                     new StringBuilder("Pay ").append(times).append(
                                             additionalCost.getText(false)).append(" ?").toString(), ability, game)) {

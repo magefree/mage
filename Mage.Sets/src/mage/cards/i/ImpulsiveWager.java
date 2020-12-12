@@ -68,7 +68,7 @@ class ImpulsiveWagerEffect extends OneShotEffect {
                     effect.setTargetPointer(getTargetPointer());
                     effect.apply(game, source);
                 } else {
-                    player.drawCards(2, source.getSourceId(), game);
+                    player.drawCards(2, source, game);
                 }
 
             }

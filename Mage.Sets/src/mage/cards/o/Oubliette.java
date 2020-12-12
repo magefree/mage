@@ -69,7 +69,7 @@ class OubliettePhaseOutEffect extends OneShotEffect {
             return false;
         }
         MageObjectReference mor = new MageObjectReference(permanent, game);
-        permanent.tap(game);
+        permanent.tap(source, game);
         permanent.phaseOut(game);
         game.addEffect(new OubliettePhasePreventEffect(mor), source);
         game.addDelayedTriggeredAbility(new OublietteDelayedTriggeredAbility(mor), source);

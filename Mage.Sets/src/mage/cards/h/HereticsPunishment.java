@@ -68,12 +68,12 @@ class HereticsPunishmentEffect extends OneShotEffect {
                 .orElse(0);
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(maxCost, source.getSourceId(), game, false, true);
+            permanent.damage(maxCost, source.getSourceId(), source, game, false, true);
             return true;
         }
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.damage(maxCost, source.getSourceId(), game);
+            targetPlayer.damage(maxCost, source.getSourceId(), source, game);
             return true;
         }
         return false;

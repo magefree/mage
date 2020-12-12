@@ -88,12 +88,12 @@ class TheBattleOfYavinEffect extends OneShotEffect {
             if (lifePaid > 0) {
                 Player player = game.getPlayer(opponent.getId());
                 if (player != null) {
-                    player.loseLife(lifePaid, game, false);
+                    player.loseLife(lifePaid, game, source, false);
                 }
             }
 
             for (Permanent permanent : sacrifices) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
         return true;

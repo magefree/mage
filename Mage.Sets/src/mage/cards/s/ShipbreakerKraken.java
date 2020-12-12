@@ -101,7 +101,7 @@ class ShipbreakerKrakenReplacementEffect extends ContinuousRuleModifyingEffectIm
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 discard();
                 return false;
@@ -126,7 +126,9 @@ class ShipbreakerKrakenWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL
+                && event.getPlayerId().equals(controllerId)
+                && event.getTargetId().equals(sourceId)) {
             condition = true;
             game.replaceEvent(event);
             return;

@@ -56,7 +56,7 @@ class LifesmithEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Cost cost = ManaUtil.createManaCost(1, false);
-        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+        if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.gainLife(3, game, source);

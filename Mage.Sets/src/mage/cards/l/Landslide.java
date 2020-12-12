@@ -72,13 +72,13 @@ class LandslideEffect extends OneShotEffect {
                 int amount = 0;
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+                    if (permanent != null && permanent.sacrifice(source, game)) {
                         amount++;
                     }
                 }
                 Player player = game.getPlayer(source.getFirstTarget());
                 if (player != null) {
-                    player.damage(amount, source.getSourceId(), game);
+                    player.damage(amount, source.getSourceId(), source, game);
                 }
             }
             return true;

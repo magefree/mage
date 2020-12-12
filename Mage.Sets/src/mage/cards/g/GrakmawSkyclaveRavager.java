@@ -96,8 +96,7 @@ class GrakmawSkyclaveRavagerEffect extends OneShotEffect {
         if (permanent != null) {
             counters = permanent.getCounters(game).getCount(CounterType.P1P1);
         }
-        return new GrakmawSkyclaveRavagerHydraToken(counters).putOntoBattlefield(
-                1, game, source.getSourceId(), source.getControllerId()
-        );
+        return new GrakmawSkyclaveRavagerHydraToken(counters)
+                .putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

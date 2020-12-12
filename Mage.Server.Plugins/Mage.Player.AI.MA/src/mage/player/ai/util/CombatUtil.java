@@ -354,28 +354,6 @@ public final class CombatUtil {
         if (attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
             sim.getBattlefield().removePermanent(attacker.getId());
         }
-        
-        /*
-        sim.getPlayer(defendingPlayerId).declareBlocker(blocker.getId(), attacker.getId(), sim);
-        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
-
-        sim.checkStateAndTriggered();
-        while (!sim.getStack().isEmpty()) {
-            sim.getStack().resolve(sim);
-            sim.applyEffects();
-        }
-        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
-
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
-        simulateStep(sim, new EndOfCombatStep());
-        // The following commented out call produces random freezes.
-        //sim.checkStateAndTriggered();
-        while (!sim.getStack().isEmpty()) {
-            sim.getStack().resolve(sim);
-            sim.applyEffects();
-        }
-        */
 
         return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));
     }

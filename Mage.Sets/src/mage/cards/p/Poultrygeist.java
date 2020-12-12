@@ -64,11 +64,11 @@ class PoultrygeistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int result = controller.rollDice(game, 6);
+            int result = controller.rollDice(source, game, 6);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 if (result == 1) {
-                    return permanent.sacrifice(source.getSourceId(), game);
+                    return permanent.sacrifice(source, game);
                 } else {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
                 }

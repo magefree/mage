@@ -69,7 +69,7 @@ class WashOutEffect extends OneShotEffect {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(color));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                permanent.moveToZone(Zone.HAND, source, game, true);
             }
             return true;
         }

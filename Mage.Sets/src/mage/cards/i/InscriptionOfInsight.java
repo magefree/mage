@@ -81,8 +81,8 @@ class InscriptionOfInsightEffect extends OneShotEffect {
             return false;
         }
 
-        return new CustomIllusionToken(player.getHand().size()).putOntoBattlefield(
-                1, game, source.getSourceId(), source.getFirstTarget()
+        return new CustomIllusionToken(player.getHand().size())
+                .putOntoBattlefield(1, game, source, source.getFirstTarget()
         );
     }
 }

@@ -35,7 +35,7 @@ public class DamageSelfEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.damage(amount, source.getSourceId(), game, false, true);
+            permanent.damage(amount, source.getSourceId(), source, game, false, true);
             return true;
         }
         return false;

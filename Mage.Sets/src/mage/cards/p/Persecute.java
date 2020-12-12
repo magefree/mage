@@ -71,7 +71,7 @@ class PersecuteEffect extends OneShotEffect {
         FilterCard filterCard = new FilterCard();
         filterCard.add(new ColorPredicate(choice.getColor()));
         targetPlayer.revealCards(source, targetPlayer.getHand(), game);
-        targetPlayer.discard(new CardsImpl(targetPlayer.getHand().getCards(filterCard, game)), source, game);
+        targetPlayer.discard(new CardsImpl(targetPlayer.getHand().getCards(filterCard, game)), false, source, game);
         return true;
     }
 }

@@ -87,14 +87,14 @@ class DrainLifeEffect extends OneShotEffect {
             } else {
                 return false;
             }
-            permanent.damage(amount, source.getSourceId(), game);
+            permanent.damage(amount, source.getSourceId(), source, game);
         } else {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player == null) {
                 return false;
             }
             lifetogain = Math.min(player.getLife(), lifetogain);
-            player.damage(amount, source.getSourceId(), game);
+            player.damage(amount, source.getSourceId(), source, game);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {

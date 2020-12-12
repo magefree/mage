@@ -10,6 +10,7 @@ import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.game.Game;
+import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -164,8 +165,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                                 Spell chosenCopy = targetCopyMap.get(chosenId);
                                 if (chosenCopy != null) {
                                     game.getStack().push(chosenCopy);
-                                    game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT,
-                                            chosenCopy.getId(), spell.getId(), source.getControllerId()));
+                                    game.fireEvent(new CopiedStackObjectEvent(spell, chosenCopy, source.getControllerId()));
                                     toDelete.add(chosenId);
                                     madeACopy = true;
                                 }

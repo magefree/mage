@@ -61,11 +61,11 @@ class TributeToHungerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && opponent != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-            if (target.canChoose(opponent.getId(), game)) {
+            if (target.canChoose(source.getSourceId(), opponent.getId(), game)) {
                 opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                     controller.gainLife(permanent.getToughness().getValue(), game, source);
                 }
             }

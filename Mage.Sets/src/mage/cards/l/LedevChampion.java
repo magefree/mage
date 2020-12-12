@@ -80,12 +80,12 @@ class LedevChampionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int tappedAmount = 0;
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-        if (target.canChoose(source.getControllerId(), game)
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
             for (UUID creatureId : target.getTargets()) {
                 Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
-                    creature.tap(game);
+                    creature.tap(source, game);
                     tappedAmount++;
                 }
             }

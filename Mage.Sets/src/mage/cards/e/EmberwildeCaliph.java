@@ -115,7 +115,7 @@ class EmberwildeCaliphEffect extends OneShotEffect {
         if (controller != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
-                controller.loseLife(amount, game, false);
+                controller.loseLife(amount, game, source, false);
             }
             return true;
         }

@@ -90,7 +90,7 @@ class PlaguecrafterEffect extends OneShotEffect {
                     CardType.PLANESWALKER.getPredicate()
             ));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            if (target.canChoose(player.getId(), game)) {
+            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                 while (!target.isChosen() && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
@@ -103,7 +103,7 @@ class PlaguecrafterEffect extends OneShotEffect {
         for (UUID permID : perms) {
             Permanent permanent = game.getPermanent(permID);
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
 

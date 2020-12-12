@@ -63,7 +63,7 @@ class NoeticScalesEffect extends OneShotEffect {
             int numberOfCardsInHand = player.getHand().size();
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                 if (creature.getPower().getValue() > numberOfCardsInHand) {
-                    if (creature.moveToZone(Zone.HAND, source.getId(), game, false)) {
+                    if (creature.moveToZone(Zone.HAND, source, game, false)) {
                         game.informPlayers(player.getLogName() + " moves " + creature.getLogName() + " from the battlefield to their hand.");
                     }
                 }

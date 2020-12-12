@@ -61,7 +61,7 @@ class MijaeDjinnEffect extends OneShotEffect {
                 return true;
             } else {
                 creature.removeFromCombat(game);
-                creature.tap(game);
+                creature.tap(source, game);
                 return true;
                 }
             }

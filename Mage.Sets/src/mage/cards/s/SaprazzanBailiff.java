@@ -82,7 +82,7 @@ class SaprazzanBailiffEffect extends OneShotEffect {
                 for (UUID cid : player.getGraveyard().copy()) {
                     Card card = game.getCard(cid);
                     if (card != null && (card.isArtifact() || card.isEnchantment())) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                        controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
                     }
                 }
             }

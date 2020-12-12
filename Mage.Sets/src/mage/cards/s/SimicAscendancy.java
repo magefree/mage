@@ -93,7 +93,9 @@ class SimicAscendancyTriggeredAbility extends TriggeredAbilityImpl {
                     && permanent.isCreature()
                     && permanent.isControlledBy(this.getControllerId())) {
                 this.getEffects().clear();
-                this.addEffect(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(event.getAmount())));
+                if (event.getAmount() > 0) {
+                    this.addEffect(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(event.getAmount())));
+                }
                 return true;
             }
         }

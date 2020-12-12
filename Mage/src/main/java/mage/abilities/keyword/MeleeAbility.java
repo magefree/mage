@@ -51,10 +51,10 @@ class MeleeWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.BEGIN_COMBAT_STEP_PRE) {
+        if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
             this.playersAttacked.clear();
         }
-        else if (event.getType() == EventType.ATTACKER_DECLARED) {
+        else if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Set<UUID> attackedPlayers = this.playersAttacked.getOrDefault(event.getPlayerId(), new HashSet<>(1));
             attackedPlayers.add(event.getTargetId());
             this.playersAttacked.put(event.getPlayerId(), attackedPlayers);

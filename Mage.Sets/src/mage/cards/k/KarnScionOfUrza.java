@@ -171,7 +171,7 @@ class KarnMinus1Effect extends OneShotEffect {
                         card = game.getCard(target.getFirstTarget());
                     }
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        card.moveToZone(Zone.HAND, source, game, false);
                         Cards revealCard = new CardsImpl();
                         revealCard.add(card);
                         controller.revealCards("BLAHALJALJDSLAKJD", revealCard, game);

@@ -61,7 +61,7 @@ class OverwhelmingForcesEffect extends OneShotEffect {
         if (controller != null && getTargetPointer().getFirst(game, source) != null) {
             int destroyedCreature = 0;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
-                if (permanent.destroy(source.getSourceId(), game, false)) {
+                if (permanent.destroy(source, game, false)) {
                     destroyedCreature++;
                 }
             }

@@ -75,7 +75,7 @@ class FulfillContractEffect extends OneShotEffect {
         Permanent permanentToDestroy = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent permanentToPutCounter = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (controller != null) {
-            if (permanentToDestroy != null && permanentToDestroy.destroy(source.getSourceId(), game, false)) {
+            if (permanentToDestroy != null && permanentToDestroy.destroy(source, game, false)) {
                 if (permanentToPutCounter != null) {
                     permanentToPutCounter.addCounters(CounterType.P1P1.createInstance(), source, game);
                 }

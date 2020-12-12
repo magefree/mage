@@ -89,7 +89,7 @@ class MeanderingTowershellEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            controller.moveCardToExileWithInfo(sourcePermanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+            controller.moveCardToExileWithInfo(sourcePermanent, null, "", source, game, Zone.BATTLEFIELD, true);
             game.addDelayedTriggeredAbility(new AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility(), source);
             return true;
         }

@@ -74,7 +74,7 @@ class CruelRealityTriggeredAbiilty extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -128,12 +128,12 @@ class CruelRealityEffect extends OneShotEffect {
                 if (cursedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
                     Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
                     if (objectToBeSacrificed != null) {
-                        if (objectToBeSacrificed.sacrifice(source.getId(), game)) {
+                        if (objectToBeSacrificed.sacrifice(source, game)) {
                             return true;
                         }
                     }
                 }
-            cursedPlayer.loseLife(5, game, false);
+            cursedPlayer.loseLife(5, game, source, false);
             return true;
         }
         return false;

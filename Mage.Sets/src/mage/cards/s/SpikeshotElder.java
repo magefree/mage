@@ -69,12 +69,12 @@ class SpikeshotElderEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(damage, sourcePermanent.getId(), game, false, true);
+            permanent.damage(damage, sourcePermanent.getId(), source, game, false, true);
             return true;
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(damage, sourcePermanent.getId(), game);
+            player.damage(damage, sourcePermanent.getId(), source, game);
             return true;
         }
         return false;

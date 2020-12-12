@@ -72,7 +72,7 @@ class InquisitionEffect extends OneShotEffect {
                     }
                 }
                 if (cardsFound > 0) {
-                    targetPlayer.damage(cardsFound, source.getSourceId(), game);
+                    targetPlayer.damage(cardsFound, source.getSourceId(), source, game);
                 }
                 return true;
             }

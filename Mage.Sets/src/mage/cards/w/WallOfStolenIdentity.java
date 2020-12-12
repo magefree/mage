@@ -122,7 +122,7 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
             }
         });
 
-        copyFromPermanent.tap(game);
+        copyFromPermanent.tap(source, game);
         // Incredibly, you can't just add a fixed target to a continuousrulemodifyingeffect, thus the workaround.
         ContinuousRuleModifyingEffect effect = new DontUntapInControllersUntapStepSourceEffect();
         Ability ability = new SimpleStaticAbility(effect);

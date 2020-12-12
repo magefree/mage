@@ -69,7 +69,7 @@ class CannibalizeEffect extends OneShotEffect {
                 if (creature != null) {
                     if ((count == 0 && controller.chooseUse(Outcome.Exile, "Exile " + creature.getLogName() + '?', source, game))
                             || (count == 1 && !exileDone)) {
-                        controller.moveCardToExileWithInfo(creature, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                        controller.moveCardToExileWithInfo(creature, null, "", source, game, Zone.BATTLEFIELD, true);
                         exileDone = true;
                     } else {
                         creature.addCounters(CounterType.P1P1.createInstance(2), source, game);

@@ -65,9 +65,9 @@ public final class Pariah extends CardImpl {
             DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null) {
-                Permanent p = game.getPermanent(equipment.getAttachedTo());
-                if (p != null) {
-                    p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+                Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+                if (permanent != null) {
+                    permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
                     return true;
                 }
             }

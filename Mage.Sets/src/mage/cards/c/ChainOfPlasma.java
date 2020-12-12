@@ -63,19 +63,19 @@ class ChainOfPlasmaEffect extends OneShotEffect {
             Player affectedPlayer = null;
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                player.damage(3, source.getSourceId(), game);
+                player.damage(3, source.getSourceId(), source, game);
                 affectedPlayer = player;
             } else {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent.damage(3, source.getSourceId(), game, false, true);
+                    permanent.damage(3, source.getSourceId(), source, game, false, true);
                     affectedPlayer = game.getPlayer(permanent.getControllerId());
                 }
             }
             if (affectedPlayer != null) {
                 if (affectedPlayer.chooseUse(Outcome.Copy, "Discard a card to copy the spell?", source, game)) {
                     Cost cost = new DiscardCardCost();
-                    if (cost.pay(source, game, source.getSourceId(), affectedPlayer.getId(), false, null)) {
+                    if (cost.pay(source, game, source, affectedPlayer.getId(), false, null)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
                             spell.createCopyOnStack(game, source, affectedPlayer.getId(), true);

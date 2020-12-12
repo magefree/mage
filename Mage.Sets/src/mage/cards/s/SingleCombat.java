@@ -87,7 +87,7 @@ class SingleCombatEffect extends OneShotEffect {
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterSac, source.getControllerId(), game)) {
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
         return true;
     }

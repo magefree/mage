@@ -71,16 +71,16 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
+            if (enchantedLand != null && enchantedLand.isLand()) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchantedLand.getControllerId()));
                 return true;
             }
         }

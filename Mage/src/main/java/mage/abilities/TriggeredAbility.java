@@ -28,7 +28,7 @@ public interface TriggeredAbility extends Ability {
      * This method checks if the event has to trigger the ability. It's
      * important to do nothing unique within this method, that can't be done
      * multiple times. Because some abilities call this to check if an ability
-     * is relevant (e.g. Torpor Orb), so the method is calle dmultiple times for
+     * is relevant (e.g. Torpor Orb), so the method is called multiple times for
      * the same event.
      *
      * @param event

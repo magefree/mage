@@ -130,7 +130,7 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
                 && (permanent.hasSubtype(SubType.PLAINS, game)
                 || permanent.hasSubtype(SubType.ISLAND, game)

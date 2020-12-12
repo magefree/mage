@@ -95,7 +95,7 @@ class JalumGrifterEffect extends OneShotEffect {
             
             Target target = new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent(), true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             }
@@ -125,12 +125,12 @@ class JalumGrifterEffect extends OneShotEffect {
                     if (card.getId().equals(sourceCard.getId())) {
                         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                         if (sourcePermanent != null) {
-                            sourcePermanent.sacrifice(source.getSourceId(), game);
+                            sourcePermanent.sacrifice(source, game);
                         }
                     } else {
                         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                         if (permanent != null) {
-                            permanent.destroy(source.getSourceId(), game, false);
+                            permanent.destroy(source, game, false);
                         }
                     }
                 }

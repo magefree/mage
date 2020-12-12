@@ -122,7 +122,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
                 toDelete.add(entry.getKey());
                 continue;
             }
-            permanent.changeControllerId(lockedControllers.get(permanent.getId()), game);
+            permanent.changeControllerId(lockedControllers.get(permanent.getId()), game, source);
             permanent.getAbilities().setControllerId(lockedControllers.get(permanent.getId()));
             if (destroyAttachedAuras) {
                 FilterPermanent filter = new FilterPermanent();
@@ -130,7 +130,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
                 for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
                     Permanent attachment = game.getPermanent(attachmentId);
                     if (attachment != null && filter.match(attachment, game)) {
-                        attachment.destroy(source.getSourceId(), game, false);
+                        attachment.destroy(source, game, false);
                     }
                 }
             }

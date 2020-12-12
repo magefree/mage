@@ -61,7 +61,7 @@ class FracturedIdentityEffect extends OneShotEffect {
             return false;
         }
 
-        permanent.moveToExile(null, null, source.getSourceId(), game);
+        permanent.moveToExile(null, null, source, game);
         UUID controllerId = permanent.getControllerId();
         for (UUID opponentId : game.getOpponents(controllerId)) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(opponentId, null, false);

@@ -86,7 +86,7 @@ class ExplosionEffect extends OneShotEffect {
         effect.apply(game, source);
         Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (player != null) {
-            player.drawCards(xValue, source.getSourceId(), game);
+            player.drawCards(xValue, source, game);
         }
         return true;
     }

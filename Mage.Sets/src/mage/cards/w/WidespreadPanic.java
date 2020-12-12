@@ -59,11 +59,12 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LIBRARY_SHUFFLED;
+        return event.getType() == GameEvent.EventType.LIBRARY_SHUFFLED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // event.getSourceId() must be null for default shuffle like mulligan
         if (event.getPlayerId().equals(game.getControllerId(event.getSourceId()))) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -106,7 +107,7 @@ class WidespreadPanicEffect extends OneShotEffect {
                 shuffler.choose(Outcome.Detriment, target, source.getSourceId(), game);
                 Card card = shuffler.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    shuffler.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
+                    shuffler.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, false);
 
                 }
             }

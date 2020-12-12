@@ -73,7 +73,7 @@ class BondersOrnamentEffect extends OneShotEffect {
                     .noneMatch("Bonder's Ornament"::equals)) {
                 continue;
             }
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
         }
         return true;
     }

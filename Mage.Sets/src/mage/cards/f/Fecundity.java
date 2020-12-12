@@ -61,7 +61,7 @@ class FecundityEffect extends OneShotEffect {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 if (controller.chooseUse(outcome, "Draw a card?", source, game)) {
-                    controller.drawCards(1, source.getSourceId(), game);
+                    controller.drawCards(1, source, game);
                 }
                 return true;
             }

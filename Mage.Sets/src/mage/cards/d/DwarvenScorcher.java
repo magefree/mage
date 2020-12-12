@@ -69,8 +69,8 @@ class DwarvenScorcherEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(permanent.getControllerId());
         if (player != null && player.chooseUse(outcome, "Have this spell deal 2 damage to you?", source, game)) {
-            return player.damage(2, source.getSourceId(), game) > 0;
+            return player.damage(2, source.getSourceId(), source, game) > 0;
         }
-        return permanent.damage(1, source.getSourceId(), game) > 0;
+        return permanent.damage(1, source.getSourceId(), source, game) > 0;
     }
 }

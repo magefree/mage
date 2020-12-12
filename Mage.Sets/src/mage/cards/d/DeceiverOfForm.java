@@ -88,7 +88,7 @@ class DeceiverOfFormEffect extends OneShotEffect {
                     }
                 }
                 if (controller.chooseUse(outcome, "Move " + copyFromCard.getLogName() + " to the bottom of your library?", source, game)) {
-                    controller.moveCardToLibraryWithInfo(copyFromCard, source.getSourceId(), game, Zone.LIBRARY, false, true);
+                    controller.moveCardToLibraryWithInfo(copyFromCard, source, game, Zone.LIBRARY, false, true);
                 }
             }
             return true;

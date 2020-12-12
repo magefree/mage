@@ -89,7 +89,7 @@ class NoxiousVaporsEffect extends OneShotEffect {
             chosenCards.addAll(player.getHand().getCards(StaticFilters.FILTER_CARD_LAND, game));
             Cards cards = player.getHand().copy();
             cards.removeIf(chosenCards.stream().map(MageItem::getId).collect(Collectors.toSet())::contains);
-            player.discard(cards, source, game);
+            player.discard(cards, false, source, game);
         }
         return true;
     }

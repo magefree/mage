@@ -79,13 +79,13 @@ class UnnaturalHungerEffect extends OneShotEffect {
                 Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter));
                 Player enchantedCreatureController = game.getPlayer(attachedTo.getControllerId());
                 if (enchantedCreatureController != null
-                        && cost.canPay(source, source.getSourceId(), enchantedCreatureController.getId(), game)
+                        && cost.canPay(source, source, enchantedCreatureController.getId(), game)
                         && enchantedCreatureController.chooseUse(outcome, "Sacrifice another creature to prevent " + attachedTo.getPower().getValue() + " damage?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), enchantedCreatureController.getId(), true)) {
+                        && cost.pay(source, game, source, enchantedCreatureController.getId(), true)) {
                 }
                 if (enchantedCreatureController != null
                         && !cost.isPaid()) {
-                    enchantedCreatureController.damage(attachedTo.getPower().getValue(), source.getSourceId(), game);
+                    enchantedCreatureController.damage(attachedTo.getPower().getValue(), source.getSourceId(), source, game);
                 }
                 return true;
             }

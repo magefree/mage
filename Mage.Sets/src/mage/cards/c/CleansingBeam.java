@@ -61,10 +61,10 @@ class CleansingBeamEffect extends OneShotEffect {
         Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         if (target != null) {
             ObjectColor color = target.getColor(game);
-            target.damage(2, source.getSourceId(), game);
+            target.damage(2, source.getSourceId(), source, game);
             for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
-                    p.damage(2, source.getSourceId(), game, false, true);
+                    p.damage(2, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;

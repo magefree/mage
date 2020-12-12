@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TargetEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -67,7 +68,7 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
             Player targetPlayer = game.getPlayer(((StackObject) object).getStackAbility().getFirstTarget());
             if (targetPlayer != null) {
                 for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                    if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                    if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                         possibleTargets.add(card.getId());
                     }
                 }

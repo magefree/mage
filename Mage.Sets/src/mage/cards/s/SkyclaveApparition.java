@@ -110,9 +110,7 @@ class SkyclaveApparitionEffect extends OneShotEffect {
                 .mapToInt(MageObject::getConvertedManaCost)
                 .sum();
         for (UUID playerId : owners) {
-            new CustomIllusionToken(totalCMC).putOntoBattlefield(
-                    1, game, source.getSourceId(), playerId
-            );
+            new CustomIllusionToken(totalCMC).putOntoBattlefield(1, game, source, playerId);
         }
         return true;
     }

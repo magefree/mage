@@ -131,7 +131,7 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
                 int xValue = spell.getSpellAbility().getManaCostsToPay().getX();
 
                 Token hydraToken = new ZaxaraTheExemplaryHydraToken();
-                hydraToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                hydraToken.putOntoBattlefield(1, game, source, source.getControllerId());
 
                 for (UUID tokenId : hydraToken.getLastAddedTokenIds()) {
                     Permanent permanent = game.getPermanent(tokenId);

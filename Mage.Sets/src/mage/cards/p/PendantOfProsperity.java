@@ -79,7 +79,7 @@ class PendantOfProsperityEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(1, source.getSourceId(), game);
+        player.drawCards(1, source, game);
         if (!player.chooseUse(outcome, "Put a land into play from your hand?", source, game)) {
             return true;
         }

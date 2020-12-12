@@ -28,8 +28,8 @@ public abstract class CostImpl implements Cost {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        return pay(ability, game, sourceId, controllerId, noMana, this);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana) {
+        return pay(ability, game, source, controllerId, noMana, this);
     }
 
     @Override

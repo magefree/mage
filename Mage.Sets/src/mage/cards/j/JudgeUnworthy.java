@@ -70,7 +70,7 @@ class JudgeUnworthyEffect extends OneShotEffect {
                 controller.revealCards(sourceCard.getName(), new CardsImpl(card), game);
                 Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
+                    targetCreature.damage(card.getConvertedManaCost(), source.getSourceId(), source, game, false, true);
                     return true;
                 }
             }

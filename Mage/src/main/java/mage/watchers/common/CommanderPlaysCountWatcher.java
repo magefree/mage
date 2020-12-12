@@ -7,10 +7,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Calcs commanders play count only from command zone (spell or land)
@@ -33,13 +30,21 @@ public class CommanderPlaysCountWatcher extends Watcher {
                 && event.getType() != EventType.SPELL_CAST) {
             return;
         }
+        final UUID objectId;
+        if (event.getType() == EventType.LAND_PLAYED) {
+            objectId = event.getTargetId();
+        } else if (event.getType() == EventType.SPELL_CAST) {
+            objectId = event.getSourceId();
+        } else {
+            objectId = null;
+        }
         boolean isCommanderObject = game
                 .getPlayerList()
                 .stream()
                 .map(game::getPlayer)
                 .map(game::getCommandersIds)
                 .flatMap(Collection::stream)
-                .anyMatch(event.getSourceId()::equals);
+                .anyMatch(id -> Objects.equals(id, objectId));
         if (!isCommanderObject || event.getZone() != Zone.COMMAND) {
             return;
         }

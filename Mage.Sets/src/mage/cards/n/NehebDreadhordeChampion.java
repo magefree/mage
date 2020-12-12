@@ -83,13 +83,13 @@ class NehebDreadhordeChampionEffect extends OneShotEffect {
         if (!player.choose(outcome, target, source.getSourceId(), game)) {
             return false;
         }
-        int counter = player.discard(new CardsImpl(target.getTargets()), source, game).size();
+        int counter = player.discard(new CardsImpl(target.getTargets()), false, source, game).size();
         Mana mana = new Mana();
         if (counter < 1) {
             return true;
         }
         IntStream.range(0, counter).forEach(x -> mana.increaseRed());
-        player.drawCards(counter, source.getSourceId(), game);
+        player.drawCards(counter, source, game);
         player.getManaPool().addMana(mana, game, source, true);
         return true;
     }

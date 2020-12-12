@@ -82,7 +82,7 @@ class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TRANSFORM;
+        return event.getType() == GameEvent.EventType.TRANSFORM;
     }
     
     @Override

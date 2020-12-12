@@ -82,9 +82,9 @@ class KineticAugurEffect extends OneShotEffect {
         }
         TargetDiscard target = new TargetDiscard(0, 2, StaticFilters.FILTER_CARD, player.getId());
         player.choose(Outcome.AIDontUseIt, player.getHand(), target, game);
-        int discarded = player.discard(new CardsImpl(target.getTargets()), source, game).size();
+        int discarded = player.discard(new CardsImpl(target.getTargets()), false, source, game).size();
         if (discarded > 0) {
-            player.drawCards(discarded, source.getSourceId(), game);
+            player.drawCards(discarded, source, game);
         }
         return true;
     }

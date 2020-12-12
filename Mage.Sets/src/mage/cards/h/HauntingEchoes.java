@@ -59,7 +59,7 @@ class HauntingEchoesEffect extends OneShotEffect {
         if (targetPlayer != null && player != null) {
             for (Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if (!StaticFilters.FILTER_CARD_BASIC_LAND.match(card, game)) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
+                    card.moveToExile(null, "", source, game);
 
                     String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
                     FilterCard filterCard = new FilterCard("cards named " + nameToSearch);
@@ -73,7 +73,7 @@ class HauntingEchoesEffect extends OneShotEffect {
                     for (UUID cardId : targets) {
                         Card libraryCard = game.getCard(cardId);
                         if (libraryCard != null) {
-                            libraryCard.moveToExile(null, "", source.getSourceId(), game);
+                            libraryCard.moveToExile(null, "", source, game);
                         }
                     }
                 }

@@ -63,7 +63,7 @@ class SoldeviDiggerEffect extends OneShotEffect {
                 topCard = card;
             }
             if (topCard != null) {
-                return controller.moveCardToLibraryWithInfo(topCard, source.getSourceId(), game, Zone.GRAVEYARD, false, true);
+                return controller.moveCardToLibraryWithInfo(topCard, source, game, Zone.GRAVEYARD, false, true);
             }
             return true;
         }

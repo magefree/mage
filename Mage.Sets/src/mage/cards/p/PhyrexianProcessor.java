@@ -75,7 +75,7 @@ class PhyrexianProcessorPayLifeEffect extends OneShotEffect {
         }
         int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
         Cost cost = new PayLifeCost(payAmount);
-        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+        if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;
         }
         Card sourceCard = game.getCard(source.getSourceId());
@@ -114,7 +114,7 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
             MinionToken token = new MinionToken();
             token.getPower().modifyBaseValue(lifePaid);
             token.getToughness().modifyBaseValue(lifePaid);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }
         return false;

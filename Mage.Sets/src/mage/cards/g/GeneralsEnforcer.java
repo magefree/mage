@@ -89,7 +89,7 @@ class GeneralsEnforcerEffect extends OneShotEffect {
         }
         boolean isCreature = card.isCreature();
         if (player.moveCards(card, Zone.EXILED, source, game) && isCreature) {
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source, source.getControllerId());
         }
         return true;
     }

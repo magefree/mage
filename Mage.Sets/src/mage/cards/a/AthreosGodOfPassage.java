@@ -101,9 +101,9 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect {
         boolean paid = false;
         if (opponent != null) {
             Cost cost = new PayLifeCost(3);
-            if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
+            if (cost.canPay(source, source, opponent.getId(), game)
                     && opponent.chooseUse(outcome, "Pay 3 life to prevent that " + creature.getLogName() + " returns to " + controller.getLogName() + "'s hand?", source, game)
-                    && cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {
+                    && cost.pay(source, game, source, opponent.getId(), false, null)) {
                 paid = true;
             }
         }
@@ -136,7 +136,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

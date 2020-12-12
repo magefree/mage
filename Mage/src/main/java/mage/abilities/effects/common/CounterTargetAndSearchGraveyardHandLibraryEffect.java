@@ -53,7 +53,7 @@ public class CounterTargetAndSearchGraveyardHandLibraryEffect extends SearchTarg
                     cardName = targetObject.getName();
                 }
                 searchPlayerId = stackObject.getControllerId();
-                result = game.getStack().counter(objectId, source.getSourceId(), game);
+                result = game.getStack().counter(objectId, source, game);
             }
         }
         // 5/1/2008: If the targeted spell can't be countered (it's Vexing Shusher, for example),

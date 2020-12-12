@@ -76,7 +76,6 @@ class UrzasMiterWatcher extends Watcher {
         this.cards = new ArrayList<>();
     }
 
-
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT) {

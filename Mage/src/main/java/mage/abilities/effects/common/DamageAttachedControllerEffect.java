@@ -55,7 +55,7 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(enchanted.getControllerId());
         if (player != null) {
-            player.damage(amount.calculate(game, source, this), source.getSourceId(), game);
+            player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
             return true;
         }
         return false;

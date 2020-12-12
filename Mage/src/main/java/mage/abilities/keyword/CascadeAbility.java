@@ -109,10 +109,7 @@ class CascadeEffect extends OneShotEffect {
 
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
-        GameEvent event = GameEvent.getEvent(
-                GameEvent.EventType.CASCADE_LAND, source.getSourceId(),
-                source.getSourceId(), source.getControllerId(), 0
-        );
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.CASCADE_LAND, source.getSourceId(), source, source.getControllerId(), 0);
         game.replaceEvent(event);
         if (event.getAmount() > 0) {
             TargetCardInExile target = new TargetCardInExile(

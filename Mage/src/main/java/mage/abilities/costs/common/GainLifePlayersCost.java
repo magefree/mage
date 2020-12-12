@@ -27,7 +27,7 @@ public class GainLifePlayersCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
@@ -45,14 +45,14 @@ public class GainLifePlayersCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(controllerId)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.gainLife(amount, game, sourceId);
+                        player.gainLife(amount, game, source);
                     }
                 }
             }

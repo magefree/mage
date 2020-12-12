@@ -70,7 +70,7 @@ class ChandraFireArtisanTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getAmount() == 0 || !event.getData().equals("loyalty")
-                || !event.getTargetId().equals(getSourceId())) {
+                || !event.getTargetId().equals(this.getSourceId())) {
             return false;
         }
         this.getEffects().clear();

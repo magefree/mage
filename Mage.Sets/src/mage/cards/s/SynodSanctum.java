@@ -85,7 +85,7 @@ class SynodSanctumEffect extends OneShotEffect {
                 if (permanent != null) {
                     UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                     if (exileZone != null) {
-                        controller.moveCardToExileWithInfo(permanent, exileZone, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                        controller.moveCardToExileWithInfo(permanent, exileZone, sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true);
                     }
                 }
             }

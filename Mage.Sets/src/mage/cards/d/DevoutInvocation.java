@@ -66,16 +66,16 @@ class DevoutInvocationEffect extends OneShotEffect {
         if (controller != null) {
             int tappedAmount = 0;
             TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            while (true && controller.canRespond()) {
+            while (controller.canRespond()) {
                 target.clearChosen();
-                if (target.canChoose(source.getControllerId(), game)) {
+                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                     Map<String, Serializable> options = new HashMap<>();
                     options.put("UI.right.btn.text", "Tapping complete");
                     controller.choose(outcome, target, source.getControllerId(), game, options);
                     if (!target.getTargets().isEmpty()) {
                         UUID creature = target.getFirstTarget();
                         if (creature != null) {
-                            game.getPermanent(creature).tap(game);
+                            game.getPermanent(creature).tap(source, game);
                             tappedAmount++;
                         }
                     } else {
@@ -87,7 +87,7 @@ class DevoutInvocationEffect extends OneShotEffect {
             }
             if (tappedAmount > 0) {
                 AngelToken angelToken = new AngelToken();
-                angelToken.putOntoBattlefield(tappedAmount, game, source.getSourceId(), source.getControllerId());
+                angelToken.putOntoBattlefield(tappedAmount, game, source, source.getControllerId());
             }
             return true;
         }

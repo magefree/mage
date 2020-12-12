@@ -71,7 +71,7 @@ public final class RakdosCharm extends CardImpl {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
-                    controller.damage(1, permanent.getId(), game);
+                    controller.damage(1, permanent.getId(), source, game);
                     game.informPlayers("1 damage to " + controller.getLogName() + " from " + permanent.getName());
                 }
             }

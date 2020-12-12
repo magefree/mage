@@ -59,7 +59,7 @@ class BalanceOfPowerEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
 
         if (opponent != null && player != null && opponent.getHand().size() > player.getHand().size()) {
-            player.drawCards(opponent.getHand().size() - player.getHand().size(), source.getSourceId(), game);
+            player.drawCards(opponent.getHand().size() - player.getHand().size(), source, game);
             return true;
         }
 

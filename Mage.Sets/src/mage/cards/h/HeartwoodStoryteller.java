@@ -63,7 +63,7 @@ class HeartwoodStorytellerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -106,7 +106,7 @@ class HeartwoodStorytellerEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseUse(outcome, "Draw a card?", source, game)) {
-                    player.drawCards(1, source.getSourceId(), game);
+                    player.drawCards(1, source, game);
                 }
             }
         }

@@ -89,7 +89,7 @@ class EnigmaticIncarnationEffect extends OneShotEffect {
         }
         game.getState().processAction(game);
         int cmc = permanent.getConvertedManaCost();
-        if (!permanent.sacrifice(source.getSourceId(), game)) {
+        if (!permanent.sacrifice(source, game)) {
             return false;
         }
         FilterCard filterCard = new FilterCreatureCard("creature card with converted mana cost " + (cmc + 1));

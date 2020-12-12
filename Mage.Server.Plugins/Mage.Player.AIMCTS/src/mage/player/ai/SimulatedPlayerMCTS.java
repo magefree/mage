@@ -133,7 +133,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
-                    game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
+                    game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));
                     actionCount++;
                     return true;
                 }
@@ -174,7 +174,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
 //        logger.info("select blockers");
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
@@ -403,7 +403,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
         if (this.isHuman()) {
             int remainingDamage = damage;
             UUID targetId;
@@ -418,19 +418,19 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 }
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent.damage(amount, sourceId, game, false, true);
+                    permanent.damage(amount, attackerId, source, game, false, true);
                     remainingDamage -= amount;
                 } else {
                     Player player = game.getPlayer(targetId);
                     if (player != null) {
-                        player.damage(amount, sourceId, game);
+                        player.damage(amount, attackerId, source, game);
                         remainingDamage -= amount;
                     }
                 }
                 targets.remove(targetId);
             }
         } else {
-            super.assignDamage(damage, targets, singleTargetName, sourceId, game);
+            super.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
         }
     }
 

@@ -70,7 +70,7 @@ class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE;
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
     }
 
     @Override
@@ -97,12 +97,12 @@ class SourceHasCountersCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return (game.getPermanent(sourceId).getCounters(game).getCount(counterType) >= counters);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return (game.getPermanent(source.getSourceId()).getCounters(game).getCount(counterType) >= counters);
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         this.paid = true;
         return paid;
     }

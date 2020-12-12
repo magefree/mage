@@ -163,7 +163,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
                     continue;
                 }
                 // Destroy the rest.
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
             return true;
         }

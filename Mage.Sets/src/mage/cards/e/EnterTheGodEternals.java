@@ -66,7 +66,7 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    controller.gainLife(permanent.damage(4, source.getSourceId(), game), game, source);
+                    controller.gainLife(permanent.damage(4, source.getSourceId(), source, game), game, source);
                     continue;
                 }
                 Player player = game.getPlayer(targetId);

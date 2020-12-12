@@ -104,7 +104,7 @@ class CracklingDoomEffect extends OneShotEffect {
                 }
             }
             for (Permanent permanent : toSacrifice) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
             return true;
         }

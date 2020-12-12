@@ -79,8 +79,8 @@ public final class BalanWanderingKnight extends CardImpl {
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (equipment != null) {
                         //If an Equipment can't equip, it isn't attached, and it doesn't become unattached (if it's attached to a creature).
-                        if (!balan.cantBeAttachedBy(equipment, game, false)) {
-                            balan.addAttachment(equipment.getId(), game);
+                        if (!balan.cantBeAttachedBy(equipment, source, game, false)) {
+                            balan.addAttachment(equipment.getId(), source, game);
                         }
                     }
                 }

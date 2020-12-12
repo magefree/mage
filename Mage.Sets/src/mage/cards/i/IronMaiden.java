@@ -54,7 +54,7 @@ class IronMaidenEffect extends OneShotEffect {
         if (player != null) {
             int amount = player.getHand().size() - 4;
             if (amount > 0) {
-                player.damage(amount, source.getSourceId(), game);
+                player.damage(amount, source.getSourceId(), source, game);
                 return true;
             }
         }

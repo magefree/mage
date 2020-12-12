@@ -63,8 +63,8 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 for (UUID targetId : targets.get(0).getTargets()) {
@@ -73,7 +73,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
                         return false;
                     }
                     isZombieCard = card.hasSubtype(SubType.ZOMBIE, game);
-                    paid |= player.discard(card, null, game);
+                    paid |= player.discard(card, true, source, game);
 
                 }
             }
@@ -82,8 +82,8 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

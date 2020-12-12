@@ -190,7 +190,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                     && spell != null) {
                 this.resetMorph();
                 spell.setFaceDown(true, game); // so only the back is visible
-                if (alternateCosts.canPay(ability, sourceId, ability.getControllerId(), game)) {
+                if (alternateCosts.canPay(ability, this, ability.getControllerId(), game)) {
                     if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 "
                             + "face-down creature for " + getCosts().getText() + " ?", ability, game)) {
                         game.getState().setValue("MorphAbility"
@@ -225,7 +225,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
                 this.resetMorph();
-                if (alternateCosts.canPay(ability, sourceId, ability.getControllerId(), game)) {
+                if (alternateCosts.canPay(ability, this, ability.getControllerId(), game)) {
                     if (player.chooseUse(Outcome.Benefit, "Cast this card as a 2/2 "
                             + "face-down creature for " + getCosts().getText() + " ?", ability, game)) {
                         activateMorph(game);

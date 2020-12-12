@@ -73,7 +73,7 @@ class DimensionalBreachExileEffect extends OneShotEffect {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
             if (exileId != null) {
                 game.getBattlefield().getAllActivePermanents().forEach((permanent) -> {
-                    permanent.moveToExile(exileId, sourceObject.getName(), source.getSourceId(), game);
+                    permanent.moveToExile(exileId, sourceObject.getName(), source, game);
                 });
                 return true;
             }

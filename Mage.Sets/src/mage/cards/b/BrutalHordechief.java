@@ -166,7 +166,7 @@ class BrutalHordechiefChooseBlockersEffect extends ContinuousRuleModifyingEffect
         watcher.copyCountApply = watcher.copyCount;
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
-            game.getCombat().selectBlockers(blockController, game);
+            game.getCombat().selectBlockers(blockController, source, game);
             return true;
         }
         return false;

@@ -74,8 +74,8 @@ class FeedTheSwarmEffect extends OneShotEffect {
         if (permanent == null || player == null) {
             return false;
         }
-        player.loseLife(permanent.getConvertedManaCost(), game, false);
-        permanent.destroy(source.getSourceId(), game, false);
+        player.loseLife(permanent.getConvertedManaCost(), game, source, false);
+        permanent.destroy(source, game, false);
         return true;
     }
 }

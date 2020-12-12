@@ -132,8 +132,8 @@ class GemstoneCavernsEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         Cost cost = new ExileFromHandCost(new TargetCardInHand());
-                        if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
-                            result = cost.pay(source, game, source.getSourceId(), source.getControllerId(), true, null);
+                        if (cost.canPay(source, source, source.getControllerId(), game)) {
+                            result = cost.pay(source, game, source, source.getControllerId(), true, null);
                         }
                     }
                 }

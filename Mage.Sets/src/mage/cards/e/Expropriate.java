@@ -175,7 +175,7 @@ class ExpropriateControlEffect extends ContinuousEffectImpl {
         if (permanent == null || controllerId == null) {
             this.discard();
         } else {
-            permanent.changeControllerId(controllerId, game);
+            permanent.changeControllerId(controllerId, game, source);
         }
         return true;
     }

@@ -165,10 +165,10 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, you gain X life and draw X cards.", source, game)) {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     controller.resetStoredBookmark(game); // otherwise you can undo the payment
                     controller.gainLife(costX, game, source);
-                    controller.drawCards(costX, source.getSourceId(), game);
+                    controller.drawCards(costX, source, game);
                     return true;
                 }
             }

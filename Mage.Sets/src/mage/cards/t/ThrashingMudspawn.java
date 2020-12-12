@@ -70,7 +70,7 @@ class ThrashingMudspawnEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.loseLife(amount, game, false);
+                player.loseLife(amount, game, source, false);
                 return true;
             }
         }

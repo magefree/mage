@@ -62,7 +62,7 @@ class DarkDealEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsInHand = player.getHand().size();
-                    player.discard(cardsInHand, false, source, game);
+                    player.discard(cardsInHand, false, false, source, game);
                     if (cardsInHand > 1) {
                         cardsToDraw.put(playerId, cardsInHand - 1);
                     }
@@ -71,7 +71,7 @@ class DarkDealEffect extends OneShotEffect {
             for (Map.Entry<UUID, Integer> toDrawByPlayer : cardsToDraw.entrySet()) {
                 Player player = game.getPlayer(toDrawByPlayer.getKey());
                 if (player != null) {
-                    player.drawCards(toDrawByPlayer.getValue(), source.getSourceId(), game);
+                    player.drawCards(toDrawByPlayer.getValue(), source, game);
                 }
             }
             return true;

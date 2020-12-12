@@ -63,7 +63,7 @@ public class DiscardTargetEffect extends OneShotEffect {
         for (UUID targetPlayerId : targetPointer.getTargets(game, source)) {
             Player player = game.getPlayer(targetPlayerId);
             if (player != null) {
-                player.discard(amount.calculate(game, source, this), randomDiscard, source, game);
+                player.discard(amount.calculate(game, source, this), randomDiscard, false, source, game);
             }
         }
         return true;

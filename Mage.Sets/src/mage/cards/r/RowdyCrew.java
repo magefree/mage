@@ -71,17 +71,17 @@ class RowdyCrewEffect extends OneShotEffect {
         Permanent creature = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(3, source.getSourceId(), game);
+            player.drawCards(3, source, game);
             Cards cards = new CardsImpl();
             int cardsInHand = player.getHand().size();
             switch (cardsInHand) {
                 case 0:
                     break;
                 case 1:
-                    player.discard(1, true, source, game);
+                    player.discard(1, true, false, source, game);
                     break;
                 default:
-                    cards = player.discard(2, true, source, game);
+                    cards = player.discard(2, true, false, source, game);
             }
             if (creature != null && cardsInHand > 1) {
                 for (CardType type : CardType.values()) {

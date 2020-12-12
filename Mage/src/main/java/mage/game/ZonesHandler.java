@@ -1,5 +1,6 @@
 package mage.game;
 
+import mage.abilities.Ability;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.Outcome;
@@ -23,8 +24,8 @@ import java.util.*;
  */
 public final class ZonesHandler {
 
-    public static boolean cast(ZoneChangeInfo info, Game game) {
-        if (maybeRemoveFromSourceZone(info, game)) {
+    public static boolean cast(ZoneChangeInfo info, Game game, Ability source) {
+        if (maybeRemoveFromSourceZone(info, game, source)) {
             placeInDestinationZone(info, game, 0);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
@@ -43,13 +44,13 @@ public final class ZonesHandler {
         return false;
     }
 
-    public static boolean moveCard(ZoneChangeInfo info, Game game) {
+    public static boolean moveCard(ZoneChangeInfo info, Game game, Ability source) {
         List<ZoneChangeInfo> list = new ArrayList<>();
         list.add(info);
-        return !moveCards(list, game).isEmpty();
+        return !moveCards(list, game, source).isEmpty();
     }
 
-    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
+    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game, Ability source) {
         // Handle Unmelded Meld Cards
         for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
@@ -75,13 +76,17 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
+                if (card instanceof ModalDoubleFacesCard || card instanceof ModalDoubleFacesCardHalf) {
+                    System.out.println("!"); // TODO: remove after mdf test fixes
+                }
+
                 if (card instanceof ModalDoubleFacesCard) {
                     info.event.setTargetId(((ModalDoubleFacesCard) card).getLeftHalfCard().getId());
                 }
             }
         }
 
-        zoneChangeInfos.removeIf(zoneChangeInfo -> !maybeRemoveFromSourceZone(zoneChangeInfo, game));
+        zoneChangeInfos.removeIf(zoneChangeInfo -> !maybeRemoveFromSourceZone(zoneChangeInfo, game, source));
         int createOrder = 0;
         for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
             if (createOrder == 0 && Zone.BATTLEFIELD.equals(zoneChangeInfo.event.getToZone())) {
@@ -270,14 +275,16 @@ public final class ZonesHandler {
         return game.getPermanent(targetId);
     }
 
-    private static boolean maybeRemoveFromSourceZone(ZoneChangeInfo info, Game game) {
+    private static boolean maybeRemoveFromSourceZone(ZoneChangeInfo info, Game game, Ability source) {
+        ZoneChangeEvent event = info.event;
+
         // Handle Unmelded Cards
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
-            MeldCard meld = game.getMeldCard(info.event.getTargetId());
+            MeldCard meld = game.getMeldCard(event.getTargetId());
             for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
                 ZoneChangeInfo subInfo = itr.next();
-                if (!maybeRemoveFromSourceZone(subInfo, game)) {
+                if (!maybeRemoveFromSourceZone(subInfo, game, source)) {
                     itr.remove();
                 } else if (Objects.equals(subInfo.event.getTargetId(), meld.getTopHalfCard().getId())) {
                     meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
@@ -294,7 +301,6 @@ public final class ZonesHandler {
         }
 
         // Handle all normal cases
-        ZoneChangeEvent event = info.event;
         Card card = getTargetCard(game, event.getTargetId());
         if (card == null) {
             // If we can't find the card we can't remove it.
@@ -304,7 +310,7 @@ public final class ZonesHandler {
         boolean success = false;
         if (info.faceDown) {
             card.setFaceDown(true, game);
-        } else if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
+        } else if (event.getToZone().equals(Zone.BATTLEFIELD)) {
             if (!card.isPermanent()
                     && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
                 // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
@@ -332,7 +338,7 @@ public final class ZonesHandler {
 
                 // put onto battlefield with possible counters
                 game.getPermanentsEntering().put(permanent.getId(), permanent);
-                card.checkForCountersToAdd(permanent, game);
+                card.checkForCountersToAdd(permanent, source, game);
                 permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
                         && ((ZoneChangeInfo.Battlefield) info).tapped);
 
@@ -344,8 +350,8 @@ public final class ZonesHandler {
                 // make sure the controller of all continuous effects of this card are switched to the current controller
                 game.setScopeRelevant(true);
                 game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
-                if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)
-                        && card.removeFromZone(game, fromZone, event.getSourceId())) {
+                if (permanent.entersBattlefield(source, game, fromZone, true)
+                        && card.removeFromZone(game, fromZone, source)) {
                     success = true;
                     event.setTarget(permanent);
                 } else {
@@ -357,11 +363,11 @@ public final class ZonesHandler {
             } else if (event.getTarget() != null) {
                 card.setFaceDown(info.faceDown, game);
                 Permanent target = event.getTarget();
-                success = game.getPlayer(target.getControllerId()).removeFromBattlefield(target, game)
-                        && target.removeFromZone(game, fromZone, event.getSourceId());
+                success = game.getPlayer(target.getControllerId()).removeFromBattlefield(target, source, game)
+                        && target.removeFromZone(game, fromZone, source);
             } else {
                 card.setFaceDown(info.faceDown, game);
-                success = card.removeFromZone(game, fromZone, event.getSourceId());
+                success = card.removeFromZone(game, fromZone, source);
             }
         }
         if (success) {

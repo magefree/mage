@@ -78,7 +78,7 @@ class SeekEffect extends OneShotEffect {
                     UUID targetId = target.getFirstTarget();
                     Card card = opponent.getLibrary().remove(targetId, game);
                     if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
+                        player.moveCardToExileWithInfo(card, null, null, source, game, Zone.LIBRARY, true);
                         int cmc = card.getConvertedManaCost();
                         if (cmc > 0) {
                             player.gainLife(cmc, game, source);

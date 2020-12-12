@@ -60,7 +60,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (condition.apply(game, this)
-                && costs.canPay(this, sourceId, playerId, game)
+                && costs.canPay(this, this, playerId, game)
                 && game.isActivePlayer(playerId)) {
             this.activatorId = playerId;
             return ActivationStatus.getTrue(this, game);
@@ -100,7 +100,7 @@ class WellOfKnowledgeEffect extends OneShotEffect {
         if (source instanceof ActivatedAbilityImpl) {
             Player activator = game.getPlayer(((ActivatedAbilityImpl) source).getActivatorId());
             if (activator != null) {
-                activator.drawCards(1, source.getSourceId(), game);
+                activator.drawCards(1, source, game);
                 return true;
             }
 

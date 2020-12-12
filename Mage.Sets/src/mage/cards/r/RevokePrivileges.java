@@ -88,7 +88,7 @@ class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CREW_VEHICLE;
+        return event.getType() == GameEvent.EventType.CREW_VEHICLE;
     }
 
     @Override

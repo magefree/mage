@@ -103,7 +103,7 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
             }
 
             game.informPlayers(winner.getLogName() + " won the auction with a bid of " + highBid + " life" + (highBid > 1 ? "s" : ""));
-            winner.loseLife(highBid, game, false);
+            winner.loseLife(highBid, game, source, false);
             super.controllingPlayerId = winner.getId();
         }
         super.init(source, game);

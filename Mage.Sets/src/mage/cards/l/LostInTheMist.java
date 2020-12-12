@@ -62,7 +62,7 @@ class LostInTheMistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            return permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            return permanent.moveToZone(Zone.HAND, source, game, false);
         }
         return false;
     }

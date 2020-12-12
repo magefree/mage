@@ -77,7 +77,7 @@ class CruelFateEffect extends OneShotEffect {
                     } else if (cards.size() == 1) {
                         Card card = cards.get(cards.iterator().next(), game);
                         controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                        card.moveToZone(Zone.GRAVEYARD, source, game, true);
                         cards.clear();
                     }
                 }

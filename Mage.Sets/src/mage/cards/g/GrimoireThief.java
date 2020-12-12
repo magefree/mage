@@ -213,7 +213,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
 
                     if (CardUtil.haveSameNames(stackObject, name1, game) || CardUtil.haveSameNames(stackObject, name2, game)) {
                         Spell spell = (Spell) stackObject;
-                        game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+                        game.getStack().counter(stackObject.getId(), source, game);
                         game.informPlayers(sourceObject.getLogName() + ": spell " + spell.getIdName() + " was countered.");
                     }
                 }

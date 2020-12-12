@@ -35,9 +35,13 @@ public class MadnessTest extends CardTestPlayerBase {
     @Test
     public void testMadness() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        //
+        // Madness {2}{G} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
         addCard(Zone.HAND, playerA, "Arrogant Wurm");
-        addCard(Zone.HAND, playerA, "Raven's Crime");
+        //
+        // Target player discards a card.
+        addCard(Zone.HAND, playerA, "Raven's Crime"); // {B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerA);
         setChoice(playerA, "Yes"); // use madness triggered ability

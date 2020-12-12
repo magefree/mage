@@ -91,6 +91,7 @@ class EzurisPredationEffect extends OneShotEffect {
                         }
                         Permanent opponentCreature = creaturesOfOpponents.iterator().next();
                         creaturesOfOpponents.remove(opponentCreature);
+                        // can be multiple tokens, so must be used custom BATCH_FIGHT event
                         token.fight(opponentCreature, source, game, false);
                         morSet.add(new MageObjectReference(token, game));
                         morSet.add(new MageObjectReference(opponentCreature, game));
@@ -99,7 +100,7 @@ class EzurisPredationEffect extends OneShotEffect {
                 }
                 String data = UUID.randomUUID().toString();
                 game.getState().setValue("batchFight_" + data, morSet);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BATCH_FIGHT, getId(), getId(), source.getControllerId(), data, 0));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BATCH_FIGHT, getId(), source, source.getControllerId(), data, 0));
             }
             return true;
         }

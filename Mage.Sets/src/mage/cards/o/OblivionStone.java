@@ -64,12 +64,12 @@ class OblivionStoneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
             if (!(p.isLand() || p.getCounters(game).containsKey(CounterType.FATE))) {
-                p.destroy(source.getSourceId(), game, false);
+                p.destroy(source, game, false);
             }
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
             if (p.getCounters(game).containsKey(CounterType.FATE)) {
-                p.removeCounters(CounterType.FATE.getName(), p.getCounters(game).getCount(CounterType.FATE), game);
+                p.removeCounters(CounterType.FATE.getName(), p.getCounters(game).getCount(CounterType.FATE), source, game);
             }
         }
         return true;

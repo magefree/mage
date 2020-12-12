@@ -70,17 +70,17 @@ class StrategySchmategyffect extends OneShotEffect {
             // 5 - Each player discards their hand and draws seven cards.
             // 6 - Repeat this process two more times
             while (numTimesToDo > 0) {
-                int amount = controller.rollDice(game, 6);
+                int amount = controller.rollDice(source, game, 6);
                 numTimesToDo--;
                 if (amount == 2) {
                     List<Permanent> artifactPermanents = game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), controller.getId(), game);
                     for (Permanent permanent : artifactPermanents) {
-                        permanent.destroy(permanent.getId(), game, false);
+                        permanent.destroy(source, game, false);
                     }
                 } else if (amount == 3) {
                     List<Permanent> landPermanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, controller.getId(), game);
                     for (Permanent permanent : landPermanents) {
-                        permanent.destroy(permanent.getId(), game, false);
+                        permanent.destroy(source, game, false);
                     }
                 } else if (amount == 4) {
                     new DamageEverythingEffect(3, new FilterCreaturePermanent()).apply(game, source);

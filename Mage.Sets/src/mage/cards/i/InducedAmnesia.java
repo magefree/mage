@@ -72,12 +72,12 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
             if (numberOfCards > 0) {
                 UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 for (Card card : targetPlayer.getHand().getCards(game)) {
-                    card.moveToExile(exileId, sourcePermanent.getName(), source.getSourceId(), game);
+                    card.moveToExile(exileId, sourcePermanent.getName(), source, game);
                     card.setFaceDown(true, game);
                 }
                 game.informPlayers(sourcePermanent.getLogName() + ": " + targetPlayer.getLogName() + " exiles their hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ? "s" : "") + ')');
                 game.getState().processAction(game);
-                targetPlayer.drawCards(numberOfCards, source.getSourceId(), game);
+                targetPlayer.drawCards(numberOfCards, source, game);
             }
             return true;
         }
@@ -112,7 +112,7 @@ class InducedAmnesiaReturnEffect extends OneShotEffect {
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
                     numberOfCards++;
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    card.moveToZone(Zone.HAND, source, game, true);
                     card.setFaceDown(false, game);
                 }
             }

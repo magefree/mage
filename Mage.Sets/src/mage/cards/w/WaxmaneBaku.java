@@ -80,13 +80,13 @@ class WaxmaneBakuTapEffect extends OneShotEffect {
             }
         }
         TargetPermanent target = new TargetPermanent(numberToTap, filter);
-        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        permanent.tap(game);
+                        permanent.tap(source, game);
                     }
                 }
             }

@@ -52,7 +52,7 @@ class PsionicBlastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.damage(2, source.getSourceId(), game);
+            player.damage(2, source.getSourceId(), source, game);
             return true;
         }
         return false;

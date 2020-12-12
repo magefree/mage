@@ -74,12 +74,12 @@ class GlintHawkEffect extends OneShotEffect {
         if (controller != null) {
             boolean targetChosen = false;
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-            if (target.canChoose(controller.getId(), game) && controller.chooseUse(outcome, "Return an artifact you control to its owner's hand?", source, game)) {
+            if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.chooseUse(outcome, "Return an artifact you control to its owner's hand?", source, game)) {
                 controller.chooseTarget(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     targetChosen = true;
-                    permanent.moveToZone(Zone.HAND, this.getId(), game, false);
+                    permanent.moveToZone(Zone.HAND, source, game, false);
                 }
             }
 

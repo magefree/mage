@@ -34,13 +34,12 @@ public class MiracleWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
-            return;
         }
         // inital card draws do not trigger miracle so check that phase != null
         if (game.getPhase() != null && event.getType() == GameEvent.EventType.DREW_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Integer amount = 1 + amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
+                int amount = 1 + amountOfCardsDrawnThisTurn.getOrDefault(playerId, 0);
                 amountOfCardsDrawnThisTurn.put(playerId, amount);
                 if (amount == 1) {
                     checkMiracleAbility(event, game);
@@ -52,7 +51,7 @@ public class MiracleWatcher extends Watcher {
     private void checkMiracleAbility(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
         if (card != null) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
                     if (controller != null) {
@@ -60,7 +59,7 @@ public class MiracleWatcher extends Watcher {
                         controller.lookAtCards("Miracle", cards, game);
                         if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getLogName() + " to be able to use Miracle?", ability, game)) {
                             controller.revealCards("Miracle", cards, game);
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(), card.getId(), controller.getId()));
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(), ability, controller.getId()));
                             break;
                         }
                     }

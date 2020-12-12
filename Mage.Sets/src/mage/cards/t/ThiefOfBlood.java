@@ -76,7 +76,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             Counters counters = permanent.getCounters(game).copy();
             for (Counter counter : counters.values()) {
-                permanent.removeCounters(counter.getName(), counter.getCount(), game);
+                permanent.removeCounters(counter.getName(), counter.getCount(), source, game);
                 countersRemoved += counter.getCount();
             }
         }

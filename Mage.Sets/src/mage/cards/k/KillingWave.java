@@ -93,13 +93,13 @@ class KillingWaveEffect extends OneShotEffect {
                 if (lifePaid > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.loseLife(lifePaid, game, false);
+                        player.loseLife(lifePaid, game, source, false);
                     }
                 }
             }
 
             for (Permanent creature : sacrifices) {
-                creature.sacrifice(source.getSourceId(), game);
+                creature.sacrifice(source, game);
             }
         }
         return true;

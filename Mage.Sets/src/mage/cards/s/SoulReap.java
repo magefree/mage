@@ -93,7 +93,7 @@ class SoulReapWatcher extends Watcher {
         if (condition == true) { //no need to check - condition has already occured
             return;
         }
-        if (event.getType() == EventType.SPELL_CAST
+        if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && controllerId.equals(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
@@ -131,7 +131,7 @@ class SoulReapEffect extends OneShotEffect {
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                controller.loseLife(3, game, false);
+                controller.loseLife(3, game, source, false);
                 return true;
             }
         }

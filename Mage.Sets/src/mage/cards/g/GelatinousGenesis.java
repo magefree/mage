@@ -53,7 +53,7 @@ class GelatinousGenesisEffect extends OneShotEffect {
         OozeToken oozeToken = new OozeToken();
         oozeToken.getPower().modifyBaseValue(count);
         oozeToken.getToughness().modifyBaseValue(count);
-        oozeToken.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
+        oozeToken.putOntoBattlefield(count, game, source, source.getControllerId());
         return true;
     }
 

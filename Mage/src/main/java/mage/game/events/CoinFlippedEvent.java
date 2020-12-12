@@ -8,15 +8,17 @@ import java.util.UUID;
  * @author TheElk801
  **/
 public class CoinFlippedEvent extends GameEvent {
+
     private final boolean result;
     private final boolean chosen;
     private final boolean winnable;
 
     CoinFlippedEvent(UUID playerId, UUID sourceId, boolean result, boolean chosen, boolean winnable) {
-        super(EventType.COIN_FLIPPED, playerId, sourceId, playerId);
+        super(GameEvent.EventType.COIN_FLIPPED, playerId, null, playerId);
         this.result = result;
         this.chosen = chosen;
         this.winnable = winnable;
+        this.setSourceId(sourceId);
     }
 
     public boolean getResult() {

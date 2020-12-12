@@ -95,11 +95,11 @@ class GoblinCharbelcherEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(damage, source.getSourceId(), game, false, true);
+            permanent.damage(damage, source.getSourceId(), source, game, false, true);
         } else {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-                targetPlayer.damage(damage, source.getSourceId(), game);
+                targetPlayer.damage(damage, source.getSourceId(), source, game);
             }
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);

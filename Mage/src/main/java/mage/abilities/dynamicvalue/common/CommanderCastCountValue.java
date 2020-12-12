@@ -13,9 +13,9 @@ public enum CommanderCastCountValue implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
-        return watcher != null ? watcher.getPlayerCount(source.getControllerId()) : 0;
+        return watcher != null ? watcher.getPlayerCount(sourceAbility.getControllerId()) : 0;
     }
 
     @Override

@@ -73,7 +73,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean applied;
         Token token = new DinOfTheFireherdToken();
-        applied = token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        applied = token.putOntoBattlefield(1, game, source, source.getControllerId());
 
         int blackCreaturesControllerControls = game.getBattlefield().countAll(blackCreatureFilter, source.getControllerId(), game);
         int redCreaturesControllerControls = game.getBattlefield().countAll(redCreatureFilter, source.getControllerId(), game);

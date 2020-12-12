@@ -85,16 +85,16 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
                 return true;
             }
             Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
-            if (target.canChoose(targetPlayer.getId(), game)) {
+            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
                 while (!target.isChosen() 
-                        && target.canChoose(targetPlayer.getId(), game) && targetPlayer.canRespond()) {
+                        && target.canChoose(source.getSourceId(), targetPlayer.getId(), game) && targetPlayer.canRespond()) {
                     targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 }
                 //sacrifice all chosen (non null) permanents
                 target.getTargets().stream()
                         .map(game::getPermanent)
                         .filter(Objects::nonNull)
-                        .forEach(permanent -> permanent.sacrifice(source.getSourceId(), game));
+                        .forEach(permanent -> permanent.sacrifice(source, game));
             }
             return true;
         }
@@ -142,9 +142,9 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
         if (target == null) {
             return false;
         }
-        if (cost.canPay(source, source.getSourceId(), activePlayerId, game)
+        if (cost.canPay(source, source, activePlayerId, game)
                 && target.chooseUse(Outcome.Sacrifice, "Sacrifice a permanent to delay Curse of the Cabal?", source, game)
-                && cost.pay(source, game, source.getSourceId(), activePlayerId, true, null)) {
+                && cost.pay(source, game, source, activePlayerId, true, null)) {
             return super.apply(game, source);
         }
         return true;

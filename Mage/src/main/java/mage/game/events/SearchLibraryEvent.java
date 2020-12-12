@@ -1,5 +1,7 @@
 package mage.game.events;
 
+import mage.abilities.Ability;
+
 import java.util.UUID;
 
 /**
@@ -17,8 +19,8 @@ public class SearchLibraryEvent extends GameEvent {
      * @param playerId       who must search the library (also see searchingControllerId)
      * @param amount         cards amount to search
      */
-    public SearchLibraryEvent(UUID targetPlayerId, UUID sourceId, UUID playerId, int amount) {
-        super(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, sourceId, playerId, amount, false);
+    public SearchLibraryEvent(UUID targetPlayerId, Ability source, UUID playerId, int amount) {
+        super(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, source, playerId, amount, false);
         this.searchingControllerId = playerId;
     }
 

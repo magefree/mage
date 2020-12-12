@@ -73,7 +73,7 @@ class VraskasStoneglareEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getControllerId());
         int toughness = permanent.getToughness().getValue();
-        permanent.destroy(source.getSourceId(), game, false);
+        permanent.destroy(source, game, false);
         if (player != null) {
             player.gainLife(toughness, game, source);
         }

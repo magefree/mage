@@ -77,7 +77,7 @@ class ArtificersHexEffect extends OneShotEffect {
             if (equipment != null && equipment.getAttachedTo() != null) {
                 Permanent creature = game.getPermanent(equipment.getAttachedTo());
                 if (creature != null && creature.isCreature()) {
-                    return creature.destroy(source.getSourceId(), game, false);
+                    return creature.destroy(source, game, false);
                 }
             }
         }

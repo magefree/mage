@@ -66,7 +66,7 @@ class LifesLegacyEffect extends OneShotEffect {
             }
         }
         if (power > 0) {
-            controller.drawCards(power, source.getSourceId(), game);
+            controller.drawCards(power, source, game);
         }
         return true;
     }

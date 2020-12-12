@@ -70,7 +70,7 @@ class FreyalisesWindsReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanentUntapping = game.getPermanent(event.getTargetId());
         if (permanentUntapping != null) {
-            permanentUntapping.removeCounters(CounterType.WIND.createInstance(), game);
+            permanentUntapping.removeCounters(CounterType.WIND.createInstance(), source, game);
             return true;
         }
         return false;

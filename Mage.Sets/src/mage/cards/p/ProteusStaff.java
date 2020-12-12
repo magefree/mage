@@ -72,7 +72,7 @@ class ProteusStaffEffect extends OneShotEffect {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (owner != null && controller != null) {
                 // Put target creature on the bottom of its owner's library.
-                owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
+                owner.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, false, true);
 
                 // That creature's controller reveals cards from the top of their library until they reveal a creature card.
                 Cards cards = new CardsImpl();
@@ -94,7 +94,7 @@ class ProteusStaffEffect extends OneShotEffect {
                     if (cards.size() == 1) {
                         Card card = cards.get(cards.iterator().next(), game);
                         if (card != null) {
-                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
+                            controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);
                             cards.remove(card);
                         }
                     } else {
@@ -102,7 +102,7 @@ class ProteusStaffEffect extends OneShotEffect {
                         controller.choose(Outcome.Neutral, cards, target, game);
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
-                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
+                            controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);
                             cards.remove(card);
                         }
                     }

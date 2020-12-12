@@ -82,7 +82,7 @@ class ForceOfRageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token token = new AkoumStonewakerElementalToken();
-        token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(2, game, source, source.getControllerId());
         List<Permanent> permanentList = new ArrayList();
         for (UUID permId : token.getLastAddedTokenIds()) {
             permanentList.add(game.getPermanent(permId));

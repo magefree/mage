@@ -81,7 +81,7 @@ class VizkopaConfessorEffect extends OneShotEffect {
         if (controller != null && targetPlayer != null && sourceCard != null) {
             int payLife = controller.getAmount(0, controller.getLife(),"Pay how many life?", game);
             if (payLife > 0) {
-                controller.loseLife(payLife, game, false);
+                controller.loseLife(payLife, game, source, false);
                 game.informPlayers(sourceCard.getName() + ": " + controller.getLogName() + " pays " + payLife + " life");
 
                 Cards cardsInHand = new CardsImpl();
@@ -109,7 +109,7 @@ class VizkopaConfessorEffect extends OneShotEffect {
                     controller.chooseTarget(Outcome.Exile, revealedCards, targetInHand, source, game);
                     Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND, true);
+                        controller.moveCardToExileWithInfo(card, null, null, source, game, Zone.HAND, true);
                     }
                 }
                 return true;

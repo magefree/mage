@@ -77,7 +77,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TRANSFORMED;
+        return event.getType() == GameEvent.EventType.TRANSFORMED;
     }
 
     @Override
@@ -117,12 +117,12 @@ class WerewolfRansackerEffect extends OneShotEffect {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    if (permanent.destroy(source.getSourceId(), game, false)) {
+                    if (permanent.destroy(source, game, false)) {
                         affectedTargets++;
                         if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                             Player player = game.getPlayer(permanent.getControllerId());
                             if (player != null) {
-                                player.damage(3, source.getSourceId(), game);
+                                player.damage(3, source.getSourceId(), source, game);
                             }
                         }
                     }

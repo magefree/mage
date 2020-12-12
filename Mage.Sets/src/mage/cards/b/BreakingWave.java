@@ -69,7 +69,7 @@ class BreakingWaveEffect extends OneShotEffect {
             if (creature.isTapped()) {
                 creature.untap(game);
             } else {
-                creature.tap(game);
+                creature.tap(source, game);
             }
         }
         return true;

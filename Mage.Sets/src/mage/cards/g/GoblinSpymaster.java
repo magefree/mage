@@ -68,7 +68,7 @@ class SpyMasterGoblinCreateTokenEffect extends OneShotEffect {
 
         if (player != null) {
             Token token = new SpyMasterGoblinToken();
-            token.putOntoBattlefield(1, game, source.getSourceId(), player.getId());
+            token.putOntoBattlefield(1, game, source, player.getId());
         }
 
         return true;

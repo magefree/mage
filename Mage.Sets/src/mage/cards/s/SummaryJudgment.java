@@ -74,6 +74,6 @@ class SummaryJudgementEffect extends OneShotEffect {
         if (AddendumCondition.instance.apply(game, source)) {
             damage = 5;
         }
-        return permanent.damage(damage, source.getSourceId(), game) > 0;
+        return permanent.damage(damage, source.getSourceId(), source, game) > 0;
     }
 }

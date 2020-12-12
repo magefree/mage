@@ -107,12 +107,12 @@ class AvacynThePurifierEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
-            permanent.damage(3, source.getSourceId(), game, false, true);
+            permanent.damage(3, source.getSourceId(), source, game, false, true);
         }
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                opponent.damage(3, source.getSourceId(), game);
+                opponent.damage(3, source.getSourceId(), source, game);
             }
         }
         return true;

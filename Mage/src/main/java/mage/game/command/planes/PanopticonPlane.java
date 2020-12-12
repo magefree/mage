@@ -76,7 +76,7 @@ class PanopticonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PLANESWALKED;
+        return event.getType() == GameEvent.EventType.PLANESWALKED;
     }
 
     @Override

@@ -68,7 +68,7 @@ class PoxEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int lifeToLose = (int) Math.ceil(player.getLife() / 3.0);
-                    player.loseLife(lifeToLose, game, false);
+                    player.loseLife(lifeToLose, game, source, false);
                 }
             }
             // then discards a third of the cards in their hand,
@@ -77,7 +77,7 @@ class PoxEffect extends OneShotEffect {
                 if (player != null) {
                     int cardsToDiscard = (int) Math.ceil(player.getHand().size() / 3.0);
                     if (cardsToDiscard > 0) {
-                        player.discard(cardsToDiscard, false, source, game);
+                        player.discard(cardsToDiscard, false, false, source, game);
                     }
                 }
             }
@@ -93,7 +93,7 @@ class PoxEffect extends OneShotEffect {
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                             }
                         }
                     }
@@ -111,7 +111,7 @@ class PoxEffect extends OneShotEffect {
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                             }
                         }
                     }

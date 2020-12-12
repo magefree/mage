@@ -2,12 +2,14 @@ package org.mage.test.player;
 
 import mage.*;
 import mage.abilities.*;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
@@ -35,6 +37,7 @@ import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
+import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -564,6 +567,10 @@ public class TestPlayer implements Player {
             removed.forEach(actionsToRemoveLater::remove);
         }
 
+        // fake test ability for triggers and events
+        Ability source = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        source.setControllerId(this.getId());
+
         int numberOfActions = actions.size();
         List<PlayerAction> tempActions = new ArrayList<>();
         tempActions.addAll(actions);
@@ -663,7 +670,7 @@ public class TestPlayer implements Player {
                             CounterType counterType = CounterType.findByName(groups[1]);
                             Assert.assertNotNull("Invalid counter type " + groups[1], counterType);
                             Counter counter = counterType.createInstance(Integer.parseInt(groups[2]));
-                            permanent.addCounters(counter, null, game);
+                            permanent.addCounters(counter, source, game);
                             actions.remove(action);
                             return true;
                         }
@@ -1034,7 +1041,7 @@ public class TestPlayer implements Player {
      * rollback.
      *
      * @param game
-     * @param rollbackBlock rollback block to add the actions for
+     * @param rollbackBlockNumber rollback block to add the actions for
      */
     private void addActionsAfterRollback(Game game, int rollbackBlockNumber) {
         Map<UUID, ArrayList<PlayerAction>> rollbackBlock = rollbackActions.get(rollbackBlockNumber);
@@ -1680,7 +1687,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         List<PlayerAction> tempActions = new ArrayList<>(actions);
 
         UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
@@ -1692,7 +1699,7 @@ public class TestPlayer implements Player {
             // aiXXX commands
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
                 mustBlockByAction = true;
-                this.computerPlayer.selectBlockers(game, defendingPlayerId);
+                this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
                 actions.remove(action);
                 break;
             }
@@ -1726,7 +1733,7 @@ public class TestPlayer implements Player {
 
         // AI FULL play if no actions available
         if (!mustBlockByAction && this.AIPlayer) {
-            this.computerPlayer.selectBlockers(game, defendingPlayerId);
+            this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
         }
     }
 
@@ -2154,15 +2161,15 @@ public class TestPlayer implements Player {
         // ^ - multiple targets
         // [] - special option like [no copy]
         // = - target type like targetPlayer=PlayerA
-        Boolean foundMulti = targetDefinition.contains("^");
-        Boolean foundSpecialStart = targetDefinition.contains("[");
-        Boolean foundSpecialClose = targetDefinition.contains("]");
-        Boolean foundEquals = targetDefinition.contains("=");
+        boolean foundMulti = targetDefinition.contains("^");
+        boolean foundSpecialStart = targetDefinition.contains("[");
+        boolean foundSpecialClose = targetDefinition.contains("]");
+        boolean foundEquals = targetDefinition.contains("=");
 
-        Boolean canMulti = canSupportChars.contains("^");
-        Boolean canSpecialStart = canSupportChars.contains("[");
-        Boolean canSpecialClose = canSupportChars.contains("]");
-        Boolean canEquals = canSupportChars.contains("=");
+        boolean canMulti = canSupportChars.contains("^");
+        boolean canSpecialStart = canSupportChars.contains("[");
+        boolean canSpecialClose = canSupportChars.contains("]");
+        boolean canEquals = canSupportChars.contains("=");
 
         // how to fix: change target definition for addTarget in test's code or update choose from targets implementation in TestPlayer
         if ((foundMulti && !canMulti) || (foundSpecialStart && !canSpecialStart) || (foundSpecialClose && !canSpecialClose) || (foundEquals && !canEquals)) {
@@ -2715,13 +2722,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int drawCards(int num, UUID sourceId, Game game) {
-        return computerPlayer.drawCards(num, sourceId, game);
+    public int drawCards(int num, Ability source, Game game) {
+        return computerPlayer.drawCards(num, source, game);
     }
 
     @Override
-    public int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects) {
-        return computerPlayer.drawCards(num, sourceId, game, appliedEffects);
+    public int drawCards(int num, Ability source, Game game, GameEvent event) {
+        return computerPlayer.drawCards(num, source, game, event);
     }
 
     @Override
@@ -2745,23 +2752,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Card discardOne(boolean random, Ability source, Game game) {
-        return computerPlayer.discardOne(random, source, game);
+    public Card discardOne(boolean random, boolean payForCost, Ability source, Game game) {
+        return computerPlayer.discardOne(random, payForCost, source, game);
     }
 
     @Override
-    public Cards discard(int amount, boolean random, Ability source, Game game) {
-        return computerPlayer.discard(amount, random, source, game);
+    public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
+        return computerPlayer.discard(amount, random, payForCost, source, game);
     }
 
     @Override
-    public Cards discard(Cards cards, Ability source, Game game) {
-        return computerPlayer.discard(cards, source, game);
+    public Cards discard(Cards cards, boolean payForCost, Ability source, Game game) {
+        return computerPlayer.discard(cards, payForCost, source, game);
     }
 
     @Override
-    public boolean discard(Card card, Ability source, Game game) {
-        return computerPlayer.discard(card, source, game);
+    public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
+        return computerPlayer.discard(card, payForCost, source, game);
     }
 
     @Override
@@ -2770,18 +2777,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean addAttachment(UUID permanentId, Game game) {
-        return computerPlayer.addAttachment(permanentId, game);
+    public boolean addAttachment(UUID permanentId, Ability source, Game game) {
+        return computerPlayer.addAttachment(permanentId, source, game);
     }
 
     @Override
-    public boolean removeAttachment(Permanent attachment, Game game) {
-        return computerPlayer.removeAttachment(attachment, game);
+    public boolean removeAttachment(Permanent attachment, Ability source, Game game) {
+        return computerPlayer.removeAttachment(attachment, source, game);
     }
 
     @Override
-    public boolean removeFromBattlefield(Permanent permanent, Game game) {
-        return computerPlayer.removeFromBattlefield(permanent, game);
+    public boolean removeFromBattlefield(Permanent permanent, Ability source, Game game) {
+        return computerPlayer.removeFromBattlefield(permanent, source, game);
     }
 
     @Override
@@ -3007,11 +3014,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setLife(int life, Game game, UUID sourceId) {
-        computerPlayer.setLife(life, game, sourceId);
-    }
-
-    @Override
     public void setLife(int life, Game game, Ability source) {
         computerPlayer.setLife(life, game, source);
     }
@@ -3042,8 +3044,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int loseLife(int amount, Game game, boolean atCombat) {
-        return computerPlayer.loseLife(amount, game, atCombat);
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat, UUID attackerId) {
+        return computerPlayer.loseLife(amount, game, source, atCombat, attackerId);
+    }
+
+    @Override
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat) {
+        return computerPlayer.loseLife(amount, game, source, atCombat);
     }
 
     @Override
@@ -3062,28 +3069,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int gainLife(int amount, Game game, UUID sourceId) {
-        return computerPlayer.gainLife(amount, game, sourceId);
+    public int damage(int damage, UUID attackerId, Ability source, Game game) {
+        return computerPlayer.damage(damage, attackerId, source, game);
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game) {
-        return computerPlayer.damage(damage, sourceId, game);
+    public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
+        return computerPlayer.damage(damage, attackerId, source, game, combatDamage, preventable);
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
-        return computerPlayer.damage(damage, sourceId, game, combatDamage, preventable);
+    public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+        return computerPlayer.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
-        return computerPlayer.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
-    }
-
-    @Override
-    public boolean addCounters(Counter counter, Game game) {
-        return computerPlayer.addCounters(counter, game);
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return computerPlayer.addCounters(counter, source, game);
     }
 
     @Override
@@ -3303,13 +3305,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int rollDice(Game game, int numSides) {
-        return computerPlayer.rollDice(game, numSides);
+    public int rollDice(Ability source, Game game, int numSides) {
+        return computerPlayer.rollDice(source, game, numSides);
     }
 
     @Override
-    public int rollDice(Game game, List<UUID> appliedEffects, int numSides) {
-        return computerPlayer.rollDice(game, appliedEffects, numSides);
+    public int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides) {
+        return computerPlayer.rollDice(source, game, appliedEffects, numSides);
     }
 
     @Override
@@ -3413,8 +3415,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
-        return computerPlayer.canPaySacrificeCost(permanent, sourceId, controllerId, game);
+    public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
+        return computerPlayer.canPaySacrificeCost(permanent, source, controllerId, game);
     }
 
     @Override
@@ -3538,13 +3540,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game);
-    }
-
-    @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
-        return computerPlayer.moveCardToHandWithInfo(card, sourceId, game, withName);
+    public boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName) {
+        return computerPlayer.moveCardToHandWithInfo(card, source, game, withName);
     }
 
     @Override
@@ -3563,23 +3560,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
-        return computerPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone);
+    public boolean moveCardToGraveyardWithInfo(Card card, Ability source, Game game, Zone fromZone) {
+        return computerPlayer.moveCardToGraveyardWithInfo(card, source, game, fromZone);
     }
 
     @Override
-    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
-        return computerPlayer.moveCardToLibraryWithInfo(card, sourceId, game, fromZone, toTop, withName);
+    public boolean moveCardToLibraryWithInfo(Card card, Ability source, Game game, Zone fromZone, boolean toTop, boolean withName) {
+        return computerPlayer.moveCardToLibraryWithInfo(card, source, game, fromZone, toTop, withName);
     }
 
     @Override
-    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
-        return computerPlayer.moveCardToExileWithInfo(card, exileId, exileName, sourceId, game, fromZone, withName);
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, Ability source, Game game, Zone fromZone, boolean withName) {
+        return computerPlayer.moveCardToExileWithInfo(card, exileId, exileName, source, game, fromZone, withName);
     }
 
     @Override
-    public boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
-        return computerPlayer.moveCardToCommandWithInfo(card, sourceId, game, fromZone);
+    public boolean moveCardToCommandWithInfo(Card card, Ability source, Game game, Zone fromZone) {
+        return computerPlayer.moveCardToCommandWithInfo(card, source, game, fromZone);
     }
 
     @Override
@@ -3905,10 +3902,10 @@ public class TestPlayer implements Player {
 
     @Override
     public void assignDamage(int damage, List<UUID> targets,
-                             String singleTargetName, UUID sourceId,
+                             String singleTargetName, UUID attackerId, Ability source,
                              Game game
     ) {
-        computerPlayer.assignDamage(damage, targets, singleTargetName, sourceId, game);
+        computerPlayer.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
     }
 
     @Override
@@ -4015,17 +4012,17 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanarDieRoll rollPlanarDie(Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+    public PlanarDieRoll rollPlanarDie(Ability source, Game game, List<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

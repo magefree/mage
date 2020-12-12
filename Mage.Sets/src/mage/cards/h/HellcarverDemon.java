@@ -72,12 +72,12 @@ class HellcarverDemonEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
                 if (!Objects.equals(permanent, sourceObject)) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
             }
             if (!controller.getHand().isEmpty()) {
                 int cardsInHand = controller.getHand().size();
-                controller.discard(cardsInHand, false, source, game);
+                controller.discard(cardsInHand, false, false, source, game);
             }
             // move cards from library to exile
             Set<Card> currentExiledCards = new HashSet<>();

@@ -44,7 +44,7 @@ public class DestroyAttachedToEffect extends OneShotEffect {
         if (attachment != null && attachment.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
             if (attachedTo != null) {
-                return attachedTo.destroy(source.getSourceId(), game, noRegen);
+                return attachedTo.destroy(source, game, noRegen);
             }
         }
         return false;

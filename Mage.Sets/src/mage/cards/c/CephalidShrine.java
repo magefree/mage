@@ -61,7 +61,7 @@ class CephalidShrineTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -113,14 +113,14 @@ class CephalidShrineEffect extends OneShotEffect {
                     // even if the cost is 0, we still offer
                     Cost cost = ManaUtil.createManaCost(count, true);
                     if (game.getStack().contains(spell)
-                            && cost.canPay(source, source.getSourceId(), controller.getId(), game)
+                            && cost.canPay(source, source, controller.getId(), game)
                             && controller.chooseUse(outcome, "Pay " + cost.getText()
                                     + " to prevent countering " + spell.getName() + "?", source, game)
-                            && cost.pay(source, game, source.getSourceId(), controller.getId(), false)
+                            && cost.pay(source, game, source, controller.getId(), false)
                             && cost.isPaid()) {
                         return false;
                     } else {
-                        game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                        game.getStack().counter(spell.getId(), source, game);
                         game.informPlayers(spell.getName() + " has been countered due to "
                                 + controller.getName() + " not paying " + cost.getText());
                         return true;

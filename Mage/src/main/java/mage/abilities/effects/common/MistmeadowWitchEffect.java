@@ -26,7 +26,7 @@ public class MistmeadowWitchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Mistmeadow Witch Exile", source.getSourceId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "Mistmeadow Witch Exile", source, game)) {
                 //create delayed triggered ability
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 game.addDelayedTriggeredAbility(delayedAbility, source);

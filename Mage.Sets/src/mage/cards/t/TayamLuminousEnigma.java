@@ -91,12 +91,12 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         paid = false;
         int countersRemoved = 0;
         Player controller = game.getPlayer(controllerId);
         for (int i = 0; i < countersToRemove; i++) {
-            if (target.choose(Outcome.UnboostCreature, controllerId, sourceId, game)) {
+            if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), game)) {
                 UUID targetId = getOnlyElement(target.getTargets());
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
@@ -124,7 +124,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
                             }
                         }
                         if (counterName != null) {
-                            permanent.removeCounters(counterName, 1, game);
+                            permanent.removeCounters(counterName, 1, source, game);
                             target.clearChosen();
                             if (!game.isSimulation()) {
                                 game.informPlayers(new StringBuilder(controller.getLogName())

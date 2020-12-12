@@ -61,7 +61,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LIBRARY_SHUFFLED;
+        return event.getType() == GameEvent.EventType.LIBRARY_SHUFFLED;
     }
 
     @Override

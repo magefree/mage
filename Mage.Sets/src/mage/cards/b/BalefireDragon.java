@@ -64,7 +64,7 @@ class BalefireDragonEffect extends OneShotEffect {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
                 for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
-                    creature.damage(amount, source.getSourceId(), game, false, true);
+                    creature.damage(amount, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;

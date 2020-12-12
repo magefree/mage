@@ -112,7 +112,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         if (permanent != null) {
                             Player player = game.getPlayer(permanent.getControllerId());
                             if (player != null) {
-                                player.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                                player.moveCardToExileWithInfo(permanent, null, "", source, game, Zone.BATTLEFIELD, true);
                             }
                         }
                     } else if (game.getState().getZone(objectId) == Zone.HAND) {
@@ -120,7 +120,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         if (card != null) {
                             Player player = game.getPlayer(card.getOwnerId());
                             if (player != null) {
-                                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
+                                player.moveCardToExileWithInfo(card, null, "", source, game, Zone.HAND, true);
                             }
                         }
                     }
@@ -149,7 +149,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                 filter.add(Predicates.not(Predicates.or(uuidPredicates)));
 
                 target = new TargetControlledPermanent(0, 1, filter, true);
-                if (target.canChoose(player.getId(), game)
+                if (target.canChoose(source.getSourceId(), player.getId(), game)
                         && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
                     for (UUID targetId : target.getTargets()) {
                         if (!selectedObjects.contains(targetId)) {
@@ -174,7 +174,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         uuidPredicates.add(new CardIdPredicate(uuid));
                     }
                     filterInHand.add(Predicates.not(Predicates.or(uuidPredicates)));
-                    if (targetInHand.canChoose(player.getId(), game) &&
+                    if (targetInHand.canChoose(source.getSourceId(), player.getId(), game) &&
                             player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
 
                         Card card = player.getHand().get(targetInHand.getFirstTarget(), game);

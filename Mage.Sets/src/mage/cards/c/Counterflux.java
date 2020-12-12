@@ -88,7 +88,7 @@ class CounterfluxEffect extends OneShotEffect {
             }
         }
         for (Spell spell : spellsToCounter) {
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            game.getStack().counter(spell.getId(), source, game);
         }
         return true;
     }

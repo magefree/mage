@@ -97,7 +97,7 @@ class CounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getStack().counter(this.getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+        return game.getStack().counter(this.getTargetPointer().getFirst(game, source), source, game);
     }
 
 }

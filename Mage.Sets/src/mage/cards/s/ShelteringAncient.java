@@ -64,11 +64,11 @@ class ShelteringAncientCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Target target = new TargetCreaturePermanent(1, 1, filter, true);
-            if (target.choose(Outcome.BoostCreature, controllerId, sourceId, game)) {
+            if (target.choose(Outcome.BoostCreature, controllerId, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(), ability, game);
@@ -81,8 +81,8 @@ class ShelteringAncientCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, sourceId, game, 1);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return game.getBattlefield().contains(filter, source.getSourceId(), game, 1);
     }
 
     @Override

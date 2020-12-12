@@ -89,22 +89,22 @@ class XathridDemonEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 int amount = permanent.getPower().getValue();
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
 
                 if (amount > 0) {
                     Set<UUID> opponents = game.getOpponents(source.getControllerId());
                     for (UUID opponentId : opponents) {
                         Player opponent = game.getPlayer(opponentId);
                         if (opponent != null) {
-                            opponent.loseLife(amount, game, false);
+                            opponent.loseLife(amount, game, source, false);
                         }
                     }
                 }
                 return true;
             }
         } else {
-            sourcePermanent.tap(game);
-            controller.loseLife(7, game, false);
+            sourcePermanent.tap(source, game);
+            controller.loseLife(7, game, source, false);
             return true;
         }
         return false;

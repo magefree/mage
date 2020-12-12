@@ -87,7 +87,7 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int xValue = game.getBattlefield().countAll(filter, source.getControllerId(), game);
         Token token = new BaruFistOfKrosaToken(xValue);
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 }

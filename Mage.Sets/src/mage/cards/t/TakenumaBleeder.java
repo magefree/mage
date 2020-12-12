@@ -65,7 +65,7 @@ class TakenumaBleederEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (game.getBattlefield().countAll(new FilterCreaturePermanent(SubType.DEMON, "Demon"), source.getControllerId(), game) < 1) {
-                controller.loseLife(1, game, false);
+                controller.loseLife(1, game, source, false);
             }
             return true;
         }

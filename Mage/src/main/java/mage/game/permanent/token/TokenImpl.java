@@ -123,13 +123,13 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
-        return this.putOntoBattlefield(amount, game, sourceId, controllerId, false, false);
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId) {
+        return this.putOntoBattlefield(amount, game, source, controllerId, false, false);
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
-        return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, null);
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, null);
     }
 
     private String getSetCode(Game game, UUID sourceId) {
@@ -158,12 +158,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, attackedPlayer, true);
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, true);
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -173,16 +173,20 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         lastAddedTokenIds.clear();
 
-        CreateTokenEvent event = new CreateTokenEvent(sourceId, controllerId, amount, this);
+        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
         if (!created || !game.replaceEvent(event)) {
-            putOntoBattlefieldHelper(event, game, tapped, attacking, attackedPlayer, created);
+            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
             return true;
         }
         return false;
     }
 
-    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
         Player controller = game.getPlayer(event.getPlayerId());
+        if (controller == null) {
+            return;
+        }
+
         Token token = event.getToken();
         int amount = event.getAmount();
 
@@ -200,7 +204,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         game.setScopeRelevant(true);
         for (Permanent permanent : permanents) {
-            if (permanent.entersBattlefield(event.getSourceId(), game, Zone.OUTSIDE, true)) {
+            if (permanent.entersBattlefield(source, game, Zone.OUTSIDE, true)) {
                 permanentsEntered.add(permanent);
             } else {
                 game.getPermanentsEntering().remove(permanent.getId());
@@ -219,7 +223,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
             game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
             if (permanent instanceof PermanentToken && created) {
-                game.addSimultaneousEvent(new CreatedTokenEvent(event.getSourceId(), (PermanentToken) permanent));
+                game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
             }
             if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                 game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);

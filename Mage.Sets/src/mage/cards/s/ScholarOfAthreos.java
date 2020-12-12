@@ -60,7 +60,7 @@ class ScholarOfAthreosEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if(opponent != null) {
-                lifeLost += opponent.loseLife(1, game, false);
+                lifeLost += opponent.loseLife(1, game, source, false);
             }
         }
         game.getPlayer(source.getControllerId()).gainLife(lifeLost, game, source);

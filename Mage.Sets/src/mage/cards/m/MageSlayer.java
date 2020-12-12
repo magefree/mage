@@ -68,7 +68,7 @@ class MageSlayerEffect extends OneShotEffect {
             if (power > 0 && defenderId != null) {
                 UUID sourceId = (UUID) this.getValue("sourceId");
                 if (sourceId != null) {
-                    game.damagePlayerOrPlaneswalker(defenderId, power, source.getSourceId(), game, false, true);
+                    game.damagePlayerOrPlaneswalker(defenderId, power, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;

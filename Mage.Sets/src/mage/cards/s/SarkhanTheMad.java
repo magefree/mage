@@ -84,7 +84,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);
                 if (sourcePermanent != null) {
-                    sourcePermanent.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, false);
+                    sourcePermanent.damage(card.getConvertedManaCost(), source.getSourceId(), source, game, false, false);
                 }
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             }
@@ -117,12 +117,12 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
         if (permanent != null) {
-            permanent.sacrifice(this.getId(), game);
+            permanent.sacrifice(source, game);
 
             Player player = game.getPlayer(permanent.getControllerId());
             if(player != null) {
                 Token dragonToken = new DragonToken2();
-                dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
+                dragonToken.putOntoBattlefield(1, game, source, player.getId());
             }
         }
         return false;
@@ -159,7 +159,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         List<Permanent> dragons = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         if (dragons != null && !dragons.isEmpty()) {
             for (Permanent dragon : dragons) {
-                game.damagePlayerOrPlaneswalker(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), game, false, true);
+                game.damagePlayerOrPlaneswalker(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), source, game, false, true);
             }
             return true;
         }

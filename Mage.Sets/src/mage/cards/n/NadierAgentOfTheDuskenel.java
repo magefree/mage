@@ -91,8 +91,7 @@ class NadierAgentOfTheDuskenelEffect extends OneShotEffect {
         if (!permanent.isCreature() || permanent.getPower().getValue() < 1) {
             return false;
         }
-        return new ElfToken().putOntoBattlefield(
-                permanent.getPower().getValue(), game, source.getSourceId(), source.getControllerId()
+        return new ElfToken().putOntoBattlefield(permanent.getPower().getValue(), game, source, source.getControllerId()
         );
     }
 }

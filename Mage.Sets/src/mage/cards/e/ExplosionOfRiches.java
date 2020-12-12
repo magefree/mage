@@ -65,7 +65,7 @@ class ExplosionOfRichesEffect extends OneShotEffect {
                     && !player.chooseUse(outcome, "Draw a card?", source, game)) {
                 continue;
             }
-            if (player.drawCards(1, source.getSourceId(), game) >= 1) {
+            if (player.drawCards(1, source, game) >= 1) {
                 continue;
             }
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

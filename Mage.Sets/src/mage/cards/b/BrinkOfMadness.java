@@ -61,7 +61,7 @@ public final class BrinkOfMadness extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Player player = game.getPlayer(source.getFirstTarget());
-            return player != null && !player.discard(player.getHand(), source, game).isEmpty();
+            return player != null && !player.discard(player.getHand(), false, source, game).isEmpty();
         }
     }
 }

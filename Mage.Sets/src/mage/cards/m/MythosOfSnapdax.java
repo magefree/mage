@@ -119,7 +119,7 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
             if (permanent == null || toKeep.contains(permanent.getId())) {
                 continue;
             }
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
         return true;
     }

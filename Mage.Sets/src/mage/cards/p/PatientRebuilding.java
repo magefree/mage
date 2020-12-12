@@ -76,7 +76,7 @@ class PatientRebuildingEffect extends OneShotEffect {
             }
         }
         if (numberOfLandCards > 0) {
-            return controller.drawCards(numberOfLandCards, source.getSourceId(), game) > 0;
+            return controller.drawCards(numberOfLandCards, source, game) > 0;
         }
         return true;
     }

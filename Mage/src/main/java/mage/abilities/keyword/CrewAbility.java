@@ -73,7 +73,7 @@ class CrewCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
             public String getMessage() {
@@ -92,13 +92,13 @@ class CrewCost extends CostImpl {
         };
 
         // can cancel
-        if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
+        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
             int sumPower = 0;
             for (UUID targetId : target.getTargets()) {
-                GameEvent event = new GameEvent(GameEvent.EventType.CREW_VEHICLE, targetId, sourceId, controllerId);
+                GameEvent event = new GameEvent(GameEvent.EventType.CREW_VEHICLE, targetId, source, controllerId);
                 if (!game.replaceEvent(event)) {
                     Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null && permanent.tap(game)) {
+                    if (permanent != null && permanent.tap(source, game)) {
                         sumPower += permanent.getPower().getValue();
                     }
                 }
@@ -106,7 +106,7 @@ class CrewCost extends CostImpl {
             paid = sumPower >= value;
             if (paid) {
                 for (UUID targetId : target.getTargets()) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, sourceId, controllerId));
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, source, controllerId));
                 }
             }
         } else {
@@ -117,7 +117,7 @@ class CrewCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
             int powerToAdd = permanent.getPower().getValue();

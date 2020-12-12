@@ -71,9 +71,9 @@ class WinterBlastEffect extends OneShotEffect {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                permanent.tap(game);
+                permanent.tap(source, game);
                 if (permanent.getAbilities().contains(FlyingAbility.getInstance())) {
-                    permanent.damage(2, source.getSourceId(), game, false, true);
+                    permanent.damage(2, source.getSourceId(), source, game, false, true);
                 }
                 affectedTargets++;
             }

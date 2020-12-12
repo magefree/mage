@@ -66,7 +66,7 @@ public final class BorosFuryShield extends CardImpl {
                 Player player = game.getPlayer(target.getControllerId());
                 if (player != null) {
                     int power = target.getPower().getValue();
-                    player.damage(power, source.getId(), game);
+                    player.damage(power, source.getId(), source, game);
                 }
 
             }

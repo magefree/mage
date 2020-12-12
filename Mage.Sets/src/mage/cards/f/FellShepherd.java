@@ -75,7 +75,7 @@ class FellShepherdWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && ((Card) card).isOwnedBy(this.controllerId) && card.isCreature()) {
                 creatureIds.add(card.getId());
@@ -115,7 +115,7 @@ class FellShepherdEffect extends OneShotEffect {
                 if (game.getState().getZone(creatureId) == Zone.GRAVEYARD) {
                     Card card = game.getCard(creatureId);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        card.moveToZone(Zone.HAND, source, game, false);
                         sb.append(' ').append(card.getName());
                     }
                 }

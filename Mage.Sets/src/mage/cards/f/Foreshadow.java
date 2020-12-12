@@ -72,7 +72,7 @@ class ForeshadowEffect extends OneShotEffect {
         }
         for (Card card : targetPlayer.millCards(1, source, game).getCards(game)) {
             if (CardUtil.haveSameNames(card, cardName, game)) {
-                controller.drawCards(1, source.getSourceId(), game);
+                controller.drawCards(1, source, game);
                 break;
             }
         }

@@ -112,7 +112,7 @@ class CabalInterrogatorEffect extends OneShotEffect {
                 card = revealedCards.getRandom(game);
             }
 
-            targetPlayer.discard(card, source, game);
+            targetPlayer.discard(card, false, source, game);
         }
         return true;
     }

@@ -67,7 +67,7 @@ class ManabondEffect extends OneShotEffect {
 
             }
             controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            controller.discard(controller.getHand().size(), false, source, game);
+            controller.discard(controller.getHand().size(), false, false, source, game);
             return true;
         }
         return false;

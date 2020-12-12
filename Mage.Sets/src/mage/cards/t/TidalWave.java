@@ -58,7 +58,7 @@ class TidalWaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token token = new TidalWaveWallToken();
-        if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+        if (token.putOntoBattlefield(1, game, source, source.getControllerId())) {
             for (UUID tokenId : token.getLastAddedTokenIds()) {
                 Permanent tokenPermanent = game.getPermanent(tokenId);
                 if (tokenPermanent != null) {

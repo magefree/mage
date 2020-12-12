@@ -67,12 +67,12 @@ class MishrasWarMachineEffect extends OneShotEffect {
                 && sourcePermanent != null) {
             DiscardCardCost cost = new DiscardCardCost();
             if (controller.chooseUse(Outcome.Benefit, "Do you wish to discard a card to prevent the 3 damage to you?", source, game)
-                    && cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
-                    && cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+                    && cost.canPay(source, source, source.getControllerId(), game)
+                    && cost.pay(source, game, source, source.getControllerId(), true)) {
                 return true;
             }
-            if (controller.damage(3, sourcePermanent.getId(), game) > 0) {
-                sourcePermanent.tap(game);
+            if (controller.damage(3, sourcePermanent.getId(), source, game) > 0) {
+                sourcePermanent.tap(source, game);
                 return true;
             }
         }

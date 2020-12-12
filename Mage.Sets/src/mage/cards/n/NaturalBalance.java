@@ -74,7 +74,7 @@ public final class NaturalBalance extends CardImpl {
                             if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
                                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
                                     if (!target.getTargets().contains(permanent.getId())) {
-                                        permanent.sacrifice(source.getId(), game);
+                                        permanent.sacrifice(source, game);
                                     }
                                 }
                             }

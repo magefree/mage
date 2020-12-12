@@ -58,10 +58,10 @@ class CertainDeathEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null && you != null) {
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
             Player permController = game.getPlayer(permanent.getControllerId());
             if (permController != null) {
-                permController.loseLife(2, game, false);
+                permController.loseLife(2, game, source, false);
                 you.gainLife(2, game, source);
                 return true;
             }

@@ -67,7 +67,7 @@ class GraviticPunchEffect extends OneShotEffect {
         if (player == null || controlledCreature == null) {
             return false;
         }
-        player.damage(controlledCreature.getPower().getValue(), controlledCreature.getId(), game);
+        player.damage(controlledCreature.getPower().getValue(), controlledCreature.getId(), source, game);
         return true;
     }
 }

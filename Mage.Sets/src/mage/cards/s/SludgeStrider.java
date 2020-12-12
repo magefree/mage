@@ -70,7 +70,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -122,7 +122,7 @@ class SludgeStriderEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
         if (targetPlayer != null) {
-            targetPlayer.loseLife(1, game, false);
+            targetPlayer.loseLife(1, game, source, false);
         }
         if (you != null) {
             you.gainLife(1, game, source);

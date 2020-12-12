@@ -86,7 +86,7 @@ class HydroidKrasisEffect extends OneShotEffect {
             return false;
         }
         int halfCost = Math.floorDiv(((SpellAbility) obj).getManaCostsToPay().getX(), 2);
-        player.drawCards(halfCost, source.getSourceId(), game);
+        player.drawCards(halfCost, source, game);
         player.gainLife(halfCost, game, source);
         return true;
     }

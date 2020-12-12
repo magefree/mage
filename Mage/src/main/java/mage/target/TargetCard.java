@@ -8,6 +8,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TargetEvent;
 import mage.players.Player;
 
 import java.util.*;
@@ -72,7 +73,7 @@ public class TargetCard extends TargetObject {
                 switch (zone) {
                     case HAND:
                         for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets++;
                                 if (possibleTargets >= this.minNumberOfTargets) {
                                     return true;
@@ -82,7 +83,7 @@ public class TargetCard extends TargetObject {
                         break;
                     case GRAVEYARD:
                         for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets++;
                                 if (possibleTargets >= this.minNumberOfTargets) {
                                     return true;
@@ -92,7 +93,7 @@ public class TargetCard extends TargetObject {
                         break;
                     case LIBRARY:
                         for (Card card : player.getLibrary().getUniqueCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 if (filter.match(card, game)) {
                                     possibleTargets++;
                                     if (possibleTargets >= this.minNumberOfTargets) {
@@ -104,7 +105,7 @@ public class TargetCard extends TargetObject {
                         break;
                     case EXILED:
                         for (Card card : game.getExile().getPermanentExile().getCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 if (filter.match(card, player.getId(), game)) {
                                     possibleTargets++;
                                     if (possibleTargets >= this.minNumberOfTargets) {
@@ -141,21 +142,21 @@ public class TargetCard extends TargetObject {
                 switch (zone) {
                     case HAND:
                         for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets.add(card.getId());
                             }
                         }
                         break;
                     case GRAVEYARD:
                         for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets.add(card.getId());
                             }
                         }
                         break;
                     case LIBRARY:
                         for (Card card : player.getLibrary().getUniqueCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 if (filter.match(card, sourceId, sourceControllerId, game)) {
                                     possibleTargets.add(card.getId());
                                 }
@@ -164,7 +165,7 @@ public class TargetCard extends TargetObject {
                         break;
                     case EXILED:
                         for (Card card : game.getExile().getPermanentExile().getCards(game)) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 if (filter.match(card, sourceId, sourceControllerId, game)) {
                                     possibleTargets.add(card.getId());
                                 }
@@ -179,7 +180,7 @@ public class TargetCard extends TargetObject {
                                 .filter(card -> filter.match(card, sourceId, sourceControllerId, game))
                                 .collect(Collectors.toList());
                         for (Card card : possibleCards) {
-                            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                                 possibleTargets.add(card.getId());
                             }
                         }

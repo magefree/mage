@@ -73,9 +73,9 @@ class ArgothianWurmEffect extends PutOnLibrarySourceEffect {
                 Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()));
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && cost.canPay(source, source.getSourceId(), playerId, game)
+                        && cost.canPay(source, source, playerId, game)
                         && player.chooseUse(Outcome.Sacrifice, "Sacrifice a land?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), playerId, true, null)) {
+                        && cost.pay(source, game, source, playerId, true, null)) {
                     costPaid = true;
                 }
             }

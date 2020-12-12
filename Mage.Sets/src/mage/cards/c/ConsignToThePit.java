@@ -62,8 +62,8 @@ class ConsignToThePitEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        permanent.destroy(source.getSourceId(), game, false);
-        player.damage(2, source.getSourceId(), game);
+        permanent.destroy(source, game, false);
+        player.damage(2, source.getSourceId(), source, game);
         return true;
     }
 }

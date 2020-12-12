@@ -103,7 +103,7 @@ class DevelopmentEffect extends OneShotEffect {
                     if (opponent != null && opponent.chooseUse(Outcome.Detriment,
                             "Allow " + player.getLogName() + " to draw a card instead? (" + (i + 1) + ')', source, game)) {
                         game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
-                        player.drawCards(1, source.getSourceId(), game);
+                        player.drawCards(1, source, game);
                         putToken = false;
                         break;
                     }

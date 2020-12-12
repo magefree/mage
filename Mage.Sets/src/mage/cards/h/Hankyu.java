@@ -116,11 +116,11 @@ class HankyuDealsDamageEffect extends OneShotEffect {
 
                 Permanent permanent = game.getPermanent(source.getFirstTarget());
                 if (permanent != null) {
-                    permanent.damage(damageAmount, source.getSourceId(), game, false, true);
+                    permanent.damage(damageAmount, source.getSourceId(), source, game, false, true);
                 }
                 Player player = game.getPlayer(source.getFirstTarget());
                 if (player != null) {
-                    player.damage(damageAmount, source.getSourceId(), game);
+                    player.damage(damageAmount, source.getSourceId(), source, game);
                 }
             }
             return true;
@@ -149,17 +149,17 @@ class HankyuCountersSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent equipment = game.getPermanent(this.effectGivingEquipmentId);
         if (equipment != null) {
             this.removedCounters = equipment.getCounters(game).getCount(CounterType.AIM);
             if (this.removedCounters > 0) {
-                equipment.removeCounters("aim", this.removedCounters, game);
+                equipment.removeCounters("aim", this.removedCounters, source, game);
             }
         }
         this.paid = true;

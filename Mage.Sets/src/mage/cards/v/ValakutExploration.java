@@ -171,7 +171,7 @@ class ValakutExplorationDamageEffect extends OneShotEffect {
             if (playerId == null) {
                 continue;
             }
-            player.damage(count, source.getSourceId(), game);
+            player.damage(count, source.getSourceId(), source, game);
         }
         return true;
     }

@@ -70,15 +70,15 @@ class FlameblastDragonEffect extends OneShotEffect {
             if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to any target", source, game)) {
                 int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     Permanent permanent = game.getPermanent(source.getFirstTarget());
                     if (permanent != null) {
-                        permanent.damage(costX, source.getSourceId(), game, false, true);
+                        permanent.damage(costX, source.getSourceId(), source, game, false, true);
                         return true;
                     }
                     Player targetPlayer = game.getPlayer(source.getFirstTarget());
                     if (targetPlayer != null) {
-                        targetPlayer.damage(costX, source.getSourceId(), game);
+                        targetPlayer.damage(costX, source.getSourceId(), source, game);
                         return true;
                     }
                     return false;

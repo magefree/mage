@@ -70,7 +70,7 @@ class EpicenterEffect extends OneShotEffect {
         while (permanents.hasNext()) {
             Permanent p = permanents.next();
             if (p.isLand()) {
-                p.sacrifice(source.getSourceId(), game);
+                p.sacrifice(source, game);
             }
         }
 

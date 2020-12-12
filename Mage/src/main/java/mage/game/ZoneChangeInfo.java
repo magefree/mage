@@ -3,6 +3,8 @@ package mage.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.cards.MeldCard;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
@@ -91,20 +93,24 @@ public class ZoneChangeInfo {
     public static class Battlefield extends ZoneChangeInfo {
 
         public boolean tapped;
+        public Ability source;
 
-        public Battlefield(ZoneChangeEvent event, boolean tapped) {
+        public Battlefield(ZoneChangeEvent event, boolean tapped, Ability source) {
             super(event);
             this.tapped = tapped;
+            this.source = source;
         }
 
-        public Battlefield(ZoneChangeEvent event, boolean faceDown, boolean tapped) {
+        public Battlefield(ZoneChangeEvent event, boolean faceDown, boolean tapped, Ability source) {
             super(event, faceDown);
             this.tapped = tapped;
+            this.source = source;
         }
 
         public Battlefield(final Battlefield info) {
             super(info);
             this.tapped = info.tapped;
+            this.source = info.source;
         }
 
         @Override
@@ -147,14 +153,14 @@ public class ZoneChangeInfo {
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
             if (meld != null) {
                 if (meld.hasTopHalf(game)) {
-                    ZoneChangeEvent topEvent = new ZoneChangeEvent(meld.getTopHalfCard().getId(), event.getSourceId(),
+                    ZoneChangeEvent topEvent = new ZoneChangeEvent(meld.getTopHalfCard().getId(), event.getSource(),
                             event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
                     ZoneChangeInfo topInfo = info.copy();
                     topInfo.event = topEvent;
                     subInfo.add(topInfo);
                 }
                 if (meld.hasBottomHalf(game)) {
-                    ZoneChangeEvent bottomEvent = new ZoneChangeEvent(meld.getBottomHalfCard().getId(), event.getSourceId(),
+                    ZoneChangeEvent bottomEvent = new ZoneChangeEvent(meld.getBottomHalfCard().getId(), event.getSource(),
                             event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
                     ZoneChangeInfo bottomInfo = info.copy();
                     bottomInfo.event = bottomEvent;

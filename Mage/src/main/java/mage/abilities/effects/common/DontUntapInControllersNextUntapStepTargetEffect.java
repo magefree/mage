@@ -87,14 +87,14 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UNTAP_STEP || event.getType() == EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // the check if a permanent untap phase is already handled is needed if multiple effects are added to prevent untap in next untap step of controller
         // if we don't check it for every untap step of a turn only one effect would be consumed instead of all be valid for the next untap step
-        if (event.getType() == EventType.UNTAP_STEP) {
+        if (event.getType() == GameEvent.EventType.UNTAP_STEP) {
             boolean allHandled = true;
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
@@ -120,7 +120,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (handledTargetsDuringTurn.containsKey(event.getTargetId())
                     && !handledTargetsDuringTurn.get(event.getTargetId())
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {

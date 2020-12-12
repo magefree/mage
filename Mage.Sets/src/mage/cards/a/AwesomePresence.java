@@ -80,8 +80,8 @@ class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
                 && enchantment.isAttachedTo(enchantedAttackingCreature.getId())) {
             Player defendingPlayer = game.getPlayer(blockingCreature.getControllerId());
             if (defendingPlayer != null) {
-                return !manaCosts.canPay(source, source.getSourceId(), defendingPlayer.getId(), game)
-                        || !manaCosts.pay(source, game, source.getSourceId(), defendingPlayer.getId(), false);
+                return !manaCosts.canPay(source, source, defendingPlayer.getId(), game)
+                        || !manaCosts.pay(source, game, source, defendingPlayer.getId(), false);
             }
         }
         return true;

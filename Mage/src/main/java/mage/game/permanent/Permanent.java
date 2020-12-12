@@ -24,9 +24,9 @@ public interface Permanent extends Card, Controllable {
 
     boolean untap(Game game);
 
-    boolean tap(Game game);
+    boolean tap(Ability source, Game game);
 
-    boolean tap(boolean forCombat, Game game);
+    boolean tap(boolean forCombat, Ability source, Game game);
 
     /**
      * use tap(game)
@@ -91,25 +91,23 @@ public interface Permanent extends Card, Controllable {
 
     int getAttachedToZoneChangeCounter();
 
-    void attachTo(UUID permanentId, Game game);
+    void attachTo(UUID permanentId, Ability source, Game game);
 
     void unattach(Game game);
 
-    //    boolean addAttachment(UUID permanentId, Game game);
-//
-//    boolean removeAttachment(UUID permanentId, Game game);
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
     /**
-     * @param source
+     * @param attachment
+     * @param source can be null for default checks like state base
      * @param game
      * @param silentMode - use it to ignore warning message for users (e.g. for
      *                   checking only)
      * @return
      */
-    boolean cantBeAttachedBy(MageObject source, Game game, boolean silentMode);
+    boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode);
 
     boolean wasControlledFromStartOfControllerTurn();
 
@@ -117,23 +115,36 @@ public interface Permanent extends Card, Controllable {
 
     int getDamage();
 
-    int damage(int damage, UUID sourceId, Game game);
+    int damage(int damage, UUID attackerId, Ability source, Game game);
 
-    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable);
-
-    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects);
+    int damage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable);
 
     /**
-     * used in combat only to deal damage at the same time
+     * Uses in replace events only
      *
      * @param damage
-     * @param sourceId
+     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
+     * @param source can be null for default game actions like combat
+     * @param game
+     * @param combat
+     * @param preventable
+     * @param appliedEffects
+     * @return
+     */
+    int damage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects);
+
+    /**
+     * Uses in combat only to deal damage at the same time
+     *
+     * @param damage
+     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
+     * @param source can be null for default game actions like combat
      * @param game
      * @param preventable
      * @param combat
      * @return
      */
-    int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+    int markDamage(int damage, UUID attackerId, Ability source, Game game, boolean preventable, boolean combat);
 
     void markLifelink(int damage);
 
@@ -145,9 +156,15 @@ public interface Permanent extends Card, Controllable {
 
     MageObject getBasicMageObject(Game game);
 
-    boolean destroy(UUID sourceId, Game game, boolean noRegen);
+    boolean destroy(Ability source, Game game, boolean noRegen);
 
-    boolean sacrifice(UUID sourceId, Game game);
+    /**
+     *
+     * @param source can be null for state base actions
+     * @param game
+     * @return
+     */
+    boolean sacrifice(Ability source, Game game);
 
     boolean regenerate(Ability source, Game game);
 
@@ -155,7 +172,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
 
-    boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
+    boolean entersBattlefield(Ability source, Game game, Zone fromZone, boolean fireEvent);
 
     String getValue(GameState state);
 
@@ -173,7 +190,7 @@ public interface Permanent extends Card, Controllable {
 
     void resetControl();
 
-    boolean changeControllerId(UUID controllerId, Game game);
+    boolean changeControllerId(UUID controllerId, Game game, Ability source);
 
     boolean checkControlChanged(Game game);
 

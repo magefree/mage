@@ -83,7 +83,7 @@ class MaraudingRaptorEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if (permanent.damage(2, source.getSourceId(), game) > 0 && permanent.hasSubtype(SubType.DINOSAUR, game)) {
+        if (permanent.damage(2, source.getSourceId(), source, game) > 0 && permanent.hasSubtype(SubType.DINOSAUR, game)) {
             game.addEffect(new BoostSourceEffect(2, 0, Duration.EndOfTurn), source);
         }
         return true;

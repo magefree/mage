@@ -122,7 +122,7 @@ class OpenSeasonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID controller = game.getControllerId(source.getFirstTarget());
         if (controller != null) {
-            game.getPlayer(controller).loseLife(2, game, false);
+            game.getPlayer(controller).loseLife(2, game, source, false);
             for (UUID playerId : game.getOpponents(controller)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

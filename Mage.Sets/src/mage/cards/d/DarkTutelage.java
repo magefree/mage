@@ -53,8 +53,8 @@ class DarkTutelageEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.revealCards(source, new CardsImpl(card), game);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                controller.loseLife(card.getConvertedManaCost(), game, false);
+                card.moveToZone(Zone.HAND, source, game, false);
+                controller.loseLife(card.getConvertedManaCost(), game, source, false);
                 return true;
             }
         }

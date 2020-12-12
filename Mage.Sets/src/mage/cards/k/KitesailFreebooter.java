@@ -97,7 +97,7 @@ class KitesailFreebooterExileEffect extends OneShotEffect {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);
                     // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
                     if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                        controller.moveCardToExileWithInfo(card, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.HAND, true);
+                        controller.moveCardToExileWithInfo(card, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourcePermanent.getIdName(), source, game, Zone.HAND, true);
                     }
                 }
             }

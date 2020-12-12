@@ -50,7 +50,7 @@ public class DiscardControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && !player.discard(amount.calculate(game, source, this), randomDiscard, source, game).isEmpty();
+        return player != null && !player.discard(amount.calculate(game, source, this), randomDiscard, false, source, game).isEmpty();
     }
 
     private void setText() {

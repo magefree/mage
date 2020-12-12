@@ -70,7 +70,7 @@ class DuneblastEffect extends OneShotEffect {
             }
             for(Permanent creature: game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
                 if (!Objects.equals(creature, creatureToKeep)) {
-                    creature.destroy(source.getSourceId(), game, false);
+                    creature.destroy(source, game, false);
                 }
             }
             return true;

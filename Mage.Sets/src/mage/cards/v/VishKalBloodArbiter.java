@@ -78,9 +78,9 @@ enum VishKalBloodArbiterDynamicValue implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        for (Cost cost : source.getCosts()) {
+        for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof RemoveAllCountersSourceCost) {
                 count += ((RemoveAllCountersSourceCost) cost).getRemovedCounters();
             }

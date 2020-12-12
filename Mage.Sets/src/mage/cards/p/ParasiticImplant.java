@@ -68,7 +68,7 @@ class ParasiticImplantEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                return creature.sacrifice(source.getSourceId(), game);
+                return creature.sacrifice(source, game);
             }
         }
         return false;

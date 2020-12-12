@@ -92,7 +92,7 @@ class PlagueReaverSacrificeEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
         return true;
     }

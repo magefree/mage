@@ -61,10 +61,10 @@ class InterrogationEffect extends OneShotEffect {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
             Cost cost = new PayLifeCost(3);
-            if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+            if (!cost.canPay(source, source, player.getId(), game)
                     || !player.chooseUse(Outcome.LoseLife, "Pay 3 life?", source, game)
-                    || !cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                player.discardOne(false, source, game);
+                    || !cost.pay(source, game, source, player.getId(), false, null)) {
+                player.discardOne(false, false, source, game);
             }
             return true;
         }

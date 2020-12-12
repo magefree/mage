@@ -65,7 +65,7 @@ class SkredDamageEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if(amount > 0) {   
             if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
+                permanent.damage(amount, source.getSourceId(), source, game, false, true);
                 return true;
             }
         }

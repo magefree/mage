@@ -101,7 +101,7 @@ public class RandomTest {
         for (int x = 0; x < weight; x++) {
             for (int y = 0; y < height; y++) {
                 // roll dice
-                int diceVal = player.rollDice(game, 12);
+                int diceVal = player.rollDice(null, game, 12);
                 int colorMult = Math.floorDiv(255, 12);
 
                 image.setRGB(x, y, new Color(colorMult * diceVal, colorMult * diceVal, colorMult * diceVal).getRGB());
@@ -124,7 +124,7 @@ public class RandomTest {
         for (int x = 0; x < weight; x++) {
             for (int y = 0; y < height; y++) {
                 // roll planar dice
-                PlanarDieRoll res = player.rollPlanarDie(game);
+                PlanarDieRoll res = player.rollPlanarDie(null, game);
                 image.setRGB(x, y, new Color(
                         res.equals(PlanarDieRoll.CHAOS_ROLL) ? 255 : 0,
                         res.equals(PlanarDieRoll.PLANAR_ROLL) ? 255 : 0,

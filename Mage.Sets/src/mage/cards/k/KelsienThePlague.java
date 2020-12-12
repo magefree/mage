@@ -121,7 +121,7 @@ class KelsienThePlagueEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.damage(1, source.getSourceId(), game);
+        permanent.damage(1, source.getSourceId(), source, game);
         game.addDelayedTriggeredAbility(new KelsienThePlagueDelayedTriggeredAbility(permanent.getId()), source);
         return true;
     }

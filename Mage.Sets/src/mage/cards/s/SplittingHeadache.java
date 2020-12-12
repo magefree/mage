@@ -74,7 +74,7 @@ class SplittingHeadacheEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
-                    return player.discard(card, source, game);
+                    return player.discard(card, false, source, game);
 
                 }
             }

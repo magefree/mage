@@ -64,7 +64,7 @@ class ScroungeEffect extends OneShotEffect {
             filter.add(new OwnerIdPredicate(opponent.getId()));
             TargetCardInGraveyard chosenCard = new TargetCardInGraveyard(filter);
             chosenCard.setNotTarget(true);
-            if (chosenCard.canChoose(opponent.getId(), game)) {
+            if (chosenCard.canChoose(source.getSourceId(), opponent.getId(), game)) {
                 opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                 Card card = game.getCard(chosenCard.getFirstTarget());
                 if (card != null) {

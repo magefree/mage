@@ -85,7 +85,7 @@ class MindBombEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 Cards cardsPlayer = cardsToDiscard.get(playerId);
-                cardsToDiscard.put(playerId, player.discard(cardsPlayer, source, game));
+                cardsToDiscard.put(playerId, player.discard(cardsPlayer, false, source, game));
             }
         }
 
@@ -97,7 +97,7 @@ class MindBombEffect extends OneShotEffect {
             }
             Cards cardsPlayer = cardsToDiscard.get(playerId);
             if (cardsPlayer != null) {
-                player.damage(3 - cardsPlayer.size(), source.getId(), game);
+                player.damage(3 - cardsPlayer.size(), source.getSourceId(), source, game);
             }
         }
         return true;

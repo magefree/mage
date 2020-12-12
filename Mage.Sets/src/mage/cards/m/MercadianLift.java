@@ -85,7 +85,7 @@ class MercadianLiftEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, numberOfCounters));
             filter.setMessage("creature card with converted mana cost " + numberOfCounters);
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (target.canChoose(controller.getId(), game)
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)
                     && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 target.setRequired(false);

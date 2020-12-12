@@ -37,14 +37,14 @@ public class ShuffleIntoLibrarySourceEffect extends OneShotEffect {
             if (mageObject instanceof Permanent) {
                 owner = game.getPlayer(((Permanent) mageObject).getOwnerId());
                 if (owner != null) {
-                    owner.moveCardToLibraryWithInfo((Permanent)mageObject, source.getSourceId(), game, fromZone, true, true);                
+                    owner.moveCardToLibraryWithInfo((Permanent) mageObject, source, game, fromZone, true, true);
                     owner.shuffleLibrary(source, game);
                     return true;
                 }
             } else if (mageObject instanceof Card) {
                 owner = game.getPlayer(((Card) mageObject).getOwnerId());
                 if (owner != null) {
-                    owner.moveCardToLibraryWithInfo((Card)mageObject, source.getSourceId(), game, fromZone, true, true);                
+                    owner.moveCardToLibraryWithInfo((Card)mageObject, source, game, fromZone, true, true);
                     owner.shuffleLibrary(source, game);
                     return true;
                 }

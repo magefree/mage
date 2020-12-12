@@ -87,7 +87,7 @@ class DementiaSliverEffect extends OneShotEffect {
                     revealed.add(card);
                     opponent.revealCards(sourceObject.getName(), revealed, game);
                     if (CardUtil.haveSameNames(card, cardName, game)) {
-                        opponent.discard(card, source, game);
+                        opponent.discard(card, false, source, game);
                     }
                 }
             }

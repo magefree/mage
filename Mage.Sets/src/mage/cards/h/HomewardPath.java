@@ -90,7 +90,7 @@ class HomewardPathControlEffect extends ContinuousEffectImpl {
             Permanent creature = it.next().getPermanent(game);
             if (creature != null) {
                 if (!creature.isControlledBy(creature.getOwnerId())) {
-                    creature.changeControllerId(creature.getOwnerId(), game);
+                    creature.changeControllerId(creature.getOwnerId(), game, source);
                 }
             } else {
                 it.remove();

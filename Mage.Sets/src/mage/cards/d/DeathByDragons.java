@@ -62,7 +62,7 @@ class DeathByDragonsEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(this.getTargetPointer().getFirst(game, source))) {
                     Token token = new DragonToken2();
-                    token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
+                    token.putOntoBattlefield(1, game, source, playerId);
                 }
             }
             return true;

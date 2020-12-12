@@ -89,7 +89,7 @@ class InfernalKirinEffect extends OneShotEffect {
         targetPlayer.revealCards(source, targetPlayer.getHand(), game);
         Cards cards = targetPlayer.getHand().copy();
         cards.removeIf(uuid -> game.getCard(uuid).getConvertedManaCost() != cmc);
-        targetPlayer.discard(cards, source, game);
+        targetPlayer.discard(cards, false, source, game);
         return true;
     }
 }

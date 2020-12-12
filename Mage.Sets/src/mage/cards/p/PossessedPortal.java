@@ -101,13 +101,13 @@ class PossessedPortalEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             Cost discardCost = new DiscardCardCost();
-            if (player != null && discardCost.canPay(source, source.getSourceId(), playerId, game)
+            if (player != null && discardCost.canPay(source, source, playerId, game)
                     && player.chooseUse(Outcome.Discard, "Discard a card? (Otherwise sacrifice a permanent)", source, game)) {
-                discardCost.pay(source, game, source.getSourceId(), playerId, true, null);
+                discardCost.pay(source, game, source, playerId, true, null);
             }
             else {
                 Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent());
-                sacrificeCost.pay(source, game, source.getSourceId(), playerId, true, null);
+                sacrificeCost.pay(source, game, source, playerId, true, null);
             }
         }
         return true;

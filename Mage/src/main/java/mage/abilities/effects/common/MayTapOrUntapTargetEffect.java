@@ -31,7 +31,7 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
                     target.untap(game);
                 }
             } else if (player.chooseUse(Outcome.Tap, "Tap that permanent?", source, game)) {
-                target.tap(game);
+                target.tap(source, game);
             }
             return true;
         }

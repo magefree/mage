@@ -71,10 +71,10 @@ class FeedThePackEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+            if (permanent != null && permanent.sacrifice(source, game)) {
                 int toughness = permanent.getToughness().getValue();
                 WolfToken token = new WolfToken();
-                token.putOntoBattlefield(toughness, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(toughness, game, source, source.getControllerId());
                 return true;
             }
         }

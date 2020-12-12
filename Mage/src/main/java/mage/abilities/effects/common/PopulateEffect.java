@@ -66,7 +66,7 @@ public class PopulateEffect extends OneShotEffect {
         }
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        if (!target.canChoose(source.getControllerId(), game)) {
+        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
             return true;
         }
         player.choose(Outcome.Copy, target, source.getSourceId(), game);

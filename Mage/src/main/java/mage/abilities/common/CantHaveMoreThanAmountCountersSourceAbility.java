@@ -77,7 +77,7 @@ class CantHaveMoreThanAmountCountersSourceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTER;
+        return event.getType() == GameEvent.EventType.ADD_COUNTER;
     }
 
     @Override

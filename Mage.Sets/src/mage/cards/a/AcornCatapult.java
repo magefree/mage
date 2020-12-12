@@ -72,7 +72,7 @@ class AcornCatapultEffect extends OneShotEffect {
         }
 
         if (player != null) {
-            new SquirrelToken().putOntoBattlefield(1, game, source.getSourceId(), player.getId());
+            new SquirrelToken().putOntoBattlefield(1, game, source, player.getId());
             return true;
         }
 

@@ -90,9 +90,9 @@ class MagesContestEffect extends OneShotEffect {
                     }
                 } while (!Objects.equals(currentPlayer, winner));
                 game.informPlayers(winner.getLogName() + " has won the contest with a high bid of " + highBid + " life");
-                winner.loseLife(highBid, game, false);
+                winner.loseLife(highBid, game, source, false);
                 if (winner == you) {
-                    game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                    game.getStack().counter(spell.getId(), source, game);
                 }
                 return true;
             }

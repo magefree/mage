@@ -136,20 +136,20 @@ class SunforgerUnattachCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent attachment = game.getPermanent(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
         if (attachment != null && attachment.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
             if (attachedTo != null) {
-                paid = attachedTo.removeAttachment(attachment.getId(), game);
+                paid = attachedTo.removeAttachment(attachment.getId(), source, game);
             }
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent attachment = game.getPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
         if (attachment != null && attachment.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
             if (attachedTo != null) {

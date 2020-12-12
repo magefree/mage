@@ -74,7 +74,7 @@ class GlintEyeNephilimEffect extends OneShotEffect {
         if (amount > 0) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.drawCards(amount, source.getSourceId(), game);
+                controller.drawCards(amount, source, game);
                 return true;
             }
         }

@@ -76,7 +76,7 @@ class BuildersBaneEffect extends OneShotEffect {
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
-                if (permanent.destroy(source.getSourceId(), game, false)) {
+                if (permanent.destroy(source, game, false)) {
                     game.getState().processAction(game);
                     if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
                             && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
@@ -92,7 +92,7 @@ class BuildersBaneEffect extends OneShotEffect {
         for (Map.Entry<UUID, Integer> entry : destroyedArtifactPerPlayer.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
             if (player != null) {
-                player.damage(entry.getValue(), source.getSourceId(), game);
+                player.damage(entry.getValue(), source.getSourceId(), source, game);
             }
         }
 

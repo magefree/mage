@@ -58,7 +58,7 @@ class WorldfireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(null, "", source.getSourceId(), game);
+            permanent.moveToExile(null, "", source, game);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -66,13 +66,13 @@ class WorldfireEffect extends OneShotEffect {
                 for (UUID cid : player.getHand().copy()) {
                     Card c = game.getCard(cid);
                     if (c != null) {
-                        c.moveToExile(null, null, source.getSourceId(), game);
+                        c.moveToExile(null, null, source, game);
                     }
                 }
                 for (UUID cid : player.getGraveyard().copy()) {
                     Card c = game.getCard(cid);
                     if (c != null) {
-                        c.moveToExile(null, null, source.getSourceId(), game);
+                        c.moveToExile(null, null, source, game);
                     }
                 }
                 player.setLife(1, game, source);

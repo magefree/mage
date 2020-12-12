@@ -156,7 +156,7 @@ public abstract class AbilityImpl implements Ability {
         if (checkIfClause(game)) {
             // Ability has started resolving. Fire event.
             // Used for abilities counting the number of resolutions like Ashling the Pilgrim.
-            game.fireEvent(new GameEvent(GameEvent.EventType.RESOLVING_ABILITY, this.getOriginalId(), this.getSourceId(), this.getControllerId()));
+            game.fireEvent(new GameEvent(GameEvent.EventType.RESOLVING_ABILITY, this.getOriginalId(), this, this.getControllerId()));
             if (this instanceof TriggeredAbility) {
                 for (UUID modeId : this.getModes().getSelectedModes()) {
                     this.getModes().setActiveMode(modeId);
@@ -288,11 +288,11 @@ public abstract class AbilityImpl implements Ability {
 
         // For effects from cards like Void Winnower x costs have to be set
         if (this.getAbilityType() == AbilityType.SPELL
-                && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
+                && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId()), this)) {
             return false;
         }
 
-        handlePhyrexianManaCosts(game, sourceId, controller);
+        handlePhyrexianManaCosts(game, controller);
 
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
@@ -351,7 +351,7 @@ public abstract class AbilityImpl implements Ability {
         } // end modes
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
-        if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
+        if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, this, controllerId, noMana, null)) {
             logger.debug("activate mana ability failed - non mana costs");
             return false;
         }
@@ -375,12 +375,12 @@ public abstract class AbilityImpl implements Ability {
         }
 
         //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
-        if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false, null)) {
+        if (!manaCostsToPay.pay(this, game, this, activatorId, false, null)) {
             return false; // cancel during mana payment
         }
 
         //20100716 - 601.2g
-        if (!costs.pay(this, game, sourceId, activatorId, noMana, null)) {
+        if (!costs.pay(this, game, this, activatorId, noMana, null)) {
             logger.debug("activate failed - non mana costs");
             return false;
         }
@@ -510,7 +510,7 @@ public abstract class AbilityImpl implements Ability {
      * Phyrexian mana symbols, the player announces whether they intend to pay 2
      * life or the corresponding colored mana cost for each of those symbols.
      */
-    private void handlePhyrexianManaCosts(Game game, UUID sourceId, Player controller) {
+    private void handlePhyrexianManaCosts(Game game, Player controller) {
         Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
@@ -518,7 +518,7 @@ public abstract class AbilityImpl implements Ability {
             if (cost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) cost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
-                if (payLifeCost.canPay(this, sourceId, controller.getId(), game)
+                if (payLifeCost.canPay(this, this, controller.getId(), game)
                         && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', this, game)) {
                     costIterator.remove();
                     costs.add(payLifeCost);
@@ -529,7 +529,7 @@ public abstract class AbilityImpl implements Ability {
 
     public int handleManaXMultiplier(Game game, int value) {
         // some spells can change X value without new pays (Unbound Flourishing doubles X)
-        GameEvent xEvent = GameEvent.getEvent(GameEvent.EventType.X_MANA_ANNOUNCE, getId(), getSourceId(), getControllerId(), value);
+        GameEvent xEvent = GameEvent.getEvent(GameEvent.EventType.X_MANA_ANNOUNCE, this.getId(), this, getControllerId(), value);
         game.replaceEvent(xEvent, this);
         return xEvent.getAmount();
     }

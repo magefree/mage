@@ -72,7 +72,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                 if (amount > 0) {
                     Cost cost = ManaUtil.createManaCost(amount, true);
                     if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to prevent?", source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                        if (cost.pay(source, game, source, player.getId(), false)) {
                             game.informPlayers(sourceObject.getName() + ": additional cost was paid");
                             return true;
                         }
@@ -80,7 +80,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                     game.informPlayers(sourceObject.getName() + ": additional cost wasn't paid - countering " + spell.getName());
 
                     // Counter target spell unless its controller pays {X}
-                    game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+                    game.getStack().counter(source.getFirstTarget(), source, game);
 
                     // that player taps all lands with mana abilities they control...
                     List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game);
@@ -88,7 +88,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                         Abilities<Ability> landAbilities = land.getAbilities();
                         for (Ability ability : landAbilities) {
                             if (ability instanceof ActivatedManaAbilityImpl) {
-                                land.tap(game);
+                                land.tap(source, game);
                                 break;
                             }
                         }

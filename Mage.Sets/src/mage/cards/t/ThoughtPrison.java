@@ -88,7 +88,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);
                     if (card != null) {
-                        card.moveToExile(source.getSourceId(), "Thought Prison", source.getSourceId(), game);
+                        card.moveToExile(source.getSourceId(), "Thought Prison", source, game);
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
@@ -127,7 +127,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -196,7 +196,7 @@ class ThoughtPrisonDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.damage(2, source.getSourceId(), game);
+            targetPlayer.damage(2, source.getSourceId(), source, game);
             return true;
         }
         return false;

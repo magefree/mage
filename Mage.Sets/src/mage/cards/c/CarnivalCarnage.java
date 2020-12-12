@@ -72,10 +72,10 @@ class CarnivalEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.damage(1, source.getSourceId(), game);
+        permanent.damage(1, source.getSourceId(), source, game);
         Player player = game.getPlayer(permanent.getControllerId());
         if (player != null) {
-            player.damage(1, source.getSourceId(), game);
+            player.damage(1, source.getSourceId(), source, game);
         }
         return true;
     }

@@ -86,7 +86,7 @@ class DiscordantDirgeEffect extends OneShotEffect {
         if (!controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
             return false;
         }
-        targetOpponent.discard(new CardsImpl(target.getTargets()), source, game);
+        targetOpponent.discard(new CardsImpl(target.getTargets()), false, source, game);
         return true;
     }
 

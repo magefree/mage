@@ -71,7 +71,7 @@ class VendettaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent target = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (player != null && target != null) {
-            player.loseLife(target.getToughness().getValue(), game, false);
+            player.loseLife(target.getToughness().getValue(), game, source, false);
             return true;
         }
         return false;

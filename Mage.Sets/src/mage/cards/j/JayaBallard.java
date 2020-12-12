@@ -80,8 +80,8 @@ class JayaBallardDiscardDrawEffect extends OneShotEffect {
         }
         TargetDiscard target = new TargetDiscard(0, 3, new FilterCard(), controller.getId());
         target.choose(outcome, controller.getId(), source.getSourceId(), game);
-        int count = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
-        controller.drawCards(count, source.getSourceId(), game);
+        int count = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
+        controller.drawCards(count, source, game);
         return true;
     }
 }

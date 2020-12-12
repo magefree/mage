@@ -77,7 +77,7 @@ class HypnoxExileEffect extends OneShotEffect {
             for (UUID cid : player.getHand().copy()) {
                 Card c = game.getCard(cid);
                 if (c != null) {
-                    c.moveToExile(source.getSourceId(), "Hypnox", source.getSourceId(), game);
+                    c.moveToExile(source.getSourceId(), "Hypnox", source, game);
                 }
             }
             return true;

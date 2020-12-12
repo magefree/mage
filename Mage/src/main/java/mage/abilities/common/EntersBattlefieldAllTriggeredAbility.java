@@ -99,7 +99,6 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
                             effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
                             break;
                     }
-
                 }
             }
             return true;

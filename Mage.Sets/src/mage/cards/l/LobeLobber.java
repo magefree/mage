@@ -72,8 +72,8 @@ class LobeLobberEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
 
         if (controller != null && equipment != null && player != null) {
-            player.damage(1, source.getSourceId(), game);
-            int amount = controller.rollDice(game, 6);
+            player.damage(1, source.getSourceId(), source, game);
+            int amount = controller.rollDice(source, game, 6);
             if (amount >= 5) {
                 new UntapSourceEffect().apply(game, source);
             }

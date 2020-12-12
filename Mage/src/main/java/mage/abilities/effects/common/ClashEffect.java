@@ -86,7 +86,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null
-                && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CLASH, controller.getId(), controller.getId()))) {
+                && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CLASH, controller.getId(), source, controller.getId()))) {
             // choose opponent
             Target target = new TargetOpponent(true);
             target.setTargetName("an opponent to clash with");
@@ -152,10 +152,10 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
                     // put the cards back to library
                     if (cardController != null) {
-                        controller.moveCardToLibraryWithInfo(cardController, source.getSourceId(), game, Zone.LIBRARY, topController, true);
+                        controller.moveCardToLibraryWithInfo(cardController, source, game, Zone.LIBRARY, topController, true);
                     }
                     if (cardOpponent != null) {
-                        opponent.moveCardToLibraryWithInfo(cardOpponent, source.getSourceId(), game, Zone.LIBRARY, topOpponent, true);
+                        opponent.moveCardToLibraryWithInfo(cardOpponent, source, game, Zone.LIBRARY, topOpponent, true);
                     }
                     // fire CLASHED event with info about who won
                     String winner = "draw";
@@ -165,7 +165,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     if (cmcOpponent > cmcController) {
                         winner = "opponent";
                     }
-                    GameEvent gameEvent = new GameEvent(EventType.CLASHED, opponent.getId(), source.getSourceId(), controller.getId());
+                    GameEvent gameEvent = new GameEvent(GameEvent.EventType.CLASHED, opponent.getId(), source, controller.getId());
                     gameEvent.setData(winner);
                     game.fireEvent(gameEvent);
 

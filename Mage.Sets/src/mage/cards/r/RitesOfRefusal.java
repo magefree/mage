@@ -67,7 +67,7 @@ class RitesOfRefusalEffect extends OneShotEffect {
             if (controller != null && controllerOfTargetedSpell != null) {
                 int numToDiscard = controller.getAmount(0,
                         controller.getHand().size(), "How many cards do you want to discard?", game);
-                Cards discardedCards = controller.discard(numToDiscard, false, source, game);
+                Cards discardedCards = controller.discard(numToDiscard, false, false, source, game);
                 int actualNumberDiscarded = discardedCards.size();
                 if (actualNumberDiscarded > 0) {
                     Cost cost = ManaUtil.createManaCost(actualNumberDiscarded * 3, false);
@@ -77,11 +77,11 @@ class RitesOfRefusalEffect extends OneShotEffect {
                             + " to prevent "
                             + targetSpell.getName()
                             + " from gettting countered?", source, game)
-                            && cost.pay(source, game, source.getSourceId(),
+                            && cost.pay(source, game, source,
                                     controllerOfTargetedSpell.getId(), false)) {
                         return true;
                     }
-                    game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
+                    game.getStack().counter(targetSpell.getId(), source, game);
                     return true;
                 }
             }

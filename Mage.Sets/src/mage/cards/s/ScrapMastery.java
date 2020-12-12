@@ -77,7 +77,7 @@ class ScrapMasteryEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), playerId, game)) {
-                        permanent.sacrifice(source.getSourceId(), game);
+                        permanent.sacrifice(source, game);
                     }
                 }
             }

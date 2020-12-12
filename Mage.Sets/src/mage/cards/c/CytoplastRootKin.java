@@ -88,7 +88,7 @@ class CytoplastRootKinEffect extends OneShotEffect {
                 && targetPermanent != null
                 && !sourcePermanent.getId().equals(targetPermanent.getId())
                 && targetPermanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-            targetPermanent.removeCounters(CounterType.P1P1.createInstance(), game);
+            targetPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
             sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
             return true;
         }

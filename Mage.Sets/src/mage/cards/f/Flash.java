@@ -74,14 +74,14 @@ class FlashEffect extends OneShotEffect {
                 ManaCosts<ManaCost> reducedCost = ManaCosts.removeVariableManaCost(CardUtil.reduceCost(card.getManaCost(), 2));
                 if (controller.chooseUse(Outcome.Benefit, String.valueOf("Pay " + reducedCost.getText()) + Character.toString('?'), source, game)) {
                     reducedCost.clearPaid();
-                    if (reducedCost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                    if (reducedCost.pay(source, game, source, source.getControllerId(), false, null)) {
                         return true;
                     }
                 }
 
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
 
                 return true;

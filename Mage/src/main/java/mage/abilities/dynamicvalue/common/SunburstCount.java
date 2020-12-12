@@ -16,11 +16,11 @@ public enum SunburstCount implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         if (!game.getStack().isEmpty()) {
             StackObject spell = game.getStack().getFirst();
-            if (spell instanceof Spell && ((Spell) spell).getSourceId().equals(source.getSourceId())) {
+            if (spell instanceof Spell && ((Spell) spell).getSourceId().equals(sourceAbility.getSourceId())) {
                 Mana mana = ((Spell) spell).getSpellAbility().getManaCostsToPay().getPayment();
                 if (mana.getBlack() > 0) {
                     count++;

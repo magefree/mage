@@ -71,12 +71,12 @@ class NecromancersConvenantEffect extends OneShotEffect {
         }
         int count = 0;
         for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            if (card.moveToExile(source.getSourceId(), "Necromancer Covenant", source.getSourceId(), game)) {
+            if (card.moveToExile(source.getSourceId(), "Necromancer Covenant", source, game)) {
                 count += 1;
             }
         }
         ZombieToken zombieToken = new ZombieToken();
-        if (zombieToken.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId())) {
+        if (zombieToken.putOntoBattlefield(count, game, source, source.getControllerId())) {
             return true;
         }
         return false;

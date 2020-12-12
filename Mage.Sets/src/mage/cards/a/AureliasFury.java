@@ -103,7 +103,7 @@ class AureliasFuryEffect extends OneShotEffect {
             for (UUID creatureId : watcher.getDamagedCreatures()) {
                 Permanent permanent = game.getPermanent(creatureId);
                 if (permanent != null) {
-                    permanent.tap(game);
+                    permanent.tap(source, game);
                 }
             }
             for (UUID playerId : watcher.getDamagedPlayers()) {
@@ -177,7 +177,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
             MageObject obj = game.getObject(event.getSourceId());
             if (obj instanceof Spell) {
                 if (sourceId.equals(((Spell) obj).getSourceId())) {
@@ -185,7 +185,7 @@ class AureliasFuryDamagedByWatcher extends Watcher {
                 }
             }
         }
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             MageObject obj = game.getObject(event.getSourceId());
             if (obj instanceof Spell) {
                 if (sourceId.equals(((Spell) obj).getSourceId())) {

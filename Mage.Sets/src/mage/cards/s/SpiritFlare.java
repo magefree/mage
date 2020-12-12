@@ -81,13 +81,13 @@ class SpiritFlareEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || !permanent.tap(game)) {
+        if (permanent == null || !permanent.tap(source, game)) {
             return false;
         }
         Permanent permanent1 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent1 == null) {
             return false;
         }
-        return permanent1.damage(permanent.getPower().getValue(), permanent.getId(), game) > 0;
+        return permanent1.damage(permanent.getPower().getValue(), permanent.getId(), source, game) > 0;
     }
 }

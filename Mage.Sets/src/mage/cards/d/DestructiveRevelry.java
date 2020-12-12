@@ -59,10 +59,10 @@ class DestructiveRevelryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
             Player permController = game.getPlayer(permanent.getControllerId());
             if (permController != null) {
-                permController.damage(2, source.getSourceId(), game);
+                permController.damage(2, source.getSourceId(), source, game);
                 return true;
             }
         }

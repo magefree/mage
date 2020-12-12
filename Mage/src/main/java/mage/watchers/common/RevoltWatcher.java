@@ -26,7 +26,7 @@ public class RevoltWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event instanceof ZoneChangeEvent) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event instanceof ZoneChangeEvent) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = zEvent.getTarget();

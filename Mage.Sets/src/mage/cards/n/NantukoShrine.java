@@ -74,7 +74,7 @@ class NantukoShrineEffect extends OneShotEffect {
                     }
                 }
                 if (count > 0) {
-                    new SquirrelToken().putOntoBattlefield(count, game, source.getSourceId(), spell.getControllerId());
+                    new SquirrelToken().putOntoBattlefield(count, game, source, spell.getControllerId());
                 }
                 return true;
             }

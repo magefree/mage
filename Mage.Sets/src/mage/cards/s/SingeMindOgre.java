@@ -74,7 +74,7 @@ class SingeMindOgreEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 targetPlayer.revealCards("Singe-Mind Ogre", revealed, game);
-                targetPlayer.loseLife(card.getConvertedManaCost(), game, false);
+                targetPlayer.loseLife(card.getConvertedManaCost(), game, source, false);
                 return true;
             }
         }

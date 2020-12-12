@@ -112,8 +112,7 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = (Card) game.getState().getValue("BosiumStrip");
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.STACK, true);
-                return true;
+                ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
             }
         }
         return false;

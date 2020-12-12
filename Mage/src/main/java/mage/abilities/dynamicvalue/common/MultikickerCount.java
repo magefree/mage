@@ -15,13 +15,13 @@ public enum MultikickerCount implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        Card card = game.getCard(source.getSourceId());
+        Card card = game.getCard(sourceAbility.getSourceId());
         if (card != null) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getAbilities(game)) {
                 if (ability instanceof KickerAbility) {
-                    count += ((KickerAbility) ability).getKickedCounter(game, source);
+                    count += ((KickerAbility) ability).getKickedCounter(game, sourceAbility);
                 }
             }
         }

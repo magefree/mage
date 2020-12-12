@@ -73,7 +73,7 @@ class MutinyEffect extends OneShotEffect {
             int damage = firstTarget.getPower().getValue();
             Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (damage > 0 && secondTarget != null) {
-                secondTarget.damage(damage, firstTarget.getId(), game);
+                secondTarget.damage(damage, firstTarget.getId(), source, game);
             }
         }
         return true;

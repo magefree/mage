@@ -56,7 +56,7 @@ class SoulRendEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null && permanent.getColor(game).isWhite()) {
-            permanent.destroy(source.getSourceId(), game, true);
+            permanent.destroy(source, game, true);
         }
         return false;
     }

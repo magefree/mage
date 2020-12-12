@@ -1,6 +1,6 @@
-
-
 package mage.game.events;
+
+import mage.abilities.Ability;
 
 import java.util.UUID;
 
@@ -12,8 +12,8 @@ public class NumberOfTriggersEvent extends GameEvent {
 
     private final GameEvent sourceEvent;
 
-    public NumberOfTriggersEvent(UUID controllerOfAbilityId, UUID sourceOfTrigger, GameEvent sourceEvent) {
-        super(EventType.NUMBER_OF_TRIGGERS, null, sourceOfTrigger, controllerOfAbilityId);
+    public NumberOfTriggersEvent(Ability triggeredAbility, GameEvent sourceEvent) {
+        super(GameEvent.EventType.NUMBER_OF_TRIGGERS, null, triggeredAbility, triggeredAbility.getControllerId());
         this.sourceEvent = sourceEvent;
         this.amount = 1; // Number of times to trigger. Panharmonicon can change this.
     }

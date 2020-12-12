@@ -58,7 +58,7 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
             if (attachedTo != null && counter != null) {
                 Counter newCounter = counter.copy();
                 newCounter.add(amount.calculate(game, source, this));
-                attachedTo.removeCounters(newCounter, game);
+                attachedTo.removeCounters(newCounter, source, game);
             }
             return true;
         }

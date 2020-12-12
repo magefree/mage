@@ -99,15 +99,15 @@ class TheFirstEruptionEffect extends OneShotEffect {
 
         Target target = new TargetControlledPermanent(1, 1, filter, false);
         boolean sacrificed = false;
-        if (target.canChoose(controller.getId(), game)) {
-            while (controller.canRespond() && !target.isChosen() && target.canChoose(controller.getId(), game)) {
+        if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            while (controller.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game)) {
                 controller.chooseTarget(Outcome.Sacrifice, target, source, game);
             }
 
             for (int idx = 0; idx < target.getTargets().size(); idx++) {
                 Permanent permanent = game.getPermanent(target.getTargets().get(idx));
                 if (permanent != null) {
-                    sacrificed |= permanent.sacrifice(source.getSourceId(), game);
+                    sacrificed |= permanent.sacrifice(source, game);
                 }
             }
         }

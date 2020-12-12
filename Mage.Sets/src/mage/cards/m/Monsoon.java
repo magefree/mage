@@ -67,10 +67,10 @@ class MonsoonEffect extends OneShotEffect {
         if (player != null) {
             int damage = 0;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                permanent.tap(game);
+                permanent.tap(source, game);
                 damage++;
             }
-            player.damage(damage, source.getSourceId(), game);
+            player.damage(damage, source.getSourceId(), source, game);
             return true;
         }
         return false;

@@ -77,13 +77,13 @@ class OrcishSettlersEffect extends OneShotEffect {
         TargetLandPermanent target = new TargetLandPermanent(amount);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
-                && target.canChoose(controller.getId(), game)
+                && target.canChoose(source.getSourceId(), controller.getId(), game)
                 && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
             List<UUID> targets = target.getTargets();
             targets.forEach((landId) -> {
                 Permanent land = game.getPermanent(landId);
                 if (land != null) {
-                    land.destroy(landId, game, false);
+                    land.destroy(source, game, false);
                 }
             });
             return true;

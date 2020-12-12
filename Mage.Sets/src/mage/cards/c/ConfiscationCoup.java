@@ -76,14 +76,14 @@ class ConfiscationCoupEffect extends OneShotEffect {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
                 Cost cost = new PayEnergyCost(targetPermanent.getManaCost().convertedManaCost());
-                if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
+                if (cost.canPay(source, source, source.getControllerId(), game)) {
                     int convertedManaCost = targetPermanent.getManaCost().convertedManaCost();
                     StringBuilder energy = new StringBuilder(convertedManaCost);
                     for (int i = 0; i < convertedManaCost; i++) {
                         energy.append("{E}");
                     }
                     if (controller.chooseUse(outcome, "Pay " + energy + " to get control of " + targetPermanent.getLogName() + '?', source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+                        if (cost.pay(source, game, source, source.getControllerId(), true)) {
                             ContinuousEffect controllEffect = new GainControlTargetEffect(Duration.Custom);
                             controllEffect.setTargetPointer(new FixedTarget(targetPermanent, game));
                             game.addEffect(controllEffect, source);

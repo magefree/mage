@@ -62,7 +62,7 @@ class CuriousHerdEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, source.getFirstTarget(), game
         );
         if (artifactCount > 0) {
-            token.putOntoBattlefield(artifactCount, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(artifactCount, game, source, source.getControllerId());
         }
         return true;
     }

@@ -19,8 +19,9 @@ public class SweepNumber implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        Integer sweepNumber = (Integer) game.getState().getValue("sweep" + source.getSourceId() + game.getState().getZoneChangeCounter(source.getSourceId()));
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Integer sweepNumber = (Integer) game.getState().getValue("sweep"
+                + sourceAbility.getSourceId() + game.getState().getZoneChangeCounter(sourceAbility.getSourceId()));
         return sweepNumber != null ? sweepNumber : 0;
     }
 

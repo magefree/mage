@@ -94,11 +94,11 @@ class DragonTempestDamageEffect extends OneShotEffect {
             if (amount > 0) {
                 Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(amount, damageSource.getId(), game, false, true);
+                    targetCreature.damage(amount, damageSource.getId(), source, game, false, true);
                 } else {
                     Player player = game.getPlayer(source.getTargets().getFirstTarget());
                     if (player != null) {
-                        player.damage(amount, damageSource.getId(), game);
+                        player.damage(amount, damageSource.getId(), source, game);
                     }
                 }
             }

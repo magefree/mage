@@ -77,17 +77,17 @@ class RamThroughEffect extends OneShotEffect {
             return false;
         }
         if (!myPermanent.getAbilities().containsKey(TrampleAbility.getInstance().getId())) {
-            return anotherPermanent.damage(power, myPermanent.getId(), game, false, true) > 0;
+            return anotherPermanent.damage(power, myPermanent.getId(), source, game, false, true) > 0;
         }
         int lethal = getLethalDamage(anotherPermanent, game);
         if (myPermanent.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
             lethal = Math.min(lethal, 1);
         }
         lethal = Math.min(lethal, power);
-        anotherPermanent.damage(lethal, myPermanent.getId(), game);
+        anotherPermanent.damage(lethal, myPermanent.getId(), source, game);
         Player player = game.getPlayer(anotherPermanent.getControllerId());
         if (player != null && lethal < power) {
-            player.damage(power - lethal, myPermanent.getId(), game);
+            player.damage(power - lethal, myPermanent.getId(), source, game);
         }
         return true;
     }

@@ -61,7 +61,7 @@ public final class LightningDart extends CardImpl {
                 if (color.isWhite() || color.isBlue()) {
                     damage = 4;
                 }
-                permanent.damage(damage, source.getId(), game, false, false);
+                permanent.damage(damage, source.getId(), source, game, false, false);
             }
 
             return false;

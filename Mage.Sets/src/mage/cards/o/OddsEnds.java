@@ -67,7 +67,7 @@ class OddsEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.flipCoin(source, game, false)) {
                 game.informPlayers("Odds: Spell countered");
-                return game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
 
             } else {
                 game.informPlayers("Odds: Spell will be copied");

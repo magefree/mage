@@ -59,7 +59,7 @@ class WhisperingMadnessEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            int discarded = player.discard(player.getHand(), source, game).size();
+            int discarded = player.discard(player.getHand(), false, source, game).size();
             if (discarded > maxDiscarded) {
                 maxDiscarded = discarded;
             }
@@ -67,7 +67,7 @@ class WhisperingMadnessEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(maxDiscarded, source.getSourceId(), game);
+                player.drawCards(maxDiscarded, source, game);
             }
         }
         return true;

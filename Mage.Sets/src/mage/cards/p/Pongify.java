@@ -63,7 +63,7 @@ class PongifyEffect extends OneShotEffect {
             if (permanent != null) {
                 UUID controllerId = permanent.getControllerId();
                 if (controllerId != null) {
-                    new PongifyApeToken().putOntoBattlefield(1, game, source.getSourceId(), controllerId);
+                    new PongifyApeToken().putOntoBattlefield(1, game, source, controllerId);
                     return true;
                 }
             }

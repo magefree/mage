@@ -64,7 +64,7 @@ class LeylineOfPunishmentEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PREVENT_DAMAGE;
+        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
     }
 
     @Override

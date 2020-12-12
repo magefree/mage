@@ -69,13 +69,13 @@ class DashHopesCounterSourceEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null) {
                     cost.clearPaid();
-                    if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                    if (cost.canPay(source, source, player.getId(), game)
                             && player.chooseUse(outcome, "Pay 5 life to counter " + sourceObject.getIdName() + '?', source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                        if (cost.pay(source, game, source, player.getId(), false, null)) {
                             game.informPlayers(player.getLogName() + " pays 5 life to counter " + sourceObject.getIdName() + '.');
                             Spell spell = game.getStack().getSpell(source.getSourceId());
                             if (spell != null) {
-                                game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                                game.getStack().counter(spell.getId(), source, game);
                             }
                         }
                     }

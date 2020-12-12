@@ -70,11 +70,11 @@ class FulgentDistractionEffect extends OneShotEffect {
                 }
 
                 if ( isEquipment ) {
-                    creature.removeAttachment(equipmentId, game);
+                    creature.removeAttachment(equipmentId, source, game);
                 }
             }
 
-            creature.tap(game);
+            creature.tap(source, game);
         }
         return true;
     }

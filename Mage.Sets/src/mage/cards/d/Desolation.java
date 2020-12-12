@@ -71,13 +71,13 @@ class DesolationEffect extends OneShotEffect {
                     filter.add(CardType.LAND.getPredicate());
                     filter.add(new ControllerIdPredicate(playerId));
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-                    if (target.canChoose(player.getId(), game)) {
+                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                         player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                            permanent.sacrifice(source, game);
                             if (filterPlains.match(permanent, game)) {
-                                player.damage(2, source.getSourceId(), game);
+                                player.damage(2, source.getSourceId(), source, game);
                             }
                         }
                     }
@@ -112,7 +112,7 @@ class DesolationWatcher extends Watcher {
                 && !game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+                Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId()); // need only info about permanent
                 if (permanent != null && permanent.isLand()) {
                     tappedForManaThisTurnPlayers.add(playerId);
                 }

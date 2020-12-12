@@ -87,7 +87,7 @@ class DevouringHellionEffect extends OneShotEffect {
         int xValue = 0;
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
-            if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+            if (permanent != null && permanent.sacrifice(source, game)) {
                 xValue++;
             }
         }

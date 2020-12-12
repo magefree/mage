@@ -46,7 +46,7 @@ public class LookLibraryMayPutToBottomEffect extends OneShotEffect {
             }
             controller.lookAtCards(sourceObject.getName(), new CardsImpl(card), game);
             boolean toBottom = controller.chooseUse(outcome, "Put card on the bottom of your library?", source, game);
-            return controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, !toBottom, false);
+            return controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, !toBottom, false);
         }
         return true;
     }

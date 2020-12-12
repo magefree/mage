@@ -64,6 +64,6 @@ class JadedResponseEffect extends OneShotEffect {
                 ).stream()
                 .map(permanent -> permanent.getColor(game))
                 .anyMatch(stackObject.getColor(game)::shares);
-        return matches && game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+        return matches && game.getStack().counter(stackObject.getId(), source, game);
     }
 }

@@ -66,7 +66,7 @@ class AuguryAdeptEffect extends OneShotEffect {
         }
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+            card.moveToZone(Zone.HAND, source, game, true);
             int cmc = card.getConvertedManaCost();
             if (cmc > 0) {
                 controller.gainLife(cmc, game, source);

@@ -63,7 +63,7 @@ class IncreasingDevotionEffect extends OneShotEffect {
             if (spell.getFromZone() == Zone.GRAVEYARD) {
                 amount = 10;
             }
-            token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(amount, game, source, source.getControllerId());
             return true;
         }
         return false;

@@ -73,9 +73,9 @@ class AllHallowsEveEffect extends OneShotEffect {
         if (allHallowsEve != null
                 && controller != null
                 && game.getExile().getCard(allHallowsEve.getId(), game) != null) {
-            allHallowsEve.removeCounters(CounterType.SCREAM.getName(), 1, game);
+            allHallowsEve.removeCounters(CounterType.SCREAM.getName(), 1, source, game);
             if (allHallowsEve.getCounters(game).getCount(CounterType.SCREAM) == 0) {
-                allHallowsEve.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                allHallowsEve.moveToZone(Zone.GRAVEYARD, source, game, false);
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

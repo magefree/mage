@@ -95,9 +95,9 @@ class ArmoryAutomatonEffect extends OneShotEffect {
                     if (aura != null) {
                         Permanent attachedTo = game.getPermanent(aura.getAttachedTo());
                         if (attachedTo != null) {
-                            attachedTo.removeAttachment(aura.getId(), game);
+                            attachedTo.removeAttachment(aura.getId(), source, game);
                         }
-                        sourcePermanent.addAttachment(aura.getId(), game);
+                        sourcePermanent.addAttachment(aura.getId(), source, game);
                     }
                 } else {
                     break;

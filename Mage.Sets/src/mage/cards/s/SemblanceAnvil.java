@@ -66,7 +66,7 @@ class SemblanceAnvilEffect extends OneShotEffect {
             player.choose(Outcome.Benefit, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
-                card.moveToExile(getId(), "Semblance Anvil (Imprint)", source.getSourceId(), game);
+                card.moveToExile(getId(), "Semblance Anvil (Imprint)", source, game);
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.imprint(card.getId(), game);

@@ -68,8 +68,8 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARD_CARD
-                || event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.DISCARD_CARD
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -77,10 +77,10 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
         // rules:
         // You can’t use the Library of Leng ability to place a discarded card on top of your library when you discard a card as a cost,
         // because costs aren’t effects. (2004-10-04)
-        if (event.getType() == EventType.DISCARD_CARD && event.getFlag()) {
+        if (event.getType() == GameEvent.EventType.DISCARD_CARD && event.getFlag()) {
             return event.getPlayerId().equals(source.getControllerId());
         }
-        if (event.getType() == EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (event.getTargetId().equals(cardId) && game.getState().getZoneChangeCounter(event.getTargetId()) == zoneChangeCounter) {
                 return ((ZoneChangeEvent) event).getFromZone() == Zone.HAND && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD;
             }
@@ -90,7 +90,7 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DISCARD_CARD) {
+        if (event.getType() == GameEvent.EventType.DISCARD_CARD) {
             // only save card info
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
@@ -99,7 +99,7 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
             }
             return false;
         }
-        if (event.getType() == EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             Player controller = game.getPlayer(source.getControllerId());
             Card card = game.getCard(event.getTargetId());
             if (controller != null && card != null) {

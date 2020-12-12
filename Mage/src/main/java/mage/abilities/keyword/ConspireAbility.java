@@ -138,7 +138,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
             if (player != null) {
                 resetConspire(ability, game);
                 // AI supports conspire
-                if (conspireCost.canPay(ability, getSourceId(), getControllerId(), game)
+                if (conspireCost.canPay(ability, this, getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, "Pay " + conspireCost.getText(false) + " ?", ability, game)) {
                     activateConspire(ability, game);
                     for (Iterator it = conspireCost.iterator(); it.hasNext(); ) {

@@ -81,7 +81,7 @@ class StarkeOfRathEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
-                targetPermanent.destroy(source.getSourceId(), game, false);
+                targetPermanent.destroy(source, game, false);
                 ContinuousEffect effect = new StarkeOfRathControlEffect();
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getControllerId()));
                 game.addEffect(effect, source);
@@ -113,7 +113,7 @@ class StarkeOfRathControlEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (permanent != null && newController != null) {
-            return permanent.changeControllerId(newController.getId(), game);
+            return permanent.changeControllerId(newController.getId(), game, source);
         } else {
             discard();
         }

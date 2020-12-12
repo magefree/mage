@@ -44,9 +44,9 @@ public final class AdamaroFirstToDesire extends CardImpl {
 
 class MostCardsInOpponentsHandCount implements DynamicValue {
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int maxCards = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(sourceAbility.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
                 int cards = opponent.getHand().size();

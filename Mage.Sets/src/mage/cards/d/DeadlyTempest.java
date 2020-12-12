@@ -61,7 +61,7 @@ class DeadlyTempestEffect extends OneShotEffect {
         if (controller != null) {
             Map<UUID, Integer> destroyedCreatures = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-                if (permanent.destroy(source.getSourceId(), game, false)) {
+                if (permanent.destroy(source, game, false)) {
                     int count = destroyedCreatures.getOrDefault(permanent.getControllerId(), 0);
                     destroyedCreatures.put(permanent.getControllerId(), count + 1);
                 }
@@ -71,7 +71,7 @@ class DeadlyTempestEffect extends OneShotEffect {
                 if (count > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.loseLife(count, game, false);
+                        player.loseLife(count, game, source, false);
                     }
                 }
             }

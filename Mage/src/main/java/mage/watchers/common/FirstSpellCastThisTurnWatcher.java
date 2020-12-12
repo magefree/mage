@@ -29,9 +29,9 @@ public class FirstSpellCastThisTurnWatcher extends Watcher {
             case CAST_SPELL:
                 Spell spell = (Spell) game.getObject(event.getTargetId());
                 if (spell != null && !playerFirstSpellCast.containsKey(spell.getControllerId())) {
-                    if (event.getType() == EventType.SPELL_CAST) {
+                    if (event.getType() == GameEvent.EventType.SPELL_CAST) {
                         playerFirstSpellCast.put(spell.getControllerId(), spell.getId());
-                    } else if (event.getType() == EventType.CAST_SPELL) {
+                    } else if (event.getType() == GameEvent.EventType.CAST_SPELL) {
                         playerFirstCastSpell.put(spell.getControllerId(), spell.getId());
                     }
                 }

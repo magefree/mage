@@ -63,7 +63,7 @@ class SireOfInsanityEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.discard(player.getHand(), source, game);
+                player.discard(player.getHand(), false, source, game);
             }
         }
         return true;

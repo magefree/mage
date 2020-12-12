@@ -97,7 +97,7 @@ class FumbleEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(attachment, game));
                 game.addEffect(effect, source);
                 if (newCreature != null) {
-                    attachment.attachTo(newCreature.getId(), game);
+                    attachment.attachTo(newCreature.getId(), source, game);
                 }
             }
         }

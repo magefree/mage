@@ -61,7 +61,7 @@ class WaylayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token token = new WaylayToken();
-        token.putOntoBattlefield(3, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(3, game, source, source.getControllerId());
         List<Permanent> toExile = new ArrayList<>();
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);

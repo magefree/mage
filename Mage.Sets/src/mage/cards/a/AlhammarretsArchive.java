@@ -9,6 +9,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 
 import java.util.UUID;
@@ -97,7 +98,7 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(2, event.getSourceId(), game, event.getAppliedEffects());
+            controller.drawCards(2, source, game, event);
         }
         return true;
     }

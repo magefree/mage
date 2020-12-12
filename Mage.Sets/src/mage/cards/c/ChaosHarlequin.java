@@ -67,7 +67,7 @@ class ChaosHarlequinEffect extends OneShotEffect {
         if (player != null) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
-                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                player.moveCardToExileWithInfo(card, null, "", source, game, Zone.LIBRARY, true);
                 if (card.isLand()) {
                     game.addEffect(new BoostSourceEffect(-4, 0, Duration.EndOfTurn), source);
                 } else {

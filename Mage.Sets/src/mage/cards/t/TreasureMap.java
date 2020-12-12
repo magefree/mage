@@ -78,7 +78,7 @@ class TreasureMapEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.LANDMARK.createInstance(), source, game);
                 int counters = permanent.getCounters(game).getCount(CounterType.LANDMARK);
                 if (counters > 2) {
-                    permanent.removeCounters("landmark", counters, game);
+                    permanent.removeCounters("landmark", counters, source, game);
                     new TransformSourceEffect(true).apply(game, source);
                     new CreateTokenEffect(new TreasureToken(), 3).apply(game, source);
                 }

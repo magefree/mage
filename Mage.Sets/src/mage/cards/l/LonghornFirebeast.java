@@ -63,8 +63,8 @@ class LonghornFirebeastEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(opponentUuid);
                 if (opponent != null && opponent.chooseUse(Outcome.LoseLife, "Make " + permanent.getLogName() + " deal 5 damage to you?", source, game)) {
                     game.informPlayers(opponent.getLogName() + " has chosen to receive 5 damage from " + permanent.getLogName());
-                    opponent.damage(5, permanent.getId(), game);
-                    permanent.sacrifice(source.getSourceId(), game);
+                    opponent.damage(5, permanent.getId(), source, game);
+                    permanent.sacrifice(source, game);
                     return true;
                 }
             }

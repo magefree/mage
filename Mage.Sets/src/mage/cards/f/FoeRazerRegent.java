@@ -76,12 +76,12 @@ class FoeRazerRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.FIGHTED_PERMANENT;
+        return event.getType() == GameEvent.EventType.FIGHTED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (permanent != null && permanent.isControlledBy(getControllerId())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -114,7 +114,7 @@ class FoeRazerRegentDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE;
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
     }
 
     @Override

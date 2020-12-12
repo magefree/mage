@@ -67,7 +67,7 @@ class InfernalDarknessCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
 
         Player player = game.getPlayer(controllerId);
         if (player == null) {
@@ -77,10 +77,10 @@ class InfernalDarknessCost extends CostImpl {
         paid = false;
 
         manaCost.clearPaid();
-        if (manaCost.pay(ability, game, player.getId(), player.getId(), false)
+        if (manaCost.pay(ability, game, source, player.getId(), false)
                 && player.canPayLifeCost(ability)
                 && player.getLife() >= 1
-                && lifeCost.pay(ability, game, player.getId(), player.getId(), false)) {
+                && lifeCost.pay(ability, game, source, player.getId(), false)) {
             paid = true;
         }
 
@@ -88,7 +88,7 @@ class InfernalDarknessCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         if (player != null
                 && player.canPayLifeCost(ability)
@@ -135,12 +135,12 @@ class InfernalDarknessReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getObject(event.getSourceId());
+        MageObject mageObject = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return mageObject != null && mageObject.isLand();
     }
 }

@@ -54,11 +54,11 @@ public final class HungryFlames extends CardImpl {
             Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
 
             if (permanent != null) {
-                permanent.damage(3, source.getSourceId(), game, false, true);
+                permanent.damage(3, source.getSourceId(), source, game, false, true);
             }
 
             if (player != null) {
-                player.damage(2, source.getSourceId(), game);
+                player.damage(2, source.getSourceId(), source, game);
             }
 
             return true;

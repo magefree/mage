@@ -67,7 +67,7 @@ class ScentOfIvyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         RevealTargetFromHandCost cost = new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter));
-        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+        if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;
         }
         int xValue = cost.getNumberRevealedCards();

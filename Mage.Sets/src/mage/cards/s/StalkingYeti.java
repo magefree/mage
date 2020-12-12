@@ -85,8 +85,8 @@ class StalkingYetiEffect extends OneShotEffect {
         if (thisCreature == null || thatCreature == null) {
             return false;
         }
-        thatCreature.damage(thisCreature.getPower().getValue(), thisCreature.getId(), game, false, true);
-        thisCreature.damage(thatCreature.getPower().getValue(), thatCreature.getId(), game, false, true);
+        thatCreature.damage(thisCreature.getPower().getValue(), thisCreature.getId(), source, game, false, true);
+        thisCreature.damage(thatCreature.getPower().getValue(), thatCreature.getId(), source, game, false, true);
         return true;
     }
 }

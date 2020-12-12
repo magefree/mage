@@ -102,7 +102,7 @@ class BloodletterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+        if (permanent != null && permanent.sacrifice(source, game)) {
             return new DamageEverythingEffect(2).apply(game, source);
         }
         return false;

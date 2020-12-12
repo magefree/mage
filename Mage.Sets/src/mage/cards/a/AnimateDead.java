@@ -108,7 +108,7 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
                 target.addTarget(enchantedCreature.getId(), source, game);
                 animateDead.getSpellAbility().getTargets().clear();
                 animateDead.getSpellAbility().getTargets().add(target);
-                enchantedCreature.addAttachment(animateDead.getId(), game);
+                enchantedCreature.addAttachment(animateDead.getId(), source, game);
                 ContinuousEffect effect = new AnimateDeadAttachToPermanentEffect();
                 effect.setTargetPointer(new FixedTarget(enchantedCreature, game));
                 game.addEffect(effect, source);
@@ -144,7 +144,7 @@ class AnimateDeadLeavesBattlefieldTriggeredEffect extends OneShotEffect {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
                 if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
-                    attachedTo.sacrifice(source.getSourceId(), game);
+                    attachedTo.sacrifice(source, game);
                 }
             }
             return true;
@@ -180,7 +180,7 @@ class AnimateDeadAttachEffect extends OneShotEffect {
             // Card have no attachedTo attribute yet so write ref only to enchantment now
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null) {
-                enchantment.attachTo(card.getId(), game);
+                enchantment.attachTo(card.getId(), source, game);
             }
             return true;
         }

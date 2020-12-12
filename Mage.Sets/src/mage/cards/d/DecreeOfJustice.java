@@ -72,7 +72,7 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
         }
         int payCount = ManaUtil.playerPaysXGenericMana(true, "Decree of Justice", player, source, game);
         if (payCount > 0) {
-            return new SoldierToken().putOntoBattlefield(payCount, game, source.getSourceId(), source.getControllerId());
+            return new SoldierToken().putOntoBattlefield(payCount, game, source, source.getControllerId());
         }
         return false;
     }

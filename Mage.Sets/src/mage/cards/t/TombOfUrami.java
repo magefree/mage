@@ -63,17 +63,17 @@ class SacrificeAllLandCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)) {
-            paid |= permanent.sacrifice(sourceId, game);
+            paid |= permanent.sacrifice(source, game);
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)) {
-            if (!game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
+            if (!game.getPlayer(controllerId).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 return false;
             }
         }

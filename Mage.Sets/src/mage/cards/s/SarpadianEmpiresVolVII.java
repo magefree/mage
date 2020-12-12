@@ -125,7 +125,7 @@ class SarpadianEmpiresCreateSelectedTokenEffect extends OneShotEffect {
                 token = new SaprolingToken();
                 break;
         }
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 }

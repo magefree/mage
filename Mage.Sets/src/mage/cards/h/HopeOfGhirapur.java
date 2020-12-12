@@ -144,7 +144,7 @@ class HopeOfGhirapurCombatDamageWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {
             MageObjectReference damager = new MageObjectReference(event.getSourceId(), game);
             Set<UUID> players;
             if (combatDamagedPlayers.containsKey(damager)) {

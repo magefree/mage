@@ -74,7 +74,7 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
             GontisMachinationsFirstLostLifeThisTurnWatcher watcher
                     = game.getState().getWatcher(GontisMachinationsFirstLostLifeThisTurnWatcher.class);
             if (watcher != null
-                    && watcher.timesLostLifeThisTurn(event.getTargetId()) < 2) {
+                    && watcher.timesLostLifeThisTurn(event.getPlayerId()) < 2) {
                 return true;
             }
         }
@@ -104,9 +104,9 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case LOST_LIFE:
-                int timesLifeLost = playersLostLife.getOrDefault(event.getTargetId(), 0);
+                int timesLifeLost = playersLostLife.getOrDefault(event.getPlayerId(), 0);
                 timesLifeLost++;
-                playersLostLife.put(event.getTargetId(), timesLifeLost);
+                playersLostLife.put(event.getPlayerId(), timesLifeLost);
         }
     }
 
@@ -141,7 +141,7 @@ class GontisMachinationsEffect extends OneShotEffect {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    totalLostLife += game.getPlayer(opponentId).loseLife(3, game, false);
+                    totalLostLife += game.getPlayer(opponentId).loseLife(3, game, source, false);
                 }
             }
             game.getPlayer(source.getControllerId()).gainLife(totalLostLife, game, source);

@@ -22,6 +22,8 @@ import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.events.CopiedStackObjectEvent;
+import mage.game.events.CopyStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
@@ -243,7 +245,7 @@ public class Spell extends StackObjImpl implements Card {
             if (!game.isSimulation()) {
                 game.informPlayers(getName() + " has been fizzled.");
             }
-            counter(null, game);
+            counter(null, /*this.getSpellAbility()*/ game);
             return false;
         } else if (this.isEnchantment() && this.hasSubtype(SubType.AURA, game)) {
             if (ability.getTargets().stillLegal(ability, game)) {
@@ -265,7 +267,7 @@ public class Spell extends StackObjImpl implements Card {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-                    if (token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false)) {
+                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedToken();
                         flag = true;
                     }
@@ -318,14 +320,14 @@ public class Spell extends StackObjImpl implements Card {
                 if (!game.isSimulation()) {
                     game.informPlayers(getName() + " has been fizzled.");
                 }
-                counter(null, game);
+                counter(null, /*this.getSpellAbility()*/ game);
                 return false;
             }
         } else if (isCopy()) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability.getSourceId(), getControllerId(), false, false, null, false);
+            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
             return true;
         } else {
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
@@ -394,21 +396,25 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void counter(UUID sourceId, Game game) {
-        this.counter(sourceId, game, Zone.GRAVEYARD, false, ZoneDetail.NONE);
+    public void counter(Ability source, Game game) {
+        this.counter(source, game, Zone.GRAVEYARD, false, ZoneDetail.NONE);
     }
 
     @Override
-    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+    public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+        // source can be null for fizzled spells, found only one place with that usage -- Rebound Ability:
+        // event.getSourceId().equals(source.getSourceId())
+        // TODO: so later it must be replaced to another technics with non null source
+        UUID counteringSourceId = (source == null ? null : source.getSourceId());
         this.countered = true;
         if (!isCopy()) {
-            Player player = game.getPlayer(game.getControllerId(sourceId));
+            Player player = game.getPlayer(game.getControllerId(counteringSourceId));
             if (player == null) {
                 player = game.getPlayer(getControllerId());
             }
             if (player != null) {
                 Ability counteringAbility = null;
-                MageObject counteringObject = game.getObject(sourceId);
+                MageObject counteringObject = game.getObject(counteringSourceId);
                 if (counteringObject instanceof StackObject) {
                     counteringAbility = ((StackObject) counteringObject).getStackAbility();
                 }
@@ -692,13 +698,13 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean turnFaceUp(Game game, UUID playerId) {
+    public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
         setFaceDown(false, game);
         return true;
     }
 
     @Override
-    public boolean turnFaceDown(Game game, UUID playerId) {
+    public boolean turnFaceDown(Ability source, Game game, UUID playerId) {
         setFaceDown(true, game);
         return true;
     }
@@ -770,57 +776,57 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
-        return card.removeFromZone(game, fromZone, sourceId);
+    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
+        return card.removeFromZone(game, fromZone, source);
     }
 
     @Override
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
-        return moveToZone(zone, sourceId, game, flag, null);
+    public boolean moveToZone(Zone zone, Ability source, Game game, boolean flag) {
+        return moveToZone(zone, source, game, flag, null);
     }
 
     @Override
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
+    public boolean moveToZone(Zone zone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
         // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // These are state-based actions. See rule 704.
         if (this.isCopy() && zone != Zone.STACK) {
             return true;
         }
-        return card.moveToZone(zone, sourceId, game, flag, appliedEffects);
+        return card.moveToZone(zone, source, game, flag, appliedEffects);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        return moveToExile(exileId, name, sourceId, game, null);
+    public boolean moveToExile(UUID exileId, String name, Ability source, Game game) {
+        return moveToExile(exileId, name, source, game, null);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
+    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isCopy()) {
             game.getStack().remove(this, game);
             return true;
         }
-        return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);
+        return this.card.moveToExile(exileId, name, source, game, appliedEffects);
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean facedown) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -930,13 +936,13 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Game game) {
-        card.removeCounters(name, amount, game);
+    public void removeCounters(String name, int amount, Ability source, Game game) {
+        card.removeCounters(name, amount, source, game);
     }
 
     @Override
-    public void removeCounters(Counter counter, Game game) {
-        card.removeCounters(counter, game);
+    public void removeCounters(Counter counter, Ability source, Game game) {
+        card.removeCounters(counter, source, game);
     }
 
     public Card getCard() {
@@ -1025,8 +1031,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void checkForCountersToAdd(Permanent permanent, Game game) {
-        card.checkForCountersToAdd(permanent, game);
+    public void checkForCountersToAdd(Permanent permanent, Ability source, Game game) {
+        card.checkForCountersToAdd(permanent, source, game);
     }
 
     @Override
@@ -1037,7 +1043,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
         Spell spellCopy = null;
-        GameEvent gameEvent = GameEvent.getEvent(EventType.COPY_STACKOBJECT, this.getId(), source.getSourceId(), newControllerId, amount);
+        GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
             return null;
         }
@@ -1048,7 +1054,7 @@ public class Spell extends StackObjImpl implements Card {
             if (chooseNewTargets) {
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
-            game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, spellCopy.getId(), this.getId(), newControllerId));
+            game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
         }
         return spellCopy;
     }
@@ -1078,12 +1084,12 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean addAttachment(UUID permanentId, Game game) {
+    public boolean addAttachment(UUID permanentId, Ability source, Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean removeAttachment(UUID permanentId, Game game) {
+    public boolean removeAttachment(UUID permanentId, Ability source, Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 

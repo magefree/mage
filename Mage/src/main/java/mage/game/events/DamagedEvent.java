@@ -12,9 +12,10 @@ public abstract class DamagedEvent extends GameEvent {
 
     protected boolean combat;
 
-    public DamagedEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean combat) {
-        super(type, targetId, sourceId, playerId, amount, false);
+    public DamagedEvent(EventType type, UUID targetId, UUID attackerId, UUID playerId, int amount, boolean combat) {
+        super(type, targetId, null, playerId, amount, false);
         this.combat = combat;
+        this.setSourceId(attackerId);
     }
 
     public boolean isCombatDamage() {

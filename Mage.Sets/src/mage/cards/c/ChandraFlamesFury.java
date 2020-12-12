@@ -89,8 +89,8 @@ class ChandraFlamesFuryEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        permanent.damage(4, source.getSourceId(), game);
-        player.damage(2, source.getSourceId(), game);
+        permanent.damage(4, source.getSourceId(), source, game);
+        player.damage(2, source.getSourceId(), source, game);
         return true;
     }
 }

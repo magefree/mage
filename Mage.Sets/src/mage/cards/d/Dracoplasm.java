@@ -105,7 +105,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                 int toughness = 0;
                 for (UUID targetId : target.getTargets()) {
                     Permanent targetCreature = game.getPermanent(targetId);
-                    if (targetCreature != null && targetCreature.sacrifice(source.getSourceId(), game)) {
+                    if (targetCreature != null && targetCreature.sacrifice(source, game)) {
                         power = CardUtil.addWithOverflowCheck(power, targetCreature.getPower().getValue());
                         toughness = CardUtil.addWithOverflowCheck(toughness, targetCreature.getToughness().getValue());
                     }

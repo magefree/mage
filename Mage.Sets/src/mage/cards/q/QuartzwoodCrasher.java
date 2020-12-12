@@ -120,7 +120,7 @@ class QuartzwoodCrasherEffect extends OneShotEffect {
         QuartzwoodCrasherWatcher watcher = game.getState().getWatcher(QuartzwoodCrasherWatcher.class);
         return watcher != null && new DinosaurBeastToken(
                 watcher.getDamage(targetPointer.getFirst(game, source), source.getControllerId())
-        ).putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        ).putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }
 

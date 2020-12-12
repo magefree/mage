@@ -109,7 +109,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
-                    while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                    while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());

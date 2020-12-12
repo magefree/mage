@@ -85,7 +85,7 @@ class KroxaTitanOfDeathsHungerEntersEffect extends OneShotEffect {
         if (EscapeAbility.wasCastedWithEscape(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter())) {
             return false;
         }
-        return permanent.sacrifice(source.getSourceId(), game);
+        return permanent.sacrifice(source, game);
     }
 }
 
@@ -127,7 +127,7 @@ class KroxaTitanOfDeathsHungerDiscardEffect extends OneShotEffect {
                 .forEachOrdered(card -> {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player == null
-                            || !player.discard(card, source, game)
+                            || !player.discard(card, false, source, game)
                             || card.isLand()) {
                         return;
                     }
@@ -138,7 +138,7 @@ class KroxaTitanOfDeathsHungerDiscardEffect extends OneShotEffect {
                 .filter(uuid -> !playerSet.contains(uuid))
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .forEachOrdered(player -> player.loseLife(3, game, false));
+                .forEachOrdered(player -> player.loseLife(3, game, source, false));
         return true;
     }
 }

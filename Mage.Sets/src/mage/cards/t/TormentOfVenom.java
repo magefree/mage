@@ -79,17 +79,17 @@ class TormentOfVenomEffect extends OneShotEffect {
                     if (controllingPlayer.choose(outcome, target, source.getSourceId(), game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                            permanent.sacrifice(source, game);
                             return true;
                         }
                     }
                 }
                 if (!controllingPlayer.getHand().isEmpty() && controllingPlayer.chooseUse(outcome, "Discard a card?",
                         "Otherwise you lose 3 life.", "Discard", "Lose 3 life", source, game)) {
-                    controllingPlayer.discardOne(false, source, game);
+                    controllingPlayer.discardOne(false, false, source, game);
                     return true;
                 }
-                controllingPlayer.loseLife(3, game, false);
+                controllingPlayer.loseLife(3, game, source, false);
                 return true;
             }
         }

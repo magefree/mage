@@ -62,7 +62,7 @@ class MonomaniaEffect extends OneShotEffect {
         player.choose(Outcome.Benefit, player.getHand(), target, game);
         Cards cards = player.getHand().copy();
         cards.removeIf(target.getTargets()::contains);
-        return !player.discard(cards, source, game).isEmpty();
+        return !player.discard(cards, false, source, game).isEmpty();
     }
 
     @Override

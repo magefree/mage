@@ -69,7 +69,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
                 continue;
             }
             int lifeToLose = (int) Math.ceil(player.getLife() / 2.0);
-            player.loseLife(lifeToLose, game, false);
+            player.loseLife(lifeToLose, game, source, false);
         }
         // then discards half of the cards in their hand,
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
@@ -79,7 +79,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
             }
             int cardsToDiscard = (int) Math.ceil(player.getHand().size() / 2.0);
             if (cardsToDiscard > 0) {
-                player.discard(cardsToDiscard, false, source, game);
+                player.discard(cardsToDiscard, false, false, source, game);
             }
         }
         // then sacrifices half of the creatures they control,
@@ -98,7 +98,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
             }
         }

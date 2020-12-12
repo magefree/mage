@@ -91,7 +91,7 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.BLOCKER_DECLARED
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED
                 && event.getSourceId().equals(getSourceId()); // Defiant Vanguard is the blocker
     }
 
@@ -133,13 +133,13 @@ class DefiantVanguardEffect extends OneShotEffect {
         Permanent defiantVanguard = game.getPermanent(source.getSourceId());
         if (blockedCreature != null) {
             if (game.getState().getValue(blockedCreature.toString()).equals(blockedCreature.getZoneChangeCounter(game))) { // true if it did not change zones
-                blockedCreature.destroy(source.getSourceId(), game, false);
+                blockedCreature.destroy(source, game, false);
                 result = true;
             }
         }
         if (defiantVanguard != null) {
             if (game.getState().getValue(defiantVanguard.toString()).equals(defiantVanguard.getZoneChangeCounter(game))) { // true if it did not change zones
-                defiantVanguard.destroy(source.getSourceId(), game, false);
+                defiantVanguard.destroy(source, game, false);
                 result = true;
             }
         }

@@ -77,8 +77,8 @@ class SelfInflictedWoundEffect extends OneShotEffect {
             targetOpponent.chooseTarget(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                if (permanent.sacrifice(source.getSourceId(), game)) {
-                    targetOpponent.loseLife(2, game, false);
+                if (permanent.sacrifice(source, game)) {
+                    targetOpponent.loseLife(2, game, source, false);
                 }                
             }
             

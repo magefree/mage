@@ -89,7 +89,7 @@ class NetherbornAltarEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null) {
             int counterCount = permanent.getCounters(game).getCount(CounterType.SOUL);
-            controller.loseLife(3 * counterCount, game, false);
+            controller.loseLife(3 * counterCount, game, source, false);
         }
         return true;
     }

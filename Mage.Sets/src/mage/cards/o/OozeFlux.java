@@ -77,7 +77,7 @@ class OozeFluxCreateTokenEffect extends OneShotEffect {
         tokenCopy.getAbilities().newId();
         tokenCopy.getPower().modifyBaseValue(xValue);
         tokenCopy.getToughness().modifyBaseValue(xValue);
-        tokenCopy.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        tokenCopy.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 }

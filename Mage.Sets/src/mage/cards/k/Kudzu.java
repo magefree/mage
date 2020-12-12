@@ -79,7 +79,7 @@ class KudzuEffect extends OneShotEffect {
                     && controller != null) {
                 Player landsController = game.getPlayer(enchantedLand.getControllerId());
                 if (game.getState().getZone(enchantedLand.getId()) == Zone.BATTLEFIELD) { // if 2 or more Kudzu's were on a land
-                    enchantedLand.destroy(source.getId(), game, false);
+                    enchantedLand.destroy(source, game, false);
                 }
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
@@ -92,7 +92,7 @@ class KudzuEffect extends OneShotEffect {
                                 if (landChosen != null) {
                                     for (Target targetTest : kudzuCard.getSpellAbility().getTargets()) {
                                         if (targetTest.getFilter().match(landChosen, game)) {
-                                            landChosen.addAttachment(kudzu.getId(), game);
+                                            landChosen.addAttachment(kudzu.getId(), source, game);
                                         }
                                     }
                                 }

@@ -68,7 +68,7 @@ class DireTacticsEffect extends OneShotEffect {
         int toughness = permanent.getToughness().getValue();
         player.moveCards(permanent, Zone.EXILED, source, game);
         if (game.getBattlefield().countAll(filter, player.getId(), game) < 1) {
-            player.loseLife(toughness, game, false);
+            player.loseLife(toughness, game, source, false);
         }
         return true;
     }

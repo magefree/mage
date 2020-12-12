@@ -114,7 +114,7 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
             for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
-                    permanent.removeCounters(counterType.getName(), multiTarget.getTargetAmount(target), game);
+                    permanent.removeCounters(counterType.getName(), multiTarget.getTargetAmount(target), source, game);
                 }
             }
             return true;

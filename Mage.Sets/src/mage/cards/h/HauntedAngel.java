@@ -69,7 +69,7 @@ class HauntedAngelEffect extends OneShotEffect {
         HauntedAngelToken token = new HauntedAngelToken();
         for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
             if (!playerId.equals(controllerId)) {
-                token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
+                token.putOntoBattlefield(1, game, source, playerId);
             }
         }
         return true;

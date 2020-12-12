@@ -13,6 +13,7 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 
 import java.util.UUID;
 
@@ -60,9 +61,9 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_CREATURE
-                || event.getType() == EventType.DAMAGE_PLAYER
-                || event.getType() == EventType.DAMAGE_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER;
     }
 
     @Override
@@ -78,10 +79,10 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int amount = (int) Math.ceil(event.getAmount() / 2.0);
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source.getControllerId(), amount, ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), amount, ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             event.setAmount(event.getAmount() - amount);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), amount));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), amount));
         }
         return false;
     }

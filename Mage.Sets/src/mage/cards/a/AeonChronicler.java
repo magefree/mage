@@ -72,7 +72,7 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTER_REMOVED;
+        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
     }
 
     @Override

@@ -161,7 +161,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                         for (UUID id : target.getTargets()) {
                             target.updateTarget(id, game);
                             if (!target.isNotTarget()) {
-                                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, ability.getSourceId(), ability.getControllerId()));
+                                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, ability, ability.getControllerId()));
                             }
                         }
                     }
@@ -910,7 +910,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         logger.debug("selectBlockers");
         declareBlockers(game, playerId);
     }

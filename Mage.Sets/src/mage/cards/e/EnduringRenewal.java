@@ -87,7 +87,7 @@ class EnduringRenewalReplacementEffect extends ReplacementEffectImpl {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
             } else {
                 // This is still replacing the draw, so we still return true
-                controller.drawCards(1, source.getSourceId(), game, event.getAppliedEffects());
+                controller.drawCards(1, source, game, event);
             }
             return true;
         }
@@ -156,7 +156,7 @@ class EnduringRenewalEffect extends OneShotEffect {
         if (creature != null) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                creature.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                creature.moveToZone(Zone.HAND, source, game, false);
             }
             return true;
         }

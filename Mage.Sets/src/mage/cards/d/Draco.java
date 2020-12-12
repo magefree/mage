@@ -101,11 +101,11 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
             int count = Math.max(0, MAX_DOMAIN_VALUE - domainValueReduction);
             if (player.chooseUse(Outcome.Benefit, "Pay {" + count + "}? Or " + permanent.getName() + " will be sacrificed.", source, game)) {
                 Cost cost = ManaUtil.createManaCost(count, false);
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false)) {
                     return true;
                 }
             }
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
             return true;
         }
         return false;

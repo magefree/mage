@@ -120,7 +120,7 @@ class JaceMirrorMageDrawEffect extends OneShotEffect {
         // Gatherer ruling (2007-02-01)
         // If the draw is replaced by another effect, none of the rest of Fa’adiyah Seer’s ability applies,
         // even if the draw is replaced by another draw (such as with Enduring Renewal).
-        if (controller.drawCards(1, source.getSourceId(), game) != 1) {
+        if (controller.drawCards(1, source, game) != 1) {
             return true;
         }
         controller.revealCards(source, new CardsImpl(card), game);
@@ -131,7 +131,7 @@ class JaceMirrorMageDrawEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
-        permanent.removeCounters(CounterType.LOYALTY.createInstance(card.getConvertedManaCost()), game);
+        permanent.removeCounters(CounterType.LOYALTY.createInstance(card.getConvertedManaCost()), source, game);
         return true;
     }
 }

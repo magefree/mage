@@ -87,16 +87,16 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
-        if (damageEvent.getType() == EventType.DAMAGE_PLAYER) {
+        if (damageEvent.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
             Player targetPlayer = game.getPlayer(event.getTargetId());
             if (targetPlayer != null) {
-                targetPlayer.damage(CardUtil.addWithOverflowCheck(damageEvent.getAmount(), damageEvent.getAmount()), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                targetPlayer.damage(CardUtil.addWithOverflowCheck(damageEvent.getAmount(), damageEvent.getAmount()), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                 return true;
             }
         } else {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
             if (targetPermanent != null) {
-                targetPermanent.damage(CardUtil.addWithOverflowCheck(damageEvent.getAmount(), damageEvent.getAmount()), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                targetPermanent.damage(CardUtil.addWithOverflowCheck(damageEvent.getAmount(), damageEvent.getAmount()), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
                 return true;
             }
         }

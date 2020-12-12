@@ -114,7 +114,7 @@ class LilianaDeathMageUltimateEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (opponent != null) {
             int amount = opponent.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
-            opponent.loseLife(amount * 2, game, false);
+            opponent.loseLife(amount * 2, game, source, false);
         }
         return true;
     }

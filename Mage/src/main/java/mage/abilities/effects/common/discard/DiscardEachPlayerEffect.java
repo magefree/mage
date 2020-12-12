@@ -84,7 +84,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
                     break;
             }
             if (randomDiscard) {
-                player.discard(toDiscard, true, source, game);
+                player.discard(toDiscard, true, false, source, game);
                 continue;
             }
             int numberOfCardsToDiscard = Math.min(toDiscard, player.getHand().size());
@@ -108,7 +108,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.discard(cardsToDiscard.get(playerId), source, game);
+            player.discard(cardsToDiscard.get(playerId), false, source, game);
         }
         return true;
     }

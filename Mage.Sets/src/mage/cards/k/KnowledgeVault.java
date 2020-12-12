@@ -106,7 +106,7 @@ class KnowledgeVaultReturnEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && controller != null) {
-            if (sourcePermanent.sacrifice(source.getSourceId(), game)) {
+            if (sourcePermanent.sacrifice(source, game)) {
                 new DiscardHandControllerEffect().apply(game, source);
                 ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
                 if (exileZone != null) {

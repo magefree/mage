@@ -63,8 +63,8 @@ class RivalsDuelFightTargetsEffect extends OneShotEffect {
         // 20110930 - 701.10
         if (creature1 != null
                 && creature2 != null) {
-            creature1.damage(creature2.getPower().getValue(), creature2.getId(), game, false, true);
-            creature2.damage(creature1.getPower().getValue(), creature1.getId(), game, false, true);
+            creature1.damage(creature2.getPower().getValue(), creature2.getId(), source, game, false, true);
+            creature2.damage(creature1.getPower().getValue(), creature1.getId(), source, game, false, true);
             return true;
         }
         return false;

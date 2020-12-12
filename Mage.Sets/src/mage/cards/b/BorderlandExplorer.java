@@ -94,7 +94,7 @@ class BorderlandExplorerEffect extends OneShotEffect {
                     if (cardsPlayer != null) {
                         for (UUID cardId : cardsPlayer) {
                             Card card = game.getCard(cardId);
-                            player.discard(card, source, game);
+                            player.discard(card, false, source, game);
 
                         }
                     }

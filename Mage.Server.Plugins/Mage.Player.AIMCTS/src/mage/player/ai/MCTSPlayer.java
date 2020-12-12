@@ -178,73 +178,10 @@ public class MCTSPlayer extends ComputerPlayer {
 
     @Override
     public boolean priority(Game game) {
-//        logger.info("Paused for Priority for player:" + getName());
         game.pause();
         nextAction = NextAction.PRIORITY;
         return false;
     }
-
-//    @Override
-//    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean chooseMulligan(Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public boolean chooseUse(Outcome outcome, String message, Game game) {
-//        game.pause();
-//        nextAction = NextAction.CHOOSE_USE;
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean choose(Outcome outcome, Choice choice, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public Mode chooseMode(Modes modes, Ability source, Game game) {
-//        game.end();
-//    }
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
@@ -253,29 +190,8 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         game.pause();
         nextAction = NextAction.SELECT_BLOCKERS;
     }
-
-//    @Override
-//    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
-//        game.end();
-//    }
-//
-//    @Override
-//    public int getAmount(int min, int max, String message, Game game) {
-//        game.end();
-//    }
-
 }

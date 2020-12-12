@@ -77,7 +77,7 @@ class MidnightRitualEffect extends OneShotEffect {
             Cards cardsToExile = new CardsImpl(getTargetPointer().getTargets(game, source));
             controller.moveCards(cardsToExile, Zone.EXILED, source, game);
             if (!cardsToExile.isEmpty()) {
-                new ZombieToken().putOntoBattlefield(cardsToExile.size(), game, source.getSourceId(), controller.getId());
+                new ZombieToken().putOntoBattlefield(cardsToExile.size(), game, source, controller.getId());
             }
             return true;
         }

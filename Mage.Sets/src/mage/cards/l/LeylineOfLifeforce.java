@@ -67,7 +67,7 @@ class LeylineOfLifeforceEffect extends ContinuousRuleModifyingEffectImpl {
     
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTER;
+        return event.getType() == GameEvent.EventType.COUNTER;
     }
     
     @Override

@@ -82,7 +82,7 @@ class NecroplasmEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, numCounters));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if(permanent != null) {
-                    permanent.destroy(source.getSourceId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
             }
             return true;

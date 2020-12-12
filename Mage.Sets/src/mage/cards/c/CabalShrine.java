@@ -60,7 +60,7 @@ class CabalShrineTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -105,7 +105,7 @@ class CabalShrineEffect extends OneShotEffect {
                             count += player.getGraveyard().count(filterCardName, game);
                         }
                     }
-                    controller.discard(count, false, source, game);
+                    controller.discard(count, false, false, source, game);
                     return true;
                 }
             }

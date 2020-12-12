@@ -44,10 +44,10 @@ public final class ReversePolarity extends CardImpl {
 class ReversePolarityAmount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ReversePolarityWatcher watcher = game.getState().getWatcher(ReversePolarityWatcher.class);
         if(watcher != null) {
-            return watcher.getArtifactDamageReceivedThisTurn(source.getControllerId()) * 2;
+            return watcher.getArtifactDamageReceivedThisTurn(sourceAbility.getControllerId()) * 2;
         }
         return 0;
     }

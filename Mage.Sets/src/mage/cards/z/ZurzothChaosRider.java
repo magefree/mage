@@ -178,8 +178,8 @@ class ZurzothChaosRiderEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.drawCards(1, source.getSourceId(), game);
-            player.discard(1, true, source, game);
+            player.drawCards(1, source, game);
+            player.discard(1, true, false, source, game);
         }
         return true;
     }

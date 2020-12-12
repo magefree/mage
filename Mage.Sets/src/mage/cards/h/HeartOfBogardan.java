@@ -64,7 +64,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DIDNT_PAY_CUMULATIVE_UPKEEP;
+        return event.getType() == GameEvent.EventType.DIDNT_PAY_CUMULATIVE_UPKEEP;
     }
 
     @Override
@@ -101,9 +101,9 @@ class HeartOfBogardanEffect extends OneShotEffect {
         if (player != null && sourcePermanent != null) {
             int damage = sourcePermanent.getCounters(game).getCount(CounterType.AGE) * 2 - 2;
             if (damage > 0) {
-                player.damage(damage, source.getSourceId(), game);
+                player.damage(damage, source.getSourceId(), source, game);
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                    perm.damage(damage, source.getSourceId(), game, false, true);
+                    perm.damage(damage, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;

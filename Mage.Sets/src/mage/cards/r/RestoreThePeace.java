@@ -61,7 +61,7 @@ class RestoreThePeaceEffect extends OneShotEffect {
             for (UUID permId : watcher.damageSources) {
                 Permanent perm = game.getPermanent(permId);
                 if (perm != null) {
-                    perm.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    perm.moveToZone(Zone.HAND, source, game, true);
                 }
             }
             return true;

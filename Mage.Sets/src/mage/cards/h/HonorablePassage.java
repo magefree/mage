@@ -65,7 +65,7 @@ class HonorablePassageEffect extends PreventNextDamageFromChosenSourceToTargetEf
                 if (sourceControllerId != null) {
                     Player sourceController = game.getPlayer(sourceControllerId);
                     if (sourceController != null) {
-                        sourceController.damage(damage, source.getSourceId(), game);
+                        sourceController.damage(damage, source.getSourceId(), source, game);
                     }
                 }
             }

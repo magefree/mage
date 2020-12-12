@@ -67,11 +67,11 @@ class EssenceFilterEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.chooseUse(outcome, "Destroy all enchantments? (otherwise all nonwhite enchantments are destroyed)", source, game)) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), controller.getId(), source.getSourceId(), game)) {
-                    permanent.destroy(source.getSourceId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
             } else {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
-                    permanent.destroy(source.getSourceId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
             }
             return true;

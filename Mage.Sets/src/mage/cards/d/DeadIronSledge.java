@@ -121,7 +121,7 @@ class DeadIronSledgeDestroyEffect extends OneShotEffect {
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.destroy(targetId, game, false);
+                permanent.destroy(source, game, false);
             }
         }
         return true;

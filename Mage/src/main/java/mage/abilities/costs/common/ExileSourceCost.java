@@ -41,7 +41,7 @@ public class ExileSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         MageObject sourceObject = ability.getSourceObject(game);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && sourceObject instanceof Card) {
@@ -52,7 +52,7 @@ public class ExileSourceCost extends CostImpl {
                 exileZoneName = sourceObject.getName();
                 game.getState().setValue(sourceObject.getId().toString(), ability.getSourceObjectZoneChangeCounter());
             }
-            controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, sourceId, game, game.getState().getZone(sourceObject.getId()), true);
+            controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, source, game, game.getState().getZone(sourceObject.getId()), true);
                 // 117.11. The actions performed when paying a cost may be modified by effects.
             // Even if they are, meaning the actions that are performed don't match the actions
             // that are called for, the cost has still been paid.
@@ -63,8 +63,8 @@ public class ExileSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
         return permanent != null;
     }
 

@@ -64,7 +64,7 @@ class ScatteringStrokeEffect extends OneShotEffect {
         Spell spell = (Spell) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && spell != null) {
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            game.getStack().counter(spell.getId(), source, game);
             if (ClashEffect.getInstance().apply(game, source)) {
                 Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(0, 0, 0, 0, 0, 0, 0, spell.getConvertedManaCost()));
                 AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility

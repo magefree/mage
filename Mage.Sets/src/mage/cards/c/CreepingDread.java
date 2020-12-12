@@ -117,7 +117,7 @@ class CreepingDreadEffect extends OneShotEffect {
                     Player player = entry.getKey();
                     Card cardChosen = entry.getValue();
                     if (player != null) {
-                        player.discard(cardChosen, source, game);
+                        player.discard(cardChosen, false, source, game);
                     }
                 }
             }            
@@ -125,7 +125,7 @@ class CreepingDreadEffect extends OneShotEffect {
             // each opponent who discarded a card of the same type loses 3 life
             if (!opponentsAffected.isEmpty()) {
                 for(Player opponent : opponentsAffected) {
-                    opponent.loseLife(3, game, false);
+                    opponent.loseLife(3, game, source, false);
                 }
             }
             

@@ -166,11 +166,11 @@ class LoseControlDuplicity extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL
                 && event.getPlayerId().equals(controllerId)
-                && event.getSourceId().equals(getSourceId())) {
+                && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(getSourceId())
+                && event.getTargetId().equals(this.getSourceId())
                 && ((ZoneChangeEvent) event).getToZone() != Zone.BATTLEFIELD) {
             return true;
         }

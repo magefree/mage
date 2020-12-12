@@ -64,7 +64,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
     }
 
     @Override
@@ -114,8 +114,8 @@ class CurseOfChaosEffect extends OneShotEffect {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null) {
             if (!attacker.getHand().isEmpty() && attacker.chooseUse(outcome, "Discard a card and draw a card?", source, game)) {
-                attacker.discard(1, false, source, game);
-                attacker.drawCards(1, source.getSourceId(), game);
+                attacker.discard(1, false, false, source, game);
+                attacker.drawCards(1, source, game);
             }
             return true;
         }

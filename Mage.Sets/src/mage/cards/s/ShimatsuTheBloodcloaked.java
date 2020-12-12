@@ -89,7 +89,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
                 game.informPlayers(controller.getLogName() + " sacrifices " + sacrificedCreatures + " creatures for " + creature.getLogName());
                 for (UUID targetId : target.getTargets()) {
                     Permanent targetCreature = game.getPermanent(targetId);
-                    if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
+                    if (targetCreature == null || !targetCreature.sacrifice(source, game)) {
                         return false;
                     }
                 }

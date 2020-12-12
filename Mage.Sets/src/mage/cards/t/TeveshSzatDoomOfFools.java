@@ -114,12 +114,12 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
                 game.getPlayer(permanent.getControllerId()),
                 CommanderCardType.COMMANDER_OR_OATHBREAKER
         ).contains(permanent.getId());
-        if (!permanent.sacrifice(source.getSourceId(), game)) {
+        if (!permanent.sacrifice(source, game)) {
             return false;
         }
-        controller.drawCards(2, source.getSourceId(), game);
+        controller.drawCards(2, source, game);
         if (isCommander) {
-            controller.drawCards(1, source.getSourceId(), game);
+            controller.drawCards(1, source, game);
         }
         return true;
     }

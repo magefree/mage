@@ -89,7 +89,7 @@ class TidalFlatsEffect extends OneShotEffect {
             cost.clearPaid();
             String message = "Pay " + cost.getText() + " for " + permanent.getLogName() + "? If you don't, creatures " + controller.getLogName() + " controls blocking it gain first strike until end of turn.";
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                if (cost.pay(source, game, source, player.getId(), false, null)) {
                     game.informPlayers(player.getLogName() + " paid " + cost.getText() + " for " + permanent.getLogName());
                 } else {
                     game.informPlayers(player.getLogName() + " didn't pay " + cost.getText() + " for " + permanent.getLogName());

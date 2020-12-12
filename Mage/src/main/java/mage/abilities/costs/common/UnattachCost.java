@@ -22,11 +22,11 @@ public class UnattachCost extends UseAttachedCost {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         if (mageObjectReference == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             return paid;
         }
@@ -34,7 +34,7 @@ public class UnattachCost extends UseAttachedCost {
             if (!this.mageObjectReference.refersTo(attachmentId, game)) {
                 continue;
             }
-            paid = permanent.removeAttachment(attachmentId, game);
+            paid = permanent.removeAttachment(attachmentId, source, game);
             if (paid) {
                 break;
             }

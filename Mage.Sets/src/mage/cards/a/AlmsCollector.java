@@ -74,8 +74,8 @@ class AlmsCollectorReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(event.getPlayerId());
         if (controller != null && opponent != null) {
-            controller.drawCards(1, source.getSourceId(), game, event.getAppliedEffects());
-            opponent.drawCards(1, source.getSourceId(), game, event.getAppliedEffects());
+            controller.drawCards(1, source, game, event);
+            opponent.drawCards(1, source, game, event);
             return true;
         }
         return false;

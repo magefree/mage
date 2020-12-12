@@ -97,13 +97,13 @@ class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        boolean result = super.pay(ability, game, sourceId, controllerId, noMana, costToPay);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        boolean result = super.pay(ability, game, source, controllerId, noMana, costToPay);
         if (paid && !getPermanents().isEmpty()) {
             Permanent sacrificedPermanen = getPermanents().get(0);
-            Permanent sourcePermanent = game.getPermanent(sourceId);
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null && sacrificedPermanen != null) {
-                game.getState().setValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + sourceId + sourcePermanent.getZoneChangeCounter(game), sacrificedPermanen.getToughness().getValue());
+                game.getState().setValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourcePermanent.getZoneChangeCounter(game), sacrificedPermanen.getToughness().getValue());
             }
         }
         return result;

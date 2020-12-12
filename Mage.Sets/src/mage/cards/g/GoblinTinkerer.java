@@ -76,7 +76,7 @@ class GoblinTinkererDamageEffect extends OneShotEffect {
             Permanent sourceObject = game.getPermanent(source.getSourceId());
             int damage = targetArtifact.getConvertedManaCost();
             if (sourceObject != null && damage > 0) {
-                sourceObject.damage(damage, targetArtifact.getId(), game, false, true);
+                sourceObject.damage(damage, targetArtifact.getId(), source, game, false, true);
             }
             return true;
         }

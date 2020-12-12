@@ -72,7 +72,7 @@ class HallOfTheBanditLordWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.MANA_PAID) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
@@ -83,12 +83,12 @@ class HallOfTheBanditLordWatcher extends Watcher {
                 }
             }
         }
-        if (event.getType() == EventType.COUNTERED) {
+        if (event.getType() == GameEvent.EventType.COUNTERED) {
             if (creatures.contains(event.getTargetId())) {
                 creatures.remove(event.getSourceId());
             }
         }
-        if (event.getType() == EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (creatures.contains(event.getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 // spell was e.g. exiled and goes again to stack, so previous cast has not resolved.
@@ -97,7 +97,7 @@ class HallOfTheBanditLordWatcher extends Watcher {
                 }
             }
         }
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             if (creatures.contains(event.getSourceId())) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(event.getSourceId()));

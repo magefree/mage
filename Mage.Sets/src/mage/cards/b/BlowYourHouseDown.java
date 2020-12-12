@@ -64,7 +64,7 @@ class BlowYourHouseDownEffect extends OneShotEffect {
                 .flatMap(Collection::stream)
                 .map(game::getPermanent)
                 .filter(permanent -> permanent != null && permanent.hasSubtype(SubType.WALL, game))
-                .forEach(permanent -> permanent.destroy(source.getSourceId(), game, false));
+                .forEach(permanent -> permanent.destroy(source, game, false));
         return true;
     }
 }

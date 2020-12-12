@@ -19,11 +19,11 @@ public interface Cost extends Serializable {
      * Check is it possible to pay
      * For mana it checks only single color and amount available, not total mana cost
      */
-    boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game);
+    boolean canPay(Ability ability, Ability source, UUID controllerId, Game game);
 
-    boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana);
+    boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana);
 
-    boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay);
+    boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay);
 
     boolean isPaid();
 

@@ -181,7 +181,7 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
 
     }
 
@@ -196,7 +196,7 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
 
     }
 

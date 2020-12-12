@@ -72,11 +72,11 @@ class RixMaadiRevelerEffect extends OneShotEffect {
             return false;
         }
         if (SpectacleCondition.instance.apply(game, source)) {
-            player.discard(player.getHand().size(), false, source, game);
-            player.drawCards(3, source.getSourceId(), game);
+            player.discard(player.getHand().size(), false, false, source, game);
+            player.drawCards(3, source, game);
         } else {
-            player.discard(1, false, source, game);
-            player.drawCards(1, source.getSourceId(), game);
+            player.discard(1, false, false, source, game);
+            player.drawCards(1, source, game);
         }
         return true;
     }

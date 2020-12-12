@@ -99,11 +99,11 @@ class SwordOfTheAgesEffect extends OneShotEffect {
             if (totalPower > 0) {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (player != null) {
-                    player.damage(totalPower, source.getSourceId(), game);
+                    player.damage(totalPower, source.getSourceId(), source, game);
                 } else {
                     Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (creature != null) {
-                        creature.damage(totalPower, source.getSourceId(), game, false, true);
+                        creature.damage(totalPower, source.getSourceId(), source, game, false, true);
                     }
                 }
             }

@@ -95,7 +95,7 @@ class BelzenlokDemonTokenEffect extends OneShotEffect {
         } else {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.damage(6, source.getSourceId(), game);
+                controller.damage(6, source.getSourceId(), source, game);
             }
         }
         return true;

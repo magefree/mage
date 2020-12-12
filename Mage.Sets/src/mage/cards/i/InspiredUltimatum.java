@@ -61,11 +61,11 @@ class InspiredUltimatumEffect extends OneShotEffect {
         }
         game.damagePlayerOrPlaneswalker(
                 source.getTargets().get(1).getFirstTarget(), 5,
-                source.getSourceId(), game, false, true
+                source.getSourceId(), source, game, false, true
         );
         player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(5, source.getSourceId(), game);
+            player.drawCards(5, source, game);
         }
         return true;
     }

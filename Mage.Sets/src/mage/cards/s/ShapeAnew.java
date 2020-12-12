@@ -56,7 +56,7 @@ public final class ShapeAnew extends CardImpl {
             if (targetPermanent == null) {
                 return false;
             }
-            targetPermanent.sacrifice(source.getSourceId(), game);
+            targetPermanent.sacrifice(source, game);
             Player targetController = game.getPlayer(targetPermanent.getControllerId());
             if (targetController == null) {
                 return false;

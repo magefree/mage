@@ -42,6 +42,7 @@ import mage.game.Game;
 import mage.game.GameImpl;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
+import mage.game.events.DeclareAttackerEvent;
 import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
@@ -1464,8 +1465,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
                 for (Permanent attacker : game.getBattlefield().getAllActivePermanents(filterCreatureForCombat, getId(), game)) {
                     if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                            GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
-                                    attackedDefender, attacker.getId(), attacker.getControllerId()), game)) {
+                            new DeclareAttackerEvent(attackedDefender, attacker.getId(), attacker.getControllerId()), game)) {
                         continue;
                     }
                     // if attacker needs a specific defender to attack so select that one instead
@@ -1560,8 +1560,7 @@ public class HumanPlayer extends PlayerImpl {
                 for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
 
                     if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                            GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
-                                    forcedToAttackId, attacker.getId(), attacker.getControllerId()), game)) {
+                            new DeclareAttackerEvent(forcedToAttackId, attacker.getId(), attacker.getControllerId()), game)) {
                         continue;
                     }
                     // if attacker needs a specific defender to attack so select that one instead
@@ -1657,7 +1656,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         if (gameInCheckPlayableState(game)) {
             return;
         }
@@ -1813,7 +1812,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void assignDamage(int damage, java.util.List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+    public void assignDamage(int damage, java.util.List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
@@ -1822,17 +1821,17 @@ public class HumanPlayer extends PlayerImpl {
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
             }
-            choose(Outcome.Damage, target, sourceId, game);
+            choose(Outcome.Damage, target, source.getSourceId(), game);
             if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
                 int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanent.damage(damageAmount, sourceId, game, false, true);
+                    permanent.damage(damageAmount, attackerId, source, game, false, true);
                     remainingDamage -= damageAmount;
                 } else {
                     Player player = game.getPlayer(target.getFirstTarget());
                     if (player != null) {
-                        player.damage(damageAmount, sourceId, game);
+                        player.damage(damageAmount, attackerId, source, game);
                         remainingDamage -= damageAmount;
                     }
                 }

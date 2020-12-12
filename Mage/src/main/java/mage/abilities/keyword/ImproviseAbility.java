@@ -160,7 +160,7 @@ class ImproviseEffect extends OneShotEffect {
                 if (perm == null) {
                     continue;
                 }
-                if (!perm.isTapped() && perm.tap(game)) {
+                if (!perm.isTapped() && perm.tap(source, game)) {
                     ManaPool manaPool = controller.getManaPool();
                     manaPool.addMana(Mana.ColorlessMana(1), game, source);
                     manaPool.unlockManaType(ManaType.COLORLESS);

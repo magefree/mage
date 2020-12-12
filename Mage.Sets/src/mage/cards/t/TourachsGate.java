@@ -116,12 +116,12 @@ class TourachsGateUpkeepEffect extends OneShotEffect {
         if (permanent != null) {
             int amount = permanent.getCounters(game).getCount(CounterType.TIME);
             if (amount > 0) {
-                permanent.removeCounters(CounterType.TIME.createInstance(), game);
+                permanent.removeCounters(CounterType.TIME.createInstance(), source, game);
             }
             // is supposed to function similar to Vanishing
             amount = permanent.getCounters(game).getCount(CounterType.TIME);
             if (amount == 0) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
             return true;
         }

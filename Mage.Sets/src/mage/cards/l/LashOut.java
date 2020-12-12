@@ -59,11 +59,11 @@ class LashOutEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && creature != null) {
-            creature.damage(3, source.getSourceId(), game, false, true);
+            creature.damage(3, source.getSourceId(), source, game, false, true);
             if (ClashEffect.getInstance().apply(game, source)) {
                 Player creaturesController = game.getPlayer(creature.getControllerId());
                 if (creaturesController != null) {
-                    creaturesController.damage(3, source.getSourceId(), game);
+                    creaturesController.damage(3, source.getSourceId(), source, game);
                 }
             }
             return true;

@@ -83,7 +83,7 @@ class ReverberationEffect extends ReplacementEffectImpl {
             if (targetSpell != null) {
                 Player targetsController = game.getPlayer(targetSpell.getControllerId());
                 if (targetsController != null) {
-                    targetsController.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
+                    targetsController.damage(damageEvent.getAmount(), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
                     return true;
                 }
             }

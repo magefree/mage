@@ -361,7 +361,12 @@ public interface Game extends MageItem, Serializable {
 
     void undo(UUID playerId);
 
-    void emptyManaPools();
+    /**
+     * Empty mana pool with mana burn and life lose checks
+     *
+     * @param source must be null for default game events
+     */
+    void emptyManaPools(Ability source);
 
     void addEffect(ContinuousEffect continuousEffect, Ability source);
 
@@ -420,7 +425,7 @@ public interface Game extends MageItem, Serializable {
 
     boolean endTurn(Ability source);
 
-    int doAction(MageAction action, UUID sourceId);
+    int doAction(Ability source, MageAction action);
 
     //game transaction methods
     void saveState(boolean bookmark);
@@ -448,7 +453,7 @@ public interface Game extends MageItem, Serializable {
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
 
-    void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command);
+    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command);
 
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
@@ -486,9 +491,9 @@ public interface Game extends MageItem, Serializable {
 
     void setMonarchId(Ability source, UUID monarchId);
 
-    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
+    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
 
-    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
+    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 
     Mulligan getMulligan();
 

@@ -113,7 +113,7 @@ class NeganTheColdBloodedEffect extends OneShotEffect {
             if (opponent.equals(creatureId)) {
                 game.informPlayers(opponent.getName() + " chose " + permanent.getIdName());
             }
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
         return true;
     }

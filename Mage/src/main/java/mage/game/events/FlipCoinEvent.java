@@ -1,5 +1,6 @@
 package mage.game.events;
 
+import mage.abilities.Ability;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -13,8 +14,8 @@ public class FlipCoinEvent extends GameEvent {
     private final boolean winnable;
     private int flipCount = 1;
 
-    public FlipCoinEvent(UUID playerId, UUID sourceId, boolean result, boolean chosen, boolean winnable) {
-        super(EventType.FLIP_COIN, playerId, sourceId, playerId);
+    public FlipCoinEvent(UUID playerId, Ability source, boolean result, boolean chosen, boolean winnable) {
+        super(GameEvent.EventType.FLIP_COIN, playerId, source, playerId);
         this.result = result;
         this.chosen = chosen;
         this.winnable = winnable;
@@ -52,7 +53,7 @@ public class FlipCoinEvent extends GameEvent {
         this.flipCount = flipCount;
     }
 
-    public CoinFlippedEvent getFlippedEvent() {
+    public CoinFlippedEvent createFlippedEvent() {
         return new CoinFlippedEvent(playerId, sourceId, result, chosen, winnable);
     }
 }

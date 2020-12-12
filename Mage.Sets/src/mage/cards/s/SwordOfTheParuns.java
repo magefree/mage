@@ -102,7 +102,7 @@ class MayTapOrUntapAttachedEffect extends OneShotEffect {
                     }
                 } else {
                     if (player.chooseUse(Outcome.Tap, "Tap equipped creature?", source, game)) {
-                        equipedCreature.tap(game);
+                        equipedCreature.tap(source, game);
                     }
                 }
                 return true;

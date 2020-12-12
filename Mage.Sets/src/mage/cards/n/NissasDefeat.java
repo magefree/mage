@@ -79,11 +79,11 @@ class NissasDefeatEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
 
         if (permanent != null) {
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
 
             // If it was a Nissa planeswalker, draw a card
             if (filter.match(permanent, game) && controller != null) {
-                controller.drawCards(1, source.getSourceId(), game);
+                controller.drawCards(1, source, game);
             }
             return true;
         }

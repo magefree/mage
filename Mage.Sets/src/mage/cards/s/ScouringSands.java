@@ -61,7 +61,7 @@ class ScouringSandsDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (creature != null) {
-                creature.damage(1, source.getSourceId(), game, false, false);
+                creature.damage(1, source.getSourceId(), source, game, false, false);
             }
         }
         return true;

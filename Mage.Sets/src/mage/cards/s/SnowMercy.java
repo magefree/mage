@@ -110,16 +110,16 @@ class SnowMercyCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        Permanent permanent = game.getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             // Tap, Untap, Tap, Untap, Tap:
-            if (!permanent.isTapped() && permanent.tap(game)) {
+            if (!permanent.isTapped() && permanent.tap(source, game)) {
                 if (permanent.isTapped() && permanent.untap(game)) {
-                    if (!permanent.isTapped() && permanent.tap(game)) {
+                    if (!permanent.isTapped() && permanent.tap(source, game)) {
                         if (permanent.isTapped() && permanent.untap(game)) {
-                            if (!permanent.isTapped() && permanent.tap(game)) {
+                            if (!permanent.isTapped() && permanent.tap(source, game)) {
                                 paid = true;
                             }
                         }
@@ -131,8 +131,8 @@ class SnowMercyCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             return !permanent.isTapped();
         }

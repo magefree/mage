@@ -121,11 +121,11 @@ class GrevenPredatorCaptainEffect extends OneShotEffect {
         }
         int power = permanent.getPower().getValue();
         int toughness = permanent.getToughness().getValue();
-        if (!permanent.sacrifice(source.getSourceId(), game)) {
+        if (!permanent.sacrifice(source, game)) {
             return false;
         }
-        player.drawCards(power, source.getSourceId(), game);
-        player.loseLife(toughness, game, false);
+        player.drawCards(power, source, game);
+        player.loseLife(toughness, game, source, false);
         return true;
     }
 }

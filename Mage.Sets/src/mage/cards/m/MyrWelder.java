@@ -73,7 +73,7 @@ class MyrWelderEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (card != null && permanent != null) {
-            card.moveToExile(getId(), "Myr Welder (Imprint)", source.getSourceId(), game);
+            card.moveToExile(getId(), "Myr Welder (Imprint)", source, game);
             permanent.imprint(card.getId(), game);
             return true;
         }

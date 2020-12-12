@@ -124,7 +124,7 @@ class GainControlSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game);
+            return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {
             discard();
         }

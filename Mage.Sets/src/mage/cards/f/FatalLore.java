@@ -67,12 +67,12 @@ class FatalLoreEffect extends OneShotEffect {
         if (controller != null
                 && chosenOpponent != null) {
             if (chosenOpponent.chooseUse(Outcome.Neutral, "If you choose Yes, the controller draws three cards.  If no, the controller gets to destroy up to two target creatures that you control and you get to draw up to 3 cards.  Those creatures can't be regenerated.", source, game)) {
-                controller.drawCards(3, source.getSourceId(), game);
+                controller.drawCards(3, source, game);
             } else {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen opponent's creature");
                 filter.add(new ControllerIdPredicate(chosenOpponent.getId()));
                 TargetCreaturePermanent target = new TargetCreaturePermanent(0, 2, filter, false);
-                if (target.canChoose(controller.getId(), game)
+                if (target.canChoose(source.getSourceId(), controller.getId(), game)
                         && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
                     for (UUID targetId : target.getTargets()) {
                         Effect destroyCreature = new DestroyTargetEffect(true);

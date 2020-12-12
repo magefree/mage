@@ -72,7 +72,7 @@ class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -107,7 +107,7 @@ class ScreechingBatTransformSourceEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Cost cost = new ManaCostsImpl("{2}{B}{B}");
-            if (cost.pay(source, game, permanent.getControllerId(), permanent.getControllerId(), false, null)) {
+            if (cost.pay(source, game, source, permanent.getControllerId(), false, null)) {
                 if (permanent.isTransformable()) {
                     permanent.setTransformed(!permanent.isTransformed());
                 }

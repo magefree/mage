@@ -70,7 +70,7 @@ class WretchedBanquetEffect extends OneShotEffect {
         }
 
         if (targetCreature.getPower().getValue() <= minPower) {
-            targetCreature.destroy(source.getSourceId(), game, false);
+            targetCreature.destroy(source, game, false);
             return true;
         }
         return false;

@@ -64,7 +64,7 @@ class KinjallisSunwingEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.tap(game);
+            target.tap(source, game);
         }
         return false;
     }

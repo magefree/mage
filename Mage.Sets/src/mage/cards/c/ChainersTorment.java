@@ -79,7 +79,7 @@ class ChainersTormentEffect extends OneShotEffect {
             for (UUID tokenId : effect.getLastAddedTokenIds()) {
                 Permanent token = game.getPermanentOrLKIBattlefield(tokenId);
                 if (token != null) {
-                    player.damage(xValue, tokenId, game);
+                    player.damage(xValue, tokenId, source, game);
                 }
             }
         }

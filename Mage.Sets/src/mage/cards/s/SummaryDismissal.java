@@ -66,7 +66,7 @@ class SummaryDismissalEffect extends OneShotEffect {
                 ((Spell) stackObject).moveToExile(null, "", null, game);
             }
             if (stackObject instanceof Ability) {
-                game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+                game.getStack().counter(stackObject.getId(), source, game);
             }
         }
         return true;

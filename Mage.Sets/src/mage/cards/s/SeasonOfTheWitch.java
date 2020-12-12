@@ -20,6 +20,7 @@ import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.DeclareAttackerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -99,7 +100,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
                     continue;
                 }
                 // Destroy the rest.
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
             return true;
         }
@@ -129,8 +130,7 @@ class CouldAttackThisTurnWatcher extends Watcher {
                             if (permanent.canAttack(defender, game)) {
                                 // exclude Propaganda style effects
                                 if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                                        GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
-                                                defender, permanent.getId(), permanent.getControllerId()), game)) {
+                                        new DeclareAttackerEvent(defender, permanent.getId(), permanent.getControllerId()), game)) {
                                     this.couldAttackThisTurnCreatures.add(new MageObjectReference(permanent.getId(), game));
                                     break;
                                 }

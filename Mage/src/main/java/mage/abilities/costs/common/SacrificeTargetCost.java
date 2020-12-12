@@ -51,20 +51,20 @@ public class SacrificeTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         UUID activator = controllerId;
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
         // can be cancel by user
-        if (targets.choose(Outcome.Sacrifice, activator, sourceId, game)) {
+        if (targets.choose(Outcome.Sacrifice, activator, source.getSourceId(), game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     return false;
                 }
                 permanents.add(permanent.copy());
-                paid |= permanent.sacrifice(sourceId, game);
+                paid |= permanent.sacrifice(source, game);
             }
             if (!paid && targets.get(0).getNumberOfTargets() == 0) {
                 paid = true; // e.g. for Devouring Rage
@@ -74,7 +74,7 @@ public class SacrificeTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         UUID activator = controllerId;
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
@@ -88,7 +88,7 @@ public class SacrificeTargetCost extends CostImpl {
         int validTargets = 0;
         int neededtargets = targets.get(0).getNumberOfTargets();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetControlledPermanent) targets.get(0)).getFilter(), controllerId, game)) {
-            if (game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
+            if (game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
                 if (validTargets >= neededtargets) {
                     return true;

@@ -66,7 +66,7 @@ class HeartlessHidetsuguDamageEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int damage = player.getLife() / 2;
-                    player.damage(damage, source.getSourceId(), game);
+                    player.damage(damage, source.getSourceId(), source, game);
                 }
             }
             return true;

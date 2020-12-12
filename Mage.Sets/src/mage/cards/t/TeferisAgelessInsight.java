@@ -61,7 +61,7 @@ class TeferisAgelessInsightEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(2, event.getSourceId(), game, event.getAppliedEffects());
+            controller.drawCards(2, source, game, event);
         }
         return true;
     }

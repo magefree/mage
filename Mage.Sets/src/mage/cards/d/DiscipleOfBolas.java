@@ -72,10 +72,10 @@ class DiscipleOfBolasEffect extends OneShotEffect {
                 controller.chooseTarget(outcome, target, source, game);
                 Permanent sacrificed = game.getPermanent(target.getFirstTarget());
                 if (sacrificed != null) {
-                    sacrificed.sacrifice(source.getSourceId(), game);
+                    sacrificed.sacrifice(source, game);
                     int power = sacrificed.getPower().getValue();
                     controller.gainLife(power, game, source);
-                    controller.drawCards(power, source.getSourceId(), game);
+                    controller.drawCards(power, source, game);
                 }
             }
             return true;

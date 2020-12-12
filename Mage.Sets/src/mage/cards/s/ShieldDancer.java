@@ -68,7 +68,7 @@ class ShieldDancerRedirectionEffect extends RedirectionEffect {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
     }
     
     @Override

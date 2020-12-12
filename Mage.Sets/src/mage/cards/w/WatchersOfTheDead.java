@@ -80,7 +80,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
                         for (Card cardInGraveyard : cardsInGraveyard.getCards(game)) {
                             if (!target.getTargets().contains(cardInGraveyard.getId())) {
                                 opponent.moveCardToExileWithInfo(cardInGraveyard, CardUtil.getCardExileZoneId(game, source.getId()),
-                                        sourceObject.getLogName(), source.getId(), game, Zone.GRAVEYARD, true);
+                                        sourceObject.getLogName(), source, game, Zone.GRAVEYARD, true);
                             }
                         }
                     }

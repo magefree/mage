@@ -82,7 +82,7 @@ class TitanHunterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         return game.damagePlayerOrPlaneswalker(
                 game.getActivePlayerId(), 4, source.getSourceId(),
-                game, false, true
+                source, game, false, true
         ) > 0;
     }
 }

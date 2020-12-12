@@ -70,7 +70,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Token token = new GreenCatToken();
                 int amount = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
-                token.putOntoBattlefield(amount, game, source.getSourceId(), playerId);
+                token.putOntoBattlefield(amount, game, source, playerId);
             }
             return true;
         }

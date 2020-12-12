@@ -9,6 +9,8 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
@@ -1238,7 +1240,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (!isTestMode()) { // Test player already sends target event as they select the target
             for (Target target : ability.getModes().getMode().getTargets()) {
                 for (UUID targetId : target.getTargets()) {
-                    game.fireEvent(GameEvent.getEvent(EventType.TARGETED, targetId, ability.getId(), ability.getControllerId()));
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, targetId, ability, ability.getControllerId()));
                 }
             }
         }
@@ -1250,10 +1252,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         Set<Card> lands = new LinkedHashSet<>();
         for (Card landCard : hand.getCards(new FilterLandCard(), game)) {
             // remove lands that can not be played
-            if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, landCard.getId(), landCard.getId(), playerId), null, game, true)) {
-                break;
+            boolean canPlay = false;
+            for (Ability ability : landCard.getAbilities(game)) {
+                if (ability instanceof PlayLandAbility) {
+                    if (!game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, landCard.getId(), ability, playerId), null, game, true)) {
+                        canPlay = true;
+                    }
+                }
             }
-            lands.add(landCard);
+            if (canPlay) {
+                lands.add(landCard);
+            }
         }
         while (!lands.isEmpty() && this.canPlayLand()) {
             if (lands.size() == 1) {
@@ -1321,7 +1330,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (mana.enough(avail)) {
                         SpellAbility ability = card.getSpellAbility();
                         if (ability != null && ability.canActivate(playerId, game).canActivate()
-                                && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
+                                && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getSourceId(), ability, playerId), ability, game, true)) {
                             if (card.getCardType().contains(CardType.INSTANT)
                                     || card.hasAbility(FlashAbility.getInstance(), game)) {
                                 playableInstant.add(card);
@@ -1534,7 +1543,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
-            return cost.pay(null, game, null, playerId, false, null) || approvingObject != null;
+            return cost.pay(ability, game, ability, playerId, false, null) || approvingObject != null;
         }
 
         // pay special mana like convoke cost (tap for pay)
@@ -1899,7 +1908,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         log.debug("selectBlockers");
 
         List<Permanent> blockers = getAvailableBlockers(game);
@@ -1955,10 +1964,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
         log.debug("assignDamage");
         //TODO: improve this
-        game.getPermanent(targets.get(0)).damage(damage, sourceId, game);
+        game.getPermanent(targets.get(0)).damage(damage, attackerId, source, game);
     }
 
     @Override

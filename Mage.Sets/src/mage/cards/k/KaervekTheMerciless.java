@@ -70,12 +70,12 @@ class KaervekTheMercilessEffect extends OneShotEffect {
             int cost = spell.getConvertedManaCost();
             Player target = game.getPlayer(source.getFirstTarget());
             if (target != null) {
-                target.damage(cost, source.getSourceId(), game);
+                target.damage(cost, source.getSourceId(), source, game);
                 return true;
             }
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                targetCreature.damage(cost, source.getSourceId(), game, false, true);
+                targetCreature.damage(cost, source.getSourceId(), source, game, false, true);
                 return true;
             }
         }

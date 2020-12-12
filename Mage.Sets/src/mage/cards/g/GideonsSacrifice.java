@@ -162,7 +162,7 @@ class GideonsSacrificeEffectReplacementEffect extends ReplacementEffectImpl {
         game.informPlayers(message.toString());
         // Redirect damage
         permanent.damage(
-                damageEvent.getAmount(), damageEvent.getSourceId(), game,
+                damageEvent.getAmount(), damageEvent.getSourceId(), source, game,
                 damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects()
         );
         return true;

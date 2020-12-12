@@ -64,7 +64,7 @@ class PestilentHazeEffect extends OneShotEffect {
                         StaticFilters.FILTER_PERMANENT_PLANESWALKER,
                         source.getControllerId(), source.getSourceId(), game
                 ).stream()
-                .forEach(permanent -> permanent.removeCounters(CounterType.LOYALTY.createInstance(2), game));
+                .forEach(permanent -> permanent.removeCounters(CounterType.LOYALTY.createInstance(2), source, game));
         return true;
     }
 }

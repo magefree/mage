@@ -52,7 +52,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                 // check for Morph
                 Card card = game.getCard(perm.getId());
                 if (card != null) {
-                    for (Ability ability : card.getAbilities()) {
+                    for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof MorphAbility) {
                             this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getMorphCosts()));
                         }

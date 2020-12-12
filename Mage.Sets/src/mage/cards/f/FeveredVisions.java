@@ -54,10 +54,10 @@ class FeveredVisionsEffect extends OneShotEffect {
         UUID activePlayerId = game.getActivePlayerId();
         Player player = game.getPlayer(activePlayerId);
         if (controller != null && player != null) {
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             if (opponents.contains(player.getId()) && player.getHand().size() > 3) {
-                player.damage(2, source.getSourceId(), game);
+                player.damage(2, source.getSourceId(), source, game);
             }
             return true;
         }

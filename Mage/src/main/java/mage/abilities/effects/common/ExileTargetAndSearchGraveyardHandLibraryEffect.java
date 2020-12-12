@@ -40,7 +40,7 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
             Permanent permanentToExile = game.getPermanent(exileTarget.getFirstTarget());
             if (permanentToExile != null) {
                 targetPlayerId = permanentToExile.getControllerId();
-                result = permanentToExile.moveToExile(null, "", source.getSourceId(), game);
+                result = permanentToExile.moveToExile(null, "", source, game);
                 this.applySearchAndExile(game, source, permanentToExile.getName(), targetPlayerId);
             }
         }

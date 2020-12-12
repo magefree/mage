@@ -68,7 +68,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
                 int damageDealt = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
                 Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    permanent.damage(damageDealt, source.getSourceId(), game, false, true);
+                    permanent.damage(damageDealt, source.getSourceId(), source, game, false, true);
                 }
                 return true;
             }

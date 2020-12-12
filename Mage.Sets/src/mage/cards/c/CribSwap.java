@@ -70,7 +70,7 @@ class CribSwapEffect extends OneShotEffect {
             Permanent targetCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (targetCreature != null) {
                 CribSwapShapeshifterWhiteToken token = new CribSwapShapeshifterWhiteToken();
-                return token.putOntoBattlefield(1, game, source.getSourceId(), targetCreature.getControllerId());
+                return token.putOntoBattlefield(1, game, source, targetCreature.getControllerId());
             }
         }
         return false;

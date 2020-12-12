@@ -64,12 +64,12 @@ class ManipulateFateEffect extends SearchEffect {
                 for (UUID targetId : getTargets()) {
                     Card card = player.getLibrary().getCard(targetId, game);
                     if (card != null) {
-                        card.moveToExile(null, null, targetId, game);
+                        card.moveToExile(null, null, source, game);
                     }
                 }
             }
             player.shuffleLibrary(source, game);
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
             return true;
         }
         return false;

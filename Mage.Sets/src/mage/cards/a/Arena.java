@@ -65,11 +65,11 @@ class ArenaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
-            creature.tap(game);
+            creature.tap(source, game);
         }
         creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
-            creature.tap(game);
+            creature.tap(source, game);
         }
         return new FightTargetsEffect().apply(game, source);
     }

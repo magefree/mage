@@ -73,7 +73,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PLAY_TURN;
+        return event.getType() == GameEvent.EventType.PLAY_TURN;
     }
     
     @Override

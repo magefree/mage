@@ -104,7 +104,7 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
         if (opponent != null) {
             int lifeLose = 3 - opponent.getHand().size();
             if (lifeLose > 0) {
-                opponent.loseLife(lifeLose, game, false);
+                opponent.loseLife(lifeLose, game, source, false);
             }
             return true;
         }

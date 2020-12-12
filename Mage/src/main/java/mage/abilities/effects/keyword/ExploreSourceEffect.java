@@ -98,8 +98,7 @@ public class ExploreSourceEffect extends OneShotEffect {
         if (permanentController == null) {
             return false;
         }
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId,
-                source.getSourceId(), permanent.getControllerId()));
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EXPLORED, permanentId, source, permanent.getControllerId()));
         if (permanentController.getLibrary().hasCards()) {
             Card card = permanentController.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();

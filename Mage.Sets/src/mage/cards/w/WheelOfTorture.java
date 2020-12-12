@@ -53,7 +53,7 @@ class WheelOfTortureEffect extends OneShotEffect {
         if (player != null) {
             int amount = 3 - player.getHand().size();
             if (amount > 0) {
-                player.damage(amount, source.getSourceId(), game);
+                player.damage(amount, source.getSourceId(), source, game);
                 return true;
             }
         }

@@ -32,7 +32,8 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED
+                || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override

@@ -81,18 +81,18 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
             return false;
         }
         if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
-            return player.damage(2, source.getSourceId(), game) > 0;
+            return player.damage(2, source.getSourceId(), source, game) > 0;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent(1);
         target.setNotTarget(true);
-        if (target.canChoose(player.getId(), game)
+        if (target.canChoose(source.getSourceId(), player.getId(), game)
                 && player.chooseUse(Outcome.Detriment, "Sacrifice a creature to prevent 2 damage?", source, game)
                 && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+            if (permanent != null && permanent.sacrifice(source, game)) {
                 return true;
             }
         }
-        return player.damage(2, source.getSourceId(), game) > 0;
+        return player.damage(2, source.getSourceId(), source, game) > 0;
     }
 }

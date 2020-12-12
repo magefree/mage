@@ -68,7 +68,7 @@ class FleshEffect extends OneShotEffect {
         Card targetCard = game.getCard(source.getFirstTarget());
         if (targetCard != null) {
             int power = targetCard.getPower().getValue();
-            targetCard.moveToExile(null, null, source.getSourceId(), game);
+            targetCard.moveToExile(null, null, source, game);
             if (power > 0) {
                 Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (targetCreature != null) {
@@ -107,12 +107,12 @@ class BloodEffect extends OneShotEffect {
 
         Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (sourcePermanent != null && targetCreature != null) {
-            targetCreature.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
+            targetCreature.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game, false, true);
             return true;
         }
         Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (sourcePermanent != null && targetPlayer != null) {
-            targetPlayer.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game);
+            targetPlayer.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game);
             return true;
         }
         return false;

@@ -76,10 +76,10 @@ class GoblinArchaeologistEffect extends OneShotEffect {
        Permanent permanent = game.getPermanent(source.getSourceId());
        if (player != null && permanent != null) {
            if (!player.flipCoin(source, game, true)) {
-               permanent.sacrifice(source.getSourceId(), game);
+               permanent.sacrifice(source, game);
            }else{
                Permanent targetArtifact = game.getPermanent(source.getFirstTarget());
-               targetArtifact.destroy(source.getSourceId(), game, true);
+               targetArtifact.destroy(source, game, true);
                permanent.untap(game);
            }
            return true;

@@ -88,7 +88,7 @@ class SuturedGhoulEffect extends OneShotEffect {
                 for (UUID uuid : target.getTargets()) {
                     Card card = controller.getGraveyard().get(uuid, game);
                     if (card != null) {
-                        card.moveToExile(getId(), permanent.getIdName(), source.getSourceId(), game);
+                        card.moveToExile(getId(), permanent.getIdName(), source, game);
                         permanent.imprint(card.getId(), game);
                         count++;
                     }

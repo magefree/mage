@@ -68,8 +68,8 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())) {
-            Permanent sourcePermanent = game.getPermanent(event.getSourceId());
+        if (event.getTargetId().equals(this.getSourceId())) {
+            Permanent sourcePermanent = game.getPermanent(event.getTargetId());
             if (sourcePermanent != null) {
                 return !(sourcePermanent.getControllerId()).equals(sourcePermanent.getOwnerId());
             }
@@ -105,8 +105,8 @@ class BronzeBombshellEffect extends OneShotEffect {
         if (bronzeBombshell != null) {
             Player newController = game.getPlayer(bronzeBombshell.getControllerId());
             if (newController != null) {
-                if (bronzeBombshell.sacrifice(source.getId(), game)) {//sacrificed by the new controlling player
-                    newController.damage(7, source.getSourceId(), game);//bronze bombshell does 7 damage to the controller
+                if (bronzeBombshell.sacrifice(source, game)) {//sacrificed by the new controlling player
+                    newController.damage(7, source.getSourceId(), source, game);//bronze bombshell does 7 damage to the controller
                     return true;
                 }
             }

@@ -56,7 +56,7 @@ class DisplacementWaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (!permanent.isLand() && permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
-                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                permanent.moveToZone(Zone.HAND, source, game, true);
             }
         }
         return true;

@@ -90,11 +90,11 @@ public class DoIfCostPaid extends OneShotEffect {
             message = CardUtil.replaceSourceName(message, mageObject.getName());
             boolean result = true;
             Outcome payOutcome = executingEffects.getOutcome(source, this.outcome);
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+            if (cost.canPay(source, source, player.getId(), game)
                     && (!optional || player.chooseUse(payOutcome, message, source, game))) {
                 cost.clearPaid();
                 int bookmark = game.bookmarkState();
-                if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                if (cost.pay(source, game, source, player.getId(), false)) {
                     game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + message);
                     for (Effect effect : executingEffects) {
                         effect.setTargetPointer(this.targetPointer);

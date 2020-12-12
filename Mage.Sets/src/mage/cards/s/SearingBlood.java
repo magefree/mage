@@ -85,7 +85,7 @@ class SearingBloodDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -134,7 +134,7 @@ class SearingBloodDelayedEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 MageObject sourceObject = source.getSourceObject(game);
-                player.damage(3, source.getSourceId(), game);
+                player.damage(3, source.getSourceId(), source, game);
                 return true;
             }
         }

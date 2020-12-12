@@ -116,16 +116,16 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
         ).filter(
                 attachment -> attachment != null
         ).forEachOrdered((attachment) -> {
-            if (!sourcePermanent.cantBeAttachedBy(attachment, game, true)) {
+            if (!sourcePermanent.cantBeAttachedBy(attachment, source, game, true)) {
                 if (attachment.getAttachedTo() != sourcePermanent.getId()) {
                     if (attachment.getAttachedTo() != null) {
                         Permanent fromPermanent = game.getPermanent(attachment.getAttachedTo());
                         if (fromPermanent != null) {
-                            fromPermanent.removeAttachment(attachment.getId(), game);
+                            fromPermanent.removeAttachment(attachment.getId(), source, game);
                         }
                     }
                 }
-                sourcePermanent.addAttachment(attachment.getId(), game);
+                sourcePermanent.addAttachment(attachment.getId(), source, game);
                 game.informPlayers(attachment.getLogName() + " was attached to " + sourcePermanent.getLogName());
             }
         });

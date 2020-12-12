@@ -51,7 +51,7 @@ public class LivingDeathEffect extends OneShotEffect {
 
             // Sacrifice all creatures
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
 
             game.getState().processAction(game);

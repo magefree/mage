@@ -14,6 +14,7 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -68,7 +69,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
             int numberOfClericsControlled = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(SubType.CLERIC, "Clerics")).calculate(game, source, this);
             int toPrevent = Math.min(numberOfClericsControlled, event.getAmount());
             if (toPrevent > 0 && controller.chooseUse(Outcome.PreventDamage, "Prevent " + toPrevent + " damage to " + targetPlayer.getName() + '?', source, game)) {
-                GameEvent preventEvent = new PreventDamageEvent(targetPlayer.getId(), source.getSourceId(), source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
+                GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
                 if (!game.replaceEvent(preventEvent)) {
                     if (event.getAmount() >= toPrevent) {
                         event.setAmount(event.getAmount() - toPrevent);
@@ -77,13 +78,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
                         result = true;
                     }
                     game.informPlayers("Battletide Alchemist prevented " + toPrevent + " damage to " + targetPlayer.getName());
-                    game.fireEvent(GameEvent.getEvent(
-                            GameEvent.EventType.PREVENTED_DAMAGE,
-                            targetPlayer.getId(),
-                            source.getSourceId(),
-                            source.getControllerId(),
-                            toPrevent));
-
+                    game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent));
                 }
             }
         }
@@ -92,7 +87,7 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
 }

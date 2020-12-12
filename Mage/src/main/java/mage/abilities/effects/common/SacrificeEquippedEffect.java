@@ -37,7 +37,7 @@ public class SacrificeEquippedEffect extends OneShotEffect {
                 permanent = game.getPermanent(equipment.getAttachedTo());
             }
             if (permanent != null) {
-                return permanent.sacrifice(source.getSourceId(), game);
+                return permanent.sacrifice(source, game);
             }
         }
         return false;

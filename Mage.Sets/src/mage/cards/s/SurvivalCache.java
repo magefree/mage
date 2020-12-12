@@ -62,7 +62,7 @@ class SurvivalCacheEffect extends OneShotEffect {
                 }
             }
             if (haveMoreLife)
-                sourcePlayer.drawCards(1, source.getSourceId(), game);
+                sourcePlayer.drawCards(1, source, game);
         }
         return false;
     }

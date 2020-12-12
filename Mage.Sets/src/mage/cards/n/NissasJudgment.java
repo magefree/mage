@@ -87,7 +87,7 @@ class NissasJudgmentEffect extends OneShotEffect {
             if (targetCreature != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterWithCounter, controller.getId(), game)) {
                     if (permanent.getPower().getValue() > 0) {
-                        targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true);
+                        targetCreature.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true);
                     }
                 }
             }

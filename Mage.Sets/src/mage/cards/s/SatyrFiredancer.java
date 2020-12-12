@@ -68,7 +68,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -124,7 +124,7 @@ class SatyrFiredancerDamageEffect extends OneShotEffect {
         if (targetCreature != null && controller != null) {
             int damage = (Integer) this.getValue("damage");
             if (damage > 0) {
-                targetCreature.damage(damage, source.getSourceId(), game, false, true);
+                targetCreature.damage(damage, source.getSourceId(), source, game, false, true);
             }
             return true;
         }

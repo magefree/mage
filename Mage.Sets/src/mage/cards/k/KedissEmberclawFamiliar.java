@@ -92,7 +92,7 @@ class KedissEmberclawFamiliarEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.damage(damage, sourceId, game);
+            player.damage(damage, sourceId, source, game);
         }
         return true;
     }

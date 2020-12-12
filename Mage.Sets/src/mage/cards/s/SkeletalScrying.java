@@ -105,8 +105,8 @@ class SkeletalScryingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
             if ( controller != null ) {
-                controller.drawCards(amount.calculate(game, source, this), source.getSourceId(), game);
-                controller.loseLife(amount.calculate(game, source, this), game, false);
+                controller.drawCards(amount.calculate(game, source, this), source, game);
+                controller.loseLife(amount.calculate(game, source, this), game, source, false);
                 return true;
             }
         return false;

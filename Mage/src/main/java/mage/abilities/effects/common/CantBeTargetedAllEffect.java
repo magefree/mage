@@ -58,7 +58,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TARGET;
+        return event.getType() == GameEvent.EventType.TARGET;
     }
 
     @Override

@@ -96,7 +96,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
             if (!creatures.isEmpty()) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
                 break;
             }

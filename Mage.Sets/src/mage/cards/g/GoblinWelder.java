@@ -76,7 +76,7 @@ public final class GoblinWelder extends CardImpl {
                         && card.isArtifact()
                         && currentZone == Zone.GRAVEYARD
                         && card.isOwnedBy(artifact.getControllerId())) {
-                    boolean sacrifice = artifact.sacrifice(source.getSourceId(), game);
+                    boolean sacrifice = artifact.sacrifice(source, game);
                     boolean putOnBF = owner.moveCards(card, Zone.BATTLEFIELD, source, game);
                     if (sacrifice || putOnBF) {
                         return true;

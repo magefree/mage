@@ -103,8 +103,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = (Card) game.getState().getValue("JayaBallard");
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.STACK, true);
-                return true;
+                ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
             }
         }
         return false;
@@ -112,7 +111,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

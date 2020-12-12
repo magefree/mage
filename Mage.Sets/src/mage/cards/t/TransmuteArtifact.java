@@ -72,7 +72,7 @@ class TransmuteArtifactEffect extends SearchEffect {
             Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
             if (permanent != null) {
                 convertedManaCost = permanent.getConvertedManaCost();
-                sacrifice = permanent.sacrifice(source.getSourceId(), game);
+                sacrifice = permanent.sacrifice(source, game);
             }
         } else {
             return true;
@@ -91,7 +91,7 @@ class TransmuteArtifactEffect extends SearchEffect {
                             Cost cost = ManaUtil.createManaCost(card.getConvertedManaCost() - convertedManaCost, true);
                             boolean payed = false;
                             if (controller.chooseUse(Outcome.Benefit, "Do you want to pay " + cost.getText() + " to put it onto the battlefield?", source, game)
-                                    && cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                                    && cost.pay(source, game, source, source.getControllerId(), false)) {
                                 payed = true;
                             }
 

@@ -79,7 +79,7 @@ class CarryAwayEffect extends OneShotEffect {
             if (enchantedEquipment != null) {
                 Permanent equippedCreature = game.getPermanent(enchantedEquipment.getAttachedTo());
                 if (equippedCreature != null) {
-                    return equippedCreature.removeAttachment(enchantedEquipment.getId(), game);
+                    return equippedCreature.removeAttachment(enchantedEquipment.getId(), source, game);
                 }
             }
         }

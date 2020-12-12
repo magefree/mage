@@ -93,7 +93,7 @@ class GildedDrakeEffect extends OneShotEffect {
                         return true;
                     }
                 }
-                sourceObject.sacrifice(source.getSourceId(), game);
+                sourceObject.sacrifice(source, game);
             }
             return true;
         }

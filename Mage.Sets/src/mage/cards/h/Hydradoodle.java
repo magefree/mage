@@ -93,7 +93,7 @@ class HydradoodleEffect extends OneShotEffect {
                 if (amount > 0) {
                     int total = 0;
                     for (int roll = 0; roll < amount; roll++) {
-                        int thisRoll = controller.rollDice(game, 6);
+                        int thisRoll = controller.rollDice(source, game, 6);
                         total += thisRoll;
                     }
 

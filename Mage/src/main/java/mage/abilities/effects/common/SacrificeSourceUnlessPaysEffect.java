@@ -65,9 +65,9 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
             }
 
             costToPay.clearPaid();
-            if (costToPay.canPay(source, source.getSourceId(), source.getControllerId(), game)
+            if (costToPay.canPay(source, source, source.getControllerId(), game)
                     && player.chooseUse(Outcome.Benefit, message, source, game)
-                    && costToPay.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                    && costToPay.pay(source, game, source, source.getControllerId(), false, null)) {
                 game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent sacrifice effect");
                 return true;
             }
@@ -75,7 +75,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
             game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent sacrifice effect");
             if (source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId())
                     && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                sourcePermanent.sacrifice(source.getSourceId(), game);
+                sourcePermanent.sacrifice(source, game);
             }
             return true;
         }

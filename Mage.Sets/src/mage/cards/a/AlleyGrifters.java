@@ -64,7 +64,7 @@ class AlleyGriftersDiscardEffect extends OneShotEffect {
         if (blockingCreature != null) {
             Player opponent = game.getPlayer(blockingCreature.getControllerId());
             if (opponent != null) {
-                opponent.discard(1, false, source, game);
+                opponent.discard(1, false, false, source, game);
                 return true;
             }
         }

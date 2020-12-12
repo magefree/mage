@@ -75,12 +75,12 @@ class TimecraftingRemoveEffect extends OneShotEffect {
             int xValue = source.getManaCostsToPay().getX();
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                permanent.removeCounters(CounterType.TIME.createInstance(xValue), game);
+                permanent.removeCounters(CounterType.TIME.createInstance(xValue), source, game);
             }
             else {
                 Card card = game.getExile().getCard(this.getTargetPointer().getFirst(game, source), game);
                 if (card != null) {
-                    card.removeCounters(CounterType.TIME.createInstance(xValue), game);
+                    card.removeCounters(CounterType.TIME.createInstance(xValue), source, game);
                 }
             }
             return true;

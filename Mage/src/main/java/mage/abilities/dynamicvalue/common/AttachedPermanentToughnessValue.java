@@ -19,12 +19,12 @@ public enum AttachedPermanentToughnessValue implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        Permanent enchantment = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
         if (enchantment == null) {
             // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            enchantment = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
         }
         if (enchantment == null) {
             return 0;

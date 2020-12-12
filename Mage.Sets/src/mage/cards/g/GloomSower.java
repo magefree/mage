@@ -75,7 +75,7 @@ class GloomSowerEffect extends OneShotEffect {
             return false;
         }
 
-        player.loseLife(2, game, false);
+        player.loseLife(2, game, source, false);
         return true;
     }
 }

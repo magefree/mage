@@ -65,10 +65,10 @@ class HarnessedLightningEffect extends OneShotEffect {
             int numberToPay = controller.getAmount(0, controller.getCounters().getCount(CounterType.ENERGY), "How many {E} do you like to pay?", game);
             if (numberToPay > 0) {
                 Cost cost = new PayEnergyCost(numberToPay);
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+                if (cost.pay(source, game, source, source.getControllerId(), true)) {
                     Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                     if (targetCreature != null) {
-                        targetCreature.damage(numberToPay, source.getSourceId(), game, false, true);
+                        targetCreature.damage(numberToPay, source.getSourceId(), source, game, false, true);
                     }
                 }
             }

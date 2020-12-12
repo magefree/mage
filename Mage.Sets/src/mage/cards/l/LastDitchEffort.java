@@ -65,7 +65,7 @@ class LastDitchEffortEffect extends OneShotEffect {
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    if (permanent.sacrifice(source.getSourceId(), game)) {
+                    if (permanent.sacrifice(source, game)) {
                         numSacrificed++;
                     }
                 }
@@ -76,10 +76,10 @@ class LastDitchEffortEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(uuid);
                 Player opponent = game.getPlayer(uuid);
                 if (permanent != null) {
-                    permanent.damage(damage, source.getSourceId(), game, false, true);
+                    permanent.damage(damage, source.getSourceId(), source, game, false, true);
                 }
                 if (opponent != null) {
-                    opponent.damage(damage, source.getSourceId(), game);
+                    opponent.damage(damage, source.getSourceId(), source, game);
                 }
             }
             return true;

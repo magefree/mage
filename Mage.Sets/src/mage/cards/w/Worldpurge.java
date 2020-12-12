@@ -84,7 +84,7 @@ class WorldpurgeEffect extends OneShotEffect {
                     player.shuffleCardsToLibrary(cardsToLibrary, game, source);
                 }
             }
-            game.emptyManaPools();
+            game.emptyManaPools(source);
             game.informPlayers(sourceObject.getLogName() + " - All players have lost all unspent mana");
             return true;
         }

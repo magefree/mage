@@ -73,7 +73,7 @@ class CloakOfConfusionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARE_BLOCKERS_STEP;
+        return event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
     }
 
     @Override
@@ -131,7 +131,7 @@ class CloakOfConfusionEffect extends OneShotEffect {
             game.addEffect(effect, source);
             Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (defendingPlayer != null) {
-                defendingPlayer.discard(1, true, source, game);
+                defendingPlayer.discard(1, true, false, source, game);
             }
             return true;
         }

@@ -59,7 +59,7 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
     }
 
     @Override
@@ -117,7 +117,7 @@ class TotalWarDestroyEffect extends OneShotEffect {
                     continue;
                 }
                 // Destroy the rest.
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
             return true;
         }

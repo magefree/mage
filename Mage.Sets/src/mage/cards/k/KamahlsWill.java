@@ -96,7 +96,7 @@ class KamahlsWillEffect extends OneShotEffect {
             if (creature == null || creature.getPower().getValue() < 1) {
                 continue;
             }
-            permanent.damage(creature.getPower().getValue(), creature.getId(), game);
+            permanent.damage(creature.getPower().getValue(), creature.getId(), source, game);
         }
         return true;
     }

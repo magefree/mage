@@ -87,7 +87,7 @@ class StitcherGeralfEffect extends OneShotEffect {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     power += card.getPower().getValue();
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                    controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
                 }
             }
             return new CreateTokenEffect(new StitcherGeralfZombieToken(power)).apply(game, source);

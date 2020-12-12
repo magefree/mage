@@ -65,7 +65,7 @@ class ExperimentalOverloadEffect extends OneShotEffect {
             return false;
         }
         int spellCount = player.getGraveyard().count(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game);
-        new WeirdToken2(spellCount).putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        new WeirdToken2(spellCount).putOntoBattlefield(1, game, source, source.getControllerId());
         if (spellCount < 1) {
             return true;
         }

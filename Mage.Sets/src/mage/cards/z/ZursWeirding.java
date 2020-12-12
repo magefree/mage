@@ -107,7 +107,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
                 while (otherPlayer.canRespond()
                         && !paid
                         && otherPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
-                    paid = lifeCost.pay(source, game, source.getSourceId(), otherPlayer.getId(), false, null);
+                    paid = lifeCost.pay(source, game, source, otherPlayer.getId(), false, null);
                 }
                 if (paid) {
                     player.moveCards(card, Zone.GRAVEYARD, source, game);
@@ -116,7 +116,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
             }
         }
         // This is still replacing the draw, so we still return true
-        player.drawCards(1, source.getSourceId(), game, event.getAppliedEffects());
+        player.drawCards(1, source, game, event);
         return true;
     }
 }

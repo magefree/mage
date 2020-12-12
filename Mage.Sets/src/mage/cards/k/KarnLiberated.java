@@ -151,7 +151,7 @@ class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.BEGINNING_PHASE_PRE;
+        return event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE;
     }
 
     @Override

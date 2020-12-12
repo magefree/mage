@@ -63,22 +63,22 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
         player.lookAtCards(source, null, cards, game);
         Cards revealedCards = new CardsImpl();
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to reveal and put into your hand"));
-        if (target.canChoose(source.getControllerId(), game)
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && player.choose(Outcome.DrawCard, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                card.moveToZone(Zone.HAND, source, game, false);
                 revealedCards.add(card);
             }
         }
         target = new TargetCard(Zone.LIBRARY, new FilterLandCard("land card to reveal and put into your hand"));
-        if (target.canChoose(source.getControllerId(), game)
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && player.choose(Outcome.DrawCard, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                card.moveToZone(Zone.HAND, source, game, false);
                 revealedCards.add(card);
             }
         }

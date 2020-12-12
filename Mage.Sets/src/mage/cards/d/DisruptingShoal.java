@@ -74,7 +74,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null && isConvertedManaCostEqual(source, spell.getConvertedManaCost())) {
-            return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            return game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return false;
     }

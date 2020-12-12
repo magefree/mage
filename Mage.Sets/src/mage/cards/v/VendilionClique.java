@@ -85,7 +85,7 @@ class VendilionCliqueEffect extends OneShotEffect {
                     cards.add(card);
                     player.revealCards(sourceObject.getIdName(), cards, game);
                     player.putCardsOnBottomOfLibrary(cards, game, source, true);
-                    player.drawCards(1, source.getSourceId(), game);
+                    player.drawCards(1, source, game);
                 }
             }
             return true;

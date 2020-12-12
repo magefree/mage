@@ -83,11 +83,11 @@ class RustElementalEffect extends OneShotEffect {
                     Permanent artifactSacrifice = game.getPermanent(target.getFirstTarget());
                     if (artifactSacrifice != null) {
                         // sacrifice the chosen artifact
-                        artifactSacrifice.sacrifice(source.getSourceId(), game);
+                        artifactSacrifice.sacrifice(source, game);
                     }
                 } else {
-                    sourceObject.tap(game);
-                    controller.damage(4, source.getSourceId(), game);
+                    sourceObject.tap(source, game);
+                    controller.damage(4, source.getSourceId(), source, game);
                 }
             }
             return true;

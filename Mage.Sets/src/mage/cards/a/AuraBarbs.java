@@ -57,7 +57,7 @@ public final class AuraBarbs extends CardImpl {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
-                    controller.damage(2, permanent.getId(), game);
+                    controller.damage(2, permanent.getId(), source, game);
                     game.informPlayers("2 damage assigned to " + controller.getLogName() + " from " + permanent.getName());
                 }
             }
@@ -67,7 +67,7 @@ public final class AuraBarbs extends CardImpl {
                 if (auraEnchantment.getAttachedTo() != null) {
                     Permanent attachedToCreature = game.getPermanent(auraEnchantment.getAttachedTo());
                     if (attachedToCreature != null && attachedToCreature.isCreature()) {
-                        attachedToCreature.damage(2, auraEnchantment.getId(), game, false, true);
+                        attachedToCreature.damage(2, auraEnchantment.getId(), source, game, false, true);
                         game.informPlayers("2 damage assigned to " + attachedToCreature.getName() + " from " + auraEnchantment.getName());
                     }
                 }

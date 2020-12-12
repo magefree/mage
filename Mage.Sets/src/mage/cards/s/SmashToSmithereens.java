@@ -59,9 +59,9 @@ class SmashToSmithereensEffect extends OneShotEffect {
         Permanent targetArtifact = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (targetArtifact != null) {
             Player controllerOfArtifact = game.getPlayer(targetArtifact.getControllerId());
-            targetArtifact.destroy(source.getSourceId(), game, false);
+            targetArtifact.destroy(source, game, false);
             if (controllerOfArtifact != null) {
-                controllerOfArtifact.damage(3, source.getSourceId(), game);
+                controllerOfArtifact.damage(3, source.getSourceId(), source, game);
             }
             return true;
         }

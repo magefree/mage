@@ -74,7 +74,7 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
     
     @Override

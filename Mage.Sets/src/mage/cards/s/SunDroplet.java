@@ -65,14 +65,16 @@ class SunDropletTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getControllerId())) {
             this.getEffects().clear();
-            this.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(event.getAmount())));
+            if (event.getAmount() > 0) {
+                this.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(event.getAmount())));
+            }
             return true;
         }
         return false;

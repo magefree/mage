@@ -64,7 +64,7 @@ class HarmlessOfferingEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(controllerId);
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (controller != null && permanent != null) {
-            permanent.changeControllerId(controllerId, game);
+            permanent.changeControllerId(controllerId, game, source);
         } else {
             this.discard();
         }

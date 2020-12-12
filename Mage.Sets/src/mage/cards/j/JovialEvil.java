@@ -65,7 +65,7 @@ class JovialEvilEffect extends OneShotEffect {
                 amount++;
             }
             if (amount > 0) {
-                opponent.damage(amount * 2, source.getSourceId(), game);
+                opponent.damage(amount * 2, source.getSourceId(), source, game);
             }
             return true;
         }

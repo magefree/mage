@@ -53,7 +53,7 @@ class MindmoilEffect extends OneShotEffect {
         if (you != null) {
             int count = you.getHand().size();
             you.putCardsOnBottomOfLibrary(you.getHand(), game, source, true);
-            you.drawCards(count, source.getSourceId(), game);
+            you.drawCards(count, source, game);
         }
         return true;
     }

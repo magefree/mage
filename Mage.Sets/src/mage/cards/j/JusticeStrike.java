@@ -57,6 +57,6 @@ class JusticeStrikeEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        return permanent.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true) > 0;
+        return permanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true) > 0;
     }
 }

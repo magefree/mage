@@ -84,7 +84,7 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -155,7 +155,7 @@ class SporogenesisRemoveCountersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-            permanent.removeCounters(CounterType.FUNGUS.createInstance(permanent.getCounters(game).getCount(CounterType.FUNGUS)), game);
+            permanent.removeCounters(CounterType.FUNGUS.createInstance(permanent.getCounters(game).getCount(CounterType.FUNGUS)), source, game);
         }
         return true;
     }

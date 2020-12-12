@@ -2,6 +2,7 @@ package mage.game.events;
 
 import mage.ApprovingObject;
 import mage.MageIdentifier;
+import mage.abilities.Ability;
 import mage.constants.Zone;
 
 import java.io.Serializable;
@@ -17,7 +18,7 @@ public class GameEvent implements Serializable {
     protected EventType type;
     protected UUID id;
     protected UUID targetId;
-    protected UUID sourceId;
+    protected UUID sourceId; // TODO: check sourceId usage in all events, it must gets sourceId from source ability only, not other values
     protected UUID playerId;
     protected int amount;
     // flags:
@@ -25,6 +26,7 @@ public class GameEvent implements Serializable {
     // for combat damage: event is preventable damage
     // for discard: event is result of effect (1) or result of cost (0)
     // for prevent damage: try to prevent combat damage (1) or other damage (0)
+    // for tapped: is it tapped for combat (1) or for another reason (0)
     protected boolean flag;
     protected String data;
     protected Zone zone;
@@ -70,11 +72,16 @@ public class GameEvent implements Serializable {
          */
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP,
-        DRAW_CARDS, // applies to an instruction to draw more than one card before any replacement effects apply to individual cards drawn
+        DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORED,
         ECHO_PAID,
         MIRACLE_CARD_REVEALED,
+        /* MADNESS_CARD_EXILED,
+         targetId    id of the card with madness
+         sourceId    original id of the madness ability
+         playerId    controller of the card
+         */
         MADNESS_CARD_EXILED,
         INVESTIGATED,
         KICKED,
@@ -84,6 +91,9 @@ public class GameEvent implements Serializable {
          playerId    controller of the convoked spell
          */
         CONVOKED,
+        /* DISCARD_CARD
+         flag        event is result of effect (1) or result of cost (0)
+         */
         DISCARD_CARD,
         DISCARDED_CARD,
         DISCARDED_CARDS,
@@ -101,13 +111,20 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_PLAYER,
         DAMAGED_PLAYER_BATCH,
+        /* DAMAGE_CAUSES_LIFE_LOSS,
+         targetId    the id of the damaged player
+         sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
+         playerId    the id of the damged player
+         amount      amount of damage
+         flag        is it combat damage
+         */
         DAMAGE_CAUSES_LIFE_LOSS,
         PLAYER_LIFE_CHANGE,
         GAIN_LIFE, GAINED_LIFE,
         LOSE_LIFE, LOST_LIFE,
         /* LOSE_LIFE + LOST_LIFE
          targetId    the id of the player loosing life
-         sourceId    the id of the player loosing life
+         sourceId    sourceId of the ability which caused the lose
          playerId    the id of the player loosing life
          amount      amount of life loss
          flag        true = from comabat damage - other from non combat damage
@@ -172,7 +189,19 @@ public class GameEvent implements Serializable {
          */
         TRIGGERED_ABILITY,
         RESOLVING_ABILITY,
-        COPY_STACKOBJECT, COPIED_STACKOBJECT,
+        /* COPY_STACKOBJECT
+         targetId    id of the spell/ability to copy
+         sourceId    id of the object with copy ability
+         playerId    id of the player who will be control new copied spell/ability
+         amount      number on copies
+         */
+        COPY_STACKOBJECT,
+        /* COPIED_STACKOBJECT, TODO: make same logic in params for COPY_STACKOBJECT and COPIED_STACKOBJECT
+         targetId    id of the new copied spell/ability
+         sourceId    id of the spell/ability to copy
+         playerId    id of the player who will be control new copied spell/ability
+         */
+        COPIED_STACKOBJECT,
         /* ADD_MANA
          targetId    id of the ability that added the mana
          sourceId    sourceId of the ability that added the mana
@@ -192,11 +221,19 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the mana source
          playerId    controller of the ability the mana was paid for
          amount      not used for this event
-         flag        indicates a special condition
-         data        originalId of the mana producing ability
+         flag        indicates a special condition of mana
+         data        originalId of the mana producing ability as string (converted from UUID)
          */
         MANA_PAID,
         LOSES, LOST, WINS, DRAW_PLAYER,
+        /* TARGET
+         targetId    id of the targeting card
+         sourceId    id of the ability's object that try to targeting
+         playerId    player who try to targeting (can be different from source ability's controller)
+                     TODO: BUT there is isLegal(Ability source, Game game) code and it uses only source ability's controller,
+                       so some abilities can be fizzled on resolve cause no legal targets?
+         amount      not used for this event
+         */
         TARGET, TARGETED,
         /* TARGETS_VALID
          targetId    id of the spell or id of stack ability the targets were set to
@@ -239,11 +276,13 @@ public class GameEvent implements Serializable {
          */
         DECLARING_BLOCKERS,
         DECLARED_BLOCKERS,
-        /* DECLARING_BLOCKERS
-         targetId    id of the blocking player
-         sourceId    id of the blocking player
+        DECLARE_BLOCKER,
+        /* BLOCKER_DECLARED
+         targetId    attacker id
+         sourceId    blocker id
+         playerId    blocker controller id
          */
-        DECLARE_BLOCKER, BLOCKER_DECLARED,
+        BLOCKER_DECLARED,
         CREATURE_BLOCKED,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
@@ -268,7 +307,15 @@ public class GameEvent implements Serializable {
         ENTERS_THE_BATTLEFIELD_CONTROL, // 616.1b
         ENTERS_THE_BATTLEFIELD_COPY, // 616.1c
         ENTERS_THE_BATTLEFIELD, // 616.1d
-        TAP, TAPPED,
+        TAP,
+        /* TAPPED,
+         targetId    tapped permanent
+         sourceId    id of the abilitity's source (can be null for standard tap actions like combat)
+         playerId    controller of the tapped permanent
+         amount      not used for this event
+         flag        is it tapped for combat
+         */
+        TAPPED,
         TAPPED_FOR_MANA,
         /* TAPPED_FOR_MANA
          During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
@@ -281,14 +328,14 @@ public class GameEvent implements Serializable {
         TRANSFORM, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
-        BECOMES_EXERTED,
         /* BECOMES_EXERTED
          targetId    id of the exerted creature
-         sourceId    id of the exerted creature
-         playerId    playerId of the player that controlls the creature
+         sourceId    sourceId of the ability that triggered the event (do exert)
+         playerId    player who makes the exert (can be different from permanent's controller)
          amount      not used for this event
          flag        not used for this event
          */
+        BECOMES_EXERTED,
         BECOMES_RENOWNED,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
@@ -336,21 +383,44 @@ public class GameEvent implements Serializable {
         EMBALMED_CREATURE,
         ETERNALIZED_CREATURE,
         ATTACH, ATTACHED,
-        STAY_ATTACHED,
         UNATTACH, UNATTACHED,
+        /* ATTACH, ATTACHED,
+           UNATTACH, UNATTACHED,
+         targetId    id of the permanent who get/lose attachment
+         sourceId    id of the attachment
+         playerId    player who control the attachment
+         amount      not used for this event
+         flag        not used for this event
+         */
+        STAY_ATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
         COUNTER_REMOVED, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
          targetId    id of the creature that lost control
-         sourceId    id of the creature that lost control
+         sourceId    null
          playerId    player that controlles the creature before
          amount      not used for this event
          flag        not used for this event
          */
         LOST_CONTROL,
-        GAIN_CONTROL, GAINED_CONTROL,
+        /* GAIN_CONTROL
+         targetId    id of the permanent that trying to get control
+         sourceId    null
+         playerId    new player that try to get control of permanent
+         amount      not used for this event
+         flag        not used for this event
+         */
+        GAIN_CONTROL,
+        /* GAINED_CONTROL
+         targetId    id of the permanent that got control
+         sourceId    null
+         playerId    new player that got control of permanent
+         amount      not used for this event
+         flag        not used for this event
+         */
+        GAINED_CONTROL,
         CREATE_TOKEN, CREATED_TOKEN,
         /* REGENERATE
          targetId    id of the creature to regenerate
@@ -370,79 +440,69 @@ public class GameEvent implements Serializable {
         CUSTOM_EVENT
     }
 
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
-        this(type, null, targetId, sourceId, playerId, 0, false);
+    public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
+        this(type, null, targetId, source, playerId, 0, false);
     }
 
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, ApprovingObject approvingObject) {
-        this(type, null, targetId, sourceId, playerId, 0, false, approvingObject);
+    public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, ApprovingObject approvingObject) {
+        this(type, null, targetId, source, playerId, 0, false, approvingObject);
     }
 
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
-        this(type, null, targetId, sourceId, playerId, amount, flag);
+    public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
+        this(type, null, targetId, source, playerId, amount, flag);
     }
 
-    public GameEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, sourceId, playerId, 0, false);
+    public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
+        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, 0, false);
     }
 
-    public GameEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, sourceId, playerId, amount, flag);
+    public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
+        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, amount, flag);
     }
 
-    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount) {
-        return new GameEvent(type, targetId, sourceId, playerId, amount, false);
+    public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount) {
+        return new GameEvent(type, targetId, source, playerId, amount, false);
     }
 
-    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
-        return new GameEvent(type, targetId, sourceId, playerId);
+    public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
+        return new GameEvent(type, targetId, source, playerId);
     }
 
-    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, ApprovingObject approvingObject) {
-        return new GameEvent(type, targetId, sourceId, playerId, approvingObject);
+    public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, ApprovingObject approvingObject) {
+        return new GameEvent(type, targetId, source, playerId, approvingObject);
     }
 
+    @Deprecated // usage must be replaced by getEvent with source ability
     public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId) {
         return new GameEvent(type, targetId, null, playerId);
     }
 
-    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, String data, int amount) {
-        GameEvent event = getEvent(type, targetId, sourceId, playerId);
+    public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, String data, int amount) {
+        GameEvent event = getEvent(type, targetId, source, playerId);
         event.setAmount(amount);
         event.setData(data);
         return event;
     }
 
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId, int amount) {
-        return new GameEvent(customEventType, targetId, sourceId, playerId, amount, false);
+    public static GameEvent getEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount) {
+        return new GameEvent(customEventType, targetId, source, playerId, amount, false);
     }
 
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId) {
-        return new GameEvent(customEventType, targetId, sourceId, playerId);
+    public static GameEvent getEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
+        return new GameEvent(customEventType, targetId, source, playerId);
     }
 
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID playerId) {
-        return new GameEvent(customEventType, targetId, null, playerId);
-    }
-
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID playerId, String data, int amount) {
-        GameEvent event = getEvent(customEventType, targetId, playerId);
-        event.setAmount(amount);
-        event.setData(data);
-        return event;
+    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag)
+    {
+        this(type, customEventType, targetId, source, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
-        this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
-    }
-
-    private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
+                      UUID targetId, Ability source, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
-        this.sourceId = sourceId;
+        this.sourceId = source == null ? null : source.getSourceId();
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
@@ -584,5 +644,14 @@ public class GameEvent implements Serializable {
             return false;
         }
         return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());
+    }
+
+    /**
+     * Custom sourceId setup for some events (use it in constructor). TODO: replace all custom sourceId to normal event classes
+     *
+     * @param sourceId
+     */
+    protected void setSourceId(UUID sourceId) {
+        this.sourceId = sourceId;
     }
 }

@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -63,7 +64,7 @@ class ForkEffect extends OneShotEffect {
             copy.getColor(game).setRed(true);
             game.getStack().push(copy);
             copy.chooseNewTargets(game, controller.getId());
-            game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, copy.getId(), spell.getId(), source.getControllerId()));
+            game.fireEvent(new CopiedStackObjectEvent(spell, copy, source.getControllerId()));
             return true;
         }
         return false;

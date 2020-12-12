@@ -85,7 +85,7 @@ class BoundEffect extends OneShotEffect {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                     if (toSacrifice != null) {
-                        toSacrifice.sacrifice(source.getSourceId(), game);
+                        toSacrifice.sacrifice(source, game);
                         game.getState().processAction(game);
                         int colors = toSacrifice.getColor(game).getColorCount();
                         if (colors > 0) {

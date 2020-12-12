@@ -16,10 +16,10 @@ public enum ManaSpentToCastCount implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        Spell spell = game.getStack().getSpell(source.getSourceId());
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Spell spell = game.getStack().getSpell(sourceAbility.getSourceId());
         if (spell == null) {
-            MageObject mageObject = game.getLastKnownInformation(source.getSourceId(), Zone.STACK);
+            MageObject mageObject = game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.STACK);
             if (mageObject instanceof Spell) {
                 spell = (Spell) mageObject;
             }

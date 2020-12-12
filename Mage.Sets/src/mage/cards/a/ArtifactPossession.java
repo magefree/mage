@@ -73,9 +73,16 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        UUID tappedPermanent = null;
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+            tappedPermanent = event.getSourceId();
+        }
+        if (event.getType() == GameEvent.EventType.TAPPED) {
+            tappedPermanent = event.getTargetId();
+        }
+
         Permanent aura = game.getPermanent(this.getSourceId());
-        return aura != null &&  aura.isAttachedTo(event.getSourceId());
-        
+        return aura != null && aura.isAttachedTo(tappedPermanent);
     }
 
     @Override

@@ -151,7 +151,7 @@ class AnimationModuleEffect extends OneShotEffect {
                         if (player.getCounters().size() == 1) {
                             for (Counter counter : player.getCounters().values()) {
                                 Counter newCounter = new Counter(counter.getName());
-                                player.addCounters(newCounter, game);
+                                player.addCounters(newCounter, source, game);
                             }
                         } else {
                             Choice choice = new ChoiceImpl(true);
@@ -165,7 +165,7 @@ class AnimationModuleEffect extends OneShotEffect {
                                 for (Counter counter : player.getCounters().values()) {
                                     if (counter.getName().equals(choice.getChoice())) {
                                         Counter newCounter = new Counter(counter.getName());
-                                        player.addCounters(newCounter, game);
+                                        player.addCounters(newCounter, source, game);
                                         break;
                                     }
                                 }

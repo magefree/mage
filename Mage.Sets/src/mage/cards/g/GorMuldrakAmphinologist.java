@@ -99,7 +99,7 @@ class GorMuldrakAmphinologistEffect extends OneShotEffect {
             if (entry.getValue() > minValue) {
                 continue;
             }
-            token.putOntoBattlefield(1, game, source.getSourceId(), entry.getKey());
+            token.putOntoBattlefield(1, game, source, entry.getKey());
         }
         return true;
     }

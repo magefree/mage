@@ -95,7 +95,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Token token = new KorSoldierToken();
-            if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+            if (token.putOntoBattlefield(1, game, source, source.getControllerId())) {
                 for (UUID tokenId : token.getLastAddedTokenIds()) {
                     Permanent tokenPermanent = game.getPermanent(tokenId);
                     if (tokenPermanent != null) {
@@ -108,9 +108,9 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
                                 if (equipmentPermanent != null) {
                                     Permanent attachedTo = game.getPermanent(equipmentPermanent.getAttachedTo());
                                     if (attachedTo != null) {
-                                        attachedTo.removeAttachment(equipmentPermanent.getId(), game);
+                                        attachedTo.removeAttachment(equipmentPermanent.getId(), source, game);
                                     }
-                                    tokenPermanent.addAttachment(equipmentPermanent.getId(), game);
+                                    tokenPermanent.addAttachment(equipmentPermanent.getId(), source, game);
                                 }
                             }
                         }

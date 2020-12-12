@@ -91,7 +91,7 @@ public class Targets extends ArrayList<Target> {
                 }
                 // Check if there are some rules for targets are violated, if so reset the targets and start again
                 if (this.getUnchosen().isEmpty()
-                        && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source.getSourceId(), source.getControllerId()), source)) {
+                        && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source, source.getControllerId()), source)) {
                     //game.restoreState(state, "Targets");
                     clearChosen();
                 }
@@ -110,6 +110,8 @@ public class Targets extends ArrayList<Target> {
     }
 
     /**
+     * For target choose
+     *
      * Checks if there are enough targets that can be chosen. Should only be
      * used for Ability targets since this checks for protection, shroud etc.
      *
@@ -123,6 +125,8 @@ public class Targets extends ArrayList<Target> {
     }
 
     /**
+     * For non target choose (e.g. cost pay)
+     *
      * Checks if there are enough objects that can be selected. Should not be
      * used for Ability targets since this does not check for protection, shroud
      * etc.

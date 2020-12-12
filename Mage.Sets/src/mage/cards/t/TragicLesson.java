@@ -69,14 +69,14 @@ class TragicLessonEffect extends OneShotEffect {
         if (controller != null
                 && controller.chooseUse(Outcome.Discard, "Do you want to return a land you control to its owner's hand? If you don't, you must discard 1 card", source, game)) {
             Cost cost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter));
-            if (cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
-                if (cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
+            if (cost.canPay(source, source, controller.getId(), game)) {
+                if (cost.pay(source, game, source, controller.getId(), false, null)) {
                     return true;                    
                 }
             }
         }
         if (controller != null) {
-            controller.discard(1, false, source, game);
+            controller.discard(1, false, false, source, game);
             return true;
         }
         return false;

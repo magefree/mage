@@ -68,7 +68,6 @@ class SubterraneanTremorsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         int damage = source.getManaCostsToPay().getX();
         UUID sourceId = source.getSourceId();
         UUID controllerId = source.getControllerId();
@@ -76,20 +75,20 @@ class SubterraneanTremorsEffect extends OneShotEffect {
         // X damage to each creature without flying
         List<Permanent> creaturePermanents = game.getBattlefield().getActivePermanents(filterCreatures, controllerId, game);
         for (Permanent permanent : creaturePermanents) {
-            permanent.damage(damage, sourceId, game, false, true);
+            permanent.damage(damage, sourceId, source, game, false, true);
         }
 
         // X 4 or more: destroy all artifacts
         if (damage >= 4) {
             List<Permanent> artifactPermanents = game.getBattlefield().getActivePermanents(filterArtifacts, controllerId, game);
             for (Permanent permanent : artifactPermanents) {
-                permanent.destroy(permanent.getId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
         // X 8 or more: create an 8/8 red lizard creature token on the battlefield
         if (damage >= 8) {
             SubterraneanTremorsLizardToken lizardToken = new SubterraneanTremorsLizardToken();
-            lizardToken.putOntoBattlefield(1, game, sourceId, controllerId);
+            lizardToken.putOntoBattlefield(1, game, source, controllerId);
         }
 
         return true;

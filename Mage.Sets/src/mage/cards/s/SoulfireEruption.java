@@ -87,10 +87,10 @@ class SoulfireEruptionEffect extends OneShotEffect {
                 continue;
             }
             if (permanent != null) {
-                permanent.damage(card.getConvertedManaCost(), source.getSourceId(), game);
+                permanent.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
             }
             if (player != null) {
-                player.damage(card.getConvertedManaCost(), source.getSourceId(), game);
+                player.damage(card.getConvertedManaCost(), source.getSourceId(), source, game);
             }
         }
         return true;

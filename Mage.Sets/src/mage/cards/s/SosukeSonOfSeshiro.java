@@ -79,7 +79,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
 
     @Override

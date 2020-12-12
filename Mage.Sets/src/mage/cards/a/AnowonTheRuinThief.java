@@ -134,7 +134,7 @@ class AnowonTheRuinThiefEffect extends OneShotEffect {
         if (player.millCards(damage, source, game).count(StaticFilters.FILTER_CARD_CREATURE, game) > 0) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.drawCards(1, source.getSourceId(), game);
+                controller.drawCards(1, source, game);
             }
         }
         return true;

@@ -80,7 +80,7 @@ class EmberwildeDjinnEffect extends OneShotEffect {
         }
         Cost cost = new OrCost(new ManaCostsImpl("{R}{R}"), new PayLifeCost(2), "{R}{R} or 2 life");
         if (player.chooseUse(Outcome.GainControl, "Gain control of " + sourceObject.getLogName() + "?", source, game)) {
-            if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+            if (cost.pay(source, game, source, player.getId(), false)) {
                 ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, false, player.getId());
                 effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
                 game.addEffect(effect, source);

@@ -53,7 +53,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -93,11 +93,11 @@ class StandstillEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (permanent.sacrifice(source.getSourceId(), game)) {
+            if (permanent.sacrifice(source, game)) {
                 for (UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {
                     Player player = game.getPlayer(uuid);
                     if (player != null) {
-                        player.drawCards(3, source.getSourceId(), game);
+                        player.drawCards(3, source, game);
                     }
                 }
                 return true;

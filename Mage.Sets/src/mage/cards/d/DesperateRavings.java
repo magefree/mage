@@ -62,10 +62,10 @@ class DesperateRavingsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(2, source.getSourceId(), game);
+            player.drawCards(2, source, game);
             Cards hand = player.getHand();
             Card card = hand.getRandom(game);
-            player.discard(card, source, game);
+            player.discard(card, false, source, game);
             return true;
         }
         return false;

@@ -31,8 +31,8 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
     }
     
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent planeswalker = game.getPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent planeswalker = game.getPermanent(source.getSourceId());
         return planeswalker!= null && planeswalker.canLoyaltyBeUsed(game);
     }
 

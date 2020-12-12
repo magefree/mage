@@ -54,7 +54,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -137,7 +137,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
         for (UUID permanentId : fixedTargets.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                permanent.changeControllerId(source.getControllerId(), game);
+                permanent.changeControllerId(source.getControllerId(), game, source);
             }
         }
         return true;

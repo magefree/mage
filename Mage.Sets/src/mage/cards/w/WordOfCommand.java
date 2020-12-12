@@ -3,6 +3,7 @@ package mage.cards.w;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffect;
@@ -164,10 +165,11 @@ class WordOfCommandEffect extends OneShotEffect {
         if (card.isLand()) { // we can't use getPlayableObjects(game) in here because it disallows playing lands outside the main step // TODO: replace to getPlayable() checks with disable step condition?
             if (targetPlayer.canPlayLand()
                     && game.getActivePlayerId().equals(targetPlayer.getId())) {
-                canPlay = true;
                 for (Ability ability : card.getAbilities(game)) {
-                    if (!game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), targetPlayer.getId()), ability, game, true)) {
-                        canPlay &= true;
+                    if (ability instanceof PlayLandAbility) {
+                        if (!game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability, targetPlayer.getId()), ability, game, true)) {
+                            canPlay = true;
+                        }
                     }
                 }
             }

@@ -68,8 +68,8 @@ class FriendlyFireEffect extends OneShotEffect {
                             Cards cards = new CardsImpl(card);
                             controllerOfTargetCreature.revealCards(sourceObject.getName(), cards, game);
                             int damage = card.getConvertedManaCost();
-                            targetCreature.damage(damage, source.getSourceId(), game, false, true);
-                            controllerOfTargetCreature.damage(damage, source.getSourceId(), game);
+                            targetCreature.damage(damage, source.getSourceId(), source, game, false, true);
+                            controllerOfTargetCreature.damage(damage, source.getSourceId(), source, game);
                             return true;
                         }
                     }

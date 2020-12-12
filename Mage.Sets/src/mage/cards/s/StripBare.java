@@ -70,7 +70,7 @@ class StripBareEffect extends OneShotEffect {
             for (Permanent attachment : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 if (attachment != null
                         && targetCreature.getAttachments().contains(attachment.getId())) {
-                    applied = attachment.destroy(source.getSourceId(), game, false);
+                    applied = attachment.destroy(source, game, false);
                 }
             }
         }

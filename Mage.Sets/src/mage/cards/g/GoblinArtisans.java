@@ -79,7 +79,7 @@ class GoblinArtisansEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.flipCoin(source, game, true)) {
-                controller.drawCards(1, source.getSourceId(), game);
+                controller.drawCards(1, source, game);
             } else {
                 List<Permanent> artifacts = game.getBattlefield().getActivePermanents(new FilterControlledArtifactPermanent(), source.getControllerId(), game);
                 if (artifacts.isEmpty()) {//Don't even bother if there is no artifact to 'counter'/sacrifice
@@ -108,7 +108,7 @@ class GoblinArtisansEffect extends OneShotEffect {
                     }
                     TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
                     controller.choose(Outcome.Sacrifice, cards, target, game);
-                    game.getPermanent(target.getFirstTarget()).sacrifice(source.getSourceId(), game);
+                    game.getPermanent(target.getFirstTarget()).sacrifice(source, game);
                 }
                 return true;
             }

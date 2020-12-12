@@ -41,9 +41,9 @@ public class DamageEachOtherEffect extends OneShotEffect {
         if (sourceCreature != null && targetCreature != null
                 && sourceCreature.isCreature()
                 && targetCreature.isCreature()) {
-            targetCreature.damage(sourceCreature.getPower().getValue(), sourceCreature.getId(), game, false, true);
+            targetCreature.damage(sourceCreature.getPower().getValue(), sourceCreature.getId(), source, game, false, true);
             if (sourceOnBattlefield) {
-                sourceCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                sourceCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), source, game, false, true);
             }
             return true;
         }

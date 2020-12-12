@@ -128,6 +128,6 @@ class ViviensInvocationDamageEffect extends OneShotEffect {
         if (creature == null || permanent == null) {
             return false;
         }
-        return creature.damage(permanent.getPower().getValue(), permanent.getId(), game, false, true) > 0;
+        return creature.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true) > 0;
     }
 }

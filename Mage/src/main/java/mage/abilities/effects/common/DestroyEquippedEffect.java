@@ -42,7 +42,7 @@ public class DestroyEquippedEffect extends OneShotEffect {
                 permanent = game.getPermanent(equipment.getAttachedTo());
             }
             if (permanent != null) {
-                return permanent.destroy(source.getSourceId(), game, false);
+                return permanent.destroy(source, game, false);
             }
         }
         return false;

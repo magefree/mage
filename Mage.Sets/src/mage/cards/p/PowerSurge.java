@@ -62,7 +62,7 @@ class PowerSurgeDamageEffect extends OneShotEffect {
             PowerSurgeWatcher watcher = game.getState().getWatcher(PowerSurgeWatcher.class);
             if (watcher != null) {
                 int damage = watcher.getUntappedLandCount();
-                player.damage(damage, source.getSourceId(), game);
+                player.damage(damage, source.getSourceId(), source, game);
                 return true;
             }
         }

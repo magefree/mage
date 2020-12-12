@@ -73,13 +73,13 @@ class HexParasiteEffect extends OneShotEffect {
             for (String counterName : counterNames) {
                 if (controller.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
                     if (permanent.getCounters(game).get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
-                        permanent.removeCounters(counterName, 1, game);
+                        permanent.removeCounters(counterName, 1, source, game);
                         removed++;
                     } else {
                         int amount = controller.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", game);
                         if (amount > 0) {
                             removed += amount;
-                            permanent.removeCounters(counterName, amount, game);
+                            permanent.removeCounters(counterName, amount, source, game);
                         }
                     }
                 }

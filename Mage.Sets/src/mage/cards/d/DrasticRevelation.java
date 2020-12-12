@@ -50,9 +50,9 @@ class DrasticRevelationEffect extends OneShotEffect {
         if (you == null) {
             return false;
         }
-        you.discard(you.getHand(), source, game);
-        you.drawCards(7, source.getSourceId(), game);
-        you.discard(3, true, source, game);
+        you.discard(you.getHand(), false, source, game);
+        you.drawCards(7, source, game);
+        you.discard(3, true, false, source, game);
         return false;
     }
 

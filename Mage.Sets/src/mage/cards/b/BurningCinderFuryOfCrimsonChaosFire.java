@@ -170,7 +170,7 @@ class BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect extends Conti
             permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
         if (permanent != null && controller != null) {
-            return permanent.changeControllerId(controller, game);
+            return permanent.changeControllerId(controller, game, source);
         }
         return false;
     }

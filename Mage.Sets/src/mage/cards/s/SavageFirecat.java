@@ -18,6 +18,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -35,8 +36,10 @@ public final class SavageFirecat extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Savage Firecat enters the battlefield with seven +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(7))));
+
         // Whenever you tap a land for mana, remove a +1/+1 counter from Savage Firecat.
         this.addAbility(new SavageFirecatTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance())));
 
@@ -69,16 +72,17 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
             return false;
-        }        
-        return game.getCard(event.getSourceId()).isLand() &&
-                event.getPlayerId().equals(this.controllerId);
+        }
+
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null && permanent.isLand() && event.getPlayerId().equals(this.controllerId);
     }
     
     @Override

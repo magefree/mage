@@ -64,7 +64,7 @@ class GlacialGraspEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.tap(game);
+        permanent.tap(source, game);
         game.addEffect(new DontUntapInControllersNextUntapStepTargetEffect(), source);
         Player player = game.getPlayer(permanent.getControllerId());
         if (player == null) {

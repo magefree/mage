@@ -69,7 +69,7 @@ class SearchTheCityExileEffect extends OneShotEffect {
             for (int i = 0; i < 5; i++) {
                 if (player.getLibrary().hasCards()) {
                     Card topCard = player.getLibrary().getFromTop(game);
-                    topCard.moveToExile(source.getSourceId(), "Cards exiled by Search the City", source.getSourceId(), game);
+                    topCard.moveToExile(source.getSourceId(), "Cards exiled by Search the City", source, game);
                 }
             }
             return true;
@@ -96,7 +96,7 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST || event.getType() == EventType.LAND_PLAYED;
+        return event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED;
     }
 
     @Override
@@ -158,14 +158,14 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
         if (cardName != null && searchTheCityExileZone != null) {
             for (Card card : searchTheCityExileZone.getCards(game)) {
                 if (CardUtil.haveSameNames(card, cardName, game)) {
-                    if (card.moveToZone(Zone.HAND, source.getSourceId(), game, true)) {
+                    if (card.moveToZone(Zone.HAND, source, game, true)) {
                         game.informPlayers("Search the City: put " + card.getName() + " into owner's hand");
                     }
                     searchTheCityExileZone.remove(card);
                     if (searchTheCityExileZone.isEmpty()) {
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                            permanent.sacrifice(source, game);
                             // extra turn
                             game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
                         }

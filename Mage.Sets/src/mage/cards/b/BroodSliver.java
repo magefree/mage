@@ -66,7 +66,7 @@ class BroodSliverEffect extends OneShotEffect {
         Player permanentController = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (permanentController != null) {
             if (permanentController.chooseUse(outcome, "create a 1/1 colorless Sliver creature token", source, game)) {
-                return new SliverToken().putOntoBattlefield(1, game, source.getSourceId(), permanentController.getId());
+                return new SliverToken().putOntoBattlefield(1, game, source, permanentController.getId());
             }
             return true;
         }

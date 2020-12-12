@@ -79,7 +79,7 @@ class LastRitesEffect extends OneShotEffect {
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CARDS, controller.getId()
         );
         controller.chooseTarget(Outcome.AIDontUseIt, cardsInHand, target, source, game);
-        int discardCount = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        int discardCount = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
         FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a")
                 + " nonland card" + (discardCount > 1 ? "s" : ""));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));

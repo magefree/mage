@@ -114,9 +114,9 @@ class UnlessPaysDelayedEffectTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkEventType(GameEvent event, Game game) {
         switch (step) {
             case UPKEEP:
-                return event.getType() == EventType.UPKEEP_STEP_PRE;
+                return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
             case DRAW:
-                return event.getType() == EventType.DRAW_STEP_PRE;
+                return event.getType() == GameEvent.EventType.DRAW_STEP_PRE;
             default:
                 return false;
         }

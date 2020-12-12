@@ -6,6 +6,6 @@ package mage.game.events;
 public class DamagedCreatureBatchEvent extends DamagedBatchEvent {
 
     public DamagedCreatureBatchEvent() {
-        super(EventType.DAMAGED_CREATURE_BATCH, DamagedCreatureEvent.class);
+        super(GameEvent.EventType.DAMAGED_CREATURE_BATCH, DamagedCreatureEvent.class);
     }
 }

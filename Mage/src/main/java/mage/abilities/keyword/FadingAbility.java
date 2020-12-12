@@ -70,9 +70,9 @@ class FadingEffect extends OneShotEffect {
         if (permanent != null) {
             int amount = permanent.getCounters(game).getCount(CounterType.FADE);
             if (amount > 0) {
-                permanent.removeCounters(CounterType.FADE.createInstance(), game);
+                permanent.removeCounters(CounterType.FADE.createInstance(), source, game);
             } else {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
             return true;
         }

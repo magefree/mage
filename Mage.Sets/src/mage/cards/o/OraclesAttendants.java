@@ -82,7 +82,7 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
         if (permanent != null) {
-            permanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+            permanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
         return false;
@@ -90,7 +90,7 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
     }
     
     @Override

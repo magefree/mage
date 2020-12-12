@@ -69,7 +69,7 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             MageObject object = game.getObject(event.getSourceId());
             String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
             return CardUtil.haveSameNames(object, cardName, game);

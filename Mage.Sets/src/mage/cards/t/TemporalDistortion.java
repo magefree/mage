@@ -76,7 +76,7 @@ class TemporalDistortionRemovalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(game.getActivePlayerId())) {
-            permanent.removeCounters(CounterType.HOURGLASS.createInstance(permanent.getCounters(game).getCount(CounterType.HOURGLASS)), game);
+            permanent.removeCounters(CounterType.HOURGLASS.createInstance(permanent.getCounters(game).getCount(CounterType.HOURGLASS)), source, game);
         }
         return true;
     }

@@ -40,8 +40,10 @@ public final class UtopiaSprawl extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // As Utopia Sprawl enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
+
         // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color.
         this.addAbility(new UtopiaSprawlTriggeredAbility());
     }
@@ -68,7 +70,7 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override

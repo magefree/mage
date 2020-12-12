@@ -60,9 +60,9 @@ class EssenceBacklashEffect extends OneShotEffect {
         if (spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
 
-            result = game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            result = game.getStack().counter(source.getFirstTarget(), source, game);
             if (spellController != null) {
-                spellController.damage(spell.getPower().getValue(), source.getSourceId(), game);
+                spellController.damage(spell.getPower().getValue(), source.getSourceId(), source, game);
             }
         }
         return result;

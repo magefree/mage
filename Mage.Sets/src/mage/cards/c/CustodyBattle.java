@@ -93,7 +93,7 @@ class GiveControlEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game);
+            return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {
             discard();
         }
@@ -125,10 +125,10 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
             String message = "sacrifice a land?";
             message = CardUtil.replaceSourceName(message, sourcePermanent.getLogName());
             message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
-            if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)
+            if (cost.canPay(source, source, source.getControllerId(), game)
                     && controller.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     return true;
                 }
             }

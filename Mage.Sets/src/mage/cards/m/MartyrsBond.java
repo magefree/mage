@@ -65,7 +65,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -136,7 +136,7 @@ class MartyrsBondEffect extends OneShotEffect {
                     Player player = game.getPlayer(playerId);
                     if (player != null && !playerId.equals(controller.getId())) {
                         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-                        if (target.canChoose(playerId, game)) {
+                        if (target.canChoose(source.getSourceId(), playerId, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             perms.add(target.getFirstTarget());
                         }
@@ -147,7 +147,7 @@ class MartyrsBondEffect extends OneShotEffect {
                 for (UUID permID : perms) {
                     Permanent permanent = game.getPermanent(permID);
                     if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
+                        permanent.sacrifice(source, game);
                         saccedPermaents = true;
                     }
                 }

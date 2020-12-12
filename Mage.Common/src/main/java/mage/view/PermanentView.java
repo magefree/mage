@@ -94,7 +94,7 @@ public class PermanentView extends CardView {
         if (permanent.isFaceDown(game) && card != null) {
             if (controlled) {
                 // must be a morphed or manifested card
-                for (Ability permanentAbility : permanent.getAbilities()) {
+                for (Ability permanentAbility : permanent.getAbilities(game)) {
                     if (permanentAbility.getWorksFaceDown()) {
                         this.rules.add(permanentAbility.getRule(true));
                     } else if (permanentAbility instanceof TurnFaceUpAbility && !permanentAbility.getRuleVisible()) {

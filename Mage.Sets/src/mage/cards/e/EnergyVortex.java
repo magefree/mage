@@ -103,9 +103,9 @@ class EnergyVortexEffect extends OneShotEffect {
         }
         int counters = permanent.getCounters(game).getCount(CounterType.VORTEX);
         Cost cost = ManaUtil.createManaCost(counters, false);
-        if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+        if (cost.pay(source, game, source, player.getId(), false)) {
             return true;
         }
-        return player.damage(3, source.getSourceId(), game) > 0;
+        return player.damage(3, source.getSourceId(), source, game) > 0;
     }
 }

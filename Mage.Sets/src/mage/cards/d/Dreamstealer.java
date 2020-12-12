@@ -73,7 +73,7 @@ class DreamstealerDiscardEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
             int damage = (Integer) getValue("damage");
-            targetPlayer.discard(damage, false, source, game);
+            targetPlayer.discard(damage, false, false, source, game);
             game.informPlayers(targetPlayer.getLogName() + "discards " + damage + " card(s)");
             return true;
         }

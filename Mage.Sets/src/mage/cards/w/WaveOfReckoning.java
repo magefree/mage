@@ -55,7 +55,7 @@ class WaveOfReckoningDamageEffect extends OneShotEffect {
 
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 int amount = permanent.getPower().getValue();
-                permanent.damage(amount, permanent.getId(), game, false, true);
+                permanent.damage(amount, permanent.getId(), source, game, false, true);
             }
             return true;
         }

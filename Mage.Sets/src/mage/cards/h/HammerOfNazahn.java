@@ -84,7 +84,7 @@ class HammerOfNazahnEffect extends OneShotEffect {
             Permanent equipment = game.getPermanent(getTargetPointer().getFirst(game, source));
             Permanent targetCreature = game.getPermanent(source.getTargets().getFirstTarget());
             if (equipment != null && targetCreature != null) {
-                targetCreature.addAttachment(equipment.getId(), game);
+                targetCreature.addAttachment(equipment.getId(), source, game);
             }
             return true;
         }

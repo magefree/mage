@@ -66,7 +66,7 @@ class ThroneOfEmpiresEffect extends OneShotEffect {
         }
         Token soldier = new SoldierToken();
         int count = scepter && crown ? 5 : 1;
-        soldier.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
+        soldier.putOntoBattlefield(count, game, source, source.getControllerId());
         return false;
     }
 

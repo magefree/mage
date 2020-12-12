@@ -71,7 +71,7 @@ class WojekEmbermageEffect extends OneShotEffect {
             ObjectColor targetColor = target.getColor(game);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER, source.getControllerId(), game)) {
                 if (target.getId().equals(permanent.getId()) || permanent.getColor(game).shares(targetColor)) {
-                    permanent.damage(1, source.getSourceId(), game, false, true);
+                    permanent.damage(1, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;

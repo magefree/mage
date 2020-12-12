@@ -94,11 +94,11 @@ class OrzhovCharmReturnToHandEffect extends OneShotEffect {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment != null && attachment.isControlledBy(source.getControllerId())
                         && attachment.hasSubtype(SubType.AURA, game)) {
-                    attachment.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    attachment.moveToZone(Zone.HAND, source, game, false);
                 }
             }
             if (target.isControlledBy(source.getControllerId())) {
-                target.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                target.moveToZone(Zone.HAND, source, game, false);
             }
             return true;
         }
@@ -128,9 +128,9 @@ class OrzhovCharmDestroyAndLoseLifeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (target != null && controller != null) {
             int toughness = target.getToughness().getValue();
-            target.destroy(source.getSourceId(), game, false);
+            target.destroy(source, game, false);
             if (toughness > 0) {
-                controller.loseLife(toughness, game, false);
+                controller.loseLife(toughness, game, source, false);
             }
             return true;
         }

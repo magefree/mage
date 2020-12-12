@@ -61,7 +61,7 @@ class TurnTheTablesEffect extends PreventDamageToControllerEffect {
         if (damage > 0) {
             Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (attackingCreature != null) {
-                attackingCreature.damage(damage, source.getSourceId(), game, false, true);
+                attackingCreature.damage(damage, source.getSourceId(), source, game, false, true);
             }
         }
         return preventionEffectData;

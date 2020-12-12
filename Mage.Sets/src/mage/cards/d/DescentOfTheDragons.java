@@ -68,7 +68,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(permanentId);
                     if (permanent != null) {
                         UUID controllerOfTargetId = permanent.getControllerId();
-                        if (permanent.destroy(source.getSourceId(), game, false)) {
+                        if (permanent.destroy(source, game, false)) {
                             int count = playersWithTargets.getOrDefault(controllerOfTargetId, 0);
                             playersWithTargets.put(controllerOfTargetId, count + 1);
 
@@ -78,7 +78,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
             }
             DragonToken dragonToken = new DragonToken();
             for (Map.Entry<UUID, Integer> amountTokensPerPlayer : playersWithTargets.entrySet()) {
-                dragonToken.putOntoBattlefield(amountTokensPerPlayer.getValue(), game, source.getSourceId(), amountTokensPerPlayer.getKey());
+                dragonToken.putOntoBattlefield(amountTokensPerPlayer.getValue(), game, source, amountTokensPerPlayer.getKey());
             }
             return true;
         }

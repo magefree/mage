@@ -104,7 +104,7 @@ class SpinalEmbraceSacrificeEffect extends OneShotEffect {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
                 affectedTargets++;
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {

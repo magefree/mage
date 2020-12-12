@@ -91,7 +91,7 @@ class KozilekDrawEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(7 - controller.getHand().size(), source.getSourceId(), game);
+            controller.drawCards(7 - controller.getHand().size(), source, game);
             return true;
         }
         return false;
@@ -109,7 +109,7 @@ class KozilekDiscardCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Spell targetSpell = game.getStack().getSpell(ability.getFirstTarget());
         if (targetSpell == null) {
             return false;
@@ -123,13 +123,13 @@ class KozilekDiscardCost extends CostImpl {
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);
-        if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
                 }
-                player.discard(card, ability, game);
+                player.discard(card, true, source, game);
                 paid = true;
             }
         }
@@ -143,7 +143,7 @@ class KozilekDiscardCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         if (game.getStack().isEmpty()) {
             return false;
         }

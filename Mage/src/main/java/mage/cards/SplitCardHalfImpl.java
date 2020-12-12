@@ -1,5 +1,6 @@
 package mage.cards;
 
+import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
@@ -46,18 +47,18 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
-        return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
+    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+        return splitCardParent.moveToZone(toZone, source, game, flag, appliedEffects);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
-        return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
+    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+        return splitCardParent.moveToExile(exileId, name, source, game, appliedEffects);
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
-        return splitCardParent.removeFromZone(game, fromZone, sourceId);
+    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
+        return splitCardParent.removeFromZone(game, fromZone, source);
     }
 
     @Override

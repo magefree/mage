@@ -112,7 +112,7 @@ class NecroticPlagueEffect extends OneShotEffect {
                 if (sourceEnchantmentCard != null && creature != null) {
                     game.getState().setValue("attachTo:" + sourceEnchantmentCard.getId(), creature);
                     creatureController.moveCards(sourceEnchantmentCard, Zone.BATTLEFIELD, source, game);
-                    return creature.addAttachment(sourceEnchantmentCard.getId(), game);
+                    return creature.addAttachment(sourceEnchantmentCard.getId(), source, game);
                 }
             }
         }

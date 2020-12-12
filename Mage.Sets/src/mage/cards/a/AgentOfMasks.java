@@ -55,7 +55,7 @@ class AgentOfMasksEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int loseLife = 0;
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(1, game, false);
+            loseLife += game.getPlayer(opponentId).loseLife(1, game, source, false);
         }
         if (loseLife > 0)
             game.getPlayer(source.getControllerId()).gainLife(loseLife, game, source);

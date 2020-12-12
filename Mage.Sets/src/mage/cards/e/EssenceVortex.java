@@ -61,9 +61,9 @@ class EssenceVortexEffect extends OneShotEffect {
             return false;
         }
         Cost cost = new PayLifeCost(permanent.getToughness().getValue());
-        if (cost.pay(source, game, source.getSourceId(), permanent.getControllerId(), true)) {
+        if (cost.pay(source, game, source, permanent.getControllerId(), true)) {
             return true;
         }
-        return permanent.destroy(source.getSourceId(), game, true);
+        return permanent.destroy(source, game, true);
     }
 }

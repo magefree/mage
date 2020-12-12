@@ -112,7 +112,7 @@ class FruitcakeElementalControlSourceEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getFirstTarget());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && player != null) {
-            permanent.changeControllerId(player.getId(), game);
+            permanent.changeControllerId(player.getId(), game, source);
         } else {
             // no valid target exists, effect can be discarded
             discard();

@@ -17,6 +17,7 @@ import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -135,7 +136,7 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 game.getState().setValue("becameBlocked_" + key, morSet);
                 game.fireEvent(GameEvent.getEvent(
                         GameEvent.EventType.BATCH_BLOCK_NONCOMBAT,
-                        source.getSourceId(), source.getSourceId(),
+                        source.getSourceId(), source,
                         source.getControllerId(), key, 0)
                 );
                 return true;
@@ -177,7 +178,7 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                 game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
                 // TODO: find an alternate event solution for multi-blockers (as per issue #4285), this will work fine for single blocker creatures though
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attacker.getId(), blocker.getId(), blocker.getControllerId()));
+                game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
                 group.pickBlockerOrder(attacker.getControllerId(), game);
             }
         }

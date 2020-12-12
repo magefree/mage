@@ -89,10 +89,10 @@ class BandTogetherEffect extends OneShotEffect {
         }
 
         if (permanentDamage1 != null) {
-            permanentDest.damage(permanentDamage1.getPower().getValue(), permanentDamage1.getId(), game, false, true);
+            permanentDest.damage(permanentDamage1.getPower().getValue(), permanentDamage1.getId(), source, game, false, true);
         }
         if (permanentDamage2 != null) {
-            permanentDest.damage(permanentDamage2.getPower().getValue(), permanentDamage2.getId(), game, false, true);
+            permanentDest.damage(permanentDamage2.getPower().getValue(), permanentDamage2.getId(), source, game, false, true);
         }
         return true;
     }

@@ -81,7 +81,7 @@ class TortureChamberEffect1 extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             int painCounters = permanent.getCounters(game).getCount(CounterType.PAIN);
-            player.damage(painCounters, source.getSourceId(), game);
+            player.damage(painCounters, source.getSourceId(), source, game);
             return true;
         }
         return false;
@@ -114,7 +114,7 @@ class TortureChamberEffect2 extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(countersRemoved, source.getSourceId(), game, false, true);
+            permanent.damage(countersRemoved, source.getSourceId(), source, game, false, true);
             return true;
         }
         return false;

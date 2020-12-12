@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -72,7 +73,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), event.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), event.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int preventedDamage = event.getAmount();
             MageObject damageSource = game.getObject(event.getSourceId());
@@ -84,7 +85,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
                 game.informPlayers(message);
             }
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), preventedDamage));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), preventedDamage));
         }
         return false;
     }

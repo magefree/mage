@@ -77,7 +77,7 @@ class TormentedThoughtsDiscardEffect extends OneShotEffect {
                 }
             }
             if (power > 0) {
-                targetPlayer.discard(power, false, source, game);
+                targetPlayer.discard(power, false, false, source, game);
             }
             return true;
         }

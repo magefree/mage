@@ -156,7 +156,7 @@ class ShrivelingRotEffect extends OneShotEffect {
             Player permanentController = game.getPlayer(permanent.getControllerId());
             if (permanentController != null) {
                 int amount = permanent.getToughness().getValue();
-                permanentController.loseLife(amount, game, false);
+                permanentController.loseLife(amount, game, source, false);
                 return true;
             }
         }

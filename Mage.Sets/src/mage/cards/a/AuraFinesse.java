@@ -82,9 +82,9 @@ class AuraFinesseEffect extends OneShotEffect {
                     Target auraTarget = aura.getSpellAbility().getTargets().get(0);
                     if (!auraTarget.canTarget(creature.getId(), game))  {
                         game.informPlayers(aura.getLogName() + " was not attched to " +creature.getLogName() + " because it's no legal target for the aura" );
-                    } else if (oldCreature.removeAttachment(aura.getId(), game)) {
+                    } else if (oldCreature.removeAttachment(aura.getId(), source, game)) {
                         game.informPlayers(aura.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + creature.getLogName());
-                        creature.addAttachment(aura.getId(), game);
+                        creature.addAttachment(aura.getId(), source, game);
                     }
                 }
             }

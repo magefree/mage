@@ -84,7 +84,7 @@ class HuatliWarriorPoetDamageEffect extends OneShotEffect {
         Target multiTarget = source.getTargets().get(0);
         for (UUID target : multiTarget.getTargets()) {
             Permanent permanent = game.getPermanent(target);
-            if (permanent != null && permanent.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game, false, true) > 0) {
+            if (permanent != null && permanent.damage(multiTarget.getTargetAmount(target), source.getSourceId(), source, game, false, true) > 0) {
                 ContinuousEffect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);

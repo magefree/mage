@@ -72,7 +72,7 @@ class BellowingFiendEffect extends OneShotEffect {
         if (damagedCreature != null) {
             Player controller = game.getPlayer(damagedCreature.getControllerId());
             if (controller != null) {
-                controller.damage(3, source.getSourceId(), game);
+                controller.damage(3, source.getSourceId(), source, game);
                 applied = true;
             }
         }

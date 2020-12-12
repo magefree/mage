@@ -84,7 +84,7 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
             if (objectControllerId != null) {
                 Player objectController = game.getPlayer(objectControllerId);
                 if (objectController != null) {
-                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
+                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
                 }
             }
         }

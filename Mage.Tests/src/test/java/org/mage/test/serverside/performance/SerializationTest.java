@@ -41,7 +41,7 @@ public class SerializationTest extends CardTestPlayerBase {
 
         // mark damage from infected ability
         permanent.addAbility(InfectAbility.getInstance(), null, currentGame);
-        permanent.markDamage(1, permanent.getId(), currentGame, false, false);
+        permanent.markDamage(1, permanent.getId(), null, currentGame, false, false);
 
         // test compress (it uses default java serialization)
         Object compressed = CompressUtil.compress(permanent);

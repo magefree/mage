@@ -124,7 +124,7 @@ class DanceOfTheDeadReAttachEffect extends OneShotEffect {
                 target.addTarget(enchantedCreature.getId(), source, game);
                 enchantment.getSpellAbility().getTargets().clear();
                 enchantment.getSpellAbility().getTargets().add(target);
-                enchantedCreature.addAttachment(enchantment.getId(), game);
+                enchantedCreature.addAttachment(enchantment.getId(), source, game);
             }
             return true;
         }
@@ -157,7 +157,7 @@ class DanceOfTheDeadLeavesBattlefieldTriggeredEffect extends OneShotEffect {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
                 if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
-                    attachedTo.sacrifice(source.getSourceId(), game);
+                    attachedTo.sacrifice(source, game);
                 }
             }
             return true;
@@ -193,7 +193,7 @@ class DanceOfTheDeadAttachEffect extends OneShotEffect {
             // Card have no attachedTo attribute yet so write ref only to enchantment now
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null) {
-                enchantment.attachTo(card.getId(), game);
+                enchantment.attachTo(card.getId(), source, game);
             }
             return true;
         }

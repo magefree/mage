@@ -79,7 +79,7 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LIBRARY_SEARCHED;
+        return event.getType() == GameEvent.EventType.LIBRARY_SEARCHED;
     }
 
     @Override
@@ -121,7 +121,7 @@ class ObNixilisUnshackledEffect extends SacrificeEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            player.loseLife(10, game, false);
+            player.loseLife(10, game, source, false);
         }
         return super.apply(game, source);
     }

@@ -114,10 +114,10 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.canRespond()
                         && !player.equals(controller)
-                        && cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        && cost.canPay(source, source, player.getId(), game)
                         && player.chooseUse(Outcome.Benefit, message, source, game)) {
                     cost.clearPaid();
-                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                    if (cost.pay(source, game, source, player.getId(), false, null)) {
                         if (!game.isSimulation()) {
                             game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                         }

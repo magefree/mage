@@ -57,7 +57,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
@@ -66,8 +66,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (permanent != null && permanent.isLand()) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
                 return true;
@@ -116,7 +115,7 @@ class ManaWebeffect extends OneShotEffect {
                     Set<ManaType> manaTypes = AnyColorLandsProduceManaAbility.getManaTypesFromPermanent(opponentPermanent, game);
                     for (ManaType manaType : manaTypes) {
                         if (manaTypesSource.contains(manaType)) {
-                           tappedLands = opponentPermanent.tap(game) || tappedLands;
+                           tappedLands = opponentPermanent.tap(source, game) || tappedLands;
                            break;
                         }
                     }

@@ -92,10 +92,10 @@ class BlazingTorchEffect extends OneShotEffect {
         if (targetedPermanent == null) {
             Player targetedPlayer = game.getPlayer(source.getFirstTarget());
             if (targetedPlayer != null) {
-                targetedPlayer.damage(2, permanent.getId(), game);
+                targetedPlayer.damage(2, permanent.getId(), source, game);
             }
         } else {
-            targetedPermanent.damage(2, permanent.getId(), game);
+            targetedPermanent.damage(2, permanent.getId(), source, game);
         }
         return true;
     }

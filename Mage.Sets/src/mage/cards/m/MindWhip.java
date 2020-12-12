@@ -84,7 +84,7 @@ class MindWhipEffect extends OneShotEffect {
                 Effect effect = new DamageTargetEffect(2);
                 effect.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
                 effect.apply(game, source);
-                enchantedCreature.tap(game);
+                enchantedCreature.tap(source, game);
                 return true;
             }
         }

@@ -83,6 +83,6 @@ class UroTitanOfNaturesWrathEffect extends OneShotEffect {
         if (EscapeAbility.wasCastedWithEscape(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter())) {
             return false;
         }
-        return permanent.sacrifice(source.getSourceId(), game);
+        return permanent.sacrifice(source, game);
     }
 }

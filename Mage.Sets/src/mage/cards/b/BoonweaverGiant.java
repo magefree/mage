@@ -115,7 +115,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
             }
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (permanent != null) {
-                return permanent.addAttachment(card.getId(), game);
+                return permanent.addAttachment(card.getId(), source, game);
             }
         }
         return true;

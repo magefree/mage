@@ -100,8 +100,8 @@ class IsolationCellEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             Cost cost = ManaUtil.createManaCost(2, false);
-            if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
-                player.loseLife(2, game, false);
+            if (!cost.pay(source, game, source, player.getId(), false)) {
+                player.loseLife(2, game, source, false);
             }
             return true;
         }

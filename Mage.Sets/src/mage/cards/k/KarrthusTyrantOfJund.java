@@ -123,7 +123,7 @@ class KarrthusControlEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent dragon = game.getPermanent(targetPointer.getFirst(game, source));
         if (dragon != null && controllerId != null) {
-            return dragon.changeControllerId(controllerId, game);
+            return dragon.changeControllerId(controllerId, game, source);
         }
         return false;
     }

@@ -74,7 +74,7 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
                     if (opponent.chooseUse(outcome,
                             "Have Pia's Revolution deal 3 damage to you to prevent that " + permanent.getIdName() + " returns to " + controller.getName() + "'s hand?",
                             source, game)) {
-                        opponent.damage(3, source.getSourceId(), game);
+                        opponent.damage(3, source.getSourceId(), source, game);
                     } else if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                         controller.moveCards(game.getCard(permanentId), Zone.HAND, source, game);
                     }

@@ -76,11 +76,11 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
                     continue;
                 }
                 // Tap the rest.
-                creature.tap(game);
+                creature.tap(source, game);
                 count++;
             }
             if (count > 0) {
-                player.damage(count, source.getSourceId(), game);
+                player.damage(count, source.getSourceId(), source, game);
             }
             return true;
         }

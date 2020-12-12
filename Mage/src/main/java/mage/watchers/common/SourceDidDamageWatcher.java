@@ -24,9 +24,9 @@ public class SourceDidDamageWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE
-                || event.getType() == EventType.DAMAGED_PLANESWALKER
-                || event.getType() == EventType.DAMAGED_PLAYER) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
                 damageSources.add(event.getSourceId());
 
         }

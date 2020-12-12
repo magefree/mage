@@ -136,7 +136,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 } else {
                     costChoiceText = alternativeCostsToCheck.isEmpty() ? "Cast without paying its mana cost?" : "Pay alternative costs? (" + alternativeCostsToCheck.getText() + ')';
                 }
-                if (alternativeCostsToCheck.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)
+                if (alternativeCostsToCheck.canPay(ability, ability, ability.getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {
                     if (ability instanceof SpellAbility) {
                         ability.getManaCostsToPay().removeIf(manaCost -> manaCost instanceof VariableCost);

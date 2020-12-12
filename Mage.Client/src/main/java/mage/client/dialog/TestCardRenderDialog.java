@@ -87,7 +87,7 @@ public class TestCardRenderDialog extends MageDialog {
         game.loadCards(cardsList, controllerId);
 
         PermanentCard perm = new PermanentCard(card, controllerId, game);
-        if (damage > 0) perm.damage(damage, controllerId, game);
+        if (damage > 0) perm.damage(damage, controllerId, null, game);
         if (power > 0) perm.getPower().setValue(power);
         if (toughness > 0) perm.getToughness().setValue(toughness);
         perm.removeSummoningSickness();

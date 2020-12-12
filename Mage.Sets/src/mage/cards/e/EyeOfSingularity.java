@@ -91,7 +91,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
         for (UUID id : toDestroy.keySet()) {
             Permanent permanent = game.getPermanent(id);
             if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
         return true;
@@ -115,7 +115,7 @@ class EyeOfSingularityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
@@ -176,7 +176,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
         for (UUID id : toDestroy.keySet()) {
             Permanent permanent = game.getPermanent(id);
             if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
 

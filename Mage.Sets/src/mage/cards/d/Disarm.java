@@ -67,7 +67,7 @@ public final class Disarm extends CardImpl {
                 equipmentFilter.add(SubType.EQUIPMENT.getPredicate());
 
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(equipmentFilter, game)) {
-                    creature.removeAttachment(equipment.getId(), game);
+                    creature.removeAttachment(equipment.getId(), source, game);
                 }
                 return true;
             }

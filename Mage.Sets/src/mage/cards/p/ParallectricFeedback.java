@@ -61,7 +61,7 @@ class ParallectricFeedbackEffect extends OneShotEffect {
             if (spell != null) {
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
-                    spellController.damage(spell.getConvertedManaCost(), source.getSourceId(), game);
+                    spellController.damage(spell.getConvertedManaCost(), source.getSourceId(), source, game);
                     return true;
                 }
             }

@@ -76,7 +76,7 @@ class StormbreathDragonDamageEffect extends OneShotEffect {
             if (opponent != null) {
                 int damage = opponent.getHand().size();
                 if (damage > 0) {
-                    opponent.damage(damage, source.getSourceId(), game);
+                    opponent.damage(damage, source.getSourceId(), source, game);
                 }
             }
         }

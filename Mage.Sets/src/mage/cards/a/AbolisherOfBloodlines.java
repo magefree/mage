@@ -73,7 +73,7 @@ class AbolisherOfBloodlinesAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TRANSFORMED;
+        return event.getType() == GameEvent.EventType.TRANSFORMED;
     }
 
     @Override

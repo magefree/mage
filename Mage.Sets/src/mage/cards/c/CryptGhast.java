@@ -30,8 +30,9 @@ public final class CryptGhast extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
+        // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());
+
         // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         this.addAbility(new CryptGhastTriggeredAbility());
     }
@@ -65,12 +66,12 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanent(event.getTargetId());
+        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
         return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
     }
 

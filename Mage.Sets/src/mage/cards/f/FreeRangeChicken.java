@@ -64,8 +64,8 @@ class FreeRangeChickenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int firstRoll = controller.rollDice(game, 6);
-            int secondRoll = controller.rollDice(game, 6);
+            int firstRoll = controller.rollDice(source, game, 6);
+            int secondRoll = controller.rollDice(source, game, 6);
             if (firstRoll == secondRoll) {
                 game.addEffect(new BoostSourceEffect(firstRoll, firstRoll, Duration.EndOfTurn), source);
             }
@@ -75,7 +75,7 @@ class FreeRangeChickenEffect extends OneShotEffect {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
                     if (watcher.rolledThisTurn(sourcePermanent.getId(), totalRoll)) {
-                        sourcePermanent.sacrifice(source.getSourceId(), game);
+                        sourcePermanent.sacrifice(source, game);
                     } else {
                         watcher.addRoll(sourcePermanent.getId(), totalRoll);
                     }

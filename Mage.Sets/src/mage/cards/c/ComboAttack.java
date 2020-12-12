@@ -65,10 +65,10 @@ class ComboAttackEffect extends OneShotEffect {
             return false;
         }
         if (permanent1 != null) {
-            permanent3.damage(permanent1.getPower().getValue(), permanent1.getId(), game, false, true);
+            permanent3.damage(permanent1.getPower().getValue(), permanent1.getId(), source, game, false, true);
         }
         if (permanent2 != null) {
-            permanent3.damage(permanent2.getPower().getValue(), permanent2.getId(), game, false, true);
+            permanent3.damage(permanent2.getPower().getValue(), permanent2.getId(), source, game, false, true);
         }
         return true;
     }

@@ -66,7 +66,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ACTIVATED_ABILITY;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
     }
 
     @Override
@@ -113,7 +113,7 @@ class KurkeshOnakkeAncientEffect extends OneShotEffect {
         ColoredManaCost cost = new ColoredManaCost(ColoredManaSymbol.R);
         if (player != null) {
             if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? If you do, copy that ability.  You may choose new targets for the copy.", source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false)) {
                     StackAbility ability = (StackAbility) getValue("stackAbility");
                     Player controller = game.getPlayer(source.getControllerId());
                     Permanent sourcePermanent = game.getPermanent(source.getSourceId());

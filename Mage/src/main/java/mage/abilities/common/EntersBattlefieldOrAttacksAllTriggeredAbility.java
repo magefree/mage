@@ -71,13 +71,13 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                || event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        Permanent attacker = game.getPermanent(event.getSourceId());
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD 
                 && permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
@@ -95,7 +95,8 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
             }
             return true;
         }
-        
+
+        Permanent attacker = game.getPermanent(event.getSourceId());
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED 
                 && attacker != null && filter.match(attacker, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {

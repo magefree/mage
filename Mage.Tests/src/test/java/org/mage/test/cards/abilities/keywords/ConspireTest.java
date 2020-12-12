@@ -84,13 +84,21 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Wort, the Raidmother");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
+        // prepare goblins
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother");// {4}{R/G}{R/G}
 
+        // cast with conspire
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use conspire
+        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "No"); // keep targets
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
+
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertLife(playerB, 14);

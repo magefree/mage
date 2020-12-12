@@ -23,6 +23,7 @@ import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
@@ -849,13 +850,14 @@ public final class CardUtil {
     }
 
     /**
-     * Put card to battlefield without resolve
+     * Put card to battlefield without resolve (for cheats and tests only)
      *
+     * @param source must be non null (if you need it empty then use fakeSourceAbility)
      * @param game
      * @param card
      * @param player
      */
-    public static void putCardOntoBattlefieldWithEffects(Game game, Card card, Player player) {
+    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card card, Player player) {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
 
         // prepare card and permanent
@@ -870,8 +872,8 @@ public final class CardUtil {
 
         // put onto battlefield with possible counters
         game.getPermanentsEntering().put(permanent.getId(), permanent);
-        card.checkForCountersToAdd(permanent, game);
-        permanent.entersBattlefield(permanent.getId(), game, Zone.OUTSIDE, false);
+        card.checkForCountersToAdd(permanent, source, game);
+        permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
 
@@ -1009,5 +1011,68 @@ public final class CardUtil {
         int zcc = game.getState().getZoneChangeCounter(card.getId());
         game.addEffect(new CanPlayCardControllerEffect(game, card.getId(), zcc, duration), source);
         game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration).setTargetPointer(new FixedTarget(card.getId(), zcc)), source);
+    }
+
+    /**
+     * Pay life in effects
+     *
+     * @param lifeToPay
+     * @param player
+     * @param source
+     * @param game
+     * @return true on good pay
+     */
+    public static boolean tryPayLife(int lifeToPay, Player player, Ability source, Game game) {
+        // rules:
+        // 119.4. If a cost or effect allows a player to pay an amount of life greater than 0, the player may do so
+        // only if their life total is greater than or equal to the amount of the payment. If a player pays life,
+        // the payment is subtracted from their life total; in other words, the player loses that much life.
+        // (Players can always pay 0 life.)
+        if (lifeToPay == 0) {
+            return true;
+        } else if (lifeToPay < 0) {
+            return false;
+        }
+
+        if (lifeToPay > player.getLife()) {
+            return false;
+        }
+
+        if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Generates source log name to insert into log messages
+     *
+     * @param game
+     * @param sourceId
+     * @param namePrefix   if source object exists then that will be added before name
+     * @param namePostfix  if source object exists then that will be added after name
+     * @param nonFoundText if source object not exists then it will be used
+     * @return
+     */
+    public static String getSourceLogName(Game game, String namePrefix, UUID sourceId, String namePostfix, String nonFoundText) {
+        MageObject sourceObject = game.getObject(sourceId);
+        return (sourceObject == null ? nonFoundText : namePrefix + sourceObject.getLogName() + namePostfix);
+    }
+
+    public static String getSourceLogName(Game game, String namePrefix, Ability source, String namePostfix, String nonFoundText) {
+        return getSourceLogName(game, namePrefix, source == null ? null : source.getSourceId(), namePostfix, nonFoundText);
+    }
+
+    public static String getSourceLogName(Game game, Ability source) {
+        return CardUtil.getSourceLogName(game, " (source: ", source, ")", "");
+    }
+
+    public static String getSourceLogName(Game game, Ability source, UUID ignoreSourceId) {
+        if (ignoreSourceId != null && source != null && ignoreSourceId.equals(source.getSourceId())) {
+            return "";
+        }
+        return CardUtil.getSourceLogName(game, " (source: ", source, ")", "");
     }
 }

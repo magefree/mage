@@ -58,7 +58,7 @@ class StormWorldEffect extends OneShotEffect {
         if (player != null) {
             int damage = 4 - player.getHand().size();
             if (damage > 0) {
-                player.damage(damage, source.getSourceId(), game);
+                player.damage(damage, source.getSourceId(), source, game);
             }
             return true;
         }

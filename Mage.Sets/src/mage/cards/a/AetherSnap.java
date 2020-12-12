@@ -72,7 +72,7 @@ class AetherSnapEffect extends OneShotEffect {
             }
             Counters counters = permanent.getCounters(game).copy();
             for (Counter counter : counters.values()) {
-                permanent.removeCounters(counter, game);
+                permanent.removeCounters(counter, source, game);
             }
         }
         controller.moveCards(tokens, Zone.EXILED, source, game);

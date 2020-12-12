@@ -128,7 +128,7 @@ class ScourgeOfTheSkyclavesEffect extends OneShotEffect {
                 continue;
             }
             int lifeToLose = (int) Math.ceil(player.getLife() / 2.0);
-            player.loseLife(lifeToLose, game, false);
+            player.loseLife(lifeToLose, game, source, false);
         }
         return true;
     }

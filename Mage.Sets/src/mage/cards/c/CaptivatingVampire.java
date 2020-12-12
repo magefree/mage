@@ -86,7 +86,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case ControlChangingEffects_2:
                     if (sublayer == SubLayer.NA) {
-                        permanent.changeControllerId(source.getControllerId(), game);
+                        permanent.changeControllerId(source.getControllerId(), game, source);
                     }
                     break;
                 case TypeChangingEffects_4:

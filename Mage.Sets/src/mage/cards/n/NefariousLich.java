@@ -97,7 +97,7 @@ class NefariousLichDamageReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
@@ -130,14 +130,14 @@ class NefariousLichLifeGainReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null) {
-            controller.drawCards(event.getAmount(), source.getSourceId(), game);
+            controller.drawCards(event.getAmount(), source, game); // original event is not a draw event, so skip it in params
         }
         return true;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.GAIN_LIFE;
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
     }
 
     @Override

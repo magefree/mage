@@ -192,7 +192,7 @@ class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                card.moveToExile(null, "", source.getSourceId(), game);
+                card.moveToExile(null, "", source, game);
                 return true;
             }
         }
@@ -201,7 +201,7 @@ class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

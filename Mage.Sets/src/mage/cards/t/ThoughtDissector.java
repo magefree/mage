@@ -94,7 +94,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
                 controller.moveCards(artifact, Zone.BATTLEFIELD, source, game);
                 Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                 if (sourcePermanent != null) {
-                    sourcePermanent.sacrifice(source.getSourceId(), game);
+                    sourcePermanent.sacrifice(source, game);
                 }
             }
             targetOpponent.moveCards(nonArtifacts, Zone.GRAVEYARD, source, game);

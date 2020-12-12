@@ -92,7 +92,7 @@ class AngrathTheFlameUltimateEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(opponentId);
             if (player != null && !player.getGraveyard().isEmpty()) {
-                player.loseLife(player.getGraveyard().size(), game, false);
+                player.loseLife(player.getGraveyard().size(), game, source, false);
             }
         }
         return true;
