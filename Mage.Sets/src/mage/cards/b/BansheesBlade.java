@@ -72,10 +72,10 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER
-                || event.getType() == EventType.DAMAGED_CREATURE
-                || event.getType() == EventType.DAMAGED_PLANESWALKER
-                || event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
+                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE;
     }
 
     @Override
@@ -87,7 +87,7 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
             usedInPhase = false;
         }
         return false;

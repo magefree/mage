@@ -125,8 +125,7 @@ class SeraphicGreatswordEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return new AngelToken().putOntoBattlefield(
-                1, game, source.getSourceId(), source.getControllerId(), true, true, playerId
-        );
+        return new AngelToken()
+                .putOntoBattlefield(1, game, source, source.getControllerId(), true, true, playerId);
     }
 }

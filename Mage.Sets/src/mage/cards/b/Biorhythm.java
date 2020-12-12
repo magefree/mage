@@ -60,7 +60,7 @@ class BiorhythmEffect extends OneShotEffect {
             if(player != null) {
                 int diff = player.getLife() - game.getBattlefield().countAll(filter, playerId, game);
                 if(diff > 0) {
-                    player.loseLife(diff, game, false);
+                    player.loseLife(diff, game, source, false);
                 }
                 if(diff < 0) {
                     player.gainLife(-diff, game, source);

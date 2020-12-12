@@ -20,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public final class DawnsReflection extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors.
         this.addAbility(new DawnsReflectionTriggeredAbility());
     }
@@ -71,13 +73,17 @@ class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        return enchantment != null && enchantment.isAttachedTo(event.getSourceId());
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
+            return enchantedLand != null && enchantedLand.isLand();
+        }
+        return false;
     }
 
     @Override

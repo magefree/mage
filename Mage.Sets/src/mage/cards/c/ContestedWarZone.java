@@ -114,7 +114,7 @@ class ContestedWarZoneEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
         if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game);
+            return permanent.changeControllerId(controllerId, game, source);
         } else {
             discard();
         }

@@ -135,17 +135,17 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.chooseUse(outcome, "Do you want to destroy " + sourcePermanent.getLogName() + "? (sacrifice two lands or have it deal 5 damage to you)", source, game)) {
                         cost.clearPaid();
-                        if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                        if (cost.canPay(source, source, player.getId(), game)
                                 && player.chooseUse(Outcome.Sacrifice, "Will you sacrifice two lands? (otherwise you'll be dealt 5 damage)", source, game)) {
-                            if (!cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                                player.damage(5, source.getSourceId(), game);
+                            if (!cost.pay(source, game, source, player.getId(), false, null)) {
+                                player.damage(5, source.getSourceId(), source, game);
                             }
                         } else {
-                            player.damage(5, source.getSourceId(), game);
+                            player.damage(5, source.getSourceId(), source, game);
                         }
                         sourcePermanent = game.getPermanent(source.getSourceId());
                         if (sourcePermanent != null) {
-                            sourcePermanent.destroy(source.getSourceId(), game, false);
+                            sourcePermanent.destroy(source, game, false);
                         }
                         break;
                     }

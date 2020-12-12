@@ -64,26 +64,13 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                }
-            } else {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
-                }
-            }
-        }
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

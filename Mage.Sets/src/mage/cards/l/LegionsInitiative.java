@@ -87,7 +87,7 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
         boolean creatureExiled = false;
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (creature != null) {
-                if (creature.moveToExile(source.getSourceId(), "Legion's Initiative", source.getSourceId(), game)) {
+                if (creature.moveToExile(source.getSourceId(), "Legion's Initiative", source, game)) {
                     creatureExiled = true;
                 }
             }
@@ -130,7 +130,7 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
             for (UUID cardId : exile) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
-                    card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    card.moveToZone(Zone.BATTLEFIELD, source, game, false);
                     Permanent returnedCreature = game.getPermanent(cardId);
                     if (returnedCreature != null) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

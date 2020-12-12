@@ -76,17 +76,17 @@ class EmrakulsEvangelCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent selfPermanent = game.getPermanent(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent selfPermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(controllerId);
         if (selfPermanent != null && player != null) {
-            paid = selfPermanent.sacrifice(sourceId, game); // sacrifice self
+            paid = selfPermanent.sacrifice(source, game); // sacrifice self
             Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
             player.chooseTarget(Outcome.Sacrifice, target, ability, game);
             for (UUID permanentId : target.getTargets()) {
                 Permanent otherPermanent = game.getPermanent(permanentId);
                 if (otherPermanent != null) {
-                    if (otherPermanent.sacrifice(sourceId, game)) {
+                    if (otherPermanent.sacrifice(source, game)) {
                         numSacrificed++;
                     }
                 }
@@ -100,10 +100,9 @@ class EmrakulsEvangelCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
-
-        return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, source, controllerId, game);
     }
 
     @Override
@@ -140,7 +139,7 @@ class EmrakulsEvangelEffect extends OneShotEffect {
             }
             if (tokensToCreate > 0) {
                 EldraziHorrorToken token = new EldraziHorrorToken();
-                token.putOntoBattlefield(tokensToCreate, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(tokensToCreate, game, source, source.getControllerId());
             }
             return true;
         }

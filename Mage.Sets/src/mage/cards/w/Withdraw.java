@@ -80,7 +80,7 @@ class WithdrawEffect extends OneShotEffect {
             if (creatureController != null) {
                 Cost cost = ManaUtil.createManaCost(1, false);
                 if (creatureController.chooseUse(Outcome.Benefit, "Pay {1}? (Otherwise " + secondCreature.getName() + " will be returned to its owner's hand)", source, game)) {
-                    cost.pay(source, game, source.getSourceId(), creatureController.getId(), false);
+                    cost.pay(source, game, source, creatureController.getId(), false);
                 }
                 if (!cost.isPaid()) {
                     creatureController.moveCards(secondCreature, Zone.HAND, source, game);

@@ -27,27 +27,27 @@ public class RevealSecretOpponentCost extends CostImpl {
         }
 
         @Override
-        public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-            UUID playerThatChoseId = (UUID) game.getState().getValue(sourceId + ChooseSecretOpponentEffect.SECRET_OWNER);
+        public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+            UUID playerThatChoseId = (UUID) game.getState().getValue(source.getSourceId() + ChooseSecretOpponentEffect.SECRET_OWNER);
             if (playerThatChoseId == null || !playerThatChoseId.equals(controllerId)) {
                 return false;
             }
-            UUID opponentId = (UUID) game.getState().getValue(sourceId + ChooseSecretOpponentEffect.SECRET_OPPONENT);
+            UUID opponentId = (UUID) game.getState().getValue(source.getSourceId() + ChooseSecretOpponentEffect.SECRET_OPPONENT);
             return opponentId != null;
         }
 
         @Override
-        public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-            UUID playerThatChoseId = (UUID) game.getState().getValue(sourceId + ChooseSecretOpponentEffect.SECRET_OWNER);
+        public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+            UUID playerThatChoseId = (UUID) game.getState().getValue(source.getSourceId() + ChooseSecretOpponentEffect.SECRET_OWNER);
             if (playerThatChoseId == null || !playerThatChoseId.equals(controllerId)) {
                 return false;
             }
-            UUID opponentId = (UUID) game.getState().getValue(sourceId + ChooseSecretOpponentEffect.SECRET_OPPONENT);
+            UUID opponentId = (UUID) game.getState().getValue(source.getSourceId() + ChooseSecretOpponentEffect.SECRET_OPPONENT);
             if (opponentId != null) {
-                game.getState().setValue(sourceId + ChooseSecretOpponentEffect.SECRET_OWNER, null); // because only once, the vale is set to null
+                game.getState().setValue(source.getSourceId() + ChooseSecretOpponentEffect.SECRET_OWNER, null); // because only once, the vale is set to null
                 Player controller = game.getPlayer(controllerId);
                 Player opponent = game.getPlayer(opponentId);
-                MageObject sourceObject = game.getObject(sourceId);
+                MageObject sourceObject = game.getObject(source.getSourceId());
                 if (controller != null && opponent != null && sourceObject != null) {
                     if (sourceObject instanceof Permanent) {
                         ((Permanent) sourceObject).addInfo(ChooseSecretOpponentEffect.SECRET_OPPONENT, null, game);

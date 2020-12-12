@@ -68,7 +68,7 @@ public class InspiredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UNTAPPED;
+        return event.getType() == GameEvent.EventType.UNTAPPED;
     }
 
     @Override

@@ -68,7 +68,7 @@ class ThoughtLashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DIDNT_PAY_CUMULATIVE_UPKEEP;
+        return event.getType() == GameEvent.EventType.DIDNT_PAY_CUMULATIVE_UPKEEP;
     }
 
     @Override

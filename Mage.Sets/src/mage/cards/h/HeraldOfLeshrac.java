@@ -91,9 +91,9 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Target target = new TargetPermanent(filter);
-        if (target.choose(Outcome.GainControl, controllerId, sourceId, game)) {
+        if (target.choose(Outcome.GainControl, controllerId, source.getSourceId(), game)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
             effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
             game.addEffect(effect, ability);
@@ -104,7 +104,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return game.getBattlefield().contains(filter, controllerId, game, 1);
     }
 

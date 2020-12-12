@@ -66,7 +66,7 @@ class VengefulWarchiefTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         VengefulWarchiefWatcher watcher = game.getState().getWatcher(VengefulWarchiefWatcher.class);
-        return watcher != null && watcher.timesLostLifeThisTurn(event.getTargetId()) < 2;
+        return watcher != null && watcher.timesLostLifeThisTurn(event.getPlayerId()) < 2;
     }
 
     @Override
@@ -91,9 +91,9 @@ class VengefulWarchiefWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_LIFE) {
-            int timesLifeLost = playersLostLife.getOrDefault(event.getTargetId(), 0);
+            int timesLifeLost = playersLostLife.getOrDefault(event.getPlayerId(), 0);
             timesLifeLost++;
-            playersLostLife.put(event.getTargetId(), timesLifeLost);
+            playersLostLife.put(event.getPlayerId(), timesLifeLost);
         }
     }
 

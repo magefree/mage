@@ -50,7 +50,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TURNEDFACEUP;
+        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
     }
 
     @Override

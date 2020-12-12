@@ -71,7 +71,7 @@ class WitchbaneOrbEffect extends OneShotEffect {
                 }
             }
             for (Permanent curse : toDestroy) {
-                curse.destroy(source.getSourceId(), game, false);
+                curse.destroy(source, game, false);
             }
             return true;
         }

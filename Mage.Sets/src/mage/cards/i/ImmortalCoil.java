@@ -22,6 +22,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -134,7 +135,7 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             Player player = game.getPlayer(source.getControllerId());
@@ -144,13 +145,13 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
                     for (UUID targetId : target.getTargets()) {
                         Card card = player.getGraveyard().get(targetId, game);
                         if (card != null) {
-                            card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
+                            card.moveToZone(Zone.EXILED, source, game, false);
                         }
                     }
                 }
             }
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
         }
         return false;
     }
@@ -159,7 +160,6 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             return event.getTargetId().equals(source.getControllerId());
-
         }
         return false;
     }

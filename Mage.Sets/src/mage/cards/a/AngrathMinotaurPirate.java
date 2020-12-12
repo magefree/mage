@@ -95,11 +95,11 @@ class AngrathMinotaurPirateThirdAbilityEffect extends OneShotEffect {
         if (targetOpponent != null) {
             int powerSum = 0;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), game)) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
                 powerSum += permanent.getPower().getValue();
             }
             game.getState().processAction(game);
-            targetOpponent.damage(powerSum, source.getSourceId(), game);
+            targetOpponent.damage(powerSum, source.getSourceId(), source, game);
         }
         return true;
     }

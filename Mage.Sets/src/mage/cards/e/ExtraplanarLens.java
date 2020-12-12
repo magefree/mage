@@ -80,7 +80,7 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetLand = game.getPermanent(source.getFirstTarget());
             if (targetLand != null) {
-                targetLand.moveToExile(null, extraplanarLens.getName() + " (Imprint)", source.getSourceId(), game);
+                targetLand.moveToExile(null, extraplanarLens.getName() + " (Imprint)", source, game);
                 extraplanarLens.imprint(targetLand.getId(), game);
                 extraplanarLens.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + targetLand.getLogName() + ']'), game);
             }
@@ -113,7 +113,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent landTappedForMana = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        Permanent landTappedForMana = game.getPermanentOrLKIBattlefield(event.getSourceId()); // need only info about permanent
         Permanent extraplanarLens = game.getPermanent(getSourceId());
         if (extraplanarLens != null
                 && landTappedForMana != null

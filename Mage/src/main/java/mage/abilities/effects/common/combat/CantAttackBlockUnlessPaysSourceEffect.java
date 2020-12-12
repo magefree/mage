@@ -32,10 +32,10 @@ public class CantAttackBlockUnlessPaysSourceEffect extends PayCostToAttackBlockE
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(restrictType == RestrictType.BLOCK) && event.getType() == EventType.DECLARE_ATTACKER) {
+        if (!(restrictType == RestrictType.BLOCK) && event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
             return event.getSourceId().equals(source.getSourceId());
         }
-        if (!(restrictType == RestrictType.ATTACK) && event.getType() == EventType.DECLARE_BLOCKER) {
+        if (!(restrictType == RestrictType.ATTACK) && event.getType() == GameEvent.EventType.DECLARE_BLOCKER) {
             return event.getSourceId().equals(source.getSourceId());
         }
         return false;

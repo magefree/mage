@@ -107,7 +107,7 @@ class RaidingPartyEffect extends OneShotEffect {
                         for (UUID creatureId : untappedCreatureTarget.getTargets()) {
                             Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
                             if (creature != null) {
-                                creature.tap(game);
+                                creature.tap(source, game);
                             }
                         }
                     }
@@ -127,7 +127,7 @@ class RaidingPartyEffect extends OneShotEffect {
             }
             for (Permanent plains : game.getBattlefield().getActivePermanents(filter2, source.getControllerId(), source.getSourceId(), game)) {
                 if (!plainsToSave.contains(plains.getId())) {
-                    plains.destroy(source.getSourceId(), game, false);
+                    plains.destroy(source, game, false);
                 }
             }
             return true;

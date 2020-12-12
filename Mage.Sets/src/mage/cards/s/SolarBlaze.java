@@ -55,7 +55,7 @@ class SolarBlazeEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)
         ) {
-            permanent.damage(permanent.getPower().getValue(), permanent.getId(), game);
+            permanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game);
         }
         return true;
     }

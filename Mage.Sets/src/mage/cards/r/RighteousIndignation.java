@@ -56,7 +56,7 @@ class RighteousIndignationTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
 
     @Override

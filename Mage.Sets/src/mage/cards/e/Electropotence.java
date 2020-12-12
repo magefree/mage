@@ -56,7 +56,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
@@ -105,16 +105,16 @@ class ElectropotenceEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Damage, "Pay {2}{R} to do the damage?", source, game)) {
                 // if (controller.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + creature.getName() + " deals damage equal to its power to any target.", game)) {
                 ManaCosts manaCosts = new ManaCostsImpl("{2}{R}");
-                if (manaCosts.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
+                if (manaCosts.pay(source, game, source, controller.getId(), false, null)) {
                     int amount = creature.getPower().getValue();
                     UUID target = source.getTargets().getFirstTarget();
                     Permanent targetCreature = game.getPermanent(target);
                     if (targetCreature != null) {
-                        targetCreature.damage(amount, creature.getId(), game, false, true);
+                        targetCreature.damage(amount, creature.getId(), source, game, false, true);
                     } else {
                         Player player = game.getPlayer(target);
                         if (player != null) {
-                            player.damage(amount, creature.getId(), game);
+                            player.damage(amount, creature.getId(), source, game);
                         }
                     }
 

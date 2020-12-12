@@ -82,15 +82,13 @@ class SeasonedPyromancerEffect extends OneShotEffect {
             return false;
         }
         int nonlands = player
-                .discard(2, false, source, game)
+                .discard(2, false, false, source, game)
                 .count(StaticFilters.FILTER_CARD_NON_LAND, game);
-        player.drawCards(2, source.getSourceId(), game);
+        player.drawCards(2, source, game);
         if (nonlands == 0) {
             return true;
         }
-        new RedElementalToken().putOntoBattlefield(
-                nonlands, game, source.getSourceId(), source.getControllerId()
-        );
+        new RedElementalToken().putOntoBattlefield(nonlands, game, source, source.getControllerId());
         return true;
     }
 }

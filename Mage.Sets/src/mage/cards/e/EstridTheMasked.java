@@ -108,7 +108,6 @@ class EstridTheMaskedTokenEffect extends OneShotEffect {
             }
             token.getAbilities().get(0).getTargets().get(0).add(source.getFirstTarget(), game);
             token.getAbilities().get(0).getEffects().get(0).apply(game, token.getAbilities().get(0));
-            // token.attachTo(source.getFirstTarget(), game);
         }
         return true;
     }

@@ -64,13 +64,13 @@ class ChandrasRevolutionEffect extends OneShotEffect {
         // Chandra's Revolution deals 4 damage to target creature.             
         Permanent permanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         if (permanent != null) {
-            applied |= permanent.damage(4, source.getSourceId(), game, false, true) > 0;
+            applied |= permanent.damage(4, source.getSourceId(), source, game, false, true) > 0;
         }
 
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             // Tap target land. That land doesn't untap during its controller's next untap step.
-            permanent.tap(game);
+            permanent.tap(source, game);
             ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("that land");
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);

@@ -71,7 +71,7 @@ class HullbreacherReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        new TreasureToken().putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        new TreasureToken().putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 

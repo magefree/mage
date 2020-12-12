@@ -4,8 +4,6 @@ import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import java.util.UUID;
-
 import static mage.constants.PhaseStep.*;
 import static mage.constants.Zone.BATTLEFIELD;
 import static mage.constants.Zone.HAND;
@@ -34,7 +32,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_reduce_life_of_playerA_by_1_at_the_beginning_of_the_next_end_step() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
+        setLife(playerA, ANY_LIFE_TOTAL);
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -48,7 +46,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_not_reduce_life_of_playerA_by_1_at_post_combat_main_step() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
+        setLife(playerA, ANY_LIFE_TOTAL);
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -62,7 +60,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_return_Brood_of_Cockroaches_to_playerA_hand_end_of_turn() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
+        setLife(playerA, ANY_LIFE_TOTAL);
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 
@@ -76,7 +74,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
     @Test
     public void should_not_return_Brood_of_Cockroaches_to_playerA_at_post_combat_step() {
-        playerA.setLife(ANY_LIFE_TOTAL, currentGame, UUID.randomUUID());
+        setLife(playerA, ANY_LIFE_TOTAL);
 
         playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
 

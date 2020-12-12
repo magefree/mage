@@ -102,7 +102,7 @@ class CantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.REGENERATE) {
+        if (event.getType() == GameEvent.EventType.REGENERATE) {
             DamagedByWatcher watcher = game.getState().getWatcher(DamagedByWatcher.class, source.getSourceId());
             if (watcher != null) {
                 return watcher.wasDamaged(event.getTargetId(), game);

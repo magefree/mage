@@ -64,11 +64,11 @@ class SoulNovaEffect extends OneShotEffect {
             for (UUID attachmentId : attachments) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                    attachment.moveToExile(null, "", source.getSourceId(), game);
+                    attachment.moveToExile(null, "", source, game);
                 }
             }
 
-            permanent.moveToExile(null, "", source.getSourceId(), game);
+            permanent.moveToExile(null, "", source, game);
             return true;
         }
         return false;

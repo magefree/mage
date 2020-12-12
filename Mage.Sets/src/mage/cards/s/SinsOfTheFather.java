@@ -60,12 +60,12 @@ class SinsOfTheFatherEffect extends OneShotEffect {
             int exiledCards = 0;
             for(Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if(filter.match(card, game)) {
-                    if(card.moveToExile(null, "", source.getSourceId(), game)) {
+                    if(card.moveToExile(null, "", source, game)) {
                         exiledCards++;
                     }
                 }
             }
-            targetPlayer.loseLife(exiledCards, game, false);
+            targetPlayer.loseLife(exiledCards, game, source, false);
             return true;
         }
         return false;

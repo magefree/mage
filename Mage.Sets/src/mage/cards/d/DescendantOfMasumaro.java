@@ -75,7 +75,7 @@ class DescendantOfMasumaroEffect extends OneShotEffect {
             }
             Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetOpponent != null && !targetOpponent.getHand().isEmpty()) {
-                sourcePermanent.removeCounters(CounterType.P1P1.getName(), targetOpponent.getHand().size(), game);
+                sourcePermanent.removeCounters(CounterType.P1P1.getName(), targetOpponent.getHand().size(), source, game);
                 game.informPlayers(controller.getLogName() + " removes " + targetOpponent.getHand().size() + " +1/+1 counters from " + sourcePermanent.getLogName());
             }
             return true;

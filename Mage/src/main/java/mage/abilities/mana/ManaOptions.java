@@ -128,13 +128,13 @@ public class ManaOptions extends ArrayList<Mana> {
      */
     private boolean checkManaReplacementAndTriggeredMana(Ability ability, Game game, Mana mana) {
         if (ability.hasTapCost()) {
-            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, ability.getSourceId(), ability.getSourceId(), ability.getControllerId(), mana);
+            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, ability.getSourceId(), ability, ability.getControllerId(), mana);
             if (game.replaceEvent(event)) {
                 return false;
             }
             game.fireEvent(event);
         }
-        ManaEvent manaEvent = new ManaEvent(GameEvent.EventType.MANA_ADDED, ability.getSourceId(), ability.getSourceId(), ability.getControllerId(), mana);
+        ManaEvent manaEvent = new ManaEvent(GameEvent.EventType.MANA_ADDED, ability.getSourceId(), ability, ability.getControllerId(), mana);
         manaEvent.setData(mana.toString());
         game.fireEvent(manaEvent);
         return true;

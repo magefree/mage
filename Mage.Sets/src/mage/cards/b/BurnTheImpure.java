@@ -58,11 +58,11 @@ class BurnTheImpureEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(3, source.getSourceId(), game, false, true);
+            permanent.damage(3, source.getSourceId(), source, game, false, true);
             if (permanent.getAbilities().contains(InfectAbility.getInstance())) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
-                    controller.damage(3, source.getSourceId(), game);
+                    controller.damage(3, source.getSourceId(), source, game);
                 }
             }
             return true;

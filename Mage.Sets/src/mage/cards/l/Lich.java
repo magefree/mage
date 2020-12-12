@@ -86,14 +86,14 @@ class LichLifeGainReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null) {
-            controller.drawCards(event.getAmount(), source.getSourceId(), game);
+            controller.drawCards(event.getAmount(), source, game); // original event is not a draw event, so skip it in params
         }
         return true;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.GAIN_LIFE;
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
     }
 
     @Override
@@ -119,7 +119,7 @@ class LichDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -175,7 +175,7 @@ class LichDamageEffect extends OneShotEffect {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                            permanent.sacrifice(source, game);
                         }
                     }
                     return true;

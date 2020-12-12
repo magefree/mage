@@ -101,7 +101,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTER_ADDED;
+        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
     }
 
     @Override
@@ -141,7 +141,7 @@ class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            if (sourcePermanent.sacrifice(source.getSourceId(), game)) {
+            if (sourcePermanent.sacrifice(source, game)) {
                 return new DestroyAllEffect(new FilterNonlandPermanent()).apply(game, source);
             }
         }

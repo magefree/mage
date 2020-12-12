@@ -60,9 +60,9 @@ class LavaBlisterEffect extends OneShotEffect {
             if (player != null) {
                 String message = "Have Lava Blister do 6 damage to you?";
                 if (player.chooseUse(Outcome.Damage, message, source, game)) {
-                    player.damage(6, source.getSourceId(), game);
+                    player.damage(6, source.getSourceId(), source, game);
                 } else {
-                    permanent.destroy(source.getId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
                 return true;
             }

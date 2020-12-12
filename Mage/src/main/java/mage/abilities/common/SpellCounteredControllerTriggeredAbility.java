@@ -39,7 +39,7 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTERED;
+        return event.getType() == GameEvent.EventType.COUNTERED;
     }
 
     @Override

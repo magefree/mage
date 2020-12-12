@@ -135,7 +135,7 @@ class ThievingAmalgamLifeLossEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.loseLife(2, game, false);
+        player.loseLife(2, game, source, false);
         return effect.apply(game, source);
     }
 }

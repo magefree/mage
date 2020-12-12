@@ -40,10 +40,10 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
         Player anotherPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
 
         if (myPermanent != null && anotherPermanent != null) {
-            anotherPermanent.damage(myPermanent.getPower().getValue(), myPermanent.getId(), game, false, true);
+            anotherPermanent.damage(myPermanent.getPower().getValue(), myPermanent.getId(), source, game, false, true);
             return true;
         } else if (myPermanent != null && anotherPlayer != null) {
-            anotherPlayer.damage(myPermanent.getPower().getValue(), myPermanent.getId(), game);
+            anotherPlayer.damage(myPermanent.getPower().getValue(), myPermanent.getId(), source, game);
             return true;
         }
         return false;

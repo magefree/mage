@@ -35,7 +35,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
             Card card = game.getCard(((Permanent) object).getId());
             if (card != null
                     && getValue("zcc").equals(game.getState().getZoneChangeCounter(card.getId()))) { // Necrogenesis, etc.
-                if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
+                if (card.moveToZone(Zone.HAND, source, game, false)) {
                     return true;
                 }
             }

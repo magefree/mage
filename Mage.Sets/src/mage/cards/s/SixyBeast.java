@@ -85,7 +85,7 @@ class SixyBeastEffect extends OneShotEffect {
                 int guessedAmount = opponent.getAmount(0, 6, "Guess the number of counters on " + permanent.getName(), game);
                 game.informPlayers(opponent.getLogName() + " guessed " + guessedAmount + " as the number of counters on " + permanent.getLogName());
                 if (counterAmount == guessedAmount) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
             }
             return true;

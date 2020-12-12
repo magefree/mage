@@ -72,7 +72,7 @@ public class DamageControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
+            player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
             return true;
         }
         return false;

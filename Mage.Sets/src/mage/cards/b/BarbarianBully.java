@@ -72,7 +72,7 @@ class BarbarianBullyEffect extends OneShotEffect {
                 continue;
             }
             if (player.chooseUse(Outcome.UnboostCreature, "Have " + permanent.getName() + " deal 4 damage to you?", source, game)) {
-                player.damage(4, permanent.getId(), game);
+                player.damage(4, permanent.getId(), source, game);
                 costPaid = true;
             }
         }

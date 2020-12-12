@@ -78,7 +78,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
         destroyedPermanents = game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source.getSourceId(), game
         ).stream().filter(
-                (permanent) -> (permanent.destroy(source.getSourceId(), game, false))
+                (permanent) -> (permanent.destroy(source, game, false))
         ).map((_item) -> 1).reduce(destroyedPermanents, Integer::sum);
         if (destroyedPermanents > 0) {
             return new AddCountersSourceEffect(

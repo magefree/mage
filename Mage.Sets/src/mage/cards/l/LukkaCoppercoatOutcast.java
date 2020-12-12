@@ -197,7 +197,7 @@ class LukkaCoppercoatOutcastDamageEffect extends OneShotEffect {
                 .collect(Collectors.toList());
         for (Permanent permanent : controlledCreatures) {
             for (Player opponent : opponentList) {
-                opponent.damage(permanent.getPower().getValue(), permanent.getId(), game);
+                opponent.damage(permanent.getPower().getValue(), permanent.getId(), source, game);
             }
         }
         return true;

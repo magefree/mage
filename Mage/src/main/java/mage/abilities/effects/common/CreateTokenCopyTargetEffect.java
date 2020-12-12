@@ -211,7 +211,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         additionalAbilities.stream().forEach(token::addAbility);
 
-        token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
+        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {

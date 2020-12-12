@@ -117,7 +117,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
                             // Check for protection
                             MageObject auraObject = game.getObject(auraId);
                             if (auraObject != null) {
-                                if (permanentToAttachAuras.cantBeAttachedBy(auraObject, game, true)) {
+                                if (permanentToAttachAuras.cantBeAttachedBy(auraObject, source, game, true)) {
                                     passed = false;
                                 }
                             }
@@ -129,8 +129,8 @@ class GlamerSpinnersEffect extends OneShotEffect {
 
                         for (UUID auraId : aurasToAttach) {
                             Permanent auraToAttachToPermanent = game.getPermanent(auraId);
-                            targetPermanent.removeAttachment(auraToAttachToPermanent.getId(), game);
-                            permanentToAttachAuras.addAttachment(auraToAttachToPermanent.getId(), game);
+                            targetPermanent.removeAttachment(auraToAttachToPermanent.getId(), source, game);
+                            permanentToAttachAuras.addAttachment(auraToAttachToPermanent.getId(), source, game);
                         }
                         return true;
                     }

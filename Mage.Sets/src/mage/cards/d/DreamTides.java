@@ -85,7 +85,7 @@ class DreamTidesEffect extends OneShotEffect {
                     Cost cost = ManaUtil.createManaCost(2, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
 
-                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                    if (cost.pay(source, game, source, player.getId(), false)) {
                         tappedCreature.untap(game);
                     }
                 }

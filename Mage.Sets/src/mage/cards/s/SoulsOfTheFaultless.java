@@ -67,7 +67,7 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
 
     @Override
@@ -122,7 +122,7 @@ class SoulsOfTheFaultlessEffect extends OneShotEffect {
         UUID attackerId = (UUID) this.getValue("attackerId");
         Player attacker = game.getPlayer(attackerId);
         if (attacker != null) {
-            attacker.loseLife(amount, game, false);
+            attacker.loseLife(amount, game, source, false);
         }
         return true;
     }

@@ -108,12 +108,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        return pay(ability, game, sourceId, controllerId, noMana, this);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana) {
+        return pay(ability, game, source, controllerId, noMana, this);
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID playerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID playerId, boolean noMana, Cost costToPay) {
         if (this.isEmpty() || noMana) {
             setPaid();
             return true;
@@ -154,12 +154,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
      * @return true if the cost was paid
      */
     @Override
-    public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
+    public boolean payOrRollback(Ability ability, Game game, Ability source, UUID payingPlayerId) {
         Player payingPlayer = game.getPlayer(payingPlayerId);
         if (payingPlayer != null) {
             int bookmark = game.bookmarkState();
-            handlePhyrexianManaCosts(payingPlayer, ability, game);
-            if (pay(ability, game, sourceId, payingPlayerId, false, null)) {
+            handlePhyrexianManaCosts(ability, payingPlayer, source, game);
+            if (pay(ability, game, source, payingPlayerId, false, null)) {
                 game.removeBookmark(bookmark);
                 return true;
             }
@@ -168,7 +168,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         return false;
     }
 
-    private void handlePhyrexianManaCosts(Player payingPlayer, Ability source, Game game) {
+    private void handlePhyrexianManaCosts(Ability abilityToPay, Player payingPlayer, Ability source, Game game) {
         if (this.isEmpty()) {
             return; // nothing to be done without any mana costs. prevents NRE from occurring here
         }
@@ -180,7 +180,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             if (manaCost instanceof PhyrexianManaCost) {
                 PhyrexianManaCost phyrexianManaCost = (PhyrexianManaCost) manaCost;
                 PayLifeCost payLifeCost = new PayLifeCost(2);
-                if (payLifeCost.canPay(source, source.getSourceId(), payingPlayer.getId(), game)
+                if (payLifeCost.canPay(abilityToPay, source, payingPlayer.getId(), game)
                         && payingPlayer.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + phyrexianManaCost.getBaseText() + '?', source, game)) {
                     manaCostIterator.remove();
                     tempCosts.add(payLifeCost);
@@ -188,7 +188,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             }
         }
 
-        tempCosts.pay(source, game, source.getSourceId(), payingPlayer.getId(), false, null);
+        tempCosts.pay(source, game, source, payingPlayer.getId(), false, null);
     }
 
     private void handleLikePhyrexianManaCosts(Player player, Ability source, Game game) {
@@ -220,14 +220,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
                 if (tempPhyrexianCost != null) {
                     PayLifeCost payLifeCost = new PayLifeCost(2);
-                    if (payLifeCost.canPay(source, source.getSourceId(), player.getId(), game)
+                    if (payLifeCost.canPay(source, source, player.getId(), game)
                             && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + tempPhyrexianCost.getBaseText() + '?', source, game)) {
                         manaCostIterator.remove();
                         tempCosts.add(payLifeCost);
                     }
                 }
             }
-            tempCosts.pay(source, game, source.getSourceId(), player.getId(), false, null);
+            tempCosts.pay(source, game, source, player.getId(), false, null);
         }
     }
 
@@ -566,9 +566,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         for (T cost : this) {
-            if (!cost.canPay(ability, sourceId, controllerId, game)) {
+            if (!cost.canPay(ability, source, controllerId, game)) {
                 return false;
             }
         }

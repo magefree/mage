@@ -1,5 +1,3 @@
-
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.HexproofAbility;
@@ -20,10 +18,13 @@ public class HexproofTest extends CardTestPlayerBase {
     public void testOneTargetOneGainingHexproof() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Elder of Laurels");
-        addCard(Zone.HAND, playerA, "Ranger's Guile");
-
+        //
+        // Target creature you control gets +1/+1 and gains hexproof until end of turn.
+        addCard(Zone.HAND, playerA, "Ranger's Guile"); // {G}
+        //
+        // Return up to two target creatures to their owners’ hands.
+        addCard(Zone.HAND, playerB, "Into the Void"); //{3}{U}
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
-        addCard(Zone.HAND, playerB, "Into the Void");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Into the Void", "Elder of Laurels");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Ranger's Guile", "Elder of Laurels");

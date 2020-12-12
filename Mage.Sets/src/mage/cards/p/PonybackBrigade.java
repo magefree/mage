@@ -73,10 +73,10 @@ class PonybackBrigadeAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TURNEDFACEUP && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getType() == GameEvent.EventType.TURNEDFACEUP && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;

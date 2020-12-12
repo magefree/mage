@@ -135,7 +135,7 @@ class SlipperyBogbonderEffect extends OneShotEffect {
                     .filter(entry -> entry.getValue() > 0)
                     .map(entry -> CounterType.findByName(entry.getKey()).createInstance(entry.getValue()))
                     .filter(counter -> creature.addCounters(counter, source, game))
-                    .forEach(counter -> permanent.removeCounters(counter, game));
+                    .forEach(counter -> permanent.removeCounters(counter, source, game));
         }
         return true;
     }

@@ -64,12 +64,9 @@ class FrightfulDelusionEffect extends OneShotEffect {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
                 cost.clearPaid();
-                game.getPlayer(spell.getControllerId()).discard(
-                        1, false, source, game);
-                if (!cost.pay(source, game, spell.getControllerId(),
-                        spell.getControllerId(), false, null)) {
-                    return game.getStack().counter(source.getFirstTarget(),
-                            source.getSourceId(), game);
+                game.getPlayer(spell.getControllerId()).discard(1, false, false, source, game);
+                if (!cost.pay(source, game, source, spell.getControllerId(), false, null)) {
+                    return game.getStack().counter(source.getFirstTarget(), source, game);
                 }
             }
         }

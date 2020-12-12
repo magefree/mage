@@ -642,7 +642,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         logger.debug("selectBlockers");
         if (combat != null && !combat.getGroups().isEmpty()) {
             List<CombatGroup> groups = game.getCombat().getGroups();

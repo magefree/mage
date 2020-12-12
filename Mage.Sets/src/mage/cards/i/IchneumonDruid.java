@@ -66,7 +66,7 @@ class IchneumonDruidAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -102,7 +102,7 @@ class IchneumonDruidWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             UUID playerId = event.getPlayerId();
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.isInstant()) {

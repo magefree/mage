@@ -144,7 +144,7 @@ class GuardianProjectEffect extends OneShotEffect {
         if (GuardianProjectTriggeredAbility.checkCondition(
                 mor.getPermanentOrLKIBattlefield(game), source.getControllerId(), game)
         ) {
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
             return true;
         }
         return false;

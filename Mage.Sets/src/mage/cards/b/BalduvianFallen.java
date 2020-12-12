@@ -69,7 +69,7 @@ class BalduvianFallenAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         this.getEffects().clear();
-        if(event.getSourceId() != null && event.getSourceId().equals(this.getSourceId()) && event instanceof ManaEvent) {
+        if(event.getTargetId().equals(this.getSourceId()) && event instanceof ManaEvent) {
             ManaEvent manaEvent = (ManaEvent) event;
             int total = manaEvent.getMana().getBlack() + manaEvent.getMana().getRed();
             if (total > 0) {

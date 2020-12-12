@@ -69,7 +69,7 @@ class MtendaLionEffect extends OneShotEffect {
         }
         Cost cost = new ManaCostsImpl("{U}");
         if (!player.chooseUse(outcome, "Pay {U} to prevent damage?", source, game)
-                || !cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                || !cost.pay(source, game, source, player.getId(), false)) {
             return false;
         }
         game.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn), source);

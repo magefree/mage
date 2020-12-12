@@ -39,8 +39,8 @@ public class ExileTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
             for (UUID targetId: targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -51,7 +51,7 @@ public class ExileTargetCost extends CostImpl {
                 // Even if they are, meaning the actions that are performed don't match the actions 
                 // that are called for, the cost has still been paid.
                 // so return state here is not important because the user indended to exile the target anyway
-                game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, sourceId, game, Zone.BATTLEFIELD, true);
+                game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, source, game, Zone.BATTLEFIELD, true);
             }
             paid = true;
         }
@@ -59,8 +59,8 @@ public class ExileTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

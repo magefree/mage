@@ -127,8 +127,8 @@ class MoveTargetAuraEffect extends OneShotEffect {
                 && controller.choose(outcome, target, oldAttachment.getId(), game)) {
             Permanent newAttachment = game.getPermanent(target.getFirstTarget());
             if (newAttachment != null
-                    && oldAttachment.removeAttachment(enchantment.getId(), game)) {
-                newAttachment.addAttachment(enchantment.getId(), game);
+                    && oldAttachment.removeAttachment(enchantment.getId(), source, game)) {
+                newAttachment.addAttachment(enchantment.getId(), source, game);
                 game.informPlayers(enchantment.getLogName() + " was unattached from " + oldAttachment.getLogName() + " and attached to " + newAttachment.getLogName());
                 return true;
             }

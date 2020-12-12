@@ -64,7 +64,7 @@ class VengevineAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -97,7 +97,7 @@ class VengevineWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         condition = false;
-        if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.isCreature()) {
                 creatureSpellCount++;

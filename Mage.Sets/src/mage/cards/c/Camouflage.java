@@ -22,6 +22,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -183,10 +184,10 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                         group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                                         game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
                                         if (notYetBlocked) {
-                                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attacker.getId(), null));
+                                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attacker.getId(), source, null));
                                         }
                                         // TODO: find an alternate event solution for multi-blockers (as per issue #4285), this will work fine for single blocker creatures though
-                                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attacker.getId(), blocker.getId(), blocker.getControllerId()));
+                                        game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
                                     }
                                 }
                             }

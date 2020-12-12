@@ -83,12 +83,12 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
                 cards.add(card);
                 player.revealCards("Sorin, Grim Nemesis", cards, game);
 
-                if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
+                if (card.moveToZone(Zone.HAND, source, game, false)) {
                     for (UUID playerId : game.getOpponents(source.getControllerId())) {
                         if (card.getConvertedManaCost() > 0) {
                             Player opponent = game.getPlayer(playerId);
                             if (opponent != null) {
-                                opponent.loseLife(card.getConvertedManaCost(), game, false);
+                                opponent.loseLife(card.getConvertedManaCost(), game, source, false);
                             }
                         }
                     }

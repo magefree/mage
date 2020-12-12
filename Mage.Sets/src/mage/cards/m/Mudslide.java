@@ -90,7 +90,7 @@ class MudslideEffect extends OneShotEffect {
                 if (player.choose(Outcome.Untap, tappedCreatureTarget, source.getSourceId(), game)) {
                     Cost cost = ManaUtil.createManaCost(2, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
-                    if (tappedCreature != null && cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                    if (tappedCreature != null && cost.pay(source, game, source, player.getId(), false)) {
                         tappedCreature.untap(game);
                     } else {
                         break;

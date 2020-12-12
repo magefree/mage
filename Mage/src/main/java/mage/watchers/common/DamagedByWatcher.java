@@ -30,8 +30,8 @@ public class DamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        boolean eventHasAppropriateType = (event.getType() == EventType.DAMAGED_CREATURE) ||
-                (watchPlaneswalkers && event.getType() == EventType.DAMAGED_PLANESWALKER);
+        boolean eventHasAppropriateType = (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) ||
+                (watchPlaneswalkers && event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER);
         if (eventHasAppropriateType && sourceId.equals(event.getSourceId())) {
             MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
             damagedBySource.add(mor);

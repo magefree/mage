@@ -95,17 +95,17 @@ class InfernalHarvestVariableCost extends VariableCostImpl {
         }
 
         @Override
-        public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+        public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
             return game.getBattlefield().countAll(filter, controllerId, game) >= xValue;
         }
 
         @Override
-        public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-            if (!this.canPay(ability, sourceId, controllerId, game)) {
+        public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+            if (!this.canPay(ability, source, controllerId, game)) {
                 return false;
             }
             Player player = game.getPlayer(controllerId);
-            if (player == null || !targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+            if (player == null || !targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), game)) {
                 return false;
             }
             return paid = player.moveCards(

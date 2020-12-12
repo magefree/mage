@@ -66,11 +66,11 @@ class FinaleOfRevelationEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
 
         if (xValue < 10) {
-            player.drawCards(xValue, source.getSourceId(), game);
+            player.drawCards(xValue, source, game);
         } else {
             player.putCardsOnTopOfLibrary(player.getGraveyard(), game, source, false);
             player.shuffleLibrary(source, game);
-            player.drawCards(xValue, source.getSourceId(), game);
+            player.drawCards(xValue, source, game);
             new UntapLandsEffect(5).apply(game, source);
             game.addEffect(new MaximumHandSizeControllerEffect(
                     Integer.MAX_VALUE, Duration.EndOfGame,

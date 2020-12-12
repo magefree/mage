@@ -67,21 +67,20 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment == null || !event.getSourceId().equals(enchantment.getAttachedTo())) {
-            return false;
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
+            if (enchantedLand != null && enchantedLand.isLand()) {
+                this.getEffects().setTargetPointer(new FixedTarget(enchantedLand.getControllerId()));
+                return true;
+            }
         }
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
-        return true;
+        return false;
     }
 
 

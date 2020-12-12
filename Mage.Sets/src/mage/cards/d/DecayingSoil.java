@@ -92,7 +92,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -142,13 +142,13 @@ class DecayingSoilEffect extends OneShotEffect {
         if (player != null) {
             if (player.chooseUse(Outcome.Benefit, " - Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     UUID target = this.getTargetPointer().getFirst(game, source);
                     if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-                            card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                            card.moveToZone(Zone.HAND, source, game, true);
                             return true;
                         }
                     }

@@ -60,10 +60,10 @@ class ElixerOfImmortalityEffect extends OneShotEffect {
         if (player != null) {
             player.gainLife(5, game, source);
             if (permanent != null) {
-                player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
+                player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, true, true);
             }
             for (Card card: player.getGraveyard().getCards(game)) {
-                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+                player.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
             }                 
             player.shuffleLibrary(source, game);
             return true;

@@ -65,7 +65,7 @@ class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -102,7 +102,7 @@ class WorldslayerEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             if (!Objects.equals(permanent.getId(), source.getSourceId())) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
         return true;

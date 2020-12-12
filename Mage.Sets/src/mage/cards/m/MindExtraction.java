@@ -99,7 +99,7 @@ class MindExtractionEffect extends OneShotEffect {
                 .stream()
                 .filter(card -> card.getColor(game).shares(color))
                 .forEach(toDiscard::add);
-        player.discard(toDiscard, source, game);
+        player.discard(toDiscard, false, source, game);
         return true;
     }
 }

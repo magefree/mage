@@ -61,7 +61,7 @@ class ChartACourseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && !RaidCondition.instance.apply(game, source)) {
-            player.discard(1, false, source, game);
+            player.discard(1, false, false, source, game);
             return true;
         }
         return false;

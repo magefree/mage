@@ -74,9 +74,9 @@ class PathwayArrowsEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
-                int damageDealt = targetCreature.damage(1, source.getSourceId(), game, false, true);
+                int damageDealt = targetCreature.damage(1, source.getSourceId(), source, game, false, true);
                 if (damageDealt > 0 && targetCreature.getColor(game).isColorless()) {
-                    targetCreature.tap(game);
+                    targetCreature.tap(source, game);
                 }
             }
             return true;

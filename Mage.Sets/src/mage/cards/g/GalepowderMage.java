@@ -88,7 +88,7 @@ class GalepowderMageEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     UUID exileId = UUID.randomUUID();
-                    if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                    if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
                         Card card = game.getCard(getTargetPointer().getFirst(game, source));
                         if (card != null) {
                             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);

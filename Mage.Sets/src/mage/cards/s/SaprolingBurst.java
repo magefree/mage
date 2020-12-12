@@ -74,7 +74,7 @@ class SaprolingBurstCreateTokenEffect extends OneShotEffect {
     @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
         Token token = new SaprolingBurstToken(new MageObjectReference(source.getSourceObject(game), game));
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
@@ -150,7 +150,7 @@ class SaprolingBurstDestroyEffect extends OneShotEffect {
             for (UUID tokenId : tokensCreated) {
                 Permanent token = game.getPermanent(tokenId);
                 if (token != null) {
-                    token.destroy(source.getSourceId(), game, true);
+                    token.destroy(source, game, true);
                 }
             }
         }

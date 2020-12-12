@@ -65,7 +65,7 @@ class NantukoCultivatorEffect extends OneShotEffect {
         }
         TargetCardInHand toDiscard = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_LAND);
         player.chooseTarget(Outcome.AIDontUseIt, toDiscard, source, game);
-        int count = player.discard(new CardsImpl(toDiscard.getTargets()), source, game).size();
+        int count = player.discard(new CardsImpl(toDiscard.getTargets()), false, source, game).size();
         if (count < 1) {
             return false;
         }
@@ -73,7 +73,7 @@ class NantukoCultivatorEffect extends OneShotEffect {
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(count), source, game);
         }
-        player.drawCards(count, source.getSourceId(), game);
+        player.drawCards(count, source, game);
         return true;
     }
 

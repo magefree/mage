@@ -74,11 +74,11 @@ class EatenBySpidersEffect extends OneShotEffect {
             for (UUID attachmentId : attachments) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                    attachment.destroy(source.getSourceId(), game, false);
+                    attachment.destroy(source, game, false);
                 }
             }
 
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
             return true;
         }
         return false;

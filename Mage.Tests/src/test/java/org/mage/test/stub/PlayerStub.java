@@ -27,6 +27,7 @@ import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
+import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -121,12 +122,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setLife(int life, Game game, UUID sourceId) {
-
-    }
-
-    @Override
-    public int loseLife(int amount, Game game, boolean at) {
+    public int loseLife(int amount, Game game, Ability source, boolean atCombat) {
         return 0;
     }
 
@@ -136,22 +132,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int gainLife(int amount, Game game, UUID sourceId) {
+    public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return 0;
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game) {
+    public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
         return 0;
     }
 
     @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
-        return 0;
-    }
-
-    @Override
-    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+    public int damage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         return 0;
     }
 
@@ -200,7 +191,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
         return false;
     }
 
@@ -530,12 +521,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int drawCards(int num, UUID sourceId, Game game) {
+    public int drawCards(int num, Ability source, Game game) {
         return 0;
     }
 
     @Override
-    public int drawCards(int num, UUID sourceId, Game game, List<UUID> appliedEffects) {
+    public int drawCards(int num, Ability source, Game game, GameEvent event) {
         return 0;
     }
 
@@ -555,7 +546,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean removeFromBattlefield(Permanent permanent, Game game) {
+    public boolean removeFromBattlefield(Permanent permanent, Ability source, Game game) {
         return false;
     }
 
@@ -644,17 +635,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Cards discard(Cards cards, Ability source, Game game) {
+    public Cards discard(Cards cards, boolean payForCost, Ability source, Game game) {
         return null;
     }
 
     @Override
-    public Card discardOne(boolean random, Ability source, Game game) {
+    public Card discardOne(boolean random, boolean payForCost, Ability source, Game game) {
         return null;
     }
 
     @Override
-    public Cards discard(int amount, boolean random, Ability source, Game game) {
+    public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
         return null;
     }
 
@@ -664,7 +655,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean discard(Card card, Ability source, Game game) {
+    public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
         return false;
     }
 
@@ -939,7 +930,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
 
     }
 
@@ -954,7 +945,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
 
     }
 
@@ -1069,7 +1060,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Game game) {
+    public boolean addCounters(Counter counter, Ability source, Game game) {
         return true;
     }
 
@@ -1084,12 +1075,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean addAttachment(UUID permanentId, Game game) {
+    public boolean addAttachment(UUID permanentId, Ability source, Game game) {
         return false;
     }
 
     @Override
-    public boolean removeAttachment(Permanent permanent, Game game) {
+    public boolean removeAttachment(Permanent permanent, Ability source, Game game) {
         return false;
     }
 
@@ -1179,22 +1170,17 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game) {
+    public boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName) {
         return false;
     }
 
     @Override
-    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, boolean withName) {
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, Ability source, Game game, Zone fromZone, boolean withName) {
         return false;
     }
 
     @Override
-    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
-        return false;
-    }
-
-    @Override
-    public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+    public boolean moveCardToGraveyardWithInfo(Card card, Ability source, Game game, Zone fromZone) {
         return false;
     }
 
@@ -1204,12 +1190,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
+    public boolean moveCardToLibraryWithInfo(Card card, Ability source, Game game, Zone fromZone, boolean toTop, boolean withName) {
         return false;
     }
 
     @Override
-    public boolean moveCardToCommandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+    public boolean moveCardToCommandWithInfo(Card card, Ability source, Game game, Zone fromZone) {
         return false;
     }
 

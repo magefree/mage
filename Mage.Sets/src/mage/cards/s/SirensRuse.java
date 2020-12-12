@@ -64,7 +64,7 @@ class SirensRuseEffect extends ExileTargetForSourceEffect {
         if (super.apply(game, source)) {
             new ReturnToBattlefieldUnderYourControlTargetEffect(false).apply(game, source);
             if (isPirate && player != null) {
-                player.drawCards(1, source.getSourceId(), game);
+                player.drawCards(1, source, game);
             }
             return true;
         }

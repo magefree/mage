@@ -67,7 +67,7 @@ class LostInTheWoodsEffect extends OneShotEffect {
                         permanent.removeFromCombat(game);
                     }
                 }
-                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, true);
+                controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, true);
             }
         }
         return true;

@@ -194,7 +194,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     }
 
     @Override
-    public void selectBlockers(Game game, UUID defendingPlayerId) {
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         StringBuilder sb = new StringBuilder();
         sb.append(game.getTurn().getValue(game.getTurnNum())).append(" player ").append(name).append(" blocking: ");
         getNextAction(game, NextAction.SELECT_BLOCKERS);
@@ -218,41 +218,6 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         logger.info(sb.toString());
         MCTSNode.logHitMiss();
     }
-
-//    @Override
-//    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public int getAmount(int min, int max, String message, Game game) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void sideboard(Match match, Deck deck) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void construct(Tournament tournament, Deck deck) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    @Override
-//    public void pickCard(List<Card> cards, Deck deck, Draft draft) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
 
     protected long totalThinkTime = 0;
     protected long totalSimulations = 0;

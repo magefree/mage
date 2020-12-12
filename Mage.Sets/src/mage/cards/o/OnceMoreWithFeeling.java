@@ -70,7 +70,7 @@ class OnceMoreWithFeelingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            permanent.moveToExile(null, "", source.getSourceId(), game);
+            permanent.moveToExile(null, "", source, game);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -78,7 +78,7 @@ class OnceMoreWithFeelingEffect extends OneShotEffect {
                 for (UUID cid : player.getGraveyard().copy()) {
                     Card c = game.getCard(cid);
                     if (c != null) {
-                        c.moveToExile(null, null, source.getSourceId(), game);
+                        c.moveToExile(null, null, source, game);
                     }
                 }
                 player.moveCards(player.getHand(), Zone.LIBRARY, source, game);

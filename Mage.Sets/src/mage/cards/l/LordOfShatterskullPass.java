@@ -88,7 +88,7 @@ class LordOfShatterskullPassEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(defenderId));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
-                permanent.damage(6, source.getSourceId(), game, false, true);
+                permanent.damage(6, source.getSourceId(), source, game, false, true);
             }
             return true;
         }

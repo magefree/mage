@@ -45,7 +45,7 @@ public class BecomesAuraAttachToManifestSourceEffect extends OneShotEffect {
                 new ManifestEffect(1).apply(game, source);
                 Permanent enchantedCreature = game.getPermanent(card.getId());
                 if (enchantedCreature != null) {
-                    enchantedCreature.addAttachment(enchantment.getId(), game);
+                    enchantedCreature.addAttachment(enchantment.getId(), source, game);
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
                     Target target = new TargetCreaturePermanent(filter);
                     target.addTarget(enchantedCreature.getId(), source, game);

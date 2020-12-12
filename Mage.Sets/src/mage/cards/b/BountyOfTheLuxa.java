@@ -68,7 +68,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
         if (controller != null) {
             if (bountyOfLuxa != null
                     && bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {
-                bountyOfLuxa.removeCounters(CounterType.FLOOD.createInstance(bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD)), game);
+                bountyOfLuxa.removeCounters(CounterType.FLOOD.createInstance(bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD)), source, game);
                 if (bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) == 0) {
                     Mana manaToAdd = new Mana();
                     manaToAdd.increaseColorless();
@@ -80,7 +80,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
                 if (bountyOfLuxa != null) {
                     new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
                 }
-                controller.drawCards(1, source.getSourceId(), game);
+                controller.drawCards(1, source, game);
             }
             return true;
         }

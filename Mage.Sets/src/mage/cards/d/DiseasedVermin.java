@@ -98,14 +98,14 @@ class DiseasedVerminEffect extends OneShotEffect {
         if (sourcePermanent != null
                 && controller != null) {
             TargetPlayer targetOpponent = new TargetPlayer(1, 1, false, filter);
-            if (targetOpponent.canChoose(controller.getId(), game)
+            if (targetOpponent.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.choose(Outcome.Damage, targetOpponent, source.getSourceId(), game)) {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null
                         && sourcePermanent.getCounters(game).getCount(CounterType.INFECTION) > 0) {
                     opponent.damage(
                             sourcePermanent.getCounters(game).getCount(CounterType.INFECTION), 
-                            source.getSourceId(), game, false, true);
+                            source.getSourceId(), source, game, false, true);
                     return true;
                 }
             }
@@ -143,7 +143,7 @@ class DiseasedVerminWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 && event.getSourceId() == sourceId) {
             damagedPlayers.add(event.getTargetId());
         }

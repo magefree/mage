@@ -85,7 +85,7 @@ class DemonlordBelzenlokEffect extends OneShotEffect {
                 }
             }
         }
-        controller.damage(addedToHand, source.getSourceId(), game);
+        controller.damage(addedToHand, source.getSourceId(), source, game);
         return true;
     }
 

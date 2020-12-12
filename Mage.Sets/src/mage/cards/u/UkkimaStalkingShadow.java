@@ -79,7 +79,7 @@ class UkkimaStalkingShadowEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(permanent.getPower().getValue(), source.getSourceId(), game);
+            player.damage(permanent.getPower().getValue(), source.getSourceId(), source, game);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {

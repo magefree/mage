@@ -144,14 +144,14 @@ class SoulBurnEffect extends OneShotEffect {
             } else {
                 return false;
             }
-            permanent.damage(totalXAmount, source.getSourceId(), game);
+            permanent.damage(totalXAmount, source.getSourceId(), source, game);
         } else {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player == null) {
                 return false;
             }
             lifetogain = Math.min(player.getLife(), lifetogain);
-            player.damage(totalXAmount, source.getSourceId(), game);
+            player.damage(totalXAmount, source.getSourceId(), source, game);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {

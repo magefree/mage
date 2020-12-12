@@ -75,7 +75,7 @@ class FlayedNimEffect extends OneShotEffect {
             return false;
         }
         int damage = (int) this.getValue("damage");
-        player.loseLife(damage, game, false);
+        player.loseLife(damage, game, source, false);
         return true;
     }
 }

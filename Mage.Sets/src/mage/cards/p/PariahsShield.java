@@ -59,10 +59,10 @@ public final class PariahsShield extends CardImpl {
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null) {
-                Permanent p = game.getPermanent(equipment.getAttachedTo());
-                if (p != null) {
+                Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+                if (permanent != null) {
                     DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-                    p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+                    permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
                     return true;
                 }
             }

@@ -116,7 +116,7 @@ class TritonTacticsTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_COMBAT_STEP_PRE;
+        return event.getType() == GameEvent.EventType.END_COMBAT_STEP_PRE;
     }
 
     @Override
@@ -162,7 +162,7 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                     if (attackerSet.contains(CardUtil.getCardZoneString(null, creature.getId(), game))) {
                         // tap creature and add the not untap effect
-                        creature.tap(game);
+                        creature.tap(source, game);
                         doNotUntapNextUntapStep.add(creature);
                         game.informPlayers("Triton Tactics: " + creature.getName() + " doesn't untap during its controller's next untap step");
                     }

@@ -52,15 +52,15 @@ public interface Card extends MageObject {
 
     String getTokenDescriptor();
 
-    void checkForCountersToAdd(Permanent permanent, Game game);
+    void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);
 
     boolean isFaceDown(Game game);
 
-    boolean turnFaceUp(Game game, UUID playerId);
+    boolean turnFaceUp(Ability source, Game game, UUID playerId);
 
-    boolean turnFaceDown(Game game, UUID playerId);
+    boolean turnFaceDown(Ability source, Game game, UUID playerId);
 
     boolean isFlipCard();
 
@@ -84,7 +84,7 @@ public interface Card extends MageObject {
      * Moves the card to the specified zone
      *
      * @param zone
-     * @param sourceId
+     * @param source ability which calls that move, can be null
      * @param game
      * @param flag     If zone
      *                 <ul>
@@ -92,40 +92,38 @@ public interface Card extends MageObject {
      *                 bottom</li></ul></li>
      *                 <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
      *                 untapped</li></ul></li>
-     *                 <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from
-     *                 Battlefield</li></ul></li>
      *                 </ul>
      * @return true if card was moved to zone
      */
-    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
+    boolean moveToZone(Zone zone, Ability source, Game game, boolean flag);
 
-    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects);
+    boolean moveToZone(Zone zone, Ability source, Game game, boolean flag, List<UUID> appliedEffects);
 
     /**
      * Moves the card to an exile zone
      *
      * @param exileId  set to null for generic exile zone
      * @param name     used for exile zone with the specified exileId
-     * @param sourceId
+     * @param source
      * @param game
      * @return true if card was moved to zone
      */
-    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
+    boolean moveToExile(UUID exileId, String name, Ability source, Game game);
 
-    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects);
+    boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects);
 
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
 
     // WARNING, don't add new move/remove methods (if you add then you must override it in all multi-parts card like Split Half or MDF Half)
-    boolean removeFromZone(Game game, Zone fromZone, UUID sourceId);
+    boolean removeFromZone(Game game, Zone fromZone, Ability source);
 
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
+    boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId);
 
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped);
+    boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped);
 
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown);
+    boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean facedown);
 
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects);
+    boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects);
 
     void setZone(Zone zone, Game game);
 
@@ -152,9 +150,9 @@ public interface Card extends MageObject {
 
     boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect);
 
-    void removeCounters(String name, int amount, Game game);
+    void removeCounters(String name, int amount, Ability source, Game game);
 
-    void removeCounters(Counter counter, Game game);
+    void removeCounters(Counter counter, Ability source, Game game);
 
     @Override
     Card copy();
@@ -175,9 +173,9 @@ public interface Card extends MageObject {
 
     List<UUID> getAttachments();
 
-    boolean addAttachment(UUID permanentId, Game game);
+    boolean addAttachment(UUID permanentId, Ability source, Game game);
 
-    boolean removeAttachment(UUID permanentId, Game game);
+    boolean removeAttachment(UUID permanentId, Ability source, Game game);
 
     default boolean isOwnedBy(UUID controllerId) {
         return getOwnerId().equals(controllerId);

@@ -74,7 +74,7 @@ class SandstoneOracleEffect extends OneShotEffect {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
                     int cardsDiff = opponent.getHand().size() - controller.getHand().size();
                     if (cardsDiff > 0) {
-                        controller.drawCards(cardsDiff, source.getSourceId(), game);
+                        controller.drawCards(cardsDiff, source, game);
                     }
                 }
             }

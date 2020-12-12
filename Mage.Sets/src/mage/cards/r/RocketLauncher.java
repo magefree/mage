@@ -67,7 +67,7 @@ class RocketLauncherWatcher extends Watcher {
             changedControllerOR1stTurn = false;
         }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL &&
-                Objects.equals(event.getSourceId(), cardId)) {
+                Objects.equals(event.getTargetId(), cardId)) {
             changedControllerOR1stTurn = true;
         }
     }

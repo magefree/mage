@@ -91,9 +91,9 @@ class TempOfTheDamnedUpkeepEffect extends OneShotEffect {
         if (permanent != null) {
             int amount = permanent.getCounters(game).getCount(CounterType.FUNK);
             if (amount > 0) {
-                permanent.removeCounters(CounterType.FUNK.createInstance(), game);
+                permanent.removeCounters(CounterType.FUNK.createInstance(), source, game);
             } else {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
             return true;
         }

@@ -66,7 +66,7 @@ class GravebladeMarauderEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controller != null) {
-            targetPlayer.loseLife(controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game), game, false);
+            targetPlayer.loseLife(controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game), game, source, false);
             return true;
         }
         return false;

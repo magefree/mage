@@ -89,7 +89,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
@@ -119,7 +119,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " exerted " + creature.getName());
                 }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_EXERTED, creature.getId(), creature.getId(), creature.getControllerId()));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_EXERTED, creature.getId(), source, source.getControllerId()));
                 ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("", creature.getControllerId());
                 effect.setTargetPointer(new FixedTarget(creature, game));
                 game.addEffect(effect, source);
@@ -152,7 +152,7 @@ class ExertedThisTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BECOMES_EXERTED) {
-            this.exertedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
+            this.exertedThisTurnCreatures.add(new MageObjectReference(event.getTargetId(), game));
         }
     }
 

@@ -46,23 +46,23 @@ public class OrCost implements Cost {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return firstCost.canPay(ability, sourceId, controllerId, game) || secondCost.canPay(ability, sourceId, controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return firstCost.canPay(ability, source, controllerId, game) || secondCost.canPay(ability, source, controllerId, game);
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        return pay(ability, game, sourceId, controllerId, noMana, this);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana) {
+        return pay(ability, game, source, controllerId, noMana, this);
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         selectedCost = null;
         // if only one can be paid select it
-        if (!firstCost.canPay(ability, sourceId, controllerId, game)) {
+        if (!firstCost.canPay(ability, source, controllerId, game)) {
             selectedCost = secondCost;
         }
-        if (!secondCost.canPay(ability, sourceId, controllerId, game)) {
+        if (!secondCost.canPay(ability, source, controllerId, game)) {
             selectedCost = firstCost;
         }
         // if both can be paid player has to select
@@ -84,7 +84,7 @@ public class OrCost implements Cost {
         if (selectedCost == null) {
             return false;
         }
-        return selectedCost.pay(ability, game, sourceId, controllerId, noMana, costToPay);
+        return selectedCost.pay(ability, game, source, controllerId, noMana, costToPay);
 
     }
 

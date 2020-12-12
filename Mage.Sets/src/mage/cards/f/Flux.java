@@ -60,8 +60,8 @@ class FluxEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 int numToDiscard = player.getAmount(0, player.getHand().size(), "Discard how many cards?", game);
-                player.discard(numToDiscard, false, source, game);
-                player.drawCards(numToDiscard, source.getSourceId(), game);
+                player.discard(numToDiscard, false, false, source, game);
+                player.drawCards(numToDiscard, source, game);
             }
         }
         return true;

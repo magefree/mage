@@ -1,5 +1,3 @@
-
-// author jeffwadsworth
 package mage.abilities.costs.common;
 
 import java.util.ArrayList;
@@ -17,6 +15,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+/**
+ *
+ * @author jeffwadsworth
+ */
 public class RevealTargetFromHandCost extends CostImpl {
 
     public int convertedManaCosts = 0;
@@ -37,8 +39,8 @@ public class RevealTargetFromHandCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Benefit, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), game)) {
             convertedManaCosts = 0;
             numberCardsRevealed = 0;
             Player player = game.getPlayer(controllerId);
@@ -53,7 +55,7 @@ public class RevealTargetFromHandCost extends CostImpl {
                 }
             }
             if (numberCardsRevealed > 0) {
-                MageObject baseObject = game.getBaseObject(sourceId);
+                MageObject baseObject = game.getBaseObject(source.getSourceId());
                 player.revealCards(baseObject == null ? "card cost" : baseObject.getIdName(), cards, game);
             }
             if (targets.get(0).getNumberOfTargets() <= numberCardsRevealed) {
@@ -78,8 +80,8 @@ public class RevealTargetFromHandCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

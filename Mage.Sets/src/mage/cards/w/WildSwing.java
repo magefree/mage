@@ -74,7 +74,7 @@ class WildSwingEffect extends OneShotEffect {
                 Permanent targetPermanent = game.getPermanent(target.getTargets().get(RandomUtil.nextInt(target.getTargets().size())));
                 if (targetPermanent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": The randomly chosen target to destroy is " + targetPermanent.getLogName());
-                    targetPermanent.destroy(source.getSourceId(), game, false);
+                    targetPermanent.destroy(source, game, false);
                 }
                 return true;
             }

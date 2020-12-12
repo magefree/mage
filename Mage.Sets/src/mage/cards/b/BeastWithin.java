@@ -61,7 +61,7 @@ class BeastWithinEffect extends OneShotEffect {
         // (2011-06-01)
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source); // must use LKI
         if (permanent != null) {
-            new BeastToken().putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
+            new BeastToken().putOntoBattlefield(1, game, source, permanent.getControllerId());
         }
         return true;
     }

@@ -34,7 +34,7 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
         if (player != null) {
             List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game);
             for (Permanent p : permanents) {
-                p.tap(game);
+                p.tap(source, game);
             }
             return true;
         }

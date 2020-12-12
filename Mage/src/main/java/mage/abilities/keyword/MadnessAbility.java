@@ -14,6 +14,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.MadnessCardExiledEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -105,9 +106,9 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                if (controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true)) {
+                if (controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source, game, ((ZoneChangeEvent) event).getFromZone(), true)) {
                     game.applyEffects(); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
-                    GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_EXILED, card.getId(), source.getOriginalId(), controller.getId());
+                    GameEvent gameEvent = new MadnessCardExiledEvent(card.getId(), source, controller.getId());
                     game.fireEvent(gameEvent);
                 }
                 return true;

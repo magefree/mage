@@ -71,7 +71,7 @@ public final class LaccolithWarrior extends CardImpl {
     
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.damage(damage, sourcePermanent.getId(), game, false, true);
+                permanent.damage(damage, sourcePermanent.getId(), source, game, false, true);
                 return true;
             }
             return false;

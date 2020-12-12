@@ -79,7 +79,7 @@ class RogueSkycaptainEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             new AddCountersSourceEffect(CounterType.WAGE.createInstance(), true).apply(game, source);
             Cost cost = ManaUtil.createManaCost(2 * permanent.getCounters(game).getCount(CounterType.WAGE), false);
-            if (!cost.pay(source, game, controller.getId(), controller.getId(), false)) {
+            if (!cost.pay(source, game, source, controller.getId(), false)) {
                 new RemoveAllCountersSourceEffect(CounterType.WAGE).apply(game, source);
                 Player opponent;
                 Set<UUID> opponents = game.getOpponents(controller.getId());
@@ -92,7 +92,7 @@ class RogueSkycaptainEffect extends OneShotEffect {
                     opponent = game.getPlayer(target.getFirstTarget());
                 }
                 if (opponent != null) {
-                    permanent.changeControllerId(opponent.getId(), game);
+                    permanent.changeControllerId(opponent.getId(), game, source);
                 }
             }
             return true;

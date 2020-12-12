@@ -81,7 +81,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                     && controller.choose(Outcome.PutCreatureInPlay, target, source.getId(), game)) {
                 Card cardChosen = game.getCard(target.getFirstTarget());
                 if (cardChosen != null
-                        && cardChosen.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game)) {
+                        && cardChosen.moveToExile(exileId, sourceObject.getIdName(), source, game)) {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(cardChosen);
                     token.removePTCDA();
@@ -90,7 +90,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                     token.getColor(game).setColor(ObjectColor.BLACK);
                     token.removeAllCreatureTypes(game);
                     token.addSubType(game, SubType.ZOMBIE);
-                    if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+                    if (token.putOntoBattlefield(1, game, source, source.getControllerId())) {
                         Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
                         if (tokenPermanent != null) {
                             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

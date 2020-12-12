@@ -60,14 +60,14 @@ class PartingThoughtsEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
                 int numberOfCounters = 0;
                 for (Counter counter : permanent.getCounters(game).values()) {
                     numberOfCounters += counter.getCount();
                 }
                 if (numberOfCounters > 0) {
-                    controller.drawCards(numberOfCounters, source.getSourceId(), game);
-                    controller.loseLife(numberOfCounters, game, false);
+                    controller.drawCards(numberOfCounters, source, game);
+                    controller.loseLife(numberOfCounters, game, source, false);
                 }
             }
             return true;

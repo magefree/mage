@@ -58,7 +58,7 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -95,7 +95,7 @@ class BlackViseEffect extends OneShotEffect {
         if (chosenPlayer != null) {
             int damage = chosenPlayer.getHand().size() - 4;
             if (damage > 0) {
-                chosenPlayer.damage(damage, source.getSourceId(), game);
+                chosenPlayer.damage(damage, source.getSourceId(), source, game);
             }
             return true;
         }

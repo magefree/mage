@@ -69,7 +69,7 @@ class ReturnToHandEffect extends OneShotEffect {
                 if (permanent != null) {
                     boolean ret = controller.moveCards(permanent, Zone.HAND, source, game);
                     if (ret) {
-                        game.fireEvent(new GameEvent(EventType.MEDITATED, source.getSourceId(), source.getSourceId(), controller.getId()));
+                        game.fireEvent(new GameEvent(GameEvent.EventType.MEDITATED, source.getSourceId(), source, controller.getId()));
                     }
                     return ret;
                 }

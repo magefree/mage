@@ -73,13 +73,13 @@ class BreakingPointDestroyEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 6 damage to you?", source, game)) {
                     destroyCreatures = false;
-                    player.damage(6, source.getSourceId(), game);
+                    player.damage(6, source.getSourceId(), source, game);
                     game.informPlayers(player.getLogName() + " has " + spell.getName() + " deal 6 to them");
                 }
             }
             if (destroyCreatures) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
-                    permanent.destroy(source.getSourceId(), game, true);
+                    permanent.destroy(source, game, true);
                 }
             }
             return destroyCreatures;

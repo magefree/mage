@@ -71,7 +71,7 @@ class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -131,12 +131,12 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
                 if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        return permanent.damage(1, source.getSourceId(), game, false, true) > 0;
+                        return permanent.damage(1, source.getSourceId(), source, game, false, true) > 0;
                     }
                 }
             }
         }
-        opponent.damage(1, source.getSourceId(), game);
+        opponent.damage(1, source.getSourceId(), source, game);
         return true;
     }
 }

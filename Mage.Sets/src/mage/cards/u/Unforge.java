@@ -65,7 +65,7 @@ class UnforgeEffect extends OneShotEffect{
         if(equipment != null){
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if(creature != null){
-              creature.damage(2, source.getId(), game, false, true);
+              creature.damage(2, source.getSourceId(), source, game, false, true);
               return true;
             }
         }

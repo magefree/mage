@@ -42,7 +42,7 @@ public class SacrificeSourceEffect extends OneShotEffect {
             Permanent permanent = (Permanent) sourceObject;
             // you can only sacrifice a permanent you control
             if (source.isControlledBy(permanent.getControllerId())) {
-                return permanent.sacrifice(source.getSourceId(), game);
+                return permanent.sacrifice(source, game);
             }
             return true;
         }

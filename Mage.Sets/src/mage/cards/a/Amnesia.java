@@ -60,7 +60,7 @@ class AmnesiaEffect extends OneShotEffect {
             player.revealCards(source, hand, game);
             Set<Card> cards = hand.getCards(game);
             cards.removeIf(MageObject::isLand);
-            player.discard(new CardsImpl(cards), source, game);
+            player.discard(new CardsImpl(cards), false, source, game);
             return true;
         }
         return false;

@@ -69,16 +69,16 @@ class ProwlingPangolinEffect extends OneShotEffect {
                 Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledCreaturePermanent("two creatures"), true));
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && cost.canPay(source, source.getSourceId(), playerId, game)
+                        && cost.canPay(source, source, playerId, game)
                         && player.chooseUse(Outcome.Sacrifice, "Sacrifice two creatures?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), playerId, true, null)) {
+                        && cost.pay(source, game, source, playerId, true, null)) {
                     costPaid = true;
                 }
             }
             if (costPaid) {
                 Permanent sourceObject = game.getPermanent(source.getSourceId());
                 if (sourceObject != null) {
-                    sourceObject.sacrifice(source.getSourceId(), game);
+                    sourceObject.sacrifice(source, game);
                 }
             }
             return true;

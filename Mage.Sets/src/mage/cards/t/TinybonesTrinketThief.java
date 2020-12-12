@@ -118,7 +118,7 @@ class TinybonesTrinketThiefEffect extends OneShotEffect {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null && player.getHand().isEmpty()) {
-                player.loseLife(10, game, false);
+                player.loseLife(10, game, source, false);
             }
         }
         return true;

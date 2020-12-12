@@ -145,7 +145,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
             if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent, game) != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (watcher.getTappedMerfolkIds(sourcePermanent, game).contains(new MageObjectReference(permanent, game))) {
-                        permanent.destroy(source.getSourceId(), game, false);
+                        permanent.destroy(source, game, false);
                     }
                 }
                 return true;

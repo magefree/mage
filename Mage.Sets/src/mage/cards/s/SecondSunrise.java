@@ -64,7 +64,7 @@ class SecondSunriseEffect extends OneShotEffect {
                 if (c != null && game.getState().getZone(id) == Zone.GRAVEYARD) {
                     if (c.isArtifact() || c.isCreature() ||
                         c.isEnchantment() || c.isLand())
-                    c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    c.moveToZone(Zone.BATTLEFIELD, source, game, false);
                 }
             }
             return true;

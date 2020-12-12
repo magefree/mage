@@ -71,7 +71,7 @@ class RoninCliffriderEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(defenderId));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
-                permanent.damage(1, source.getSourceId(), game, false, true);
+                permanent.damage(1, source.getSourceId(), source, game, false, true);
             }
             return true;
         }

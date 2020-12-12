@@ -45,7 +45,7 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case ControlChangingEffects_2:
                         if (sublayer == SubLayer.NA) {
-                            permanent.changeControllerId(enchantment.getControllerId(), game);
+                            permanent.changeControllerId(enchantment.getControllerId(), game, source);
                             permanent.getAbilities().forEach((ability) -> {
                                 ability.setControllerId(enchantment.getControllerId());
                             });

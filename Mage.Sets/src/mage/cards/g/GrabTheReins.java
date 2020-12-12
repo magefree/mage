@@ -91,18 +91,18 @@ class GrabTheReinsEffect extends OneShotEffect {
             player.chooseTarget(Outcome.Sacrifice, target, source, game);
             Permanent creatureToSacrifice = game.getPermanent(target.getTargets().get(0));
             int amount = creatureToSacrifice.getPower().getValue();
-            if (!creatureToSacrifice.sacrifice(creatureToSacrifice.getId(), game)) {
+            if (!creatureToSacrifice.sacrifice(source, game)) {
                 return false;
             }
             if (amount > 0) {
                 Permanent permanent = game.getPermanent(source.getFirstTarget());
                 if (permanent != null) {
-                    permanent.damage(amount, source.getSourceId(), game, false, true);
+                    permanent.damage(amount, source.getSourceId(), source, game, false, true);
                     return true;
                 }
                 player = game.getPlayer(source.getFirstTarget());
                 if (player != null) {
-                    player.damage(amount, source.getSourceId(), game);
+                    player.damage(amount, source.getSourceId(), source, game);
                     return true;
                 }
             } else {

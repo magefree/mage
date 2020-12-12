@@ -83,7 +83,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTER_ADDED;
+        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
     }
 
     @Override
@@ -128,8 +128,8 @@ class BombSquadDamgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
-            creature.removeCounters(CounterType.FUSE.getName(), creature.getCounters(game).getCount(CounterType.FUSE), game);
-            creature.destroy(source.getSourceId(), game, false);
+            creature.removeCounters(CounterType.FUSE.getName(), creature.getCounters(game).getCount(CounterType.FUSE), source, game);
+            creature.destroy(source, game, false);
         }
         if (creature == null) {
             creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
@@ -137,7 +137,7 @@ class BombSquadDamgeEffect extends OneShotEffect {
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                controller.damage(4, source.getSourceId(), game);
+                controller.damage(4, source.getSourceId(), source, game);
                 return true;
             }
         }

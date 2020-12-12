@@ -62,7 +62,7 @@ class DesecratedEarthEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.discard(1, false, source, game);
+                player.discard(1, false, false, source, game);
                 return true;
             }
         }

@@ -73,13 +73,13 @@ class GravestormEffect extends OneShotEffect {
             if (opponentChoosesExile && targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {                    
-                    opponentExilesACard = targetPlayer.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                    opponentExilesACard = targetPlayer.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
                 }
             }
             
             if (!opponentExilesACard) {                
                 if (you.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
-                    you.drawCards(1, source.getSourceId(), game);
+                    you.drawCards(1, source, game);
                 }
             }
             return true;

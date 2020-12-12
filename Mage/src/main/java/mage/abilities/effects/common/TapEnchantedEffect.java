@@ -27,7 +27,7 @@ public class TapEnchantedEffect extends OneShotEffect {
         if (permanent != null) {
             Permanent attach = game.getPermanent(permanent.getAttachedTo());
             if (attach != null) {
-                attach.tap(game);
+                attach.tap(source, game);
                 return true;
             }
         }

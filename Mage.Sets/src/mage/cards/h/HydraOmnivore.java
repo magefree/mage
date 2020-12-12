@@ -68,7 +68,7 @@ class HydraOmnivoreEffect extends OneShotEffect {
                 if (!Objects.equals(playerId, damagedOpponent)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        int dealtDamage = opponent.damage(amount, source.getSourceId(), game);
+                        int dealtDamage = opponent.damage(amount, source.getSourceId(), source, game);
                         game.informPlayers(object.getLogName() + " deals " + dealtDamage + " damage to " + opponent.getLogName());
                     }
                 }

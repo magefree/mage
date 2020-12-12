@@ -81,7 +81,7 @@ class KamahlsSummonsEffect extends OneShotEffect {
             for (Map.Entry<UUID, Integer> revealedCardsByPlayer : revealedCards.entrySet()) {
                 int value = revealedCardsByPlayer.getValue();
                 if (value > 0) {
-                    token.putOntoBattlefield(value, game, source.getSourceId(), revealedCardsByPlayer.getKey());
+                    token.putOntoBattlefield(value, game, source, revealedCardsByPlayer.getKey());
                 }
             }
             return true;

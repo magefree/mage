@@ -60,7 +60,7 @@ class HonorTheFallenEffect extends OneShotEffect {
                 if (player != null) {
                     for (Card card : player.getGraveyard().getCards(game)) {
                         if (StaticFilters.FILTER_CARD_CREATURE.match(card, source.getSourceId(), controller.getId(), game)) {
-                            if (card.moveToExile(null, "", source.getSourceId(), game)) {
+                            if (card.moveToExile(null, "", source, game)) {
                                 exiledCards++;
                             }
                         }

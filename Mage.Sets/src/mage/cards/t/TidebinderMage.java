@@ -134,7 +134,9 @@ class TidebinderMageWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL
+                && event.getPlayerId().equals(controllerId)
+                && event.getTargetId().equals(sourceId)) {
             condition = true;
             game.replaceEvent(event);
             return;

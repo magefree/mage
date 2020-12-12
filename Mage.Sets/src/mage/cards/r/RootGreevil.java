@@ -74,7 +74,7 @@ public final class RootGreevil extends CardImpl {
                 FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
                 filter.add(new ColorPredicate(choice.getColor()));
                 for (Permanent enchantment : game.getBattlefield().getAllActivePermanents(filter, game)) {
-                    enchantment.destroy(source.getSourceId(), game, false);
+                    enchantment.destroy(source, game, false);
                 }
                 return true;
             }

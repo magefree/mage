@@ -145,7 +145,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                     for (UUID permanentId : playerPiles.getValue().get(sacrificePile)) {
                         Permanent permanent = game.getPermanent(permanentId);
                         if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                            permanent.sacrifice(source, game);
                         }
                     }
                 }

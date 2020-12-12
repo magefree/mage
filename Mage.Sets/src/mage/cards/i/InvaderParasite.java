@@ -70,7 +70,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (sourcePermanent != null && targetPermanent != null) {
-            targetPermanent.moveToExile(getId(), "Invader Parasite (Imprint)", source.getSourceId(), game);
+            targetPermanent.moveToExile(getId(), "Invader Parasite (Imprint)", source, game);
             sourcePermanent.imprint(targetPermanent.getId(), game);
         }
         return true;
@@ -99,7 +99,7 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override

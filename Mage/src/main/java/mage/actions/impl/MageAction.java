@@ -1,5 +1,6 @@
 package mage.actions.impl;
 
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -55,11 +56,11 @@ public abstract class MageAction {
      * Execute action.
      *
      *
-     * @param sourceId
+     * @param source
      * @param game Game context.
      * @return
      */
-    public abstract int doAction(UUID sourceId, final Game game);
+    public abstract int doAction(Ability source, final Game game);
 
     /**
      * Undo action.

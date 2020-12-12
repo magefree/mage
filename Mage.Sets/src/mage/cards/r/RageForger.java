@@ -87,7 +87,7 @@ class RageForgerDamageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent attackingCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && attackingCreature != null) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 1, attackingCreature.getId(), game, false, true);
+            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 1, attackingCreature.getId(), source, game, false, true);
             return true;
         }
         return false;

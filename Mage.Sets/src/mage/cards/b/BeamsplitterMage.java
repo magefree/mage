@@ -15,6 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -180,7 +181,7 @@ class BeamsplitterMageEffect extends OneShotEffect {
                         }
                     }
                 }
-                game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, copy.getId(), spell.getId(), source.getControllerId()));
+                game.fireEvent(new CopiedStackObjectEvent(spell, copy, source.getControllerId()));
                 String activateMessage = copy.getActivatedMessage(game);
                 if (activateMessage.startsWith(" casts ")) {
                     activateMessage = activateMessage.substring(6);

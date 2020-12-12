@@ -67,11 +67,11 @@ class CranialArchiveEffect extends OneShotEffect {
             Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
                 for (Card card: targetPlayer.getGraveyard().getCards(game)){
-                    targetPlayer.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+                    targetPlayer.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
                 }
                 targetPlayer.shuffleLibrary(source, game);
             }
-            controller.drawCards(1, source.getSourceId(), game);
+            controller.drawCards(1, source, game);
             return true;
         }
         return false;

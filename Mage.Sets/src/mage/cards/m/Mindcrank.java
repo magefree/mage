@@ -59,7 +59,7 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOST_LIFE;
+        return event.getType() == GameEvent.EventType.LOST_LIFE;
     }
 
     @Override

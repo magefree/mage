@@ -70,10 +70,10 @@ class CutTheTethersEffect extends OneShotEffect {
                 boolean paid = false;
                 if (player.chooseUse(Outcome.Benefit, "Pay {3} to keep " + creature.getName() + " on the battlefield?", source, game)) {
                     Cost cost = ManaUtil.createManaCost(3, false);
-                    paid = cost.pay(source, game, source.getSourceId(), creature.getControllerId(), false, null);
+                    paid = cost.pay(source, game, source, creature.getControllerId(), false, null);
                 }
                 if (!paid) {
-                    creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    creature.moveToZone(Zone.HAND, source, game, true);
                 }
             }
         }

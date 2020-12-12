@@ -57,9 +57,9 @@ class WebOfInertiaEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && sourceObject != null) {
             Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard());
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, "Exile a card from your graveyard?", source, game)) {
+            if (cost.canPay(source, source, player.getId(), game) && player.chooseUse(Outcome.Detriment, "Exile a card from your graveyard?", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                if (cost.pay(source, game, source, player.getId(), false, null)) {
                     if (!game.isSimulation()) {
                         game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                     }

@@ -124,7 +124,7 @@ class MobRuleControlAllEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         if (creature != null && controllerId != null) {
-            return creature.changeControllerId(controllerId, game);
+            return creature.changeControllerId(controllerId, game, source);
         }
         return false;
     }

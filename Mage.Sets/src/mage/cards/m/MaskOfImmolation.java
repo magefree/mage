@@ -77,7 +77,7 @@ class MaskOfImmolationEffect extends CreateTokenEffect {
         if (p == null) {
             return false;
         }
-        p.addAttachment(source.getSourceId(), game);
+        p.addAttachment(source.getSourceId(), source, game);
         return true;
     }
 

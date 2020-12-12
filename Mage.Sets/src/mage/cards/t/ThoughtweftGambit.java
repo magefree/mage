@@ -59,7 +59,7 @@ class ThoughtweftGambitEffect extends OneShotEffect {
         if (opponents != null) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (opponents.contains(creature.getControllerId())) {
-                    creature.tap(game);
+                    creature.tap(source, game);
                 }
             }
             passed = true;

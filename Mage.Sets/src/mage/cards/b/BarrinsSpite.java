@@ -72,10 +72,10 @@ class BarrinsSpiteEffect extends OneShotEffect {
                                 && controllerOfCreature.chooseUse(Outcome.Sacrifice, "Sacrifice " + creature.getLogName() + '?', source, game))
                                 || (count == 1
                                 && !sacrificeDone)) {
-                            creature.sacrifice(source.getId(), game);
+                            creature.sacrifice(source, game);
                             sacrificeDone = true;
                         } else {
-                            creature.moveToZone(Zone.HAND, source.getId(), game, false);
+                            creature.moveToZone(Zone.HAND, source, game, false);
                         }
                         count++;
                     }

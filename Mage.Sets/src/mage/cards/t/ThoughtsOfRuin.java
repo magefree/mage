@@ -92,7 +92,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
                 }
                 // sacrifice all lands
                 for (Permanent permanent :permanentsToSacrifice) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                 }
             }
         }

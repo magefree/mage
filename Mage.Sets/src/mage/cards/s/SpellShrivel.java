@@ -70,13 +70,13 @@ class SpellShrivelCounterUnlessPaysEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 Cost cost = ManaUtil.createManaCost(4, false);
-                if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
+                if (!cost.pay(source, game, source, spell.getControllerId(), false)) {
                     StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-                    if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()))) {
+                    if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source, stackObject.getControllerId()))) {
                         game.informPlayers(sourceObject.getIdName() + ": cost wasn't payed - countering " + stackObject.getName());
                         game.rememberLKI(source.getFirstTarget(), Zone.STACK, stackObject);
                         controller.moveCards((Spell) spell, Zone.EXILED, source, game);
-                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()));
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source, stackObject.getControllerId()));
                         return true;
                     }
                     return false;

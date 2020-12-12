@@ -20,8 +20,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -72,25 +74,26 @@ class GarzasAssassinCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         return controller != null && (controller.getLife() < 1 || controller.canPayLifeCost(ability));
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            int currentLife = controller.getLife();
-            int lifeToPay = (currentLife + currentLife % 2) / 2; // Divide by two and round up.
-            if (lifeToPay < 0) {
-                this.paid = true;
-            } else {
-                this.paid = (controller.loseLife(lifeToPay, game, false) == lifeToPay);
-            }
-            return this.paid;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        int currentLife = controller.getLife();
+        int lifeToPay = Math.max(0, (currentLife + currentLife % 2) / 2); // Divide by two and round up.
+        if (lifeToPay <= 0) {
+            this.paid = true;
+        } else {
+            this.paid = CardUtil.tryPayLife(lifeToPay, controller, source, game);
+        }
+        return this.paid;
     }
 
     @Override

@@ -71,7 +71,7 @@ class BrokenVisageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) { 
-            permanent.destroy(source.getSourceId(), game, true);
+            permanent.destroy(source, game, true);
             CreateTokenEffect effect = new CreateTokenEffect(new BrokenVisageSpiritToken(permanent.getPower().getValue(), permanent.getToughness().getValue()));
             effect.apply(game, source);
             for (UUID tokenId : effect.getLastAddedTokenIds()) {

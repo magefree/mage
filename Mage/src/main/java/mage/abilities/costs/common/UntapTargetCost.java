@@ -32,8 +32,8 @@ public class UntapTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (target.choose(Outcome.Untap, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (target.choose(Outcome.Untap, controllerId, source.getSourceId(), game)) {
             for (UUID targetId : (List<UUID>) target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -46,8 +46,8 @@ public class UntapTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return target.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

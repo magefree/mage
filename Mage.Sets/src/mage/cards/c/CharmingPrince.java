@@ -98,7 +98,7 @@ class CharmingPrinceEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if (!controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+        if (!controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
             return false;
         }
         //create delayed triggered ability

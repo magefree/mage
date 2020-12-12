@@ -80,7 +80,7 @@ class ApathyEffect extends OneShotEffect {
             return false;
         }
         if (!player.chooseUse(outcome, "Discard a card at random to untap enchanted creature?", source, game)
-                || player.discardOne(true, source, game) == null) {
+                || player.discardOne(true, false, source, game) == null) {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());

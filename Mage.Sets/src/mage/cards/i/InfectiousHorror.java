@@ -57,7 +57,7 @@ class InfectiousHorrorEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                opponent.loseLife(2, game, false);
+                opponent.loseLife(2, game, source, false);
             }
         }
         return true;

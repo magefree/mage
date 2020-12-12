@@ -46,6 +46,7 @@ public class LoadTest {
     private static final int TEST_PORT = 17171;
     private static final String TEST_PROXY_TYPE = "None";
     private static final String TEST_USER_NAME = "user";
+    private static final String TEST_AI_SETS_USAGE = "CMR"; // set in generated decks for AI games (empty for all sets usage)
 
     @BeforeClass
     public static void initDatabase() {
@@ -267,7 +268,7 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_TwoAIPlayGame_One() {
-        playTwoAIGame("Single AI game", "GR", "GRN");
+        playTwoAIGame("Single AI game", "WGUBR", TEST_AI_SETS_USAGE);
     }
 
     @Test
@@ -293,7 +294,7 @@ public class LoadTest {
             long randomSeed = seedsList.get(i);
             logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
             RandomUtil.setSeed(randomSeed);
-            playTwoAIGame("AI game #" + (i + 1), "WGUBR", "ELD");
+            playTwoAIGame("AI game #" + (i + 1), "WGUBR", TEST_AI_SETS_USAGE);
         }
     }
 

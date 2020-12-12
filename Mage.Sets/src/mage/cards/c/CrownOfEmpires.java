@@ -74,7 +74,7 @@ class CrownOfEmpiresEffect extends OneShotEffect {
             game.getState().setValue(source.getSourceId().toString(), source.getControllerId());
             game.addEffect(effect, source);
         } else {
-            target.tap(game);
+            target.tap(source, game);
         }
         return false;
     }
@@ -105,7 +105,7 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
         if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game);
+            return permanent.changeControllerId(controllerId, game, source);
         }
         return false;
     }

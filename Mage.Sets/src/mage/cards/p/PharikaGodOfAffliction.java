@@ -88,7 +88,7 @@ class PharikaExileEffect extends OneShotEffect {
         if (tokenController == null) {
             return false;
         }
-        return new PharikaSnakeToken().putOntoBattlefield(1, game, source.getSourceId(), tokenController.getId());
+        return new PharikaSnakeToken().putOntoBattlefield(1, game, source, tokenController.getId());
     }
 
     @Override

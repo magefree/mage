@@ -82,7 +82,7 @@ class ShredsOfSanityEffect extends OneShotEffect {
                 cardsToHand.add(card);
             }
             controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            controller.discardOne(false, source, game);
+            controller.discardOne(false, false, source, game);
             return true;
         }
         return false;

@@ -66,7 +66,7 @@ class AjanisChosenEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Token token = new CatToken();
-            if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+            if (token.putOntoBattlefield(1, game, source, source.getControllerId())) {
                 Permanent enchantment = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (enchantment != null && enchantment.hasSubtype(SubType.AURA, game)) {
                     for (UUID tokenId : token.getLastAddedTokenIds()) {
@@ -77,8 +77,8 @@ class AjanisChosenEffect extends OneShotEffect {
                                 boolean canAttach = enchantment.getSpellAbility() == null
                                         || (!enchantment.getSpellAbility().getTargets().isEmpty() && enchantment.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game));
                                 if (canAttach && controller.chooseUse(Outcome.Neutral, "Attach " + enchantment.getName() + " to the token ?", source, game)) {
-                                    if (oldCreature.removeAttachment(enchantment.getId(), game)) {
-                                        tokenPermanent.addAttachment(enchantment.getId(), game);
+                                    if (oldCreature.removeAttachment(enchantment.getId(), source, game)) {
+                                        tokenPermanent.addAttachment(enchantment.getId(), source, game);
                                     }
                                 }
                             }

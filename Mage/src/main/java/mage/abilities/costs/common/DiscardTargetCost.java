@@ -40,7 +40,7 @@ public class DiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         this.cards.clear();
         this.targets.clearChosen();
         Player player = game.getPlayer(controllerId);
@@ -49,11 +49,11 @@ public class DiscardTargetCost extends CostImpl {
         }
         int amount = this.getTargets().get(0).getNumberOfTargets();
         if (randomDiscard) {
-            this.cards.addAll(player.discard(amount, true, ability, game).getCards(game));
-        } else if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+            this.cards.addAll(player.discard(amount, true, true, source, game).getCards(game));
+        } else if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), game)) {
             Cards toDiscard = new CardsImpl();
             toDiscard.addAll(targets.get(0).getTargets());
-            Cards discarded = player.discard(toDiscard, ability, game);
+            Cards discarded = player.discard(toDiscard, true, source, game);
             if (!discarded.isEmpty()) {
                 cards.addAll(discarded.getCards(game));
             }
@@ -70,8 +70,8 @@ public class DiscardTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(sourceId, controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

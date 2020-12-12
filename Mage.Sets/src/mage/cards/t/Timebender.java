@@ -92,7 +92,7 @@ class TimebenderEffect extends OneShotEffect {
             if (addCounters) {
                 permanent.addCounters(CounterType.TIME.createInstance(2), source, game);
             } else {
-                permanent.removeCounters(CounterType.TIME.getName(), 2, game);
+                permanent.removeCounters(CounterType.TIME.getName(), 2, source, game);
             }
             return true;
         }
@@ -101,7 +101,7 @@ class TimebenderEffect extends OneShotEffect {
             if (addCounters) {
                 card.addCounters(CounterType.TIME.createInstance(2), source, game);
             } else {
-                card.removeCounters(CounterType.TIME.getName(), 2, game);
+                card.removeCounters(CounterType.TIME.getName(), 2, source, game);
             }
             return true;
         }

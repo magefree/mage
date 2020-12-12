@@ -76,7 +76,7 @@ class HiddenStringsEffect extends OneShotEffect {
                             }
                         } else {
                             if (player.chooseUse(Outcome.Tap, "Tap " + permanent.getName() + '?', source, game)) {
-                                permanent.tap(game);
+                                permanent.tap(source, game);
                             }
                         }
                     }

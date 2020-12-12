@@ -98,9 +98,9 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
             return false;
         }
         Cost cost = new ManaCostsImpl("{R}{R}{R}");
-        if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+        if (!cost.canPay(source, source, player.getId(), game)
                 || !player.chooseUse(Outcome.Benefit, "Pay {R}{R}{R}?", source, game)
-                || !cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                || !cost.pay(source, game, source, player.getId(), false)) {
             TargetOpponent target = new TargetOpponent();
             Player opponent = null;
             if (target.choose(Outcome.Detriment, player.getId(), source.getSourceId(), game)) {
@@ -108,7 +108,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
             }
             new TapAllEffect(filter).apply(game, source);
             if (permanent != null) {
-                permanent.tap(game);
+                permanent.tap(source, game);
             }
             if (opponent != null) {
                 new GainControlAllEffect(Duration.Custom, filter, opponent.getId()).apply(game, source);

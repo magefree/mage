@@ -74,7 +74,7 @@ class WitchHuntEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.changeControllerId(this.getTargetPointer().getFirst(game, source), game);
+            return permanent.changeControllerId(this.getTargetPointer().getFirst(game, source), game, source);
         }
         return false;
     }

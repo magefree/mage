@@ -24,7 +24,7 @@ public class EffectKeyValue implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return (Integer)effect.getValue(key);
     }
 

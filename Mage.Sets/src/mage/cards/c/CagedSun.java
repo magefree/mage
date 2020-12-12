@@ -100,7 +100,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.MANA_ADDED;
+        return event.getType() == GameEvent.EventType.MANA_ADDED;
     }
 
     @Override

@@ -177,7 +177,7 @@ class AssistEffect extends OneShotEffect {
 
             if (amountToPay > 0) {
                 Cost cost = ManaUtil.createManaCost(amountToPay, false);
-                if (cost.pay(source, game, source.getSourceId(), targetPlayer.getId(), false)) {
+                if (cost.pay(source, game, source, targetPlayer.getId(), false)) {
                     ManaPool manaPool = controller.getManaPool();
                     manaPool.addMana(Mana.ColorlessMana(amountToPay), game, source);
                     manaPool.unlockManaType(ManaType.COLORLESS); // it's unlock mana for one use/click, but it can gives more

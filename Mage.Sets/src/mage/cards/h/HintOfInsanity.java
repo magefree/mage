@@ -80,7 +80,7 @@ class HintOfInsanityEffect extends OneShotEffect {
                         .filter(card -> nameCounts.getOrDefault(card.getName(), 0) > 1)
                         .collect(Collectors.toSet())
         );
-        player.discard(cards, source, game);
+        player.discard(cards, false, source, game);
         return true;
     }
 }

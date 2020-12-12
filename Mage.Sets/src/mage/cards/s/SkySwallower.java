@@ -70,7 +70,7 @@ class GainControlAllPermanentsEffect extends ContinuousEffectImpl {
         if (targetPlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (permanent != null && !permanent.getId().equals(source.getSourceId())) {
-                    permanent.changeControllerId(targetPlayer.getId(), game);
+                    permanent.changeControllerId(targetPlayer.getId(), game, source);
                 }
             }
         } else {

@@ -90,14 +90,14 @@ class LavabrinkFloodgatesEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.DOOM.createInstance(), source, game);
                 break;
             case "Remove a doom counter":
-                permanent.removeCounters(CounterType.DOOM.createInstance(), game);
+                permanent.removeCounters(CounterType.DOOM.createInstance(), source, game);
                 break;
             case "Do nothing":
             default:
                 break;
         }
         if (permanent.getCounters(game).getCount(CounterType.DOOM) < 3
-                || !permanent.sacrifice(source.getSourceId(), game)) {
+                || !permanent.sacrifice(source, game)) {
             return true;
         }
         game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(

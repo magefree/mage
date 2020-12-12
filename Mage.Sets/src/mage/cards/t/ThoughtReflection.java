@@ -14,6 +14,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -75,7 +76,7 @@ class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player you = game.getPlayer(event.getPlayerId());
         if (you != null) {
-            you.drawCards(2, event.getSourceId(), game, event.getAppliedEffects());
+            you.drawCards(2, source, game, event);
         }
         return true;
     }

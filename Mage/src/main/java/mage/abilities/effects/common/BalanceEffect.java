@@ -92,7 +92,7 @@ public class BalanceEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && cardsToDiscard.get(playerId) != null) {
-                player.discard(cardsToDiscard.get(playerId), source, game);
+                player.discard(cardsToDiscard.get(playerId), false, source, game);
             }
         }
 
@@ -145,7 +145,7 @@ public class BalanceEffect extends OneShotEffect {
 
         for (Permanent permanent : permanentsToSacrifice) {
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
     }

@@ -75,7 +75,7 @@ class BubblingCauldronEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                lostLife += opponent.loseLife(4, game, false);
+                lostLife += opponent.loseLife(4, game, source, false);
             }
         }
         if (controller != null) {

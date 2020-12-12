@@ -59,7 +59,7 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
 
             if(removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
                 StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
-                permanent.removeCounters(CounterType.P1P1.createInstance(), game);
+                permanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
                 sb.append("Removed a +1/+1 counter ");
                 game.informPlayers(sb.toString());
             }

@@ -64,14 +64,14 @@ class BreakthroughEffect extends OneShotEffect {
         }
         int amountToKeep = source.getManaCostsToPay().getX();
         if (amountToKeep == 0) {
-            player.discard(player.getHand(), source, game);
+            player.discard(player.getHand(), false, source, game);
         } else if (amountToKeep < player.getHand().size()) {
             TargetCardInHand target = new TargetCardInHand(amountToKeep, new FilterCard());
             target.setTargetName("cards to keep");
             target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game);
             Cards cards = player.getHand().copy();
             cards.removeIf(target.getTargets()::contains);
-            player.discard(cards, source, game);
+            player.discard(cards, false, source, game);
         }
         return true;
     }

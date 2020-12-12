@@ -110,7 +110,7 @@ class ThievingSkydiverEffect extends OneShotEffect {
             return false;
         }
         game.applyEffects();
-        permanent.addAttachment(artifact.getId(), game);
+        permanent.addAttachment(artifact.getId(), source, game);
         return true;
     }
 }

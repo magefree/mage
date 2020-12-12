@@ -117,7 +117,7 @@ class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
                 Card imprintedCard = game.getCard(SummonersEgg.getImprinted().get(0));
                 if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()) == Zone.EXILED) {
                     //turn the exiled card face up.
-                    imprintedCard.turnFaceUp(game, source.getControllerId());
+                    imprintedCard.turnFaceUp(source, game, source.getControllerId());
                     //If it's a creature card,
                     if (imprintedCard.isCreature()) {
                         //put it onto the battlefield under your control

@@ -66,7 +66,7 @@ class ClingingMistsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            creature.tap(game);
+            creature.tap(source, game);
             doNotUntapNextUntapStep.add(creature);
         }
         if (!doNotUntapNextUntapStep.isEmpty()) {

@@ -26,7 +26,7 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (event.getTargetId().equals(controllerId)) {
                 damageSourceIds.add(CardUtil.getCardZoneString(null, event.getSourceId(), game));
             }

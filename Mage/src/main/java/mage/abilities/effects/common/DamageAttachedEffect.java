@@ -62,7 +62,7 @@ public class DamageAttachedEffect extends OneShotEffect {
         if(enchanted == null) {
             return false;
         }
-        enchanted.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+        enchanted.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
         return true;
     }
 

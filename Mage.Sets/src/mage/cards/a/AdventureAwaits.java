@@ -73,7 +73,7 @@ class AdventureAwaitsEffect extends OneShotEffect {
             player.putCardsOnBottomOfLibrary(cards, game, source, false);
         } else {
             player.putCardsOnBottomOfLibrary(cards, game, source, false);
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
         }
         return true;
     }

@@ -69,12 +69,12 @@ class ExileLibraryEffect extends OneShotEffect {
             int count = controller.getLibrary().size();
             if (count > 0) {
                 for (Card cardToExile: controller.getLibrary().getCards(game)) {
-                    cardToExile.moveToExile(null, "", source.getSourceId(), game);
+                    cardToExile.moveToExile(null, "", source, game);
                     cardToExile.setFaceDown(true, game);
                 }
             }
             for (Card cardToLibrary: controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(cardToLibrary, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+                controller.moveCardToLibraryWithInfo(cardToLibrary, source, game, Zone.GRAVEYARD, true, true);
             }
             controller.shuffleLibrary(source, game);
             return true;

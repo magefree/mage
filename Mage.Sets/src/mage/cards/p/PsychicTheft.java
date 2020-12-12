@@ -86,7 +86,7 @@ class PsychicTheftEffect extends OneShotEffect {
                 }
                 if (chosenCard != null) {
 
-                    opponent.moveCardToExileWithInfo(chosenCard, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.HAND, true);
+                    opponent.moveCardToExileWithInfo(chosenCard, source.getSourceId(), sourceObject.getIdName(), source, game, Zone.HAND, true);
 
                     AsThoughEffect effect = new PsychicTheftCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(chosenCard.getId()));

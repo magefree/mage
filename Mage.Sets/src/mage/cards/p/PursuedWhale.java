@@ -69,7 +69,7 @@ class PursuedWhaleTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            token.putOntoBattlefield(1, game, source.getSourceId(), playerId);
+            token.putOntoBattlefield(1, game, source, playerId);
         }
         return true;
     }

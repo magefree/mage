@@ -114,7 +114,7 @@ class YoseiTheMorningStarTapEffect extends OneShotEffect {
         for (UUID target : target1.getTargets()) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
-                permanent.tap(game);
+                permanent.tap(source, game);
             } else {
                 return false;
             }

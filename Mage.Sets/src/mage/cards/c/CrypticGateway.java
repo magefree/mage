@@ -68,16 +68,16 @@ class CrypticGatewayCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int numTargets = 0;
         Set<Permanent> permanents = new HashSet<>();
-        while (numTargets < 2 && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
+        while (numTargets < 2 && target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     return false;
                 }
-                paid |= permanent.tap(game);
+                paid |= permanent.tap(source, game);
                 if (paid) {
                     numTargets++;
                     target.clearChosen();
@@ -92,8 +92,8 @@ class CrypticGatewayCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return target.canChoose(source.getSourceId(), controllerId, game);
     }
 
     public CrypticGatewayPredicate getPredicate() {

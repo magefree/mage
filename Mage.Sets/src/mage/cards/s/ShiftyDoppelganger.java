@@ -139,7 +139,7 @@ class ShiftyDoppelgangerReturnEffect extends OneShotEffect {
         Permanent creature = game.getPermanent(creatureId);
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (creature != null && creature.getZoneChangeCounter(game) == this.creatureZoneCount && creature.sacrifice(source.getSourceId(), game)) {
+        if (creature != null && creature.getZoneChangeCounter(game) == this.creatureZoneCount && creature.sacrifice(source, game)) {
             if (player != null && sourceObject != null && sourceObject.getZoneChangeCounter(game) == this.sourceZoneCount) {
                 player.moveCards(game.getCard(source.getSourceId()), Zone.BATTLEFIELD, source, game);
             }

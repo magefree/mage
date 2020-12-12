@@ -62,7 +62,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -102,7 +102,7 @@ class GutterGrimeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         GutterGrimeToken token = new GutterGrimeToken(source.getSourceId());
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 

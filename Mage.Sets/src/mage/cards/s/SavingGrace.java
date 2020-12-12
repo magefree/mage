@@ -131,7 +131,7 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
             }
             game.informPlayers(message.toString());
             // Redirect damage
-            creature.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+            creature.damage(damageEvent.getAmount(), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             return true;
         }
         return false;

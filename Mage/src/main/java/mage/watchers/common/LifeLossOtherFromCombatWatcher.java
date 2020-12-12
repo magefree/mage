@@ -24,6 +24,7 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        // non combat lose life
         if (event.getType() == GameEvent.EventType.LOST_LIFE && !event.getFlag()) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {

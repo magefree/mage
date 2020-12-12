@@ -135,7 +135,7 @@ class ArchfiendOfSpiteEffect extends OneShotEffect {
                 null, "Lose " + amount + " life",
                 "Sacrifice " + amount + " permanents", source, game
         )) {
-            return player.loseLife(amount, game, false) > 0;
+            return player.loseLife(amount, game, source, false) > 0;
         }
         return effect.apply(game, source);
     }

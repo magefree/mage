@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -74,7 +75,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             int numberOfCreaturesControlled = CreaturesYouControlCount.instance.calculate(game, source, this);
             int toPrevent = Math.min(numberOfCreaturesControlled, event.getAmount());
-            GameEvent preventEvent = new PreventDamageEvent(equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
+            GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
             if (!game.replaceEvent(preventEvent)) {
                 if (event.getAmount() >= toPrevent) {
                     event.setAmount(event.getAmount() - toPrevent);
@@ -84,8 +85,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
                 }
                 if (toPrevent > 0) {
                     game.informPlayers("Shield of the Avatar " + "prevented " + toPrevent + " damage to " + game.getPermanent(equipment.getAttachedTo()).getName());
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                            equipment.getAttachedTo(), source.getSourceId(), source.getControllerId(), toPrevent));
+                    game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent));
                 }
             }
         }

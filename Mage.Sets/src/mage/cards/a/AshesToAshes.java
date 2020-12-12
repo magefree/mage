@@ -69,7 +69,7 @@ class AshesToAshesEffect extends OneShotEffect {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
-                target.moveToExile(exileId, "Ashes to Ashes", source.getSourceId(), game);
+                target.moveToExile(exileId, "Ashes to Ashes", source, game);
             }
         }
         return true;

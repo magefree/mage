@@ -93,7 +93,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 int creatureCardsInGraveyard = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source.getSourceId(), game);
-                token.putOntoBattlefield(creatureCardsInGraveyard, game, source.getSourceId(), playerId);
+                token.putOntoBattlefield(creatureCardsInGraveyard, game, source, playerId);
                 for (UUID tokenId : token.getLastAddedTokenIds()) {
                     tokensCreated.add(tokenId);
                 }
@@ -117,13 +117,13 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE
-                || event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.END_TURN_STEP_PRE) {
+        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(sourceId);
             if (permanent != null) {
                 for (Effect effect : this.getEffects()) {
@@ -136,7 +136,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 return true;
             }
-        } else if (event.getType() == EventType.ZONE_CHANGE) {
+        } else if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (event.getTargetId().equals(this.getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
@@ -191,7 +191,7 @@ class TombstoneStairwellDestroyEffect extends OneShotEffect {
             for (UUID tokenId : tokensCreated) {
                 Permanent token = game.getPermanent(tokenId);
                 if (token != null) {
-                    token.destroy(source.getSourceId(), game, true);
+                    token.destroy(source, game, true);
                 }
             }
         }

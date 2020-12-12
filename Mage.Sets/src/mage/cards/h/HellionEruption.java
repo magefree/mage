@@ -57,9 +57,9 @@ class HellionEruptionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
-        (new HellionToken()).putOntoBattlefield(permanents.size(), game, source.getSourceId(), source.getControllerId());
+        (new HellionToken()).putOntoBattlefield(permanents.size(), game, source, source.getControllerId());
         return true;
     }
 

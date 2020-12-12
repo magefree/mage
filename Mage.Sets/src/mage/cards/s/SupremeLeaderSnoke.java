@@ -95,10 +95,10 @@ enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
 class OpponentNoncombatLostLifeCount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         PlayerLostLifeNonCombatWatcher watcher = game.getState().getWatcher(PlayerLostLifeNonCombatWatcher.class);
         if(watcher != null) {
-            return watcher.getAllOppLifeLost(source.getControllerId(), game);
+            return watcher.getAllOppLifeLost(sourceAbility.getControllerId(), game);
         }
         return 0;
     }

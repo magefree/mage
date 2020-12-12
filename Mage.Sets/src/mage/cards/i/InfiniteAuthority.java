@@ -129,7 +129,7 @@ class InfiniteAuthorityEffect extends OneShotEffect {
             if (enchantedCreature != null) {
                 Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    if (permanent.destroy(source.getSourceId(), game, false)) {
+                    if (permanent.destroy(source, game, false)) {
                         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
                         delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(enchantedCreature, game));
                         game.addDelayedTriggeredAbility(delayedAbility, source);

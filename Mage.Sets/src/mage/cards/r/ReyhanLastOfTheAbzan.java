@@ -77,7 +77,7 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

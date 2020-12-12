@@ -61,7 +61,7 @@ class JackalPupEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
-            you.damage((Integer) this.getValue("damage"), source.getSourceId(), game);
+            you.damage((Integer) this.getValue("damage"), source.getSourceId(), source, game);
         }
         return true;
     }

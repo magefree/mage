@@ -80,7 +80,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_BLOCKERS;
+        return event.getType() == GameEvent.EventType.DECLARED_BLOCKERS;
     }
 
     @Override
@@ -158,7 +158,7 @@ class GodsendExileEffect extends OneShotEffect {
         if (creature != null && controller != null && sourcePermanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             controller.moveCardToExileWithInfo(creature, exileId,
-                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ')', source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    sourcePermanent.getIdName() + " (" + sourcePermanent.getZoneChangeCounter(game) + ')', source, game, Zone.BATTLEFIELD, true);
 
         }
         return false;
@@ -192,7 +192,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null) {
                 ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));

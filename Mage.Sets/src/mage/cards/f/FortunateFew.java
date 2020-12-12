@@ -87,7 +87,7 @@ class FortunateFewEffect extends OneShotEffect {
 
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
                 if (!chosenCards.containsKey(permanent)) {
-                    permanent.destroy(source.getSourceId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
             }
             return true;

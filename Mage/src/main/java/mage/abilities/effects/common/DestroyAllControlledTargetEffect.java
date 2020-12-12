@@ -36,7 +36,7 @@ public class DestroyAllControlledTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
         }
         return true;
     }

@@ -543,7 +543,7 @@ public final class ManaUtil {
             wantToPay = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
             if (wantToPay > 0) {
                 Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
-                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
+                payed = cost.pay(source, game, source, player.getId(), false, null);
             } else {
                 payed = true;
             }

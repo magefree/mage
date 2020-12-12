@@ -74,7 +74,7 @@ class SharkTyphoonCastEffect extends OneShotEffect {
         if (spell != null) {
             xValue = spell.getConvertedManaCost();
         }
-        return new SharkToken(xValue).putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        return new SharkToken(xValue).putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }
 

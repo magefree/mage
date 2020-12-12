@@ -64,14 +64,14 @@ class CompulsiveResearchDiscardEffect extends OneShotEffect {
         }
         if (targetPlayer.getHand().count(StaticFilters.FILTER_CARD_LAND, game) < 1
                 || !targetPlayer.chooseUse(outcome, "Discard a land card?", source, game)) {
-            return !targetPlayer.discard(2, false, source, game).isEmpty();
+            return !targetPlayer.discard(2, false, false, source, game).isEmpty();
         }
         TargetDiscard target = new TargetDiscard(StaticFilters.FILTER_CARD_LAND_A, targetPlayer.getId());
         targetPlayer.choose(Outcome.Discard, target, source.getSourceId(), game);
         Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-        if (card != null && targetPlayer.discard(card, source, game)) {
+        if (card != null && targetPlayer.discard(card, false, source, game)) {
             return true;
         }
-        return !targetPlayer.discard(2, false, source, game).isEmpty();
+        return !targetPlayer.discard(2, false, false, source, game).isEmpty();
     }
 }

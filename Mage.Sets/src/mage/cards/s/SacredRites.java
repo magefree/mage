@@ -63,7 +63,7 @@ class SacredRitesEffect extends OneShotEffect {
         }
         Target target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
         target.choose(outcome, controller.getId(), source.getSourceId(), game);
-        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
         if (numDiscarded > 0) {
             game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
         }

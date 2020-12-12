@@ -69,13 +69,13 @@ class ForceChokeEffect extends OneShotEffect {
         Player objectController = game.getPlayer(stackObject.getControllerId());
         if (player != null) {
             Cost cost = new PayLifeCost(stackObject.getConvertedManaCost());
-            if (cost.canPay(source, source.getSourceId(), objectController.getId(), game)
+            if (cost.canPay(source, source, objectController.getId(), game)
                     && objectController.chooseUse(Outcome.LoseLife, "Pay "
                             + stackObject.getConvertedManaCost() + " life?", source, game)
-                    && cost.pay(source, game, source.getSourceId(), objectController.getId(), false, null)) {
+                    && cost.pay(source, game, source, objectController.getId(), false, null)) {
                 objectController.moveCards((Card) stackObject, Zone.HAND, source, game);
             } else {
-                game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+                game.getStack().counter(stackObject.getId(), source, game);
             }
             return true;
         }

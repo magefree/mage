@@ -75,6 +75,6 @@ class ResoluteStrikeEffect extends OneShotEffect {
         }
         TargetPermanent targetPermanent = new TargetPermanent(0, 1, filter, true);
         player.choose(outcome, targetPermanent, source.getSourceId(), game);
-        return permanent.addAttachment(targetPermanent.getFirstTarget(), game);
+        return permanent.addAttachment(targetPermanent.getFirstTarget(), source, game);
     }
 }

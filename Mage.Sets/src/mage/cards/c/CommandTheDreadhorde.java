@@ -72,7 +72,7 @@ class CommandTheDreadhordeEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(source.getTargets().get(0).getTargets());
         int damage = cards.getCards(game).stream().mapToInt(Card::getConvertedManaCost).sum();
-        player.damage(damage, source.getSourceId(), game);
+        player.damage(damage, source.getSourceId(), source, game);
         return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
     }
 }

@@ -71,7 +71,7 @@ class FathomFleetSwordjackEffect extends OneShotEffect {
         );
         return artifactCount > 0 && game.damagePlayerOrPlaneswalker(
                 game.getCombat().getDefenderId(source.getSourceId()), artifactCount,
-                source.getSourceId(), game, false, true
+                source.getSourceId(), source, game, false, true
         ) > 0;
     }
 }

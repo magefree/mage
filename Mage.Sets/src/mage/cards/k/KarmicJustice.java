@@ -58,7 +58,7 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DESTROYED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DESTROYED_PERMANENT;
     }
     
     @Override

@@ -145,8 +145,8 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), game)) {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
@@ -155,15 +155,15 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
                     return false;
                 }
                 defendingPlayerId = game.getCombat().getDefenderId(permanent.getId());
-                paid |= controller.moveCardToHandWithInfo(permanent, sourceId, game);
+                paid |= controller.moveCardToHandWithInfo(permanent, source, game, true);
             }
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override
@@ -191,7 +191,7 @@ class RevealNinjutsuCardCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
 
         Card card = player.getHand().get(ability.getSourceId(), game);
@@ -214,7 +214,7 @@ class RevealNinjutsuCardCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
     }
 

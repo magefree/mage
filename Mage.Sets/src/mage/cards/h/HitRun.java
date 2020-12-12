@@ -77,14 +77,14 @@ class HitEffect extends OneShotEffect {
                     CardType.CREATURE.getPredicate()));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
 
-            if (target.canChoose(targetPlayer.getId(), game)) {
+            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
                 targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                     int damage = permanent.getConvertedManaCost();
                     if (damage > 0) {
-                        targetPlayer.damage(damage, source.getSourceId(), game);
+                        targetPlayer.damage(damage, source.getSourceId(), source, game);
                     }
                 }
             }

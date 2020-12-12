@@ -59,7 +59,7 @@ class DwarvenShrineTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -103,7 +103,7 @@ class DwarvenShrineEffect extends OneShotEffect {
                             count += player.getGraveyard().count(filterCardName, game);
                         }
                     }
-                    controller.damage(count * 2, mageObject.getId(), game);
+                    controller.damage(count * 2, mageObject.getId(), source, game);
                     return true;
                 }
             }

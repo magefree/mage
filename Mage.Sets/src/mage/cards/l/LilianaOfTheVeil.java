@@ -118,7 +118,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
     private void sacrificePermanents(List<Permanent> pile, Game game, Ability source) {
         for (Permanent permanent : pile) {
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
     }

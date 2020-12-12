@@ -102,6 +102,6 @@ class EmberwildeCaptainEffect extends OneShotEffect {
         if (player == null || player.getHand().size() < 1) {
             return false;
         }
-        return player.damage(player.getHand().size(), source.getSourceId(), game) > 0;
+        return player.damage(player.getHand().size(), source.getSourceId(), source, game) > 0;
     }
 }

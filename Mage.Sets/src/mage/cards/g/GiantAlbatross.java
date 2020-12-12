@@ -83,11 +83,11 @@ class GiantAlbatrossEffect extends OneShotEffect {
                     for (Permanent creature : creatures) {
                         if (sourcePermanent.getDealtDamageByThisTurn().contains(new MageObjectReference(creature.getId(), game))) {
                             final StringBuilder sb = new StringBuilder("Pay 2 life? (Otherwise ").append(creature.getName()).append(" will be destroyed)");
-                            if (cost.canPay(source, creature.getControllerId(), creature.getControllerId(), game) && player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
-                                cost.pay(source, game, creature.getControllerId(), creature.getControllerId(), true, null);
+                            if (cost.canPay(source, source, creature.getControllerId(), game) && player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
+                                cost.pay(source, game, source, creature.getControllerId(), true, null);
                             }
                             if (!cost.isPaid()) {
-                                creature.destroy(source.getSourceId(), game, true);
+                                creature.destroy(source, game, true);
                             }
                         }
                     }

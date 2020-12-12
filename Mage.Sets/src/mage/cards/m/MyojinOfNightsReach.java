@@ -75,7 +75,7 @@ class MyojinOfNightsReachEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                opponent.discard(opponent.getHand(), source, game);
+                opponent.discard(opponent.getHand(), false, source, game);
             }
         }
         return true;

@@ -94,7 +94,7 @@ class GenesisChamberEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             MyrToken token = new MyrToken();
-            token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
+            token.putOntoBattlefield(1, game, source, permanent.getControllerId());
         }
         return true;
     }

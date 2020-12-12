@@ -92,7 +92,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
         for (UUID targetId : source.getTargets().get(0).getTargets()) {
             Permanent perm = game.getPermanent(targetId);
             if (perm != null) {
-                perm.destroy(source.getSourceId(), game, false);
+                perm.destroy(source, game, false);
                 if (Zone.GRAVEYARD == game.getState().getZone(targetId)) {
                     Card card = game.getCard(targetId);
                     if (card != null) {

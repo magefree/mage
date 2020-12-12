@@ -77,7 +77,7 @@ class SootImpEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
-            caster.loseLife(1, game, false);
+            caster.loseLife(1, game, source, false);
             return true;
         }
         return false;

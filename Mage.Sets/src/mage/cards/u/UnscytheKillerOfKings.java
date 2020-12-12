@@ -76,7 +76,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -132,9 +132,9 @@ class UnscytheEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
+            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
                 ZombieToken zombie = new ZombieToken();
-                return zombie.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                return zombie.putOntoBattlefield(1, game, source, source.getControllerId());
             }
             return true;
         }

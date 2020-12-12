@@ -85,10 +85,10 @@ class CocoonEffect extends OneShotEffect {
         if (permanent != null) {
             int amount = permanent.getCounters(game).getCount(CounterType.PUPA);
             if (amount > 0) {
-                permanent.removeCounters(CounterType.PUPA.createInstance(), game);
+                permanent.removeCounters(CounterType.PUPA.createInstance(), source, game);
             } else {
                 Permanent enchantedPermanent = game.getPermanent(permanent.getAttachedTo());
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
                 if (enchantedPermanent != null) {
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
                     effect.setTargetPointer(new FixedTarget(enchantedPermanent, game));

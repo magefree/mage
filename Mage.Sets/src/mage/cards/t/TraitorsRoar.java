@@ -71,10 +71,10 @@ class TraitorsRoarEffect extends OneShotEffect {
         boolean applied = false;
         Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
         if (targetCreature != null) {
-            applied = targetCreature.tap(game);
+            applied = targetCreature.tap(source, game);
             Player controller = game.getPlayer(targetCreature.getControllerId());
             if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game);
+                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), source, game);
                 applied = true;
             }
         }

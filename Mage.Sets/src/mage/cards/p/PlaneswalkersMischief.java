@@ -76,7 +76,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
             opponent.revealCards(source, cards, game);
             if (revealedCard.isInstant()
                     || revealedCard.isSorcery()) {
-                opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source.getSourceId(), game, Zone.HAND, true);
+                opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source, game, Zone.HAND, true);
                 AsThoughEffect effect = new PlaneswalkersMischiefCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(revealedCard.getId()));
                 game.addEffect(effect, source);

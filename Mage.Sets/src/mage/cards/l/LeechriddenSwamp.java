@@ -87,7 +87,7 @@ class LeechriddenSwampLoseLifeEffect extends OneShotEffect {
             for (UUID opponentId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    opponent.loseLife(1, game, false);
+                    opponent.loseLife(1, game, source, false);
                 }
             }
             return true;

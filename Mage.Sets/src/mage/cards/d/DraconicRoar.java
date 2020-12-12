@@ -96,7 +96,7 @@ class DraconicRoarEffect extends OneShotEffect {
                 if (permanent != null) {
                     Player player = game.getPlayer(permanent.getControllerId());
                     if (player != null) {
-                        player.damage(3, source.getSourceId(), game);
+                        player.damage(3, source.getSourceId(), source, game);
                     }
                 }
             }

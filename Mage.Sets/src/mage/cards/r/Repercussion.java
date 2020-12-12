@@ -97,7 +97,7 @@ class RepercussionEffect extends OneShotEffect {
             if (creature != null) {
                 Player player = game.getPlayer(creature.getControllerId());
                 if (player != null) {
-                    player.damage(playerDamage, source.getSourceId(), game);
+                    player.damage(playerDamage, source.getSourceId(), source, game);
                 }
             }
             return true;

@@ -74,7 +74,7 @@ class EvershrikeEffect extends OneShotEffect {
         Card evershrikeCard = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && evershrikeCard != null) {
-            if (evershrikeCard.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false)) {
+            if (evershrikeCard.moveToZone(Zone.BATTLEFIELD, source, game, false)) {
                 int xAmount = source.getManaCostsToPay().getX() + 1;
                 Permanent evershrikePermanent = game.getPermanent(source.getSourceId());
                 if (evershrikePermanent == null) {
@@ -94,7 +94,7 @@ class EvershrikeEffect extends OneShotEffect {
                         if (aura != null) {
                             game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);
                             if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
-                                evershrikePermanent.addAttachment(aura.getId(), game);
+                                evershrikePermanent.addAttachment(aura.getId(), source, game);
                             }
                             exileSource = false;
                         }

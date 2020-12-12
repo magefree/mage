@@ -81,7 +81,7 @@ class SelflessExorcistEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
-        permanent.damage(card.getPower().getValue(), card.getId(), game);
+        permanent.damage(card.getPower().getValue(), card.getId(), source, game);
         return true;
     }
 }

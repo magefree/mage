@@ -64,7 +64,7 @@ class RitesOfSpringEffect extends OneShotEffect {
         }
         TargetCard target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
         controller.choose(Outcome.AIDontUseIt, controller.getHand(), target, game);
-        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
+        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
         new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, numDiscarded, StaticFilters.FILTER_CARD_BASIC_LAND
         ), true, true).apply(game, source);

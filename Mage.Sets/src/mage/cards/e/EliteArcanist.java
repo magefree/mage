@@ -107,7 +107,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
                     && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Elite Arcanist", source.getSourceId(), game);
+                    card.moveToExile(source.getSourceId(), "Elite Arcanist", source, game);
                     Permanent permanent = game.getPermanent(source.getSourceId());
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);

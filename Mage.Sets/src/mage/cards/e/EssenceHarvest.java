@@ -71,7 +71,7 @@ class EssenceHarvestEffect extends OneShotEffect {
             }
 
             if (amount > 0) {
-                targetPlayer.loseLife(amount, game, false);
+                targetPlayer.loseLife(amount, game, source, false);
                 controller.gainLife(amount, game, source);
             }
             return true;

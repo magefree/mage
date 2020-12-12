@@ -78,7 +78,7 @@ class NoxiousGearhulkEffect extends OneShotEffect {
         Permanent creatureToDestroy = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creatureToDestroy != null && player != null) {
             if (player.chooseUse(Outcome.DestroyPermanent, "Destroy creature?", source, game)) {
-                if (creatureToDestroy.destroy(source.getSourceId(), game, false)) {
+                if (creatureToDestroy.destroy(source, game, false)) {
                     player.gainLife(creatureToDestroy.getToughness().getValue(), game, source);
                 }
             }

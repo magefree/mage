@@ -87,8 +87,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
             }
             CurseOfTheSwineBoarToken swineToken = new CurseOfTheSwineBoarToken();
             for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
-                swineToken.putOntoBattlefield(exiledByController.getValue(),
-                        game, source.getSourceId(), exiledByController.getKey());
+                swineToken.putOntoBattlefield(exiledByController.getValue(), game, source, exiledByController.getKey());
             }
             return true;
         }

@@ -121,7 +121,7 @@ class TransmuteArtifactEffect extends SearchEffect {
             if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
                 Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
                 if (permanent != null) {
-                    sacrifice = permanent.sacrifice(source.getSourceId(), game);
+                    sacrifice = permanent.sacrifice(source, game);
                 }
             }
             if (sacrifice && controller.searchLibrary(target, source, game)) {

@@ -135,7 +135,7 @@ class MidnightClockEffect extends OneShotEffect {
         cards.addAll(player.getGraveyard());
         player.putCardsOnTopOfLibrary(cards, game, source, false);
         player.shuffleLibrary(source, game);
-        player.drawCards(7, source.getSourceId(), game);
+        player.drawCards(7, source, game);
         return effect.apply(game, source);
     }
 }

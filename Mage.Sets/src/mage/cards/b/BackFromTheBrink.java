@@ -66,19 +66,19 @@ class BackFromTheBrinkCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
             Player controller = game.getPlayer(controllerId);
             if (controller != null) {
                 Card card = controller.getGraveyard().get(targets.getFirstTarget(), game);
                 if (card != null && controller.moveCards(card, Zone.EXILED, ability, game)) {
                     ability.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-                    paid = card.getManaCost().pay(ability, game, sourceId, controllerId, noMana);
+                    paid = card.getManaCost().pay(ability, game, source, controllerId, noMana);
                 }
             }
         }

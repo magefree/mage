@@ -106,8 +106,8 @@ class TaboraxHopesDemiseEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.chooseUse(
                 outcome, "Draw a card and lose 1 life?", source, game
-        ) && player.drawCards(1, source.getSourceId(), game) > 0) {
-            player.loseLife(1, game, false);
+        ) && player.drawCards(1, source, game) > 0) {
+            player.loseLife(1, game, source, false);
             return true;
         }
         return false;

@@ -62,7 +62,7 @@ class FeldonsCaneEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Card card: controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+                controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
             }            
             controller.shuffleLibrary(source, game);
             return true;

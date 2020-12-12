@@ -85,7 +85,7 @@ class DredgeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DRAW_CARD;
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override

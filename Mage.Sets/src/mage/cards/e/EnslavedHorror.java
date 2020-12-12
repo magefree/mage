@@ -78,7 +78,7 @@ class EnslavedHorrorEffect extends OneShotEffect {
                     filterCreatureCard.add(new OwnerIdPredicate(playerId));
                     TargetCardInGraveyard target = new TargetCardInGraveyard(0, 1, filterCreatureCard);
                     target.setNotTarget(true);
-                    if (target.canChoose(playerId, game)
+                    if (target.canChoose(source.getSourceId(), playerId, game)
                             && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {

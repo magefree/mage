@@ -68,7 +68,7 @@ class EntanglingTrapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CLASHED;
+        return event.getType() == GameEvent.EventType.CLASHED;
     }
 
     @Override

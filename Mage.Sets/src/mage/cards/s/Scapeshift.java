@@ -69,7 +69,7 @@ class ScapeshiftEffect extends OneShotEffect {
             for (UUID uuid : sacrificeLand.getTargets()) {
                 Permanent land = game.getPermanent(uuid);
                 if (land != null) {
-                    land.sacrifice(source.getSourceId(), game);
+                    land.sacrifice(source, game);
                     amount++;
                 }
             }

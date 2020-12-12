@@ -65,7 +65,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UNTAP_STEP || event.getType() == EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
             return false;
         }
         // remember the turn of the untap step the effect has to be applied
-        if (event.getType() == EventType.UNTAP_STEP) {
+        if (event.getType() == GameEvent.EventType.UNTAP_STEP) {
             if (game.isActivePlayer(getTargetPointer().getFirst(game, source))) {
                 if (validForTurnNum == game.getTurnNum()) { // the turn has a second untap step but the effect is already related to the first untap step
                     discard();
@@ -90,7 +90,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 Player controller = game.getPlayer(source.getControllerId());

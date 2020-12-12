@@ -195,7 +195,7 @@ class DualNatureExileEffect extends OneShotEffect {
             for (UUID tokenId : tokensCreated) {
                 Permanent token = game.getPermanent(tokenId);
                 if (token != null) {
-                    token.destroy(source.getSourceId(), game, true);
+                    token.destroy(source, game, true);
                 }
             }
         }

@@ -18,7 +18,7 @@ public class ZoneChangeGroupEvent extends GameEvent {
     private final Set<PermanentToken> tokens;
 
     public ZoneChangeGroupEvent(Set<Card> cards, Set<PermanentToken> tokens, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
-        super(EventType.ZONE_CHANGE_GROUP, null, sourceId, playerId);
+        super(GameEvent.EventType.ZONE_CHANGE_GROUP, null, null, playerId);
         this.fromZone = fromZone;
         this.toZone = toZone;
         this.cards = cards;

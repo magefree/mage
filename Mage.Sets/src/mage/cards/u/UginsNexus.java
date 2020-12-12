@@ -72,7 +72,7 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.EXTRA_TURN;
+        return event.getType() == GameEvent.EventType.EXTRA_TURN;
     }
     
     @Override
@@ -107,7 +107,7 @@ class UginsNexusExileEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
-            permanent.moveToExile(null, "", source.getSourceId(), game);
+            permanent.moveToExile(null, "", source, game);
             new AddExtraTurnControllerEffect().apply(game, source);
             return true;
         }
@@ -116,12 +116,12 @@ class UginsNexusExileEffect extends ReplacementEffectImpl {
     
     @Override    
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getToZone() == Zone.GRAVEYARD && zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 return true;

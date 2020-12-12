@@ -98,7 +98,7 @@ class TheAkroanWarEffect extends OneShotEffect {
         game.getBattlefield()
                 .getActivePermanents(filter, source.getControllerId(), game)
                 .stream()
-                .forEach(permanent -> permanent.damage(permanent.getPower().getValue(), permanent.getId(), game));
+                .forEach(permanent -> permanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game));
         return true;
     }
 }

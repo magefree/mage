@@ -76,7 +76,7 @@ class ChainOfSilenceEffect extends OneShotEffect {
             TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'), true);
             if (player != null && player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
                 Permanent land = game.getPermanent(target.getFirstTarget());
-                if (land != null && land.sacrifice(source.getSourceId(), game)) {
+                if (land != null && land.sacrifice(source, game)) {
                     if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {

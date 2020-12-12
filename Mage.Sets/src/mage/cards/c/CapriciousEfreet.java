@@ -91,7 +91,7 @@ class CapriciousEfreetEffect extends OneShotEffect {
 
         if (!targetPermanents.isEmpty()) {
             permanent = targetPermanents.get(RandomUtil.nextInt(targetPermanents.size()));
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
             return true;
         }
         return false;

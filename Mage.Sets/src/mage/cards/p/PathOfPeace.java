@@ -58,7 +58,7 @@ class PathOfPeaceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && target != null) {
-            target.destroy(source.getSourceId(), game, false);
+            target.destroy(source, game, false);
             Player owner = game.getPlayer(target.getOwnerId());
             if (owner != null) {
                 owner.gainLife(4, game, source);

@@ -76,7 +76,7 @@ class CallTheCoppercoatsEffect extends OneShotEffect {
                         .mapToInt(uuid -> game.getBattlefield().countAll(
                                 StaticFilters.FILTER_PERMANENT_CREATURE, uuid, game
                         )).sum(),
-                game, source.getSourceId(), source.getControllerId()
+                game, source, source.getControllerId()
         );
     }
 }

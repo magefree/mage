@@ -86,9 +86,9 @@ class QuarryHaulerEffect extends OneShotEffect {
                     } else {
                         counterType = CounterType.findByName(counter.getName());
                         if (counterType != null) {
-                            permanent.removeCounters(counterType.createInstance(), game);
+                            permanent.removeCounters(counterType.createInstance(), source, game);
                         } else {
-                            permanent.removeCounters(counter.getName(), 1, game);
+                            permanent.removeCounters(counter.getName(), 1, source, game);
                         }
                     }
                 }

@@ -119,7 +119,7 @@ class TurnaboutEffect extends OneShotEffect {
                 filter.add(Predicates.not(TappedPredicate.instance));
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (permanent.isControlledBy(target)) {
-                        permanent.tap(game);
+                        permanent.tap(source, game);
                     }
                 }
             }

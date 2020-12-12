@@ -83,7 +83,7 @@ class HoardingDragonEffect extends OneShotEffect {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
                     }
                 }
             }

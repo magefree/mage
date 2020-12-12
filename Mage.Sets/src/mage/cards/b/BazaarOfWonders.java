@@ -81,7 +81,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
         filter1.add(Predicates.not(TokenPredicate.instance));
         if (!game.getBattlefield().getActivePermanents(filter1, 
                 source.getControllerId(), game).isEmpty()) {
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            game.getStack().counter(spell.getId(), source, game);
             return true;
         }
         FilterCard filter2 = new FilterCard();
@@ -92,7 +92,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
                 continue;
             }
             if (player.getGraveyard().count(filter2, game) > 0) {
-                spell.counter(source.getControllerId(), game);
+                spell.counter(source, game);
                 return true;
             }
         }

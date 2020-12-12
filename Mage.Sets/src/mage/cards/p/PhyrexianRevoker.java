@@ -77,7 +77,7 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ACTIVATE_ABILITY) {
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             MageObject object = game.getObject(event.getSourceId()); // Can happen for special ability????
             if (object != null) {
                 Optional<Ability> optAbility = object.getAbilities().get(event.getTargetId());

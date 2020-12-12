@@ -36,7 +36,7 @@ public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
             if (condition.apply(game, source)) {
                 return true;
             }
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
             return true;
         }
         return false;

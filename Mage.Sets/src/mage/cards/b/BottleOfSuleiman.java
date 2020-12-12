@@ -62,10 +62,10 @@ class BottleOfSuleimanEffect extends OneShotEffect {
         if (you != null) {
             if (you.flipCoin(source, game, true)) {
                 DjinnToken token = new DjinnToken();
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(1, game, source, source.getControllerId());
                 return true;
             } else {
-                you.damage(5, source.getSourceId(), game);
+                you.damage(5, source.getSourceId(), source, game);
                 return true;
             }
 

@@ -69,7 +69,7 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
         // Gatherer ruling (2007-02-01)
         // If the draw is replaced by another effect, none of the rest of Fa’adiyah Seer’s ability applies,
         // even if the draw is replaced by another draw (such as with Enduring Renewal).
-        if (cardDrawn == null || player.drawCards(1, event.getSourceId(), game, event.getAppliedEffects()) != 1) {
+        if (cardDrawn == null || player.drawCards(1, source, game, event) != 1) {
             return true;
         }
         player.revealCards(source, new CardsImpl(cardDrawn), game);
@@ -78,10 +78,10 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
         }
         game.informPlayers("The card drawn by " + player.getName() + " is a creature card.  They discard that card unless they pay 3 life.");
         PayLifeCost cost = new PayLifeCost(3);
-        if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+        if (!cost.canPay(source, source, player.getId(), game)
                 || !player.chooseUse(outcome, "Pay 3 life or discard " + cardDrawn.getIdName() + "?", null, "Pay 3 life", "Discard", source, game)
-                || !cost.pay(source, game, source.getSourceId(), player.getId(), true, cost)) {
-            player.discard(cardDrawn, source, game);
+                || !cost.pay(source, game, source, player.getId(), true, cost)) {
+            player.discard(cardDrawn, false, source, game);
         }
         return true;
     }

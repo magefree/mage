@@ -93,7 +93,7 @@ class NogginWhackEffect extends OneShotEffect {
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards(source, revealedCards, game);
             controller.chooseTarget(Outcome.Exile, revealedCards, targetInHand, source, game);
-            targetPlayer.discard(new CardsImpl(targetInHand.getTargets()), source, game);
+            targetPlayer.discard(new CardsImpl(targetInHand.getTargets()), false, source, game);
         }
         return true;
     }

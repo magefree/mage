@@ -109,10 +109,10 @@ class StormHeraldEffect extends OneShotEffect {
                         targetCreature.setNotTarget(true);
                         if (controller.choose(Outcome.PutCardInPlay, targetCreature, source.getSourceId(), game)) {
                             Permanent targetPermanent = game.getPermanent(targetCreature.getFirstTarget());
-                            if (!targetPermanent.cantBeAttachedBy(auraCard, game, true)) {
+                            if (!targetPermanent.cantBeAttachedBy(auraCard, source, game, true)) {
                                 game.getState().setValue("attachTo:" + auraCard.getId(), targetPermanent);
                                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-                                targetPermanent.addAttachment(auraCard.getId(), game);
+                                targetPermanent.addAttachment(auraCard.getId(), source, game);
                                 Permanent permanent = game.getPermanent(auraId);
                                 if (permanent != null) {
                                     toExile.add(permanent);

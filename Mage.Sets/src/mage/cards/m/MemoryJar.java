@@ -68,7 +68,7 @@ class MemoryJarEffect extends OneShotEffect {
                 for (UUID cardId : handCards) {
                     Card card = handCards.get(cardId, game);
                     if (card != null) {
-                        card.moveToExile(getId(), "Memory Jar", source.getSourceId(), game);
+                        card.moveToExile(getId(), "Memory Jar", source, game);
                         card.setFaceDown(true, game);
                         cards.add(card);
                     }
@@ -79,7 +79,7 @@ class MemoryJarEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(7, source.getSourceId(), game);
+                player.drawCards(7, source, game);
             }
         }
         //Delayed ability
@@ -120,13 +120,13 @@ class MemoryJarDelayedEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.discard(player.getHand().size(), false, source, game);
+                    player.discard(player.getHand().size(), false, false, source, game);
                 }
             }
             //Return to hand
             for (Iterator<Card> it = cards.getCards(game).iterator(); it.hasNext(); ) {
                 Card card = it.next();
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                card.moveToZone(Zone.HAND, source, game, true);
             }
             return true;
         }
@@ -152,7 +152,7 @@ class MemoryJarDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE;
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
     }
 
     @Override

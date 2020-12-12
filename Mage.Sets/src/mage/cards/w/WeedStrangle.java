@@ -61,7 +61,7 @@ class WeedStrangleEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && creature != null) {
-            creature.destroy(source.getSourceId(), game, false);
+            creature.destroy(source, game, false);
             if (ClashEffect.getInstance().apply(game, source)) {
                 controller.gainLife(creature.getToughness().getValue(), game, source);
             }

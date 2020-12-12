@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
@@ -100,7 +101,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                        if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                        if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                             possibleTargets++;
                             if (possibleTargets >= this.minNumberOfTargets) {
                                 return true;
@@ -125,7 +126,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
             if (player != null) {
                 Set<UUID> targetsInThisGraveyeard = new HashSet<>();
                 for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                    if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                    if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                         targetsInThisGraveyeard.add(card.getId());
                     }
                 }

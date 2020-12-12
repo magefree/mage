@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.target.TargetSource;
 
 import java.util.UUID;
@@ -91,21 +92,15 @@ class PilgrimOfVirtueEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-            preventDamage(event, source, target.getFirstTarget(), game);
-            return true;
-        }
-        return false;
-    }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(target, source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             event.setAmount(0);
-            this.used = true;
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), damage));
+            this.used = true; // one time use
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
+            return true;
         }
+        return false;
     }
 
     @Override

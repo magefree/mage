@@ -104,12 +104,12 @@ class ChecksAndBalancesEffect extends OneShotEffect {
                     TargetCardInHand target = new TargetCardInHand();
                     if (player.choose(Outcome.Discard, target, source.getSourceId(), game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        player.discard(card, source, game);
+                        player.discard(card, false, source, game);
                     }
 
                 }
             }
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            game.getStack().counter(spell.getId(), source, game);
             return true;
         }
         return false;

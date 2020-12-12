@@ -138,9 +138,9 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
+    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
-        return super.moveToZone(toZone, sourceId, game, flag, appliedEffects);
+        return super.moveToZone(toZone, source, game, flag, appliedEffects);
     }
 
     @Override
@@ -150,26 +150,26 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
+    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
-        return super.moveToExile(exileId, name, sourceId, game, appliedEffects);
+        return super.moveToExile(exileId, name, source, game, appliedEffects);
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         if (isCopy()) {
-            return super.removeFromZone(game, fromZone, sourceId);
+            return super.removeFromZone(game, fromZone, source);
         }
         if (isMelded(game) && fromZone == Zone.BATTLEFIELD) {
             Permanent permanent = game.getPermanent(objectId);
-            return permanent != null && permanent.removeFromZone(game, fromZone, sourceId);
+            return permanent != null && permanent.removeFromZone(game, fromZone, source);
         }
-        boolean topRemoved = hasTopHalf(game) && topHalfCard.removeFromZone(game, fromZone, sourceId);
+        boolean topRemoved = hasTopHalf(game) && topHalfCard.removeFromZone(game, fromZone, source);
         if (!topRemoved) {
             // The top half isn't being moved with the pair anymore.
             halves.remove(topHalfCard);
         }
-        boolean bottomRemoved = hasBottomHalf(game) && bottomHalfCard.removeFromZone(game, fromZone, sourceId);
+        boolean bottomRemoved = hasBottomHalf(game) && bottomHalfCard.removeFromZone(game, fromZone, source);
         if (!bottomRemoved) {
             // The bottom half isn't being moved with the pair anymore.
             halves.remove(bottomHalfCard);

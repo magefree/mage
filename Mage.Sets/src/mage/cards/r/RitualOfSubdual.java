@@ -78,12 +78,12 @@ class RitualOfSubdualReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getObject(event.getSourceId());
+        MageObject mageObject = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return mageObject != null && mageObject.isLand();
     }
 }

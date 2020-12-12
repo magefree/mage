@@ -71,7 +71,7 @@ class CoalitionRelicEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && player != null) {
             int chargeCounters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
-            sourcePermanent.removeCounters(CounterType.CHARGE.createInstance(chargeCounters), game);
+            sourcePermanent.removeCounters(CounterType.CHARGE.createInstance(chargeCounters), source, game);
             Mana mana = new Mana();
             ChoiceColor choice = new ChoiceColor();
             for (int i = 0; i < chargeCounters; i++) {

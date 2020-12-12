@@ -91,7 +91,7 @@ class CrosisThePurgerEffect extends OneShotEffect {
                         .filter(card -> card.getColor(game).shares(choice.getColor()))
                         .collect(Collectors.toSet())
         );
-        damagedPlayer.discard(cards, source, game);
+        damagedPlayer.discard(cards, false, source, game);
         return true;
     }
 }

@@ -97,7 +97,7 @@ class BlimComedicGeniusEffect extends OneShotEffect {
             if (count < 1) {
                 continue;
             }
-            player.loseLife(count, game, true);
+            player.loseLife(count, game, source, true);
             TargetDiscard target = new TargetDiscard(StaticFilters.FILTER_CARD, playerId);
             player.choose(outcome, target, source.getSourceId(), game);
             cardsMap.put(playerId, new CardsImpl(target.getTargets()));
@@ -107,7 +107,7 @@ class BlimComedicGeniusEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.discard(entry.getValue(), source, game);
+            player.discard(entry.getValue(), false, source, game);
         }
         return true;
     }

@@ -96,14 +96,14 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER
-                || event.getType() == EventType.COMBAT_DAMAGE_STEP_PRIORITY
-                || event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.isControlledBy(this.getControllerId()) &&
@@ -117,8 +117,8 @@ class FelineSovereignTriggeredAbility extends TriggeredAbilityImpl {
                 return true;
             }
         }
-        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
-                (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
+                (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
             damagedPlayerIds.clear();
         }
         return false;

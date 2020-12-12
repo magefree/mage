@@ -66,7 +66,7 @@ class SmotheringTitheEffect extends OneShotEffect {
         }
         Cost cost = ManaUtil.createManaCost(2, false);
         if (!player.chooseUse(Outcome.Detriment, "Pay {2} to prevent this effect?", source, game)
-                || !cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                || !cost.pay(source, game, source, player.getId(), false)) {
             return new CreateTokenEffect(new TreasureToken()).apply(game, source);
         }
         return false;

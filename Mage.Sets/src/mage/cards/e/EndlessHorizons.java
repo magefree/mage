@@ -79,7 +79,7 @@ class EndlessHorizonsEffect extends SearchEffect {
                     for (UUID cardId : target.getTargets()) {
                         Card card = you.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            card.moveToExile(exileZone, "Endless Horizons", source.getSourceId(), game);
+                            card.moveToExile(exileZone, "Endless Horizons", source, game);
                         }
                     }
                 }

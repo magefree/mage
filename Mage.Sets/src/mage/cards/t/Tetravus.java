@@ -108,7 +108,7 @@ class TetravusCreateTokensEffect extends OneShotEffect {
         }
         countersToRemove = player.getAmount(0, countersToRemove, "Choose an amount of counters to remove", game);
         Cost cost = new RemoveCountersSourceCost(CounterType.P1P1.createInstance(countersToRemove));
-        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+        if (cost.pay(source, game, source, source.getControllerId(), true)) {
             CreateTokenEffect effect = new CreateTokenEffect(new TetraviteToken(), countersToRemove);
             effect.apply(game, source);
             Object object = game.getState().getValue(CardUtil.getObjectZoneString("_tokensCreated", permanent, game));
@@ -157,7 +157,7 @@ class TetravusAddCountersEffect extends OneShotEffect {
         filter.add(new TetravusPredicate(new MageObjectReference(permanent, game)));
         filter.add(TokenPredicate.instance);
         ExileTargetCost cost = new ExileTargetCost(new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true));
-        if (cost.pay(source, game, source.getSourceId(), player.getId(), true)) {
+        if (cost.pay(source, game, source, player.getId(), true)) {
             return new AddCountersSourceEffect(CounterType.P1P1.createInstance(cost.getPermanents().size())).apply(game, source);
         }
         return false;

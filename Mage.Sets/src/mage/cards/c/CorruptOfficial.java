@@ -72,7 +72,7 @@ class CorruptOfficialDiscardEffect extends OneShotEffect {
             Combat combat = game.getCombat();
             Player defendingPlayer = game.getPlayer(combat.getDefendingPlayerId(corruptOfficial.getId(), game));
             if (defendingPlayer != null) {
-                defendingPlayer.discard(1, true, source, game);
+                defendingPlayer.discard(1, true, false, source, game);
                 return true;
             }
         }

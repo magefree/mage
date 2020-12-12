@@ -73,7 +73,7 @@ class MarchOfTheDroidsEffect extends OneShotEffect {
                     int number = card.getCounters(game).getCount(CounterType.REPAIR);
                     if (number > 0) {
                         cardsToReturn.add(card);
-                        card.removeCounters(CounterType.REPAIR.createInstance(number), game);
+                        card.removeCounters(CounterType.REPAIR.createInstance(number), source, game);
                     }
                 }
             }

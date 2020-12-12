@@ -65,7 +65,7 @@ class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
@@ -120,7 +120,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (target.canChoose(controller.getId(), game) && target.choose(outcome, controller.getId(), source.getSourceId(), game)) {
+        if (target.canChoose(source.getSourceId(), controller.getId(), game) && target.choose(outcome, controller.getId(), source.getSourceId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = game.getCard(cardId);

@@ -73,7 +73,7 @@ class FreeForAllExileAllEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
             Card card = game.getCard(permanent.getId());
-            permanent.moveToExile(source.getSourceId(), "Free-for-All", source.getSourceId(), game);
+            permanent.moveToExile(source.getSourceId(), "Free-for-All", source, game);
             if (card != null) {
                 card.setFaceDown(true, game);
             }

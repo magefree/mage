@@ -87,8 +87,8 @@ class PrisonTermEffect extends OneShotEffect {
             if (oldCreature == null) {
                 return false;
             }
-            if (oldCreature.removeAttachment(prisonTerm.getId(), game)) {
-                return opponentCreature.addAttachment(prisonTerm.getId(), game);
+            if (oldCreature.removeAttachment(prisonTerm.getId(), source, game)) {
+                return opponentCreature.addAttachment(prisonTerm.getId(), source, game);
             }
         }
         return false;

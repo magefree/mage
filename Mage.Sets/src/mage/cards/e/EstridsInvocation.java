@@ -95,10 +95,10 @@ class EstridsInvocationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Estrid's Invocation", source.getSourceId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "Estrid's Invocation", source, game)) {
                 Card card = game.getExile().getCard(source.getSourceId(), game);
                 if (card != null) {
-                    return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    return card.moveToZone(Zone.BATTLEFIELD, source, game, false);
                 }
             }
         }

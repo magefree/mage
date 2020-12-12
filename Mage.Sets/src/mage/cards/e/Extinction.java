@@ -62,7 +62,7 @@ class ExtinctionEffect extends OneShotEffect {
                 FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
                 filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
                 for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
-                    creature.destroy(source.getSourceId(), game, true);
+                    creature.destroy(source, game, true);
                 }
                 return true;
             }

@@ -63,11 +63,11 @@ class FuneralPyreEffect extends OneShotEffect {
         Card exiledCard = game.getCard(source.getTargets().getFirstTarget());
         if (exiledCard != null) {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
-            if (exiledCard.moveToExile(exileId, "Funeral Pyre", source.getSourceId(), game)) {
+            if (exiledCard.moveToExile(exileId, "Funeral Pyre", source, game)) {
                 Player owner = game.getPlayer(exiledCard.getOwnerId());
                 if (owner != null) {
                     Token token = new SpiritWhiteToken();
-                    return token.putOntoBattlefield(1, game, source.getSourceId(), owner.getId());
+                    return token.putOntoBattlefield(1, game, source, owner.getId());
                 }
             }
         }

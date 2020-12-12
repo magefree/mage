@@ -79,7 +79,7 @@ class KusariGamaAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
 
     @Override
@@ -128,7 +128,7 @@ class KusariGamaDamageEffect extends OneShotEffect {
             if (creature != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, creature.getControllerId(), game)) {
                     if (!permanent.getId().equals(damagedCreatureId)) {
-                        permanent.damage(damage, source.getSourceId(), game, false, true);
+                        permanent.damage(damage, source.getSourceId(), source, game, false, true);
                     }
                 }
             }

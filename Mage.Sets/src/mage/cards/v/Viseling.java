@@ -64,7 +64,7 @@ class ViselingEffect extends OneShotEffect {
         if (opponent != null) {
             int xValue = opponent.getHand().size() - 4;
             if (xValue > 0) {
-                opponent.damage(xValue, source.getSourceId(), game);
+                opponent.damage(xValue, source.getSourceId(), source, game);
             }
             return true;
         }

@@ -80,7 +80,7 @@ class CabalTherapyEffect extends OneShotEffect {
             }
             return !CardUtil.haveSameNames(card, cardName, game);
         });
-        targetPlayer.discard(hand, source, game);
+        targetPlayer.discard(hand, false, source, game);
         return true;
     }
 

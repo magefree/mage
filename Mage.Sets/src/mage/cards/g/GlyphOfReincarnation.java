@@ -88,7 +88,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                     if (!creature.getId().equals(targetWall.getId())) {
                         if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(targetWall, game), game)) {
-                            if (creature.destroy(source.getSourceId(), game, true)
+                            if (creature.destroy(source, game, true)
                                     && game.getState().getZone(creature.getId()) == Zone.GRAVEYARD) { // If a commander is replaced to command zone, the creature does not die
                                 Player permController = game.getPlayer(creature.getControllerId());
                                 if (permController != null) {

@@ -23,6 +23,9 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingSameNotBandedPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
+import mage.game.events.AttackerDeclaredEvent;
+import mage.game.events.DeclareAttackerEvent;
+import mage.game.events.DeclareBlockerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -272,13 +275,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                     Permanent attackingPermanent = game.getPermanent(attacker);
                     if (attackingPermanent != null) {
                         attackingPermanent.setTapped(false);
-                        attackingPermanent.tap(true, game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
+                        attackingPermanent.tap(true, null, game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
                     }
                 }
                 handleBanding(attacker, game);
                 // This can only be used to modify the event, the attack can't be replaced here
-                game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
-                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
+                game.replaceEvent(new AttackerDeclaredEvent(group.defenderId, attacker, attackingPlayerId));
+                game.addSimultaneousEvent(new AttackerDeclaredEvent(group.defenderId, attacker, attackingPlayerId));
             }
         }
         attackersTappedByAttack.clear();
@@ -452,8 +455,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
                 for (UUID defenderId : defenders) {
                     if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                            GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
-                                    defenderId, creature.getId(), creature.getControllerId()), game)) {
+                            new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game)) {
                         defendersCostlessAttackable.remove(defenderId);
                         defendersForcedToAttack.remove(defenderId);
                     }
@@ -550,13 +552,13 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void selectBlockers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackingPlayerId, attackingPlayerId))) {
-            game.getCombat().selectBlockers(null, game);
+            game.getCombat().selectBlockers(null, null, game);
         }
         for (UUID attackingCreatureID : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attackingCreatureID);
             CombatGroup group = game.getCombat().findGroup(attackingCreatureID);
             if (permanent != null && group != null && !group.getBlocked()) {
-                game.fireEvent(GameEvent.getEvent(EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackingPlayerId));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackingPlayerId));
             }
         }
     }
@@ -568,7 +570,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * defender is the controller
      * @param game
      */
-    public void selectBlockers(Player blockController, Game game) {
+    public void selectBlockers(Player blockController, Ability source, Game game) {
         Player attacker = game.getPlayer(attackingPlayerId);
         //20101001 - 509.1c
         game.getCombat().retrieveMustBlockAttackerRequirements(attacker, game);
@@ -583,7 +585,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     controller = blockController;
                 }
                 while (choose) {
-                    controller.selectBlockers(game, defenderId);
+                    controller.selectBlockers(source, game, defenderId);
                     if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
                         return;
                     }
@@ -719,7 +721,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             }
                             // check if the possible blocker has to pay cost to block, if so don't force
                             if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                                    GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackingCreatureId, possibleBlocker.getId(), possibleBlocker.getControllerId()), game)) {
+                                    new DeclareBlockerEvent(attackingCreatureId, possibleBlocker.getId(), possibleBlocker.getControllerId()), game)) {
                                 // has cost to block to pay so remove this attacker
                                 continue;
                             }
@@ -1291,7 +1293,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
         if (attacker != null) {
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
+            if (!game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))) {
                 if (addAttackerToCombat(creatureId, defenderId, game)) {
                     if (!attacker.hasAbility(VigilanceAbility.getInstance(), game)
                             && !attacker.hasAbility(JohanVigilanceAbility.getInstance(), game)) {

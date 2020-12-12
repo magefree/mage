@@ -109,7 +109,7 @@ class HighcliffFelidarEffect extends OneShotEffect {
         toDestroy.stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .forEachOrdered(permanent -> permanent.destroy(source.getSourceId(), game, false));
+                .forEachOrdered(permanent -> permanent.destroy(source, game, false));
         return true;
     }
 }

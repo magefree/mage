@@ -42,7 +42,7 @@ public class TapTargetEffect extends OneShotEffect {
         for (UUID target : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
-                permanent.tap(game);
+                permanent.tap(source, game);
             }
         }
         return true;

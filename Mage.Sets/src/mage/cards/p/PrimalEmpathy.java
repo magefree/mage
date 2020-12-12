@@ -83,7 +83,7 @@ class PrimalEmpathyEffect extends OneShotEffect {
                 .mapToInt(MageInt::getValue)
                 .anyMatch(i -> i >= highestPower);
         if (flag) {
-            return player.drawCards(1, source.getSourceId(), game) > 0;
+            return player.drawCards(1, source, game) > 0;
         }
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);

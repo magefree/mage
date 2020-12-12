@@ -53,7 +53,7 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         if (permanent != null) {
             Player targetController = game.getPlayer(permanent.getControllerId());
             if (targetController != null) {
-                targetController.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, preventable);
+                targetController.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
             }
             return true;
         }

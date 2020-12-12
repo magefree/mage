@@ -66,7 +66,7 @@ class BrightmareEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.tap(game);
+        permanent.tap(source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.gainLife(permanent.getPower().getValue(), game, source);

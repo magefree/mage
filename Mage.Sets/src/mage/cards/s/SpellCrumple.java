@@ -60,7 +60,7 @@ class SpellCrumpleCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.LIBRARY, false, ZoneDetail.BOTTOM);
+            return game.getStack().counter(targetPointer.getFirst(game, source), source, game, Zone.LIBRARY, false, ZoneDetail.BOTTOM);
         }
         return false;
     }

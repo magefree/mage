@@ -27,7 +27,7 @@ public final class StormCauldron extends CardImpl {
         // Whenever a land is tapped for mana, return it to its owner's hand.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return it to its owner's hand");
-        this.addAbility(new TapLandForManaAllTriggeredAbility(effect, false, true));
+        this.addAbility(new TapLandForManaAllTriggeredAbility(effect, false, true, true));
     }
 
     public StormCauldron(final StormCauldron card) {

@@ -130,12 +130,12 @@ class GiftOfDoomEffect extends OneShotEffect {
         target.setNotTarget(true);
         if (player.choose(outcome, target, source.getSourceId(), game)
                 && game.getPermanent(target.getFirstTarget()) != null
-                && !game.getPermanent(target.getFirstTarget()).cantBeAttachedBy(giftOfDoom, game, false)) {
+                && !game.getPermanent(target.getFirstTarget()).cantBeAttachedBy(giftOfDoom, source, game, false)) {
             game.getState().setValue("attachTo:" + giftOfDoom.getId(), target.getFirstTarget());
-            game.getPermanent(target.getFirstTarget()).addAttachment(giftOfDoom.getId(), game);
+            game.getPermanent(target.getFirstTarget()).addAttachment(giftOfDoom.getId(), source, game);
             return true;
         }
-        player.moveCardToGraveyardWithInfo(giftOfDoom, source.getId(), game, Zone.BATTLEFIELD); //no legal target
+        player.moveCardToGraveyardWithInfo(giftOfDoom, source, game, Zone.BATTLEFIELD); //no legal target
         return false;
     }
 }

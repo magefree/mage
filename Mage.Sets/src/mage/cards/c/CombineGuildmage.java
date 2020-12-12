@@ -135,7 +135,7 @@ class CombineGuildmageCounterEffect extends OneShotEffect {
             return false;
         }
         if (fromPermanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-            fromPermanent.removeCounters(CounterType.P1P1.createInstance(), game);
+            fromPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
             toPermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
         }
         return true;

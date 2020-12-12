@@ -92,10 +92,10 @@ class GodEternalBontuEffect extends OneShotEffect {
         int counter = 0;
         for (UUID permanentId : target.getTargets()) {
             Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+            if (permanent != null && permanent.sacrifice(source, game)) {
                 counter++;
             }
         }
-        return player.drawCards(counter, source.getSourceId(), game) > 0;
+        return player.drawCards(counter, source, game) > 0;
     }
 }

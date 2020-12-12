@@ -59,9 +59,9 @@ class ToppleTheStatueEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.tap(game);
+        permanent.tap(source, game);
         if (permanent.isArtifact()) {
-            permanent.destroy(source.getSourceId(), game, false);
+            permanent.destroy(source, game, false);
         }
         return new DrawCardSourceControllerEffect(1).apply(game, source);
     }

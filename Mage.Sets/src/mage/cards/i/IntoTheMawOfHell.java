@@ -61,7 +61,7 @@ class IntoTheMawOfHellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.damage(13, source.getSourceId(), game, false, true);
+            permanent.damage(13, source.getSourceId(), source, game, false, true);
             return true;
         }
         return false;

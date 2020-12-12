@@ -86,9 +86,9 @@ class TibaltTheFiendBloodedFirstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
             Card card = player.getHand().getRandom(game);
-            player.discard(card, source, game);
+            player.discard(card, false, source, game);
             return true;
         }
         return false;
@@ -152,7 +152,7 @@ class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game);
+            return permanent.changeControllerId(controllerId, game, source);
         }
         return false;
     }

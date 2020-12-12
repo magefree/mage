@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -83,11 +84,11 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
         } else {
             amount = 0;
         }
-        GameEvent preventEvent = new PreventDamageEvent(source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent, ((DamageEvent) event).isCombatDamage());
         if (game.replaceEvent(preventEvent)) {
             return result;
         }
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
+        Permanent targetCreature = game.getPermanent(event.getTargetId());
         if (targetCreature == null) {
             return result;
         }
@@ -105,12 +106,11 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
             return result;
         }
         game.informPlayers("Acolyte's Reward prevented " + toPrevent + " to " + targetCreature.getName());
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                source.getControllerId(), source.getSourceId(), source.getControllerId(), toPrevent));
+        game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), toPrevent));
 
         Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (targetPlayer != null) {
-            targetPlayer.damage(toPrevent, source.getSourceId(), game);
+            targetPlayer.damage(toPrevent, source.getSourceId(), source, game);
             game.informPlayers("Acolyte's Reward deals " + toPrevent + " damage to " + targetPlayer.getLogName());
             return result;
         }
@@ -118,7 +118,7 @@ class AcolytesRewardEffect extends PreventionEffectImpl {
         if (targetDamageCreature == null) {
             return result;
         }
-        targetDamageCreature.damage(toPrevent, source.getSourceId(), game, false, true);
+        targetDamageCreature.damage(toPrevent, source.getSourceId(), source, game, false, true);
         game.informPlayers("Acolyte's Reward deals " + toPrevent + " damage to " + targetDamageCreature.getName());
         return result;
     }

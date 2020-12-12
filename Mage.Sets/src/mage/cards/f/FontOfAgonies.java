@@ -70,7 +70,9 @@ class FontOfAgoniesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(controllerId) && event.getAmount() > 0) {
             this.getEffects().clear();
-            this.addEffect(new AddCountersSourceEffect(CounterType.BLOOD.createInstance(event.getAmount())));
+            if (event.getAmount() > 0) {
+                this.addEffect(new AddCountersSourceEffect(CounterType.BLOOD.createInstance(event.getAmount())));
+            }
             return true;
         }
         return false;

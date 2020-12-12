@@ -75,10 +75,10 @@ class StitchersApprenticeEffect extends OneShotEffect {
         if (player != null) {
             Target target = new TargetControlledPermanent(new FilterControlledCreaturePermanent());
 
-            if (target.canChoose(player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
+            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    return permanent.sacrifice(source.getSourceId(), game);
+                    return permanent.sacrifice(source, game);
                 }
             }
         }

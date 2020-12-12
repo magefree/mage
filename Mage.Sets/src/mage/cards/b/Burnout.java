@@ -73,7 +73,7 @@ class BurnoutCounterTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
         if(targetSpell != null && targetSpell.getColor(game).isBlue()){
-            game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return true;
     }

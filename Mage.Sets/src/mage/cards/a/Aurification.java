@@ -128,7 +128,7 @@ public final class Aurification extends CardImpl {
                 if (permanent != null) {
                     int numToRemove = permanent.getCounters(game).getCount(CounterType.GOLD);
                     if (numToRemove > 0) {
-                        permanent.removeCounters(CounterType.GOLD.getName(), numToRemove, game);
+                        permanent.removeCounters(CounterType.GOLD.getName(), numToRemove, source, game);
                     }
                 }
             }

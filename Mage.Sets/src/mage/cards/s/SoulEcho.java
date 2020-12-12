@@ -122,7 +122,7 @@ class SoulEchoReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
-            permanent.removeCounters(CounterType.ECHO.createInstance(damage), game);
+            permanent.removeCounters(CounterType.ECHO.createInstance(damage), source, game);
             game.informPlayers(controller.getLogName() + ": " + damage + " damage replaced with " + permanent.getLogName());
         }
         return true;
@@ -130,7 +130,7 @@ class SoulEchoReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override

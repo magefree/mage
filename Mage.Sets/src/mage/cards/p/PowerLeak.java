@@ -80,7 +80,7 @@ class PowerLeakEffect extends OneShotEffect {
         if (player.chooseUse(Outcome.Neutral, message, source, game)) {
             xValue = player.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
             cost.add(new GenericManaCost(xValue));
-            if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+            if (cost.pay(source, game, source, player.getId(), false, null)) {
                 game.informPlayers(player.getLogName() + " paid {" + xValue + "} for " + permanent.getLogName());
             } else {
                 game.informPlayers(player.getLogName() + " didn't pay {X} for " + permanent.getLogName());
@@ -94,7 +94,7 @@ class PowerLeakEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
-        player.damage(2, source.getSourceId(), game);
+        player.damage(2, source.getSourceId(), source, game);
         effect.discard();
         return true;
     }

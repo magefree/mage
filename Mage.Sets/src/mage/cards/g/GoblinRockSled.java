@@ -86,7 +86,7 @@ class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEff
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override

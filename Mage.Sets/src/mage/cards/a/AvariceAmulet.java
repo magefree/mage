@@ -84,7 +84,7 @@ class AvariceAmuletChangeControlEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game);
+            return permanent.changeControllerId(source.getFirstTarget(), game, source);
         }
         return false;
     }

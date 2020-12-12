@@ -87,7 +87,7 @@ class SuncleanserRemoveCountersEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             for (Counter counter : permanent.getCounters(game).copy().values()) { // copy to prevent ConcurrentModificationException
-                permanent.removeCounters(counter, game);
+                permanent.removeCounters(counter, source, game);
             }
             return true;
         }

@@ -67,18 +67,18 @@ class SufferThePastEffect extends OneShotEffect {
             int numberToTarget = Math.min(targetPlayer.getGraveyard().size(), source.getManaCostsToPay().getX());
             TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(numberToTarget, numberToTarget, filter);
             if (you != null) {
-                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                if (target.canChoose(source.getSourceId(), source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
                     if (!target.getTargets().isEmpty()) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
                             Card card = game.getCard(targetId);
                             if (card != null) {
-                                card.moveToExile(id, "Suffer the Past", source.getSourceId(), game);
+                                card.moveToExile(id, "Suffer the Past", source, game);
                                 numberExiled ++;
                             }
                         }
                         you.gainLife(numberExiled, game, source);
-                        targetPlayer.loseLife(numberExiled, game, false);
+                        targetPlayer.loseLife(numberExiled, game, source, false);
                     }
                 }
                 return true;

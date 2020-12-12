@@ -73,7 +73,7 @@ class HuntersProwessDrawEffect extends OneShotEffect {
         if (controller != null) {
             int damage = (Integer) this.getValue("damage");
             if (damage > 0) {
-                controller.drawCards(damage, source.getSourceId(), game);
+                controller.drawCards(damage, source, game);
             }
             return true;
         }

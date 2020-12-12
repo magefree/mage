@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -21,13 +20,13 @@ public final class DistortionStrike extends CardImpl {
     public DistortionStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
-
         // Target creature gets +1/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
         Effect effect = new CantBeBlockedTargetEffect();
         effect.setText("and can't be blocked this turn");
         this.getSpellAbility().addEffect(effect);
+
         // Rebound
         this.addAbility(new ReboundAbility());
     }

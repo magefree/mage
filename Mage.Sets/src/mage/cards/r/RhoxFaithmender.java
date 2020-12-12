@@ -78,7 +78,7 @@ class RhoxFaithmenderEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.GAIN_LIFE;
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
     }
 
     @Override

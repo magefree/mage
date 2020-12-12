@@ -112,7 +112,7 @@ class FleshReaverEffect extends OneShotEffect {
         }
         int damageToDeal = (Integer) getValue("damage");
         if (damageToDeal > 0) {
-            controller.damage(damageToDeal, source.getSourceId(), game);
+            controller.damage(damageToDeal, source.getSourceId(), source, game);
         }
         return true;
     }

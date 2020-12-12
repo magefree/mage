@@ -103,14 +103,14 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOST_CONTROL
-                || event.getType() == EventType.UNTAPPED;
+        return event.getType() == GameEvent.EventType.LOST_CONTROL
+                || event.getType() == GameEvent.EventType.UNTAPPED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (EventType.LOST_CONTROL == event.getType()
-                && event.getSourceId().equals(getSourceId())) {
+                && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
         return EventType.UNTAPPED == event.getType()

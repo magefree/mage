@@ -6,12 +6,14 @@ import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.MorphAbility;
@@ -1069,7 +1071,7 @@ public abstract class GameImpl implements Game, Serializable {
             Player player = getPlayer(playerId);
             Cards cardsWithOpeningAction = new CardsImpl();
             for (Card card : player.getHand().getCards(this)) {
-                for (Ability ability : card.getAbilities()) {
+                for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof OpeningHandAction) {
                         OpeningHandAction action = (OpeningHandAction) ability;
                         if (action.isOpeningHandActionAllowed(card, player, this)) {
@@ -1088,7 +1090,7 @@ public abstract class GameImpl implements Game, Serializable {
                     card = cardsWithOpeningAction.getRandom(this);
                 }
                 if (card != null) {
-                    for (Ability ability : card.getAbilities()) {
+                    for (Ability ability : card.getAbilities(this)) {
                         if (ability instanceof OpeningHandAction) {
                             OpeningHandAction action = (OpeningHandAction) ability;
                             if (action.askUseOpeningHandAction(card, player, this)) {
@@ -1541,11 +1543,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void emptyManaPools() {
+    public void emptyManaPools(Ability source) {
         for (Player player : getPlayers().values()) {
             int amount = player.getManaPool().emptyPool(this);
             if (state.isManaBurn() && amount > 0) {
-                player.loseLife(amount, this, false);
+                player.loseLife(amount, this, source, false);
             }
         }
     }
@@ -1783,7 +1785,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
         UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
-        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source.getSourceId(), source.getControllerId()));
+        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId()));
         return uuid;
     }
 
@@ -2088,8 +2090,8 @@ public abstract class GameImpl implements Game, Serializable {
                                 Card card = this.getCard(perm.getId());
                                 if (card != null && card.isCreature()) {
                                     UUID wasAttachedTo = perm.getAttachedTo();
-                                    perm.attachTo(null, this);
-                                    fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                                    perm.attachTo(null, null, this);
+                                    fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                 } else if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
                                 }
@@ -2097,19 +2099,19 @@ public abstract class GameImpl implements Game, Serializable {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterControlledPermanent) {
                                     if (!((FilterControlledPermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
-                                            || attachedTo.cantBeAttachedBy(perm, this, true)) {
+                                            || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                         if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
                                         }
                                     }
-                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, this, true)) {
+                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, null, this, true)) {
                                     // handle bestow unattachment
                                     Card card = this.getCard(perm.getId());
                                     if (card != null && card.isCreature()) {
                                         UUID wasAttachedTo = perm.getAttachedTo();
-                                        perm.attachTo(null, this);
+                                        perm.attachTo(null, null, this);
                                         BestowAbility.becomeCreature(perm, this);
-                                        fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                                        fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                                     } else if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
                                     }
@@ -2135,7 +2137,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     || !(spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
                                     if (attachedTo != null) {
-                                        attachedTo.removeAttachment(perm.getId(), this);
+                                        attachedTo.removeAttachment(perm.getId(), null, this);
                                     }
                                     somethingHappened = true;
                                 }
@@ -2169,7 +2171,7 @@ public abstract class GameImpl implements Game, Serializable {
                             }
                             if (noChapterAbilityTriggeredOrOnStack) {
                                 // After the last chapter ability has left the stack, you'll sacrifice the Saga
-                                perm.sacrifice(perm.getId(), this);
+                                perm.sacrifice(null, this);
                                 somethingHappened = true;
                             }
                         }
@@ -2196,10 +2198,10 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                     if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                         UUID wasAttachedTo = perm.getAttachedTo();
-                        perm.attachTo(null, this);
-                        fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                        perm.attachTo(null, null, this);
+                        fireEvent(new UnattachedEvent(wasAttachedTo, perm.getId(), perm, null));
                     } else if (!attachedTo.isCreature() || attachedTo.hasProtectionFrom(perm, this)) {
-                        if (attachedTo.removeAttachment(perm.getId(), this)) {
+                        if (attachedTo.removeAttachment(perm.getId(), null, this)) {
                             somethingHappened = true;
                         }
                     }
@@ -2209,9 +2211,9 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {
-                        perm.attachTo(null, this);
+                        perm.attachTo(null, null, this);
                     } else if (!land.isLand() || land.hasProtectionFrom(perm, this)) {
-                        if (land.removeAttachment(perm.getId(), this)) {
+                        if (land.removeAttachment(perm.getId(), null, this)) {
                             somethingHappened = true;
                         }
                     }
@@ -2228,7 +2230,7 @@ public abstract class GameImpl implements Game, Serializable {
                             || !(attachment.getSubtype(this).contains(SubType.AURA)
                             || attachment.getSubtype(this).contains(SubType.EQUIPMENT)
                             || attachment.getSubtype(this).contains(SubType.FORTIFICATION)))) {
-                        if (perm.removeAttachment(attachment.getId(), this)) {
+                        if (perm.removeAttachment(attachment.getId(), null, this)) {
                             somethingHappened = true;
                             break;
                         }
@@ -2253,7 +2255,7 @@ public abstract class GameImpl implements Game, Serializable {
                     CantHaveMoreThanAmountCountersSourceAbility counterAbility = (CantHaveMoreThanAmountCountersSourceAbility) ability;
                     int count = perm.getCounters(this).getCount(counterAbility.getCounterType());
                     if (count > counterAbility.getAmount()) {
-                        perm.removeCounters(counterAbility.getCounterType().getName(), count - counterAbility.getAmount(), this);
+                        perm.removeCounters(counterAbility.getCounterType().getName(), count - counterAbility.getAmount(), counterAbility, this);
                         somethingHappened = true;
                     }
                 }
@@ -2638,11 +2640,11 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.getAttachedTo() != null) {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
                     if (attachedTo != null) {
-                        attachedTo.removeAttachment(perm.getId(), this);
+                        attachedTo.removeAttachment(perm.getId(), null, this);
                     } else {
                         Player attachedToPlayer = getPlayer(perm.getAttachedTo());
                         if (attachedToPlayer != null) {
-                            attachedToPlayer.removeAttachment(perm, this);
+                            attachedToPlayer.removeAttachment(perm, null, this);
                         }
                     }
                 }
@@ -2814,7 +2816,7 @@ public abstract class GameImpl implements Game, Serializable {
             return result;
         }
         DamageEvent damageEvent = (DamageEvent) event;
-        GameEvent preventEvent = new PreventDamageEvent(damageEvent.getTargetId(), damageEvent.getSourceId(), source.getControllerId(), damageEvent.getAmount(), damageEvent.isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(damageEvent.getTargetId(), damageEvent.getSourceId(), source, source.getControllerId(), damageEvent.getAmount(), damageEvent.isCombatDamage());
         if (game.replaceEvent(preventEvent)) {
             result.setReplaced(true);
             return result;
@@ -2855,7 +2857,7 @@ public abstract class GameImpl implements Game, Serializable {
                 game.informPlayers(message.toString());
             }
         }
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), result.getPreventedDamage()));
+        game.fireEvent(new PreventedDamageEvent(damageEvent.getTargetId(), source.getSourceId(), source, source.getControllerId(), result.getPreventedDamage()));
         return result;
 
     }
@@ -3039,7 +3041,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 if (s.length == 2) {
                                     try {
                                         Integer amount = Integer.parseInt(s[1]);
-                                        player.setLife(amount, this, ownerId);
+                                        player.setLife(amount, this, null);
                                         logger.debug("Setting player's life: ");
                                     } catch (NumberFormatException e) {
                                         logger.fatal("error setting life", e);
@@ -3060,7 +3062,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void cheat(UUID ownerId, UUID activePlayerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
+    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
+        // fake test ability for triggers and events
+        Ability fakeSourceAbility = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        fakeSourceAbility.setControllerId(ownerId);
+
         Player player = getPlayer(ownerId);
         if (player != null) {
             loadCards(ownerId, library);
@@ -3094,7 +3100,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
 
             for (PermanentCard permanentCard : battlefield) {
-                CardUtil.putCardOntoBattlefieldWithEffects(this, permanentCard, player);
+                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, permanentCard, player);
             }
 
             applyEffects();
@@ -3116,11 +3122,8 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public int doAction(MageAction action, UUID sourceId) {
-        //actions.add(action);
-        int value = action.doAction(sourceId, this);
-//        score += action.getScore(scorePlayer);
-        return value;
+    public int doAction(Ability source, MageAction action) {
+        return action.doAction(source, this);
     }
 
     @Override
@@ -3370,10 +3373,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (monarchId.equals(getMonarchId())) { // Nothing happens if you're already the monarch
             return;
         }
-        if (replaceEvent(GameEvent.getEvent(
-                GameEvent.EventType.BECOME_MONARCH,
-                monarchId, source.getSourceId(), monarchId
-        ))) {
+        if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.BECOME_MONARCH, monarchId, source, monarchId))) {
             return;
         }
         Player newMonarch = getPlayer(monarchId);
@@ -3383,24 +3383,24 @@ public abstract class GameImpl implements Game, Serializable {
         if (newMonarch != null) {
             getState().setMonarchId(monarchId);
             informPlayers(newMonarch.getLogName() + " is the monarch");
-            fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
+            fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source, monarchId));
         }
     }
 
     @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
-        return damagePlayerOrPlaneswalker(playerOrWalker, damage, sourceId, game, combatDamage, preventable, null);
+    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
+        return damagePlayerOrPlaneswalker(playerOrWalker, damage, attackerId, source, game, combatDamage, preventable, null);
     }
 
     @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
         Player player = getPlayer(playerOrWalker);
         if (player != null) {
-            return player.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+            return player.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
         }
         Permanent permanent = getPermanent(playerOrWalker);
         if (permanent != null) {
-            return permanent.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+            return permanent.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
         }
         return 0;
     }

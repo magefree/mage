@@ -89,7 +89,7 @@ class SoltariGuerrillasReplacementEffect extends PreventionEffectImpl {
             if (redirectTo != null) {
                 game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + redirectTo.getLogName() + " instead.");
                 DamageEvent damageEvent = (DamageEvent) event;
-                redirectTo.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
+                redirectTo.damage(preventionResult.getPreventedDamage(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             }
             discard(); // (only once)
         }

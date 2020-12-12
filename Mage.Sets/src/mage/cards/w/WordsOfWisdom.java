@@ -62,7 +62,7 @@ class WordsOfWisdomEffect extends OneShotEffect {
                 if (!playerId.equals(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.drawCards(1, source.getSourceId(), game);
+                        player.drawCards(1, source, game);
                     }
                 }
             }

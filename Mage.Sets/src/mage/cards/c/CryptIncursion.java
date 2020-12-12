@@ -58,7 +58,7 @@ class CryptIncursionEffect extends OneShotEffect {
             int exiledCards = 0;
             for (Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if (StaticFilters.FILTER_CARD_CREATURE.match(card, game)) {
-                    if (card.moveToExile(null, "", source.getSourceId(), game)) {
+                    if (card.moveToExile(null, "", source, game)) {
                         exiledCards++;
                     }
                 }

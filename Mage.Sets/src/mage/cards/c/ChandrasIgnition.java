@@ -59,13 +59,13 @@ class ChandrasIgnitionEffect extends OneShotEffect {
         if (targetCreature != null && targetCreature.getPower().getValue() > 0) {
             for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
                 if (!creature.getId().equals(targetCreature.getId())) {
-                    creature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                    creature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), source, game, false, true);
                 }
             }
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    opponent.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game);
+                    opponent.damage(targetCreature.getPower().getValue(), targetCreature.getId(), source, game);
                 }
             }
         }

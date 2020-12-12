@@ -69,7 +69,7 @@ class ReignOfThePitEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-                if (target.canChoose(player.getId(), game)) {
+                if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                     while (!target.isChosen() && player.canRespond()) {
                         player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                     }
@@ -81,7 +81,7 @@ class ReignOfThePitEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(permID);
             if (permanent != null) {
                 int power = permanent.getPower().getValue();
-                if (permanent.sacrifice(source.getSourceId(), game)) {
+                if (permanent.sacrifice(source, game)) {
                     totalPowerSacrificed += power;
                 }
             }

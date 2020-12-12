@@ -113,7 +113,7 @@ class NazahnTapEffect extends TapTargetEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.tap(game);
+            permanent.tap(source, game);
             return true;
         }
         return false;

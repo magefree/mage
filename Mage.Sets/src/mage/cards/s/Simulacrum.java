@@ -46,10 +46,10 @@ public final class Simulacrum extends CardImpl {
 class SimulacrumAmount implements DynamicValue {
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         AmountOfDamageAPlayerReceivedThisTurnWatcher watcher = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
         if(watcher != null) {
-            return watcher.getAmountOfDamageReceivedThisTurn(source.getControllerId());
+            return watcher.getAmountOfDamageReceivedThisTurn(sourceAbility.getControllerId());
         }
         return 0;
     }

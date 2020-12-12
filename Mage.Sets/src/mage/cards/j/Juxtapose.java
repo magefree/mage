@@ -94,8 +94,8 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
                 this.lockedControllers.put(permanent2.getId(), permanent1.getControllerId());
                 this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter(game));
 
-                permanent1.changeControllerId(targetPlayer.getId(), game);
-                permanent2.changeControllerId(you.getId(), game);
+                permanent1.changeControllerId(targetPlayer.getId(), game, source);
+                permanent2.changeControllerId(you.getId(), game, source);
                 MageObject sourceObject = game.getCard(source.getSourceId());
                 game.informPlayers((sourceObject != null ? sourceObject.getLogName() : "") + ": " + you.getLogName() +
                         " and " + targetPlayer.getLogName() + " exchange control of " + permanent1.getLogName() +
@@ -117,7 +117,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
                 toDelete.add(entry.getKey());
                 continue;
             }
-            permanent.changeControllerId(lockedControllers.get(permanent.getId()), game);
+            permanent.changeControllerId(lockedControllers.get(permanent.getId()), game, source);
         }
         if (!toDelete.isEmpty()) {
             for (UUID uuid : toDelete) {

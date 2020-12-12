@@ -35,7 +35,7 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-         return event.getTargetId().equals(sourceId);
+         return event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

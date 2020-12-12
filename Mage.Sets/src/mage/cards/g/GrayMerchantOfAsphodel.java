@@ -78,7 +78,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .mapToInt(opponent -> opponent.loseLife(lifeLost, game, false))
+                .mapToInt(opponent -> opponent.loseLife(lifeLost, game, source, false))
                 .sum();
         return controller.gainLife(totalLifeLost, game, source) > 0;
     }

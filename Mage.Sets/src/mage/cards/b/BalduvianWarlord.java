@@ -17,6 +17,7 @@ import mage.filter.common.FilterBlockingCreature;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -115,7 +116,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                     filter.add(new PermanentInListPredicate(list));
                     TargetAttackingCreature target = new TargetAttackingCreature(1, 1, filter, true);
                     if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        while (!target.isChosen() && target.canChoose(controller.getId(), game) && controller.canRespond()) {
+                        while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);
                         }
                     } else {
@@ -132,25 +133,25 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                             chosenGroup.addBlockerToGroup(permanent.getId(), controller.getId(), game);
                             game.getCombat().addBlockingGroup(permanent.getId(), chosenPermanent.getId(), controller.getId(), game); // 702.21h
                             if (notYetBlocked) {
-                                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), source, null));
                                 Set<MageObjectReference> morSet = new HashSet<>();
                                 morSet.add(new MageObjectReference(chosenPermanent, game));
                                 for (UUID bandedId : chosenPermanent.getBandedCards()) {
                                     CombatGroup bandedGroup = game.getCombat().findGroup(bandedId);
                                     if (bandedGroup != null && chosenGroup.getBlockers().size() == 1) {
                                         morSet.add(new MageObjectReference(bandedId, game));
-                                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, bandedId, null));
+                                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, bandedId, source, null));
                                     }
                                 }
                                 String key = UUID.randomUUID().toString();
                                 game.getState().setValue("becameBlocked_" + key, morSet);
                                 game.fireEvent(GameEvent.getEvent(
                                         GameEvent.EventType.BATCH_BLOCK_NONCOMBAT,
-                                        source.getSourceId(), source.getSourceId(),
+                                        source.getSourceId(), source,
                                         source.getControllerId(), key, 0)
                                 );
                             }
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
+                            game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                         }
                         CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
                         if (blockGroup != null) {

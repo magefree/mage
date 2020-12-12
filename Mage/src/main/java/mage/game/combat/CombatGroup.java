@@ -10,6 +10,8 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.BlockerDeclaredEvent;
+import mage.game.events.DeclareBlockerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -266,23 +268,23 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (hasTrample(attacker)) {
                     int lethalDamage = getLethalDamage(blocker, attacker, game);
                     if (lethalDamage >= damage) {
-                        blocker.markDamage(damage, attacker.getId(), game, true, true);
+                        blocker.markDamage(damage, attacker.getId(), null, game, true, true);
                     } else {
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
-                        blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
+                        blocker.markDamage(damageAssigned, attacker.getId(), null, game, true, true);
                         damage -= damageAssigned;
                         if (damage > 0) {
                             defenderDamage(attacker, damage, game);
                         }
                     }
                 } else {
-                    blocker.markDamage(damage, attacker.getId(), game, true, true);
+                    blocker.markDamage(damage, attacker.getId(), null, game, true, true);
                 }
             }
             if (canDamage(blocker, first)) {
                 if (checkSoleBlockerAfter(blocker, game)) { // blocking several creatures handled separately
                     if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                        attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
+                        attacker.markDamage(blockerDamage, blocker.getId(), null, game, true, true);
                     }
                 }
             }
@@ -349,20 +351,20 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     // might be missing canDamage condition?
                     Permanent blocker = game.getPermanent(blockerId);
                     if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                        attacker.markDamage(power, blockerId, game, true, true);
+                        attacker.markDamage(power, blockerId, null, game, true, true);
                     }
                 }
             }
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                 Permanent blocker = game.getPermanent(entry.getKey());
-                blocker.markDamage(entry.getValue(), attacker.getId(), game, true, true);
+                blocker.markDamage(entry.getValue(), attacker.getId(), null, game, true, true);
             }
         } else {
             for (UUID blockerId : blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (canDamage(blocker, first)) {
                     if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                        attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
+                        attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), null, game, true, true);
                     }
                 }
             }
@@ -402,7 +404,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (damage > 0) {
                     Player defendingPlayer = game.getPlayer(defendingPlayerId);
                     if (defendingPlayer != null) {
-                        defendingPlayer.damage(damage, attacker.getId(), game, true, true);
+                        defendingPlayer.damage(damage, attacker.getId(), null, game, true, true);
                     }
                 }
                 if (isAttacking) {
@@ -412,14 +414,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             // might be missing canDamage condition?
                             Permanent blocker = game.getPermanent(blockerId);
                             if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                                attacker.markDamage(power, blockerId, game, true, true);
+                                attacker.markDamage(power, blockerId, null, game, true, true);
                             }
                         }
                     }
                 }
                 for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                     Permanent defendingCreature = game.getPermanent(entry.getKey());
-                    defendingCreature.markDamage(entry.getValue(), attacker.getId(), game, true, true);
+                    defendingCreature.markDamage(entry.getValue(), attacker.getId(), null, game, true, true);
                 }
             } else {
                 if (isAttacking) {
@@ -427,7 +429,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         Permanent blocker = game.getPermanent(blockerId);
                         if (canDamage(blocker, first)) {
                             if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                                attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
+                                attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), null, game, true, true);
                             }
                         }
                     }
@@ -475,7 +477,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (blocker != null && attacker != null) {
             if (canDamage(blocker, first)) {
                 int damage = getDamageValueFromPermanent(blocker, game);
-                attacker.markDamage(damage, blocker.getId(), game, true, true);
+                attacker.markDamage(damage, blocker.getId(), null, game, true, true);
             }
         }
     }
@@ -531,7 +533,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                 Permanent attacker = game.getPermanent(entry.getKey());
-                attacker.markDamage(entry.getValue(), blocker.getId(), game, true, true);
+                attacker.markDamage(entry.getValue(), blocker.getId(), null, game, true, true);
             }
         }
     }
@@ -540,12 +542,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (this.defenderIsPlaneswalker) {
             Permanent defender = game.getPermanent(defenderId);
             if (defender != null) {
-                defender.markDamage(amount, attacker.getId(), game, true, true);
+                defender.markDamage(amount, attacker.getId(), null, game, true, true);
             }
         } else {
             Player defender = game.getPlayer(defenderId);
             if (defender != null) {
-                defender.damage(amount, attacker.getId(), game, true, true);
+                defender.damage(amount, attacker.getId(), null, game, true, true);
             }
         }
     }
@@ -570,7 +572,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      */
     public void addBlocker(UUID blockerId, UUID playerId, Game game) {
         for (UUID attackerId : attackers) {
-            if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackerId, blockerId, playerId))) {
+            if (game.replaceEvent(new DeclareBlockerEvent(attackerId, blockerId, playerId))) {
                 return;
             }
         }
@@ -690,7 +692,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         for (UUID blockerId : blockers) {
             for (UUID attackerId : attackers) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
+                game.fireEvent(new BlockerDeclaredEvent(attackerId, blockerId, players.get(blockerId)));
             }
         }
 

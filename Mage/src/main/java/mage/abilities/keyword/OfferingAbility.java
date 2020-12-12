@@ -225,7 +225,7 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Permanent toOffer = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (toOffer != null) {
-            toOffer.sacrifice(source.getSourceId(), game);
+            toOffer.sacrifice(source, game);
             CardUtil.reduceCost((SpellAbility) abilityToModify, toOffer.getSpellAbility().getManaCosts());
         }
         game.getState().setValue("offering_" + source.getSourceId(), null);

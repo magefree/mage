@@ -49,13 +49,13 @@ public class DoWhenCostPaid extends OneShotEffect {
         }
         String message = CardUtil.replaceSourceName(chooseUseText, mageObject.getLogName());
         Outcome payOutcome = ability.getEffects().getOutcome(source, this.outcome);
-        if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+        if (!cost.canPay(source, source, player.getId(), game)
                 || (optional && !player.chooseUse(payOutcome, message, source, game))) {
             return false;
         }
         cost.clearPaid();
         int bookmark = game.bookmarkState();
-        if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+        if (cost.pay(source, game, source, player.getId(), false)) {
             ability.getEffects().setTargetPointer(getTargetPointer());
             game.fireReflexiveTriggeredAbility(ability, source);
             player.resetStoredBookmark(game);

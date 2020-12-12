@@ -115,7 +115,7 @@ class FertileImaginationEffect extends OneShotEffect {
                         }
                     }
                     game.informPlayers(sourceObject.getLogName() + " creates " + (tokensToMake == 0 ? "no" : "" + tokensToMake) + " 1/1 green Saproling creature tokens.");
-                    saprolingToken.putOntoBattlefield(tokensToMake, game, source.getId(), source.getControllerId());
+                    saprolingToken.putOntoBattlefield(tokensToMake, game, source, source.getControllerId());
                     return true;
                 }
             }

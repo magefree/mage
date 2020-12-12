@@ -78,12 +78,12 @@ class OupheVandalsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID targetId = source.getFirstTarget();
         StackObject stackObject = game.getStack().getStackObject(targetId);
-        if (targetId != null && game.getStack().counter(targetId, source.getSourceId(), game)) {
+        if (targetId != null && game.getStack().counter(targetId, source, game)) {
             UUID permanentId = stackObject.getSourceId();
             if (permanentId != null) {
                 Permanent usedPermanent = game.getPermanent(permanentId);
                 if (usedPermanent != null) {
-                    usedPermanent.destroy(source.getSourceId(), game, false);
+                    usedPermanent.destroy(source, game, false);
                 }
             }
             return true;

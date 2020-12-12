@@ -66,7 +66,7 @@ class ChronicFloodingAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED;
+        return event.getType() == GameEvent.EventType.TAPPED;
     }
  
     @Override

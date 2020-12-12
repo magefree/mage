@@ -170,8 +170,8 @@ class AkiriFearlessVoyagerEffect extends OneShotEffect {
         if (creature == null) {
             return false;
         }
-        creature.removeAttachment(equipment.getId(), game);
-        creature.tap(game);
+        creature.removeAttachment(equipment.getId(), source, game);
+        creature.tap(source, game);
         game.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ).setTargetPointer(new FixedTarget(creature, game)), source);

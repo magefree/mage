@@ -75,7 +75,7 @@ class DuskmantleSeerEffect extends OneShotEffect {
                 Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
                     player.revealCards(source, ": Revealed by " + player.getName(), new CardsImpl(card), game);
-                    player.loseLife(card.getConvertedManaCost(), game, false);
+                    player.loseLife(card.getConvertedManaCost(), game, source, false);
                     player.moveCards(card, Zone.HAND, source, game);
                 }
             }

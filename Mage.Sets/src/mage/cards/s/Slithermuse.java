@@ -83,7 +83,7 @@ class SlithermuseEffect extends OneShotEffect {
                     game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
                     int diff = chosenPlayer.getHand().size() - player.getHand().size();
                     if (diff > 0) {
-                        player.drawCards(diff, source.getSourceId(), game);
+                        player.drawCards(diff, source, game);
                     }
                     return true;
                 }

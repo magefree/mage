@@ -29,7 +29,7 @@ public class BrainstormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(3, source.getSourceId(), game);
+            player.drawCards(3, source, game);
             putOnLibrary(player, source, game);
             putOnLibrary(player, source, game);
             return true;
@@ -43,7 +43,7 @@ public class BrainstormEffect extends OneShotEffect {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
-                return player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
+                return player.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, false);
             }
         }
         return false;

@@ -82,11 +82,11 @@ class EssenceLeakEffect extends OneShotEffect {
             Cost cost = permanent.getManaCost().copy();
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     return true;
                 }
             }
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
             return true;
         }
         return false;

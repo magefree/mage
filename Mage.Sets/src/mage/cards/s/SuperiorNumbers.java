@@ -71,6 +71,6 @@ class SuperiorNumbersEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game
         );
         int damage = Math.max(controllerCreatures - opponentCreatures, 0);
-        return creature.damage(damage, source.getSourceId(), game) > 0;
+        return creature.damage(damage, source.getSourceId(), source, game) > 0;
     }
 }

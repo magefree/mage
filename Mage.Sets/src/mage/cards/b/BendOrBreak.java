@@ -172,12 +172,12 @@ class BendOrBreakEffect extends OneShotEffect {
                     List<Permanent> pileToTap = playerPiles.getValue().get(1);
                     for (Permanent permanent : pileToSac) {
                         if (permanent != null) {
-                            permanent.destroy(source.getSourceId(), game, false);
+                            permanent.destroy(source, game, false);
                         }
                     }
                     for (Permanent permanent : pileToTap) {
                         if (permanent != null) {
-                            permanent.tap(game);
+                            permanent.tap(source, game);
                         }
                     }
                 }

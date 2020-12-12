@@ -74,11 +74,11 @@ class ReprocessEffect extends OneShotEffect {
             for(UUID uuid : toSacrifice.getTargets()){
                 Permanent permanent = game.getPermanent(uuid);
                 if(permanent != null){
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                     amount++;
                 }
             }
-            player.drawCards(amount, source.getSourceId(), game);
+            player.drawCards(amount, source, game);
         }
         return true;
     }

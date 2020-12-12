@@ -80,8 +80,8 @@ class JackInTheMoxManaEffect extends ManaEffect {
             int amount = controller.rollDice(game, 6);
             switch (amount) {
                 case 1:
-                    permanent.sacrifice(source.getSourceId(), game);
-                    controller.loseLife(5, game, false);
+                    permanent.sacrifice(source, game);
+                    controller.loseLife(5, game, source, false);
                     break;
                 case 2:
                     mana.add(Mana.WhiteMana(1));

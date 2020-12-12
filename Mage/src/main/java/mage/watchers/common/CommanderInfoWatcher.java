@@ -36,7 +36,7 @@ public class CommanderInfoWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (checkCommanderDamage && event.getType() == EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
+        if (checkCommanderDamage && event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
             if (sourceId.equals(event.getSourceId())) {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
                 if (damageEvent.isCombatDamage()) {

@@ -57,7 +57,7 @@ class WitsEndEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.discard(player.getHand(), source, game);
+        player.discard(player.getHand(), false, source, game);
         return true;
     }
 }

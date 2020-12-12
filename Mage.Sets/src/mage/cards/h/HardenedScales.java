@@ -59,7 +59,7 @@ class HardenedScalesEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTERS;
+        return event.getType() == GameEvent.EventType.ADD_COUNTERS;
     }
 
     @Override

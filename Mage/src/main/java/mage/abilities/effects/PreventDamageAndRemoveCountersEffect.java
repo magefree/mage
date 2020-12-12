@@ -51,7 +51,7 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
         if (!thatMany) {
             damage = 1;
         }
-        permanent.removeCounters(CounterType.P1P1.createInstance(damage), game); //MTG ruling (this) loses counters even if the damage isn't prevented
+        permanent.removeCounters(CounterType.P1P1.createInstance(damage), source, game); //MTG ruling (this) loses counters even if the damage isn't prevented
         return false;
     }
 

@@ -58,7 +58,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.NUMBER_OF_TRIGGERS;
+        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
     }
 
     @Override
@@ -69,7 +69,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
             if (source.isControlledBy(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // enters triggers
-                if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
+                if (sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering Jedis
                     if (entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.JEDI, game)) {
@@ -80,7 +80,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
                     }
                 }
                 // leaves triggers
-                if (sourceEvent.getType() == EventType.ZONE_CHANGE && sourceEvent instanceof ZoneChangeEvent) {
+                if (sourceEvent.getType() == GameEvent.EventType.ZONE_CHANGE && sourceEvent instanceof ZoneChangeEvent) {
                     ZoneChangeEvent leavesTheBattlefieldEvent = (ZoneChangeEvent) sourceEvent;
                     if (leavesTheBattlefieldEvent.getFromZone() == Zone.BATTLEFIELD) {
                         // Only for leaving Jedis

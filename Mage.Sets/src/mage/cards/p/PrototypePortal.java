@@ -141,7 +141,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
             if (card != null) {
                 EmptyToken token = new EmptyToken();
                 CardUtil.copyTo(token).from(card);
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(1, game, source, source.getControllerId());
                 return true;
             }
         }

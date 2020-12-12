@@ -135,7 +135,7 @@ public class ChampionAbility extends StaticAbility {
 
 class ChampionExileCost extends CostImpl {
 
-    private String exileZone = null;
+    private String exileZone;
 
     public ChampionExileCost(FilterControlledPermanent filter, String exileZone) {
         this.addTarget(new TargetControlledPermanent(1, 1, filter, true));
@@ -149,20 +149,20 @@ class ChampionExileCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
                 UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName() + " championed permanents", sourceId, game, Zone.BATTLEFIELD, true);
+                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName() + " championed permanents", source, game, Zone.BATTLEFIELD, true);
                     if (paid) {
-                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_CHAMPIONED, permanent.getId(), sourceId, controllerId));
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_CHAMPIONED, permanent.getId(), source, controllerId));
                     }
                 }
             }
@@ -171,8 +171,8 @@ class ChampionExileCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return targets.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

@@ -80,8 +80,8 @@ class VentifactBottleEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && player != null) {
             int chargeCounters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
-            sourcePermanent.removeCounters(CounterType.CHARGE.createInstance(chargeCounters), game);
-            sourcePermanent.tap(game);
+            sourcePermanent.removeCounters(CounterType.CHARGE.createInstance(chargeCounters), source, game);
+            sourcePermanent.tap(source, game);
             Mana mana = new Mana();
             mana.setColorless(chargeCounters);
             player.getManaPool().addMana(mana, game, source);

@@ -99,7 +99,7 @@ class BronzehideLionReturnEffect extends OneShotEffect {
         if (aura == null || creature == null) {
             return true;
         }
-        creature.addAttachment(aura.getId(), game);
+        creature.addAttachment(aura.getId(), source, game);
         return true;
     }
 }

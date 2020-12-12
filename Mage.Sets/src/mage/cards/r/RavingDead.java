@@ -71,7 +71,7 @@ class RavingDeadDamageEffect extends OneShotEffect {
         if (player != null) {
             Integer amount = player.getLife() / 2;
             if (amount > 0) {
-                player.loseLife(amount, game, false);
+                player.loseLife(amount, game, source, false);
             }
             return true;
         }

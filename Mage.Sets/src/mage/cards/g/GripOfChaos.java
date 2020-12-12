@@ -56,10 +56,10 @@ class GripOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST
-                || event.getType() == EventType.ACTIVATED_ABILITY
-                || event.getType() == EventType.TRIGGERED_ABILITY
-                || event.getType() == EventType.COPIED_STACKOBJECT;
+        return event.getType() == GameEvent.EventType.SPELL_CAST
+                || event.getType() == GameEvent.EventType.ACTIVATED_ABILITY
+                || event.getType() == GameEvent.EventType.TRIGGERED_ABILITY
+                || event.getType() == GameEvent.EventType.COPIED_STACKOBJECT;
     }
 
     @Override

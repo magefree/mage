@@ -62,10 +62,10 @@ class MorbidBloomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card targetCreatureCard = game.getCard(source.getFirstTarget());
         if (targetCreatureCard != null) {
-            targetCreatureCard.moveToExile(null, null, source.getSourceId(), game);
+            targetCreatureCard.moveToExile(null, null, source, game);
             int toughness = targetCreatureCard.getToughness().getValue();
             SaprolingToken token = new SaprolingToken();
-            return token.putOntoBattlefield(toughness, game, source.getSourceId(), source.getControllerId());
+            return token.putOntoBattlefield(toughness, game, source, source.getControllerId());
         }
         return false;
     }

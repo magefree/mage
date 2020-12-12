@@ -97,7 +97,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PHASE_CHANGED || event.getType() == EventType.COMBAT_PHASE_PRE;
+        return event.getType() == GameEvent.EventType.PHASE_CHANGED || event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE;
     }
 
     @Override

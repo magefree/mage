@@ -33,7 +33,7 @@ public class NumericSetToEffectValues implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Object object = effect.getValue(valueKey);
         if (object instanceof Integer) {
             return (Integer) object;

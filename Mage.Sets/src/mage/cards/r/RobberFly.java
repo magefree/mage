@@ -70,8 +70,8 @@ class DrawCardsDefendingPlayerEffect extends OneShotEffect {
         if (controller != null
                 && defendingPlayer != null) {
             int numberOfCardsInHand = defendingPlayer.getHand().size();
-            defendingPlayer.discard(defendingPlayer.getHand(), source, game);
-            defendingPlayer.drawCards(numberOfCardsInHand, source.getSourceId(), game);
+            defendingPlayer.discard(defendingPlayer.getHand(), false, source, game);
+            defendingPlayer.drawCards(numberOfCardsInHand, source, game);
             return true;
         }
         return false;

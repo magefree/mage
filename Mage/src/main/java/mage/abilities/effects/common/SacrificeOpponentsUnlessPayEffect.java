@@ -122,14 +122,14 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
 
                 costToPay.clearPaid();
                 if (!(player.chooseUse(Outcome.Benefit, message, source, game)
-                        && costToPay.pay(source, game, source.getSourceId(), player.getId(), false, null))) {
+                        && costToPay.pay(source, game, source, player.getId(), false, null))) {
                     game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the sacrifice effect");
 
                     int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
                     if (numTargets > 0) {
                         TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, true);
 
-                        if (target.canChoose(player.getId(), game)) {
+                        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
                             permsToSacrifice.addAll(target.getTargets());
                         }
@@ -144,7 +144,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(permID);
 
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
 

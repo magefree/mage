@@ -75,7 +75,7 @@ class CorpseLungeEffect extends OneShotEffect {
         if (amount > 0) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
+                permanent.damage(amount, source.getSourceId(), source, game, false, true);
                 return true;
             }
         }

@@ -73,7 +73,7 @@ class TormentOfScarabsAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -125,17 +125,17 @@ class TormentOfScarabsEffect extends OneShotEffect {
                 if (enchantedPlayer.choose(outcome, target, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
+                        permanent.sacrifice(source, game);
                         return true;
                     }
                 }
             }
             if (!enchantedPlayer.getHand().isEmpty() && enchantedPlayer.chooseUse(outcome, "Discard a card?",
                     "Otherwise you lose 3 life.", "Discard", "Lose 3 life", source, game)) {
-                enchantedPlayer.discardOne(false, source, game);
+                enchantedPlayer.discardOne(false, false, source, game);
                 return true;
             }
-            enchantedPlayer.loseLife(3, game, false);
+            enchantedPlayer.loseLife(3, game, source, false);
             return true;
         }
 

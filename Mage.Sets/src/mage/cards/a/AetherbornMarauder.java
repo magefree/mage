@@ -92,7 +92,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
                                 numberToMove = controller.getAmount(0, numberOfCounters, "How many +1/+1 counters do you want to move?", game);
                             }
                             if (numberToMove > 0) {
-                                fromPermanent.removeCounters(CounterType.P1P1.createInstance(numberToMove), game);
+                                fromPermanent.removeCounters(CounterType.P1P1.createInstance(numberToMove), source, game);
                                 sourceObject.addCounters(CounterType.P1P1.createInstance(numberToMove), source, game);
                             }
                         }

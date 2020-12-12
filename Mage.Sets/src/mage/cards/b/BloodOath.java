@@ -111,7 +111,7 @@ class BloodOathEffect extends OneShotEffect {
                         }
                     }
                     game.informPlayers(sourceObject.getLogName() + " deals " + (damageToDeal == 0 ? "no" : "" + damageToDeal) + " damage to " + opponent.getLogName());
-                    opponent.damage(damageToDeal, source.getSourceId(), game);
+                    opponent.damage(damageToDeal, source.getSourceId(), source, game);
                     return true;
                 }
             }

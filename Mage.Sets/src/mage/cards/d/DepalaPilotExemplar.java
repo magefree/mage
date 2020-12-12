@@ -88,7 +88,7 @@ class DepalaPilotExemplarEffect extends OneShotEffect {
             ManaCosts<ManaCost> cost = new ManaCostsImpl<>("{X}");
             int xValue = controller.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
             cost.add(new GenericManaCost(xValue));
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false) && xValue > 0) {
+            if (cost.pay(source, game, source, source.getControllerId(), false) && xValue > 0) {
                 new RevealLibraryPutIntoHandEffect(xValue, filter, Zone.LIBRARY, false).apply(game, source);
             }
             return true;

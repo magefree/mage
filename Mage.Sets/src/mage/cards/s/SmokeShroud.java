@@ -89,7 +89,7 @@ class SmokeShroudEffect extends OneShotEffect {
         if (sourceCard != null && permanent != null && controller != null) {
             game.getState().setValue("attachTo:" + sourceCard.getId(), permanent);
             if (controller.moveCards(sourceCard, Zone.BATTLEFIELD, source, game)) {
-                permanent.addAttachment(sourceCard.getId(), game);
+                permanent.addAttachment(sourceCard.getId(), source, game);
             }
             return true;
         }

@@ -1,5 +1,6 @@
 package mage.game.events;
 
+import mage.abilities.Ability;
 import mage.target.Target;
 
 import java.util.UUID;
@@ -15,12 +16,12 @@ public class LibrarySearchedEvent extends GameEvent {
      * Searched library event (after library searching finished). Return false on replaceEvent to
      *
      * @param targetPlayerId whose library searched
-     * @param sourceId       source of the searching effect
+     * @param source         source ability of the searching effect
      * @param playerId       who must search the library
      * @param searchedTarget founded cards (targets list can be changed by replace events, see Opposition Agent)
      */
-    public LibrarySearchedEvent(UUID targetPlayerId, UUID sourceId, UUID playerId, Target searchedTarget) {
-        super(EventType.LIBRARY_SEARCHED, targetPlayerId, sourceId, playerId, searchedTarget.getTargets().size(), false);
+    public LibrarySearchedEvent(UUID targetPlayerId, Ability source, UUID playerId, Target searchedTarget) {
+        super(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, source, playerId, searchedTarget.getTargets().size(), false);
         this.searchedTarget = searchedTarget;
     }
 

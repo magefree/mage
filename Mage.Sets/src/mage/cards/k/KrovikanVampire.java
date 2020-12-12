@@ -149,7 +149,7 @@ class KrovikanVampireCreaturesDamagedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
                 && sourceId.equals(event.getSourceId())) {
             damagedBySource.add(event.getTargetId());
         }
@@ -211,17 +211,17 @@ class KrovikanVampireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOST_CONTROL
-                || event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.LOST_CONTROL
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.LOST_CONTROL
-                && event.getSourceId().equals(krovikanVampire)) {
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL
+                && event.getTargetId().equals(krovikanVampire)) {
             return true;
         }
-        if (event.getType() == EventType.ZONE_CHANGE
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && event.getTargetId().equals(krovikanVampire)) {
             return true;
         }

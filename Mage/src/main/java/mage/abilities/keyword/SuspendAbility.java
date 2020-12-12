@@ -262,7 +262,7 @@ class SuspendExileEffect extends OneShotEffect {
         if (card != null && controller != null) {
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
             if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of "
-                    + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
+                    + controller.getName(), source, game, Zone.HAND, true)) {
                 if (suspend == Integer.MAX_VALUE) {
                     suspend = source.getManaCostsToPay().getX();
                 }
@@ -296,8 +296,8 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            Card card = game.getCard(getSourceId());
+        if (event.getTargetId().equals(this.getSourceId())) {
+            Card card = game.getCard(this.getSourceId());
             return card != null
                     && game.getState().getZone(card.getId()) == Zone.EXILED
                     && card.getCounters(game).getCount(CounterType.TIME) == 0;
@@ -350,7 +350,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 }
             }
             if (!abilitiesToRemove.isEmpty()) {
-                for (Ability ability : card.getAbilities()) {
+                for (Ability ability : card.getAbilities(game)) {
                     if (ability instanceof SuspendBeginningOfUpkeepInterveningIfTriggeredAbility
                             || ability instanceof SuspendPlayCardAbility) {
                         abilitiesToRemove.add(ability);

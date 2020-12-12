@@ -70,13 +70,13 @@ public class FatesealEffect extends OneShotEffect {
                     Card card = cards.get(target1.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
+                        controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);
                     }
                     target1.clearChosen();
                 }
                 // move cards to the top of the library
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
-                game.fireEvent(new GameEvent(GameEvent.EventType.FATESEALED, opponent.getId(), source.getSourceId(), source.getControllerId()));
+                game.fireEvent(new GameEvent(GameEvent.EventType.FATESEALED, opponent.getId(), source, source.getControllerId()));
                 controller.setTopCardRevealed(revealed);
                 return true;
             }

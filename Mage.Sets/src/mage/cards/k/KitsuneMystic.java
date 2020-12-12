@@ -114,8 +114,8 @@ class AutumnTailEffect extends OneShotEffect {
             if (oldCreature == null || oldCreature.equals(creature)) {
                 return false;
             }
-            if (oldCreature.removeAttachment(aura.getId(), game)) {
-                return creature.addAttachment(aura.getId(), game);
+            if (oldCreature.removeAttachment(aura.getId(), source, game)) {
+                return creature.addAttachment(aura.getId(), source, game);
             }
         }
         return false;

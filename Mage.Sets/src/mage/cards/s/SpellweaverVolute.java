@@ -108,7 +108,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                                         Card newAuraTarget = game.getCard(auraTarget.getFirstTarget());
                                         if (newAuraTarget != null) {
                                             if (enchantedCard.getId().equals(newAuraTarget.getId())) {
-                                            } else if (newAuraTarget.addAttachment(sourcePermanent.getId(), game)) {
+                                            } else if (newAuraTarget.addAttachment(sourcePermanent.getId(), source, game)) {
                                                 game.informPlayers(sourcePermanent.getLogName() + " was attached to " + newAuraTarget.getLogName());
                                             }
                                         }

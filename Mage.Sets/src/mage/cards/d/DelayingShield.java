@@ -68,7 +68,7 @@ class DelayingShieldReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override
@@ -104,11 +104,11 @@ class DelayingShieldUpkeepEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             int numCounters = permanent.getCounters(game).getCount(CounterType.DELAY);
-            permanent.removeCounters(CounterType.DELAY.createInstance(numCounters), game);
+            permanent.removeCounters(CounterType.DELAY.createInstance(numCounters), source, game);
             for (int i = numCounters; i > 0; i--) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay {1}{W}? (" + i + " counters left to pay)", source, game)) {
                     Cost cost = new ManaCostsImpl<>("{1}{W}");
-                    if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                    if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                         continue;
                     }
                 }

@@ -12,9 +12,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
+import mage.game.events.*;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,6 +36,7 @@ public final class Godtoucher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // {1}{W}, {T}: Prevent all damage that would be dealt to target creature with power 5 or greater this turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GodtoucherEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{W}"));
@@ -78,12 +77,20 @@ class GodtoucherEffect extends PreventionEffectImpl {
     }
 
     @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!this.used && super.applies(event, source, game)) {
+            return source.getTargets().getFirstTarget().equals(event.getTargetId());
+        }
+        return false;
+    }
+
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
         }
         return false;
     }

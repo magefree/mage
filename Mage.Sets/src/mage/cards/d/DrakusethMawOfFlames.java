@@ -93,11 +93,11 @@ class DrakusethMawOfFlamesEffect extends OneShotEffect {
     private static void damage(int damage, UUID targetId, Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
-            permanent.damage(damage, source.getSourceId(), game, false, true);
+            permanent.damage(damage, source.getSourceId(), source, game, false, true);
         }
         Player player = game.getPlayer(targetId);
         if (player != null) {
-            player.damage(damage, source.getSourceId(), game);
+            player.damage(damage, source.getSourceId(), source, game);
         }
     }
 }

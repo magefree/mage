@@ -72,7 +72,7 @@ class MadcapExperimentEffect extends OneShotEffect {
             int damage = toReveal.size();
             toReveal.remove(toBattlefield);
             controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
-            controller.damage(damage, source.getSourceId(), game);
+            controller.damage(damage, source.getSourceId(), source, game);
 
             return true;
         }

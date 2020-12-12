@@ -99,7 +99,7 @@ class DoOrDieEffect extends OneShotEffect {
     private void destroyPermanents(List<Permanent> pile, Game game, Ability source) {
         for (Permanent permanent : pile) {
             if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, true);
+                permanent.destroy(source, game, true);
             }
         }
     }

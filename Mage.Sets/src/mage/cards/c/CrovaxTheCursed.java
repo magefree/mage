@@ -87,7 +87,7 @@ class CrovaxTheCursedEffect extends OneShotEffect {
                     }
                 }
             } else if (sourceObject != null && sourceObject.getCounters(game).containsKey(CounterType.P1P1)) {
-                sourceObject.removeCounters(CounterType.P1P1.getName(), 1, game);
+                sourceObject.removeCounters(CounterType.P1P1.getName(), 1, source, game);
                 game.informPlayers(controller.getLogName() + " removes a +1/+1 counter from " + sourceObject.getName());
             }
             return true;

@@ -44,7 +44,7 @@ public class DestroyMultiTargetEffect extends OneShotEffect {
             for (UUID permanentId: target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    permanent.destroy(source.getSourceId(), game, noRegen);
+                    permanent.destroy(source, game, noRegen);
                     affectedTargets++;
                 }
             }

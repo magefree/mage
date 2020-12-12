@@ -60,13 +60,13 @@ class PestilenceDemonEffect extends OneShotEffect {
         for (UUID permanentId : game.getBattlefield().getAllPermanentIds()) {
             Permanent p = game.getPermanent(permanentId);
             if (p != null && p.isCreature()) {
-                p.damage(1, source.getSourceId(), game, false, true);
+                p.damage(1, source.getSourceId(), source, game, false, true);
             }
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player p = game.getPlayer(playerId);
             if (p != null) {
-                p.damage(1, source.getSourceId(), game);
+                p.damage(1, source.getSourceId(), source, game);
             }
         }
         return true;

@@ -68,7 +68,7 @@ class SpelljackEffect extends OneShotEffect {
         if (controller != null) {
             UUID targetId = targetPointer.getFirst(game, source);
             StackObject stackObject = game.getStack().getStackObject(targetId);
-            if (stackObject != null && game.getStack().counter(targetId, source.getSourceId(), game, Zone.EXILED, false, ZoneDetail.NONE)) {
+            if (stackObject != null && game.getStack().counter(targetId, source, game, Zone.EXILED, false, ZoneDetail.NONE)) {
                 Card card = ((Spell) stackObject).getCard();
                 if (card != null) {
                     ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.Custom, true);

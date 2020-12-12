@@ -73,7 +73,7 @@ class SparkFiendEffect extends OneShotEffect {
                 Permanent sourcePermanent = (Permanent) mageObject;
                 if (roll == 2 || roll == 3 || roll == 12) {
                     // sacrifice
-                    sourcePermanent.sacrifice(source.getSourceId(), game);
+                    sourcePermanent.sacrifice(source, game);
                 } else if (roll == 7 || roll == 11) {
                     // don't roll again
                     game.getState().setValue("SparkFiend" + source.getSourceId().toString(), 0);
@@ -118,7 +118,7 @@ class SparkFiendUpkeepEffect extends OneShotEffect {
                     Permanent sourcePermanent = (Permanent) mageObject;
                     if (roll == 7) {
                         // sacrifice
-                        sourcePermanent.sacrifice(source.getSourceId(), game);
+                        sourcePermanent.sacrifice(source, game);
                     } else if (roll == (Integer) game.getState().getValue("SparkFiend" + source.getSourceId().toString())) {
                         // don't roll again
                         game.getState().setValue("SparkFiend" + source.getSourceId().toString(), 0);

@@ -49,7 +49,7 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, targetZone, false, zoneDetail);
+            return game.getStack().counter(targetPointer.getFirst(game, source), source, game, targetZone, false, zoneDetail);
         }
         return false;
     }

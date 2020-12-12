@@ -86,8 +86,8 @@ class IllusoryGainsEffect extends OneShotEffect {
             if (oldCreature == null) {
                 return false;
             }
-            if (oldCreature.removeAttachment(illusoryGains.getId(), game)) {
-                return opponentCreature.addAttachment(illusoryGains.getId(), game);
+            if (oldCreature.removeAttachment(illusoryGains.getId(), source, game)) {
+                return opponentCreature.addAttachment(illusoryGains.getId(), source, game);
             }
         }
         return false;

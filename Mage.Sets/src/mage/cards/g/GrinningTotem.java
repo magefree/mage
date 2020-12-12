@@ -85,7 +85,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
                     Card card = targetOpponent.getLibrary().remove(targetCard.getFirstTarget(), game);
                     if (card != null) {
                         UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
-                        you.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                        you.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
                         ContinuousEffect effect = new GrinningTotemMayPlayEffect();
                         effect.setTargetPointer(new FixedTarget(card.getId()));
                         game.addEffect(effect, source);
@@ -172,7 +172,7 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override

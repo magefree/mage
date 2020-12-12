@@ -81,7 +81,7 @@ class LiegeOfTheHollowsEffect extends OneShotEffect {
                     : paidMana.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null) {
-                    token.putOntoBattlefield(entry.getValue(), game, source.getSourceId(), player.getId());
+                    token.putOntoBattlefield(entry.getValue(), game, source, player.getId());
                 }
             }
             game.getState().processAction(game);

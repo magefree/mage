@@ -88,12 +88,12 @@ class ChandrasRegulatorEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+        if (!cost.canPay(source, source, player.getId(), game)
                 || !player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() +
                 "? If you do, copy that ability. You may choose new targets for the copy.", source, game)) {
             return true;
         }
-        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+        if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return true;
         }
         StackAbility ability = (StackAbility) getValue("stackAbility");

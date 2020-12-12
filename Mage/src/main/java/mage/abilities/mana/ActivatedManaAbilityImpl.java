@@ -70,7 +70,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         }
 
         //20091005 - 605.3a
-        return new ActivationStatus(costs.canPay(this, sourceId, controllerId, game), null);
+        return new ActivationStatus(costs.canPay(this, this, controllerId, game), null);
     }
 
     /**

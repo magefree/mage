@@ -79,6 +79,11 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // rules:
+        // If a spell with rebound that you cast from your hand doesn’t resolve for any reason (due being countered
+        // by a spell like Cancel, or because all of its targets are illegal), rebound has no effect.
+        // The spell is simply put into your graveyard. You won’t get to cast it again next turn.
+        // (2010-06-15)
         if (((ZoneChangeEvent) event).getFromZone() == Zone.STACK
                 && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && event.getSourceId() != null
@@ -108,7 +113,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
                     game.addDelayedTriggeredAbility(trigger, source);
 
                     player.moveCardToExileWithInfo(sourceCard, sourceCard.getId(),
-                            player.getName() + " Rebound", source.getSourceId(), game, Zone.STACK, true);
+                            player.getName() + " Rebound", source, game, Zone.STACK, true);
                     return true;
                 }
             }
@@ -127,7 +132,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
 
     ReboundEffectCastFromExileDelayedTrigger(UUID cardId, UUID sourceId) {
         super(new ReboundCastSpellFromExileEffect());
-        setSourceId(sourceId);
+        setSourceId(sourceId); // TODO: WTF?!
         this.optional = true;
     }
 

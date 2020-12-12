@@ -74,7 +74,7 @@ class FireProphecyEffect extends OneShotEffect {
             return false;
         }
         if (player.putCardsOnBottomOfLibrary(card, game, source, false)) {
-            player.drawCards(1, source.getSourceId(), game);
+            player.drawCards(1, source, game);
         }
         return true;
     }

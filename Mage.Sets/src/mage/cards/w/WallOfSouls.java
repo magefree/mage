@@ -67,7 +67,7 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
 
     @Override
@@ -105,7 +105,7 @@ class WallOfSoulsDealDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = (Integer) getValue("damage");
         if (amount > 0) {
-            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), amount, source.getSourceId(), game, false, true) > 0;
+            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), amount, source.getSourceId(), source, game, false, true) > 0;
         }
         return false;
     }

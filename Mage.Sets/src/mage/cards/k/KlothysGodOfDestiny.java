@@ -102,7 +102,7 @@ class KlothysGodOfDestinyEffect extends OneShotEffect {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .forEach(opponent -> opponent.damage(2, source.getSourceId(), game));
+                .forEach(opponent -> opponent.damage(2, source.getSourceId(), source, game));
         return true;
     }
 }

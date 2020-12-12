@@ -92,7 +92,7 @@ class ShatterAssumptionsEffect extends OneShotEffect {
         } else {
             f = filter2;
         }
-        player.discard(new CardsImpl(player.getHand().getCards(f, game)), source, game);
+        player.discard(new CardsImpl(player.getHand().getCards(f, game)), false, source, game);
         return true;
     }
 }

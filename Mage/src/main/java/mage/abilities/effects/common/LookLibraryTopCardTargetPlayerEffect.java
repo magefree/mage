@@ -75,7 +75,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
             if (putToGraveyard) {
                 for (Card card : cards.getCards(game)) {
                     if (player.chooseUse(outcome, "Do you wish to put card into the player's graveyard?", source, game)) {
-                        player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        player.moveCardToGraveyardWithInfo(card, source, game, Zone.LIBRARY);
                     } else {
                         game.informPlayers(player.getLogName() + " puts the card back on top of the library.");
                     }

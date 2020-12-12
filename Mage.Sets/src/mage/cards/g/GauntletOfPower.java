@@ -114,7 +114,7 @@ class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility 
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override

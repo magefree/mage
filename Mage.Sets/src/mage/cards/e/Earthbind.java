@@ -79,7 +79,7 @@ class EarthbindEffect extends OneShotEffect {
             Permanent enchanted = game.getPermanent(attachment.getAttachedTo());
             if (enchanted != null) {
                 if (enchanted.getAbilities().contains(FlyingAbility.getInstance())) {               
-                    enchanted.damage(2, source.getSourceId(), game, false, true);
+                    enchanted.damage(2, source.getSourceId(), source, game, false, true);
                 }
                 return true;
             }

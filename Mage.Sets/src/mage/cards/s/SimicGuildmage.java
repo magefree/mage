@@ -111,7 +111,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             if (fromPermanent == null || toPermanent == null || !fromPermanent.isControlledBy(toPermanent.getControllerId())) {
                 return false;
             }
-            fromPermanent.removeCounters(CounterType.P1P1.createInstance(1), game);
+            fromPermanent.removeCounters(CounterType.P1P1.createInstance(1), source, game);
             toPermanent.addCounters(CounterType.P1P1.createInstance(1), source, game);
             return true;
         }
@@ -196,12 +196,12 @@ class MoveAuraEffect extends OneShotEffect {
                 Permanent permanentToAttachAura = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());
                 if (permanentToAttachAura != null) {
                     // Check for protection
-                    if (permanentToAttachAura.cantBeAttachedBy(aura, game, true)) {
+                    if (permanentToAttachAura.cantBeAttachedBy(aura, source, game, true)) {
                         passed = false;
                     }
                     if (passed) {
-                        fromPermanent.removeAttachment(aura.getId(), game);
-                        permanentToAttachAura.addAttachment(aura.getId(), game);
+                        fromPermanent.removeAttachment(aura.getId(), source, game);
+                        permanentToAttachAura.addAttachment(aura.getId(), source, game);
                         return true;
                     }
                 }

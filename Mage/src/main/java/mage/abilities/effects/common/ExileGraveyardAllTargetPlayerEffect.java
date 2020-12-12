@@ -35,7 +35,7 @@ public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect {
         if (targetPlayer != null) {
             List<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
             for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
+                game.getCard(cardId).moveToZone(Zone.EXILED, source, game, false);
             }
             return true;
         }

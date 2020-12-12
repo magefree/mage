@@ -140,7 +140,7 @@ class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
                 }
             } else {
                 game.informPlayers(sourcePermanent.getLogName() + " can't attack an opponent it didn't attack last combat.");
-                sourcePermanent.tap(game);
+                sourcePermanent.tap(source, game);
             }
             return true;
         }

@@ -4,6 +4,7 @@ package mage.game.events;
 
 import java.util.UUID;
 import mage.Mana;
+import mage.abilities.Ability;
 
 /**
  *
@@ -13,8 +14,8 @@ public class ManaEvent extends GameEvent {
 
     protected Mana mana;
 
-    public ManaEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, Mana mana) {
-        super(type, targetId, sourceId, playerId);
+    public ManaEvent(EventType type, UUID targetId, Ability source, UUID playerId, Mana mana) {
+        super(type, targetId, source, playerId);
         this.mana = mana;
     }
 

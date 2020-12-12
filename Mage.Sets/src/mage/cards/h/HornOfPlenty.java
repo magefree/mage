@@ -65,7 +65,7 @@ class HornOfPlentyEffect extends OneShotEffect {
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {1} to draw a card at the beginning of the next end step?", source, game)) {
                 Cost cost = new ManaCostsImpl("{1}");
-                if (cost.pay(source, game, source.getSourceId(), caster.getId(), false, null)) {
+                if (cost.pay(source, game, source, caster.getId(), false, null)) {
                     Effect effect = new DrawCardTargetEffect(1);
                     effect.setTargetPointer(new FixedTarget(caster.getId()));
                     game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);

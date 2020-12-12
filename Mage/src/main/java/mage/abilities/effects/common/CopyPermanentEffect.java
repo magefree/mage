@@ -156,9 +156,9 @@ public class CopyPermanentEffect extends OneShotEffect {
         Permanent targetPermanent = game.getPermanent(targetId);
         Player targetPlayer = game.getPlayer(targetId);
         if (targetPermanent != null) {
-            targetPermanent.addAttachment(sourcePermanent.getId(), game);
+            targetPermanent.addAttachment(sourcePermanent.getId(), source, game);
         } else if (targetPlayer != null) {
-            targetPlayer.addAttachment(sourcePermanent.getId(), game);
+            targetPlayer.addAttachment(sourcePermanent.getId(), source, game);
         } else {
             return false;
         }

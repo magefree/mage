@@ -73,7 +73,7 @@ class VizierOfTheTrueAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.BECOMES_EXERTED;
+        return event.getType() == GameEvent.EventType.BECOMES_EXERTED;
     }
 
     @Override

@@ -72,7 +72,7 @@ class MagusoftheJarEffect extends OneShotEffect {
                 for (UUID cardId : handCards) {
                     Card card = handCards.get(cardId, game);
                     if (card != null) {
-                        card.moveToExile(getId(), "Magus of the Jar", source.getSourceId(), game);
+                        card.moveToExile(getId(), "Magus of the Jar", source, game);
                         card.setFaceDown(true, game);
                         cards.add(card);
                     }
@@ -83,7 +83,7 @@ class MagusoftheJarEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(7, source.getSourceId(), game);
+                player.drawCards(7, source, game);
             }
         }
         //Delayed ability
@@ -124,13 +124,13 @@ class MagusoftheJarDelayedEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.discard(player.getHand().size(), false, source, game);
+                    player.discard(player.getHand().size(), false, false, source, game);
                 }
             }
             //Return to hand
             for (Iterator<Card> it = cards.getCards(game).iterator(); it.hasNext(); ) {
                 Card card = it.next();
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                card.moveToZone(Zone.HAND, source, game, true);
             }
             return true;
         }

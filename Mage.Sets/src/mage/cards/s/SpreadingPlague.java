@@ -69,7 +69,7 @@ class SpreadingPlagueEffect extends OneShotEffect {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER, source.getControllerId(), game)) {
                 if (permanent.getColor(game).shares(color)
                         && !Objects.equals(permanent, creature)) {
-                    permanent.destroy(source.getSourceId(), game, true);
+                    permanent.destroy(source, game, true);
                 }
             }
             return true;

@@ -89,7 +89,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DRAW_CARD;
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override
@@ -122,27 +122,13 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
-                }
-            } else {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
-                }
-            }
-            return false;
-        }
-        return true;
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+        return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

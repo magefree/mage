@@ -93,7 +93,7 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
             player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
             Card card = game.getCard(target.getTargets().get(0));
             if (card != null) {
-                return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                return card.moveToZone(Zone.BATTLEFIELD, source, game, false);
             }
         }
         return false;

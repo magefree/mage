@@ -180,7 +180,7 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
             Integer doomNumber = (Integer) game.getState().getValue(mageObject.getId() + "_doom");
             if (doomNumber == 1) {
                 // not completely sure if counter should be moving here or not (relevant in case the second trigger gets countered)
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CUSTOM_EVENT, source.getSourceId(), source.getSourceId(), controller.getId(), "DoomCounterReset", 1));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CUSTOM_EVENT, source.getSourceId(), source, controller.getId(), "DoomCounterReset", 1));
             }
             if (doomNumber > 0) {
                 doomNumber--;
@@ -211,7 +211,7 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CUSTOM_EVENT;
+        return event.getType() == GameEvent.EventType.CUSTOM_EVENT;
     }
 
     @Override

@@ -59,7 +59,7 @@ class EachOpponentLosesYouGainSumLifeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int lostLife = 0;
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            lostLife += game.getPlayer(opponentId).loseLife(1, game, false);
+            lostLife += game.getPlayer(opponentId).loseLife(1, game, source, false);
         }
         game.getPlayer(source.getControllerId()).gainLife(lostLife, game, source);
         return true;

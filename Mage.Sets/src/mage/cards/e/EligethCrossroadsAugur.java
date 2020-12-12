@@ -80,7 +80,7 @@ class EligethCrossroadsAugurReplacementEffect extends ReplacementEffectImpl {
         if (player == null) {
             return false;
         }
-        player.drawCards(event.getAmount(), event.getSourceId(), game);
+        player.drawCards(event.getAmount(), source, game); // original event is not a draw event, so skip it in params
         return true;
     }
 }

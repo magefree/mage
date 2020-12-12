@@ -58,7 +58,7 @@ class EscapePodEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (permanent != null && sourceObject != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source, game)) {
                 Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
                 effect.setText("Return that card to the battlefield under your control at the beginning of the next end step");
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));

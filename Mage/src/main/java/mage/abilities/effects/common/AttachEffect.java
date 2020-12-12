@@ -43,16 +43,16 @@ public class AttachEffect extends OneShotEffect {
                     || zcc == source.getSourceObjectZoneChangeCounter() + 2) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    return permanent.addAttachment(source.getSourceId(), game);
+                    return permanent.addAttachment(source.getSourceId(), source, game);
                 } else {
                     Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
                     if (player != null) {
-                        return player.addAttachment(source.getSourceId(), game);
+                        return player.addAttachment(source.getSourceId(), source, game);
                     }
                     if (!source.getTargets().isEmpty() && source.getTargets().get(0) instanceof TargetCard) { // e.g. Spellweaver Volute
                         Card card = game.getCard(getTargetPointer().getFirst(game, source));
                         if (card != null) {
-                            return card.addAttachment(source.getSourceId(), game);
+                            return card.addAttachment(source.getSourceId(), source, game);
                         }
                     }
                 }

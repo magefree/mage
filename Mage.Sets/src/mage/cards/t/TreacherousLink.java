@@ -89,7 +89,7 @@ class TreacherousLinkEffect extends ReplacementEffectImpl {
         if (controller == null) {
             return false;
         }
-        controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
+        controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
         return true;
     }
 

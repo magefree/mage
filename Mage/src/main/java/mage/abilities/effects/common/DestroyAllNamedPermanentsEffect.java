@@ -42,7 +42,7 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
             filter.add(new NamePredicate(targetPermanent.getName()));
         }
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            perm.destroy(source.getSourceId(), game, false);
+            perm.destroy(source, game, false);
         }
         return true;
     }

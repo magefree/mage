@@ -68,12 +68,12 @@ class DecreeOfPainEffect extends OneShotEffect {
         if (controller != null) {
             int destroyedCreature = 0;
             for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
-                if (creature.destroy(source.getSourceId(), game, true)) {
+                if (creature.destroy(source, game, true)) {
                     destroyedCreature++;
                 }
             }
             if (destroyedCreature > 0) {
-                controller.drawCards(destroyedCreature, source.getSourceId(), game);
+                controller.drawCards(destroyedCreature, source, game);
             }
             return true;
         }

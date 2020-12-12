@@ -89,7 +89,7 @@ class ConsumingFerocityEffect extends OneShotEffect {
             if (creature.getCounters(game).getCount(CounterType.P1P0) > 2) {
                 Player player = game.getPlayer(creature.getControllerId());
                 if (player != null) {
-                    player.damage(creature.getPower().getValue(), creature.getId(), game);
+                    player.damage(creature.getPower().getValue(), creature.getId(), source, game);
                 }
                 effect = new DestroyTargetEffect(true);
                 effect.setTargetPointer(new FixedTarget(creature, game));

@@ -89,14 +89,14 @@ class DoomForetoldEffect extends OneShotEffect {
             target.setNotTarget(true);
             if (player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null && permanent.sacrifice(source.getSourceId(), game)) {
+                if (permanent != null && permanent.sacrifice(source, game)) {
                     return true;
                 }
             }
         }
-        player.discard(1, false, source, game);
-        player.loseLife(2, game, false);
-        controller.drawCards(1, source.getSourceId(), game);
+        player.discard(1, false, false, source, game);
+        player.loseLife(2, game, source, false);
+        controller.drawCards(1, source, game);
         controller.gainLife(2, game, source);
         effect1.apply(game, source);
         effect2.apply(game, source);

@@ -80,7 +80,7 @@ class SarkhanTheMasterlessDamageEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (permanent != null && permanent.hasSubtype(SubType.DRAGON, game)) {
-                creature.damage(1, permanent.getId(), game);
+                creature.damage(1, permanent.getId(), source, game);
             }
         }
         return true;

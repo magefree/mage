@@ -59,7 +59,7 @@ class MartyrsCryEffect extends OneShotEffect {
         Map<UUID, Integer> playerCrtCount = new HashMap<>();
         for (Iterator<Permanent> it = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator(); it.hasNext();) {
             Permanent perm = it.next();
-            if (perm != null && perm.isCreature() && perm.getColor(game).isWhite() && perm.moveToExile(null, null, source.getSourceId(), game)) {
+            if (perm != null && perm.isCreature() && perm.getColor(game).isWhite() && perm.moveToExile(null, null, source, game)) {
                 playerCrtCount.putIfAbsent(perm.getControllerId(), 0);
                 playerCrtCount.compute(perm.getControllerId(), (p, amount) -> amount + 1);
             }
@@ -67,7 +67,7 @@ class MartyrsCryEffect extends OneShotEffect {
         for (UUID playerId : game.getPlayerList().toList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), source.getSourceId(), game);
+                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), source, game);
             }
         }
         return true;

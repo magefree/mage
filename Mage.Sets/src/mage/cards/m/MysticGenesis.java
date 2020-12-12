@@ -59,7 +59,7 @@ class MysticGenesisEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null) {
-            game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            game.getStack().counter(source.getFirstTarget(), source, game);
             return new CreateTokenEffect(new MysticGenesisOozeToken(stackObject.getConvertedManaCost())).apply(game, source);
         }
         return false;

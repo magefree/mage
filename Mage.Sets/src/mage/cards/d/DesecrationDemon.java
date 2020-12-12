@@ -73,15 +73,15 @@ class DesecrationDemonEffect extends OneShotEffect {
                     filter.add(CardType.CREATURE.getPredicate());
                     filter.add(TargetController.YOU.getControllerPredicate());
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                    if (target.canChoose(opponent.getId(), game)) {
+                    if (target.canChoose(source.getSourceId(), opponent.getId(), game)) {
                         if (opponent.chooseUse(Outcome.AIDontUseIt, "Sacrifice a creature to tap " + descrationDemon.getLogName() + "and put a +1/+1 counter on it?", source, game))
                         {
                             opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                                 game.informPlayers(opponent.getLogName() + " sacrifices " + permanent.getLogName() + " to tap " + descrationDemon.getLogName() + ". A +1/+1 counter was put on it");
-                                descrationDemon.tap(game);
+                                descrationDemon.tap(source, game);
                                 descrationDemon.addCounters(CounterType.P1P1.createInstance(), source, game);
                             }
                         }

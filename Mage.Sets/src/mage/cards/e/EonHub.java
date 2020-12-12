@@ -62,7 +62,7 @@ class SkipUpkeepStepEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP;
     }
     
     @Override

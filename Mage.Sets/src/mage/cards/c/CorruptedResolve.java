@@ -55,7 +55,7 @@ class CorruptedResolveEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null && player.getCounters().containsKey(CounterType.POISON))
-                return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
+                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
         }
         return false;
     }

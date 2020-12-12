@@ -83,7 +83,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             return;
         }
 
-        if (additionalCost.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)
+        if (additionalCost.canPay(ability, this, ability.getControllerId(), game)
                 && player.chooseUse(Outcome.Benefit, "Pay " + additionalCost.getText(false) + " ?", ability, game)) {
             addCostsToAbility(additionalCost, ability);
             activateCost(game, ability);

@@ -67,7 +67,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
     }
 
     @Override
@@ -104,7 +104,7 @@ class CreepyDollEffect extends OneShotEffect {
                 UUID targetId = getTargetPointer().getFirst(game, source);
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent.destroy(source.getSourceId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
             }
         }

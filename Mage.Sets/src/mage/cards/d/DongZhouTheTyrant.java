@@ -68,7 +68,7 @@ class DongZhouTheTyrantEffect extends OneShotEffect {
             int amount = creature.getPower().getValue();
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                controller.damage(amount, creature.getId(), game);
+                controller.damage(amount, creature.getId(), source, game);
                 return true;
             }
         }

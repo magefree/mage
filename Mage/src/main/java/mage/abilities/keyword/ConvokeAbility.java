@@ -219,7 +219,7 @@ class ConvokeEffect extends OneShotEffect {
                     continue;
                 }
                 String manaName;
-                if (!perm.isTapped() && perm.tap(game)) {
+                if (!perm.isTapped() && perm.tap(source, game)) {
                     ManaPool manaPool = controller.getManaPool();
                     Choice chooseManaType = buildChoice(perm.getColor(game), unpaid.getMana());
                     if (!chooseManaType.getChoices().isEmpty()) {
@@ -262,7 +262,7 @@ class ConvokeEffect extends OneShotEffect {
                         manaPool.unlockManaType(ManaType.COLORLESS);
                         manaName = "colorless";
                     }
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source.getSourceId(), source.getControllerId()));
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
                     game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
 
                     // can't use mana abilities after that (convoke cost must be payed after mana abilities only)

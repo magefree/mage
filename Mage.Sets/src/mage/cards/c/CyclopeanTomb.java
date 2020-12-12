@@ -195,7 +195,7 @@ class CyclopeanTombCounterWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTERS_ADDED && event.getData().equals(CounterType.MIRE.getName()) && event.getAmount() > 0) {
-            Permanent tomb = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            Permanent tomb = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (tomb != null) {
                 MageObjectReference cylopeanTombInstance = new MageObjectReference(tomb, game);
                 Set<MageObjectReference> miredLands;

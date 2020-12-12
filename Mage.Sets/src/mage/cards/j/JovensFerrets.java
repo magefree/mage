@@ -90,7 +90,7 @@ class JovensFerretsEffect extends OneShotEffect {
                     }
                 }
                 for (Permanent creature : toTap) {
-                    creature.tap(game);
+                    creature.tap(source, game);
                     DontUntapInControllersNextUntapStepTargetEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                     effect.setTargetPointer(new FixedTarget(creature.getId()));
                     game.addEffect(effect, source);

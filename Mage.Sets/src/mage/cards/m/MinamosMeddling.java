@@ -65,7 +65,7 @@ class MinamosMeddlingCounterTargetEffect extends OneShotEffect {
             if (spell == null) {
                 continue;
             }
-            game.getStack().counter(targetId, source.getSourceId(), game);
+            game.getStack().counter(targetId, source, game);
             Player spellController = game.getPlayer(spell.getControllerId());
             if (spellController == null) {
                 continue;
@@ -82,7 +82,7 @@ class MinamosMeddlingCounterTargetEffect extends OneShotEffect {
                 }
             }
             if (!cardsToDiscard.isEmpty()) {
-                spellController.discard(cardsToDiscard, source, game);
+                spellController.discard(cardsToDiscard, false, source, game);
             }
         }
         return true;

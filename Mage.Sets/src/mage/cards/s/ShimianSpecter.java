@@ -93,7 +93,7 @@ class ShimianSpecterEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard());
             target.setNotTarget(true);
             Card chosenCard = null;
-            if (target.canChoose(controller.getId(), game)
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
@@ -116,7 +116,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                 for (Card checkCard : targetPlayer.getGraveyard().getCards(game)) {
                     if (checkCard.getName().equals(chosenCard.getName())) {
                         controller.moveCardToExileWithInfo(checkCard, null, "",
-                                source.getSourceId(), game, Zone.GRAVEYARD, true);
+                                source, game, Zone.GRAVEYARD, true);
                     }
                 }
 
@@ -127,7 +127,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "",
-                                source.getSourceId(), game, Zone.HAND, true);
+                                source, game, Zone.HAND, true);
                     }
                 }
             }
@@ -142,7 +142,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                 for (UUID cardId : targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                        controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.LIBRARY, true);
                     }
                 }
                 targetPlayer.shuffleLibrary(source, game);

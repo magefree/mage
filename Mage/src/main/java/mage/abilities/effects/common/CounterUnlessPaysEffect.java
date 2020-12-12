@@ -68,9 +68,10 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                 }
 
                 costToPay.clearPaid();
-                if (!(player.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false, null))) {
+                if (!(player.chooseUse(Outcome.Benefit, message, source, game)
+                        && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
                     game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
-                    return game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                    return game.getStack().counter(spell.getId(), source, game);
                 }
                 game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
                 return true;

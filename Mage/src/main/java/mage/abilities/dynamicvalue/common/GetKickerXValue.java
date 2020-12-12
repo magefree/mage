@@ -16,7 +16,7 @@ public enum GetKickerXValue implements DynamicValue {
     instance;
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         // calcs only kicker with X values
 
         // kicker adds additional costs to spell ability
@@ -24,7 +24,7 @@ public enum GetKickerXValue implements DynamicValue {
         // kicker can be calls multiple times (use getKickedCounter)
 
         int finalValue = 0;
-        Spell spell = game.getSpellOrLKIStack(source.getSourceId());
+        Spell spell = game.getSpellOrLKIStack(sourceAbility.getSourceId());
         if (spell != null && spell.getSpellAbility() != null) {
             int xValue = spell.getSpellAbility().getManaCostsToPay().getX();
             for (Ability ability : spell.getAbilities()) {
@@ -38,7 +38,7 @@ public enum GetKickerXValue implements DynamicValue {
 
 
                     if (haveVarCost) {
-                        int kickedCount = ((KickerAbility) ability).getKickedCounter(game, source);
+                        int kickedCount = ((KickerAbility) ability).getKickedCounter(game, sourceAbility);
                         if (kickedCount > 0) {
                             finalValue += kickedCount * xValue;
                         }

@@ -8,10 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
+import mage.game.events.*;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -55,10 +52,10 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int preventedDamage = event.getAmount();
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), preventedDamage));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), preventedDamage));
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.moveCards(player.getLibrary().getTopCards(game, preventedDamage), Zone.EXILED, source, game);

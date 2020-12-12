@@ -72,7 +72,7 @@ class RenderSilentCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
         if (spell != null) {
             source.getEffects().get(1).setTargetPointer(new FixedTarget(spell.getControllerId()));
-            return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            return game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return false;
     }

@@ -89,7 +89,7 @@ class LaccolithRigEffect extends OneShotEffect {
             int damage = ownCreature.getPower().getValue();
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                targetCreature.damage(damage, ownCreature.getId(), game, false, true);
+                targetCreature.damage(damage, ownCreature.getId(), source, game, false, true);
                 return true;
             }
         }

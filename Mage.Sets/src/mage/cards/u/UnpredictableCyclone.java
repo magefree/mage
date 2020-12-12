@@ -112,7 +112,7 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         Player player = game.getPlayer(event.getPlayerId());
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId()); // event.getSourceId() will be null for default draws (non effects)
         if (player == null || stackObject == null
                 || stackObject.getStackAbility() == null
                 || !(stackObject.getStackAbility() instanceof CyclingAbility)) {

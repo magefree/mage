@@ -88,8 +88,8 @@ class DarettiDiscardDrawEffect extends OneShotEffect {
         if (controller != null) {
             TargetDiscard target = new TargetDiscard(0, 2, new FilterCard(), controller.getId());
             target.choose(outcome, controller.getId(), source.getSourceId(), game);
-            int count = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
-            controller.drawCards(count, source.getSourceId(), game);
+            int count = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
+            controller.drawCards(count, source, game);
             return true;
         }
         return false;
@@ -120,7 +120,7 @@ class DarettiSacrificeEffect extends OneShotEffect {
             if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent artifact = game.getPermanent(target.getFirstTarget());
-                if (artifact != null && artifact.sacrifice(source.getSourceId(), game)) {
+                if (artifact != null && artifact.sacrifice(source, game)) {
                     Card card = game.getCard(getTargetPointer().getFirst(game, source));
                     if (card != null) {
                         return controller.moveCards(card, Zone.BATTLEFIELD, source, game);

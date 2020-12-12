@@ -67,8 +67,8 @@ class ThwartTheGraveTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID playerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, playerId, game);
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         if (!this.getTargets().isEmpty()) {
             possibleTargets.removeIf(uuid -> {
                 Card card = game.getCard(uuid);

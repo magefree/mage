@@ -84,11 +84,11 @@ class ConeOfFlameEffect extends OneShotEffect {
         for (Target target : source.getTargets()) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                applied |= (permanent.damage(damage, source.getSourceId(), game, false, true) > 0);
+                applied |= (permanent.damage(damage, source.getSourceId(), source, game, false, true) > 0);
             }
             Player player = game.getPlayer(target.getFirstTarget());
             if (player != null) {
-                applied |= (player.damage(damage, source.getSourceId(), game) > 0);
+                applied |= (player.damage(damage, source.getSourceId(), source, game) > 0);
             }
             damage++;
         }

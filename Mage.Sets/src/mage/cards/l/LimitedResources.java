@@ -82,7 +82,7 @@ class LimitedResourcesEffect extends OneShotEffect {
                 target.setRequired(true);
                 player.chooseTarget(outcome.Benefit, target, source, game);
                 game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), playerId, game).stream().filter((land) -> (!target.getTargets().contains(land.getId()))).forEachOrdered((land) -> {
-                    land.sacrifice(source.getSourceId(), game);
+                    land.sacrifice(source, game);
                 });
             }
         });

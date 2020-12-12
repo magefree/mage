@@ -78,7 +78,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
 
         if (controller != null) {
             Token token = new CatSoldierCreatureToken();
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source, source.getControllerId());
             Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (attackingCreature != null && game.getState().getCombat() != null) {
                 // Possible ruling (see Aetherplasm)

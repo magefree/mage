@@ -76,7 +76,7 @@ class GhastlyDemiseEffect extends OneShotEffect {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
                     if (permanent != null && permanent.getToughness().getValue() <= game.getPlayer(source.getControllerId()).getGraveyard().size()) {
-                        permanent.destroy(source.getSourceId(), game, noRegen);
+                        permanent.destroy(source, game, noRegen);
                         affectedTargets++;
                     }
                 }
@@ -85,7 +85,7 @@ class GhastlyDemiseEffect extends OneShotEffect {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null && permanent.getToughness().getValue() <= game.getPlayer(source.getControllerId()).getGraveyard().size()) {
-                    permanent.destroy(source.getSourceId(), game, noRegen);
+                    permanent.destroy(source, game, noRegen);
                     affectedTargets++;
                 }
             }

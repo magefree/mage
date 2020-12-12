@@ -98,7 +98,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
             return false;
         }
         // TODO: make this redirect damage from all blockers
-        controller.damage(event.getAmount(), source.getSourceId(), game);
+        controller.damage(event.getAmount(), source.getSourceId(), source, game);
         String sourceLogName = game.getObject(source.getSourceId()).getLogName() + ": ";
         game.informPlayers(sourceLogName + "Redirected " + event.getAmount() + " damage to " + controller.getLogName());
         this.discard();

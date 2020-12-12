@@ -80,7 +80,7 @@ class TurnFaceUpEffect extends OneShotEffect {
         if (controller != null && card != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
-                if (sourcePermanent.turnFaceUp(game, source.getControllerId())) {
+                if (sourcePermanent.turnFaceUp(source, game, source.getControllerId())) {
                     if (megamorph) {
                         sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                     }

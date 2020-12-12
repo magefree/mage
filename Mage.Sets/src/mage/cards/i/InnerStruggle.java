@@ -60,7 +60,7 @@ class InnerStruggleEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
-                targetCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
+                targetCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), source, game, false, true);
             }
             return true;
         }

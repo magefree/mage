@@ -67,7 +67,7 @@ public class DestroyTargetEffect extends OneShotEffect {
                     if (permanent != null
                             && permanent.isPhasedIn()
                             && !permanent.isPhasedOutIndirectly()) {
-                        permanent.destroy(source.getSourceId(), game, noRegen);
+                        permanent.destroy(source, game, noRegen);
                         affectedTargets++;
                     }
                 }
@@ -78,7 +78,7 @@ public class DestroyTargetEffect extends OneShotEffect {
                 if (permanent != null
                         && permanent.isPhasedIn()
                         && !permanent.isPhasedOutIndirectly()) {
-                    permanent.destroy(source.getSourceId(), game, noRegen);
+                    permanent.destroy(source, game, noRegen);
                     affectedTargets++;
                 }
             }

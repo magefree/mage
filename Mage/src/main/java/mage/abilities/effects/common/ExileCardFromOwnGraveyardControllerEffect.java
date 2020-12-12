@@ -44,7 +44,7 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
                 for (UUID targetId : target.getTargets()) {
                     Card card = player.getGraveyard().get(targetId, game);
                     if (card != null) {
-                        card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
+                        card.moveToZone(Zone.EXILED, source, game, false);
                     }
                 }
             }

@@ -84,10 +84,10 @@ class MagmasaurEffect extends OneShotEffect {
         Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (sourceObject != null && controller != null) {
             if (controller.chooseUse(outcome, "Remove a +1/+1 counter from " + sourceObject.getLogName() + '?', source, game)) {
-                sourceObject.removeCounters(CounterType.P1P1.getName(), 1, game);
+                sourceObject.removeCounters(CounterType.P1P1.getName(), 1, source, game);
             } else {
                 int counters = sourceObject.getCounters(game).getCount(CounterType.P1P1);
-                sourceObject.sacrifice(source.getSourceId(), game);
+                sourceObject.sacrifice(source, game);
                 new DamageEverythingEffect(counters, filter).apply(game, source);
             }
             return true;

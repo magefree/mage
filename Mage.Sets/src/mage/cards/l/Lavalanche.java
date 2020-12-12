@@ -68,13 +68,13 @@ class LavalancheEffect extends OneShotEffect {
         if (targetPlayer == null) {
             return false;
         }
-        targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), game);
+        targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
         FilterPermanent filter = new FilterPermanent("and each creature that player or that planeswalker's controller controls");
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
-            permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
+            permanent.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
         }
         return true;
     }

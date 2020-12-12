@@ -70,7 +70,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -120,12 +120,12 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
         if (player != null && damageAmount > 0) {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-                targetPlayer.damage(damageAmount, source.getSourceId(), game);
+                targetPlayer.damage(damageAmount, source.getSourceId(), source, game);
                 return true;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(damageAmount, source.getSourceId(), game, false, true);
+                permanent.damage(damageAmount, source.getSourceId(), source, game, false, true);
                 return true;
             }
         }

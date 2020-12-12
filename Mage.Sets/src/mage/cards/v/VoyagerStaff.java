@@ -63,7 +63,7 @@ class VoyagerStaffEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && creature != null && sourcePermanent != null) {
-            if (controller.moveCardToExileWithInfo(creature, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+            if (controller.moveCardToExileWithInfo(creature, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
                 effect.setText("Return the exiled card to the battlefield under its owner's control at the beginning of the next end step");

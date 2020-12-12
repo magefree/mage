@@ -27,7 +27,7 @@ public class BlockedAttackerWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.BLOCKER_DECLARED) {
+        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             MageObjectReference blocker = new MageObjectReference(event.getSourceId(), game);
             Set<MageObjectReference> blockedAttackers = blockData.get(blocker);
             if (blockedAttackers != null) {

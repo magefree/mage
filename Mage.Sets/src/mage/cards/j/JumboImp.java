@@ -144,7 +144,7 @@ class JumboImpRemoveCountersEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             int amount = controller.rollDice(game, 6);
-            permanent.removeCounters(CounterType.P1P1.createInstance(amount), game);
+            permanent.removeCounters(CounterType.P1P1.createInstance(amount), source, game);
             return true;
         }
         return false;

@@ -70,7 +70,7 @@ class DieYoungEffect extends OneShotEffect {
             int numberToPayed = controller.getAmount(0, max, "How many energy counters do you like to pay? (maximum = " + max + ')', game);
             if (numberToPayed > 0) {
                 Cost cost = new PayEnergyCost(numberToPayed);
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+                if (cost.pay(source, game, source, source.getControllerId(), true)) {
                     Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                     if (targetCreature != null) {
                         numberToPayed *= -1;

@@ -63,7 +63,7 @@ class AwakenTheErstwhileEffect extends OneShotEffect {
                 if (player != null) {
                     int cardsInHand = player.getHand().size();
                     if (cardsInHand > 0) {
-                        player.discard(cardsInHand, false, source, game);
+                        player.discard(cardsInHand, false, false, source, game);
                         cardsAmount.put(playerId, cardsInHand);
                     }
                 }
@@ -74,7 +74,7 @@ class AwakenTheErstwhileEffect extends OneShotEffect {
                 Player player = game.getPlayer(discardedHand.getKey());
                 int tokensCount = discardedHand.getValue();
                 if (player != null && tokensCount > 0) {
-                    new ZombieToken().putOntoBattlefield(tokensCount, game, source.getSourceId(), player.getId());
+                    new ZombieToken().putOntoBattlefield(tokensCount, game, source, player.getId());
                 }
             });
 

@@ -78,7 +78,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -113,7 +113,7 @@ class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), game);
+            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), source, game);
         }
         return true;
     }

@@ -89,7 +89,7 @@ class ScytheSpecterEffect extends OneShotEffect {
             for (UUID opponentId : cardDiscarded.keySet()) {//discard must happen simultaneously
                 Player player = game.getPlayer(opponentId);
                 if (player != null
-                        && player.discard(cardDiscarded.get(opponentId), source, game)) {
+                        && player.discard(cardDiscarded.get(opponentId), false, source, game)) {
                     discardedCheck.put(opponentId, 1);//note that a card was discarded
                 }
             }
@@ -100,7 +100,7 @@ class ScytheSpecterEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null
                             && discardedCheck.get(playerId) == 1) {//check that card was discarded
-                        opponent.loseLife(highestCMC, game, false);
+                        opponent.loseLife(highestCMC, game, source, false);
                     }
                 }
             }

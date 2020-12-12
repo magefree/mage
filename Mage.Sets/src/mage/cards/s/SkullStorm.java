@@ -72,7 +72,7 @@ class SkullStormEffect extends OneShotEffect {
                         filter, source.getControllerId(), game
                 ).isEmpty()) {
                     int lifeToLose = (int) Math.ceil(player.getLife() / 2f);
-                    player.loseLife(lifeToLose, game, false);
+                    player.loseLife(lifeToLose, game, source, false);
                 } else {
                     Effect effect = new SacrificeEffect(
                             StaticFilters.FILTER_PERMANENT_CREATURE, 1, null

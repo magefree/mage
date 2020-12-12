@@ -78,8 +78,8 @@ class DaredevilDragsterEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             permanent.addCounters(CounterType.VELOCITY.createInstance(), source, game);
             if (permanent.getCounters(game).getCount(CounterType.VELOCITY) >= 2) {
-                permanent.sacrifice(source.getSourceId(), game);
-                controller.drawCards(2, source.getSourceId(), game);
+                permanent.sacrifice(source, game);
+                controller.drawCards(2, source, game);
             }
             return true;
         }

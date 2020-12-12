@@ -93,11 +93,11 @@ class BaneFireEffect extends OneShotEffect {
         int damage = source.getManaCostsToPay().getX();
         boolean preventable = damage < 5;
         if (targetPlayer != null) {
-            targetPlayer.damage(damage, source.getSourceId(), game, false, preventable);
+            targetPlayer.damage(damage, source.getSourceId(), source, game, false, preventable);
             return true;
         }
         if (targetCreature != null) {
-            targetCreature.damage(damage, source.getSourceId(), game, false, preventable);
+            targetCreature.damage(damage, source.getSourceId(), source, game, false, preventable);
             return true;
         }
         return false;
@@ -130,7 +130,7 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.COUNTER) {
+        if (event.getType() == GameEvent.EventType.COUNTER) {
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 UUID spellId = card.getSpellAbility().getId();

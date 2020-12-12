@@ -72,6 +72,6 @@ class SynchronizedSpellcraftEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player.damage(partyCount, source.getSourceId(), game) > 0;
+        return player.damage(partyCount, source.getSourceId(), source, game) > 0;
     }
 }

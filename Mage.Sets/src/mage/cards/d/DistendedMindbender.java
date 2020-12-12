@@ -100,7 +100,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
         if (controller.chooseTarget(Outcome.Benefit, opponent.getHand(), targetFourOrGreater, source, game)) {
             toDiscard.addAll(targetFourOrGreater.getTargets());
         }
-        opponent.discard(toDiscard, source, game);
+        opponent.discard(toDiscard, false, source, game);
         return true;
     }
 }

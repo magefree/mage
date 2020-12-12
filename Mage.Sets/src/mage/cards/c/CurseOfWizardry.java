@@ -62,7 +62,7 @@ class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends Trigger
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override

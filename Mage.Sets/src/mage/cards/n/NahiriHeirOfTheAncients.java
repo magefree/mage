@@ -106,7 +106,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token token = new KorWarriorToken();
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
@@ -140,7 +140,7 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
         player.choose(outcome, target, source.getSourceId(), game);
-        tokenCreature.addAttachment(target.getFirstTarget(), game);
+        tokenCreature.addAttachment(target.getFirstTarget(), source, game);
         return true;
     }
 }

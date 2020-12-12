@@ -86,15 +86,15 @@ class SerpentineSpikeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         if (permanent != null) {
-            permanent.damage(2, source.getSourceId(), game, false, true);
+            permanent.damage(2, source.getSourceId(), source, game, false, true);
         }
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.damage(3, source.getSourceId(), game, false, true);
+            permanent.damage(3, source.getSourceId(), source, game, false, true);
         }
         permanent = game.getPermanent(source.getTargets().get(2).getFirstTarget());
         if (permanent != null) {
-            permanent.damage(4, source.getSourceId(), game, false, true);
+            permanent.damage(4, source.getSourceId(), source, game, false, true);
         }
         return true;
     }

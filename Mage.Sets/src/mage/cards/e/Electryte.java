@@ -93,7 +93,7 @@ class ElectryteEffect extends OneShotEffect {
         int amount = thisCreature.getPower().getValue();
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent permanent : permanents) {
-            permanent.damage(amount, source.getSourceId(), game, false, true);
+            permanent.damage(amount, source.getSourceId(), source, game, false, true);
         }
         return true;
     }

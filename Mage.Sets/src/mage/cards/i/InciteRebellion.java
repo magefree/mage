@@ -63,9 +63,9 @@ class InciteRebellionEffect extends OneShotEffect {
                 if (player != null) {
                     int count = game.getBattlefield().countAll(filter, playerId, game);
                     if (count > 0) {
-                        player.damage(count, source.getSourceId(), game);
+                        player.damage(count, source.getSourceId(), source, game);
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                            permanent.damage(count, source.getSourceId(), game);
+                            permanent.damage(count, source.getSourceId(), source, game);
                         }
                     }
                 }

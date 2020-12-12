@@ -62,7 +62,7 @@ class FellTheMightyEffect extends OneShotEffect {
         if (controller != null && targetCreature != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
                 if (permanent.getPower().getValue() > targetCreature.getPower().getValue()) {
-                    permanent.destroy(source.getSourceId(), game, false);
+                    permanent.destroy(source, game, false);
                 }
             }
             return true;

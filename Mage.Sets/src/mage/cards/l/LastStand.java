@@ -80,14 +80,14 @@ class LastStandEffect extends OneShotEffect {
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
                 int swamps = game.getBattlefield().count(filterSwamp, source.getSourceId(), source.getControllerId(), game);
-                opponent.loseLife(swamps * 2, game, false);
+                opponent.loseLife(swamps * 2, game, source, false);
             }
             // Last Stand deals damage equal to the number of Mountains you control to target creature.
             Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (creature != null) {
                 int mountains = game.getBattlefield().count(filterMountain, source.getSourceId(), source.getControllerId(), game);
                 if (mountains > 0) {
-                    creature.damage(mountains, source.getSourceId(), game, false, true);
+                    creature.damage(mountains, source.getSourceId(), source, game, false, true);
                 }
             }
             // Create a 1/1 green Saproling creature token for each Forest you control.
@@ -101,8 +101,8 @@ class LastStandEffect extends OneShotEffect {
             // Draw a card for each Island you control, then discard that many cards
             int islands = game.getBattlefield().count(filterIsland, source.getSourceId(), source.getControllerId(), game);
             if (islands > 0) {
-                controller.drawCards(islands, source.getSourceId(), game);
-                controller.discard(islands, false, source, game);
+                controller.drawCards(islands, source, game);
+                controller.discard(islands, false, false, source, game);
             }
 
         }

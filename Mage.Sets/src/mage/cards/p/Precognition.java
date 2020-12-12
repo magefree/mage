@@ -71,7 +71,7 @@ class PrecognitionEffect extends OneShotEffect {
                 Cards cards = new CardsImpl(card);
                 controller.lookAtCards("Precognition", cards, game);
                 if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", source, game)) {
-                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, false, false);
+                    controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);
                 } else {
                     game.informPlayers(controller.getLogName() + " puts the card back on top of the library.");
                 }

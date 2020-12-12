@@ -96,10 +96,10 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
             boolean doEffect = true;
 
             // check if targetController is willing to pay
-            if (costToPay.canPay(source, source.getSourceId(), player.getId(), game)
+            if (costToPay.canPay(source, source, player.getId(), game)
                     && player.chooseUse(Outcome.Detriment, message, source, game)) {
                 costToPay.clearPaid();
-                if (costToPay.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                if (costToPay.pay(source, game, source, player.getId(), false, null)) {
                     if (!game.isSimulation()) {
                         game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                     }

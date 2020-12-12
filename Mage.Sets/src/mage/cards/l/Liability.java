@@ -67,7 +67,7 @@ class LiabilityEffect extends OneShotEffect {
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
-                controller.loseLife(1, game, false);
+                controller.loseLife(1, game, source, false);
                 return true;
             }
         }

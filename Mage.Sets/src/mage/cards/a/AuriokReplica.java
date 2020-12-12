@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.target.TargetSource;
 
 import java.util.UUID;
@@ -72,17 +73,13 @@ class AuriokReplicaEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        preventDamage(event, source, event.getSourceId(), game);
-        return true;
-    }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(target, source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), damage));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
         }
+        return true;
     }
 
     @Override

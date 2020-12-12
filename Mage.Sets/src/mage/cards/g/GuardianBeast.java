@@ -113,9 +113,9 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
         }
 
         StackObject spell = game.getStack().getStackObject(event.getSourceId());
-        if (event.getType() == EventType.GAIN_CONTROL
-                || ((event.getType() == EventType.ATTACH
-                || event.getType() == EventType.TARGET)
+        if (event.getType() == GameEvent.EventType.GAIN_CONTROL
+                || ((event.getType() == GameEvent.EventType.ATTACH
+                || event.getType() == GameEvent.EventType.TARGET)
                 && spell != null && spell.isEnchantment() && spell.hasSubtype(SubType.AURA, game))) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_ARTIFACTS_NON_CREATURE, source.getControllerId(), game)) {
                 if (perm != null && Objects.equals(perm.getId(), targetPermanent.getId()) && !perm.isCreature()) {

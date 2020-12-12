@@ -84,7 +84,7 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
-                    if (permanent.sacrifice(source.getSourceId(), game)) {
+                    if (permanent.sacrifice(source, game)) {
                         numSacrificed++;
                     }
                 }
@@ -120,7 +120,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
         if (controller != null) {
             VariableCost cost = new PayVariableLifeCost();
             int xValue = cost.announceXValue(source, game);
-            cost.getFixedCostsFromAnnouncedValue(xValue).pay(source, game, source.getSourceId(), source.getControllerId(), false, null);
+            cost.getFixedCostsFromAnnouncedValue(xValue).pay(source, game, source, source.getControllerId(), false, null);
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
             controller.lookAtCards(source, null, cards, game);
 

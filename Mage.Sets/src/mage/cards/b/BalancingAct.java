@@ -78,7 +78,7 @@ class BalancingActEffect extends OneShotEffect {
                     if (target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)) {
                         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getSourceId(), game)) {
                             if (permanent != null && !target.getTargets().contains(permanent.getId())) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                             }
                         }
                     }
@@ -104,7 +104,7 @@ class BalancingActEffect extends OneShotEffect {
                     if (target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)) {
                         Cards cards = player.getHand().copy();
                         cards.removeIf(target.getTargets()::contains);
-                        player.discard(cards, source, game);
+                        player.discard(cards, false, source, game);
                     }
                 }
             }

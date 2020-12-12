@@ -63,7 +63,7 @@ class VoidwalkEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && permanent != null && sourceObject != null) {
-            if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+            if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                 effect.setText("Return that card to the battlefield under its owner's control at the beginning of the next end step");

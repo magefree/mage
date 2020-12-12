@@ -67,7 +67,7 @@ class PryingQuestionsEffect extends OneShotEffect {
                 targetOpponent.choose(Outcome.Detriment, target, source.getSourceId(), game);
                 Card card = targetOpponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    targetOpponent.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, true, false);
+                    targetOpponent.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, false);
                 }
             }
             return true;

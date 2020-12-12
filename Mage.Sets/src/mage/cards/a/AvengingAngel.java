@@ -68,7 +68,7 @@ class AvengingAngelEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
             if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                controller.moveCardToLibraryWithInfo(sourceCard, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+                controller.moveCardToLibraryWithInfo(sourceCard, source, game, Zone.GRAVEYARD, true, true);
             }
             return true;
         }

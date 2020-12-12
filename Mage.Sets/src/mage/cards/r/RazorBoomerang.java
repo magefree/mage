@@ -81,10 +81,10 @@ class RazorBoomerangEffect extends OneShotEffect {
         if (targetedPermanent == null) {
             Player targetedPlayer = game.getPlayer(source.getFirstTarget());
             if (targetedPlayer != null) {
-                targetedPlayer.damage(1, permanent.getId(), game);
+                targetedPlayer.damage(1, permanent.getId(), source, game);
             }
         } else {
-            targetedPermanent.damage(1, permanent.getId(), game);
+            targetedPermanent.damage(1, permanent.getId(), source, game);
         }
         return player.moveCards(permanent, Zone.HAND, source, game);
     }

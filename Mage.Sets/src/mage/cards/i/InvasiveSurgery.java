@@ -81,7 +81,7 @@ class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameA
                     cardName = targetObject.getName();
                 }
                 spellController = stackObject.getControllerId();
-                game.getStack().counter(objectId, source.getSourceId(), game);
+                game.getStack().counter(objectId, source, game);
             }
         }
 

@@ -66,8 +66,8 @@ class SoulBarrierEffect extends OneShotEffect {
             Cost cost = ManaUtil.createManaCost(2, false);
             String message = "Would you like to pay {2} to prevent taking 2 damage from " + permanent.getLogName() + "?";
             if (!(player.chooseUse(Outcome.Benefit, message, source, game)
-                    && cost.pay(source, game, source.getSourceId(), player.getId(), false, null))) {
-                player.damage(2, source.getSourceId(), game);
+                    && cost.pay(source, game, source, player.getId(), false, null))) {
+                player.damage(2, source.getSourceId(), source, game);
             }
             return true;
         }

@@ -106,8 +106,8 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE
-                || event.getType() == EventType.UNTAPPED;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE
+                || event.getType() == GameEvent.EventType.UNTAPPED;
     }
 
     @Override
@@ -119,7 +119,7 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId() != null) {
-            if (event.getType() == EventType.ZONE_CHANGE
+            if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                     && event.getTargetId().equals(getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 return zEvent.getFromZone() == Zone.BATTLEFIELD;

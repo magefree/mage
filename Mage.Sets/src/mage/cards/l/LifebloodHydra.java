@@ -76,7 +76,7 @@ class LifebloodHydraEffect extends OneShotEffect {
             Permanent diedPermanent = (Permanent) getValue("permanentLeftBattlefield");
             if (diedPermanent != null) {
                 controller.gainLife(diedPermanent.getPower().getValue(), game, source);
-                controller.drawCards(diedPermanent.getPower().getValue(), source.getSourceId(), game);
+                controller.drawCards(diedPermanent.getPower().getValue(), source, game);
             }
             return true;
         }

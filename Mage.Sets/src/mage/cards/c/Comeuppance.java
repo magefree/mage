@@ -72,7 +72,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             UUID objectControllerId = null;
             if (damageDealingObject instanceof Permanent) {
                 if (damageDealingObject.isCreature()) {
-                    ((Permanent) damageDealingObject).damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
+                    ((Permanent) damageDealingObject).damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
                 } else {
                     objectControllerId = ((Permanent) damageDealingObject).getControllerId();
                 }
@@ -84,7 +84,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
             if (objectControllerId != null) {
                 Player objectController = game.getPlayer(objectControllerId);
                 if (objectController != null) {
-                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), game);
+                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
                 }
             }
         }

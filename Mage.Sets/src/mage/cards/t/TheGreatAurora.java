@@ -83,7 +83,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                     permanentsCount.put(playerId, handCards + (list != null ? list.size() : 0));
                     if (list != null) {
                         for (Permanent permanent : list) {
-                            player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
+                            player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, true, true);
                         }
                         player.shuffleLibrary(source, game);
                     }
@@ -98,7 +98,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 if (player != null) {
                     int count = permanentsCount.get(playerId);
                     if (count > 0) {
-                        player.drawCards(count, source.getSourceId(), game);
+                        player.drawCards(count, source, game);
                     }
                 }
             }

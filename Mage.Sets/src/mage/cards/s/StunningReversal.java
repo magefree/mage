@@ -65,7 +65,7 @@ class StunningReversalEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            player.drawCards(7, source.getSourceId(), game);
+            player.drawCards(7, source, game); // original event is not a draw event, so skip it in params
             player.setLife(1, game, source);
             this.discard();
         }

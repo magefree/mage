@@ -96,7 +96,7 @@ class DreamSalvageEffect extends OneShotEffect {
                 && controller != null
                 && watcher != null
                 && watcher.getAmountCardsDiscarded(targetOpponent.getId()) > 0) {
-            controller.drawCards(watcher.getAmountCardsDiscarded(targetOpponent.getId()), source.getSourceId(), game);
+            controller.drawCards(watcher.getAmountCardsDiscarded(targetOpponent.getId()), source, game);
             return true;
         }
         return false;

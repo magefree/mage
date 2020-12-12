@@ -109,7 +109,7 @@ class NissaWhoShakesTheWorldTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanent(event.getTargetId());
+        Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
         return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
     }
 

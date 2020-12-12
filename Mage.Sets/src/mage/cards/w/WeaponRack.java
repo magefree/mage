@@ -76,7 +76,7 @@ class WeaponRackEffect extends OneShotEffect {
         if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(), source, game)) {
             return false;
         }
-        sourcePermanent.removeCounters(CounterType.P1P1.createInstance(), game);
+        sourcePermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
         return true;
     }
 }

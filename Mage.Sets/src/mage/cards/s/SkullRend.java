@@ -54,10 +54,10 @@ public final class SkullRend extends CardImpl {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
             for (Player opponent : opponents) {
-                opponent.damage(2, source.getSourceId(), game);
+                opponent.damage(2, source.getSourceId(), source, game);
             }
             for (Player opponent : opponents) {
-                opponent.discard(2, true, source, game);
+                opponent.discard(2, true, false, source, game);
             }
             return true;
         }

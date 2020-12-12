@@ -86,7 +86,7 @@ class VirulentWoundDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -136,7 +136,7 @@ class VirulentWoundDelayedEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.addCounters(CounterType.POISON.createInstance(1), game);
+                player.addCounters(CounterType.POISON.createInstance(1), source, game);
                 return true;
             }
         }

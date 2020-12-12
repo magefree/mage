@@ -95,9 +95,9 @@ class ParadoxicalOutcomeNumber implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (zoneChangeCounter == 0) {
-            Card card = game.getCard(source.getSourceId());
+            Card card = game.getCard(sourceAbility.getSourceId());
             if (card != null) {
                 zoneChangeCounter = card.getZoneChangeCounter(game);
                 if (previousZone) {
@@ -106,7 +106,7 @@ class ParadoxicalOutcomeNumber implements DynamicValue {
             }
         }
         int number = 0;
-        Integer sweepNumber = (Integer) game.getState().getValue("ParadoxicalOutcomeEffect" + source.getSourceId() + zoneChangeCounter);
+        Integer sweepNumber = (Integer) game.getState().getValue("ParadoxicalOutcomeEffect" + sourceAbility.getSourceId() + zoneChangeCounter);
         if (sweepNumber != null) {
             number = sweepNumber;
         }

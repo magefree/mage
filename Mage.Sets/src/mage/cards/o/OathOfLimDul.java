@@ -69,7 +69,7 @@ class OathOfLimDulTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOST_LIFE;
+        return event.getType() == GameEvent.EventType.LOST_LIFE;
     }
 
     @Override
@@ -119,7 +119,7 @@ class OathOfLimDulEffect extends OneShotEffect {
                 for (UUID targetPermanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetPermanentId);
                     if (permanent != null
-                            && permanent.sacrifice(source.getSourceId(), game)) {
+                            && permanent.sacrifice(source, game)) {
                         numberSacrificed += 1;
                         sacrificeDone = true;
                     }
@@ -128,8 +128,8 @@ class OathOfLimDulEffect extends OneShotEffect {
             numberToDiscard = amountDamage - numberSacrificed;
             Cost cost = new DiscardTargetCost(new TargetCardInHand(numberToDiscard, new FilterCard("card(s) in your hand to discard")));
             if (numberToDiscard > 0
-                    && cost.canPay(source, source.getSourceId(), controller.getId(), game)) {
-                return cost.pay(source, game, source.getSourceId(), controller.getId(), true);  // discard cost paid simultaneously
+                    && cost.canPay(source, source, controller.getId(), game)) {
+                return cost.pay(source, game, source, controller.getId(), true);  // discard cost paid simultaneously
             }
         }
         return sacrificeDone;

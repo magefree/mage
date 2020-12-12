@@ -131,7 +131,7 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
         if (!permanents.isEmpty()) {
             Permanent permanent = permanents.get(RandomUtil.nextInt(permanents.size()));
             if (permanent != null) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
         return true;

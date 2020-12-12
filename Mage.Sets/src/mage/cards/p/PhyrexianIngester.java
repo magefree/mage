@@ -88,7 +88,7 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
             if (sourcePermanent != null && targetPermanent != null) {
-                controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)", source, game, Zone.BATTLEFIELD, true);
                 sourcePermanent.imprint(targetPermanent.getId(), game);
                 return true;
             }

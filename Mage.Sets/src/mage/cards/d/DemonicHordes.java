@@ -86,11 +86,11 @@ class DemonicHordesEffect extends OneShotEffect {
             }
             if (controller.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     return true;
                 }
             }
-            demonicHordes.tap(game);
+            demonicHordes.tap(source, game);
             Target choiceOpponent = new TargetOpponent();
             choiceOpponent.setNotTarget(true);
             FilterLandPermanent filterLand = new FilterLandPermanent();
@@ -103,7 +103,7 @@ class DemonicHordesEffect extends OneShotEffect {
                     if (opponent.chooseTarget(Outcome.Sacrifice, chosenLand, source, game)) {
                         Permanent land = game.getPermanent(chosenLand.getFirstTarget());
                         if (land != null) {
-                            land.sacrifice(source.getSourceId(), game);
+                            land.sacrifice(source, game);
                         }
                     }
                 }

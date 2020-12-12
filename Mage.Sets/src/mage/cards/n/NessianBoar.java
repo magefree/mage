@@ -69,6 +69,6 @@ class NessianBoarEffect extends OneShotEffect {
             return false;
         }
         Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.drawCards(1, source.getSourceId(), game) > 0;
+        return player != null && player.drawCards(1, source, game) > 0;
     }
 }

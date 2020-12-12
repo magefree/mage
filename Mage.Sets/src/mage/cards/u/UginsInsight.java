@@ -59,7 +59,7 @@ class UginsInsightEffect extends OneShotEffect {
             if (highCMC > 0) {
                 controller.scry(highCMC, source, game);
             }
-            controller.drawCards(3, source.getSourceId(), game);
+            controller.drawCards(3, source, game);
             return true;
         }
         return false;

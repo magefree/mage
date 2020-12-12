@@ -71,7 +71,7 @@ class FromTheAshesEffect extends OneShotEffect {
                     int amount = 0;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
                         amount++;
-                        permanent.destroy(source.getSourceId(), game, false);
+                        permanent.destroy(source, game, false);
                     }
                     playerAmount.put(playerId, amount);
                 }

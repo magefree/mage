@@ -76,7 +76,7 @@ class CobraTrapWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DESTROYED_PERMANENT) {
+        if (event.getType() == GameEvent.EventType.DESTROYED_PERMANENT) {
             Permanent perm = game.getPermanentOrLKIBattlefield(event.getTargetId()); // can regenerate or be indestructible
             if (perm != null && !perm.isCreature()) {
                 if (!game.getStack().isEmpty()) {

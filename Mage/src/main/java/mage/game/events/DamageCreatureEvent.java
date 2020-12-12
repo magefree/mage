@@ -1,5 +1,3 @@
-
-
 package mage.game.events;
 
 import java.util.UUID;
@@ -10,8 +8,7 @@ import java.util.UUID;
  */
 public class DamageCreatureEvent extends DamageEvent {
 
-    public DamageCreatureEvent(UUID targetId, UUID sourceId, UUID playerId, int amount, boolean preventable, boolean combat) {
-        super(EventType.DAMAGE_CREATURE, targetId, sourceId, playerId, amount, preventable, combat);
+    public DamageCreatureEvent(UUID targetId, UUID damageSourceId, UUID targetControllerId, int amount, boolean preventable, boolean combat) {
+        super(GameEvent.EventType.DAMAGE_CREATURE, targetId, damageSourceId, targetControllerId, amount, preventable, combat);
     }
-
 }

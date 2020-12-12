@@ -61,7 +61,7 @@ class RetracedImageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInHand target = new TargetCardInHand();
-            if (target.canChoose(controller.getId(), game)
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)
                     && controller.choose(outcome, target, source.getSourceId(), game)) {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 if (chosenCard != null) {

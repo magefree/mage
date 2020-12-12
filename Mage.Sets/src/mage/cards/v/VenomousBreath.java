@@ -108,7 +108,7 @@ class VenomousBreathEffect extends OneShotEffect {
                     }
                 }
                 for (Permanent creature : toDestroy) {
-                    creature.destroy(source.getSourceId(), game, false);
+                    creature.destroy(source, game, false);
                 }
                 return true;
             }

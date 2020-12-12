@@ -127,7 +127,7 @@ class RavenousGigantotheriumEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         for (Permanent permanent : permanentList) {
-            sourcePerm.damage(permanent.getPower().getValue(), permanent.getId(), game);
+            sourcePerm.damage(permanent.getPower().getValue(), permanent.getId(), source, game);
         }
         return true;
     }

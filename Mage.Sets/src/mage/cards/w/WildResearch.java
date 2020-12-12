@@ -91,7 +91,7 @@ class WildResearchEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.discardOne(true, source, game);
+            controller.discardOne(true, false, source, game);
             controller.shuffleLibrary(source, game);
             return true;
         }

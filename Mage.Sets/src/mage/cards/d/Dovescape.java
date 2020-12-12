@@ -70,10 +70,10 @@ class DovescapeEffect extends OneShotEffect {
         if (spell != null) {
             spellCMC = spell.getConvertedManaCost();
             spellControllerID = spell.getControllerId();
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            game.getStack().counter(spell.getId(), source, game);
         }
         Token token = new DovescapeToken();
-        token.putOntoBattlefield(spellCMC, game, source.getSourceId(), spellControllerID);
+        token.putOntoBattlefield(spellCMC, game, source, spellControllerID);
         return true;
     }
 }

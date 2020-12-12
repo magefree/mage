@@ -64,7 +64,7 @@ class TyphoonEffect extends OneShotEffect {
                         amount++;
                     }
                     if (amount > 0) {
-                        player.damage(amount, source.getSourceId(), game);
+                        player.damage(amount, source.getSourceId(), source, game);
                     }
                 }
             }

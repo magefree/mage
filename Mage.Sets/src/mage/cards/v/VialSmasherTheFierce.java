@@ -141,12 +141,12 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
                             if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null) {
-                                    return permanent.damage(damage, source.getSourceId(), game, false, true) > 0;
+                                    return permanent.damage(damage, source.getSourceId(), source, game, false, true) > 0;
                                 }
                             }
                         }
                     }
-                    opponent.damage(damage, source.getSourceId(), game);
+                    opponent.damage(damage, source.getSourceId(), source, game);
                 }
             }
             return true;

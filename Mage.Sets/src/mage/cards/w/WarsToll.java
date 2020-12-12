@@ -70,7 +70,7 @@ class WarsTollTapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         if (getTargetPointer().getFirst(game, source) != null) {
             game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, getTargetPointer().getFirst(game, source), game).forEach((permanent) -> {
-                permanent.tap(game);
+                permanent.tap(source, game);
             });
             return true;
         }

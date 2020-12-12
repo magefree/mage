@@ -72,7 +72,7 @@ class InhumaniacEffect extends OneShotEffect {
             } else if (amount == 1) {
                 int numToRemove = permanent.getCounters(game).getCount(CounterType.P1P1);
                 if (numToRemove > 0) {
-                    permanent.removeCounters(CounterType.P1P1.getName(), numToRemove, game);
+                    permanent.removeCounters(CounterType.P1P1.getName(), numToRemove, source, game);
                 }
             }
             return true;

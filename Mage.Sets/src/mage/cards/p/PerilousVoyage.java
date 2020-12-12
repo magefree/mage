@@ -68,7 +68,7 @@ class PerilousVoyageEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             boolean isLittle = permanent.getConvertedManaCost() < 3;
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+            permanent.moveToZone(Zone.HAND, source, game, true);
             if (isLittle && player != null) {
                 player.scry(2, source, game);
             }

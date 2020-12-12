@@ -82,8 +82,8 @@ class ChanceEffect extends OneShotEffect {
         }
         TargetCard target = new TargetDiscard(0, controller.getHand().size(), StaticFilters.FILTER_CARD_CARDS, controller.getId());
         controller.chooseTarget(outcome, controller.getHand(), target, source, game);
-        int amount = controller.discard(new CardsImpl(target.getTargets()), source, game).size();
-        controller.drawCards(amount, source.getSourceId(), game);
+        int amount = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
+        controller.drawCards(amount, source, game);
         return true;
     }
 }

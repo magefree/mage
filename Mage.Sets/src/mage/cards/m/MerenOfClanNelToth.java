@@ -95,7 +95,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
                     targetZone = Zone.BATTLEFIELD;
                     text = " put onto battlefield for ";
                 }
-                card.moveToZone(targetZone, source.getSourceId(), game, false);
+                card.moveToZone(targetZone, source, game, false);
                 game.informPlayers("Meren of Clan Nel Toth: " + card.getName() + text + player.getLogName());
                 return true;
             }

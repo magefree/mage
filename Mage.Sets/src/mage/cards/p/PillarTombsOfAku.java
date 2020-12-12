@@ -71,12 +71,12 @@ class PillarTombsOfAkuEffect extends OneShotEffect {
         }
         if (activePlayer.chooseUse(Outcome.Sacrifice, "Sacrifice a creature?", source, game)) {
             Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
-            if (cost.canPay(source, source.getSourceId(), activePlayer.getId(), game)
-                    && cost.pay(source, game, source.getSourceId(), activePlayer.getId(), true)) {
+            if (cost.canPay(source, source, activePlayer.getId(), game)
+                    && cost.pay(source, game, source, activePlayer.getId(), true)) {
                 return true;
             }
         }
-        activePlayer.loseLife(5, game, false);
+        activePlayer.loseLife(5, game, source, false);
         return new SacrificeSourceEffect().apply(game, source);
     }
 }

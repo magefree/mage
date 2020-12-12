@@ -73,7 +73,7 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
         if (player != null) {
             int numCommanders = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
             if (numCommanders == 0) {
-                player.damage(4, source.getSourceId(), game);
+                player.damage(4, source.getSourceId(), source, game);
                 return true;
             }
         }

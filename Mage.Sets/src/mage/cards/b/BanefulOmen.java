@@ -54,7 +54,7 @@ public final class BanefulOmen extends CardImpl {
 
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == EventType.END_TURN_STEP_PRE;
+            return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
         }
 
         @Override
@@ -100,7 +100,7 @@ public final class BanefulOmen extends CardImpl {
             for (UUID opponentUuid : opponents) {
                 Player opponent = game.getPlayer(opponentUuid);
                 if (opponent != null) {
-                    opponent.loseLife(loseLife, game, false);
+                    opponent.loseLife(loseLife, game, source, false);
                 }
             }
             return true;

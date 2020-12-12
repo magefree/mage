@@ -74,7 +74,7 @@ class TyrantOfDiscordEffect extends OneShotEffect {
                     int index = 0;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponent.getId())) {
                         if (index == random) {
-                            if (permanent.sacrifice(source.getSourceId(), game)) {
+                            if (permanent.sacrifice(source, game)) {
                                 if (permanent.isLand()) {
                                     stop = true;
                                     game.informPlayers("Land permanent has been sacrificed: " + permanent.getName() + ". Stopping process.");

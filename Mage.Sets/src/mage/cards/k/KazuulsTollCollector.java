@@ -74,7 +74,7 @@ class KazuulsTollCollectorEffect extends OneShotEffect {
         Permanent equipment = game.getPermanent(source.getFirstTarget());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && equipment != null) {
-            return permanent.addAttachment(equipment.getId(), game);
+            return permanent.addAttachment(equipment.getId(), source, game);
         }
         return false;
     }

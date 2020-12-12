@@ -1,5 +1,3 @@
-
-
 package mage.game.events;
 
 import java.util.UUID;
@@ -12,9 +10,10 @@ public abstract class DamageEvent extends GameEvent {
 
     protected boolean combat;
 
-    public DamageEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean preventable, boolean combat) {
-        super(type, targetId, sourceId, playerId, amount, preventable);
+    public DamageEvent(EventType type, UUID targetId, UUID damageSourceId, UUID targetControllerId, int amount, boolean preventable, boolean combat) {
+        super(type, targetId, null, targetControllerId, amount, preventable);
         this.combat = combat;
+        this.setSourceId(damageSourceId);
     }
 
     public boolean isCombatDamage() {

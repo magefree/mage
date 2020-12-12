@@ -65,8 +65,8 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects) {
-        if (super.moveToZone(toZone, sourceId, game, flag, appliedEffects)) {
+    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+        if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
             game.getState().setZone(getLeftHalfCard().getId(), toZone);
             game.getState().setZone(getRightHalfCard().getId(), toZone);
             return true;
@@ -82,8 +82,8 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
-        if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
+    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+        if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
             Zone currentZone = game.getState().getZone(getId());
             game.getState().setZone(getLeftHalfCard().getId(), currentZone);
             game.getState().setZone(getRightHalfCard().getId(), currentZone);
@@ -93,9 +93,9 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         // zone contains only one main card
-        return super.removeFromZone(game, fromZone, sourceId);
+        return super.removeFromZone(game, fromZone, source);
     }
 
     @Override

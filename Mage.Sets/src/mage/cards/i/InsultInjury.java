@@ -111,11 +111,11 @@ class InjuryEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
 
         if (permanent != null) {
-            permanent.damage(2, source.getSourceId(), game, false, true);
+            permanent.damage(2, source.getSourceId(), source, game, false, true);
         }
 
         if (player != null) {
-            player.damage(2, source.getSourceId(), game);
+            player.damage(2, source.getSourceId(), source, game);
         }
 
         return true;

@@ -110,7 +110,7 @@ class FactOrFictionEffect extends OneShotEffect {
                 if (i < pile1.size()) {
                     sb.append(", ");
                 }
-                card.moveToZone(pile1Zone, source.getSourceId(), game, false);
+                card.moveToZone(pile1Zone, source, game, false);
             }
             game.informPlayers(sb.toString());
 
@@ -122,7 +122,7 @@ class FactOrFictionEffect extends OneShotEffect {
                 if (i < pile2.size()) {
                     sb.append(", ");
                 }
-                card.moveToZone(pile2Zone, source.getSourceId(), game, false);
+                card.moveToZone(pile2Zone, source, game, false);
             }
             game.informPlayers(sb.toString());
         }

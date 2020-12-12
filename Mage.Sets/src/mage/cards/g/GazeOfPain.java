@@ -124,7 +124,7 @@ class GazeOfPainEffect extends OneShotEffect {
                         && attacker != null) {
                     if (controller.chooseUse(outcome, "Do you wish to deal damage equal to " + attacker.getName() + "'s power to a target creature?", source, game)) {
                         TargetCreaturePermanent target = new TargetCreaturePermanent();
-                        if (target.canChoose(controller.getId(), game)
+                        if (target.canChoose(source.getSourceId(), controller.getId(), game)
                                 && controller.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
                             Effect effect = new DamageTargetEffect(attacker.getPower().getValue());
                             effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));

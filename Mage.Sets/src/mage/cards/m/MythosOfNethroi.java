@@ -68,6 +68,6 @@ class MythosOfNethroiEffect extends OneShotEffect {
         if (permanent == null || (!permanent.isCreature() && !condition.apply(game, source))) {
             return false;
         }
-        return permanent.destroy(source.getSourceId(), game, false);
+        return permanent.destroy(source, game, false);
     }
 }

@@ -69,7 +69,7 @@ class GrovetenderDruidsEffect extends OneShotEffect {
         if (player != null) {
             if (player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {1}?", source, game)) {
                 Cost cost = new ManaCostsImpl("{1}");
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     new CreateTokenEffect(new GrovetenderDruidsPlantToken()).apply(game, source);
                 }
                 return true;

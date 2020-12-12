@@ -73,7 +73,7 @@ class SplitDecisionEffect extends OneShotEffect {
                 }
             }
             if (denialCount > duplicationCount) {
-                return game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
             } else {
                 return new CopyTargetSpellEffect().apply(game, source);
             }

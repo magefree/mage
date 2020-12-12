@@ -89,7 +89,7 @@ class GideonExileAllOtherPermanentsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             if (!permanent.getId().equals(source.getSourceId())) {
-                permanent.moveToExile(null, null, source.getSourceId(), game);
+                permanent.moveToExile(null, null, source, game);
             }
         }
         return true;

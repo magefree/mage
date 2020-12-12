@@ -64,10 +64,10 @@ class NotForgottenEffect extends OneShotEffect {
         
         if (controller != null && targetCard != null) {
             boolean onTop = controller.chooseUse(outcome, "Put " + targetCard.getName() + " on top of it's owners library (otherwise on bottom)?", source, game);
-            boolean moved = controller.moveCardToLibraryWithInfo(targetCard, source.getSourceId(), game, Zone.GRAVEYARD, onTop, true);
+            boolean moved = controller.moveCardToLibraryWithInfo(targetCard, source, game, Zone.GRAVEYARD, onTop, true);
             if (moved) {
                 Token token = new SpiritWhiteToken();
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);                
+                token.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
                 return true;
             }
         }

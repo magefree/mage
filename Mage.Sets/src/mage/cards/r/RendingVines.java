@@ -67,7 +67,7 @@ class RendingVinesEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null) {
             if (permanent.getConvertedManaCost() <= controller.getHand().size()) {
-                return permanent.destroy(source.getSourceId(), game, false);
+                return permanent.destroy(source, game, false);
             }
         }
         return false;

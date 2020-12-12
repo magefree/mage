@@ -74,7 +74,7 @@ class ChroniclerOfHeroesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (new PermanentsOnTheBattlefieldCondition(filter).apply(game, source)) {
-                controller.drawCards(1, source.getSourceId(), game);
+                controller.drawCards(1, source, game);
             }
             return true;
         }

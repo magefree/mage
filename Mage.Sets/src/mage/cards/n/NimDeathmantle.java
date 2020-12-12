@@ -85,7 +85,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -131,7 +131,7 @@ class NimDeathmantleEffect extends OneShotEffect {
         if (controller != null && equipment != null) {
             if (controller.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false)) {
                     UUID target = targetPointer.getFirst(game, source);
                     if (target != null) {
                         Card card = game.getCard(target);
@@ -140,7 +140,7 @@ class NimDeathmantleEffect extends OneShotEffect {
                             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                                 Permanent permanent = game.getPermanent(card.getId());
                                 if (permanent != null) {
-                                    permanent.addAttachment(equipment.getId(), game);
+                                    permanent.addAttachment(equipment.getId(), source, game);
                                 }
                             }
                         }

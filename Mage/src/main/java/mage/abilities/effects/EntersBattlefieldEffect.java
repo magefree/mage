@@ -107,25 +107,23 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
                 return false;
             }
         }
-        Spell spell = game.getStack().getSpell(event.getSourceId());
-        if (spell == null) {
+        Spell entersBySpell = game.getStack().getSpell(event.getSourceId());
+        if (entersBySpell == null) {
             StackObject stackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
             if (stackObject instanceof Spell) {
-                spell = (Spell) stackObject;
+                entersBySpell = (Spell) stackObject;
             }
         }
         for (Effect effect : baseEffects) {
-            // if (source.activate(game, false)) { // Why is this needed????
             if (effect instanceof ContinuousEffect) {
                 game.addEffect((ContinuousEffect) effect, source);
             } else {
-                if (spell != null) {
-                    effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
+                if (entersBySpell != null) {
+                    effect.setValue(SOURCE_CAST_SPELL_ABILITY, entersBySpell.getSpellAbility());
                 }
                 effect.setValue("appliedEffects", event.getAppliedEffects());
                 effect.apply(game, source);
             }
-            // }
         }
         return false;
     }

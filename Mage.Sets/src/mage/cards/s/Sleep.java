@@ -59,7 +59,7 @@ class SleepEffect extends OneShotEffect {
         if (player != null) {
             List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
-                creature.tap(game);
+                creature.tap(source, game);
                 doNotUntapNextUntapStep.add(creature);
             }
             if (!doNotUntapNextUntapStep.isEmpty()) {

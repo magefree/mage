@@ -58,7 +58,7 @@ class DevastatingSummonsEffect extends OneShotEffect {
         token.getPower().modifyBaseValue(GetXValue.instance.calculate(game, source, this));
         token.getToughness().modifyBaseValue(GetXValue.instance.calculate(game, source, this));
 
-        token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(2, game, source, source.getControllerId());
 
         return true;
     }

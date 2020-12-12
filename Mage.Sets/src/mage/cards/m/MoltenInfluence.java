@@ -61,10 +61,10 @@ class MoltenInfluenceEffect extends OneShotEffect {
             Player player = game.getPlayer(spell.getControllerId());
             String message = "Have Molten Influence do 4 damage to you?";
             if (player != null && player.chooseUse(Outcome.Damage, message, source, game)) {
-                player.damage(4, source.getSourceId(), game);
+                player.damage(4, source.getSourceId(), source, game);
                 return true;
             } else {
-                return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+                return game.getStack().counter(source.getFirstTarget(), source, game);
             }
         }
         return false;

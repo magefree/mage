@@ -82,7 +82,7 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return (event.getType() == EventType.BLOCKER_DECLARED);
+        return (event.getType() == GameEvent.EventType.BLOCKER_DECLARED);
     }
 
     @Override
@@ -129,7 +129,7 @@ class DreadWightEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             // tap permanent
-            permanent.tap(game);
+            permanent.tap(source, game);
             // does not untap while paralyzation counter is on it
             ContinuousRuleModifyingEffect effect2 = new DreadWightDoNotUntapEffect(
                     Duration.WhileOnBattlefield,

@@ -29,7 +29,7 @@ public class InvestigateEffect extends CreateTokenEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (super.apply(game, source)) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source, source.getControllerId()));
             return true;
         }
         return false;

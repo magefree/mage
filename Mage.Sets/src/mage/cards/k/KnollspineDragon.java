@@ -71,7 +71,7 @@ class KnollspineDragonEffect extends OneShotEffect {
                 AmountOfDamageAPlayerReceivedThisTurnWatcher watcher = game.getState().getWatcher(AmountOfDamageAPlayerReceivedThisTurnWatcher.class);
                 if (watcher != null) {
                     int drawAmount = watcher.getAmountOfDamageReceivedThisTurn(targetOpponent.getId());
-                    controller.drawCards(drawAmount, source.getSourceId(), game);
+                    controller.drawCards(drawAmount, source, game);
                     return true;
                 }
             }

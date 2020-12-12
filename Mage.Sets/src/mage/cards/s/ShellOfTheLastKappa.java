@@ -101,12 +101,12 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
                 sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
             if (sourcePermanent != null) {
-                game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                game.getStack().counter(spell.getId(), source, game);
                 Card card = spell.getCard();
                 if (card != null) {
                     return card.moveToExile(CardUtil.getExileZoneId(game, source.getSourceId(),
                             sourcePermanent.getZoneChangeCounter(game)),
-                            sourcePermanent.getName(), source.getSourceId(), game);
+                            sourcePermanent.getName(), source, game);
                 }
             }
         }

@@ -119,7 +119,7 @@ class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.EXTRA_TURN;
+        return event.getType() == GameEvent.EventType.EXTRA_TURN;
     }
 
     @Override

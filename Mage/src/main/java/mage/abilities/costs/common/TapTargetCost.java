@@ -35,22 +35,22 @@ public class TapTargetCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     return false;
                 }
-                paid |= permanent.tap(game);
+                paid |= permanent.tap(source, game);
             }
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(sourceId, controllerId, game);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return target.canChoose(source.getSourceId(), controllerId, game);
     }
 
     public TargetControlledPermanent getTarget() {

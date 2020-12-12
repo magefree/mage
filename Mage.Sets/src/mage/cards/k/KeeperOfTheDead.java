@@ -189,7 +189,7 @@ class KeeperOfTheDeadEffect extends OneShotEffect {
         if (opponent != null) {
             Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (creature != null) {
-                creature.destroy(source.getSourceId(), game, false);
+                creature.destroy(source, game, false);
             }
         }
         return true;

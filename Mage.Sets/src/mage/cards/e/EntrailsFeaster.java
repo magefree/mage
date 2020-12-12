@@ -81,10 +81,10 @@ class EntrailsFeasterEffect extends OneShotEffect {
                         }
                     }
                 } else if (sourceObject != null) {
-                    sourceObject.tap(game);
+                    sourceObject.tap(source, game);
                 }
             } else if (sourceObject != null) {
-                sourceObject.tap(game);
+                sourceObject.tap(source, game);
             }
             return true;
         }

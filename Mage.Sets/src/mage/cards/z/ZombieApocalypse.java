@@ -69,7 +69,7 @@ class ZombieApocalypseEffect extends OneShotEffect {
             game.getState().processAction(game);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(
                     new FilterPermanent(SubType.HUMAN, "Humans"), source.getControllerId(), game)) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
             return true;
         }

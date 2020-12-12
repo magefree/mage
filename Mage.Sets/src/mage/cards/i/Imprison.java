@@ -84,7 +84,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ACTIVATED_ABILITY;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
     }
 
     @Override
@@ -137,7 +137,7 @@ class ImprisonUnblockEffect extends OneShotEffect {
                 if (permanent.isCreature()) {
                     
                     // Tap the creature
-                    permanent.tap(game);
+                    permanent.tap(source, game);
     
                     // Remove it from combat
                     Effect effect = new RemoveFromCombatTargetEffect();

@@ -77,9 +77,9 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
         if (player != null && mageObject != null) {
             Cost cost = new DiscardTargetCost(new TargetCardInHand(new FilterNonlandCard()));
             String message = "Discard a nonland card to search your library?";
-            if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game) 
+            if (cost.canPay(source, source, source.getControllerId(), game)
                     && player.chooseUse(Outcome.Detriment, message, source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     Card card = game.getCard(cost.getTargets().getFirstTarget());
                     if (card == null) {
                         return false;

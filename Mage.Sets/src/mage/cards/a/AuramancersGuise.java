@@ -67,9 +67,9 @@ class EnchantedCreatureAurasCount implements DynamicValue {
     }
 
     @Override
-    public int calculate(Game game, Ability source, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        Permanent aura = game.getPermanent(source.getSourceId());
+        Permanent aura = game.getPermanent(sourceAbility.getSourceId());
         if (aura != null) {
             Permanent permanent = game.getPermanent(aura.getAttachedTo());
             if (permanent != null) {

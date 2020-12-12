@@ -58,7 +58,7 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
@@ -96,7 +96,7 @@ class TheRackEffect extends OneShotEffect {
         if (chosenPlayer != null) {
             int damage = 3 - chosenPlayer.getHand().size();
             if (damage > 0) {
-                chosenPlayer.damage(damage, source.getSourceId(), game);
+                chosenPlayer.damage(damage, source.getSourceId(), source, game);
             }
             return true;
         }

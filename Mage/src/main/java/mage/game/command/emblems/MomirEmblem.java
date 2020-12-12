@@ -89,7 +89,7 @@ class MomirEffect extends OneShotEffect {
             }
         }
         if (token != null) {
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
+            token.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
             return true;
         }
 

@@ -87,7 +87,7 @@ class YawgmothsVileOfferingEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
 
         if (permanent != null) {
-            permanent.destroy(source.getId(), game, false);
+            permanent.destroy(source, game, false);
         }
 
         return false;

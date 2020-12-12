@@ -38,13 +38,13 @@ public class PutCountersSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             this.paid = permanent.addCounters(counter, ability, game, false);
         }

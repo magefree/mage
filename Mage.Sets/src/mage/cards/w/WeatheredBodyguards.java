@@ -66,10 +66,10 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-        Permanent damager = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null && !p.isTapped() && damageEvent.isCombatDamage() && damager != null && damager.isAttacking() && !damager.isBlocked(game)) {
-            p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+        Permanent attacker = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && !permanent.isTapped() && damageEvent.isCombatDamage() && attacker != null && attacker.isAttacking() && !attacker.isBlocked(game)) {
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
         return true;

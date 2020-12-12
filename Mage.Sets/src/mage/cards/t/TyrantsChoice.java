@@ -95,7 +95,7 @@ class TyrantsChoiceLoseLifeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            game.getPlayer(opponentId).loseLife(4, game, false);
+            game.getPlayer(opponentId).loseLife(4, game, source, false);
         }
         return true;
     }

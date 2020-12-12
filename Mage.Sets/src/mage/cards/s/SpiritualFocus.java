@@ -60,7 +60,7 @@ class SpiritualFocusTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
+        return event.getType() == GameEvent.EventType.DISCARDED_CARD;
     }
 
     @Override
@@ -106,7 +106,7 @@ class SpiritualFocusDrawCardEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && permanent != null) {
             if (player.chooseUse(outcome, "Draw a card (" + permanent.getLogName() + ')', source, game)) {
-                player.drawCards(1, source.getSourceId(), game);
+                player.drawCards(1, source, game);
             }
             return true;
         }

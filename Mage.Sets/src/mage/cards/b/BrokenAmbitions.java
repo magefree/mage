@@ -99,9 +99,9 @@ class BrokenAmbitionsEffect extends OneShotEffect {
             }
 
             costToPay.clearPaid();
-            if (!(player.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, spell.getSourceId(), spell.getControllerId(), false, null))) {
+            if (!(player.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
                 game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
-                game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                game.getStack().counter(spell.getId(), source, game);
             }
             game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
 

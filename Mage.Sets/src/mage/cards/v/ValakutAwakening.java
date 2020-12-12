@@ -84,7 +84,7 @@ class ValakutAwakeningEffect extends OneShotEffect {
         player.choose(outcome, player.getHand(), targetCard, game);
         Cards cards = new CardsImpl(targetCard.getTargets());
         player.putCardsOnBottomOfLibrary(cards, game, source, true);
-        player.drawCards(cards.size() + 1, source.getSourceId(), game);
+        player.drawCards(cards.size() + 1, source, game);
         return true;
     }
 }

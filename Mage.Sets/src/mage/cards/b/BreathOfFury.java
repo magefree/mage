@@ -71,7 +71,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -129,7 +129,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null
-                && enchantedCreature.sacrifice(source.getSourceId(), game)
+                && enchantedCreature.sacrifice(source, game)
                 && target.canChoose(source.getSourceId(), controller.getId(), game)) {
             controller.choose(outcome, target, source.getSourceId(), game);
             Permanent newCreature = game.getPermanent(target.getFirstTarget());
@@ -140,13 +140,13 @@ class BreathOfFuryEffect extends OneShotEffect {
                     if (oldCreature.getId().equals(newCreature.getId())) {
                         success = true;
                     } else {
-                        if (oldCreature.removeAttachment(enchantment.getId(), game)
-                                && newCreature.addAttachment(enchantment.getId(), game)) {
+                        if (oldCreature.removeAttachment(enchantment.getId(), source, game)
+                                && newCreature.addAttachment(enchantment.getId(), source, game)) {
                             game.informPlayers(enchantment.getLogName() + " was unattached from " + oldCreature.getLogName() + " and attached to " + newCreature.getLogName());
                             success = true;
                         }
                     }
-                } else if (newCreature.addAttachment(enchantment.getId(), game)) {
+                } else if (newCreature.addAttachment(enchantment.getId(), source, game)) {
                     game.informPlayers(enchantment.getLogName() + " was attached to " + newCreature.getLogName());
                     success = true;
                 }

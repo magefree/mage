@@ -63,9 +63,9 @@ class DeadReckoningEffect extends OneShotEffect {
         TargetCreaturePermanent target2 = new TargetCreaturePermanent();
 
         if (controller != null) {
-            if (target1.canChoose(source.getControllerId(), game)
+            if (target1.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.choose(Outcome.Benefit, target1, source.getSourceId(), game)
-                    && target2.canChoose(source.getControllerId(), game)
+                    && target2.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.choose(Outcome.Damage, target2, source.getSourceId(), game)) {
                 Card creatureInGraveyard = game.getCard(target1.getFirstTarget());
                 if (creatureInGraveyard != null) {
@@ -73,7 +73,7 @@ class DeadReckoningEffect extends OneShotEffect {
                         int power = creatureInGraveyard.getPower().getValue();
                         Permanent creature = game.getPermanent(target2.getFirstTarget());
                         if (creature != null) {
-                            creature.damage(power, source.getSourceId(), game, false, true);
+                            creature.damage(power, source.getSourceId(), source, game, false, true);
                             return true;
                         }
                     }

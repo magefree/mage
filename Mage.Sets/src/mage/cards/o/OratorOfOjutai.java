@@ -136,7 +136,7 @@ class OratorOfOjutaiEffect extends OneShotEffect {
             if (sourcePermanent != null) {
                 DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = game.getState().getWatcher(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class);
                 if (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId())) {
-                    controller.drawCards(1, source.getSourceId(), game);
+                    controller.drawCards(1, source, game);
                     return true;
                 }
             }

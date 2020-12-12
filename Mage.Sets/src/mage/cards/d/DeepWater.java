@@ -78,15 +78,14 @@ class DeepWaterReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject mageObject = game.getObject(event.getSourceId());
-        if (mageObject != null && mageObject.isLand()) {
-            Permanent land = game.getPermanent(event.getSourceId());
-            return land != null && filter.match(land, game);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent != null && permanent.isLand()) {
+            return filter.match(permanent, game);
         }
         return false;
     }

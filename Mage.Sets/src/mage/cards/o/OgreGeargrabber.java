@@ -82,7 +82,7 @@ class OgreGeargrabberEffect1 extends OneShotEffect {
             if (equipment != null) {
                 Permanent ogre = game.getPermanent(source.getSourceId());
                 if (ogre != null) {
-                    ogre.addAttachment(equipmentId, game);
+                    ogre.addAttachment(equipmentId, source, game);
                 }
             }
             return true;
@@ -108,7 +108,7 @@ class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOST_CONTROL;
+        return event.getType() == GameEvent.EventType.LOST_CONTROL;
     }
 
     @Override
@@ -149,7 +149,7 @@ class OgreGeargrabberEffect2 extends OneShotEffect {
             if (equipment != null && equipment.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(equipment.getAttachedTo());
                 if (attachedTo != null) {
-                    attachedTo.removeAttachment(equipmentId, game);
+                    attachedTo.removeAttachment(equipmentId, source, game);
                 }
             }
             return true;

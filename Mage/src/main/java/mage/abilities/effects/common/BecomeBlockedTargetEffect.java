@@ -52,17 +52,14 @@ public class BecomeBlockedTargetEffect extends OneShotEffect {
             if (alreadyBlocked) {
                 continue;
             }
-            game.fireEvent(GameEvent.getEvent(
-                    GameEvent.EventType.CREATURE_BLOCKED, permanent.getId(),
-                    source.getSourceId(), null
-            ));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, permanent.getId(), source, null));
             morSet.add(new MageObjectReference(permanent, game));
         }
         String key = UUID.randomUUID().toString();
         game.getState().setValue("becameBlocked_" + key, morSet);
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.BATCH_BLOCK_NONCOMBAT,
-                source.getSourceId(), source.getSourceId(),
+                source.getSourceId(), source,
                 source.getControllerId(), key, 0)
         );
         return true;

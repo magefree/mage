@@ -170,7 +170,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
             if (permanent != null
                     && mageObject != null
                     && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {
-                if (permanent.sacrifice(source.getSourceId(), game)) {
+                if (permanent.sacrifice(source, game)) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
                             source.getSourceObjectZoneChangeCounter());
                     if (exileId != null) {

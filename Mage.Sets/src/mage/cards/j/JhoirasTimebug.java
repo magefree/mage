@@ -82,7 +82,7 @@ class JhoirasTimebugEffect extends OneShotEffect {
                     permanent.addCounters(CounterType.TIME.createInstance(), source, game);
                 }
                 else {
-                    permanent.removeCounters(CounterType.TIME.createInstance(), game);
+                    permanent.removeCounters(CounterType.TIME.createInstance(), source, game);
                 }
             }
             else {
@@ -92,7 +92,7 @@ class JhoirasTimebugEffect extends OneShotEffect {
                         card.addCounters(CounterType.TIME.createInstance(), source, game);
                     }
                     else {
-                        card.removeCounters(CounterType.TIME.createInstance(), game);
+                        card.removeCounters(CounterType.TIME.createInstance(), source, game);
                     }
                 }
             }

@@ -72,7 +72,7 @@ class ShroudedLoreEffect extends OneShotEffect {
             do {
                 chosenCard = new TargetCardInGraveyard(filter);
                 chosenCard.setNotTarget(true);
-                if (chosenCard.canChoose(opponent.getId(), game)) {
+                if (chosenCard.canChoose(source.getSourceId(), opponent.getId(), game)) {
                     opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
                     card = game.getCard(chosenCard.getFirstTarget());
                     if (card != null) {
@@ -84,9 +84,9 @@ class ShroudedLoreEffect extends OneShotEffect {
                 }
 
                 if (!done) {
-                    if (cost.canPay(source, source.getSourceId(), you.getId(), game) && you.chooseUse(Outcome.Benefit, "Pay {B} to choose a different card ?", source, game)) {
+                    if (cost.canPay(source, source, you.getId(), game) && you.chooseUse(Outcome.Benefit, "Pay {B} to choose a different card ?", source, game)) {
                         cost.clearPaid();
-                        if (!cost.pay(source, game, source.getSourceId(), you.getId(), false, null)) {
+                        if (!cost.pay(source, game, source, you.getId(), false, null)) {
                             done = true;
                         }
                     } else {

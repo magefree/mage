@@ -72,11 +72,11 @@ class GruesomeDiscoveryEffect extends OneShotEffect {
         }
         targetPlayer.revealCards(source, targetPlayer.getHand(), game);
         if (targetPlayer.getHand().size() <= 2) {
-            targetPlayer.discard(2, false, source, game);
+            targetPlayer.discard(2, false, false, source, game);
         }
         TargetCard target = new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS);
         player.choose(Outcome.Discard, targetPlayer.getHand(), target, game);
-        targetPlayer.discard(new CardsImpl(target.getTargets()), source, game);
+        targetPlayer.discard(new CardsImpl(target.getTargets()), false, source, game);
         return true;
     }
 }

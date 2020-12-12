@@ -144,7 +144,7 @@ class HammerJammerEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             if (getValue("rolled") != null) {
                 int amount = (Integer) getValue("rolled");
-                permanent.removeCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)), game);
+                permanent.removeCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)), source, game);
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
                 return true;
             }

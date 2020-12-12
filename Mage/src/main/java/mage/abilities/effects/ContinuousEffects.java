@@ -419,7 +419,7 @@ public class ContinuousEffects implements Serializable {
             return true;
         }
         MageObject object;
-        if (event.getType() == EventType.ZONE_CHANGE
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
                 && event.getTargetId().equals(ability.getSourceId())) {
             object = ((ZoneChangeEvent) event).getTarget();

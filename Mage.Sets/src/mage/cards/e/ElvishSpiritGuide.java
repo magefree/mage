@@ -57,19 +57,19 @@ class ExileSourceFromHandCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Card card = game.getCard(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Card card = game.getCard(source.getSourceId());
         Player player = game.getPlayer(controllerId);
-        if (player != null && player.getHand().contains(sourceId) && card != null) {
-            paid = card.moveToExile(ability.getSourceId(), "from Hand", ability.getSourceId(), game);
+        if (player != null && player.getHand().contains(source.getSourceId()) && card != null) {
+            paid = card.moveToExile(ability.getSourceId(), "from Hand", source, game);
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        if (player != null && player.getHand().contains(sourceId)) {
+        if (player != null && player.getHand().contains(source.getSourceId())) {
             return true;
         }
         return false;

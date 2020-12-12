@@ -70,9 +70,9 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
         }
         return true;
     }

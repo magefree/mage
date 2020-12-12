@@ -79,7 +79,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
                 if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
@@ -87,7 +87,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         }
-        if (event.getType() == EventType.TURNFACEUP) {
+        if (event.getType() == GameEvent.EventType.TURNFACEUP) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 return true;
             }

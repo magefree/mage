@@ -63,7 +63,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
-            game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+            game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
             // mana gets added also if counter is not successful
             int cmc = spell.getConvertedManaCost();
             Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(cmc), "your");

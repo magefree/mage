@@ -58,7 +58,7 @@ class MudholeEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             for (Card card : targetPlayer.getGraveyard().getCards(filter, game)) {
-                card.moveToExile(null, "", source.getSourceId(), game);
+                card.moveToExile(null, "", source, game);
             }
             return true;
         }

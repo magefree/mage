@@ -99,9 +99,9 @@ public class MiracleAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             // Refer to the card at the zone it is now (hand)
-            getEffects().setTargetPointer(new FixedTarget(game.getCard(event.getSourceId()), game));
+            getEffects().setTargetPointer(new FixedTarget(game.getCard(event.getTargetId()), game));
             return true;
         }
         return false;

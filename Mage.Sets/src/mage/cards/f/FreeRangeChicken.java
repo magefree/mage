@@ -75,7 +75,7 @@ class FreeRangeChickenEffect extends OneShotEffect {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
                     if (watcher.rolledThisTurn(sourcePermanent.getId(), totalRoll)) {
-                        sourcePermanent.sacrifice(source.getSourceId(), game);
+                        sourcePermanent.sacrifice(source, game);
                     } else {
                         watcher.addRoll(sourcePermanent.getId(), totalRoll);
                     }

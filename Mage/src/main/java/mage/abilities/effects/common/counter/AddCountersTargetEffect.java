@@ -60,44 +60,39 @@ public class AddCountersTargetEffect extends OneShotEffect {
         if (controller != null && sourceObject != null && counter != null) {
             int affectedTargets = 0;
             for (UUID uuid : targetPointer.getTargets(game, source)) {
+                Counter newCounter = counter.copy();
+                int calculated = amount.calculate(game, source, this); // 0 -- you must use default couner
+                if (calculated < 0) {
+                    continue;
+                } else if (calculated == 0) {
+                    // use original counter
+                } else {
+                    // increase to calculated value
+                    newCounter.remove(newCounter.getCount());
+                    newCounter.add(calculated);
+                }
+
                 Permanent permanent = game.getPermanent(uuid);
                 Player player = game.getPlayer(uuid);
                 Card card = game.getCard(targetPointer.getFirst(game, source));
                 if (permanent != null) {
-                    Counter newCounter = counter.copy();
-                    int calculated = amount.calculate(game, source, this);
-                    if (calculated > 0 && newCounter.getCount() > 0) {
-                        newCounter.remove(newCounter.getCount());
-                    }
-                    newCounter.add(calculated);
-                    int before = permanent.getCounters(game).getCount(counter.getName());
                     permanent.addCounters(newCounter, source, game);
-                    int numberAdded = permanent.getCounters(game).getCount(counter.getName()) - before;
                     affectedTargets++;
-                    if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + numberAdded + ' ' + counter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
-                    }
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                        + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + permanent.getLogName());
                 } else if (player != null) {
-                    Counter newCounter = counter.copy();
-                    newCounter.add(amount.calculate(game, source, this));
-                    player.addCounters(newCounter, game);
+                    player.addCounters(newCounter, source, game);
                     affectedTargets++;
-                    if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + counter.getCount() + ' ' + counter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + player.getLogName());
-                    }
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                        + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + player.getLogName());
                 } else if (card != null) {
-                    card.addCounters(counter, source, game);
-                    if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(' ').append(counter.getName())
-                                .append(" counter to ").append(card.getName())
-                                .append(" (").append(card.getCounters(game).getCount(counter.getName())).append(')').toString());
-                    }
-                    return true;
+                    card.addCounters(newCounter, source, game);
+                    affectedTargets++;
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + card.getLogName());
                 }
             }
-            return true;
+            return affectedTargets > 0;
         }
         return false;
     }

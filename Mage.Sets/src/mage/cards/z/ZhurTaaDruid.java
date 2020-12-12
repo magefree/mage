@@ -58,7 +58,7 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA
                 && !game.inCheckPlayableState();
     }
 

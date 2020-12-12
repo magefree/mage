@@ -67,7 +67,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -120,7 +120,7 @@ class PrinceOfThrallsEffect extends OneShotEffect {
                 PayLifeCost cost = new PayLifeCost(3);
                 if (opponent.chooseUse(Outcome.Neutral, cost.getText() + " or " + card.getLogName() + " comes back into the battlefield under opponents control", source, game)) {
                     cost.clearPaid();
-                    if (cost.pay(source, game, source.getSourceId(), opponent.getId(), true, null)) {
+                    if (cost.pay(source, game, source, opponent.getId(), true, null)) {
                         return true;
                     }
                 }

@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
@@ -70,20 +71,20 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int prevented;
             if (event.getAmount() >= this.amount) {
                 int damage = amount;
                 event.setAmount(event.getAmount() - amount);
                 this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
                 prevented = damage;
             } else {
                 int damage = event.getAmount();
                 event.setAmount(0);
                 amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
                 prevented = damage;
             }
 

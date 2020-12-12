@@ -67,7 +67,7 @@ class TrapfindersTrickEffect extends OneShotEffect {
             return false;
         }
         player.revealCards(source, player.getHand(), game);
-        player.discard(new CardsImpl(player.getHand().getCards(filter, game)), source, game);
+        player.discard(new CardsImpl(player.getHand().getCards(filter, game)), false, source, game);
         return true;
     }
 }

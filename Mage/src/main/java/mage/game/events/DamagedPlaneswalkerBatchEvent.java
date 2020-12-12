@@ -6,6 +6,6 @@ package mage.game.events;
 public class DamagedPlaneswalkerBatchEvent extends DamagedBatchEvent {
 
     public DamagedPlaneswalkerBatchEvent() {
-        super(EventType.DAMAGED_PLANESWALKER_BATCH, DamagedPlaneswalkerEvent.class);
+        super(GameEvent.EventType.DAMAGED_PLANESWALKER_BATCH, DamagedPlaneswalkerEvent.class);
     }
 }

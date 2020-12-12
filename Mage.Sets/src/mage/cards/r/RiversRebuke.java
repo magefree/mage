@@ -56,7 +56,7 @@ class RiversRebukeReturnToHandEffect extends OneShotEffect {
             FilterNonlandPermanent filter = new FilterNonlandPermanent();
             filter.add(new ControllerIdPredicate(targetPointer.getFirst(game, source)));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                permanent.moveToZone(Zone.HAND, source, game, true);
             }
             return true;
         }

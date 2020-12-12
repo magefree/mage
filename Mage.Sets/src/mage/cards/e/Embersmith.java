@@ -60,15 +60,15 @@ class EmbersmithEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Cost cost = ManaUtil.createManaCost(1, false);
-        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+        if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                permanent.damage(1, source.getSourceId(), game, false, true);
+                permanent.damage(1, source.getSourceId(), source, game, false, true);
                 return true;
             }
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
-                player.damage(1, source.getSourceId(), game);
+                player.damage(1, source.getSourceId(), source, game);
                 return true;
             }
             return false;

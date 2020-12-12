@@ -102,7 +102,7 @@ class CloakingDeviceLoseLifeDefendingPlayerEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player defender = game.getPlayer(game.getCombat().getDefendingPlayerId(enchantment.getAttachedTo(), game));
             if (defender != null) {
-                defender.loseLife(amount.calculate(game, source, this), game, false);
+                defender.loseLife(amount.calculate(game, source, this), game, source, false);
             }
         }
         return true;

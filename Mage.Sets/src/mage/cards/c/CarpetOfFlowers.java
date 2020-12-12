@@ -64,8 +64,8 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PRECOMBAT_MAIN_PHASE_PRE
-                || event.getType() == EventType.POSTCOMBAT_MAIN_PHASE_PRE;
+        return event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE
+                || event.getType() == GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE;
     }
 
     @Override

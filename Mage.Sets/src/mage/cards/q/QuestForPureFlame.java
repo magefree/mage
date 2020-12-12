@@ -71,7 +71,7 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -107,9 +107,9 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_CREATURE
-                || event.getType() == EventType.DAMAGE_PLAYER
-                || event.getType() == EventType.DAMAGE_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER;
     }
 
     @Override

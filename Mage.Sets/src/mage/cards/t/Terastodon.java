@@ -80,7 +80,7 @@ class TerastodonEffect extends OneShotEffect {
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
-                if (permanent.destroy(source.getSourceId(), game, false)) {
+                if (permanent.destroy(source, game, false)) {
                     if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                         int numberPermanents = destroyedPermanents.getOrDefault(permanent.getControllerId(), 0);
                         destroyedPermanents.put(permanent.getControllerId(), numberPermanents + 1);
@@ -91,7 +91,7 @@ class TerastodonEffect extends OneShotEffect {
         game.getState().processAction(game);
         ElephantToken elephantToken = new ElephantToken();
         for (Entry<UUID, Integer> entry : destroyedPermanents.entrySet()) {
-            elephantToken.putOntoBattlefield(entry.getValue(), game, source.getSourceId(), entry.getKey());
+            elephantToken.putOntoBattlefield(entry.getValue(), game, source, entry.getKey());
         }
         return true;
     }

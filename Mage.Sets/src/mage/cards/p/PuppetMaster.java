@@ -74,14 +74,14 @@ class PuppetMasterEffect extends OneShotEffect {
         if (object instanceof Permanent) {
             Card card = game.getCard(((Permanent) object).getId());
             if (card != null) {
-                if (card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
+                if (card.moveToZone(Zone.HAND, source, game, false)) {
                     Cost cost = new ManaCostsImpl("{U}{U}{U}");
                     Player controller = game.getPlayer(source.getControllerId());
                     Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
                     if (controller != null && sourcePermanent != null) {
                         if (controller.chooseUse(Outcome.Neutral, "Pay " + cost.getText() + " to return " + sourcePermanent.getLogName() + " to its owner's hand?", source, game)
-                                && cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
-                            sourcePermanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                                && cost.pay(source, game, source, controller.getId(), false, null)) {
+                            sourcePermanent.moveToZone(Zone.HAND, source, game, false);
                         }
                     }
                     return true;

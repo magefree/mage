@@ -113,7 +113,7 @@ class GeodeGolemEffect extends OneShotEffect {
 
             // CAST: as spell or as land
             if (cost == null
-                    || cost.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
+                    || cost.pay(source, game, source, controller.getId(), false, null)) {
                 if (commander.getSpellAbility() != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + commander.getId(), Boolean.TRUE);
                     Boolean commanderWasCast = controller.cast(controller.chooseAbilityForCast(commander, game, true),

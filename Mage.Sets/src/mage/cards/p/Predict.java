@@ -71,7 +71,7 @@ class PredictEffect extends OneShotEffect {
                 break;
             }
         }
-        controller.drawCards(toDraw, source.getSourceId(), game);
+        controller.drawCards(toDraw, source, game);
         return true;
     }
 }

@@ -64,7 +64,7 @@ class SacrificeAllLandEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), source.getControllerId(), game)) {
-                permanent.sacrifice(source.getControllerId(), game);
+                permanent.sacrifice(source, game);
             }
             return true;
         }

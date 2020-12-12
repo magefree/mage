@@ -74,12 +74,12 @@ class ObNixilisTheHateTwistedEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.destroy(source.getSourceId(), game, false);
+        permanent.destroy(source, game, false);
         Player player = game.getPlayer(permanent.getControllerId());
         if (player == null) {
             return false;
         }
-        player.drawCards(2, source.getSourceId(), game);
+        player.drawCards(2, source, game);
         return true;
     }
 }

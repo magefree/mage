@@ -67,7 +67,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 if (controller.chooseUse(outcome, "Shall " + targetPlayer.getLogName() + " lose " + amount + " life?", source, game)) {
-                    targetPlayer.loseLife(amount, game, false);
+                    targetPlayer.loseLife(amount, game, source, false);
                 } else {
                     int numberPermanents = game.getState().getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);
                     if (numberPermanents > amount) {
@@ -77,7 +77,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
                         for (UUID uuid : target.getTargets()) {
                             Permanent permanent = game.getPermanent(uuid);
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                             }
                         }
                     }

@@ -77,9 +77,9 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
             for (UUID oppId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(oppId);
                 if (opponent != null
-                        && cost.canPay(source, source.getSourceId(), opponent.getId(), game)
+                        && cost.canPay(source, source, opponent.getId(), game)
                         && opponent.chooseUse(Outcome.Neutral, "Pay 3 life to prevent " + controller.getLogName() + " from getting " + card.getLogName() + "?", source, game)
-                        && cost.pay(source, game, source.getSourceId(), opponent.getId(), true)) {
+                        && cost.pay(source, game, source, opponent.getId(), true)) {
                     keepIt = false;
                 }
             }

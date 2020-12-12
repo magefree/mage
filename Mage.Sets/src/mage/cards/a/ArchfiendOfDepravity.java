@@ -80,7 +80,7 @@ class ArchfiendOfDepravityEffect extends OneShotEffect {
                 }
             }
             for (Permanent creature : creaturesToSacrifice) {
-                creature.sacrifice(source.getSourceId(), game);
+                creature.sacrifice(source, game);
             }
             return true;
         }

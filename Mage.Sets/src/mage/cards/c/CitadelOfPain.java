@@ -71,7 +71,7 @@ class CitadelOfPainEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             int damage = game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
-            player.damage(damage, source.getSourceId(), game);
+            player.damage(damage, source.getSourceId(), source, game);
             return true;
         }
         return false;

@@ -92,8 +92,8 @@ class CollectiveDefianceEffect extends OneShotEffect {
         if (targetPlayer == null) {
             return false;
         }
-        int count = targetPlayer.discard(targetPlayer.getHand(), source, game).size();
-        targetPlayer.drawCards(count, source.getSourceId(), game);
+        int count = targetPlayer.discard(targetPlayer.getHand(), false, source, game).size();
+        targetPlayer.drawCards(count, source, game);
         return true;
     }
 }

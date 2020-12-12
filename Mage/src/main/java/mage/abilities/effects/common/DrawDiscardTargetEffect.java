@@ -49,8 +49,8 @@ public class DrawDiscardTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            player.drawCards(cardsToDraw, source.getSourceId(), game);
-            player.discard(cardsToDiscard, false, source, game);
+            player.drawCards(cardsToDraw, source, game);
+            player.discard(cardsToDiscard, false, false, source, game);
             return true;
         }
         return false;

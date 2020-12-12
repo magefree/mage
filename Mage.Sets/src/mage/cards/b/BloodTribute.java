@@ -83,7 +83,7 @@ class BloodTributeLoseLifeEffect extends OneShotEffect {
         if (player != null) {
             Integer amount = (int) Math.ceil(player.getLife() / 2f);
             if (amount > 0) {
-                player.loseLife(amount, game, false);
+                player.loseLife(amount, game, source, false);
                 game.getState().setValue(source.getSourceId().toString() + "_BloodTribute", amount);
                 return true;
             }

@@ -78,7 +78,7 @@ class HappilyEverAfterEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .forEachOrdered(player -> {
                     player.gainLife(5, game, source);
-                    player.drawCards(1, source.getSourceId(), game);
+                    player.drawCards(1, source, game);
                 });
         return true;
     }

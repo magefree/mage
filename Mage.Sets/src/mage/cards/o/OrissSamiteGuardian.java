@@ -109,7 +109,7 @@ class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifyingEffectImp
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CAST_SPELL;
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override

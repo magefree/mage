@@ -34,7 +34,7 @@ public class ReturnToLibraryPermanentEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getPermanent(source.getSourceId());
             if (card != null) {
-                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.STACK, toTop, true);
+                controller.moveCardToLibraryWithInfo(card, source, game, Zone.STACK, toTop, true);
             }
             return true;
         }

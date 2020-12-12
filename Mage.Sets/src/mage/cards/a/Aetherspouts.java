@@ -127,7 +127,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 }
                 // move all permanents to lib at the same time
                 for (Permanent permanent : toLibrary) {
-                    player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, false);
+                    player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, true, false);
                 }
                 // cards to bottom
                 cards.clear();
@@ -165,7 +165,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 }
                 // move all permanents to lib at the same time
                 for (Permanent permanent : toLibrary) {
-                    player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, false);
+                    player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, false, false);
                 }
                 player = playerList.getNext(game, false);
             } while (player != null && !player.getId().equals(game.getActivePlayerId()) && activePlayer.canRespond());

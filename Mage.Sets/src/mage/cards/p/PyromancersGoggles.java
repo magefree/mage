@@ -79,7 +79,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.MANA_PAID;
+        return event.getType() == GameEvent.EventType.MANA_PAID;
     }
 
     @Override

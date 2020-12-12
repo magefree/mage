@@ -71,12 +71,12 @@ class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect {
         if (controller != null) {
             Permanent firstTarget = game.getPermanent(source.getFirstTarget());
             if (firstTarget != null) {
-                firstTarget.destroy(source.getSourceId(), game, false);
+                firstTarget.destroy(source, game, false);
 
             }
             Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (secondTarget != null) {
-                secondTarget.destroy(source.getSourceId(), game, false);
+                secondTarget.destroy(source, game, false);
             }
             return true;
         }

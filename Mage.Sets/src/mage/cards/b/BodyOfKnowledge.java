@@ -80,6 +80,6 @@ class BodyOfKnowledgeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         return player != null
                 && amount > 0
-                && player.drawCards(amount, source.getSourceId(), game) > 0;
+                && player.drawCards(amount, source, game) > 0;
     }
 }

@@ -74,7 +74,7 @@ public class CreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
-        token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
+        token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
 

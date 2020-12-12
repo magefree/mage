@@ -58,7 +58,7 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.NUMBER_OF_TRIGGERS;
+        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
     }
 
     @Override
@@ -70,7 +70,7 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // Only EtB triggers
                 if (sourceEvent != null
-                        && sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD
+                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                         && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering artifacts or creatures

@@ -60,7 +60,7 @@ class StrongholdDisciplineEffect extends OneShotEffect {
                 if (count > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.loseLife(count, game, false);
+                        player.loseLife(count, game, source, false);
                     }
                 }
             }

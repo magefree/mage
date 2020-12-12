@@ -80,8 +80,8 @@ class PainsRewardEffect extends OneShotEffect {
             }
 
             game.informPlayers(winner.getLogName() + " won the auction with a bid of " + highBid + " life" + (highBid > 1 ? "s" : ""));
-            winner.loseLife(highBid, game, false);
-            winner.drawCards(4, source.getSourceId(), game);
+            winner.loseLife(highBid, game, source, false);
+            winner.drawCards(4, source, game);
             return true;
         }
         return false;

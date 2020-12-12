@@ -72,7 +72,7 @@ class SternJudgeEffect extends OneShotEffect {
             Player player = game.getPlayer(source.getSourceId());
             if (player != null) {
                 int lifeToLose = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
-                player.loseLife(lifeToLose, game, false);
+                player.loseLife(lifeToLose, game, source, false);
             }
         }
         return true;

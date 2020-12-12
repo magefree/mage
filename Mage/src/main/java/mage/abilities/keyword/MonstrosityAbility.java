@@ -103,7 +103,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
             }
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(monstrosityValue)).apply(game, source);
             permanent.setMonstrous(true);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_MONSTROUS, source.getSourceId(), source.getSourceId(), source.getControllerId(), monstrosityValue));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_MONSTROUS, source.getSourceId(), source, source.getControllerId(), monstrosityValue));
             return true;
         }
         return false;

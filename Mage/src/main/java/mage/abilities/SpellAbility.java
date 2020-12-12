@@ -92,7 +92,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (game.inCheckPlayableState()) {
                 if (game.getContinuousEffects().preventedByRuleModification(
-                        GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this.getSourceId(), playerId), this, game, true)) {
+                        GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, this.getId(), this, playerId), this, game, true)) {
                     return ActivationStatus.getFalse();
                 }
             }
@@ -104,7 +104,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
                 }
             }
-            if (costs.canPay(this, sourceId, playerId, game)) {
+            if (costs.canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {

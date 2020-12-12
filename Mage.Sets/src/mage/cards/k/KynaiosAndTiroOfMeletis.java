@@ -70,7 +70,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.drawCards(1, source.getSourceId(), game);
+            controller.drawCards(1, source, game);
             PlayerList playerList = game.getState().getPlayerList().copy();
 
             while (!playerList.get().equals(source.getControllerId()) && controller.canRespond()) {
@@ -113,7 +113,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
             for (UUID playerId : noLandPlayers) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.drawCards(1, source.getSourceId(), game);
+                    player.drawCards(1, source, game);
                 }
             }
             return true;

@@ -50,22 +50,22 @@ public class EchoEffect extends OneShotEffect {
                 Cost altCost = new ManaCostsImpl("{0}");
                 if (controller.chooseUse(Outcome.Benefit, "Pay {0} instead of the echo cost?", source, game)) {
                     altCost.clearPaid();
-                    if (altCost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ECHO_PAID, source.getSourceId(), source.getSourceId(), source.getControllerId()));
+                    if (altCost.pay(source, game, source, source.getControllerId(), false, null)) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ECHO_PAID, source.getSourceId(), source, source.getControllerId()));
                         return true;
                     }
                 }
             }
             if (controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ECHO_PAID, source.getSourceId(), source.getSourceId(), source.getControllerId()));
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ECHO_PAID, source.getSourceId(), source, source.getControllerId()));
                     return true;
                 }
             }
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
             return true;
         }

@@ -89,7 +89,7 @@ class NecromancyReAttachEffect extends OneShotEffect {
             controller.moveCards(cardInGraveyard, Zone.BATTLEFIELD, source, game);
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
             if (enchantedCreature != null) {
-                enchantedCreature.addAttachment(enchantment.getId(), game);
+                enchantedCreature.addAttachment(enchantment.getId(), source, game);
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with " + enchantment.getIdName());
                 filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));
                 Target target = new TargetCreaturePermanent(filter);
@@ -127,7 +127,7 @@ class NecromancyLeavesBattlefieldTriggeredEffect extends OneShotEffect {
             if (sourcePermanent.getAttachedTo() != null) {
                 Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
                 if (attachedTo != null && attachedTo.getZoneChangeCounter(game) == sourcePermanent.getAttachedToZoneChangeCounter()) {
-                    attachedTo.sacrifice(source.getSourceId(), game);
+                    attachedTo.sacrifice(source, game);
                 }
             }
             return true;

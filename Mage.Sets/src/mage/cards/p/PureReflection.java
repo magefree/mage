@@ -69,13 +69,13 @@ public final class PureReflection extends CardImpl {
             FilterPermanent filter = new FilterPermanent("Reflections");
             filter.add(SubType.REFLECTION.getPredicate());
             game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).forEach((permanent) -> {
-                permanent.destroy(source.getSourceId(), game,false);
+                permanent.destroy(source, game,false);
             });
             game.getState().processAction(game);
             
             // Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.
             ReflectionPureToken token = new ReflectionPureToken(spell.getConvertedManaCost());
-            token.putOntoBattlefield(1, game, source.getSourceId(), spell.getControllerId());
+            token.putOntoBattlefield(1, game, source, spell.getControllerId());
 
             return true;
         }

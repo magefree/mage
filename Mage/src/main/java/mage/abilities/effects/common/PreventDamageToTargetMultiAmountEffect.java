@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -79,18 +80,17 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int targetAmount = targetAmountMap.get(event.getTargetId());
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             if (event.getAmount() >= targetAmount) {
-                int damage = targetAmount;
                 event.setAmount(event.getAmount() - targetAmount);
                 targetAmountMap.remove(event.getTargetId());
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
+                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), targetAmount));
             } else {
                 int damage = event.getAmount();
                 event.setAmount(0);
-                targetAmountMap.put(event.getTargetId(), targetAmount -= damage);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, event.getTargetId(), source.getSourceId(), source.getControllerId(), damage));
+                targetAmountMap.put(event.getTargetId(), targetAmount - damage);
+                game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
             }
             if (targetAmountMap.isEmpty()) {
                 this.used = true;

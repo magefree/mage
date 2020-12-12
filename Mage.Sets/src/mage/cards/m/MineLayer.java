@@ -87,7 +87,7 @@ class RemoveAllMineCountersEffect extends OneShotEffect {
             if (permanent != null) {
                 int numToRemove = permanent.getCounters(game).getCount(CounterType.MINE);
                 if (numToRemove > 0) {
-                    permanent.removeCounters(CounterType.MINE.getName(), numToRemove, game);
+                    permanent.removeCounters(CounterType.MINE.getName(), numToRemove, source, game);
                 }
             }
         }

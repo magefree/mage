@@ -75,7 +75,9 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
+        if (zEvent != null
+                && Zone.GRAVEYARD == zEvent.getToZone()
+                && zEvent.getCards() != null) {
             for (Card card : zEvent.getCards()) {
                 if (card != null) {
                     UUID cardOwnerId = card.getOwnerId();

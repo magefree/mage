@@ -43,7 +43,7 @@ public class DamageAllControlledTargetEffect extends OneShotEffect {
             return false;
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-            permanent.damage(amount, source.getSourceId(), game, false, true);
+            permanent.damage(amount, source.getSourceId(), source, game, false, true);
         }
         return true;
     }

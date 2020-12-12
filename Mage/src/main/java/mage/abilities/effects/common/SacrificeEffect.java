@@ -58,14 +58,14 @@ public class SacrificeEffect extends OneShotEffect {
                 Target target = new TargetPermanent(amount, amount, newFilter, true);
                 if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
                     while (!target.isChosen()
-                            && target.canChoose(player.getId(), game)
+                            && target.canChoose(source.getSourceId(), player.getId(), game)
                             && player.canRespond()) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     }
                     for (int idx = 0; idx < target.getTargets().size(); idx++) {
                         Permanent permanent = game.getPermanent(target.getTargets().get(idx));
                         if (permanent != null
-                                && permanent.sacrifice(source.getSourceId(), game)) {
+                                && permanent.sacrifice(source, game)) {
                             applied = true;
                         }
                     }

@@ -75,7 +75,7 @@ class DeathrenderEffect extends OneShotEffect {
                 Card creatureInHand = game.getCard(target.getFirstTarget());
                 if (creatureInHand != null) {
                     if (controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game)) {
-                        game.getPermanent(creatureInHand.getId()).addAttachment(sourcePermanent.getId(), game);
+                        game.getPermanent(creatureInHand.getId()).addAttachment(sourcePermanent.getId(), source, game);
                     }
                 }
             }

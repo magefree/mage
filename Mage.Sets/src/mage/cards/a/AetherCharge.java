@@ -61,7 +61,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
@@ -111,7 +111,7 @@ class AetherChargeEffect extends OneShotEffect {
             creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
         }
         if (creature != null) {
-            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 4, creature.getId(), game, false, true) > 0;
+            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 4, creature.getId(), source, game, false, true) > 0;
         }
         return false;
     }

@@ -19,6 +19,7 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -82,7 +83,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return (event.getType() == EventType.CAST_SPELL_LATE || event.getType() == EventType.CAST_SPELL);
+        return (event.getType() == GameEvent.EventType.CAST_SPELL_LATE || event.getType() == GameEvent.EventType.CAST_SPELL);
     }
 
     @Override
@@ -119,12 +120,12 @@ class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
+        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int damage = event.getAmount();
             event.setAmount(0);
             game.informPlayers("Damage has been prevented: " + damage);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
+            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
         }
         return false;
     }

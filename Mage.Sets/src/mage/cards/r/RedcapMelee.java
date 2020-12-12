@@ -64,7 +64,7 @@ class RedcapMeleeEffect extends OneShotEffect {
             return false;
         }
         boolean isRed = permanent.getColor(game).isRed();
-        if (permanent.damage(4, source.getSourceId(), game) > 0 && !isRed) {
+        if (permanent.damage(4, source.getSourceId(), source, game) > 0 && !isRed) {
             return effect.apply(game, source);
         }
         return true;

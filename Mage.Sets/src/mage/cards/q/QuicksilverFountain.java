@@ -135,8 +135,7 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
-            land.removeCounters(CounterType.FLOOD.createInstance(
-                    land.getCounters(game).getCount(CounterType.FLOOD)), game);
+            land.removeCounters(CounterType.FLOOD.createInstance(land.getCounters(game).getCount(CounterType.FLOOD)), source, game);
         }
         return true;
     }

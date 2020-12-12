@@ -68,14 +68,14 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.UPKEEP_STEP_PRE;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         this.getEffects().clear();
         boolean result;
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             result = event.getTargetId().equals(this.getSourceId());
         } else {
             result = event.getPlayerId().equals(this.getControllerId());

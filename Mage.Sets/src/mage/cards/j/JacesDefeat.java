@@ -78,7 +78,7 @@ class JacesDefeatEffect extends OneShotEffect {
             for (UUID targetId : getTargetPointer().getTargets(game, source) ) {
                 Spell spell = game.getStack().getSpell(targetId);
                 if (spell != null) {
-                    game.getStack().counter(targetId, source.getSourceId(), game);
+                    game.getStack().counter(targetId, source, game);
                     Player controller = game.getPlayer(source.getControllerId());
                     // If it was a Jace planeswalker, you may discard a card. If you do, draw a card
                     if (filter.match(spell, game) && controller != null) {

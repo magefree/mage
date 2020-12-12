@@ -82,13 +82,13 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
         if (controller == null) {
             return false;
         }
-        Permanent damager = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (damager == null) {
+        Permanent attacker = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (attacker == null) {
             return false;
         }
         if (((DamagedPlayerEvent) event).isCombatDamage()
                 && controller.hasOpponent(event.getTargetId(), game)
-                && damager.hasSubtype(SubType.WARRIOR, game)
+                && attacker.hasSubtype(SubType.WARRIOR, game)
                 && !usedForCombatDamageStep) {
             usedForCombatDamageStep = true;
             return true;

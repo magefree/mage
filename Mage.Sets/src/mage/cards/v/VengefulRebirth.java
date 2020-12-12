@@ -78,12 +78,12 @@ class VengefulRebirthEffect extends OneShotEffect {
         int damage = card.getConvertedManaCost();
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.damage(damage, source.getSourceId(), game, false, true);
+            permanent.damage(damage, source.getSourceId(), source, game, false, true);
             return true;
         }
         Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
         if (targetPlayer != null) {
-            targetPlayer.damage(damage, source.getSourceId(), game);
+            targetPlayer.damage(damage, source.getSourceId(), source, game);
         }
         return true;
     }

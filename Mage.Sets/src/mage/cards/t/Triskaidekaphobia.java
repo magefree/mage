@@ -114,7 +114,7 @@ class TriskaidekaphobiaLoseLifeEffect extends OneShotEffect {
         for (UUID pid : playerList) {
             Player player = game.getPlayer(pid);
             if (player != null) {
-                player.loseLife(1, game, false);
+                player.loseLife(1, game, source, false);
             }
         }
         return true;

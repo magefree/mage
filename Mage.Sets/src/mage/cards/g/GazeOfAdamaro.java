@@ -58,7 +58,7 @@ class GazeOfAdamaroEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), game);
+            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), source, game);
             return true;
         }
         return false;

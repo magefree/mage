@@ -23,18 +23,18 @@ public class TapAttachedCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent attachment = game.getPermanentOrLKIBattlefield(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent attachment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Permanent permanent = game.getPermanent(attachment.getAttachedTo());
         if (permanent != null) {
-            paid = permanent.tap(game);
+            paid = permanent.tap(source, game);
         }
         return paid;
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent attachment = game.getPermanentOrLKIBattlefield(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent attachment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Permanent permanent = game.getPermanent(attachment.getAttachedTo());
         if (permanent != null) {
             // return true;          // Technically the more correct implementation, but all cards using this cost also come with an "untapped" condition

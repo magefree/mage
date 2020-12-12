@@ -58,7 +58,7 @@ class ManaBreachEffect extends OneShotEffect {
             TargetLandPermanent toBounce = new TargetLandPermanent(1, 1, filter, true);
             if(player.chooseTarget(Outcome.ReturnToHand, toBounce, source, game)) {
                 Permanent land = game.getPermanent(toBounce.getTargets().get(0));
-                land.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                land.moveToZone(Zone.HAND, source, game, false);
             }
             return true;
         }

@@ -59,8 +59,6 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Zone fromZone = ((ZoneChangeEvent) event).getFromZone();
         Card card = game.getCard(event.getTargetId());
-        UUID sourceId = event.getSourceId();
-        UUID controllerId = event.getPlayerId();
         if (card == null) {
             return false;
         }
@@ -95,7 +93,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
 
         UUID targetId = null;
-        MageObject sourceObject = game.getObject(sourceId);
+        MageObject sourceObject = game.getObject(event.getSourceId());
         boolean enchantCardInGraveyard = false;
         if (sourceObject instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) sourceObject;
@@ -157,25 +155,25 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
             if (firstCardFace != null) {
                 // transforming card. remove first face (original card) from old zone
-                firstCardFace.removeFromZone(game, fromZone, sourceId);
+                firstCardFace.removeFromZone(game, fromZone, source);
             } else {
-                card.removeFromZone(game, fromZone, sourceId);
+                card.removeFromZone(game, fromZone, source);
             }
             PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
-            ZoneChangeEvent zoneChangeEvent = new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD);
+            ZoneChangeEvent zoneChangeEvent = new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD);
             permanent.updateZoneChangeCounter(game, zoneChangeEvent);
             game.addPermanent(permanent, 0);
             card.setZone(Zone.BATTLEFIELD, game);
-            if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {
+            if (permanent.entersBattlefield(source, game, fromZone, true)) {
                 String attachToName = null;
                 if (targetCard != null) {
-                    permanent.attachTo(targetCard.getId(), game);
+                    permanent.attachTo(targetCard.getId(), source, game);
                     attachToName = targetCard.getLogName();
                 } else if (targetPermanent != null) {
-                    targetPermanent.addAttachment(permanent.getId(), game);
+                    targetPermanent.addAttachment(permanent.getId(), source, game);
                     attachToName = targetPermanent.getLogName();
                 } else if (targetPlayer != null) {
-                    targetPlayer.addAttachment(permanent.getId(), game);
+                    targetPlayer.addAttachment(permanent.getId(), source, game);
                     attachToName = targetPlayer.getLogName();
                 }
                 game.applyEffects();

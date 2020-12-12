@@ -80,7 +80,7 @@ class PlagueOfVerminEffect extends OneShotEffect {
                     if (currentPlayer.chooseUse(Outcome.AIDontUseIt, "Pay life?", source, game)) {
                         totalPaidLife = currentPlayer.getAmount(0, controller.getLife(), "Pay how many life?", game);
                         if (totalPaidLife > 0) {
-                            currentPlayer.loseLife(totalPaidLife, game, false);
+                            currentPlayer.loseLife(totalPaidLife, game, source, false);
                             if (payLife.get(currentPlayer.getId()) == null) {
                                 payLife.put(currentPlayer.getId(), totalPaidLife);
                             } else {
@@ -110,7 +110,7 @@ class PlagueOfVerminEffect extends OneShotEffect {
                     : payLife.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
                 if (player != null) {
-                    token.putOntoBattlefield(entry.getValue(), game, source.getSourceId(), player.getId());
+                    token.putOntoBattlefield(entry.getValue(), game, source, player.getId());
                 }
             }
 

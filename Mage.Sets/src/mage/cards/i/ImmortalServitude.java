@@ -60,7 +60,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
         Set<Card> cards = you.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
         for (Card card : cards) {
             if (card != null && card.getConvertedManaCost() == count) {
-                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                card.moveToZone(Zone.BATTLEFIELD, source, game, false);
             }
         }
         return true;

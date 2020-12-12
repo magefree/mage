@@ -58,7 +58,7 @@ class MindlockRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.SEARCH_LIBRARY;
+        return event.getType() == GameEvent.EventType.SEARCH_LIBRARY;
     }
 
     @Override

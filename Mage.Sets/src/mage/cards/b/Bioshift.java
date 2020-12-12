@@ -89,7 +89,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             if (amountCounters > 0) {
                 int amountToMove = controller.getAmount(0, amountCounters, "How many counters do you want to move?", game);
                 if (amountToMove > 0) {
-                    fromPermanent.removeCounters(CounterType.P1P1.createInstance(amountToMove), game);
+                    fromPermanent.removeCounters(CounterType.P1P1.createInstance(amountToMove), source, game);
                     toPermanent.addCounters(CounterType.P1P1.createInstance(amountToMove), source, game);
                 }
             }

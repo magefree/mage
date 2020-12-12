@@ -133,7 +133,7 @@ class VaevictisAsmadiTheDireEffect extends OneShotEffect {
             for (UUID permId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permId);
                 if (permanent == null
-                        || !permanent.sacrifice(source.getSourceId(), game)) {
+                        || !permanent.sacrifice(source, game)) {
                     continue;
                 }
                 Player player = game.getPlayer(permanent.getControllerId());

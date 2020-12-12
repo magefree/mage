@@ -83,17 +83,13 @@ class PossessedSkaabDiesEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
-            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
-        }
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

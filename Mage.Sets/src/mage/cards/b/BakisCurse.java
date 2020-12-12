@@ -64,7 +64,7 @@ class BakisCurseEffect extends OneShotEffect {
                     count++;
                 }
             }
-            creature.damage(count * 2, source.getId(), game, false, true);
+            creature.damage(count * 2, source.getId(), source, game, false, true);
         }
         return true;
     }

@@ -89,7 +89,7 @@ class AmphinMutineerEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(permanent, Zone.EXILED, source, game);
-        new SalamnderWarriorToken().putOntoBattlefield(1, game, source.getSourceId(), player.getId());
+        new SalamnderWarriorToken().putOntoBattlefield(1, game, source, player.getId());
         return true;
     }
 }

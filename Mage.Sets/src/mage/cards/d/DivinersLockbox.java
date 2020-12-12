@@ -84,7 +84,7 @@ class DivinersLockboxEffect extends OneShotEffect {
         player.revealCards(source, new CardsImpl(card), game);
         if (choice.getChoice().equals(card.getName())) {
             sacEffect.apply(game, source);
-            player.drawCards(3, source.getSourceId(), game);
+            player.drawCards(3, source, game);
         }
         return true;
     }

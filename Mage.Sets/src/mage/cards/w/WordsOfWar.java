@@ -70,14 +70,14 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
-                player.damage(2, source.getSourceId(), game);
+                player.damage(2, source.getSourceId(), source, game);
                 this.used = true;
                 discard();
                 return true;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(2, source.getSourceId(), game, false, true);
+                permanent.damage(2, source.getSourceId(), source, game, false, true);
                 this.used = true;
                 discard();
                 return true;

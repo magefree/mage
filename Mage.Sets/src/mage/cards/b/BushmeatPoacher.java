@@ -98,6 +98,6 @@ class BushmeatPoacherEffect extends OneShotEffect {
         if (amount > 0) {
             player.gainLife(amount, game, source);
         }
-        return player.drawCards(1, source.getSourceId(), game) > 0;
+        return player.drawCards(1, source, game) > 0;
     }
 }

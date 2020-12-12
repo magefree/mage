@@ -98,23 +98,23 @@ class ClackbridgeTrollEffect extends OneShotEffect {
             filter.add(TargetController.YOU.getControllerPredicate());
             TargetControlledPermanent target = new TargetControlledPermanent(filter);
             target.setNotTarget(true);
-            if (!target.canChoose(opponent.getId(), game)
+            if (!target.canChoose(source.getSourceId(), opponent.getId(), game)
                     || !opponent.chooseUse(Outcome.AIDontUseIt, "Sacrifice a creature?", source, game)
                     || !opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 continue;
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent == null || !permanent.sacrifice(source.getSourceId(), game)) {
+            if (permanent == null || !permanent.sacrifice(source, game)) {
                 continue;
             }
             flag = true;
         }
         if (flag) {
             if (sourcePerm != null) {
-                sourcePerm.tap(game);
+                sourcePerm.tap(source, game);
             }
             controller.gainLife(3, game, source);
-            controller.drawCards(1, source.getSourceId(), game);
+            controller.drawCards(1, source, game);
         }
         return true;
     }

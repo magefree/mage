@@ -65,7 +65,7 @@ class HomingLightningEffect extends OneShotEffect {
         }
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (creature != null) {
-                creature.damage(4, source.getSourceId(), game, false, true);
+                creature.damage(4, source.getSourceId(), source, game, false, true);
             }
         }
         return true;

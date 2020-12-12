@@ -66,7 +66,7 @@ class InduceParanoiaEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (spell != null) { 
-            game.getStack().counter(spell.getId(), source.getSourceId(), game);
+            game.getStack().counter(spell.getId(), source, game);
             int spellCMC = spell.getConvertedManaCost();
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {

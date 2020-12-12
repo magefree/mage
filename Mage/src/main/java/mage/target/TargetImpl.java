@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
@@ -223,12 +224,12 @@ public abstract class TargetImpl implements Target {
         if (getMaxNumberOfTargets() == 0 || targets.size() < getMaxNumberOfTargets()) {
             if (!targets.containsKey(id)) {
                 if (source != null && !skipEvent && shouldReportEvents) {
-                    if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+                    if (!game.replaceEvent(new TargetEvent(id, source))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
                         chosen = targets.size() >= getNumberOfTargets();
                         if (!skipEvent && shouldReportEvents) {
-                            game.addSimultaneousEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+                            game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                         }
                     }
                 } else {
@@ -261,12 +262,12 @@ public abstract class TargetImpl implements Target {
             amount += targets.get(id);
         }
         if (source != null && !skipEvent && shouldReportEvents) {
-            if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, id, source, source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
                 chosen = targets.size() >= getNumberOfTargets();
                 if (!skipEvent && shouldReportEvents) {
-                    game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                 }
             }
         } else {
@@ -336,7 +337,7 @@ public abstract class TargetImpl implements Target {
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }
             }
-            if (!notTarget && game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getSourceId(), source.getControllerId()))) {
+            if (!notTarget && game.replaceEvent(new TargetEvent(targetId, source))) {
 //                replacedTargets++;
                 illegalTargets.add(targetId);
                 continue;

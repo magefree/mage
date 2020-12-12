@@ -68,7 +68,7 @@ class AdNauseamEffect extends OneShotEffect {
             controller.moveCards(card, Zone.HAND, source, game);
             int cmc = card.getConvertedManaCost();
             if (cmc > 0) {
-                controller.loseLife(cmc, game, false);
+                controller.loseLife(cmc, game, source, false);
             }
             controller.revealCards(sourceCard.getIdName() + " put into hand", new CardsImpl(card), game);
 

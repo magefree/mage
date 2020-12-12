@@ -62,7 +62,7 @@ class FleshAllergyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && card.isCreature()) {
                 creaturesDiedThisTurn++;
@@ -107,7 +107,7 @@ class FleshAllergyEffect extends OneShotEffect {
             if (player != null) {
                 int amount = watcher.getCreaturesDiedThisTurn();
                 if (amount > 0) {
-                    player.loseLife(amount, game, false);
+                    player.loseLife(amount, game, source, false);
                     return true;
                 }
             }

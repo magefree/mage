@@ -73,21 +73,21 @@ class RiftElementalCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         paid = false;
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             Target target = new TargetPermanentOrSuspendedCard(filter, true);
-            if (target.choose(Outcome.Neutral, controllerId, sourceId, game)) {
+            if (target.choose(Outcome.Neutral, controllerId, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanent.removeCounters(CounterType.TIME.createInstance(), game);
+                    permanent.removeCounters(CounterType.TIME.createInstance(), source, game);
                     this.paid = true;
                 }
                 else {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        card.removeCounters(CounterType.TIME.createInstance(), game);
+                        card.removeCounters(CounterType.TIME.createInstance(), source, game);
                         this.paid = true;
                     }
                 }
@@ -97,9 +97,9 @@ class RiftElementalCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Target target = new TargetPermanentOrSuspendedCard(filter, true);
-        return target.canChoose(sourceId, controllerId, game);
+        return target.canChoose(source.getSourceId(), controllerId, game);
     }
 
     @Override

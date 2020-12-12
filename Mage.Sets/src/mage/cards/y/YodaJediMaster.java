@@ -91,7 +91,7 @@ class YodaJediMasterEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null && sourcePermanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game)) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
                 effect.setText("Return that card to the battlefield under your control at the beginning of your next end step");

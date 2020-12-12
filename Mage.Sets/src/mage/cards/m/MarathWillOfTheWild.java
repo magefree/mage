@@ -135,7 +135,7 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
             Token token = new MarathWillOfTheWildElementalToken();
             token.getPower().modifyBaseValue(amount);
             token.getToughness().modifyBaseValue(amount);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }
         return false;
@@ -154,8 +154,8 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
             return true;
         }
@@ -163,11 +163,11 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int amount = ManacostVariableValue.instance.calculate(game, ability, null);
-        Permanent permanent = game.getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) >= amount) {
-            permanent.removeCounters(CounterType.P1P1.getName(), amount, game);
+            permanent.removeCounters(CounterType.P1P1.getName(), amount, source, game);
             this.paid = true;
         }
         return paid;

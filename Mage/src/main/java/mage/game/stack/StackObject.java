@@ -16,13 +16,17 @@ public interface StackObject extends MageObject, Controllable {
 
     UUID getSourceId();
 
-    void counter(UUID sourceId, Game game);
+    /**
+     *
+     * @param source null for fizzled events (sourceId will be null)
+     * @param game
+     */
+    void counter(Ability source, Game game);
 
-    void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail);
+    void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail);
 
     Ability getStackAbility();
 
-    //     int getConvertedManaCost();
     boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
 
     StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);

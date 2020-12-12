@@ -69,10 +69,10 @@ class MoonlightBargainEffect extends OneShotEffect {
             Cards toHand = new CardsImpl();
             for (Card card : topFive) {
                 PayLifeCost cost = new PayLifeCost(2);
-                if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
+                if (cost.canPay(source, source, source.getControllerId(), game)) {
                     if (controller.chooseUse(outcome, "Put " + card.getIdName() + " into your graveyard unless you pay 2 life", sourceObject.getIdName(),
                             "Pay 2 life and put into hand", "Put into your graveyard", source, game)) {
-                        if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+                        if (cost.pay(source, game, source, source.getControllerId(), false)) {
                             toHand.add(card);
                         } else {
                             controller.moveCards(card, Zone.GRAVEYARD, source, game);

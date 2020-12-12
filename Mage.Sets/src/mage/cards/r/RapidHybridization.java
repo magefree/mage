@@ -60,7 +60,7 @@ class RapidHybridizationEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             FrogLizardToken token = new FrogLizardToken();
-            token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
+            token.putOntoBattlefield(1, game, source, permanent.getControllerId());
         }
         return true;
     }

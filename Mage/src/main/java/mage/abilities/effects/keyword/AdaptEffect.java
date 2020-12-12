@@ -52,7 +52,7 @@ public class AdaptEffect extends OneShotEffect {
             return false;
         }
         GameEvent event = new GameEvent(
-                GameEvent.EventType.ADAPT, source.getSourceId(), source.getSourceId(),
+                GameEvent.EventType.ADAPT, source.getSourceId(), source,
                 source.getControllerId(), adaptNumber, false
         );
         if (game.replaceEvent(event)) {

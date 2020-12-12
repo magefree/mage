@@ -106,8 +106,8 @@ class ChandraDrawEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int amount = player.discard(player.getHand(), source, game).size();
-        player.drawCards(amount + 1, source.getSourceId(), game);
+        int amount = player.discard(player.getHand(), false, source, game).size();
+        player.drawCards(amount + 1, source, game);
         return true;
     }
 }

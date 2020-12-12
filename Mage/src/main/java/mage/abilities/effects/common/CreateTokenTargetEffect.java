@@ -57,7 +57,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         if (value > 0) {
-            return token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source), tapped, attacking);
+            return token.putOntoBattlefield(value, game, source, targetPointer.getFirst(game, source), tapped, attacking);
         }
         return true;
     }

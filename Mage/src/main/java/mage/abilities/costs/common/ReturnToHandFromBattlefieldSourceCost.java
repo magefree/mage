@@ -24,8 +24,8 @@ public class ReturnToHandFromBattlefieldSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(controllerId);
         if (permanent == null || controller == null) {
             return false;
@@ -36,8 +36,8 @@ public class ReturnToHandFromBattlefieldSourceCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().containsPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return game.getBattlefield().containsPermanent(source.getSourceId());
     }
 
     @Override

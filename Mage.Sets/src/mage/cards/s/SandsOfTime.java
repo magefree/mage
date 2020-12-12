@@ -78,7 +78,7 @@ class SandsOfTimeEffect extends OneShotEffect {
                 if (permanent.isTapped()) {
                     permanent.untap(game);
                 } else {
-                    permanent.tap(game);
+                    permanent.tap(source, game);
                 }
             }
             return true;

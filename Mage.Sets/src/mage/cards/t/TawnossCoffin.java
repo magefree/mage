@@ -221,7 +221,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
             for (Card enchantment : returningAuras) {
                 Permanent permanent = game.getPermanent(enchantment.getId());
                 if (permanent != null) {
-                    newPermanent.addAttachment(permanent.getId(), game);
+                    newPermanent.addAttachment(permanent.getId(), source, game);
                 }
             }
         }

@@ -72,7 +72,7 @@ class PleaForPowerEffect extends OneShotEffect {
             if (timeCount > knowledgeCount) {
                 new AddExtraTurnControllerEffect().apply(game, source);
             } else {
-                controller.drawCards(3, source.getSourceId(), game);
+                controller.drawCards(3, source, game);
             }
             return true;
         }

@@ -61,7 +61,7 @@ class FoulTongueShriekEffect extends OneShotEffect {
         if (controller != null && targetOpponent != null) {
             int amount = new AttackingCreatureCount(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED).calculate(game, source, this);
             if (amount > 0) {
-                targetOpponent.loseLife(amount, game, false);
+                targetOpponent.loseLife(amount, game, source, false);
                 controller.gainLife(amount, game, source);
             }
             return true;

@@ -77,7 +77,7 @@ class GeminiEngineCreateTokenEffect extends OneShotEffect {
         } else {
             token = new GeminiEngineTwinToken(0, 0);
         }
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, true);
+        token.putOntoBattlefield(1, game, source, source.getControllerId(), false, true);
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent tokenPerm = game.getPermanent(tokenId);
             if (tokenPerm != null) {

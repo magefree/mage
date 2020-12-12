@@ -16,15 +16,18 @@ import mage.target.targetpointer.FixedTarget;
 public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean setTargetPointer;
+    private final boolean landMustExists;
 
-    public TapLandForManaAllTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+    public TapLandForManaAllTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer, boolean landMustExists) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        this.landMustExists = landMustExists;
     }
 
     public TapLandForManaAllTriggeredAbility(final TapLandForManaAllTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
+        this.landMustExists = ability.landMustExists;
     }
 
     @Override
@@ -37,7 +40,14 @@ public class TapLandForManaAllTriggeredAbility extends TriggeredAbilityImpl {
         if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
             return false;
         }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+
+        Permanent permanent;
+        if (landMustExists) {
+            permanent = game.getPermanent(event.getSourceId());
+        } else {
+            permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        }
+
         if (permanent != null && permanent.isLand()) {
             if (setTargetPointer) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));

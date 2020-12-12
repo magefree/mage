@@ -57,7 +57,7 @@ class DictateOfKruphixAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DRAW_STEP_PRE;
+        return event.getType() == GameEvent.EventType.DRAW_STEP_PRE;
     }
 
     @Override

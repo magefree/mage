@@ -91,7 +91,7 @@ class MindreaverExileEffect extends OneShotEffect {
             for (int i = 0; i < 3; i++) {
                 Card card = opponent.getLibrary().getFromTop(game);
                 if (card != null) {
-                    card.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game);
+                    card.moveToExile(exileId, sourceObject.getIdName(), source, game);
                 }
             }
         }

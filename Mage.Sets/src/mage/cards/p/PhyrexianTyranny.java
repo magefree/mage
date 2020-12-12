@@ -58,7 +58,7 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DREW_CARD;
+        return event.getType() == GameEvent.EventType.DREW_CARD;
     }
 
     @Override
@@ -98,8 +98,8 @@ class PhyrexianTyrannyEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             Cost cost = ManaUtil.createManaCost(2, false);
-            if (!cost.pay(source, game, player.getId(), player.getId(), false, null)) {
-                player.loseLife(2, game, false);
+            if (!cost.pay(source, game, source, player.getId(), false, null)) {
+                player.loseLife(2, game, source, false);
             }
             return true;
         }

@@ -72,12 +72,12 @@ class BorosReckonerDealDamageEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game);
+                player.damage(amount, source.getSourceId(), source, game);
                 return true;
             }
             Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
             if (creature != null) {
-                creature.damage(amount, source.getSourceId(), game, false, true);
+                creature.damage(amount, source.getSourceId(), source, game, false, true);
                 return true;
             }
         }

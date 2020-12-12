@@ -48,7 +48,7 @@ public class LoseLifePermanentControllerEffect extends OneShotEffect {
             player = game.getPlayer(permanent.getControllerId());
         }
         if (player != null) {
-            player.loseLife(amount.calculate(game, source, this), game, false);
+            player.loseLife(amount.calculate(game, source, this), game, source, false);
             return true;
         }
         return false;

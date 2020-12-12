@@ -60,7 +60,7 @@ class PriceOfKnowledgeEffect extends OneShotEffect {
         if (targetPlayer != null) {
             int xValue = targetPlayer.getHand().size();
             if (xValue > 0) {
-                targetPlayer.damage(xValue, source.getSourceId(), game);
+                targetPlayer.damage(xValue, source.getSourceId(), source, game);
             }
             return true;
         }

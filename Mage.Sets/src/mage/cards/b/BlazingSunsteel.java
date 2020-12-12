@@ -118,12 +118,12 @@ class BlazingSunsteelEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(damage, creature.getId(), game);
+            permanent.damage(damage, creature.getId(), source, game);
             return true;
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(damage, creature.getId(), game);
+            player.damage(damage, creature.getId(), source, game);
             return true;
         }
         return false;

@@ -54,7 +54,7 @@ class WurmcallingEffect extends OneShotEffect {
         WurmCallingWurmToken token = new WurmCallingWurmToken();
         token.getPower().modifyBaseValue(count);
         token.getToughness().modifyBaseValue(count);
-        token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }
 

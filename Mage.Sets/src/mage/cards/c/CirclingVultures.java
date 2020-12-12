@@ -99,6 +99,6 @@ class CirclingVulturesDiscardEffect extends OneShotEffect {
             return false;
         }
 
-        return player.discard(card, source, game);
+        return player.discard(card, false, source, game);
     }
 }

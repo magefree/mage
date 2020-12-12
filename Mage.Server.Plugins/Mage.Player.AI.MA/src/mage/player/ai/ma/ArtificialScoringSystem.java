@@ -68,14 +68,14 @@ public final class ArtificialScoringSystem {
         int score = permanent.getCounters(game).getCount(CounterType.CHARGE) * 30;
         score += permanent.getCounters(game).getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
-        if (!canTap(permanent)) {
+        if (!canTap(permanent, game)) {
             score += getTappedScore(permanent);
         }
         if (permanent.getCardType().contains(CardType.CREATURE)) {
             final int power = permanent.getPower().getValue();
             final int toughness = permanent.getToughness().getValue();
             int abilityScore = 0;
-            for (Ability ability : permanent.getAbilities()) {
+            for (Ability ability : permanent.getAbilities(game)) {
                 abilityScore += MagicAbility.getAbilityScore(ability);
             }
             score += power * 300 + getPositive(toughness) * 200 + abilityScore * (getPositive(power) + 1) / 2;
@@ -85,7 +85,7 @@ public final class ArtificialScoringSystem {
                 MageObject object = game.getObject(uuid);
                 if (object instanceof Card) {
                     Card card = (Card) object;
-                    int outcomeScore = object.getAbilities().getOutcomeTotal();
+                    int outcomeScore = card.getAbilities(game).getOutcomeTotal();
                     if (card.getCardType().contains(CardType.ENCHANTMENT)) {
                         enchantments = enchantments + outcomeScore * 100;
                     } else {
@@ -106,15 +106,15 @@ public final class ArtificialScoringSystem {
         return score;
     }
 
-    private static boolean canTap(Permanent permanent) {
+    private static boolean canTap(Permanent permanent, Game game) {
         return !permanent.isTapped()
                 && (!permanent.hasSummoningSickness()
                 || !permanent.getCardType().contains(CardType.CREATURE)
-                || permanent.getAbilities().contains(HasteAbility.getInstance()));
+                || permanent.getAbilities(game).contains(HasteAbility.getInstance()));
     }
 
     private static int getPositive(int value) {
-        return value > 0 ? value : 0;
+        return Math.max(0, value);
     }
 
     public static int getTappedScore(final Permanent permanent) {

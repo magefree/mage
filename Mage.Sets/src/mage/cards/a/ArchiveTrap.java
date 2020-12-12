@@ -59,7 +59,7 @@ class ArchiveTrapWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.LIBRARY_SEARCHED
+        if (event.getType() == GameEvent.EventType.LIBRARY_SEARCHED
                 && event.getTargetId().equals(event.getPlayerId())) { // player searched own library
             playerIds.add(event.getPlayerId());
         }

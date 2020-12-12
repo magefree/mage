@@ -109,7 +109,7 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (keepFilter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
         return true;

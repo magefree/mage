@@ -62,7 +62,7 @@ class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbili
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PRECOMBAT_MAIN_PHASE_PRE;
+        return event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE;
     }
 
     @Override

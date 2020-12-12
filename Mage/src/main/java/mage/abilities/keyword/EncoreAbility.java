@@ -91,7 +91,7 @@ class EncoreEffect extends OneShotEffect {
         if (opponentCount < 1) {
             return false;
         }
-        token.putOntoBattlefield(opponentCount, game, source.getSourceId(), source.getControllerId());
+        token.putOntoBattlefield(opponentCount, game, source, source.getControllerId());
         Iterator<UUID> it = token.getLastAddedTokenIds().iterator();
         while (it.hasNext()) {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
@@ -181,7 +181,7 @@ class EncoreSacrificeEffect extends OneShotEffect {
         for (MageObjectReference mageObjectReference : mageObjectReferenceSet) {
             Permanent permanent = mageObjectReference.getPermanent(game);
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source, game);
             }
         }
         return true;

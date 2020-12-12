@@ -105,13 +105,13 @@ class CrownOfTheAgesEffect extends OneShotEffect {
                     }
                     // Check for protection
                     MageObject auraObject = game.getObject(aura.getId());
-                    if (auraObject != null && creatureToAttachAura.cantBeAttachedBy(auraObject, game, true)) {
+                    if (auraObject != null && creatureToAttachAura.cantBeAttachedBy(auraObject, source, game, true)) {
                         passed = false;
                     }
                 }
                 if (passed) {
-                    fromPermanent.removeAttachment(aura.getId(), game);
-                    creatureToAttachAura.addAttachment(aura.getId(), game);
+                    fromPermanent.removeAttachment(aura.getId(), source, game);
+                    creatureToAttachAura.addAttachment(aura.getId(), source, game);
                     return true;
                 }
             }

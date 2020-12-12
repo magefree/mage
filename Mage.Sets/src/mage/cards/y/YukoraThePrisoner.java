@@ -80,7 +80,7 @@ class YukoraThePrisonerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
         return true;
     }

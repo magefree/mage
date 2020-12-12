@@ -77,7 +77,7 @@ class KaerveksPurgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // Destroy target creature with converted mana cost X.
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature != null && targetCreature.destroy(source.getSourceId(), game, false)) {
+        if (targetCreature != null && targetCreature.destroy(source, game, false)) {
             game.getState().processAction(game);
             if (targetCreature.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(targetCreature.getId())
                     && game.getState().getZone(targetCreature.getId()) != Zone.GRAVEYARD) {
@@ -88,7 +88,7 @@ class KaerveksPurgeEffect extends OneShotEffect {
             Player creatureController = game.getPlayer(targetCreature.getControllerId());
             int power = targetCreature.getPower().getValue();
             if (creatureController != null) {
-                creatureController.damage(power, source.getSourceId(), game);
+                creatureController.damage(power, source.getSourceId(), source, game);
             }
         }
         return true;

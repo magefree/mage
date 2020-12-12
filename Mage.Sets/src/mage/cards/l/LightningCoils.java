@@ -78,7 +78,7 @@ class LightningCoilsEffect extends OneShotEffect {
             int counters = p.getCounters(game).getCount(CounterType.CHARGE);
             if (counters >= 5) {
                 // remove all the counters and create that many tokens
-                p.removeCounters(CounterType.CHARGE.getName(), p.getCounters(game).getCount(CounterType.CHARGE), game);
+                p.removeCounters(CounterType.CHARGE.getName(), p.getCounters(game).getCount(CounterType.CHARGE), source, game);
                 CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), counters);
                 effect.apply(game, source);
 

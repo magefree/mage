@@ -67,7 +67,7 @@ class ProtectorOfTheCrownEffect extends ReplacementEffectImpl {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+            p.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
         return true;

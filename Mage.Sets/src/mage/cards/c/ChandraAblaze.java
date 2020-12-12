@@ -91,7 +91,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
             player.choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
-                player.discard(card, source, game);
+                player.discard(card, false, source, game);
                 source.getEffects().get(1).setValue("discardedCard", card);
                 game.getState().setValue(source.getSourceId().toString(), card);
                 return true;
@@ -123,13 +123,13 @@ class ChandraAblazeEffect2 extends OneShotEffect {
         if (card != null && card.getColor(game).isRed()) {
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(4, source.getSourceId(), game, false, true);
+                permanent.damage(4, source.getSourceId(), source, game, false, true);
                 return true;
             }
 
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
-                player.damage(4, source.getSourceId(), game);
+                player.damage(4, source.getSourceId(), source, game);
                 return true;
             }
         }

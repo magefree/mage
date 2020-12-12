@@ -214,7 +214,7 @@ public class SimulatedPlayer extends ComputerPlayer {
                 logger.debug("simulating -- triggered ability:" + ability);
             game.getStack().push(new StackAbility(ability, playerId));
             if (ability.activate(game, false) && ability.isUsesStack()) {
-                game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
+                game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));
             }
             game.applyEffects();
             game.getPlayers().resetPassed();
@@ -235,7 +235,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         sim.getStack().push(new StackAbility(ability, playerId));
         ability.activate(sim, false);
         if (ability.activate(sim, false) && ability.isUsesStack()) {
-            game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
+            game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));
         }
         sim.applyEffects();
         SimulationNode newNode = new SimulationNode(parent, sim, playerId);

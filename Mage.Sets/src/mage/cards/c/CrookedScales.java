@@ -75,14 +75,14 @@ class CrookedScalesEffect extends OneShotEffect {
             do {
                 if (controller.flipCoin(source, game, true)) {
                     if (theirGuy != null) {
-                        theirGuy.destroy(controller.getId(), game, false);
+                        theirGuy.destroy(source, game, false);
                     }
                     keepGoing = false;
                 } else {
                     cost = ManaUtil.createManaCost(3, false);
-                    if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, controller.getId(), controller.getId(), false, null))) {
+                    if (!(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, source, controller.getId(), false, null))) {
                         if (yourGuy != null) {
-                            yourGuy.destroy(controller.getId(), game, false);
+                            yourGuy.destroy(source, game, false);
                         }
                         keepGoing = false;
                     } else {

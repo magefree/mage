@@ -56,16 +56,14 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SACRIFICED_PERMANENT;
+        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SACRIFICED_PERMANENT) {
-            MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (mageObject != null && mageObject.isCreature()) {
-                return true;
-            }
+        MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        if (mageObject != null && mageObject.isCreature()) {
+            return true;
         }
         return false;
     }

@@ -60,7 +60,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ACTIVATED_ABILITY;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
     }
 
     @Override
@@ -103,9 +103,9 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         ManaCostsImpl cost = new ManaCostsImpl("{2}");
         if (player != null) {
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+            if (cost.canPay(source, source, player.getId(), game)
                     && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? If you do, copy that ability. You may choose new targets for the copy.", source, game)) {
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     StackAbility ability = (StackAbility) getValue("stackAbility");
                     Player controller = game.getPlayer(source.getControllerId());
                     Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());

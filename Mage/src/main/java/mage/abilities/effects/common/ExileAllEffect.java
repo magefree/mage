@@ -52,7 +52,7 @@ public class ExileAllEffect extends OneShotEffect {
         if (controller != null) {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
             for (Permanent permanent : permanents) {
-                controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source, game, Zone.BATTLEFIELD, true);
             }
             return true;
         }

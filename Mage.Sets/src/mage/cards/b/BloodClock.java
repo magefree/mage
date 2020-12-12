@@ -64,7 +64,7 @@ class BloodClockEffect extends OneShotEffect {
             return false;
         }
         if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, return a permanent you control to its owner's hand.", source, game)) {
-            player.loseLife(2, game, false);
+            player.loseLife(2, game, source, false);
             game.informPlayers(player.getLogName() + " pays 2 life. They will not return a permanent they control.");
             return true;
         } else {
@@ -73,7 +73,7 @@ class BloodClockEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     game.informPlayers(player.getLogName() + " returns " + permanent.getName() + " to hand.");
-                    return permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    return permanent.moveToZone(Zone.HAND, source, game, false);
                 }
             }
         }

@@ -68,7 +68,7 @@ class PoultrygeistEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 if (result == 1) {
-                    return permanent.sacrifice(source.getSourceId(), game);
+                    return permanent.sacrifice(source, game);
                 } else {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
                 }

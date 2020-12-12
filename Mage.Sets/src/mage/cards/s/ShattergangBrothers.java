@@ -101,7 +101,7 @@ class ShattergangBrothersEffect extends OneShotEffect {
                                 && player.chooseTarget(outcome, target, source, game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                             }
                         }
                     }

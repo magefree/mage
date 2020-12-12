@@ -71,11 +71,11 @@ class SkullscorchDiscardEffect extends OneShotEffect {
             if (player != null) {
                 if (player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 4 damage to you?", source, game)) {
                     discardCards = false;
-                    player.damage(4, source.getSourceId(), game);
+                    player.damage(4, source.getSourceId(), source, game);
                     game.informPlayers(player.getLogName() + " has " + spell.getLogName() + " deal 4 to them");
                 }
                 if (discardCards) {
-                    player.discard(2, true, source, game);
+                    player.discard(2, true, false, source, game);
                 }
             }
             return discardCards;

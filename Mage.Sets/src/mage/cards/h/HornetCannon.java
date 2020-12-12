@@ -64,7 +64,7 @@ class HornetCannonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token hornetToken = new HornetToken();
-        hornetToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        hornetToken.putOntoBattlefield(1, game, source, source.getControllerId());
         for (UUID tokenId : hornetToken.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {

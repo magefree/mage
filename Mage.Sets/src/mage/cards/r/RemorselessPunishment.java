@@ -76,7 +76,7 @@ class RemorselessPunishmentEffect extends OneShotEffect {
     private void handleBaseEffect(Game game, Ability source, Player opponent, String iteration) {
         if (opponent.getHand().size() > 1) {
             if (opponent.chooseUse(outcome, "Choose your " + iteration + " punishment.", null, "Discard two cards", "Choose another option", source, game)) {
-                opponent.discard(2, false, source, game);
+                opponent.discard(2, false, false, source, game);
                 return;
             }
         }
@@ -87,7 +87,7 @@ class RemorselessPunishmentEffect extends OneShotEffect {
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(targetId);
                         if (permanent != null) {
-                            permanent.sacrifice(source.getSourceId(), game);
+                            permanent.sacrifice(source, game);
                         }
                     }
                     return;
@@ -95,6 +95,6 @@ class RemorselessPunishmentEffect extends OneShotEffect {
 
             }
         }
-        opponent.loseLife(5, game, false);
+        opponent.loseLife(5, game, source, false);
     }
 }

@@ -84,14 +84,14 @@ class SeizuresEffect extends OneShotEffect {
         Player player = game.getPlayer(enchanted.getControllerId());
         if (player != null) {
             Cost cost = new ManaCostsImpl("{3}");
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+            if (cost.canPay(source, source, player.getId(), game)
                     && player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to avoid damage?", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
+                if (cost.pay(source, game, source, player.getId(), false, null)) {
                     return true;
                 }
             }
-            player.damage(3, source.getSourceId(), game);
+            player.damage(3, source.getSourceId(), source, game);
             return true;
         }
         return false;

@@ -67,7 +67,7 @@ class TaintedPactEffect extends OneShotEffect{
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
 
-                card.moveToExile(null, null, source.getSourceId(), game);
+                card.moveToExile(null, null, source, game);
                 // Checks if there was already exiled a card with the same name
                 if (names.contains(card.getName())) {
                     break;
@@ -75,7 +75,7 @@ class TaintedPactEffect extends OneShotEffect{
                 names.add(card.getName());
                 if (player.chooseUse(outcome, "Put " + card.getName() + " into your hand?", source, game)) {
                      //Adds the current card to hand if it is chosen.
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    card.moveToZone(Zone.HAND, source, game, true);
                     break;
                 }
             }

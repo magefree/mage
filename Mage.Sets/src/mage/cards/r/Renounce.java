@@ -65,7 +65,7 @@ class RenounceEffect extends OneShotEffect {
             for(UUID uuid : toSacrifice.getTargets()){
                 Permanent permanent = game.getPermanent(uuid);
                 if(permanent != null){
-                    permanent.sacrifice(source.getSourceId(), game);
+                    permanent.sacrifice(source, game);
                     amount++;
                 }
             }

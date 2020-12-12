@@ -10,8 +10,7 @@ import java.util.UUID;
  */
 public class DamagedCreatureEvent extends DamagedEvent {
 
-    public DamagedCreatureEvent(UUID targetId, UUID sourceId, UUID playerId, int amount, boolean combat) {
-        super(EventType.DAMAGED_CREATURE, targetId, sourceId, playerId, amount, combat);
+    public DamagedCreatureEvent(UUID targetId, UUID attackerId, UUID playerId, int amount, boolean combat) {
+        super(GameEvent.EventType.DAMAGED_CREATURE, targetId, attackerId, playerId, amount, combat);
     }
-
 }

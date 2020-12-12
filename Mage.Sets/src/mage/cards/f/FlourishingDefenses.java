@@ -56,7 +56,7 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.COUNTER_ADDED;
+        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
     }
 
     @Override

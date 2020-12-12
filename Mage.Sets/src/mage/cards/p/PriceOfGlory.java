@@ -52,7 +52,7 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA
                 && !game.inCheckPlayableState();        
     }
 
@@ -99,7 +99,7 @@ class PriceOfGloryEffect extends OneShotEffect {
         if (controller != null) {
             Permanent land = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (land != null && !land.isControlledBy(game.getActivePlayerId())) { // intervening if clause has to be checked again
-                land.destroy(source.getSourceId(), game, false);
+                land.destroy(source, game, false);
             }
             return true;
         }

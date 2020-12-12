@@ -76,19 +76,19 @@ class ProfaneTransfusionEffect extends OneShotEffect {
         if (lifeDifference == 0
                 || !player1.isLifeTotalCanChange()
                 || !player2.isLifeTotalCanChange()) {
-            return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            return token.putOntoBattlefield(1, game, source, source.getControllerId());
         }
 
         if (lifePlayer1 < lifePlayer2 && (!player1.isCanGainLife() || !player2.isCanLoseLife())) {
-            return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            return token.putOntoBattlefield(1, game, source, source.getControllerId());
         }
 
         if (lifePlayer1 > lifePlayer2 && (!player1.isCanLoseLife() || !player2.isCanGainLife())) {
-            return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            return token.putOntoBattlefield(1, game, source, source.getControllerId());
         }
 
         player1.setLife(lifePlayer2, game, source);
         player2.setLife(lifePlayer1, game, source);
-        return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        return token.putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

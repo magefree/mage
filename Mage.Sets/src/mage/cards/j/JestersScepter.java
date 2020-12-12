@@ -83,7 +83,7 @@ class JestersScepterEffect extends OneShotEffect {
             if (targetedPlayer.getLibrary().hasCards()) {
                 Set<Card> cardsToExile = targetedPlayer.getLibrary().getTopCards(game, 5);
                 for (Card card : cardsToExile) {
-                    if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceObject.getName(), source.getSourceId(), game)) {
+                    if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceObject.getName(), source, game)) {
                         card.setFaceDown(true, game);
                     }
                 }
@@ -150,7 +150,7 @@ class JestersScepterCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
@@ -160,15 +160,15 @@ class JestersScepterCost extends CostImpl {
                     && controller.choose(Outcome.Benefit, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    if (controller.moveCardToGraveyardWithInfo(card, sourceId, game, Zone.EXILED)) {
+                    if (controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {
                         if (card instanceof SplitCard) {
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
                         } else if (card instanceof ModalDoubleFacesCard) {
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment", ((ModalDoubleFacesCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment2", ((ModalDoubleFacesCard) card).getRightHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacesCard) card).getLeftHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacesCard) card).getRightHalfCard().getName());
                         } else {
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment", card.getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", card.getName());
                         }
                         paid = true;
                     }
@@ -179,7 +179,7 @@ class JestersScepterCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         return player != null;
     }
@@ -209,7 +209,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
             String nameOfExiledCardPayment2 = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment2");
             if (CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment, game)
                     || CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment2, game)) {
-                return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
+                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
             }
         }
         return false;

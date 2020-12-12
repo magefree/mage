@@ -115,24 +115,24 @@ class MerseineCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent sourcePermanent = game.getBattlefield().getPermanent(sourceId);
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Permanent sourcePermanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
             if (attachedTo != null) {
-                return attachedTo.getManaCost().canPay(ability, sourceId, controllerId, game);
+                return attachedTo.getManaCost().canPay(ability, source, controllerId, game);
             }
         }
         return false;
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent sourcePermanent = game.getBattlefield().getPermanent(sourceId);
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent sourcePermanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
             if (attachedTo != null) {
-                paid = attachedTo.getManaCost().pay(ability, game, sourceId, controllerId, noMana);
+                paid = attachedTo.getManaCost().pay(ability, game, source, controllerId, noMana);
             }
         }
         return paid;

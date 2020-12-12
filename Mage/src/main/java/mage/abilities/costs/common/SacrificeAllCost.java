@@ -34,9 +34,9 @@ public class SacrificeAllCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            if (permanent.sacrifice(sourceId, game)) {
+            if (permanent.sacrifice(source, game)) {
                 permanents.add(permanent.copy());
             }
         }
@@ -45,7 +45,7 @@ public class SacrificeAllCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         UUID activator = controllerId;
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
@@ -57,7 +57,7 @@ public class SacrificeAllCost extends CostImpl {
         }
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            if (!game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
+            if (!game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 return false;
             }
         }

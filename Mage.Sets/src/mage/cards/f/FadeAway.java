@@ -68,7 +68,7 @@ class FadeAwayEffect extends OneShotEffect {
                         ManaCostsImpl cost = new ManaCostsImpl();
                         cost.add(new GenericManaCost(payAmount));
                         cost.clearPaid();
-                        if (cost.payOrRollback(source, game, source.getSourceId(), playerId)) {
+                        if (cost.payOrRollback(source, game, source, playerId)) {
                             paid = true;
                         }
                     }
@@ -85,7 +85,7 @@ class FadeAwayEffect extends OneShotEffect {
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
                             if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
+                                permanent.sacrifice(source, game);
                             }
                         }
                     }

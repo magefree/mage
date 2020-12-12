@@ -71,7 +71,7 @@ class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
     }
 
     @Override
@@ -118,7 +118,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
                         Card aura = game.getCard(target.getFirstTarget());
                         game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
                         controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                        return attackingCreature.addAttachment(aura.getId(), game);
+                        return attackingCreature.addAttachment(aura.getId(), source, game);
                     }
                 }
             }

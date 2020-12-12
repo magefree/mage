@@ -80,7 +80,7 @@ class RevivalRevengeEffect extends OneShotEffect {
         }
         controller.gainLife(controller.getLife(), game, source);
         int life = player.getLife();
-        player.loseLife(Math.floorDiv(life, 2) + (life % 2), game, false);
+        player.loseLife(Math.floorDiv(life, 2) + (life % 2), game, source, false);
         return true;
     }
 }

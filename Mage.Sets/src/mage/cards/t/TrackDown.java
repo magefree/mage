@@ -76,7 +76,7 @@ class TrackDownEffect extends OneShotEffect {
         cards.add(card);
         controller.revealCards(sourceObject.getName(), cards, game);
         if (card.isLand() || card.isCreature()) {
-            controller.drawCards(1, source.getSourceId(), game);
+            controller.drawCards(1, source, game);
         }
 
         return true;

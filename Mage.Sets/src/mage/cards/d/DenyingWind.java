@@ -68,7 +68,7 @@ class DenyingWindEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card card = player.getLibrary().remove(targetId, game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
+                        controller.moveCardToExileWithInfo(card, null, null, source, game, Zone.LIBRARY, true);
                     }
                 }
             }

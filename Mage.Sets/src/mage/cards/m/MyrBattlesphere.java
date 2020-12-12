@@ -126,14 +126,14 @@ class MyrBattlesphereEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(0, 1, filter, true);
             while (controller.canRespond()) {
                 target.clearChosen();
-                if (target.canChoose(source.getControllerId(), game)) {
+                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                     Map<String, Serializable> options = new HashMap<>();
                     options.put("UI.right.btn.text", "Myr tapping complete");
                     controller.choose(outcome, target, source.getControllerId(), game, options);
                     if (!target.getTargets().isEmpty()) {
                         UUID creature = target.getFirstTarget();
                         if (creature != null) {
-                            game.getPermanent(creature).tap(game);
+                            game.getPermanent(creature).tap(source, game);
                             tappedAmount++;
                         }
                     } else {
@@ -148,7 +148,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender
-                return game.damagePlayerOrPlaneswalker(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), game, false, true) > 0;
+                return game.damagePlayerOrPlaneswalker(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
             }
             return true;
         }

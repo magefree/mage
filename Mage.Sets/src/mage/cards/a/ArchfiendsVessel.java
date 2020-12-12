@@ -116,7 +116,7 @@ class ArchfiendsVesselEffect extends OneShotEffect {
                 boolean moved = controller.moveCards(archfiendsVessel.getMainCard(), Zone.EXILED, source, game);
                 if (moved) {
                     Token token = new DemonToken();
-                    token.putOntoBattlefield(1, game, source.getSourceId(), controller.getId());
+                    token.putOntoBattlefield(1, game, source, controller.getId());
                 }
                 return true;
             }

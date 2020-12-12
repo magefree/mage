@@ -90,10 +90,10 @@ class AnaBattlemageKickerEffect extends OneShotEffect {
         boolean applied = false;
         Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
         if (targetCreature != null) {
-            applied = targetCreature.tap(game);
+            applied = targetCreature.tap(source, game);
             Player controller = game.getPlayer(targetCreature.getControllerId());
             if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game);
+                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), source, game);
                 applied = true;
             }
         }

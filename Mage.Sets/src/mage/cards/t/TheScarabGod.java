@@ -99,7 +99,7 @@ class TheScarabGodEffect extends OneShotEffect {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        opponent.loseLife(numZombies, game, false);
+                        opponent.loseLife(numZombies, game, source, false);
                     }
                 }
                 controller.scry(numZombies, source, game);

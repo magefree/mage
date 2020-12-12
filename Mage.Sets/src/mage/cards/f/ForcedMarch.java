@@ -63,7 +63,7 @@ class ForcedMarchEffect extends OneShotEffect {
                 source.getSourceId(),
                 game)) {
             if (permanent.getConvertedManaCost() <= source.getManaCostsToPay().getX()) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
         }
         return true;

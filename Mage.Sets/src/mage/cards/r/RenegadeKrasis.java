@@ -70,7 +70,7 @@ class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.EVOLVED_CREATURE;
+        return event.getType() == GameEvent.EventType.EVOLVED_CREATURE;
     }
 
     @Override

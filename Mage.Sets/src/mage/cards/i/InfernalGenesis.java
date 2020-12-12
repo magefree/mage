@@ -65,7 +65,7 @@ class InfernalGenesisEffect extends OneShotEffect {
                 .mapToInt(MageObject::getConvertedManaCost)
                 .sum();
         if (totalCMC > 0) {
-            token.putOntoBattlefield(totalCMC, game, source.getSourceId(), player.getId());
+            token.putOntoBattlefield(totalCMC, game, source, player.getId());
         }
         return true;
     }

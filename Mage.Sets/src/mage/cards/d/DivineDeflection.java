@@ -98,12 +98,12 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
             Permanent permanent = game.getPermanent(dealDamageTo);
             if (permanent != null) {
                 game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
-                permanent.damage(prevented, source.getSourceId(), game, false, true);
+                permanent.damage(prevented, source.getSourceId(), source, game, false, true);
             }
             Player player = game.getPlayer(dealDamageTo);
             if (player != null) {
                 game.informPlayers("Dealing " + prevented + " to " + player.getLogName() + " instead");
-                player.damage(prevented, source.getSourceId(), game);
+                player.damage(prevented, source.getSourceId(), source, game);
             }
         }
         return false;

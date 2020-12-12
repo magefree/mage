@@ -106,7 +106,7 @@ class CorrosiveOozeEffect extends OneShotEffect {
                 }
             }
             for (Permanent permanent : toDestroy) {
-                permanent.destroy(source.getSourceId(), game, false);
+                permanent.destroy(source, game, false);
             }
 
             return true;

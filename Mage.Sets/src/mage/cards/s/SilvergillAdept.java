@@ -69,7 +69,7 @@ class SilvergillAdeptCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
 
         Player player = game.getPlayer(controllerId);
         if (player == null) {
@@ -80,7 +80,7 @@ class SilvergillAdeptCost extends CostImpl {
         if (player.getHand().count(filter, game) > 0
                 && player.chooseUse(Outcome.Benefit, "Reveal a Merfolk card? Otherwise pay {3}.", ability, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (player.choose(Outcome.Benefit, target, sourceId, game)) {
+            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     paid = true;
@@ -89,7 +89,7 @@ class SilvergillAdeptCost extends CostImpl {
             }
         } else {
             mana.clearPaid();
-            if (mana.pay(ability, game, player.getId(), player.getId(), false)) {
+            if (mana.pay(ability, game, source, player.getId(), false)) {
                 paid = true;
             }
         }
@@ -98,13 +98,13 @@ class SilvergillAdeptCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getHand().count(filter, game) > 0) {
             return true;
         }
 
-        return mana.canPay(ability, sourceId, controllerId, game);
+        return mana.canPay(ability, source, controllerId, game);
 
     }
 

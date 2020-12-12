@@ -72,13 +72,13 @@ class BurnAtTheStakeEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(amount, source.getSourceId(), game, false, true);
+            permanent.damage(amount, source.getSourceId(), source, game, false, true);
             return true;
         }
 
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.damage(amount, source.getSourceId(), game);
+            player.damage(amount, source.getSourceId(), source, game);
             return true;
         }
 

@@ -134,8 +134,7 @@ class SzatsWillEffect extends OneShotEffect {
                 .max()
                 .orElse(0);
         if (maxPower > 0) {
-            new BreedingPitThrullToken().putOntoBattlefield(
-                    1, game, source.getSourceId(), source.getControllerId()
+            new BreedingPitThrullToken().putOntoBattlefield(1, game, source, source.getControllerId()
             );
         }
         return true;

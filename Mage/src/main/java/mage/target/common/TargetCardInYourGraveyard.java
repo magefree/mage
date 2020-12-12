@@ -11,6 +11,7 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
@@ -76,7 +77,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
         for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-            if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                 possibleTargets.add(card.getId());
             }
         }
@@ -116,7 +117,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
             }
             int possibleTargets = 0;
             for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {
                         return true;

@@ -73,13 +73,17 @@ class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
+            return enchantedLand != null && enchantedLand.isLand();
+        }
+        return false;
     }
 
     @Override

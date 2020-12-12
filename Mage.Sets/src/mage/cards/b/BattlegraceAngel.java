@@ -72,7 +72,7 @@ class BattlegraceAngelAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
     }
 
     @Override

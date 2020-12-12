@@ -79,7 +79,7 @@ class LandGrantReavealCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
         if (player != null) {
             player.revealCards("Land Grant", player.getHand(), game);
@@ -89,7 +89,7 @@ class LandGrantReavealCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
     }
 

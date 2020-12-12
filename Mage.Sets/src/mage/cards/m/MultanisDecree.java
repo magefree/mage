@@ -58,7 +58,7 @@ class MultanisDecreeDestroyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
 		int enchantmentsDestoyed = 0;
         for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_ENCHANTMENT_PERMANENT,  source.getControllerId(), source.getSourceId(), game)) {
-            if (permanent.destroy(source.getSourceId(), game, false)) {
+            if (permanent.destroy(source, game, false)) {
                 enchantmentsDestoyed++;
             }
         }

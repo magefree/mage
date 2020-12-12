@@ -59,7 +59,7 @@ class CantonicaCasinoEffect extends OneShotEffect {
                 you.gainLife(10, game, source);
             } else {
                 // Otherwise, lose 1 life
-                you.loseLife(1, game, false);
+                you.loseLife(1, game, source, false);
             }
             return true;
         }

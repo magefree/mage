@@ -62,6 +62,6 @@ class AngelicAscensionEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        return token.putOntoBattlefield(1, game, source.getSourceId(), permanent.getControllerId());
+        return token.putOntoBattlefield(1, game, source, permanent.getControllerId());
     }
 }

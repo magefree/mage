@@ -56,8 +56,8 @@ class HeartwarmingRedemptionEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int discarded = player.discard(player.getHand().size(), false, source, game).size();
-        player.drawCards(discarded + 1, source.getSourceId(), game);
+        int discarded = player.discard(player.getHand().size(), false, false, source, game).size();
+        player.drawCards(discarded + 1, source, game);
         player.gainLife(player.getHand().size(), game, source);
         return true;
     }

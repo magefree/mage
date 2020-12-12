@@ -36,7 +36,7 @@ public final class RustScarab extends CardImpl {
         // Whenever Rust Scarab becomes blocked, you may destroy target artifact or enchantment defending player controls.
         Effect effect = new DestroyTargetEffect();
         effect.setText("destroy target artifact or enchantment defending player controls");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, true));
+        this.addAbility(new RustScarabBecomesBlockedTriggeredAbility(effect, true));
 
     }
 
@@ -51,19 +51,19 @@ public final class RustScarab extends CardImpl {
 }
 
 
-class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
+class RustScarabBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
+    public RustScarabBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public BecomesBlockedTriggeredAbility(final BecomesBlockedTriggeredAbility ability) {
+    public RustScarabBecomesBlockedTriggeredAbility(final RustScarabBecomesBlockedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CREATURE_BLOCKED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
     }
 
     @Override
@@ -89,7 +89,7 @@ class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public BecomesBlockedTriggeredAbility copy() {
-        return new BecomesBlockedTriggeredAbility(this);
+    public RustScarabBecomesBlockedTriggeredAbility copy() {
+        return new RustScarabBecomesBlockedTriggeredAbility(this);
     }
 }

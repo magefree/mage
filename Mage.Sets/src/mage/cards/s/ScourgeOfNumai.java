@@ -65,7 +65,7 @@ class ScourgeOfNumaiEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (game.getBattlefield().countAll(new FilterCreaturePermanent(SubType.OGRE, "Ogre"), source.getControllerId(), game) < 1) {
-                controller.loseLife(2, game, false);
+                controller.loseLife(2, game, source, false);
             }
             return true;
         }

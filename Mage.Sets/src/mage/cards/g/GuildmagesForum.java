@@ -64,7 +64,7 @@ class GuildmagesForumWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.MANA_PAID) {
+        if (event.getType() == GameEvent.EventType.MANA_PAID) {
             MageObject target = game.getObject(event.getTargetId());
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())

@@ -73,7 +73,9 @@ class BloodHoundTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getControllerId()) && event.getAmount() > 0) {
             this.getEffects().clear();
-            this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
+            if (event.getAmount() > 0) {
+                this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
+            }
             return true;
         }
         return false;

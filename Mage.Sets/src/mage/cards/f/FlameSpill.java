@@ -69,10 +69,10 @@ class FlameSpillEffect extends OneShotEffect {
             lethal = Math.min(lethal, 1);
         }
         lethal = Math.min(lethal, 4);
-        permanent.damage(lethal, source.getSourceId(), game);
+        permanent.damage(lethal, source.getSourceId(), source, game);
         Player player = game.getPlayer(permanent.getControllerId());
         if (player != null && lethal < 4) {
-            player.damage(4 - lethal, source.getSourceId(), game);
+            player.damage(4 - lethal, source.getSourceId(), source, game);
         }
         return true;
     }

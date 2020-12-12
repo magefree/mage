@@ -75,13 +75,13 @@ class CycloneEffect extends OneShotEffect {
             DamageEverythingEffect dmg = new DamageEverythingEffect(total);
             dmg.apply(game, source);
         } else {            
-            permanent.sacrifice(source.getSourceId(), game);
+            permanent.sacrifice(source, game);
         }
         return true;
     }
     
     private boolean choice(Game game, Ability source, Player player, Cost counters) {
-        return counters.canPay(source, source.getSourceId(), player.getId(), game)
+        return counters.canPay(source, source, player.getId(), game)
                     && player.chooseUse(Outcome.Damage, "Pay Cyclone's Upkeep?", source, game);
     }
         

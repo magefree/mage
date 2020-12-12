@@ -78,7 +78,7 @@ class CourtOfAmbitionEffect extends OneShotEffect {
                 continue;
             }
             if (player.getHand().size() < discardCount || !player.chooseUse(outcome, message, source, game)) {
-                player.loseLife(discardCount * 3, game, false);
+                player.loseLife(discardCount * 3, game, source, false);
             }
             TargetDiscard target = new TargetDiscard(discardCount, StaticFilters.FILTER_CARD, playerId);
             player.choose(outcome, target, source.getSourceId(), game);
@@ -87,7 +87,7 @@ class CourtOfAmbitionEffect extends OneShotEffect {
         for (Map.Entry<UUID, Cards> entry : discardMap.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
             if (player != null) {
-                player.discard(entry.getValue(), source, game);
+                player.discard(entry.getValue(), false, source, game);
             }
         }
         return true;

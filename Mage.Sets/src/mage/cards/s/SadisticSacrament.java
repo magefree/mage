@@ -85,7 +85,7 @@ class SadisticSacramentEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getLibrary().remove(targetId, game);
                     if (card != null) {
-                        card.moveToExile(null, "", source.getSourceId(), game);
+                        card.moveToExile(null, "", source, game);
                     }
                 }
             }

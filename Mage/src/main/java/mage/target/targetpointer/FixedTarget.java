@@ -58,9 +58,7 @@ public class FixedTarget implements TargetPointer {
      * @param game
      */
     public FixedTarget(Permanent permanent, Game game) {
-        this.targetId = permanent.getId();
-        this.zoneChangeCounter = permanent.getZoneChangeCounter(game);
-        this.initialized = true;
+        this(permanent.getId(), game);
     }
 
     /**

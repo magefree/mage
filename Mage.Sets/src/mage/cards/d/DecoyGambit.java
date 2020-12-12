@@ -124,11 +124,11 @@ class DecoyGambitEffect extends OneShotEffect {
         the choices made before them. After all choices are made, you draw the appropriate number of 
         cards. After you’ve drawn, the appropriate creatures are all simultaneously returned to their owners’ hands.
          */
-        controller.drawCards(numberOfCardsToDraw, source.getSourceId(), game);
+        controller.drawCards(numberOfCardsToDraw, source, game);
         for (Permanent creature : permanentToHand) {
             if (creature != null
                     && new DecoyGambitCondition(creature).apply(game, source)) { // same controller required
-                creature.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                creature.moveToZone(Zone.HAND, source, game, false);
             }
         }
         return true;

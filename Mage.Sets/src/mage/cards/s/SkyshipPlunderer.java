@@ -80,7 +80,7 @@ class SkyshipPlundererEffect extends OneShotEffect {
                     } else {
                         counterToAdd = new Counter(counter.getName());
                     }
-                    player.addCounters(counterToAdd, game);
+                    player.addCounters(counterToAdd, source, game);
                 }
                 return true;
             }

@@ -63,7 +63,7 @@ public final class RoninWarclub extends CardImpl {
 
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+            return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
         }
 
         @Override
@@ -119,11 +119,11 @@ public final class RoninWarclub extends CardImpl {
                 if (attachment.getAttachedTo() != null) {
                     Permanent oldTarget = game.getPermanent(attachment.getAttachedTo());
                     if (oldTarget != null) {
-                        oldTarget.removeAttachment(source.getSourceId(), game);
+                        oldTarget.removeAttachment(source.getSourceId(), source, game);
                     }
                 }
                 boolean result;
-                result = permanent.addAttachment(source.getSourceId(), game);
+                result = permanent.addAttachment(source.getSourceId(), source, game);
                 return result;
             }
             return false;

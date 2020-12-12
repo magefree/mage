@@ -133,7 +133,7 @@ class FallEffect extends OneShotEffect {
             cards.add(card);
         }
         targetPlayer.revealCards(sourceObject.getIdName(), cards, game);
-        targetPlayer.discard(new CardsImpl(cards.getCards(StaticFilters.FILTER_CARD_NON_LAND, game)), source, game);
+        targetPlayer.discard(new CardsImpl(cards.getCards(StaticFilters.FILTER_CARD_NON_LAND, game)), false, source, game);
         return true;
     }
 }

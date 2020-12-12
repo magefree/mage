@@ -60,7 +60,7 @@ class CommenceTheEndgameEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.drawCards(2, source.getSourceId(), game);
+        player.drawCards(2, source, game);
         return new AmassEffect(player.getHand().size()).apply(game, source);
     }
 }

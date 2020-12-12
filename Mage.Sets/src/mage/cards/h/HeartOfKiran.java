@@ -81,24 +81,24 @@ class HeartOfKiranAlternateCrewCost extends CostImpl {
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         paid = false;
 
         Target target = new TargetControlledPermanent(1, 1, filter, true);
 
-        if (target.choose(Outcome.Benefit, controllerId, sourceId, game)) {
+        if (target.choose(Outcome.Benefit, controllerId, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             int originalLoyalty = permanent.getCounters(game).getCount(counterTypeToRemove);
 
-            GameEvent event = new GameEvent(GameEvent.EventType.CREW_VEHICLE, target.getFirstTarget(), sourceId, controllerId);
+            GameEvent event = new GameEvent(GameEvent.EventType.CREW_VEHICLE, target.getFirstTarget(), source, controllerId);
             if (!game.replaceEvent(event)) {
-                permanent.removeCounters(counterTypeToRemove.createInstance(), game);
+                permanent.removeCounters(counterTypeToRemove.createInstance(), source, game);
             }
 
             paid = permanent.getCounters(game).getCount(counterTypeToRemove) < originalLoyalty;
 
             if (paid) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, target.getFirstTarget(), sourceId, controllerId));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, target.getFirstTarget(), source, controllerId));
             }
         }
 
@@ -106,7 +106,7 @@ class HeartOfKiranAlternateCrewCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return !game.getBattlefield().getAllActivePermanents(filter, game).isEmpty();
     }
 

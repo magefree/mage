@@ -65,7 +65,7 @@ public class LoseLifeTargetControllerEffect extends OneShotEffect {
             }
 
             if ( controller != null ) {
-                controller.loseLife(amount, game, false);
+                controller.loseLife(amount, game, source, false);
                 return true;
             }
         }

@@ -33,7 +33,7 @@ public class TurnFaceUpTargetEffect extends OneShotEffect {
         if (target != null) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
-                return permanent.turnFaceUp(game, source.getControllerId());
+                return permanent.turnFaceUp(source, game, source.getControllerId());
             }
         }
         return false;

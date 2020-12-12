@@ -74,7 +74,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -118,7 +118,7 @@ class SoulSeizerEffect extends OneShotEffect {
                 game.informPlayers(permanent.getName() + " transforms into " + permanent.getSecondCardFace().getName());
                 Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
                 if (attachTo != null) {
-                    return attachTo.addAttachment(source.getSourceId(), game);
+                    return attachTo.addAttachment(source.getSourceId(), source, game);
                 }
             }
         }

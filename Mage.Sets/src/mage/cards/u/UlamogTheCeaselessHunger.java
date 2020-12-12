@@ -74,7 +74,7 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -111,7 +111,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override

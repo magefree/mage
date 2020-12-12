@@ -114,7 +114,7 @@ class TheMendingOfDominariaSecondEffect extends OneShotEffect {
                     Zone.BATTLEFIELD, source, game, false, false, false, null
             );
             for (Card card : controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+                controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
             }
             controller.shuffleLibrary(source, game);
         }

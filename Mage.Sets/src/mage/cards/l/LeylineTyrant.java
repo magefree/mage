@@ -125,7 +125,7 @@ class LeylineTyrantDamageEffect extends OneShotEffect {
         }
         Cost cost = new ManaCostsImpl<>(manaString);
         cost.clearPaid();
-        if (!cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
+        if (!cost.pay(source, game, source, source.getControllerId(), false)) {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

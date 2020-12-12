@@ -70,12 +70,12 @@ class HatchetBullyCost extends CostImpl {
     }
 
     @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
@@ -110,11 +110,11 @@ class HatchetBullyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.damage(2, source.getSourceId(), game, false, true);
+            permanent.damage(2, source.getSourceId(), source, game, false, true);
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.damage(2, source.getSourceId(), game);
+            player.damage(2, source.getSourceId(), source, game);
         }
         return true;
     }
