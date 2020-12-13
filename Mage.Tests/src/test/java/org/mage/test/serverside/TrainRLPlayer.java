@@ -17,7 +17,9 @@ import mage.util.RandomUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
-
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
+import org.mage.test.player.RLPlayer;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,8 +28,9 @@ import java.util.Locale;
 
 /**
  * @author ayratn
+ * Modified by Elchanan Haas
  */
-public class TestPlayRandomGame extends MageTestBase {
+public class TrainRLPlayer extends MageTestBase {
 
     private static final List<String> colorChoices = new ArrayList<>(Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu"));
     private static final int DECK_SIZE = 40;
@@ -35,26 +38,29 @@ public class TestPlayRandomGame extends MageTestBase {
     @Test
     //@Ignore
     public void playGames() throws GameException, FileNotFoundException {
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 10; i++) {
             logger.info("Playing game: " + i);
             playOneGame();
         }
     }
 
     private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
+
+        String deckLoc="RB Aggro.dck";
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
 
-        Player computerA = createRandomPlayer("ComputerA");
+        Player computerA = createRLPlayer("ComputerA");
         Deck deck = generateRandomDeck();
-
+        //Deck deck=loadDeck(deckLoc);
         if (deck.getCards().size() < DECK_SIZE) {
             throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck.getCards().size() + ", but must be " + DECK_SIZE);
         }
         game.addPlayer(computerA, deck);
         game.loadCards(deck.getCards(), computerA.getId());
 
-        Player computerB = createRandomPlayer("ComputerB");
+        Player computerB = createRLPlayer("ComputerB");
         Deck deck2 = generateRandomDeck();
+        //Deck deck2=loadDeck(deckLoc);
         if (deck2.getCards().size() < DECK_SIZE) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size() + ", but must be " + DECK_SIZE);
         }
@@ -71,7 +77,10 @@ public class TestPlayRandomGame extends MageTestBase {
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
     }
+    private Player createRLPlayer(String name){
+        return new RLPlayer(name);
 
+    }
     private Deck generateRandomDeck() {
         String selectedColors = colorChoices.get(RandomUtil.nextInt(colorChoices.size())).toUpperCase(Locale.ENGLISH);
         List<ColoredManaSymbol> allowedColors = new ArrayList<>();
@@ -82,5 +91,24 @@ public class TestPlayRandomGame extends MageTestBase {
         }
         List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
         return ComputerPlayer.buildDeck(DECK_SIZE, cardPool, allowedColors);
+    }
+    private Deck loadDeck(String name){
+        DeckCardLists list;
+        StringBuilder errormsg= new StringBuilder(); 
+        list=DeckImporter.importDeckFromFile(name, errormsg,true);
+        if(errormsg.length()>0) logger.info(errormsg.toString());
+        //logger.info(list.getCards());
+        //for(int i=0;i<list.getCards().size();i++){
+        //    logger.info(list.getCards().get(i).getCardName());
+        //}
+        Deck deck;
+        try{
+            deck = Deck.load(list, false, false);
+        }
+        catch(GameException e){
+            logger.info("load failure");
+            deck=null;
+        }
+        return deck;
     }
 }

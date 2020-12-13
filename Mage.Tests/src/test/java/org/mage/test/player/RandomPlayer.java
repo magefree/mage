@@ -30,8 +30,8 @@ import java.util.*;
  */
 public class RandomPlayer extends ComputerPlayer {
 
-    private final boolean isSimulatedPlayer;
-    private int actionCount = 0;
+    protected final boolean isSimulatedPlayer;
+    protected int actionCount = 0;
 
     protected PassAbility pass = new PassAbility();
 
@@ -72,7 +72,7 @@ public class RandomPlayer extends ComputerPlayer {
         return didSomething;
     }
 
-    private Ability getAction(Game game) {
+    protected Ability getAction(Game game) {
         List<ActivatedAbility> playables = getPlayableAbilities(game);
         Ability ability;
         while (true) {
