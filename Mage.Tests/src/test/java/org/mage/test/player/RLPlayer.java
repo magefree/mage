@@ -33,11 +33,13 @@ import java.util.stream.Collectors;
 
 public class RLPlayer extends RandomPlayer{
     public RLLearner learner;
-    public RLPlayer(String name) {  
+    private static final Logger logger = Logger.getLogger(RLPlayer.class);
+    public RLPlayer(String name,RLLearner inLearner) {  
         super(name);
+        learner=inLearner;
     }
     public RLPlayer(final RLPlayer player) {
-        super(player);
+        super(player);   
     }
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
@@ -65,14 +67,16 @@ public class RLPlayer extends RandomPlayer{
         Ability ability;
         ability=chooseAbility(game, castPlayables);
         List<Ability> options = getPlayableOptions(ability, game);
-        ability=chooseAbility(game, options);
-            if (!ability.getManaCosts().getVariableCosts().isEmpty()) {//leave random for now-variable spells, AI can wait
-                int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
-                if (amount > 0) {
-                    ability = ability.copy();
-                    ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
-                }
+        if (!options.isEmpty()) {
+            ability=chooseAbility(game, options);
+        }
+        if (!ability.getManaCosts().getVariableCosts().isEmpty()) {//leave random for now-variable spells, AI can wait
+            int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+            if (amount > 0) {
+                ability = ability.copy();
+                ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
             }
+        }
         return ability;
     }
     @Override

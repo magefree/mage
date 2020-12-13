@@ -34,17 +34,26 @@ import org.mage.test.player.RLagent.*;
 //Takes in a game state and a list of RLAction and can choose an action
 //Records its experiences and can learn from them 
 public class RLLearner {
-    List<Experience> experiences;//keep an eye on the size of this array, if it gets out 
+    LinkedList<GameSequence> games;//keep an eye on the size of this array, if it gets out 
     //of hand, the game representation will need to be compressed, which could be tricky
     //There is almost certainly some unused information to cut, but that would require memory profiling
     //and adding a prune method to Game. 
     public RLLearner(){
-        experiences=new ArrayList<Experience>(); 
+        games=new LinkedList<GameSequence>(); 
+    }
+    public void newGame(){
+        games.add(new GameSequence());
     }
     public int choose(Game game, List<RLAction> actions){
         int choice=RandomUtil.nextInt(actions.size());
         Experience exp=new Experience(game.copy(),actions,choice);
-        experiences.add(exp);
+        getCurrent().addExperience(exp);
         return choice;
+    }
+    public void endGame(String winner){
+        getCurrent().setWinner(winner);
+    }
+    public GameSequence getCurrent(){
+        return games.getLast();
     }
 }

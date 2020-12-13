@@ -33,7 +33,7 @@ public class TestPlayRandomGame extends MageTestBase {
     private static final int DECK_SIZE = 40;
 
     @Test
-    //@Ignore
+    @Ignore
     public void playGames() throws GameException, FileNotFoundException {
         for (int i = 1; i < 100; i++) {
             logger.info("Playing game: " + i);

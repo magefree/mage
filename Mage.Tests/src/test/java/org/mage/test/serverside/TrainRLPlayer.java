@@ -20,6 +20,8 @@ import org.mage.test.serverside.base.MageTestBase;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import org.mage.test.player.RLPlayer;
+import org.mage.test.player.RLagent.RLLearner;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,34 +40,42 @@ public class TrainRLPlayer extends MageTestBase {
     @Test
     //@Ignore
     public void playGames() throws GameException, FileNotFoundException {
+        RLLearner learner=new RLLearner();
         for (int i = 1; i < 10; i++) {
             logger.info("Playing game: " + i);
-            playOneGame();
+            
+            playOneGame(learner);
         }
     }
 
-    private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-
-        String deckLoc="RB Aggro.dck";
+    private void playOneGame(RLLearner learner) throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-
-        Player computerA = createRLPlayer("ComputerA");
-        Deck deck = generateRandomDeck();
-        //Deck deck=loadDeck(deckLoc);
-        if (deck.getCards().size() < DECK_SIZE) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size = " + deck.getCards().size() + ", but must be " + DECK_SIZE);
+        learner.newGame();
+        String deckLoc="RB Aggro.dck";
+        Player computerA = createRLPlayer("RLPlayer",learner);
+        String mode="load";
+        Deck decka;
+        Deck deckb;
+        if(mode=="random"){
+            decka= generateRandomDeck();
+            deckb= generateRandomDeck();
+        }else{
+            decka=loadDeck(deckLoc);
+            deckb=loadDeck(deckLoc);
         }
-        game.addPlayer(computerA, deck);
-        game.loadCards(deck.getCards(), computerA.getId());
-
-        Player computerB = createRLPlayer("ComputerB");
-        Deck deck2 = generateRandomDeck();
-        //Deck deck2=loadDeck(deckLoc);
-        if (deck2.getCards().size() < DECK_SIZE) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size() + ", but must be " + DECK_SIZE);
+        if (decka.getCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size = " + decka.getCards().size() + ", but must be " + DECK_SIZE);
         }
-        game.addPlayer(computerB, deck2);
-        game.loadCards(deck2.getCards(), computerB.getId());
+        game.addPlayer(computerA, decka);
+        game.loadCards(decka.getCards(), computerA.getId());
+
+        Player computerB = createRandomPlayer("RandomPlayer");
+        //Deck deck2 = generateRandomDeck();
+        if (deckb.getCards().size() < DECK_SIZE) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deckb.getCards().size() + ", but must be " + DECK_SIZE);
+        }
+        game.addPlayer(computerB, deckb);
+        game.loadCards(deckb.getCards(), computerB.getId());
 
         long t1 = System.nanoTime();
         GameOptions options = new GameOptions();
@@ -73,13 +83,13 @@ public class TrainRLPlayer extends MageTestBase {
         game.setGameOptions(options);
         game.start(computerA.getId());
         long t2 = System.nanoTime();
-
+        learner.endGame(game.getWinner());
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
+        logger.info(learner.getCurrent().getValue(computerA));
     }
-    private Player createRLPlayer(String name){
-        return new RLPlayer(name);
-
+    private Player createRLPlayer(String name,RLLearner learner){
+        return new RLPlayer(name,learner);
     }
     private Deck generateRandomDeck() {
         String selectedColors = colorChoices.get(RandomUtil.nextInt(colorChoices.size())).toUpperCase(Locale.ENGLISH);
