@@ -77,11 +77,21 @@ public final class ZonesHandler {
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
                 if (card instanceof ModalDoubleFacesCard || card instanceof ModalDoubleFacesCardHalf) {
-                    System.out.println("!"); // TODO: remove after mdf test fixes
-                }
+                    boolean forceToMainSide = false;
 
-                if (card instanceof ModalDoubleFacesCard) {
-                    info.event.setTargetId(((ModalDoubleFacesCard) card).getLeftHalfCard().getId());
+                    // if effect put half mdf card to battlefield then it must be the main side only (example: return targeted half card to battle)
+                    if (card instanceof ModalDoubleFacesCardHalf && !source.getAbilityType().isPlayCardAbility()) {
+                        forceToMainSide = true;
+                    }
+
+                    // if effect put mdf card to battlefield then it must be main side only
+                    if (card instanceof ModalDoubleFacesCard) {
+                        forceToMainSide = true;
+                    }
+
+                    if (forceToMainSide) {
+                        info.event.setTargetId(((ModalDoubleFacesCard) card.getMainCard()).getLeftHalfCard().getId());
+                    }
                 }
             }
         }

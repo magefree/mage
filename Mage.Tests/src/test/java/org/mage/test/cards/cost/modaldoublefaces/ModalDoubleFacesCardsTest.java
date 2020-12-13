@@ -452,11 +452,48 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         checkExileCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
 
         // return at the end
-        showBattlefield("hmm b", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
-        showExile("hmm e", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
-        showGraveyard("hmm g", 2, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPermanentCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
         checkExileCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ExileAsSecondSideAndReturnAsMainSide() {
+        // https://github.com/magefree/mage/issues/7212
+
+        // When Flickerwisp enters the battlefield, exile another target permanent. Return that card to the battlefield
+        // under its owner’s control at the beginning of the next end step.
+        addCard(Zone.HAND, playerA, "Flickerwisp"); // {1}{W}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        // prepare mdf permanent as land
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth");
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 1);
+
+        // exile
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flickerwisp");
+        addTarget(playerA, "Akoum Teeth");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkPermanentCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 0);
+        checkExileCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1); // exile as main card
+        checkExileCount("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 0);
+
+        // return at the end
+        checkPermanentCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkPermanentCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 0);
+        checkExileCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+        checkExileCount("return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 0);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
