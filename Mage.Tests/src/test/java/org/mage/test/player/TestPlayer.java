@@ -54,6 +54,7 @@ import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import mage.util.CardUtil;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -83,6 +84,8 @@ public class TestPlayer implements Player {
     public static final String BLOCK_SKIP = "[block_skip]";
     public static final String ATTACK_SKIP = "[attack_skip]";
     public static final String NO_TARGET = "NO_TARGET"; // cast spell or activate ability without target defines
+    public static final String FLIPCOIN_RESULT_TRUE = "[flipcoin_true]";
+    public static final String FLIPCOIN_RESULT_FALSE = "[flipcoin_false]";
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
@@ -3302,6 +3305,25 @@ public class TestPlayer implements Player {
     @Override
     public boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects) {
         return computerPlayer.flipCoin(source, game, true, appliedEffects);
+    }
+
+    @Override
+    public boolean flipCoinResult(Game game) {
+        assertAliasSupportInChoices(false);
+        if (!choices.isEmpty()) {
+            String nextResult = choices.get(0);
+            if (nextResult.equals(FLIPCOIN_RESULT_TRUE)) {
+                choices.remove(0);
+                return true;
+            } else if (nextResult.equals(FLIPCOIN_RESULT_FALSE)) {
+                choices.remove(0);
+                return false;
+            }
+        }
+        this.chooseStrictModeFailed("flipcoin result", game, "Use setFlipCoinResult to setup it in unit tests");
+
+        // implementation from PlayerImpl:
+        return RandomUtil.nextBoolean();
     }
 
     @Override

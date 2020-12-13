@@ -30,7 +30,7 @@ public final class WireflyHive extends CardImpl {
     public WireflyHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {3}, {tap}: Flip a coin. If you win the flip, create a 2/2 colorless Insect artifact creature token with flying named Wirefly.
+        // {3}, {T}: Flip a coin. If you win the flip, create a 2/2 colorless Insect artifact creature token with flying named Wirefly.
         // If you lose the flip, destroy all permanents named Wirefly.
         Ability ability = new SimpleActivatedAbility(new FlipCoinEffect(
                 new CreateTokenEffect(new WireflyToken()), new DestroyAllEffect(filter)

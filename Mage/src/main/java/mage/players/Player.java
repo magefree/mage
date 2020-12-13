@@ -444,6 +444,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Ability source, Game game, boolean winnable, List<UUID> appliedEffects);
 
+    boolean flipCoinResult(Game game);
+
     int rollDice(Ability source, Game game, int numSides);
 
     int rollDice(Ability source, Game game, List<UUID> appliedEffects, int numSides);

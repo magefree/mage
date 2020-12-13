@@ -1877,6 +1877,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Set next result of next flipCoin's try (one flipCoin event can call multiple tries under some effects)
+     * TestPlayer/ComputerPlayer always selects Heads in good winable events
+     *
+     * @param player
+     * @param result
+     */
+    public void setFlipCoinResult(TestPlayer player, boolean result) {
+        player.addChoice(result ? TestPlayer.FLIPCOIN_RESULT_TRUE : TestPlayer.FLIPCOIN_RESULT_FALSE);
+    }
+
+    /**
      * Set target permanents
      *
      * @param player

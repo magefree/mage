@@ -2752,7 +2752,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
             game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(chosen));
         }
-        boolean result = RandomUtil.nextBoolean();
+        boolean result = this.flipCoinResult(game);
         FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
         event.addAppliedEffects(appliedEffects);
         game.replaceEvent(event);
@@ -2762,7 +2762,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             boolean canChooseHeads = event.getResult();
             boolean canChooseTails = !event.getResult();
             for (int i = 1; i < event.getFlipCount(); i++) {
-                boolean tempFlip = RandomUtil.nextBoolean();
+                boolean tempFlip = this.flipCoinResult(game);
                 canChooseHeads = canChooseHeads || tempFlip;
                 canChooseTails = canChooseTails || !tempFlip;
                 game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(tempFlip));
@@ -2787,6 +2787,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             return event.getResult() == event.getChosen();
         }
         return event.getResult();
+    }
+
+    /**
+     * Return result for next flip coint try (can be contolled in tests)
+     * @return
+     */
+    @Override
+    public boolean flipCoinResult(Game game) {
+        return RandomUtil.nextBoolean();
     }
 
     @Override

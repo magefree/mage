@@ -29,6 +29,7 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Identity Thief"); // {2}{U}{U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Molten Sentry");
+        setFlipCoinResult(playerA, true);
 
         attack(2, playerB, "Identity Thief");
         setChoice(playerB, "Yes");

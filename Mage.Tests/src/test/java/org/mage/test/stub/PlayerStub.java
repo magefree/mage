@@ -630,6 +630,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean flipCoinResult(Game game) {
+        return false;
+    }
+
+    @Override
     public int rollDice(Ability source, Game game, int numSides) {
         return 1;
     }
