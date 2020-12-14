@@ -26,9 +26,9 @@ import org.apache.log4j.Logger;
 
 public class ActionAttack extends RLAction{
     public Permanent perm;
-    public Boolean attack;
+    public Boolean isAttack;
     public ActionAttack(Permanent p, Boolean attck){
         perm=p;
-        attack=attck;
+        isAttack=attck;
     }
 }

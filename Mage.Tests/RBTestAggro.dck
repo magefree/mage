@@ -1,0 +1,17 @@
+4 [THB:264] Anax, Hardened in the Forge
+4 [RNA:245] Blood Crypt
+4 [PELD:115p] Bonecrusher Giant
+4 [PELD:147p] Torbran, Thane of Red Fell
+7 [THB:285] Mountain
+4 [THB:253] Mountain
+4 [THB:284] Mountain
+4 [M20:159] Scorch Spitter
+4 [ELD:294] Rimrock Knight
+3 [BNG:164] Temple of Malice
+4 [PTHB:148p] Phoenix of Ash
+4 [ELD:360] Fervent Champion
+2 [ELD:387] Castle Embereth
+4 [RNA:109] Rix Maadi Reveler
+4 [M20:164] Unchained Berserker
+LAYOUT MAIN:(1,6)(CMC,false,50)|([RNA:245],[RNA:245],[RNA:245],[RNA:245],[THB:285],[THB:285],[THB:285],[THB:253],[THB:284],[THB:285],[THB:285],[THB:253],[THB:253],[THB:285],[THB:253],[THB:285],[THB:284],[THB:284],[THB:284],[BNG:164],[BNG:164],[BNG:164],[ELD:387],[ELD:387])([M20:159],[M20:159],[M20:159],[M20:159],[ELD:360],[ELD:360],[ELD:360],[ELD:360])([RNA:109],[RNA:109],[RNA:109],[RNA:109],[M20:164],[M20:164],[M20:164],[M20:164])([THB:264],[THB:264],[THB:264],[THB:264],[ELD:294],[ELD:294],[ELD:294],[ELD:294],[PTHB:148p],[PTHB:148p],[PTHB:148p],[PTHB:148p])([PELD:147p],[PELD:147p],[PELD:147p],[PELD:147p])([PELD:115p],[PELD:115p],[PELD:115p],[PELD:115p])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|

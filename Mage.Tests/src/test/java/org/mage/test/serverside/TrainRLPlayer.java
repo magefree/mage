@@ -51,7 +51,7 @@ public class TrainRLPlayer extends MageTestBase {
     private void playOneGame(RLLearner learner) throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         learner.newGame();
-        String deckLoc="RB Aggro.dck";
+        String deckLoc="RBTestAggro.dck";
         Player computerA = createRLPlayer("RLPlayer",learner);
         String mode="load";
         Deck decka;
@@ -107,7 +107,6 @@ public class TrainRLPlayer extends MageTestBase {
         StringBuilder errormsg= new StringBuilder(); 
         list=DeckImporter.importDeckFromFile(name, errormsg,true);
         if(errormsg.length()>0) logger.info(errormsg.toString());
-        //logger.info(list.getCards());
         //for(int i=0;i<list.getCards().size();i++){
         //    logger.info(list.getCards().get(i).getCardName());
         //}
