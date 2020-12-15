@@ -1878,7 +1878,7 @@ public class TestPlayer implements Player {
             }
             if (choiceType.equals("target")) {
                 printStart("Unused targets");
-                if (targets.isEmpty()) {
+                if (!targets.isEmpty()) {
                     System.out.println(String.join("\n", targets));
                 }
                 printEnd();
