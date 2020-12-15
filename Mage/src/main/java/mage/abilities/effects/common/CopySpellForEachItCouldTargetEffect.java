@@ -11,7 +11,6 @@ import mage.filter.FilterInPlay;
 import mage.filter.predicate.mageobject.FromSetPredicate;
 import mage.game.Game;
 import mage.game.events.CopiedStackObjectEvent;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
@@ -82,7 +81,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
             }
 
             // collect objects that can be targeted
-            Spell copy = spell.copySpell(source.getControllerId());
+            Spell copy = spell.copySpell(source.getControllerId(), game);
             modifyCopy(copy, game, source);
             Target sampleTarget = targetsToBeChanged.iterator().next().getTarget(copy);
             sampleTarget.setNotTarget(true);
@@ -94,7 +93,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     obj = game.getPlayer(objId);
                 }
                 if (obj != null) {
-                    copy = spell.copySpell(source.getControllerId());
+                    copy = spell.copySpell(source.getControllerId(), game);
                     try {
                         modifyCopy(copy, (T) obj, game, source);
                         if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {

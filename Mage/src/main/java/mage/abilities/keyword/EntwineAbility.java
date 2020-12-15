@@ -8,7 +8,6 @@ import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -144,17 +143,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     }
 
     private String getActivationKey(Ability source, Game game) {
-        // same logic as KickerAbility, uses for source ability only
-        int zcc = 0;
-        if (source.getAbilityType() == AbilityType.TRIGGERED) {
-            zcc = source.getSourceObjectZoneChangeCounter();
-        }
-        if (zcc == 0) {
-            zcc = game.getState().getZoneChangeCounter(source.getSourceId());
-        }
-        if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
-            --zcc;
-        }
-        return String.valueOf(zcc);
+        // same logic as KickerAbility
+        return KickerAbility.getActivationKey(source, game);
     }
 }

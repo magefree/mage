@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,12 +11,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,8 +21,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GodPharaohsGift extends CardImpl {
@@ -83,7 +77,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                 if (cardChosen != null
                         && cardChosen.moveToExile(exileId, sourceObject.getIdName(), source, game)) {
                     EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(cardChosen);
+                    CardUtil.copyTo(token).from(cardChosen, game);
                     token.removePTCDA();
                     token.getPower().modifyBaseValue(4);
                     token.getToughness().modifyBaseValue(4);

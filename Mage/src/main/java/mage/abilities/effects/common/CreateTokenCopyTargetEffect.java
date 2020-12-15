@@ -34,15 +34,15 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final CardType additionalCardType;
     private boolean hasHaste;
     private final int number;
-    private List<Permanent> addedTokenPermanents;
+    private final List<Permanent> addedTokenPermanents;
     private SubType additionalSubType;
     private SubType onlySubType;
-    private boolean tapped;
-    private boolean attacking;
-    private UUID attackedPlayer;
+    private final boolean tapped;
+    private final boolean attacking;
+    private final UUID attackedPlayer;
     private final int tokenPower;
     private final int tokenToughness;
-    private boolean gainsFlying;
+    private final boolean gainsFlying;
     private boolean becomesArtifact;
     private ObjectColor color;
     private boolean useLKI = false;
@@ -170,7 +170,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(copyFrom); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        CardUtil.copyTo(token).from(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);

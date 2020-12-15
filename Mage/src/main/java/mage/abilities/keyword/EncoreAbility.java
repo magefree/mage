@@ -85,7 +85,7 @@ class EncoreEffect extends OneShotEffect {
             return false;
         }
         EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(card);
+        CardUtil.copyTo(token).from(card, game);
         Set<MageObjectReference> addedTokens = new HashSet<>();
         int opponentCount = game.getOpponents(source.getControllerId()).size();
         if (opponentCount < 1) {

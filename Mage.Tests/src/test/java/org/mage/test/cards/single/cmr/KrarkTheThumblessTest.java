@@ -37,18 +37,20 @@ public class KrarkTheThumblessTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // FIRST BOLT CAST
-        // cast bolt and generate 3 triggers
+        // cast bolt and generate 2 triggers
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, "Whenever"); // 2x triggers raise
         checkStackSize("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 3); // bolt + 2x triggers
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast L", 1);
         checkStackObject("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 2);
+        checkHandCardCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 0);
 
         // resolve first trigger and lose (move spell to hand)
         setFlipCoinResult(playerA, false);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
-        checkStackSize("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1); // second trigger
+        checkStackSize("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1); // one trigger
         checkStackObject("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast L", 0);
+        checkStackObject("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 1);
         checkHandCardCount("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1); // moved to hand
 
         // resolve second trigger and win (copy the spell)
@@ -57,6 +59,7 @@ public class KrarkTheThumblessTest extends CardTestPlayerBase {
         setChoice(playerA, "No"); // do not change a target of the copy
         checkStackSize("after win trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1); // copied bolt
         checkStackObject("after lose trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast L", 1);
+        checkStackObject("after win trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whenever you cast", 0);
         checkHandCardCount("after win trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1); // stil in hand
 
         // SECOND BOLT CAST

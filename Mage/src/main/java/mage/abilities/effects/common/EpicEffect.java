@@ -4,7 +4,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.Objects;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -20,10 +19,11 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.util.Objects;
+
 /**
- *
  * @author jeffwadsworth
- *
+ * <p>
  * 702.49. Epic 702.49a Epic represents two spell abilities, one of which
  * creates a delayed triggered ability. “Epic” means “For the rest of the game,
  * you can't cast spells,” and “At the beginning of each of your upkeeps for the
@@ -55,7 +55,7 @@ public class EpicEffect extends OneShotEffect {
             if (spell == null) {
                 return false;
             }
-            spell = spell.copySpell(source.getControllerId());
+            spell = spell.copySpell(source.getControllerId(), game);
             // Remove Epic effect from the spell
             Effect epicEffect = null;
             for (Effect effect : spell.getSpellAbility().getEffects()) {
@@ -118,9 +118,7 @@ class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (Objects.equals(source.getControllerId(), event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object != null) {
-                return true;
-            }
+            return object != null;
         }
         return false;
     }

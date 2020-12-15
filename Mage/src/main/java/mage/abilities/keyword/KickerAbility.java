@@ -159,18 +159,30 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source, source.getControllerId()));
     }
 
-    private String getActivationKey(Ability source, String costText, Game game) {
-        int zcc = 0;
-        if (source.getAbilityType() == AbilityType.TRIGGERED) {
-            zcc = source.getSourceObjectZoneChangeCounter();
-        }
+    /**
+     * Return activation zcc key for searching spell's settings in source object
+     *
+     * @param source
+     * @param game
+     * @return
+     */
+    public static String getActivationKey(Ability source, Game game) {
+        // must use ZCC from the moment of spell's ability activation
+        int zcc = source.getSourceObjectZoneChangeCounter();
         if (zcc == 0) {
+            // if ability is not activated yet (example: triggered ability checking the kicker conditional)
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
-        if (zcc > 0 && (source.getAbilityType() == AbilityType.TRIGGERED)) {
+
+        // triggers or activated abilities moves to stack and card's ZCC is changed -- so you must use workaround to find spell's zcc
+        if (source.getAbilityType() == AbilityType.TRIGGERED || source.getAbilityType() == AbilityType.ACTIVATED) {
             --zcc;
         }
-        return zcc + ((kickerCosts.size() > 1) ? costText : "");
+        return zcc + "";
+    }
+
+    private String getActivationKey(Ability source, String costText, Game game) {
+        return getActivationKey(source, game) + ((kickerCosts.size() > 1) ? costText : "");
     }
 
     @Override

@@ -43,9 +43,14 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
      */
     @Test
     public void testGravecrawlerCastFromGrave() {
-
+        // You may cast Gravecrawler from your graveyard as long as you control a Zombie.
         addCard(Zone.GRAVEYARD, playerA, "Gravecrawler", 1);
+        //
+        // Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your
+        // graveyard, return Prized Amalgam from your graveyard to the battlefield tapped at the beginning of the
+        // next end step.
         addCard(Zone.GRAVEYARD, playerA, "Prized Amalgam", 1);
+        //
         addCard(Zone.BATTLEFIELD, playerA, "Gnawing Zombie", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 

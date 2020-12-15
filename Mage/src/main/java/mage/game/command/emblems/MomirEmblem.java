@@ -81,7 +81,7 @@ class MomirEffect extends OneShotEffect {
                 Card card = options.get(index).getCard();
                 if (card != null) {
                     token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card);
+                    CardUtil.copyTo(token).from(card, game);
                     break;
                 } else {
                     options.remove(index);

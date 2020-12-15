@@ -234,8 +234,9 @@ public final class ZonesHandler {
                         if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
                             spell = ((ZoneChangeInfo.Stack) info).spell;
                         } else {
-                            spell = new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone());
+                            spell = new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone(), game);
                         }
+                        spell.syncZoneChangeCounterOnStack(card, game);
                         game.getStack().push(spell);
                         game.getState().setZone(spell.getId(), Zone.STACK);
                         game.getState().setZone(card.getId(), Zone.STACK);

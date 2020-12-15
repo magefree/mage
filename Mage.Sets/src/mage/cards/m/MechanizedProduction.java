@@ -1,10 +1,4 @@
-
 package mage.cards.m;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,8 +8,8 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -26,6 +20,11 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -81,7 +80,7 @@ class MechanizedProductionEffect extends OneShotEffect {
             Permanent enchantedArtifact = game.getPermanentOrLKIBattlefield(sourceObject.getAttachedTo());
             if (enchantedArtifact != null) {
                 EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(enchantedArtifact);
+                CardUtil.copyTo(token).from(enchantedArtifact, game);
                 token.putOntoBattlefield(1, game, source, source.getControllerId());
             }
             Map<String, Integer> countNames = new HashMap<>();

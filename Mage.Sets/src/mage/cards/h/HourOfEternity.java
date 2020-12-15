@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.ObjectColor;
@@ -92,7 +91,7 @@ class HourOfEternityEffect extends OneShotEffect {
             for (Card card : cardsToExile) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                     EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card);
+                    CardUtil.copyTo(token).from(card, game);
                     token.removePTCDA();
                     token.getPower().modifyBaseValue(4);
                     token.getToughness().modifyBaseValue(4);

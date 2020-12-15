@@ -5,7 +5,6 @@
  */
 package mage.abilities.mana.conditional;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -20,8 +19,9 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ConditionalSpellManaBuilder extends ConditionalManaBuilder {
@@ -66,9 +66,9 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
             if (game.inCheckPlayableState() && object instanceof Card) {
-                Spell spell = new Spell((Card) object, (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()));
-                return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
-            }            
+                Spell spell = new Spell((Card) object, (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()), game);
+                return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
+            }
             if ((object instanceof StackObject)) {
                 return filter.match((StackObject) object, source.getSourceId(), source.getControllerId(), game);
             }

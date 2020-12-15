@@ -25,6 +25,10 @@ public class PermanentToken extends PermanentImpl {
         this.power.modifyBaseValue(token.getPower().getBaseValueModified());
         this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+
+        // token's ZCC must be synced with original token to keep abilities settings
+        // Example: kicker ability and kicked status
+        this.setZoneChangeCounter(this.token.getZoneChangeCounter(game), game);
     }
 
     public PermanentToken(final PermanentToken permanent) {

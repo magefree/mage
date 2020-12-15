@@ -166,7 +166,7 @@ class BeamsplitterMageEffect extends OneShotEffect {
                 if (creature == null) {
                     return false;
                 }
-                Spell copy = spell.copySpell(source.getControllerId());
+                Spell copy = spell.copySpell(source.getControllerId(), game);
                 game.getStack().push(copy);
                 setTarget:
                 for (UUID modeId : copy.getSpellAbility().getModes().getSelectedModes()) {

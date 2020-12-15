@@ -453,8 +453,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         Card mainCard = getMainCard();
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability, controllerId, fromZone, Zone.STACK);
-        ZoneChangeInfo.Stack info
-                = new ZoneChangeInfo.Stack(event, new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone()));
+        Spell spell = new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone(), game);
+        ZoneChangeInfo.Stack info = new ZoneChangeInfo.Stack(event, spell);
         return ZonesHandler.cast(info, game, ability);
     }
 

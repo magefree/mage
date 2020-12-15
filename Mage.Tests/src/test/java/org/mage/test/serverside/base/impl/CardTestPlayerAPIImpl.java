@@ -1695,14 +1695,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         assertAliaseSupportInActivateCommand(cardName, true);
         assertAliaseSupportInActivateCommand(targetName, true);
         assertAliaseSupportInActivateCommand(spellOnStack, false);
-        if (StackClause.WHILE_ON_STACK == clause) {
-            addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName
-                    + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
-                    + "$spellOnStack=" + spellOnStack);
-        } else {
-            addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName
-                    + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
-                    + "$!spellOnStack=" + spellOnStack);
+
+        String targetInfo = (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName);
+        switch (clause) {
+            case WHILE_ON_STACK:
+                addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName
+                        + '$' + targetInfo
+                        + "$spellOnStack=" + spellOnStack);
+                break;
+            case WHILE_COPY_ON_STACK:
+                addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName
+                        + '$' + targetInfo
+                        + "$spellCopyOnStack=" + spellOnStack);
+                break;
+            case WHILE_NOT_ON_STACK:
+                addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName
+                        + '$' + targetInfo
+                        + "$!spellOnStack=" + spellOnStack);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown stack clause " + clause);
         }
     }
 

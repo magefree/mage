@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -17,15 +15,15 @@ import mage.game.permanent.token.EmptyToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class SpittingImage extends CardImpl {
 
     public SpittingImage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G/U}{G/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}");
 
         // Create a token that's a copy of target creature.
         this.getSpellAbility().addEffect(new CreateTokenCopyTargetEffect());
@@ -65,7 +63,7 @@ class SpittingImageEffect extends OneShotEffect {
         }
         if (permanent != null) {
             EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent);
+            CardUtil.copyTo(token).from(permanent, game);
             token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }

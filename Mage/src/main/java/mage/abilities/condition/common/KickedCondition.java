@@ -1,5 +1,3 @@
-
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -21,10 +19,15 @@ public enum KickedCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            // if permanent spell was copied then it enters with sourceId = PermanentToken instead Card (example: Lithoform Engine)
+            card = game.getPermanentEntering(source.getSourceId());
+        }
+
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
+            for (Ability ability : card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
-                    if(((KickerAbility) ability).isKicked(game, source, "")) {
+                    if (((KickerAbility) ability).isKicked(game, source, "")) {
                         return true;
                     }
                 }

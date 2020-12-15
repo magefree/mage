@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.abilities.Ability;
@@ -11,7 +10,6 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.CopiedStackObjectEvent;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -19,14 +17,13 @@ import mage.target.TargetSpell;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Fork extends CardImpl {
 
 
     public Fork(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{R}");
 
         // Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new ForkEffect());
@@ -60,7 +57,7 @@ class ForkEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null && controller != null) {
-            Spell copy = spell.copySpell(source.getControllerId());
+            Spell copy = spell.copySpell(source.getControllerId(), game);
             copy.getColor(game).setRed(true);
             game.getStack().push(copy);
             copy.chooseNewTargets(game, controller.getId());

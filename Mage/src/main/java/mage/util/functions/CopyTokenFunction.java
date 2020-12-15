@@ -1,4 +1,3 @@
-
 package mage.util.functions;
 
 import mage.MageObject;
@@ -8,9 +7,11 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 
 /**
  * @author nantuko
@@ -27,7 +28,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
     }
 
     @Override
-    public Token apply(Card source) {
+    public Token apply(Card source, Game game) {
         if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
         }
@@ -94,7 +95,22 @@ public class CopyTokenFunction implements Function<Token, Card> {
         return target;
     }
 
-    public Token from(Card source) {
-        return apply(source);
+    public Token from(Card source, Game game) {
+        return from(source, game, null);
+    }
+
+    public Token from(Card source, Game game, Spell spell) {
+        apply(source, game);
+
+        // token's ZCC must be synced with original card to keep abilities settings
+        // Example: kicker ability and kicked status
+        if (spell != null) {
+            // copied spell puts to battlefield as token, so that token's ZCC must be synced with spell instead card (card can be moved before resolve)
+            target.setZoneChangeCounter(spell.getZoneChangeCounter(game), game);
+        } else {
+            target.setZoneChangeCounter(source.getZoneChangeCounter(game), game);
+        }
+
+        return target;
     }
 }

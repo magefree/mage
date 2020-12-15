@@ -25,7 +25,6 @@ import mage.game.GameState;
 import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.CopyStackObjectEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -58,6 +57,7 @@ public class Spell extends StackObjImpl implements Card {
     private final SpellAbility ability;
     private final Zone fromZone;
     private final UUID id;
+    protected int zoneChangeCounter; // spell's ZCC must be synced with card's on stack or another copied spell
 
     private UUID controllerId;
     private boolean copy;
@@ -69,12 +69,13 @@ public class Spell extends StackObjImpl implements Card {
 
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
-    public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
+    public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game) {
         this.card = card;
         this.color = card.getColor(null).copy();
         this.frameColor = card.getFrameColor(null).copy();
         this.frameStyle = card.getFrameStyle();
-        id = ability.getId();
+        this.id = ability.getId();
+        this.zoneChangeCounter = card.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
@@ -93,6 +94,7 @@ public class Spell extends StackObjImpl implements Card {
 
     public Spell(final Spell spell) {
         this.id = spell.id;
+        this.zoneChangeCounter = spell.zoneChangeCounter;
         for (SpellAbility spellAbility : spell.spellAbilities) {
             this.spellAbilities.add(spellAbility.copy());
         }
@@ -265,7 +267,7 @@ public class Spell extends StackObjImpl implements Card {
                     flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 } else {
                     EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card);
+                    CardUtil.copyTo(token).from(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedToken();
@@ -325,7 +327,7 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else if (isCopy()) {
             EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
+            CardUtil.copyTo(token).from(card, game, this);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
             token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
             return true;
@@ -744,8 +746,8 @@ public class Spell extends StackObjImpl implements Card {
         return new Spell(this);
     }
 
-    public Spell copySpell(UUID newController) {
-        Spell spellCopy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
+    public Spell copySpell(UUID newController, Game game) {
+        Spell spellCopy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone, game);
         boolean firstDone = false;
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
             if (!firstDone) {
@@ -758,6 +760,7 @@ public class Spell extends StackObjImpl implements Card {
         }
         spellCopy.setCopy(true, this);
         spellCopy.setControllerId(newController);
+        spellCopy.syncZoneChangeCounterOnStack(this, game);
         return spellCopy;
     }
 
@@ -851,16 +854,6 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
-        throw new UnsupportedOperationException("Unsupported operation");
-    }
-
-    @Override
-    public void setZoneChangeCounter(int value, Game game) {
-        throw new UnsupportedOperationException("Unsupported operation");
-    }
-
-    @Override
     public Ability getStackAbility() {
         return this.ability;
     }
@@ -877,7 +870,38 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public int getZoneChangeCounter(Game game) {
-        return card.getZoneChangeCounter(game);
+        // spell's zcc can't be changed after put to stack
+        return zoneChangeCounter;
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    /**
+     * Sync ZCC with card on stack
+     *
+     * @param card
+     * @param game
+     */
+    public void syncZoneChangeCounterOnStack(Card card, Game game) {
+        this.zoneChangeCounter = card.getZoneChangeCounter(game);
+    }
+
+    /**
+     * Sync ZCC with copy spell on stack
+     *
+     * @param spell
+     * @param game
+     */
+    public void syncZoneChangeCounterOnStack(Spell spell, Game game) {
+        this.zoneChangeCounter = spell.getZoneChangeCounter(game);
     }
 
     @Override
@@ -1048,7 +1072,7 @@ public class Spell extends StackObjImpl implements Card {
             return null;
         }
         for (int i = 0; i < gameEvent.getAmount(); i++) {
-            spellCopy = this.copySpell(newControllerId);
+            spellCopy = this.copySpell(newControllerId, game);
             game.getState().setZone(spellCopy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
             game.getStack().push(spellCopy);
             if (chooseNewTargets) {
