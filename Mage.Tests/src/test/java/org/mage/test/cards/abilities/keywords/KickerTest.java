@@ -279,6 +279,39 @@ public class KickerTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Conditional_TriggeredAbilityMustSeeMultikickedStatus() {
+        // bug:
+        // Hallar Not Procing Right: When I kick Thornscape Battlemage it doesn't proc Hallar effect for some reason.
+        // I tried this 3 times and it never triggered properly.
+
+        // Kicker {R} and/or {W} (You may pay an additional {R} and/or {W} as you cast this spell.)
+        // When Thornscape Battlemage enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to any target.
+        // When Thornscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact.
+        addCard(Zone.HAND, playerA, "Thornscape Battlemage", 1); // {2}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        //
+        // Whenever you cast a spell, if that spell was kicked, put a +1/+1 counter on Hallar, the Firefletcher,
+        // then Hallar deals damage equal to the number of +1/+1 counters on it to each opponent.
+        addCard(Zone.BATTLEFIELD, playerA, "Hallar, the Firefletcher", 1);
+
+        // cast kicked spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thornscape Battlemage");
+        setChoice(playerA, "Yes");  // use kicker {R} - 2 damage to any target
+        setChoice(playerA, "No"); // not use kicker {W} - destroy target
+        addTarget(playerA, playerB); // target for 2 damage
+        setChoice(playerA, "Yes"); // put counter on hallar
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, "Hallar, the Firefletcher", CounterType.P1P1, 1);
+        assertLife(playerB, 20 - 2 - 1); // 2 damage from kicked spell, 1 damage from hallar's trigger
+    }
+
+    @Test
     public void test_ZCC_ReturnedPermanentMustNotBeKicked() {
         // bug:
         // If a creature is cast with kicker, dies, and is then returned to play

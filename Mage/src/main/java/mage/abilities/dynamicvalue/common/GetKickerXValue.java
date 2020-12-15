@@ -36,7 +36,6 @@ public enum GetKickerXValue implements DynamicValue {
                             .stream()
                             .anyMatch(varCost -> !((OptionalAdditionalCostImpl) varCost).getVariableCosts().isEmpty());
 
-
                     if (haveVarCost) {
                         int kickedCount = ((KickerAbility) ability).getKickedCounter(game, sourceAbility);
                         if (kickedCount > 0) {

@@ -26,7 +26,7 @@ public class KickerWithAnyNumberModesAbility extends KickerAbility implements Op
 
     @Override
     public void changeModes(Ability ability, Game game) {
-        if (!isKicked(game, ability, "")) {
+        if (!isKicked(game, ability)) {
             return;
         }
 

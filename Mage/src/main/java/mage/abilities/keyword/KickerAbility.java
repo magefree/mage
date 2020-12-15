@@ -122,27 +122,63 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         }
     }
 
-    public int getKickedCounter(Game game, Ability source) {
-        String key = getActivationKey(source, "", game);
-        return activations.getOrDefault(key, 0);
-    }
+    private int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
+        String key;
+        if (needKickerCost.isEmpty()) {
+            // need all kickers
+            key = getActivationKey(source, "", game);
+        } else {
+            // need only cost related kickers
+            key = getActivationKey(source, needKickerCost, game);
+        }
 
-    public boolean isKicked(Game game, Ability source, String costText) {
-        String key = getActivationKey(source, costText, game);
+        int totalActivations = 0;
         if (kickerCosts.size() > 1) {
             for (String activationKey : activations.keySet()) {
-                if (activationKey.startsWith(key)
-                        && activations.get(activationKey) > 0) {
-                    return true;
+                if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
+                    totalActivations += activations.get(activationKey);
                 }
             }
         } else {
-            if (activations.containsKey(key)) {
-                return activations.get(key) > 0;
-
+            if (activations.containsKey(key) && activations.get(key) > 0) {
+                totalActivations += activations.get(key);
             }
         }
-        return false;
+        return totalActivations;
+    }
+
+    /**
+     * Return total kicker activations (kicker + multikicker)
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    public int getKickedCounter(Game game, Ability source) {
+        return getKickedCounterStrict(game, source, "");
+    }
+
+    /**
+     * If spell was kicked
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    public boolean isKicked(Game game, Ability source) {
+        return isKicked(game, source, "");
+    }
+
+    /**
+     * If spell was kicked by specific kicker cost
+     *
+     * @param game
+     * @param source
+     * @param needKickerCost use cost.getText(true)
+     * @return
+     */
+    public boolean isKicked(Game game, Ability source, String needKickerCost) {
+        return getKickedCounterStrict(game, source, needKickerCost) > 0;
     }
 
     public List<OptionalAdditionalCost> getKickerCosts() {
@@ -196,7 +232,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                     while (player.canRespond() && again) {
                         String times = "";
                         if (kickerCost.isRepeatable()) {
-                            int activatedCount = getKickedCounter(game, ability);
+                            int activatedCount = getKickedCounterStrict(game, ability, kickerCost.getText(true));
                             times = (activatedCount + 1) + (activatedCount == 0 ? " time " : " times ");
                         }
                         // TODO: add AI support to find max number of possible activations (from available mana)

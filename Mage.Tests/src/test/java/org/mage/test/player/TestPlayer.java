@@ -1869,6 +1869,20 @@ public class TestPlayer implements Player {
                 printAbilities(game, computerPlayer.getPlayable(game, true));
                 printEnd();
             }
+            if (choiceType.equals("choice")) {
+                printStart("Unused choices");
+                if (!choices.isEmpty()) {
+                    System.out.println(String.join("\n", choices));
+                }
+                printEnd();
+            }
+            if (choiceType.equals("target")) {
+                printStart("Unused targets");
+                if (targets.isEmpty()) {
+                    System.out.println(String.join("\n", targets));
+                }
+                printEnd();
+            }
             Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
                     + " turn " + game.getTurnNum()
                     + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")
