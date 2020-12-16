@@ -29,5 +29,6 @@ public final class Kaldheim extends ExpansionSet {
         this.maxCardNumberInBooster = 285;
 
         cards.add(new SetCardInfo("Barkchannel Pathway", 251, Rarity.RARE, mage.cards.b.BarkchannelPathway.class));
+        cards.add(new SetCardInfo("Blightstep Pathway", 252, Rarity.RARE, mage.cards.b.BlightstepPathway.class));
     }
 }
