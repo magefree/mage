@@ -2,6 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -11,9 +12,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -49,7 +53,8 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
 
     GruulRagebeastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);
-        this.addTarget(new TargetOpponentsCreaturePermanent());
+        this.addTarget(new TargetOpponentsCreaturePermanent().withChooseHint("for fighting"));
+        this.addTarget(new TargetPermanent(1, 1, StaticFilters.FILTER_PERMANENT, true)); // for info only
     }
 
     private GruulRagebeastTriggeredAbility(final GruulRagebeastTriggeredAbility ability) {
@@ -70,13 +75,21 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null
+        Permanent sourceObject = game.getPermanent(this.getSourceId());
+        if (sourceObject != null
+                && permanent != null
                 && permanent.isControlledBy(this.getControllerId())
-                && permanent.isCreature()
-                && (targetId.equals(this.getSourceId())
-                || !targetId.equals(this.getSourceId()))) {
+                && permanent.isCreature()) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                if (effect instanceof GruulRagebeastEffect) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+
+                    // triggered creature info stores as target
+                    Target targetInfo = this.getTargets().get(1);
+                    targetInfo.clearChosen();
+                    targetInfo.add(permanent.getId(), game);
+                    targetInfo.withChooseHint(permanent.getLogName());
+                }
             }
             return true;
         }
@@ -85,7 +98,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.";
+        return "Whenever {this} or another creature enters the battlefield under your control, " + super.getRule();
     }
 }
 
@@ -101,6 +114,7 @@ class GruulRagebeastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // second target for info only, so use only first
         Permanent triggeredCreature = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
@@ -115,5 +129,14 @@ class GruulRagebeastEffect extends OneShotEffect {
     @Override
     public GruulRagebeastEffect copy() {
         return new GruulRagebeastEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        // additional info for stack ability about triggered permanent (it store info in second target)
+        Target target = mode.getTargets().get(1);
+        String info = (target.getChooseHint() == null ? "" : " (your fighting creature: " + target.getChooseHint() + ")");
+
+        return "that creature fights target creature an opponent controls" + info;
     }
 }

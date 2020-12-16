@@ -13,6 +13,9 @@ import java.util.*;
  * Calcs commanders play count only from command zone (spell or land)
  * Cards like Remand can put command to hand and cast it without commander tax increase
  *
+ * Warning, if your code can be called in non commander games then you must watcher in your ability
+ * (example: you are using watcher in trigger, hint or effect, but do not checking another things like commander source or cost)
+ *
  * @author JayDi85
  */
 public class CommanderPlaysCountWatcher extends Watcher {
