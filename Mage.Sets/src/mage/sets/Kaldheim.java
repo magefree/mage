@@ -18,7 +18,7 @@ public final class Kaldheim extends ExpansionSet {
     private Kaldheim() {
         super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION);
         this.blockName = "Kaldheim";
-        this.hasBasicLands = true;
+        this.hasBasicLands = false; // TODO: change after more cards added
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
