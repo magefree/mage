@@ -492,6 +492,7 @@ public class ScryfallImageSupportCards {
             add("ZNC"); // Zendikar Rising Commander
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
+            add("KHM"); // Kaldheim
         }
     };
 

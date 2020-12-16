@@ -732,7 +732,7 @@ public class CardView extends SimpleCardView {
         // need only unique targets for arrow drawning
         Set<UUID> newTargets = new HashSet<>();
 
-        // fronormal targets
+        // from normal targets
         for (Target target : targets) {
             if (target.isChosen()) {
                 newTargets.addAll(target.getTargets());
