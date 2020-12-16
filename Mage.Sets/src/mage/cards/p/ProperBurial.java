@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -10,18 +8,18 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ProperBurial extends CardImpl {
 
     public ProperBurial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
 
         // Whenever a creature you control dies, you gain life equal to that creature's toughness.
@@ -63,7 +61,9 @@ class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.isControlledBy(this.getControllerId()) && permanent.isCreature()) {
+            if (permanent != null
+                    && permanent.isControlledBy(this.getControllerId())
+                    && permanent.isCreature()) {
                 this.getEffects().clear();
                 this.addEffect(new GainLifeEffect(permanent.getToughness().getValue()));
                 return true;

@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.abilities.Ability;
@@ -14,7 +13,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -26,7 +24,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class MartyrsBond extends CardImpl {
@@ -73,7 +70,9 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.isControlledBy(this.getControllerId()) && !permanent.isLand()) {
+            if (permanent != null
+                    && permanent.isControlledBy(this.getControllerId())
+                    && !permanent.isLand()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                 }

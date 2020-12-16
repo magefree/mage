@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,18 +8,18 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GruulRagebeast extends CardImpl {
@@ -50,10 +48,11 @@ public final class GruulRagebeast extends CardImpl {
 class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
 
     GruulRagebeastTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);this.addTarget(new TargetOpponentsCreaturePermanent());
+        super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);
+        this.addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-  private   GruulRagebeastTriggeredAbility(final GruulRagebeastTriggeredAbility ability) {
+    private GruulRagebeastTriggeredAbility(final GruulRagebeastTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,7 +70,8 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent.isControlledBy(this.controllerId)
+        if (permanent != null
+                && permanent.isControlledBy(this.getControllerId())
                 && permanent.isCreature()
                 && (targetId.equals(this.getSourceId())
                 || !targetId.equals(this.getSourceId()))) {
@@ -95,7 +95,7 @@ class GruulRagebeastEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-  private   GruulRagebeastEffect(final GruulRagebeastEffect effect) {
+    private GruulRagebeastEffect(final GruulRagebeastEffect effect) {
         super(effect);
     }
 
