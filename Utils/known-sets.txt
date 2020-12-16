@@ -117,6 +117,7 @@ Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
 Kaladesh|Kaladesh|
+Kaldheim|Kaldheim|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|
 Legends|Legends|

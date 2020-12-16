@@ -117,6 +117,7 @@ Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
 Kaladesh|KLD|
+Kaldheim|KHM|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
