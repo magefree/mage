@@ -30,7 +30,7 @@ public final class SphinxOfTheSecondSun extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of your postcombat main phase, you get an additional beginning phase after this phase.
+        // At the beginning of your postcombat main phase, you get an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
         this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(
                 new SphinxOfTheSecondSunEffect(), TargetController.YOU, false
         ), new SphinxOfTheSecondSunWatcher());
@@ -50,7 +50,7 @@ class SphinxOfTheSecondSunEffect extends OneShotEffect {
 
     SphinxOfTheSecondSunEffect() {
         super(Outcome.Benefit);
-        staticText = "you get an additional beginning phase after this phase";
+        staticText = "you get an additional beginning phase after this phase. <i>(The beginning phase includes the untap, upkeep, and draw steps.)</i>";
     }
 
     private SphinxOfTheSecondSunEffect(final SphinxOfTheSecondSunEffect effect) {
@@ -74,9 +74,9 @@ class SphinxOfTheSecondSunEffect extends OneShotEffect {
                 break;
             }
         }
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.POSTCOMBAT_MAIN, turnPhase, false);
-        combat.setNote("sphinxSecondSun");
-        game.getState().getTurnMods().add(combat);
+        TurnMod newPhase = new TurnMod(source.getControllerId(), TurnPhase.BEGINNING, turnPhase, false);
+        newPhase.setNote("sphinxSecondSun");
+        game.getState().getTurnMods().add(newPhase);
         return true;
     }
 }

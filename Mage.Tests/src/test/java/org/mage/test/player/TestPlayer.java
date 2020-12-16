@@ -1028,7 +1028,7 @@ public class TestPlayer implements Player {
         if (numberOfActions == actions.size()) {
             foundNoAction++;
             if (foundNoAction > maxCallsWithoutAction) {
-                throw new AssertionError("More priority calls to " + getName()
+                throw new AssertionError("Too much priority calls to " + getName()
                         + " without taking any action than allowed (" + maxCallsWithoutAction + ") on turn " + game.getTurnNum());
             }
         } else {
