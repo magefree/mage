@@ -8,6 +8,8 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
@@ -474,7 +476,7 @@ public class CardView extends SimpleCardView {
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     Mode mode = spellAbility.getModes().get(modeId);
                     if (!mode.getTargets().isEmpty()) {
-                        setTargets(mode.getTargets());
+                        addTargets(mode.getTargets(), mode.getEffects(), spellAbility, game);
                     }
                 }
             }
@@ -722,17 +724,31 @@ public class CardView extends SimpleCardView {
         this.tokenSetCode = token.getOriginalExpansionSetCode();
     }
 
-    protected final void setTargets(Targets targets) {
+    protected final void addTargets(Targets targets, Effects effects, Ability source, Game game) {
+        if (this.targets == null) {
+            this.targets = new ArrayList<>();
+        }
+
+        // need only unique targets for arrow drawning
+        Set<UUID> newTargets = new HashSet<>();
+
+        // fronormal targets
         for (Target target : targets) {
             if (target.isChosen()) {
-                for (UUID targetUUID : target.getTargets()) {
-                    if (this.targets == null) {
-                        this.targets = new ArrayList<>();
-                    }
-                    this.targets.add(targetUUID);
-                }
+                newTargets.addAll(target.getTargets());
             }
         }
+
+        // from targetPointers (can be same as normal targets)
+        List<UUID> fromPointers = effects.stream()
+                .map(Effect::getTargetPointer)
+                .filter(Objects::nonNull)
+                .map(p -> p.getTargets(game, source))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        newTargets.addAll(fromPointers);
+
+        this.targets.addAll(newTargets);
     }
 
     public String getName() {

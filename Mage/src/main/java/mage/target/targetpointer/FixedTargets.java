@@ -5,10 +5,6 @@
  */
 package mage.target.targetpointer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -18,10 +14,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
-public class FixedTargets implements TargetPointer {
+public class FixedTargets extends TargetPointerImpl {
 
     final ArrayList<MageObjectReference> targets = new ArrayList<>();
     final ArrayList<UUID> targetsNotInitialized = new ArrayList<>();
@@ -29,11 +30,15 @@ public class FixedTargets implements TargetPointer {
     private boolean initialized;
 
     public FixedTargets(UUID targetId) {
+        super();
+
         targetsNotInitialized.add(targetId);
         this.initialized = false;
     }
 
     public FixedTargets(Cards cards, Game game) {
+        super();
+
         for (UUID targetId : cards) {
             MageObjectReference mor = new MageObjectReference(targetId, game);
             targets.add(mor);
@@ -42,6 +47,8 @@ public class FixedTargets implements TargetPointer {
     }
 
     public FixedTargets(List<Permanent> permanents, Game game) {
+        super();
+
         for (Permanent permanent : permanents) {
             MageObjectReference mor = new MageObjectReference(permanent.getId(), permanent.getZoneChangeCounter(game), game);
             targets.add(mor);
@@ -50,6 +57,8 @@ public class FixedTargets implements TargetPointer {
     }
 
     public FixedTargets(Set<Card> cards, Game game) {
+        super();
+
         for (Card card : cards) {
             MageObjectReference mor = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game), game);
             targets.add(mor);
@@ -57,10 +66,12 @@ public class FixedTargets implements TargetPointer {
         this.initialized = true;
     }
 
-    private FixedTargets(final FixedTargets fixedTargets) {
-        this.targets.addAll(fixedTargets.targets);
-        this.targetsNotInitialized.addAll(fixedTargets.targetsNotInitialized);
-        this.initialized = fixedTargets.initialized;
+    private FixedTargets(final FixedTargets targetPointer) {
+        super(targetPointer);
+
+        this.targets.addAll(targetPointer.targets);
+        this.targetsNotInitialized.addAll(targetPointer.targetsNotInitialized);
+        this.initialized = targetPointer.initialized;
     }
 
     @Override
@@ -97,7 +108,7 @@ public class FixedTargets implements TargetPointer {
     }
 
     @Override
-    public TargetPointer copy() {
+    public FixedTargets copy() {
         return new FixedTargets(this);
     }
 

@@ -1,7 +1,5 @@
 package mage.view;
 
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -16,6 +14,9 @@ import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -124,7 +125,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     abilityView = new AbilityView(ability, sourceObject.getName(), sourceCardView);
                 }
                 if (!ability.getTargets().isEmpty()) {
-                    abilityView.setTargets(ability.getTargets());
+                    abilityView.addTargets(ability.getTargets(), ability.getEffects(), ability, game);
                 } else {
                     List<UUID> abilityTargets = new ArrayList<>();
                     for (Effect effect : ability.getEffects()) {

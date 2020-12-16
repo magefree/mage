@@ -5,11 +5,6 @@
  */
 package mage.target.targetpointer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -17,11 +12,12 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.*;
+
 /**
- *
  * @author LevelX2
  */
-public class ThirdTargetPointer implements TargetPointer {
+public class ThirdTargetPointer extends TargetPointerImpl {
 
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
@@ -30,9 +26,12 @@ public class ThirdTargetPointer implements TargetPointer {
     }
 
     public ThirdTargetPointer() {
+        super();
     }
 
-    public ThirdTargetPointer(ThirdTargetPointer targetPointer) {
+    public ThirdTargetPointer(final ThirdTargetPointer targetPointer) {
+        super(targetPointer);
+
         this.zoneChangeCounter = new HashMap<>();
         for (Map.Entry<UUID, Integer> entry : targetPointer.zoneChangeCounter.entrySet()) {
             this.zoneChangeCounter.put(entry.getKey(), entry.getValue());
@@ -84,7 +83,7 @@ public class ThirdTargetPointer implements TargetPointer {
     }
 
     @Override
-    public TargetPointer copy() {
+    public ThirdTargetPointer copy() {
         return new ThirdTargetPointer(this);
     }
 

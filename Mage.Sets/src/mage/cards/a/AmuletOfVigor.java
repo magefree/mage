@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -11,9 +9,11 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.GameLog;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -21,8 +21,9 @@ import mage.target.targetpointer.FixedTarget;
 public final class AmuletOfVigor extends CardImpl {
 
     public AmuletOfVigor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
+        // Whenever a permanent enters the battlefield tapped and under your control, untap it.
         this.addAbility(new AmuletOfVigorTriggeredAbility());
     }
 
@@ -37,6 +38,7 @@ public final class AmuletOfVigor extends CardImpl {
 }
 
 class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
+
     AmuletOfVigorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new UntapTargetEffect());
     }
@@ -57,10 +59,13 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null && p.isTapped() && p.isControlledBy(this.controllerId)) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.isTapped() && permanent.isControlledBy(this.getControllerId())) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                effect.setTargetPointer(
+                        new FixedTarget(event.getTargetId())
+                                .withData("triggeredName", GameLog.getColoredObjectIdNameForTooltip(permanent))
+                );
             }
             return true;
         }
@@ -69,6 +74,11 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a permanent enters the battlefield tapped and under your control, untap it.";
+        // that triggers depends on stack order, so make each trigger unique with extra info
+        String triggeredInfo = "";
+        if (this.getEffects().get(0).getTargetPointer() != null) {
+            triggeredInfo = " Triggered permanent: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + ".";
+        }
+        return "Whenever a permanent enters the battlefield tapped and under your control, untap it." + triggeredInfo;
     }
 }

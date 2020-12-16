@@ -1,13 +1,15 @@
 package mage.target.targetpointer;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.Copyable;
 
-public interface TargetPointer extends Serializable {
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
+
+public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
 
     void init(Game game, Ability source);
 
@@ -34,4 +36,14 @@ public interface TargetPointer extends Serializable {
      * @return permanent
      */
     Permanent getFirstTargetPermanentOrLKI(Game game, Ability source);
+
+    /**
+     * Store text to target pointer (usefull to keep data for specific trigger, e.g. selected target name for rules)
+     *
+     * @param key
+     * @param value
+     */
+    TargetPointer withData(String key, String value);
+
+    String getData(String key);
 }

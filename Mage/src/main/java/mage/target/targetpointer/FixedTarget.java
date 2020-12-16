@@ -1,9 +1,5 @@
 package mage.target.targetpointer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -12,7 +8,12 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-public class FixedTarget implements TargetPointer {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+public class FixedTarget extends TargetPointerImpl {
 
     private final UUID targetId;
     private int zoneChangeCounter;
@@ -29,6 +30,7 @@ public class FixedTarget implements TargetPointer {
      * @param target
      */
     public FixedTarget(UUID target) {
+        super();
         this.targetId = target;
         this.initialized = false;
     }
@@ -45,6 +47,7 @@ public class FixedTarget implements TargetPointer {
      * @param game
      */
     public FixedTarget(Card card, Game game) {
+        super();
         this.targetId = card.getId();
         this.zoneChangeCounter = card.getZoneChangeCounter(game);
         this.initialized = true;
@@ -71,6 +74,7 @@ public class FixedTarget implements TargetPointer {
      * @param zoneChangeCounter
      */
     public FixedTarget(UUID targetId, int zoneChangeCounter) {
+        super();
         this.targetId = targetId;
         this.initialized = true;
         this.zoneChangeCounter = zoneChangeCounter;
@@ -83,15 +87,18 @@ public class FixedTarget implements TargetPointer {
      * @param game
      */
     public FixedTarget(UUID targetId, Game game) {
+        super();
         this.targetId = targetId;
         this.initialized = true;
         this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
     }
 
-    public FixedTarget(final FixedTarget fixedTarget) {
-        this.targetId = fixedTarget.targetId;
-        this.zoneChangeCounter = fixedTarget.zoneChangeCounter;
-        this.initialized = fixedTarget.initialized;
+    public FixedTarget(final FixedTarget targetPointer) {
+        super(targetPointer);
+
+        this.targetId = targetPointer.targetId;
+        this.zoneChangeCounter = targetPointer.zoneChangeCounter;
+        this.initialized = targetPointer.initialized;
     }
 
     @Override
@@ -142,7 +149,7 @@ public class FixedTarget implements TargetPointer {
     }
 
     @Override
-    public TargetPointer copy() {
+    public FixedTarget copy() {
         return new FixedTarget(this);
     }
 
@@ -173,5 +180,4 @@ public class FixedTarget implements TargetPointer {
         }
         return null;
     }
-
 }

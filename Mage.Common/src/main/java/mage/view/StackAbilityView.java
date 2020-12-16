@@ -4,6 +4,8 @@ import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -17,8 +19,6 @@ import mage.util.GameLog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.HintUtils;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -78,7 +78,7 @@ public class StackAbilityView extends CardView {
         for (UUID modeId : ability.getModes().getSelectedModes()) {
             Mode mode = ability.getModes().get(modeId);
             if (!mode.getTargets().isEmpty()) {
-                setTargets(mode.getTargets());
+                addTargets(mode.getTargets(), mode.getEffects(), ability, game);
             } else {
                 List<UUID> targetList = new ArrayList<>();
                 for (Effect effect : mode.getEffects()) {
@@ -102,13 +102,13 @@ public class StackAbilityView extends CardView {
                             }
                         }
                     }
-
                 }
             }
         }
         if (!names.isEmpty()) {
             getRules().add("<i>Related objects: " + names.toString() + "</i>");
         }
+
         // show for modal ability, which mode was choosen
         if (ability.isModal()) {
             Modes modes = ability.getModes();
@@ -117,7 +117,7 @@ public class StackAbilityView extends CardView {
                 this.rules.add("<span color='green'><i>Chosen mode: " + mode.getEffects().getText(mode) + "</i></span>");
             }
         }
-        
+
         if (HintUtils.ABILITY_HINTS_ENABLE) {
             List<String> abilityHints = new ArrayList<>();
             for (Hint hint : ability.getHints()) {
