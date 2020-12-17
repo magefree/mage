@@ -2754,7 +2754,7 @@ public abstract class GameImpl implements Game, Serializable {
         // If the current monarch leaves the game. When that happens, the player whose turn it is becomes the monarch.
         // If the monarch leaves the game on their turn, the next player in turn order becomes the monarch.
         if (playerId.equals(getMonarchId())) {
-            if (!isActivePlayer(playerId)) {
+            if (!isActivePlayer(playerId) && getActivePlayerId() != null) {
                 setMonarchId(null, getActivePlayerId());
             } else {
                 Player nextPlayer = getPlayerList().getNext(this, true);
@@ -3370,16 +3370,20 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void setMonarchId(Ability source, UUID monarchId) {
-        if (monarchId.equals(getMonarchId())) { // Nothing happens if you're already the monarch
+        if (monarchId.equals(getMonarchId())) {
+            // Nothing happens if you're already the monarch
             return;
         }
+
         if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.BECOME_MONARCH, monarchId, source, monarchId))) {
             return;
         }
-        Player newMonarch = getPlayer(monarchId);
+
         if (getMonarchId() == null) {
             getState().addDesignation(new Monarch(), this, monarchId);
         }
+
+        Player newMonarch = getPlayer(monarchId);
         if (newMonarch != null) {
             getState().setMonarchId(monarchId);
             informPlayers(newMonarch.getLogName() + " is the monarch");
