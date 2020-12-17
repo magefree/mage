@@ -7,10 +7,11 @@ public class GameSequence {
     public List<Experience> experiences;
     private String winner;
     private static final Logger logger = Logger.getLogger(GameSequence.class);
-    GameSequence(){
+    protected Player player;
+    GameSequence(Player play){
         experiences= new ArrayList<Experience>();
         winner="";
-        
+        player=play;
     }
     public void setWinner(String win){
         winner=win;
@@ -18,7 +19,10 @@ public class GameSequence {
     public void addExperience(Experience exp){
         experiences.add(exp);
     }
-    public int getValue(Player player){ 
+    public Player getPlayer(){
+        return player;
+    }
+    public int getValue(){ 
         String winLine="Player "+player.getName()+" is the winner";
         if(winner.equals(winLine)){
             return 1;
