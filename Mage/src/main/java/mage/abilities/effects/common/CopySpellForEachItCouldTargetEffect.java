@@ -80,7 +80,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                 return false;
             }
 
-            // collect objects that can be targeted
+            // generate copies for each possible target, but do not put it to stack (use must choose targets in custom order later)
             Spell copy = spell.copySpell(source.getControllerId(), game);
             modifyCopy(copy, game, source);
             Target sampleTarget = targetsToBeChanged.iterator().next().getTarget(copy);
@@ -135,28 +135,33 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                 }
             }
 
-            // allow the copies' controller to choose the order that they go on the stack
+            // allows controller of the copies to choose spells order on stack (by using targeting GUI)
             for (Player player : game.getPlayers().values()) {
                 if (playerTargetCopyMap.containsKey(player.getId())) {
                     Map<UUID, Spell> targetCopyMap = playerTargetCopyMap.get(player.getId());
                     if (targetCopyMap != null) {
                         while (!targetCopyMap.isEmpty()) {
+                            // all checks must be make for new copied spell, not original (controller can be changed)
+                            Spell spellSample = targetCopyMap.values().stream().findFirst().get();
                             FilterInPlay<T> setFilter = filter.copy();
-                            setFilter.add(new FromSetPredicate(targetCopyMap.keySet()));
+                            setFilter.add(new FromSetPredicate(targetCopyMap.keySet())); // allows only unselected targets
                             Target target = new TargetWithAdditionalFilter(sampleTarget, setFilter);
                             target.setNotTarget(false); // it is targeted, not chosen
-                            target.setMinNumberOfTargets(0);
+                            target.setMinNumberOfTargets(0); // if not selected then it uses first target (see below), same for AI
                             target.setMaxNumberOfTargets(1);
-                            target.setTargetName(filter.getMessage() + " that " + spell.getLogName()
+                            target.setTargetName(filter.getMessage() + " that " + spellSample.getLogName()
                                     + " could target (" + targetCopyMap.size() + " remaining)");
-                            // shortcut if there's only one possible target remaining
+
                             if (targetCopyMap.size() > 1
-                                    && target.canChoose(spell.getId(), player.getId(), game)) {
+                                    && target.canChoose(spellSample.getId(), player.getId(), game)) {
                                 // The original "source" is not applicable here due to the spell being a copy.  ie: Zada, Hedron Grinder
-                                player.chooseTarget(Outcome.Neutral, target, spell.getSpellAbility(), game); // not source, but the spell that is copied
+                                Outcome outcome = spellSample.getSpellAbility().getAllEffects().getOutcome(spellSample.getSpellAbility());
+                                player.chooseTarget(outcome, target, spellSample.getSpellAbility(), game); // not source, but the spell that is copied
                             }
+
                             Collection<UUID> chosenIds = target.getTargets();
                             if (chosenIds.isEmpty()) {
+                                // uses first target on cancel/non-selected
                                 chosenIds = targetCopyMap.keySet();
                             }
                             List<UUID> toDelete = new ArrayList<>();

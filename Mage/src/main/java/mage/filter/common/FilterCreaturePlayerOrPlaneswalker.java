@@ -1,11 +1,11 @@
 package mage.filter.common;
 
-import java.util.UUID;
-
 import mage.MageItem;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy Created on 4/8/18.
@@ -33,22 +33,26 @@ public class FilterCreaturePlayerOrPlaneswalker extends FilterPermanentOrPlayer 
 
     @Override
     public boolean match(MageItem o, Game game) {
-        if (o instanceof Player) {
-            return playerFilter.match((Player) o, game);
-        } else if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent) o, game)
-                    || planeswalkerFilter.match((Permanent) o, game);
+        if (super.match(o, game)) {
+            if (o instanceof Player) {
+                return playerFilter.match((Player) o, game);
+            } else if (o instanceof Permanent) {
+                return creatureFilter.match((Permanent) o, game)
+                        || planeswalkerFilter.match((Permanent) o, game);
+            }
         }
         return false;
     }
 
     @Override
     public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
-        if (o instanceof Player) {
-            return playerFilter.match((Player) o, sourceId, playerId, game);
-        } else if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent) o, sourceId, playerId, game)
-                    || planeswalkerFilter.match((Permanent) o, sourceId, playerId, game);
+        if (super.match(o, game)) { // process predicates
+            if (o instanceof Player) {
+                return playerFilter.match((Player) o, sourceId, playerId, game);
+            } else if (o instanceof Permanent) {
+                return creatureFilter.match((Permanent) o, sourceId, playerId, game)
+                        || planeswalkerFilter.match((Permanent) o, sourceId, playerId, game);
+            }
         }
         return false;
     }
