@@ -44,10 +44,8 @@ public final class FacelessDevourer extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
 
         // When Faceless Devourer enters the battlefield, exile another target creature with shadow.
-        Effect effect = new ExileTargetForSourceEffect();
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // When Faceless Devourer leaves the battlefield, return the exiled card to the battlefield under its owner's control.

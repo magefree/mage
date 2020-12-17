@@ -36,12 +36,10 @@ public final class FelidarGuardian extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Felidar Guardian enters the battlefield, you may exile another target permanent you control, then return that card to the battlefield under its owner's control.
-        Effect effect = new ExileTargetForSourceEffect();
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
-
     }
 
     public FelidarGuardian(final FelidarGuardian card) {

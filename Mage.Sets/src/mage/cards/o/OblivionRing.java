@@ -34,14 +34,12 @@ public final class OblivionRing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // When Oblivion Ring enters the battlefield, exile another target nonland permanent.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(anotherNonlandPermanent);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
+        ability.addTarget(new TargetPermanent(anotherNonlandPermanent));
+        this.addAbility(ability);
 
         // When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
-        this.addAbility(ability2);
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
     public OblivionRing(final OblivionRing card) {

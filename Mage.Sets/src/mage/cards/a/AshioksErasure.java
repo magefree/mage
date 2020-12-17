@@ -123,16 +123,11 @@ class AshioksErasureReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         }
         UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
 
-        if (exileZone == null) {
-            return false;
-        }
         ExileZone exile = game.getExile().getExileZone(exileZone);
         if (exile == null) {
             // try without ZoneChangeCounter - that is useful for tokens
             exileZone = CardUtil.getCardExileZoneId(game, source);
-            if (exileZone != null) {
-                exile = game.getExile().getExileZone(exileZone);
-            }
+            exile = game.getExile().getExileZone(exileZone);
         }
 
         if (exile == null) {

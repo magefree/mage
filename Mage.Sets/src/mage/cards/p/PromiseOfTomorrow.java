@@ -39,13 +39,12 @@ public final class PromiseOfTomorrow extends CardImpl {
         ));
 
         // At the beginning of each end step, if you control no creatures, sacrifice Promise of Tomorrow and return all cards exiled with it to the battlefield under your control.
+        BeginningOfEndStepTriggeredAbility returnAbility = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false);
+        returnAbility.addEffect(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD));
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new SacrificeSourceEffect(), TargetController.ANY, false
-                ), condition, "At the beginning of each end step, if you control no creatures, " +
+                returnAbility, condition, "At the beginning of each end step, if you control no creatures, " +
                 "sacrifice {this} and return all cards exiled with it to the battlefield under your control."
         );
-        ability.addEffect(new ReturnFromExileForSourceEffect(Zone.EXILED));
         this.addAbility(ability);
     }
 

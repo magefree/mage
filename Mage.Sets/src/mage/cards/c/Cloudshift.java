@@ -20,8 +20,7 @@ public final class Cloudshift extends CardImpl {
 
         // Exile target creature you control, then return that card to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Effect effect = new ExileTargetForSourceEffect();
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false));
     }
 

@@ -113,8 +113,8 @@ class WerewolfRansackerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (!targetPointer.getTargets(game, source).isEmpty()) {
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        if (this.targetPointer != null && !this.targetPointer.getTargets(game, source).isEmpty()) {
+            for (UUID permanentId : this.targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     if (permanent.destroy(source, game, false)) {

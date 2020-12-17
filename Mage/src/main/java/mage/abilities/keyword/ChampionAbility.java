@@ -154,7 +154,7 @@ class ChampionExileCost extends CostImpl {
         MageObject sourceObject = ability.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
-                UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
+                UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter()); // exileId important for return effect
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {

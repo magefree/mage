@@ -39,15 +39,12 @@ public final class FacelessButcher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.
-        Effect effect = new ExileTargetForSourceEffect();
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(effect, false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
 
         // When Faceless Butcher leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
-        this.addAbility(ability2);
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
 
     }
 

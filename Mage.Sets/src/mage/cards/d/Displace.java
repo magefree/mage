@@ -21,11 +21,9 @@ public final class Displace extends CardImpl {
 
         // Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2, new FilterControlledCreaturePermanent("creatures you control"), false));
-        Effect effect = new ExileTargetForSourceEffect();
-        this.getSpellAbility().addEffect(effect);
-        effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
-                .withReturnNames("those cards", "their owner's").concatBy(", then");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
+                .withReturnNames("those cards", "their owner's").concatBy(", then"));
     }
 
     public Displace(final Displace card) {
