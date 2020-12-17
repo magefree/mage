@@ -186,14 +186,14 @@ public class BoosterGenerationTest extends MageTestBase {
         List<CardInfo> setOrzaList = MastersEditionIV.getInstance().getSpecialLand();
         Assert.assertEquals("Urza special lands must have 4 variation for each of 3 card", 3 * 4, setOrzaList.size());
 
-        List<String> foundedUrzaList = new ArrayList<>();
+        List<String> foundUrzaList = new ArrayList<>();
         for (CardInfo cardInfo : setOrzaList) {
             Assert.assertTrue("card " + cardInfo.getName() + " must be in urza's list", needUrzaList.contains(cardInfo.getName()));
-            foundedUrzaList.add(cardInfo.getName());
+            foundUrzaList.add(cardInfo.getName());
         }
 
         for (String needName : needUrzaList) {
-            Assert.assertTrue("can't find need card " + needName + " in special land list", foundedUrzaList.contains(needName));
+            Assert.assertTrue("can't find need card " + needName + " in special land list", foundUrzaList.contains(needName));
         }
     }
 

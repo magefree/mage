@@ -99,7 +99,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
         ExileZone exile = game.getExile().getExileZone(exileId);
         if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
-            if (returnToZone == Zone.BATTLEFIELD) {
+            if (Zone.BATTLEFIELD.equals(returnToZone)) {
                 controller.moveCards(exile.getCards(game), returnToZone, source, game, false, false, true, null);
             } else {
                 controller.moveCards(exile, returnToZone, source, game);
@@ -110,19 +110,19 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     private void updateText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("return the exiled " + this.returnName + " ");
+        sb.append("return the exiled ").append(this.returnName).append(" ");
         switch (returnToZone) {
             case BATTLEFIELD:
-                sb.append("to the battlefield under " + this.returnControlName + " control");
+                sb.append("to the battlefield under ").append(this.returnControlName).append(" control");
                 if (tapped) {
                     sb.append(" tapped");
                 }
                 break;
             case HAND:
-                sb.append("to " + this.returnControlName + " hand");
+                sb.append("to ").append(this.returnControlName).append(" hand");
                 break;
             case GRAVEYARD:
-                sb.append("to " + this.returnControlName + " graveyard");
+                sb.append("to ").append(this.returnControlName).append(" graveyard");
                 break;
         }
         staticText = sb.toString();

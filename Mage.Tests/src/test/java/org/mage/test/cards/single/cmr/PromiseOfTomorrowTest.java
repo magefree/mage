@@ -31,8 +31,8 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         checkExileCount("after die", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 2);
 
         // must return
-        checkPermanentCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 2);
         checkGraveyardCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Promise of Tomorrow", 1);
+        checkPermanentCount("after return", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 2);        
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);

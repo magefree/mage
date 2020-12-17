@@ -1257,31 +1257,31 @@ public class TestPlayer implements Player {
     private void assertAbility(PlayerAction action, Game game, Player player, String permanentName, String abilityClass, boolean mustHave) {
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
-        boolean founded = false;
+        boolean found = false;
         for (Ability ability : perm.getAbilities(game)) {
             if (ability.getClass().getName().equals(abilityClass)) {
-                founded = true;
+                found = true;
                 break;
             }
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have the ability " + abilityClass, true, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have the ability " + abilityClass, true, found);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must not have the ability " + abilityClass, false, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must not have the ability " + abilityClass, false, found);
         }
     }
 
     private void assertPlayableAbility(PlayerAction action, Game game, Player player, String abilityStartText, boolean mustHave) {
-        boolean founded = false;
+        boolean found = false;
         for (Ability ability : computerPlayer.getPlayable(game, true)) {
             if (ability.toString().startsWith(abilityStartText)) {
-                founded = true;
+                found = true;
                 break;
             }
         }
 
-        if (mustHave && !founded) {
+        if (mustHave && !found) {
             printStart("Available mana for " + computerPlayer.getName());
             printMana(game, computerPlayer.getManaAvailable(game));
             printStart(action.getActionName());
@@ -1290,7 +1290,7 @@ public class TestPlayer implements Player {
             Assert.fail("Must have playable ability, but not found: " + abilityStartText);
         }
 
-        if (!mustHave && founded) {
+        if (!mustHave && found) {
             printStart("Available mana for " + computerPlayer.getName());
             printMana(game, computerPlayer.getManaAvailable(game));
             printStart(action.getActionName());
@@ -1301,82 +1301,82 @@ public class TestPlayer implements Player {
     }
 
     private void assertPermanentCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
-        int foundedCount = 0;
+        int foundCount = 0;
         for (Permanent perm : game.getBattlefield().getAllPermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
-                foundedCount++;
+                foundCount++;
             }
         }
 
-        if (foundedCount != count) {
+        if (foundCount != count) {
             printStart("Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
             printEnd();
-            Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but founded " + foundedCount);
+            Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but found " + foundCount);
         }
     }
 
     private void assertPermanentTapped(PlayerAction action, Game game, Player player, String permanentName, boolean tapped, int count) {
-        int foundedCount = 0;
+        int foundCount = 0;
         for (Permanent perm : game.getBattlefield().getAllPermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName)
                     && perm.getControllerId().equals(player.getId())
                     && perm.isTapped() == tapped) {
-                foundedCount++;
+                foundCount++;
             }
         }
 
-        if (foundedCount != count) {
+        if (foundCount != count) {
             printStart("Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
-                    + "permanents with name " + permanentName + ", but founded " + foundedCount);
+                    + "permanents with name " + permanentName + ", but found " + foundCount);
         }
     }
 
     private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
-        int foundedCount = 0;
+        int foundCount = 0;
         for (Permanent perm : game.getBattlefield().getAllPermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
-                foundedCount = perm.getCounters(game).getCount(counterType);
+                foundCount = perm.getCounters(game).getCount(counterType);
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundedCount);
+        Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundCount);
     }
 
     private void assertExileCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
-        int foundedCount = 0;
+        int foundCount = 0;
         for (Card card : game.getExile().getAllCards(game)) {
             if (hasObjectTargetNameOrAlias(card, permanentName) && card.isOwnedBy(player.getId())) {
-                foundedCount++;
+                foundCount++;
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in exile zone with " + count + " instances", count, foundedCount);
+        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in exile zone with " + count + " instances", count, foundCount);
     }
 
     private void assertGraveyardCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
-        int foundedCount = 0;
+        int foundCount = 0;
         for (Card card : player.getGraveyard().getCards(game)) {
             if (hasObjectTargetNameOrAlias(card, permanentName) && card.isOwnedBy(player.getId())) {
-                foundedCount++;
+                foundCount++;
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in graveyard zone with " + count + " instances", count, foundedCount);
+        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in graveyard zone with " + count + " instances", count, foundCount);
     }
 
     private void assertLibraryCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
-        int foundedCount = 0;
+        int foundCount = 0;
         for (Card card : player.getLibrary().getCards(game)) {
             if (hasObjectTargetNameOrAlias(card, permanentName)) {
-                foundedCount++;
+                foundCount++;
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in library with " + count + " instances", count, foundedCount);
+        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in library with " + count + " instances", count, foundCount);
     }
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
@@ -1436,18 +1436,18 @@ public class TestPlayer implements Player {
 
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
-        boolean founded = false;
+        boolean found = false;
         for (CardType ct : perm.getCardType()) {
             if (ct.equals(type)) {
-                founded = true;
+                found = true;
                 break;
             }
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have type " + type, true, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have type " + type, true, found);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not type " + type, false, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not type " + type, false, found);
         }
     }
 
@@ -1455,18 +1455,18 @@ public class TestPlayer implements Player {
 
         Permanent perm = findPermanentWithAssert(action, game, player, permanentName);
 
-        boolean founded = false;
+        boolean found = false;
         for (SubType st : perm.getSubtype(game)) {
             if (st.equals(subType)) {
-                founded = true;
+                found = true;
                 break;
             }
         }
 
         if (mustHave) {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have subtype " + subType, true, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have subtype " + subType, true, found);
         } else {
-            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not subtype " + subType, false, founded);
+            Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have not subtype " + subType, false, found);
         }
     }
 
@@ -1505,13 +1505,13 @@ public class TestPlayer implements Player {
     }
 
     private void assertStackObject(PlayerAction action, Game game, String stackAbilityName, int needAmount) {
-        long foundedAmount = game.getStack()
+        long foundAmount = game.getStack()
                 .stream()
                 .filter(stack -> stack.getStackAbility().toString().startsWith(stackAbilityName))
                 .count();
-        if (needAmount != foundedAmount) {
+        if (needAmount != foundAmount) {
             printStack(game);
-            Assert.fail(action.getActionName() + " - stack must have " + needAmount + " objects with ability [" + stackAbilityName + "] but have " + foundedAmount);
+            Assert.fail(action.getActionName() + " - stack must have " + needAmount + " objects with ability [" + stackAbilityName + "] but have " + foundAmount);
         }
     }
 

@@ -12,7 +12,7 @@ public abstract class DamagedBatchEvent extends GameEvent {
     private final Set<DamagedEvent> events = new HashSet<>();
 
     public DamagedBatchEvent(EventType type, Class<? extends DamagedEvent> damageClazz) {
-        super(GameEvent.EventType.DAMAGED_PLAYER_BATCH, null, null, null);
+        super(type, null, null, null);
         this.damageClazz = damageClazz;
     }
 
