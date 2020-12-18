@@ -1,8 +1,5 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,6 +41,10 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
 import mage.util.functions.ApplyToPermanent;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public interface Game extends MageItem, Serializable {
 
@@ -501,6 +502,21 @@ public interface Game extends MageItem, Serializable {
 
     default Set<UUID> getCommandersIds(Player player) {
         return getCommandersIds(player, CommanderCardType.ANY);
+    }
+
+    /**
+     * Return not played commander cards from command zone
+     *
+     * @param player
+     * @return
+     */
+    default Set<Card> getCommanderCardsFromCommandZone(Player player) {
+        // commanders in command zone aren't cards so you must call getCard instead getObject
+        return getCommandersIds(player).stream()
+                .map(this::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> Zone.COMMAND.equals(this.getState().getZone(card.getId())))
+                .collect(Collectors.toSet());
     }
 
     void setGameStopped(boolean gameStopped);

@@ -238,8 +238,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    @Ignore
-    // TODO: fix gain ability for spells to apply in all zones instead stack only or change getPlayable to look ahead and simulate spell on stack (wtf)
     public void test_Other_ConvokeAsGains() {
         // {1}{U}
         // Artifact spells you cast have convoke.

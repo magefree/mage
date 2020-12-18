@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -6,23 +5,23 @@ import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
- *
  * @author BetaSteward
  */
-public class MycosynthGolemTest extends CardTestPlayerBase {
+public class MycosynthGolemTest extends CardTestCommander4Players {
 
-    /**
-     * Mycosynth Golem Artifact Creature — Golem 4/5, 11 (11) Affinity for
-     * artifacts (This spell costs {1} less to cast for each artifact you
-     * control.) Artifact creature spells you cast have affinity for artifacts.
-     * (They cost {1} less to cast for each artifact you control.)
-     *
-     */
     @Test
-    public void testSpellsAffinity() {
+    public void test_AffinityForNormalSpells() {
+        /*
+         bug:
+         Mycosynth Golem Artifact Creature — Golem 4/5, 11 (11) Affinity for
+         artifacts (This spell costs {1} less to cast for each artifact you
+         control.) Artifact creature spells you cast have affinity for artifacts.
+         (They cost {1} less to cast for each artifact you control.)
+         */
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         // Affinity for artifacts
@@ -32,8 +31,10 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Myr");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
         assertHandCount(playerA, "Alpha Myr", 0);
@@ -48,7 +49,5 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
             tappedLands++;
         }
         Assert.assertEquals("only one land may be tapped because the cost reduction", 1, tappedLands);
-
     }
-
 }

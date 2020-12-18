@@ -23,6 +23,7 @@ import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -815,6 +816,15 @@ public final class CardUtil {
     public static Abilities<Ability> getAbilities(MageObject object, Game game) {
         if (object instanceof Card) {
             return ((Card) object).getAbilities(game);
+        } else if (object instanceof Commander && Zone.COMMAND.equals(game.getState().getZone(object.getId()))) {
+            // Commanders in command zone must gain cost related abilities for playable
+            // calculation (affinity, convoke; example: Chief Engineer). So you must use card object here
+            Card card = game.getCard(object.getId());
+            if (card != null) {
+                return card.getAbilities(game);
+            } else {
+                return object.getAbilities();
+            }
         } else {
             return object.getAbilities();
         }

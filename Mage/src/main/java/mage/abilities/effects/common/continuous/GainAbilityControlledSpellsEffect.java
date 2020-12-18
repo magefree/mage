@@ -44,8 +44,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null
-                && permanent != null) {
+        if (player != null && permanent != null) {
             for (Card card : game.getExile().getAllCards(game)) {
                 if (card.isOwnedBy(source.getControllerId())
                         && filter.match(card, game)) {
@@ -67,6 +66,14 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
+
+            // workaround to gain cost reduction abilities to commanders before cast (make it playable)
+            game.getCommanderCardsFromCommandZone(player).stream()
+                    .filter(card -> filter.match(card, game))
+                    .forEach(card -> {
+                        game.getState().addOtherAbility(card, ability);
+                    });
+
             for (StackObject stackObject : game.getStack()) {
                 // only spells cast, so no copies of spells
                 if ((stackObject instanceof Spell)

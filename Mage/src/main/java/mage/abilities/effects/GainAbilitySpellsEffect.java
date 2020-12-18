@@ -60,6 +60,14 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
                     game.getState().addOtherAbility(card, ability);
                 }
             }
+
+            // workaround to gain cost reduction abilities to commanders before cast (make it playable)
+            game.getCommanderCardsFromCommandZone(player).stream()
+                    .filter(card -> filter.match(card, game))
+                    .forEach(card -> {
+                        game.getState().addOtherAbility(card, ability);
+                    });
+
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject.isControlledBy(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());
