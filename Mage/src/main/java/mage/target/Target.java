@@ -50,6 +50,12 @@ public interface Target extends Serializable {
 
     boolean canTarget(UUID id, Game game);
 
+    /**
+     * @param id
+     * @param source WARNING, it can be null for AI or other calls from events (TODO: introduce normal source in AI ComputerPlayer)
+     * @param game
+     * @return
+     */
     boolean canTarget(UUID id, Ability source, Game game);
 
     boolean stillLegalTarget(UUID id, Ability source, Game game);

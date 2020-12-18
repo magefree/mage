@@ -195,7 +195,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
      * Return real affected max modes in current game. Use null params for default max modes value.
      *
      * @param game
-     * @param source
+     * @param source can be null for rules generation
      * @return
      */
     public int getMaxModes(Game game, Ability source) {

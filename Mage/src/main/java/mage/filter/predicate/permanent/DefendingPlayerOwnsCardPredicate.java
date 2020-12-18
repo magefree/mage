@@ -1,19 +1,19 @@
 package mage.filter.predicate.permanent;
 
 import mage.cards.Card;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Game;
 
 /**
  * @author TheElk801
  */
-public enum DefendingPlayerOwnsCardPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
+public enum DefendingPlayerOwnsCardPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return input.getObject().isOwnedBy(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+    public boolean apply(ObjectPlayer<Card> input, Game game) {
+        return game.getCombat().getPlayerDefenders(game, false).contains(input.getObject().getOwnerId());
     }
 
     @Override

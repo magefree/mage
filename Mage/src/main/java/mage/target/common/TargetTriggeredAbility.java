@@ -1,9 +1,5 @@
-
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.constants.Zone;
@@ -13,8 +9,11 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public class TargetTriggeredAbility extends TargetObject {
@@ -32,6 +31,7 @@ public class TargetTriggeredAbility extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
+        // 114.4. A spell or ability on the stack is an illegal target for itself.
         if (source != null && source.getSourceId().equals(id)) {
             return false;
         }

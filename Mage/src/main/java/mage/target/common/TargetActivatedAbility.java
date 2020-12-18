@@ -41,6 +41,7 @@ public class TargetActivatedAbility extends TargetObject {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
+        // 114.4. A spell or ability on the stack is an illegal target for itself.
         if (source != null && source.getSourceId().equals(id)) {
             return false;
         }
@@ -80,7 +81,7 @@ public class TargetActivatedAbility extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
-                    && filter.match(((StackAbility) stackObject), game)) {
+                    && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
