@@ -1394,10 +1394,11 @@ public abstract class GameImpl implements Game, Serializable {
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark, "Game exception: " + ex.getMessage());
                         bookmark = 0;
-                        Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (errorContinueCounter > 15) {
-                            throw new MageException("Iterated player priority after game exception too often, game ends!");
+                            throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
+                                    + ex.getMessage());
                         }
+                        Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (activePlayer != null && !activePlayer.isTestMode()) {
                             errorContinueCounter++;
                             continue;
