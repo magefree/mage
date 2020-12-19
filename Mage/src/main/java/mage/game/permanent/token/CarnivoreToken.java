@@ -1,12 +1,12 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class CarnivoreToken extends TokenImpl {
@@ -18,6 +18,8 @@ public final class CarnivoreToken extends TokenImpl {
         subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("C13", "EMA", "TMP");
     }
 
     public CarnivoreToken(final CarnivoreToken token) {
@@ -26,5 +28,14 @@ public final class CarnivoreToken extends TokenImpl {
 
     public CarnivoreToken copy() {
         return new CarnivoreToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C13")) {
+            this.setTokenType(2);
+        }
     }
 }

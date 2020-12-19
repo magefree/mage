@@ -4,34 +4,23 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public final class ElephantToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("C14", "CNS", "DDD", "MM2", "WWK", "OGW", "C15", "GVL", "MM3", "CMA", "MH1"));
-    }
-
     public ElephantToken() {
-        this((String) null);
-    }
-
-    public ElephantToken(String setCode) {
         super("Elephant", "3/3 green Elephant creature token");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELEPHANT);
         power = new MageInt(3);
         toughness = new MageInt(3);
+
+        availableImageSetCodes = Arrays.asList("C13", "C14", "C15", "CMA", "CMD", "CNS", "GVL", "DDD",
+                "EMA", "INV", "JUD", "MM2", "ODY", "ROE", "TSP", "VMA", "WWK", "MH1", "CMR");
     }
 
     public ElephantToken(final ElephantToken token) {
@@ -42,4 +31,8 @@ public final class ElephantToken extends TokenImpl {
         return new ElephantToken(this);
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+    }
 }

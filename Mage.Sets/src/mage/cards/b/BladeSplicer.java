@@ -1,8 +1,5 @@
-
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +15,9 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.GolemToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class BladeSplicer extends CardImpl {
@@ -30,21 +28,21 @@ public final class BladeSplicer extends CardImpl {
         filter.add(SubType.GOLEM.getPredicate());
     }
 
-    public BladeSplicer (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+    public BladeSplicer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         // When Blade Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.        
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(expansionSetCode))));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
+
         // Golem creatures you control have first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public BladeSplicer(final BladeSplicer card) {
         super(card);
     }
 

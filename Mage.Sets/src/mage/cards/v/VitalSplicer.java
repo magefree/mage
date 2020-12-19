@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -19,8 +17,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.GolemToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class VitalSplicer extends CardImpl {
@@ -34,7 +33,7 @@ public final class VitalSplicer extends CardImpl {
     }
 
     public VitalSplicer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -42,7 +41,7 @@ public final class VitalSplicer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Vital Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(expansionSetCode))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
 
         // {1}: Regenerate target Golem you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}"));

@@ -1,12 +1,12 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class RhysTheRedeemedToken extends TokenImpl {
@@ -20,6 +20,8 @@ public final class RhysTheRedeemedToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("SHM");
     }
 
     public RhysTheRedeemedToken(final RhysTheRedeemedToken token) {
@@ -28,5 +30,14 @@ public final class RhysTheRedeemedToken extends TokenImpl {
 
     public RhysTheRedeemedToken copy() {
         return new RhysTheRedeemedToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SHM")) {
+            this.setTokenType(2);
+        }
     }
 }

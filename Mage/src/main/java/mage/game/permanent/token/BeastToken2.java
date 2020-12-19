@@ -4,38 +4,23 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author LoneFox
  */
 public final class BeastToken2 extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "GVL", "MM3", "CMA", "E01", "C19", "C20", "ZNC"));
-    }
-
     public BeastToken2() {
-        this(null, 0);
-    }
-
-    public BeastToken2(String setCode) {
-        this(setCode, 0);
-    }
-
-    public BeastToken2(String setCode, int tokenType) {
         super("Beast", "4/4 green Beast creature token");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.BEAST);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        availableImageSetCodes = Arrays.asList("C13", "C14", "C15", "C19", "CMA", "CMD", "GVL", "DDD",
+                "E01", "ODY", "SCG", "ZEN", "C20", "ZNC", "CMR");
     }
 
     public BeastToken2(final BeastToken2 token) {
@@ -50,7 +35,28 @@ public final class BeastToken2 extends TokenImpl {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD") || getOriginalExpansionSetCode().equals("GVL") || getOriginalExpansionSetCode().equals("MM3")) {
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C14")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C19")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMA")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DDD")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("E01")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMR")) {
             this.setTokenType(2);
         }
     }

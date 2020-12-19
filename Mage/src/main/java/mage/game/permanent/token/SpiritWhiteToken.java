@@ -5,25 +5,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author nantuko
  */
 public final class SpiritWhiteToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM",
-                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "RNA", "M20", "C20"));
-    }
-
     public SpiritWhiteToken() {
         super("Spirit", "1/1 white Spirit creature token with flying");
-        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setWhite(true);
@@ -31,6 +21,9 @@ public final class SpiritWhiteToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM",
+                "SOI", "EMA", "C16", "MM3", "CMA", "E01", "ANA", "GPT", "RAV", "EMN", "RNA", "M20", "C20", "CMR");
     }
 
     @Override

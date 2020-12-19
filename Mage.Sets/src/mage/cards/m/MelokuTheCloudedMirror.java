@@ -28,9 +28,9 @@ public final class MelokuTheCloudedMirror extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.WIZARD);
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 

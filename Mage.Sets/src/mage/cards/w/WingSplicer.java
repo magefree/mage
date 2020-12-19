@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,8 +15,9 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.GolemToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class WingSplicer extends CardImpl {
@@ -31,7 +30,7 @@ public final class WingSplicer extends CardImpl {
     }
 
     public WingSplicer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -39,8 +38,8 @@ public final class WingSplicer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Wing Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(expansionSetCode))));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
+
         // Golem creatures you control have flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }

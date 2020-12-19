@@ -11,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.Arrays;
+
 public final class RockToken extends TokenImpl {
 
     public RockToken() {
@@ -23,6 +25,8 @@ public final class RockToken extends TokenImpl {
                 new DamageTargetEffect(2), new TargetAnyTarget(), new SacrificeAttachmentCost(), new GenericManaCost(1), new TapSourceCost()
         )));
         this.addAbility(new EquipAbility(1));
+
+        availableImageSetCodes = Arrays.asList("CMR");
     }
 
     public RockToken(final RockToken token) {
@@ -31,5 +35,10 @@ public final class RockToken extends TokenImpl {
 
     public RockToken copy() {
         return new RockToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
     }
 }

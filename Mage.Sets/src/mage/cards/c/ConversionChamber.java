@@ -1,8 +1,5 @@
-
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -20,14 +17,15 @@ import mage.filter.common.FilterArtifactCard;
 import mage.game.permanent.token.GolemToken;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class ConversionChamber extends CardImpl {
 
-    public ConversionChamber (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+    public ConversionChamber(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         // {2}, {T}: Exile target artifact card from a graveyard. Put a charge counter on Conversion Chamber.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(2));
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
@@ -35,14 +33,14 @@ public final class ConversionChamber extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {2}, {T}, Remove a charge counter from Conversion Chamber: Create a 3/3 colorless Golem artifact creature token.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken(expansionSetCode)), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
 
     }
 
-    public ConversionChamber (final ConversionChamber card) {
+    public ConversionChamber(final ConversionChamber card) {
         super(card);
     }
 

@@ -28,7 +28,9 @@ public class PermanentToken extends PermanentImpl {
 
         // token's ZCC must be synced with original token to keep abilities settings
         // Example: kicker ability and kicked status
-        this.setZoneChangeCounter(this.token.getZoneChangeCounter(game), game);
+        if (game != null) { // game == null in GUI for card viewer's tokens
+            this.setZoneChangeCounter(this.token.getZoneChangeCounter(game), game);
+        }
     }
 
     public PermanentToken(final PermanentToken permanent) {

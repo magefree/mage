@@ -474,6 +474,27 @@ public class ScryfallImageSupportTokens {
             put("ZNC/Saproling", "https://api.scryfall.com/cards/tznc/9/en?format=image");
             put("ZNC/Thopter", "https://api.scryfall.com/cards/tznc/11/en?format=image");
 
+            // CMR
+            put("CMR/Angel", "https://api.scryfall.com/cards/tcmr/1/en?format=image");
+            put("CMR/Beast/1", "https://api.scryfall.com/cards/tcmr/18/en?format=image"); // 3/3
+            put("CMR/Beast/2", "https://api.scryfall.com/cards/tcmr/19/en?format=image"); // 4/4
+            put("CMR/Cat", "https://api.scryfall.com/cards/tcmr/15/en?format=image");
+            put("CMR/Dragon", "https://api.scryfall.com/cards/tcmr/7/en?format=image");
+            put("CMR/Elephant", "https://api.scryfall.com/cards/tcmr/20/en?format=image");
+            put("CMR/Elf Warrior", "https://api.scryfall.com/cards/tcmr/8/en?format=image");
+            put("CMR/Golem", "https://api.scryfall.com/cards/tcmr/9/en?format=image");
+            put("CMR/Horror", "https://api.scryfall.com/cards/tcmr/10/en?format=image");
+            put("CMR/Illusion", "https://api.scryfall.com/cards/tcmr/17/en?format=image");
+            put("CMR/Plant", "https://api.scryfall.com/cards/tcmr/21/en?format=image");
+            put("CMR/Rock", "https://api.scryfall.com/cards/tcmr/11/en?format=image");
+            put("CMR/Salamander Warrior", "https://api.scryfall.com/cards/tcmr/4/en?format=image");
+            put("CMR/Saproling", "https://api.scryfall.com/cards/tcmr/22/en?format=image");
+            put("CMR/Soldier/1", "https://api.scryfall.com/cards/tcmr/16/en?format=image");
+            put("CMR/Soldier/2", "https://api.scryfall.com/cards/tcmr/2/en?format=image");
+            put("CMR/Spirit", "https://api.scryfall.com/cards/tcmr/3/en?format=image");
+            put("CMR/Thrull", "https://api.scryfall.com/cards/tcmr/5/en?format=image");
+            put("CMR/Treasure", "https://api.scryfall.com/cards/tcmr/12/en?format=image");
+            put("CMR/Zombie", "https://api.scryfall.com/cards/tcmr/6/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -16,7 +16,7 @@ public final class PlantToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("WWK", "DDP", "OGW", "ZNR");
+        availableImageSetCodes = Arrays.asList("ARC", "C13", "C18", "DDP", "OGW", "PC2", "WWK", "XLN", "ZEN", "ZNR", "CMR");
     }
 
     public PlantToken(final PlantToken token) {
@@ -25,5 +25,10 @@ public final class PlantToken extends TokenImpl {
 
     public PlantToken copy() {
         return new PlantToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
     }
 }
