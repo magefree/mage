@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -16,9 +15,9 @@ import mage.game.permanent.token.ElfToken;
 
 /**
  *
- * @author Loki
+ * @author weirddan455
  */
-public final class ElvishPromenade extends CardImpl {
+public final class ElvenAmbush extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
 
@@ -28,20 +27,21 @@ public final class ElvishPromenade extends CardImpl {
 
     private static final DynamicValue elfCount = new PermanentsOnBattlefieldCount(filter);
 
-    public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{G}");
-        this.subtype.add(SubType.ELF);
+    public ElvenAmbush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
+
         this.getSpellAbility().addHint(new ValueHint("Elves you control", elfCount));
 
+        // Create a 1/1 green Elf Warrior creature token for each Elf you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), elfCount));
     }
 
-    public ElvishPromenade(final ElvishPromenade card) {
+    private ElvenAmbush(final ElvenAmbush card) {
         super(card);
     }
 
     @Override
-    public ElvishPromenade copy() {
-        return new ElvishPromenade(this);
+    public ElvenAmbush copy() {
+        return new ElvenAmbush(this);
     }
 }
