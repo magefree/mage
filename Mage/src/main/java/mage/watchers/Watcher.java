@@ -1,12 +1,14 @@
 package mage.watchers;
 
-import java.io.Serializable;
-import java.lang.reflect.*;
-import java.util.*;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.PlayerList;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * watches for certain game events to occur and flags condition
@@ -123,6 +125,14 @@ public abstract class Watcher implements Serializable {
                                 set.addAll(e.getValue());
                                 target.put(e.getKey(), set);
                             }
+                        } else if (valueType.getTypeName().contains("PlayerList")) {
+                            Map<Object, PlayerList> source = (Map<Object, PlayerList>) field.get(this);
+                            Map<Object, PlayerList> target = (Map<Object, PlayerList>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, PlayerList> e : source.entrySet()) {
+                                PlayerList list = e.getValue().copy();
+                                target.put(e.getKey(), list);
+                            }
                         } else if (valueType.getTypeName().contains("List")) {
                             Map<Object, List<Object>> source = (Map<Object, List<Object>>) field.get(this);
                             Map<Object, List<Object>> target = (Map<Object, List<Object>>) field.get(watcher);
@@ -141,14 +151,12 @@ public abstract class Watcher implements Serializable {
                                 map.putAll(e.getValue());
                                 target.put(e.getKey(), map);
                             }
-
                         } else {
                             ((Map) field.get(watcher)).putAll((Map) field.get(this));
                         }
                     } else if (field.getType() == List.class) {
                         ((List) field.get(watcher)).clear();
                         ((List) field.get(watcher)).addAll((List) field.get(this));
-
                     } else {
                         field.set(watcher, field.get(this));
                     }

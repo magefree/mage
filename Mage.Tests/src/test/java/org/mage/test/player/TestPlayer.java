@@ -738,6 +738,18 @@ public class TestPlayer implements Player {
                     }
 
                     Assert.fail("Unknow ai command: " + command);
+                } else if (action.getAction().startsWith(RUN_PREFIX)) {
+                    String command = action.getAction();
+                    command = command.substring(command.indexOf(RUN_PREFIX) + RUN_PREFIX.length());
+
+                    // custom code execute
+                    if (command.equals(RUN_COMMAND_CODE)) {
+                        action.getCodePayload().run(action.getActionName(), computerPlayer, game);
+                        actions.remove(action);
+                        return true;
+                    }
+
+                    Assert.fail("Unknow run command: " + command);
                 } else if (action.getAction().startsWith(CHECK_PREFIX)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(CHECK_PREFIX) + CHECK_PREFIX.length());

@@ -2,6 +2,7 @@ package org.mage.test.player;
 
 import mage.constants.PhaseStep;
 import mage.game.Game;
+import org.mage.test.serverside.base.CardTestCodePayload;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -12,12 +13,18 @@ public class PlayerAction {
     private final int turnNum;
     private final PhaseStep step;
     private final String action;
+    private final CardTestCodePayload codePayload; // special code to execute (e.g. on dynamic check)
 
     public PlayerAction(String actionName, int turnNum, PhaseStep step, String action) {
+        this(actionName, turnNum, step, action, null);
+    }
+
+    public PlayerAction(String actionName, int turnNum, PhaseStep step, String action, CardTestCodePayload codePayload) {
         this.actionName = actionName;
         this.turnNum = turnNum;
         this.step = step;
         this.action = action;
+        this.codePayload = codePayload;
     }
 
     public int getTurnNum() {
@@ -33,7 +40,11 @@ public class PlayerAction {
     }
 
     public String getActionName() {
-        return this.actionName;
+        return actionName;
+    }
+
+    public CardTestCodePayload getCodePayload() {
+        return codePayload;
     }
 
     /**
