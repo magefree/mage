@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.Objects;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,6 +18,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -70,7 +70,7 @@ class GenesisUltimatumEffect extends OneShotEffect {
             return false;
         }
         Cards toHand = new CardsImpl(player.getLibrary().getTopCards(game, 5));
-        player.lookAtCards(source, null, toHand, game);         
+        player.lookAtCards(source, null, toHand, game);
         TargetCard targetCard = new TargetCardInLibrary(0, 5, filter);
         player.choose(outcome, toHand, targetCard, game);
         Cards toBattlefield = new CardsImpl(targetCard.getTargets());
@@ -78,8 +78,8 @@ class GenesisUltimatumEffect extends OneShotEffect {
             toBattlefield
                     .stream()
                     .map(game::getPermanent)
-                    .map(MageItem::getId)
                     .filter(Objects::nonNull) // to prevent exception https://github.com/magefree/mage/issues/7220
+                    .map(MageItem::getId)
                     .forEach(toHand::remove);
         }
         player.moveCards(toHand, Zone.HAND, source, game);
