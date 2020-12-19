@@ -9,7 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -100,7 +99,7 @@ class ArmedAndArmoredEquipEffect extends OneShotEffect {
             return false;
         }
 
-        FilterControlledCreaturePermanent dwarfFilter = new FilterControlledCreaturePermanent(SubType.DWARF);
+        FilterControlledPermanent dwarfFilter = new FilterControlledPermanent(SubType.DWARF);
         List<Permanent> dwarves = game.getBattlefield().getAllActivePermanents(dwarfFilter, controller.getId(), game);
 
         FilterControlledPermanent equipmentFilter = new FilterControlledPermanent(SubType.EQUIPMENT);
@@ -108,13 +107,16 @@ class ArmedAndArmoredEquipEffect extends OneShotEffect {
 
         if (!dwarves.isEmpty() && !equipment.isEmpty()) {
             TargetPermanent target = new TargetPermanent(0, 1, dwarfFilter, true);
+            target.withChooseHint("dwarf to be equipped");
             controller.choose(outcome, target, source.getId(), game);
             Permanent dwarf = game.getPermanent(target.getFirstTarget());
             if (dwarf != null) {
                 target = new TargetPermanent(0, Integer.MAX_VALUE, equipmentFilter, true);
+                target.withChooseHint("equip to " + dwarf.getLogName());
                 controller.choose(outcome, target, source.getId(), game);
                 for (UUID targetId : target.getTargets()) {
                     dwarf.addAttachment(targetId, source, game);
+                    game.informPlayers(game.getPermanent(targetId).getLogName() + " was attached to " + dwarf.getLogName());
                 }
             }
         }
