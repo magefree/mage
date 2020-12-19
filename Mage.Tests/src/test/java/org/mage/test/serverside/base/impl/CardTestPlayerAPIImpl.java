@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
+import org.mage.test.serverside.base.CardTestCodePayload;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.io.FileNotFoundException;
@@ -57,6 +58,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
     public static final String SHOW_PREFIX = "show:"; // prefix for all show commands
     public static final String AI_PREFIX = "ai:"; // prefix for all ai commands
+    public static final String RUN_PREFIX = "run:"; // prefix for all run commands
 
     static {
         // aliases can be used in check commands, so all prefixes and delimeters must be unique
@@ -76,6 +78,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     // commands for AI
     public static final String AI_COMMAND_PLAY_PRIORITY = "play priority";
     public static final String AI_COMMAND_PLAY_STEP = "play step";
+
+    // commands for run
+    public static final String RUN_COMMAND_CODE = "code";
 
     static {
         // cards can be played/casted by activate ability command too
@@ -373,6 +378,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             res += CHECK_PARAM_DELIMETER + param;
         }
         addPlayerAction(player, checkName, turnNum, step, res);
+    }
+
+    /**
+     * Execute custom code under player's priority. You can stop debugger on it.
+     * <p>
+     * Example 1: check some conditions in the middle of the test
+     * Example 2: make game modifications (if you don't want to use custom abilities)
+     * Example 3: stop debugger in the middle of the game
+     *
+     * @param info
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param codePayload code to execute
+     */
+    public void runCode(String info, int turnNum, PhaseStep step, TestPlayer player, CardTestCodePayload codePayload) {
+        PlayerAction playerAction = new PlayerAction(info, turnNum, step, RUN_PREFIX + RUN_COMMAND_CODE, codePayload);
+        addPlayerAction(player, playerAction);
     }
 
     public void checkPT(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer power, Integer toughness) {
