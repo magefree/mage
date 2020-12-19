@@ -4,11 +4,14 @@ package mage.cards.b;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
@@ -20,11 +23,9 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public final class BloodSun extends CardImpl {
@@ -52,8 +53,8 @@ public final class BloodSun extends CardImpl {
 class BloodSunEffect extends ContinuousEffectImpl {
 
     public BloodSunEffect(Duration duration) {
-        super(duration, Outcome.LoseAbility);
-        staticText = "all lands lose all abilities except mana abilities";
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
+        staticText = "All lands lose all abilities except mana abilities";
     }
 
     private BloodSunEffect(final BloodSunEffect effect) {
@@ -66,30 +67,55 @@ class BloodSunEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, player.getId(), source.getSourceId(), game)) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        List<Ability> toRemove = new ArrayList<>();
-                        permanent.getAbilities().forEach(a -> {
-                            if (a.getAbilityType() != AbilityType.MANA) {
-                                toRemove.add(a);
-                            }
-                        });
-                        permanent.removeAbilities(toRemove, source.getSourceId(), game);
-                        break;
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ObjectColor colorless = new ObjectColor();
+            // permaments
+            game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, source.getControllerId(), game)
+                    .forEach(permanent -> {
+                        if (layer == Layer.AbilityAddingRemovingEffects_6) {
+                            List<Ability> toRemove = new ArrayList<>();
+                            permanent.getAbilities().forEach(a -> {
+                                if (a.getAbilityType() != AbilityType.MANA) {
+                                    toRemove.add(a);
+                                }
+                            });
+                            permanent.removeAbilities(toRemove, source.getSourceId(), game);
+                        }
+                    });
+            // exile
+            game.getExile().getAllCards(game).forEach(c -> removeActivatedAndStaticAbilitiesFromLands(c));
+
+            game.getState().getPlayersInRange(controller.getId(), game).forEach(playerId -> {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    // hand
+                    player.getHand().getCards(game).forEach(c -> removeActivatedAndStaticAbilitiesFromLands(c));
+                    // library
+                    player.getLibrary().getCards(game).forEach(c -> removeActivatedAndStaticAbilitiesFromLands(c));
+                    // graveyard
+                    player.getGraveyard().getCards(game).forEach(c -> removeActivatedAndStaticAbilitiesFromLands(c));
                 }
-            }
+            });
             return true;
         }
         return false;
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    private void removeActivatedAndStaticAbilitiesFromLands(Card card) {
+        if (card.isLand() && (layer == Layer.AbilityAddingRemovingEffects_6)) {
+            List<Ability> toRemove = new ArrayList<>();
+            card.getAbilities().forEach(a -> {
+                if (a.getAbilityType() != AbilityType.MANA && a.getAbilityType() != AbilityType.PLAY_LAND) {
+                    toRemove.add(a);
+                }
+            });
+            toRemove.forEach(a -> {
+                if (card.getAbilities().contains(a))
+                    card.getAbilities().remove(card.getAbilities().indexOf(a));
+            });
+        }
     }
 
     @Override
