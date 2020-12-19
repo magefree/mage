@@ -28,10 +28,12 @@ public final class AbsorbIdentity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target creature to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+
         // You may have Shapeshifters you control become copies of that creature until end of turn.
         this.getSpellAbility().addEffect(new AbsorbIdentityEffect());
+
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private AbsorbIdentity(final AbsorbIdentity card) {
