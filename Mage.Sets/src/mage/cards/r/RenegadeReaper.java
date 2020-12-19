@@ -31,7 +31,7 @@ public final class RenegadeReaper extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Renegade Reaper enters the battlefield, mill four cards. If at least one Angel is milled this way, you gain 4 life.
+        // When Renegade Reaper enters the battlefield, mill four cards. If at least one Angel card is milled this way, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RenegadeReaperEffect()));
     }
 
@@ -49,7 +49,7 @@ class RenegadeReaperEffect extends OneShotEffect {
 
     RenegadeReaperEffect() {
         super(Outcome.Benefit);
-        staticText = "mill four cards. If at least one Angel is milled this way, you gain 4 life";
+        staticText = "mill four cards. If at least one Angel card is milled this way, you gain 4 life";
     }
 
     private RenegadeReaperEffect(final RenegadeReaperEffect effect) {
