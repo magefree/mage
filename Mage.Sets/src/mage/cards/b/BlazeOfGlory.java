@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.BeforeBlockersAreDeclaredCondition;
@@ -13,15 +11,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.game.Controllable;
+import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class BlazeOfGlory extends CardImpl {
@@ -29,7 +26,7 @@ public final class BlazeOfGlory extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(new BlazeOfGloryDefendingPlayerControlsPredicate());
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public BlazeOfGlory(UUID ownerId, CardSetInfo setInfo) {
@@ -51,14 +48,6 @@ public final class BlazeOfGlory extends CardImpl {
     @Override
     public BlazeOfGlory copy() {
         return new BlazeOfGlory(this);
-    }
-}
-
-class BlazeOfGloryDefendingPlayerControlsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
-
-    @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        return game.getCombat().getPlayerDefenders(game).contains(input.getObject().getControllerId());
     }
 }
 

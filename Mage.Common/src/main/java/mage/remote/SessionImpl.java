@@ -143,7 +143,7 @@ public class SessionImpl implements Session {
                     logger.error("Connect: unknown server error", exep.getCause());
                 }
             } else if (cause instanceof NoSuchMethodException) {
-                // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
+                // NoSuchMethodException is thrown on an invocation of an unknown JBoss remoting
                 // method, so it's likely to be because of a version incompatibility.
                 addMessage = "The following method is not available in the server, probably the "
                         + "server version is not compatible with the client: " + cause.getMessage();

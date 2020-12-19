@@ -1,4 +1,3 @@
-
 package mage.filter.predicate.permanent;
 
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -19,6 +18,6 @@ public enum DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredic
 
     @Override
     public String toString() {
-        return "Another";
+        return "";
     }
 }

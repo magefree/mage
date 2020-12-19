@@ -737,7 +737,7 @@ public class TestPlayer implements Player {
                         return true;
                     }
 
-                    Assert.fail("Unknow ai command: " + command);
+                    Assert.fail("Unknown ai command: " + command);
                 } else if (action.getAction().startsWith(RUN_PREFIX)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(RUN_PREFIX) + RUN_PREFIX.length());
@@ -749,7 +749,7 @@ public class TestPlayer implements Player {
                         return true;
                     }
 
-                    Assert.fail("Unknow run command: " + command);
+                    Assert.fail("Unknown run command: " + command);
                 } else if (action.getAction().startsWith(CHECK_PREFIX)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(CHECK_PREFIX) + CHECK_PREFIX.length());
@@ -915,7 +915,7 @@ public class TestPlayer implements Player {
                     if (wasProccessed) {
                         return true;
                     } else {
-                        Assert.fail("Unknow check command or params: " + command);
+                        Assert.fail("Unknown check command or params: " + command);
                     }
                 } else if (action.getAction().startsWith(SHOW_PREFIX)) {
                     String command = action.getAction();
@@ -1022,7 +1022,7 @@ public class TestPlayer implements Player {
                     if (wasProccessed) {
                         return true;
                     } else {
-                        Assert.fail("Unknow show command or params: " + command);
+                        Assert.fail("Unknown show command or params: " + command);
                     }
                 }
 

@@ -17,8 +17,11 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -26,6 +29,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ArmixFiligreeThrasher extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+
+    static {
+        filter.add(DefendingPlayerControlsPredicate.instance);
+    }
 
     public ArmixFiligreeThrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
@@ -44,6 +53,7 @@ public final class ArmixFiligreeThrasher extends CardImpl {
                 ), false, "target creature defending player controls gets -X/-X until end of turn, " +
                 "where X is the number of artifacts you control plus the number of artifact cards in your graveyard"
         );
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
                 ability, new DiscardCardCost(), "Discard a card?"
         ), false));
