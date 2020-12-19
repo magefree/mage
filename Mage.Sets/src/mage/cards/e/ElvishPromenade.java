@@ -2,8 +2,11 @@
 package mage.cards.e;
 
 import java.util.UUID;
+
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,17 +20,20 @@ import mage.game.permanent.token.ElfToken;
  */
 public final class ElvishPromenade extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
 
     static {
         filter.add(SubType.ELF.getPredicate());
     }
 
+    private static final DynamicValue elfCount = new PermanentsOnBattlefieldCount(filter);
+
     public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{G}");
         this.subtype.add(SubType.ELF);
+        this.getSpellAbility().addHint(new ValueHint("Elves you control", elfCount));
 
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), elfCount));
     }
 
     public ElvishPromenade(final ElvishPromenade card) {

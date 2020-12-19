@@ -2,8 +2,10 @@ package mage.cards.e;
 
 import java.util.UUID;
 
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,17 +19,21 @@ import mage.game.permanent.token.ElfToken;
  */
 public final class ElvenAmbush extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
 
     static {
         filter.add(SubType.ELF.getPredicate());
     }
 
+    private static final DynamicValue elfCount = new PermanentsOnBattlefieldCount(filter);
+
     public ElvenAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
 
+        this.getSpellAbility().addHint(new ValueHint("Elves you control", elfCount));
+
         // Create a 1/1 green Elf Warrior creature token for each Elf you control.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), elfCount));
     }
 
     private ElvenAmbush(final ElvenAmbush card) {
