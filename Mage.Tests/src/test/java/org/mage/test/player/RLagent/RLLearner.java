@@ -6,6 +6,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.i.IndathaCrystal;
 import mage.cards.p.PermeatingMass;
 import mage.choices.Choice;
 import mage.constants.Outcome;
@@ -45,7 +46,9 @@ import org.deeplearning4j.nn.conf.layers.misc.RepeatVector;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.distribution.UniformDistribution;
+import org.deeplearning4j.nn.conf.graph.ElementWiseVertex;
 import org.deeplearning4j.nn.conf.graph.ReshapeVertex;
+import org.deeplearning4j.nn.conf.graph.ElementWiseVertex.Op;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
@@ -75,7 +78,7 @@ public class RLLearner {
     //of hand, the game representation will need to be compressed, which could be tricky
     //There is almost certainly some unused information to cut, but that would require memory profiling
     //and adding a prune method to Game. 
-    final int max_represents=256; //Probably need to increase later
+    final int max_represents=256; 
     final int input_seqlen=2;
     final int no_attack=1;
     final int no_block=2;
@@ -104,10 +107,103 @@ public class RLLearner {
     public void newGame(Player player){
         games.add(new GameSequence(player));
     }
+    //Decides which games to sample experiences from, the exact
+    //experience is chosen later
+    protected List<Integer> sampleGames(int size){
+        List<Integer> sizes=new ArrayList<Integer>();
+        int totalSize=0;
+        for(GameSequence game:games){
+            int gameSize=game.experiences.size();
+            sizes.add(gameSize);
+            totalSize+=gameSize;
+        }
+        List<Integer> gamesToSample=new ArrayList<Integer>();
+        for(int i=0;i<size;i++){
+            int expIndex=RandomUtil.nextInt(totalSize);
+            while(expIndex>sizes.get(i)){
+                expIndex-=sizes.get(i);
+            }
+            gamesToSample.add(i);
+        }
+        return gamesToSample;
+    }
+    //Remeber--this simply doens't represent NULL elements
+    //Only getTargets can currently handle NULL elements
+    protected List<INDArray> represent_batch(List<Experience> exps,List<Player> players){
+        List<INDArray> actionIDs=new ArrayList<INDArray>();
+        List<INDArray> otherReals=new ArrayList<INDArray>();
+        List<INDArray> permIDs=new ArrayList<INDArray>();
+        for(int i=0;i<exps.size();i++){
+            Experience exp=exps.get(i);
+            if(exp!=null){
+                actionIDs.add(representActions(exp.game,exp.actions));
+                List<INDArray> gameRepr=representGame(exp.game, players.get(i));
+                otherReals.add(gameRepr.get(0));
+                permIDs.add(gameRepr.get(1));
+            }
+        }
+        List<INDArray> inputs=new ArrayList<INDArray>();
+        inputs.add(Nd4j.pile(actionIDs));
+        inputs.add(Nd4j.pile(otherReals));
+        inputs.add(Nd4j.pile(permIDs));
+        return inputs;
+    } 
+    protected INDArray runModel(List<Experience> exps,List<Player> players){
+        List<INDArray> representedExps=represent_batch(exps, players);
+        Map<String,INDArray> qmodelOut=model.feedForward(representedExps.toArray(new INDArray[representedExps.size()]),true);
+        INDArray QValues=qmodelOut.get("linout").reshape(-1,max_representable_actions);
+        return QValues;
+    }
+    protected List<Double> getTargets(List<GameSequence> sampledGames,List<Experience> exps,List<Player> players){
+        INDArray QValues=runModel(exps, players);
+        INDArray maxQ=QValues.max(1);
+        List<Double> targets=new ArrayList<Double>();
+        int nonlast=0;
+        for(int i=0;i<exps.size();i++){
+            if(exps.get(i)!=null){
+                targets.add(maxQ.getDouble(nonlast));
+                nonlast+=1;
+            }
+            else{
+                targets.add((double) sampledGames.get(i).getValue());
+            }
+        }
+        return targets;
+    }
+    protected List<INDArray> sampleBatch(int size){
+        List<Integer> gamesToSample=sampleGames(size);
+        List<GameSequence> sampledGames=new ArrayList<GameSequence>();
+        List<Experience> currents=new ArrayList<Experience>();
+        List<Experience> nexts=new ArrayList<Experience>();
+        List<Player> players=new ArrayList<Player>();
+        for(int i=0;i<size;i++){
+            GameSequence sampledGame=games.get(gamesToSample.get(i));
+            sampledGames.add(sampledGame);
+            players.add(sampledGame.getPlayer());
+            int expIndex=RandomUtil.nextInt(sampledGame.experiences.size());
+            currents.add(sampledGame.experiences.get(expIndex));
+            if(expIndex+1 != sampledGame.experiences.size()){
+                nexts.add(sampledGame.experiences.get(expIndex+1));
+            }
+            else{
+                nexts.add(null);
+            }
+        }
+        INDArray target=runModel(currents, players);
+        List<Double> targets=getTargets(sampledGames, nexts, players);
+        for(int i=0;i<size;i++){
+            
+        }
+    } 
     protected int getGreedy(Game game, List<RLAction> actions){
-        INDArray actionRepr=representActions(game,actions);
-        actionRepr=Nd4j.expandDims(actionRepr, 0);
-        Map<String,INDArray> qmodelOut=model.feedForward(actionRepr,true);
+        Player thisPlayer=getCurrentGame().getPlayer();
+        List<INDArray> gameRepr=representGame(game, thisPlayer);
+        INDArray actionRepr=representActions(game, actions);
+        INDArray inputs[]=new INDArray[3];
+        inputs[0]=Nd4j.expandDims(actionRepr, 0);
+        inputs[1]=Nd4j.expandDims(gameRepr.get(0), 0);
+        inputs[2]=Nd4j.expandDims(gameRepr.get(1), 0);
+        Map<String,INDArray> qmodelOut=model.feedForward(inputs,true);
         INDArray q_values=qmodelOut.get("linout").reshape(max_representable_actions);
         double max_q=Double.NEGATIVE_INFINITY;
         int max_index=0;
@@ -143,12 +239,13 @@ public class RLLearner {
         .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.AVG).build(),"embedPermanent")
         .addLayer("combinedGame", new DenseLayer.Builder().nIn(game_reals+internal_dim).nOut(internal_dim).build(), "poolPermanent","otherReal")
         .addLayer("actGame1",new ActivationLayer.Builder().activation(Activation.RELU).build(),"combinedGame")
-        .addLayer("repeatGame", new Upsampling1D.Builder().size(max_representable_actions).build(), "actGame1")
+        .addVertex("repeatGame", new ReshapeVertex(-1,internal_dim,1), "actGame1")
         .addLayer("embedAction",new EmbeddingSequenceLayer.Builder().nIn(max_represents).nOut(internal_dim/input_seqlen).inputLength(model_inputlen).build(),"actionIDs")
         .addVertex("refold", new ReshapeVertex(-1,internal_dim,max_representable_actions), "embedAction") 
         .addLayer("actlin1", new Convolution1D.Builder().nIn(internal_dim).nOut(internal_dim).kernelSize(1).build(), "refold")
-        .addVertex("combined", new , "actlin1","repeatGame")
-        .addLayer("linout", new Convolution1D.Builder().nIn(internal_dim).nOut(1).kernelSize(1).activation(Activation.TANH).build(), "lin1")
+        .addVertex("combined", new ElementWiseVertex(Op.Product), "actlin1","repeatGame")
+        .addLayer("lastlin", new Convolution1D.Builder().nIn(internal_dim).nOut(1).kernelSize(1).activation(Activation.TANH).build(), "combined")
+        .addLayer("linout",new OutputLayer.Builder(LossFunctions.LossFunction.MSE).nIn(1).nOut(1).build(),"lastlin")
         .setOutputs("linout")    //We need to specify the network outputs and their order
         .build();
     ComputationGraph net = new ComputationGraph(conf);
