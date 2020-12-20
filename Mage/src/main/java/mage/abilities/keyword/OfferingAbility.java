@@ -1,7 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -23,6 +21,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 702.46. Offering # 702.46a Offering is a static ability of a card that
@@ -96,24 +97,22 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
         // Creatures from the offerd type
         game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)
                 .stream()
-                .forEach(permanent -> {
-                    ManaOptions manaOptionsForThisPermanent = new ManaOptions();
-                    for (ManaCost manaCost : permanent.getSpellAbility().getManaCosts()) {
-                        if (manaCost instanceof HybridManaCost) {
-                            ManaOptions manaOptionsForHybrid = new ManaOptions();
-                            for (Mana mana : manaCost.getManaOptions()) {
-                                manaOptionsForHybrid.add(mana);
+                .map(Card::getSpellAbility)
+                .filter(Objects::nonNull)
+                .forEach(spellAbility -> {
+                            ManaOptions manaOptionsForThisPermanent = new ManaOptions();
+                            for (ManaCost manaCost : spellAbility.getManaCosts()) {
+                                if (manaCost instanceof HybridManaCost) {
+                                    ManaOptions manaOptionsForHybrid = new ManaOptions();
+                                    manaOptionsForHybrid.addAll(manaCost.getManaOptions());
+                                    manaOptionsForThisPermanent.addMana(manaOptionsForHybrid);
+                                } else {
+                                    manaOptionsForThisPermanent.addMana(manaCost.getMana());
+                                }
                             }
-                            manaOptionsForThisPermanent.addMana(manaOptionsForHybrid);
-                        } else {
-                            manaOptionsForThisPermanent.addMana(manaCost.getMana());
+
+                            additionalManaOptionsForThisAbility.addAll(manaOptionsForThisPermanent);
                         }
-                    }
-                    for(Mana mana : manaOptionsForThisPermanent) {
-                        additionalManaOptionsForThisAbility.add(mana);
-                    }
-                    
-                }
                 );
 
         additionalManaOptionsForThisAbility.removeDuplicated();
