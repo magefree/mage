@@ -8,6 +8,8 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -24,6 +26,8 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
  * @author weirddan455
  */
 public final class CleavingReaper extends CardImpl {
+
+    private static final Hint hint = new ConditionHint(CleavingReaperCondition.instance, "Can return from graveyard");
 
     public CleavingReaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -44,6 +48,7 @@ public final class CleavingReaper extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new PayLifeCost(3), CleavingReaperCondition.instance
         );
+        ability.addHint(hint);
         this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
     }
 
