@@ -36,7 +36,7 @@ public final class Eyekite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 EyekiteCondition.instance, "{this} gets +2/+0 as long as you've drawn two or more cards this turn."
-        )), new CardsDrawnThisTurnWatcher());
+        )));
     }
 
     private Eyekite(final Eyekite card) {

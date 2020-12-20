@@ -42,7 +42,7 @@ public final class ThoughtSponge extends CardImpl {
                 CounterType.P1P1.createInstance(), ThoughtSpongeValue.instance, false
         ), "with a number of +1/+1 counters on it equal to " +
                 "the greatest number of cards an opponent has drawn this turn"
-        ), new CardsDrawnThisTurnWatcher());
+        ));
 
         // When Thought Sponge dies, draw cards equal to its power.
         this.addAbility(new DiesSourceTriggeredAbility(

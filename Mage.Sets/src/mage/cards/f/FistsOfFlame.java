@@ -33,7 +33,6 @@ public final class FistsOfFlame extends CardImpl {
                 StaticValue.get(0), Duration.EndOfTurn
         ).setText("and gets +1/+0 for each card you've drawn this turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addWatcher(new CardsDrawnThisTurnWatcher());
     }
 
     private FistsOfFlame(final FistsOfFlame card) {

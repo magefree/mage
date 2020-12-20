@@ -17,6 +17,9 @@ public class CardsDrawnThisTurnWatcher extends Watcher {
 
     private final Map<UUID, Integer> cardsDrawnThisTurn = new HashMap<>();
 
+    /**
+     * It's a default game watcher, so no need to init it with card code
+     */
     public CardsDrawnThisTurnWatcher() {
         super(WatcherScope.GAME);
     }

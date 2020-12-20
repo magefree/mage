@@ -34,7 +34,7 @@ public final class TomeAnima extends CardImpl {
                 new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.WhileOnBattlefield),
                 TomeAnimaCondition.instance,
                 "{this} can't be blocked as long as you've drawn two or more cards this turn"
-        )), new CardsDrawnThisTurnWatcher());
+        )));
     }
 
     private TomeAnima(final TomeAnima card) {

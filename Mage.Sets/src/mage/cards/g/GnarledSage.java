@@ -48,7 +48,7 @@ public final class GnarledSage extends CardImpl {
                 "and has vigilance"
         ));
 
-        this.addAbility(ability, new CardsDrawnThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private GnarledSage(final GnarledSage card) {

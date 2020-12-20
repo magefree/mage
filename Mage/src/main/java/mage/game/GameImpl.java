@@ -1123,6 +1123,7 @@ public abstract class GameImpl implements Game, Serializable {
         getState().addWatcher(new DamageDoneWatcher());
         getState().addWatcher(new PlanarRollWatcher());
         getState().addWatcher(new PlayersAttackedThisTurnWatcher());
+        getState().addWatcher(new CardsDrawnThisTurnWatcher());
     }
 
     public void initPlayerDefaultWatchers(UUID playerId) {

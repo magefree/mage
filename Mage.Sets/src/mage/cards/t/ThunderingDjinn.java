@@ -35,7 +35,7 @@ public final class ThunderingDjinn extends CardImpl {
                 CardsDrawnThisTurnDynamicValue.instance
         ).setText("it deals damage to any target equal to the number of cards you've drawn this turn."), false);
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability, new CardsDrawnThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private ThunderingDjinn(final ThunderingDjinn card) {

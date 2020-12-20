@@ -35,7 +35,7 @@ public final class SpinehornMinotaur extends CardImpl {
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 SpinehornMinotaurCondition.instance, "As long as you've drawn two or more cards this turn, " +
                 "{this} has double strike"
-        )), new CardsDrawnThisTurnWatcher());
+        )));
     }
 
     private SpinehornMinotaur(final SpinehornMinotaur card) {
