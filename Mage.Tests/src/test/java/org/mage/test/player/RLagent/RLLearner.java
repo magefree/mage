@@ -170,7 +170,7 @@ public class RLLearner {
         }
         return targets;
     }
-    protected List<INDArray> sampleBatch(int size){
+    protected void trainBatch(int size){
         List<Integer> gamesToSample=sampleGames(size);
         List<GameSequence> sampledGames=new ArrayList<GameSequence>();
         List<Experience> currents=new ArrayList<Experience>();
@@ -192,8 +192,11 @@ public class RLLearner {
         INDArray target=runModel(currents, players);
         List<Double> targets=getTargets(sampledGames, nexts, players);
         for(int i=0;i<size;i++){
-            
+            target.putScalar(i,currents.get(i).chosen,targets.get(i));
         }
+        List<INDArray> representedExps=represent_batch(currents, players);
+        INDArray[] inputs=representedExps.toArray(new INDArray[representedExps.size()]);
+        model.fit(inputs, new INDArray[]{target});
     } 
     protected int getGreedy(Game game, List<RLAction> actions){
         Player thisPlayer=getCurrentGame().getPlayer();
