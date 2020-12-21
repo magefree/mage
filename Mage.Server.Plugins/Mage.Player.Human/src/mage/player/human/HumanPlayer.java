@@ -9,9 +9,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
@@ -43,7 +43,6 @@ import mage.game.GameImpl;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.events.DeclareAttackerEvent;
-import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -93,8 +92,8 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean holdingPriority;
 
-    protected Queue<PlayerResponse> actionQueue = new LinkedList<>();
-    protected Queue<PlayerResponse> actionQueueSaved = new LinkedList<>();
+    protected ConcurrentLinkedQueue<PlayerResponse> actionQueue = new ConcurrentLinkedQueue<>();
+    protected ConcurrentLinkedQueue<PlayerResponse> actionQueueSaved = new ConcurrentLinkedQueue<>();
     protected int actionIterations = 0;
     protected boolean recordingMacro = false;
     protected boolean macroTriggeredSelectionFlag;
@@ -159,7 +158,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean pullResponseFromQueue(Game game) {
         if (actionQueue.isEmpty() && actionIterations > 0 && !actionQueueSaved.isEmpty()) {
-            actionQueue = new LinkedList<>(actionQueueSaved);
+            actionQueue = new ConcurrentLinkedQueue<>(actionQueueSaved);
             actionIterations--;
 //            logger.info("MACRO iteration: " + actionIterations);
         }
@@ -685,11 +684,11 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
-                if (target.canTarget(abilityControllerId, response.getUUID(), null, cards, game)) {
-                    if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
-                        target.remove(response.getUUID());
-                    } else {
+            if (response.getUUID() != null) {                
+                if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
+                    target.remove(response.getUUID());
+                } else {
+                    if (target.canTarget(abilityControllerId, response.getUUID(), null, cards, game)) {                    
                         target.add(response.getUUID(), game);
                         if (target.doneChosing()) {
                             return true;

@@ -76,11 +76,8 @@ class EerieUltimatumEffect extends OneShotEffect {
 
 class EerieUltimatumTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter
-            = new FilterPermanentCard("permanent cards with different names");
-
     EerieUltimatumTarget() {
-        super(0, Integer.MAX_VALUE, filter, true);
+        super(0, Integer.MAX_VALUE, new FilterPermanentCard("permanent cards with different names"), true);
     }
 
     private EerieUltimatumTarget(final EerieUltimatumTarget target) {
@@ -92,6 +89,22 @@ class EerieUltimatumTarget extends TargetCardInYourGraveyard {
         return new EerieUltimatumTarget(this);
     }
 
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability ability, Game game) {
+        if (super.canTarget(playerId, id, ability, game)) {
+            Set<String> names = this.getTargets()
+                .stream()
+                .map(game::getCard)
+                .map(MageObject::getName)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+            Card card = game.getCard(id);
+            return card != null && !names.contains(card.getName());            
+        }
+        return false;
+    }
+
+    
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
