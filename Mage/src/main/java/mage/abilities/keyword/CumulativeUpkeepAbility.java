@@ -89,7 +89,9 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                     }
                 }
                 game.fireEvent(new GameEvent(GameEvent.EventType.DIDNT_PAY_CUMULATIVE_UPKEEP, permanent.getId(), source, player.getId(), ageCounter, false));
-                permanent.sacrifice(source, game);
+                if (source.getControllerId().equals(permanent.getControllerId())) { // Permanent can only be sacrificed if you still control it
+                    permanent.sacrifice(source, game);
+                }
                 return true;
             } else {
                 CostsImpl<Cost> totalCost = new CostsImpl<>();
