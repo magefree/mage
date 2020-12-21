@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -15,11 +15,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -44,9 +48,7 @@ public final class FireGiantsFury extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Whenever it deals combat damage to a player this turn, exile that many cards from the top of your library. Until the end of your next turn, you may play those cards.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new FireGiantsFuryEffect(), false, true);
-        effect = new GainAbilityTargetEffect(ability, Duration.EndOfTurn);
-        effect.setText("Whenever it deals combat damage to a player this turn, exile that many cards from the top of your library. Until the end of your next turn, you may play those cards");
+        effect = new FireGiantsFuryEffect();
         this.getSpellAbility().addEffect(effect);
 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -64,9 +66,9 @@ public final class FireGiantsFury extends CardImpl {
 
 class FireGiantsFuryEffect extends OneShotEffect {
 
-    FireGiantsFuryEffect() {
+    public FireGiantsFuryEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
+        this.staticText = "Whenever it deals combat damage to a player this turn, exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
     }
 
     private FireGiantsFuryEffect(final FireGiantsFuryEffect effect) {
@@ -80,19 +82,86 @@ class FireGiantsFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        DelayedTriggeredAbility delayedAbility = new FireGiantsFuryDelayedTriggeredAbility(source.getFirstTarget());
+        delayedAbility.addWatcher(new FireGiantsFuryWatcher());
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+        return true;
+    }
+}
+
+class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+    private final UUID target;
+
+    public FireGiantsFuryDelayedTriggeredAbility(UUID target) {
+        super(new FireGiantsFuryDelayedEffect(target), Duration.EndOfTurn, false, false);
+        this.target = target;
+    }
+
+    private FireGiantsFuryDelayedTriggeredAbility (FireGiantsFuryDelayedTriggeredAbility ability) {
+        super(ability);
+        this.target = ability.target;
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getSourceId().equals(target);
+    }
+
+    @Override
+    public FireGiantsFuryDelayedTriggeredAbility copy() {
+        return new FireGiantsFuryDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever it deals combat damage to a player this turn, exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
+    }
+}
+
+class FireGiantsFuryDelayedEffect extends OneShotEffect {
+
+    private final UUID target;
+
+    public FireGiantsFuryDelayedEffect(UUID target) {
+        super(Outcome.PlayForFree);
+        this.target = target;
+        this.staticText = "exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
+    }
+
+    private FireGiantsFuryDelayedEffect(final FireGiantsFuryDelayedEffect effect) {
+        super(effect);
+        this.target = effect.target;
+    }
+
+    @Override
+    public FireGiantsFuryDelayedEffect copy() {
+        return new FireGiantsFuryDelayedEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Integer damage = (Integer) getValue("damage");
-        if (controller != null && damage != null) {
-            Set<Card> cards = controller.getLibrary().getTopCards(game, damage);
-            Card sourceCard = game.getCard(source.getSourceId());
-            controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
+        FireGiantsFuryWatcher watcher = game.getState().getWatcher(FireGiantsFuryWatcher.class);
+        if (controller != null && watcher != null) {
+            int damage = watcher.getDamage(target);
+            if (damage > 0) {
+                Set<Card> cards = controller.getLibrary().getTopCards(game, damage);
+                Card sourceCard = game.getCard(source.getSourceId());
+                controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
 
-            for (Card card : cards) {
-                ContinuousEffect effect = new FireGiantsFuryMayPlayEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
+                for (Card card : cards) {
+                    ContinuousEffect effect = new FireGiantsFuryMayPlayEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                }
+
             }
-
             return true;
         }
         return false;
@@ -103,7 +172,7 @@ class FireGiantsFuryMayPlayEffect extends AsThoughEffectImpl {
 
     private int castOnTurn = 0;
 
-    FireGiantsFuryMayPlayEffect() {
+    public FireGiantsFuryMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the end of your next turn, you may play that card.";
     }
@@ -142,5 +211,32 @@ class FireGiantsFuryMayPlayEffect extends AsThoughEffectImpl {
         UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
         return source.isControlledBy(affectedControllerId)
                 && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
+    }
+}
+
+class FireGiantsFuryWatcher extends Watcher {
+
+    private final Map<UUID, Integer> damagingObjects;
+
+    public FireGiantsFuryWatcher() {
+        super(WatcherScope.GAME);
+        this.damagingObjects = new HashMap<>();
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+            damagingObjects.put(event.getSourceId(), event.getAmount());
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        damagingObjects.clear();
+    }
+
+    public int getDamage(UUID sourceId) {
+        return damagingObjects.getOrDefault(sourceId, 0);
     }
 }
