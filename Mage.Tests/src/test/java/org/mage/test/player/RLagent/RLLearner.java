@@ -170,7 +170,7 @@ public class RLLearner {
         }
         return targets;
     }
-    protected void trainBatch(int size){
+    public void trainBatch(int size){
         List<Integer> gamesToSample=sampleGames(size);
         List<GameSequence> sampledGames=new ArrayList<GameSequence>();
         List<Experience> currents=new ArrayList<Experience>();

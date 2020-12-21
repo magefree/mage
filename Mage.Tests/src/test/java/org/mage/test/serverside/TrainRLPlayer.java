@@ -46,6 +46,7 @@ public class TrainRLPlayer extends MageTestBase {
             
             playOneGame(learner);
             //logger.info(learner.actionToIndex);
+            learner.trainBatch(64);
         }
     }
 
