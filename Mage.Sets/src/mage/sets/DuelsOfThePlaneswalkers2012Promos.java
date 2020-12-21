@@ -5,7 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- * https://scryfall.com/sets/pdp12
+ * https://scryfall.com/sets/pdp11
  *
  * @author JayDi85
  */
@@ -18,12 +18,12 @@ public final class DuelsOfThePlaneswalkers2012Promos extends ExpansionSet {
     }
 
     private DuelsOfThePlaneswalkers2012Promos() {
-        super("Duels of the Planeswalkers 2012 Promos", "PDP12", ExpansionSet.buildDate(2012, 1, 1), SetType.PROMOTIONAL);
+        super("Duels of the Planeswalkers 2012 Promos", "PDP12", ExpansionSet.buildDate(2011, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Primordial Hydra", 1, Rarity.MYTHIC, mage.cards.p.PrimordialHydra.class));
-        cards.add(new SetCardInfo("Serra Avatar", 2, Rarity.MYTHIC, mage.cards.s.SerraAvatar.class));
-        cards.add(new SetCardInfo("Vampire Nocturnus", 3, Rarity.MYTHIC, mage.cards.v.VampireNocturnus.class));
+        cards.add(new SetCardInfo("Frost Titan", 1, Rarity.MYTHIC, mage.cards.f.FrostTitan.class));
+        cards.add(new SetCardInfo("Grave Titan", 2, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
+        cards.add(new SetCardInfo("Inferno Titan", 3, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
     }
 }

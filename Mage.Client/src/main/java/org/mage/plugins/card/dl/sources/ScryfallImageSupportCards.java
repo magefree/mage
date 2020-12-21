@@ -238,7 +238,6 @@ public class ScryfallImageSupportCards {
             add("TD0"); // Magic Online Theme Decks
             add("PD2"); // Premium Deck Series: Fire and Lightning
             //add("PMPS11"); // Magic Premiere Shop 2011
-            add("PDP11"); // Duels of the Planeswalkers 2011 Promos
             add("PWP11"); // Wizards Play Network 2011
             //add("PS11"); // Salvat 2011
             add("P11"); // Magic Player Rewards 2011
