@@ -15,15 +15,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -83,7 +81,6 @@ class FireGiantsFuryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = new FireGiantsFuryDelayedTriggeredAbility(source.getFirstTarget());
-        delayedAbility.addWatcher(new FireGiantsFuryWatcher());
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
@@ -94,7 +91,7 @@ class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
     private final UUID target;
 
     public FireGiantsFuryDelayedTriggeredAbility(UUID target) {
-        super(new FireGiantsFuryDelayedEffect(target), Duration.EndOfTurn, false, false);
+        super(new FireGiantsFuryDelayedEffect(), Duration.EndOfTurn, false, false);
         this.target = target;
     }
 
@@ -110,7 +107,14 @@ class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(target);
+        if (event.getSourceId().equals(target) && ((DamagedEvent) event).isCombatDamage()) {
+            for (Effect effect : this.getAllEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                effect.setValue("damage", event.getAmount());
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -126,17 +130,13 @@ class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class FireGiantsFuryDelayedEffect extends OneShotEffect {
 
-    private final UUID target;
-
-    public FireGiantsFuryDelayedEffect(UUID target) {
+    public FireGiantsFuryDelayedEffect() {
         super(Outcome.PlayForFree);
-        this.target = target;
         this.staticText = "exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
     }
 
     private FireGiantsFuryDelayedEffect(final FireGiantsFuryDelayedEffect effect) {
         super(effect);
-        this.target = effect.target;
     }
 
     @Override
@@ -147,10 +147,9 @@ class FireGiantsFuryDelayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        FireGiantsFuryWatcher watcher = game.getState().getWatcher(FireGiantsFuryWatcher.class);
-        if (controller != null && watcher != null) {
-            int damage = watcher.getDamage(target);
-            if (damage > 0) {
+        if (controller != null) {
+            Integer damage = (Integer) getValue("damage");
+            if (damage != null && damage > 0) {
                 Set<Card> cards = controller.getLibrary().getTopCards(game, damage);
                 Card sourceCard = game.getCard(source.getSourceId());
                 controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
@@ -211,32 +210,5 @@ class FireGiantsFuryMayPlayEffect extends AsThoughEffectImpl {
         UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
         return source.isControlledBy(affectedControllerId)
                 && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
-    }
-}
-
-class FireGiantsFuryWatcher extends Watcher {
-
-    private final Map<UUID, Integer> damagingObjects;
-
-    public FireGiantsFuryWatcher() {
-        super(WatcherScope.GAME);
-        this.damagingObjects = new HashMap<>();
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            damagingObjects.put(event.getSourceId(), event.getAmount());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        damagingObjects.clear();
-    }
-
-    public int getDamage(UUID sourceId) {
-        return damagingObjects.getOrDefault(sourceId, 0);
     }
 }
