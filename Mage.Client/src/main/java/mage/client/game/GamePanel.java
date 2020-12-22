@@ -88,7 +88,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private String chosenHandKey = "You";
     private boolean smallMode = false;
     private boolean initialized = false;
-    private skipButtonsList skipButtons = new skipButtonsList();
+    private final skipButtonsList skipButtons = new skipButtonsList();
 
     private boolean menuNameSet = false;
     private boolean handCardsOfOpponentAvailable = false;
@@ -102,7 +102,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private boolean initComponents;
 
-    private Timer resizeTimer;
+    private final Timer resizeTimer;
 
     private enum PopUpMenuType {
         TRIGGER_ORDER
@@ -1289,7 +1289,11 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChoosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
-                // play from stack unsupported
+                // users can activate abilities of the spell on the stack (example: Lightning Storm);
+                if (needPlayable.containsKey(card.getKey())) {
+                    card.getValue().setPlayable(true);
+                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                }
             }
         }
 
@@ -2537,7 +2541,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     // Event listener for the ShowCardsDialog
     private Listener<Event> getShowCardsEventListener(final ShowCardsDialog dialog) {
-        return (Listener<Event>) event -> {
+        return event -> {
             if (event.getEventType() == ClientEventType.SHOW_POP_UP_MENU) {
                 if (event.getComponent() != null && event.getComponent() instanceof CardPanel) {
                     JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();

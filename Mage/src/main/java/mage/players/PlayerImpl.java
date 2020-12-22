@@ -44,7 +44,6 @@ import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.events.*;
-import mage.game.events.GameEvent.EventType;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -1568,7 +1567,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        // It may not be possible to activate abilities of stack abilities
+        // stack abilities - can't activate anything
+        // spell ability - can activate additional abilities (example: "Lightning Storm")
         if (object instanceof StackAbility || object == null) {
             return useable;
         }
@@ -1594,10 +1594,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                 needId1 = object.getId();
                 needId2 = ((AdventureCardSpell) object).getParentCard().getId();
                 needId3 = object.getId();
+            } else if (object instanceof Spell) {
+                // example: activate Lightning Storm's ability from the spell on the stack
+                needId1 = object.getId();
+                needId2 = ((Spell) object).getCard().getId();
+                needId3 = null;
             } else {
                 needId1 = object.getId();
-                needId2 = object.getId();
-                needId3 = object.getId();
+                needId2 = null;
+                needId3 = null;
             }
 
             // workaround to find all abilities first and filter it for one object
@@ -2791,6 +2796,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * Return result for next flip coint try (can be contolled in tests)
+     *
      * @return
      */
     @Override
@@ -3707,6 +3713,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (card != null && card.getMainCard().getId() != card.getId()) {
                     UUID mainCardId = card.getMainCard().getId();
                     playableObjects.put(mainCardId, playableObjects.getOrDefault(mainCardId, 0) + 1);
+                }
+
+                // spell on stack can have activated abilities,
+                // so mark it as playable too (users must able to clicks on stack objects)
+                // example: Lightning Storm
+                Spell spell = game.getSpell(ability.getSourceId());
+                if (spell != null) {
+                    playableObjects.put(spell.getId(), playableObjects.getOrDefault(spell.getId(), 0) + 1);
                 }
             }
         }

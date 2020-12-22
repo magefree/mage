@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,11 +19,12 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class LightningStorm extends CardImpl {
@@ -38,6 +37,7 @@ public final class LightningStorm extends CardImpl {
         effect.setText("{this} deals X damage to any target, where X is 3 plus the number of charge counters on it");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+
         // Discard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it. Any player may activate this ability but only if Lightning Storm is on the stack.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.STACK,
                 new LightningStormAddCounterEffect(),
@@ -115,7 +115,8 @@ class LightningStormAddCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
             spell.addCounters(CounterType.CHARGE.createInstance(2), source, game);
-            return spell.chooseNewTargets(game, ((ActivatedAbilityImpl) source).getActivatorId(), false, false, null);
+            spell.chooseNewTargets(game, ((ActivatedAbilityImpl) source).getActivatorId(), false, false, null);
+            return true;
         }
         return false;
     }
