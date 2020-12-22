@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -17,6 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -80,24 +82,27 @@ class FireGiantsFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new FireGiantsFuryDelayedTriggeredAbility(source.getFirstTarget());
-        game.addDelayedTriggeredAbility(delayedAbility, source);
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
+        game.addDelayedTriggeredAbility(new FireGiantsFuryDelayedTriggeredAbility(new MageObjectReference(permanent, game)), source);
         return true;
     }
 }
 
 class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final UUID target;
+    private final MageObjectReference mor;
 
-    public FireGiantsFuryDelayedTriggeredAbility(UUID target) {
+    public FireGiantsFuryDelayedTriggeredAbility(MageObjectReference mor) {
         super(new FireGiantsFuryDelayedEffect(), Duration.EndOfTurn, false, false);
-        this.target = target;
+        this.mor = mor;
     }
 
     private FireGiantsFuryDelayedTriggeredAbility (FireGiantsFuryDelayedTriggeredAbility ability) {
         super(ability);
-        this.target = ability.target;
+        this.mor = ability.mor;
     }
 
     @Override
@@ -107,7 +112,7 @@ class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(target) && ((DamagedEvent) event).isCombatDamage()) {
+        if (mor.refersTo(event.getSourceId(), game) && ((DamagedEvent) event).isCombatDamage()) {
             for (Effect effect : this.getAllEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 effect.setValue("damage", event.getAmount());
