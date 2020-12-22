@@ -19,6 +19,7 @@ import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counters;
 import mage.game.combat.Combat;
+import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -517,6 +518,27 @@ public interface Game extends MageItem, Serializable {
                 .filter(Objects::nonNull)
                 .filter(card -> Zone.COMMAND.equals(this.getState().getZone(card.getId())))
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Finds is it a commander card/object (use it in conditional and other things)
+     *
+     * @param player
+     * @param object
+     * @return
+     */
+    default boolean isCommanderObject(Player player, MageObject object) {
+        UUID idToCheck = null;
+        if (object instanceof Spell) {
+            idToCheck = ((Spell) object).getCard().getId();
+        }
+        if (object instanceof CommandObject) {
+            idToCheck = object.getId();
+        }
+        if (object instanceof Card) {
+            idToCheck = ((Card) object).getMainCard().getId();
+        }
+        return idToCheck != null && this.getCommandersIds(player).contains(idToCheck);
     }
 
     void setGameStopped(boolean gameStopped);

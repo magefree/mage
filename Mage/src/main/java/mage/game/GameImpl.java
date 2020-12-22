@@ -436,19 +436,23 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public UUID getOwnerId(MageObject object) {
-        if (object instanceof Card) {
-            return ((Card) object).getOwnerId();
-        }
         if (object instanceof Spell) {
             return ((Spell) object).getOwnerId();
         }
+
         if (object instanceof StackObject) {
             // maybe this is not correct in all cases?
             return ((StackObject) object).getControllerId();
         }
+
         if (object instanceof CommandObject) {
             return ((CommandObject) object).getControllerId();
         }
+
+        if (object instanceof Card) {
+            return ((Card) object).getOwnerId();
+        }
+
         return null;
     }
 

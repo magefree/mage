@@ -16,6 +16,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.Card;
 import mage.filter.FilterSpell;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
@@ -65,12 +66,19 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (game.inCheckPlayableState() && object instanceof Card) {
-                Spell spell = new Spell((Card) object, (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()), game);
-                return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
-            }
             if ((object instanceof StackObject)) {
                 return filter.match((StackObject) object, source.getSourceId(), source.getControllerId(), game);
+            }
+
+            // checking mana without real cast
+            if (game.inCheckPlayableState()) {
+                Spell spell = null;
+                if (object instanceof Card) {
+                    spell = new Spell((Card) object, (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()), game);
+                } else if (object instanceof Commander) {
+                    spell = new Spell(((Commander) object).getSourceObject(), (SpellAbility) source, source.getControllerId(), game.getState().getZone(source.getSourceId()), game);
+                }
+                return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
             }
         }
         return false;

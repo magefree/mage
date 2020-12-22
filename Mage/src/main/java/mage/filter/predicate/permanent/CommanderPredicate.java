@@ -13,8 +13,8 @@ public enum CommanderPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Player owner = game.getPlayer(game.getOwnerId(input.getId()));
-        return owner != null && game.getCommandersIds(owner).contains(input.getId());
+        Player owner = game.getPlayer(game.getOwnerId(input));
+        return owner != null && game.isCommanderObject(owner, input);
     }
 
     @Override
