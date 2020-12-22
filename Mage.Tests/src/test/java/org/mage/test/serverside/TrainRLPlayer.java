@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
 
 /**
  * @author ayratn
@@ -41,13 +42,17 @@ public class TrainRLPlayer extends MageTestBase {
     //@Ignore
     public void playGames() throws GameException, FileNotFoundException {
         RLLearner learner=new RLLearner();
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 100; i++) {
             logger.info("Playing game: " + i);
-            
             playOneGame(learner);
-            //logger.info(learner.actionToIndex);
-            learner.trainBatch(64);
+            for(int j=0;j<10;j++){
+                learner.trainBatch(64);
+                double[] scores= learner.losses.getScoreVsIter().getEffectiveScores();
+                logger.info(scores[scores.length-1]); 
+            }
         }
+        //logger.info(learner.actionToIndex);
+        
     }
 
     private void playOneGame(RLLearner learner) throws GameException, FileNotFoundException, IllegalArgumentException {
