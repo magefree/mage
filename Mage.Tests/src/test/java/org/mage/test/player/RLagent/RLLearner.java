@@ -74,12 +74,9 @@ import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
 //Records its experiences and can learn from them 
 public class RLLearner {
     private static final Logger logger = Logger.getLogger(RLLearner.class);
-    protected LinkedList<GameSequence> games;//keep an eye on the size of this array, if it gets out 
-    //of hand, the game representation will need to be compressed, which could be tricky
-    //There is almost certainly some unused information to cut, but that would require memory profiling
-    //and adding a prune method to Game. 
+    protected LinkedList<GameSequence> games;
     public CollectScoresIterationListener losses;
-    protected double epsilon=.5f; //For epsilon greedy learning
+    protected double epsilon=.5f; //For epsilon greedy learning. Set to 0 for evaluation
     protected Boolean evaluateMode; //Sets mode to testing, no experience should be collected  
     Representer representer;
     ComputationGraph model;
@@ -131,43 +128,38 @@ public class RLLearner {
     //Represents a batch of data as a list of INDArrays
     //Remember--this simply doens't represent NULL elements
     //Only getTargets can currently handle NULL elements
-    protected List<INDArray> represent_batch(List<Experience> exps,List<Player> players){
-        List<INDArray> actionIDs=new ArrayList<INDArray>();
-        List<INDArray> otherReals=new ArrayList<INDArray>();
-        List<INDArray> permIDs=new ArrayList<INDArray>();
-        for(int i=0;i<exps.size();i++){
-            Experience exp=exps.get(i);
-            if(exp!=null){
-                actionIDs.add(representActions(exp.game,exp.actions));
-                List<INDArray> gameRepr=representGame(exp.game, players.get(i));
-                otherReals.add(gameRepr.get(0));
-                permIDs.add(gameRepr.get(1));
+    protected List<INDArray> represent_batch(List<RepresentedGame> reprGames){
+        List<List<INDArray>> prePiled=new ArrayList<List<INDArray>>();
+        for(int i=0;i<HParams.total_model_inputs;i++){
+            prePiled.add(new ArrayList<INDArray>());
+        }
+        for(int i=0;i<reprGames.size();i++){
+            INDArray[] repr=reprGames.get(i).asModelInputs();
+            for(int j=0;j<HParams.total_model_inputs;j++){
+                prePiled.get(j).add(repr[j]);
             }
         }
-        List<INDArray> inputs=new ArrayList<INDArray>();
-        inputs.add(Nd4j.pile(actionIDs));
-        inputs.add(Nd4j.pile(otherReals));
-        inputs.add(Nd4j.pile(permIDs));
-        return inputs;
+        List<INDArray> batchRepr=new ArrayList<INDArray>();
+        for(int i=0;i<prePiled.size();i++){
+            batchRepr.add(Nd4j.pile(prePiled.get(i)));
+        }
+        return batchRepr;
     } 
     //Runs the model on given inputs
-    protected INDArray runModel(List<Experience> exps,List<Player> players){
-        List<INDArray> representedExps=represent_batch(exps, players);
+    protected INDArray runModel(List<RepresentedGame> reprGames){
+        List<INDArray> representedExps=represent_batch(reprGames);
         Map<String,INDArray> qmodelOut=model.feedForward(representedExps.toArray(new INDArray[representedExps.size()]),true);
         INDArray QValues=qmodelOut.get("linout").reshape(-1,HParams.max_representable_actions);
         return QValues;
     }
-    //Calculates the targets of the ML model for the actions 
-    //taken. Undoes the deletions from the runModel
-    protected List<Double> getTargets(List<GameSequence> sampledGames,List<Experience> exps,List<Player> players){
-        INDArray QValues=runModel(exps, players);
+    //Calculates the targets of the ML model for the actions taken
+    protected List<Double> getTargets(List<GameSequence> sampledGames,List<RepresentedGame> reprGames){
+        INDArray QValues=runModel(reprGames);
         INDArray maxQ=QValues.max(1);
         List<Double> targets=new ArrayList<Double>();
-        int nonlast=0;
-        for(int i=0;i<exps.size();i++){
-            if(exps.get(i)!=null){
-                targets.add(maxQ.getDouble(nonlast));
-                nonlast+=1;
+        for(int i=0;i<reprGames.size();i++){
+            if(!reprGames.get(i).isDummy){
+                targets.add(maxQ.getDouble(i));
             }
             else{
                 logger.info("adding game win/loss "+sampledGames.get(i).getValue());
@@ -181,48 +173,43 @@ public class RLLearner {
     public void trainBatch(int size){
         List<Integer> gamesToSample=sampleGames(size);
         List<GameSequence> sampledGames=new ArrayList<GameSequence>();
-        List<Experience> currents=new ArrayList<Experience>();
-        List<Experience> nexts=new ArrayList<Experience>();
-        List<Player> players=new ArrayList<Player>();
+        List<Experience> currentExps=new ArrayList<Experience>();
+        List<RepresentedGame> currentReprs=new ArrayList<RepresentedGame>();
+        List<RepresentedGame> nextReprs=new ArrayList<RepresentedGame>();
         for(int i=0;i<size;i++){
             GameSequence sampledGame=games.get(gamesToSample.get(i));
             sampledGames.add(sampledGame);
-            players.add(sampledGame.getPlayer());
             int expIndex=RandomUtil.nextInt(sampledGame.experiences.size());
-            currents.add(sampledGame.experiences.get(expIndex));
+            Experience exp=sampledGame.experiences.get(expIndex);
+            currentExps.add(exp);
+            currentReprs.add(exp.repr);
             if(expIndex+1 != sampledGame.experiences.size()){
-                nexts.add(sampledGame.experiences.get(expIndex+1));
+                nextReprs.add(sampledGame.experiences.get(expIndex+1).repr);
             }
             else{
-                nexts.add(null);
+                nextReprs.add(representer.emptyGame());
             }
         }
-        INDArray target=runModel(currents, players);
-        List<Double> targets=getTargets(sampledGames, nexts, players);
+        INDArray target=runModel(currentReprs);
+        List<Double> targets=getTargets(sampledGames, nextReprs);
         //logger.info(targets.toString());
         for(int i=0;i<size;i++){
-            target.putScalar(i,currents.get(i).chosen,targets.get(i));
+            target.putScalar(i,currentExps.get(i).chosen,targets.get(i));
         }
         
         target=Nd4j.expandDims(target, 1);
-        List<INDArray> representedExps=represent_batch(currents, players);
+        List<INDArray> representedExps=represent_batch(currentReprs);
         INDArray[] inputs=representedExps.toArray(new INDArray[representedExps.size()]);
         model.fit(inputs, new INDArray[]{target});
     } 
     //Gets the action the model thinks is best in this game state
-    protected int getGreedy(Game game, List<RLAction> actions){
-        Player thisPlayer=getCurrentGame().getPlayer();
-        List<INDArray> gameRepr=representGame(game, thisPlayer);
-        INDArray actionRepr=representActions(game, actions);
-        INDArray inputs[]=new INDArray[3];
-        inputs[0]=Nd4j.expandDims(actionRepr, 0);
-        inputs[1]=Nd4j.expandDims(gameRepr.get(0), 0);
-        inputs[2]=Nd4j.expandDims(gameRepr.get(1), 0);
+    protected int getGreedy(RepresentedGame repr){
+        INDArray inputs[]=repr.asModelInputs();
         Map<String,INDArray> qmodelOut=model.feedForward(inputs,true);
         INDArray q_values=qmodelOut.get("linout").reshape(HParams.max_representable_actions);
         double max_q=Double.NEGATIVE_INFINITY;
         int max_index=0;
-        for(int i=0;i<Math.min(actions.size(),HParams.max_representable_actions);i++){
+        for(int i=0;i<Math.min(repr.numActions,HParams.max_representable_actions);i++){
             double value=q_values.getDouble(i);
             if(value>max_q){
                 max_q=value;
@@ -232,15 +219,16 @@ public class RLLearner {
         return max_index;
     }
     //Rund the epsilon greedy algorithm
-    public int choose(Game game, List<RLAction> actions){
+    public int choose(Game game, Player player,List<RLAction> actions){
         int choice;
+        RepresentedGame repr=representer.represent(game, player, actions);
         if(RandomUtil.nextDouble()<epsilon){//random action
             choice=RandomUtil.nextInt(Math.min(actions.size(),HParams.max_representable_actions));
         }
         else{//Greedy action from q learner
-            choice=getGreedy(game, actions);
+            choice=getGreedy(repr);
         }
-        Experience exp=new Experience(game.copy(),actions,choice);
+        Experience exp=new Experience(repr,choice);
         getCurrentGame().addExperience(exp);
         return choice;
     }
@@ -273,8 +261,8 @@ public class RLLearner {
     }
     //Ends the current game, no more experiences should be 
     //added after this
-    public void endGame(String winner){
-        getCurrentGame().setWinner(winner);
+    public void endGame(Player player,String winner){
+        getCurrentGame().setWinner(player,winner);
     }
     public GameSequence getCurrentGame(){
         return games.getLast();

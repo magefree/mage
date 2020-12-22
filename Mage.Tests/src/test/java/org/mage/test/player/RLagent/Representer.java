@@ -37,7 +37,7 @@ public class Representer {
         gameZeros[1]=Nd4j.zeros(HParams.max_representable_permanents);
         List<INDArray> gameRepr=Arrays.asList(gameZeros);
         List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(HParams.model_inputlen));
-        return new RepresentedGame(0,gameRepr,actionRepr);
+        return new RepresentedGame(0,gameRepr,actionRepr,true);
     }
     //Takes the string representation of a permanent or
     //an action and maps it to it's ID. If it is not in 

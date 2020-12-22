@@ -16,9 +16,26 @@ public class RepresentedGame {
     protected int numActions;
     protected List<INDArray> actionRepr;
     protected List<INDArray> gameRepr;
+    protected boolean isDummy;
     RepresentedGame(int numActions, List<INDArray> gameRepr,List<INDArray> actionRepr){
+        this(numActions, gameRepr,actionRepr,false);
+    }
+    RepresentedGame(int numActions, List<INDArray> gameRepr,List<INDArray> actionRepr,boolean isDummy){
         this.numActions=numActions;
         this.gameRepr=gameRepr;
         this.actionRepr=actionRepr;
+        this.isDummy=isDummy;
+    }
+
+    //returns the data prepared to be fed into the model
+    public INDArray[] asModelInputs(){
+        INDArray inputs[]=new INDArray[HParams.total_model_inputs];
+        inputs[0]=Nd4j.expandDims(actionRepr.get(0), 0);
+        inputs[1]=Nd4j.expandDims(gameRepr.get(0), 0);
+        inputs[2]=Nd4j.expandDims(gameRepr.get(1), 0);
+        return inputs;
+    }
+    public int getNumActions(){
+        return numActions;
     }
 }

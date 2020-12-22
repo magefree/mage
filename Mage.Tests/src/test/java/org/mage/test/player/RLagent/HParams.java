@@ -11,4 +11,5 @@ public class HParams {
     public final static int internal_dim=32; //For speed for now, should be good enough
     public final static int game_reals=4;
     public final static int num_game_reprs=2;
+    public final static int total_model_inputs=3;
 }

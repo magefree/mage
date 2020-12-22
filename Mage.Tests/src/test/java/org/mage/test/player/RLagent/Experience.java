@@ -7,12 +7,10 @@ import java.util.*;
  */
 
 public class Experience{
-    Game game;
-    List<RLAction> actions;
+    RepresentedGame repr;
     int chosen;
-    public Experience(Game inGame, List<RLAction> inActions, int inChoice){
-        game=inGame;
-        actions=inActions;
-        chosen=inChoice;
+    public Experience(RepresentedGame repr,int chosen){
+        this.repr=repr;
+        this.chosen=chosen;
     }
 }
