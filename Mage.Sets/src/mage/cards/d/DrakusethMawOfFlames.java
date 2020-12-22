@@ -43,9 +43,8 @@ public final class DrakusethMawOfFlames extends CardImpl {
         target.setTargetTag(1);
         ability.addTarget(target);
         FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("any target");
-        filter.getCreatureFilter().add(new AnotherTargetPredicate(2, true));
         filter.getPlayerFilter().add(new AnotherTargetPredicate(2, true));
-        filter.getPlaneswalkerFilter().add(new AnotherTargetPredicate(2, true));
+        filter.getPermanentFilter().add(new AnotherTargetPredicate(2, true));
         target = new TargetAnyTarget(0, 2, filter).withChooseHint("to deal 3 damage");
         target.setTargetTag(2);
         ability.addTarget(target);

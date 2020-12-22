@@ -32,14 +32,12 @@ public final class BondOfPassion extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterCreaturePermanent();
-    private static final FilterCreaturePlayerOrPlaneswalker filter2
+    private static final FilterCreaturePlayerOrPlaneswalker otherFilter
             = new FilterCreaturePlayerOrPlaneswalker("any other target");
 
     static {
-        filter.add(new AnotherTargetPredicate(1));
-        filter2.getCreatureFilter().add(new AnotherTargetPredicate(2));
-        filter2.getPlaneswalkerFilter().add(new AnotherTargetPredicate(2));
-        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
+        otherFilter.getPlayerFilter().add(new AnotherTargetPredicate(2));
+        otherFilter.getPlayerFilter().add(new AnotherTargetPredicate(2));
     }
 
     public BondOfPassion(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +48,7 @@ public final class BondOfPassion extends CardImpl {
         Target target = new TargetPermanent(filter);
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
-        target = new TargetAnyTarget(filter2);
+        target = new TargetAnyTarget(otherFilter);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

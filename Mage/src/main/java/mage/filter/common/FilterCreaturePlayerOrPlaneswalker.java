@@ -1,72 +1,48 @@
 package mage.filter.common;
 
-import mage.MageItem;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.MageObject;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 
-import java.util.UUID;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
+ * If you add predicate to permanentFilter then it will be applied to planeswalker too
+ *
  * @author JRHerlehy Created on 4/8/18.
  */
 public class FilterCreaturePlayerOrPlaneswalker extends FilterPermanentOrPlayer {
-
-    protected FilterCreaturePermanent creatureFilter;
-    protected FilterPlaneswalkerPermanent planeswalkerFilter;
 
     public FilterCreaturePlayerOrPlaneswalker() {
         this("any target");
     }
 
     public FilterCreaturePlayerOrPlaneswalker(String name) {
+        this(name, (SubType) null);
+    }
+
+    public FilterCreaturePlayerOrPlaneswalker(String name, SubType... andCreatureTypes) {
         super(name);
-        creatureFilter = new FilterCreaturePermanent();
-        planeswalkerFilter = new FilterPlaneswalkerPermanent();
+        List<Predicate<MageObject>> allCreaturePredicates = Arrays.stream(andCreatureTypes)
+                .filter(Objects::nonNull)
+                .map(SubType::getPredicate)
+                .collect(Collectors.toList());
+        allCreaturePredicates.add(0, CardType.CREATURE.getPredicate());
+        Predicate<MageObject> planeswalkerPredicate = CardType.PLANESWALKER.getPredicate();
+
+        this.permanentFilter.add(Predicates.or(
+                Predicates.and(allCreaturePredicates),
+                planeswalkerPredicate
+        ));
     }
 
     public FilterCreaturePlayerOrPlaneswalker(final FilterCreaturePlayerOrPlaneswalker filter) {
         super(filter);
-        this.creatureFilter = filter.creatureFilter.copy();
-        this.planeswalkerFilter = filter.planeswalkerFilter.copy();
-    }
-
-    @Override
-    public boolean match(MageItem o, Game game) {
-        if (super.match(o, game)) {
-            if (o instanceof Player) {
-                return playerFilter.match((Player) o, game);
-            } else if (o instanceof Permanent) {
-                return creatureFilter.match((Permanent) o, game)
-                        || planeswalkerFilter.match((Permanent) o, game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(o, game)) { // process predicates
-            if (o instanceof Player) {
-                return playerFilter.match((Player) o, sourceId, playerId, game);
-            } else if (o instanceof Permanent) {
-                return creatureFilter.match((Permanent) o, sourceId, playerId, game)
-                        || planeswalkerFilter.match((Permanent) o, sourceId, playerId, game);
-            }
-        }
-        return false;
-    }
-
-    public FilterCreaturePermanent getCreatureFilter() {
-        return this.creatureFilter;
-    }
-
-    public FilterPlaneswalkerPermanent getPlaneswalkerFilter() {
-        return this.planeswalkerFilter;
-    }
-
-    public void setCreatureFilter(FilterCreaturePermanent creatureFilter) {
-        this.creatureFilter = creatureFilter;
     }
 
     @Override

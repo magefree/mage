@@ -1,6 +1,5 @@
 package mage.target.common;
 
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 
@@ -16,15 +15,7 @@ public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
         super(amount, defaultFilter);
     }
 
-    public TargetCreatureOrPlaneswalkerAmount(DynamicValue amount) {
-        super(amount, defaultFilter);
-    }
-
     public TargetCreatureOrPlaneswalkerAmount(int amount, FilterPermanent filter) {
-        super(amount, filter);
-    }
-
-    public TargetCreatureOrPlaneswalkerAmount(DynamicValue amount, FilterPermanent filter) {
         super(amount, filter);
     }
 

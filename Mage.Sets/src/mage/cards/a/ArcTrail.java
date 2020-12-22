@@ -33,9 +33,8 @@ public final class ArcTrail extends CardImpl {
         this.getSpellAbility().addTarget(target1);
 
         FilterCreaturePlayerOrPlaneswalker filter2 = new FilterCreaturePlayerOrPlaneswalker("another creature, player or planeswalker to deal 1 damage");
-        AnotherTargetPredicate predicate = new AnotherTargetPredicate(2);
-        filter2.getCreatureFilter().add(predicate);
-        filter2.getPlayerFilter().add(predicate);
+        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
+        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
         TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);

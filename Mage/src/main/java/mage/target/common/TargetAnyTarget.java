@@ -116,17 +116,8 @@ public class TargetAnyTarget extends TargetImpl {
             }
         }
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-
-        for (Permanent planeswalker : game.getBattlefield().getActivePermanents(filter.getPlaneswalkerFilter(), sourceControllerId, game)) {
-            if (planeswalker.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(planeswalker, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -160,17 +151,8 @@ public class TargetAnyTarget extends TargetImpl {
             }
         }
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
-                count++;
-                if (count >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
-        }
-
-        for (Permanent planeswalker : game.getBattlefield().getActivePermanents(filter.getPlaneswalkerFilter(), sourceControllerId, game)) {
-            if (filter.match(planeswalker, null, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -190,22 +172,15 @@ public class TargetAnyTarget extends TargetImpl {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.canBeTargetedBy(targetSource, sourceControllerId, game)
-                    && filter.getPlayerFilter().match(player, sourceId, sourceControllerId, game)) {
+                    && filter.match(player, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(playerId);
             }
         }
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
-                    && filter.getCreatureFilter().match(permanent, sourceId, sourceControllerId, game)) {
+                    && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
-            }
-        }
-
-        for (Permanent planeswalker : game.getBattlefield().getActivePermanents(filter.getPlaneswalkerFilter(), sourceControllerId, game)) {
-            if (planeswalker.canBeTargetedBy(targetSource, sourceControllerId, game)
-                    && filter.getPlaneswalkerFilter().match(planeswalker, sourceId, sourceControllerId, game)) {
-                possibleTargets.add(planeswalker.getId());
             }
         }
 
@@ -218,20 +193,14 @@ public class TargetAnyTarget extends TargetImpl {
 
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && filter.getPlayerFilter().match(player, game)) {
+            if (player != null && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
-            if (filter.getCreatureFilter().match(permanent, null, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
+            if (filter.getPermanentFilter().match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
-            }
-        }
-
-        for (Permanent planeswalker : game.getBattlefield().getActivePermanents(filter.getPlaneswalkerFilter(), sourceControllerId, game)) {
-            if (filter.getPlaneswalkerFilter().match(planeswalker, null, sourceControllerId, game)) {
-                possibleTargets.add(planeswalker.getId());
             }
         }
 

@@ -2,22 +2,16 @@ package mage.target.common;
 
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
-import mage.filter.common.FilterPermanentOrPlayer;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetAnyTargetAmount extends TargetPermanentOrPlayerAmount {
 
-    private static final FilterPermanentOrPlayer defaultFilter
+    private static final FilterCreaturePlayerOrPlaneswalker defaultFilter
             = new FilterCreaturePlayerOrPlaneswalker("targets");
-
-    static {
-        defaultFilter.getPermanentFilter().add(CardType.CREATURE.getPredicate());
-    }
 
     public TargetAnyTargetAmount(int amount) {
         this(amount, 0);

@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,12 +16,12 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class CauterySliver extends CardImpl {
@@ -43,10 +41,12 @@ public final class CauterySliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability1, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{1}, Sacrifice this permanent: This permanent deals 1 damage to any target.\"")));
+
         // All Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn."
+        // All Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target player, planeswalker, or Sliver creature this turn."
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("1"));
         ability2.addCost(new SacrificeSourceCost());
-        ability2.addTarget(new TargetSliverCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget(new FilterCreatureOrPlayerByType(SubType.SLIVER, "Sliver creature or player")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn.\"")));
@@ -62,18 +62,10 @@ public final class CauterySliver extends CardImpl {
     }
 }
 
-class TargetSliverCreatureOrPlayer extends TargetAnyTarget {
-
-    public TargetSliverCreatureOrPlayer() {
-        super();
-        filter = new FilterCreatureOrPlayerByType("Sliver", "Sliver creature or player");
-    }
-}
-
 class FilterCreatureOrPlayerByType extends FilterCreaturePlayerOrPlaneswalker {
 
-    public FilterCreatureOrPlayerByType(String type, String name) {
+    public FilterCreatureOrPlayerByType(SubType subType, String name) {
         super(name);
-        creatureFilter = new FilterCreaturePermanent(type);
+        this.getPermanentFilter().add(subType.getPredicate());
     }
 }

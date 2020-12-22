@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
@@ -17,18 +15,18 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamageDoneWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class NeedleDrop extends CardImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker FILTER = new FilterCreaturePlayerOrPlaneswalker();
+    private static final FilterCreaturePlayerOrPlaneswalker filer = new FilterCreaturePlayerOrPlaneswalker();
 
     static {
-        FILTER.getCreatureFilter().add(new DamagedThisTurnPredicate());
-        FILTER.getPlaneswalkerFilter().add(new DamagedThisTurnPredicate());
-        FILTER.getPlayerFilter().add(new DamagedThisTurnPredicate());
+        filer.getPlayerFilter().add(new DamagedThisTurnPredicate());
+        filer.getPermanentFilter().add(new DamagedThisTurnPredicate());
     }
 
     public NeedleDrop(UUID ownerId, CardSetInfo setInfo) {
@@ -38,7 +36,7 @@ public final class NeedleDrop extends CardImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to any target that was dealt damage this turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetAnyTarget(1, 1, FILTER));
+        this.getSpellAbility().addTarget(new TargetAnyTarget(1, 1, filer));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

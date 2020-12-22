@@ -2281,9 +2281,6 @@ public class TestPlayer implements Player {
                         if (filter instanceof FilterCreatureOrPlayer) {
                             filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
                         }
-                        if (filter instanceof FilterCreaturePlayerOrPlaneswalker) {
-                            filter = ((FilterCreaturePlayerOrPlaneswalker) filter).getCreatureFilter();
-                        }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
                         }
