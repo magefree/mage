@@ -20,6 +20,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 
 /**
  * @author TheElk801
@@ -45,7 +47,7 @@ public final class FallFromFavor extends CardImpl {
 
         // Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(
-                new DontUntapInControllersUntapStepEnchantedEffect(), FallFromFavorCondition.instance
+                new DontUntapInControllersUntapStepEnchantedEffect(), new InvertCondition(MonarchIsSourceControllerCondition.instance)
         ).setText("enchanted creature doesn't untap during its controller's untap step unless that player is the monarch")));
     }
 
@@ -56,14 +58,5 @@ public final class FallFromFavor extends CardImpl {
     @Override
     public FallFromFavor copy() {
         return new FallFromFavor(this);
-    }
-}
-
-enum FallFromFavorCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(game.getActivePlayerId());
     }
 }
