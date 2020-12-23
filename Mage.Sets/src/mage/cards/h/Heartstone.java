@@ -14,6 +14,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.Mana;
 
 /**
  * @author pcasaretto_at_gmail.com
@@ -42,8 +43,7 @@ public final class Heartstone extends CardImpl {
 class HeartstoneEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Activated abilities of creatures cost "
-            + "{1} less to activate. This effect can't reduce the mana in that cost to less than one mana.";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+            + "{1} less to activate. This effect can't reduce the mana in that cost to less than one mana";
 
     public HeartstoneEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -58,7 +58,11 @@ class HeartstoneEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            CardUtil.reduceCost(abilityToModify, 1);
+            int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 1, 1);            
+            if (reduceMax <= 0) {
+                return true;
+            }            
+            CardUtil.reduceCost(abilityToModify, reduceMax);
             return true;
         }
         return false;
@@ -71,10 +75,7 @@ class HeartstoneEffect extends CostModificationEffectImpl {
                 && (abilityToModify instanceof ActivatedAbility))) {
             // Activated abilities of creatures
             Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
-            if (permanent != null
-                    && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                return true;
-            }
+            return permanent != null && permanent.isCreature();
         }
         return false;
     }

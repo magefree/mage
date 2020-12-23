@@ -35,8 +35,8 @@ public final class PowerArtifact extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted artifact's activated abilities cost less to activate.
-        // This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
+        // Enchanted artifact's activated abilities cost {2} less to activate. 
+        // This effect can't reduce the mana in that cost to less than one mana.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PowerArtifactCostModificationEffect()));
     }
 
@@ -55,7 +55,7 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
     PowerArtifactCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Enchanted artifact's activated abilities cost {2} less to activate. "
-                + "This effect can't reduce the amount of mana an ability costs to activate to less than one mana.";
+                + "This effect can't reduce the mana in that cost to less than one mana";
 
     }
 
@@ -67,15 +67,11 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduce = mana.getGeneric();
-            if (reduce > 0 && mana.count() == mana.getGeneric()) {
-                reduce--;
-            }
-            if (reduce > 2) {
-                reduce = 2;
-            }
-            CardUtil.reduceCost(abilityToModify, reduce);
+            int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);            
+            if (reduceMax <= 0) {
+                return true;
+            }            
+            CardUtil.reduceCost(abilityToModify, reduceMax);
         }
         return true;
     }
