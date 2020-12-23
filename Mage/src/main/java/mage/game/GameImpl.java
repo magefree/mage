@@ -342,7 +342,6 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
-            // state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
             return object;
         }
         if (getPermanentsEntering().containsKey(objectId)) {
@@ -350,7 +349,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
         for (StackObject item : state.getStack()) {
             if (item.getId().equals(objectId)) {
-                //  state.setZone(objectId, Zone.STACK); // why is this neccessary?
                 return item;
             }
             if (item.getSourceId().equals(objectId) && item instanceof Spell) {

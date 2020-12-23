@@ -90,6 +90,14 @@ public interface Game extends MageItem, Serializable {
 
     Spell getSpellOrLKIStack(UUID spellId);
 
+    /**
+     * Find permanent on the battlefield by id. If you works with cards and want to check it on battlefield then
+     * use game.getState().getZone() instead. Card's id and permanent's id can be different (example: mdf card
+     * puts half card to battlefield, not the main card).
+     *
+     * @param permanentId
+     * @return
+     */
     Permanent getPermanent(UUID permanentId);
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);

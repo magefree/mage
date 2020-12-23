@@ -167,8 +167,8 @@ public class GameState implements Serializable, Copyable<GameState> {
                 this.values.put(entry.getKey(), ((HashSet) entry.getValue()).clone());
             } else if (entry.getValue() instanceof EnumSet) {
                 this.values.put(entry.getKey(), ((EnumSet) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof HashMap){
-                this.values.put(entry.getKey(), ((HashMap) entry.getValue()).clone());                
+            } else if (entry.getValue() instanceof HashMap) {
+                this.values.put(entry.getKey(), ((HashMap) entry.getValue()).clone());
             } else {
                 this.values.put(entry.getKey(), entry.getValue());
             }
@@ -696,9 +696,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Permanent getPermanent(UUID permanentId) {
         if (permanentId != null && battlefield.containsPermanent(permanentId)) {
-            Permanent permanent = battlefield.getPermanent(permanentId);
-            // setZone(permanent.getId(), Zone.BATTLEFIELD); // shouldn't this be set anyway? (LevelX2)
-            return permanent;
+            return battlefield.getPermanent(permanentId);
         }
         return null;
     }

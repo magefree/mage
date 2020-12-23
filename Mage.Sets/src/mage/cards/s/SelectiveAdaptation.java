@@ -61,7 +61,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
         private final String abilityName;
         private final FilterCard filter;
 
-        private AbilitySelector(Class abilityClass, String abilityName) {
+        AbilitySelector(Class abilityClass, String abilityName) {
             this.abilityClass = abilityClass;
             this.abilityName = abilityName;
             this.filter = new FilterCard("card with " + abilityName);
@@ -121,7 +121,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
             Card toBattlefield = game.getCard(target.getFirstTarget());
             if (toBattlefield != null
                     && player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game)
-                    && game.getPermanent(toBattlefield.getId()) != null) {
+                    && Zone.BATTLEFIELD.equals(game.getState().getZone(toBattlefield.getId()))) {
                 toHand.remove(toBattlefield);
             }
         }

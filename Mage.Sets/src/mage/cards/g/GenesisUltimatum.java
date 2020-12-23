@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -18,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -49,7 +47,7 @@ class GenesisUltimatumEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterPermanentCard("any number of permanent cards");
 
     GenesisUltimatumEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCardInPlay);
         staticText = "Look at the top five cards of your library. Put any number of permanent cards " +
                 "from among them onto the battlefield and the rest into your hand";
     }
@@ -72,14 +70,13 @@ class GenesisUltimatumEffect extends OneShotEffect {
         Cards toHand = new CardsImpl(player.getLibrary().getTopCards(game, 5));
         player.lookAtCards(source, null, toHand, game);
         TargetCard targetCard = new TargetCardInLibrary(0, 5, filter);
+        targetCard.withChooseHint("put to battlefield");
         player.choose(outcome, toHand, targetCard, game);
         Cards toBattlefield = new CardsImpl(targetCard.getTargets());
         if (player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game)) {
             toBattlefield
                     .stream()
-                    .map(game::getPermanent)
-                    .filter(Objects::nonNull) // to prevent exception https://github.com/magefree/mage/issues/7220
-                    .map(MageItem::getId)
+                    .filter(id -> Zone.BATTLEFIELD.equals(game.getState().getZone(id)))
                     .forEach(toHand::remove);
         }
         player.moveCards(toHand, Zone.HAND, source, game);
