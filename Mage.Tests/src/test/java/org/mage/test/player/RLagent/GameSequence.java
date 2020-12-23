@@ -7,7 +7,7 @@ public class GameSequence {
     public List<Experience> experiences;
     private static final Logger logger = Logger.getLogger(GameSequence.class);
     protected int value;
-    public GameSequence(Player play){
+    public GameSequence(){
         experiences= new ArrayList<Experience>();
     }
     public void setWinner(Player player,String winner){

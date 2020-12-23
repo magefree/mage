@@ -51,7 +51,7 @@ public class RLPlayer extends RandomPlayer{
                 for(int i=0;i<options.size();i++){
                     toUse.add((RLAction) new ActionAbility(options.get(i)));
                 }
-                int choice=learner.choose(game,toUse);
+                int choice=learner.choose(game,this,toUse);
                 ActionAbility chosenAction=(ActionAbility) toUse.get(choice);
                 ability = chosenAction.ability;
             }
@@ -87,7 +87,7 @@ public class RLPlayer extends RandomPlayer{
         for(int i=0;i<attackersList.size();i++){
             Permanent attacker=attackersList.get(i);
             List<RLAction> toattack= Arrays.asList((RLAction) new ActionAttack(attacker,false),(RLAction) new ActionAttack(attacker,true));
-            int index=learner.choose(game,toattack);
+            int index=learner.choose(game,this,toattack);
             if(index==1){//chose to attack
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
                 if (!game.getCombat().declareAttacker(attacker.getId(), defenderId, playerId, game)) {
@@ -115,7 +115,7 @@ public class RLPlayer extends RandomPlayer{
                 toblock.add((RLAction) new ActionBlock(game.getPermanent(attacker),blocker,true));
             }
             toblock.add((RLAction) new ActionBlock(null,null,false)); // Don't block anything
-            int choice=learner.choose(game,toblock);
+            int choice=learner.choose(game,this,toblock);
             ActionBlock chosenAction=(ActionBlock) toblock.get(choice);
 
             if (chosenAction.isBlock) {

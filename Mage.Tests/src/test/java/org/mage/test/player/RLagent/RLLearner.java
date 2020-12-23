@@ -84,6 +84,7 @@ public class RLLearner {
     public RLLearner(){
         games=new LinkedList<GameSequence>(); 
         model=constructModel();
+        representer=new Representer();
         evaluateMode=false;
     }
     //Sets evalueate mode. When evaluate mode is 
@@ -101,7 +102,7 @@ public class RLLearner {
     //to later learn from. This game will be returned from
     //getCurrentGame 
     public void newGame(Player player){
-        games.add(new GameSequence(player));
+        games.add(new GameSequence());
     }
     //Decides which games to sample experiences from, the exact
     //experience is chosen later
@@ -141,7 +142,19 @@ public class RLLearner {
         }
         List<INDArray> batchRepr=new ArrayList<INDArray>();
         for(int i=0;i<prePiled.size();i++){
-            batchRepr.add(Nd4j.pile(prePiled.get(i)));
+            for(int j=0;j<prePiled.get(i).size();j++){
+                String s1=prePiled.get(i).get(j).shapeInfoToString();
+                String s2=prePiled.get(i).get(0).shapeInfoToString();
+                if(!s1.equals(s2)){
+                    logger.info(i+"\n"+s1+"\n"+s2+"\n---\n");
+                }
+            }
+        }
+        for(int i=0;i<prePiled.size();i++){
+            
+            INDArray piled=Nd4j.pile(prePiled.get(i));
+            INDArray dataCol=Nd4j.squeeze(piled,1);
+            batchRepr.add(dataCol);
         }
         return batchRepr;
     } 
@@ -162,7 +175,7 @@ public class RLLearner {
                 targets.add(maxQ.getDouble(i));
             }
             else{
-                logger.info("adding game win/loss "+sampledGames.get(i).getValue());
+                //logger.info("adding game win/loss "+sampledGames.get(i).getValue());
                 targets.add((double) sampledGames.get(i).getValue());
             }
         }
@@ -221,6 +234,10 @@ public class RLLearner {
     //Rund the epsilon greedy algorithm
     public int choose(Game game, Player player,List<RLAction> actions){
         int choice;
+        
+        /*if(1<2){
+        return RandomUtil.nextInt(actions.size());
+        }*/
         RepresentedGame repr=representer.represent(game, player, actions);
         if(RandomUtil.nextDouble()<epsilon){//random action
             choice=RandomUtil.nextInt(Math.min(actions.size(),HParams.max_representable_actions));
@@ -236,7 +253,7 @@ public class RLLearner {
     //because it sets the training listener
     ComputationGraph constructModel(){
         ComputationGraphConfiguration conf = new NeuralNetConfiguration.Builder()
-        .updater(new Adam(0.01))
+        .updater(new Adam(0.005))
         .graphBuilder()
         .addInputs("actionIDs","otherReal","permanentIDs") //can use any label for this        
         .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents).nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")

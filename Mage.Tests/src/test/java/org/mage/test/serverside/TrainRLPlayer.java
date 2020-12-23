@@ -42,20 +42,22 @@ public class TrainRLPlayer extends MageTestBase {
     //@Ignore
     public void playGames() throws GameException, FileNotFoundException {
         RLLearner learner=new RLLearner();
-        for (int i = 1; i < 100; i++) {
+        int netwins=0;
+        for (int i = 1; i < 1000; i++) {
             logger.info("Playing game: " + i);
-            playOneGame(learner);
-            for(int j=0;j<10;j++){
+            netwins+=playOneGame(learner);
+            for(int j=0;j<20;j++){
                 learner.trainBatch(64);
                 double[] scores= learner.losses.getScoreVsIter().getEffectiveScores();
                 logger.info(scores[scores.length-1]); 
             }
+            logger.info(netwins);
         }
         //logger.info(learner.actionToIndex);
         
     }
 
-    private void playOneGame(RLLearner learner) throws GameException, FileNotFoundException, IllegalArgumentException {
+    private int playOneGame(RLLearner learner) throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         String deckLoc="RBTestAggro.dck";
         Player computerA = createRLPlayer("RLPlayer",learner);
@@ -93,9 +95,10 @@ public class TrainRLPlayer extends MageTestBase {
         logger.info("starting game");
         game.start(computerA.getId());
         long t2 = System.nanoTime();
-        learner.endGame(game.getWinner());
+        learner.endGame(computerA,game.getWinner());
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
+        return learner.getCurrentGame().getValue();
     }
     private Player createRLPlayer(String name,RLLearner learner){
         return new RLPlayer(name,learner);

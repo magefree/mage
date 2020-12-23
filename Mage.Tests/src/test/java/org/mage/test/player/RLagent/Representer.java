@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import mage.game.permanent.Battlefield;
-
+import org.nd4j.linalg.api.buffer.DataType;
 
 public class Representer {
     HashMap<String,Integer> nameToIndex;
@@ -33,10 +33,10 @@ public class Representer {
 
     public RepresentedGame emptyGame(){
         INDArray[] gameZeros=new INDArray[HParams.num_game_reprs];
-        gameZeros[0]=Nd4j.zeros(HParams.game_reals);
-        gameZeros[1]=Nd4j.zeros(HParams.max_representable_permanents);
+        gameZeros[0]=Nd4j.zeros(DataType.FLOAT,HParams.game_reals);
+        gameZeros[1]=Nd4j.zeros(DataType.INT32,HParams.max_representable_permanents);
         List<INDArray> gameRepr=Arrays.asList(gameZeros);
-        List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(HParams.model_inputlen));
+        List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(DataType.INT32,HParams.model_inputlen));
         return new RepresentedGame(0,gameRepr,actionRepr,true);
     }
     //Takes the string representation of a permanent or
