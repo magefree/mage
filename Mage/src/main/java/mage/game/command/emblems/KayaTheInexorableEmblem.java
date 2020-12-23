@@ -39,9 +39,13 @@ public class KayaTheInexorableEmblem  extends Emblem {
 class KayaTheInexorableEmblemEffect extends OneShotEffect {
 
     private static final FilterOwnedCard filter = new FilterOwnedCard();
+    private static final Set<String> choices = new LinkedHashSet<>();
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        choices.add("Hand");
+        choices.add("Graveyard");
+        choices.add("Exile");
     }
 
     public KayaTheInexorableEmblemEffect() {
@@ -62,10 +66,6 @@ class KayaTheInexorableEmblemEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Set<String> choices = new LinkedHashSet<>();
-            choices.add("Hand");
-            choices.add("Graveyard");
-            choices.add("Exile");
             Choice zoneChoice = new ChoiceImpl(true);
             zoneChoice.setMessage("Cast a legendary spell from hand, graveyard, or exile");
             zoneChoice.setChoices(choices);
