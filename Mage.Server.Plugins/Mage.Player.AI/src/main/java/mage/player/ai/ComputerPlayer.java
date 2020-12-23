@@ -1233,18 +1233,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         return true;
     } // end priorityPlay method
 
-    @Override
-    public boolean activateAbility(ActivatedAbility ability, Game game) {
-        if (!isTestMode()) { // Test player already sends target event as they select the target
-            for (Target target : ability.getModes().getMode().getTargets()) {
-                for (UUID targetId : target.getTargets()) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, targetId, ability, ability.getControllerId()));
-                }
-            }
-        }
-        return super.activateAbility(ability, game);
-    }
-
     protected void playLand(Game game) {
         log.debug("playLand");
         Set<Card> lands = new LinkedHashSet<>();
