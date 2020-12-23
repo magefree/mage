@@ -107,7 +107,8 @@ class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            Choice choice = new ChoiceImpl();
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose vigilance, reach, or trample counter");
             choice.setChoices(choices);
             player.choose(outcome, choice, game);
             String chosen = choice.getChoice();
