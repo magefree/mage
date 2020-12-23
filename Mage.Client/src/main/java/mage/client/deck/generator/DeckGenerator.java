@@ -1,12 +1,5 @@
 package mage.client.deck.generator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
@@ -20,6 +13,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
+
+import java.util.*;
 
 /**
  * Generates random card pool and builds a deck.
@@ -289,6 +284,7 @@ public final class DeckGenerator {
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
         }
+        criteria.ignoreSetsWithSnowLands();
 
         Map<String, List<CardInfo>> basicLandMap = new HashMap<>();
 
@@ -297,7 +293,7 @@ public final class DeckGenerator {
             criteria.rarities(Rarity.LAND).name(landName);
             List<CardInfo> cards = CardRepository.instance.findCards(criteria);
             if (cards.isEmpty()) { // Workaround to get basic lands if lands are not available for the given sets
-                criteria.setCodes("ORI");
+                criteria.setCodes("M15");
                 cards = CardRepository.instance.findCards(criteria);
             }
             basicLandMap.put(landName, cards);

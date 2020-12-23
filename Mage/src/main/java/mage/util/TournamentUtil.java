@@ -6,51 +6,43 @@
 
 package mage.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import mage.cards.Card;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionInfo;
-import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.*;
 import mage.constants.Rarity;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class TournamentUtil {
-    
+
     /**
      * Tries to calculate the most appropiate sets to add basic lands for cards of a deck
-     * 
+     *
      * @param setCodesDeck
      * @return setCode for lands
      */
-            
+
     public static Set<String> getLandSetCodeForDeckSets(Collection<String> setCodesDeck) {
-        
+
         Set<String> landSetCodes = new HashSet<>();
         // decide from which sets basic lands are taken from
-        for (String setCode :setCodesDeck) {
+        for (String setCode : setCodesDeck) {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
-            if (expansionInfo.hasBasicLands()) {
+            if (expansionInfo.hasBasicLands() && !CardRepository.haveSnowLands(setCode)) {
                 landSetCodes.add(expansionInfo.getCode());
             }
         }
 
         // if sets have no basic land, take land from block
         if (landSetCodes.isEmpty()) {
-            for (String setCode :setCodesDeck) {
+            for (String setCode : setCodesDeck) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                 List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
-                for (ExpansionInfo blockSet: blockSets) {
-                    if (blockSet.hasBasicLands()) {
+                for (ExpansionInfo blockSet : blockSets) {
+                    if (blockSet.hasBasicLands() && !CardRepository.haveSnowLands(blockSet.getCode())) {
                         landSetCodes.add(blockSet.getCode());
                     }
                 }
@@ -60,7 +52,10 @@ public final class TournamentUtil {
         if (landSetCodes.isEmpty()) {
             // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
             // select a set with basic lands by random
-            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
+            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate()
+                    .stream()
+                    .filter(exp -> !CardRepository.haveSnowLands(exp.getCode()))
+                    .collect(Collectors.toList());
             if (!basicLandSets.isEmpty()) {
                 landSetCodes.add(basicLandSets.get(RandomUtil.nextInt(basicLandSets.size())).getCode());
             }
@@ -71,11 +66,13 @@ public final class TournamentUtil {
         }
         return landSetCodes;
     }
-    
+
     public static List<Card> getLands(String landName, int number, Set<String> landSets) {
         CardCriteria criteria = new CardCriteria();
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
+        } else {
+            criteria.ignoreSetsWithSnowLands();
         }
         criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> lands = CardRepository.instance.findCards(criteria);
@@ -84,9 +81,9 @@ public final class TournamentUtil {
             for (int i = 0; i < number; i++) {
                 Card land = lands.get(RandomUtil.nextInt(lands.size())).getCard();
                 cards.add(land);
-            }            
-        }        
+            }
+        }
         return cards;
     }
-    
+
 }

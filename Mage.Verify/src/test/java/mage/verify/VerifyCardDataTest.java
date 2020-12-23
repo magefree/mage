@@ -820,11 +820,11 @@ public class VerifyCardDataTest {
         // CHECK: wrong basic lands settings (it's for lands search, not booster construct)
         for (ExpansionSet set : sets) {
             Boolean needLand = set.hasBasicLands();
-            Boolean foundedLand = false;
+            Boolean foundLand = false;
             Map<String, Integer> foundLandsList = new HashMap<>();
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 if (isBasicLandName(card.getName())) {
-                    foundedLand = true;
+                    foundLand = true;
                     int count = foundLandsList.getOrDefault(card.getName(), 0);
                     foundLandsList.put(card.getName(), count + 1);
                 }
@@ -834,11 +834,11 @@ public class VerifyCardDataTest {
                     .map(p -> (p.getKey() + " - " + p.getValue().toString()))
                     .sorted().collect(Collectors.joining(", "));
 
-            if (needLand && !foundedLand) {
+            if (needLand && !foundLand) {
                 errorsList.add("error, found set with wrong hasBasicLands - it's true, but haven't land cards: " + set.getCode() + " in " + set.getClass().getName());
             }
 
-            if (!needLand && foundedLand) {
+            if (!needLand && foundLand) {
                 errorsList.add("error, found set with wrong hasBasicLands - it's false, but have land cards: " + set.getCode() + " in " + set.getClass().getName() + ", lands: " + landNames);
             }
 

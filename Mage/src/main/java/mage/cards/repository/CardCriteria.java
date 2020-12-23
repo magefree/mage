@@ -20,6 +20,7 @@ public class CardCriteria {
     private String nameExact;
     private String rules;
     private final List<String> setCodes;
+    private final List<String> ignoreSetCodes; // sets to ignore, use with little amount of sets (example: ignore sets with snow lands)
     private final List<CardType> types;
     private final List<CardType> notTypes;
     private final List<String> supertypes;
@@ -42,6 +43,7 @@ public class CardCriteria {
 
     public CardCriteria() {
         this.setCodes = new ArrayList<>();
+        this.ignoreSetCodes = new ArrayList<>();
         this.rarities = new ArrayList<>();
         this.types = new ArrayList<>();
         this.notTypes = new ArrayList<>();
@@ -130,6 +132,16 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria ignoreSetCodes(String... ignoreSetCodes) {
+        this.ignoreSetCodes.addAll(Arrays.asList(ignoreSetCodes));
+        return this;
+    }
+
+    public CardCriteria ignoreSetsWithSnowLands() {
+        this.ignoreSetCodes.addAll(CardRepository.snowLandSetCodes);
+        return this;
+    }
+
     public CardCriteria types(CardType... types) {
         this.types.addAll(Arrays.asList(types));
         return this;
@@ -213,6 +225,14 @@ public class CardCriteria {
         }
         if (!setCodes.isEmpty()) {
             where.or(setCodes.size());
+            clausesCount++;
+        }
+
+        for (String ignoreSetCode : ignoreSetCodes) {
+            where.ne("setCode", ignoreSetCode);
+        }
+        if (!ignoreSetCodes.isEmpty()) {
+            where.or(ignoreSetCodes.size());
             clausesCount++;
         }
 
@@ -355,6 +375,10 @@ public class CardCriteria {
 
     public List<String> getSetCodes() {
         return setCodes;
+    }
+
+    public List<String> getIgnoreSetCodes() {
+        return ignoreSetCodes;
     }
 
     public List<CardType> getTypes() {

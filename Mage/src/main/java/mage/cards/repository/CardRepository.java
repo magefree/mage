@@ -41,6 +41,14 @@ public enum CardRepository {
     private Set<String> classNames;
     private final RepositoryEventSource eventSource = new RepositoryEventSource();
 
+    public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
+            "CSP",
+            "MH1",
+            "SLD",
+            "ME2",
+            "ICE"
+    ));
+
     CardRepository() {
         File file = new File("db");
         if (!file.exists()) {
@@ -188,12 +196,8 @@ public enum CardRepository {
         return names;
     }
 
-    public Boolean haveSnowLands(String setCode) {
-        return setCode.equals("CSP")
-                || setCode.equals("MH1")
-                || setCode.equals("SLD")
-                || setCode.equals("ME2")
-                || setCode.equals("ICE");
+    public static Boolean haveSnowLands(String setCode) {
+        return snowLandSetCodes.contains(setCode);
     }
 
     public Set<String> getNonbasicLandNames() {
