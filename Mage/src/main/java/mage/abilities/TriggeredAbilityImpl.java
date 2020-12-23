@@ -203,7 +203,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     /*
-     603.6c,603.6d
+     603.6c Leaves-the-battlefield abilities, 603.6d
+        if true the game “looks back in time” to determine if those abilities trigger,
+        using the existence of those abilities and the appearance of objects immediately prior to the event (603.10)
      */
     @Override
     public boolean isLeavesTheBattlefieldTrigger() {
