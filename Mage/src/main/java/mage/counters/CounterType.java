@@ -64,6 +64,7 @@ public enum CounterType {
     FUNGUS("fungus"),
     FUSE("fuse"),
     GEM("gem"),
+    GHOSTFORM("ghostform"),
     GLOBE("globe"),
     GLYPH("glyph"),
     GOLD("gold"),
