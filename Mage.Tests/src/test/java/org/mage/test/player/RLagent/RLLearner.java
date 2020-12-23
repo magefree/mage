@@ -141,7 +141,8 @@ public class RLLearner {
             }
         }
         List<INDArray> batchRepr=new ArrayList<INDArray>();
-        for(int i=0;i<prePiled.size();i++){
+        //Debugging code for testing mismatched zero vs. real reprs
+        /*for(int i=0;i<prePiled.size();i++){
             for(int j=0;j<prePiled.get(i).size();j++){
                 String s1=prePiled.get(i).get(j).shapeInfoToString();
                 String s2=prePiled.get(i).get(0).shapeInfoToString();
@@ -149,7 +150,7 @@ public class RLLearner {
                     logger.info(i+"\n"+s1+"\n"+s2+"\n---\n");
                 }
             }
-        }
+        }*/
         for(int i=0;i<prePiled.size();i++){
             
             INDArray piled=Nd4j.pile(prePiled.get(i));
@@ -176,7 +177,7 @@ public class RLLearner {
             }
             else{
                 //logger.info("adding game win/loss "+sampledGames.get(i).getValue());
-                targets.add((double) sampledGames.get(i).getValue());
+                targets.add((double) sampledGames.get(i).getValue()*HParams.discount);
             }
         }
         return targets;
@@ -253,7 +254,7 @@ public class RLLearner {
     //because it sets the training listener
     ComputationGraph constructModel(){
         ComputationGraphConfiguration conf = new NeuralNetConfiguration.Builder()
-        .updater(new Adam(0.005))
+        .updater(new Adam(0.01))
         .graphBuilder()
         .addInputs("actionIDs","otherReal","permanentIDs") //can use any label for this        
         .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents).nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")

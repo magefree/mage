@@ -12,4 +12,5 @@ public class HParams {
     public final static int game_reals=4;
     public final static int num_game_reprs=2;
     public final static int total_model_inputs=3;
+    public final static double discount=.99;
 }

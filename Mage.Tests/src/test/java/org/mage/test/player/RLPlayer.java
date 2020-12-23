@@ -111,8 +111,12 @@ public class RLPlayer extends RandomPlayer{
             List<RLAction> toblock=new ArrayList<RLAction>();
             List<CombatGroup> groups=game.getCombat().getGroups();
             for(int i=0;i<numGroups;i++){
-                UUID attacker=groups.get(i).getAttackers().get(0);
-                toblock.add((RLAction) new ActionBlock(game.getPermanent(attacker),blocker,true));
+                List<UUID> groupIDs=groups.get(i).getAttackers();
+                if(groupIDs.size()>0){
+                    UUID attacker=groupIDs.get(0);
+                    toblock.add((RLAction) new ActionBlock(game.getPermanent(attacker),blocker,true));
+           
+                }
             }
             toblock.add((RLAction) new ActionBlock(null,null,false)); // Don't block anything
             int choice=learner.choose(game,this,toblock);
