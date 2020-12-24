@@ -1,4 +1,4 @@
-package org.mage.test.player.RLagent;
+package mage.player.ai;
 
 public class HParams {
     public final static int max_represents=256; 

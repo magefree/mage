@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
-import org.mage.test.player.RLPlayer;
+import mage.player.ai;
 import org.mage.test.player.RLagent.RLLearner;
 
 import java.io.FileNotFoundException;

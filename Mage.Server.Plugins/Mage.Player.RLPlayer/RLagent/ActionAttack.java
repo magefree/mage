@@ -1,4 +1,4 @@
-package org.mage.test.player.RLagent;
+package mage.player.ai;
 
 
 import mage.game.permanent.Permanent;

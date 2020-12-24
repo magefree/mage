@@ -1,4 +1,4 @@
-package org.mage.test.player.RLagent;
+package mage.player.ai;
 import java.io.Serializable;
 import java.util.*;
 import mage.players.Player;

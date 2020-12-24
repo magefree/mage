@@ -1,4 +1,4 @@
-package org.mage.test.player;
+package mage.player.ai;
 
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;

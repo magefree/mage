@@ -1,4 +1,4 @@
-package org.mage.test.player.RLagent;
+package mage.player.ai;
 
 public abstract class RLAction {
     public RLAction(){
