@@ -78,7 +78,18 @@ class ArchelosLagoonMysticEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return !source.getSourceId().equals(((EntersTheBattlefieldEvent) event).getTarget().getId());
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return false;
+        }
+
+        Permanent targetObject = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (targetObject == null) {
+            return false;
+        }
+
+        return !sourceObject.getId().equals(targetObject.getId())
+                && sourceObject.isTapped() == this.tapped;
     }
 
     @Override
