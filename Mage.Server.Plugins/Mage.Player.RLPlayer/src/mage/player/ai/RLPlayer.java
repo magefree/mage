@@ -23,8 +23,9 @@ import mage.util.RandomUtil;
 import java.io.Serializable;
 import java.util.*;
 import org.apache.log4j.Logger;
-import org.mage.test.player.RLagent.*;
+import mage.player.ai.*;
 import java.util.stream.Collectors;
+import mage.player.ai.RLAgent.*;
 /**
  * uses a reinforcement learning based AI
  *

@@ -1,4 +1,4 @@
-package mage.player.ai;
+package mage.player.ai.RLAgent;
 import mage.game.Game;
 
 import java.io.Serializable;

@@ -23,9 +23,11 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.mage.test.player.RandomPlayer;
+//import mage.player.ai.;
+//import org.mage.test.player.RandomPlayer;
+import mage.player.ai.RandomPlayer;
+import mage.player.ai.Attackers;
 import org.mage.test.player.TestPlayer;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;

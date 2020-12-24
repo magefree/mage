@@ -1,5 +1,4 @@
-package mage.player.ai;
-
+package mage.player.ai.RLAgent;
 import mage.abilities.*;
 import mage.MageObject;
 import mage.abilities.common.PassAbility;

@@ -1,4 +1,4 @@
-package mage.player.ai;
+package mage.player.ai.RLAgent;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import mage.abilities.*;

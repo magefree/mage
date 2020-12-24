@@ -1,4 +1,4 @@
-package mage.player.ai;
+package mage.player.ai.RLAgent;
 import mage.game.permanent.Permanent;
 
 public class ActionBlock extends RLAction{
