@@ -121,8 +121,17 @@ public class CardView extends SimpleCardView {
 
     protected Card originalCard = null;
 
+    /**
+     * Non game usage like deck editor
+     *
+     * @param card
+     */
     public CardView(Card card) {
-        this(card, null, false);
+        this(card, (Game) null);
+    }
+
+    public CardView(Card card, Game game) {
+        this(card, game, false);
     }
 
     public CardView(Card card, SimpleCardView simpleCardView) {
@@ -450,7 +459,7 @@ public class CardView extends SimpleCardView {
 
         Card secondSideCard = card.getSecondCardFace();
         if (secondSideCard != null) {
-            this.secondCardFace = new CardView(secondSideCard);
+            this.secondCardFace = new CardView(secondSideCard, game);
             this.alternateName = secondCardFace.getName();
             this.originalName = card.getName();
         }
@@ -464,7 +473,7 @@ public class CardView extends SimpleCardView {
         if (card instanceof ModalDoubleFacesCard) {
             this.transformable = true; // enable GUI day/night button
             ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
-            this.secondCardFace = new CardView(mdfCard.getRightHalfCard());
+            this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
             this.alternateName = mdfCard.getRightHalfCard().getName();
             this.originalName = card.getName();
         }

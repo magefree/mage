@@ -6,7 +6,6 @@ import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.GameState;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
     }
 
     /**
-     * Uses for card render tests
+     * Non game usage like card render tests
      *
      * @param cardViews
      */
@@ -39,6 +38,11 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         }
     }
 
+    /**
+     * Non game usage like deck editor
+     *
+     * @param cards
+     */
     public CardsView(Collection<? extends Card> cards) {
         for (Card card : cards) {
             this.put(card.getId(), new CardView(card));
@@ -116,9 +120,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                 if (abilityView == null) {
                     CardView sourceCardView;
                     if (isPermanent) {
-                        sourceCardView = new CardView((Permanent) sourceObject);
+                        sourceCardView = new CardView((Permanent) sourceObject, game);
                     } else if (isCard) {
-                        sourceCardView = new CardView((Card) sourceObject);
+                        sourceCardView = new CardView((Card) sourceObject, game);
                     } else {
                         sourceCardView = new CardView(sourceObject, game);
                     }
@@ -164,14 +168,4 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     + abilities.stream().map(a -> a.getClass().getSimpleName() + " - " + a.getRule()).collect(Collectors.joining("\n")));
         }
     }
-
-    public CardsView(Collection<? extends Ability> abilities, GameState state) {
-        for (Ability ability : abilities) {
-            Card sourceCard = state.getPermanent(ability.getSourceId());
-            if (sourceCard != null) {
-                this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-            }
-        }
-    }
-
 }
