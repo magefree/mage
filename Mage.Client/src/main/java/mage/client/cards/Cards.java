@@ -168,8 +168,13 @@
                  }
              }
              if (card instanceof StackAbilityView) {
+                 // replace ability by original card
                  CardView tmp = ((StackAbilityView) card).getSourceCard();
                  tmp.overrideRules(card.getRules());
+                 tmp.setChoosable(card.isChoosable());
+                 tmp.setPlayable(card.isPlayable());
+                 tmp.setPlayableAmount(card.getPlayableAmount());
+                 tmp.setSelected(card.isSelected());
                  tmp.setIsAbility(true);
                  tmp.overrideTargets(card.getTargets());
                  tmp.overrideId(card.getId());
