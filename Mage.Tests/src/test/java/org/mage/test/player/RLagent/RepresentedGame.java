@@ -7,12 +7,14 @@ import mage.abilities.common.PassAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.io.Serializable;
 import java.util.*;
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.factory.Nd4j;
 import mage.game.permanent.Battlefield;
 
-public class RepresentedGame {
+public class RepresentedGame implements Serializable{
     protected int numActions;
     protected List<INDArray> actionRepr;
     protected List<INDArray> gameRepr;

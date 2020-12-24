@@ -1,9 +1,10 @@
 package org.mage.test.player.RLagent;
+import java.io.Serializable;
 import java.util.*;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
-public class GameSequence {
+public class GameSequence implements Serializable{
     public List<Experience> experiences;
     private static final Logger logger = Logger.getLogger(GameSequence.class);
     protected int value;

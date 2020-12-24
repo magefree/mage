@@ -6,6 +6,8 @@ import mage.abilities.common.PassAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.io.Serializable;
 import java.util.*;
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -13,7 +15,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import mage.game.permanent.Battlefield;
 import org.nd4j.linalg.api.buffer.DataType;
 
-public class Representer {
+public class Representer implements Serializable{
     HashMap<String,Integer> nameToIndex;
     int current_represent=3;
     private static final Logger logger = Logger.getLogger(Representer.class);

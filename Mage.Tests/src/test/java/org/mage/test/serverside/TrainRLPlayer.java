@@ -28,7 +28,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
-
+import java.io.*;
+import org.deeplearning4j.nn.graph.ComputationGraph;
+import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
 /**
  * @author ayratn
  * Modified by Elchanan Haas
@@ -43,7 +45,10 @@ public class TrainRLPlayer extends MageTestBase {
     public void playGames() throws GameException, FileNotFoundException {
         RLLearner learner=new RLLearner();
         int netwins=0;
-        for (int i = 1; i < 1000; i++) {
+        String loc="learnerModel";
+        
+        //learner=loadLearner(loc);
+        for (int i = 0; i < 3; i++) {
             logger.info("Playing game: " + i);
             netwins+=playOneGame(learner);
             for(int j=0;j<5;j++){
@@ -59,10 +64,53 @@ public class TrainRLPlayer extends MageTestBase {
                 learner.setEpsilon(.1f);
             }
         }
+        saveLearner(learner, loc);
         //logger.info(learner.actionToIndex);
         
     }
-
+    String getDataLoc(String fileName){
+        return fileName+".ser";
+    }
+    String getModelLoc(String fileName){
+        return fileName+"-model.zip";
+    }
+    void saveLearner(RLLearner learner,String loc){
+        try {
+            FileOutputStream fileOut =
+            new FileOutputStream(getDataLoc(loc));
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(learner);
+            out.close();
+            fileOut.close();
+            File locationToSaveGraph = new File(getModelLoc(loc));
+            learner.model.save(locationToSaveGraph, true);
+            System.out.printf("Serialized data is saved in "+loc+"\n");
+         } catch (IOException i) {
+            i.printStackTrace();
+         }
+    }
+    RLLearner loadLearner(String loc){
+        try {
+            FileInputStream fileIn = new FileInputStream(getDataLoc(loc));
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Object read=in.readObject();
+            RLLearner learner = (RLLearner) read;
+            in.close();
+            fileIn.close();
+            learner.model=ComputationGraph.load(new File(getModelLoc(loc)),true);
+            CollectScoresIterationListener listener=new CollectScoresIterationListener(1);
+            learner.model.setListeners(listener);
+            learner.losses=listener;
+            return learner;
+         } catch (IOException i) {
+            i.printStackTrace();
+            return null;
+         } catch (ClassNotFoundException c) {
+            System.out.println("RLLearner class not found");
+            c.printStackTrace();
+            return null;
+         }
+    }
     private int playOneGame(RLLearner learner) throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         String deckLoc="RBTestAggro.dck";

@@ -68,18 +68,20 @@ import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
  * @author Elchanan Haas
  */
 
-
 //Main learner 
 //Takes in a game state and a list of RLAction and can choose an action
 //Records its experiences and can learn from them 
-public class RLLearner {
-    private static final Logger logger = Logger.getLogger(RLLearner.class);
+public class RLLearner implements Serializable{
+    //private static final Logger logger = Logger.getLogger(RLLearner.class);
+    static final long serialVersionUID=1L;
     protected LinkedList<GameSequence> games;
-    public CollectScoresIterationListener losses;
-    protected double epsilon=.5f; //For epsilon greedy learning. Set to 0 for evaluation
-    protected Boolean evaluateMode; //Sets mode to testing, no experience should be collected  
+    public transient CollectScoresIterationListener losses;
+    private double epsilon=.5f; //For epsilon greedy learning. Set to 0 for evaluation
+    protected boolean evaluateMode; //Sets mode to testing, no experience should be collected  
     Representer representer;
-    ComputationGraph model;
+    public transient ComputationGraph model; //Must be serializes seperately with its own methods
+    //needs to be public for serialization
+
     //Constructor--creates a RLLearner
     public RLLearner(){
         games=new LinkedList<GameSequence>(); 
