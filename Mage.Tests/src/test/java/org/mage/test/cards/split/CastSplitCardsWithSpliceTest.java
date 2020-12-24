@@ -79,8 +79,6 @@ public class CastSplitCardsWithSpliceTest extends CardTestPlayerBase {
         addTarget(playerA, "Bow of Nylea"); // target right
 
         // must used all mana
-        //showAvaileableMana("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();

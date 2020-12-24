@@ -1130,7 +1130,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
 
-        log.warn("No proper AI target handling: " + target.getClass().getName());
+        // it's ok on no targets available
+        log.warn("No proper AI target handling or can't find permanents/cards to target: " + target.getClass().getName());
         return false;
     }
 
