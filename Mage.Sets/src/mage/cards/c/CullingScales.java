@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -12,27 +10,30 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author cg5
  */
 public final class CullingScales extends CardImpl {
 
     private static final FilterPermanent filterNonlandPermanentWithLowestCmc = new FilterNonlandPermanent(
-        "nonland permanent with the lowest converted mana cost (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
+            "nonland permanent with the lowest converted mana cost (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
     );
+
     static {
         filterNonlandPermanentWithLowestCmc.add(new HasLowestCMCAmongstNonlandPermanentsPredicate());
     }
-    
+
     public CullingScales(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, destroy target nonland permanent with the lowest converted mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect(), TargetController.YOU, false);
@@ -48,16 +49,16 @@ public final class CullingScales extends CardImpl {
     public CullingScales copy() {
         return new CullingScales(this);
     }
-    
+
 }
 
-class HasLowestCMCAmongstNonlandPermanentsPredicate implements Predicate<Permanent> {
-    
+class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+
     @Override
-    public boolean apply(Permanent input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, input.getConvertedManaCost()));
-        return !game.getBattlefield().contains(filter, 1, game);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, input.getObject().getConvertedManaCost()));
+        return !game.getBattlefield().contains(filter, input.getSourceId(), input.getPlayerId(), game, 1);
     }
-    
+
 }

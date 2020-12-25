@@ -1,5 +1,6 @@
 package mage.game.permanent;
 
+import mage.abilities.Ability;
 import mage.abilities.keyword.PhasingAbility;
 import mage.constants.CardType;
 import mage.constants.RangeOfInfluence;
@@ -92,21 +93,8 @@ public class Battlefield implements Serializable {
         }
     }
 
-    /**
-     * Returns true if the battlefield contains at least 1 {@link Permanent}
-     * that matches the filter. This method ignores the range of influence.
-     *
-     * @param filter
-     * @param num
-     * @param game
-     * @return boolean
-     */
-    public boolean contains(FilterPermanent filter, int num, Game game) {
-        return field.values()
-                .stream()
-                .filter(permanent -> filter.match(permanent, game)
-                        && permanent.isPhasedIn()).count() >= num;
-
+    public boolean containsControlled(FilterPermanent filter, Ability source, Game game, int num) {
+        return containsControlled(filter, source.getSourceId(), source.getControllerId(), game, num);
     }
 
     /**
@@ -115,19 +103,24 @@ public class Battlefield implements Serializable {
      * ignores the range of influence.
      *
      * @param filter
-     * @param controllerId
+     * @param sourceId
+     * @param controllerId controller and source can be different (from different players)
      * @param num
      * @param game
      * @return boolean
      */
-    public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
+    public boolean containsControlled(FilterPermanent filter, UUID sourceId, UUID controllerId, Game game, int num) {
         return field.values()
                 .stream()
                 .filter(permanent -> permanent.isControlledBy(controllerId)
-                        && filter.match(permanent, game)
+                        && filter.match(permanent, sourceId, controllerId, game)
                         && permanent.isPhasedIn())
                 .count() >= num;
 
+    }
+
+    public boolean contains(FilterPermanent filter, Ability source, Game game, int num) {
+        return contains(filter, source.getSourceId(), source.getControllerId(), game, num);
     }
 
     /**
@@ -136,22 +129,23 @@ public class Battlefield implements Serializable {
      * matches the supplied filter.
      *
      * @param filter
+     * @param sourceId       can be null for default SBA checks like legendary rule
      * @param sourcePlayerId
      * @param game
      * @param num
      * @return boolean
      */
-    public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Game game, int num) {
+    public boolean contains(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Game game, int num) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             return field.values().stream()
-                    .filter(permanent -> filter.match(permanent, null, sourcePlayerId, game)
+                    .filter(permanent -> filter.match(permanent, sourceId, sourcePlayerId, game)
                             && permanent.isPhasedIn()).count() >= num;
 
         } else {
             List<UUID> range = game.getState().getPlayersInRange(sourcePlayerId, game);
             return field.values().stream()
                     .filter(permanent -> range.contains(permanent.getControllerId())
-                            && filter.match(permanent, null, sourcePlayerId, game)
+                            && filter.match(permanent, sourceId, sourcePlayerId, game)
                             && permanent.isPhasedIn())
                     .count() >= num;
         }

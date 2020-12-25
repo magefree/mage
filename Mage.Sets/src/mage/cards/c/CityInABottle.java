@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,7 +8,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.c.CityInABottle.getArabianNightsNamePredicates;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -23,11 +19,15 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static mage.cards.c.CityInABottle.getArabianNightsNamePredicates;
+
 /**
- *
  * @author emerald000
  */
 public final class CityInABottle extends CardImpl {
@@ -158,7 +158,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().contains(filter, this.getControllerId(), game, 1);
+        return game.getBattlefield().contains(filter, this.getSourceId(), this.getControllerId(), game, 1);
     }
 
     @Override
