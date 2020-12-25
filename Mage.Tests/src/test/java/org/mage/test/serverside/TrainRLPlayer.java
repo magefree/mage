@@ -30,6 +30,7 @@ import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
 import java.io.*;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
+import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 /**
  * @author ayratn
  * Modified by Elchanan Haas

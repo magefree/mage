@@ -25,7 +25,7 @@ import org.deeplearning4j.nn.conf.layers.RnnOutputLayer;
 
 import java.io.Serializable;
 import java.util.*;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.hamcrest.core.IsInstanceOf;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -60,10 +60,15 @@ import org.nd4j.linalg.learning.config.Sgd;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.nd4j.evaluation.classification.Evaluation;
-import org.slf4j.LoggerFactory;
 import mage.game.permanent.Battlefield;
 import org.deeplearning4j.nn.conf.layers.ActivationLayer;
 import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
+import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
+
 /**
  * @author Elchanan Haas
  */
@@ -88,6 +93,9 @@ public class RLLearner implements Serializable{
         model=constructModel();
         representer=new Representer();
         evaluateMode=false;
+        //prevents logging spam
+        Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        root.setLevel(Level.INFO);
     }
     //Sets evalueate mode. When evaluate mode is 
     //True, no experience is collected
