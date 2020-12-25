@@ -1,5 +1,6 @@
 package mage.player.ai;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
@@ -29,6 +30,7 @@ import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.util.RandomUtil;
@@ -37,6 +39,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * @author nantuko
@@ -155,7 +158,13 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             boolean usedStack = false;
             while (actions.peek() != null) {
                 Ability ability = actions.poll();
-                logger.info(new StringBuilder("===> Act [").append(game.getPlayer(playerId).getName()).append("] Action: ").append(ability.toString()).toString());
+                // log example: ===> Act [PlayerA] Action: Cast Blessings of Nature (target 1; target 2)
+                logger.info(new StringBuilder("===> Act [")
+                        .append(game.getPlayer(playerId).getName())
+                        .append("] Action: ")
+                        .append(ability.toString())
+                        .append(listTargets(game, ability.getTargets(), " (targeting %s)", ""))
+                        .toString());
                 if (!ability.getTargets().isEmpty()) {
                     for (Target target : ability.getTargets()) {
                         for (UUID id : target.getTargets()) {
@@ -506,7 +515,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
                             .append(" <").append(val).append("> (").append(action)
                             .append(action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
-                            .append(listTargets(game, action.getTargets())).append(')')
+                            .append(listTargets(game, action.getTargets(), " (targeting %s)", "")).append(')')
                             .append(logger.isTraceEnabled() ? " #" + newNode.hashCode() : "");
                     SimulationNode2 logNode = newNode;
                     while (logNode.getChildren() != null
@@ -541,7 +550,11 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                         if (depth == maxDepth) {
                             GameStateEvaluator2.PlayerEvaluateScore score = GameStateEvaluator2.evaluate(this.getId(), bestNode.game);
                             String scoreInfo = " [" + score.getPlayerInfoShort() + "-" + score.getOpponentInfoShort() + "]";
-                            logger.info("Sim Prio [" + depth + "] -- Saved best node yet <" + bestNode.getScore() + scoreInfo + "> " + bestNode.getAbilities().toString());
+                            String abilitiesInfo = bestNode.getAbilities()
+                                    .stream()
+                                    .map(a -> a.toString() + listTargets(game, a.getTargets(), " (targeting %s)", ""))
+                                    .collect(Collectors.joining("; "));
+                            logger.info("Sim Prio [" + depth + "] -- Saved best node yet <" + bestNode.getScore() + scoreInfo + "> " + abilitiesInfo);
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());
@@ -1009,17 +1022,36 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         return suggestedActions.size();
     }
 
-    protected String listTargets(Game game, Targets targets) {
-        StringBuilder sb = new StringBuilder();
-        if (targets != null) {
-            for (Target target : targets) {
-                sb.append('[').append(target.getTargetedName(game)).append(']');
-            }
-            if (sb.length() > 0) {
-                sb.insert(0, " targeting ");
+    /**
+     * Return info about targets list (targeting objects)
+     *
+     * @param game
+     * @param targets
+     * @param format    example: my %s in data
+     * @param emptyText default text for empty targets list
+     * @return
+     */
+    protected String listTargets(Game game, Targets targets, String format, String emptyText) {
+        List<String> res = new ArrayList<>();
+        for (Target target : targets) {
+            for (UUID id : target.getTargets()) {
+                MageObject object = game.getObject(id);
+                if (object != null) {
+                    String prefix = "";
+                    if (target instanceof TargetAmount) {
+                        prefix = " " + target.getTargetAmount(id) + "x ";
+                    }
+                    res.add(prefix + object.getIdName());
+                }
             }
         }
-        return sb.toString();
+        String info = String.join("; ", res);
+
+        if (info.isEmpty()) {
+            return emptyText;
+        } else {
+            return String.format(format, info);
+        }
     }
 
     @Override

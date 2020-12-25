@@ -2,11 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -65,7 +61,7 @@ class LegendarySpellAbilityCheckEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getSourceId().equals(source.getSourceId())
-                && !game.getBattlefield().contains(filter, event.getPlayerId(), 1, game);
+                && !game.getBattlefield().containsControlled(filter, source, game, 1);
     }
 
     @Override

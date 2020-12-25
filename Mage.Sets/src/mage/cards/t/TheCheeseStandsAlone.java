@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -18,8 +16,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class TheCheeseStandsAlone extends CardImpl {
@@ -47,6 +46,7 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     private boolean wonAlready = false;
+
     static {
         filter.add(new NamePredicate("The Cheese Stands Alone"));
     }
@@ -57,7 +57,7 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
     }
 
     public CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
-        super(effect);        
+        super(effect);
     }
 
     @Override
@@ -72,7 +72,7 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
             if (controller.getHand().isEmpty()) {
                 int numberPerms = new PermanentsOnBattlefieldCount(new FilterControlledPermanent()).calculate(game, source, this);
                 if (numberPerms == 1) {
-                    if (game.getBattlefield().contains(filter, source.getControllerId(), 1, game)) {                        
+                    if (game.getBattlefield().containsControlled(filter, source, game, 1)) {
                         if (!wonAlready) {
                             wonAlready = true;
                             controller.won(game);

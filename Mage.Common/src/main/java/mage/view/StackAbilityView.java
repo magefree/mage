@@ -27,6 +27,8 @@ public class StackAbilityView extends CardView {
 
     private static final long serialVersionUID = 1L;
 
+    // in GUI: that's view will be replaced by sourceCard, so don't forget to sync settings like
+    // selectable, chooseable, etc. Search by getSourceCard
     private final CardView sourceCard;
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {

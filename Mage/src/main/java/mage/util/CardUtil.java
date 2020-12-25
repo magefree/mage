@@ -73,6 +73,25 @@ public final class CardUtil {
     }
 
     /**
+     * calculates the maximal possible generic mana reduction for a given mana cost
+     *
+     * @param mana mana costs that should be reduced
+     * @param maxPossibleReduction max possible generic mana reduction 
+     * @param notLessThan the complete costs may not be reduced more than this CMC mana costs
+     */
+    public static int calculateActualPossibleGenericManaReduction(Mana mana, int maxPossibleReduction, int notLessThan) {
+        int nonGeneric = mana.count() - mana.getGeneric();
+        int notPossibleGenericReduction = Math.max(0, notLessThan - nonGeneric);
+        int actualPossibleGenericManaReduction = Math.max(0, mana.getGeneric() - notPossibleGenericReduction);
+        if (actualPossibleGenericManaReduction > maxPossibleReduction) {
+            actualPossibleGenericManaReduction = maxPossibleReduction;
+        }        
+        return actualPossibleGenericManaReduction;
+    }
+    
+    
+    
+    /**
      * Reduces ability cost to be paid.
      *
      * @param ability

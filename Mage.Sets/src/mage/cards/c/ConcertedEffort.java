@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -18,14 +16,15 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class ConcertedEffort extends CardImpl {
 
     public ConcertedEffort(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConcertedEffortEffect(), TargetController.ANY, false));
@@ -81,22 +80,22 @@ class ConcertedEffortEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Flying
-        if (game.getBattlefield().contains(filterFlying, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().contains(filterFlying, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Fear
-        if (game.getBattlefield().contains(filterFear, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().contains(filterFear, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // First strike
-        if (game.getBattlefield().contains(filterFirstStrike, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().contains(filterFirstStrike, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Double strike
-        if (game.getBattlefield().contains(filterDoubleStrike, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().contains(filterDoubleStrike, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
@@ -119,12 +118,12 @@ class ConcertedEffortEffect extends OneShotEffect {
         }
 
         // Trample
-        if (game.getBattlefield().contains(filterTrample, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().contains(filterTrample, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Vigilance
-        if (game.getBattlefield().contains(filterVigilance, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().contains(filterVigilance, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
         return true;

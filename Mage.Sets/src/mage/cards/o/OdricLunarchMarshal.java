@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.MageInt;
@@ -94,67 +93,67 @@ class OdricLunarchMarshalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         // First strike
-        if (game.getBattlefield().contains(filterFirstStrike, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterFirstStrike, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Flying
-        if (game.getBattlefield().contains(filterFlying, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterFlying, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Deathtouch
-        if (game.getBattlefield().contains(filterDeathtouch, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterDeathtouch, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Double strike
-        if (game.getBattlefield().contains(filterDoubleStrike, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterDoubleStrike, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Haste
-        if (game.getBattlefield().contains(filterHaste, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterHaste, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Hexproof
-        if (game.getBattlefield().contains(filterHexproof, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterHexproof, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Indestructible
-        if (game.getBattlefield().contains(filterIndestructible, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterIndestructible, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Lifelink
-        if (game.getBattlefield().contains(filterLifelink, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterLifelink, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Menace
-        if (game.getBattlefield().contains(filterMenace, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterMenace, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Reach
-        if (game.getBattlefield().contains(filterReach, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterReach, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Skulk
-        if (game.getBattlefield().contains(filterSkulk, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterSkulk, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(new SkulkAbility(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Trample
-        if (game.getBattlefield().contains(filterTrample, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterTrample, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Vigilance
-        if (game.getBattlefield().contains(filterVigilance, source.getControllerId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filterVigilance, source, game, 1)) {
             game.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
         return true;

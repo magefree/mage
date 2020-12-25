@@ -784,7 +784,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).choosePile(message, new CardsView(pile1), new CardsView(pile2)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).choosePile(message, new CardsView(game, pile1), new CardsView(game, pile2)));
     }
 
     private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes, final String message) throws MageException {

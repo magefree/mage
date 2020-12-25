@@ -19,6 +19,7 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(final EntersBattlefieldOrDiesSourceTriggeredAbility ability) {

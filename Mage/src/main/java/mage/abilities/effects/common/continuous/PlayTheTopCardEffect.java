@@ -61,7 +61,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
                 && playerId.equals(source.getControllerId())
                 && cardToCheck.isOwnedBy(source.getControllerId())
                 && (!cardToCheck.getManaCost().isEmpty() || cardToCheck.isLand())
-                && filter.match(cardToCheck, game)) {
+                && filter.match(cardToCheck, source.getSourceId(), source.getControllerId(), game)) {
             Player player = game.getPlayer(cardToCheck.getOwnerId());
 
             UUID needCardID = player.getLibrary().getFromTop(game) == null ? null : player.getLibrary().getFromTop(game).getId();

@@ -96,8 +96,21 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         }
         if (permanent != null) {
             permanent.addAbility(ability, source.getSourceId(), game);
+            afterGain(game, source, permanent, ability);
         }
         return true;
+    }
+
+    /**
+     * Calls after ability gain. Override it to apply additional data (example: transfer ability's settings from original to destination source)
+     *
+     * @param game
+     * @param source
+     * @param permanent
+     * @param addedAbility
+     */
+    public void afterGain(Game game, Ability source, Permanent permanent, Ability addedAbility) {
+        //
     }
 
     private void setText() {

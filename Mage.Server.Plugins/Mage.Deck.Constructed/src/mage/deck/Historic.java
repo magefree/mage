@@ -59,7 +59,7 @@ public class Historic extends Constructed {
         singleCards.add("Talrand, Sky Summoner");
 
         // Jumpstart with replacements
-        setCodes.add(mage.sets.Jumpstart.getInstance().getCode());
+        setCodes.add("JMP");
         singleCards.add("Archon of Sun's Grace");
         singleCards.add("Banishing Light");
         singleCards.add("Gadwick, the Wizened");

@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -17,12 +15,7 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -34,13 +27,15 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class HeraldOfLeshrac extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent("land you control but don't own");
+
     static {
         filter.add(TargetController.NOT_YOU.getOwnerPredicate());
     }
@@ -78,6 +73,7 @@ public final class HeraldOfLeshrac extends CardImpl {
 class HeraldOfLeshracCumulativeCost extends CostImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent("land you don't control");
+
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
@@ -105,7 +101,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, game, 1);
+        return game.getBattlefield().contains(filter, source.getSourceId(), controllerId, game, 1);
     }
 
     @Override

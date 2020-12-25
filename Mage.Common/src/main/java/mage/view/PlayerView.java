@@ -1,13 +1,5 @@
-
 package mage.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.cards.Card;
 import mage.counters.Counters;
 import mage.designations.Designation;
@@ -21,6 +13,9 @@ import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.net.UserData;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -105,7 +100,7 @@ public class PlayerView implements Serializable {
         }
         Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().hasCards())
                 ? player.getLibrary().getFromTop(game) : null;
-        this.topCard = cardOnTop != null ? new CardView(cardOnTop) : null;
+        this.topCard = cardOnTop != null ? new CardView(cardOnTop, game) : null;
         if (player.getUserData() != null) {
             this.userData = player.getUserData();
         } else {

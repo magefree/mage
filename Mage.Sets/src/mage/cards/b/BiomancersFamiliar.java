@@ -74,14 +74,7 @@ class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
         if (controller == null) {
             return false;
         }
-        Mana mana = abilityToModify.getManaCostsToPay().getMana();
-        int reduceMax = mana.getGeneric();
-        if (reduceMax > 0 && mana.count() == mana.getGeneric()) {
-            reduceMax--;
-        }
-        if (reduceMax > 2) {
-            reduceMax = 2;
-        }
+        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);        
         if (reduceMax <= 0) {
             return true;
         }

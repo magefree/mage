@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.conditional;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class LegendarySorceryTest extends CardTestPlayerBase {
@@ -55,10 +53,13 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
         // Flying, first strike, vigilance, trample, haste, protection from black and from red
         addCard(Zone.BATTLEFIELD, playerB, "Akroma, Angel of Wrath", 1); // Legendary
 
+        // can't cast cause you don't have a legendary creature (only opponent have)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
 
+        //setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        //assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Urza's Ruinous Blast", 0);
 

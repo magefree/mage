@@ -50,7 +50,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
     public boolean applies(GameEvent event, Ability source, Game game) {
         if ((event.getType() == GameEvent.EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId()))
                 || (event.getType() == GameEvent.EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
-            return game.getBattlefield().contains(filter, source.getControllerId(), 1, game);
+            return game.getBattlefield().containsControlled(filter, source, game, 1);
         }
         return false;
     }

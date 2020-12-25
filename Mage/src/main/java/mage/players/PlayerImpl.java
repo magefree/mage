@@ -1500,7 +1500,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if ((ability.isUsesStack()
                         || ability.getRuleVisible())
                         && !game.isSimulation()) {
-                    game.informPlayers(getLogName() + ability.getGameLogMessage(game));
+                    game.informPlayers(getLogName() + " - " + ability.getGameLogMessage(game));
                 }
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);

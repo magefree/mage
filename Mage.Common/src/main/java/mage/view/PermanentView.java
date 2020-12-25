@@ -1,9 +1,5 @@
-
 package mage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.cards.Card;
@@ -12,8 +8,11 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PermanentView extends CardView {
@@ -36,8 +35,8 @@ public class PermanentView extends CardView {
     private final boolean attachedToPermanent;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
-        super(permanent, game, (permanent.getControllerId() == null) ? false : permanent.getControllerId().equals(createdForPlayerId));
-        this.controlled = (permanent.getControllerId() == null) ? false : permanent.getControllerId().equals(createdForPlayerId);
+        super(permanent, game, permanent.getControllerId() != null && permanent.getControllerId().equals(createdForPlayerId));
+        this.controlled = permanent.getControllerId() != null && permanent.getControllerId().equals(createdForPlayerId);
         this.rules = permanent.getRules(game);
         this.tapped = permanent.isTapped();
         this.flipped = permanent.isFlipped();
@@ -59,7 +58,7 @@ public class PermanentView extends CardView {
         } else {
             if (card != null) {
                 // original may not be face down
-                original = new CardView(card);
+                original = new CardView(card, game);
             } else {
                 original = null;
             }
