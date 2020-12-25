@@ -7,7 +7,6 @@ import mage.abilities.common.PassAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
 import java.io.Serializable;
 import java.util.*;
 import org.apache.log4j.Logger;

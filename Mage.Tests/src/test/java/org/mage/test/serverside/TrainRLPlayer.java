@@ -23,7 +23,8 @@ import mage.cards.decks.importer.DeckImporter;
 //import org.mage.test.player.RLagent.RLLearner;
 //import mage.player.ai.;
 //import mage.server.;
-import mage.player.ai.*;
+import mage.player.ai.RLPlayer;
+import mage.player.ai.RLAgent.*;
 //import mage.player.ai.RLPlayer;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
  * @author ayratn
  * Modified by Elchanan Haas
  */
-/*
+
 public class TrainRLPlayer extends MageTestBase {
 
     private static final List<String> colorChoices = new ArrayList<>(Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu"));
@@ -191,4 +192,3 @@ public class TrainRLPlayer extends MageTestBase {
         return deck;
     }
 }
-*/

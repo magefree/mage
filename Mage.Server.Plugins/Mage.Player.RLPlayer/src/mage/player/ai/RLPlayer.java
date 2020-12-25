@@ -23,7 +23,7 @@ import mage.util.RandomUtil;
 import java.io.Serializable;
 import java.util.*;
 import org.apache.log4j.Logger;
-import mage.player.ai.*;
+import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 /**

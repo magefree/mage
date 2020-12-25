@@ -22,7 +22,6 @@ import mage.util.RandomUtil;
 
 import java.io.Serializable;
 import java.util.*;
-
 /**
  * plays randomly
  *

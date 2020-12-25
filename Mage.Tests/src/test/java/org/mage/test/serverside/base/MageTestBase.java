@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 //import mage.player.ai.;
 //import org.mage.test.player.RandomPlayer;
+import mage.player.ai.RLPlayer;
 import mage.player.ai.RandomPlayer;
 import mage.player.ai.Attackers;
 import org.mage.test.player.TestPlayer;
