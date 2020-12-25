@@ -2,27 +2,30 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.cards.Card;
-import mage.constants.*;
+import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
+import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
  * @author weirddan455
  */
 public final class Realmwalker extends CardImpl {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("cast creature spells of the chosen type");
+    static {
+        filter.add(ChosenSubtypePredicate.instance);
+    }
 
     public Realmwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -42,7 +45,7 @@ public final class Realmwalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells of the chosen type from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new RealmwalkerEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
     }
 
     private Realmwalker(final Realmwalker card) {
@@ -52,56 +55,5 @@ public final class Realmwalker extends CardImpl {
     @Override
     public Realmwalker copy() {
         return new Realmwalker(this);
-    }
-}
-
-class RealmwalkerEffect extends AsThoughEffectImpl {
-
-    public RealmwalkerEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast creature spells of the chosen type from the top of your library.";
-    }
-
-    private RealmwalkerEffect(final RealmwalkerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public RealmwalkerEffect copy() {
-        return new RealmwalkerEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return applies(objectId, null, source, game, affectedControllerId);
-    }
-
-    @Override
-    public boolean applies (UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        Card cardToCheck = game.getCard(objectId);
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-
-        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        if (subType != null) {
-            FilterCreatureCard filter = new FilterCreatureCard();
-            filter.add(subType.getPredicate());
-
-            if (cardToCheck != null
-                    && playerId.equals(source.getControllerId())
-                    && cardToCheck.isOwnedBy(source.getControllerId())
-                    && (!cardToCheck.getManaCost().isEmpty() || cardToCheck.isLand())
-                    && filter.match(cardToCheck, game)) {
-                Player player = game.getPlayer(cardToCheck.getOwnerId());
-
-                UUID needCardID = player.getLibrary().getFromTop(game) == null ? null : player.getLibrary().getFromTop(game).getId();
-                return objectId.equals(needCardID);
-            }
-        }
-        return false;
     }
 }
