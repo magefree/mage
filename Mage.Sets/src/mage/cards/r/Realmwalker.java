@@ -86,18 +86,21 @@ class RealmwalkerEffect extends AsThoughEffectImpl {
         Card cardToCheck = game.getCard(objectId);
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
 
-        FilterCreatureCard filter = new FilterCreatureCard();
-        filter.add(ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game).getPredicate());
+        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+        if (subType != null) {
+            FilterCreatureCard filter = new FilterCreatureCard();
+            filter.add(subType.getPredicate());
 
-        if (cardToCheck != null
-                && playerId.equals(source.getControllerId())
-                && cardToCheck.isOwnedBy(source.getControllerId())
-                && (!cardToCheck.getManaCost().isEmpty() || cardToCheck.isLand())
-                && filter.match(cardToCheck, game)) {
-            Player player = game.getPlayer(cardToCheck.getOwnerId());
+            if (cardToCheck != null
+                    && playerId.equals(source.getControllerId())
+                    && cardToCheck.isOwnedBy(source.getControllerId())
+                    && (!cardToCheck.getManaCost().isEmpty() || cardToCheck.isLand())
+                    && filter.match(cardToCheck, game)) {
+                Player player = game.getPlayer(cardToCheck.getOwnerId());
 
-            UUID needCardID = player.getLibrary().getFromTop(game) == null ? null : player.getLibrary().getFromTop(game).getId();
-            return objectId.equals(needCardID);
+                UUID needCardID = player.getLibrary().getFromTop(game) == null ? null : player.getLibrary().getFromTop(game).getId();
+                return objectId.equals(needCardID);
+            }
         }
         return false;
     }
