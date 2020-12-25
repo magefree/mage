@@ -48,7 +48,7 @@ public class TrainRLPlayer extends MageTestBase {
         String loc="learnerModel";
         
         //learner=loadLearner(loc);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3000; i++) {
             logger.info("Playing game: " + i);
             netwins+=playOneGame(learner);
             for(int j=0;j<5;j++){
@@ -69,10 +69,10 @@ public class TrainRLPlayer extends MageTestBase {
         
     }
     String getDataLoc(String fileName){
-        return fileName+".ser";
+        return "models/"+fileName+"-model.ser";
     }
     String getModelLoc(String fileName){
-        return fileName+"-model.zip";
+        return "models/"+fileName+"-model.zip";
     }
     void saveLearner(RLLearner learner,String loc){
         try {

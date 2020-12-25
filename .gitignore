@@ -76,7 +76,7 @@ Mage.Tests/target
 Mage.Tests/cache
 Mage.Tests/db
 Mage.Tests/*.log
-
+Mage.Tests/models
 # Mage
 Mage/target
 Mage/*.log
