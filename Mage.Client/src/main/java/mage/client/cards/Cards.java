@@ -1,10 +1,3 @@
-
-
- /*
-  * Cards.java
-  *
-  * Created on Dec 18, 2009, 10:40:12 AM
-  */
  package mage.client.cards;
 
  import mage.cards.MageCard;
@@ -122,15 +115,8 @@
      public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, boolean revertOrder) {
          boolean changed = false;
 
-         // remove objects no longer on the stack from display
-         for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext(); ) {
-             Entry<UUID, MageCard> entry = i.next();
-             if (!cardsView.containsKey(entry.getKey())) {
-                 removeCard(entry.getKey());
-                 i.remove();
-                 changed = true;
-             }
-         }
+         // remove objects no longer to display
+         changed = removeOutdatedCards(cardsView);
 
          // Workaround for bug leaving display of objects on the stack (issue #213 https://github.com/magefree/mage/issues/213)
          if (cardsView.isEmpty() && countCards() > 0) {
@@ -254,18 +240,29 @@
          card.setLocation(dx, (int) card.getLocation().getY());
      }
 
-     private void removeCard(UUID cardId) {
+     private boolean removeOutdatedCards(CardsView cardsView) {
+         boolean changed = false;
+
+         // components
          for (Component comp : cardArea.getComponents()) {
+             UUID cardId = null;
              if (comp instanceof Card) {
-                 if (((Card) comp).getCardId().equals(cardId)) {
-                     cardArea.remove(comp);
-                 }
+                 cardId = ((Card) comp).getCardId();
              } else if (comp instanceof MageCard) {
-                 if (((MageCard) comp).getOriginal().getId().equals(cardId)) {
-                     cardArea.remove(comp);
-                 }
+                 cardId = ((MageCard) comp).getOriginal().getId();
+             } else {
+                 LOGGER.error("Unknown card conponent in cards panel to remove: " + comp);
+             }
+             if (cardId == null || !cardsView.containsKey(cardId)) {
+                 cardArea.remove(comp);
+                 changed = true;
              }
          }
+
+         // links
+         cards.keySet().removeIf(id -> !cardsView.containsKey(id));
+
+         return changed;
      }
 
      private int countCards() {
