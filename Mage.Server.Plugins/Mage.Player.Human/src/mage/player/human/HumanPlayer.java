@@ -1,18 +1,5 @@
 package mage.player.human;
 
-import java.awt.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
@@ -26,12 +13,11 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.ModalDoubleFacesCardHalf;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -61,6 +47,15 @@ import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
 import org.apache.log4j.Logger;
+
+import java.awt.*;
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.stream.Collectors;
+
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -504,22 +499,23 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
                 // selected some target
 
                 // remove selected
-                if (target.getTargets().contains(response.getUUID())) {
-                    target.remove(response.getUUID());
+                if (target.getTargets().contains(responseId)) {
+                    target.remove(responseId);
                     continue;
                 }
 
-                if (!targetIds.contains(response.getUUID())) {
+                if (!targetIds.contains(responseId)) {
                     continue;
                 }
 
                 if (target instanceof TargetPermanent) {
-                    if (((TargetPermanent) target).canTarget(abilityControllerId, response.getUUID(), sourceId, game, false)) {
-                        target.add(response.getUUID(), game);
+                    if (((TargetPermanent) target).canTarget(abilityControllerId, responseId, sourceId, game, false)) {
+                        target.add(responseId, game);
                         if (target.doneChosing()) {
                             return true;
                         }
@@ -527,21 +523,21 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     MageObject object = game.getObject(sourceId);
                     if (object instanceof Ability) {
-                        if (target.canTarget(response.getUUID(), (Ability) object, game)) {
-                            if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
-                                target.remove(response.getUUID());
+                        if (target.canTarget(responseId, (Ability) object, game)) {
+                            if (target.getTargets().contains(responseId)) { // if already included remove it with
+                                target.remove(responseId);
                             } else {
-                                target.addTarget(response.getUUID(), (Ability) object, game);
+                                target.addTarget(responseId, (Ability) object, game);
                                 if (target.doneChosing()) {
                                     return true;
                                 }
                             }
                         }
-                    } else if (target.canTarget(response.getUUID(), game)) {
-                        if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
-                            target.remove(response.getUUID());
+                    } else if (target.canTarget(responseId, game)) {
+                        if (target.getTargets().contains(responseId)) { // if already included remove it with
+                            target.remove(responseId);
                         } else {
-                            target.addTarget(response.getUUID(), null, game);
+                            target.addTarget(responseId, null, game);
                             if (target.doneChosing()) {
                                 return true;
                             }
@@ -594,16 +590,17 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
                 // remove selected
-                if (target.getTargets().contains(response.getUUID())) {
-                    target.remove(response.getUUID());
+                if (target.getTargets().contains(responseId)) {
+                    target.remove(responseId);
                     continue;
                 }
 
-                if (possibleTargets.contains(response.getUUID())) {
-                    if (target.canTarget(abilityControllerId, response.getUUID(), source, game)) {
-                        target.addTarget(response.getUUID(), source, game);
+                if (possibleTargets.contains(responseId)) {
+                    if (target.canTarget(abilityControllerId, responseId, source, game)) {
+                        target.addTarget(responseId, source, game);
                         if (target.doneChosing()) {
                             return true;
                         }
@@ -684,12 +681,13 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {                
-                if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
-                    target.remove(response.getUUID());
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
+                if (target.getTargets().contains(responseId)) { // if already included remove it with
+                    target.remove(responseId);
                 } else {
-                    if (target.canTarget(abilityControllerId, response.getUUID(), null, cards, game)) {                    
-                        target.add(response.getUUID(), game);
+                    if (target.canTarget(abilityControllerId, responseId, null, cards, game)) {
+                        target.add(responseId, game);
                         if (target.doneChosing()) {
                             return true;
                         }
@@ -758,11 +756,12 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
-                if (target.getTargets().contains(response.getUUID())) { // if already included remove it
-                    target.remove(response.getUUID());
-                } else if (target.canTarget(abilityControllerId, response.getUUID(), source, cards, game)) {
-                    target.addTarget(response.getUUID(), source, game);
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
+                if (target.getTargets().contains(responseId)) { // if already included remove it
+                    target.remove(responseId);
+                } else if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
+                    target.addTarget(responseId, source, game);
                     if (target.doneChosing()) {
                         return true;
                     }
@@ -805,23 +804,24 @@ public class HumanPlayer extends PlayerImpl {
             if (!isExecutingMacro()) {
                 String selectedNames = target.getTargetedName(game);
                 game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
-                        + "<br> Amount remaining: " + target.getAmountRemaining()
-                        + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
-                        getRelatedObjectName(source, game)),
+                                + "<br> Amount remaining: " + target.getAmountRemaining()
+                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
+                                getRelatedObjectName(source, game)),
                         possibleTargets,
                         required,
                         getOptions(target, null));
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
-                if (target.canTarget(abilityControllerId, response.getUUID(), source, game)) {
-                    UUID targetId = response.getUUID();
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
+                if (target.canTarget(abilityControllerId, responseId, source, game)) {
+                    UUID targetId = responseId;
                     MageObject targetObject = game.getObject(targetId);
 
                     boolean removeMode = target.getTargets().contains(targetId)
                             && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : " target") + "?", "",
-                                    "Remove from selected", "Add extra amount (remaining " + target.getAmountRemaining() + ")", source, game);
+                            "Remove from selected", "Add extra amount (remaining " + target.getAmountRemaining() + ")", source, game);
 
                     if (removeMode) {
                         target.remove(targetId);
@@ -963,9 +963,9 @@ public class HumanPlayer extends PlayerImpl {
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
                                     && !controllingPlayer
-                                            .getUserData()
-                                            .getUserSkipPrioritySteps()
-                                            .isStopOnAllEndPhases())) {
+                                    .getUserData()
+                                    .getUserSkipPrioritySteps()
+                                    .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -997,9 +997,9 @@ public class HumanPlayer extends PlayerImpl {
                         if (haveNewObjectsOnStack
                                 && (playerId.equals(game.getActivePlayerId())
                                 && controllingPlayer
-                                        .getUserData()
-                                        .getUserSkipPrioritySteps()
-                                        .isStopOnStackNewObjects())) {
+                                .getUserData()
+                                .getUserSkipPrioritySteps()
+                                .isStopOnStackNewObjects())) {
                             // new objects on stack -- disable "pass until stack resolved"
                             passedUntilStackResolved = false;
                         } else {
@@ -1044,12 +1044,13 @@ public class HumanPlayer extends PlayerImpl {
                 break;
             }
 
+            UUID responseId = getFixedResponseUUID(game);
             if (response.getString() != null
                     && response.getString().equals("special")) {
                 activateSpecialAction(game, null);
-            } else if (response.getUUID() != null) {
+            } else if (responseId != null) {
                 boolean result = false;
-                MageObject object = game.getObject(response.getUUID());
+                MageObject object = game.getObject(responseId);
                 if (object != null) {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
@@ -1104,6 +1105,21 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         return false;
+    }
+
+    private UUID getFixedResponseUUID(Game game) {
+        // user can clicks on any side of multi/double faces card, but game must process click to main card all the time
+        MageObject object = game.getObject(response.getUUID());
+
+        // mdf cards
+        if (object instanceof ModalDoubleFacesCardHalf) {
+            if (!Zone.BATTLEFIELD.equals(game.getState().getZone(object.getId()))
+                    && !Zone.STACK.equals(game.getState().getZone(object.getId()))) {
+                return ((ModalDoubleFacesCardHalf) object).getMainCard().getId();
+            }
+        }
+
+        return response.getUUID();
     }
 
     private boolean checkPassStep(Game game, HumanPlayer controllingPlayer) {
@@ -1191,11 +1207,12 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
                 for (TriggeredAbility ability : abilitiesWithNoOrderSet) {
-                    if (ability.getId().equals(response.getUUID())
+                    if (ability.getId().equals(responseId)
                             || (!macroTriggeredSelectionFlag
-                            && ability.getSourceId().equals(response.getUUID()))) {
+                            && ability.getSourceId().equals(responseId))) {
                         if (recordingMacro) {
                             PlayerResponse tResponse = new PlayerResponse();
                             tResponse.setUUID(ability.getSourceId());
@@ -1239,10 +1256,11 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
+            UUID responseId = getFixedResponseUUID(game);
             if (response.getBoolean() != null) {
                 return false;
-            } else if (response.getUUID() != null) {
-                playManaAbilities(abilityToCast, unpaid, game);
+            } else if (responseId != null) {
+                playManaAbilities(responseId, abilityToCast, unpaid, game);
             } else if (response.getString() != null
                     && response.getString().equals("special")) {
                 if (unpaid instanceof ManaCostsImpl) {
@@ -1355,9 +1373,9 @@ public class HumanPlayer extends PlayerImpl {
         return xValue;
     }
 
-    protected void playManaAbilities(Ability abilityToCast, ManaCost unpaid, Game game) {
+    protected void playManaAbilities(UUID objectId, Ability abilityToCast, ManaCost unpaid, Game game) {
         updateGameStatePriority("playManaAbilities", game);
-        MageObject object = game.getObject(response.getUUID());
+        MageObject object = game.getObject(objectId);
         if (object == null) {
             return;
         }
@@ -1417,8 +1435,8 @@ public class HumanPlayer extends PlayerImpl {
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
                     || (!getControllingPlayersUserData(game)
-                            .getUserSkipPrioritySteps()
-                            .isStopOnDeclareAttackers()
+                    .getUserSkipPrioritySteps()
+                    .isStopOnDeclareAttackers()
                     && (passedTurn
                     || passedTurnSkipStack
                     || passedUntilEndOfTurn
@@ -1453,6 +1471,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
+            UUID responseId = getFixedResponseUUID(game);
             if (response.getString() != null
                     && response.getString().equals("special")) { // All attack
                 setStoredBookmark(game.bookmarkState());
@@ -1486,8 +1505,8 @@ public class HumanPlayer extends PlayerImpl {
                 if (checkIfAttackersValid(game)) {
                     return;
                 }
-            } else if (response.getUUID() != null) {
-                Permanent attacker = game.getPermanent(response.getUUID());
+            } else if (responseId != null) {
+                Permanent attacker = game.getPermanent(responseId);
                 if (attacker != null) {
                     if (filterCreatureForCombat.match(attacker, null, playerId, game)) {
                         selectDefender(game.getCombat().getDefenders(), attacker.getId(), game);
@@ -1631,13 +1650,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
-                UUID defenderId = response.getUUID();
-                for (Player player : game.getPlayers().values()) {
-                    if (player.getId().equals(response.getUUID())) {
-                        defenderId = player.getId(); // get the correct player object
-                        break;
-                    }
-                }
+                UUID defenderId = getFixedResponseUUID(game);
                 declareAttacker(attackerId, defenderId, game, true);
                 return true;
             }
@@ -1649,7 +1662,7 @@ public class HumanPlayer extends PlayerImpl {
         TargetDefender target = new TargetDefender(defenders, null);
         target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
         if (chooseTarget(Outcome.Damage, target, null, game)) {
-            return response.getUUID();
+            return getFixedResponseUUID(game);
         }
         return null;
     }
@@ -1692,12 +1705,13 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
+            UUID responseId = getFixedResponseUUID(game);
             if (response.getBoolean() != null) {
                 return;
             } else if (response.getInteger() != null) {
                 return;
-            } else if (response.getUUID() != null) {
-                Permanent blocker = game.getPermanent(response.getUUID());
+            } else if (responseId != null) {
+                Permanent blocker = game.getPermanent(responseId);
                 if (blocker != null) {
                     boolean removeBlocker = false;
                     // does not block yet and can block or can block more attackers
@@ -1730,9 +1744,10 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
                 for (Permanent perm : attackers) {
-                    if (perm.getId().equals(response.getUUID())) {
+                    if (perm.getId().equals(responseId)) {
                         return perm.getId();
                     }
                 }
@@ -1755,9 +1770,10 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
                 for (Permanent perm : blockers) {
-                    if (perm.getId().equals(response.getUUID())) {
+                    if (perm.getId().equals(responseId)) {
                         return perm.getId();
                     }
                 }
@@ -1795,14 +1811,15 @@ public class HumanPlayer extends PlayerImpl {
         }
         waitForResponse(game);
 
+        UUID responseId = getFixedResponseUUID(game);
         if (response.getBoolean() != null) {
             // do nothing
-        } else if (response.getUUID() != null) {
-            CombatGroup group = game.getCombat().findGroup(response.getUUID());
+        } else if (responseId != null) {
+            CombatGroup group = game.getCombat().findGroup(responseId);
             if (group != null) {
                 // check if already blocked, if not add
                 if (!group.getBlockers().contains(blockerId)) {
-                    declareBlocker(defenderId, blockerId, response.getUUID(), game);
+                    declareBlocker(defenderId, blockerId, responseId, game);
                 } else { // else remove from block
                     game.getCombat().removeBlockerGromGroup(blockerId, group, game);
                 }
@@ -1904,9 +1921,10 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getUUID() != null) {
-                if (specialActions.containsKey(response.getUUID())) {
-                    SpecialAction specialAction = specialActions.get(response.getUUID());
+            UUID responseId = getFixedResponseUUID(game);
+            if (responseId != null) {
+                if (specialActions.containsKey(responseId)) {
+                    SpecialAction specialAction = specialActions.get(responseId);
                     if (unpaidForManaAction != null) {
                         specialAction.setUnpaidMana(unpaidForManaAction);
                     }
@@ -1966,9 +1984,10 @@ public class HumanPlayer extends PlayerImpl {
         }
         waitForResponse(game);
 
-        if (response.getUUID() != null) {
-            if (abilities.containsKey(response.getUUID())) {
-                activateAbility(abilities.get(response.getUUID()), game);
+        UUID responseId = getFixedResponseUUID(game);
+        if (responseId != null) {
+            if (abilities.containsKey(responseId)) {
+                activateAbility(abilities.get(responseId), game);
             }
         }
     }
@@ -2015,9 +2034,10 @@ public class HumanPlayer extends PlayerImpl {
                 }
                 waitForResponse(game);
 
-                if (response.getUUID() != null) {
-                    if (useableAbilities.containsKey(response.getUUID())) {
-                        return (SpellAbility) useableAbilities.get(response.getUUID());
+                UUID responseId = getFixedResponseUUID(game);
+                if (responseId != null) {
+                    if (useableAbilities.containsKey(responseId)) {
+                        return (SpellAbility) useableAbilities.get(responseId);
                     }
                 }
             }
@@ -2096,9 +2116,10 @@ public class HumanPlayer extends PlayerImpl {
                     }
                     waitForResponse(game);
 
-                    if (response.getUUID() != null) {
+                    UUID responseId = getFixedResponseUUID(game);
+                    if (responseId != null) {
                         for (Mode mode : modes.getAvailableModes(source, game)) {
-                            if (mode.getId().equals(response.getUUID())) {
+                            if (mode.getId().equals(responseId)) {
                                 // TODO: add checks on 2x selects (cheaters can rewrite client side code and select same mode multiple times)
                                 // reason: wrong setup eachModeMoreThanOnce and eachModeOnlyOnce in many cards
                                 return mode;
@@ -2106,12 +2127,12 @@ public class HumanPlayer extends PlayerImpl {
                         }
 
                         // end choice by done option in ability pickup dialog
-                        if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(response.getUUID())) {
+                        if (canEndChoice && Modes.CHOOSE_OPTION_DONE_ID.equals(responseId)) {
                             done = true;
                         }
 
                         // cancel choice (remove all selections)
-                        if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(response.getUUID())) {
+                        if (Modes.CHOOSE_OPTION_CANCEL_ID.equals(responseId)) {
                             modes.clearSelectedModes();
                         }
                     } else if (canEndChoice) {

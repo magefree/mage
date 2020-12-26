@@ -314,7 +314,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_Zones_AfterCast() {
+    public void test_Zones_AfterCast_1() {
         // Akoum Warrior {5}{R} - creature
         // Akoum Teeth - land
         addCard(Zone.HAND, playerA, "Akoum Warrior");
@@ -333,6 +333,40 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         Card card = currentGame.getState().getBattlefield().getAllPermanents()
                 .stream()
                 .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(card);
+        Assert.assertEquals("permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getId()));
+        Assert.assertEquals("main permanent card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(card.getMainCard().getId()));
+        Assert.assertEquals("half card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getId()));
+        Assert.assertEquals("main card must be on battlefield", Zone.BATTLEFIELD, currentGame.getState().getZone(((PermanentCard) card).getCard().getMainCard().getId()));
+    }
+
+    @Test
+    public void test_Zones_AfterCast_2() {
+        removeAllCardsFromHand(playerA);
+        // possible bug: if you click on mdf card second side then keep in hand after cast (sorcery + land)
+        // P.S. it works in GUI only, reason: user can sends UUID from wrong card side
+
+        // Ondu Inversion {6}{W}{W} - sorcery
+        // Ondu Skyruins - land
+        addCard(Zone.HAND, playerA, "Ondu Inversion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
+
+        // prepare mdf permanent
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ondu Skyruins");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ondu Skyruins", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertHandCount(playerA, 0);
+        Card card = currentGame.getState().getBattlefield().getAllPermanents()
+                .stream()
+                .filter(p -> CardUtil.haveSameNames(p, "Ondu Skyruins", currentGame))
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(card);
