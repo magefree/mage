@@ -107,7 +107,7 @@ class TruthOrTaleEffect extends OneShotEffect {
                     Card finalChosenCard = game.getCard(finalChosenCardTarget.getFirstTarget());
                     if (finalChosenCard != null) {
                         if (!game.isSimulation()) {
-                            game.informPlayers(controller.getName() + " chose to put " + finalChosenCard.getIdName() + " into their hand.");
+                            game.informPlayers(controller.getLogName() + " chose to put " + finalChosenCard.getIdName() + " into their hand.");
                         }
                         cards.remove(finalChosenCard);
                         controller.moveCards(finalChosenCard, Zone.HAND, source, game);

@@ -79,9 +79,9 @@ class DistantMemoriesEffect extends OneShotEffect {
                     if (opponent != null) {
                         if (opponent.chooseUse(Outcome.Detriment, sb.toString(), source, game)) {
                             putInHand = true;
-                            game.informPlayers(opponent.getName() + " decides to put the selected card into the player's hand.");
+                            game.informPlayers(opponent.getLogName() + " decides to put the selected card into the player's hand.");
                         } else {
-                            game.informPlayers(opponent.getName() + " decides to leave the card in exile.");
+                            game.informPlayers(opponent.getLogName() + " decides to leave the card in exile.");
                         }
                     }
                 }

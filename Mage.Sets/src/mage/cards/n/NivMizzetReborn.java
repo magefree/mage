@@ -133,7 +133,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 10));
-        game.informPlayers(player.getName() + " reveals " +
+        game.informPlayers(player.getLogName() + " reveals " +
                 cards.getCards(game).stream().map(card -> card.getName() + " ").reduce((a, b) -> a + b));
         Cards cards2 = new CardsImpl();
         if (cards.isEmpty()) {
@@ -156,7 +156,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         if (player.moveCards(cards2, Zone.HAND, source, game)) {
             for (Card card : cards2.getCards(game)) {
-                game.informPlayers(player.getName() + " chose " + card.getName() + " and put it into their hand.");
+                game.informPlayers(player.getLogName() + " chose " + card.getName() + " and put it into their hand.");
             }
         }
         return true;

@@ -70,11 +70,11 @@ class ScryingGlassEffect extends OneShotEffect {
             filter.add(new ColorPredicate(color.getColor()));
             targetOpponent.revealCards(source, targetOpponent.getHand(), game);
             if (targetOpponent.getHand().count(filter, game) == amount) {
-                game.informPlayers(controller.getName() + " has chosen the exact number and color of the revealed cards from " + targetOpponent.getName() + "'s hand.  They draw a card.");
+                game.informPlayers(controller.getLogName() + " has chosen the exact number and color of the revealed cards from " + targetOpponent.getName() + "'s hand.  They draw a card.");
                 controller.drawCards(1, source, game);
                 return true;
             } else {
-                game.informPlayers(controller.getName() + " has chosen incorrectly and will not draw a card.");
+                game.informPlayers(controller.getLogName() + " has chosen incorrectly and will not draw a card.");
             }
         }
         return false;

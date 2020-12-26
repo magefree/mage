@@ -30,10 +30,10 @@ public abstract class CouncilsDilemmaVoteEffect extends OneShotEffect {
                         "Choose " + choiceOne + " or " + choiceTwo + "?",
                         source.getRule(), choiceOne, choiceTwo, source, game)) {
                     voteOneCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceOne);
+                    game.informPlayers(player.getLogName() + " has voted for " + choiceOne);
                 } else {
                     voteTwoCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceTwo);
+                    game.informPlayers(player.getLogName() + " has voted for " + choiceTwo);
                 }
             }
         }

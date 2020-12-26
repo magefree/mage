@@ -21,6 +21,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -107,11 +108,11 @@ class NeganTheColdBloodedEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            if (controllerChoice.equals(creatureId)) {
-                game.informPlayers(controller.getName() + " chose " + permanent.getIdName());
+            if (Objects.equals(controllerChoice, creatureId)) {
+                game.informPlayers(controller.getLogName() + " chose " + permanent.getIdName());
             }
-            if (opponentChoice.equals(creatureId)) {
-                game.informPlayers(opponent.getName() + " chose " + permanent.getIdName());
+            if (Objects.equals(opponentChoice, creatureId)) {
+                game.informPlayers(opponent.getLogName() + " chose " + permanent.getIdName());
             }
             permanent.sacrifice(source, game);
         }

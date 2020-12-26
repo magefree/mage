@@ -85,9 +85,9 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     private void turnsForTimeVote(int timeCount, Player controller, Game game, Ability source) {
         if (timeCount == 1) {
-            game.informPlayers(controller.getName() + " will take an extra turn");
+            game.informPlayers(controller.getLogName() + " will take an extra turn");
         } else {
-            game.informPlayers(controller.getName() + " will take " + timeCount + " extra turns");
+            game.informPlayers(controller.getLogName() + " will take " + timeCount + " extra turns");
         }
         do {
             game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
@@ -119,7 +119,7 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
                 ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
-                game.informPlayers(controller.getName() + " gained control of " + permanent.getIdName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
+                game.informPlayers(controller.getLogName() + " gained control of " + permanent.getIdName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
             }
         }
     }
@@ -133,10 +133,10 @@ class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
                         "Choose " + choiceOne + " or " + choiceTwo + "?",
                         source.getRule(), choiceOne, choiceTwo, source, game)) {
                     voteOneCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceOne);
+                    game.informPlayers(player.getLogName() + " has voted for " + choiceOne);
                 } else {
                     voteTwoCount++;
-                    game.informPlayers(player.getName() + " has voted for " + choiceTwo);
+                    game.informPlayers(player.getLogName() + " has voted for " + choiceTwo);
                     choiceTwoVoters.add(player.getId());
                 }
             }
