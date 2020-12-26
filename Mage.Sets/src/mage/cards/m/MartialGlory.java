@@ -32,7 +32,7 @@ public final class MartialGlory extends CardImpl {
         
         // Target creature gets +0/+3 until end of turn.
         Effect effect2 = new BoostTargetEffect(0,3, Duration.EndOfTurn);
-        effect2.setText("<br></br>Target creature gets +0/+3 until end of turn");
+        effect2.setText("<br><br>Target creature gets +0/+3 until end of turn");
         effect2.setTargetPointer(SecondTargetPointer.getInstance());
         target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
         this.getSpellAbility().addEffect(effect2);

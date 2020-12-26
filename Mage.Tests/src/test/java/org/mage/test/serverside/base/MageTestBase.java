@@ -14,8 +14,10 @@ import mage.players.Player;
 import mage.players.PlayerType;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
+import mage.server.managers.ConfigSettings;
 import mage.server.tournament.TournamentFactory;
-import mage.server.util.ConfigSettings;
+import mage.server.util.ConfigFactory;
+import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
@@ -100,7 +102,7 @@ public abstract class MageTestBase {
     public static void init() {
         Logger.getRootLogger().setLevel(Level.DEBUG);
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.instance;
+        ConfigSettings config = new ConfigWrapper(ConfigFactory.loadFromFile("config/config.xml"));
         config.getGameTypes().forEach((gameType) -> {
             GameFactory.instance.addGameType(gameType.getName(), loadGameType(gameType), loadPlugin(gameType));
         });

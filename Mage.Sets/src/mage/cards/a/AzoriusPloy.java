@@ -33,7 +33,7 @@ public final class AzoriusPloy extends CardImpl {
 
         // Prevent all combat damage that would be dealt to target creature this turn.
         Effect effect2 = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);
-        effect2.setText("<br></br>Prevent all combat damage that would be dealt to target creature this turn.");
+        effect2.setText("<br><br>Prevent all combat damage that would be dealt to target creature this turn.");
         effect2.setTargetPointer(SecondTargetPointer.getInstance());
         this.getSpellAbility().addEffect(effect2);
         target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));

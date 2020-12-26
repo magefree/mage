@@ -1956,7 +1956,7 @@ public class TestPlayer implements Player {
             int index = 0;
             for (Map.Entry<String, String> entry : rEffects.entrySet()) {
                 if (entry.getValue().startsWith(choice)) {
-                    choices.remove(choice);
+                    choices.remove(0);
                     return index;
                 }
                 index++;

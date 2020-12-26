@@ -22,7 +22,7 @@ public enum MetalcraftCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().contains(filter, source.getControllerId(), 3, game);
+        return game.getBattlefield().containsControlled(filter, source, game, 3);
     }
 
     @Override

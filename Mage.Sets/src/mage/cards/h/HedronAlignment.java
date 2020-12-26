@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -24,14 +22,15 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HedronAlignment extends CardImpl {
 
     public HedronAlignment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
@@ -85,7 +84,7 @@ class HedronAlignmentEffect extends OneShotEffect {
             Cards cardsToReveal = new CardsImpl();
             controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
             // Check battlefield
-            if (!game.getBattlefield().contains(filterPermanent, source.getControllerId(), game, 1)) {
+            if (!game.getBattlefield().contains(filterPermanent, source, game, 1)) {
                 return true;
             }
             if (controller.getHand().getCards(filterCard, source.getSourceId(), controller.getId(), game).isEmpty()) {

@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -16,14 +14,15 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RemorselessPunishment extends CardImpl {
 
     public RemorselessPunishment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         // Target opponent loses 5 life unless that player discards two cards or sacrifices a creature or planeswalker. Repeat this process once.
         getSpellAbility().addEffect(new RemorselessPunishmentEffect());
@@ -80,7 +79,7 @@ class RemorselessPunishmentEffect extends OneShotEffect {
                 return;
             }
         }
-        if (game.getBattlefield().contains(filter, opponent.getId(), 1, game)) {
+        if (game.getBattlefield().containsControlled(filter, source.getSourceId(), opponent.getId(), game, 1)) {
             if (opponent.chooseUse(outcome, "Choose your " + iteration + " punishment.", null, "Sacrifice a creature or planeswalker", "Lose 5 life", source, game)) {
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
                 if (target.choose(Outcome.Sacrifice, opponent.getId(), source.getId(), game)) {

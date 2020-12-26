@@ -1,24 +1,18 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.PreventDamageToAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Inviolability extends CardImpl {
@@ -34,7 +28,9 @@ public final class Inviolability extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Prevent all damage that would be dealt to enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, false)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageToAttachedEffect(
+                Duration.WhileOnBattlefield, AttachmentType.AURA, false
+        )));
     }
 
     public Inviolability(final Inviolability card) {

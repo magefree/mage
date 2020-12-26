@@ -70,18 +70,19 @@ class CourtOfAmbitionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int discardCount = source.isControlledBy(game.getMonarchId()) ? 2 : 1;
         String message = "Discard " + CardUtil.numberToText(discardCount, "a")
-                + "card" + (discardCount > 1 ? 's' : "") + "? If not you lose " + (discardCount * 3) + " life";
+                + " card" + (discardCount > 1 ? 's' : "") + "? If not you lose " + (discardCount * 3) + " life";
         Map<UUID, Cards> discardMap = new HashMap<>();
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-            if (player.getHand().size() < discardCount || !player.chooseUse(outcome, message, source, game)) {
+            if (player.getHand().size() < discardCount || !player.chooseUse(Outcome.LoseLife, message, source, game)) {
                 player.loseLife(discardCount * 3, game, source, false);
+                continue;
             }
             TargetDiscard target = new TargetDiscard(discardCount, StaticFilters.FILTER_CARD, playerId);
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(Outcome.Discard, target, source.getSourceId(), game);
             discardMap.put(playerId, new CardsImpl(target.getTargets()));
         }
         for (Map.Entry<UUID, Cards> entry : discardMap.entrySet()) {

@@ -3,11 +3,14 @@
 [![Build Status](https://travis-ci.org/magefree/mage.svg?branch=master)](https://travis-ci.org/magefree/mage) [![latest release](https://img.shields.io/github/v/release/magefree/mage)](https://github.com/magefree/mage/releases/) [![commints since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/) [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 XMage allows you to play Magic against one or more online players or computer opponents. 
-It includes full rules enforcement for over **20 000** unique cards and ~50.000 reprints from different editions. 
+It includes full rules enforcement for over **20 000** unique cards and more than 50.000 reprints from different editions. 
 You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
 
 It's support single matches and tournaments with dozens game modes like duel, multiplayer, standard, modern, commander, 
 pauper, oathbreaker, historic, freeform and much more.
+
+Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for 
+testing combos and other game situations with pre-defined conditions.
 
 There are [public servers](http://xmageservers.online/) where you can play XMage against other players. 
 You can also host your own server to play against the AI and/or your friends.
@@ -57,6 +60,13 @@ There are another way to report bugs too:
 Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for more detailed instructions. 
 
 [Wiki page](https://github.com/magefree/mage/wiki) contains detail information about private or public server setup.
+
+### Server options
+
+The XMage server locates by default the configuration file from the current working directory to the relative path `config/config.xml`
+(`config\config.xml` in Windows). To change this location, start the server with the property `xmage.config.path` set
+to the desired location, for example `-Dxmage.config.path=config/otherconfig.xml`. The option can be set from the 
+XMageLauncher in `Settings > Java > Server java options`.
 
 ## Troubleshooting / FAQ
 

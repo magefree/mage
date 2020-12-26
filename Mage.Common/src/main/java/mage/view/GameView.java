@@ -94,7 +94,7 @@ public class GameView implements Serializable {
                             stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, card.getName(), new CardView(card, game, false, false, false)));
                         }
                     } else {
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, "", new CardView(card)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, "", new CardView(card, game)));
                     }
                     if (card.isTransformable()) {
                         updateLatestCardView(game, card, stackObject.getId());
@@ -103,7 +103,7 @@ public class GameView implements Serializable {
                 } else if (object != null) {
                     if (object instanceof PermanentToken) {
                         PermanentToken token = (PermanentToken) object;
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), new CardView(token)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), new CardView(token, game)));
                         checkPaid(stackObject.getId(), (StackAbility) stackObject);
                     } else if (object instanceof Emblem) {
                         CardView cardView = new CardView(new EmblemView((Emblem) object));

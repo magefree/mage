@@ -1,15 +1,15 @@
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
 import java.util.UUID;
-import mage.abilities.costs.Cost;
 
 public class ControlPermanentCost extends CostImpl {
-    private FilterControlledPermanent filter;
+    private final FilterControlledPermanent filter;
 
     public ControlPermanentCost(FilterControlledPermanent filter) {
         this.filter = filter.copy();
@@ -23,7 +23,7 @@ public class ControlPermanentCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 1, game);
+        return game.getBattlefield().containsControlled(filter, source.getSourceId(), controllerId, game, 1);
     }
 
     @Override

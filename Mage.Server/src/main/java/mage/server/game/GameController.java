@@ -23,11 +23,11 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Phase;
 import mage.interfaces.Action;
 import mage.players.Player;
-import mage.server.*;
-import mage.server.util.ConfigSettings;
+import mage.server.Main;
+import mage.server.User;
+import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
-import mage.server.util.ThreadExecutor;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -53,13 +53,14 @@ public class GameController implements GameCallback {
     private static final int GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS = 10; // checks and inform players about joining status
     private static final int GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS = 2 * 60; // leave player from game if it don't join and inactive on server
 
-    private static final ExecutorService gameExecutor = ThreadExecutor.instance.getGameExecutor();
+    private final ExecutorService gameExecutor;
     private static final Logger logger = Logger.getLogger(GameController.class);
 
     protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private ScheduledFuture<?> futureTimeout;
-    protected static final ScheduledExecutorService timeoutIdleExecutor = ThreadExecutor.instance.getTimeoutIdleExecutor();
+    private final ManagerFactory managerFactory;
+    protected final ScheduledExecutorService timeoutIdleExecutor;
 
     private final ConcurrentMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private final ReadWriteLock gameSessionsLock = new ReentrantReadWriteLock();
@@ -83,13 +84,16 @@ public class GameController implements GameCallback {
     private int turnsToRollback;
     private int requestsOpen;
 
-    public GameController(Game game, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
+    public GameController(ManagerFactory managerFactory, Game game, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
+        this.managerFactory = managerFactory;
+        gameExecutor = managerFactory.threadExecutor().getGameExecutor();
+        timeoutIdleExecutor = managerFactory.threadExecutor().getTimeoutIdleExecutor();
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
-        chatId = ChatManager.instance.createChatSession("Game " + game.getId());
+        chatId = managerFactory.chatManager().createChatSession("Game " + game.getId());
         this.userReqestingRollback = null;
         this.game = game;
-        this.game.setSaveGame(ConfigSettings.instance.isSaveGameActivated());
+        this.game.setSaveGame(managerFactory.configSettings().isSaveGameActivated());
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
         this.gameOptions = gameOptions;
@@ -103,7 +107,7 @@ public class GameController implements GameCallback {
         for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
             gameSessionPlayer.cleanUp();
         }
-        ChatManager.instance.destroyChatSession(chatId);
+        managerFactory.chatManager().destroyChatSession(chatId);
         for (PriorityTimer priorityTimer : timers.values()) {
             priorityTimer.cancel();
         }
@@ -120,11 +124,11 @@ public class GameController implements GameCallback {
                                 updateGame();
                                 break;
                             case INFO:
-                                ChatManager.instance.broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, event.getGame(), MessageType.GAME, null);
+                                managerFactory.chatManager().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, event.getGame(), MessageType.GAME, null);
                                 logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case STATUS:
-                                ChatManager.instance.broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), event.getWithTurnInfo() ? event.getGame() : null, MessageType.GAME, null);
+                                managerFactory.chatManager().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), event.getWithTurnInfo() ? event.getGame() : null, MessageType.GAME, null);
                                 logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case ERROR:
@@ -273,7 +277,7 @@ public class GameController implements GameCallback {
             logger.fatal("- userId: " + userId);
             return;
         }
-        Optional<User> user = UserManager.instance.getUser(userId);
+        Optional<User> user = managerFactory.userManager().getUser(userId);
         if (!user.isPresent()) {
             logger.fatal("User not found : " + userId);
             return;
@@ -286,7 +290,7 @@ public class GameController implements GameCallback {
         GameSessionPlayer gameSession = gameSessions.get(playerId);
         String joinType;
         if (gameSession == null) {
-            gameSession = new GameSessionPlayer(game, userId, playerId);
+            gameSession = new GameSessionPlayer(managerFactory, game, userId, playerId);
             final Lock w = gameSessionsLock.writeLock();
             w.lock();
             try {
@@ -300,7 +304,7 @@ public class GameController implements GameCallback {
         }
         user.get().addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
-        ChatManager.instance.broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
+        managerFactory.chatManager().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
         checkStart();
     }
 
@@ -335,7 +339,7 @@ public class GameController implements GameCallback {
                         // join the game because player has not joined or was removed because of disconnect
                         String problemPlayerFixes;
                         user.removeConstructing(player.getId());
-                        GameManager.instance.joinGame(game.getId(), user.getId());
+                        managerFactory.gameManager().joinGame(game.getId(), user.getId());
                         logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
                         if (user.isConnected()) {
                             // init game session, see reconnect()
@@ -345,7 +349,7 @@ public class GameController implements GameCallback {
                                 logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
                                 user.ccGameStarted(session.getGameId(), player.getId());
                                 session.init();
-                                GameManager.instance.sendPlayerString(session.getGameId(), user.getId(), "");
+                                managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
                             } else {
                                 problemPlayerFixes = "leave on broken game session";
                                 logger.error("Can't find game session for forced join, leave it: player " + player.getName() + " in gameId: " + game.getId());
@@ -357,7 +361,7 @@ public class GameController implements GameCallback {
                             player.leave();
                         }
 
-                        ChatManager.instance.broadcast(chatId, player.getName(), user.getPingInfo()
+                        managerFactory.chatManager().broadcast(chatId, player.getName(), user.getPingInfo()
                                         + " is forced to join the game (waiting ends after "
                                         + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS
                                         + " secs, applied fixes: " + problemPlayerFixes + ")",
@@ -382,7 +386,7 @@ public class GameController implements GameCallback {
     private Optional<User> getUserByPlayerId(UUID playerId) {
         for (Map.Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             if (entry.getValue().equals(playerId)) {
-                return UserManager.instance.getUser(entry.getKey());
+                return managerFactory.userManager().getUser(entry.getKey());
             }
         }
         return Optional.empty();
@@ -391,7 +395,7 @@ public class GameController implements GameCallback {
     private void checkStart() {
         if (allJoined()) {
             joinWaitingExecutor.shutdownNow();
-            ThreadExecutor.instance.getCallExecutor().execute(this::startGame);
+            managerFactory.threadExecutor().getCallExecutor().execute(this::startGame);
         }
     }
 
@@ -423,14 +427,14 @@ public class GameController implements GameCallback {
         }
         if (!isAllowedToWatch(userId)) {
             // Dont want people on our ignore list to stalk us
-            UserManager.instance.getUser(userId).ifPresent(user -> {
+            managerFactory.userManager().getUser(userId).ifPresent(user -> {
                 user.showUserMessage("Not allowed", "You are banned from watching this game");
-                ChatManager.instance.broadcast(chatId, user.getName(), " tried to join, but is banned", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
+                managerFactory.chatManager().broadcast(chatId, user.getName(), " tried to join, but is banned", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
             });
             return false;
         }
-        UserManager.instance.getUser(userId).ifPresent(user -> {
-            GameSessionWatcher gameWatcher = new GameSessionWatcher(userId, game, false);
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
+            GameSessionWatcher gameWatcher = new GameSessionWatcher(managerFactory.userManager(), userId, game, false);
             final Lock w = gameWatchersLock.writeLock();
             w.lock();
             try {
@@ -440,7 +444,7 @@ public class GameController implements GameCallback {
             }
             gameWatcher.init();
             user.addGameWatchInfo(game.getId());
-            ChatManager.instance.broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
+            managerFactory.chatManager().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
         });
         return true;
     }
@@ -453,8 +457,8 @@ public class GameController implements GameCallback {
         } finally {
             w.unlock();
         }
-        UserManager.instance.getUser(userId).ifPresent(user -> {
-            ChatManager.instance.broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
+            managerFactory.chatManager().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
         });
     }
 
@@ -628,7 +632,7 @@ public class GameController implements GameCallback {
                                 gameSession.requestPermissionToSeeHandCards(userIdRequester);
                             } else {
                                 // player does not allow the request
-                                UserManager.instance.getUser(userIdRequester).ifPresent(requester -> {
+                                managerFactory.userManager().getUser(userIdRequester).ifPresent(requester -> {
                                     requester.showUserMessage("Request to show hand cards", "Player " + grantingPlayer.getName() + " does not allow to request to show hand cards!");
                                 });
                             }
@@ -640,7 +644,7 @@ public class GameController implements GameCallback {
                 }
             } else {
                 // user can already see the cards
-                UserManager.instance.getUser(userIdRequester).ifPresent(requester -> {
+                managerFactory.userManager().getUser(userIdRequester).ifPresent(requester -> {
                     requester.showUserMessage("Request to show hand cards", "You can see already the hand cards of player " + grantingPlayer.getName() + '!');
                 });
 
@@ -653,9 +657,9 @@ public class GameController implements GameCallback {
         Player viewLimitedDeckPlayer = game.getPlayer(userIdRequester);
         if (viewLimitedDeckPlayer != null) {
             if (viewLimitedDeckPlayer.isHuman()) {
-                for (MatchPlayer p : TableManager.instance.getTable(tableId).getMatch().getPlayers()) {
+                for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
                     if (p.getPlayer().getId().equals(userIdRequester)) {
-                        Optional<User> u = UserManager.instance.getUser(origId);
+                        Optional<User> u = managerFactory.userManager().getUser(origId);
                         if (u.isPresent() && p.getDeck() != null) {
                             u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
                         }
@@ -698,8 +702,8 @@ public class GameController implements GameCallback {
         if (player != null) {
             String sb = player.getLogName()
                     + " has timed out (player had priority and was not active for "
-                    + ConfigSettings.instance.getMaxSecondsIdle() + " seconds ) - Auto concede.";
-            ChatManager.instance.broadcast(chatId, "", sb, MessageColor.BLACK, true, game, MessageType.STATUS, null);
+                    + managerFactory.configSettings().getMaxSecondsIdle() + " seconds ) - Auto concede.";
+            managerFactory.chatManager().broadcast(chatId, "", sb, MessageColor.BLACK, true, game, MessageType.STATUS, null);
             game.idleTimeout(playerId);
         }
     }
@@ -712,7 +716,7 @@ public class GameController implements GameCallback {
         for (final GameSessionWatcher gameWatcher : getGameSessionWatchers()) {
             gameWatcher.gameOver(message);
         }
-        TableManager.instance.endGame(tableId);
+        managerFactory.tableManager().endGame(tableId);
     }
 
     public UUID getSessionId() {
@@ -763,7 +767,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void endGameInfo() {
-        Table table = TableManager.instance.getTable(tableId);
+        Table table = managerFactory.tableManager().getTable(tableId);
         if (table != null) {
             if (table.getMatch() != null) {
                 for (final GameSessionPlayer gameSession : getGameSessions()) {
@@ -784,7 +788,7 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).choosePile(message, new CardsView(pile1), new CardsView(pile2)));
+        perform(playerId, playerId1 -> getGameSession(playerId1).choosePile(message, new CardsView(game, pile1), new CardsView(game, pile2)));
     }
 
     private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes, final String message) throws MageException {
@@ -1012,7 +1016,7 @@ public class GameController implements GameCallback {
         cancelTimeout();
         futureTimeout = timeoutIdleExecutor.schedule(
                 () -> idleTimeout(playerId),
-                Main.isTestMode() ? 3600 : ConfigSettings.instance.getMaxSecondsIdle(),
+                Main.isTestMode() ? 3600 : managerFactory.configSettings().getMaxSecondsIdle(),
                 TimeUnit.SECONDS
         );
     }
@@ -1094,7 +1098,7 @@ public class GameController implements GameCallback {
     }
 
     public boolean isAllowedToWatch(UUID userId) {
-        Optional<User> user = UserManager.instance.getUser(userId);
+        Optional<User> user = managerFactory.userManager().getUser(userId);
         if (user.isPresent()) {
             return !gameOptions.bannedUsers.contains(user.get().getName());
         }
@@ -1208,7 +1212,7 @@ public class GameController implements GameCallback {
     public String getPingsInfo() {
         List<String> usersInfo = new ArrayList<>();
         for (Map.Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
-            Optional<User> user = UserManager.instance.getUser(entry.getKey());
+            Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
             user.ifPresent(u -> usersInfo.add("* " + u.getName() + ": " + u.getPingInfo()));
         }
         Collections.sort(usersInfo);
@@ -1216,7 +1220,7 @@ public class GameController implements GameCallback {
 
         List<String> watchersinfo = new ArrayList<>();
         for (Map.Entry<UUID, GameSessionWatcher> entry : watchers.entrySet()) {
-            Optional<User> user = UserManager.instance.getUser(entry.getValue().userId);
+            Optional<User> user = managerFactory.userManager().getUser(entry.getValue().userId);
             user.ifPresent(u -> watchersinfo.add("* " + u.getName() + ": " + u.getPingInfo()));
         }
         Collections.sort(watchersinfo);

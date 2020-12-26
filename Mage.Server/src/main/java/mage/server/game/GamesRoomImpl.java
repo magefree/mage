@@ -1,12 +1,5 @@
-
 package mage.server.game;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -16,17 +9,20 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.players.PlayerType;
 import mage.server.RoomImpl;
-import mage.server.TableManager;
 import mage.server.User;
-import mage.server.UserManager;
-import mage.server.tournament.TournamentManager;
-import mage.server.util.ConfigSettings;
-import mage.server.util.ThreadExecutor;
+import mage.server.managers.ManagerFactory;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -40,9 +36,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private static List<MatchView> matchView = new ArrayList<>();
     private static List<RoomUsersView> roomUsersView = new ArrayList<>();
 
+    private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
-    public GamesRoomImpl() {
+    public GamesRoomImpl(ManagerFactory managerFactory) {
+        super(managerFactory.chatManager());
+        this.managerFactory = managerFactory;
         UPDATE_EXECUTOR.scheduleAtFixedRate(() -> {
             try {
                 update();
@@ -71,7 +70,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             } else {
                 // more since 50 matches finished since this match so removeUserFromAllTablesAndChat it
                 if (table.isTournament()) {
-                    TournamentManager.instance.removeTournament(table.getTournament().getId());
+                    managerFactory.tournamentManager().removeTournament(table.getTournament().getId());
                 }
                 this.removeTable(table.getId());
             }
@@ -79,7 +78,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         tableView = tableList;
         matchView = matchList;
         List<UsersView> users = new ArrayList<>();
-        for (User user : UserManager.instance.getUsers()) {
+        for (User user : managerFactory.userManager().getUsers()) {
             if (user.getUserState() != User.UserState.Offline && !user.getName().equals("Admin")) {
                 try {
                     users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
@@ -108,9 +107,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         users.sort((one, two) -> one.getUserName().compareToIgnoreCase(two.getUserName()));
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
         roomUserInfo.add(new RoomUsersView(users,
-                GameManager.instance.getNumberActiveGames(),
-                ThreadExecutor.instance.getActiveThreads(ThreadExecutor.instance.getGameExecutor()),
-                ConfigSettings.instance.getMaxGameThreads()
+                managerFactory.gameManager().getNumberActiveGames(),
+                managerFactory.threadExecutor().getActiveThreads(managerFactory.threadExecutor().getGameExecutor()),
+                managerFactory.configSettings().getMaxGameThreads()
         ));
         roomUsersView = roomUserInfo;
     }
@@ -123,7 +122,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     @Override
     public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (tables.containsKey(tableId)) {
-            return TableManager.instance.joinTable(userId, tableId, name, playerType, skill, deckList, password);
+            return managerFactory.tableManager().joinTable(userId, tableId, name, playerType, skill, deckList, password);
         } else {
             return false;
         }
@@ -131,7 +130,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public TableView createTable(UUID userId, MatchOptions options) {
-        Table table = TableManager.instance.createTable(this.getRoomId(), userId, options);
+        Table table = managerFactory.tableManager().createTable(this.getRoomId(), userId, options);
         tables.put(table.getId(), table);
         return new TableView(table);
     }
@@ -139,7 +138,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     @Override
     public boolean joinTournamentTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (tables.containsKey(tableId)) {
-            return TableManager.instance.joinTournament(userId, tableId, name, playerType, skill, deckList, password);
+            return managerFactory.tableManager().joinTournament(userId, tableId, name, playerType, skill, deckList, password);
         } else {
             return false;
         }
@@ -147,7 +146,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public TableView createTournamentTable(UUID userId, TournamentOptions options) {
-        Table table = TableManager.instance.createTournamentTable(this.getRoomId(), userId, options);
+        Table table = managerFactory.tableManager().createTournamentTable(this.getRoomId(), userId, options);
         tables.put(table.getId(), table);
         return new TableView(table);
     }
@@ -179,12 +178,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public void leaveTable(UUID userId, UUID tableId) {
-        TableManager.instance.leaveTable(userId, tableId);
+        managerFactory.tableManager().leaveTable(userId, tableId);
     }
 
     @Override
     public boolean watchTable(UUID userId, UUID tableId) throws MageException {
-        return TableManager.instance.watchTable(userId, tableId);
+        return managerFactory.tableManager().watchTable(userId, tableId);
     }
 
     @Override

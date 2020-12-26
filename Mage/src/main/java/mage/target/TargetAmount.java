@@ -6,10 +6,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Outcome;
 import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -52,10 +49,10 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean doneChosing() {
-        return amountWasSet 
-                && (remainingAmount == 0 
-                    || (getMinNumberOfTargets() < getMaxNumberOfTargets() 
-                        && getTargets().size() >= getMinNumberOfTargets()));
+        return amountWasSet
+                && (remainingAmount == 0
+                || (getMinNumberOfTargets() < getMaxNumberOfTargets()
+                && getTargets().size() >= getMinNumberOfTargets()));
     }
 
     @Override
@@ -100,14 +97,14 @@ public abstract class TargetAmount extends TargetImpl {
         }
         chosen = isChosen();
         while (remainingAmount > 0) {
-            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {                
+            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = isChosen();
         }
         return chosen = true;
     }
-    
+
     @Override
     public List<? extends TargetAmount> getTargetOptions(Ability source, Game game) {
         List<TargetAmount> options = new ArrayList<>();
@@ -115,21 +112,50 @@ public abstract class TargetAmount extends TargetImpl {
 
         addTargets(this, possibleTargets, options, source, game);
 
+        // debug target variations
+        //printTargetsVariations(possibleTargets, options);
+
         return options;
     }
 
-    protected void addTargets(TargetAmount target, Set<UUID> targets, List<TargetAmount> options, Ability source, Game game) {
+    private void printTargetsVariations(Set<UUID> possibleTargets, List<TargetAmount> options) {
+        // debug target variations
+        // permanent index + amount
+        // example: 7 -> 2; 8 -> 3; 9 -> 1
+        List<UUID> list = new ArrayList<>(possibleTargets);
+        HashMap<UUID, Integer> targetNumbers = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            targetNumbers.put(list.get(i), i);
+        }
+        List<String> res = options
+                .stream()
+                .map(t -> t.getTargets()
+                        .stream()
+                        .map(id -> targetNumbers.get(id) + " -> " + t.getTargetAmount(id))
+                        .sorted()
+                        .collect(Collectors.joining("; ")))
+                .collect(Collectors.toList());
+        Collections.sort(res);
+        System.out.println();
+        System.out.println(res.stream().collect(Collectors.joining("\n")));
+        System.out.println();
+    }
+
+    protected void addTargets(TargetAmount target, Set<UUID> possibleTargets, List<TargetAmount> options, Ability source, Game game) {
         if (!amountWasSet) {
             setAmount(source, game);
         }
-        for (UUID targetId : targets) {
+        Set<UUID> usedTargets = new HashSet<>();
+        for (UUID targetId : possibleTargets) {
+            usedTargets.add(targetId);
             for (int n = 1; n <= target.remainingAmount; n++) {
                 TargetAmount t = target.copy();
                 t.addTarget(targetId, n, source, game, true);
                 if (t.remainingAmount > 0) {
-                    if (targets.size() > 1) {
-                        Set<UUID> newTargets = targets.stream().filter(newTarget -> !newTarget.equals(targetId)).collect(Collectors.toSet());
-                        addTargets(t, newTargets, options, source, game);
+                    if (possibleTargets.size() > 1) {
+                        // don't use that target again
+                        Set<UUID> newPossibleTargets = possibleTargets.stream().filter(newTarget -> !usedTargets.contains(newTarget)).collect(Collectors.toSet());
+                        addTargets(t, newPossibleTargets, options, source, game);
                     }
                 } else {
                     options.add(t);

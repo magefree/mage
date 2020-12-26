@@ -14,6 +14,12 @@ import mage.game.permanent.Permanent;
  */
 public class LandwalkAbility extends EvasionAbility {
 
+    /**
+     * Don't use source related filters here (example: landwalk for user selected land type).
+     * If you want it then use workaround from Traveler's Cloak to transfer settings after gain
+     *
+     * @param filter
+     */
     public LandwalkAbility(FilterLandPermanent filter) {
         this(filter, true);
     }
@@ -39,7 +45,6 @@ public class LandwalkAbility extends EvasionAbility {
         }
         return ruleText;
     }
-
 }
 
 class LandwalkEffect extends RestrictionEffect {
@@ -59,7 +64,7 @@ class LandwalkEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (game.getBattlefield().contains(filter, blocker.getControllerId(), 1, game)
+        if (game.getBattlefield().contains(filter, source.getSourceId(), blocker.getControllerId(), game, 1)
                 && null == game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_LANDWALK, source, blocker.getControllerId(), game)) {
             switch (filter.getMessage()) {
                 case "plains":
@@ -74,7 +79,6 @@ class LandwalkEffect extends RestrictionEffect {
                     return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_FORESTWALK, source, blocker.getControllerId(), game);
                 default:
                     return false;
-
             }
         }
         return true;

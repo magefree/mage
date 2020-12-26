@@ -1,5 +1,3 @@
-
-
 package mage.server.draft;
 
 import mage.MageException;
@@ -9,10 +7,8 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.players.Player;
-import mage.server.TableManager;
-import mage.server.UserManager;
 import mage.server.game.GameController;
-import mage.server.util.ThreadExecutor;
+import mage.server.managers.ManagerFactory;
 import mage.view.DraftPickView;
 import org.apache.log4j.Logger;
 
@@ -25,7 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftController {
@@ -33,6 +28,7 @@ public class DraftController {
     private static final Logger logger = Logger.getLogger(GameController.class);
     public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
+    private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();
     private final ConcurrentMap<UUID, UUID> userPlayerMap;
     private final UUID draftSessionId;
@@ -40,7 +36,8 @@ public class DraftController {
     private final UUID tableId;
     private final UUID markedCard;
 
-    public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+    public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+        this.managerFactory = managerFactory;
         draftSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         this.draft = draft;
@@ -61,8 +58,7 @@ public class DraftController {
                                 endDraft();
                                 break;
                         }
-                    }
-                    catch (MageException ex) {
+                    } catch (MageException ex) {
                         logger.fatal("Table event listener error", ex);
                     }
                 }
@@ -75,13 +71,12 @@ public class DraftController {
                                 pickCard(event.getPlayerId(), event.getMax());
                                 break;
                         }
-                    }
-                    catch (MageException ex) {
+                    } catch (MageException ex) {
                         logger.fatal("Table event listener error", ex);
                     }
                 }
         );
-        for (DraftPlayer player: draft.getPlayers()) {
+        for (DraftPlayer player : draft.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
                 logger.debug("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
@@ -96,13 +91,13 @@ public class DraftController {
 
     public void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
-        DraftSession draftSession = new DraftSession(draft, userId, playerId);
+        DraftSession draftSession = new DraftSession(managerFactory, draft, userId, playerId);
         draftSessions.put(playerId, draftSession);
-        UserManager.instance.getUser(userId).ifPresent(user-> {
-                    user.addDraft(playerId, draftSession);
-                    logger.debug("User " + user.getName() + " has joined draft " + draft.getId());
-                    draft.getPlayer(playerId).setJoined();
-                });
+        managerFactory.userManager().getUser(userId).ifPresent(user -> {
+            user.addDraft(playerId, draftSession);
+            logger.debug("User " + user.getName() + " has joined draft " + draft.getId());
+            draft.getPlayer(playerId).setJoined();
+        });
         checkStart();
     }
 
@@ -114,7 +109,7 @@ public class DraftController {
     }
 
     public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
-        if (draft.replacePlayer(oldPlayer, newPlayer)) {            
+        if (draft.replacePlayer(oldPlayer, newPlayer)) {
             DraftSession draftSession = draftSessions.get(oldPlayer.getId());
             if (draftSession != null) {
                 draftSession.draftOver(); // closes the draft panel of the replaced player
@@ -128,12 +123,12 @@ public class DraftController {
     private synchronized void checkStart() {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
-            ThreadExecutor.instance.getCallExecutor().execute(this::startDraft);
+            managerFactory.threadExecutor().getCallExecutor().execute(this::startDraft);
         }
     }
 
     private void startDraft() {
-        for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+        for (final Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
             if (!entry.getValue().init()) {
                 logger.fatal("Unable to initialize client for playerId " + entry.getKey());
                 //TODO: generate client error message
@@ -147,7 +142,7 @@ public class DraftController {
         if (!draft.allJoined()) {
             return false;
         }
-        for (DraftPlayer player: draft.getPlayers()) {
+        for (DraftPlayer player : draft.getPlayers()) {
             if (player.getPlayer().isHuman() && !draftSessions.containsKey(player.getPlayer().getId())) {
                 return false;
             }
@@ -160,12 +155,12 @@ public class DraftController {
     }
 
     private void endDraft() throws MageException {
-        for (final DraftSession draftSession: draftSessions.values()) {
+        for (final DraftSession draftSession : draftSessions.values()) {
             draftSession.draftOver();
             draftSession.removeDraft();
         }
-        TableManager.instance.endDraft(tableId, draft);
-        DraftManager.instance.removeDraft(draft.getId());
+        managerFactory.tableManager().endDraft(tableId, draft);
+        managerFactory.draftManager().removeDraft(draft.getId());
     }
 
     public void kill(UUID userId) {
@@ -210,7 +205,7 @@ public class DraftController {
     }
 
     private synchronized void updateDraft() throws MageException {
-        for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+        for (final Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
             entry.getValue().update();
         }
     }
@@ -229,7 +224,7 @@ public class DraftController {
         draft.setAbort(true);
         try {
             endDraft();
-        } catch(MageException ex) {
+        } catch (MageException ex) {
 
         }
     }
