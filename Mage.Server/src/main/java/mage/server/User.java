@@ -10,14 +10,13 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
-import mage.server.game.GameManager;
 import mage.server.game.GameSessionPlayer;
+import mage.server.managers.ManagerFactory;
 import mage.server.rating.GlickoRating;
 import mage.server.rating.GlickoRatingSystem;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentController;
-import mage.server.tournament.TournamentManager;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
@@ -43,6 +42,7 @@ public class User {
         Offline // set if the user was disconnected and expired or regularly left XMage. Removed is the user later after some time
     }
 
+    private final ManagerFactory managerFactory;
     private final UUID userId;
     private final String userName;
     private final String host;
@@ -68,7 +68,8 @@ public class User {
     private String clientVersion;
     private String userIdStr;
 
-    public User(String userName, String host, AuthorizedUser authorizedUser) {
+    public User(ManagerFactory managerFactory, String userName, String host, AuthorizedUser authorizedUser) {
+        this.managerFactory = managerFactory;
         this.userId = UUID.randomUUID();
         this.userName = userName;
         this.host = host;
@@ -181,7 +182,7 @@ public class User {
         // Because watched games don't get restored after reconnection call stop watching
         for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext(); ) {
             UUID gameId = iterator.next();
-            GameManager.instance.stopWatching(gameId, userId);
+            managerFactory.gameManager().stopWatching(gameId, userId);
             iterator.remove();
         }
         ServerMessagesUtil.instance.incLostConnection();
@@ -227,7 +228,7 @@ public class User {
 
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            SessionManager.instance.getSession(sessionId).ifPresent(session
+            managerFactory.sessionManager().getSession(sessionId).ifPresent(session
                     -> session.fireCallback(call)
             );
         }
@@ -288,27 +289,27 @@ public class User {
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
         lastActivity = new Date();
-        GameManager.instance.sendPlayerUUID(gameId, userId, data);
+        managerFactory.gameManager().sendPlayerUUID(gameId, userId, data);
     }
 
     public void sendPlayerString(final UUID gameId, final String data) {
         lastActivity = new Date();
-        GameManager.instance.sendPlayerString(gameId, userId, data);
+        managerFactory.gameManager().sendPlayerString(gameId, userId, data);
     }
 
     public void sendPlayerManaType(final UUID gameId, final UUID playerId, final ManaType data) {
         lastActivity = new Date();
-        GameManager.instance.sendPlayerManaType(gameId, playerId, userId, data);
+        managerFactory.gameManager().sendPlayerManaType(gameId, playerId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data) {
         lastActivity = new Date();
-        GameManager.instance.sendPlayerBoolean(gameId, userId, data);
+        managerFactory.gameManager().sendPlayerBoolean(gameId, userId, data);
     }
 
     public void sendPlayerInteger(final UUID gameId, final Integer data) {
         lastActivity = new Date();
-        GameManager.instance.sendPlayerInteger(gameId, userId, data);
+        managerFactory.gameManager().sendPlayerInteger(gameId, userId, data);
     }
 
     public void updateLastActivity(String pingInfo) {
@@ -338,7 +339,7 @@ public class User {
         }
         for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext(); ) {
             Entry<UUID, UUID> next = iterator.next();
-            Optional<TournamentController> tournamentController = TournamentManager.instance.getTournamentController(next.getValue());
+            Optional<TournamentController> tournamentController = managerFactory.tournamentManager().getTournamentController(next.getValue());
             if (tournamentController.isPresent()) {
                 ccTournamentStarted(next.getValue(), next.getKey());
                 tournamentController.get().rejoin(next.getKey());
@@ -349,7 +350,7 @@ public class User {
         for (Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
             ccGameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
-            GameManager.instance.sendPlayerString(entry.getValue().getGameId(), userId, "");
+            managerFactory.gameManager().sendPlayerString(entry.getValue().getGameId(), userId, "");
         }
 
         for (Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
@@ -362,7 +363,7 @@ public class User {
             entry.getValue().construct(0); // TODO: Check if this is correct
         }
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
-            Optional<TableController> controller = TableManager.instance.getController(entry.getKey());
+            Optional<TableController> controller = managerFactory.tableManager().getController(entry.getKey());
             if (controller.isPresent()) {
                 ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
             } else {
@@ -427,32 +428,32 @@ public class User {
         draftSessions.clear();
         logger.trace("REMOVE " + userName + " Tournament sessions " + userTournaments.size());
         for (UUID tournamentId : userTournaments.values()) {
-            TournamentManager.instance.quit(tournamentId, userId);
+            managerFactory.tournamentManager().quit(tournamentId, userId);
         }
         userTournaments.clear();
         constructing.clear();
         logger.trace("REMOVE " + userName + " Tables " + tables.size());
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
-            TableManager.instance.leaveTable(userId, entry.getValue().getId());
+            managerFactory.tableManager().leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
         sideboarding.clear();
         logger.trace("REMOVE " + userName + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
-            GameManager.instance.quitMatch(gameSessionPlayer.getGameId(), userId);
+            managerFactory.gameManager().quitMatch(gameSessionPlayer.getGameId(), userId);
             gameSessionPlayer.quitGame();
         }
         gameSessions.clear();
         logger.trace("REMOVE " + userName + " watched Games " + watchedGames.size());
         for (Iterator<UUID> it = watchedGames.iterator(); it.hasNext(); ) { // Iterator to prevent ConcurrentModificationException
             UUID gameId = it.next();
-            GameManager.instance.stopWatching(gameId, userId);
+            managerFactory.gameManager().stopWatching(gameId, userId);
         }
         watchedGames.clear();
         logger.trace("REMOVE " + userName + " Chats ");
-        ChatManager.instance.removeUser(userId, reason);
+        managerFactory.chatManager().removeUser(userId, reason);
     }
 
     public void setUserData(UserData userData) {
@@ -788,7 +789,7 @@ public class User {
             if (table.getState() == TableState.FINISHED) {
                 number++;
             } else {
-                Optional<TableController> tableController = TableManager.instance.getController(table.getId());
+                Optional<TableController> tableController = managerFactory.tableManager().getController(table.getId());
                 if (!tableController.isPresent()) {
                     logger.error("table not found : " + table.getId());
                 } else if (tableController.get().isUserStillActive(userId)) {

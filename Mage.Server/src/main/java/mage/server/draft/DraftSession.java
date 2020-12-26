@@ -1,5 +1,14 @@
-
 package mage.server.draft;
+
+import mage.game.draft.Draft;
+import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
+import mage.server.User;
+import mage.server.managers.ManagerFactory;
+import mage.view.DraftClientMessage;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
+import org.apache.log4j.Logger;
 
 import java.rmi.RemoteException;
 import java.util.Optional;
@@ -8,16 +17,6 @@ import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import mage.game.draft.Draft;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
-import mage.server.User;
-import mage.server.UserManager;
-import mage.server.util.ThreadExecutor;
-import mage.view.DraftClientMessage;
-import mage.view.DraftPickView;
-import mage.view.DraftView;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -26,6 +25,7 @@ public class DraftSession {
 
     protected static final Logger logger = Logger.getLogger(DraftSession.class);
 
+    private final ManagerFactory managerFactory;
     protected final UUID userId;
     protected final UUID playerId;
     protected final Draft draft;
@@ -33,9 +33,11 @@ public class DraftSession {
     protected UUID markedCard;
 
     private ScheduledFuture<?> futureTimeout;
-    protected static final ScheduledExecutorService timeoutExecutor = ThreadExecutor.instance.getTimeoutExecutor();
+    protected final ScheduledExecutorService timeoutExecutor;
 
-    public DraftSession(Draft draft, UUID userId, UUID playerId) {
+    public DraftSession(ManagerFactory managerFactory, Draft draft, UUID userId, UUID playerId) {
+        this.managerFactory = managerFactory;
+        this.timeoutExecutor = managerFactory.threadExecutor().getTimeoutExecutor();
         this.userId = userId;
         this.draft = draft;
         this.playerId = playerId;
@@ -44,12 +46,12 @@ public class DraftSession {
 
     public boolean init() {
         if (!killed) {
-            Optional<User> user = UserManager.instance.getUser(userId);
+            Optional<User> user = managerFactory.userManager().getUser(userId);
             if (user.isPresent()) {
                 if (futureTimeout != null && !futureTimeout.isDone()) {
                     int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
                     user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
-                        new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
+                            new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
                 }
                 return true;
             }
@@ -59,16 +61,16 @@ public class DraftSession {
 
     public void update() {
         if (!killed) {
-            UserManager.instance
+            managerFactory.userManager()
                     .getUser(userId).
                     ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(),
-                        new DraftClientMessage(getDraftView(), null))));
+                            new DraftClientMessage(getDraftView(), null))));
         }
     }
 
     public void draftOver() {
         if (!killed) {
-            UserManager.instance
+            managerFactory.userManager()
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_OVER, draft.getId())));
         }
@@ -77,10 +79,10 @@ public class DraftSession {
     public void pickCard(int timeout) {
         if (!killed) {
             setupTimeout(timeout);
-            UserManager.instance
+            managerFactory.userManager()
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
-                        new DraftClientMessage(getDraftView(), getDraftPickView(timeout)))));
+                            new DraftClientMessage(getDraftView(), getDraftPickView(timeout)))));
 
         }
     }
@@ -89,7 +91,7 @@ public class DraftSession {
         cancelTimeout();
         if (seconds > 0) {
             futureTimeout = timeoutExecutor.schedule(
-                    () -> DraftManager.instance.timeout(draft.getId(), userId),
+                    () -> managerFactory.draftManager().timeout(draft.getId(), userId),
                     seconds, TimeUnit.SECONDS
             );
         }
@@ -103,7 +105,7 @@ public class DraftSession {
 
     protected void handleRemoteException(RemoteException ex) {
         logger.fatal("DraftSession error ", ex);
-        DraftManager.instance.kill(draft.getId(), userId);
+        managerFactory.draftManager().kill(draft.getId(), userId);
     }
 
     public void setKilled() {
@@ -119,7 +121,7 @@ public class DraftSession {
     }
 
     public void removeDraft() {
-        UserManager.instance.getUser(userId).ifPresent(user -> user.removeDraft(playerId));
+        managerFactory.userManager().getUser(userId).ifPresent(user -> user.removeDraft(playerId));
 
     }
 
