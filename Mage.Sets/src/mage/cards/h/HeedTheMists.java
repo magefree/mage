@@ -57,7 +57,7 @@ public final class HeedTheMists extends CardImpl {
                     .stream()
                     .mapToInt(MageObject::getConvertedManaCost)
                     .sum();
-            controller.drawCards(totalCMC, source.getSourceId(), game);
+            controller.drawCards(totalCMC, source, game);
             return true;
         }
 
