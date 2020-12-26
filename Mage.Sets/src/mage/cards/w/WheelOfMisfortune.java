@@ -70,12 +70,12 @@ class WheelOfMisfortuneEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            game.informPlayers(player.getName() + " chose " + playerMap);
+            game.informPlayers(player.getName() + " chose " + entry.getValue());
         }
         int maxValue = playerMap.values().stream().mapToInt(x -> x).max().orElse(0);
         game.informPlayers("The highest number chosen was " + maxValue);
         int minValue = playerMap.values().stream().mapToInt(x -> x).min().orElse(0);
-        game.informPlayers("The lowest number chosen was " + maxValue);
+        game.informPlayers("The lowest number chosen was " + minValue);
         for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
             if (player == null) {
