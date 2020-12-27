@@ -8,8 +8,8 @@ public enum PlayerType {
     COMPUTER_DRAFT_BOT("Computer - draftbot"),
     COMPUTER_MINIMAX_HYBRID("Computer - minimax hybrid"),
     COMPUTER_MONTE_CARLO("Computer - monte carlo"),
-    COMPUTER_MAD("Computer - mad");
-
+    COMPUTER_MAD("Computer - mad"),
+    COMPUTER_RL("Computer - RL");
     String description;
 
     PlayerType(String description) {

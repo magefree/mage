@@ -70,6 +70,7 @@
         <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
         <playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>
         <playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
+        <playerType name="Computer - RL" jar="mage-player-ai-rl.jar" className="mage.player.ai.RLPlayer"/>
     </playerTypes>
     <gameTypes>
         <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>

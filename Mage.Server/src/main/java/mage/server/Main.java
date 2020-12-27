@@ -382,7 +382,10 @@ public final class Main {
 
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
+            File pluginFile=new File(pluginFolder, plugin.getJar());
+            //Note-this line of code will not load modlures from Mage.Server.Plugins,
+            //the modules must be added to the Mage.Server pom.xml
+            classLoader.addURL(pluginFile.toURI().toURL());
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
