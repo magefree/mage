@@ -47,6 +47,7 @@ public final class Commander2017Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodforged Battle-Axe", 50, Rarity.RARE, mage.cards.b.BloodforgedBattleAxe.class));
         cards.add(new SetCardInfo("Bloodhusk Ritualist", 101, Rarity.UNCOMMON, mage.cards.b.BloodhuskRitualist.class));
         cards.add(new SetCardInfo("Bloodline Necromancer", 14, Rarity.UNCOMMON, mage.cards.b.BloodlineNecromancer.class));
+        cards.add(new SetCardInfo("Bloodlord of Vaasgoth", 102, Rarity.MYTHIC, mage.cards.b.BloodlordOfVaasgoth.class));
         cards.add(new SetCardInfo("Bloodsworn Steward", 22, Rarity.RARE, mage.cards.b.BloodswornSteward.class));
         cards.add(new SetCardInfo("Blossoming Sands", 237, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Body Double", 83, Rarity.RARE, mage.cards.b.BodyDouble.class));
@@ -84,6 +85,7 @@ public final class Commander2017Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Curse of Verbosity", 9, Rarity.UNCOMMON, mage.cards.c.CurseOfVerbosity.class));
         cards.add(new SetCardInfo("Curse of Vitality", 3, Rarity.UNCOMMON, mage.cards.c.CurseOfVitality.class));
         cards.add(new SetCardInfo("Damnable Pact", 108, Rarity.RARE, mage.cards.d.DamnablePact.class));
+        cards.add(new SetCardInfo("Dark Impostor", 109, Rarity.RARE, mage.cards.d.DarkImpostor.class));
         cards.add(new SetCardInfo("Darksteel Ingot", 207, Rarity.UNCOMMON, mage.cards.d.DarksteelIngot.class));
         cards.add(new SetCardInfo("Deathbringer Regent", 110, Rarity.RARE, mage.cards.d.DeathbringerRegent.class));
         cards.add(new SetCardInfo("Decree of Pain", 111, Rarity.RARE, mage.cards.d.DecreeOfPain.class));
