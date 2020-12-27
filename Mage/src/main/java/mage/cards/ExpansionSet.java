@@ -436,7 +436,7 @@ public abstract class ExpansionSet implements Serializable {
             addToBooster(booster, commons);
         }
 
-        if (numSpecialCommons > 0) { // e.g. used to conditionaly replace common cards in the booster
+        if (numSpecialCommons > 0) { // e.g. used to conditionally replace common cards in the booster
             addSpecialCommon(booster, numSpecialCommons);
         }
 
