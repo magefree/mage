@@ -1,7 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,14 +9,16 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.PartnerAbility;
-import mage.constants.*;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -40,7 +40,7 @@ public final class HalanaKessigRanger extends CardImpl {
         // Whenever another creature enters the battlefield under your control, you may pay {2}. When you do, that creature deals damage equal to its power to target creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DoIfCostPaid(new HalanaKessigRangerTriggerEffect(), new GenericManaCost(2)),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT_TARGET,
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT,
                 "Whenever another creature enters the battlefield under your control, you may pay {2}. " +
                         "When you do, that creature deals damage equal to its power to target creature."
         ));

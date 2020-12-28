@@ -1,8 +1,6 @@
-
 package mage.constants;
 
 /**
- *
  * @author LevelX2
  */
 public enum SetTargetPointer {

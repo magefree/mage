@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -92,11 +91,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {
-                        case PERMANENT:
-                            effect.setTargetPointer(new FixedTarget(permanent, game));
-                            break;
                         case PLAYER:
                             effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                            break;
+                        case PERMANENT:
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
                             break;
                     }
                 }
