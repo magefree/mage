@@ -79,7 +79,7 @@ import ch.qos.logback.classic.Logger;
 public class RLLearner implements Serializable{
     //private static final Logger logger = Logger.getLogger(RLLearner.class);
     static final long serialVersionUID=1L;
-    protected LinkedList<GameSequence> games;
+    public transient LinkedList<GameSequence> games; //Save seperately because it is big
     public transient CollectScoresIterationListener losses;
     private double epsilon=.5f; //For epsilon greedy learning. Set to 0 for evaluation
     protected boolean evaluateMode; //Sets mode to testing, no experience should be collected  

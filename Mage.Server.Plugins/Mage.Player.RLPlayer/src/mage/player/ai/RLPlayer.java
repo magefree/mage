@@ -26,6 +26,11 @@ import org.apache.log4j.Logger;
 import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
+import java.io.*;
+
+import org.deeplearning4j.nn.graph.ComputationGraph;
+import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
+import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 /**
  * uses a reinforcement learning based AI
  *
@@ -35,12 +40,84 @@ import mage.player.ai.RLAgent.*;
 public class RLPlayer extends RandomPlayer{
     public RLLearner learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
+    public RLPlayer(String name, RangeOfInfluence range, int skill){
+        super(name);
+        learner=loadLearner("default",false);
+    }
     public RLPlayer(String name,RLLearner inLearner) {  
         super(name);
         learner=inLearner;
     }
     public RLPlayer(final RLPlayer player) {
         super(player);   
+    }
+    private static String getPath(String subpath){
+        File jarFile = new File(RLPlayer.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        File file = new File(jarFile.getParentFile().getParent(), subpath);
+        file.getParentFile().mkdirs();
+        logger.info(file.getAbsolutePath());
+        return file.getAbsolutePath();
+    }
+    public static String getDataLoc(String fileName){
+        return getPath("models/"+fileName+"-data.ser");
+    }
+    public static String getClassLoc(String fileName){
+        return getPath("models/"+fileName+"-class.ser");
+    }
+    public static String getModelLoc(String fileName){
+        return getPath("models/"+fileName+"-model.zip");
+    }
+    public static void saveLearner(RLLearner learner,String loc){
+        try {
+            FileOutputStream fileClassOut =new FileOutputStream(getClassLoc(loc));
+            ObjectOutputStream classOut = new ObjectOutputStream(fileClassOut);
+            FileOutputStream fileDataOut =new FileOutputStream(getDataLoc(loc));
+            ObjectOutputStream dataOut = new ObjectOutputStream(fileDataOut);
+            classOut.writeObject(learner);
+            classOut.close();
+            fileClassOut.close();
+            dataOut.writeObject(learner.games);
+            dataOut.close();
+            fileDataOut.close();
+            File locationToSaveGraph = new File(getModelLoc(loc));
+            learner.model.save(locationToSaveGraph, true);
+            System.out.printf("Serialized data is saved in "+loc+"\n");
+         } catch (IOException i) {
+            i.printStackTrace();
+         }
+    }
+    public static RLLearner loadLearner(String loc,boolean load_data){
+        try {
+            FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
+            FileInputStream fileDataIn = new FileInputStream(getDataLoc(loc));
+            ObjectInputStream classIn = new ObjectInputStream(fileClassIn);
+            ObjectInputStream dataIn = new ObjectInputStream(fileDataIn);
+            Object read=classIn.readObject();
+            RLLearner learner = (RLLearner) read;
+            if(load_data){
+                learner.games=(LinkedList<GameSequence>) dataIn.readObject();
+            } else{
+                learner.games=new LinkedList<GameSequence>();
+            }
+            classIn.close();
+            fileClassIn.close();
+            dataIn.close();
+            fileDataIn.close();
+            //logger.info("loading model...");
+            learner.model=ComputationGraph.load(new File(getModelLoc(loc)),true);
+            CollectScoresIterationListener listener=new CollectScoresIterationListener(1);
+            learner.model.setListeners(listener);
+            learner.losses=listener;
+            //logger.info("loaded model");
+            return learner;
+         } catch (IOException i) {
+            i.printStackTrace();
+            return null;
+         } catch (ClassNotFoundException c) {
+            System.out.println("RLLearner class not found");
+            c.printStackTrace();
+            return null;
+         }
     }
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;

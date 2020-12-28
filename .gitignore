@@ -95,6 +95,9 @@ Mage.Verify/db
 # Logs rotation
 *.log.*
 
+#RL learner models
+Mage.Server.Plugins/Mage.Player.RLPlayer/models
+
 # Utils
 releases
 Utils/author.txt
