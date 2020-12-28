@@ -110,7 +110,11 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
 
     @Test
     public void test_PlayerLeaveGameWithOwnPermanentAndCustomEffect() {
-        prepareAndRunLeaveGameWithLongEffectTest(Duration.Custom);
+        // Using Custom duration without implementing specific duration rules makes no sense
+        // This conflicts rule 800.4a (only any effects which give that player control of any objects or players end.)
+        // See PlayerLeftGameRangeAllTest.TestContinuousEffectStaysAfterCreatingPlayerLeft as example why custom effects may not end, if the source permanent of the effect leaves the game
+        
+        // prepareAndRunLeaveGameWithLongEffectTest(Duration.Custom);
     }
 
     @Test

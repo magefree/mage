@@ -1,5 +1,6 @@
 package org.mage.test.multiplayer;
 
+import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -12,8 +13,6 @@ import mage.game.mulligan.MulliganType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
-
-import java.io.FileNotFoundException;
 
 /**
  * @author LevelX2
@@ -405,7 +404,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        Assert.assertFalse("Player D is no longer in the game", playerA.isInGame());
+        Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
         assertLife(playerA, 2);
 
         assertPermanentCount(playerD, "Juggernaut", 1);
@@ -418,4 +417,61 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
 
     }
 
+    /**
+     * https://github.com/magefree/mage/issues/6997
+       Some continuous effects should stay in play even after the player that set them leaves the game. 
+       Example: 
+       * Player A: Casts Vorinclex, Voice of Hunger 
+       * Player D: Taps all lands and do stuff (lands shouldn't untap during his next untap step)     
+       * Player C: Kills Player A Player D: Lands untapped normally, though they shouldn't
+       * 
+       * This happened playing commander against 3 AIs. One of the AIs played Vorinclex, I tapped all my lands during my turn to do stuff. 
+       * Next AI killed the one that had Vorinclex. When the game got to my turn, my lands untapped normally.
+     */
+    @Test
+    public void TestContinuousEffectStaysAfterCreatingPlayerLeft() {
+        // Player order: A -> D -> C -> B
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
+        // Trample
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
+        // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
+        addCard(Zone.HAND, playerA, "Vorinclex, Voice of Hunger"); // Creature 7/6  {6}{G}{G}
+
+        addCard(Zone.HAND, playerD, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerD, "Plains", 2);
+
+        addCard(Zone.HAND, playerC, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Mountain", 1);
+
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vorinclex, Voice of Hunger");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
+
+        setChoice(playerA, "Whenever an opponent taps a land for mana");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Lightning Bolt", playerA);
+
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
+        
+        execute();
+
+        assertAllCommandsUsed();
+        
+        assertPermanentCount(playerD, "Silvercoat Lion", 1);
+        
+        assertGraveyardCount(playerC, "Lightning Bolt", 1);
+        
+        Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
+
+        Assert.assertTrue("Player D is the active player",currentGame.getActivePlayerId().equals(playerD.getId()));
+        
+        assertTappedCount("Plains", true, 2); // Do not untap because of Vorinclex do not untap effect
+
+    }
+
+    
 }
