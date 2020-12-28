@@ -2668,8 +2668,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             LibrarySearchedEvent searchedEvent = new LibrarySearchedEvent(targetPlayer.getId(), source, searchingPlayer.getId(), target);
-            if (game.replaceEvent(searchedEvent)) {
-                return false;
+            if (!game.replaceEvent(searchedEvent)) {
+                game.fireEvent(searchedEvent);
             }
             break;
         } while (true);
