@@ -508,7 +508,7 @@ public class TableController {
         }
         if (playerOpt.isPresent()) {
             Player player = playerOpt.get();
-            logger.trace("Player " + player.getName() + " created id: " + player.getId());
+            logger.info("Player " + player.getName() + " created id: " + player.getId());
         }
         return playerOpt;
     }

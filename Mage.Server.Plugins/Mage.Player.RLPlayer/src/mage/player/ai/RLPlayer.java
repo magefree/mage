@@ -21,6 +21,7 @@ import mage.target.TargetCard;
 import mage.util.RandomUtil;
 
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.*;
 import org.apache.log4j.Logger;
 import mage.player.ai.RLAgent.*;
@@ -40,9 +41,12 @@ import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 public class RLPlayer extends RandomPlayer{
     public RLLearner learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
-    public RLPlayer(String name, RangeOfInfluence range, int skill){
+    public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
         learner=loadLearner("default",false);
+        if(Objects.isNull(learner)){
+            logger.warn("learner is null");
+        }
     }
     public RLPlayer(String name,RLLearner inLearner) {  
         super(name);
@@ -51,21 +55,27 @@ public class RLPlayer extends RandomPlayer{
     public RLPlayer(final RLPlayer player) {
         super(player);   
     }
-    private static String getPath(String subpath){
-        File jarFile = new File(RLPlayer.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-        File file = new File(jarFile.getParentFile().getParent(), subpath);
-        file.getParentFile().mkdirs();
-        logger.info(file.getAbsolutePath());
-        return file.getAbsolutePath();
+    private static String getPath(String fileName,String tail){
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "xmage-models",fileName+tail);
+        try{
+            Files.createDirectories(path.getParent());
+        }
+        catch(IOException e){
+            System.err.println("Failed to create directory!" + e.getMessage());
+        }
+        
+        logger.info(path.toString());
+        return path.toString();
     }
     public static String getDataLoc(String fileName){
-        return getPath("models/"+fileName+"-data.ser");
+        return getPath(fileName,"-data.ser");
     }
     public static String getClassLoc(String fileName){
-        return getPath("models/"+fileName+"-class.ser");
+        return getPath(fileName,"-class.ser");
     }
     public static String getModelLoc(String fileName){
-        return getPath("models/"+fileName+"-model.zip");
+        return getPath(fileName,"-model.zip");
     }
     public static void saveLearner(RLLearner learner,String loc){
         try {

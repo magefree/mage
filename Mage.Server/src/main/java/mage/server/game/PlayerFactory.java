@@ -35,6 +35,7 @@ public enum PlayerFactory {
                 logger.fatal("Unknown player type: " + playerType);
             }
         } catch (Exception ex) {
+            System.out.println("Playerfactory error"+ex);
             logger.fatal("PlayerFactory error ", ex);
         }
         return Optional.empty();
