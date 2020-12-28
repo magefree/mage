@@ -22,6 +22,8 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.List;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  * @author spjspj
@@ -61,7 +63,12 @@ class MomirEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = source.getManaCostsToPay().getX();
-
+        if (game.isSimulation()) {
+            // Create dummy token to prevent multiple DB find cards what causes H2 java.lang.IllegalStateException if AI cancels calculation because of time out
+            Token token = new CreatureToken(value, value +1);
+            token.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
+            return true;
+        }
         // should this be random across card names
         CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).convertedManaCost(value);
         List<CardInfo> options = CardRepository.instance.findCards(criteria);
