@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -65,8 +66,25 @@ class EmberwildeCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getDefenders().contains(getControllerId())
-                && getSourceId().equals(game.getMonarchId());
+        Player player = game.getPlayer(this.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        // controller must be monarch
+        if (!player.getId().equals(game.getMonarchId())) {
+            return false;
+        }
+
+        for (UUID attacker : game.getCombat().getAttackers()) {
+            Permanent creature = game.getPermanent(attacker);
+            if (creature != null
+                    && player.hasOpponent(creature.getControllerId(), game)
+                    && player.getId().equals(game.getCombat().getDefendingPlayerId(attacker, game))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
