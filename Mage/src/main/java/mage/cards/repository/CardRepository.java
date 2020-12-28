@@ -482,6 +482,13 @@ public enum CardRepository {
         return Collections.emptyList();
     }
 
+    /**
+     * Warning, don't use db functions in card's code - it generate heavy db loading in AI simulations. If you
+     * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
+     *
+     * @param criteria
+     * @return
+     */
     public List<CardInfo> findCards(CardCriteria criteria) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
