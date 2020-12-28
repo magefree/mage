@@ -50,7 +50,7 @@ public class TrainRLPlayer extends MageTestBase {
         String loc="default";
         
         //learner=loadLearner(loc);
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4000; i++) {
             logger.info("Playing game: " + i);
             netwins+=playOneGame(learner);
             for(int j=0;j<5;j++){
@@ -64,6 +64,9 @@ public class TrainRLPlayer extends MageTestBase {
             }
             if(i==2000){
                 learner.setEpsilon(.1f);
+            }
+            if(i==3000){
+                learner.setEpsilon(.0f);
             }
         }
         RLPlayer.saveLearner(learner, loc);

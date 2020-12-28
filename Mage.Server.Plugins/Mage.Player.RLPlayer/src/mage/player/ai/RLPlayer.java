@@ -96,7 +96,7 @@ public class RLPlayer extends RandomPlayer{
             i.printStackTrace();
          }
     }
-    public static RLLearner loadLearner(String loc,boolean load_data){
+    public static RLLearner loadLearner(String loc,boolean trainMode){
         try {
             FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
             FileInputStream fileDataIn = new FileInputStream(getDataLoc(loc));
@@ -104,10 +104,12 @@ public class RLPlayer extends RandomPlayer{
             ObjectInputStream dataIn = new ObjectInputStream(fileDataIn);
             Object read=classIn.readObject();
             RLLearner learner = (RLLearner) read;
-            if(load_data){
+            if(trainMode){
                 learner.games=(LinkedList<GameSequence>) dataIn.readObject();
             } else{
                 learner.games=new LinkedList<GameSequence>();
+                learner.setEvaluateMode(true);
+                learner.setEpsilon(0);
             }
             classIn.close();
             fileClassIn.close();

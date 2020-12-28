@@ -256,8 +256,10 @@ public class RLLearner implements Serializable{
         else{//Greedy action from q learner
             choice=getGreedy(repr);
         }
-        Experience exp=new Experience(repr,choice);
-        getCurrentGame().addExperience(exp);
+        if(!evaluateMode){
+            Experience exp=new Experience(repr,choice);
+            getCurrentGame().addExperience(exp);
+        }
         return choice;
     }
     //Constructs the model. Should only be run once in constructor,
