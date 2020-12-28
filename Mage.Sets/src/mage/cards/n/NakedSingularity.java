@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,8 +17,9 @@ import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class NakedSingularity extends CardImpl {
@@ -93,11 +92,11 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
             if (choice.getChoices().size() == 1) {
                 chosenColor = choice.getChoices().iterator().next();
             } else {
-                if (controller.choose(Outcome.PutManaInPool, choice, game)) {
-                    chosenColor = choice.getChoice();
-                } else {
-                    return false;
-                }
+                controller.choose(Outcome.PutManaInPool, choice, game);
+                chosenColor = choice.getChoice();
+            }
+            if (chosenColor == null) {
+                return false;
             }
             ManaEvent manaEvent = (ManaEvent) event;
             Mana mana = manaEvent.getMana();
