@@ -7,6 +7,7 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
@@ -42,7 +43,7 @@ public final class Conflux extends CardImpl {
 class ConfluxTarget extends TargetCardInLibrary {
 
     private static final FilterCard filter
-            = new FilterLandCard("a white card, a blue card, a black card, a red card, and a green card");
+            = new FilterNonlandCard("a white card, a blue card, a black card, a red card, and a green card");
 
     static {
         filter.add(Predicates.not(ColorlessPredicate.instance));
