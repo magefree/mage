@@ -109,7 +109,7 @@ public class RLPlayer extends RandomPlayer{
             } else{
                 learner.games=new LinkedList<GameSequence>();
                 learner.setEvaluateMode(true);
-                learner.setEpsilon(0);
+                learner.setEpsilon(.05f);
             }
             classIn.close();
             fileClassIn.close();

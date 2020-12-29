@@ -293,6 +293,9 @@ public class RLLearner implements Serializable{
     //added after this
     public void endGame(Player player,String winner){
         getCurrentGame().setWinner(player,winner);
+        if(games.size()>HParams.games_to_keep){
+            games.removeFirst();
+        }
     }
     public GameSequence getCurrentGame(){
         return games.getLast();

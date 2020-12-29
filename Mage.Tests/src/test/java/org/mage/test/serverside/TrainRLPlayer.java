@@ -47,7 +47,7 @@ public class TrainRLPlayer extends MageTestBase {
     public void playGames() throws GameException, FileNotFoundException {
         RLLearner learner=new RLLearner();
         int netwins=0;
-        String loc="default";
+        String loc="double";
         
         //learner=loadLearner(loc);
         for (int i = 0; i < 4000; i++) {
@@ -66,7 +66,7 @@ public class TrainRLPlayer extends MageTestBase {
                 learner.setEpsilon(.1f);
             }
             if(i==3000){
-                learner.setEpsilon(.0f);
+                learner.setEpsilon(.05f);
             }
         }
         RLPlayer.saveLearner(learner, loc);
