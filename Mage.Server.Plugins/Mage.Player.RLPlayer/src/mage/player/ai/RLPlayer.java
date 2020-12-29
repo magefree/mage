@@ -149,6 +149,7 @@ public class RLPlayer extends RandomPlayer{
         return ability;
     }
 
+    
     @Override
     protected Ability getAction(Game game) {
         //logger.info("Getting action");
@@ -186,6 +187,13 @@ public class RLPlayer extends RandomPlayer{
             }
         }
         actionCount++;
+    }
+
+    @Override
+    public boolean chooseMulligan(Game game) {
+        List<RLAction> toMull= Arrays.asList((RLAction) new ActionMulligan(false),(RLAction) new ActionMulligan(true));
+        int index=learner.choose(game,this,toMull);
+        return index==1;
     }
 
     @Override

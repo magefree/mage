@@ -16,7 +16,7 @@ import org.nd4j.linalg.api.buffer.DataType;
 
 public class Representer implements Serializable{
     HashMap<String,Integer> nameToIndex;
-    int current_represent=3;
+    int current_represent=HParams.counter_start;
     private static final Logger logger = Logger.getLogger(Representer.class);
     public Representer(){
         nameToIndex=new HashMap<String,Integer>();
@@ -160,7 +160,16 @@ public class Representer implements Serializable{
                 embeds[0]=HParams.no_block;
                 embeds[1]=HParams.no_block;
             }
-        }else{
+        }
+        else if(action instanceof ActionMulligan){
+            ActionMulligan actMull=(ActionMulligan) action;
+            if(actMull.isMulligan){
+                embeds[0]=HParams.yes_mulligan;
+            }else{
+                embeds[0]=HParams.no_mulligan;
+            }
+        }
+        else{
             throw new java.lang.UnsupportedOperationException("Unable to represent action type yet");
         }
         return Nd4j.createFromArray(embeds);
