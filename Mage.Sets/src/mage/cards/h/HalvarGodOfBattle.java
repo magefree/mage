@@ -21,8 +21,9 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
@@ -43,7 +44,7 @@ public final class HalvarGodOfBattle extends ModalDoubleFacesCard {
     static {
         filter.add(Predicates.or(EnchantedPredicate.instance, EquippedPredicate.instance));
         filter2.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
-        filter2.add(new AttachedToPredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
+        filter2.add(new HalvarGodOfBattlePredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
     }
 
     public HalvarGodOfBattle(UUID ownerId, CardSetInfo setInfo) {
@@ -174,5 +175,25 @@ class SwordOfTheRealmsEffect extends OneShotEffect {
             }
         }
         return false;
+    }
+}
+
+class HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
+
+    private final FilterPermanent filter;
+
+    public HalvarGodOfBattlePredicate(FilterPermanent filter) {
+        this.filter=filter;
+    }
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        UUID attachedTo = input.getObject().getAttachedTo();
+        return attachedTo != null && filter.match(game.getPermanent(attachedTo), input.getSourceId(), input.getPlayerId(), game);
+    }
+
+    @Override
+    public String toString() {
+        return "attached to " + filter.getMessage();
     }
 }
