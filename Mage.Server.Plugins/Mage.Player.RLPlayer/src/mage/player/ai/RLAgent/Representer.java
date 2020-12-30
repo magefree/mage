@@ -29,7 +29,7 @@ public class Representer implements Serializable{
     public RepresentedGame represent(Game game,Player player, List<RLAction> actions){
         List<INDArray> gameRepr=representGame(game, player);
         List<INDArray> actionRepr=representActions(game, actions);
-        return new RepresentedGame(actions.size(),gameRepr,actionRepr);
+        return new RepresentedGame(actions.size(),gameRepr,actionRepr,player.getLife(),getOpponent(game, player).getLife());
     }
 
     public RepresentedGame emptyGame(){
@@ -38,7 +38,11 @@ public class Representer implements Serializable{
         gameZeros[1]=Nd4j.zeros(DataType.INT32,HParams.max_representable_permanents);
         List<INDArray> gameRepr=Arrays.asList(gameZeros);
         List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(DataType.INT32,HParams.model_inputlen));
-        return new RepresentedGame(0,gameRepr,actionRepr,true);
+        return new RepresentedGame(0,gameRepr,actionRepr,0,0,true);
+    }
+    protected float getReward(Player LPlayer,Game game){
+        Player OPlayer=getOpponent(game, LPlayer);
+        return (LPlayer.getLife()-OPlayer.getLife())/(200.0f);
     }
     //Takes the string representation of a permanent or
     //an action and maps it to it's ID. If it is not in 
@@ -77,21 +81,32 @@ public class Representer implements Serializable{
 
     //extracts relevent decimal quanitites from a player
     protected float[] playerToArray(Player player){
-        float[] data=new float[HParams.game_reals/2];
+        float[] data=new float[HParams.player_reals];
         data[0]=player.getLife()/20f;
         data[1]=player.getHand().size()/7f;
         return data;
     }
-    //represents a game state by extracting relevent information
-    //First value is real numbers, second is embedding IDs (ints)
-    protected List<INDArray> representGame(Game game,Player LPlayer){
+    protected Player getOpponent(Game game,Player LPlayer){
         UUID learnerId=LPlayer.getId(); 
         UUID opponentId=game.getOpponents(learnerId).iterator().next();
         Player OPlayer=game.getPlayer(opponentId);
-        Battlefield field=game.getBattlefield();
+        return OPlayer;
+    }
+    //represents a game state by extracting relevent information
+    //First value is real numbers, second is embedding IDs (ints)
+    protected float[] getGameReals(Game game, Player LPlayer,Player OPlayer){
         float[] gameReals=new float[HParams.game_reals];
-        System.arraycopy(playerToArray(LPlayer), 0, gameReals, 0, HParams.game_reals/2);
-        System.arraycopy(playerToArray(OPlayer), 0, gameReals, HParams.game_reals/2, HParams.game_reals/2);
+        System.arraycopy(playerToArray(LPlayer), 0, gameReals, 0,HParams.player_reals);
+        System.arraycopy(playerToArray(OPlayer), 0, gameReals, HParams.player_reals, HParams.player_reals);
+        int nextIndex=2*HParams.player_reals;
+        gameReals[nextIndex]=game.getTurnNum();
+        return gameReals;
+    }
+    protected List<INDArray> representGame(Game game,Player LPlayer){
+        Player OPlayer=getOpponent(game, LPlayer);
+        UUID learnerId=LPlayer.getId(); 
+        UUID opponentId=OPlayer.getId();
+        Battlefield field=game.getBattlefield();
         int[] embeds=new int[HParams.max_representable_permanents];
         Iterator<Permanent> perms=field.getAllPermanents().iterator();
         for(int i=0;i<HParams.max_representable_permanents;i++){
@@ -109,7 +124,7 @@ public class Representer implements Serializable{
                 embeds[i]=getActionID(permName);
             }
         }
-        INDArray realList=Nd4j.createFromArray(gameReals);
+        INDArray realList=Nd4j.createFromArray(getGameReals(game, LPlayer, OPlayer));
         INDArray embedList=Nd4j.createFromArray(embeds);
         ArrayList<INDArray> ret=new ArrayList<INDArray>();
         ret.add(realList);

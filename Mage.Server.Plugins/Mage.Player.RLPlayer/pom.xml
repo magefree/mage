@@ -47,6 +47,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-native</artifactId>
+            <version>${dl4j-master.version}</version>
+            <classifier>linux-x86_64-avx2</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>

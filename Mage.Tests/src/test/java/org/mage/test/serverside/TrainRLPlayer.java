@@ -53,12 +53,17 @@ public class TrainRLPlayer extends MageTestBase {
         for (int i = 0; i < 4000; i++) {
             logger.info("Playing game: " + i);
             netwins+=playOneGame(learner);
-            for(int j=0;j<5;j++){
-                learner.trainBatch(64);
-                double[] scores= learner.losses.getScoreVsIter().getEffectiveScores();
-                logger.info(scores[scores.length-1]); 
+            if(i>20){ //Allow a short warmup data collection phase
+                for(int j=0;j<HParams.train_per_game;j++){
+                    learner.trainBatch(HParams.batch_size);
+                    double[] scores= learner.losses.getScoreVsIter().getEffectiveScores();
+                    logger.info(scores[scores.length-1]); 
+                }
             }
             logger.info(netwins);
+            if(i%HParams.copy_time==0){
+                learner.copyToTarget();
+            }
             if(i==1000){
                 learner.setEpsilon(.3f);
             }

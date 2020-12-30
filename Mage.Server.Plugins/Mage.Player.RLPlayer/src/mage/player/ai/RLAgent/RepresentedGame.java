@@ -18,14 +18,18 @@ public class RepresentedGame implements Serializable{
     protected List<INDArray> actionRepr;
     protected List<INDArray> gameRepr;
     protected boolean isDummy;
-    RepresentedGame(int numActions, List<INDArray> gameRepr,List<INDArray> actionRepr){
-        this(numActions, gameRepr,actionRepr,false);
+    protected float agentLife;
+    protected float opponentLife;
+    RepresentedGame(int numActions, List<INDArray> gameRepr,List<INDArray> actionRepr,float agentLife,float opponentLife){
+        this(numActions, gameRepr,actionRepr,agentLife,opponentLife,false);
     }
-    RepresentedGame(int numActions, List<INDArray> gameRepr,List<INDArray> actionRepr,boolean isDummy){
+    RepresentedGame(int numActions, List<INDArray> gameRepr,List<INDArray> actionRepr,float agentLife,float opponentLife, boolean isDummy){
         this.numActions=numActions;
         this.gameRepr=gameRepr;
         this.actionRepr=actionRepr;
         this.isDummy=isDummy;
+        this.agentLife=agentLife;
+        this.opponentLife=opponentLife;
     }
 
     //returns the data prepared to be fed into the model
@@ -35,6 +39,12 @@ public class RepresentedGame implements Serializable{
         inputs[1]=Nd4j.expandDims(gameRepr.get(0), 0);
         inputs[2]=Nd4j.expandDims(gameRepr.get(1), 0);
         return inputs;
+    }
+    public float getAgentLife(){
+        return agentLife;
+    }
+    public float getOpponentLife(){
+        return opponentLife;
     }
     public int getNumActions(){
         return numActions;

@@ -59,6 +59,7 @@ Mage.Server.Plugins/Mage.Player.AI.MA/target
 Mage.Server.Plugins/Mage.Player.AI/target
 Mage.Server.Plugins/Mage.Player.AIMCTS/target
 Mage.Server.Plugins/Mage.Player.AIMinimax/target
+Mage.Server.Plugins/Mage.Player.RLPlayer/target
 Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
 Mage.Server.Plugins/Mage.Tournament.Constructed/target

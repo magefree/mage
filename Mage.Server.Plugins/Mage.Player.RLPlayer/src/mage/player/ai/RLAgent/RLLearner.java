@@ -1,69 +1,32 @@
 package mage.player.ai.RLAgent;
 
-import mage.abilities.*;
-import mage.MageObject;
-import mage.abilities.common.PassAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.choices.Choice;
-import mage.constants.Outcome;
-import mage.constants.RangeOfInfluence;
+
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
-import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetAmount;
-import mage.target.TargetCard;
 import mage.util.RandomUtil;
-import mage.players.PlayerList;
 import org.deeplearning4j.nn.conf.layers.RnnOutputLayer;
 
 import java.io.Serializable;
 import java.util.*;
-//import org.apache.log4j.Logger;
-import org.hamcrest.core.IsInstanceOf;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.api.buffer.DataType;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.nn.conf.ComputationGraphConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.layers.EmbeddingSequenceLayer;
 import org.deeplearning4j.nn.conf.layers.GlobalPoolingLayer;
-import org.deeplearning4j.nn.conf.layers.LocallyConnected1D;
 import org.deeplearning4j.nn.conf.layers.Convolution1D;
-import org.nd4j.linalg.learning.config.Sgd;
-import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.PoolingType;
-import org.deeplearning4j.nn.conf.layers.Upsampling1D;
-import org.deeplearning4j.nn.conf.layers.misc.RepeatVector;
-import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
-import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
-import org.deeplearning4j.nn.conf.distribution.UniformDistribution;
 import org.deeplearning4j.nn.conf.graph.ElementWiseVertex;
 import org.deeplearning4j.nn.conf.graph.ReshapeVertex;
 import org.deeplearning4j.nn.conf.graph.ElementWiseVertex.Op;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
-import org.deeplearning4j.nn.conf.layers.OutputLayer;
-import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.activations.Activation;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.dataset.DataSet;
-import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.config.Sgd;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
-import org.nd4j.evaluation.classification.Evaluation;
-import mage.game.permanent.Battlefield;
 import org.deeplearning4j.nn.conf.layers.ActivationLayer;
 import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
-import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -84,13 +47,15 @@ public class RLLearner implements Serializable{
     private double epsilon=.5f; //For epsilon greedy learning. Set to 0 for evaluation
     protected boolean evaluateMode; //Sets mode to testing, no experience should be collected  
     Representer representer;
-    public transient ComputationGraph model; //Must be serializes seperately with its own methods
+    public transient ComputationGraph model; //Must be serialized seperately with its own methods
+    protected transient ComputationGraph targetNet;
     //needs to be public for serialization
 
     //Constructor--creates a RLLearner
     public RLLearner(){
         games=new LinkedList<GameSequence>(); 
         model=constructModel();
+        
         representer=new Representer();
         evaluateMode=false;
         //prevents logging spam
@@ -101,6 +66,9 @@ public class RLLearner implements Serializable{
     //True, no experience is collected
     public void setEvaluateMode(Boolean isEvaluateMode){
         evaluateMode=isEvaluateMode;
+    }
+    public void copyToTarget(){
+        targetNet=model.clone();
     }
     //Epsilon controlls the tradeoff between random
     //and greedy actions, lower values being more greedy
@@ -170,24 +138,33 @@ public class RLLearner implements Serializable{
         return batchRepr;
     } 
     //Runs the model on given inputs
-    protected INDArray runModel(List<RepresentedGame> reprGames){
+    protected INDArray runModel(ComputationGraph graph, List<RepresentedGame> reprGames){
         List<INDArray> representedExps=represent_batch(reprGames);
-        Map<String,INDArray> qmodelOut=model.feedForward(representedExps.toArray(new INDArray[representedExps.size()]),true);
+        Map<String,INDArray> qmodelOut=graph.feedForward(representedExps.toArray(new INDArray[representedExps.size()]),true);
         INDArray QValues=qmodelOut.get("linout").reshape(-1,HParams.max_representable_actions);
         return QValues;
     }
     //Calculates the targets of the ML model for the actions taken
-    protected List<Double> getTargets(List<GameSequence> sampledGames,List<RepresentedGame> reprGames){
-        INDArray QValues=runModel(reprGames);
+    protected List<Double> getTargets(List<GameSequence> sampledGames,List<RepresentedGame> currentReprs, List<RepresentedGame> nextReprs){
+        INDArray QValues;
+        if(HParams.double_dqn){
+            QValues=runModel(targetNet,nextReprs);
+        }
+        else{
+            QValues=runModel(model,nextReprs);
+        }
         INDArray maxQ=QValues.max(1);
         List<Double> targets=new ArrayList<Double>();
-        for(int i=0;i<reprGames.size();i++){
-            if(!reprGames.get(i).isDummy){
-                targets.add(maxQ.getDouble(i));
+        for(int i=0;i<nextReprs.size();i++){
+            if(!nextReprs.get(i).isDummy){
+                double priorLifeDiff=currentReprs.get(i).getAgentLife()-currentReprs.get(i).getOpponentLife();
+                double currentLifeDiff=nextReprs.get(i).getAgentLife()-nextReprs.get(i).getOpponentLife();
+                targets.add((currentLifeDiff-priorLifeDiff)/20.0+maxQ.getDouble(i)*HParams.discount);
             }
             else{
                 //logger.info("adding game win/loss "+sampledGames.get(i).getValue());
-                targets.add((double) sampledGames.get(i).getValue()*HParams.discount);
+                double value=(double) sampledGames.get(i).getValue();
+                targets.add(value);
             }
         }
         return targets;
@@ -214,8 +191,14 @@ public class RLLearner implements Serializable{
                 nextReprs.add(representer.emptyGame());
             }
         }
-        INDArray target=runModel(currentReprs);
-        List<Double> targets=getTargets(sampledGames, nextReprs);
+        INDArray target;
+        if(HParams.double_dqn){
+            target=runModel(targetNet,currentReprs);
+        }
+        else{
+            target=runModel(model,currentReprs);
+        }
+        List<Double> targets=getTargets(sampledGames, currentReprs,nextReprs);
         //logger.info(targets.toString());
         for(int i=0;i<size;i++){
             target.putScalar(i,currentExps.get(i).chosen,targets.get(i));
@@ -266,21 +249,21 @@ public class RLLearner implements Serializable{
     //because it sets the training listener
     ComputationGraph constructModel(){
         ComputationGraphConfiguration conf = new NeuralNetConfiguration.Builder()
-        .updater(new Adam(0.01))
+        .updater(new Adam(HParams.lr))
         .graphBuilder()
         .addInputs("actionIDs","otherReal","permanentIDs") //can use any label for this        
         .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents).nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")
-        .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.AVG).build(),"embedPermanent")
+        .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.SUM).build(),"embedPermanent")
         .addLayer("combinedGame", new DenseLayer.Builder().nIn(HParams.game_reals+HParams.internal_dim).nOut(HParams.internal_dim).build(), "poolPermanent","otherReal")
         .addLayer("actGame1",new ActivationLayer.Builder().activation(Activation.RELU).build(),"combinedGame")
         .addVertex("repeatGame", new ReshapeVertex(-1,HParams.internal_dim,1), "actGame1")
         .addLayer("embedAction",new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents).nOut(HParams.internal_dim/HParams.input_seqlen).inputLength(HParams.model_inputlen).build(),"actionIDs")
         .addVertex("refold", new ReshapeVertex(-1,HParams.internal_dim,HParams.max_representable_actions), "embedAction") 
-        .addLayer("actlin1", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).kernelSize(1).build(), "refold")
-        .addVertex("combined", new ElementWiseVertex(Op.Product), "actlin1","repeatGame")
-        .addLayer("lastlin", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(1).kernelSize(1).activation(Activation.TANH).build(), "combined")
+        .addVertex("combined", new ElementWiseVertex(Op.Add), "refold","repeatGame")
+        .addLayer("actlin1", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).activation(Activation.RELU).kernelSize(1).build(), "combined")
+        .addLayer("lastlin", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(1).kernelSize(1).activation(Activation.IDENTITY).build(), "actlin1")
         .addLayer("linout",new RnnOutputLayer.Builder(LossFunctions.LossFunction.MSE).activation(Activation.IDENTITY).nIn(1).nOut(1).build(),"lastlin")
-        .setOutputs("linout")    //We need to specify the network outputs and their order
+        .setOutputs("linout")   
         .build();
 
     ComputationGraph net = new ComputationGraph(conf);
