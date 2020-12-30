@@ -99,7 +99,7 @@ class ValakutExplorationExileEffect extends OneShotEffect {
                         game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
                 ), sourcePermanent.getIdName()
         );
-        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfTurn);
+        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfGame);
         effect.setTargetPointer(new FixedTarget(card, game));
         game.addEffect(effect, source);
         return true;
@@ -109,7 +109,7 @@ class ValakutExplorationExileEffect extends OneShotEffect {
 class ValakutExplorationCastFromExileEffect extends AsThoughEffectImpl {
 
     ValakutExplorationCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may play the card from exile";
     }
 
