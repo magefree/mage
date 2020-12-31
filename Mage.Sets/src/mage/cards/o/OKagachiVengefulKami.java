@@ -15,7 +15,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.watchers.Watcher;
@@ -133,14 +132,23 @@ class OKagachiVengefulKamiWatcher extends Watcher {
                 playerMap.remove(game.getActivePlayerId());
                 return;
             case ATTACKER_DECLARED:
-                playerMap.computeIfAbsent(event.getPlayerId(), x -> new HashSet<>()).add(event.getTargetId());
-                return;
+                UUID attacker = event.getPlayerId();
+                Set<UUID> defenders = playerMap.get(attacker);
+                if (defenders == null) {
+                    defenders = new HashSet<>();
+                }
+                defenders.add(event.getTargetId());
+                playerMap.put(attacker, defenders);
         }
     }
 
     boolean checkPlayer(UUID attackerId, UUID defenderId) {
-        return attackerId != null
-                && defenderId != null
-                && playerMap.computeIfAbsent(attackerId, x -> new HashSet<>()).contains(defenderId);
+        if (attackerId != null && defenderId != null) {
+            Set<UUID> defendersLastTurn = playerMap.get(defenderId);
+            if (defendersLastTurn != null) {
+                return defendersLastTurn.contains(attackerId);
+            }
+        }
+        return false;
     }
 }
