@@ -17,6 +17,7 @@ import org.deeplearning4j.nn.conf.layers.EmbeddingSequenceLayer;
 import org.deeplearning4j.nn.conf.layers.GlobalPoolingLayer;
 import org.deeplearning4j.nn.conf.layers.Convolution1D;
 import org.deeplearning4j.nn.conf.layers.PoolingType;
+import org.deeplearning4j.nn.conf.layers.BatchNormalization;
 import org.deeplearning4j.nn.conf.graph.ElementWiseVertex;
 import org.deeplearning4j.nn.conf.graph.ReshapeVertex;
 import org.deeplearning4j.nn.conf.graph.ElementWiseVertex.Op;
@@ -57,6 +58,7 @@ public class RLLearner implements Serializable{
         model=constructModel();
         
         representer=new Representer();
+        copyToTarget();
         evaluateMode=false;
         //prevents logging spam
         Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
@@ -212,7 +214,13 @@ public class RLLearner implements Serializable{
     //Gets the action the model thinks is best in this game state
     protected int getGreedy(RepresentedGame repr){
         INDArray inputs[]=repr.asModelInputs();
-        Map<String,INDArray> qmodelOut=model.feedForward(inputs,true);
+        Map<String,INDArray> qmodelOut;
+        if(HParams.double_dqn){
+            qmodelOut=targetNet.feedForward(inputs,false);
+        }else{
+            qmodelOut=model.feedForward(inputs,false);
+        }
+        
         INDArray q_values=qmodelOut.get("linout").reshape(HParams.max_representable_actions);
         double max_q=Double.NEGATIVE_INFINITY;
         int max_index=0;
@@ -252,16 +260,24 @@ public class RLLearner implements Serializable{
         .updater(new Adam(HParams.lr))
         .graphBuilder()
         .addInputs("actionIDs","otherReal","permanentIDs") //can use any label for this        
-        .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents).nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")
+        .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents)
+          .nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")
         .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.SUM).build(),"embedPermanent")
-        .addLayer("combinedGame", new DenseLayer.Builder().nIn(HParams.game_reals+HParams.internal_dim).nOut(HParams.internal_dim).build(), "poolPermanent","otherReal")
-        .addLayer("actGame1",new ActivationLayer.Builder().activation(Activation.RELU).build(),"combinedGame")
-        .addVertex("repeatGame", new ReshapeVertex(-1,HParams.internal_dim,1), "actGame1")
-        .addLayer("embedAction",new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents).nOut(HParams.internal_dim/HParams.input_seqlen).inputLength(HParams.model_inputlen).build(),"actionIDs")
+        .addLayer("normPool",new BatchNormalization.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).build(),"poolPermanent")
+        .addLayer("combinedGame", new DenseLayer.Builder().nIn(HParams.game_reals+HParams.internal_dim)
+          .nOut(HParams.internal_dim).activation(Activation.RELU).build(), "normPool","otherReal")
+        .addLayer("actGame1", new DenseLayer.Builder().nIn(HParams.internal_dim)
+          .nOut(HParams.internal_dim).activation(Activation.RELU).build(), "combinedGame")
+        .addLayer("normGame1", new BatchNormalization.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).build(), "actGame1")
+        .addVertex("repeatGame", new ReshapeVertex(-1,HParams.internal_dim,1), "normGame1")
+        .addLayer("embedAction",new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents)
+          .nOut(HParams.internal_dim/HParams.input_seqlen).inputLength(HParams.model_inputlen).build(),"actionIDs")
         .addVertex("refold", new ReshapeVertex(-1,HParams.internal_dim,HParams.max_representable_actions), "embedAction") 
-        .addVertex("combined", new ElementWiseVertex(Op.Add), "refold","repeatGame")
-        .addLayer("actlin1", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).activation(Activation.RELU).kernelSize(1).build(), "combined")
-        .addLayer("lastlin", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(1).kernelSize(1).activation(Activation.IDENTITY).build(), "actlin1")
+        .addVertex("combined", new ElementWiseVertex(Op.Product), "refold","repeatGame")   
+        .addLayer("actlin1", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim)
+          .activation(Activation.RELU).kernelSize(1).build(), "combined")
+        .addLayer("lastlin", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(1).kernelSize(1)
+          .activation(Activation.TANH).build(), "actlin1")
         .addLayer("linout",new RnnOutputLayer.Builder(LossFunctions.LossFunction.MSE).activation(Activation.IDENTITY).nIn(1).nOut(1).build(),"lastlin")
         .setOutputs("linout")   
         .build();

@@ -9,9 +9,9 @@ public class HParams {
     public final static int no_mulligan=4;
     public final static int counter_start=5;
 
-    public final static int copy_time=2;
-    public final static int train_per_game=3; 
-    public final static double lr=.01;
+    public final static int copy_time=5;
+    public final static int train_per_game=10; 
+    public final static double lr=.001;
     public final static int batch_size=128;
     public final static int max_represents=256; 
     public final static int input_seqlen=2;
@@ -23,7 +23,8 @@ public class HParams {
     public final static int player_reals=2;
     public final static int num_game_reprs=2;
     public final static int total_model_inputs=3;
-    public final static double discount=.9;
+    public final static double discount=.98;
     public final static int games_to_keep=1000;
     public final static boolean double_dqn=false; 
+    public final static int perm_features=4;
 }

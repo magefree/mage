@@ -13,7 +13,8 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import mage.game.permanent.Battlefield;
 import org.nd4j.linalg.api.buffer.DataType;
-
+import mage.game.combat.CombatGroup;
+import mage.game.combat.Combat;
 public class Representer implements Serializable{
     HashMap<String,Integer> nameToIndex;
     int current_represent=HParams.counter_start;
@@ -108,6 +109,7 @@ public class Representer implements Serializable{
         UUID opponentId=OPlayer.getId();
         Battlefield field=game.getBattlefield();
         int[] embeds=new int[HParams.max_representable_permanents];
+        float[][] extra_perm_info=new float[HParams.max_representable_permanents][HParams.perm_features];
         Iterator<Permanent> perms=field.getAllPermanents().iterator();
         for(int i=0;i<HParams.max_representable_permanents;i++){
             if(perms.hasNext()){
@@ -122,6 +124,14 @@ public class Representer implements Serializable{
                 }
                 String permName="Permanent:"+controllerName+nameObject(perm);
                 embeds[i]=getActionID(permName);
+                Combat combat=game.getCombat();
+                if(combat.getAttackers().contains(perm.getId())){
+                    extra_perm_info[i][0]=1;
+                }
+                if(combat.getBlockers().contains(perm.getId())){
+                    extra_perm_info[i][1]=1;
+                }
+                if(perm )
             }
         }
         INDArray realList=Nd4j.createFromArray(getGameReals(game, LPlayer, OPlayer));
