@@ -67,6 +67,14 @@ public class EscapeAbility extends SpellAbility {
     }
 
     @Override
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        if (game.getState().getZone(getSourceId()) != Zone.GRAVEYARD) {
+            return ActivationStatus.getFalse();
+        }
+        return super.canActivate(playerId, game);
+    }
+
+    @Override
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
             game.getState().setValue(CASTED_WITH_ESCAPE_KEY + getSourceId().toString() + (getSourceObjectZoneChangeCounter() + 1), Boolean.TRUE);
