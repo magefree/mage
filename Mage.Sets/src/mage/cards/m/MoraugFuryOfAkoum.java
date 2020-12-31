@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -20,8 +21,6 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -90,10 +89,7 @@ class MoraugFuryOfAkoumBoostEffect extends ContinuousEffectImpl {
         if (watcher == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (permanent == null) {
-                continue;
-            }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
             permanent.addPower(watcher.getAttackCount(permanent, game));
         }
         return true;
@@ -142,7 +138,7 @@ class MoraugFuryOfAkoumDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     MoraugFuryOfAkoumDelayedTriggeredAbility(UUID connectedTurnMod) {
         super(new UntapAllControllerEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURES
+                StaticFilters.FILTER_PERMANENT_CREATURE
         ), Duration.EndOfTurn, true, false);
         this.connectedTurnMod = connectedTurnMod;
     }
@@ -180,7 +176,7 @@ class MoraugFuryOfAkoumDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "At the beginning of that combat, untap all creatures you control";
+        return "At the beginning of that combat, untap all creatures you control.";
     }
 }
 
