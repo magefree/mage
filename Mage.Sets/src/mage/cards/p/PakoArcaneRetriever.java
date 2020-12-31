@@ -64,8 +64,8 @@ class PakoArcaneRetrieverEffect extends OneShotEffect {
 
     PakoArcaneRetrieverEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the top card of each player's library and put a fetch counter on each of them. " +
-                "Put a +1/+1 counter on {this} for each noncreature card exiled this way.";
+        staticText = "exile the top card of each player's library and put a fetch counter on each of them. "
+                + "Put a +1/+1 counter on {this} for each noncreature card exiled this way.";
     }
 
     private PakoArcaneRetrieverEffect(final PakoArcaneRetrieverEffect effect) {
@@ -129,7 +129,7 @@ class PakoArcaneRetrieverWatcher extends Watcher {
 
     boolean checkCard(UUID playerId, Card card, Game game) {
         return card != null && playerMap
-                .computeIfAbsent(playerId, u -> new HashSet<MageObjectReference>())
+                .computeIfAbsent(playerId, u -> new HashSet<>())
                 .stream()
                 .anyMatch(mageObjectReference -> mageObjectReference.refersTo(card.getId(), game));
     }
