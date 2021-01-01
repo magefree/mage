@@ -37,6 +37,7 @@ public class Representer implements Serializable{
         INDArray[] gameZeros=new INDArray[HParams.num_game_reprs];
         gameZeros[0]=Nd4j.zeros(DataType.FLOAT,HParams.game_reals);
         gameZeros[1]=Nd4j.zeros(DataType.INT32,HParams.max_representable_permanents);
+        gameZeros[2]=Nd4j.zeros(DataType.FLOAT,HParams.perm_features,HParams.max_representable_permanents);
         List<INDArray> gameRepr=Arrays.asList(gameZeros);
         List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(DataType.INT32,HParams.model_inputlen));
         return new RepresentedGame(0,gameRepr,actionRepr,0,0,true);
@@ -125,13 +126,16 @@ public class Representer implements Serializable{
                 String permName="Permanent:"+controllerName+nameObject(perm);
                 embeds[i]=getActionID(permName);
                 Combat combat=game.getCombat();
-                if(combat.getAttackers().contains(perm.getId())){
-                    extra_perm_info[i][0]=1;
+                if(Objects.nonNull(combat)){
+                    if(combat.getAttackers().contains(perm.getId())){
+                        extra_perm_info[i][0]=1;
+                    }
+                    if(combat.getBlockers().contains(perm.getId())){
+                        extra_perm_info[i][1]=1;
+                    }
                 }
-                if(combat.getBlockers().contains(perm.getId())){
-                    extra_perm_info[i][1]=1;
-                }
-                if(perm )
+                extra_perm_info[i][2]=perm.getPower().getValue()/5.0f;
+                extra_perm_info[i][3]=perm.getToughness().getValue()/5.0f;
             }
         }
         INDArray realList=Nd4j.createFromArray(getGameReals(game, LPlayer, OPlayer));
@@ -139,6 +143,7 @@ public class Representer implements Serializable{
         ArrayList<INDArray> ret=new ArrayList<INDArray>();
         ret.add(realList);
         ret.add(embedList);
+        ret.add(Nd4j.createFromArray(extra_perm_info).transpose());
         return ret;
     }
     //represents a single action.

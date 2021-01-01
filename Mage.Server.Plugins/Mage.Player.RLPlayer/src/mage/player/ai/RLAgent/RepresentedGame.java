@@ -36,8 +36,9 @@ public class RepresentedGame implements Serializable{
     public INDArray[] asModelInputs(){
         INDArray inputs[]=new INDArray[HParams.total_model_inputs];
         inputs[0]=Nd4j.expandDims(actionRepr.get(0), 0);
-        inputs[1]=Nd4j.expandDims(gameRepr.get(0), 0);
-        inputs[2]=Nd4j.expandDims(gameRepr.get(1), 0);
+        for(int i=0;i<gameRepr.size();i++){
+            inputs[i+1]=Nd4j.expandDims(gameRepr.get(i), 0);
+        }
         return inputs;
     }
     public float getAgentLife(){

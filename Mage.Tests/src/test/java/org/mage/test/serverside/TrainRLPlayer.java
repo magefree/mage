@@ -47,13 +47,13 @@ public class TrainRLPlayer extends MageTestBase {
     public void playGames() throws GameException, FileNotFoundException {
         RLLearner learner=new RLLearner();
         int netwins=0;
-        String loc="3";
+        String loc="4";
         
         //learner=loadLearner(loc);
         for (int i = 0; i < 4000; i++) {
             logger.info("Playing game: " + i);
             netwins+=playOneGame(learner);
-            if(i>20){ //Allow a short warmup data collection phase
+            if(i>0){ //Allow a short warmup data collection phase
                 for(int j=0;j<HParams.train_per_game;j++){
                     learner.trainBatch(HParams.batch_size);
                     double[] scores= learner.losses.getScoreVsIter().getEffectiveScores();

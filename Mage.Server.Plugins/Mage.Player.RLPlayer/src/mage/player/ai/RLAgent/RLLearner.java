@@ -20,6 +20,7 @@ import org.deeplearning4j.nn.conf.layers.PoolingType;
 import org.deeplearning4j.nn.conf.layers.BatchNormalization;
 import org.deeplearning4j.nn.conf.graph.ElementWiseVertex;
 import org.deeplearning4j.nn.conf.graph.ReshapeVertex;
+import org.deeplearning4j.nn.conf.graph.MergeVertex;
 import org.deeplearning4j.nn.conf.graph.ElementWiseVertex.Op;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.nd4j.linalg.activations.Activation;
@@ -259,12 +260,14 @@ public class RLLearner implements Serializable{
         ComputationGraphConfiguration conf = new NeuralNetConfiguration.Builder()
         .updater(new Adam(HParams.lr))
         .graphBuilder()
-        .addInputs("actionIDs","otherReal","permanentIDs") //can use any label for this        
+        .addInputs("actionIDs","otherReal","permanentIDs","extraPermInfo") //can use any label for this        
         .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents)
           .nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")
-        .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.SUM).build(),"embedPermanent")
-        .addLayer("normPool",new BatchNormalization.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).build(),"poolPermanent")
-        .addLayer("combinedGame", new DenseLayer.Builder().nIn(HParams.game_reals+HParams.internal_dim)
+        .addVertex("addExtraInfo",new MergeVertex(),"embedPermanent","extraPermInfo")
+        .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.SUM).build(),"addExtraInfo")
+        .addLayer("normPool",new BatchNormalization.Builder().nIn(HParams.internal_dim+HParams.perm_features)
+        .nOut(HParams.internal_dim+HParams.perm_features).build(),"poolPermanent")
+        .addLayer("combinedGame", new DenseLayer.Builder().nIn(HParams.game_reals+HParams.internal_dim+HParams.perm_features)
           .nOut(HParams.internal_dim).activation(Activation.RELU).build(), "normPool","otherReal")
         .addLayer("actGame1", new DenseLayer.Builder().nIn(HParams.internal_dim)
           .nOut(HParams.internal_dim).activation(Activation.RELU).build(), "combinedGame")

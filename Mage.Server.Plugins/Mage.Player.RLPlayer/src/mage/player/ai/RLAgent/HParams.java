@@ -21,10 +21,10 @@ public class HParams {
     public final static int internal_dim=64; //For speed for now, should be good enough
     public final static int game_reals=5;
     public final static int player_reals=2;
-    public final static int num_game_reprs=2;
-    public final static int total_model_inputs=3;
+    public final static int num_game_reprs=3;
+    public final static int total_model_inputs=1+num_game_reprs;
     public final static double discount=.98;
     public final static int games_to_keep=1000;
-    public final static boolean double_dqn=false; 
+    public final static boolean double_dqn=true; 
     public final static int perm_features=4;
 }
