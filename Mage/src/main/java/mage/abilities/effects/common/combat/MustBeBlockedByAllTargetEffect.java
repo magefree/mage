@@ -64,10 +64,4 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
         return new MustBeBlockedByAllTargetEffect(this);
     }
 
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-
-        MustBeBlockedByAllSourceEffect.initMustBeBlockedInfo(game, source, targetPointer.getFirst(game, source));
-    }
 }

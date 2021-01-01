@@ -87,11 +87,4 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
         }
         return sb.toString();
     }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-
-        CantBeBlockedSourceEffect.initCantBeBlockedInfo(game, source, targetPointer.getFirst(game, source));
-    }
 }
