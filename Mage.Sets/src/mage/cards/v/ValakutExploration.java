@@ -5,7 +5,6 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -103,34 +102,6 @@ class ValakutExplorationExileEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(card, game));
         game.addEffect(effect, source);
         return true;
-    }
-}
-
-class ValakutExplorationCastFromExileEffect extends AsThoughEffectImpl {
-
-    ValakutExplorationCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may play the card from exile";
-    }
-
-    private ValakutExplorationCastFromExileEffect(final ValakutExplorationCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ValakutExplorationCastFromExileEffect copy() {
-        return new ValakutExplorationCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }
 
