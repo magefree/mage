@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
 import java.io.*;
 
 /**
