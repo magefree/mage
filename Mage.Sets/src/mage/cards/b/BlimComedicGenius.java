@@ -13,7 +13,6 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -23,6 +22,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  * @author TheElk801
@@ -60,7 +60,7 @@ public final class BlimComedicGenius extends CardImpl {
 
 class BlimComedicGeniusEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(TargetController.NOT_YOU.getOwnerPredicate());
@@ -68,8 +68,8 @@ class BlimComedicGeniusEffect extends OneShotEffect {
 
     BlimComedicGeniusEffect() {
         super(Outcome.Benefit);
-        staticText = "that player gains control of target permanent you control. Then each player loses life " +
-                "and discards cards equal to the number of permanents they control but don't own";
+        staticText = "that player gains control of target permanent you control. Then each player loses life "
+                + "and discards cards equal to the number of permanents they control but don't own";
     }
 
     private BlimComedicGeniusEffect(final BlimComedicGeniusEffect effect) {
