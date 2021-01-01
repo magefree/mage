@@ -68,7 +68,7 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
         }
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (game.inCheckPlayableState() && controller != null && sourceObject != null) {
+        if (controller != null && sourceObject != null && mana.getAny() == 0) {
             game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName()
                     + " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
         }
