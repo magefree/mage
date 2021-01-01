@@ -3387,7 +3387,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             // Even mana cost can't be checked here without lookahead
             // So make it available all the time
             boolean canUse;
-            if (ability instanceof MorphAbility && object instanceof Card && game.canPlaySorcery(getId())) {
+            if (ability instanceof MorphAbility && object instanceof Card && (game.canPlaySorcery(getId()) ||
+                    (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game)))) {
                 canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
             } else {
                 canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
