@@ -38,12 +38,17 @@
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-core</artifactId>
-            <version>${dl4j.version}</version>
+            <version>${dl4j-master.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-cuda-10.2</artifactId>
+            <version>1.0.0-beta7</version>
         </dependency>
         <dependency>
             <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-cuda-11.0</artifactId>
-            <version>${nd4j.version}</version>
+            <artifactId>nd4j-cuda-10.2-platform</artifactId>
+            <version>${dl4j-master.version}</version>
         </dependency>
 
         <dependency>
@@ -76,11 +81,11 @@
     </build>
 
     <properties>
-        <dl4j.version>1.0.0-SNAPSHOT</dl4j.version>     <!-- Modified for using SNAPSHOT versions -->
-        <nd4j.version>1.0.0-SNAPSHOT</nd4j.version>     <!-- Modified for using SNAPSHOT versions -->
+        <dl4j-master.version>1.0.0-beta7</dl4j-master.version>
         <logback.version>1.2.3</logback.version>
         <java.version>1.8</java.version>
         <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 
