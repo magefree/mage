@@ -10,7 +10,7 @@ public class HParams {
     public final static int counter_start=5;
 
     public final static int copy_time=5;
-    public final static int train_per_game=10; 
+    public final static int train_per_game=5; 
     public final static double lr=.001;
     public final static int batch_size=128;
     public final static int max_represents=256; 

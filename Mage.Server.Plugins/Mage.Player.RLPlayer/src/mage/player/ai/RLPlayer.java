@@ -101,10 +101,10 @@ public class RLPlayer extends RandomPlayer{
             FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
             FileInputStream fileDataIn = new FileInputStream(getDataLoc(loc));
             ObjectInputStream classIn = new ObjectInputStream(fileClassIn);
-            ObjectInputStream dataIn = new ObjectInputStream(fileDataIn);
             Object read=classIn.readObject();
             RLLearner learner = (RLLearner) read;
             if(trainMode){
+                ObjectInputStream dataIn = new ObjectInputStream(fileDataIn);
                 learner.games=(LinkedList<GameSequence>) dataIn.readObject();
             } else{
                 learner.games=new LinkedList<GameSequence>();

@@ -46,10 +46,10 @@ public class TrainRLPlayer extends MageTestBase {
     public void playGames() throws GameException, FileNotFoundException {
         RLLearner learner=new RLLearner();
         int netwins=0;
-        String loc="4";
-        
+        String loc="default";
+        learner.setEpsilon(1.0f);
         //learner=loadLearner(loc);
-        for (int i = 0; i < 4000; i++) {
+        for (int i = 0; i < 8000; i++) {
             logger.info("Playing game: " + i);
             netwins+=playOneGame(learner);
             if(i>0){ //Allow a short warmup data collection phase
@@ -63,13 +63,19 @@ public class TrainRLPlayer extends MageTestBase {
             if(i%HParams.copy_time==0){
                 learner.copyToTarget();
             }
+            if(i==500){
+                learner.setEpsilon(.8f);
+            }
             if(i==1000){
-                learner.setEpsilon(.3f);
+                learner.setEpsilon(.5f);
             }
             if(i==2000){
+                learner.setEpsilon(.3f);
+            }
+            if(i==4000){
                 learner.setEpsilon(.1f);
             }
-            if(i==3000){
+            if(i==6000){
                 learner.setEpsilon(.05f);
             }
         }
