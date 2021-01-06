@@ -16,10 +16,11 @@ public class PyConnection {
         }
         catch (UnknownHostException ex) {
             System.out.println("Server not found: " + ex.getMessage());
-
+            System.exit(-1);
         } catch (IOException ex) {
 
             System.out.println("I/O error: " + ex.getMessage());
+            System.exit(-1);
         }
     }
     void write(RepresentedGame repr){

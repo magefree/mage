@@ -68,6 +68,8 @@ Mage.Server.Plugins/Mage.Tournament.Constructed/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
 
 Mage.Server.Plugins/Mage.Player.RLPlayer/db
+**cards.h2.mv.db
+**cards.h2.trace.db 
 
 # Mage.Sets
 Mage.Sets/target
