@@ -39,11 +39,14 @@ public class  GameRunner{
     private static final List<String> colorChoices = new ArrayList<>(Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu"));
     private static final int DECK_SIZE = 40;
     private static final Logger logger = Logger.getLogger(GameRunner.class);
+    PyConnection conn;
+    RLPyAgent agent;
     public GameRunner(){
-
+        conn=new PyConnection(5000);
+        agent=new RLPyAgent(conn);
     }
     
-    private int playOneGame(RLAgent agent) throws GameException, FileNotFoundException, IllegalArgumentException {
+    private int playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         String deckLoc="RBTestAggro.dck";
         Player computerA = createAgentPlayer("RLPlayer",agent);
@@ -80,10 +83,11 @@ public class  GameRunner{
         logger.info("starting game");
         game.start(computerA.getId());
         long t2 = System.nanoTime();
-        learner.endGame(computerA,game.getWinner());
+        //learner.endGame(computerA,game.getWinner());
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
-        return learner.getCurrentGame().getValue();
+        //return learner.getCurrentGame().getValue();
+        return 0;
     }
     private Player createAgentPlayer(String name, RLAgent agent){
         return new RLPlayer(name,agent);

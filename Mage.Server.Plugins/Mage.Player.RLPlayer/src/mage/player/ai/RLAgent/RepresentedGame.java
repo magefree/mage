@@ -12,6 +12,7 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.factory.Nd4j;
 import mage.game.permanent.Battlefield;
+import com.google.gson.*;
 
 public class RepresentedGame implements Serializable{
     protected int numActions;
@@ -31,7 +32,10 @@ public class RepresentedGame implements Serializable{
         this.agentLife=agentLife;
         this.opponentLife=opponentLife;
     }
-
+    String asJsonString(){
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
     //returns the data prepared to be fed into the model
     public INDArray[] asModelInputs(){
         INDArray inputs[]=new INDArray[HParams.total_model_inputs];

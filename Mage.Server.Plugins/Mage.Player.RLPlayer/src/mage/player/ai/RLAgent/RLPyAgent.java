@@ -29,14 +29,19 @@ import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 import java.io.*;
 
-public class RLWebAgent extends RLAgent {
+public class RLPyAgent extends RLAgent {
     Representer representer;
-    public RLWebAgent(){
+    PyConnection conn;
+    public RLPyAgent(PyConnection conn){
         representer=new Representer();
+        this.conn=conn;
     }
     public int choose(Game game, Player player,List<RLAction> actions){
         RepresentedGame repr=representer.represent(game, player, actions);
-        return RandomUtil.nextInt(actions.size());
+        conn.write(repr);
+        int action=conn.read();
+        assert 0<= action && action <actions.size();
+        return action;
     }
 
 }
