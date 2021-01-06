@@ -40,8 +40,6 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
-import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 
 /**
  * @author nantuko
@@ -822,6 +820,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
             Player attackingPlayer = game.getPlayer(activePlayerId);
 
+            // TODO: add attack of Planeswalker
+
             // 1. check alpha strike first (all in attack to kill)
             for (UUID defenderId : game.getOpponents(playerId)) {
                 Player defender = game.getPlayer(defenderId);
@@ -853,37 +853,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 if (attackersList.isEmpty()) {
                     continue;
                 }
-                
-                // Attack a Planeswalker first
-                int totalPowerOfAttackers = 0;
-                int loyaltyCounters = 0;
-                for (Permanent planeswalker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, defender.getId(), game)) {
-                    if (planeswalker != null) {
-                        loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
-                        // verify the attackers can kill the planeswalker, otherwise attack the player
-                        for (Permanent attacker : attackersList) {
-                            totalPowerOfAttackers += attacker.getPower().getValue();
-                        }
-                        if (totalPowerOfAttackers < loyaltyCounters) {
-                            break;
-                        }
-                        // kill it and any remaining attackers attack the player
-                        for (Permanent attacker : attackersList) {
-                            loyaltyCounters -= attacker.getPower().getValue();
-                            attackingPlayer.declareAttacker(attacker.getId(), planeswalker.getId(), game, true);
-                            if (loyaltyCounters <= 0) {
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                // get refreshed list of available attackers
-                attackersList = super.getAvailableAttackers(defenderId, game);
-                if (attackersList.isEmpty()) {
-                    continue;
-                }
-                
                 List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
 
                 // The AI will now attack more sanely.  Simple, but good enough for now.
