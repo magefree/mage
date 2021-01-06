@@ -61,10 +61,13 @@ Mage.Server.Plugins/Mage.Player.AIMCTS/target
 Mage.Server.Plugins/Mage.Player.AIMinimax/target
 Mage.Server.Plugins/Mage.Player.RLPlayer/target
 Mage.Server.Plugins/Mage.Player.RLPlayer/target/
+Mage.Server.Plugins/Mage.Player.RLPlayer/db
 Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
 Mage.Server.Plugins/Mage.Tournament.Constructed/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
+
+Mage.Server.Plugins/Mage.Player.RLPlayer/db
 
 # Mage.Sets
 Mage.Sets/target
@@ -99,6 +102,7 @@ Mage.Verify/db
 
 #RL learner models
 Mage.Server.Plugins/Mage.Player.RLPlayer/models
+Mage.Server.Plugins/Mage.Player.RLPlayer/db
 
 # Utils
 releases
