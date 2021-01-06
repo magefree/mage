@@ -31,7 +31,7 @@ import java.io.*;
 /**
  * @author ayratn
  * Modified by Elchanan Haas
- */
+ 
 
 public class TrainRLPlayer extends MageTestBase {
 
@@ -161,3 +161,4 @@ public class TrainRLPlayer extends MageTestBase {
         return deck;
     }
 }
+*/

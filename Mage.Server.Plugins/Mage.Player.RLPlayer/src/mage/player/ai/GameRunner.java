@@ -46,9 +46,9 @@ public class  GameRunner{
         agent=new RLPyAgent(conn);
     }
     
-    private int playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
+    public int playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        String deckLoc="RBTestAggro.dck";
+        String deckLoc="/home/elchanan/java/mage/Mage.Tests/RBTestAggro.dck";
         Player computerA = createAgentPlayer("RLPlayer",agent);
         String mode="load";
         Deck decka;
