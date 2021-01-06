@@ -50,7 +50,11 @@
             <artifactId>nd4j-cuda-10.2-platform</artifactId>
             <version>${dl4j-master.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-twoplayerduel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

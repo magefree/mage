@@ -39,16 +39,16 @@ import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
  */
 
 public class RLPlayer extends RandomPlayer{
-    public RLLearner learner;
+    public RLAgent learner;
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
-        learner=loadLearner("default",false);
+        //learner=loadLearner("default",false);
         if(Objects.isNull(learner)){
             logger.warn("learner is null");
         }
     }
-    public RLPlayer(String name,RLLearner inLearner) {  
+    public RLPlayer(String name,RLAgent inLearner) {  
         super(name);
         learner=inLearner;
     }
@@ -106,6 +106,7 @@ public class RLPlayer extends RandomPlayer{
             if(trainMode){
                 ObjectInputStream dataIn = new ObjectInputStream(fileDataIn);
                 learner.games=(LinkedList<GameSequence>) dataIn.readObject();
+                dataIn.close();
             } else{
                 learner.games=new LinkedList<GameSequence>();
                 learner.setEvaluateMode(true);
@@ -113,7 +114,6 @@ public class RLPlayer extends RandomPlayer{
             }
             classIn.close();
             fileClassIn.close();
-            dataIn.close();
             fileDataIn.close();
             //logger.info("loading model...");
             learner.model=ComputationGraph.load(new File(getModelLoc(loc)),true);
