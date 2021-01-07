@@ -15,6 +15,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
+/**
+ *
+ * @author weirddan455
+ */
 public class BoastAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
