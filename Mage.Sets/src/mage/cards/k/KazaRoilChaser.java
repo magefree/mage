@@ -12,6 +12,7 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -105,8 +106,12 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
             discard(); // only one use
             return false;
         }
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.isControlledBy(source.getControllerId());
+        if (!(abilityToModify instanceof SpellAbility)
+                || !abilityToModify.isControlledBy(source.getControllerId())) {
+            return false;
+        }
+        Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+        return spellCard != null && spellCard.isInstantOrSorcery();
     }
 
     @Override

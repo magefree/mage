@@ -12,7 +12,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -40,8 +39,8 @@ public class SagaAbility extends SimpleStaticAbility {
         this.maxChapter = ability.maxChapter;
     }
 
-    public void addChapterEffect(Card card, SagaChapter chapter, Effect effect) {
-        addChapterEffect(card, chapter, chapter, effect);
+    public void addChapterEffect(Card card, SagaChapter chapter, Effect... effects) {
+        addChapterEffect(card, chapter, chapter, new Effects(effects));
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect) {
