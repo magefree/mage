@@ -81,9 +81,10 @@ class WheelOfMisfortuneEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            if (entry.getValue() >= maxValue) {
+            if (entry.getValue() == maxValue) {
                 player.damage(maxValue, source.getSourceId(), source, game);
-            } else if (entry.getValue() > minValue) {
+            }
+            if (entry.getValue() != minValue) {
                 player.discard(player.getHand(), false, source, game);
                 player.drawCards(7, source, game);
             }

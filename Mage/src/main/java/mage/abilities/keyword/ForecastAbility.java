@@ -1,7 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealSourceFromYourHandCost;
@@ -10,11 +9,13 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
  * 702.56. Forecast 702.56a A forecast ability is a special kind of activated
  * ability that can be activated only from a player's hand. It's written
  * "Forecast -- [Activated ability]."
- *
+ * <p>
  * 702.56b A forecast ability may be activated only during the upkeep step of
  * the card's owner and only once each turn. The controller of the forecast
  * ability reveals the card with that ability from their hand as the ability is
@@ -23,7 +24,6 @@ import mage.game.Game;
  * begins, whichever comes first.
  *
  * @author LevelX2
- *
  */
 public class ForecastAbility extends LimitedTimesPerTurnActivatedAbility {
 
@@ -53,8 +53,6 @@ public class ForecastAbility extends LimitedTimesPerTurnActivatedAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("<i>Forecast</i> &mdash; ");
-        sb.append(super.getRule()).append(" <i>Activate this ability only during your upkeep.</i>");
-        return sb.toString();
+        return "Forecast &mdash; " + super.getRule() + " <i>(Activate this ability only during your upkeep.)</i>";
     }
 }
