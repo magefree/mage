@@ -1,5 +1,8 @@
 package mage.cards.a;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,14 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
+import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -70,37 +71,37 @@ class ConspyEffect extends ContinuousEffectImpl {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                    game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                    game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
                 if (card.isCreature() && !card.hasSubtype(subType, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                    game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card.isOwnedBy(controller.getId()) && card.isCreature() && !card.hasSubtype(subType, game)) {
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                    game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // commander in command zone
-            for (UUID commanderId : game.getCommandersIds(controller)) {
-                if (game.getState().getZone(commanderId) == Zone.COMMAND) {
-                    Card card = game.getCard(commanderId);
+            for (CommandObject commandObject : game.getState().getCommand()) {
+                if (commandObject instanceof Commander) {
+                    Card card = game.getCard(((Commander) commandObject).getId());
                     if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
-                        game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                        game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                     }
                 }
-            }
+            }            
             // creature spells you control
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
                 StackObject stackObject = iterator.next();
@@ -109,7 +110,7 @@ class ConspyEffect extends ContinuousEffectImpl {
                         && stackObject.isCreature()
                         && !stackObject.hasSubtype(subType, game)) {
                     Card card = ((Spell) stackObject).getCard();
-                    game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                    game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                 }
             }
             // creatures you control

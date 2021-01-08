@@ -14,18 +14,18 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.game.command.Commander;
 
 /**
  *
@@ -78,17 +78,22 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             // Stack
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell) {
-                    object.getColor(game).addColor(color);
+                    game.getState().getCreateMageObjectAttribute(object, game).getColor().addColor(color);
+                    Card card = ((Spell) object).getCard();
+                    game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                 }
-            }
+            }           
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
-                game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
+                game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
             }
             // Command
             for (CommandObject commandObject : game.getState().getCommand()) {
                 if (commandObject instanceof Commander) {
-                    commandObject.getColor(game).addColor(color);
+                    Card card = game.getCard(((Commander) commandObject).getId());
+                    if (card != null) {
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
+                    }
                 }
             }
 
@@ -97,15 +102,15 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 if (player != null) {
                     // Hand
                     for (Card card : player.getHand().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                     }
                     // Library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                     }
                     // Graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card, game).getColor().addColor(color);
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
                     }
                 }
             }

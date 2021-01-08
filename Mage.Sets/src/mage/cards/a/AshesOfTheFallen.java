@@ -62,7 +62,7 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
                 for (UUID cardId : controller.getGraveyard()) {
                     Card card = game.getCard(cardId);
                     if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
-                        game.getState().getCreateCardAttribute(card, game).getSubtype().add(subType);
+                        game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                     }
                 }
             } else {

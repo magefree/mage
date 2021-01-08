@@ -1,5 +1,8 @@
 package mage.cards;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -20,13 +23,8 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -867,28 +865,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void setSpellAbility(SpellAbility ability) {
         spellAbility = ability;
-    }
-
-    @Override
-    public ObjectColor getColor(Game game) {
-        if (game != null) {
-            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
-            if (cardAttribute != null) {
-                return cardAttribute.getColor();
-            }
-        }
-        return super.getColor(game);
-    }
-
-    @Override
-    public SubTypeList getSubtype(Game game) {
-        if (game != null) {
-            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
-            if (cardAttribute != null) {
-                return cardAttribute.getSubtype();
-            }
-        }
-        return super.getSubtype(game);
     }
 
     @Override

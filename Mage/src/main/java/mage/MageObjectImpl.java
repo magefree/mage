@@ -1,5 +1,6 @@
 package mage;
 
+import java.util.*;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -16,11 +17,10 @@ import mage.cards.FrameStyle;
 import mage.cards.mock.MockCard;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.MageObjectAttribute;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -117,6 +117,12 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public SubTypeList getSubtype(Game game) {
+        if (game != null) {
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getSubtype();
+            }
+        }        
         return subtype;
     }
 
@@ -170,6 +176,12 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public ObjectColor getColor(Game game) {
+        if (game != null) {
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getColor();
+            }
+        }        
         return color;
     }
 

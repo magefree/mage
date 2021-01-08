@@ -219,5 +219,57 @@ public class PaintersServantTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * https://github.com/magefree/mage/issues/6487
+     * I was playing mtg and had a Painter's Servant on the board, naming blue. 
+     * A player tried to cast a green sun's zenith, it was targeted by pyroblast
+     * and in response the painter was exiled but the zenith was still countered.
+     */
+    
+    @Test
+    public void testColorSpellEnds() {
+        setStrictChooseMode(true);
+        
+        // As Painter's Servant enters the battlefield, choose a color.
+        // All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+        addCard(Zone.HAND, playerA, "Painter's Servant", 1); // Artifact Creature {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5); 
+        // Choose one - Counter target spell if it's blue; or destroy target permanent if it's blue.
+        addCard(Zone.HAND, playerA, "Pyroblast", 1); // Instant {R}
+        
+        // Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library.
+        // Shuffle Green Sun's Zenith into its owner's library.
+        addCard(Zone.HAND, playerB, "Green Sun's Zenith", 1); // Sorcery {X}{G}
+        addTarget(playerB, "Ambush Viper");
+        // Exile target artifact or enchantment.
+        addCard(Zone.HAND, playerB, "Altar's Light", 1); // Instant {2}{W}{W}
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
+        // Flash, Deathtouch
+        addCard(Zone.LIBRARY, playerB, "Ambush Viper", 2); // Creature 2/1  {1}{G}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
+        setChoice(playerA, "Blue");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Green Sun's Zenith");
+        setChoice(playerB, "X=2");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyroblast", "Green Sun's Zenith");
+        setModeChoice(playerA, "1");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Altar's Light", "Painter's Servant", "Pyroblast");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+        
+        assertGraveyardCount(playerA, "Pyroblast", 1);
+        assertGraveyardCount(playerB, "Altar's Light", 1);
+        assertLibraryCount(playerB, "Green Sun's Zenith", 1);
+        
+        assertExileCount(playerA, "Painter's Servant", 1);
+        
+        
+        assertPermanentCount(playerB, "Ambush Viper", 1);
+
+    }    
 
 }

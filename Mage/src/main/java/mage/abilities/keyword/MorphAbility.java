@@ -207,14 +207,14 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                                 ability.getCosts().add(cost.copy());
                             }
                         }
-                        // change spell colors
+                        // change spell colors and subtype *TODO probably this needs to be done by continuous effect (while on the stack)
                         ObjectColor spellColor = spell.getColor(game);
                         spellColor.setBlack(false);
                         spellColor.setRed(false);
                         spellColor.setGreen(false);
                         spellColor.setWhite(false);
                         spellColor.setBlue(false);
-                        game.getState().getCreateCardAttribute(spell.getCard(), game).getSubtype().clear();
+                        game.getState().getCreateMageObjectAttribute(spell.getCard(), game).getSubtype().clear();
                     } else {
                         spell.setFaceDown(false, game);
                     }

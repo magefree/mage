@@ -1,5 +1,9 @@
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
+import static java.util.Collections.emptyList;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -34,12 +38,6 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -95,7 +93,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
-    private Map<UUID, CardAttribute> cardAttribute = new HashMap<>();
+    private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
@@ -178,8 +176,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
-        for (Map.Entry<UUID, CardAttribute> entry : state.cardAttribute.entrySet()) {
-            cardAttribute.put(entry.getKey(), entry.getValue().copy());
+        for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
+            mageObjectAttribute.put(entry.getKey(), entry.getValue().copy());
         }
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
@@ -228,7 +226,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zones = state.zones;
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
-        this.cardAttribute = state.cardAttribute;
+        this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
@@ -1117,7 +1115,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (CardState state : cardState.values()) {
             state.clearAbilities();
         }
-        cardAttribute.clear();
+        mageObjectAttribute.clear();
         this.setManaBurn(false);
     }
 
@@ -1188,13 +1186,13 @@ public class GameState implements Serializable, Copyable<GameState> {
         return cardState.get(cardId);
     }
 
-    public CardAttribute getCardAttribute(UUID cardId) {
-        return cardAttribute.get(cardId);
+    public MageObjectAttribute getMageObjectAttribute(UUID cardId) {
+        return mageObjectAttribute.get(cardId);
     }
 
-    public CardAttribute getCreateCardAttribute(Card card, Game game) {
-        CardAttribute cardAtt = cardAttribute.computeIfAbsent(card.getId(), k -> new CardAttribute(card, game));
-        return cardAtt;
+    public MageObjectAttribute getCreateMageObjectAttribute(MageObject mageObject, Game game) {
+        MageObjectAttribute mageObjectAtt = mageObjectAttribute.computeIfAbsent(mageObject.getId(), k -> new MageObjectAttribute(mageObject, game));
+        return mageObjectAtt;
     }
 
     public void addWatcher(Watcher watcher) {

@@ -1,5 +1,6 @@
 package mage.game.stack;
 
+import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -22,6 +23,7 @@ import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.MageObjectAttribute;
 import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.CopyStackObjectEvent;
 import mage.game.events.GameEvent;
@@ -33,8 +35,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypeList;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -575,6 +575,12 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public ObjectColor getColor(Game game) {
+        if (game != null) {
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getColor();
+            }
+        }                
         return color;
     }
 

@@ -1,5 +1,8 @@
 package mage.cards.c;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -10,16 +13,14 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
+import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.SubTypeList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author bunchOfDevs
@@ -101,30 +102,31 @@ public final class Conspiracy extends CardImpl {
                                 setCreatureSubtype(card, subType, game);
                             }
                         }
-                        // commander in command zone
-                        for (UUID commanderId : game.getCommandersIds(controller)) {
-                            if (game.getState().getZone(commanderId) == Zone.COMMAND) {
-                                Card card = game.getCard(commanderId);
-                                if (card != null && card.isCreature()) {
+                        // in command zone
+                        for (CommandObject commandObject : game.getState().getCommand()) {
+                            if (commandObject instanceof Commander) {
+                                Card card = game.getCard(((Commander) commandObject).getId());
+                                if (card != null && card.isCreature() && card.isOwnedBy(controller.getId())) {
                                     setCreatureSubtype(card, subType, game);
                                 }
                             }
-                        }
+                        }                            
                         // creature spells you control
                         for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                             StackObject stackObject = iterator.next();
                             if (stackObject instanceof Spell
-                                    && stackObject.isControlledBy(source.getControllerId())
+                                    && stackObject.isControlledBy(controller.getId())
                                     && stackObject.isCreature()) {
-                                Card card = ((Spell) stackObject).getCard();
-                                setCreatureSubtype(card, subType, game);
+                                setCreatureSubtype(stackObject, subType, game);
+                                setCreatureSubtype(((Spell) stackObject).getCard(), subType, game);
                             }
                         }
                         // creatures you control
-                        List<Permanent> creatures = game.getState().getBattlefield().getAllActivePermanents(
-                                new FilterControlledCreaturePermanent(), source.getControllerId(), game);
-                        for (Permanent creature : creatures) {
-                            setCreatureSubtype(creature, subType, game);
+                        List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
+                        for (Permanent permanent : permanents) {
+                            if (permanent.isCreature()) {
+                                setCreatureSubtype(permanent, subType, game);
+                            }
                         }
                     }
                     return true;
@@ -134,14 +136,8 @@ public final class Conspiracy extends CardImpl {
 
         private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {
             if (object != null) {
-                if (object instanceof Card) {
-                    Card card = (Card) object;
-                    setChosenSubtype(
-                            game.getState().getCreateCardAttribute(card, game).getSubtype(),
-                            subtype);
-                } else {
-                    setChosenSubtype(object.getSubtype(game), subtype);
-                }
+                setChosenSubtype(game.getState()
+                    .getCreateMageObjectAttribute(object, game).getSubtype(), subtype);
             }
         }
 

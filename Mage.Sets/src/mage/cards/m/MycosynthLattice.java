@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
@@ -95,31 +96,36 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             // spells
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell) {
-                    object.getColor(game).setColor(colorless);
+                    game.getState().getCreateMageObjectAttribute(object, game).getColor().setColor(colorless);
                 }
             }
             // exile
             for (Card card : game.getExile().getAllCards(game)) {
-                game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
+                game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
             }
             // command
             for (CommandObject commandObject : game.getState().getCommand()) {
-                commandObject.getColor(game).setColor(colorless);
+                if (commandObject instanceof Commander) {
+                    Card card = game.getCard(((Commander) commandObject).getId());
+                    if (card != null) {
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(colorless);
+                    }
+                }
             }
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     // hand
                     for (Card card : player.getHand().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
                     }
                     // library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
                     }
                     // graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        game.getState().getCreateCardAttribute(card, game).getColor().setColor(colorless);
+                        game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
                     }
                 }
             }
