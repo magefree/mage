@@ -3,7 +3,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BoastAbility;
+import mage.abilities.keyword.BoastAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
