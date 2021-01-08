@@ -4,10 +4,21 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class Kaldheim extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList(
+            "Alrund's Epiphany",
+            "Augury Raven",
+            "Behold the Multiverse",
+            "Ranar the Ever-Watchful",
+            "Sarulf's Packmate"
+    );
 
     private static final Kaldheim instance = new Kaldheim();
 
@@ -78,5 +89,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Warchanter Skald", 381, Rarity.UNCOMMON, mage.cards.w.WarchanterSkald.class));
         cards.add(new SetCardInfo("Woodland Chasm", 274, Rarity.COMMON, mage.cards.w.WoodlandChasm.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 382, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
 }

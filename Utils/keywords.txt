@@ -44,6 +44,7 @@ Flashback|cost|
 Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
+Foretell|card, manaString|
 Haste|instance|
 Hexproof|instance|
 Improvise|new|
