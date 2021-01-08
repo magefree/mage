@@ -60,6 +60,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Sarulf, Realm Eater", 228, Rarity.RARE, mage.cards.s.SarulfRealmEater.class));
         cards.add(new SetCardInfo("Showdown of the Skalds", 229, Rarity.RARE, mage.cards.s.ShowdownOfTheSkalds.class));
         cards.add(new SetCardInfo("Snowfield Sinkhole", 269, Rarity.COMMON, mage.cards.s.SnowfieldSinkhole.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 278, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
         cards.add(new SetCardInfo("Sulfurous Mine", 270, Rarity.COMMON, mage.cards.s.SulfurousMine.class));
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
