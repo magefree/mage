@@ -40,6 +40,8 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
+import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 
 /**
  * @author nantuko
@@ -57,6 +59,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected Combat combat;
     protected int currentScore;
     protected SimulationNode2 root;
+    List<Permanent> attackersList = new ArrayList<>();
+    List<Permanent> attackersToCheck = new ArrayList<>();
 
     private static final boolean AI_SUGGEST_BY_FILE_ENABLE = true; // old method to instruct AI to play cards (use cheat commands instead now)
     private static final String AI_SUGGEST_BY_FILE_SOURCE = "config/ai.please.cast.this.txt";
@@ -820,16 +824,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
             Player attackingPlayer = game.getPlayer(activePlayerId);
 
-            // TODO: add attack of Planeswalker
-
-            // 1. check alpha strike first (all in attack to kill)
+            // check alpha strike first (all in attack to kill)
             for (UUID defenderId : game.getOpponents(playerId)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
                     continue;
                 }
 
-                List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
+                attackersList = super.getAvailableAttackers(defenderId, game);
                 if (attackersList.isEmpty()) {
                     continue;
                 }
@@ -843,13 +845,13 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
             }
 
-            // 2. check all other actions
+            // check all other actions
             for (UUID defenderId : game.getOpponents(playerId)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
                     continue;
                 }
-                List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
+                attackersList = super.getAvailableAttackers(defenderId, game);
                 if (attackersList.isEmpty()) {
                     continue;
                 }
@@ -872,7 +874,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                             safeToAttack = false;
                         }
 
-                        // kill each other
+                        // attacker and blocker have the same P/T, check their overall value
                         if (attacker.getToughness().getValue() == blocker.getPower().getValue()
                                 && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
                             if (attackerValue > blockerValue
@@ -894,22 +896,60 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                             safeToAttack = true;
                         }
 
-                        // attacker can ignore blocker
+                        // attacker has flying and blocker has neither flying nor reach
                         if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                                 && !blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                                 && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
                             safeToAttack = true;
                         }
+
+                        // if any check fails, move on to the next possible attacker
+                        if (!safeToAttack) {
+                            break;
+                        }
                     }
 
-                    // 0 damage
+                    // 0 power, don't bother attacking
                     if (attacker.getPower().getValue() == 0) {
                         safeToAttack = false;
                     }
 
+                    // add attacker to the next list of all attackers that can safely attack
                     if (safeToAttack) {
-                        // undo has to be possible e.g. if not able to pay a attack fee (e.g. Ghostly Prison)
-                        attackingPlayer.declareAttacker(attacker.getId(), defenderId, game, true);
+                        attackersToCheck.add(attacker);
+                    }
+                }
+
+                // now we have a list of all attackers that can safely attack:
+                // first check to see if any Planeswalkers can be killed
+                int totalPowerOfAttackers = 0;
+                int loyaltyCounters = 0;
+                for (Permanent planeswalker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, defender.getId(), game)) {
+                    if (planeswalker != null) {
+                        loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
+                        // verify the attackers can kill the planeswalker, otherwise attack the player
+                        for (Permanent attacker : attackersToCheck) {
+                            totalPowerOfAttackers += attacker.getPower().getValue();
+                        }
+                        if (totalPowerOfAttackers < loyaltyCounters) {
+                            break;
+                        }
+                        // kill the Planeswalker
+                        for (Permanent attacker : attackersToCheck) {
+                            loyaltyCounters -= attacker.getPower().getValue();
+                            attackingPlayer.declareAttacker(attacker.getId(), planeswalker.getId(), game, true);
+                            if (loyaltyCounters <= 0) {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // any remaining attackers go for the player
+                for (Permanent attackingPermanent : attackersToCheck) {
+                    // if not already attacking a Planeswalker...
+                    if (!attackingPermanent.isAttacking()) {
+                        attackingPlayer.declareAttacker(attackingPermanent.getId(), defenderId, game, true);
                     }
                 }
             }
@@ -1027,7 +1067,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
      *
      * @param game
      * @param targets
-     * @param format    example: my %s in data
+     * @param format example: my %s in data
      * @param emptyText default text for empty targets list
      * @return
      */
