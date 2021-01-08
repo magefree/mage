@@ -35,7 +35,7 @@ public class ForecastTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
-        activateAbility(3, PhaseStep.UPKEEP, playerA, "<i>Forecast");
+        activateAbility(3, PhaseStep.UPKEEP, playerA, "Forecast");
         addTarget(playerA, "Silvercoat Lion");
 
         attack(3, playerA, "Silvercoat Lion");
