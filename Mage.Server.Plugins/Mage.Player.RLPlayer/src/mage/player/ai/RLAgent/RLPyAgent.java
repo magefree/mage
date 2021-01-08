@@ -32,6 +32,7 @@ import java.io.*;
 public class RLPyAgent extends RLAgent {
     Representer representer;
     PyConnection conn;
+    private static final Logger logger = Logger.getLogger(RLPyAgent.class);
     public RLPyAgent(PyConnection conn){
         representer=new Representer();
         this.conn=conn;
@@ -39,6 +40,7 @@ public class RLPyAgent extends RLAgent {
     public int choose(Game game, Player player,List<RLAction> actions){
         RepresentedGame repr=representer.represent(game, player, actions);
         conn.write(repr);
+        //logger.info("wrote data");
         int action=conn.read();
         assert 0<= action && action <actions.size();
         return action;
