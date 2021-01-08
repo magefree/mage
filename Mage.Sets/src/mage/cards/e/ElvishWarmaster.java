@@ -22,6 +22,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.ElfToken;
+import mage.util.CardUtil;
 
 /**
  *
@@ -69,20 +70,19 @@ public final class ElvishWarmaster extends CardImpl {
 
 class ElvishWarmasterTriggeredAbility extends EntersBattlefieldControlledTriggeredAbility {
 
-    private int lastTurnTriggered = 0;
-
     public ElvishWarmasterTriggeredAbility(Effect effect, FilterPermanent filter) {
         super(effect, filter);
     }
 
     public ElvishWarmasterTriggeredAbility(final ElvishWarmasterTriggeredAbility ability) {
         super(ability);
-        this.lastTurnTriggered = ability.lastTurnTriggered;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getTurnNum() == lastTurnTriggered) {
+        Integer lastTurnTriggered = (Integer) game.getState()
+                .getValue(CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game));
+        if (lastTurnTriggered != null && lastTurnTriggered == game.getTurnNum()) {
             return false;
         }
         return super.checkTrigger(event, game);
@@ -90,7 +90,8 @@ class ElvishWarmasterTriggeredAbility extends EntersBattlefieldControlledTrigger
 
     @Override
     public void trigger(Game game, UUID controllerId) {
-        lastTurnTriggered = game.getTurnNum();
+        game.getState().setValue(CardUtil
+                .getCardZoneString("lastTurnTriggered" + originalId, sourceId, game), game.getTurnNum());
         super.trigger(game, controllerId);
     }
 
