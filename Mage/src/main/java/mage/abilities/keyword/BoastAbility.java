@@ -35,13 +35,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
     // Needed to make this public for BoastHint to work correctly (called by BoastCondition)
     @Override
     public boolean hasMoreActivationsThisTurn(Game game) {
-        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE) {
-            return true;
-        }
-        ActivationInfo activationInfo = getActivationInfo(game);
-        return activationInfo == null
-                || activationInfo.turnNum != game.getTurnNum()
-                || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
+        return super.hasMoreActivationsThisTurn(game);
     }
 
     @Override
