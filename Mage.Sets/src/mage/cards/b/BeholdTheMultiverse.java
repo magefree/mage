@@ -1,8 +1,8 @@
-package mage.cards.g;
+package mage.cards.b;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -10,25 +10,27 @@ import mage.constants.CardType;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public final class GlimmerOfGenius extends CardImpl {
+public final class BeholdTheMultiverse extends CardImpl {
 
-    public GlimmerOfGenius(UUID ownerId, CardSetInfo setInfo) {
+    public BeholdTheMultiverse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
-        // Scry 2, then draw two card. You get {E}{E}.
+        // Scry 2, then draw two cards.
         this.getSpellAbility().addEffect(new ScryEffect(2));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+
+        // Foretell {1}{U}
+        this.addAbility(new ForetellAbility(this, "{1}{U}"));
     }
 
-    private GlimmerOfGenius(final GlimmerOfGenius card) {
+    private BeholdTheMultiverse(final BeholdTheMultiverse card) {
         super(card);
     }
 
     @Override
-    public GlimmerOfGenius copy() {
-        return new GlimmerOfGenius(this);
+    public BeholdTheMultiverse copy() {
+        return new BeholdTheMultiverse(this);
     }
 }
