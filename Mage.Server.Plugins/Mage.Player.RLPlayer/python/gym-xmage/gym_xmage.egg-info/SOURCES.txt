@@ -1,0 +1,7 @@
+README.md
+setup.py
+gym_xmage.egg-info/PKG-INFO
+gym_xmage.egg-info/SOURCES.txt
+gym_xmage.egg-info/dependency_links.txt
+gym_xmage.egg-info/requires.txt
+gym_xmage.egg-info/top_level.txt
