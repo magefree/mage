@@ -97,7 +97,8 @@ class ConspyEffect extends ContinuousEffectImpl {
             for (CommandObject commandObject : game.getState().getCommand()) {
                 if (commandObject instanceof Commander) {
                     Card card = game.getCard(((Commander) commandObject).getId());
-                    if (card != null && card.isCreature() && !card.hasSubtype(subType, game)) {
+                    if (card != null && card.isOwnedBy(controller.getId())
+                            && card.isCreature() && !card.hasSubtype(subType, game)) {
                         game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
                     }
                 }
