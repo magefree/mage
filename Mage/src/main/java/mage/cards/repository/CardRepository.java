@@ -46,7 +46,8 @@ public enum CardRepository {
             "MH1",
             "SLD",
             "ME2",
-            "ICE"
+            "ICE",
+            "KHM"
     ));
 
     CardRepository() {

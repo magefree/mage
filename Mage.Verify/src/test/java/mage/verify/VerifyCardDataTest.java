@@ -856,9 +856,9 @@ public class VerifyCardDataTest {
                 }
             }
             if (needSnow != haveSnow) {
-                errorsList.add("error, found wrong snow lands info in set " + set.getCode() + ": "
-                        + (haveSnow ? "set have snow card" : "set haven't snow card")
-                        + ", but xmage think that it " + (needSnow ? "have" : "haven't"));
+                errorsList.add("error, found incorrect snow land info in set " + set.getCode() + ": "
+                        + (haveSnow ? "set has snow cards" : "set doesn't have snow card")
+                        + ", but xmage thinks that it " + (needSnow ? "does" : "doesn't"));
             }
         }
 
