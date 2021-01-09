@@ -91,8 +91,10 @@ class GoldspanDragonTriggeredAbility extends TriggeredAbilityImpl {
             case DECLARED_ATTACKERS:
                 return game.getCombat().getAttackers().contains(this.getSourceId());
             case TARGETED:
-                StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-                return sourceObject instanceof Spell;
+                if (event.getTargetId().equals(getSourceId())) {
+                    StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
+                    return sourceObject instanceof Spell;
+                }
             default:
                 return false;
         }
