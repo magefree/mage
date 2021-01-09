@@ -12,9 +12,7 @@ import mage.game.Game;
  */
 public enum BoastHint implements Hint {
     instance;
-    private static final ConditionHint hint = new ConditionHint(BoastCondition.instance,
-            "Can activate Boast ability", null,
-            "Can't activate Boast ability", null, true);
+    private static final ConditionHint hint = new ConditionHint(BoastCondition.instance,"Can activate Boast ability");
 
     @Override
     public String getText(Game game, Ability ability) {
