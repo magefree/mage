@@ -33,7 +33,7 @@ import mage.game.stack.StackObject;
  */
 public final class GoldspanDragon extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.TREASURE, "Treasure");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.TREASURE, "Treasures");
 
     public GoldspanDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
