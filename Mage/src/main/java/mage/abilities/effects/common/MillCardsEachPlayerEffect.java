@@ -53,6 +53,7 @@ public class MillCardsEachPlayerEffect extends OneShotEffect {
                     }
                     break;
                 case ANY:
+                case EACH_PLAYER:
                     for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                         putCardsToGravecard(playerId, source, game);
                     }
@@ -86,6 +87,7 @@ public class MillCardsEachPlayerEffect extends OneShotEffect {
                 sb.append("each opponent ");
                 break;
             case ANY:
+            case EACH_PLAYER:
                 sb.append("each player ");
                 break;
             case NOT_YOU:

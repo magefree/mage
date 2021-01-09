@@ -79,6 +79,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Inga Rune-Eyes", 64, Rarity.UNCOMMON, mage.cards.i.IngaRuneEyes.class));
         cards.add(new SetCardInfo("Invasion of the Giants", 215, Rarity.UNCOMMON, mage.cards.i.InvasionOfTheGiants.class));
         cards.add(new SetCardInfo("Kaya the Inexorable", 218, Rarity.MYTHIC, mage.cards.k.KayaTheInexorable.class));
+        cards.add(new SetCardInfo("Koma's Faithful", 102, Rarity.COMMON, mage.cards.k.KomasFaithful.class));
         cards.add(new SetCardInfo("Magda, Brazen Outlaw", 142, Rarity.RARE, mage.cards.m.MagdaBrazenOutlaw.class));
         cards.add(new SetCardInfo("Masked Vandal", 184, Rarity.COMMON, mage.cards.m.MaskedVandal.class));
         cards.add(new SetCardInfo("Pyre of Heroes", 241, Rarity.RARE, mage.cards.p.PyreOfHeroes.class));
