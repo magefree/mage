@@ -16,8 +16,12 @@ public final class Kaldheim extends ExpansionSet {
             "Alrund's Epiphany",
             "Augury Raven",
             "Behold the Multiverse",
+            "Cosmos Charger",
+            "Doomskar Oracle",
             "Ranar the Ever-Watchful",
-            "Sarulf's Packmate"
+            "Ravenform",
+            "Sarulf's Packmate",
+            "Saw It Coming"
     );
 
     private static final Kaldheim instance = new Kaldheim();
@@ -82,11 +86,11 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Sarulf's Packmate", 192, Rarity.COMMON, mage.cards.s.SarulfsPackmate.class));
         cards.add(new SetCardInfo("Sarulf, Realm Eater", 228, Rarity.RARE, mage.cards.s.SarulfRealmEater.class));
         cards.add(new SetCardInfo("Showdown of the Skalds", 229, Rarity.RARE, mage.cards.s.ShowdownOfTheSkalds.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 285, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 284, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
         cards.add(new SetCardInfo("Snow-Covered Island", 278, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 283, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 277, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 281, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 282, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 276, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 280, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Snowfield Sinkhole", 269, Rarity.COMMON, mage.cards.s.SnowfieldSinkhole.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
         cards.add(new SetCardInfo("Sulfurous Mine", 270, Rarity.COMMON, mage.cards.s.SulfurousMine.class));
@@ -96,6 +100,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 197, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
         cards.add(new SetCardInfo("Valkyrie Harbinger", 374, Rarity.RARE, mage.cards.v.ValkyrieHarbinger.class));
         cards.add(new SetCardInfo("Varragoth, Bloodsky Sire", 115, Rarity.RARE, mage.cards.v.VarragothBloodskySire.class));
+        cards.add(new SetCardInfo("Village Rites", 117, Rarity.COMMON, mage.cards.v.VillageRites.class));
         cards.add(new SetCardInfo("Volatile Fjord", 273, Rarity.COMMON, mage.cards.v.VolatileFjord.class));
         cards.add(new SetCardInfo("Warchanter Skald", 381, Rarity.UNCOMMON, mage.cards.w.WarchanterSkald.class));
         cards.add(new SetCardInfo("Woodland Chasm", 274, Rarity.COMMON, mage.cards.w.WoodlandChasm.class));
