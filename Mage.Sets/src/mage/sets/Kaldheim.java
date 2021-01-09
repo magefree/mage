@@ -86,6 +86,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Masked Vandal", 184, Rarity.COMMON, mage.cards.m.MaskedVandal.class));
         cards.add(new SetCardInfo("Pyre of Heroes", 241, Rarity.RARE, mage.cards.p.PyreOfHeroes.class));
         cards.add(new SetCardInfo("Rampage of the Valkyries", 393, Rarity.UNCOMMON, mage.cards.r.RampageOfTheValkyries.class));
+        cards.add(new SetCardInfo("Ravenform", 72, Rarity.COMMON, mage.cards.r.Ravenform.class));
         cards.add(new SetCardInfo("Realmwalker", 188, Rarity.RARE, mage.cards.r.Realmwalker.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
