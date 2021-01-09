@@ -136,7 +136,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
             sb.append("Other ");
         }
         String gainedAbility = ability.getRule();
-        sb.append(filter.getMessage()).append('s').append(" you control ");
+        sb.append(filter.getMessage()).append(" you control ");
         if (duration == Duration.WhileOnBattlefield || duration == Duration.EndOfGame) {
             sb.append("have ");
             if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {

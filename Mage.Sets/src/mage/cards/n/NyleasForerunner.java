@@ -28,7 +28,7 @@ public final class NyleasForerunner extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Other creature you control have trample.
+        // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
