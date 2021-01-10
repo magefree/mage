@@ -110,6 +110,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Seize the Spoils", 149, Rarity.COMMON, mage.cards.s.SeizeTheSpoils.class));
         cards.add(new SetCardInfo("Showdown of the Skalds", 229, Rarity.RARE, mage.cards.s.ShowdownOfTheSkalds.class));
         cards.add(new SetCardInfo("Sigrid, God-Favored", 29, Rarity.RARE, mage.cards.s.SigridGodFavored.class));
+        cards.add(new SetCardInfo("Snakeskin Veil", 194, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 284, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
         cards.add(new SetCardInfo("Snow-Covered Island", 278, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
         cards.add(new SetCardInfo("Snow-Covered Mountain", 282, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
