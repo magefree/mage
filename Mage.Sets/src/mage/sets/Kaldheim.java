@@ -111,6 +111,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Plains", 276, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
         cards.add(new SetCardInfo("Snow-Covered Swamp", 280, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Snowfield Sinkhole", 269, Rarity.COMMON, mage.cards.s.SnowfieldSinkhole.class));
+        cards.add(new SetCardInfo("Spirit of the Aldergard", 195, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheAldergard.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
         cards.add(new SetCardInfo("Sulfurous Mine", 270, Rarity.COMMON, mage.cards.s.SulfurousMine.class));
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
