@@ -23,7 +23,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public final class ValiantKnight extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent(SubType.KNIGHT, "Knights you control");
+            = new FilterCreaturePermanent(SubType.KNIGHT, "Knights");
 
     public ValiantKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
