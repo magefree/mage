@@ -18,6 +18,8 @@ public final class Kaldheim extends ExpansionSet {
             "Behold the Multiverse",
             "Cosmos Charger",
             "Doomskar Oracle",
+            "Gods' Hall Guardian",
+            "Quakebringer",
             "Ranar the Ever-Watchful",
             "Ravenform",
             "Sarulf's Packmate",
@@ -55,6 +57,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Binding the Old Gods", 206, Rarity.UNCOMMON, mage.cards.b.BindingTheOldGods.class));
         cards.add(new SetCardInfo("Blightstep Pathway", 252, Rarity.RARE, mage.cards.b.BlightstepPathway.class));
         cards.add(new SetCardInfo("Bretagard Stronghold", 253, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));
+        cards.add(new SetCardInfo("Broken Wings", 164, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Calamity Bearer", 125, Rarity.RARE, mage.cards.c.CalamityBearer.class));
         cards.add(new SetCardInfo("Canopy Tactician", 378, Rarity.RARE, mage.cards.c.CanopyTactician.class));
         cards.add(new SetCardInfo("Cleaving Reaper", 376, Rarity.RARE, mage.cards.c.CleavingReaper.class));
