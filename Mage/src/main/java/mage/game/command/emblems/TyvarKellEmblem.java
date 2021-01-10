@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
 import java.util.Iterator;
-import java.util.UUID;
 
 /**
  *
@@ -36,7 +35,7 @@ public final class TyvarKellEmblem extends Emblem {
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new TyvarKellEmblemEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn), filter, false, true
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(2).setText("and you draw two cards"));
+        ability.addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("and"));
         this.getAbilities().add(ability);
     }
 }
@@ -80,16 +79,19 @@ class TyvarKellEmblemEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         if (this.affectedObjectsSet) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-                UUID sourceId = it.next().getSourceId();
-                Card card = game.getCard(sourceId);
-                Permanent perm = game.getPermanent(sourceId);
+                MageObjectReference mor = it.next();
+                Card card = mor.getCard(game);
+                Permanent perm = game.getPermanent(mor.getSourceId());
+                boolean applied = false;
                 if (card != null && !card.hasAbility(ability, game)) {
                     game.getState().addOtherAbility(card, ability);
+                    applied = true;
                 }
-                if (perm != null) {
+                if (perm != null && perm.getZoneChangeCounter(game) == mor.getZoneChangeCounter() + 1) {
                     perm.addAbility(ability, source.getSourceId(), game);
+                    applied = true;
                 }
-                if (card == null && perm == null) {
+                if (!applied) {
                     it.remove();
                     if (affectedObjectList.isEmpty()) {
                         discard();
