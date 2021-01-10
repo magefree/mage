@@ -105,11 +105,11 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Seize the Spoils", 149, Rarity.COMMON, mage.cards.s.SeizeTheSpoils.class));
         cards.add(new SetCardInfo("Showdown of the Skalds", 229, Rarity.RARE, mage.cards.s.ShowdownOfTheSkalds.class));
         cards.add(new SetCardInfo("Sigrid, God-Favored", 29, Rarity.RARE, mage.cards.s.SigridGodFavored.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 284, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class));
-        cards.add(new SetCardInfo("Snow-Covered Island", 278, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 282, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 276, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 280, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 284, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 278, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 282, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 276, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 280, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
         cards.add(new SetCardInfo("Snowfield Sinkhole", 269, Rarity.COMMON, mage.cards.s.SnowfieldSinkhole.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
         cards.add(new SetCardInfo("Sulfurous Mine", 270, Rarity.COMMON, mage.cards.s.SulfurousMine.class));
