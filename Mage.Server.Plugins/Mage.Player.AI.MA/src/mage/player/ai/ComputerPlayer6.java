@@ -820,6 +820,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
      * @param activePlayerId
      */
     private void declareAttackers(Game game, UUID activePlayerId) {
+        attackersToCheck.clear();
+        attackersList.clear();
         game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
             Player attackingPlayer = game.getPlayer(activePlayerId);
