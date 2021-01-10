@@ -105,6 +105,7 @@ public enum CounterType {
     MUSIC("music"),
     MUSTER("muster"),
     NET("net"),
+    NIGHT("night"),
     OMEN("omen"),
     ORE("ore"),
     P0P1(new BoostCounter(0, 1).name),
