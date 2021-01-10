@@ -33,6 +33,7 @@ public enum SubType {
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
     SAGA("Saga", SubTypeSet.EnchantmentType),
+    SHARD("Shard", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
     CLUE("Clue", SubTypeSet.ArtifactType),
@@ -415,6 +416,7 @@ public enum SubType {
     LUKKA("Lukka", SubTypeSet.PlaneswalkerType),
     NAHIRI("Nahiri", SubTypeSet.PlaneswalkerType),
     NARSET("Narset", SubTypeSet.PlaneswalkerType),
+    NIKO("Niko", SubTypeSet.PlaneswalkerType),
     NISSA("Nissa", SubTypeSet.PlaneswalkerType),
     NIXILIS("Nixilis", SubTypeSet.PlaneswalkerType),
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
