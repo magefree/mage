@@ -5,6 +5,7 @@ import java.net.*;
 import java.io.*;
 import org.apache.log4j.Logger;
 import org.nd4j.shade.wstx.sw.OutputElementBase;
+import com.google.gson.*;
 
 public class PyConnection {
     BufferedReader reader;
@@ -27,23 +28,32 @@ public class PyConnection {
             System.exit(-1);
         } catch (IOException ex) {
 
-            System.out.println("I/O error: " + ex.getMessage());
+            System.out.println("I/O error in Init: " + ex.getMessage());
             System.exit(-1);
         }
     }
-    void write(RepresentedGame repr){
+    public void write(RepresentedGame repr){
+        String message=repr.asJsonString();
+        send(message);
+    }
+    void send(String message){
         try{
-            String message=repr.asJsonString();
             long messageLen=message.length();
             dataout.writeLong(messageLen);
             dataout.writeBytes(message);
             buff.flush();
         }catch (IOException ex) {
-
-            System.out.println("I/O error: " + ex.getMessage());
+            System.out.println("I/O error in send: " + ex.getMessage());
             System.exit(-1);
         }
-
+    }
+    public void write_hparams(){
+        HParams hParams=new HParams();
+        Gson gson = new Gson();
+        send(gson.toJson(hParams));
+    }
+    public void write_string(String str){
+        send(str);
     }
     int read(){
         String message="";

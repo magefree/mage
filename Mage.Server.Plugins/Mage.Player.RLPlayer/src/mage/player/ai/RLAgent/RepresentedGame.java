@@ -38,7 +38,8 @@ public class RepresentedGame implements Serializable{
     }
     //returns the data prepared to be fed into the model
     public INDArray[] asModelInputs(){
-        INDArray inputs[]=new INDArray[HParams.total_model_inputs];
+        HParams hparams=new HParams();
+        INDArray inputs[]=new INDArray[hparams.total_model_inputs];
         inputs[0]=Nd4j.expandDims(actionRepr.get(0), 0);
         for(int i=0;i<gameRepr.size();i++){
             inputs[i+1]=Nd4j.expandDims(gameRepr.get(i), 0);

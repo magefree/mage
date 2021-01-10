@@ -39,11 +39,12 @@ public class RLPyAgent extends RLAgent {
     }
     public int choose(Game game, Player player,List<RLAction> actions){
         RepresentedGame repr=representer.represent(game, player, actions);
+        conn.write_string("not done");
         conn.write(repr);
         //logger.info("wrote data");
         int action=conn.read();
         assert 0<= action && action <actions.size();
-        return action;
+        return action%actions.size();
     }
 
 }

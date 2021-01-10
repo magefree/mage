@@ -1,1 +1,1 @@
-from gym-xmage.envs.learnerVsRandom import learnerVsRandom
+from gym_xmage.envs.learnerVsRandom import learnerVsRandom

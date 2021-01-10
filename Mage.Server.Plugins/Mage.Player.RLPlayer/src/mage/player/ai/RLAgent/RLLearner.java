@@ -52,7 +52,7 @@ public class RLLearner implements Serializable{
     public transient ComputationGraph model; //Must be serialized seperately with its own methods
     protected transient ComputationGraph targetNet;
     //needs to be public for serialization
-
+    HParams hparams;
     //Constructor--creates a RLLearner
     public RLLearner(){
         games=new LinkedList<GameSequence>(); 
@@ -61,6 +61,7 @@ public class RLLearner implements Serializable{
         representer=new Representer();
         copyToTarget();
         evaluateMode=false;
+        hparams=new HParams();
         //prevents logging spam
         //Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         //root.setLevel(Level.INFO);
@@ -115,12 +116,12 @@ public class RLLearner implements Serializable{
     //Only getTargets can currently handle NULL elements
     protected List<INDArray> represent_batch(List<RepresentedGame> reprGames){
         List<List<INDArray>> prePiled=new ArrayList<List<INDArray>>();
-        for(int i=0;i<HParams.total_model_inputs;i++){
+        for(int i=0;i<hparams.total_model_inputs;i++){
             prePiled.add(new ArrayList<INDArray>());
         }
         for(int i=0;i<reprGames.size();i++){
             INDArray[] repr=reprGames.get(i).asModelInputs();
-            for(int j=0;j<HParams.total_model_inputs;j++){
+            for(int j=0;j<hparams.total_model_inputs;j++){
                 prePiled.get(j).add(repr[j]);
             }
         }
@@ -148,14 +149,14 @@ public class RLLearner implements Serializable{
         List<INDArray> representedExps=represent_batch(reprGames);
         representedExps.add(mask);
         Map<String,INDArray> qmodelOut=graph.feedForward(representedExps.toArray(new INDArray[representedExps.size()]),true);
-        INDArray QValues=qmodelOut.get("linout").reshape(-1,HParams.max_representable_actions);
+        INDArray QValues=qmodelOut.get("linout").reshape(-1,hparams.max_representable_actions);
         return QValues;
     }
     //Calculates the targets of the ML model for the actions taken
     protected List<Double> getTargets(List<GameSequence> sampledGames,List<RepresentedGame> currentReprs, List<RepresentedGame> nextReprs){
         INDArray QValues;
-        INDArray mask=Nd4j.ones(HParams.batch_size,1,HParams.max_representable_actions);
-        if(HParams.double_dqn){
+        INDArray mask=Nd4j.ones(hparams.batch_size,1,hparams.max_representable_actions);
+        if(hparams.double_dqn){
             QValues=runModel(targetNet,nextReprs,mask);
         }
         else{
@@ -167,7 +168,7 @@ public class RLLearner implements Serializable{
             if(!nextReprs.get(i).isDummy){
                 double priorLifeDiff=currentReprs.get(i).getAgentLife()-currentReprs.get(i).getOpponentLife();
                 double currentLifeDiff=nextReprs.get(i).getAgentLife()-nextReprs.get(i).getOpponentLife();
-                targets.add((currentLifeDiff-priorLifeDiff)/20.0+maxQ.getDouble(i)*HParams.discount);
+                targets.add((currentLifeDiff-priorLifeDiff)/20.0+maxQ.getDouble(i)*hparams.discount);
             }
             else{
                 //logger.info("adding game win/loss "+sampledGames.get(i).getValue());
@@ -199,8 +200,8 @@ public class RLLearner implements Serializable{
                 nextReprs.add(representer.emptyGame());
             }
         }
-        INDArray target=Nd4j.zeros(HParams.batch_size,1,HParams.max_representable_actions);
-        INDArray mask=Nd4j.zeros(HParams.batch_size,1,HParams.max_representable_actions);
+        INDArray target=Nd4j.zeros(hparams.batch_size,1,hparams.max_representable_actions);
+        INDArray mask=Nd4j.zeros(hparams.batch_size,1,hparams.max_representable_actions);
         List<Double> targets=getTargets(sampledGames, currentReprs,nextReprs);
         //logger.info(targets.toString());
         for(int i=0;i<size;i++){
@@ -216,20 +217,20 @@ public class RLLearner implements Serializable{
     } 
     //Gets the action the model thinks is best in this game state
     protected int getGreedy(RepresentedGame repr){
-        INDArray inputs[]=new INDArray[HParams.total_model_inputs+1];
-        System.arraycopy(repr.asModelInputs(),0,inputs,0,HParams.total_model_inputs);
-        inputs[HParams.total_model_inputs]=Nd4j.ones(1,HParams.max_representable_actions);
+        INDArray inputs[]=new INDArray[hparams.total_model_inputs+1];
+        System.arraycopy(repr.asModelInputs(),0,inputs,0,hparams.total_model_inputs);
+        inputs[hparams.total_model_inputs]=Nd4j.ones(1,hparams.max_representable_actions);
         Map<String,INDArray> qmodelOut;
-        if(HParams.double_dqn){
+        if(hparams.double_dqn){
             qmodelOut=targetNet.feedForward(inputs,false);
         }else{
             qmodelOut=model.feedForward(inputs,false);
         }
         
-        INDArray q_values=qmodelOut.get("linout").reshape(HParams.max_representable_actions);
+        INDArray q_values=qmodelOut.get("linout").reshape(hparams.max_representable_actions);
         double max_q=Double.NEGATIVE_INFINITY;
         int max_index=0;
-        for(int i=0;i<Math.min(repr.numActions,HParams.max_representable_actions);i++){
+        for(int i=0;i<Math.min(repr.numActions,hparams.max_representable_actions);i++){
             double value=q_values.getDouble(i);
             if(value>max_q){
                 max_q=value;
@@ -247,7 +248,7 @@ public class RLLearner implements Serializable{
         }*/
         RepresentedGame repr=representer.represent(game, player, actions);
         if(RandomUtil.nextDouble()<epsilon){//random action
-            choice=RandomUtil.nextInt(Math.min(actions.size(),HParams.max_representable_actions));
+            choice=RandomUtil.nextInt(Math.min(actions.size(),hparams.max_representable_actions));
         }
         else{//Greedy action from q learner
             choice=getGreedy(repr);
@@ -262,28 +263,28 @@ public class RLLearner implements Serializable{
     //because it sets the training listener
     ComputationGraph constructModel(){
         ComputationGraphConfiguration conf = new NeuralNetConfiguration.Builder()
-        .updater(new Adam(HParams.lr))
+        .updater(new Adam(hparams.lr))
         .graphBuilder()
         .addInputs("actionIDs","otherReal","permanentIDs","extraPermInfo","mask") //can use any label for this        
-        .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents)
-          .nOut(HParams.internal_dim).inputLength(HParams.max_representable_permanents).build(),"permanentIDs")
+        .addLayer("embedPermanent", new EmbeddingSequenceLayer.Builder().nIn(hparams.max_represents)
+          .nOut(hparams.internal_dim).inputLength(hparams.max_representable_permanents).build(),"permanentIDs")
         .addVertex("addExtraInfo",new MergeVertex(),"embedPermanent","extraPermInfo")
         .addLayer("poolPermanent", new GlobalPoolingLayer.Builder(PoolingType.SUM).build(),"addExtraInfo")
-        .addLayer("normPool",new BatchNormalization.Builder().nIn(HParams.internal_dim+HParams.perm_features)
-        .nOut(HParams.internal_dim+HParams.perm_features).build(),"poolPermanent")
-        .addLayer("combinedGame", new DenseLayer.Builder().nIn(HParams.game_reals+HParams.internal_dim+HParams.perm_features)
-          .nOut(HParams.internal_dim).activation(Activation.RELU).build(), "normPool","otherReal")
-        .addLayer("actGame1", new DenseLayer.Builder().nIn(HParams.internal_dim)
-          .nOut(HParams.internal_dim).activation(Activation.RELU).build(), "combinedGame")
-        .addLayer("normGame1", new BatchNormalization.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim).build(), "actGame1")
-        .addVertex("repeatGame", new ReshapeVertex(-1,HParams.internal_dim,1), "normGame1")
-        .addLayer("embedAction",new EmbeddingSequenceLayer.Builder().nIn(HParams.max_represents)
-          .nOut(HParams.internal_dim/HParams.input_seqlen).inputLength(HParams.model_inputlen).build(),"actionIDs")
-        .addVertex("refold", new ReshapeVertex(-1,HParams.internal_dim,HParams.max_representable_actions), "embedAction") 
+        .addLayer("normPool",new BatchNormalization.Builder().nIn(hparams.internal_dim+hparams.perm_features)
+        .nOut(hparams.internal_dim+hparams.perm_features).build(),"poolPermanent")
+        .addLayer("combinedGame", new DenseLayer.Builder().nIn(hparams.game_reals+hparams.internal_dim+hparams.perm_features)
+          .nOut(hparams.internal_dim).activation(Activation.RELU).build(), "normPool","otherReal")
+        .addLayer("actGame1", new DenseLayer.Builder().nIn(hparams.internal_dim)
+          .nOut(hparams.internal_dim).activation(Activation.RELU).build(), "combinedGame")
+        .addLayer("normGame1", new BatchNormalization.Builder().nIn(hparams.internal_dim).nOut(hparams.internal_dim).build(), "actGame1")
+        .addVertex("repeatGame", new ReshapeVertex(-1,hparams.internal_dim,1), "normGame1")
+        .addLayer("embedAction",new EmbeddingSequenceLayer.Builder().nIn(hparams.max_represents)
+          .nOut(hparams.internal_dim/hparams.input_seqlen).inputLength(hparams.model_inputlen).build(),"actionIDs")
+        .addVertex("refold", new ReshapeVertex(-1,hparams.internal_dim,hparams.max_representable_actions), "embedAction") 
         .addVertex("combined", new ElementWiseVertex(Op.Product), "refold","repeatGame")   
-        .addLayer("actlin1", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(HParams.internal_dim)
+        .addLayer("actlin1", new Convolution1D.Builder().nIn(hparams.internal_dim).nOut(hparams.internal_dim)
           .activation(Activation.RELU).kernelSize(1).build(), "combined")
-        .addLayer("lastlin", new Convolution1D.Builder().nIn(HParams.internal_dim).nOut(1).kernelSize(1)
+        .addLayer("lastlin", new Convolution1D.Builder().nIn(hparams.internal_dim).nOut(1).kernelSize(1)
           .activation(Activation.TANH).build(), "actlin1")
         .addVertex("maskout", new ElementWiseVertex(Op.Product), "lastlin","mask")
         .addLayer("linout",new RnnOutputLayer.Builder(LossFunctions.LossFunction.MSE).activation(Activation.IDENTITY).nIn(1).nOut(1).build(),"maskout")
@@ -301,7 +302,7 @@ public class RLLearner implements Serializable{
     //added after this
     public void endGame(Player player,String winner){
         getCurrentGame().setWinner(player,winner);
-        if(games.size()>HParams.games_to_keep){
+        if(games.size()>hparams.games_to_keep){
             games.removeFirst();
         }
     }

@@ -1,5 +1,10 @@
 syntax: glob
 
+
+**cards.h2.mv.db
+**cards.h2.trace.db 
+**.pyc 
+
 # Mage.Client
 Mage.Client/*.dck
 Mage.Client/db
@@ -68,8 +73,7 @@ Mage.Server.Plugins/Mage.Tournament.Constructed/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
 
 Mage.Server.Plugins/Mage.Player.RLPlayer/db
-**cards.h2.mv.db
-**cards.h2.trace.db 
+/home/elchanan/java/mage/Mage.Server.Plugins/Mage.Player.RLPlayer/target
 
 # Mage.Sets
 Mage.Sets/target

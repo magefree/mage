@@ -17,10 +17,13 @@ import mage.game.combat.CombatGroup;
 import mage.game.combat.Combat;
 public class Representer implements Serializable{
     HashMap<String,Integer> nameToIndex;
-    int current_represent=HParams.counter_start;
+    int current_represent;
+    HParams hparams;
     private static final Logger logger = Logger.getLogger(Representer.class);
     public Representer(){
         nameToIndex=new HashMap<String,Integer>();
+        hparams=new HParams();
+        current_represent=hparams.counter_start;
     }
     //Gets the name of an object
     protected String nameObject(MageObject obj){
@@ -34,12 +37,12 @@ public class Representer implements Serializable{
     }
 
     public RepresentedGame emptyGame(){
-        INDArray[] gameZeros=new INDArray[HParams.num_game_reprs];
-        gameZeros[0]=Nd4j.zeros(DataType.FLOAT,HParams.game_reals);
-        gameZeros[1]=Nd4j.zeros(DataType.INT32,HParams.max_representable_permanents);
-        gameZeros[2]=Nd4j.zeros(DataType.FLOAT,HParams.perm_features,HParams.max_representable_permanents);
+        INDArray[] gameZeros=new INDArray[hparams.num_game_reprs];
+        gameZeros[0]=Nd4j.zeros(DataType.FLOAT,hparams.game_reals);
+        gameZeros[1]=Nd4j.zeros(DataType.INT32,hparams.max_representable_permanents);
+        gameZeros[2]=Nd4j.zeros(DataType.FLOAT,hparams.perm_features,hparams.max_representable_permanents);
         List<INDArray> gameRepr=Arrays.asList(gameZeros);
-        List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(DataType.INT32,HParams.model_inputlen));
+        List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(DataType.INT32,hparams.model_inputlen));
         return new RepresentedGame(0,gameRepr,actionRepr,0,0,true);
     }
     protected float getReward(Player LPlayer,Game game){
@@ -52,9 +55,9 @@ public class Representer implements Serializable{
     protected int getActionID(String actionString){
         Integer ret=nameToIndex.putIfAbsent(actionString, current_represent);
         if(ret==null) {current_represent++;
-            if(current_represent>=HParams.max_represents){
+            if(current_represent>=hparams.max_represents){
                 throw new IllegalStateException("The maximum number of representable object in"
-                +"the machine learning model has been exceeded. increase HParams.max_represents");
+                +"the machine learning model has been exceeded. increase hparams.max_represents");
             }
         }
         ret=nameToIndex.get(actionString);
@@ -64,16 +67,16 @@ public class Representer implements Serializable{
     //fed into the model
     protected List<INDArray> representActions(Game game,List<RLAction> actions){
         List<INDArray> represented=new ArrayList<INDArray>();
-        for(int i=0;i<HParams.max_representable_actions;i++){
+        for(int i=0;i<hparams.max_representable_actions;i++){
             if(i<actions.size()){
                 represented.add(representAction(game, actions.get(i)));
             }
             else{
-                represented.add(Nd4j.createFromArray(new int[HParams.input_seqlen]));
+                represented.add(Nd4j.createFromArray(new int[hparams.input_seqlen]));
             }
         }
         INDArray packed=Nd4j.pile(represented);
-        INDArray flat=packed.reshape(HParams.model_inputlen);
+        INDArray flat=packed.reshape(hparams.model_inputlen);
         //logger.info("flat shape is "+flat.shapeInfoToString());
         ArrayList<INDArray> ret=new ArrayList<INDArray>();
         ret.add(flat);
@@ -83,7 +86,7 @@ public class Representer implements Serializable{
 
     //extracts relevent decimal quanitites from a player
     protected float[] playerToArray(Player player){
-        float[] data=new float[HParams.player_reals];
+        float[] data=new float[hparams.player_reals];
         data[0]=player.getLife()/20f;
         data[1]=player.getHand().size()/7f;
         return data;
@@ -97,10 +100,10 @@ public class Representer implements Serializable{
     //represents a game state by extracting relevent information
     //First value is real numbers, second is embedding IDs (ints)
     protected float[] getGameReals(Game game, Player LPlayer,Player OPlayer){
-        float[] gameReals=new float[HParams.game_reals];
-        System.arraycopy(playerToArray(LPlayer), 0, gameReals, 0,HParams.player_reals);
-        System.arraycopy(playerToArray(OPlayer), 0, gameReals, HParams.player_reals, HParams.player_reals);
-        int nextIndex=2*HParams.player_reals;
+        float[] gameReals=new float[hparams.game_reals];
+        System.arraycopy(playerToArray(LPlayer), 0, gameReals, 0,hparams.player_reals);
+        System.arraycopy(playerToArray(OPlayer), 0, gameReals, hparams.player_reals, hparams.player_reals);
+        int nextIndex=2*hparams.player_reals;
         gameReals[nextIndex]=game.getTurnNum();
         return gameReals;
     }
@@ -109,10 +112,10 @@ public class Representer implements Serializable{
         UUID learnerId=LPlayer.getId(); 
         UUID opponentId=OPlayer.getId();
         Battlefield field=game.getBattlefield();
-        int[] embeds=new int[HParams.max_representable_permanents];
-        float[][] extra_perm_info=new float[HParams.max_representable_permanents][HParams.perm_features];
+        int[] embeds=new int[hparams.max_representable_permanents];
+        float[][] extra_perm_info=new float[hparams.max_representable_permanents][hparams.perm_features];
         Iterator<Permanent> perms=field.getAllPermanents().iterator();
-        for(int i=0;i<HParams.max_representable_permanents;i++){
+        for(int i=0;i<hparams.max_representable_permanents;i++){
             if(perms.hasNext()){
                 Permanent perm=perms.next();
                 String controllerName;
@@ -148,7 +151,7 @@ public class Representer implements Serializable{
     }
     //represents a single action.
     protected INDArray representAction(Game game, RLAction action){
-        int[] embeds=new int[HParams.input_seqlen];
+        int[] embeds=new int[hparams.input_seqlen];
         if(action instanceof ActionAbility){
             Ability ability=((ActionAbility) action).ability;
             MageObject source=ability.getSourceObjectIfItStillExists(game);
@@ -174,7 +177,7 @@ public class Representer implements Serializable{
                 embeds[0]=getActionID(attackName);
             }
             else{
-                embeds[0]=HParams.no_attack;
+                embeds[0]=hparams.no_attack;
             }
         }
         else if (action instanceof ActionBlock){
@@ -187,16 +190,16 @@ public class Representer implements Serializable{
                 embeds[0]=getActionID(NameBlockAttacker);
                 embeds[1]=getActionID(NameBlocker);
             }else{
-                embeds[0]=HParams.no_block;
-                embeds[1]=HParams.no_block;
+                embeds[0]=hparams.no_block;
+                embeds[1]=hparams.no_block;
             }
         }
         else if(action instanceof ActionMulligan){
             ActionMulligan actMull=(ActionMulligan) action;
             if(actMull.isMulligan){
-                embeds[0]=HParams.yes_mulligan;
+                embeds[0]=hparams.yes_mulligan;
             }else{
-                embeds[0]=HParams.no_mulligan;
+                embeds[0]=hparams.no_mulligan;
             }
         }
         else{

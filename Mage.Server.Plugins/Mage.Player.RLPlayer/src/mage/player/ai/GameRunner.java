@@ -42,7 +42,9 @@ public class  GameRunner{
     PyConnection conn;
     RLPyAgent agent;
     public GameRunner(){
-        conn=new PyConnection(5000);
+        int port=5000;
+        conn=new PyConnection(port);
+        conn.write_hparams();
         agent=new RLPyAgent(conn);
     }
     
@@ -86,8 +88,10 @@ public class  GameRunner{
         //learner.endGame(computerA,game.getWinner());
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
+        int reward=getReward(computerA, game.getWinner());
+        conn.write_string(""+reward);
         //return learner.getCurrentGame().getValue();
-        return 0;
+        return reward;
     }
     private Player createAgentPlayer(String name, RLAgent agent){
         return new RLPlayer(name,agent);
@@ -120,5 +124,17 @@ public class  GameRunner{
             deck=null;
         }
         return deck;
+    }
+    private int getReward(Player player,String winner){ 
+        String winLine="Player "+player.getName()+" is the winner";
+        if(winner.equals(winLine)){
+            return 1;
+        }
+        else if(winner.equals("Game is a draw")){
+            return 0;
+        }
+        else{
+            return -1;
+        }
     }
 }
