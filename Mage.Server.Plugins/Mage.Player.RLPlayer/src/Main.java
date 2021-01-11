@@ -10,7 +10,7 @@ public class Main {
         ArrayList<String> errorsList = new ArrayList<>();
         CardScanner.scan(errorsList);
         GameRunner runner=new GameRunner();
-        for(int i=0;i<100;i++){
+        while(true){
             runner.playOneGame();
         }
     }

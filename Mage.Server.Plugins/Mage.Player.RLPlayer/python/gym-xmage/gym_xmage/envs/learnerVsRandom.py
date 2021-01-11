@@ -4,6 +4,7 @@ from gym.utils import seeding
 import socket
 import json
 import random
+import numpy as np 
 
 class learnerVsRandom(gym.Env):
     metadata = {'render.modes': ['human']}
@@ -18,15 +19,25 @@ class learnerVsRandom(gym.Env):
         print("connected")
         self.java_hparams=self.recieve_and_parse(self.clientsocket)
         print("java hparams are",self.java_hparams)
-        self.action_space=spaces.Discrete(self.java_hparams['max_representable_actions'])
+        max_act=self.java_hparams['max_representable_actions']
+        self.action_space=spaces.Discrete(max_act)
+        self.observation_space=spaces.Box(0,self.java_hparams['max_represents'],shape=(max_act,),dtype=np.int32)
     def step(self, action):
         self.clientsocket.send(bytes(str(action),'ascii')+b"\n")
         message=self.recieve_and_parse(self.clientsocket)
-        return (message,message['reward'],message['isDone'],"")
+        return (self.message_to_state(message),message['reward'],message['isDone'],{})
     def reset(self):
         message=self.recieve_and_parse(self.clientsocket)
         #done=self.recieve_msg(self.clientsocket)
-        return message
+        return self.message_to_state(message)
+    def message_to_state(self,message):
+        actions=message['actionRepr']
+        state=message['gameRepr']
+        actions=np.array(actions)
+        gameReals=np.array(state[0])
+        perms=np.array(state[1])
+        actpart1=actions[0,:,0]
+        return actpart1
     def render(self, mode='human'):
         pass
     def close(self):
@@ -40,9 +51,9 @@ class learnerVsRandom(gym.Env):
         recvlen=self.read_bytes(socket,8)
         messagelen=int.from_bytes(recvlen,byteorder='big')
         message=self.read_bytes(socket,messagelen)
-        print("message is:\n",message)
         return message
     def recieve_and_parse(self,socket):
         message=self.recieve_msg(socket)
         parsed=json.loads(message)
+        #print(json.dumps(parsed, indent = 1))
         return parsed

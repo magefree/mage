@@ -92,10 +92,10 @@ public class Representer implements Serializable{
             }
         }
         INDArray packed=Nd4j.pile(represented);
-        INDArray flat=packed.reshape(hparams.model_inputlen);
+        //INDArray flat=packed.reshape(hparams.model_inputlen);
         //logger.info("flat shape is "+flat.shapeInfoToString());
         ArrayList<INDArray> ret=new ArrayList<INDArray>();
-        ret.add(flat);
+        ret.add(packed);
         return ret;
     }
 
