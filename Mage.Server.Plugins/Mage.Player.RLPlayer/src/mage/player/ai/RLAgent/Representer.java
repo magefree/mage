@@ -33,7 +33,9 @@ public class Representer implements Serializable{
     public RepresentedGame represent(Game game,Player player, List<RLAction> actions){
         List<INDArray> gameRepr=representGame(game, player);
         List<INDArray> actionRepr=representActions(game, actions);
-        return new RepresentedGame(actions.size(),gameRepr,actionRepr,player.getLife(),getOpponent(game, player).getLife());
+        float reward=getReward(game, player);
+        boolean isDone=game.checkIfGameIsOver();
+        return new RepresentedGame(actions.size(),gameRepr,actionRepr,reward,isDone);
     }
 
     public RepresentedGame emptyGame(){
@@ -43,10 +45,24 @@ public class Representer implements Serializable{
         gameZeros[2]=Nd4j.zeros(DataType.FLOAT,hparams.perm_features,hparams.max_representable_permanents);
         List<INDArray> gameRepr=Arrays.asList(gameZeros);
         List<INDArray> actionRepr=Arrays.asList(Nd4j.zeros(DataType.INT32,hparams.model_inputlen));
-        return new RepresentedGame(0,gameRepr,actionRepr,0,0,true);
+        return new RepresentedGame(0,gameRepr,actionRepr,0.0f,true);
     }
-    protected float getReward(Player LPlayer,Game game){
+    protected float getReward(Game game,Player LPlayer){
         Player OPlayer=getOpponent(game, LPlayer);
+        boolean isOver=game.checkIfGameIsOver();
+        if(isOver){
+            String winner=game.getWinner();
+            String winLine="Player "+LPlayer.getName()+" is the winner";
+            if(winner.equals(winLine)){
+                return 1.0f;
+            }
+            else if(winner.equals("Game is a draw")){
+                return 0.0f;
+            }
+            else{
+                return -1.0f;
+            }
+        }
         return (LPlayer.getLife()-OPlayer.getLife())/(200.0f);
     }
     //Takes the string representation of a permanent or

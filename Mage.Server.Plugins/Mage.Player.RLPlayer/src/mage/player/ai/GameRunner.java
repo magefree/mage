@@ -89,7 +89,7 @@ public class  GameRunner{
         logger.info("Winner: " + game.getWinner());
         logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
         int reward=getReward(computerA, game.getWinner());
-        conn.write_string(""+reward);
+        agent.sendGame(game,computerA,new ArrayList<RLAction>());
         //return learner.getCurrentGame().getValue();
         return reward;
     }

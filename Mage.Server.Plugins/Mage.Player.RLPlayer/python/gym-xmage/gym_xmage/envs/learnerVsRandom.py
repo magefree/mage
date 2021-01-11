@@ -20,17 +20,12 @@ class learnerVsRandom(gym.Env):
         print("java hparams are",self.java_hparams)
         self.action_space=spaces.Discrete(self.java_hparams['max_representable_actions'])
     def step(self, action):
-        clientsocket.send(bytes(str(action),'ascii')+b"\n")
+        self.clientsocket.send(bytes(str(action),'ascii')+b"\n")
         message=self.recieve_and_parse(self.clientsocket)
-        done=self.recieve_msg(self.clientsocket)
-        if(done=="not done"):
-            return (message,0,False,"")
-        else:
-            reward=int(done)
-            return (message,reward,True,"")
+        return (message,message['reward'],message['isDone'],"")
     def reset(self):
-        done=self.recieve_msg(self.clientsocket)
         message=self.recieve_and_parse(self.clientsocket)
+        #done=self.recieve_msg(self.clientsocket)
         return message
     def render(self, mode='human'):
         pass
@@ -45,6 +40,7 @@ class learnerVsRandom(gym.Env):
         recvlen=self.read_bytes(socket,8)
         messagelen=int.from_bytes(recvlen,byteorder='big')
         message=self.read_bytes(socket,messagelen)
+        print("message is:\n",message)
         return message
     def recieve_and_parse(self,socket):
         message=self.recieve_msg(socket)

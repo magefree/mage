@@ -165,10 +165,8 @@ public class RLLearner implements Serializable{
         INDArray maxQ=QValues.max(1);
         List<Double> targets=new ArrayList<Double>();
         for(int i=0;i<nextReprs.size();i++){
-            if(!nextReprs.get(i).isDummy){
-                double priorLifeDiff=currentReprs.get(i).getAgentLife()-currentReprs.get(i).getOpponentLife();
-                double currentLifeDiff=nextReprs.get(i).getAgentLife()-nextReprs.get(i).getOpponentLife();
-                targets.add((currentLifeDiff-priorLifeDiff)/20.0+maxQ.getDouble(i)*hparams.discount);
+            if(!nextReprs.get(i).isDone){
+                targets.add(maxQ.getDouble(i)*hparams.discount);
             }
             else{
                 //logger.info("adding game win/loss "+sampledGames.get(i).getValue());
