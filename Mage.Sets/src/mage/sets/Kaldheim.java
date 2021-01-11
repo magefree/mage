@@ -96,6 +96,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Kaya's Onslaught", 18, Rarity.UNCOMMON, mage.cards.k.KayasOnslaught.class));
         cards.add(new SetCardInfo("Koll, the Forgemaster", 220, Rarity.UNCOMMON, mage.cards.k.KollTheForgemaster.class));
         cards.add(new SetCardInfo("Koma's Faithful", 102, Rarity.COMMON, mage.cards.k.KomasFaithful.class));
+        cards.add(new SetCardInfo("Littjara Kinseekers", 66, Rarity.COMMON, mage.cards.l.LittjaraKinseekers.class));
         cards.add(new SetCardInfo("Magda, Brazen Outlaw", 142, Rarity.RARE, mage.cards.m.MagdaBrazenOutlaw.class));
         cards.add(new SetCardInfo("Masked Vandal", 184, Rarity.COMMON, mage.cards.m.MaskedVandal.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 240, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
