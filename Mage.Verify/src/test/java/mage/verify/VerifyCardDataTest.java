@@ -1301,6 +1301,10 @@ public class VerifyCardDataTest {
         if (card.getAbilities().toArray().length == 1) { // all cards have 1 inner ability to cast
             fail(card, "abilities", "card's abilities is empty, but ref have text");
         }
+
+        if (card.getAbilities().contains(ChangelingAbility.getInstance()) && !card.isAllCreatureTypes()) {
+            fail(card, "abilities", "card has changeling ability but doesn't have isAllCreatureTypes");
+        }
     }
 
     private void checkWrongSymbolsInRules(Card card) {
