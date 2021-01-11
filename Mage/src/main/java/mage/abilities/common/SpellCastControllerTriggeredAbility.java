@@ -4,6 +4,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -14,7 +15,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
     protected String rule;
 
@@ -25,7 +25,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     protected boolean rememberSource = false;
 
     public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, spellCard, optional, false);
+        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, false);
     }
 
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
