@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.CantBeCounteredAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -32,7 +32,7 @@ public final class CragplateBaloth extends CardImpl {
         this.addAbility(new KickerAbility("{2}{G}"));
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredAbility());
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
