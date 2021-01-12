@@ -76,6 +76,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Esika's Chariot", 169, Rarity.RARE, mage.cards.e.EsikasChariot.class));
         cards.add(new SetCardInfo("Esika, God of the Tree", 168, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class));
         cards.add(new SetCardInfo("Faceless Haven", 255, Rarity.RARE, mage.cards.f.FacelessHaven.class));
+        cards.add(new SetCardInfo("Feed the Serpent", 95, Rarity.COMMON, mage.cards.f.FeedTheSerpent.class));
         cards.add(new SetCardInfo("Fire Giant's Fury", 389, Rarity.UNCOMMON, mage.cards.f.FireGiantsFury.class));
         cards.add(new SetCardInfo("Firja, Judge of Valor", 209, Rarity.UNCOMMON, mage.cards.f.FirjaJudgeOfValor.class));
         cards.add(new SetCardInfo("Forging the Tyrite Sword", 211, Rarity.UNCOMMON, mage.cards.f.ForgingTheTyriteSword.class));
