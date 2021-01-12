@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -44,7 +43,7 @@ public final class Blightning extends CardImpl {
 class BlightningEffect extends OneShotEffect {
 
     BlightningEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         this.staticText = "That player or that planeswalker's controller discards two cards.";
     }
 
