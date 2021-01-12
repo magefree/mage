@@ -176,6 +176,13 @@ public interface Permanent extends Card, Controllable {
 
     String getValue(GameState state);
 
+    /**
+     * Add abilities to the permanent, can be used in effects
+     *
+     * @param ability
+     * @param sourceId
+     * @param game
+     */
     void addAbility(Ability ability, UUID sourceId, Game game);
 
     void removeAllAbilities(UUID sourceId, Game game);

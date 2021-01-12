@@ -1,9 +1,5 @@
 package mage.game;
 
-import java.io.Serializable;
-import java.util.*;
-import static java.util.Collections.emptyList;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -25,6 +21,7 @@ import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
@@ -38,6 +35,12 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1067,6 +1070,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
+        checkWrongDynamicAbilityUsage(attachedTo, ability);
+
         addOtherAbility(attachedTo, ability, true);
     }
 
@@ -1079,6 +1084,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      *                    state
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
+        checkWrongDynamicAbilityUsage(attachedTo, ability);
+
         Ability newAbility;
         if (ability instanceof MageSingleton || !copyAbility) {
             newAbility = ability;
@@ -1092,6 +1099,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         cardState.get(attachedTo.getId()).addAbility(newAbility);
         addAbility(newAbility, attachedTo.getId(), attachedTo);
+    }
+
+    private void checkWrongDynamicAbilityUsage(Card attachedTo, Ability ability) {
+        // dynamic abilities for card only
+        // permanent's abilities are static and generated each reset cycle
+        if (attachedTo instanceof PermanentCard) {
+            throw new IllegalArgumentException("Error, wrong code usage. If you want to add new ability to the "
+                    + "permanent then use a permanent.addAbility(a, source, game): "
+                    + ability.getClass().getCanonicalName() + " - " + ability.toString());
+        }
     }
 
     /**

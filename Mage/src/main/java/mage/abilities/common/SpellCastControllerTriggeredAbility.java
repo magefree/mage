@@ -18,11 +18,10 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     protected FilterSpell filter;
     protected String rule;
 
-    /**
-     * If true, the source that triggered the ability will be set as target to
-     * effect.
-     */
+    // The source SPELL that triggered the ability will be set as target to effect
     protected boolean rememberSource = false;
+    // Use it if you want remember CARD instead spell
+    protected boolean rememberSourceAsCard = false;
 
     public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, false);
@@ -42,16 +41,22 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
+        this(zone, effect, filter, optional, rememberSource, false);
+    }
+
+    public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource, boolean rememberSourceAsCard) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rememberSource = rememberSource;
+        this.rememberSourceAsCard = rememberSourceAsCard;
     }
 
     public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.rememberSource = ability.rememberSource;
         this.rule = ability.rule;
+        this.rememberSource = ability.rememberSource;
+        this.rememberSourceAsCard = ability.rememberSourceAsCard;
     }
 
     @Override
@@ -65,7 +70,12 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 if (rememberSource) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId(), game));
+                    if (rememberSourceAsCard) {
+                        this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getCard().getId(), game));
+                    } else {
+                        this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId(), game));
+                    }
+
                 }
                 return true;
             }
