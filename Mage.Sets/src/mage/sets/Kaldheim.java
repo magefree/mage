@@ -133,6 +133,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Sulfurous Mire", 270, Rarity.COMMON, mage.cards.s.SulfurousMire.class));
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
         cards.add(new SetCardInfo("Surtland Flinger", 377, Rarity.RARE, mage.cards.s.SurtlandFlinger.class));
+        cards.add(new SetCardInfo("Tergrid's Shadow", 113, Rarity.UNCOMMON, mage.cards.t.TergridsShadow.class));
         cards.add(new SetCardInfo("The Trickster-God's Heist", 232, Rarity.UNCOMMON, mage.cards.t.TheTricksterGodsHeist.class));
         cards.add(new SetCardInfo("The World Tree", 275, Rarity.RARE, mage.cards.t.TheWorldTree.class));
         cards.add(new SetCardInfo("Thornmantle Striker", 387, Rarity.UNCOMMON, mage.cards.t.ThornmantleStriker.class));
