@@ -19,13 +19,15 @@ public final class Kaldheim extends ExpansionSet {
             "Cosmos Charger",
             "Doomskar Oracle",
             "Gods' Hall Guardian",
+            "Iron Verdict",
             "Kaya's Onslaught",
             "Quakebringer",
             "Ranar the Ever-Watchful",
             "Ravenform",
+            "Rise of the Dread Marn",
             "Sarulf's Packmate",
             "Saw It Coming",
-            "Tegrid's Shadow"
+            "Tergrid's Shadow"
     );
 
     private static final Kaldheim instance = new Kaldheim();
