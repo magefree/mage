@@ -24,7 +24,8 @@ public final class Kaldheim extends ExpansionSet {
             "Ranar the Ever-Watchful",
             "Ravenform",
             "Sarulf's Packmate",
-            "Saw It Coming"
+            "Saw It Coming",
+            "Tegrid's Shadow"
     );
 
     private static final Kaldheim instance = new Kaldheim();
@@ -126,14 +127,14 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Snowfield Sinkhole", 269, Rarity.COMMON, mage.cards.s.SnowfieldSinkhole.class));
         cards.add(new SetCardInfo("Spirit of the Aldergard", 195, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheAldergard.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
-        cards.add(new SetCardInfo("Sulfurous Mine", 270, Rarity.COMMON, mage.cards.s.SulfurousMine.class));
+        cards.add(new SetCardInfo("Sulfurous Mire", 270, Rarity.COMMON, mage.cards.s.SulfurousMire.class));
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
         cards.add(new SetCardInfo("Surtland Flinger", 377, Rarity.RARE, mage.cards.s.SurtlandFlinger.class));
         cards.add(new SetCardInfo("The Trickster-God's Heist", 232, Rarity.UNCOMMON, mage.cards.t.TheTricksterGodsHeist.class));
         cards.add(new SetCardInfo("The World Tree", 275, Rarity.RARE, mage.cards.t.TheWorldTree.class));
         cards.add(new SetCardInfo("Thornmantle Striker", 387, Rarity.UNCOMMON, mage.cards.t.ThornmantleStriker.class));
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 197, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
-        cards.add(new SetCardInfo("Tyvar Kell", 287, Rarity.MYTHIC, mage.cards.t.TyvarKell.class));
+        cards.add(new SetCardInfo("Tyvar Kell", 198, Rarity.MYTHIC, mage.cards.t.TyvarKell.class));
         cards.add(new SetCardInfo("Undersea Invader", 78, Rarity.COMMON, mage.cards.u.UnderseaInvader.class));
         cards.add(new SetCardInfo("Valkyrie Harbinger", 374, Rarity.RARE, mage.cards.v.ValkyrieHarbinger.class));
         cards.add(new SetCardInfo("Varragoth, Bloodsky Sire", 115, Rarity.RARE, mage.cards.v.VarragothBloodskySire.class));

@@ -15,9 +15,9 @@ import mage.constants.CardType;
  *
  * @author weirddan455
  */
-public final class SulfurousMine extends CardImpl {
+public final class SulfurousMire extends CardImpl {
 
-    public SulfurousMine(UUID ownerId, CardSetInfo setInfo) {
+    public SulfurousMire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.addSuperType(SuperType.SNOW);
@@ -28,16 +28,16 @@ public final class SulfurousMine extends CardImpl {
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
 
-        // Sulfurous Mine enters the battlefield tapped.
+        // Sulfurous Mire enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    private SulfurousMine(final SulfurousMine card) {
+    private SulfurousMire(final SulfurousMire card) {
         super(card);
     }
 
     @Override
-    public SulfurousMine copy() {
-        return new SulfurousMine(this);
+    public SulfurousMire copy() {
+        return new SulfurousMire(this);
     }
 }
