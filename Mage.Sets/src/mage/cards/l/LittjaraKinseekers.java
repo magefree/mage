@@ -1,11 +1,11 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.GreatestSharedCreatureTypeCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -14,11 +14,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -45,7 +43,7 @@ public final class LittjaraKinseekers extends CardImpl {
                 "put a +1/+1 counter on {this}, then scry 1."
         );
         ability.addEffect(new ScryEffect(1));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(GreatestSharedCreatureTypeCount.getHint()));
     }
 
     private LittjaraKinseekers(final LittjaraKinseekers card) {
@@ -63,26 +61,6 @@ enum LittjaraKinseekersCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanentList = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
-        );
-        permanentList.removeIf(Objects::isNull);
-        long changelings = permanentList
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(MageObject::isAllCreatureTypes)
-                .count();
-        if (changelings > 2) {
-            return true;
-        }
-        permanentList.removeIf(MageObject::isAllCreatureTypes);
-        Map<SubType, Integer> typeMap = new HashMap<>();
-        return permanentList
-                .stream()
-                .map(permanent -> permanent.getSubtype(game))
-                .flatMap(Collection::stream)
-                .mapToInt(subType -> typeMap.compute(subType, (s, i) -> i == null ? 1 : Integer.sum(i, 1)))
-                .anyMatch(x -> x + changelings > 2);
+        return GreatestSharedCreatureTypeCount.instance.calculate(game, source, null) >= 3;
     }
 }
