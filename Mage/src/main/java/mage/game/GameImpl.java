@@ -2978,7 +2978,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             // remembers if a object was in a zone during the resolution of an effect
             // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
-            // because it ahppens all at the same time the replcaement effect has still to be applied
+            // because it happens all at the same time the replacement effect has still to be applied
             Set<UUID> idSet = shortLivingLKI.computeIfAbsent(zone, k -> new HashSet<>());
             idSet.add(objectId);
             if (object instanceof Permanent) {

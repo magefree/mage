@@ -1,8 +1,5 @@
 package mage.cards;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -19,12 +16,17 @@ import mage.game.*;
 import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -310,6 +312,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             abilities.add(subAbility);
         }
 
+        // dynamic check: you can't add ability to the PermanentCard, use permanent.addAbility(a, source, game) instead
+        // reason: triggered abilities are not processing here
+        if (this instanceof PermanentCard) {
+            throw new IllegalArgumentException("Wrong code usage. Don't use that method for permanents, use permanent.addAbility(a, source, game) instead.");
+        }
+
         // verify check: draw effect can't be rollback after mana usage (example: Chromatic Sphere)
         // (player can cheat with cancel button to see next card)
         // verify test will catch that errors
@@ -325,8 +333,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
         }
-
-
     }
 
     protected void addAbilities(List<Ability> abilities) {

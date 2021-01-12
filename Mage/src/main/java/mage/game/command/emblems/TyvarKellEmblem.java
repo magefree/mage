@@ -1,23 +1,17 @@
 package mage.game.command.emblems;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-
-import java.util.Iterator;
 
 /**
- *
  * @author weirddan455
  */
 public final class TyvarKellEmblem extends Emblem {
@@ -32,74 +26,12 @@ public final class TyvarKellEmblem extends Emblem {
     public TyvarKellEmblem() {
         this.setName("Emblem Tyvar");
         this.setExpansionSetCodeForImage("KHM");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new TyvarKellEmblemEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn), filter, false, true
+
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND,
+                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true),
+                filter, false, true, true
         );
         ability.addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("and"));
         this.getAbilities().add(ability);
-    }
-}
-
-class TyvarKellEmblemEffect extends ContinuousEffectImpl {
-
-    protected Ability ability;
-
-    public TyvarKellEmblemEffect(Ability ability, Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        this.generateGainAbilityDependencies(ability, null);
-        this.staticText = "it gains haste until end of turn";
-    }
-
-    public TyvarKellEmblemEffect(final TyvarKellEmblemEffect effect) {
-        super(effect);
-        this.ability = effect.ability.copy();
-    }
-
-    @Override
-    public TyvarKellEmblemEffect copy() {
-        return new TyvarKellEmblemEffect(this);
-    }
-
-    @Override
-    public void init (Ability source, Game game) {
-        super.init(source, game);
-        if (this.affectedObjectsSet) {
-            Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-            if (spell != null) {
-                Card card = game.getCard(spell.getSourceId());
-                if (card != null) {
-                    affectedObjectList.add(new MageObjectReference(card, game));
-                }
-            }
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-                MageObjectReference mor = it.next();
-                Card card = mor.getCard(game);
-                Permanent perm = game.getPermanent(mor.getSourceId());
-                boolean applied = false;
-                if (card != null && !card.hasAbility(ability, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                    applied = true;
-                }
-                if (perm != null && perm.getZoneChangeCounter(game) == mor.getZoneChangeCounter() + 1) {
-                    perm.addAbility(ability, source.getSourceId(), game);
-                    applied = true;
-                }
-                if (!applied) {
-                    it.remove();
-                    if (affectedObjectList.isEmpty()) {
-                        discard();
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

@@ -1392,7 +1392,12 @@ public class TestPlayer implements Player {
     }
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
-        Assert.assertEquals(action.getActionName() + " - hand must contain " + count, count, player.getHand().size());
+        if (player.getHand().size() != count) {
+            printStart("Hand of " + player.getName());
+            printCards(player.getHand().getCards(game));
+            printEnd();
+            Assert.fail(action.getActionName() + " - hand must contain " + count + ", but found " + player.getHand().size());
+        }
     }
 
     private void assertHandCardCount(PlayerAction action, Game game, Player player, String cardName, int count) {
@@ -1416,7 +1421,12 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - command zone must contain " + count + " cards of " + cardName, count, realCount);
+        if (realCount != count) {
+            printStart("Cards in command zone from " + player.getName());
+            printCards(game.getCommanderCardsFromCommandZone(player));
+            printEnd();
+            Assert.fail(action.getActionName() + " - must have " + count + " cards with name " + cardName + ", but found " + realCount);
+        }
     }
 
     private void assertColor(PlayerAction action, Game game, Player player, String permanentName, String colors, boolean mustHave) {

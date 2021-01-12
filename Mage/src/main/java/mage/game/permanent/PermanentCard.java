@@ -47,9 +47,6 @@ public class PermanentCard extends PermanentImpl {
         if (otherAbilities != null) {
             abilities.addAll(otherAbilities);
         }
-        /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
-         this.loyalty = new MageInt(card.getLoyalty().getValue());
-         }*/
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
@@ -89,6 +86,7 @@ public class PermanentCard extends PermanentImpl {
                 }
             }
         } else {
+            // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
             // only set spellAbility to null if it has no targets IE: Dance of the Dead bug #7031
             if (this.getSpellAbility() != null
@@ -96,21 +94,6 @@ public class PermanentCard extends PermanentImpl {
                 this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
             }
         }
-        // adventure cards must show adventure spell info on battlefield too
-        /*
-        if (card instanceof AdventureCard) {
-            // Adventure card spell abilities should not appear on permanents.
-            List<Ability> toRemove = new ArrayList<Ability>();
-            for (Ability ability : this.abilities) {
-                if (ability instanceof SpellAbility) {
-                    if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.ADVENTURE_SPELL) {
-                        toRemove.add(ability);
-                    }
-                }
-            }
-            toRemove.forEach(ability -> this.abilities.remove(ability));
-        }
-         */
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
         this.cardType.clear();

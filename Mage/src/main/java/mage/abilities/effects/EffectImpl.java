@@ -19,7 +19,10 @@ public abstract class EffectImpl implements Effect {
     protected UUID id;
     protected Outcome outcome;
     protected EffectType effectType;
+
+    // read related docs about static and dynamic targets in ContinuousEffectImpl.affectedObjectsSet
     protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
+
     protected String staticText = "";
     protected Map<String, Object> values;
     protected String concatPrefix = ""; // combines multiple effects in text rule
