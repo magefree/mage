@@ -1,8 +1,10 @@
 package mage.util.trace;
 
+import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
@@ -14,9 +16,8 @@ import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import org.apache.log4j.Logger;
-
-import java.util.*;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -210,4 +211,31 @@ public final class TraceUtil {
     public static void trace(String msg) {
         log.info(msg);
     }
+    
+    /**
+     * Prints out a status of the currently existing triggered abilities
+     * @param game
+     */
+    public static void traceTriggeredAbilities(Game game) {
+        log.info("-------------------------------------------------------------------------------------------------");
+        log.info("Turn: " + game.getTurnNum() + " - currently existing triggered abilities: " + game.getState().getTriggers().size());
+        Map<String, String> orderedAbilities = new TreeMap<>();        
+        for (Map.Entry<String, TriggeredAbility> entry : game.getState().getTriggers().entrySet()) {
+            Player controller = game.getPlayer(entry.getValue().getControllerId());
+            MageObject source = game.getObject(entry.getValue().getSourceId());
+            orderedAbilities.put((controller == null ? "no controller": controller.getName()) + (source == null ? "no source": source.getIdName())+ entry.getKey(), entry.getKey());
+        }
+        String playerName = "";
+        for (Map.Entry<String, String> entry : orderedAbilities.entrySet()) {            
+            TriggeredAbility trAbility = game.getState().getTriggers().get(entry.getValue());
+            Player controller = game.getPlayer(trAbility.getControllerId());
+            MageObject source = game.getObject(trAbility.getSourceId());
+            if (!controller.getName().equals(playerName)) {
+                playerName = controller.getName();
+                log.info("--- Player: " + playerName + "  --------------------------------");
+            }                
+            log.info((source == null ? "no source": source.getIdName()) + " -> "
+                    + trAbility.getRule());
+        }        
+    }    
 }

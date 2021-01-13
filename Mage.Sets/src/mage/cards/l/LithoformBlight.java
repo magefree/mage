@@ -1,5 +1,6 @@
 package mage.cards.l;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,8 +18,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -41,7 +40,7 @@ public final class LithoformBlight extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Enchanted land loses all land types and abilities and has "{T}: Add {C}" and "{T}, Pay 1 life: Add one mana of any color."
-        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChangeLandAttachedEffect()));
     }
 
     private LithoformBlight(final LithoformBlight card) {
@@ -54,21 +53,21 @@ public final class LithoformBlight extends CardImpl {
     }
 }
 
-class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
+class ChangeLandAttachedEffect extends ContinuousEffectImpl {
 
-    BecomesCreatureAttachedEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
+    ChangeLandAttachedEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.AddAbility);
         staticText = "Enchanted land loses all land types and abilities " +
                 "and has \"{T}: Add {C}\" and \"{T}, Pay 1 life: Add one mana of any color.\"";
     }
 
-    private BecomesCreatureAttachedEffect(final BecomesCreatureAttachedEffect effect) {
+    private ChangeLandAttachedEffect(final ChangeLandAttachedEffect effect) {
         super(effect);
     }
 
     @Override
-    public BecomesCreatureAttachedEffect copy() {
-        return new BecomesCreatureAttachedEffect(this);
+    public ChangeLandAttachedEffect copy() {
+        return new ChangeLandAttachedEffect(this);
     }
 
     @Override

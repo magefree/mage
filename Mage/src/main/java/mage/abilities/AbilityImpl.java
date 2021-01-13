@@ -1,5 +1,9 @@
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.costs.*;
@@ -31,11 +35,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -365,7 +364,7 @@ public abstract class AbilityImpl implements Ability {
 
         //20101001 - 601.2e
         if (needCostModification && sourceObject != null) {
-            sourceObject.adjustCosts(this, game); // still needed
+            sourceObject.adjustCosts(this, game); // still needed for CostAdjuster objects (to handle some types of dynamic costs)
             game.getContinuousEffects().costModification(this, game);
         }
 

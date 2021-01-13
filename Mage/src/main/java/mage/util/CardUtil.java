@@ -1,6 +1,12 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -35,13 +41,6 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author nantuko
@@ -818,7 +817,7 @@ public final class CardUtil {
     }
 
     public static boolean isFusedPartAbility(Ability ability, Game game) {
-        // TODO: is works fine with copies of spells on stack?
+        // TODO: does it work fine with copies of spells on stack?
         if (ability instanceof SpellAbility) {
             Spell mainSpell = game.getSpell(ability.getId());
             if (mainSpell == null) {

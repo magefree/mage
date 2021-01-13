@@ -10,12 +10,18 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+/**
+ *     702.40. Affinity
+        702.40a Affinity is a static ability that functions while the spell with affinity is on the stack. 
+                “Affinity for [text]” means “This spell costs you {1} less to cast for each [text] you control.”
+        702.40b If a spell has multiple instances of affinity, each of them applies. 
+ */
 public class AffinityEffect extends CostModificationEffectImpl {
 
     private final FilterControlledPermanent filter;
 
     public AffinityEffect(FilterControlledPermanent affinityFilter) {
-        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = affinityFilter;
         staticText = "Affinity for " + filter.getMessage();
     }

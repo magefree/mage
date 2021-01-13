@@ -22,7 +22,7 @@ public class SpellCostReductionForEachSourceEffect extends CostModificationEffec
     private final int reduceGenericMana;
 
     public SpellCostReductionForEachSourceEffect(int reduceGenericMana, DynamicValue eachAmount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.eachAmount = eachAmount;
         this.reduceManaCosts = null;
         this.reduceGenericMana = reduceGenericMana;
@@ -36,7 +36,7 @@ public class SpellCostReductionForEachSourceEffect extends CostModificationEffec
     }
 
     public SpellCostReductionForEachSourceEffect(ManaCosts<ManaCost> reduceManaCosts, DynamicValue eachAmount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.eachAmount = eachAmount;
         this.reduceManaCosts = reduceManaCosts;
         this.reduceGenericMana = 0;
