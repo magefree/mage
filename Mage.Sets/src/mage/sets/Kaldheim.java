@@ -17,16 +17,20 @@ public final class Kaldheim extends ExpansionSet {
             "Augury Raven",
             "Behold the Multiverse",
             "Cosmos Charger",
+            "Crush the Weak",
             "Doomskar Oracle",
+            "Dual Strike",
             "Gods' Hall Guardian",
             "Iron Verdict",
             "Kaya's Onslaught",
+            "Mammoth Growth",
             "Quakebringer",
             "Ranar the Ever-Watchful",
             "Ravenform",
             "Rise of the Dread Marn",
             "Sarulf's Packmate",
             "Saw It Coming",
+            "Starnheim Unleased",
             "Tergrid's Shadow"
     );
 
@@ -130,6 +134,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
         cards.add(new SetCardInfo("Rise of the Dread Marn", 107, Rarity.RARE, mage.cards.r.RiseOfTheDreadMarn.class));
         cards.add(new SetCardInfo("Roots of Wisdom", 190, Rarity.COMMON, mage.cards.r.RootsOfWisdom.class));
+        cards.add(new SetCardInfo("Run Amok", 147, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Run Ashore", 74, Rarity.COMMON, mage.cards.r.RunAshore.class));
         cards.add(new SetCardInfo("Sarulf's Packmate", 192, Rarity.COMMON, mage.cards.s.SarulfsPackmate.class));
         cards.add(new SetCardInfo("Sarulf, Realm Eater", 228, Rarity.RARE, mage.cards.s.SarulfRealmEater.class));
