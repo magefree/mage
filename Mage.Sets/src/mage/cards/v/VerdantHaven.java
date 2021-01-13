@@ -1,37 +1,31 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class VerdantHaven extends CardImpl {
 
     public VerdantHaven(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -44,51 +38,15 @@ public final class VerdantHaven extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
 
         // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
-        this.addAbility(new VerdantHavenTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaAnyColorAttachedControllerEffect()));
     }
 
-    public VerdantHaven(final VerdantHaven card) {
+    private VerdantHaven(final VerdantHaven card) {
         super(card);
     }
 
     @Override
     public VerdantHaven copy() {
         return new VerdantHaven(this);
-    }
-}
-
-class VerdantHavenTriggeredAbility extends TriggeredManaAbility {
-
-    public VerdantHavenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaAnyColorAttachedControllerEffect());
-    }
-
-    public VerdantHavenTriggeredAbility(final VerdantHavenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VerdantHavenTriggeredAbility copy() {
-        return new VerdantHavenTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            return enchantedLand != null && enchantedLand.isLand();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color.";
     }
 }

@@ -8,6 +8,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,10 +46,10 @@ public final class UtopiaSprawl extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color.
-        this.addAbility(new UtopiaSprawlTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new UtopiaSprawlEffect(),"Forest"));
     }
 
-    public UtopiaSprawl(final UtopiaSprawl card) {
+    private UtopiaSprawl(final UtopiaSprawl card) {
         super(card);
     }
 
@@ -57,47 +58,14 @@ public final class UtopiaSprawl extends CardImpl {
         return new UtopiaSprawl(this);
     }
 }
-
-class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
-
-    public UtopiaSprawlTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new UtopiaSprawlEffect());
-    }
-
-    public UtopiaSprawlTriggeredAbility(UtopiaSprawlTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
-    }
-
-    @Override
-    public UtopiaSprawlTriggeredAbility copy() {
-        return new UtopiaSprawlTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color.";
-    }
-}
-
 class UtopiaSprawlEffect extends ManaEffect {
 
-    public UtopiaSprawlEffect() {
+     UtopiaSprawlEffect() {
         super();
         staticText = "its controller adds one mana of the chosen color";
     }
 
-    public UtopiaSprawlEffect(final UtopiaSprawlEffect effect) {
+    private UtopiaSprawlEffect(final UtopiaSprawlEffect effect) {
         super(effect);
     }
 

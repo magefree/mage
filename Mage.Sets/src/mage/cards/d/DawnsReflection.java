@@ -5,22 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +39,10 @@ public final class DawnsReflection extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors.
-        this.addAbility(new DawnsReflectionTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new DawnsReflectionManaEffect()));
     }
 
-    public DawnsReflection(final DawnsReflection card) {
+    private DawnsReflection(final DawnsReflection card) {
         super(card);
     }
 
@@ -56,50 +52,15 @@ public final class DawnsReflection extends CardImpl {
     }
 }
 
-class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
-
-    public DawnsReflectionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DawnsReflectionManaEffect());
-    }
-
-    public DawnsReflectionTriggeredAbility(final DawnsReflectionTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DawnsReflectionTriggeredAbility copy() {
-        return new DawnsReflectionTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            return enchantedLand != null && enchantedLand.isLand();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors <i>(in addition to the mana the land produces)</i>.";
-    }
-}
-
 class DawnsReflectionManaEffect extends ManaEffect {
 
-    public DawnsReflectionManaEffect() {
+    DawnsReflectionManaEffect() {
         super();
-        this.staticText = "its controller adds two mana in any combination of colors";
+        this.staticText = "its controller adds two mana in any combination of colors " +
+                "<i>(in addition to the mana the land produces)</i>";
     }
 
-    public DawnsReflectionManaEffect(final DawnsReflectionManaEffect effect) {
+    private DawnsReflectionManaEffect(final DawnsReflectionManaEffect effect) {
         super(effect);
     }
 

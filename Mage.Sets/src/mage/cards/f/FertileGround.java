@@ -1,28 +1,21 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class FertileGround extends CardImpl {
@@ -39,54 +32,15 @@ public final class FertileGround extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
-        this.addAbility(new FertileGroundTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaAnyColorAttachedControllerEffect()));
     }
 
-    public FertileGround(final FertileGround card) {
+    private FertileGround(final FertileGround card) {
         super(card);
     }
 
     @Override
     public FertileGround copy() {
         return new FertileGround(this);
-    }
-}
-
-class FertileGroundTriggeredAbility extends TriggeredManaAbility {
-
-    public FertileGroundTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaAnyColorAttachedControllerEffect());
-    }
-
-    public FertileGroundTriggeredAbility(FertileGroundTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            if (enchantedLand != null && enchantedLand.isLand()) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(enchantedLand.getControllerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public FertileGroundTriggeredAbility copy() {
-        return new FertileGroundTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.";
     }
 }

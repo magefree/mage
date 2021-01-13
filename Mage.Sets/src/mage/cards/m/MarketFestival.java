@@ -5,17 +5,14 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ManaChoice;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -42,10 +39,10 @@ public final class MarketFestival extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors (in addition to the mana the land produces).
-        this.addAbility(new MarketFestivalTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new MarketFestivalManaEffect()));
     }
 
-    public MarketFestival(final MarketFestival card) {
+    private MarketFestival(final MarketFestival card) {
         super(card);
     }
 
@@ -55,50 +52,14 @@ public final class MarketFestival extends CardImpl {
     }
 }
 
-class MarketFestivalTriggeredAbility extends TriggeredManaAbility {
-
-    public MarketFestivalTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MarketFestivalManaEffect());
-    }
-
-    public MarketFestivalTriggeredAbility(final MarketFestivalTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MarketFestivalTriggeredAbility copy() {
-        return new MarketFestivalTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            return enchantedLand != null && enchantedLand.isLand();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors <i>(in addition to the mana the land produces)</i>.";
-    }
-}
-
 class MarketFestivalManaEffect extends ManaEffect {
 
-    public MarketFestivalManaEffect() {
+    MarketFestivalManaEffect() {
         super();
         this.staticText = "its controller adds two mana in any combination of colors";
     }
 
-    public MarketFestivalManaEffect(final MarketFestivalManaEffect effect) {
+    private MarketFestivalManaEffect(final MarketFestivalManaEffect effect) {
         super(effect);
     }
 

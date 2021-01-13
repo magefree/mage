@@ -1,12 +1,11 @@
-package mage.cards.t;
+package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.continuous.AddCardSuperTypeAttachedEffect;
 import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,37 +16,38 @@ import mage.target.common.TargetLandPermanent;
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth
+ * @author TheElk801
  */
-public final class TraceOfAbundance extends CardImpl {
+public final class GlitteringFrost extends CardImpl {
 
-    public TraceOfAbundance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{G}");
+    public GlitteringFrost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+
+        this.addSuperType(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted land has shroud.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-                ShroudAbility.getInstance(), AttachmentType.AURA,
-                Duration.WhileOnBattlefield, "enchanted land has shroud"
-        )));
+        // Enchanted land is snow.
+        this.addAbility(new SimpleStaticAbility(new AddCardSuperTypeAttachedEffect(
+                SuperType.SNOW, Duration.WhileOnBattlefield, AttachmentType.AURA
+        ).setText("enchanted land is snow")));
 
-        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
+        // Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaAnyColorAttachedControllerEffect()));
     }
 
-    private TraceOfAbundance(final TraceOfAbundance card) {
+    private GlitteringFrost(final GlitteringFrost card) {
         super(card);
     }
 
     @Override
-    public TraceOfAbundance copy() {
-        return new TraceOfAbundance(this);
+    public GlitteringFrost copy() {
+        return new GlitteringFrost(this);
     }
 }
