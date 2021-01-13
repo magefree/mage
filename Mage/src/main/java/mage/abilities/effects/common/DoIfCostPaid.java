@@ -63,6 +63,11 @@ public class DoIfCostPaid extends OneShotEffect {
         return this;
     }
 
+    public DoIfCostPaid addOtherwiseEffect (Effect effect) {
+        otherwiseEffects.add(effect);
+        return this;
+    }
+
     public Effects getExecutingEffects() {
         return this.executingEffects;
     }
@@ -96,12 +101,14 @@ public class DoIfCostPaid extends OneShotEffect {
                 int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source, player.getId(), false)) {
                     game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + message);
-                    for (Effect effect : executingEffects) {
-                        effect.setTargetPointer(this.targetPointer);
-                        if (effect instanceof OneShotEffect) {
-                            result &= effect.apply(game, source);
-                        } else {
-                            game.addEffect((ContinuousEffect) effect, source);
+                    if (!executingEffects.isEmpty()) {
+                        for (Effect effect : executingEffects) {
+                            effect.setTargetPointer(this.targetPointer);
+                            if (effect instanceof OneShotEffect) {
+                                result &= effect.apply(game, source);
+                            } else {
+                                game.addEffect((ContinuousEffect) effect, source);
+                            }
                         }
                     }
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
