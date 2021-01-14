@@ -32,7 +32,7 @@ public final class BlizzardBrawl extends CardImpl {
 
         this.addSuperType(SuperType.SNOW);
 
-        // Choose target creature you control and target creature you don't control. The creature you control gets +1/+0 and gains indestructible until end of turn if you control three or more snow permanents. Then those creatures fight each other.
+        // Choose target creature you control and target creature you don't control. If you control three or more snow permanents, the creature you control gets +1/+0 and gains indestructible until end of turn. Then those creatures fight each other.
         this.getSpellAbility().addEffect(new BlizzardBrawlEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
@@ -59,8 +59,8 @@ class BlizzardBrawlEffect extends OneShotEffect {
     BlizzardBrawlEffect() {
         super(Outcome.Benefit);
         staticText = "Choose target creature you control and target creature you don't control. " +
-                "The creature you control gets +1/+0 and gains indestructible until end of turn " +
-                "if you control three or more snow permanents. Then those creatures fight each other.";
+                "If you control three or more snow permanents, the creature you control gets +1/+0 " +
+                "and gains indestructible until end of turn. Then those creatures fight each other.";
     }
 
     private BlizzardBrawlEffect(final BlizzardBrawlEffect effect) {

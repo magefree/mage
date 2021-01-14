@@ -59,7 +59,7 @@ public final class TheWorldTree extends CardImpl {
 
         // {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice The World Tree: Search your library for any number of God cards, put them onto the battlefield tapped, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true
+                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter)
         ), new ManaCostsImpl<>("{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
