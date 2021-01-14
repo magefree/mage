@@ -2,7 +2,6 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.cards.CardImpl;
@@ -27,7 +26,7 @@ public final class GoldmawChampion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Boast — {1}{W}: Tap target creature.
-        Ability ability = new BoastAbility(new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new BoastAbility(new TapTargetEffect(), "{1}{W}");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

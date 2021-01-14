@@ -2,7 +2,6 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.cards.CardImpl;
@@ -27,7 +26,7 @@ public final class HagiMob extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Boast — {1}{R}: Hagi Mob deals 1 damage to any target.
-        Ability ability = new BoastAbility(new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new BoastAbility(new DamageTargetEffect(1), "{1}{R}");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

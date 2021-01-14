@@ -28,9 +28,7 @@ public final class Duskwielder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Boast — {1}: Target opponent loses 1 life and you gain 1 life.
-        Ability ability = new BoastAbility(
-                new LoseLifeTargetEffect(1), new GenericManaCost(1)
-        );
+        Ability ability = new BoastAbility(new LoseLifeTargetEffect(1), new GenericManaCost(1));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

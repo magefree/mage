@@ -1,27 +1,26 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.keyword.BoastAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SearchEffect;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.keyword.BoastAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class VarragothBloodskySire extends CardImpl {
@@ -39,7 +38,7 @@ public final class VarragothBloodskySire extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Boast -- {1}{B}:Target player searches their library for a card, then shuffles their library and puts that card on top of it.
-        Ability ability = new BoastAbility(new VarragothBloodskySireEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new BoastAbility(new VarragothBloodskySireEffect(), "{1}{B}");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

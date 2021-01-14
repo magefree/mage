@@ -1,7 +1,6 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.cards.CardImpl;
@@ -26,9 +25,7 @@ public final class UsherOfTheFallen extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Boast — {1}{W}: Create a 1/1 white Human Warrior creature token.
-        this.addAbility(new BoastAbility(
-                new CreateTokenEffect(new HumanWarriorToken()), new ManaCostsImpl<>("{1}{W}")
-        ));
+        this.addAbility(new BoastAbility(new CreateTokenEffect(new HumanWarriorToken()), "{1}{W}"));
     }
 
     private UsherOfTheFallen(final UsherOfTheFallen card) {

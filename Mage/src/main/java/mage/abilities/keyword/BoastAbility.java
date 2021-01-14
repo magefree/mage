@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.common.BoastCondition;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.common.BoastHint;
 import mage.constants.Zone;
@@ -13,6 +14,10 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  * @author weirddan455
  */
 public class BoastAbility extends ActivatedAbilityImpl {
+
+    public BoastAbility(Effect effect, String manaString) {
+        this(effect, new ManaCostsImpl<>(manaString));
+    }
 
     public BoastAbility(Effect effect, Cost cost) {
         super(Zone.BATTLEFIELD, effect, cost);
