@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.common.BoastCondition;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.common.BoastHint;
 import mage.constants.Zone;
@@ -10,12 +10,11 @@ import mage.game.Game;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
- *
  * @author weirddan455
  */
 public class BoastAbility extends ActivatedAbilityImpl {
 
-    public BoastAbility(Effect effect, ManaCosts cost) {
+    public BoastAbility(Effect effect, Cost cost) {
         super(Zone.BATTLEFIELD, effect, cost);
         this.maxActivationsPerTurn = 1;
         this.addWatcher(new AttackedThisTurnWatcher());
@@ -23,7 +22,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
         this.addHint(BoastHint.instance);
     }
 
-    public BoastAbility(BoastAbility ability) {
+    private BoastAbility(BoastAbility ability) {
         super(ability);
     }
 
