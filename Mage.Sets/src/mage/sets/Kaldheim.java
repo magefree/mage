@@ -119,6 +119,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Glittering Frost", 171, Rarity.COMMON, mage.cards.g.GlitteringFrost.class));
         cards.add(new SetCardInfo("Gnottvold Recluse", 172, Rarity.COMMON, mage.cards.g.GnottvoldRecluse.class));
         cards.add(new SetCardInfo("Gods' Hall Guardian", 13, Rarity.COMMON, mage.cards.g.GodsHallGuardian.class));
+        cards.add(new SetCardInfo("Goldmaw Champion", 14, Rarity.COMMON, mage.cards.g.GoldmawChampion.class));
         cards.add(new SetCardInfo("Goldspan Dragon", 139, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Goldvein Pick", 239, Rarity.COMMON, mage.cards.g.GoldveinPick.class));
         cards.add(new SetCardInfo("Grim Draugr", 96, Rarity.COMMON, mage.cards.g.GrimDraugr.class));
