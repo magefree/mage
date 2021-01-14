@@ -27,7 +27,7 @@ public final class GuardianGladewalker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Changeling
-        this.isAllCreatureTypes();
+        this.setIsAllCreatureTypes(true);
         this.addAbility(ChangelingAbility.getInstance());
 
         // When Guardian Gladewalker enters the battlefield, put a +1/+1 counter on target creature.
