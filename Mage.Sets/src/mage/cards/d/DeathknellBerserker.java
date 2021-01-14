@@ -53,7 +53,7 @@ enum DeathknellBerserkerCondtion implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
         return permanent != null && permanent.getPower().getValue() >= 3;
     }
 }
