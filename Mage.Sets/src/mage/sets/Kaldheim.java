@@ -142,6 +142,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Masked Vandal", 184, Rarity.COMMON, mage.cards.m.MaskedVandal.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 240, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
         cards.add(new SetCardInfo("Mountain", 397, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Narfi, Betrayer King", 224, Rarity.UNCOMMON, mage.cards.n.NarfiBetrayerKing.class));
         cards.add(new SetCardInfo("Niko Aris", 225, Rarity.MYTHIC, mage.cards.n.NikoAris.class));
         cards.add(new SetCardInfo("Path to the World Tree", 186, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Plains", 394, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
