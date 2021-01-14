@@ -46,7 +46,7 @@ public final class ToralfGodOfFury extends ModalDoubleFacesCard {
     public ToralfGodOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{R}{R}",
-                "", new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{R}"
+                "Toralf's Hammer", new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{R}"
         );
 
         // 1.
