@@ -20,16 +20,20 @@ public final class Kaldheim extends ExpansionSet {
             "Crush the Weak",
             "Doomskar Oracle",
             "Dual Strike",
+            "Dwarven Reinforcements",
             "Gods' Hall Guardian",
             "Iron Verdict",
             "Kaya's Onslaught",
             "Mammoth Growth",
+            "Mystic Reflection",
+            "Poison the Cup",
             "Quakebringer",
             "Ranar the Ever-Watchful",
             "Ravenform",
             "Rise of the Dread Marn",
             "Sarulf's Packmate",
             "Saw It Coming",
+            "Scorn Effigy",
             "Shepherd of the Cosmos",
             "Starnheim Unleashed",
             "Tergrid's Shadow"
@@ -158,6 +162,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Realmwalker", 188, Rarity.RARE, mage.cards.r.Realmwalker.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
+        cards.add(new SetCardInfo("Revitalize", 23, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
         cards.add(new SetCardInfo("Rise of the Dread Marn", 107, Rarity.RARE, mage.cards.r.RiseOfTheDreadMarn.class));
         cards.add(new SetCardInfo("Roots of Wisdom", 190, Rarity.COMMON, mage.cards.r.RootsOfWisdom.class));
@@ -184,6 +189,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Spirit of the Aldergard", 195, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheAldergard.class));
         cards.add(new SetCardInfo("Squash", 152, Rarity.COMMON, mage.cards.s.Squash.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
+        cards.add(new SetCardInfo("Strategic Planning", 77, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
         cards.add(new SetCardInfo("Sulfurous Mire", 270, Rarity.COMMON, mage.cards.s.SulfurousMire.class));
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
         cards.add(new SetCardInfo("Surtland Flinger", 377, Rarity.RARE, mage.cards.s.SurtlandFlinger.class));
