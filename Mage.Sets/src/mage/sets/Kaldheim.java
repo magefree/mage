@@ -91,6 +91,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Dogged Pursuit", 85, Rarity.COMMON, mage.cards.d.DoggedPursuit.class));
         cards.add(new SetCardInfo("Doomskar Oracle", 10, Rarity.COMMON, mage.cards.d.DoomskarOracle.class));
         cards.add(new SetCardInfo("Duskwielder", 91, Rarity.COMMON, mage.cards.d.Duskwielder.class));
+        cards.add(new SetCardInfo("Dwarven Reinforcements", 134, Rarity.COMMON, mage.cards.d.DwarvenReinforcements.class));
         cards.add(new SetCardInfo("Egon, God of Death", 92, Rarity.RARE, mage.cards.e.EgonGodOfDeath.class));
         cards.add(new SetCardInfo("Elderfang Disciple", 93, Rarity.COMMON, mage.cards.e.ElderfangDisciple.class));
         cards.add(new SetCardInfo("Elderfang Ritualist", 385, Rarity.UNCOMMON, mage.cards.e.ElderfangRitualist.class));
