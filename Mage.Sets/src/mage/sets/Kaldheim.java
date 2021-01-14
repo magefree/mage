@@ -169,6 +169,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("The Trickster-God's Heist", 232, Rarity.UNCOMMON, mage.cards.t.TheTricksterGodsHeist.class));
         cards.add(new SetCardInfo("The World Tree", 275, Rarity.RARE, mage.cards.t.TheWorldTree.class));
         cards.add(new SetCardInfo("Thornmantle Striker", 387, Rarity.UNCOMMON, mage.cards.t.ThornmantleStriker.class));
+        cards.add(new SetCardInfo("Toralf, God of Fury", 154, Rarity.MYTHIC, mage.cards.t.ToralfGodOfFury.class));
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 197, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
         cards.add(new SetCardInfo("Tyvar Kell", 198, Rarity.MYTHIC, mage.cards.t.TyvarKell.class));
         cards.add(new SetCardInfo("Undersea Invader", 78, Rarity.COMMON, mage.cards.u.UnderseaInvader.class));

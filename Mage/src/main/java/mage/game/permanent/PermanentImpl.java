@@ -853,7 +853,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     /**
      * @param damageAmount
-     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
+     * @param attackerId   id of the permanent or player who make damage (source.getSourceId() in most cases)
      * @param source
      * @param game
      * @param preventable
@@ -975,53 +975,64 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int damagePlaneswalker(int damage, UUID attackerId, Ability source, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
         GameEvent event = new DamagePlaneswalkerEvent(objectId, attackerId, controllerId, damage, preventable, combat);
         event.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(event)) {
-            int actualDamage = checkProtectionAbilities(event, attackerId, source, game);
-            if (actualDamage > 0) {
-                int countersToRemove = actualDamage;
-                if (countersToRemove > getCounters(game).getCount(CounterType.LOYALTY)) {
-                    countersToRemove = getCounters(game).getCount(CounterType.LOYALTY);
-                }
-                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
-                DamagedEvent damagedEvent = new DamagedPlaneswalkerEvent(objectId, attackerId, controllerId, actualDamage, combat);
-                game.fireEvent(damagedEvent);
-                game.getState().addSimultaneousDamage(damagedEvent, game);
-                return actualDamage;
-            }
+        if (game.replaceEvent(event)) {
+            return 0;
         }
-        return 0;
+        int actualDamage = checkProtectionAbilities(event, attackerId, source, game);
+        if (actualDamage <= 0) {
+            return 0;
+        }
+        int countersToRemove = Math.min(actualDamage, getCounters(game).getCount(CounterType.LOYALTY));
+        removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
+        DamagedEvent damagedEvent = new DamagedPlaneswalkerEvent(objectId, attackerId, controllerId, actualDamage, combat);
+        damagedEvent.setExcess(actualDamage - countersToRemove);
+        game.fireEvent(damagedEvent);
+        game.getState().addSimultaneousDamage(damagedEvent, game);
+        return actualDamage;
     }
 
     protected int damageCreature(int damage, UUID attackerId, Ability source, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
         GameEvent event = new DamageCreatureEvent(this.getId(), attackerId, this.getControllerId(), damage, preventable, combat);
         event.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(event)) {
-            int actualDamage = checkProtectionAbilities(event, attackerId, source, game);
-            if (actualDamage > 0) {
-                MageObject attacker = game.getObject(attackerId);
-                if (attacker != null && (attacker.getAbilities().containsKey(InfectAbility.getInstance().getId())
-                        || attacker.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
-                    if (markDamage) {
-                        // mark damage only
-                        markDamage(CounterType.M1M1.createInstance(actualDamage), attacker);
-                    } else {
-                        Ability damageSourceAbility = null;
-                        if (attacker instanceof Permanent) {
-                            damageSourceAbility = ((Permanent) attacker).getSpellAbility();
-                        }
-                        // deal damage immediately
-                        addCounters(CounterType.M1M1.createInstance(actualDamage), damageSourceAbility, game);
-                    }
-                } else {
-                    this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);
-                }
-                DamagedEvent damagedEvent = new DamagedCreatureEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
-                game.fireEvent(damagedEvent);
-                game.getState().addSimultaneousDamage(damagedEvent, game);
-                return actualDamage;
-            }
+        if (game.replaceEvent(event)) {
+            return 0;
         }
-        return 0;
+        int actualDamage = checkProtectionAbilities(event, attackerId, source, game);
+        if (actualDamage <= 0) {
+            return 0;
+        }
+        MageObject attacker = game.getObject(attackerId);
+        int lethal = 0;
+        if (game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters().stream().anyMatch(f -> f.match(this, game))) {
+            lethal = power.getValue();
+        } else {
+            lethal = toughness.getValue();
+        }
+        lethal = Math.max(lethal - this.damage, 0);
+        if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+            lethal = Math.min(1, lethal);
+        }
+        if (attacker != null && (attacker.getAbilities().containsKey(InfectAbility.getInstance().getId())
+                || attacker.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
+            if (markDamage) {
+                // mark damage only
+                markDamage(CounterType.M1M1.createInstance(actualDamage), attacker);
+            } else {
+                Ability damageSourceAbility = null;
+                if (attacker instanceof Permanent) {
+                    damageSourceAbility = ((Permanent) attacker).getSpellAbility();
+                }
+                // deal damage immediately
+                addCounters(CounterType.M1M1.createInstance(actualDamage), damageSourceAbility, game);
+            }
+        } else {
+            this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);
+        }
+        DamagedEvent damagedEvent = new DamagedCreatureEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
+        damagedEvent.setExcess(actualDamage - lethal);
+        game.fireEvent(damagedEvent);
+        game.getState().addSimultaneousDamage(damagedEvent, game);
+        return actualDamage;
     }
 
     private int checkProtectionAbilities(GameEvent event, UUID attackerId, Ability source, Game game) {
@@ -1211,6 +1222,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     /**
      * Simple event without source
+     *
      * @param eventType
      * @param game
      */
@@ -1220,6 +1232,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     /**
      * Simple event without source
+     *
      * @param eventType
      * @param game
      * @return
