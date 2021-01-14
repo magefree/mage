@@ -2,8 +2,10 @@ package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AbilityType;
+import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -13,8 +15,6 @@ import mage.players.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import mage.abilities.TriggeredAbility;
-import mage.constants.ManaType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -138,5 +138,11 @@ public abstract class ManaEffect extends OneShotEffect {
                 game.fireEvent(event);
             }
         }
+    }
+
+    @Override
+    public ManaEffect setText(String staticText) {
+        super.setText(staticText);
+        return this;
     }
 }

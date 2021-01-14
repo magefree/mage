@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.Ability;
@@ -8,14 +7,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -25,8 +20,6 @@ import java.util.UUID;
  * @author jeffwadsworth
  */
 public final class TraceOfAbundance extends CardImpl {
-
-    private static final String rule = "Enchanted land has shroud";
 
     public TraceOfAbundance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{G}");
@@ -40,54 +33,21 @@ public final class TraceOfAbundance extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                ShroudAbility.getInstance(), AttachmentType.AURA,
+                Duration.WhileOnBattlefield, "enchanted land has shroud"
+        )));
 
         // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
-        this.addAbility(new TraceOfAbundanceTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaAnyColorAttachedControllerEffect()));
     }
 
-    public TraceOfAbundance(final TraceOfAbundance card) {
+    private TraceOfAbundance(final TraceOfAbundance card) {
         super(card);
     }
 
     @Override
     public TraceOfAbundance copy() {
         return new TraceOfAbundance(this);
-    }
-}
-
-class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
-
-    public TraceOfAbundanceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaAnyColorAttachedControllerEffect());
-    }
-
-    public TraceOfAbundanceTriggeredAbility(final TraceOfAbundanceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TraceOfAbundanceTriggeredAbility copy() {
-        return new TraceOfAbundanceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            return enchantedLand != null && enchantedLand.isLand();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color.";
     }
 }

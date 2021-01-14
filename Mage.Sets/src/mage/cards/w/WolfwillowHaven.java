@@ -11,17 +11,13 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -43,7 +39,9 @@ public final class WolfwillowHaven extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
-        this.addAbility(new WolfwillowHavenTriggeredAbility());
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaToManaPoolTargetControllerEffect(
+                new Mana(ColoredManaSymbol.G), "their"
+        )));
 
         // {4}{G}, Sacrifice Wolfwillow Haven: Create a 2/2 green Wolf creature token. Activate this ability only during your turn.
         ability = new ActivateIfConditionActivatedAbility(
@@ -62,45 +60,5 @@ public final class WolfwillowHaven extends CardImpl {
     @Override
     public WolfwillowHaven copy() {
         return new WolfwillowHaven(this);
-    }
-}
-
-class WolfwillowHavenTriggeredAbility extends TriggeredManaAbility {
-
-    WolfwillowHavenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "their"));
-    }
-
-    private WolfwillowHavenTriggeredAbility(final WolfwillowHavenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WolfwillowHavenTriggeredAbility copy() {
-        return new WolfwillowHavenTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-            if (enchantedLand != null && enchantedLand.isLand()) {
-                getEffects().setTargetPointer(new FixedTarget(enchantedLand.getControllerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds an additional {G}.";
     }
 }
