@@ -35,7 +35,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class Withercrown extends CardImpl {
 
     public Withercrown(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         this.subtype.add(SubType.AURA);
 
