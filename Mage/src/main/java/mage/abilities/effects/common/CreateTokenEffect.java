@@ -111,7 +111,7 @@ public class CreateTokenEffect extends OneShotEffect {
         }
     }
 
-    void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
             sb.append("a ");
