@@ -1,0 +1,86 @@
+package mage.cards.d;
+
+import java.util.UUID;
+
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.MenaceAbility;
+import mage.constants.AttachmentType;
+import mage.constants.SubType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.token.ZombieBerserkerToken;
+
+/**
+ *
+ * @author weirddan455
+ */
+public final class DraugrsHelm extends CardImpl {
+
+    public DraugrsHelm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}");
+
+        this.subtype.add(SubType.EQUIPMENT);
+
+        // When Draugr's Helm enters the battlefield, you may pay {2}{B}.
+        // If you do, create a 2/2 black Zombie Berserker creature token, then attach Draugr's Helm to it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
+                new DraugrsHelmEffect(), new ManaCostsImpl<>("{2}{B}")
+        )));
+
+        // Equipped creature gets +2/+2 and has menace.
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT).setText("and has menace"));
+        this.addAbility(ability);
+
+        // Equip {4}
+        this.addAbility(new EquipAbility(4));
+    }
+
+    private DraugrsHelm(final DraugrsHelm card) {
+        super(card);
+    }
+
+    @Override
+    public DraugrsHelm copy() {
+        return new DraugrsHelm(this);
+    }
+}
+
+class DraugrsHelmEffect extends CreateTokenEffect {
+
+    public DraugrsHelmEffect() {
+        super(new ZombieBerserkerToken());
+        staticText = "create a 2/2 black Zombie Berserker creature token, then attach {this} to it";
+    }
+
+    private DraugrsHelmEffect(final DraugrsHelmEffect effect) {
+        super (effect);
+    }
+
+    @Override
+    public boolean apply (Game game, Ability source) {
+        super.apply(game, source);
+        Permanent token = game.getPermanent(this.getLastAddedTokenId());
+        if (token != null) {
+            token.addAttachment(source.getSourceId(), source, game);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public DraugrsHelmEffect copy() {
+        return new DraugrsHelmEffect(this);
+    }
+}
