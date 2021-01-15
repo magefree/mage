@@ -13,7 +13,6 @@ public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
 
     public CreateTokenAttachSourceEffect(Token token) {
         super(token);
-        setText();
         staticText = staticText.concat(", then attach {this} to it");
     }
 
