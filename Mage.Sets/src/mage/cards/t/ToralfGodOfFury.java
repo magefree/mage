@@ -72,10 +72,10 @@ public final class ToralfGodOfFury extends ModalDoubleFacesCard {
                 new TapTargetEffect(), new TargetAnyTarget(), new UnattachCost(), new ManaCostsImpl<>("{1}{R}"), new TapSourceCost()
         )));
 
-        // Equipped creature get +3/+0 as long as its legendary.
+        // Equipped creature get +3/+0 as long as it's legendary.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEquippedEffect(3, 0), condition,
-                "equipped creature get +3/+0 as long as it's legendary"
+                "equipped creature gets +3/+0 as long as it's legendary"
         )));
 
         // Equip {1}{R}
