@@ -19,6 +19,7 @@ public final class Kaldheim extends ExpansionSet {
             "Cosmos Charger",
             "Crush the Weak",
             "Doomskar Oracle",
+            "Doomskar Titan",
             "Dual Strike",
             "Dwarven Reinforcements",
             "Gods' Hall Guardian",
@@ -27,10 +28,12 @@ public final class Kaldheim extends ExpansionSet {
             "Kaya's Onslaught",
             "Mammoth Growth",
             "Mystic Reflection",
+            "Niko Defies Destiny",
             "Poison the Cup",
             "Quakebringer",
             "Ranar the Ever-Watchful",
             "Ravenform",
+            "Return Upon the Tide",
             "Rise of the Dread Marn",
             "Sarulf's Packmate",
             "Saw It Coming",
@@ -95,6 +98,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Cyclone Summoner", 52, Rarity.RARE, mage.cards.c.CycloneSummoner.class));
         cards.add(new SetCardInfo("Darkbore Pathway", 254, Rarity.RARE, mage.cards.d.DarkborePathway.class));
         cards.add(new SetCardInfo("Deathknell Berserker", 83, Rarity.COMMON, mage.cards.d.DeathknellBerserker.class));
+        cards.add(new SetCardInfo("Disdainful Stroke", 54, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Divine Gambit", 8, Rarity.UNCOMMON, mage.cards.d.DivineGambit.class));
         cards.add(new SetCardInfo("Dogged Pursuit", 85, Rarity.COMMON, mage.cards.d.DoggedPursuit.class));
         cards.add(new SetCardInfo("Doomskar Oracle", 10, Rarity.COMMON, mage.cards.d.DoomskarOracle.class));
