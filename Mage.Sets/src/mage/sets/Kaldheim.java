@@ -90,6 +90,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Cinderheart Giant", 126, Rarity.COMMON, mage.cards.c.CinderheartGiant.class));
         cards.add(new SetCardInfo("Clarion Spirit", 6, Rarity.UNCOMMON, mage.cards.c.ClarionSpirit.class));
         cards.add(new SetCardInfo("Cleaving Reaper", 376, Rarity.RARE, mage.cards.c.CleavingReaper.class));
+        cards.add(new SetCardInfo("Cyclone Summoner", 52, Rarity.RARE, mage.cards.c.CycloneSummoner.class));
         cards.add(new SetCardInfo("Darkbore Pathway", 254, Rarity.RARE, mage.cards.d.DarkborePathway.class));
         cards.add(new SetCardInfo("Deathknell Berserker", 83, Rarity.COMMON, mage.cards.d.DeathknellBerserker.class));
         cards.add(new SetCardInfo("Divine Gambit", 8, Rarity.UNCOMMON, mage.cards.d.DivineGambit.class));
