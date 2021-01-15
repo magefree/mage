@@ -193,6 +193,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Shepherd of the Cosmos", 28, Rarity.UNCOMMON, mage.cards.s.ShepherdOfTheCosmos.class));
         cards.add(new SetCardInfo("Showdown of the Skalds", 229, Rarity.RARE, mage.cards.s.ShowdownOfTheSkalds.class));
         cards.add(new SetCardInfo("Sigrid, God-Favored", 29, Rarity.RARE, mage.cards.s.SigridGodFavored.class));
+        cards.add(new SetCardInfo("Skemfar Avenger", 109, Rarity.RARE, mage.cards.s.SkemfarAvenger.class));
         cards.add(new SetCardInfo("Skemfar Shadowsage", 110, Rarity.UNCOMMON, mage.cards.s.SkemfarShadowsage.class));
         cards.add(new SetCardInfo("Snakeskin Veil", 194, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 284, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
