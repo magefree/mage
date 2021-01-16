@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTop3MayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class JeskasWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Exile the top three cards of your library. You may play them this turn.
-        this.getSpellAbility().addMode(new Mode(new ExileTop3MayPlayUntilEndOfTurnEffect()));
+        this.getSpellAbility().addMode(new Mode(new ExileTopXMayPlayUntilEndOfTurnEffect(3)));
     }
 
     private JeskasWill(final JeskasWill card) {

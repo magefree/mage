@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -12,24 +13,27 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.Set;
 
-public class ExileTop3MayPlayUntilEndOfTurnEffect extends OneShotEffect {
+public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
 
-    public ExileTop3MayPlayUntilEndOfTurnEffect() {
+    private final int amount;
+
+    public ExileTopXMayPlayUntilEndOfTurnEffect(int amount) {
         super(Outcome.Benefit);
-        this.staticText = "exile the top three cards of your library. Until end of turn, you may play cards exiled this way";
+        this.amount = amount;
     }
 
-    public ExileTop3MayPlayUntilEndOfTurnEffect(final ExileTop3MayPlayUntilEndOfTurnEffect effect) {
+    private ExileTopXMayPlayUntilEndOfTurnEffect(final ExileTopXMayPlayUntilEndOfTurnEffect effect) {
         super(effect);
+        this.amount = effect.amount;
     }
 
     @Override
-    public ExileTop3MayPlayUntilEndOfTurnEffect copy() {
-        return new ExileTop3MayPlayUntilEndOfTurnEffect(this);
+    public ExileTopXMayPlayUntilEndOfTurnEffect copy() {
+        return new ExileTopXMayPlayUntilEndOfTurnEffect(this);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class ExileTop3MayPlayUntilEndOfTurnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            Set<Card> cards = new HashSet<>(controller.getLibrary().getTopCards(game, 3));
+            Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
             if (!cards.isEmpty()) {
                 controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getIdName());
                 // remove cards that could not be moved to exile
@@ -53,4 +57,16 @@ public class ExileTop3MayPlayUntilEndOfTurnEffect extends OneShotEffect {
         return false;
     }
 
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        if (amount == 1) {
+            return "exile the top card of your library. You may play that card this turn";
+        }
+        return "exile the top " +
+                CardUtil.numberToText(amount) +
+                " cards of your library. Until end of turn, you may play cards exiled this way";
+    }
 }

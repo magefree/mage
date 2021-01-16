@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.abilities.effects.common.ExileTop3MayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +17,7 @@ public final class ActOnImpulse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
-        this.getSpellAbility().addEffect(new ExileTop3MayPlayUntilEndOfTurnEffect());
+        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(3));
     }
 
     public ActOnImpulse(final ActOnImpulse card) {
