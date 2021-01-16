@@ -20,15 +20,22 @@ import java.util.Set;
 public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
 
     private final int amount;
+    private final boolean showHint;
 
     public ExileTopXMayPlayUntilEndOfTurnEffect(int amount) {
+        this(amount, false);
+    }
+
+    public ExileTopXMayPlayUntilEndOfTurnEffect(int amount, boolean showHint) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.showHint = showHint;
     }
 
     private ExileTopXMayPlayUntilEndOfTurnEffect(final ExileTopXMayPlayUntilEndOfTurnEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.showHint = effect.showHint;
     }
 
     @Override
@@ -62,11 +69,17 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+        StringBuilder sb = new StringBuilder();
         if (amount == 1) {
-            return "exile the top card of your library. You may play that card this turn";
+            sb.append("exile the top card of your library. You may play that card this turn");
+        } else {
+            sb.append("exile the top ");
+            sb.append(CardUtil.numberToText(amount));
+            sb.append(" cards of your library. Until end of turn, you may play cards exiled this way");
         }
-        return "exile the top " +
-                CardUtil.numberToText(amount) +
-                " cards of your library. Until end of turn, you may play cards exiled this way";
+        if (showHint) {
+            sb.append(". <i>(You still pay its costs. You can play a land this way only if you have an available land play remaining.)</i>");
+        }
+        return sb.toString();
     }
 }
