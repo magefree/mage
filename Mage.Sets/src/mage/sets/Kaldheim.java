@@ -204,6 +204,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Revitalize", 23, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
         cards.add(new SetCardInfo("Rise of the Dread Marn", 107, Rarity.RARE, mage.cards.r.RiseOfTheDreadMarn.class));
+        cards.add(new SetCardInfo("Rootless Yew", 189, Rarity.UNCOMMON, mage.cards.r.RootlessYew.class));
         cards.add(new SetCardInfo("Roots of Wisdom", 190, Rarity.COMMON, mage.cards.r.RootsOfWisdom.class));
         cards.add(new SetCardInfo("Run Amok", 147, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Run Ashore", 74, Rarity.COMMON, mage.cards.r.RunAshore.class));
