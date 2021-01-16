@@ -1,71 +1,56 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.LockedInCondition;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author TheElk801
  */
 public final class FigureOfDestiny extends CardImpl {
 
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent();
-    static {
-        filter2.add(SubType.SPIRIT.getPredicate());
-        filter3.add(SubType.WARRIOR.getPredicate());
-    }
-
     public FigureOfDestiny(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R/W}");
         this.subtype.add(SubType.KITHKIN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {RW}: Figure of Destiny becomes a Kithkin Spirit with base power and toughness 2/2.
-        this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken1(), "", Duration.Custom),
-                new ManaCostsImpl("{R/W}")));
+        Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
+                Duration.Custom, SubType.KITHKIN, SubType.SPIRIT
+        ).setText("{this} becomes a Kithkin Spirit"), new ManaCostsImpl("{R/W}"));
+        ability.addEffect(new SetPowerToughnessSourceEffect(
+                2, 2, Duration.Custom, SubLayer.SetPT_7b
+        ).setText("with base power and toughness 2/2"));
+        this.addAbility(ability);
+
         // {RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                    new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken2(), "", Duration.Custom),
-                    new LockedInCondition(new SourceMatchesFilterCondition(filter2)),
-                    "If {this} is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4"),
-                new ManaCostsImpl("{R/W}{R/W}{R/W}")                
-                ));
+                new FigureOfDestinySpiritEffect(), new ManaCostsImpl("{R/W}{R/W}{R/W}")
+        ));
+
         // {RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                    new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken3(), "", Duration.Custom),
-                    new LockedInCondition(new SourceMatchesFilterCondition(filter3)),
-                    "If {this} is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike"),
-                new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}")                
-                ));
+                new FigureOfDestinyWarriorEffect(), new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}")
+        ));
     }
 
-    public FigureOfDestiny(final FigureOfDestiny card) {
+    private FigureOfDestiny(final FigureOfDestiny card) {
         super(card);
     }
 
@@ -73,78 +58,75 @@ public final class FigureOfDestiny extends CardImpl {
     public FigureOfDestiny copy() {
         return new FigureOfDestiny(this);
     }
+}
 
-    private class FigureOfDestinyToken1 extends TokenImpl {
+class FigureOfDestinySpiritEffect extends OneShotEffect {
 
-        public FigureOfDestinyToken1() {
-            super("Figure of Destiny", "Kithkin Spirit with base power and toughness 2/2");
-            this.cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.KITHKIN);
-            this.subtype.add(SubType.SPIRIT);
-
-            this.color.setRed(true);
-            this.color.setWhite(true);
-            this.power = new MageInt(2);
-            this.toughness = new MageInt(2);
-        }
-
-        public FigureOfDestinyToken1(final FigureOfDestinyToken1 token) {
-            super(token);
-        }
-
-        public FigureOfDestinyToken1 copy() {
-            return new FigureOfDestinyToken1(this);
-        }
+    FigureOfDestinySpiritEffect() {
+        super(Outcome.Benefit);
+        staticText = "if {this} is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4";
     }
 
-    private class FigureOfDestinyToken2 extends TokenImpl {
-
-        public FigureOfDestinyToken2() {
-            super("Figure of Destiny", "Kithkin Spirit Warrior with base power and toughness 4/4");
-            this.cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.KITHKIN);
-            this.subtype.add(SubType.SPIRIT);
-            this.subtype.add(SubType.WARRIOR);
-
-            this.color.setRed(true);
-            this.color.setWhite(true);
-            this.power = new MageInt(4);
-            this.toughness = new MageInt(4);
-        }
-        public FigureOfDestinyToken2(final FigureOfDestinyToken2 token) {
-            super(token);
-        }
-
-        public FigureOfDestinyToken2 copy() {
-            return new FigureOfDestinyToken2(this);
-        }
-
+    private FigureOfDestinySpiritEffect(final FigureOfDestinySpiritEffect effect) {
+        super(effect);
     }
 
-    private class FigureOfDestinyToken3 extends TokenImpl {
+    @Override
+    public FigureOfDestinySpiritEffect copy() {
+        return new FigureOfDestinySpiritEffect(this);
+    }
 
-        public FigureOfDestinyToken3() {
-            super("Figure of Destiny", "Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike");
-            this.cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.KITHKIN);
-            this.subtype.add(SubType.SPIRIT);
-            this.subtype.add(SubType.WARRIOR);
-            this.subtype.add(SubType.AVATAR);
-
-            this.color.setRed(true);
-            this.color.setWhite(true);
-            this.power = new MageInt(8);
-            this.toughness = new MageInt(8);
-            this.addAbility(FlyingAbility.getInstance());
-            this.addAbility(FirstStrikeAbility.getInstance());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null || !permanent.hasSubtype(SubType.SPIRIT, game)) {
+            return false;
         }
+        game.addEffect(new AddCardSubTypeSourceEffect(
+                Duration.Custom, SubType.KITHKIN, SubType.SPIRIT, SubType.WARRIOR
+        ), source);
+        game.addEffect(new SetPowerToughnessSourceEffect(
+                4, 4, Duration.Custom, SubLayer.SetPT_7b
+        ), source);
+        return true;
+    }
+}
 
-        public FigureOfDestinyToken3(final FigureOfDestinyToken3 token) {
-            super(token);
-        }
+class FigureOfDestinyWarriorEffect extends OneShotEffect {
 
-        public FigureOfDestinyToken3 copy() {
-            return new FigureOfDestinyToken3(this);
+    FigureOfDestinyWarriorEffect() {
+        super(Outcome.Benefit);
+        staticText = "if {this} is a Warrior, it becomes a Kithkin Spirit Warrior Avatar " +
+                "with base power and toughness 8/8, flying, and first strike";
+    }
+
+    private FigureOfDestinyWarriorEffect(final FigureOfDestinyWarriorEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public FigureOfDestinyWarriorEffect copy() {
+        return new FigureOfDestinyWarriorEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null || !permanent.hasSubtype(SubType.WARRIOR, game)) {
+            return false;
         }
+        game.addEffect(new AddCardSubTypeSourceEffect(
+                Duration.Custom, SubType.KITHKIN, SubType.SPIRIT, SubType.WARRIOR, SubType.AVATAR
+        ), source);
+        game.addEffect(new SetPowerToughnessSourceEffect(
+                8, 8, Duration.Custom, SubLayer.SetPT_7b
+        ), source);
+        game.addEffect(new GainAbilitySourceEffect(
+                FlyingAbility.getInstance(), Duration.Custom
+        ), source);
+        game.addEffect(new GainAbilitySourceEffect(
+                FirstStrikeAbility.getInstance(), Duration.Custom
+        ), source);
+        return true;
     }
 }

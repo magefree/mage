@@ -1,76 +1,67 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.LockedInCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author TheElk801
  */
 public final class WardenOfTheFirstTree extends CardImpl {
 
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent FILTER2 = new FilterCreaturePermanent();
-
-    static {
-        FILTER.add(SubType.WARRIOR.getPredicate());
-        FILTER2.add(SubType.SPIRIT.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SPIRIT, "");
+    private static final Condition condition = new SourceMatchesFilterCondition(filter);
 
     public WardenOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {1}{W/B}: Warden of the First Tree becomes a Human Warrior with base power and toughness 3/3.
-        this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEffect(new WardenOfTheFirstTree1(), "", Duration.Custom),
-                new ManaCostsImpl("{1}{W/B}")));
+        Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
+                Duration.Custom, SubType.HUMAN, SubType.WARRIOR
+        ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl("{1}{W/B}"));
+        ability.addEffect(new SetPowerToughnessSourceEffect(
+                3, 3, Duration.Custom, SubLayer.SetPT_7b
+        ).setText("with base power and toughness 3/3"));
+        this.addAbility(ability);
 
         // {2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                        new BecomesCreatureSourceEffect(new WardenOfTheFirstTree2(), "", Duration.Custom),
-                        new LockedInCondition(new SourceMatchesFilterCondition(FILTER)),
-                        "If {this} is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink"),
-                new ManaCostsImpl("{2}{W/B}{W/B}")
+                new WardenOfTheFirstTreeEffect(), new ManaCostsImpl("{2}{W/B}{W/B}")
         ));
 
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalOneShotEffect(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                        new SourceMatchesFilterCondition(FILTER2),
-                        "If {this} is a Spirit, put five +1/+1 counters on it"),
-                new ManaCostsImpl("{3}{W/B}{W/B}{W/B}")
+                        condition, "If {this} is a Spirit, put five +1/+1 counters on it"
+                ), new ManaCostsImpl("{3}{W/B}{W/B}{W/B}")
         ));
     }
 
-    public WardenOfTheFirstTree(final WardenOfTheFirstTree card) {
+    private WardenOfTheFirstTree(final WardenOfTheFirstTree card) {
         super(card);
     }
 
@@ -80,46 +71,37 @@ public final class WardenOfTheFirstTree extends CardImpl {
     }
 }
 
-class WardenOfTheFirstTree1 extends TokenImpl {
+class WardenOfTheFirstTreeEffect extends OneShotEffect {
 
-    public WardenOfTheFirstTree1() {
-        super("Warden of the First Tree", "Human Warrior with base power and toughness 3/3");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-    }
-    public WardenOfTheFirstTree1(final WardenOfTheFirstTree1 token) {
-        super(token);
+    WardenOfTheFirstTreeEffect() {
+        super(Outcome.Benefit);
+        staticText = "if {this} is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink";
     }
 
-    public WardenOfTheFirstTree1 copy() {
-        return new WardenOfTheFirstTree1(this);
-    }
-}
-
-class WardenOfTheFirstTree2 extends TokenImpl {
-
-    public WardenOfTheFirstTree2() {
-        super("Warden of the First Tree", "Human Spirit Warrior with trample and lifelink");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SPIRIT);
-        this.subtype.add(SubType.WARRIOR);
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(LifelinkAbility.getInstance());
-    }
-    public WardenOfTheFirstTree2(final WardenOfTheFirstTree2 token) {
-        super(token);
+    private WardenOfTheFirstTreeEffect(final WardenOfTheFirstTreeEffect effect) {
+        super(effect);
     }
 
-    public WardenOfTheFirstTree2 copy() {
-        return new WardenOfTheFirstTree2(this);
+    @Override
+    public WardenOfTheFirstTreeEffect copy() {
+        return new WardenOfTheFirstTreeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null || !permanent.hasSubtype(SubType.WARRIOR, game)) {
+            return false;
+        }
+        game.addEffect(new AddCardSubTypeSourceEffect(
+                Duration.Custom, SubType.HUMAN, SubType.SPIRIT, SubType.WARRIOR
+        ), source);
+        game.addEffect(new GainAbilitySourceEffect(
+                TrampleAbility.getInstance(), Duration.Custom
+        ), source);
+        game.addEffect(new GainAbilitySourceEffect(
+                LifelinkAbility.getInstance(), Duration.Custom
+        ), source);
+        return true;
     }
 }
