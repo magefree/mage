@@ -79,6 +79,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Basalt Ravager", 122, Rarity.UNCOMMON, mage.cards.b.BasaltRavager.class));
         cards.add(new SetCardInfo("Battle for Bretagard", 203, Rarity.RARE, mage.cards.b.BattleForBretagard.class));
         cards.add(new SetCardInfo("Battle of Frost and Fire", 204, Rarity.RARE, mage.cards.b.BattleOfFrostAndFire.class));
+        cards.add(new SetCardInfo("Battlefield Raptor", 3, Rarity.COMMON, mage.cards.b.BattlefieldRaptor.class));
         cards.add(new SetCardInfo("Bearded Axe", 388, Rarity.UNCOMMON, mage.cards.b.BeardedAxe.class));
         cards.add(new SetCardInfo("Behold the Multiverse", 46, Rarity.COMMON, mage.cards.b.BeholdTheMultiverse.class));
         cards.add(new SetCardInfo("Beskir Shieldmate", 4, Rarity.COMMON, mage.cards.b.BeskirShieldmate.class));
