@@ -8,7 +8,7 @@ import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileTop3MayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
@@ -46,7 +46,7 @@ public final class ChandraHeartOfFire extends CardImpl {
 
         // +1: Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
         Ability ability = new LoyaltyAbility(new DiscardHandControllerEffect(), 1);
-        ability.addEffect(new ExileTop3MayPlayUntilEndOfTurnEffect().concatBy(", then"));
+        ability.addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(3).concatBy(", then"));
         this.addAbility(ability);
 
         // +1: Chandra, Heart of Fire deals 2 damage to any target.
