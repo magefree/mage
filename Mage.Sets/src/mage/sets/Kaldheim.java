@@ -130,6 +130,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Firja, Judge of Valor", 209, Rarity.UNCOMMON, mage.cards.f.FirjaJudgeOfValor.class));
         cards.add(new SetCardInfo("Forest", 398, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forging the Tyrite Sword", 211, Rarity.UNCOMMON, mage.cards.f.ForgingTheTyriteSword.class));
+        cards.add(new SetCardInfo("Frost Augur", 56, Rarity.UNCOMMON, mage.cards.f.FrostAugur.class));
         cards.add(new SetCardInfo("Frost Bite", 138, Rarity.COMMON, mage.cards.f.FrostBite.class));
         cards.add(new SetCardInfo("Frostpeak Yeti", 57, Rarity.COMMON, mage.cards.f.FrostpeakYeti.class));
         cards.add(new SetCardInfo("Frostpyre Arcanist", 58, Rarity.UNCOMMON, mage.cards.f.FrostpyreArcanist.class));
