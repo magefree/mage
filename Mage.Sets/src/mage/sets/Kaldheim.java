@@ -169,6 +169,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Kolvori, God of Kinship", 181, Rarity.RARE, mage.cards.k.KolvoriGodOfKinship.class));
         cards.add(new SetCardInfo("Koma's Faithful", 102, Rarity.COMMON, mage.cards.k.KomasFaithful.class));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 221, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
+        cards.add(new SetCardInfo("Littjara Glade-Warden", 182, Rarity.UNCOMMON, mage.cards.l.LittjaraGladeWarden.class));
         cards.add(new SetCardInfo("Littjara Kinseekers", 66, Rarity.COMMON, mage.cards.l.LittjaraKinseekers.class));
         cards.add(new SetCardInfo("Magda, Brazen Outlaw", 142, Rarity.RARE, mage.cards.m.MagdaBrazenOutlaw.class));
         cards.add(new SetCardInfo("Maja, Bretagard Protector", 222, Rarity.UNCOMMON, mage.cards.m.MajaBretagardProtector.class));
