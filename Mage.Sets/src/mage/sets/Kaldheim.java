@@ -216,6 +216,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Skemfar Avenger", 109, Rarity.RARE, mage.cards.s.SkemfarAvenger.class));
         cards.add(new SetCardInfo("Skemfar Elderhall", 268, Rarity.UNCOMMON, mage.cards.s.SkemfarElderhall.class));
         cards.add(new SetCardInfo("Skemfar Shadowsage", 110, Rarity.UNCOMMON, mage.cards.s.SkemfarShadowsage.class));
+        cards.add(new SetCardInfo("Smashing Success", 151, Rarity.COMMON, mage.cards.s.SmashingSuccess.class));
         cards.add(new SetCardInfo("Snakeskin Veil", 194, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Snow-Covered Forest", 284, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
         cards.add(new SetCardInfo("Snow-Covered Island", 278, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
