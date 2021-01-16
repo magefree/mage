@@ -189,7 +189,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Raise the Draugr", 105, Rarity.COMMON, mage.cards.r.RaiseTheDraugr.class));
         cards.add(new SetCardInfo("Rally the Ranks", 20, Rarity.RARE, mage.cards.r.RallyTheRanks.class));
         cards.add(new SetCardInfo("Rampage of the Valkyries", 393, Rarity.UNCOMMON, mage.cards.r.RampageOfTheValkyries.class));
-        cards.add(new SetCardInfo("Raven Wings", 2, Rarity.COMMON, mage.cards.r.RavenWings.class));
+        cards.add(new SetCardInfo("Raven Wings", 243, Rarity.COMMON, mage.cards.r.RavenWings.class));
         cards.add(new SetCardInfo("Ravenform", 72, Rarity.COMMON, mage.cards.r.Ravenform.class));
         cards.add(new SetCardInfo("Realmwalker", 188, Rarity.RARE, mage.cards.r.Realmwalker.class));
         cards.add(new SetCardInfo("Reckless Crew", 148, Rarity.RARE, mage.cards.r.RecklessCrew.class));
