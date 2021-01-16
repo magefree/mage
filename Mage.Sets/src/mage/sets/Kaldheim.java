@@ -131,6 +131,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Frostpeak Yeti", 57, Rarity.COMMON, mage.cards.f.FrostpeakYeti.class));
         cards.add(new SetCardInfo("Frostpyre Arcanist", 58, Rarity.UNCOMMON, mage.cards.f.FrostpyreArcanist.class));
         cards.add(new SetCardInfo("Funeral Longboat", 238, Rarity.COMMON, mage.cards.f.FuneralLongboat.class));
+        cards.add(new SetCardInfo("Fynn, the Fangbearer", 170, Rarity.UNCOMMON, mage.cards.f.FynnTheFangbearer.class));
         cards.add(new SetCardInfo("Gates of Istfell", 256, Rarity.UNCOMMON, mage.cards.g.GatesOfIstfell.class));
         cards.add(new SetCardInfo("Giant's Amulet", 59, Rarity.UNCOMMON, mage.cards.g.GiantsAmulet.class));
         cards.add(new SetCardInfo("Giant's Grasp", 384, Rarity.UNCOMMON, mage.cards.g.GiantsGrasp.class));
