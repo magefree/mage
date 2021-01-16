@@ -70,6 +70,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Arachnoform", 159, Rarity.COMMON, mage.cards.a.Arachnoform.class));
         cards.add(new SetCardInfo("Arctic Treeline", 249, Rarity.COMMON, mage.cards.a.ArcticTreeline.class));
         cards.add(new SetCardInfo("Armed and Armored", 379, Rarity.UNCOMMON, mage.cards.a.ArmedAndArmored.class));
+        cards.add(new SetCardInfo("Arni Brokenbrow", 120, Rarity.RARE, mage.cards.a.ArniBrokenbrow.class));
         cards.add(new SetCardInfo("Arni Slays the Troll", 201, Rarity.UNCOMMON, mage.cards.a.ArniSlaysTheTroll.class));
         cards.add(new SetCardInfo("Ascendant Spirit", 43, Rarity.RARE, mage.cards.a.AscendantSpirit.class));
         cards.add(new SetCardInfo("Augury Raven", 44, Rarity.COMMON, mage.cards.a.AuguryRaven.class));
