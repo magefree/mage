@@ -7,11 +7,9 @@ import mage.abilities.StaticAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -23,9 +21,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Library;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 import java.io.ObjectStreamException;
@@ -57,7 +52,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new BellBorcaSpectralSergeantEffect(), TargetController.YOU, false
+                new ExileTopXMayPlayUntilEndOfTurnEffect(1), TargetController.YOU, false
         ), new BellBorcaSpectralSergeantWatcher());
     }
 
@@ -154,42 +149,5 @@ class BellBorcaSpectralSergeantWatcher extends Watcher {
 
     int getValue(UUID sourceId) {
         return cmcMap.getOrDefault(sourceId, 0);
-    }
-}
-
-class BellBorcaSpectralSergeantEffect extends OneShotEffect {
-
-    BellBorcaSpectralSergeantEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile the top card of your library. You may play that card this turn";
-    }
-
-    private BellBorcaSpectralSergeantEffect(final BellBorcaSpectralSergeantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BellBorcaSpectralSergeantEffect copy() {
-        return new BellBorcaSpectralSergeantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent == null || controller == null || !controller.getLibrary().hasCards()) {
-            return false;
-        }
-        Library library = controller.getLibrary();
-        Card card = library.getFromTop(game);
-        if (card == null) {
-            return true;
-        }
-        String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
-        controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
-        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(card, game));
-        game.addEffect(effect, source);
-        return true;
     }
 }

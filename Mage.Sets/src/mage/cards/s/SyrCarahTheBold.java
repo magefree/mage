@@ -5,23 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.players.Library;
-import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -61,7 +56,7 @@ public final class SyrCarahTheBold extends CardImpl {
 class SyrCarahTheBoldTriggeredAbility extends TriggeredAbilityImpl {
 
     SyrCarahTheBoldTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SyrCarahTheBoldExileEffect(), false);
+        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEndOfTurnEffect(1), false);
     }
 
     private SyrCarahTheBoldTriggeredAbility(final SyrCarahTheBoldTriggeredAbility ability) {
@@ -92,69 +87,5 @@ class SyrCarahTheBoldTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} or an instant or sorcery spell you control deals damage to a player, " +
                 "exile the top card of your library. You may play that card this turn.";
-    }
-
-}
-
-class SyrCarahTheBoldExileEffect extends OneShotEffect {
-
-    SyrCarahTheBoldExileEffect() {
-        super(Outcome.Detriment);
-    }
-
-    private SyrCarahTheBoldExileEffect(final SyrCarahTheBoldExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SyrCarahTheBoldExileEffect copy() {
-        return new SyrCarahTheBoldExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent == null || controller == null || !controller.getLibrary().hasCards()) {
-            return false;
-        }
-        Library library = controller.getLibrary();
-        Card card = library.getFromTop(game);
-        if (card == null) {
-            return true;
-        }
-        String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
-        controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
-        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(card, game));
-        game.addEffect(effect, source);
-        return true;
-    }
-}
-
-class SyrCarahTheBoldCastFromExileEffect extends AsThoughEffectImpl {
-
-    SyrCarahTheBoldCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    private SyrCarahTheBoldCastFromExileEffect(final SyrCarahTheBoldCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SyrCarahTheBoldCastFromExileEffect copy() {
-        return new SyrCarahTheBoldCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }
