@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-    protected static final class ManaColor {
+    protected static final class ManaColor implements Serializable {
         private int amount = 0;
         private int snowAmount = 0;
 
