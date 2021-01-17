@@ -1312,55 +1312,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Mana mana = (Mana) o;
-
-        if (white != mana.white) {
-            return false;
-        }
-        if (blue != mana.blue) {
-            return false;
-        }
-        if (black != mana.black) {
-            return false;
-        }
-        if (red != mana.red) {
-            return false;
-        }
-        if (green != mana.green) {
-            return false;
-        }
-        if (colorless != mana.colorless) {
-            return false;
-        }
-        if (generic != mana.generic) {
-            return false;
-        }
-        if (any != mana.any) {
-            return false;
-        }
-        return flag == mana.flag;
-
+        return flag == mana.flag
+                && Objects.equals(white, mana.white)
+                && Objects.equals(blue, mana.blue)
+                && Objects.equals(black, mana.black)
+                && Objects.equals(red, mana.red)
+                && Objects.equals(green, mana.green)
+                && Objects.equals(generic, mana.generic)
+                && Objects.equals(colorless, mana.colorless)
+                && Objects.equals(any, mana.any);
     }
 
     @Override
     public int hashCode() {
-        int result = white.getAmount();
-        result = 31 * result + blue.getAmount();
-        result = 31 * result + black.getAmount();
-        result = 31 * result + red.getAmount();
-        result = 31 * result + green.getAmount();
-        result = 31 * result + generic.getAmount();
-        result = 31 * result + colorless.getAmount();
-        result = 31 * result + any.getAmount();
-        result = 31 * result + (flag ? 1 : 0);
-        return result;
+        return Objects.hash(white, blue, black, red, green, generic, colorless, any, flag);
     }
 
     /**
