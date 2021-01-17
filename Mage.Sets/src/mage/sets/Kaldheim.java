@@ -128,6 +128,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Faceless Haven", 255, Rarity.RARE, mage.cards.f.FacelessHaven.class));
         cards.add(new SetCardInfo("Fall of the Impostor", 208, Rarity.UNCOMMON, mage.cards.f.FallOfTheImpostor.class));
         cards.add(new SetCardInfo("Fearless Liberator", 135, Rarity.UNCOMMON, mage.cards.f.FearlessLiberator.class));
+        cards.add(new SetCardInfo("Fearless Pup", 136, Rarity.COMMON, mage.cards.f.FearlessPup.class));
         cards.add(new SetCardInfo("Feed the Serpent", 95, Rarity.COMMON, mage.cards.f.FeedTheSerpent.class));
         cards.add(new SetCardInfo("Fire Giant's Fury", 389, Rarity.UNCOMMON, mage.cards.f.FireGiantsFury.class));
         cards.add(new SetCardInfo("Firja's Retribution", 210, Rarity.RARE, mage.cards.f.FirjasRetribution.class));
