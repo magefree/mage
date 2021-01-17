@@ -195,6 +195,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public Mana(final ManaType manaType) {
+        this();
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
         switch (manaType) {
             case WHITE:
@@ -224,6 +225,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public Mana(final ManaType manaType, int num) {
+        this();
         Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
         switch (manaType) {
             case WHITE:
