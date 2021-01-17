@@ -1165,14 +1165,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param mana the mana to set this object to.
      */
     public void setToMana(final Mana mana) {
-        this.any = mana.any;
-        this.white = mana.white;
-        this.blue = mana.blue;
-        this.black = mana.black;
-        this.red = mana.red;
-        this.green = mana.green;
-        this.colorless = mana.colorless;
-        this.generic = mana.generic;
+        this.any = mana.any.copy();
+        this.white = mana.white.copy();
+        this.blue = mana.blue.copy();
+        this.black = mana.black.copy();
+        this.red = mana.red.copy();
+        this.green = mana.green.copy();
+        this.colorless = mana.colorless.copy();
+        this.generic = mana.generic.copy();
     }
 
     /**
