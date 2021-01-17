@@ -18,6 +18,7 @@ public final class Kaldheim extends ExpansionSet {
             "Behold the Multiverse",
             "Cosmos Charger",
             "Crush the Weak",
+            "Demom Bolt",
             "Doomskar Oracle",
             "Doomskar Titan",
             "Dual Strike",
