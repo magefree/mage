@@ -991,6 +991,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         this.any.amount = notNegative(any, "Any");
     }
 
+    public int getSnow() {
+        return white.getSnowAmount()
+                + blue.getSnowAmount()
+                + black.getSnowAmount()
+                + red.getSnowAmount()
+                + green.getSnowAmount()
+                + colorless.getSnowAmount()
+                + generic.getSnowAmount()
+                + any.getSnowAmount();
+    }
+
     /**
      * Returns this objects total mana minus the passed in {@link Mana}'s mana.
      *
