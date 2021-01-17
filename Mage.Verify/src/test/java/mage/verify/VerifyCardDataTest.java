@@ -84,6 +84,7 @@ public class VerifyCardDataTest {
         skipListCreate(SKIP_LIST_PT);
         skipListAddName(SKIP_LIST_PT, "UST", "Garbage Elemental");
         skipListAddName(SKIP_LIST_PT, "UST", "Infinity Elemental");
+        skipListAddName(SKIP_LIST_PT, "KHM", "Tuskeri Firewalker");
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -105,10 +106,12 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
+        skipListAddName(SKIP_LIST_TYPE, "KHM", "Fall of the Impostor");
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        skipListAddName(SKIP_LIST_SUBTYPE, "KHM", "Fall of the Impostor");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
