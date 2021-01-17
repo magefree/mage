@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-    private static final class ManaColor {
+    protected static final class ManaColor {
         private int amount = 0;
         private int snowAmount = 0;
 
@@ -25,41 +25,41 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             this.amount = amount;
         }
 
-        private int getAmount() {
+        protected int getAmount() {
             return amount;
         }
 
-        private int getSnowAmount() {
+        protected int getSnowAmount() {
             return snowAmount;
         }
 
-        private void incrementAmount() {
+        protected void incrementAmount() {
             incrementAmount(1, false);
         }
 
-        private void incrementAmount(ManaColor manaColor) {
+        protected void incrementAmount(ManaColor manaColor) {
             this.amount += manaColor.amount;
             this.snowAmount += manaColor.snowAmount;
         }
 
-        private void incrementAmount(int amount, boolean snow) {
+        protected void incrementAmount(int amount, boolean snow) {
             this.amount += amount;
             if (snow) {
                 this.snowAmount += amount;
             }
         }
 
-        private void removeAmount(ManaColor manaColor) {
+        protected void removeAmount(ManaColor manaColor) {
             this.amount -= manaColor.amount;
             this.snowAmount -= manaColor.snowAmount;
         }
 
-        private void clear() {
+        protected void clear() {
             amount = 0;
             snowAmount = 0;
         }
 
-        private boolean removeOne(ManaColor manaColor) {
+        protected boolean removeOne(ManaColor manaColor) {
             if (manaColor.getAmount() < 1) {
                 return false;
             }
@@ -72,7 +72,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         }
 
-        private ManaColor copy() {
+        protected ManaColor copy() {
             ManaColor copy = new ManaColor();
             copy.incrementAmount(this);
             return copy;

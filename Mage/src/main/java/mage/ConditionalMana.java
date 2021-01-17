@@ -113,25 +113,25 @@ public class ConditionalMana extends Mana implements Serializable {
             return;
         }
         if (filter.isBlack()) {
-            black = 0;
+            black.clear();
         }
         if (filter.isBlue()) {
-            blue = 0;
+            blue.clear();
         }
         if (filter.isWhite()) {
-            white = 0;
+            white.clear();
         }
         if (filter.isGreen()) {
-            green = 0;
+            green.clear();
         }
         if (filter.isRed()) {
-            red = 0;
+            red.clear();
         }
         if (filter.isColorless()) {
-            colorless = 0;
+            colorless.clear();
         }
         if (filter.isGeneric()) {
-            generic = 0;
+            generic.clear();
         }
     }
 
@@ -154,25 +154,25 @@ public class ConditionalMana extends Mana implements Serializable {
     public void clear(ManaType manaType) {
         switch (manaType) {
             case BLACK:
-                black = 0;
+                black.clear();
                 break;
             case BLUE:
-                blue = 0;
+                blue.clear();
                 break;
             case GREEN:
-                green = 0;
+                green.clear();
                 break;
             case RED:
-                red = 0;
+                red.clear();
                 break;
             case WHITE:
-                white = 0;
+                white.clear();
                 break;
             case GENERIC:
-                generic = 0;
+                generic.clear();
                 break;
             case COLORLESS:
-                colorless = 0;
+                colorless.clear();
                 break;
         }
     }
@@ -186,7 +186,7 @@ public class ConditionalMana extends Mana implements Serializable {
         }
         super.add(mana);
     }
-  
+
     public String getConditionString() {
         String condStr = "[";
         for (Condition condition : conditions) {
@@ -198,25 +198,25 @@ public class ConditionalMana extends Mana implements Serializable {
     public void add(ManaType manaType, int amount) {
         switch (manaType) {
             case BLACK:
-                black += amount;
+                black.incrementAmount(amount, false);
                 break;
             case BLUE:
-                blue += amount;
+                blue.incrementAmount(amount, false);
                 break;
             case GREEN:
-                green += amount;
+                green.incrementAmount(amount, false);
                 break;
             case RED:
-                red += amount;
+                red.incrementAmount(amount, false);
                 break;
             case WHITE:
-                white += amount;
+                white.incrementAmount(amount, false);
                 break;
             case COLORLESS:
-                colorless += amount;
+                colorless.incrementAmount(amount, false);
                 break;
             case GENERIC:
-                generic += amount;
+                generic.incrementAmount(amount, false);
                 break;
         }
     }
