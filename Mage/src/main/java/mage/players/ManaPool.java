@@ -1,7 +1,5 @@
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -17,6 +15,9 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.events.ManaPaidEvent;
 import mage.game.stack.Spell;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -34,6 +35,7 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
+    private boolean lastPaymentWasSnow = false;
 
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
@@ -89,6 +91,7 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
+        lastPaymentWasSnow = false;
         if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -146,6 +149,7 @@ public class ManaPool implements Serializable {
                 game.fireEvent(event);
                 usedManaToPay.increase(usableManaType);
                 mana.remove(usableManaType);
+                lastPaymentWasSnow |= mana.getSourceObject().isSnow();
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
                 }
@@ -180,6 +184,7 @@ public class ManaPool implements Serializable {
                 if (manaTypeToUse != null && mana.getConditionalMana().apply(ability, game, mana.getSourceId(), costToPay)) {
                     if (filter == null
                             || filter.match(mana.getSourceObject(), game)) {
+                        lastPaymentWasSnow |= mana.getSourceObject().isSnow();
                         return manaTypeToUse;
                     }
                 }
@@ -313,7 +318,7 @@ public class ManaPool implements Serializable {
                 if (mana instanceof ConditionalMana) {
                     ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game),
                             ((ConditionalMana) mana).getManaProducerOriginalId() != null
-                            ? ((ConditionalMana) mana).getManaProducerOriginalId() : source.getOriginalId());
+                                    ? ((ConditionalMana) mana).getManaProducerOriginalId() : source.getOriginalId());
                     if (emptyOnTurnsEnd) {
                         item.setDuration(Duration.EndOfTurn);
                     }
@@ -485,5 +490,9 @@ public class ManaPool implements Serializable {
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
         }
+    }
+
+    public boolean getLastPaymentWasSnow() {
+        return lastPaymentWasSnow;
     }
 }
