@@ -102,6 +102,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         green = new ManaColor();
         generic = new ManaColor();
         colorless = new ManaColor();
+        any = new ManaColor();
         flag = false;
     }
 
