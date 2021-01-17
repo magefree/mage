@@ -14,6 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -95,10 +96,15 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
         if (topCard.isInstantOrSorcery() && you.chooseUse(outcome, "Would you like to copy " + topCard.getName()
                 + " and cast it for {2} less?", source, game)) {
             Card blueprint = topCard.copy();
-            blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            if (blueprint instanceof SplitCard) {
+                ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+                ((SplitCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            } else {
+                blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            }
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
             you.moveCardToHandWithInfo(copiedCard, source, game, true); // The copy is created in and cast from your hand.
-            you.cast(copiedCard.getSpellAbility(), game, false, new ApprovingObject(source, game));
+            you.cast(you.chooseAbilityForCast(copiedCard, game, false), game, false, new ApprovingObject(source, game));
         }
 
         // draw (return false for default draw)
