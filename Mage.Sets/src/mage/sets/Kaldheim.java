@@ -199,6 +199,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Path to the World Tree", 186, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Pilfering Hawk", 71, Rarity.COMMON, mage.cards.p.PilferingHawk.class));
         cards.add(new SetCardInfo("Plains", 394, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Provoke the Trolls", 144, Rarity.COMMON, mage.cards.p.ProvokeTheTrolls.class));
         cards.add(new SetCardInfo("Pyre of Heroes", 241, Rarity.RARE, mage.cards.p.PyreOfHeroes.class));
         cards.add(new SetCardInfo("Raiders' Karve", 242, Rarity.COMMON, mage.cards.r.RaidersKarve.class));
         cards.add(new SetCardInfo("Raise the Draugr", 105, Rarity.COMMON, mage.cards.r.RaiseTheDraugr.class));
