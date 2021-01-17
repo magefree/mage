@@ -77,6 +77,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             copy.incrementAmount(this);
             return copy;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ManaColor manaColor = (ManaColor) o;
+            return amount == manaColor.amount && snowAmount == manaColor.snowAmount;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(amount, snowAmount);
+        }
     }
 
     private static final transient Logger logger = Logger.getLogger(Mana.class);
@@ -1169,14 +1182,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return if the passed in {@link Mana} values are equal to this object.
      */
     public boolean equalManaValue(final Mana mana) {
-        return this.any == mana.any
-                && this.white == mana.white
-                && this.blue == mana.blue
-                && this.black == mana.black
-                && this.red == mana.red
-                && this.green == mana.green
-                && this.colorless == mana.colorless
-                && this.generic == mana.generic;
+        return this.any.equals(mana.any)
+                && this.white.equals(mana.white)
+                && this.blue.equals(mana.blue)
+                && this.black.equals(mana.black)
+                && this.red.equals(mana.red)
+                && this.green.equals(mana.green)
+                && this.colorless.equals(mana.colorless)
+                && this.generic.equals(mana.generic);
     }
 
     /**
