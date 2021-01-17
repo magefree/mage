@@ -210,6 +210,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Crew", 148, Rarity.RARE, mage.cards.r.RecklessCrew.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
+        cards.add(new SetCardInfo("Return Upon the Tide", 106, Rarity.UNCOMMON, mage.cards.r.ReturnUponTheTide.class));
         cards.add(new SetCardInfo("Revitalize", 23, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
         cards.add(new SetCardInfo("Rise of the Dread Marn", 107, Rarity.RARE, mage.cards.r.RiseOfTheDreadMarn.class));
