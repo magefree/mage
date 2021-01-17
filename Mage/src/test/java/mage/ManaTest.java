@@ -145,7 +145,7 @@ public class ManaTest {
     public void shouldCreateManaFromIntegers() {
 
         // when
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 8);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 8);
 
         // then
         assertEquals(1, mana.getRed());
@@ -163,7 +163,7 @@ public class ManaTest {
         // given
 
         // when
-        Mana mana = new Mana(-1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, -1, 2, 6, 7, 0);
 
         // then
         assertEquals(0, mana.getRed());
@@ -308,8 +308,8 @@ public class ManaTest {
     @Test
     public void shouldAddMana() {
         // given
-        Mana thisMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
-        Mana thatMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana thisMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana thatMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
 
         // when
         thisMana.add(thatMana);
@@ -420,7 +420,7 @@ public class ManaTest {
     public void shouldSubtractCost() {
         // given
         Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2, 0);
-        Mana thatMana = new Mana(10, 1, 1, 1, 10, 1, 1, 0);
+        Mana thatMana = new Mana(1, 1, 10, 10, 1, 1, 1, 0);
 
         // when
         thisMana.subtractCost(thatMana);
@@ -471,7 +471,7 @@ public class ManaTest {
     @Test
     public void shouldReturnCount() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
         FilterMana filter = new FilterMana();
         filter.setBlack(true);
 
@@ -489,7 +489,7 @@ public class ManaTest {
     @Test
     public void shouldReturnString() {
         // given
-        Mana mana = new Mana(1, 2, 3, 0, 3, 6, 2, 0);
+        Mana mana = new Mana(0, 3, 3, 1, 2, 6, 2, 0);
 
         // when
         String ret = mana.toString();
@@ -501,7 +501,7 @@ public class ManaTest {
     @Test
     public void shouldClearMana() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
 
         // when
         mana.clear();
@@ -519,7 +519,7 @@ public class ManaTest {
     @Test
     public void shouldReturnCopy() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
 
         // when
         Mana copy = mana.copy();
@@ -597,7 +597,7 @@ public class ManaTest {
     public void shouldSetToMana() {
         // given
         Mana mana = new Mana();
-        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana newMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
 
         // when
         mana.setToMana(newMana);
@@ -610,8 +610,8 @@ public class ManaTest {
     @Test
     public void shouldHaveEqualManaValue() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
-        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana newMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
 
         // when
         boolean equalMana = mana.equalManaValue(newMana);

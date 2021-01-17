@@ -26,7 +26,7 @@ public final class GyreEngineer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add {G}{U}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 
     private GyreEngineer(final GyreEngineer card) {

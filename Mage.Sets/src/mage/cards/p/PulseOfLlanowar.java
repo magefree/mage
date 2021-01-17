@@ -2,7 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.MageObject;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 
@@ -76,7 +75,7 @@ class PulseOfLlanowarReplacementEffect extends ReplacementEffectImpl {
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();
         new AddManaOfAnyColorEffect(mana.count()).apply(game,source);
-        mana.setToMana(new Mana(0,0,0,0,0,0,0,0));
+        mana.setToMana(new Mana(0, 0, 0, 0,0, 0,0,0));
         return true;
     }
 

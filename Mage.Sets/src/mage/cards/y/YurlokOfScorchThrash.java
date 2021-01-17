@@ -127,12 +127,12 @@ class YurlokOfScorchThrashManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        netMana.add(new Mana(1, 1, 0, 0, 1, 0, 0, 0));
+        netMana.add(new Mana(0, 0, 1, 1, 1, 0, 0, 0));
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        return new Mana(1, 1, 0, 0, 1, 0, 0, 0);
+        return new Mana(0, 0, 1, 1, 1, 0, 0, 0);
     }
 }

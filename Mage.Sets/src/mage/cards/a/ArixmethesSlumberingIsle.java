@@ -58,7 +58,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.SLUMBER.createInstance(1)), true));
 
         // {T}: Add {G}{U}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 
     public ArixmethesSlumberingIsle(final ArixmethesSlumberingIsle card) {

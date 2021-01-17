@@ -44,16 +44,16 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Creates a {@link Mana} object with the passed in values. Values can not
      * be less than 0. Any values less than 0 will be logged and set to 0.
      *
+     * @param white     total White mana to have.
+     * @param blue      total Blue mana to have.
+     * @param black     total Black mana to have.
      * @param red       total Red mana to have.
      * @param green     total Green mana to have.
-     * @param blue      total Blue mana to have.
-     * @param white     total White mana to have.
-     * @param black     total Black mana to have.
      * @param generic   total Generic mana to have.
      * @param any       total Any mana to have.
      * @param colorless total Colorless mana to have.
      */
-    public Mana(final int red, final int green, final int blue, final int white, final int black, final int generic, final int any, final int colorless) {
+    public Mana(final int white, final int blue, final int black, final int red, final int green, final int generic, final int any, final int colorless) {
         this.white = notNegative(white, "White");
         this.blue = notNegative(blue, "Blue");
         this.black = notNegative(black, "Black");
@@ -173,28 +173,16 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Creates a {@link Mana} object with the passed in {@code num} of Red mana.
-     * {@code num} can not be a negative value. Negative values will be logged
-     * and set to 0.
-     *
-     * @param num value of Red mana to create.
-     * @return a {@link Mana} object with the passed in {@code num} of Red mana.
-     */
-    public static Mana RedMana(int num) {
-        return new Mana(notNegative(num, "Red"), 0, 0, 0, 0, 0, 0, 0);
-    }
-
-    /**
-     * Creates a {@link Mana} object with the passed in {@code num} of Green
+     * Creates a {@link Mana} object with the passed in {@code num} of White
      * mana. {@code num} can not be a negative value. Negative values will be
      * logged and set to 0.
      *
-     * @param num value of Green mana to create.
-     * @return a {@link Mana} object with the passed in {@code num} of Green
+     * @param num value of White mana to create.
+     * @return a {@link Mana} object with the passed in {@code num} of White
      * mana.
      */
-    public static Mana GreenMana(int num) {
-        return new Mana(0, notNegative(num, "Green"), 0, 0, 0, 0, 0, 0);
+    public static Mana WhiteMana(int num) {
+        return new Mana(notNegative(num, "White"), 0, 0, 0, 0, 0, 0, 0);
     }
 
     /**
@@ -207,20 +195,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * mana.
      */
     public static Mana BlueMana(int num) {
-        return new Mana(0, 0, notNegative(num, "Blue"), 0, 0, 0, 0, 0);
-    }
-
-    /**
-     * Creates a {@link Mana} object with the passed in {@code num} of White
-     * mana. {@code num} can not be a negative value. Negative values will be
-     * logged and set to 0.
-     *
-     * @param num value of White mana to create.
-     * @return a {@link Mana} object with the passed in {@code num} of White
-     * mana.
-     */
-    public static Mana WhiteMana(int num) {
-        return new Mana(0, 0, 0, notNegative(num, "White"), 0, 0, 0, 0);
+        return new Mana(0, notNegative(num, "Blue"), 0, 0, 0, 0, 0, 0);
     }
 
     /**
@@ -233,7 +208,32 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * mana.
      */
     public static Mana BlackMana(int num) {
-        return new Mana(0, 0, 0, 0, notNegative(num, "Black"), 0, 0, 0);
+        return new Mana(0, 0, notNegative(num, "Black"), 0, 0, 0, 0, 0);
+    }
+
+    /**
+     * Creates a {@link Mana} object with the passed in {@code num} of Red mana.
+     * {@code num} can not be a negative value. Negative values will be logged
+     * and set to 0.
+     *
+     * @param num value of Red mana to create.
+     * @return a {@link Mana} object with the passed in {@code num} of Red mana.
+     */
+    public static Mana RedMana(int num) {
+        return new Mana(0, 0, 0, notNegative(num, "Red"), 0, 0, 0, 0);
+    }
+
+    /**
+     * Creates a {@link Mana} object with the passed in {@code num} of Green
+     * mana. {@code num} can not be a negative value. Negative values will be
+     * logged and set to 0.
+     *
+     * @param num value of Green mana to create.
+     * @return a {@link Mana} object with the passed in {@code num} of Green
+     * mana.
+     */
+    public static Mana GreenMana(int num) {
+        return new Mana(0, 0, 0, 0, notNegative(num, "Green"), 0, 0, 0);
     }
 
     /**
