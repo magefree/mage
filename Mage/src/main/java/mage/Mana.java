@@ -855,7 +855,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param white total White mana.
      */
     public void setWhite(int white) {
-        this.white.amount = notNegative(white, "White");
+        this.white.clear();
+        this.white.incrementAmount(notNegative(white, "White"), false);
     }
 
     /**
@@ -874,7 +875,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param blue total Blue mana.
      */
     public void setBlue(int blue) {
-        this.blue.amount = notNegative(blue, "Blue");
+        this.blue.clear();
+        this.blue.incrementAmount(notNegative(blue, "Blue"), false);
     }
 
     /**
@@ -893,7 +895,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param black total Black mana.
      */
     public void setBlack(int black) {
-        this.black.amount = notNegative(black, "Black");
+        this.black.clear();
+        this.black.incrementAmount(notNegative(black, "Black"), false);
     }
 
     /**
@@ -912,7 +915,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param red total Red mana.
      */
     public void setRed(int red) {
-        this.red.amount = notNegative(red, "Red");
+        this.red.clear();
+        this.red.incrementAmount(notNegative(red, "Red"), false);
     }
 
     /**
@@ -931,7 +935,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param green total Green mana.
      */
     public void setGreen(int green) {
-        this.green.amount = notNegative(green, "Green");
+        this.green.clear();
+        this.green.incrementAmount(notNegative(green, "Green"), false);
     }
 
     /**
@@ -950,7 +955,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param generic total Generic mana.
      */
     public void setGeneric(int generic) {
-        this.generic.amount = notNegative(generic, "Generic");
+        this.generic.clear();
+        this.generic.incrementAmount(notNegative(generic, "Generic"), false);
     }
 
     /**
@@ -969,7 +975,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param colorless total Colorless mana.
      */
     public void setColorless(int colorless) {
-        this.colorless.amount = notNegative(colorless, "Colorless");
+        this.colorless.clear();
+        this.colorless.incrementAmount(notNegative(colorless, "Colorless"), false);
     }
 
     /**
@@ -988,7 +995,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param any total Any mana.
      */
     public void setAny(int any) {
-        this.any.amount = notNegative(any, "Any");
+        this.any.clear();
+        this.any.incrementAmount(notNegative(any, "Any"), false);
     }
 
     public int getSnow() {
@@ -1142,22 +1150,22 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public void set(final ManaType manaType, final int amount) {
         switch (manaType) {
             case WHITE:
-                white.amount = amount;
+                setWhite(amount);
                 break;
             case BLUE:
-                blue.amount = amount;
+                setBlue(amount);
                 break;
             case BLACK:
-                black.amount = amount;
+                setBlack(amount);
                 break;
             case RED:
-                red.amount = amount;
+                setRed(amount);
                 break;
             case GREEN:
-                green.amount = amount;
+                setGreen(amount);
                 break;
             case COLORLESS:
-                colorless.amount = amount;
+                setColorless(amount);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown color: " + manaType);
