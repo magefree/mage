@@ -556,7 +556,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 + blue.getAmount()
                 + black.getAmount()
                 + red.getAmount()
-                + green.getAmount();
+                + green.getAmount()
+                + any.getAmount();
     }
 
     /**
