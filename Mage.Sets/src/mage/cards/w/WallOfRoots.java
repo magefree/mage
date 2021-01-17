@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class WallOfRoots extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Put a -0/-1 counter on Wall of Roots: Add {G}. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new PutCountersSourceCost(new BoostCounter(0, -1))));
+        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new PutCountersSourceCost(CounterType.M0M1.createInstance())));
     }
 
     public WallOfRoots(final WallOfRoots card) {

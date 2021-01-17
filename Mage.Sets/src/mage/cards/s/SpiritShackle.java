@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,7 +35,7 @@ public final class SpiritShackle extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new AddCountersAttachedEffect(new BoostCounter(0, -2), "it"), "enchanted creature"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new AddCountersAttachedEffect(CounterType.M0M2.createInstance(), "it"), "enchanted creature"));
 
     }
 
