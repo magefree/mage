@@ -3,12 +3,11 @@ package mage;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotSame;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -308,18 +307,18 @@ public class ManaTest {
     @Test
     public void shouldAddMana() {
         // given
-        Mana thisMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
-        Mana thatMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana thisMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana thatMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         thisMana.add(thatMana);
 
         // then
-        assertEquals(2, thisMana.getRed());
-        assertEquals(4, thisMana.getGreen());
-        assertEquals(6, thisMana.getBlue());
-        assertEquals(8, thisMana.getWhite());
-        assertEquals(10, thisMana.getBlack());
+        assertEquals(2, thisMana.getWhite());
+        assertEquals(4, thisMana.getBlue());
+        assertEquals(6, thisMana.getBlack());
+        assertEquals(8, thisMana.getRed());
+        assertEquals(10, thisMana.getGreen());
         assertEquals(12, thisMana.getGeneric());
         assertEquals(14, thisMana.getAny());
     }
@@ -501,7 +500,7 @@ public class ManaTest {
     @Test
     public void shouldClearMana() {
         // given
-        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         mana.clear();
@@ -519,7 +518,7 @@ public class ManaTest {
     @Test
     public void shouldReturnCopy() {
         // given
-        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         Mana copy = mana.copy();
@@ -597,7 +596,7 @@ public class ManaTest {
     public void shouldSetToMana() {
         // given
         Mana mana = new Mana();
-        Mana newMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         mana.setToMana(newMana);
@@ -610,8 +609,8 @@ public class ManaTest {
     @Test
     public void shouldHaveEqualManaValue() {
         // given
-        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
-        Mana newMana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
+        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana newMana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
 
         // when
         boolean equalMana = mana.equalManaValue(newMana);
