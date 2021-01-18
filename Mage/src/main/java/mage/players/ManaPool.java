@@ -35,7 +35,7 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
-    private boolean lastPaymentWasSnow = false;
+    private boolean lastPaymentWasSnow;
 
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
@@ -43,6 +43,7 @@ public class ManaPool implements Serializable {
         autoPaymentRestricted = true;
         unlockedManaType = null;
         forcedToPay = false;
+        lastPaymentWasSnow = false;
     }
 
     public ManaPool(final ManaPool pool) {
@@ -58,6 +59,7 @@ public class ManaPool implements Serializable {
             poolBookmark.add(item.copy());
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
+        this.lastPaymentWasSnow = pool.lastPaymentWasSnow;
     }
 
     public int getRed() {
@@ -121,6 +123,7 @@ public class ManaPool implements Serializable {
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
+        lastPaymentWasSnow = false;
 
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
