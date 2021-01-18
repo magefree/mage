@@ -67,12 +67,16 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
     @Test
     public void testSnowMana2() {
-        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Boreal Druid");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Snow-Covered Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Vodalian Arcanist");
         addCard(Zone.BATTLEFIELD, playerA, "Rimefeather Owl");
         addCard(Zone.HAND, playerA, "Search for Glory");
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{S}", "Vodalian Arcanist");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Search for Glory");
 
