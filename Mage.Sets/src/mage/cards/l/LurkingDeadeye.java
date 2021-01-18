@@ -25,7 +25,7 @@ public final class LurkingDeadeye extends CardImpl {
             = new FilterCreaturePermanent("creature that was dealt damage this turn");
 
     static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
+        filter.add(WasDealtDamageThisTurnPredicate.instance);
     }
 
     public LurkingDeadeye(UUID ownerId, CardSetInfo setInfo) {

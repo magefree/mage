@@ -18,7 +18,7 @@ public final class Inflame extends CardImpl {
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature dealt damage this turn");
 
     static {
-        FILTER.add(new WasDealtDamageThisTurnPredicate());
+        FILTER.add(WasDealtDamageThisTurnPredicate.instance);
     }
 
     public Inflame(UUID ownerId, CardSetInfo setInfo) {

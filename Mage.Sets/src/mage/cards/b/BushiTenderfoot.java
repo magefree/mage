@@ -55,7 +55,7 @@ public final class BushiTenderfoot extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 
     static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
+        filter.add(WasDealtDamageThisTurnPredicate.instance);
     }
 
     public BushiTenderfoot(UUID ownerId, CardSetInfo setInfo) {

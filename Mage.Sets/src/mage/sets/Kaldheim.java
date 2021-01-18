@@ -181,6 +181,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of the Giants", 215, Rarity.UNCOMMON, mage.cards.i.InvasionOfTheGiants.class));
         cards.add(new SetCardInfo("Iron Verdict", 17, Rarity.COMMON, mage.cards.i.IronVerdict.class));
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jarl of the Forsaken", 100, Rarity.COMMON, mage.cards.j.JarlOfTheForsaken.class));
         cards.add(new SetCardInfo("Jaspera Sentinel", 178, Rarity.COMMON, mage.cards.j.JasperaSentinel.class));
         cards.add(new SetCardInfo("Jorn, God of Winter", 179, Rarity.RARE, mage.cards.j.JornGodOfWinter.class));
         cards.add(new SetCardInfo("Kardur's Vicious Return", 217, Rarity.UNCOMMON, mage.cards.k.KardursViciousReturn.class));

@@ -19,7 +19,7 @@ public final class FatalBlow extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 
     static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
+        filter.add(WasDealtDamageThisTurnPredicate.instance);
     }
     
     public FatalBlow(UUID ownerId, CardSetInfo setInfo) {

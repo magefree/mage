@@ -29,7 +29,7 @@ public final class GiantShark extends CardImpl {
 
     static {
         filter.add(SubType.ISLAND.getPredicate());
-        filter2.add(new WasDealtDamageThisTurnPredicate());
+        filter2.add(WasDealtDamageThisTurnPredicate.instance);
     }
 
     public GiantShark(UUID ownerId, CardSetInfo setInfo) {

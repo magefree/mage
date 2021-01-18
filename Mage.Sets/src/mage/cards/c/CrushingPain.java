@@ -48,7 +48,7 @@ public final class CrushingPain extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 
     static {
-        filter.add(new WasDealtDamageThisTurnPredicate());
+        filter.add(WasDealtDamageThisTurnPredicate.instance);
     }
 
     public CrushingPain (UUID ownerId, CardSetInfo setInfo) {
