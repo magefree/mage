@@ -174,6 +174,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Ice Tunnel", 262, Rarity.COMMON, mage.cards.i.IceTunnel.class));
         cards.add(new SetCardInfo("Icehide Troll", 176, Rarity.COMMON, mage.cards.i.IcehideTroll.class));
         cards.add(new SetCardInfo("Immersturm Predator", 214, Rarity.RARE, mage.cards.i.ImmersturmPredator.class));
+        cards.add(new SetCardInfo("Immersturm Raider", 141, Rarity.COMMON, mage.cards.i.ImmersturmRaider.class));
         cards.add(new SetCardInfo("Immersturm Skullcairn", 263, Rarity.UNCOMMON, mage.cards.i.ImmersturmSkullcairn.class));
         cards.add(new SetCardInfo("In Search of Greatness", 364, Rarity.RARE, mage.cards.i.InSearchOfGreatness.class));
         cards.add(new SetCardInfo("Infernal Pet", 99, Rarity.COMMON, mage.cards.i.InfernalPet.class));
