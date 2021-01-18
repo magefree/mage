@@ -32,7 +32,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class FirjasRetribution extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature with less power than this creature");
+            = new FilterCreaturePermanent("creature with less power than this creature's power");
     private static final FilterControlledPermanent filter2
             = new FilterControlledPermanent(SubType.ANGEL, "Angels you control");
 
