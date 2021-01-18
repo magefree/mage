@@ -251,6 +251,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Steel", 30, Rarity.UNCOMMON, mage.cards.s.SpectralSteel.class));
         cards.add(new SetCardInfo("Spirit of the Aldergard", 195, Rarity.UNCOMMON, mage.cards.s.SpiritOfTheAldergard.class));
         cards.add(new SetCardInfo("Squash", 152, Rarity.COMMON, mage.cards.s.Squash.class));
+        cards.add(new SetCardInfo("Stalwart Valkyrie", 31, Rarity.COMMON, mage.cards.s.StalwartValkyrie.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
         cards.add(new SetCardInfo("Story Seeker", 34, Rarity.COMMON, mage.cards.s.StorySeeker.class));
         cards.add(new SetCardInfo("Strategic Planning", 77, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
