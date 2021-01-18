@@ -18,6 +18,7 @@ public final class Kaldheim extends ExpansionSet {
             "Behold the Multiverse",
             "Cosmos Charger",
             "Crush the Weak",
+            "Demom Bolt",
             "Doomskar Oracle",
             "Doomskar Titan",
             "Dual Strike",
@@ -93,6 +94,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodline Pretender", 235, Rarity.UNCOMMON, mage.cards.b.BloodlinePretender.class));
         cards.add(new SetCardInfo("Bloodsky Berserker", 80, Rarity.UNCOMMON, mage.cards.b.BloodskyBerserker.class));
         cards.add(new SetCardInfo("Bound in Gold", 5, Rarity.COMMON, mage.cards.b.BoundInGold.class));
+        cards.add(new SetCardInfo("Breakneck Berserker", 124, Rarity.COMMON, mage.cards.b.BreakneckBerserker.class));
         cards.add(new SetCardInfo("Bretagard Stronghold", 253, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));
         cards.add(new SetCardInfo("Broken Wings", 164, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Calamity Bearer", 125, Rarity.RARE, mage.cards.c.CalamityBearer.class));
@@ -106,6 +108,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Cyclone Summoner", 52, Rarity.RARE, mage.cards.c.CycloneSummoner.class));
         cards.add(new SetCardInfo("Darkbore Pathway", 254, Rarity.RARE, mage.cards.d.DarkborePathway.class));
         cards.add(new SetCardInfo("Deathknell Berserker", 83, Rarity.COMMON, mage.cards.d.DeathknellBerserker.class));
+        cards.add(new SetCardInfo("Demon Bolt", 129, Rarity.COMMON, mage.cards.d.DemonBolt.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 54, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Divine Gambit", 8, Rarity.UNCOMMON, mage.cards.d.DivineGambit.class));
         cards.add(new SetCardInfo("Dogged Pursuit", 85, Rarity.COMMON, mage.cards.d.DoggedPursuit.class));
@@ -128,12 +131,14 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Faceless Haven", 255, Rarity.RARE, mage.cards.f.FacelessHaven.class));
         cards.add(new SetCardInfo("Fall of the Impostor", 208, Rarity.UNCOMMON, mage.cards.f.FallOfTheImpostor.class));
         cards.add(new SetCardInfo("Fearless Liberator", 135, Rarity.UNCOMMON, mage.cards.f.FearlessLiberator.class));
+        cards.add(new SetCardInfo("Fearless Pup", 136, Rarity.COMMON, mage.cards.f.FearlessPup.class));
         cards.add(new SetCardInfo("Feed the Serpent", 95, Rarity.COMMON, mage.cards.f.FeedTheSerpent.class));
         cards.add(new SetCardInfo("Fire Giant's Fury", 389, Rarity.UNCOMMON, mage.cards.f.FireGiantsFury.class));
         cards.add(new SetCardInfo("Firja's Retribution", 210, Rarity.RARE, mage.cards.f.FirjasRetribution.class));
         cards.add(new SetCardInfo("Firja, Judge of Valor", 209, Rarity.UNCOMMON, mage.cards.f.FirjaJudgeOfValor.class));
         cards.add(new SetCardInfo("Forest", 398, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forging the Tyrite Sword", 211, Rarity.UNCOMMON, mage.cards.f.ForgingTheTyriteSword.class));
+        cards.add(new SetCardInfo("Frenzied Raider", 137, Rarity.UNCOMMON, mage.cards.f.FrenziedRaider.class));
         cards.add(new SetCardInfo("Frost Augur", 56, Rarity.UNCOMMON, mage.cards.f.FrostAugur.class));
         cards.add(new SetCardInfo("Frost Bite", 138, Rarity.COMMON, mage.cards.f.FrostBite.class));
         cards.add(new SetCardInfo("Frostpeak Yeti", 57, Rarity.COMMON, mage.cards.f.FrostpeakYeti.class));
@@ -162,14 +167,18 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Harald, King of Skemfar", 212, Rarity.UNCOMMON, mage.cards.h.HaraldKingOfSkemfar.class));
         cards.add(new SetCardInfo("Hengegate Pathway", 260, Rarity.RARE, mage.cards.h.HengegatePathway.class));
         cards.add(new SetCardInfo("Highland Forest", 261, Rarity.COMMON, mage.cards.h.HighlandForest.class));
+        cards.add(new SetCardInfo("Horizon Seeker", 175, Rarity.COMMON, mage.cards.h.HorizonSeeker.class));
         cards.add(new SetCardInfo("Ice Tunnel", 262, Rarity.COMMON, mage.cards.i.IceTunnel.class));
         cards.add(new SetCardInfo("In Search of Greatness", 364, Rarity.RARE, mage.cards.i.InSearchOfGreatness.class));
+        cards.add(new SetCardInfo("Icehide Troll", 176, Rarity.COMMON, mage.cards.i.IcehideTroll.class));
+        cards.add(new SetCardInfo("Immersturm Predator", 214, Rarity.RARE, mage.cards.i.ImmersturmPredator.class));
         cards.add(new SetCardInfo("Infernal Pet", 99, Rarity.COMMON, mage.cards.i.InfernalPet.class));
         cards.add(new SetCardInfo("Inga Rune-Eyes", 64, Rarity.UNCOMMON, mage.cards.i.IngaRuneEyes.class));
         cards.add(new SetCardInfo("Invasion of the Giants", 215, Rarity.UNCOMMON, mage.cards.i.InvasionOfTheGiants.class));
         cards.add(new SetCardInfo("Iron Verdict", 17, Rarity.COMMON, mage.cards.i.IronVerdict.class));
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaspera Sentinel", 178, Rarity.COMMON, mage.cards.j.JasperaSentinel.class));
+        cards.add(new SetCardInfo("Jorn, God of Winter", 179, Rarity.RARE, mage.cards.j.JornGodOfWinter.class));
         cards.add(new SetCardInfo("Kardur's Vicious Return", 217, Rarity.UNCOMMON, mage.cards.k.KardursViciousReturn.class));
         cards.add(new SetCardInfo("Karfell Kennel-Master", 101, Rarity.COMMON, mage.cards.k.KarfellKennelMaster.class));
         cards.add(new SetCardInfo("Kaya the Inexorable", 218, Rarity.MYTHIC, mage.cards.k.KayaTheInexorable.class));
@@ -193,6 +202,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Path to the World Tree", 186, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Pilfering Hawk", 71, Rarity.COMMON, mage.cards.p.PilferingHawk.class));
         cards.add(new SetCardInfo("Plains", 394, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Provoke the Trolls", 144, Rarity.COMMON, mage.cards.p.ProvokeTheTrolls.class));
         cards.add(new SetCardInfo("Pyre of Heroes", 241, Rarity.RARE, mage.cards.p.PyreOfHeroes.class));
         cards.add(new SetCardInfo("Raiders' Karve", 242, Rarity.COMMON, mage.cards.r.RaidersKarve.class));
         cards.add(new SetCardInfo("Raise the Draugr", 105, Rarity.COMMON, mage.cards.r.RaiseTheDraugr.class));
@@ -204,6 +214,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Crew", 148, Rarity.RARE, mage.cards.r.RecklessCrew.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
+        cards.add(new SetCardInfo("Return Upon the Tide", 106, Rarity.UNCOMMON, mage.cards.r.ReturnUponTheTide.class));
         cards.add(new SetCardInfo("Revitalize", 23, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
         cards.add(new SetCardInfo("Rise of the Dread Marn", 107, Rarity.RARE, mage.cards.r.RiseOfTheDreadMarn.class));
@@ -250,6 +261,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Tormentor's Helm", 155, Rarity.COMMON, mage.cards.t.TormentorsHelm.class));
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 197, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
         cards.add(new SetCardInfo("Tuskeri Firewalker", 157, Rarity.COMMON, mage.cards.t.TuskeriFirewalker.class));
+        cards.add(new SetCardInfo("Tyrite Sanctum", 272, Rarity.RARE, mage.cards.t.TyriteSanctum.class));
         cards.add(new SetCardInfo("Tyvar Kell", 198, Rarity.MYTHIC, mage.cards.t.TyvarKell.class));
         cards.add(new SetCardInfo("Undersea Invader", 78, Rarity.COMMON, mage.cards.u.UnderseaInvader.class));
         cards.add(new SetCardInfo("Usher of the Fallen", 35, Rarity.UNCOMMON, mage.cards.u.UsherOfTheFallen.class));

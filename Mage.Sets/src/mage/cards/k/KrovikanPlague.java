@@ -21,7 +21,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -66,7 +66,7 @@ public final class KrovikanPlague extends CardImpl {
         // Tap enchanted creature: Tap enchanted creature: Krovikan Plague deals 1 damage to any target. Put a -0/-1 counter on enchanted creature. Activate this ability only if enchanted creature is untapped.
         Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1), new TapAttachedCost(), new AttachedToMatchesFilterCondition(filter));
-        ability2.addEffect(new AddCountersAttachedEffect(new BoostCounter(0, -1),"enchanted creature"));
+        ability2.addEffect(new AddCountersAttachedEffect(CounterType.M0M1.createInstance(),"enchanted creature"));
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 

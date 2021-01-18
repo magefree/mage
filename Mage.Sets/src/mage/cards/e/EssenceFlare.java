@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -39,7 +39,7 @@ public final class EssenceFlare extends CardImpl {
         // Enchanted creature gets +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
         // At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(new BoostCounter(0, -1), "that creature"),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
             TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 

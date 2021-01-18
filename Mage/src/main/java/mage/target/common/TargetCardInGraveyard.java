@@ -1,8 +1,5 @@
-
-
 package mage.target.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
@@ -10,22 +7,29 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInGraveyard extends TargetCard {
 
+    private static final FilterCard defaultFilter = new FilterCard("card from a graveyard");
+
     public TargetCardInGraveyard() {
-        this(1, 1, new FilterCard("card from a graveyard"));
+        this(1, 1);
     }
 
     public TargetCardInGraveyard(FilterCard filter) {
-        this(1, 1, filter);
+        this(1, filter);
     }
 
     public TargetCardInGraveyard(int numTargets, FilterCard filter) {
         this(numTargets, numTargets, filter);
+    }
+
+    public TargetCardInGraveyard(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, defaultFilter);
     }
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
@@ -46,5 +50,4 @@ public class TargetCardInGraveyard extends TargetCard {
     public TargetCardInGraveyard copy() {
         return new TargetCardInGraveyard(this);
     }
-
 }

@@ -96,7 +96,10 @@ public enum CounterType {
     MANNEQUIN("mannequin"),
     MATRIX("matrix"),
     MENACE("menace"),
+    M0M1(new BoostCounter(-0, -1).name),
+    M0M2(new BoostCounter(-0, -2).name),
     M1M1(new BoostCounter(-1, -1).name),
+    M1M0(new BoostCounter(-1, -0).name),
     M2M1(new BoostCounter(-2, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
     MINE("mine"),
@@ -211,6 +214,12 @@ public enum CounterType {
                 return new BoostCounter(1, 2, amount);
             case P2P2:
                 return new BoostCounter(2, 2, amount);
+            case M0M1:
+                return new BoostCounter(0, -1, amount);
+            case M0M2:
+                return new BoostCounter(0, -2, amount);
+            case M1M0:
+                return new BoostCounter(-1, 0, amount);
             case M1M1:
                 return new BoostCounter(-1, -1, amount);
             case M2M1:
