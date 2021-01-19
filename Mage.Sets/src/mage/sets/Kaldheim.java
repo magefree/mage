@@ -283,6 +283,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
         cards.add(new SetCardInfo("Surtland Flinger", 377, Rarity.RARE, mage.cards.s.SurtlandFlinger.class));
         cards.add(new SetCardInfo("Surtland Frostpyre", 271, Rarity.UNCOMMON, mage.cards.s.SurtlandFrostpyre.class));
+        cards.add(new SetCardInfo("Svella, Ice Shaper", 230, Rarity.UNCOMMON, mage.cards.s.SvellaIceShaper.class));
         cards.add(new SetCardInfo("Swamp", 396, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tergrid's Shadow", 113, Rarity.UNCOMMON, mage.cards.t.TergridsShadow.class));
         cards.add(new SetCardInfo("The Bloodsky Massacre", 207, Rarity.RARE, mage.cards.t.TheBloodskyMassacre.class));
