@@ -292,6 +292,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Waking the Trolls", 234, Rarity.RARE, mage.cards.w.WakingTheTrolls.class));
         cards.add(new SetCardInfo("Warchanter Skald", 381, Rarity.UNCOMMON, mage.cards.w.WarchanterSkald.class));
         cards.add(new SetCardInfo("Weathered Runestone", 247, Rarity.UNCOMMON, mage.cards.w.WeatheredRunestone.class));
+        cards.add(new SetCardInfo("Weigh Down", 118, Rarity.COMMON, mage.cards.w.WeighDown.class));
         cards.add(new SetCardInfo("Wings of the Cosmos", 39, Rarity.COMMON, mage.cards.w.WingsOfTheCosmos.class));
         cards.add(new SetCardInfo("Withercrown", 119, Rarity.COMMON, mage.cards.w.Withercrown.class));
         cards.add(new SetCardInfo("Woodland Chasm", 274, Rarity.COMMON, mage.cards.w.WoodlandChasm.class));
