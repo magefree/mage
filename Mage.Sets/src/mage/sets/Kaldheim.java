@@ -277,6 +277,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Tyvar Kell", 198, Rarity.MYTHIC, mage.cards.t.TyvarKell.class));
         cards.add(new SetCardInfo("Undersea Invader", 78, Rarity.COMMON, mage.cards.u.UnderseaInvader.class));
         cards.add(new SetCardInfo("Usher of the Fallen", 35, Rarity.UNCOMMON, mage.cards.u.UsherOfTheFallen.class));
+        cards.add(new SetCardInfo("Valki, God of Lies", 114, Rarity.MYTHIC, mage.cards.v.ValkiGodOfLies.class));
         cards.add(new SetCardInfo("Valkyrie Harbinger", 374, Rarity.RARE, mage.cards.v.ValkyrieHarbinger.class));
         cards.add(new SetCardInfo("Valkyrie's Sword", 36, Rarity.UNCOMMON, mage.cards.v.ValkyriesSword.class));
         cards.add(new SetCardInfo("Varragoth, Bloodsky Sire", 115, Rarity.RARE, mage.cards.v.VarragothBloodskySire.class));
