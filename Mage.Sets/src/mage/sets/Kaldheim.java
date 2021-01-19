@@ -109,6 +109,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Cleaving Reaper", 376, Rarity.RARE, mage.cards.c.CleavingReaper.class));
         cards.add(new SetCardInfo("Colossal Plow", 236, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
         cards.add(new SetCardInfo("Cosmos Elixir", 237, Rarity.RARE, mage.cards.c.CosmosElixir.class));
+        cards.add(new SetCardInfo("Craven Hulk", 127, Rarity.COMMON, mage.cards.c.CravenHulk.class));
         cards.add(new SetCardInfo("Crush the Weak", 128, Rarity.UNCOMMON, mage.cards.c.CrushTheWeak.class));
         cards.add(new SetCardInfo("Cyclone Summoner", 52, Rarity.RARE, mage.cards.c.CycloneSummoner.class));
         cards.add(new SetCardInfo("Darkbore Pathway", 254, Rarity.RARE, mage.cards.d.DarkborePathway.class));
