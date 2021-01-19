@@ -96,6 +96,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Behold the Multiverse", 46, Rarity.COMMON, mage.cards.b.BeholdTheMultiverse.class));
         cards.add(new SetCardInfo("Beskir Shieldmate", 4, Rarity.COMMON, mage.cards.b.BeskirShieldmate.class));
         cards.add(new SetCardInfo("Binding the Old Gods", 206, Rarity.UNCOMMON, mage.cards.b.BindingTheOldGods.class));
+        cards.add(new SetCardInfo("Birgi, God of Storytelling", 123, Rarity.RARE, mage.cards.b.BirgiGodOfStorytelling.class));
         cards.add(new SetCardInfo("Blightstep Pathway", 252, Rarity.RARE, mage.cards.b.BlightstepPathway.class));
         cards.add(new SetCardInfo("Blizzard Brawl", 162, Rarity.UNCOMMON, mage.cards.b.BlizzardBrawl.class));
         cards.add(new SetCardInfo("Bloodline Pretender", 235, Rarity.UNCOMMON, mage.cards.b.BloodlinePretender.class));
