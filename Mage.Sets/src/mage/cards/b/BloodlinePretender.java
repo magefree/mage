@@ -29,7 +29,7 @@ public final class BloodlinePretender extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
     }
 
     public BloodlinePretender(UUID ownerId, CardSetInfo setInfo) {

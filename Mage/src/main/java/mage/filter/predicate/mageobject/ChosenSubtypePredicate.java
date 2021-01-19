@@ -14,12 +14,18 @@ import mage.game.Game;
  * @author LoneFox
  */
 public enum ChosenSubtypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
-    instance;
+    TRUE(true), FALSE(false);
+
+    private final boolean value;
+
+    ChosenSubtypePredicate(boolean value) {
+        this.value = value;
+    }
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(input.getSourceId(), game);
-        return input.getObject().hasSubtype(subType, game);
+        return input.getObject().hasSubtype(subType, game) == value;
     }
 
     @Override

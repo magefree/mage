@@ -21,7 +21,7 @@ public final class ReflectionsOfLittjara extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell of the chosen type");
 
     static {
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
     }
 
     public ReflectionsOfLittjara(UUID ownerId, CardSetInfo setInfo) {

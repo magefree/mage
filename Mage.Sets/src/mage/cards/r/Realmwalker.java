@@ -24,7 +24,7 @@ public final class Realmwalker extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("cast creature spells of the chosen type");
     static {
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
     }
 
     public Realmwalker(UUID ownerId, CardSetInfo setInfo) {

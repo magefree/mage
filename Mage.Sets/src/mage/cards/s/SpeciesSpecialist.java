@@ -24,7 +24,7 @@ public final class SpeciesSpecialist extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature of the chosen type");
 
     static {
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
     }
 
     public SpeciesSpecialist(UUID ownerId, CardSetInfo setInfo) {

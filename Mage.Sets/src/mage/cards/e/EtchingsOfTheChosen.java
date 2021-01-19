@@ -36,9 +36,9 @@ public final class EtchingsOfTheChosen extends CardImpl {
             = new FilterControlledCreaturePermanent("a creature of the chosen type");
 
     static {
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(ChosenSubtypePredicate.instance);
+        filter2.add(ChosenSubtypePredicate.TRUE);
     }
 
     public EtchingsOfTheChosen(UUID ownerId, CardSetInfo setInfo) {

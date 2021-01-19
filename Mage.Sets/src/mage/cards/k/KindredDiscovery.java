@@ -27,7 +27,7 @@ public final class KindredDiscovery extends CardImpl {
         
         // Whenever a creature you control of the chosen type enters the battlefield or attacks, draw a card.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature you control of the chosen type");
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
         this.addAbility(new EntersBattlefieldOrAttacksAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, false));
     }
 

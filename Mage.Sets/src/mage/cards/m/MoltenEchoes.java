@@ -40,7 +40,7 @@ public final class MoltenEchoes extends CardImpl {
         // Whenever a nontoken creature of the chosen type enters the battlefield under your control, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature of the chosen type");
         filter.add(Predicates.not(TokenPredicate.instance));
-        filter.add(ChosenSubtypePredicate.instance);
+        filter.add(ChosenSubtypePredicate.TRUE);
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new MoltenEchoesEffect(),
                 filter, false, SetTargetPointer.PERMANENT,
