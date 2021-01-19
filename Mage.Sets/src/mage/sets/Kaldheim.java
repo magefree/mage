@@ -172,6 +172,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Goldspan Dragon", 139, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Goldvein Pick", 239, Rarity.COMMON, mage.cards.g.GoldveinPick.class));
         cards.add(new SetCardInfo("Grim Draugr", 96, Rarity.COMMON, mage.cards.g.GrimDraugr.class));
+        cards.add(new SetCardInfo("Grizzled Outrider", 173, Rarity.COMMON, mage.cards.g.GrizzledOutrider.class));
         cards.add(new SetCardInfo("Guardian Gladewalker", 174, Rarity.COMMON, mage.cards.g.GuardianGladewalker.class));
         cards.add(new SetCardInfo("Hagi Mob", 140, Rarity.COMMON, mage.cards.h.HagiMob.class));
         cards.add(new SetCardInfo("Hailstorm Valkyrie", 97, Rarity.UNCOMMON, mage.cards.h.HailstormValkyrie.class));
