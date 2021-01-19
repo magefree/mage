@@ -15,6 +15,7 @@ public final class Kaldheim extends ExpansionSet {
     private static final List<String> unfinished = Arrays.asList(
             "Alrund's Epiphany",
             "Augury Raven",
+            "Battle Mammoth",
             "Behold the Multiverse",
             "Cosmos Charger",
             "Crush the Weak",
@@ -25,6 +26,7 @@ public final class Kaldheim extends ExpansionSet {
             "Dream Devourer",
             "Dual Strike",
             "Dwarven Reinforcements",
+            "Glorious Protector",
             "Gods' Hall Guardian",
             "Iron Verdict",
             "Jarl of the Forsaken",
@@ -45,7 +47,8 @@ public final class Kaldheim extends ExpansionSet {
             "Shepherd of the Cosmos",
             "Skull Raid",
             "Starnheim Unleashed",
-            "Tergrid's Shadow"
+            "Tergrid's Shadow",
+            "Warhorn Blast"
     );
 
     private static final Kaldheim instance = new Kaldheim();
@@ -119,9 +122,9 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Disdainful Stroke", 54, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Divine Gambit", 8, Rarity.UNCOMMON, mage.cards.d.DivineGambit.class));
         cards.add(new SetCardInfo("Dogged Pursuit", 85, Rarity.COMMON, mage.cards.d.DoggedPursuit.class));
-        cards.add(new SetCardInfo("Doomskar", 9, Rarity.RARE, mage.cards.d.Doomskar.class));
         cards.add(new SetCardInfo("Doomskar Oracle", 10, Rarity.COMMON, mage.cards.d.DoomskarOracle.class));
         cards.add(new SetCardInfo("Doomskar Titan", 130, Rarity.UNCOMMON, mage.cards.d.DoomskarTitan.class));
+        cards.add(new SetCardInfo("Doomskar", 9, Rarity.RARE, mage.cards.d.Doomskar.class));
         cards.add(new SetCardInfo("Draugr Thought-Thief", 55, Rarity.COMMON, mage.cards.d.DraugrThoughtThief.class));
         cards.add(new SetCardInfo("Draugr's Helm", 88, Rarity.UNCOMMON, mage.cards.d.DraugrsHelm.class));
         cards.add(new SetCardInfo("Dread Rider", 89, Rarity.COMMON, mage.cards.d.DreadRider.class));
