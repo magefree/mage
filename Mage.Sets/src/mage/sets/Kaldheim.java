@@ -100,6 +100,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Bound in Gold", 5, Rarity.COMMON, mage.cards.b.BoundInGold.class));
         cards.add(new SetCardInfo("Breakneck Berserker", 124, Rarity.COMMON, mage.cards.b.BreakneckBerserker.class));
         cards.add(new SetCardInfo("Bretagard Stronghold", 253, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));
+        cards.add(new SetCardInfo("Brinebarrow Intruder", 49, Rarity.COMMON, mage.cards.b.BrinebarrowIntruder.class));
         cards.add(new SetCardInfo("Broken Wings", 164, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Calamity Bearer", 125, Rarity.RARE, mage.cards.c.CalamityBearer.class));
         cards.add(new SetCardInfo("Canopy Tactician", 378, Rarity.RARE, mage.cards.c.CanopyTactician.class));
