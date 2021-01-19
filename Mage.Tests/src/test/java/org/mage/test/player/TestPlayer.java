@@ -2251,7 +2251,7 @@ public class TestPlayer implements Player {
                     String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
                     for (Player player : game.getPlayers().values()) {
                         if (player.getName().equals(playerName)
-                                && target.canTarget(computerPlayer.getId(), player.getId(), source, game)) {
+                                && target.canTarget(abilityControllerId, player.getId(), source, game)) {
                             target.addTarget(player.getId(), source, game);
                             targets.remove(targetDefinition);
                             return true;
@@ -2495,14 +2495,29 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        UUID abilityControllerId = computerPlayer.getId();
+        if (target.getTargetController() != null && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+
         assertAliasSupportInTargets(false);
         if (!targets.isEmpty()) {
+            // skip targets
+            if (targets.get(0).equals(TARGET_SKIP)) {
+                Assert.assertTrue("found skip target, but it require more targets, needs "
+                                + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                        target.getTargets().size() >= target.getMinNumberOfTargets());
+                targets.remove(0);
+                return true;
+            }
             for (String targetDefinition : targets) {
                 String[] targetList = targetDefinition.split("\\^");
                 boolean targetFound = false;
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
-                        if (hasObjectTargetNameOrAlias(card, targetName) && !target.getTargets().contains(card.getId())) {
+                        if (hasObjectTargetNameOrAlias(card, targetName)
+                                && !target.getTargets().contains(card.getId())
+                                && target.canTarget(abilityControllerId, card.getId(), source, cards, game)) {
                             target.addTarget(card.getId(), source, game);
                             targetFound = true;
                             break;
