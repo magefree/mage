@@ -19,6 +19,7 @@ public final class Kaldheim extends ExpansionSet {
             "Cosmos Charger",
             "Crush the Weak",
             "Demon Bolt",
+            "Doomskar",
             "Doomskar Oracle",
             "Doomskar Titan",
             "Dream Devourer",
@@ -182,6 +183,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Pet", 99, Rarity.COMMON, mage.cards.i.InfernalPet.class));
         cards.add(new SetCardInfo("Inga Rune-Eyes", 64, Rarity.UNCOMMON, mage.cards.i.IngaRuneEyes.class));
         cards.add(new SetCardInfo("Invasion of the Giants", 215, Rarity.UNCOMMON, mage.cards.i.InvasionOfTheGiants.class));
+        cards.add(new SetCardInfo("Invoke the Divine", 16, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
         cards.add(new SetCardInfo("Iron Verdict", 17, Rarity.COMMON, mage.cards.i.IronVerdict.class));
         cards.add(new SetCardInfo("Island", 395, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jarl of the Forsaken", 100, Rarity.COMMON, mage.cards.j.JarlOfTheForsaken.class));
