@@ -1,5 +1,7 @@
 package mage.cards.t;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.ApprovingObject;
@@ -78,24 +80,26 @@ class TibaltsTrickeryEffect extends OneShotEffect {
                 int random = RandomUtil.nextInt(3) + 1;
                 game.informPlayers(random + " was chosen at random");
                 controller.millCards(random, source, game);
-                Card card;
+                Card cardToCast = null;
+                Set<Card> cardsToExile = new HashSet<>();
                 FilterCard filter = new FilterCard();
                 filter.add(Predicates.not(CardType.LAND.getPredicate()));
                 filter.add(Predicates.not(new NamePredicate(spellName)));
-                String exileName = CardUtil.createObjectRealtedWindowTitle(source, game, null);
-                do {
-                    card = controller.getLibrary().getFromTop(game);
-                    if (card == null) {
+                for (Card card : controller.getLibrary().getCards(game)) {
+                    cardsToExile.add(card);
+                    if (filter.match(card, game)) {
+                        cardToCast = card;
                         break;
                     }
-                    controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
-                } while (!filter.match(card, game));
-                if (card != null) {
-                    if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " for free?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        controller.cast(controller.chooseAbilityForCast(card, game, true),
+                }
+                controller.moveCardsToExile(cardsToExile, source, game, true, source.getSourceId(),
+                        CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                if (cardToCast != null) {
+                    if (controller.chooseUse(Outcome.PlayForFree, "Cast " + cardToCast.getLogName() + " for free?", source, game)) {
+                        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+                        controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
                                 game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
                     }
                 }
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
