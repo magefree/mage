@@ -250,6 +250,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Scorn Effigy", 246, Rarity.COMMON, mage.cards.s.ScornEffigy.class));
         cards.add(new SetCardInfo("Sculptor of Winter", 193, Rarity.COMMON, mage.cards.s.SculptorOfWinter.class));
         cards.add(new SetCardInfo("Seize the Spoils", 149, Rarity.COMMON, mage.cards.s.SeizeTheSpoils.class));
+        cards.add(new SetCardInfo("Shackles of Treachery", 150, Rarity.COMMON, mage.cards.s.ShacklesOfTreachery.class));
         cards.add(new SetCardInfo("Shepherd of the Cosmos", 28, Rarity.UNCOMMON, mage.cards.s.ShepherdOfTheCosmos.class));
         cards.add(new SetCardInfo("Shimmerdrift Vale", 267, Rarity.COMMON, mage.cards.s.ShimmerdriftVale.class));
         cards.add(new SetCardInfo("Showdown of the Skalds", 229, Rarity.RARE, mage.cards.s.ShowdownOfTheSkalds.class));
