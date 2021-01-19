@@ -130,6 +130,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Rider", 89, Rarity.COMMON, mage.cards.d.DreadRider.class));
         cards.add(new SetCardInfo("Dual Strike", 132, Rarity.UNCOMMON, mage.cards.d.DualStrike.class));
         cards.add(new SetCardInfo("Duskwielder", 91, Rarity.COMMON, mage.cards.d.Duskwielder.class));
+        cards.add(new SetCardInfo("Dwarven Hammer", 133, Rarity.UNCOMMON, mage.cards.d.DwarvenHammer.class));
         cards.add(new SetCardInfo("Dwarven Reinforcements", 134, Rarity.COMMON, mage.cards.d.DwarvenReinforcements.class));
         cards.add(new SetCardInfo("Egon, God of Death", 92, Rarity.RARE, mage.cards.e.EgonGodOfDeath.class));
         cards.add(new SetCardInfo("Elderfang Disciple", 93, Rarity.COMMON, mage.cards.e.ElderfangDisciple.class));
