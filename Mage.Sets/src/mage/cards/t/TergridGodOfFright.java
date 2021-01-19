@@ -146,9 +146,6 @@ class TergridGodOfFrightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = (Card) game.getState().getValue(source.getSourceId() + "TergridGodOfFrightControl");
-        if (card != null) {
-            System.out.println("In the effect and the card is " + card.getName());
-        }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && card != null) {
