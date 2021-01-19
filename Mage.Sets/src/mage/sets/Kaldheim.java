@@ -118,6 +118,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Disdainful Stroke", 54, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Divine Gambit", 8, Rarity.UNCOMMON, mage.cards.d.DivineGambit.class));
         cards.add(new SetCardInfo("Dogged Pursuit", 85, Rarity.COMMON, mage.cards.d.DoggedPursuit.class));
+        cards.add(new SetCardInfo("Doomskar", 9, Rarity.RARE, mage.cards.d.Doomskar.class));
         cards.add(new SetCardInfo("Doomskar Oracle", 10, Rarity.COMMON, mage.cards.d.DoomskarOracle.class));
         cards.add(new SetCardInfo("Doomskar Titan", 130, Rarity.UNCOMMON, mage.cards.d.DoomskarTitan.class));
         cards.add(new SetCardInfo("Draugr Thought-Thief", 55, Rarity.COMMON, mage.cards.d.DraugrThoughtThief.class));
