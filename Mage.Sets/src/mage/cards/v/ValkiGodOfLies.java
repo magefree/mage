@@ -1,5 +1,6 @@
 package mage.cards.v;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -116,6 +117,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject Valki = game.getObject(source.getSourceId());
+        Set<Card> cardsToExile = new LinkedHashSet<>();
         if (controller != null
                 && Valki != null) {
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + Valki.getZoneChangeCounter(game), game);
@@ -129,11 +131,13 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                         Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
                         if (targetedCardToExile != null
                                 && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                            controller.moveCardsToExile(targetedCardToExile, source, game, true, exileId, Valki.getName());
+                            cardsToExile.add(targetedCardToExile);
                         }
                     }
                 }
             }
+            // exile all cards at one time
+            controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Valki.getName());
             game.addDelayedTriggeredAbility(new ValkiGodOfLiesReturnExiledCardAbility(), source);
             return true;
         }
@@ -178,7 +182,7 @@ class ValkiGodOfLiesReturnExiledCardAbility extends DelayedTriggeredAbility {
 class ValkiGodOfLiesReturnExiledCardEffect extends OneShotEffect {
 
     public ValkiGodOfLiesReturnExiledCardEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Neutral);
         this.staticText = "Return exiled card to its owner's hand";
     }
 
@@ -195,8 +199,9 @@ class ValkiGodOfLiesReturnExiledCardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject Valki = game.getObject(source.getSourceId());
-        if (Valki != null
-                && controller != null) {
+        if (controller != null
+                && Valki != null) {
+            // Valki, God of Lies has changed zone, so make sure to get the exile zone information from its previous state
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + (Valki.getZoneChangeCounter(game) - 1), game);
             ExileZone exile = game.getExile().getExileZone(exileId);
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
@@ -271,15 +276,20 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        MageObject Tibalt = source.getSourceObject(game);
         UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString(), game);
-        if (controller != null) {
+        Set<Card> cardsToExile = new LinkedHashSet<>();
+        if (controller != null
+                && Tibalt != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Card topCard = player.getLibrary().getFromTop(game);
-                    controller.moveCardsToExile(topCard, source, game, true, exileId, "Tibalt, Cosmic Imposter");
+                    cardsToExile.add(topCard);
                 }
             }
+            // exile all cards at one time
+            controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Tibalt.getName());
             return true;
         }
         return false;
@@ -305,11 +315,13 @@ class ExileTargetArtifactOrCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        MageObject Tibalt = source.getSourceObject(game);
         UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString(), game);
-        if (controller != null) {
+        if (controller != null
+                && Tibalt != null) {
             Permanent targetCreatureOrArtifact = game.getPermanent(source.getTargets().getFirstTarget());
             if (targetCreatureOrArtifact != null) {
-                controller.moveCardsToExile(targetCreatureOrArtifact, source, game, true, exileId, "Tibalt, Cosmic Imposter");
+                controller.moveCardsToExile(targetCreatureOrArtifact, source, game, true, exileId, Tibalt.getName());
                 return true;
             }
         }
@@ -336,16 +348,21 @@ class ExileAllCardsFromAllGraveyards extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        MageObject Tibalt = source.getSourceObject(game);
+        Set<Card> cardsToExile = new LinkedHashSet<>();
         UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString(), game);
-        if (controller != null) {
+        if (controller != null
+                && Tibalt != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    Set<Card> cardsInGraveyard = player.getGraveyard().getCards(game);
-                    controller.moveCardsToExile(cardsInGraveyard, source, game, true, exileId, "Tibalt, Cosmic Imposter");
+                    cardsToExile.addAll(player.getGraveyard().getCards(game));
                 }
             }
-            controller.getManaPool().addMana(Mana.RedMana(3), game, source); // add {R}{R}{R}
+            // exile all cards at one time
+            controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Tibalt.getName());
+            // add {R}{R}{R}
+            controller.getManaPool().addMana(Mana.RedMana(3), game, source);
             return true;
         }
         return false;
