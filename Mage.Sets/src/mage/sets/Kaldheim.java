@@ -89,6 +89,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Barkchannel Pathway", 251, Rarity.RARE, mage.cards.b.BarkchannelPathway.class));
         cards.add(new SetCardInfo("Basalt Ravager", 122, Rarity.UNCOMMON, mage.cards.b.BasaltRavager.class));
         cards.add(new SetCardInfo("Battershield Warrior", 2, Rarity.UNCOMMON, mage.cards.b.BattershieldWarrior.class));
+        cards.add(new SetCardInfo("Battle Mammoth", 160, Rarity.MYTHIC, mage.cards.b.BattleMammoth.class));
         cards.add(new SetCardInfo("Battle for Bretagard", 203, Rarity.RARE, mage.cards.b.BattleForBretagard.class));
         cards.add(new SetCardInfo("Battle of Frost and Fire", 204, Rarity.RARE, mage.cards.b.BattleOfFrostAndFire.class));
         cards.add(new SetCardInfo("Battlefield Raptor", 3, Rarity.COMMON, mage.cards.b.BattlefieldRaptor.class));
