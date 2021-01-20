@@ -159,7 +159,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
             return false;
         }
         ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, allowedCaster, duration, withoutMana);
-        effect.setTargetPointer(new FixedTargets(cards, game));
+        effect.setTargetPointer(new FixedTargets(game.getExile().getExileZone(exileId), game));
         game.addEffect(effect, source);
         return true;
     }
