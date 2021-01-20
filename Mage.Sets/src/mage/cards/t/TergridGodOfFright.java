@@ -31,7 +31,7 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
 
     public TergridGodOfFright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{B}{B}{B}",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{B}{B}",
                 "Tergrid's Lantern", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{B}"
         );
 
