@@ -311,6 +311,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Varragoth, Bloodsky Sire", 115, Rarity.RARE, mage.cards.v.VarragothBloodskySire.class));
         cards.add(new SetCardInfo("Vault Robber", 158, Rarity.COMMON, mage.cards.v.VaultRobber.class));
         cards.add(new SetCardInfo("Vega, the Watcher", 233, Rarity.UNCOMMON, mage.cards.v.VegaTheWatcher.class));
+        cards.add(new SetCardInfo("Vengeful Reaper", 116, Rarity.UNCOMMON, mage.cards.v.VengefulReaper.class));
         cards.add(new SetCardInfo("Village Rites", 117, Rarity.COMMON, mage.cards.v.VillageRites.class));
         cards.add(new SetCardInfo("Volatile Fjord", 273, Rarity.COMMON, mage.cards.v.VolatileFjord.class));
         cards.add(new SetCardInfo("Waking the Trolls", 234, Rarity.RARE, mage.cards.w.WakingTheTrolls.class));
