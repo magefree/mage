@@ -11,6 +11,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -23,6 +24,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author jeffwadsworth
@@ -107,15 +109,20 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent != null
                     && !(permanent instanceof PermanentToken)
                     && game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                game.getState().setValue(this.getSourceId() + "TergridGodOfFrightControl", ((Card) permanent));
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(((Card) permanent).getId(), game));
+                }
                 return true;
             }
+            return false;
         }
         if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
             Card discardedCard = game.getCard(event.getTargetId());
             if (discardedCard != null
                     && !(discardedCard.isInstantOrSorcery())) {
-                game.getState().setValue(this.getSourceId() + "TergridGodOfFrightControl", discardedCard);
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(discardedCard.getId(), game));
+                }
                 return true;
             }
         }
@@ -145,11 +152,14 @@ class TergridGodOfFrightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = (Card) game.getState().getValue(source.getSourceId() + "TergridGodOfFrightControl");
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && card != null) {
-            return card.putOntoBattlefield(game, Zone.GRAVEYARD, source, controller.getId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                // controller gets to choose the order in which the cards enter the battlefield
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            }
+            return true;
         }
         return false;
     }
