@@ -253,6 +253,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Run Amok", 147, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Run Ashore", 74, Rarity.COMMON, mage.cards.r.RunAshore.class));
         cards.add(new SetCardInfo("Rune of Flight", 75, Rarity.UNCOMMON, mage.cards.r.RuneOfFlight.class));
+        cards.add(new SetCardInfo("Rune of Might", 191, Rarity.UNCOMMON, mage.cards.r.RuneOfMight.class));
         cards.add(new SetCardInfo("Sarulf's Packmate", 192, Rarity.COMMON, mage.cards.s.SarulfsPackmate.class));
         cards.add(new SetCardInfo("Sarulf, Realm Eater", 228, Rarity.RARE, mage.cards.s.SarulfRealmEater.class));
         cards.add(new SetCardInfo("Saw It Coming", 76, Rarity.UNCOMMON, mage.cards.s.SawItComing.class));
