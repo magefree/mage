@@ -51,7 +51,15 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
         for (T cost : this) {
             String textCost = cost.getText();
             if (textCost != null && !textCost.isEmpty()) {
-                sbText.append(Character.toUpperCase(textCost.charAt(0))).append(textCost.substring(1)).append(", ");
+                if (textCost.startsWith("and")) {
+                    if (sbText.length() > 1) {
+                        // Remove "," from previous cost
+                        sbText.deleteCharAt(sbText.length() - 2);
+                    }
+                    sbText.append(textCost).append(", ");
+                } else {
+                    sbText.append(Character.toUpperCase(textCost.charAt(0))).append(textCost.substring(1)).append(", ");
+                }
             }
         }
         if (sbText.length() > 1) {
