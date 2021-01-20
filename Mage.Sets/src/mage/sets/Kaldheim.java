@@ -142,6 +142,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Elderfang Ritualist", 385, Rarity.UNCOMMON, mage.cards.e.ElderfangRitualist.class));
         cards.add(new SetCardInfo("Elderleaf Mentor", 165, Rarity.COMMON, mage.cards.e.ElderleafMentor.class));
         cards.add(new SetCardInfo("Elven Ambush", 391, Rarity.UNCOMMON, mage.cards.e.ElvenAmbush.class));
+        cards.add(new SetCardInfo("Elven Bow", 166, Rarity.UNCOMMON, mage.cards.e.ElvenBow.class));
         cards.add(new SetCardInfo("Elvish Warmaster", 167, Rarity.RARE, mage.cards.e.ElvishWarmaster.class));
         cards.add(new SetCardInfo("Eradicator Valkyrie", 94, Rarity.MYTHIC, mage.cards.e.EradicatorValkyrie.class));
         cards.add(new SetCardInfo("Esika's Chariot", 169, Rarity.RARE, mage.cards.e.EsikasChariot.class));
