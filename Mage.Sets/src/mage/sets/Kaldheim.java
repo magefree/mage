@@ -47,7 +47,9 @@ public final class Kaldheim extends ExpansionSet {
             "Shepherd of the Cosmos",
             "Skull Raid",
             "Starnheim Unleashed",
+            "Struggle for Skemfar",
             "Tergrid's Shadow",
+            "Vengeful Reaper",
             "Warhorn Blast"
     );
 
@@ -190,7 +192,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Immersturm Predator", 214, Rarity.RARE, mage.cards.i.ImmersturmPredator.class));
         cards.add(new SetCardInfo("Immersturm Raider", 141, Rarity.COMMON, mage.cards.i.ImmersturmRaider.class));
         cards.add(new SetCardInfo("Immersturm Skullcairn", 263, Rarity.UNCOMMON, mage.cards.i.ImmersturmSkullcairn.class));
-        cards.add(new SetCardInfo("In Search of Greatness", 364, Rarity.RARE, mage.cards.i.InSearchOfGreatness.class));
+        cards.add(new SetCardInfo("In Search of Greatness", 177, Rarity.RARE, mage.cards.i.InSearchOfGreatness.class));
         cards.add(new SetCardInfo("Infernal Pet", 99, Rarity.COMMON, mage.cards.i.InfernalPet.class));
         cards.add(new SetCardInfo("Inga Rune-Eyes", 64, Rarity.UNCOMMON, mage.cards.i.IngaRuneEyes.class));
         cards.add(new SetCardInfo("Invasion of the Giants", 215, Rarity.UNCOMMON, mage.cards.i.InvasionOfTheGiants.class));
@@ -235,7 +237,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenform", 72, Rarity.COMMON, mage.cards.r.Ravenform.class));
         cards.add(new SetCardInfo("Ravenous Lindwurm", 187, Rarity.COMMON, mage.cards.r.RavenousLindwurm.class));
         cards.add(new SetCardInfo("Realmwalker", 188, Rarity.RARE, mage.cards.r.Realmwalker.class));
-        cards.add(new SetCardInfo("Reckless Crew", 148, Rarity.RARE, mage.cards.r.RecklessCrew.class));
+        cards.add(new SetCardInfo("Reckless Crew", 146, Rarity.RARE, mage.cards.r.RecklessCrew.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 73, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
@@ -285,8 +287,8 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Surtland Frostpyre", 271, Rarity.UNCOMMON, mage.cards.s.SurtlandFrostpyre.class));
         cards.add(new SetCardInfo("Svella, Ice Shaper", 230, Rarity.UNCOMMON, mage.cards.s.SvellaIceShaper.class));
         cards.add(new SetCardInfo("Swamp", 396, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tergrid, God of Fright", 112, Rarity.RARE, mage.cards.t.TergridGodOfFright.class));
         cards.add(new SetCardInfo("Tergrid's Shadow", 113, Rarity.UNCOMMON, mage.cards.t.TergridsShadow.class));
+        cards.add(new SetCardInfo("Tergrid, God of Fright", 112, Rarity.RARE, mage.cards.t.TergridGodOfFright.class));
         cards.add(new SetCardInfo("The Bloodsky Massacre", 207, Rarity.RARE, mage.cards.t.TheBloodskyMassacre.class));
         cards.add(new SetCardInfo("The Trickster-God's Heist", 232, Rarity.UNCOMMON, mage.cards.t.TheTricksterGodsHeist.class));
         cards.add(new SetCardInfo("The World Tree", 275, Rarity.RARE, mage.cards.t.TheWorldTree.class));
