@@ -182,6 +182,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Goldmaw Champion", 14, Rarity.COMMON, mage.cards.g.GoldmawChampion.class));
         cards.add(new SetCardInfo("Goldspan Dragon", 139, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Goldvein Pick", 239, Rarity.COMMON, mage.cards.g.GoldveinPick.class));
+        cards.add(new SetCardInfo("Graven Lore", 61, Rarity.RARE, mage.cards.g.GravenLore.class));
         cards.add(new SetCardInfo("Great Hall of Starnheim", 259, Rarity.UNCOMMON, mage.cards.g.GreatHallOfStarnheim.class));
         cards.add(new SetCardInfo("Grim Draugr", 96, Rarity.COMMON, mage.cards.g.GrimDraugr.class));
         cards.add(new SetCardInfo("Grizzled Outrider", 173, Rarity.COMMON, mage.cards.g.GrizzledOutrider.class));

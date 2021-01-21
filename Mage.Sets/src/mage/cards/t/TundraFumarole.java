@@ -65,9 +65,10 @@ class TundraFumaroleEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.getManaPool().addMana(new Mana(
-                ManaType.COLORLESS, source.getManaCostsToPay().getUsedManaToPay().getSnow()
-        ), game, source, true);
+        int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
+        if (snow > 0) {
+            player.getManaPool().addMana(new Mana(ManaType.COLORLESS, snow), game, source, true);
+        }
         return true;
     }
 }
