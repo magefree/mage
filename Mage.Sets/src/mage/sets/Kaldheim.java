@@ -298,6 +298,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Starnheim Courser", 32, Rarity.COMMON, mage.cards.s.StarnheimCourser.class));
         cards.add(new SetCardInfo("Story Seeker", 34, Rarity.COMMON, mage.cards.s.StorySeeker.class));
         cards.add(new SetCardInfo("Strategic Planning", 77, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
+        cards.add(new SetCardInfo("Struggle for Skemfar", 196, Rarity.COMMON, mage.cards.s.StruggleForSkemfar.class));
         cards.add(new SetCardInfo("Sulfurous Mire", 270, Rarity.COMMON, mage.cards.s.SulfurousMire.class));
         cards.add(new SetCardInfo("Surtland Elementalist", 375, Rarity.RARE, mage.cards.s.SurtlandElementalist.class));
         cards.add(new SetCardInfo("Surtland Flinger", 377, Rarity.RARE, mage.cards.s.SurtlandFlinger.class));
