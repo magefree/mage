@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -25,6 +26,7 @@ import mage.util.CardUtil;
 public class ExileFromGraveCost extends CostImpl {
 
     private final List<Card> exiledCards = new ArrayList<>();
+    private boolean setTargetPointer = false;
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
         target.setNotTarget(true);
@@ -57,9 +59,15 @@ public class ExileFromGraveCost extends CostImpl {
         this.text = "exile " + target.getTargetName();
     }
 
+    public ExileFromGraveCost(TargetCardInYourGraveyard target, boolean setTargetPointer) {
+        this(target);
+        this.setTargetPointer = setTargetPointer;
+    }
+
     public ExileFromGraveCost(final ExileFromGraveCost cost) {
         super(cost);
         this.exiledCards.addAll(cost.getExiledCards());
+        this.setTargetPointer = cost.setTargetPointer;
     }
 
     @Override
@@ -77,6 +85,9 @@ public class ExileFromGraveCost extends CostImpl {
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.addAll(exiledCards);
                 controller.moveCards(cardsToExile, Zone.EXILED, ability, game);
+                if (setTargetPointer) {
+                    source.getEffects().setTargetPointer(new FixedTarget(targets.getFirstTarget(), game));
+                }
                 paid = true;
             }
 

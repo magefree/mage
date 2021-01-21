@@ -250,6 +250,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Reflections of Littjara", 73, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
+        cards.add(new SetCardInfo("Resplendent Marshal", 22, Rarity.MYTHIC, mage.cards.r.ResplendentMarshal.class));
         cards.add(new SetCardInfo("Return Upon the Tide", 106, Rarity.UNCOMMON, mage.cards.r.ReturnUponTheTide.class));
         cards.add(new SetCardInfo("Revitalize", 23, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
