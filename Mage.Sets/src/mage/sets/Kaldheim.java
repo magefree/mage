@@ -192,6 +192,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Highland Forest", 261, Rarity.COMMON, mage.cards.h.HighlandForest.class));
         cards.add(new SetCardInfo("Horizon Seeker", 175, Rarity.COMMON, mage.cards.h.HorizonSeeker.class));
         cards.add(new SetCardInfo("Ice Tunnel", 262, Rarity.COMMON, mage.cards.i.IceTunnel.class));
+        cards.add(new SetCardInfo("Icebind Pillar", 62, Rarity.UNCOMMON, mage.cards.i.IcebindPillar.class));
         cards.add(new SetCardInfo("Icehide Troll", 176, Rarity.COMMON, mage.cards.i.IcehideTroll.class));
         cards.add(new SetCardInfo("Immersturm Predator", 214, Rarity.RARE, mage.cards.i.ImmersturmPredator.class));
         cards.add(new SetCardInfo("Immersturm Raider", 141, Rarity.COMMON, mage.cards.i.ImmersturmRaider.class));
