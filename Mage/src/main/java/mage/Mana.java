@@ -379,30 +379,33 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param manaType
      */
     public void increase(ManaType manaType) {
+        increase(manaType, false);
+    }
+
+    public void increase(ManaType manaType, boolean isSnow) {
         switch (manaType) {
             case WHITE:
-                white.incrementAmount();
+                white.incrementAmount(1, isSnow);
                 break;
             case BLUE:
-                blue.incrementAmount();
+                blue.incrementAmount(1, isSnow);
                 break;
             case BLACK:
-                black.incrementAmount();
+                black.incrementAmount(1, isSnow);
                 break;
             case RED:
-                red.incrementAmount();
+                red.incrementAmount(1, isSnow);
                 break;
             case GREEN:
-                green.incrementAmount();
+                green.incrementAmount(1, isSnow);
                 break;
             case COLORLESS:
-                colorless.incrementAmount();
+                colorless.incrementAmount(1, isSnow);
                 break;
             case GENERIC:
-                generic.incrementAmount();
+                generic.incrementAmount(1, isSnow);
                 break;
         }
-
     }
 
     /**

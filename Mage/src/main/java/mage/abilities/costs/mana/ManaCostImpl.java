@@ -103,31 +103,31 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         switch (mana) {
             case W:
                 if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseWhite(1, pool.getLastPaymentWasSnow());
+                    this.payment.increaseWhite();
                     return true;
                 }
                 break;
             case U:
                 if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseBlue(1, pool.getLastPaymentWasSnow());
+                    this.payment.increaseBlue();
                     return true;
                 }
                 break;
             case B:
                 if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseBlack(1, pool.getLastPaymentWasSnow());
+                    this.payment.increaseBlack();
                     return true;
                 }
                 break;
             case R:
                 if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseRed(1, pool.getLastPaymentWasSnow());
+                    this.payment.increaseRed();
                     return true;
                 }
                 break;
             case G:
                 if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseGreen(1, pool.getLastPaymentWasSnow());
+                    this.payment.increaseGreen();
                     return true;
                 }
                 break;
@@ -139,7 +139,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
         while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
             if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseColorless(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseColorless();
             }
             break;
         }
@@ -155,7 +155,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             if ((filterMana == null || filterMana.isColorless()) && pool.pay(
                     ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay
             )) {
-                this.payment.increaseColorless(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseColorless();
                 continue;
             }
 
@@ -163,7 +163,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             if ((filterMana == null || filterMana.isBlack()) && pool.pay(
                     ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay
             )) {
-                this.payment.increaseBlack(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseBlack();
                 continue;
             }
 
@@ -171,7 +171,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             if ((filterMana == null || filterMana.isBlue()) && pool.pay(
                     ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay
             )) {
-                this.payment.increaseBlue(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseBlue();
                 continue;
             }
 
@@ -179,7 +179,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             if ((filterMana == null || filterMana.isWhite()) && pool.pay(
                     ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay
             )) {
-                this.payment.increaseWhite(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseWhite();
                 continue;
             }
 
@@ -187,7 +187,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             if ((filterMana == null || filterMana.isGreen()) && pool.pay(
                     ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay
             )) {
-                this.payment.increaseGreen(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseGreen();
                 continue;
             }
 
@@ -195,7 +195,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             if ((filterMana == null || filterMana.isRed()) && pool.pay(
                     ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay
             )) {
-                this.payment.increaseRed(1, pool.getLastPaymentWasSnow());
+                this.payment.increaseRed();
                 continue;
             }
 

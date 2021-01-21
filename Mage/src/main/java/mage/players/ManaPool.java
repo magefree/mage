@@ -1,6 +1,7 @@
 package mage.players;
 
 import mage.ConditionalMana;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -35,7 +36,16 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
-    private boolean lastPaymentWasSnow;
+
+    private static final class ConditionalManaInfo {
+        private final ManaType manaType;
+        private final MageObject sourceObject;
+
+        private ConditionalManaInfo(ManaType conditionalMana, MageObject sourceObject) {
+            this.manaType = conditionalMana;
+            this.sourceObject = sourceObject;
+        }
+    }
 
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
@@ -43,7 +53,6 @@ public class ManaPool implements Serializable {
         autoPaymentRestricted = true;
         unlockedManaType = null;
         forcedToPay = false;
-        lastPaymentWasSnow = false;
     }
 
     public ManaPool(final ManaPool pool) {
@@ -59,7 +68,6 @@ public class ManaPool implements Serializable {
             poolBookmark.add(item.copy());
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
-        this.lastPaymentWasSnow = pool.lastPaymentWasSnow;
     }
 
     public int getRed() {
@@ -93,7 +101,6 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
-        lastPaymentWasSnow = false;
         if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -117,13 +124,12 @@ public class ManaPool implements Serializable {
             }
         }
         // first try to pay from conditional mana (the returned manaType can be changed if AsThoughEffects are active)
-        ManaType conditionalManaType = getConditional(manaType, ability, filter, game, costToPay, possibleAsThoughPoolManaType);
-        if (conditionalManaType != null) {
-            removeConditional(conditionalManaType, ability, game, costToPay, usedManaToPay);
+        ConditionalManaInfo manaInfo = getConditional(manaType, ability, filter, game, costToPay, possibleAsThoughPoolManaType);
+        if (manaInfo != null) {
+            removeConditional(manaInfo, ability, game, costToPay, usedManaToPay);
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
-        lastPaymentWasSnow = false;
 
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
@@ -150,9 +156,8 @@ public class ManaPool implements Serializable {
             if (mana.get(usableManaType) > 0) {
                 GameEvent event = new ManaPaidEvent(ability, mana.getSourceId(), mana.getFlag(), mana.getOriginalId());
                 game.fireEvent(event);
-                usedManaToPay.increase(usableManaType);
+                usedManaToPay.increase(usableManaType, mana.getSourceObject().isSnow());
                 mana.remove(usableManaType);
-                lastPaymentWasSnow |= mana.getSourceObject().isSnow();
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
                 }
@@ -167,7 +172,7 @@ public class ManaPool implements Serializable {
         return getMana().get(manaType);
     }
 
-    private ManaType getConditional(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, ManaType possibleAsThoughPoolManaType) {
+    private ConditionalManaInfo getConditional(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, ManaType possibleAsThoughPoolManaType) {
         if (ability == null || getConditionalMana().isEmpty()) {
             return null;
         }
@@ -187,8 +192,7 @@ public class ManaPool implements Serializable {
                 if (manaTypeToUse != null && mana.getConditionalMana().apply(ability, game, mana.getSourceId(), costToPay)) {
                     if (filter == null
                             || filter.match(mana.getSourceObject(), game)) {
-                        lastPaymentWasSnow |= mana.getSourceObject().isSnow();
-                        return manaTypeToUse;
+                        return new ConditionalManaInfo(manaTypeToUse, mana.getSourceObject());
                     }
                 }
             }
@@ -373,11 +377,11 @@ public class ManaPool implements Serializable {
         return new ManaPool(this);
     }
 
-    private void removeConditional(ManaType manaType, Ability ability, Game game, Cost costToPay, Mana usedManaToPay) {
+    private void removeConditional(ConditionalManaInfo manaInfo, Ability ability, Game game, Cost costToPay, Mana usedManaToPay) {
         for (ConditionalMana mana : getConditionalMana()) {
-            if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
-                mana.set(manaType, mana.get(manaType) - 1);
-                usedManaToPay.increase(manaType);
+            if (mana.get(manaInfo.manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
+                mana.set(manaInfo.manaType, mana.get(manaInfo.manaType) - 1);
+                usedManaToPay.increase(manaInfo.manaType, manaInfo.sourceObject.isSnow());
                 GameEvent event = new ManaPaidEvent(ability, mana.getManaProducerId(), mana.getFlag(), mana.getManaProducerOriginalId());
                 game.fireEvent(event);
                 break;
@@ -493,9 +497,5 @@ public class ManaPool implements Serializable {
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
         }
-    }
-
-    public boolean getLastPaymentWasSnow() {
-        return lastPaymentWasSnow;
     }
 }
