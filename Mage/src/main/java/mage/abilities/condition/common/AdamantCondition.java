@@ -33,10 +33,10 @@ public enum AdamantCondition implements Condition {
             if (coloredManaSymbol == null) {
                 return Arrays
                         .stream(ColoredManaSymbol.values())
-                        .map(source.getManaCostsToPay().getPayment()::getColor)
+                        .map(source.getManaCostsToPay().getUsedManaToPay()::getColor)
                         .anyMatch(i -> i > 2);
             }
-            return source.getManaCostsToPay().getPayment().getColor(coloredManaSymbol) > 2;
+            return source.getManaCostsToPay().getUsedManaToPay().getColor(coloredManaSymbol) > 2;
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class, source.getSourceId());
         if (watcher == null) {

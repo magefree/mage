@@ -28,7 +28,7 @@ public class ManaSpentToCastWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null && this.getSourceId().equals(spell.getSourceId())) {
-                payment = spell.getSpellAbility().getManaCostsToPay().getPayment();
+                payment = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE

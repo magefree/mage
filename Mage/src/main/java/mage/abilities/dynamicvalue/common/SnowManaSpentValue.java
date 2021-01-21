@@ -17,7 +17,7 @@ public enum SnowManaSpentValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         if (sourceAbility.getAbilityType() == AbilityType.SPELL) {
-            return sourceAbility.getManaCostsToPay().getPayment().getSnow();
+            return sourceAbility.getManaCostsToPay().getUsedManaToPay().getSnow();
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(
                 ManaSpentToCastWatcher.class, sourceAbility.getSourceId()

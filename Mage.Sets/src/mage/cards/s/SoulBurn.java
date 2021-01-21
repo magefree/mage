@@ -81,14 +81,14 @@ class SoulBurnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         // Get the colors we care about. (This isn't racist, honestly.)
-        int amountBlack = source.getManaCostsToPay().getPayment().getBlack();
-        int amountRed = source.getManaCostsToPay().getPayment().getRed();
+        int amountBlack = source.getManaCostsToPay().getUsedManaToPay().getBlack();
+        int amountRed = source.getManaCostsToPay().getUsedManaToPay().getRed();
 
         // Get the colors we don't really care about. (See note above.)
-        int amountWhite = source.getManaCostsToPay().getPayment().getWhite();
-        int amountGreen = source.getManaCostsToPay().getPayment().getGreen();
-        int amountBlue = source.getManaCostsToPay().getPayment().getBlue();
-        int amountColorless = source.getManaCostsToPay().getPayment().getColorless();
+        int amountWhite = source.getManaCostsToPay().getUsedManaToPay().getWhite();
+        int amountGreen = source.getManaCostsToPay().getUsedManaToPay().getGreen();
+        int amountBlue = source.getManaCostsToPay().getUsedManaToPay().getBlue();
+        int amountColorless = source.getManaCostsToPay().getUsedManaToPay().getColorless();
 
         // Figure out what was spent on the spell in total, determine proper values for 
         // black and red, minus initial casting cost. 

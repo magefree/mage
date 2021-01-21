@@ -141,7 +141,7 @@ class LaviniaAzoriusRenegadeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getStackAbility().getManaCostsToPay().getPayment().count() == 0) {
+            if (spell != null && spell.getStackAbility().getManaCostsToPay().getUsedManaToPay().count() == 0) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
