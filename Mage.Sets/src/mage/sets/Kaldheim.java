@@ -39,7 +39,6 @@ public final class Kaldheim extends ExpansionSet {
             "Niko Defies Destiny",
             "Poison the Cup",
             "Quakebringer",
-            "Ranar the Ever-Watchful",
             "Ravenform",
             "Return Upon the Tide",
             "Rise of the Dread Marn",

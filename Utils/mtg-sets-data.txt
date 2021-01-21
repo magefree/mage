@@ -118,6 +118,7 @@ Judgment|JUD|
 Jumpstart|JMP|
 Kaladesh|KLD|
 Kaldheim|KHM|
+Kaldheim Commander|KHC|
 Khans of Tarkir|KTK|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|

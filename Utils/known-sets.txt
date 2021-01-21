@@ -118,6 +118,7 @@ Judgment|Judgment|
 Jumpstart|Jumpstart|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
+Kaldheimm Commander|KaldheimCommander|
 Khans of Tarkir|KhansOfTarkir|
 Launch Party|LaunchParty|
 Legends|Legends|
