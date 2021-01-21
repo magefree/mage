@@ -253,6 +253,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Resplendent Marshal", 22, Rarity.MYTHIC, mage.cards.r.ResplendentMarshal.class));
         cards.add(new SetCardInfo("Return Upon the Tide", 106, Rarity.UNCOMMON, mage.cards.r.ReturnUponTheTide.class));
         cards.add(new SetCardInfo("Revitalize", 23, Rarity.COMMON, mage.cards.r.Revitalize.class));
+        cards.add(new SetCardInfo("Righteous Valkyrie", 24, Rarity.RARE, mage.cards.r.RighteousValkyrie.class));
         cards.add(new SetCardInfo("Rimewood Falls", 266, Rarity.COMMON, mage.cards.r.RimewoodFalls.class));
         cards.add(new SetCardInfo("Rise of the Dread Marn", 107, Rarity.RARE, mage.cards.r.RiseOfTheDreadMarn.class));
         cards.add(new SetCardInfo("Rootless Yew", 189, Rarity.UNCOMMON, mage.cards.r.RootlessYew.class));
