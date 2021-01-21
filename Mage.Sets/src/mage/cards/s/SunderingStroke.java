@@ -51,6 +51,6 @@ enum SunderingStrokeCondtition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getPayment().getColor(ColoredManaSymbol.R) >= 6;
+        return source.getManaCostsToPay().getUsedManaToPay().getColor(ColoredManaSymbol.R) >= 6;
     }
 }

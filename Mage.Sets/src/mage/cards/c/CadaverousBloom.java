@@ -69,11 +69,8 @@ class CadaverousBloomManaEffect extends BasicManaEffect {
                 int count = player.getHand().size();          
                 if (count > 0) {
                     Mana mana = new Mana(
-                            getManaTemplate().getRed() * count,
+                            getManaTemplate().getWhite() * count, getManaTemplate().getBlue() * count, getManaTemplate().getBlack() * count, getManaTemplate().getRed() * count,
                             getManaTemplate().getGreen() * count,
-                            getManaTemplate().getBlue() * count,
-                            getManaTemplate().getWhite() * count,
-                            getManaTemplate().getBlack() * count,
                             getManaTemplate().getGeneric() * count,
                             getManaTemplate().getAny() * count,
                             getManaTemplate().getColorless() * count

@@ -73,6 +73,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     @Override
     public void clearPaid() {
         payment.clear();
+        usedManaToPay.clear();
         super.clearPaid();
     }
 
@@ -100,33 +101,33 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected boolean assignColored(Ability ability, Game game, ManaPool pool, ColoredManaSymbol mana, Cost costToPay) {
         // first check special mana
         switch (mana) {
-            case B:
-                if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseBlack();
+            case W:
+                if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+                    this.payment.increaseWhite(1, pool.getLastPaymentWasSnow());
                     return true;
                 }
                 break;
             case U:
                 if (pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseBlue();
+                    this.payment.increaseBlue(1, pool.getLastPaymentWasSnow());
                     return true;
                 }
                 break;
-            case W:
-                if (pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseWhite();
-                    return true;
-                }
-                break;
-            case G:
-                if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseGreen();
+            case B:
+                if (pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+                    this.payment.increaseBlack(1, pool.getLastPaymentWasSnow());
                     return true;
                 }
                 break;
             case R:
                 if (pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                    this.payment.increaseRed();
+                    this.payment.increaseRed(1, pool.getLastPaymentWasSnow());
+                    return true;
+                }
+                break;
+            case G:
+                if (pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+                    this.payment.increaseGreen(1, pool.getLastPaymentWasSnow());
                     return true;
                 }
                 break;
@@ -138,7 +139,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
         while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
             if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseColorless();
+                this.payment.increaseColorless(1, pool.getLastPaymentWasSnow());
             }
             break;
         }
@@ -151,38 +152,50 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             // filterMana can be null, uses for spells like "spend only black mana on X"
 
             // {C}
-            if ((filterMana == null || filterMana.isColorless()) && pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseColorless();
+            if ((filterMana == null || filterMana.isColorless()) && pool.pay(
+                    ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay
+            )) {
+                this.payment.increaseColorless(1, pool.getLastPaymentWasSnow());
                 continue;
             }
 
             // {B}
-            if ((filterMana == null || filterMana.isBlack()) && pool.pay(ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseBlack();
+            if ((filterMana == null || filterMana.isBlack()) && pool.pay(
+                    ManaType.BLACK, ability, sourceFilter, game, costToPay, usedManaToPay
+            )) {
+                this.payment.increaseBlack(1, pool.getLastPaymentWasSnow());
                 continue;
             }
 
             // {U}
-            if ((filterMana == null || filterMana.isBlue()) && pool.pay(ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseBlue();
+            if ((filterMana == null || filterMana.isBlue()) && pool.pay(
+                    ManaType.BLUE, ability, sourceFilter, game, costToPay, usedManaToPay
+            )) {
+                this.payment.increaseBlue(1, pool.getLastPaymentWasSnow());
                 continue;
             }
 
             // {W}
-            if ((filterMana == null || filterMana.isWhite()) && pool.pay(ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseWhite();
+            if ((filterMana == null || filterMana.isWhite()) && pool.pay(
+                    ManaType.WHITE, ability, sourceFilter, game, costToPay, usedManaToPay
+            )) {
+                this.payment.increaseWhite(1, pool.getLastPaymentWasSnow());
                 continue;
             }
 
             // {G}
-            if ((filterMana == null || filterMana.isGreen()) && pool.pay(ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseGreen();
+            if ((filterMana == null || filterMana.isGreen()) && pool.pay(
+                    ManaType.GREEN, ability, sourceFilter, game, costToPay, usedManaToPay
+            )) {
+                this.payment.increaseGreen(1, pool.getLastPaymentWasSnow());
                 continue;
             }
 
             // {R}
-            if ((filterMana == null || filterMana.isRed()) && pool.pay(ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseRed();
+            if ((filterMana == null || filterMana.isRed()) && pool.pay(
+                    ManaType.RED, ability, sourceFilter, game, costToPay, usedManaToPay
+            )) {
+                this.payment.increaseRed(1, pool.getLastPaymentWasSnow());
                 continue;
             }
 

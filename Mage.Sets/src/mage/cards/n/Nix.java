@@ -51,7 +51,7 @@ enum NoManaSpentToCastTargetCondition implements Condition {
         if (targetId != null) {
             StackObject stackObject = game.getStack().getStackObject(targetId);
             if (stackObject != null) {
-                return stackObject.getStackAbility().getManaCostsToPay().getPayment().count() == 0;
+                return stackObject.getStackAbility().getManaCostsToPay().getUsedManaToPay().count() == 0;
             }
         }
         return false;
