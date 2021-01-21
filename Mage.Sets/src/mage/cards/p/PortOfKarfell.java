@@ -84,7 +84,7 @@ class PortOfKarfellEffect extends OneShotEffect {
         player.choose(outcome, target, source.getSourceId(), game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            player.moveCards(card, Zone.BATTLEFIELD, source, game);
+            player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         return true;
     }
