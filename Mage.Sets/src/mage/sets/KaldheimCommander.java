@@ -13,7 +13,13 @@ import java.util.List;
 public final class KaldheimCommander extends ExpansionSet {
 
     private static final List<String> unfinished = Arrays.asList(
-            "Ranar the Ever-Watchful"
+            "Cosmic Intervention",
+            "Ethereal Valkyrie",
+            "Ranar the Ever-Watchful",
+            "Sage of the Beyond",
+            "Spectral Deluge",
+            "Stoic Farmer",
+            "Tales of the Ancestors"
     );
 
     private static final KaldheimCommander instance = new KaldheimCommander();
