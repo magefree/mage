@@ -47,12 +47,15 @@ public class ManaPool implements Serializable {
         }
     }
 
+    private boolean lastPaymentWasSnow;
+
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
         autoPayment = true;
         autoPaymentRestricted = true;
         unlockedManaType = null;
         forcedToPay = false;
+        lastPaymentWasSnow = false;
     }
 
     public ManaPool(final ManaPool pool) {
@@ -68,6 +71,7 @@ public class ManaPool implements Serializable {
             poolBookmark.add(item.copy());
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
+        this.lastPaymentWasSnow = pool.lastPaymentWasSnow;
     }
 
     public int getRed() {
@@ -101,6 +105,7 @@ public class ManaPool implements Serializable {
      * @return
      */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay, Mana usedManaToPay) {
+        lastPaymentWasSnow = false;
         if (!isAutoPayment() && manaType != unlockedManaType) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
@@ -130,6 +135,7 @@ public class ManaPool implements Serializable {
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
+        lastPaymentWasSnow = false;
 
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
@@ -158,6 +164,7 @@ public class ManaPool implements Serializable {
                 game.fireEvent(event);
                 usedManaToPay.increase(usableManaType, mana.getSourceObject().isSnow());
                 mana.remove(usableManaType);
+                lastPaymentWasSnow |= mana.getSourceObject().isSnow();
                 if (mana.count() == 0) { // so no items with count 0 stay in list
                     manaItems.remove(mana);
                 }
@@ -497,5 +504,9 @@ public class ManaPool implements Serializable {
             default:
                 throw new IllegalArgumentException("Wrong mana type " + manaType);
         }
+    }
+
+    public boolean getLastPaymentWasSnow() {
+        return lastPaymentWasSnow;
     }
 }
