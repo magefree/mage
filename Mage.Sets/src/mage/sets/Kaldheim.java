@@ -126,6 +126,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Deathknell Berserker", 83, Rarity.COMMON, mage.cards.d.DeathknellBerserker.class));
         cards.add(new SetCardInfo("Demon Bolt", 129, Rarity.COMMON, mage.cards.d.DemonBolt.class));
         cards.add(new SetCardInfo("Demonic Gifts", 84, Rarity.COMMON, mage.cards.d.DemonicGifts.class));
+        cards.add(new SetCardInfo("Depart the Realm", 53, Rarity.COMMON, mage.cards.d.DepartTheRealm.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 54, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Divine Gambit", 8, Rarity.UNCOMMON, mage.cards.d.DivineGambit.class));
         cards.add(new SetCardInfo("Dogged Pursuit", 85, Rarity.COMMON, mage.cards.d.DoggedPursuit.class));
