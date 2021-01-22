@@ -20,7 +20,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -154,8 +154,8 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
-        return new SubTypeList();
+    public SubTypes getSubtype(Game game) {
+        return new SubTypes();
     }
 
     @Override

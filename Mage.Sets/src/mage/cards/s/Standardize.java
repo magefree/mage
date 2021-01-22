@@ -16,8 +16,8 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.SubTypeList;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -71,7 +71,7 @@ class StandardizeEffect extends OneShotEffect {
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
                 game.addEffect(new BecomesSubtypeAllEffect(
-                        Duration.EndOfTurn, new SubTypeList(SubType.byDescription(chosenType)),
+                        Duration.EndOfTurn, Arrays.asList(SubType.byDescription(chosenType)),
                         StaticFilters.FILTER_PERMANENT_CREATURE, true
                 ), source);
                 return true;

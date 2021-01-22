@@ -30,7 +30,7 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -161,8 +161,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
-        return new SubTypeList();
+    public SubTypes getSubtype(Game game) {
+        return new SubTypes();
     }
 
     @Override

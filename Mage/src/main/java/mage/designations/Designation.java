@@ -18,7 +18,7 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.Copyable;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -156,8 +156,8 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
-        return new SubTypeList();
+    public SubTypes getSubtype(Game game) {
+        return new SubTypes();
     }
 
     @Override

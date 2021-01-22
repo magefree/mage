@@ -29,7 +29,7 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.CardUtil;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -58,7 +58,7 @@ public class CardView extends SimpleCardView {
     protected String loyalty = "";
     protected String startingLoyalty;
     protected ArrayList<CardType> cardTypes;
-    protected SubTypeList subTypes;
+    protected SubTypes subTypes;
     protected Set<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
@@ -165,7 +165,7 @@ public class CardView extends SimpleCardView {
         this.loyalty = cardView.loyalty;
         this.startingLoyalty = cardView.startingLoyalty;
         this.cardTypes = new ArrayList<>(cardView.cardTypes);
-        this.subTypes = new SubTypeList(cardView.subTypes);
+        this.subTypes = new SubTypes(cardView.subTypes);
         this.superTypes = cardView.superTypes;
 
         this.color = cardView.color;
@@ -671,7 +671,7 @@ public class CardView extends SimpleCardView {
         this.loyalty = "";
         this.startingLoyalty = "";
         this.cardTypes = new ArrayList<>();
-        this.subTypes = new SubTypeList();
+        this.subTypes = new SubTypes();
         this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
@@ -816,7 +816,7 @@ public class CardView extends SimpleCardView {
         return cardTypes;
     }
 
-    public SubTypeList getSubTypes() {
+    public SubTypes getSubTypes() {
         return subTypes;
     }
 

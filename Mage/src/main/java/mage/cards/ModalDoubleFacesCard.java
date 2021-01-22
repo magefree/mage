@@ -10,7 +10,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -136,7 +136,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
+    public SubTypes getSubtype(Game game) {
         // rules: While a double-faced card isn’t on the stack or battlefield, consider only the characteristics of its front face.
 
         // CardImpl's constructor can call some code on init, so you must check left/right before

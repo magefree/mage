@@ -7,19 +7,19 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-public class SubTypeList extends ArrayList<SubType> {
+public class SubTypes extends ArrayList<SubType> {
 
-    public SubTypeList(SubType firstSubType) {
+    public SubTypes(SubType firstSubType) {
         super();
         this.add(firstSubType);
     }
 
-    public SubTypeList(SubType... subTypesList) {
+    public SubTypes(SubType... subTypesList) {
         super();
         Collections.addAll(this, subTypesList);
     }
 
-    public SubTypeList(final SubTypeList list) {
+    public SubTypes(final SubTypes list) {
         this.addAll(list);
     }
 

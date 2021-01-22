@@ -20,7 +20,7 @@ import mage.game.Game;
 import mage.game.MageObjectAttribute;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -32,7 +32,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
     protected ArrayList<CardType> cardType = new ArrayList<>();
-    protected SubTypeList subtype = new SubTypeList();
+    protected SubTypes subtype = new SubTypes();
     protected boolean isAllCreatureTypes;
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
@@ -116,7 +116,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
+    public SubTypes getSubtype(Game game) {
         if (game != null) {
             MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
             if (mageObjectAttribute != null) {

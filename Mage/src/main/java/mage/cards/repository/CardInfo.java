@@ -12,7 +12,7 @@ import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
 import mage.constants.*;
 import mage.util.CardUtil;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -367,8 +367,8 @@ public class CardInfo {
         this.rules = joinList(rules);
     }
 
-    public final SubTypeList getSubTypes() {
-        SubTypeList sl = new SubTypeList();
+    public final SubTypes getSubTypes() {
+        SubTypes sl = new SubTypes();
         if (subtypes.trim().isEmpty()) {
             return sl;
         }

@@ -34,7 +34,7 @@ import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -524,9 +524,9 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
+    public SubTypes getSubtype(Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            SubTypeList subtypes = card.getSubtype(game);
+            SubTypes subtypes = card.getSubtype(game);
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
             }
@@ -538,7 +538,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) { // workaround for Bestow (don't like it)
-            SubTypeList subtypes = card.getSubtype(game);
+            SubTypes subtypes = card.getSubtype(game);
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
             }

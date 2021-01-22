@@ -5,8 +5,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.SubTypeList;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,22 +16,22 @@ import java.util.UUID;
  */
 public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
-    private final SubTypeList subtypes = new SubTypeList();
+    private final List<SubType> subtypes = new ArrayList<>();
     private final boolean loseOther;  // loses other creature types
 
     public BecomesCreatureTypeTargetEffect(Duration duration, SubType subtype) {
-        this(duration, new SubTypeList(subtype));
+        this(duration, Arrays.asList(subtype));
     }
 
     public BecomesCreatureTypeTargetEffect(Duration duration, SubType subtype, boolean loseOther) {
-        this(duration, new SubTypeList(subtype), loseOther);
+        this(duration, Arrays.asList(subtype), loseOther);
     }
 
-    public BecomesCreatureTypeTargetEffect(Duration duration, SubTypeList subtypes) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, List<SubType> subtypes) {
         this(duration, subtypes, true);
     }
 
-    public BecomesCreatureTypeTargetEffect(Duration duration, SubTypeList subtypes, boolean loseOther) {
+    public BecomesCreatureTypeTargetEffect(Duration duration, List<SubType> subtypes, boolean loseOther) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.subtypes.addAll(subtypes);
         this.staticText = setText();

@@ -7,7 +7,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Describes condition when equipped permanent has subType
@@ -16,35 +18,31 @@ import mage.util.SubTypeList;
  */
 public class EquippedHasSubtypeCondition implements Condition {
 
-    private SubTypeList subTypes; // scope = Any
+    private final List<SubType> subTypes = new ArrayList<>(); // scope = Any
 
-    public EquippedHasSubtypeCondition(SubTypeList subType) {
-        this.subTypes = subType;
-    }
-
-
-    public EquippedHasSubtypeCondition(SubType subType){
-        subTypes = new SubTypeList();
-        subTypes.add(subType);
+    public EquippedHasSubtypeCondition(SubType... subTypes) {
+        for (SubType subType : subTypes) {
+            this.subTypes.add(subType);
+        }
     }
 
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getAttachedTo() != null) {
-            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-            if (attachedTo == null) {
-                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
-            }
-            if (attachedTo != null) {
-
-                for (SubType s : subTypes) {
-                    if (attachedTo.hasSubtype(s, game)) {
-                        return true;
-                    }
-                }
-
+        if (permanent == null || permanent.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
+        if (attachedTo == null) {
+            attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
+        }
+        if (attachedTo == null) {
+            return false;
+        }
+        for (SubType s : subTypes) {
+            if (attachedTo.hasSubtype(s, game)) {
+                return true;
             }
         }
         return false;

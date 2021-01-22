@@ -13,7 +13,7 @@ import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public interface MageObject extends MageItem, Serializable {
 
     ArrayList<CardType> getCardType();
 
-    SubTypeList getSubtype(Game game);
+    SubTypes getSubtype(Game game);
 
     boolean hasSubtype(SubType subtype, Game game);
 
