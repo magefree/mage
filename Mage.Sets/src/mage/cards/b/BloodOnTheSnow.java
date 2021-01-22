@@ -41,6 +41,10 @@ public final class BloodOnTheSnow extends CardImpl {
         this.getSpellAbility().addEffect(new BloodOnTheSnowEffect());
         mode.addEffect(new BloodOnTheSnowEffect());
         this.getSpellAbility().addMode(mode);
+        this.getSpellAbility().appendToRule(
+                "Then return a creature or planeswalker card with converted mana cost X or less"
+                + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell."
+        );
     }
 
     private BloodOnTheSnow(final BloodOnTheSnow card) {
@@ -57,8 +61,6 @@ class BloodOnTheSnowEffect extends OneShotEffect {
 
     public BloodOnTheSnowEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Then return a creature or planeswalker card with converted mana cost X or less"
-                + " from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell";
     }
 
     private BloodOnTheSnowEffect(final BloodOnTheSnowEffect effect) {
