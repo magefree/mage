@@ -106,6 +106,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Blizzard Brawl", 162, Rarity.UNCOMMON, mage.cards.b.BlizzardBrawl.class));
         cards.add(new SetCardInfo("Bloodline Pretender", 235, Rarity.UNCOMMON, mage.cards.b.BloodlinePretender.class));
         cards.add(new SetCardInfo("Bloodsky Berserker", 80, Rarity.UNCOMMON, mage.cards.b.BloodskyBerserker.class));
+        cards.add(new SetCardInfo("Boreal Outrider", 163, Rarity.UNCOMMON, mage.cards.b.BorealOutrider.class));
         cards.add(new SetCardInfo("Bound in Gold", 5, Rarity.COMMON, mage.cards.b.BoundInGold.class));
         cards.add(new SetCardInfo("Breakneck Berserker", 124, Rarity.COMMON, mage.cards.b.BreakneckBerserker.class));
         cards.add(new SetCardInfo("Bretagard Stronghold", 253, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));

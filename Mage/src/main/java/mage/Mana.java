@@ -1013,6 +1013,21 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 + any.getSnowAmount();
     }
 
+    public boolean checkSnow(ObjectColor color) {
+        if (color.isWhite() && white.getSnowAmount() > 0) {
+            return true;
+        } else if (color.isBlue() && blue.getSnowAmount() > 0) {
+            return true;
+        } else if (color.isBlack() && black.getSnowAmount() > 0) {
+            return true;
+        } else if (color.isRed() && red.getSnowAmount() > 0) {
+            return true;
+        } else if (color.isGreen() && green.getSnowAmount() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Returns this objects total mana minus the passed in {@link Mana}'s mana.
      *
