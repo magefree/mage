@@ -239,6 +239,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Narfi, Betrayer King", 224, Rarity.UNCOMMON, mage.cards.n.NarfiBetrayerKing.class));
         cards.add(new SetCardInfo("Niko Aris", 225, Rarity.MYTHIC, mage.cards.n.NikoAris.class));
         cards.add(new SetCardInfo("Old-Growth Troll", 185, Rarity.RARE, mage.cards.o.OldGrowthTroll.class));
+        cards.add(new SetCardInfo("Open the Omenpaths", 143, Rarity.COMMON, mage.cards.o.OpenTheOmenpaths.class));
         cards.add(new SetCardInfo("Orvar, the All-Form", 70, Rarity.MYTHIC, mage.cards.o.OrvarTheAllForm.class));
         cards.add(new SetCardInfo("Path to the World Tree", 186, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Pilfering Hawk", 71, Rarity.COMMON, mage.cards.p.PilferingHawk.class));
