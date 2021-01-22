@@ -75,7 +75,7 @@ class BloodOnTheSnowEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
-            FilterCard filter = new FilterCard("a creature or planeswalker card with CMC " + snow + " or less");
+            FilterCard filter = new FilterCard("a creature or planeswalker card with CMC " + snow + " or less from your graveyard");
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.PLANESWALKER.getPredicate()));
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, snow + 1));
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
