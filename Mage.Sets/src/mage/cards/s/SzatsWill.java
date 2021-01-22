@@ -15,12 +15,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BreedingPitThrullToken;
 import mage.players.Player;
 
@@ -28,6 +24,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.filter.predicate.permanent.GreatestPowerControlledPredicate;
 
 /**
  * @author TheElk801
@@ -38,7 +35,7 @@ public final class SzatsWill extends CardImpl {
             = new FilterControlledCreaturePermanent("creature they control with the greatest power");
 
     static {
-        filter.add(SzatsWillPredicate.instance);
+        filter.add(GreatestPowerControlledPredicate.instance);
     }
 
     public SzatsWill(UUID ownerId, CardSetInfo setInfo) {
@@ -67,36 +64,13 @@ public final class SzatsWill extends CardImpl {
     }
 }
 
-enum SzatsWillPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input
-                .getObject()
-                .getPower()
-                .getValue()
-                >= game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        input.getSourceId(), input.getPlayerId(), game
-                ).stream()
-                .filter(Objects::nonNull)
-                .map(MageObject::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
-    }
-}
-
 class SzatsWillEffect extends OneShotEffect {
 
     SzatsWillEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all cards from all opponents' graveyards, " +
-                "then create X 0/1 black Thrull creature tokens, " +
-                "where X is the greatest power among creature cards exiled this way";
+        staticText = "exile all cards from all opponents' graveyards, "
+                + "then create X 0/1 black Thrull creature tokens, "
+                + "where X is the greatest power among creature cards exiled this way";
     }
 
     private SzatsWillEffect(final SzatsWillEffect effect) {
@@ -134,8 +108,7 @@ class SzatsWillEffect extends OneShotEffect {
                 .max()
                 .orElse(0);
         if (maxPower > 0) {
-            new BreedingPitThrullToken().putOntoBattlefield(maxPower, game, source, source.getControllerId()
-            );
+            new BreedingPitThrullToken().putOntoBattlefield(maxPower, game, source, source.getControllerId());
         }
         return true;
     }
