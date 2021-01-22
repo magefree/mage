@@ -106,6 +106,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Blessing of Frost", 161, Rarity.RARE, mage.cards.b.BlessingOfFrost.class));
         cards.add(new SetCardInfo("Blightstep Pathway", 252, Rarity.RARE, mage.cards.b.BlightstepPathway.class));
         cards.add(new SetCardInfo("Blizzard Brawl", 162, Rarity.UNCOMMON, mage.cards.b.BlizzardBrawl.class));
+        cards.add(new SetCardInfo("Blood on the Snow", 79, Rarity.RARE, mage.cards.b.BloodOnTheSnow.class));
         cards.add(new SetCardInfo("Bloodline Pretender", 235, Rarity.UNCOMMON, mage.cards.b.BloodlinePretender.class));
         cards.add(new SetCardInfo("Bloodsky Berserker", 80, Rarity.UNCOMMON, mage.cards.b.BloodskyBerserker.class));
         cards.add(new SetCardInfo("Boreal Outrider", 163, Rarity.UNCOMMON, mage.cards.b.BorealOutrider.class));
