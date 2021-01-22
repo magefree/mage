@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
@@ -47,7 +45,11 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId());
+        if (event.getTargetId().equals(getSourceId())) {
+            this.getEffects().setValue("permanentEnteredBattlefield", game.getPermanent(event.getTargetId()));
+            return true;
+        }
+        return false;
     }
 
     @Override
