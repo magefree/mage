@@ -32,6 +32,7 @@ public final class KaldheimCommander extends ExpansionSet {
         super("Kaldheim Commander", "KHC", ExpansionSet.buildDate(2021, 2, 5), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Elderfang Venom", 15, Rarity.RARE, mage.cards.e.ElderfangVenom.class));
         cards.add(new SetCardInfo("Inspired Sphinx", 40, Rarity.MYTHIC, mage.cards.i.InspiredSphinx.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
