@@ -1,16 +1,15 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author LevelX2
  */
 public class LegacyCube2018February extends DraftCube {
 
     public LegacyCube2018February() {
-        super("MTGO Legacy Cube February 2018 (600 cards)");
+        super("MTGO Legacy Cube February 2018");
+
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep", ""));
         cubeCards.add(new DraftCube.CardIdentity("Abrade", ""));
         cubeCards.add(new DraftCube.CardIdentity("Abrupt Decay", ""));

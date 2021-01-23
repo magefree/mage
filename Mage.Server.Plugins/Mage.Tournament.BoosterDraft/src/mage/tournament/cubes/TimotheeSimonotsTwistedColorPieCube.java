@@ -1,15 +1,13 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class TimotheeSimonotsTwistedColorPieCube extends DraftCube {
 
-public TimotheeSimonotsTwistedColorPieCube() {
+    public TimotheeSimonotsTwistedColorPieCube() {
         super("Timothee Simonot's Twisted Color Pie Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
 
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep", ""));

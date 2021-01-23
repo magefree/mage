@@ -1,16 +1,14 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author LevelX2
  */
 public class BensCube extends DraftCube {
 
     public BensCube() {
-        super("Ben's Cube (720 cards)"); // http://cubetutor.com/viewcube/1
+        super("Ben's Cube"); // http://cubetutor.com/viewcube/1
 
         cubeCards.add(new CardIdentity("Abrupt Decay", ""));
         cubeCards.add(new CardIdentity("Abyssal Persecutor", ""));
@@ -115,7 +113,7 @@ public class BensCube extends DraftCube {
         cubeCards.add(new CardIdentity("Chandra, the Firebrand", ""));
         cubeCards.add(new CardIdentity("Chandra's Phoenix", ""));
         cubeCards.add(new CardIdentity("Channel", ""));
-        cubeCards.add(new CardIdentity("Chaos Orb", ""));
+        //cubeCards.add(new CardIdentity("Chaos Orb", ""));
         cubeCards.add(new CardIdentity("Chaos Warp", ""));
         cubeCards.add(new CardIdentity("Char", ""));
         cubeCards.add(new CardIdentity("Chrome Mox", ""));

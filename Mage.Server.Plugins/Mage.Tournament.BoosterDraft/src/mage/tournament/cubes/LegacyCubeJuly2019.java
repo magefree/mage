@@ -3,13 +3,13 @@ package mage.tournament.cubes;
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author phulin
  */
 public class LegacyCubeJuly2019 extends DraftCube {
 
     public LegacyCubeJuly2019() {
         super("MTGO Legacy Cube July 2019");
+
         cubeCards.add(new CardIdentity("Abbot of Keral Keep", ""));
         cubeCards.add(new CardIdentity("Abrade", ""));
         cubeCards.add(new CardIdentity("Abrupt Decay", ""));

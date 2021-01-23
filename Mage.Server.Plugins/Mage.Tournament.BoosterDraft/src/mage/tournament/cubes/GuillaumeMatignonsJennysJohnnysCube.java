@@ -1,15 +1,13 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class GuillaumeMatignonsJennysJohnnysCube extends DraftCube {
 
-public GuillaumeMatignonsJennysJohnnysCube() {
+    public GuillaumeMatignonsJennysJohnnysCube() {
         super("Guillaume Matignon's Jenny's/Johnny's Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
 
         cubeCards.add(new DraftCube.CardIdentity("Abundant Growth", ""));

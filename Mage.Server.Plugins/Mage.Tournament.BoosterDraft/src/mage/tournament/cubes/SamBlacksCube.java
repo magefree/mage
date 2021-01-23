@@ -1,15 +1,13 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class SamBlacksCube extends DraftCube {
 
-public SamBlacksCube() {
+    public SamBlacksCube() {
         super("Sam Black's No Search Cube"); // http://www.cubetutor.com/viewcube/69564
 
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep", ""));
@@ -86,7 +84,7 @@ public SamBlacksCube() {
         cubeCards.add(new DraftCube.CardIdentity("Chandra, Pyromaster", ""));
         cubeCards.add(new DraftCube.CardIdentity("Chandra, Torch of Defiance", ""));
         cubeCards.add(new DraftCube.CardIdentity("Channel", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Chaos Orb", ""));
+        //cubeCards.add(new DraftCube.CardIdentity("Chaos Orb", ""));
         cubeCards.add(new DraftCube.CardIdentity("Chromatic Star", ""));
         cubeCards.add(new DraftCube.CardIdentity("Chrome Mox", ""));
         cubeCards.add(new DraftCube.CardIdentity("City of Traitors", ""));
@@ -370,7 +368,7 @@ public SamBlacksCube() {
         cubeCards.add(new DraftCube.CardIdentity("Pack Rat", ""));
         cubeCards.add(new DraftCube.CardIdentity("Pact of Negation", ""));
         cubeCards.add(new DraftCube.CardIdentity("Painful Truths", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Paliano, the High City", ""));
+        //cubeCards.add(new DraftCube.CardIdentity("Paliano, the High City", ""));
         cubeCards.add(new DraftCube.CardIdentity("Palinchron", ""));
         cubeCards.add(new DraftCube.CardIdentity("Palladium Myr", ""));
         cubeCards.add(new DraftCube.CardIdentity("Pelakka Wurm", ""));
