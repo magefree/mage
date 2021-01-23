@@ -12,48 +12,6 @@ import java.util.List;
  */
 public final class Kaldheim extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList(
-            "Alrund's Epiphany",
-            "Augury Raven",
-            "Battle Mammoth",
-            "Behold the Multiverse",
-            "Cosmos Charger",
-            "Crush the Weak",
-            "Demon Bolt",
-            "Depart the Realm",
-            "Doomskar",
-            "Doomskar Oracle",
-            "Doomskar Titan",
-            "Dream Devourer",
-            "Dual Strike",
-            "Dwarven Reinforcements",
-            "Glorious Protector",
-            "Gods' Hall Guardian",
-            "Haunting Voyage",
-            "Iron Verdict",
-            "Jarl of the Forsaken",
-            "Karfell Harbinger",
-            "Kaya's Onslaught",
-            "Mammoth Growth",
-            "Mystic Reflection",
-            "Niko Defies Destiny",
-            "Poison the Cup",
-            "Quakebringer",
-            "Ravenform",
-            "Return Upon the Tide",
-            "Rise of the Dread Marn",
-            "Sarulf's Packmate",
-            "Saw It Coming",
-            "Scorn Effigy",
-            "Shepherd of the Cosmos",
-            "Skull Raid",
-            "Starnheim Unleashed",
-            "Struggle for Skemfar",
-            "Tergrid's Shadow",
-            "Vengeful Reaper",
-            "Warhorn Blast"
-    );
-
     private static final Kaldheim instance = new Kaldheim();
 
     public static Kaldheim getInstance() {
@@ -355,7 +313,5 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Withercrown", 119, Rarity.COMMON, mage.cards.w.Withercrown.class));
         cards.add(new SetCardInfo("Woodland Chasm", 274, Rarity.COMMON, mage.cards.w.WoodlandChasm.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 382, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
 }

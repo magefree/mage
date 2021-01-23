@@ -4,23 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class KaldheimCommander extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList(
-            "Cosmic Intervention",
-            "Ethereal Valkyrie",
-            "Ranar the Ever-Watchful",
-            "Sage of the Beyond",
-            "Spectral Deluge",
-            "Stoic Farmer",
-            "Tales of the Ancestors"
-    );
 
     private static final KaldheimCommander instance = new KaldheimCommander();
 
@@ -39,7 +26,5 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ruthless Winnower", 10, Rarity.RARE, mage.cards.r.RuthlessWinnower.class));
         cards.add(new SetCardInfo("Sage of the Beyond", 6, Rarity.RARE, mage.cards.s.SageOfTheBeyond.class));
         cards.add(new SetCardInfo("Spectral Deluge", 7, Rarity.RARE, mage.cards.s.SpectralDeluge.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
 }
