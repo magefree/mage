@@ -765,7 +765,19 @@ public class VerifyCardDataTest {
 
         ArrayList<String> sortedList = new ArrayList<>(list);
         if (sorted) {
-            sortedList.sort(String::compareTo);
+            sortedList.sort(new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    // show errors in the end of the list (after warnings, near the final assert fail)
+                    boolean e1 = o1.toLowerCase(Locale.ENGLISH).startsWith("error");
+                    boolean e2 = o2.toLowerCase(Locale.ENGLISH).startsWith("error");
+                    if (e1 != e2) {
+                        return Boolean.compare(e1, e2);
+                    } else {
+                        return o1.compareTo(o2);
+                    }
+                }
+            });
         }
 
         for (String mes : sortedList) {
