@@ -18,6 +18,7 @@ import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.command.Plane;
+import mage.game.draft.DraftCube;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -812,7 +813,7 @@ public class VerifyCardDataTest {
 
             //if (!className.toLowerCase(Locale.ENGLISH).equals(needClassName.toLowerCase(Locale.ENGLISH))) {
             if (!className.equals(needClassName)) {
-                errorsList.add("error, set's class name must be equal to set name: "
+                errorsList.add("Error: set's class name must be equal to set name: "
                         + className + " from " + set.getClass().getName() + ", caption: " + set.getName() + ", need name: " + needClassName);
             }
         }
@@ -835,11 +836,11 @@ public class VerifyCardDataTest {
                     .sorted().collect(Collectors.joining(", "));
 
             if (needLand && !foundLand) {
-                errorsList.add("error, found set with wrong hasBasicLands - it's true, but haven't land cards: " + set.getCode() + " in " + set.getClass().getName());
+                errorsList.add("Error: found set with wrong hasBasicLands - it's true, but haven't land cards: " + set.getCode() + " in " + set.getClass().getName());
             }
 
             if (!needLand && foundLand) {
-                errorsList.add("error, found set with wrong hasBasicLands - it's false, but have land cards: " + set.getCode() + " in " + set.getClass().getName() + ", lands: " + landNames);
+                errorsList.add("Error: found set with wrong hasBasicLands - it's false, but have land cards: " + set.getCode() + " in " + set.getClass().getName() + ", lands: " + landNames);
             }
 
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
@@ -847,7 +848,7 @@ public class VerifyCardDataTest {
 
         // CHECK: wrong snow land info
         for (ExpansionSet set : sets) {
-            boolean needSnow = CardRepository.instance.haveSnowLands(set.getCode());
+            boolean needSnow = CardRepository.haveSnowLands(set.getCode());
             boolean haveSnow = false;
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 if (card.getName().startsWith("Snow-Covered ")) {
@@ -856,7 +857,7 @@ public class VerifyCardDataTest {
                 }
             }
             if (needSnow != haveSnow) {
-                errorsList.add("error, found incorrect snow land info in set " + set.getCode() + ": "
+                errorsList.add("Error: found incorrect snow land info in set " + set.getCode() + ": "
                         + (haveSnow ? "set has snow cards" : "set doesn't have snow card")
                         + ", but xmage thinks that it " + (needSnow ? "does" : "doesn't"));
             }
@@ -891,7 +892,7 @@ public class VerifyCardDataTest {
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
                 if (cardHaveDoubleName && !cardHaveVariousSetting) {
-                    errorsList.add("error, founded double card names, but UsesVariousArt = false (missing NON_FULL_USE_VARIOUS, etc): "
+                    errorsList.add("Error: founded double card names, but UsesVariousArt = false (missing NON_FULL_USE_VARIOUS, etc): "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -905,7 +906,7 @@ public class VerifyCardDataTest {
 
                 // CHECK: all planeswalkers must be legendary
                 if (card.getCardType().contains(CardType.PLANESWALKER) && !card.getSuperType().contains(SuperType.LEGENDARY)) {
-                    errorsList.add("error, planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
                 // CHECK: getMana must works without NPE errors (it uses getNetMana with empty game param for AI score calcs)
@@ -914,7 +915,7 @@ public class VerifyCardDataTest {
 
                 // CHECK: non ascii symbols in card numbers
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
-                    errorsList.add("error, card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                    errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
         }
@@ -939,23 +940,23 @@ public class VerifyCardDataTest {
 
             // only watcher class can be extended (e.g. final)
             if (!watcherClass.getSuperclass().equals(Watcher.class)) {
-                errorsList.add("error, only Watcher class can be extended: " + watcherClass.getName());
+                errorsList.add("Error: only Watcher class can be extended: " + watcherClass.getName());
             }
 
             // no copy methods
             try {
                 Method m = watcherClass.getMethod("copy");
                 if (!m.getGenericReturnType().getTypeName().equals("T")) {
-                    errorsList.add("error, copy() method must be deleted from watcher class: " + watcherClass.getName());
+                    errorsList.add("Error: copy() method must be deleted from watcher class: " + watcherClass.getName());
                 }
             } catch (NoSuchMethodException e) {
-                errorsList.add("error, can't find copy() method in watcher class: " + watcherClass.getName());
+                errorsList.add("Error: can't find copy() method in watcher class: " + watcherClass.getName());
             }
 
             // no constructor for copy
             try {
                 Constructor<? extends Watcher> constructor = watcherClass.getDeclaredConstructor(watcherClass);
-                errorsList.add("error, copy constructor is not allowed in watcher class: " + watcherClass.getName());
+                errorsList.add("Error: copy constructor is not allowed in watcher class: " + watcherClass.getName());
             } catch (NoSuchMethodException e) {
                 // all fine, no needs in copy constructors
             }
@@ -984,13 +985,13 @@ public class VerifyCardDataTest {
                 try {
                     Watcher w2 = w1.copy();
                     if (w2 == null) {
-                        errorsList.add("error, can't copy watcher with unknown error, look at error logs above: " + watcherClass.getName());
+                        errorsList.add("Error: can't copy watcher with unknown error, look at error logs above: " + watcherClass.getName());
                     }
                 } catch (Exception e) {
-                    errorsList.add("error, can't copy watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
+                    errorsList.add("Error: can't copy watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
                 }
             } catch (Exception e) {
-                errorsList.add("error, can't create watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
+                errorsList.add("Error: can't create watcher: " + watcherClass.getName() + " (" + e.getMessage() + ")");
             }
 
         }
@@ -1066,14 +1067,14 @@ public class VerifyCardDataTest {
             String fullClass = tokenClass.getName();
             if (!fullClass.startsWith("mage.game.permanent.token.")) {
                 String className = extractShortClass(tokenClass);
-                errorsList.add("error, public token must stores in mage.game.permanent.token package: " + className + " from " + tokenClass.getName());
+                errorsList.add("Error: public token must stores in mage.game.permanent.token package: " + className + " from " + tokenClass.getName());
             }
         }
 
         // 3. check private tokens (they aren't need at all)
         for (Class<? extends TokenImpl> tokenClass : privateTokens) {
             String className = extractShortClass(tokenClass);
-            errorsList.add("error, no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
+            errorsList.add("Error: no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
         }
 
         // 4. all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
@@ -1081,9 +1082,9 @@ public class VerifyCardDataTest {
             String className = extractShortClass(tokenClass);
             Token token = (Token) createNewObject(tokenClass);
             if (token == null) {
-                errorsList.add("error, token must have default constructor with zero params: " + tokenClass.getName());
+                errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
-                errorsList.add("error, can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
+                errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
 
@@ -1115,7 +1116,7 @@ public class VerifyCardDataTest {
         for (Class<? extends Plane> planeClass : planesClassesList) {
             if (!planeClass.getName().endsWith("Plane")) {
                 String className = extractShortClass(planeClass);
-                errorsList.add("error, plane class must ends with Plane: " + className + " from " + planeClass.getName());
+                errorsList.add("Error: plane class must ends with Plane: " + className + " from " + planeClass.getName());
             }
         }
 
@@ -1124,7 +1125,7 @@ public class VerifyCardDataTest {
             String fullClass = planeClass.getName();
             if (!fullClass.startsWith("mage.game.command.planes.")) {
                 String className = extractShortClass(planeClass);
-                errorsList.add("error, plane must be stored in mage.game.command.planes package: " + className + " from " + planeClass.getName());
+                errorsList.add("Error: plane must be stored in mage.game.command.planes package: " + className + " from " + planeClass.getName());
             }
         }
 
@@ -1137,10 +1138,10 @@ public class VerifyCardDataTest {
 
                 // 4. must have type/name
                 if (plane.getPlaneType() == null) {
-                    errorsList.add("error, plane must have plane type: " + className + " from " + planeClass.getName());
+                    errorsList.add("Error: plane must have plane type: " + className + " from " + planeClass.getName());
                 }
             } catch (Throwable e) {
-                errorsList.add("error, can't create plane with default constructor: " + className + " from " + planeClass.getName());
+                errorsList.add("Error: can't create plane with default constructor: " + className + " from " + planeClass.getName());
             }
         }
 
@@ -1685,7 +1686,6 @@ public class VerifyCardDataTest {
     @Test
     public void test_checkCardConstructors() {
         Collection<String> errorsList = new ArrayList<>();
-        int errorsCount = 0;
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
@@ -1694,19 +1694,56 @@ public class VerifyCardDataTest {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
-                        errorsList.add("Broken constructor: " + setInfo.getCardClass());
-                        errorsCount++;
+                        errorsList.add("Error: broken constructor " + setInfo.getCardClass());
                     }
                 } catch (Throwable e) {
                     // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here
-                    logger.error("Can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                    logger.error("Error: can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
                 }
             }
         }
 
-        if (errorsCount > 0) {
+        if (!errorsList.isEmpty()) {
             printMessages(errorsList);
-            Assert.fail("Founded " + errorsCount + " broken cards, look at logs for stack error");
+            Assert.fail("Found " + errorsList.size() + " broken cards, look at logs above for more details");
+        }
+    }
+
+    @Test
+    public void test_checkCardsInCubes() {
+        Reflections reflections = new Reflections("mage.tournament.cubes.");
+        Set<Class<? extends DraftCube>> cubesList = reflections.getSubTypesOf(DraftCube.class);
+        Assert.assertFalse("Can't find any cubes", cubesList.isEmpty());
+
+        Collection<String> errorsList = new ArrayList<>();
+        for (Class<? extends DraftCube> cubeClass : cubesList) {
+            // need drafts with fixed cards list (constructor with zero params)
+            if (Arrays.stream(cubeClass.getConstructors()).noneMatch(c -> c.getParameterCount() == 0)) {
+                continue;
+            }
+
+            DraftCube cube = (DraftCube) createNewObject(cubeClass);
+            if (cube.getCubeCards().isEmpty()) {
+                errorsList.add("Error: broken cube, empty cards list: " + cube.getClass().getCanonicalName());
+            }
+
+            for (DraftCube.CardIdentity cardId : cube.getCubeCards()) {
+                // same find code as original cube
+                CardInfo cardInfo;
+                if (!cardId.getExtension().isEmpty()) {
+                    cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension(), false);
+                } else {
+                    cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName(), false);
+                }
+                if (cardInfo == null) {
+                    errorsList.add("Error: broken cube, can't find card: " + cube.getClass().getCanonicalName() + " - " + cardId.getName());
+                }
+            }
+        }
+
+        if (!errorsList.isEmpty()) {
+            printMessages(errorsList);
+            Assert.fail("Found " + errorsList.size() + " errors in the cubes, look at logs above for more details");
         }
     }
 }

@@ -51,7 +51,7 @@ public final class MtgJsonService {
                 Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Downloading DONE");
             } else {
-                System.out.println("Founded file " + filename + " from " + file.getAbsolutePath());
+                System.out.println("Found file " + filename + " from " + file.getAbsolutePath());
             }
             stream = new FileInputStream(file);
         }
