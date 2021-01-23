@@ -1,12 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -26,14 +19,16 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class BendOrBreak extends CardImpl {
 
     public BendOrBreak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Each player separates all nontoken lands they control into two piles. For each player, one of their piles is chosen by one of their opponents of their choice. Destroy all lands in the chosen piles. Tap all lands in the other piles.
         this.getSpellAbility().addEffect(new BendOrBreakEffect());
@@ -100,21 +95,21 @@ class BendOrBreakEffect extends OneShotEffect {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent("lands you control to assign to the first pile (lands not chosen will be assigned to the second pile)");
                     TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
                     if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)) {
-                        if (currentPlayer.chooseTarget(Outcome.Neutral, target, source, game)) {
-                            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, currentPlayer.getId(), game)) {
-                                if (target.getTargets().contains(permanent.getId())) {
-                                    firstPile.add(permanent);
-                                } else {
-                                    secondPile.add(permanent);
-                                }
+                        // TODO: add support for AI (50/50), need AI hints mechanic here
+                        currentPlayer.chooseTarget(Outcome.Neutral, target, source, game);
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, currentPlayer.getId(), game)) {
+                            if (target.getTargets().contains(permanent.getId())) {
+                                firstPile.add(permanent);
+                            } else {
+                                secondPile.add(permanent);
                             }
                         }
-                        
+
                         StringBuilder sb = new StringBuilder("First pile of ").append(currentPlayer.getLogName()).append(": ");
                         sb.append(firstPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
 
                         game.informPlayers(sb.toString());
-                        
+
                         sb = new StringBuilder("Second pile of ").append(currentPlayer.getLogName()).append(": ");
                         sb.append(secondPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
 
@@ -127,7 +122,7 @@ class BendOrBreakEffect extends OneShotEffect {
                 }
                 currentPlayer = nextPlayer;
             }
-            
+
             // For each player, one of their piles is chosen by one of their opponents of their choice
             for (Map.Entry<UUID, List<List<Permanent>>> playerPiles : playerPermanents.entrySet()) {
                 Player player = game.getPlayer(playerPiles.getKey());
