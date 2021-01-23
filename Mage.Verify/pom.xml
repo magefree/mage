@@ -25,6 +25,16 @@
             <version>${mage-version}</version>
         </dependency>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-server</artifactId>
+            <version>${mage-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-client</artifactId>
+            <version>${mage-version}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -46,12 +56,6 @@
             <artifactId>reflections</artifactId>
             <version>0.9.12</version>
         </dependency>
-        <dependency>
-            <groupId>org.mage</groupId>
-            <artifactId>mage-client</artifactId>
-            <version>1.4.47</version>
-        </dependency>
-
     </dependencies>
 
     <build>

@@ -55,7 +55,7 @@ public class VerifyCardDataTest {
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
     private static final String FULL_ABILITIES_CHECK_SET_CODE = "CMR"; // check all abilities and output cards with wrong abilities texts;
-    private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: fix sample decks if it contains errors like wrong card numbers
+    private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
     private static final Set<String> subtypesToIgnore = new HashSet<>();
@@ -1728,6 +1728,7 @@ public class VerifyCardDataTest {
         Set<Class<? extends DraftCube>> cubesList = reflections.getSubTypesOf(DraftCube.class);
         Assert.assertFalse("Can't find any cubes", cubesList.isEmpty());
 
+        CardScanner.scan();
         Collection<String> errorsList = new ArrayList<>();
         for (Class<? extends DraftCube> cubeClass : cubesList) {
             // need drafts with fixed cards list (constructor with zero params)
