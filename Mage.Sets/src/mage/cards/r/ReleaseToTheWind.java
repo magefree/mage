@@ -2,19 +2,22 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -60,10 +63,23 @@ class ReleaseToTheWindEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetPermanent != null) {
-                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent, TargetController.OWNER, Duration.Custom, true);
+        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && targetPermanent != null && sourceObject != null) {
+            UUID exileId = CardUtil.getExileZoneId(
+                    controller.getId().toString()
+                            + "-" + game.getState().getTurnNum()
+                            + "-" + sourceObject.getIdName(), game
+            );
+            String exileName = sourceObject.getIdName() + " free play for " + controller.getName();
+            if (controller.moveCardsToExile(targetPermanent, source, game, true, exileId, exileName)) {
+                Card card = game.getCard(targetPointer.getFirst(game, source));
+                if (card != null) {
+                    ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.OWNER, Duration.Custom, true);
+                    effect.setTargetPointer(new FixedTarget(card, game));
+                    game.addEffect(effect, source);
+                    return true;
+                }
             }
         }
         return false;
