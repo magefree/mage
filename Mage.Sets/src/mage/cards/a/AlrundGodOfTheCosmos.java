@@ -141,18 +141,15 @@ enum AlrundGodOfTheCosmosValue implements DynamicValue {
             filter.add(new AbilityPredicate(ForetellAbility.class));
             for (ExileZone exile : exileZones) {
                 for (Card card : exile.getCards(filter, game)) {
-                    // verify that the card is actuall Foretold
+                    // verify that the card is actually Foretold
                     UUID exileId = CardUtil.getExileZoneId(card.getId().toString() + "foretellAbility", game);
                     if (exileId != null) {
-                        System.out.println("The exileId is " + exileId);
                         if (game.getState().getExile().getExileZone(exileId) != null) {
                             cardsForetoldInExileZones.add(card);
                         }
                     }
                 }
             }
-            System.out.println("The cards with Foretell in Exile: " + cardsForetoldInExileZones.size());
-            System.out.println("The cards in controller's hand: " + controller.getHand().size());
             return controller.getHand().size() + cardsForetoldInExileZones.size();
         }
         return 0;
@@ -165,6 +162,6 @@ enum AlrundGodOfTheCosmosValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "test";
+        return "";
     }
 }
