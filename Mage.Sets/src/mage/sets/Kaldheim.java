@@ -210,6 +210,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Priest of the Haunted Edge", 104, Rarity.COMMON, mage.cards.p.PriestOfTheHauntedEdge.class));
         cards.add(new SetCardInfo("Provoke the Trolls", 144, Rarity.UNCOMMON, mage.cards.p.ProvokeTheTrolls.class));
         cards.add(new SetCardInfo("Pyre of Heroes", 241, Rarity.RARE, mage.cards.p.PyreOfHeroes.class));
+        cards.add(new SetCardInfo("Quakebringer", 145, Rarity.MYTHIC, mage.cards.q.Quakebringer.class));
         cards.add(new SetCardInfo("Raiders' Karve", 242, Rarity.COMMON, mage.cards.r.RaidersKarve.class));
         cards.add(new SetCardInfo("Raise the Draugr", 105, Rarity.COMMON, mage.cards.r.RaiseTheDraugr.class));
         cards.add(new SetCardInfo("Rally the Ranks", 20, Rarity.RARE, mage.cards.r.RallyTheRanks.class));
