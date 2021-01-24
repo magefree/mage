@@ -237,6 +237,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Rune of Mortality", 108, Rarity.UNCOMMON, mage.cards.r.RuneOfMortality.class));
         cards.add(new SetCardInfo("Rune of Speed", 148, Rarity.UNCOMMON, mage.cards.r.RuneOfSpeed.class));
         cards.add(new SetCardInfo("Rune of Sustenance", 25, Rarity.UNCOMMON, mage.cards.r.RuneOfSustenance.class));
+        cards.add(new SetCardInfo("Runed Crown", 245, Rarity.UNCOMMON, mage.cards.r.RunedCrown.class));
         cards.add(new SetCardInfo("Runeforge Champion", 26, Rarity.RARE, mage.cards.r.RuneforgeChampion.class));
         cards.add(new SetCardInfo("Sarulf's Packmate", 192, Rarity.COMMON, mage.cards.s.SarulfsPackmate.class));
         cards.add(new SetCardInfo("Sarulf, Realm Eater", 228, Rarity.RARE, mage.cards.s.SarulfRealmEater.class));
