@@ -23,6 +23,7 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Elderfang Venom", 15, Rarity.RARE, mage.cards.e.ElderfangVenom.class));
         cards.add(new SetCardInfo("Inspired Sphinx", 40, Rarity.MYTHIC, mage.cards.i.InspiredSphinx.class));
         cards.add(new SetCardInfo("Lathril, Blade of the Elves", 1, Rarity.MYTHIC, mage.cards.l.LathrilBladeOfTheElves.class));
+        cards.add(new SetCardInfo("Pact of the Serpent", 9, Rarity.RARE, mage.cards.p.PactOfTheSerpent.class));
         cards.add(new SetCardInfo("Ruthless Winnower", 10, Rarity.RARE, mage.cards.r.RuthlessWinnower.class));
         cards.add(new SetCardInfo("Sage of the Beyond", 6, Rarity.RARE, mage.cards.s.SageOfTheBeyond.class));
         cards.add(new SetCardInfo("Spectral Deluge", 7, Rarity.RARE, mage.cards.s.SpectralDeluge.class));
