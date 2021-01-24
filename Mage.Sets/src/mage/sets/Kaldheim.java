@@ -34,6 +34,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Absorb Identity", 383, Rarity.UNCOMMON, mage.cards.a.AbsorbIdentity.class));
         cards.add(new SetCardInfo("Aegar, the Freezing Flame", 200, Rarity.UNCOMMON, mage.cards.a.AegarTheFreezingFlame.class));
         cards.add(new SetCardInfo("Alpine Meadow", 248, Rarity.COMMON, mage.cards.a.AlpineMeadow.class));
+        cards.add(new SetCardInfo("Alrund, God of the Cosmos", 40, Rarity.MYTHIC, mage.cards.a.AlrundGodOfTheCosmos.class));
         cards.add(new SetCardInfo("Alrund's Epiphany", 41, Rarity.MYTHIC, mage.cards.a.AlrundsEpiphany.class));
         cards.add(new SetCardInfo("Annul", 42, Rarity.COMMON, mage.cards.a.Annul.class));
         cards.add(new SetCardInfo("Arachnoform", 159, Rarity.COMMON, mage.cards.a.Arachnoform.class));

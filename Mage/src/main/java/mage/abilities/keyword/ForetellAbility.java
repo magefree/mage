@@ -257,7 +257,7 @@ class ForetellCostAbility extends StaticAbility implements AlternativeSourceCost
     public boolean isAvailable(Ability source, Game game) {
         Card card = game.getCard(source.getSourceId());
         if (card != null
-                && game.getState().getValue(card.getId().toString()) != null) {
+                && game.getState().getValue(card.getId().toString() + "Foretell Turn Number") != null) {
             return Zone.STACK == game.getState().getZone(card.getId())
                     && ((int) game.getState().getValue(card.getId().toString()
                             + "Foretell Turn Number") != game.getTurnNum());
