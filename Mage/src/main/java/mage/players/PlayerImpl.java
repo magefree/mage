@@ -732,7 +732,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return discardedCards;
         }
         for (Card card : cards.getCards(game)) {
-            if (doDiscard(card, source, game, payForCost, false)) {
+            if (doDiscard(card, source, game, payForCost)) {
                 discardedCards.add(card);
             }
         }
@@ -752,7 +752,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             List<UUID> cardsToDiscard = new ArrayList<>(this.getHand());
             for (UUID id : cardsToDiscard) {
-                if (doDiscard(this.getHand().get(id, game), source, game, payForCost, false)) {
+                if (doDiscard(this.getHand().get(id, game), source, game, payForCost)) {
                     discardedCards.add(id);
                 }
             }
@@ -762,7 +762,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (random) {
             for (int i = 0; i < amount; i++) {
                 Card card = this.getHand().getRandom(game);
-                if (doDiscard(card, source, game, payForCost, false)) {
+                if (doDiscard(card, source, game, payForCost)) {
                     discardedCards.add(card);
                 }
             }
@@ -773,7 +773,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
-                if (doDiscard(this.getHand().get(cardId, game), source, game, payForCost, false)) {
+                if (doDiscard(this.getHand().get(cardId, game), source, game, payForCost)) {
                     discardedCards.add(cardId);
                 }
             }
@@ -783,10 +783,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
-        return doDiscard(card, source, game, payForCost, false);
+        return doDiscard(card, source, game, payForCost);
     }
 
-    private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {
+    private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost) {
         //20100716 - 701.7
         /* 701.7. Discard #
          701.7a To discard a card, move it from its owners hand to that players graveyard.
@@ -821,7 +821,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // So discard is also successful if card is moved to another zone by replacement effect!
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source, playerId));
 
-        if (fireFinalEvent) {
+        if (payForCost) {
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, 1));
         }
         return true;
