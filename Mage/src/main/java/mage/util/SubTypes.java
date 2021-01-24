@@ -5,30 +5,40 @@ import mage.constants.SubType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 public class SubTypes extends ArrayList<SubType> {
 
-    public SubTypes(SubType firstSubType) {
-        super();
-        this.add(firstSubType);
-    }
+    private boolean isAllCreatureTypes = false;
 
-    public SubTypes(SubType... subTypesList) {
+    public SubTypes(SubType... subTypes) {
         super();
-        Collections.addAll(this, subTypesList);
+        Collections.addAll(this, subTypes);
     }
 
     public SubTypes(final SubTypes list) {
         this.addAll(list);
+        this.isAllCreatureTypes = list.isAllCreatureTypes;
     }
 
     public boolean add(SubType... subTypes) {
         return Collections.addAll(this, subTypes);
     }
 
+    public void copyTo(SubTypes subtypes) {
+        this.clear();
+        this.addAll(subtypes);
+        this.isAllCreatureTypes = subtypes.isAllCreatureTypes;
+    }
+
     public boolean removeAll(SubType... subTypes) {
-        return super.removeAll(Arrays.stream(subTypes)
-                .collect(Collectors.toList()));
+        return super.removeAll(Arrays.asList(subTypes));
+    }
+
+    public void setIsAllCreatureTypes(boolean allCreatureTypes) {
+        isAllCreatureTypes = allCreatureTypes;
+    }
+
+    public boolean isAllCreatureTypes() {
+        return isAllCreatureTypes;
     }
 }

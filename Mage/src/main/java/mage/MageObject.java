@@ -175,12 +175,12 @@ public interface MageObject extends MageItem, Serializable {
 
     default void removeAllSubTypes(Game game) {
         getSubtype(game).clear();
-        setIsAllCreatureTypes(false);
+        setIsAllCreatureTypes(false, game);
     }
 
     default void removeAllCreatureTypes(Game game) {
         getSubtype(game).removeAll(SubType.getCreatureTypes());
-        setIsAllCreatureTypes(false);
+        setIsAllCreatureTypes(false, game);
     }
 
     /**
@@ -216,12 +216,12 @@ public interface MageObject extends MageItem, Serializable {
         if (!otherCard.isCreature() && !otherCard.isTribal()) {
             return false;
         }
-        boolean isAllA = this.isAllCreatureTypes();
+        boolean isAllA = this.isAllCreatureTypes(game);
         boolean isAnyA = isAllA || this.getSubtype(game)
                 .stream()
                 .map(SubType::getSubTypeSet)
                 .anyMatch(SubTypeSet.CreatureType::equals);
-        boolean isAllB = otherCard.isAllCreatureTypes();
+        boolean isAllB = otherCard.isAllCreatureTypes(game);
         boolean isAnyB = isAllB || otherCard
                 .getSubtype(game)
                 .stream()
@@ -241,9 +241,9 @@ public interface MageObject extends MageItem, Serializable {
                 .anyMatch(subType -> otherCard.hasSubtype(subType, game)));
     }
 
-    boolean isAllCreatureTypes();
+    boolean isAllCreatureTypes(Game game);
 
-    void setIsAllCreatureTypes(boolean value);
+    void setIsAllCreatureTypes(boolean value, Game game);
 
     default void addCardTypes(ArrayList<CardType> cardType) {
         getCardType().addAll(cardType);

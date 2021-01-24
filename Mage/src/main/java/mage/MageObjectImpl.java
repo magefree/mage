@@ -1,6 +1,5 @@
 package mage;
 
-import java.util.*;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -22,6 +21,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
+import java.util.*;
+
 public abstract class MageObjectImpl implements MageObject {
 
     protected UUID objectId;
@@ -33,7 +34,6 @@ public abstract class MageObjectImpl implements MageObject {
     protected FrameStyle frameStyle;
     protected ArrayList<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
-    protected boolean isAllCreatureTypes;
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
     protected String text;
@@ -71,8 +71,7 @@ public abstract class MageObjectImpl implements MageObject {
         toughness = object.toughness.copy();
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
-        this.subtype.addAll(object.subtype);
-        isAllCreatureTypes = object.isAllCreatureTypes;
+        this.subtype.copyTo(object.subtype);
         supertype.addAll(object.supertype);
         this.copy = object.copy;
         this.copyFrom = (object.copyFrom != null ? object.copyFrom.copy() : null);
@@ -122,7 +121,7 @@ public abstract class MageObjectImpl implements MageObject {
             if (mageObjectAttribute != null) {
                 return mageObjectAttribute.getSubtype();
             }
-        }        
+        }
         return subtype;
     }
 
@@ -181,7 +180,7 @@ public abstract class MageObjectImpl implements MageObject {
             if (mageObjectAttribute != null) {
                 return mageObjectAttribute.getColor();
             }
-        }        
+        }
         return color;
     }
 
@@ -240,7 +239,7 @@ public abstract class MageObjectImpl implements MageObject {
         if (value == null) {
             return false;
         }
-        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes()) {
+        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)) {
             return true;
         }
         return getSubtype(game).contains(value);
@@ -278,13 +277,13 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean isAllCreatureTypes() {
-        return isAllCreatureTypes;
+    public boolean isAllCreatureTypes(Game game) {
+        return this.getSubtype(game).isAllCreatureTypes();
     }
 
     @Override
-    public void setIsAllCreatureTypes(boolean value) {
-        isAllCreatureTypes = value && (this.isTribal() || this.isCreature());
+    public void setIsAllCreatureTypes(boolean value, Game game) {
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
     }
 
     @Override

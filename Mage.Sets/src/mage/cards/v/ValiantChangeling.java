@@ -70,7 +70,7 @@ class ValiantChangelingCostReductionEffect extends CostModificationEffectImpl {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game
         )) {
-            if (permanent.isAllCreatureTypes()) {
+            if (permanent.isAllCreatureTypes(game)) {
                 reductionAmount = 5;
                 break;
             }

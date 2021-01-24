@@ -10,7 +10,7 @@ public class ChangelingTest extends CardTestPlayerBase {
 
     // Mistform Ultimus is every creature type
     private static final String ultimus = "Mistform Ultimus";
-    // each creature gets +1/+1 for each creature you control that shares a creatureype
+    // each creature gets +1/+1 for each other creature that shares a creature type with it
     private static final String coatOfArms = "Coat of Arms";
     // all merfolk get +1/+1
     private static final String lordOfAtlantis = "Lord of Atlantis";

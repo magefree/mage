@@ -140,7 +140,7 @@ public class ChangelingTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Game-Trail Changeling", 7, 1);
         assertNotSubtype("Game-Trail Changeling", SubType.SHAPESHIFTER);
         assertAbility(playerA, "Game-Trail Changeling", HasteAbility.getInstance(), false);
-        assertAbility(playerA, "Game-Trail Changeling", ChangelingAbility.getInstance(), true);
+        assertAbility(playerA, "Game-Trail Changeling", new ChangelingAbility(), true);
     }
 
     @Test
@@ -159,6 +159,6 @@ public class ChangelingTest extends CardTestPlayerBase {
         assertSubtype("Game-Trail Changeling", SubType.GOBLIN);
         assertSubtype("Game-Trail Changeling", SubType.ELF);
         assertSubtype("Game-Trail Changeling", SubType.SHAPESHIFTER);
-        assertAbility(playerB, "Game-Trail Changeling", ChangelingAbility.getInstance(), false);
+        assertAbility(playerB, "Game-Trail Changeling", new ChangelingAbility(), false);
     }
 }

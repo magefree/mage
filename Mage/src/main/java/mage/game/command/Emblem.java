@@ -258,11 +258,11 @@ public class Emblem implements CommandObject {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
-    public boolean isAllCreatureTypes() {
+    public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
-    public void setIsAllCreatureTypes(boolean value) {
+    public void setIsAllCreatureTypes(boolean value, Game game) {
     }
 
     public void discardEffects() {

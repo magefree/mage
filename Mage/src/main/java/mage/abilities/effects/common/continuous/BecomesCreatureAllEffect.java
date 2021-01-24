@@ -107,7 +107,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                     for (SubType t : token.getSubtype(game)) {
                         permanent.addSubType(game, t);
                     }
-                    permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
+                    permanent.setIsAllCreatureTypes(token.isAllCreatureTypes(game), game);
 
                     for (SuperType t : token.getSuperType()) {
                         if (!permanent.getSuperType().contains(t)) {

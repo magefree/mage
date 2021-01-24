@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -21,6 +18,10 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.SubTypes;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author bunchOfDevs
@@ -55,7 +56,7 @@ public final class Conspiracy extends CardImpl {
             staticText = "Creatures you control are the chosen type. The same is "
                     + "true for creature spells you control and creature cards "
                     + "you own that aren't on the battlefield.";
-            
+
             this.dependendToTypes.add(DependencyType.BecomeCreature);  // Opalescence and Starfield of Nyx
         }
 
@@ -125,9 +126,9 @@ public final class Conspiracy extends CardImpl {
             List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
             for (Permanent permanent : permanents) {
                 if (permanent.isCreature()) {
-                    permanent.setIsAllCreatureTypes(false);
+                    permanent.setIsAllCreatureTypes(false, game);
                     permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
-                    permanent.addSubType(game,subType);
+                    permanent.addSubType(game, subType);
                 }
             }
             return true;
@@ -137,7 +138,8 @@ public final class Conspiracy extends CardImpl {
             if (object == null) {
                 return;
             }
-            SubTypes subTypes=game.getState().getCreateMageObjectAttribute(object, game).getSubtype();
+            SubTypes subTypes = game.getState().getCreateMageObjectAttribute(object, game).getSubtype();
+            subTypes.setIsAllCreatureTypes(false);
             subTypes.removeAll(SubType.getCreatureTypes());
             subTypes.add(subtype);
         }

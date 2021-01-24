@@ -39,7 +39,7 @@ public class ProwlWatcher extends Watcher {
         if (creature == null || allSubtypes.contains(creature.getControllerId())) {
             return;
         }
-        if (creature.isAllCreatureTypes()) {
+        if (creature.isAllCreatureTypes(game)) {
             allSubtypes.add(creature.getControllerId());
             return;
         }

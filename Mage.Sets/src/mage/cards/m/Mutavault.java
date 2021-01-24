@@ -46,7 +46,7 @@ class MutavaultToken extends TokenImpl {
     public MutavaultToken() {
         super("", "2/2 creature with all creature types");
         cardType.add(CardType.CREATURE);
-        setIsAllCreatureTypes(true);
+        subtype.setIsAllCreatureTypes(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

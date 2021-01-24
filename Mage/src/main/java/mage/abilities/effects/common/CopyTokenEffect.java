@@ -35,7 +35,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         for (SubType type : token.getSubtype(game)) {
             permanent.addSubType(game, type);
         }
-        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
+        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes(game), game);
         permanent.getSuperType().clear();
         for (SuperType type : token.getSuperType()) {
             permanent.addSuperType(type);
