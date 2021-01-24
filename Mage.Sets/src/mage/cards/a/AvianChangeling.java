@@ -22,8 +22,7 @@ public final class AvianChangeling extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
         this.addAbility(FlyingAbility.getInstance());
     }
 

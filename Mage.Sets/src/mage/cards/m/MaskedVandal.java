@@ -40,8 +40,7 @@ public final class MaskedVandal extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // When enters the battlefield, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.
         Ability ability = new EntersBattlefieldAbility(

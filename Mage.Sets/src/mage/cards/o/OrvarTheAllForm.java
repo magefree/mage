@@ -50,8 +50,7 @@ public final class OrvarTheAllForm extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Whenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

@@ -40,8 +40,7 @@ public final class BloodlinePretender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // As Bloodline Pretender enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));

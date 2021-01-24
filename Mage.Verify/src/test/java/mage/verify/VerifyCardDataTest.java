@@ -1261,10 +1261,6 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
         }
 
-        if (card.getAbilities().contains(ChangelingAbility.getInstance()) && !card.isAllCreatureTypes()) {
-            fail(card, "abilities", "card has Changeling but doesn't have isAllCreatureTypes set to true");
-        }
-
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");

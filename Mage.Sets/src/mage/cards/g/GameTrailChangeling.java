@@ -22,8 +22,7 @@ public final class GameTrailChangeling extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
         this.addAbility(TrampleAbility.getInstance());
     }
 

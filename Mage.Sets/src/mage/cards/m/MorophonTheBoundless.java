@@ -40,8 +40,7 @@ public final class MorophonTheBoundless extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // As Morophon, the Boundless enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));

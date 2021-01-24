@@ -24,8 +24,7 @@ public final class WingsOfVelisVel extends CardImpl {
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Target creature becomes 4/4, gains all creature types, and gains flying until end of turn.
         this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)

@@ -24,8 +24,7 @@ public final class ChangelingHero extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
         
         // Champion a creature
         this.addAbility(new ChampionAbility(this, true));

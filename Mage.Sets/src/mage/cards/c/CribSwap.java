@@ -28,8 +28,7 @@ public final class CribSwap extends CardImpl {
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
         // Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

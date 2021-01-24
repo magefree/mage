@@ -35,8 +35,7 @@ public final class MoritteOfTheFrost extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // You may have Moritte of the Frost enter the battlefield as a copy of a permanent you control, except it's legendary and snow in addition to its other types and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
@@ -69,8 +68,7 @@ class MoritteOfTheFrostApplier extends ApplyToPermanent {
         copyFromBlueprint.addSuperType(SuperType.SNOW);
 
         if (!isCopyOfCopy(source, copyToObjectId) && copyFromBlueprint.isCreature()) {
-            copyFromBlueprint.setIsAllCreatureTypes(true);
-            copyFromBlueprint.getAbilities().add(ChangelingAbility.getInstance());
+            copyFromBlueprint.getAbilities().add(new ChangelingAbility());
             new AddCountersSourceEffect(
                     CounterType.P1P1.createInstance(2), false
             ).apply(game, source);

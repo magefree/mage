@@ -17,8 +17,7 @@ public final class ShapeshifterBlueToken extends TokenImpl {
         color.setBlue(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        setIsAllCreatureTypes(true);
-        addAbility(ChangelingAbility.getInstance());
+        addAbility(new ChangelingAbility());
     }
 
     private ShapeshifterBlueToken(final ShapeshifterBlueToken token) {
