@@ -139,6 +139,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Floodplain", 257, Rarity.COMMON, mage.cards.g.GlacialFloodplain.class));
         cards.add(new SetCardInfo("Gladewalker Ritualist", 392, Rarity.UNCOMMON, mage.cards.g.GladewalkerRitualist.class));
         cards.add(new SetCardInfo("Glittering Frost", 171, Rarity.COMMON, mage.cards.g.GlitteringFrost.class));
+        cards.add(new SetCardInfo("Glorious Protector", 12, Rarity.RARE, mage.cards.g.GloriousProtector.class));
         cards.add(new SetCardInfo("Gnottvold Recluse", 172, Rarity.COMMON, mage.cards.g.GnottvoldRecluse.class));
         cards.add(new SetCardInfo("Gnottvold Slumbermound", 258, Rarity.UNCOMMON, mage.cards.g.GnottvoldSlumbermound.class));
         cards.add(new SetCardInfo("Gods' Hall Guardian", 13, Rarity.COMMON, mage.cards.g.GodsHallGuardian.class));
