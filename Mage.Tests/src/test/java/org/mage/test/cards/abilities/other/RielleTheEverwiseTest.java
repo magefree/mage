@@ -17,32 +17,38 @@ public class RielleTheEverwiseTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Faithless Looting");
         addCard(Zone.HAND, playerA, "Brainwash");
+        addCard(Zone.HAND, playerA, "Brainwash");
+        addCard(Zone.HAND, playerA, "Brainwash");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Rielle, the Everwise");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Faithless Looting");
+        setChoice(playerA, "Brainwash"); // discard
+        setChoice(playerA, "Brainwash"); // discard
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertAllCommandsUsed();
 
-        assertHandCount(playerA, 3);
+        assertHandCount(playerA, 5);
 
     }
 
     @Test
     public void testRielleTheEverwiseAbilityCycling() {
 
-        addCard(Zone.HAND, playerA, "Ash Barrens");
+        addCard(Zone.HAND, playerA, "Unearth");
         addCard(Zone.HAND, playerA, "Brainwash");
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Rielle, the Everwise");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Basic landcycling {1}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling {2}");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, 3);
 
@@ -53,14 +59,17 @@ public class RielleTheEverwiseTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Tolaria West");
         addCard(Zone.HAND, playerA, "Brainwash");
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.LIBRARY, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Rielle, the Everwise");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U}");
+        addTarget(playerA, "Memnite");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-
         execute();
+        assertAllCommandsUsed();
 
         assertHandCount(playerA, 3);
 
