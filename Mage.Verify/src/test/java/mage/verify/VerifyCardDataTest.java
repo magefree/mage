@@ -530,7 +530,7 @@ public class VerifyCardDataTest {
         int totalErrorFiles = 0;
         for (Path deckFile : filesList) {
             String deckName = rootPath.relativize(deckFile).toString();
-            if (skipListHaveName(SKIP_LIST_SAMPLE_DECKS, deckName)) {
+            if (!deckName.endsWith(".dck") || skipListHaveName(SKIP_LIST_SAMPLE_DECKS, deckName)) {
                 continue;
             }
 
