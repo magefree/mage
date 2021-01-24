@@ -39,7 +39,7 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
     public AlrundGodOfTheCosmos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{U}{U}",
-                "Hakka, Whispering Raven", new CardType[]{CardType.CREATURE}, new SubType[]{}, "{1}{U}"
+                "Hakka, Whispering Raven", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD}, "{1}{U}"
         );
 
         // 1.
