@@ -1,4 +1,3 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
@@ -12,6 +11,7 @@ public class PeasantsToolboxCube extends DraftCube {
 
     public PeasantsToolboxCube() {
         super("The Peasant's Toolbox");
+
         cubeCards.add(new CardIdentity("Absorb Vis", ""));
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
@@ -22,7 +22,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Aetherize", ""));
         cubeCards.add(new CardIdentity("Aethersnipe", ""));
         cubeCards.add(new CardIdentity("Affa Guard Hound", ""));
-        cubeCards.add(new CardIdentity("Agent of Acquisitions", ""));
+        //cubeCards.add(new CardIdentity("Agent of Acquisitions", ""));
         cubeCards.add(new CardIdentity("Agent of Horizons", ""));
         cubeCards.add(new CardIdentity("Agony Warp", ""));
         cubeCards.add(new CardIdentity("Air Servant", ""));
@@ -99,7 +99,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Boros Guildmage", ""));
         cubeCards.add(new CardIdentity("Boros Keyrune", ""));
         cubeCards.add(new CardIdentity("Brackwater Elemental", ""));
-        cubeCards.add(new CardIdentity("Brago's Favor", ""));
+        //cubeCards.add(new CardIdentity("Brago's Favor", ""));
         cubeCards.add(new CardIdentity("Bramblesnap", ""));
         cubeCards.add(new CardIdentity("Branching Bolt", ""));
         cubeCards.add(new CardIdentity("Briarhorn", ""));
@@ -137,8 +137,8 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Cloistered Youth", ""));
         cubeCards.add(new CardIdentity("Cloudfin Raptor", ""));
         cubeCards.add(new CardIdentity("Cloudgoat Ranger", ""));
-        cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
-        cubeCards.add(new CardIdentity("Cogwork Spy", ""));
+        //cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
+        //cubeCards.add(new CardIdentity("Cogwork Spy", ""));
         cubeCards.add(new CardIdentity("Coiling Oracle", ""));
         cubeCards.add(new CardIdentity("Common Bond", ""));
         cubeCards.add(new CardIdentity("Commune with the Gods", ""));
@@ -197,7 +197,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Dissolve", ""));
         cubeCards.add(new CardIdentity("Divine Verdict", ""));
         cubeCards.add(new CardIdentity("Domestication", ""));
-        cubeCards.add(new CardIdentity("Double Stroke", ""));
+        //cubeCards.add(new CardIdentity("Double Stroke", ""));
         cubeCards.add(new CardIdentity("Down // Dirty", ""));
         cubeCards.add(new CardIdentity("Dragon Egg", ""));
         cubeCards.add(new CardIdentity("Dragon Mantle", ""));
@@ -367,7 +367,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Icatian Crier", ""));
         cubeCards.add(new CardIdentity("Ichor Slick", ""));
         cubeCards.add(new CardIdentity("Ill-Tempered Cyclops", ""));
-        cubeCards.add(new CardIdentity("Immediate Action", ""));
+        //cubeCards.add(new CardIdentity("Immediate Action", ""));
         cubeCards.add(new CardIdentity("Impaler Shrike", ""));
         cubeCards.add(new CardIdentity("Incremental Blight", ""));
         cubeCards.add(new CardIdentity("Incremental Growth", ""));
@@ -460,7 +460,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Muddle the Mixture", ""));
         cubeCards.add(new CardIdentity("Mulldrifter", ""));
         cubeCards.add(new CardIdentity("Murderous Redcap", ""));
-        cubeCards.add(new CardIdentity("Muzzio's Preparations", ""));
+        //cubeCards.add(new CardIdentity("Muzzio's Preparations", ""));
         cubeCards.add(new CardIdentity("Mystic Retrieval", ""));
         cubeCards.add(new CardIdentity("Mystical Teachings", ""));
         cubeCards.add(new CardIdentity("Naya Panorama", ""));
@@ -530,7 +530,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Plumeveil", ""));
         cubeCards.add(new CardIdentity("Porcelain Legionnaire", ""));
         cubeCards.add(new CardIdentity("Pouncing Wurm", ""));
-        cubeCards.add(new CardIdentity("Power Play", ""));
+        //cubeCards.add(new CardIdentity("Power Play", ""));
         cubeCards.add(new CardIdentity("Premature Burial", ""));
         cubeCards.add(new CardIdentity("Prismatic Lens", ""));
         cubeCards.add(new CardIdentity("Prized Elephant", ""));
@@ -755,7 +755,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Unburial Rites", ""));
         cubeCards.add(new CardIdentity("Undercity Informer", ""));
         cubeCards.add(new CardIdentity("Undying Evil", ""));
-        cubeCards.add(new CardIdentity("Unexpected Potential", ""));
+        //cubeCards.add(new CardIdentity("Unexpected Potential", ""));
         cubeCards.add(new CardIdentity("Unruly Mob", ""));
         cubeCards.add(new CardIdentity("Utopia Vow", ""));
         cubeCards.add(new CardIdentity("Vampire Outcasts", ""));
@@ -793,7 +793,7 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Wear // Tear", ""));
         cubeCards.add(new CardIdentity("Weatherseed Totem", ""));
         cubeCards.add(new CardIdentity("Whiplash Trap", ""));
-        cubeCards.add(new CardIdentity("Whispergear Sneak", ""));
+        //cubeCards.add(new CardIdentity("Whispergear Sneak", ""));
         cubeCards.add(new CardIdentity("Wild Hunger", ""));
         cubeCards.add(new CardIdentity("Wilt-Leaf Cavaliers", ""));
         cubeCards.add(new CardIdentity("Windrider Eel", ""));

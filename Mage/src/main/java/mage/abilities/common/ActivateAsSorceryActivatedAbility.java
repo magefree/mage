@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -8,6 +7,11 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 
 public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
+
+    public ActivateAsSorceryActivatedAbility(Effect effect, Cost cost) {
+        this(Zone.BATTLEFIELD, effect, cost);
+    }
+
     public ActivateAsSorceryActivatedAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
         timing = TimingRule.SORCERY;

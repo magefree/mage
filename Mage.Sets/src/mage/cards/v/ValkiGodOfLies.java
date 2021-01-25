@@ -48,7 +48,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
     public ValkiGodOfLies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{B}",
-                "Tibalt, Cosmic Imposter", new CardType[]{CardType.PLANESWALKER}, new SubType[]{}, "{5}{B}{R}"
+                "Tibalt, Cosmic Imposter", new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
         );
 
         // 1.
@@ -64,11 +64,9 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl("{X}")));
 
         // 2.
-        // Tibalt, Cosmic Imposter
-        // Legendary Planeswalker
+        // Tibalt, Cosmic Impostor
+        // Legendary Planeswalker — Tibalt
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        // this errors out right now.  of course, we need to add the Tibalt subtype to this object
-        //this.getRightHalfCard().addSubType(game, SubType.TIBALT);
         this.getRightHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // As Tibalt enters the battlefield, you get an emblem with “You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.”

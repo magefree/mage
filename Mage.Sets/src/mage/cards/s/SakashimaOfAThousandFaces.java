@@ -59,8 +59,8 @@ class SakashimaOfAThousandFacesApplier extends ApplyToPermanent {
 
     @Override
     public boolean apply(Game game, Permanent permanent, Ability source, UUID targetObjectId) {
-        permanent.addAbility(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
-        permanent.addAbility(PartnerAbility.getInstance());
+        permanent.addAbility(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()), source.getSourceId(), game);
+        permanent.addAbility(PartnerAbility.getInstance(), source.getSourceId(), game);
         return true;
     }
 

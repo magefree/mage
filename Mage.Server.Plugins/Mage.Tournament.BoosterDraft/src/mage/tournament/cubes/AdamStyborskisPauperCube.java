@@ -1,16 +1,15 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class AdamStyborskisPauperCube extends DraftCube {
 
     public AdamStyborskisPauperCube() {
         super("Adam Styborkski's Pauper Cube"); // https://docs.google.com/spreadsheets/d/12iQhC4bHqFW7hEWxPBjyC8yBDehFZ0_4DkqzyA8EL3o/edit#gid=0
+
         // last updated with Dominaria 5/1/18
         cubeCards.add(new CardIdentity("Academy Journeymage", ""));
         cubeCards.add(new CardIdentity("Act of Treason", ""));
@@ -64,13 +63,13 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Call of the Conclave", ""));
         cubeCards.add(new CardIdentity("Call the Cavalry", ""));
         cubeCards.add(new CardIdentity("Capsize", ""));
-        cubeCards.add(new CardIdentity("Carnivorous Death-Parrot", ""));
+        //cubeCards.add(new CardIdentity("Carnivorous Death-Parrot", ""));
         cubeCards.add(new CardIdentity("Cartouche of Strength", ""));
         cubeCards.add(new CardIdentity("Cavern Harpy", ""));
         cubeCards.add(new CardIdentity("Centaur Healer", ""));
         cubeCards.add(new CardIdentity("Chain Lightning", ""));
         cubeCards.add(new CardIdentity("Chainer's Edict", ""));
-        cubeCards.add(new CardIdentity("Chivalrous Chevalier", ""));
+        //cubeCards.add(new CardIdentity("Chivalrous Chevalier", ""));
         cubeCards.add(new CardIdentity("Cinder Barrens", ""));
         cubeCards.add(new CardIdentity("Citanul Woodreaders", ""));
         cubeCards.add(new CardIdentity("Claustrophobia", ""));
@@ -78,9 +77,9 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Cloaked Siren", ""));
         cubeCards.add(new CardIdentity("Clutch of Currents", ""));
         cubeCards.add(new CardIdentity("Coalition Honor Guard", ""));
-        cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
+        //cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
         cubeCards.add(new CardIdentity("Colossal Might", ""));
-        cubeCards.add(new CardIdentity("Common Iguana", ""));
+        //cubeCards.add(new CardIdentity("Common Iguana", ""));
         cubeCards.add(new CardIdentity("Compulsive Research", ""));
         cubeCards.add(new CardIdentity("Compulsory Rest", ""));
         cubeCards.add(new CardIdentity("Consume Strength", ""));
@@ -128,7 +127,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Errant Ephemeron", ""));
         cubeCards.add(new CardIdentity("Evincar's Justice", ""));
         cubeCards.add(new CardIdentity("Evolving Wilds", ""));
-        cubeCards.add(new CardIdentity("Extremely Slow Zombie (C)", ""));
+        //cubeCards.add(new CardIdentity("Extremely Slow Zombie", ""));
         cubeCards.add(new CardIdentity("Faceless Butcher", ""));
         cubeCards.add(new CardIdentity("Faith's Fetters", ""));
         cubeCards.add(new CardIdentity("Falkenrath Noble", ""));
@@ -210,7 +209,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Lightning Bolt", ""));
         cubeCards.add(new CardIdentity("Liliana's Specter", ""));
         cubeCards.add(new CardIdentity("Loyal Pegasus", ""));
-        cubeCards.add(new CardIdentity("Lurking Automaton", ""));
+        //cubeCards.add(new CardIdentity("Lurking Automaton", ""));
         cubeCards.add(new CardIdentity("Magma Jet", ""));
         cubeCards.add(new CardIdentity("Makeshift Mauler", ""));
         cubeCards.add(new CardIdentity("Man-o'-War", ""));
@@ -247,7 +246,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Ninja of the Deep Hours", ""));
         cubeCards.add(new CardIdentity("Oblivion Ring", ""));
         cubeCards.add(new CardIdentity("Oona's Grace", ""));
-        cubeCards.add(new CardIdentity("Ordinary Pony", ""));
+        //cubeCards.add(new CardIdentity("Ordinary Pony", ""));
         cubeCards.add(new CardIdentity("Orzhov Guildgate", ""));
         cubeCards.add(new CardIdentity("Otherworldly Journey", ""));
         cubeCards.add(new CardIdentity("Overgrown Armasaur", ""));
@@ -286,7 +285,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Razorfin Hunter", ""));
         cubeCards.add(new CardIdentity("Reckless Charge", ""));
         cubeCards.add(new CardIdentity("Recoil", ""));
-        cubeCards.add(new CardIdentity("Regicide", ""));
+        //cubeCards.add(new CardIdentity("Regicide", ""));
         cubeCards.add(new CardIdentity("Remove Soul", ""));
         cubeCards.add(new CardIdentity("Rend Flesh", ""));
         cubeCards.add(new CardIdentity("Rendclaw Trow", ""));
@@ -317,7 +316,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Seeker of Insight", ""));
         cubeCards.add(new CardIdentity("Seeker of the Way", ""));
         cubeCards.add(new CardIdentity("Selesnya Guildgate", ""));
-        cubeCards.add(new CardIdentity("Selfie Preservation", ""));
+        //cubeCards.add(new CardIdentity("Selfie Preservation", ""));
         cubeCards.add(new CardIdentity("Separatist Voidmage", ""));
         cubeCards.add(new CardIdentity("Seraph of Dawn", ""));
         cubeCards.add(new CardIdentity("Sergeant-at-Arms", ""));
@@ -340,7 +339,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Sparring Construct", ""));
         cubeCards.add(new CardIdentity("Sphere of the Suns", ""));
         cubeCards.add(new CardIdentity("Spike Jester", ""));
-        cubeCards.add(new CardIdentity("Squirrel Dealer", ""));
+        //cubeCards.add(new CardIdentity("Squirrel Dealer", ""));
         cubeCards.add(new CardIdentity("Staggershock", ""));
         cubeCards.add(new CardIdentity("Star Compass", ""));
         cubeCards.add(new CardIdentity("Stitched Drake", ""));
@@ -348,7 +347,7 @@ public class AdamStyborskisPauperCube extends DraftCube {
         cubeCards.add(new CardIdentity("Storm Fleet Pyromancer", ""));
         cubeCards.add(new CardIdentity("Stormfront Pegasus", ""));
         cubeCards.add(new CardIdentity("Stormscape Apprentice", ""));
-        cubeCards.add(new CardIdentity("Strip Min", ""));
+        cubeCards.add(new CardIdentity("Strip Mine", ""));
         cubeCards.add(new CardIdentity("Striped Riverwinder", ""));
         cubeCards.add(new CardIdentity("Stronghold Confessor", ""));
         cubeCards.add(new CardIdentity("Submerged Boneyard", ""));

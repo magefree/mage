@@ -1,15 +1,13 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class EricKlugsProTourCube extends DraftCube {
 
-public EricKlugsProTourCube() {
+    public EricKlugsProTourCube() {
         super("Eric Klug's Pro Tour Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
 
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep", ""));

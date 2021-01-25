@@ -70,10 +70,11 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 if (rememberSource) {
+                    this.getEffects().setValue("spellCast", spell);
                     if (rememberSourceAsCard) {
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getCard().getId(), game));
+                        this.getEffects().setTargetPointer(new FixedTarget(spell.getCard().getId(), game));
                     } else {
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId(), game));
+                        this.getEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
                     }
 
                 }

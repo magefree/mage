@@ -72,6 +72,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Hint> hints = new ArrayList<>();
     protected Outcome customOutcome = null; // uses for AI decisions instead effects
     protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
+    protected String appendToRule = null;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -121,6 +122,8 @@ public abstract class AbilityImpl implements Ability {
         }
         this.customOutcome = ability.customOutcome;
         this.identifier = ability.identifier;
+        this.activated = ability.activated;
+        this.appendToRule = ability.appendToRule;
     }
 
     @Override
@@ -742,6 +745,10 @@ public abstract class AbilityImpl implements Ability {
         return usesStack;
     }
 
+    public void appendToRule(String appendToRule) {
+        this.appendToRule = appendToRule;
+    }
+
     @Override
     public String getRule() {
         return getRule(false);
@@ -784,6 +791,9 @@ public abstract class AbilityImpl implements Ability {
         }
         if (abilityWord != null) {
             rule = "<i>" + abilityWord + "</i> &mdash; " + Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+        }
+        if (appendToRule != null) {
+            rule = rule.concat(appendToRule);
         }
         return rule;
     }

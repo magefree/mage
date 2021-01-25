@@ -1,16 +1,14 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author LevelX2
  */
 public class MTGCube extends DraftCube {
 
     public MTGCube() {
-        super("www.mtgcube.com (502 cards)"); // http://www.mtgcube.com
+        super("www.mtgcube.com"); // http://www.mtgcube.com
 
         cubeCards.add(new CardIdentity("Abrupt Decay", ""));
         cubeCards.add(new CardIdentity("Academy Ruins", ""));

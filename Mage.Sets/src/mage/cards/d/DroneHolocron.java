@@ -48,11 +48,11 @@ public final class DroneHolocron extends CardImpl {
         // {T}, Remove two charge counters from Drone Holocron: Add WU or UB.
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new TapSourceCost());
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new TapSourceCost());
         ability.addCost(cost);
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 1, 0, 0, 0), new TapSourceCost());
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost());
         ability.addCost(cost);
         this.addAbility(ability);
     }

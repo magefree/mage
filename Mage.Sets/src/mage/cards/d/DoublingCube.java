@@ -59,12 +59,9 @@ class DoublingCubeEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Mana possibleManaInPool, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         netMana.add(new Mana( // remove possible mana conditions
-                possibleManaInPool.getRed(), 
-                possibleManaInPool.getGreen(), 
-                possibleManaInPool.getBlue(),
-                possibleManaInPool.getWhite(),                 
-                possibleManaInPool.getBlack(), 
-                0, // Generic may not be included 
+                possibleManaInPool.getWhite(), possibleManaInPool.getBlue(), possibleManaInPool.getBlack(), possibleManaInPool.getRed(),
+                possibleManaInPool.getGreen(),
+                0, // Generic may not be included
                 possibleManaInPool.getAny(), 
                 possibleManaInPool.getColorless())
         );        
@@ -91,7 +88,7 @@ class DoublingCubeEffect extends ManaEffect {
                     redMana += conditionalMana.getRed();
                     colorlessMana += conditionalMana.getColorless();
                 }
-                return new Mana(redMana, greenMana, blueMana, whiteMana, blackMana, 0, 0, colorlessMana);
+                return new Mana(whiteMana, blueMana, blackMana, redMana, greenMana, 0, 0, colorlessMana);
             }
         }
         return new Mana();

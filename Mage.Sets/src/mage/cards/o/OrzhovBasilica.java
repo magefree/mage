@@ -33,7 +33,7 @@ public final class OrzhovBasilica extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
 
         // {T}: Add {W}{B}.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 
     public OrzhovBasilica(final OrzhovBasilica card) {

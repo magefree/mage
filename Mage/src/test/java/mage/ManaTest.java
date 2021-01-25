@@ -3,12 +3,11 @@ package mage;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotSame;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -145,7 +144,7 @@ public class ManaTest {
     public void shouldCreateManaFromIntegers() {
 
         // when
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 8);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 8);
 
         // then
         assertEquals(1, mana.getRed());
@@ -163,7 +162,7 @@ public class ManaTest {
         // given
 
         // when
-        Mana mana = new Mana(-1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, -1, 2, 6, 7, 0);
 
         // then
         assertEquals(0, mana.getRed());
@@ -315,11 +314,11 @@ public class ManaTest {
         thisMana.add(thatMana);
 
         // then
-        assertEquals(2, thisMana.getRed());
-        assertEquals(4, thisMana.getGreen());
-        assertEquals(6, thisMana.getBlue());
-        assertEquals(8, thisMana.getWhite());
-        assertEquals(10, thisMana.getBlack());
+        assertEquals(2, thisMana.getWhite());
+        assertEquals(4, thisMana.getBlue());
+        assertEquals(6, thisMana.getBlack());
+        assertEquals(8, thisMana.getRed());
+        assertEquals(10, thisMana.getGreen());
         assertEquals(12, thisMana.getGeneric());
         assertEquals(14, thisMana.getAny());
     }
@@ -420,7 +419,7 @@ public class ManaTest {
     public void shouldSubtractCost() {
         // given
         Mana thisMana = new Mana(2, 2, 2, 2, 2, 2, 2, 0);
-        Mana thatMana = new Mana(10, 1, 1, 1, 10, 1, 1, 0);
+        Mana thatMana = new Mana(1, 1, 10, 10, 1, 1, 1, 0);
 
         // when
         thisMana.subtractCost(thatMana);
@@ -471,7 +470,7 @@ public class ManaTest {
     @Test
     public void shouldReturnCount() {
         // given
-        Mana mana = new Mana(1, 2, 3, 4, 5, 6, 7, 0);
+        Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 0);
         FilterMana filter = new FilterMana();
         filter.setBlack(true);
 
@@ -489,7 +488,7 @@ public class ManaTest {
     @Test
     public void shouldReturnString() {
         // given
-        Mana mana = new Mana(1, 2, 3, 0, 3, 6, 2, 0);
+        Mana mana = new Mana(0, 3, 3, 1, 2, 6, 2, 0);
 
         // when
         String ret = mana.toString();

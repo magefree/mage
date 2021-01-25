@@ -64,10 +64,10 @@ class OrcishLumberjackManaEffect extends ManaEffect {
     public OrcishLumberjackManaEffect() {
         super();
         this.staticText = "Add three mana in any combination of {R} and/or {G}";
-        netMana.add(new Mana(0, 3, 0, 0, 0, 0, 0, 0));
-        netMana.add(new Mana(1, 2, 0, 0, 0, 0, 0, 0));
-        netMana.add(new Mana(2, 1, 0, 0, 0, 0, 0, 0));
-        netMana.add(new Mana(3, 0, 0, 0, 0, 0, 0, 0));
+        netMana.add(new Mana(0, 0, 0, 0, 3, 0, 0, 0));
+        netMana.add(new Mana(0, 0, 0, 1, 2, 0, 0, 0));
+        netMana.add(new Mana(0, 0, 0, 2, 1, 0, 0, 0));
+        netMana.add(new Mana(0, 0, 0, 3, 0, 0, 0, 0));
     }
 
     public OrcishLumberjackManaEffect(final OrcishLumberjackManaEffect effect) {

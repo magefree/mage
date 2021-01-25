@@ -44,7 +44,7 @@ public final class OmnathLocusOfCreation extends CardImpl {
         ).setText("you gain 4 life if this is the first time this ability has resolved this turn."), false);
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.PutManaInPool, 2, new BasicManaEffect(new Mana(
-                1, 1, 1, 1, 0, 0, 0, 0
+                1, 1, 0, 1, 1, 0, 0, 0
         ))).setText("If it's the second time, add {R}{G}{W}{U}."));
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.Damage, 3, new DamagePlayersEffect(4, TargetController.OPPONENT)

@@ -25,6 +25,7 @@ public class WishEffect extends OneShotEffect {
     private final boolean reveal;
     private final boolean alsoFromExile;
     private final String choiceText;
+    private final boolean topOfLibrary;
 
     public WishEffect() {
         this(new FilterCard());
@@ -39,16 +40,20 @@ public class WishEffect extends OneShotEffect {
     }
 
     public WishEffect(FilterCard filter, boolean reveal, boolean alsoFromExile) {
+        this(filter, reveal, alsoFromExile, false);
+    }
+
+    public WishEffect(FilterCard filter, boolean reveal, boolean alsoFromExile, boolean topOfLibrary) {
         super(Outcome.DrawCard);
         this.filter = filter;
         this.alsoFromExile = alsoFromExile;
         this.reveal = reveal;
-        choiceText = "Choose " + filter.getMessage() + " you own from outside the game"
+        this.topOfLibrary = topOfLibrary;
+        choiceText = (topOfLibrary ? "Put " : "Choose ") + filter.getMessage() + " you own from outside the game"
                 + (alsoFromExile ? " or in exile" : "")
                 + (reveal ? ", reveal that card," : "")
-                + " and put it into your hand.";
-        staticText = "You may c" + choiceText.substring(1, choiceText.length() - 1);
-
+                + (topOfLibrary ? " on top of your library." : " and put it into your hand.");
+        staticText = "You may " + Character.toLowerCase(choiceText.charAt(0)) + choiceText.substring(1, choiceText.length() - 1);
     }
 
     public WishEffect(final WishEffect effect) {
@@ -57,6 +62,7 @@ public class WishEffect extends OneShotEffect {
         this.alsoFromExile = effect.alsoFromExile;
         this.reveal = effect.reveal;
         this.choiceText = effect.choiceText;
+        this.topOfLibrary = effect.topOfLibrary;
     }
 
     @Override
@@ -103,7 +109,11 @@ public class WishEffect extends OneShotEffect {
                         card = game.getCard(target.getFirstTarget());
                     }
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source, game, false);
+                        if (topOfLibrary) {
+                            controller.putCardsOnTopOfLibrary(card, game, source, true);
+                        } else {
+                            card.moveToZone(Zone.HAND, source, game, false);
+                        }
                         if (reveal) {
                             Cards revealCard = new CardsImpl();
                             revealCard.add(card);

@@ -64,6 +64,6 @@ enum RoilingVortexPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        return input.getStackAbility().getManaCostsToPay().getPayment().count() == 0;
+        return input.getStackAbility().getManaCostsToPay().getUsedManaToPay().count() == 0;
     }
 }
