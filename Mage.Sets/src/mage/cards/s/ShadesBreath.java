@@ -96,8 +96,7 @@ class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
             if (permanent == null) {
                 continue;
             }
-            permanent.setIsAllCreatureTypes(false, game);
-            permanent.getSubtype(game).removeAll(SubType.getCreatureTypes());
+            permanent.removeAllCreatureTypes(game);
             permanent.addSubType(game, SubType.SHADE);
         }
         return true;
