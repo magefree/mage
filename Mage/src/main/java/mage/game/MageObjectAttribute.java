@@ -24,7 +24,7 @@ public class MageObjectAttribute implements Serializable {
     public MageObjectAttribute(MageObject mageObject, Game game) {
         color = mageObject.getColor(null).copy();
         subtype = new SubTypes();
-        subtype.copyTo(mageObject.getSubtype(game));
+        subtype.copyFrom(mageObject.getSubtype(game));
     }
 
     public MageObjectAttribute(MageObjectAttribute mageObjectAttribute) {

@@ -24,7 +24,7 @@ public class SubTypes extends ArrayList<SubType> {
         return Collections.addAll(this, subTypes);
     }
 
-    public void copyTo(SubTypes subtypes) {
+    public void copyFrom(SubTypes subtypes) {
         this.clear();
         this.addAll(subtypes);
         this.isAllCreatureTypes = subtypes.isAllCreatureTypes;
