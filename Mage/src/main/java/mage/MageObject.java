@@ -178,6 +178,11 @@ public interface MageObject extends MageItem, Serializable {
         setIsAllCreatureTypes(false, game);
     }
 
+    default void retainAllEnchantmentSubTypes(Game game) {
+        setIsAllCreatureTypes(false, game);
+        getSubtype(game).retainAll(SubType.getEnchantmentTypes());
+    }
+
     default void removeAllCreatureTypes(Game game) {
         getSubtype(game).removeAll(SubType.getCreatureTypes());
         setIsAllCreatureTypes(false, game);

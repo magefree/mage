@@ -89,7 +89,7 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 permanent.getCardType().clear();
-                permanent.getSubtype(game).retainAll(SubType.getEnchantmentTypes());
+                permanent.retainAllEnchantmentSubTypes(game);
                 permanent.getCardType().add(CardType.ENCHANTMENT);
                 break;
             case AbilityAddingRemovingEffects_6:

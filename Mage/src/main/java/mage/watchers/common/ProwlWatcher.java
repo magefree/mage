@@ -1,5 +1,6 @@
 package mage.watchers.common;
 
+import mage.cards.Card;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -55,12 +56,12 @@ public class ProwlWatcher extends Watcher {
         allSubtypes.clear();
     }
 
-    public boolean hasSubtypeMadeCombatDamage(UUID playerId, SubType subtype) {
+    public boolean hasSubtypeMadeCombatDamage(UUID playerId, Card card, Game game) {
         if (allSubtypes.contains(playerId)) {
             return true;
         }
         Set<SubType> subtypes = damagingSubtypes.get(playerId);
-        return subtypes != null && subtypes.contains(subtype);
+        return subtypes != null && subtypes.stream().anyMatch(subType -> card.hasSubtype(subType, game));
     }
 
 }
