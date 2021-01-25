@@ -75,7 +75,7 @@ public final class Conversion extends CardImpl {
             for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
+                        if (land.hasSubtype(SubType.MOUNTAIN, game)) {
                             land.getSubtype(game).removeAll(SubType.getLandTypes());
                             land.addSubType(game, SubType.PLAINS);
                             land.removeAllAbilities(source.getSourceId(), game);

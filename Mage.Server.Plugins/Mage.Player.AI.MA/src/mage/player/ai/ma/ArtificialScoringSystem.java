@@ -56,7 +56,7 @@ public final class ArtificialScoringSystem {
             //score + =cardDefinition.getActivations().size()*50;
             //score += cardDefinition.getManaActivations().size()*80;
         } else {
-            if (permanent.getSubtype(game).contains(SubType.EQUIPMENT)) {
+            if (permanent.hasSubtype(SubType.EQUIPMENT, game)) {
                 score += 100;
             }
         }

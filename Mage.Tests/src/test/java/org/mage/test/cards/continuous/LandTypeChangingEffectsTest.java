@@ -226,13 +226,13 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         int mountainTypes = 0;
         int creatures = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, playerA.getId(), currentGame)) {
-            if (permanent.getSubtype(currentGame).contains(SubType.ISLAND)) {
+            if (permanent.hasSubtype(SubType.ISLAND, currentGame)) {
                 islandTypes++;
             }
-            if (permanent.getSubtype(currentGame).contains(SubType.MOUNTAIN)) {
+            if (permanent.hasSubtype(SubType.MOUNTAIN, currentGame)) {
                 mountainTypes++;
             }
-            if (permanent.getSubtype(currentGame).contains(SubType.SWAMP)) {
+            if (permanent.hasSubtype(SubType.SWAMP, currentGame)) {
                 swampTypes++;
             }
             if (permanent.isCreature()) {

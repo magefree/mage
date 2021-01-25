@@ -249,7 +249,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         Card card = getHandCards(playerA).get(0);
         Assert.assertFalse("must be non land", card.isLand());
         Assert.assertTrue("must be creature", card.isCreature());
-        Assert.assertTrue("must be minotaur", card.getSubtype(currentGame).contains(SubType.MINOTAUR));
+        Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
         Assert.assertEquals("power", 4, card.getPower().getValue());
         Assert.assertEquals("toughness", 5, card.getToughness().getValue());
     }
