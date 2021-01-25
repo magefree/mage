@@ -5,10 +5,11 @@
  */
 package mage.game;
 
-import java.io.Serializable;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.util.SubTypes;
+
+import java.io.Serializable;
 
 /**
  * This class saves changed attributes of mage objects (e.g. in command zone, graveyard, exile or
@@ -23,8 +24,7 @@ public class MageObjectAttribute implements Serializable {
 
     public MageObjectAttribute(MageObject mageObject, Game game) {
         color = mageObject.getColor(null).copy();
-        subtype = new SubTypes();
-        subtype.copyFrom(mageObject.getSubtype(game));
+        subtype = new SubTypes(mageObject.getSubtype(game));
     }
 
     public MageObjectAttribute(MageObjectAttribute mageObjectAttribute) {

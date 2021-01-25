@@ -19,15 +19,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
+import mage.constants.*;
+
 import static mage.constants.Layer.TypeChangingEffects_4;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

@@ -188,11 +188,10 @@ public interface MageObject extends MageItem, Serializable {
         if (subTypeSet == SubTypeSet.CreatureType || subTypeSet == null) {
             this.setIsAllCreatureTypes(mageObject.isAllCreatureTypes(game), game);
         }
-        for (SubType subType : getSubtype(game)) {
+        for (SubType subType : mageObject.getSubtype(game)) {
             if (subType.getSubTypeSet() == subTypeSet || subTypeSet == null) {
-                continue;
+                this.addSubType(game, subType);
             }
-            this.addSubType(game, subType);
         }
     }
 
@@ -201,15 +200,16 @@ public interface MageObject extends MageItem, Serializable {
     }
 
     default void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
-        if (subTypeSet == SubTypeSet.CreatureType) {
+        if (subTypeSet == null) {
+            setIsAllCreatureTypes(false, game);
+            getSubtype(game).clear();
+        } else if (subTypeSet == SubTypeSet.CreatureType) {
             removeAllCreatureTypes(game);
-            return;
+        } else if (subTypeSet == SubTypeSet.NonBasicLandType) {
+            getSubtype(game).removeAll(SubType.getLandTypes());
+        } else {
+            getSubtype(game).removeAll(SubType.getBySubTypeSet(subTypeSet));
         }
-        if (subTypeSet == SubTypeSet.NonBasicLandType) {
-            removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-            return;
-        }
-        getSubtype(game).removeAll(SubType.getBySubTypeSet(subTypeSet));
     }
 
     default void retainAllEnchantmentSubTypes(Game game) {
