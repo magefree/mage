@@ -224,6 +224,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Realmwalker", 188, Rarity.RARE, mage.cards.r.Realmwalker.class));
         cards.add(new SetCardInfo("Reckless Crew", 146, Rarity.RARE, mage.cards.r.RecklessCrew.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 73, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
+        cards.add(new SetCardInfo("Reidane, God of the Worthy", 21, Rarity.RARE, mage.cards.r.ReidaneGodOfTheWorthy.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
         cards.add(new SetCardInfo("Resplendent Marshal", 22, Rarity.MYTHIC, mage.cards.r.ResplendentMarshal.class));
