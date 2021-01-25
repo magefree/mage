@@ -88,7 +88,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
                     land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                     break;
                 case TypeChangingEffects_4:
-                    land.getSubtype(game).removeAll(SubType.getLandTypes());
+                    land.removeAllSubTypes(game,SubTypeSet.NonBasicLandType);
                     land.addSubType(game, SubType.PLAINS);
                     break;
             }

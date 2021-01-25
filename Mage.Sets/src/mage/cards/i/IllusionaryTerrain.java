@@ -94,7 +94,7 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
                         case TypeChangingEffects_4:
                             // the land mana ability is intrinsic, so add it here, not layer 6
                             if (land.hasSubtype(firstChoice, game)) {
-                                land.getSubtype(game).removeAll(SubType.getLandTypes());
+                                land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                                 land.addSubType(game, secondChoice);
                                 land.removeAllAbilities(source.getSourceId(), game);
                                 if (land.hasSubtype(SubType.FOREST, game)) {

@@ -138,7 +138,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
                 it.remove();
                 continue;
             }
-            land.getSubtype(game).removeAll(SubType.getLandTypes());
+            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
             land.addSubType(game, choice);
             land.removeAllAbilities(source.getSourceId(), game);
             switch (choice) {

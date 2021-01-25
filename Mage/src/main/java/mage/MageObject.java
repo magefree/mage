@@ -206,7 +206,7 @@ public interface MageObject extends MageItem, Serializable {
             return;
         }
         if (subTypeSet == SubTypeSet.NonBasicLandType) {
-            getSubtype(game).removeAll(SubType.getLandTypes());
+            removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
             return;
         }
         getSubtype(game).removeAll(SubType.getBySubTypeSet(subTypeSet));

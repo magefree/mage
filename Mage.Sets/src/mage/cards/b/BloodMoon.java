@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -13,8 +12,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BloodMoon extends CardImpl {
@@ -71,7 +71,7 @@ public final class BloodMoon extends CardImpl {
                         // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
                         // So the ability removing has to be done before Layer 6
                         // Lands have their mana ability intrinsically, so that is added in layer 4
-                        land.getSubtype(game).removeAll(SubType.getLandTypes());
+                        land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                         land.addSubType(game, SubType.MOUNTAIN);
                         land.removeAllAbilities(source.getSourceId(), game);
                         land.addAbility(new RedManaAbility(), source.getSourceId(), game);
