@@ -117,8 +117,8 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                             // So the ability removing has to be done before Layer 6
                             land.removeAllAbilities(source.getSourceId(), game);
                             // 305.7
-                            land.getSubtype(game).removeAll(SubType.getLandTypes());
-                            land.getSubtype(game).addAll(landTypes);
+                            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+                            land.addSubType(game, landTypes);
                         } else {
                             landTypesToAdd.clear();
                             for (SubType subtype : landTypes) {

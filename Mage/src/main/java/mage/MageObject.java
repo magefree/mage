@@ -17,6 +17,7 @@ import mage.util.SubTypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -164,6 +165,12 @@ public interface MageObject extends MageItem, Serializable {
         getCardType().add(cardType);
     }
 
+    default void addSubType(Game game, Collection<SubType> subTypes) {
+        for (SubType subType : subTypes) {
+            addSubType(game, subType);
+        }
+    }
+
     default void addSubType(Game game, SubType... subTypes) {
         for (SubType subType : subTypes) {
             if (subType.canGain(this)
@@ -173,9 +180,36 @@ public interface MageObject extends MageItem, Serializable {
         }
     }
 
+    default void copySubType(MageObject mageObject, Game game) {
+        copySubType(mageObject, game, null);
+    }
+
+    default void copySubType(MageObject mageObject, Game game, SubTypeSet subTypeSet) {
+        if (subTypeSet == SubTypeSet.CreatureType || subTypeSet == null) {
+            this.setIsAllCreatureTypes(mageObject.isAllCreatureTypes(game), game);
+        }
+        for (SubType subType : getSubtype(game)) {
+            if (subType.getSubTypeSet() == subTypeSet || subTypeSet == null) {
+                continue;
+            }
+            this.addSubType(game, subType);
+        }
+    }
+
     default void removeAllSubTypes(Game game) {
-        getSubtype(game).clear();
-        setIsAllCreatureTypes(false, game);
+        removeAllSubTypes(game, null);
+    }
+
+    default void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
+        if (subTypeSet == SubTypeSet.CreatureType) {
+            removeAllCreatureTypes(game);
+            return;
+        }
+        if (subTypeSet == SubTypeSet.NonBasicLandType) {
+            getSubtype(game).removeAll(SubType.getLandTypes());
+            return;
+        }
+        getSubtype(game).removeAll(SubType.getBySubTypeSet(subTypeSet));
     }
 
     default void retainAllEnchantmentSubTypes(Game game) {

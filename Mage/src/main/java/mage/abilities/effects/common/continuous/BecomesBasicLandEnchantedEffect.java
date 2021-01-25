@@ -42,8 +42,8 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
             return false;
         }
         // lands intrictically have the mana ability associated with their type, so added here in layer 4
-        permanent.getSubtype(game).removeAll(SubType.getLandTypes());
-        permanent.getSubtype(game).addAll(landTypes);
+        permanent.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
+        permanent.addSubType(game, landTypes);
         permanent.removeAllAbilities(source.getSourceId(), game);
         for (SubType landType : landTypes) {
             switch (landType) {

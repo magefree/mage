@@ -5,7 +5,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.SubTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +42,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
             return true;
         }
         target.removeAllCreatureTypes(game);
-        target.getSubtype(game).addAll(setSubtypes);
+        target.addSubType(game, setSubtypes);
         return true;
     }
 
