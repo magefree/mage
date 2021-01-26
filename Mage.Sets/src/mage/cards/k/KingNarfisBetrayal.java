@@ -5,6 +5,7 @@ import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
+import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -145,10 +146,15 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
         ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (zone != null) {
             for (Card card : zone.getCards(game)) {
+                if (card instanceof AdventureCard) {
+                    CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, ((AdventureCard) card).getSpellCard(), Duration.EndOfTurn);
+                }
+
                 CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.EndOfTurn);
             }
         }
 
         return false;
     }
+
 }
