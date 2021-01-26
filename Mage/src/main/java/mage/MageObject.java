@@ -248,7 +248,7 @@ public interface MageObject extends MageItem, Serializable {
         return false;
     }
 
-    default boolean shareCreatureTypes(Card otherCard, Game game) {
+    default boolean shareCreatureTypes(MageObject otherCard, Game game) {
         if (!isCreature() && !isTribal()) {
             return false;
         }

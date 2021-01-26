@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -89,7 +89,7 @@ class TajuruParagonEffect extends OneShotEffect {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent != null) {
             FilterCard filter = new FilterCard("card that shares a creature type with " + permanent.getName());
-            filter.add(new TajuruParagonPredicate(permanent));
+            filter.add(new SharesCreatureTypePredicate(permanent));
             TargetCard target = new TargetCardInLibrary(0, 1, filter);
             player.choose(outcome, cards, target, game);
             Card card = game.getCard(target.getFirstTarget());
@@ -100,19 +100,5 @@ class TajuruParagonEffect extends OneShotEffect {
         }
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
-    }
-}
-
-class TajuruParagonPredicate implements Predicate<Card> {
-
-    private final Permanent permanent;
-
-    TajuruParagonPredicate(Permanent permanent) {
-        this.permanent = permanent;
-    }
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        return permanent != null && input != null && permanent.shareCreatureTypes(input, game);
     }
 }

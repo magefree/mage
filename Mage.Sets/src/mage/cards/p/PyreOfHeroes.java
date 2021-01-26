@@ -1,8 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -19,16 +16,17 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class PyreOfHeroes extends CardImpl {
@@ -91,7 +89,7 @@ class PyreOfHeroesEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
         filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, newConvertedCost));
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new PyreOfHeroesPredicate(sacrificedPermanent));
+        filter.add(new SharesCreatureTypePredicate(sacrificedPermanent));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
@@ -104,24 +102,5 @@ class PyreOfHeroesEffect extends OneShotEffect {
     @Override
     public PyreOfHeroesEffect copy() {
         return new PyreOfHeroesEffect(this);
-    }
-}
-
-class PyreOfHeroesPredicate implements Predicate<MageObject> {
-
-    private final Permanent sacrificedPermanent;
-
-    public PyreOfHeroesPredicate(Permanent sacrificedPermanent) {
-        this.sacrificedPermanent = sacrificedPermanent;
-    }
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        return input.shareCreatureTypes(sacrificedPermanent, game);
-    }
-
-    @Override
-    public String toString() {
-        return "shares a creature type";
     }
 }

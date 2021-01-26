@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -73,26 +73,12 @@ class EndemicPlagueEffect extends OneShotEffect {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new EndemicPlaguePredicate(permanent));
+        filter.add(new SharesCreatureTypePredicate(permanent));
         return new DestroyAllEffect(filter, true).apply(game, source);
     }
 
     @Override
     public EndemicPlagueEffect copy() {
         return new EndemicPlagueEffect(this);
-    }
-}
-
-class EndemicPlaguePredicate implements Predicate<Permanent> {
-
-    private final Permanent permanent;
-
-    EndemicPlaguePredicate(Permanent permanent) {
-        this.permanent = permanent;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.shareCreatureTypes(permanent, game);
     }
 }

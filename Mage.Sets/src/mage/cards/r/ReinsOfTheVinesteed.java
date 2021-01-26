@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,17 +11,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -81,16 +78,10 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             if (lastStateCreature == null) {
                 return false;
             }
-            FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
-            StringBuilder sb = new StringBuilder("creature that shares a creature type with the formerly attached creature: ");
-            List<Predicate<MageObject>> subtypes = new ArrayList<>();
-            for (SubType subtype : lastStateCreature.getSubtype(game)) {
-                subtypes.add(subtype.getPredicate());
-                sb.append(subtype).append(", ");
-            }
-            FILTER.add(Predicates.or(subtypes));
-            sb.delete(sb.length() - 2, sb.length());
-            FILTER.setMessage(sb.toString());
+            FilterPermanent FILTER = new FilterCreaturePermanent(
+                    "creature that shares a creature type with " + lastStateCreature.getName()
+            );
+            FILTER.add(new SharesCreatureTypePredicate(lastStateCreature));
             TargetPermanent target = new TargetPermanent(FILTER);
             target.setNotTarget(true);
             if (controller != null
