@@ -3135,8 +3135,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
-        return computerPlayer.addCounters(counter, source, game);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
+        return computerPlayer.addCounters(counter, source.getControllerId(), source, game);
     }
 
     @Override

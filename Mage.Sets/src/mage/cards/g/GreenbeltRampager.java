@@ -65,7 +65,7 @@ public final class GreenbeltRampager extends CardImpl {
                 Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
                 if (sourceObject != null) {
                     controller.moveCards(sourceObject, Zone.HAND, source, game);
-                    controller.addCounters(CounterType.ENERGY.createInstance(), source, game);
+                    controller.addCounters(CounterType.ENERGY.createInstance(), source.getControllerId(), source, game);
                 }
             }
             return true;

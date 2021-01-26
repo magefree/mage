@@ -81,7 +81,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
                         + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + permanent.getLogName());
                 } else if (player != null) {
-                    player.addCounters(newCounter, source, game);
+                    player.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
                         + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + player.getLogName());

@@ -709,7 +709,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 
-    boolean addCounters(Counter counter, Ability source, Game game);
+    boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
     void removeCounters(String name, int amount, Ability source, Game game);
 

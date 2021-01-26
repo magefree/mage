@@ -1070,7 +1070,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         return true;
     }
 

@@ -2112,7 +2112,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             sourceControllerId = ((Permanent) attacker).getControllerId();
                         }
                         if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
-                            addCounters(CounterType.POISON.createInstance(actualDamage), source, game);
+                            addCounters(CounterType.POISON.createInstance(actualDamage), source.getControllerId(), source, game);
                         } else {
                             GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
                                     playerId, source, playerId, actualDamage, combatDamage);
@@ -2151,7 +2151,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         boolean returnCode = true;
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, playerId, source,
                 playerId, counter.getName(), counter.getCount());
