@@ -83,7 +83,6 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Cleaving Reaper", 376, Rarity.RARE, mage.cards.c.CleavingReaper.class));
         cards.add(new SetCardInfo("Codespell Cleric", 7, Rarity.COMMON, mage.cards.c.CodespellCleric.class));
         cards.add(new SetCardInfo("Colossal Plow", 236, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
-        cards.add(new SetCardInfo("Cosima, God of the Voyage", 50, Rarity.MYTHIC, mage.cards.c.CosimaGodOfTheVoyage.class));
         cards.add(new SetCardInfo("Cosmos Elixir", 237, Rarity.RARE, mage.cards.c.CosmosElixir.class));
         cards.add(new SetCardInfo("Craven Hulk", 127, Rarity.COMMON, mage.cards.c.CravenHulk.class));
         cards.add(new SetCardInfo("Crippling Fear", 82, Rarity.RARE, mage.cards.c.CripplingFear.class));
@@ -279,6 +278,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Stalwart Valkyrie", 31, Rarity.COMMON, mage.cards.s.StalwartValkyrie.class));
         cards.add(new SetCardInfo("Starnheim Aspirant", 380, Rarity.UNCOMMON, mage.cards.s.StarnheimAspirant.class));
         cards.add(new SetCardInfo("Starnheim Courser", 32, Rarity.COMMON, mage.cards.s.StarnheimCourser.class));
+        cards.add(new SetCardInfo("Starnheim Unleashed", 33, Rarity.MYTHIC, mage.cards.s.StarnheimUnleashed.class));
         cards.add(new SetCardInfo("Story Seeker", 34, Rarity.COMMON, mage.cards.s.StorySeeker.class));
         cards.add(new SetCardInfo("Strategic Planning", 77, Rarity.COMMON, mage.cards.s.StrategicPlanning.class));
         cards.add(new SetCardInfo("Struggle for Skemfar", 196, Rarity.COMMON, mage.cards.s.StruggleForSkemfar.class));
@@ -292,8 +292,8 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Tergrid, God of Fright", 112, Rarity.RARE, mage.cards.t.TergridGodOfFright.class));
         cards.add(new SetCardInfo("The Bears of Littjara", 205, Rarity.RARE, mage.cards.t.TheBearsOfLittjara.class));
         cards.add(new SetCardInfo("The Bloodsky Massacre", 207, Rarity.RARE, mage.cards.t.TheBloodskyMassacre.class));
-        cards.add(new SetCardInfo("The Three Seasons", 231, Rarity.UNCOMMON, mage.cards.t.TheThreeSeasons.class));
         cards.add(new SetCardInfo("The Raven's Warning", 227, Rarity.RARE, mage.cards.t.TheRavensWarning.class));
+        cards.add(new SetCardInfo("The Three Seasons", 231, Rarity.UNCOMMON, mage.cards.t.TheThreeSeasons.class));
         cards.add(new SetCardInfo("The Trickster-God's Heist", 232, Rarity.UNCOMMON, mage.cards.t.TheTricksterGodsHeist.class));
         cards.add(new SetCardInfo("The World Tree", 275, Rarity.RARE, mage.cards.t.TheWorldTree.class));
         cards.add(new SetCardInfo("Thornmantle Striker", 387, Rarity.UNCOMMON, mage.cards.t.ThornmantleStriker.class));
