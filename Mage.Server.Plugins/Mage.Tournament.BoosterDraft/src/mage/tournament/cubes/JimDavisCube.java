@@ -1,25 +1,23 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class JimDavisCube extends DraftCube {
 
     public JimDavisCube() {
-        super("Jim Davis's Cube (469 cards)"); // https://docs.google.com/spreadsheets/d/1pZ3aQR-Kb5MmMDNh1sOtMt4vSrJEWNixyZDZrQSBJb4/edit#gid=0
+        super("Jim Davis's Cube"); // https://docs.google.com/spreadsheets/d/1pZ3aQR-Kb5MmMDNh1sOtMt4vSrJEWNixyZDZrQSBJb4/edit#gid=0
 
         cubeCards.add(new CardIdentity("Abbot of Keral Keep", ""));
         cubeCards.add(new CardIdentity("Abrupt Decay", ""));
         cubeCards.add(new CardIdentity("Absorb", ""));
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
-        cubeCards.add(new CardIdentity("Advantageous Proclamation", ""));
+        //cubeCards.add(new CardIdentity("Advantageous Proclamation", ""));
         cubeCards.add(new CardIdentity("Aether Vial", ""));
-        cubeCards.add(new CardIdentity("Agent of Acquisitions", ""));
+        //cubeCards.add(new CardIdentity("Agent of Acquisitions", ""));
         cubeCards.add(new CardIdentity("Ajani Vengeant", ""));
         cubeCards.add(new CardIdentity("Ancient Den", ""));
         cubeCards.add(new CardIdentity("Ancient Tomb", ""));
@@ -32,7 +30,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Avacyn's Pilgrim", ""));
         cubeCards.add(new CardIdentity("Avenger of Zendikar", ""));
         cubeCards.add(new CardIdentity("Azorius Signet", ""));
-        cubeCards.add(new CardIdentity("Backup Plan", ""));
+        //cubeCards.add(new CardIdentity("Backup Plan", ""));
         cubeCards.add(new CardIdentity("Badlands", ""));
         cubeCards.add(new CardIdentity("Balance", ""));
         cubeCards.add(new CardIdentity("Baleful Strix", ""));
@@ -84,7 +82,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Clifftop Retreat", ""));
         cubeCards.add(new CardIdentity("Coalition Relic", ""));
         cubeCards.add(new CardIdentity("Coercive Portal", ""));
-        cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
+        //cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
         cubeCards.add(new CardIdentity("Collected Company", ""));
         cubeCards.add(new CardIdentity("Condescend", ""));
         cubeCards.add(new CardIdentity("Copperline Gorge", ""));
@@ -240,7 +238,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Llanowar Elves", ""));
         cubeCards.add(new CardIdentity("Loam Lion", ""));
         cubeCards.add(new CardIdentity("Lodestone Golem", ""));
-        cubeCards.add(new CardIdentity("Lore Seeker", ""));
+        //cubeCards.add(new CardIdentity("Lore Seeker", ""));
         cubeCards.add(new CardIdentity("Lotus Cobra", ""));
         cubeCards.add(new CardIdentity("Lotus Petal", ""));
         cubeCards.add(new CardIdentity("Maelstrom Pulse", ""));
@@ -305,7 +303,7 @@ public class JimDavisCube extends DraftCube {
         cubeCards.add(new CardIdentity("Polluted Delta", ""));
         cubeCards.add(new CardIdentity("Ponder", ""));
         cubeCards.add(new CardIdentity("Porcelain Legionnaire", ""));
-        cubeCards.add(new CardIdentity("Power Play", ""));
+        //cubeCards.add(new CardIdentity("Power Play", ""));
         cubeCards.add(new CardIdentity("Precinct Captain", ""));
         cubeCards.add(new CardIdentity("Precursor Golem", ""));
         cubeCards.add(new CardIdentity("Preordain", ""));

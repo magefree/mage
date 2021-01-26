@@ -1,10 +1,8 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class VintageCubeJune2016 extends DraftCube {

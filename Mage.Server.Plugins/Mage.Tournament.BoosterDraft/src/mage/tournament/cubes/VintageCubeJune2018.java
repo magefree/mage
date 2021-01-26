@@ -3,7 +3,6 @@ package mage.tournament.cubes;
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author TheELk801
  */
 public class VintageCubeJune2018 extends DraftCube {
@@ -250,7 +249,7 @@ public class VintageCubeJune2018 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Kiki-Jiki, Mirror Breaker", ""));
         cubeCards.add(new DraftCube.CardIdentity("Kitchen Finks", ""));
         cubeCards.add(new DraftCube.CardIdentity("Kitesail Freebooter", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Knight of the White Orchi", ""));
+        cubeCards.add(new DraftCube.CardIdentity("Knight of the White Orchid", ""));
         cubeCards.add(new DraftCube.CardIdentity("Kolaghan's Command", ""));
         cubeCards.add(new DraftCube.CardIdentity("Koth of the Hammer", ""));
         cubeCards.add(new DraftCube.CardIdentity("Kozilek, Butcher of Truth", ""));

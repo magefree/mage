@@ -1,15 +1,13 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class JosephVasolisPeasantCube extends DraftCube {
 
-public JosephVasolisPeasantCube() {
+    public JosephVasolisPeasantCube() {
         super("Jospeh Vasoli's Peasant Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
 
         cubeCards.add(new DraftCube.CardIdentity("Abzan Beastmaster", ""));

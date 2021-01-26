@@ -1,16 +1,14 @@
-
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
 
 /**
- *
  * @author fireshoes
  */
 public class LegendaryCubeApril2016 extends DraftCube {
 
     public LegendaryCubeApril2016() {
-        super("Legendary Cube April 2016 (566 cards)");
+        super("Legendary Cube April 2016");
         // http://magic.wizards.com/en/MTGO/articles/archive/legendary-cube-cardlist
 
         cubeCards.add(new DraftCube.CardIdentity("Abundant Growth", ""));

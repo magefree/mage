@@ -122,6 +122,8 @@ public abstract class AbilityImpl implements Ability {
         }
         this.customOutcome = ability.customOutcome;
         this.identifier = ability.identifier;
+        this.activated = ability.activated;
+        this.appendToRule = ability.appendToRule;
     }
 
     @Override

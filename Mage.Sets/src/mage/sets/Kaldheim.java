@@ -12,48 +12,6 @@ import java.util.List;
  */
 public final class Kaldheim extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList(
-            "Alrund's Epiphany",
-            "Augury Raven",
-            "Battle Mammoth",
-            "Behold the Multiverse",
-            "Cosmos Charger",
-            "Crush the Weak",
-            "Demon Bolt",
-            "Depart the Realm",
-            "Doomskar",
-            "Doomskar Oracle",
-            "Doomskar Titan",
-            "Dream Devourer",
-            "Dual Strike",
-            "Dwarven Reinforcements",
-            "Glorious Protector",
-            "Gods' Hall Guardian",
-            "Haunting Voyage",
-            "Iron Verdict",
-            "Jarl of the Forsaken",
-            "Karfell Harbinger",
-            "Kaya's Onslaught",
-            "Mammoth Growth",
-            "Mystic Reflection",
-            "Niko Defies Destiny",
-            "Poison the Cup",
-            "Quakebringer",
-            "Ravenform",
-            "Return Upon the Tide",
-            "Rise of the Dread Marn",
-            "Sarulf's Packmate",
-            "Saw It Coming",
-            "Scorn Effigy",
-            "Shepherd of the Cosmos",
-            "Skull Raid",
-            "Starnheim Unleashed",
-            "Struggle for Skemfar",
-            "Tergrid's Shadow",
-            "Vengeful Reaper",
-            "Warhorn Blast"
-    );
-
     private static final Kaldheim instance = new Kaldheim();
 
     public static Kaldheim getInstance() {
@@ -76,6 +34,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Absorb Identity", 383, Rarity.UNCOMMON, mage.cards.a.AbsorbIdentity.class));
         cards.add(new SetCardInfo("Aegar, the Freezing Flame", 200, Rarity.UNCOMMON, mage.cards.a.AegarTheFreezingFlame.class));
         cards.add(new SetCardInfo("Alpine Meadow", 248, Rarity.COMMON, mage.cards.a.AlpineMeadow.class));
+        cards.add(new SetCardInfo("Alrund, God of the Cosmos", 40, Rarity.MYTHIC, mage.cards.a.AlrundGodOfTheCosmos.class));
         cards.add(new SetCardInfo("Alrund's Epiphany", 41, Rarity.MYTHIC, mage.cards.a.AlrundsEpiphany.class));
         cards.add(new SetCardInfo("Annul", 42, Rarity.COMMON, mage.cards.a.Annul.class));
         cards.add(new SetCardInfo("Arachnoform", 159, Rarity.COMMON, mage.cards.a.Arachnoform.class));
@@ -84,6 +43,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Arni Brokenbrow", 120, Rarity.RARE, mage.cards.a.ArniBrokenbrow.class));
         cards.add(new SetCardInfo("Arni Slays the Troll", 201, Rarity.UNCOMMON, mage.cards.a.ArniSlaysTheTroll.class));
         cards.add(new SetCardInfo("Ascendant Spirit", 43, Rarity.RARE, mage.cards.a.AscendantSpirit.class));
+        cards.add(new SetCardInfo("Ascent of the Worthy", 202, Rarity.UNCOMMON, mage.cards.a.AscentOfTheWorthy.class));
         cards.add(new SetCardInfo("Augury Raven", 44, Rarity.COMMON, mage.cards.a.AuguryRaven.class));
         cards.add(new SetCardInfo("Avalanche Caller", 45, Rarity.UNCOMMON, mage.cards.a.AvalancheCaller.class));
         cards.add(new SetCardInfo("Axgard Armory", 250, Rarity.UNCOMMON, mage.cards.a.AxgardArmory.class));
@@ -115,6 +75,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Bretagard Stronghold", 253, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));
         cards.add(new SetCardInfo("Brinebarrow Intruder", 49, Rarity.COMMON, mage.cards.b.BrinebarrowIntruder.class));
         cards.add(new SetCardInfo("Broken Wings", 164, Rarity.COMMON, mage.cards.b.BrokenWings.class));
+        cards.add(new SetCardInfo("Burning-Rune Demon", 81, Rarity.MYTHIC, mage.cards.b.BurningRuneDemon.class));
         cards.add(new SetCardInfo("Calamity Bearer", 125, Rarity.RARE, mage.cards.c.CalamityBearer.class));
         cards.add(new SetCardInfo("Canopy Tactician", 378, Rarity.RARE, mage.cards.c.CanopyTactician.class));
         cards.add(new SetCardInfo("Cinderheart Giant", 126, Rarity.COMMON, mage.cards.c.CinderheartGiant.class));
@@ -139,6 +100,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Doomskar Titan", 130, Rarity.UNCOMMON, mage.cards.d.DoomskarTitan.class));
         cards.add(new SetCardInfo("Doomskar", 9, Rarity.RARE, mage.cards.d.Doomskar.class));
         cards.add(new SetCardInfo("Dragonkin Berserker", 131, Rarity.RARE, mage.cards.d.DragonkinBerserker.class));
+        cards.add(new SetCardInfo("Draugr Necromancer", 86, Rarity.RARE, mage.cards.d.DraugrNecromancer.class));
         cards.add(new SetCardInfo("Draugr Recruiter", 87, Rarity.COMMON, mage.cards.d.DraugrRecruiter.class));
         cards.add(new SetCardInfo("Draugr Thought-Thief", 55, Rarity.COMMON, mage.cards.d.DraugrThoughtThief.class));
         cards.add(new SetCardInfo("Draugr's Helm", 88, Rarity.UNCOMMON, mage.cards.d.DraugrsHelm.class));
@@ -180,7 +142,9 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Gilded Assault Cart", 390, Rarity.UNCOMMON, mage.cards.g.GildedAssaultCart.class));
         cards.add(new SetCardInfo("Glacial Floodplain", 257, Rarity.COMMON, mage.cards.g.GlacialFloodplain.class));
         cards.add(new SetCardInfo("Gladewalker Ritualist", 392, Rarity.UNCOMMON, mage.cards.g.GladewalkerRitualist.class));
+        cards.add(new SetCardInfo("Glimpse the Cosmos", 60, Rarity.UNCOMMON, mage.cards.g.GlimpseTheCosmos.class));
         cards.add(new SetCardInfo("Glittering Frost", 171, Rarity.COMMON, mage.cards.g.GlitteringFrost.class));
+        cards.add(new SetCardInfo("Glorious Protector", 12, Rarity.RARE, mage.cards.g.GloriousProtector.class));
         cards.add(new SetCardInfo("Gnottvold Recluse", 172, Rarity.COMMON, mage.cards.g.GnottvoldRecluse.class));
         cards.add(new SetCardInfo("Gnottvold Slumbermound", 258, Rarity.UNCOMMON, mage.cards.g.GnottvoldSlumbermound.class));
         cards.add(new SetCardInfo("Gods' Hall Guardian", 13, Rarity.COMMON, mage.cards.g.GodsHallGuardian.class));
@@ -218,6 +182,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Jaspera Sentinel", 178, Rarity.COMMON, mage.cards.j.JasperaSentinel.class));
         cards.add(new SetCardInfo("Jorn, God of Winter", 179, Rarity.RARE, mage.cards.j.JornGodOfWinter.class));
         cards.add(new SetCardInfo("Kardur's Vicious Return", 217, Rarity.UNCOMMON, mage.cards.k.KardursViciousReturn.class));
+        cards.add(new SetCardInfo("Karfell Harbinger", 65, Rarity.COMMON, mage.cards.k.KarfellHarbinger.class));
         cards.add(new SetCardInfo("Karfell Kennel-Master", 101, Rarity.COMMON, mage.cards.k.KarfellKennelMaster.class));
         cards.add(new SetCardInfo("Kaya the Inexorable", 218, Rarity.MYTHIC, mage.cards.k.KayaTheInexorable.class));
         cards.add(new SetCardInfo("Kaya's Onslaught", 18, Rarity.UNCOMMON, mage.cards.k.KayasOnslaught.class));
@@ -251,6 +216,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Priest of the Haunted Edge", 104, Rarity.COMMON, mage.cards.p.PriestOfTheHauntedEdge.class));
         cards.add(new SetCardInfo("Provoke the Trolls", 144, Rarity.UNCOMMON, mage.cards.p.ProvokeTheTrolls.class));
         cards.add(new SetCardInfo("Pyre of Heroes", 241, Rarity.RARE, mage.cards.p.PyreOfHeroes.class));
+        cards.add(new SetCardInfo("Quakebringer", 145, Rarity.MYTHIC, mage.cards.q.Quakebringer.class));
         cards.add(new SetCardInfo("Raiders' Karve", 242, Rarity.COMMON, mage.cards.r.RaidersKarve.class));
         cards.add(new SetCardInfo("Raise the Draugr", 105, Rarity.COMMON, mage.cards.r.RaiseTheDraugr.class));
         cards.add(new SetCardInfo("Rally the Ranks", 20, Rarity.RARE, mage.cards.r.RallyTheRanks.class));
@@ -261,6 +227,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Realmwalker", 188, Rarity.RARE, mage.cards.r.Realmwalker.class));
         cards.add(new SetCardInfo("Reckless Crew", 146, Rarity.RARE, mage.cards.r.RecklessCrew.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 73, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
+        cards.add(new SetCardInfo("Reidane, God of the Worthy", 21, Rarity.RARE, mage.cards.r.ReidaneGodOfTheWorthy.class));
         cards.add(new SetCardInfo("Renegade Reaper", 386, Rarity.UNCOMMON, mage.cards.r.RenegadeReaper.class));
         cards.add(new SetCardInfo("Replicating Ring", 244, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
         cards.add(new SetCardInfo("Resplendent Marshal", 22, Rarity.MYTHIC, mage.cards.r.ResplendentMarshal.class));
@@ -278,6 +245,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Rune of Mortality", 108, Rarity.UNCOMMON, mage.cards.r.RuneOfMortality.class));
         cards.add(new SetCardInfo("Rune of Speed", 148, Rarity.UNCOMMON, mage.cards.r.RuneOfSpeed.class));
         cards.add(new SetCardInfo("Rune of Sustenance", 25, Rarity.UNCOMMON, mage.cards.r.RuneOfSustenance.class));
+        cards.add(new SetCardInfo("Runed Crown", 245, Rarity.UNCOMMON, mage.cards.r.RunedCrown.class));
         cards.add(new SetCardInfo("Runeforge Champion", 26, Rarity.RARE, mage.cards.r.RuneforgeChampion.class));
         cards.add(new SetCardInfo("Sarulf's Packmate", 192, Rarity.COMMON, mage.cards.s.SarulfsPackmate.class));
         cards.add(new SetCardInfo("Sarulf, Realm Eater", 228, Rarity.RARE, mage.cards.s.SarulfRealmEater.class));
@@ -322,6 +290,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Tergrid, God of Fright", 112, Rarity.RARE, mage.cards.t.TergridGodOfFright.class));
         cards.add(new SetCardInfo("The Bears of Littjara", 205, Rarity.RARE, mage.cards.t.TheBearsOfLittjara.class));
         cards.add(new SetCardInfo("The Bloodsky Massacre", 207, Rarity.RARE, mage.cards.t.TheBloodskyMassacre.class));
+        cards.add(new SetCardInfo("The Three Seasons", 231, Rarity.UNCOMMON, mage.cards.t.TheThreeSeasons.class));
         cards.add(new SetCardInfo("The Raven's Warning", 227, Rarity.RARE, mage.cards.t.TheRavensWarning.class));
         cards.add(new SetCardInfo("The Trickster-God's Heist", 232, Rarity.UNCOMMON, mage.cards.t.TheTricksterGodsHeist.class));
         cards.add(new SetCardInfo("The World Tree", 275, Rarity.RARE, mage.cards.t.TheWorldTree.class));
@@ -355,7 +324,5 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Withercrown", 119, Rarity.COMMON, mage.cards.w.Withercrown.class));
         cards.add(new SetCardInfo("Woodland Chasm", 274, Rarity.COMMON, mage.cards.w.WoodlandChasm.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 382, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is fully implemented
     }
 }
