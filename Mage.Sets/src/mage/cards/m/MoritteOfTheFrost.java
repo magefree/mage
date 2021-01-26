@@ -63,9 +63,9 @@ class MoritteOfTheFrostCopyApplier extends CopyApplier {
 
         if (!isCopyOfCopy(source, copyToObjectId) && blueprint.isCreature()) {
             blueprint.getAbilities().add(new ChangelingAbility());
-            new AddCountersSourceEffect(
-                    CounterType.P1P1.createInstance(2), false
-            ).apply(game, source);
+            blueprint.getAbilities().add(new EntersBattlefieldAbility(
+                    new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), false)
+            ));
         }
         return true;
     }

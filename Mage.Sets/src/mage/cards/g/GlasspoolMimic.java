@@ -65,8 +65,7 @@ class GlasspoolMimicCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        blueprint.addSubType(game, SubType.SHAPESHIFTER);
-        blueprint.addSubType(game, SubType.ROGUE);
+        blueprint.addSubType(SubType.SHAPESHIFTER, SubType.ROGUE);
         return true;
     }
 }

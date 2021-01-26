@@ -22,8 +22,8 @@ public class AddSubtypeCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        if (!blueprint.hasSubtype(subtype, game)) {
-            blueprint.addSubType(game, subtype);
+        if (!blueprint.getSubtype().contains(subtype)) {
+            blueprint.getSubtype().add(subtype);
         }
         return true;
     }

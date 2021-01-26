@@ -91,12 +91,18 @@ class SparkDoubleExceptEffectsCopyApplier extends CopyApplier {
         if (!isCopyOfCopy(source, copyToObjectId)) {
             // enters with an additional +1/+1 counter on it if it’s a creature
             if (blueprint.isCreature()) {
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false).apply(game, source);
+                blueprint.getAbilities().add(new EntersBattlefieldAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)
+                        .setText("with an additional +1/+1 counter on it")
+                ));
             }
 
             // enters with an additional loyalty counter on it if it’s a planeswalker
             if (blueprint.isPlaneswalker()) {
-                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), false).apply(game, source);
+                blueprint.getAbilities().add(new EntersBattlefieldAbility(
+                        new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), false)
+                        .setText("with an additional loyalty counter on it")
+                ));
             }
         }
 

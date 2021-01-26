@@ -109,7 +109,7 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new CopyApplier() {
             @Override
             public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-                blueprint.addSubType(game, SubType.WALL);
+                blueprint.addSubType(SubType.WALL);
                 blueprint.getAbilities().add(DefenderAbility.getInstance());
                 return true;
             }

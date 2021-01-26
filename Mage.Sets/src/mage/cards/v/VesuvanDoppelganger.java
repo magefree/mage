@@ -89,7 +89,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                     game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new CopyApplier() {
                         @Override
                         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-                            blueprint.getColor(game).setColor(sourcePermanent.getColor(game));
+                            blueprint.getColor().setColor(sourcePermanent.getColor(game));
                             blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                                     new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
                             return true;

@@ -3,6 +3,8 @@ package mage.util.functions;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,7 +13,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public abstract class CopyApplier {
+public abstract class CopyApplier implements Serializable {
 
     // WARNING:
     // 1. Applier uses for copy effects only;
@@ -19,7 +21,6 @@ public abstract class CopyApplier {
     // 3. "source" is the current copy ability and can be different from the original copy ability (copy of copy);
     // 4. Don't use "source" param at all;
     // 5. Use isCopyOfCopy() to detect it (some effects can apply to copy of copy, but others can't -- see Spark Double as an example).
-    // TODO: check all applier implementations - remove source uses, add isCopyOfCopy processing
     public abstract boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId);
 
     public boolean isCopyOfCopy(Ability source, UUID targetObjectId) {

@@ -77,8 +77,10 @@ class VizierOfManyFacesCopyApplier extends CopyApplier {
                     continue;
                 }
                 blueprint.getManaCost().clear();
-                blueprint.addSubType(game, SubType.ZOMBIE);
-                blueprint.getColor(game).setColor(ObjectColor.WHITE);
+                if (!blueprint.getSubtype().contains(SubType.ZOMBIE)) {
+                    blueprint.getSubtype().add(SubType.ZOMBIE);
+                }
+                blueprint.getColor().setColor(ObjectColor.WHITE);
             }
         }
         return true;
