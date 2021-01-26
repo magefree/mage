@@ -65,14 +65,14 @@ public final class ProteanThaumaturge extends CardImpl {
 class ProteanThaumaturgeApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(ProteanThaumaturge.createAbility());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(ProteanThaumaturge.createAbility());
         return true;
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ProteanThaumaturge.createAbility(), source.getSourceId(), game);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addAbility(ProteanThaumaturge.createAbility(), source.getSourceId(), game);
         return true;
     }
 }

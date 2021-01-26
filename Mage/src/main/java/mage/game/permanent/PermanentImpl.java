@@ -1635,6 +1635,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public ObjectColor getColor() {
+        return color;
+    }
+
+    @Override
     public ObjectColor getColor(Game game) {
         return color;
     }

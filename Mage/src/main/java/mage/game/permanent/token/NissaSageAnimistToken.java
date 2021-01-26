@@ -14,12 +14,12 @@ public final class NissaSageAnimistToken extends TokenImpl {
     public NissaSageAnimistToken() {
         super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");
         this.setOriginalExpansionSetCode("ORI");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.getPower().modifyBaseValue(4);
         this.getToughness().modifyBaseValue(4);
         this.color.setGreen(true);
-        this.getSubtype(null).add(SubType.ELEMENTAL);
-        this.addCardType(CardType.CREATURE);
+        this.subtype.add(SubType.ELEMENTAL);
+        this.cardType.add(CardType.CREATURE);
     }
 
     public NissaSageAnimistToken(final NissaSageAnimistToken token) {

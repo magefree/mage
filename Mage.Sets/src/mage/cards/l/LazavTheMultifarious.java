@@ -130,28 +130,28 @@ class LazavTheMultifariousEffect extends OneShotEffect {
 class LazavTheMultifariousApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
-        permanent.getAbilities().add(ability);
-        permanent.setName("Lazav, the Multifarious");
-        permanent.addSuperType(SuperType.LEGENDARY);
+        blueprint.getAbilities().add(ability);
+        blueprint.setName("Lazav, the Multifarious");
+        blueprint.addSuperType(SuperType.LEGENDARY);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
-        mageObject.getAbilities().add(ability);
-        mageObject.setName("Lazav, the Multifarious");
-        mageObject.addSuperType(SuperType.LEGENDARY);
+        blueprint.getAbilities().add(ability);
+        blueprint.setName("Lazav, the Multifarious");
+        blueprint.addSuperType(SuperType.LEGENDARY);
         return true;
     }
 }

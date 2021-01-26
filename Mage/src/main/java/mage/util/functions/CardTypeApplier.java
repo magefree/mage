@@ -21,14 +21,14 @@ public class CardTypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addCardType(cardType);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addCardType(cardType);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.addCardType(cardType);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addCardType(cardType);
         return true;
     }
 }

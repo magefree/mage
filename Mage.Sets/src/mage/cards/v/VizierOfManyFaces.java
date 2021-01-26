@@ -62,12 +62,12 @@ public final class VizierOfManyFaces extends CardImpl {
 class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         return true;
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         for (Permanent entering : game.getPermanentsEntering().values()) {
             if (!entering.getId().equals(copyToObjectId) || !(entering instanceof PermanentToken)) {
                 continue;
@@ -81,9 +81,9 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
                 if (!Objects.equals(mor.getSourceId(), originalCardId) || game.getState().getZoneChangeCounter(originalCardId) != mor.getZoneChangeCounter()) {
                     continue;
                 }
-                permanent.getManaCost().clear();
-                permanent.addSubType(game, SubType.ZOMBIE);
-                permanent.getColor(game).setColor(ObjectColor.WHITE);
+                blueprint.getManaCost().clear();
+                blueprint.addSubType(game, SubType.ZOMBIE);
+                blueprint.getColor(game).setColor(ObjectColor.WHITE);
             }
         }
         return true;

@@ -13,5 +13,5 @@ import java.util.UUID;
 public abstract class ApplyToPermanent extends ApplyToMageObject implements Serializable {
 
     // WARNING: see comments in ApplyToMageObject
-    public abstract boolean apply(Game game, Permanent permanent, Ability source, UUID targetObjectId);
+    public abstract boolean apply(Game game, Permanent blueprint, Ability source, UUID targetObjectId);
 }

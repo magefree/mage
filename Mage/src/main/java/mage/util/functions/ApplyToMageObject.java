@@ -18,7 +18,7 @@ public abstract class ApplyToMageObject {
     // 4. Don't use "source" param at all;
     // 5. Use isCopyOfCopy() to detect it (some effects can apply to copy of copy, but others can't -- see Spark Double as an example).
     // TODO: check all applier implementations - remove source uses, add isCopyOfCopy processing
-    public abstract boolean apply(Game game, MageObject mageObject, Ability source, UUID targetObjectId);
+    public abstract boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId);
 
     public boolean isCopyOfCopy(Ability source, UUID targetObjectId) {
         return !Objects.equals(targetObjectId, source.getSourceId());

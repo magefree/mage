@@ -12,13 +12,13 @@ import mage.game.permanent.Permanent;
 public class EmptyApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         // do nothing
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         return true;
     }
 

@@ -56,14 +56,14 @@ public final class ArtisanOfForms extends CardImpl {
 class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(ArtisanOfForms.createAbility());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(ArtisanOfForms.createAbility());
         return true;
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ArtisanOfForms.createAbility(), source.getSourceId(), game);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addAbility(ArtisanOfForms.createAbility(), source.getSourceId(), game);
         return true;
     }
 }

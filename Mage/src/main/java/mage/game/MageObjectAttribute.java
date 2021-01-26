@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.game;
 
 import mage.MageObject;
@@ -23,7 +18,7 @@ public class MageObjectAttribute implements Serializable {
     protected SubTypes subtype;
 
     public MageObjectAttribute(MageObject mageObject, Game game) {
-        color = mageObject.getColor(null).copy();
+        color = mageObject.getColor().copy();
         subtype = new SubTypes(mageObject.getSubtype(game));
     }
 

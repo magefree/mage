@@ -45,18 +45,18 @@ public final class QuicksilverGargantuan extends CardImpl {
 class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.removePTCDA();
-        permanent.getPower().modifyBaseValue(7);
-        permanent.getToughness().modifyBaseValue(7);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.removePTCDA();
+        blueprint.getPower().modifyBaseValue(7);
+        blueprint.getToughness().modifyBaseValue(7);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.removePTCDA();
-        mageObject.getPower().modifyBaseValue(7);
-        mageObject.getToughness().modifyBaseValue(7);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.removePTCDA();
+        blueprint.getPower().modifyBaseValue(7);
+        blueprint.getToughness().modifyBaseValue(7);
         return true;
     }
 

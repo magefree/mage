@@ -130,12 +130,16 @@ public class Commander implements CommandObject {
 
     @Override
     public void setName(String name) {
-
     }
 
     @Override
     public ArrayList<CardType> getCardType() {
         return sourceObject.getCardType();
+    }
+
+    @Override
+    public SubTypes getSubtype() {
+        return sourceObject.getSubtype();
     }
 
     @Override
@@ -165,6 +169,11 @@ public class Commander implements CommandObject {
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
         return otherAbilities != null && otherAbilities.contains(ability);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return sourceObject.getColor();
     }
 
     @Override
@@ -247,6 +256,10 @@ public class Commander implements CommandObject {
     @Override
     public boolean isAllCreatureTypes(Game game) {
         return false;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
     }
 
     @Override

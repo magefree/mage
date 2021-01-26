@@ -1,4 +1,3 @@
-
 package mage.util.functions;
 
 import java.util.UUID;
@@ -20,14 +19,14 @@ public class AbilityApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ability, source.getSourceId(), game);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addAbility(ability, source.getSourceId(), game);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(ability);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(ability);
         return true;
     }
 

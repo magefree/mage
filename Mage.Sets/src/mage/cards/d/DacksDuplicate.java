@@ -51,20 +51,20 @@ public final class DacksDuplicate extends CardImpl {
 class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         /**
          * 29/05/2014	The ability of Dack's Duplicate doesn't target the
          * creature.
          */
-        permanent.addAbility(new DethroneAbility(), source.getSourceId(), game);
-        permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
+        blueprint.addAbility(new DethroneAbility(), source.getSourceId(), game);
+        blueprint.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(new DethroneAbility());
-        mageObject.getAbilities().add(HasteAbility.getInstance());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(new DethroneAbility());
+        blueprint.getAbilities().add(HasteAbility.getInstance());
         return true;
     }
 

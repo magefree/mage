@@ -552,9 +552,9 @@ public class CardView extends SimpleCardView {
             this.loyalty = "";
         }
         this.cardTypes = object.getCardType();
-        this.subTypes = object.getSubtype(null);
+        this.subTypes = object.getSubtype(game);
         this.superTypes = object.getSuperType();
-        this.color = object.getColor(null);
+        this.color = object.getColor(game);
         this.manaCostLeft = object.getManaCost().getSymbols();
         this.manaCostRight = new ArrayList<>();
         this.convertedManaCost = object.getManaCost().convertedManaCost();
@@ -596,7 +596,7 @@ public class CardView extends SimpleCardView {
             }
         }
         // Frame color
-        this.frameColor = object.getFrameColor(null);
+        this.frameColor = object.getFrameColor(game);
         // Frame style
         this.frameStyle = object.getFrameStyle();
         // Starting loyalty. Must be extracted from an ability
@@ -707,7 +707,7 @@ public class CardView extends SimpleCardView {
 
     }
 
-    CardView(Token token) {
+    CardView(Token token, Game game) {
         super(token.getId(), "", "0", false, "", "");
         this.isToken = true;
         this.id = token.getId();
@@ -720,10 +720,10 @@ public class CardView extends SimpleCardView {
         this.loyalty = "";
         this.startingLoyalty = "";
         this.cardTypes = token.getCardType();
-        this.subTypes = token.getSubtype(null);
+        this.subTypes = token.getSubtype(game);
         this.superTypes = token.getSuperType();
-        this.color = token.getColor(null);
-        this.frameColor = token.getFrameColor(null);
+        this.color = token.getColor(game);
+        this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
         this.manaCostLeft = token.getManaCost().getSymbols();
         this.manaCostRight = new ArrayList<>();

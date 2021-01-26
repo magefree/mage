@@ -58,17 +58,17 @@ public final class MoritteOfTheFrost extends CardImpl {
 class MoritteOfTheFrostApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent copyFromBlueprint, Ability source, UUID copyToObjectId) {
-        return apply(game, (MageObject) copyFromBlueprint, source, copyToObjectId);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        return apply(game, (MageObject) blueprint, source, copyToObjectId);
     }
 
     @Override
-    public boolean apply(Game game, MageObject copyFromBlueprint, Ability source, UUID copyToObjectId) {
-        copyFromBlueprint.addSuperType(SuperType.LEGENDARY);
-        copyFromBlueprint.addSuperType(SuperType.SNOW);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSuperType(SuperType.LEGENDARY);
+        blueprint.addSuperType(SuperType.SNOW);
 
-        if (!isCopyOfCopy(source, copyToObjectId) && copyFromBlueprint.isCreature()) {
-            copyFromBlueprint.getAbilities().add(new ChangelingAbility());
+        if (!isCopyOfCopy(source, copyToObjectId) && blueprint.isCreature()) {
+            blueprint.getAbilities().add(new ChangelingAbility());
             new AddCountersSourceEffect(
                     CounterType.P1P1.createInstance(2), false
             ).apply(game, source);

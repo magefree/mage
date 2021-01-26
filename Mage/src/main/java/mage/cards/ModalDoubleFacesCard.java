@@ -136,9 +136,15 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     }
 
     @Override
+    public SubTypes getSubtype() {
+        // rules: While a double-faced card isn’t on the stack or battlefield, consider only the characteristics of its front face.
+        // CardImpl's constructor can call some code on init, so you must check left/right before
+        return leftHalfCard != null ? leftHalfCard.getSubtype() : subtype;
+    }
+
+    @Override
     public SubTypes getSubtype(Game game) {
         // rules: While a double-faced card isn’t on the stack or battlefield, consider only the characteristics of its front face.
-
         // CardImpl's constructor can call some code on init, so you must check left/right before
         return leftHalfCard != null ? leftHalfCard.getSubtype(game) : subtype;
     }
@@ -238,6 +244,11 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return super.hasAbility(ability, game);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return leftHalfCard.getColor();
     }
 
     @Override

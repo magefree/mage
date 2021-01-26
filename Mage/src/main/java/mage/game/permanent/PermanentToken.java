@@ -58,6 +58,7 @@ public class PermanentToken extends PermanentImpl {
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
+        // modify all attributes permanently (without game usage)
         this.name = token.getName();
         this.abilities.clear();
         if (reset) {

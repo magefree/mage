@@ -76,14 +76,15 @@ class GodPharaohsGiftEffect extends OneShotEffect {
                 Card cardChosen = game.getCard(target.getFirstTarget());
                 if (cardChosen != null
                         && cardChosen.moveToExile(exileId, sourceObject.getIdName(), source, game)) {
+                    // create token and modify all attributes permanently (without game usage)
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(cardChosen, game);
                     token.removePTCDA();
                     token.getPower().modifyBaseValue(4);
                     token.getToughness().modifyBaseValue(4);
-                    token.getColor(game).setColor(ObjectColor.BLACK);
-                    token.removeAllCreatureTypes(game);
-                    token.addSubType(game, SubType.ZOMBIE);
+                    token.getColor().setColor(ObjectColor.BLACK);
+                    token.removeAllCreatureTypes();
+                    token.addSubType(SubType.ZOMBIE);
                     if (token.putOntoBattlefield(1, game, source, source.getControllerId())) {
                         Permanent tokenPermanent = game.getPermanent(token.getLastAddedToken());
                         if (tokenPermanent != null) {

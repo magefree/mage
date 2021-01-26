@@ -162,7 +162,7 @@ public class CardInfo {
         this.white = card.getColor(null).isWhite();
 
         this.setTypes(card.getCardType());
-        this.setSubtypes(card.getSubtype(null).stream().map(SubType::toString).collect(Collectors.toList()));
+        this.setSubtypes(card.getSubtype().stream().map(SubType::toString).collect(Collectors.toList()));
         this.setSuperTypes(card.getSuperType());
 
         // mana cost can contains multiple cards (split left/right, modal double faces, card/adventure)

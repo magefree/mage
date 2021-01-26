@@ -26,17 +26,17 @@ public class AddSubtypeApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        if (!permanent.hasSubtype(subtype, game)) {
-            permanent.addSubType(game, subtype);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        if (!blueprint.hasSubtype(subtype, game)) {
+            blueprint.addSubType(game, subtype);
         }
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        if (!mageObject.hasSubtype(subtype, game)) {
-            mageObject.addSubType(game, subtype);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        if (!blueprint.hasSubtype(subtype, game)) {
+            blueprint.addSubType(game, subtype);
         }
         return true;
     }

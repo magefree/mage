@@ -63,14 +63,14 @@ public final class CrystallineResonance extends CardImpl {
 class CrystallineResonanceApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.getAbilities().add(CrystallineResonance.createAbility());
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(CrystallineResonance.createAbility());
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(CrystallineResonance.createAbility());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(CrystallineResonance.createAbility());
         return true;
     }
 }

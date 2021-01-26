@@ -16,9 +16,9 @@ public final class WireflyToken extends TokenImpl {
         this.setOriginalExpansionSetCode("DST");
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
-        this.getSubtype(null).add(SubType.INSECT);
-        this.addCardType(CardType.ARTIFACT);
-        this.addCardType(CardType.CREATURE);
+        this.subtype.add(SubType.INSECT);
+        this.cardType.add(CardType.ARTIFACT);
+        this.cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
 

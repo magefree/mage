@@ -56,22 +56,22 @@ public final class Gigantoplasm extends CardImpl {
 class GigantoplasmApplyToPermanent extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         DynamicValue variableMana = ManacostVariableValue.instance;
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
-        permanent.getAbilities().add(ability);
+        blueprint.getAbilities().add(ability);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         DynamicValue variableMana = ManacostVariableValue.instance;
         Effect effect = new SetPowerToughnessSourceEffect(variableMana, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
-        mageObject.getAbilities().add(ability);
+        blueprint.getAbilities().add(ability);
         return true;
     }
 

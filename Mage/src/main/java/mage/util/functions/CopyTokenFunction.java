@@ -63,18 +63,16 @@ public class CopyTokenFunction implements Function<Token, Card> {
             target.setCopySourceCard(source);
         }
 
+        // modify all attributes permanently (without game usage)
         target.setName(sourceObj.getName());
-        target.getColor(null).setColor(sourceObj.getColor(null));
+        target.getColor().setColor(sourceObj.getColor());
         target.getManaCost().clear();
         target.getManaCost().add(sourceObj.getManaCost());
         target.getCardType().clear();
         for (CardType type : sourceObj.getCardType()) {
             target.addCardType(type);
         }
-        target.getSubtype(null).clear();
-        for (SubType type : sourceObj.getSubtype(null)) {
-            target.getSubtype(null).add(type);
-        }
+        target.getSubtype().copyFrom(sourceObj.getSubtype());
         target.getSuperType().clear();
         for (SuperType type : sourceObj.getSuperType()) {
             target.addSuperType(type);

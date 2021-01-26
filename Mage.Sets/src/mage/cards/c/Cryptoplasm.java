@@ -78,18 +78,18 @@ class CryptoplasmEffect extends OneShotEffect {
         if (creatureToCopy != null) {
             ApplyToPermanent applier = new ApplyToPermanent() {
                 @Override
-                public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+                public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
-                    permanent.addAbility(upkeepAbility, source.getSourceId(), game);
+                    blueprint.addAbility(upkeepAbility, source.getSourceId(), game);
                     return true;
                 }
 
                 @Override
-                public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+                public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
-                    mageObject.getAbilities().add(upkeepAbility);
+                    blueprint.getAbilities().add(upkeepAbility);
                     return true;
                 }
 

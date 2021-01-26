@@ -100,28 +100,28 @@ class LazavDimirMastermindEffect extends OneShotEffect {
 class LazavDimirMastermindApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
                 TargetController.OPPONENT, SetTargetPointer.CARD);
-        permanent.getAbilities().add(ability);
-        permanent.setName("Lazav, Dimir Mastermind");
-        permanent.addSuperType(SuperType.LEGENDARY);
-        permanent.getAbilities().add(HexproofAbility.getInstance());
+        blueprint.getAbilities().add(ability);
+        blueprint.setName("Lazav, Dimir Mastermind");
+        blueprint.addSuperType(SuperType.LEGENDARY);
+        blueprint.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new LazavDimirMastermindEffect(), true,
                 new FilterCreatureCard("a creature card"),
                 TargetController.OPPONENT, SetTargetPointer.CARD);
-        mageObject.getAbilities().add(ability);
-        mageObject.setName("Lazav, Dimir Mastermind");
-        mageObject.addSuperType(SuperType.LEGENDARY);
-        mageObject.getAbilities().add(HexproofAbility.getInstance());
+        blueprint.getAbilities().add(ability);
+        blueprint.setName("Lazav, Dimir Mastermind");
+        blueprint.addSuperType(SuperType.LEGENDARY);
+        blueprint.getAbilities().add(HexproofAbility.getInstance());
         return true;
     }
 }

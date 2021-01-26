@@ -169,6 +169,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             return false;
         }
 
+        // create token and modify all attributes permanently (without game usage)
         EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
@@ -200,14 +201,14 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.getToughness().modifyBaseValue(tokenToughness);
         }
         if (onlySubType != null) {
-            token.removeAllCreatureTypes(game);
-            token.addSubType(game, onlySubType);
+            token.removeAllCreatureTypes();
+            token.addSubType(onlySubType);
         }
-        if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {
-            token.addSubType(game, additionalSubType);
+        if (additionalSubType != null) {
+            token.addSubType(additionalSubType);
         }
         if (color != null) {
-            token.getColor(game).setColor(color);
+            token.getColor().setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
 

@@ -161,6 +161,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
+    public SubTypes getSubtype() {
+        return new SubTypes();
+    }
+
+    @Override
     public SubTypes getSubtype(Game game) {
         return new SubTypes();
     }
@@ -183,6 +188,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return false;
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
     }
 
     @Override
@@ -606,6 +616,10 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public boolean isAllCreatureTypes(Game game) {
         return false;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
     }
 
     @Override

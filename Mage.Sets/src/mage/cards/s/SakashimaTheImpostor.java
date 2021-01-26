@@ -56,12 +56,12 @@ public final class SakashimaTheImpostor extends CardImpl {
 class SakashimaTheImpostorApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addSuperType(SuperType.LEGENDARY);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSuperType(SuperType.LEGENDARY);
 
-        permanent.setName("Sakashima the Impostor");
+        blueprint.setName("Sakashima the Impostor");
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
-        permanent.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        blueprint.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
                 new ManaCostsImpl("{2}{U}{U}")
         ), source.getSourceId(), game);
@@ -69,11 +69,11 @@ class SakashimaTheImpostorApplier extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.addSuperType(SuperType.LEGENDARY);
-        mageObject.setName("Sakashima the Impostor");
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSuperType(SuperType.LEGENDARY);
+        blueprint.setName("Sakashima the Impostor");
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
-        mageObject.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        blueprint.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
                 new ManaCostsImpl("{2}{U}{U}")
         ));

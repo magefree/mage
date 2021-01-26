@@ -65,16 +65,16 @@ public final class GlasspoolMimic extends ModalDoubleFacesCard {
 class GlasspoolMimicApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addSubType(game, SubType.SHAPESHIFTER);
-        permanent.addSubType(game, SubType.ROGUE);
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSubType(game, SubType.SHAPESHIFTER);
+        blueprint.addSubType(game, SubType.ROGUE);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.addSubType(game, SubType.SHAPESHIFTER);
-        mageObject.addSubType(game, SubType.ROGUE);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSubType(game, SubType.SHAPESHIFTER);
+        blueprint.addSubType(game, SubType.ROGUE);
         return true;
     }
 }

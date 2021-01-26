@@ -58,16 +58,16 @@ public final class SakashimaOfAThousandFaces extends CardImpl {
 class SakashimaOfAThousandFacesApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID targetObjectId) {
-        permanent.addAbility(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
-        permanent.addAbility(PartnerAbility.getInstance());
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID targetObjectId) {
+        blueprint.addAbility(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
+        blueprint.addAbility(PartnerAbility.getInstance());
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID targetObjectId) {
-        mageObject.getAbilities().add(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
-        mageObject.getAbilities().add(PartnerAbility.getInstance());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
+        blueprint.getAbilities().add(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
+        blueprint.getAbilities().add(PartnerAbility.getInstance());
         return true;
     }
 }

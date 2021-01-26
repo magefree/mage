@@ -72,18 +72,18 @@ public final class VesuvanShapeshifter extends CardImpl {
 class VesuvanShapeShifterFaceUpApplier extends ApplyToPermanent {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
         Effect effect = new VesuvanShapeshifterFaceDownEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
-        permanent.getAbilities().add(ability);
+        blueprint.getAbilities().add(ability);
         return true;
     }
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Effect effect = new VesuvanShapeshifterFaceDownEffect();
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
-        mageObject.getAbilities().add(ability);
+        blueprint.getAbilities().add(ability);
         return true;
     }
 }

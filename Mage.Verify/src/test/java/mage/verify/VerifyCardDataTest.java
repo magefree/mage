@@ -1220,7 +1220,7 @@ public class VerifyCardDataTest {
 
         // Remove subtypes that need to be ignored
         Collection<String> actual = card
-                .getSubtype(null)
+                .getSubtype()
                 .stream()
                 .map(SubType::toString)
                 .collect(Collectors.toSet());

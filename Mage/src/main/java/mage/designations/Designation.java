@@ -156,6 +156,11 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
+    public SubTypes getSubtype() {
+        return new SubTypes();
+    }
+
+    @Override
     public SubTypes getSubtype(Game game) {
         return new SubTypes();
     }
@@ -173,6 +178,11 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return this.getAbilities().contains(ability);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
     }
 
     @Override
@@ -250,8 +260,11 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public void setIsAllCreatureTypes(boolean value, Game game) {
+    public void setIsAllCreatureTypes(boolean value) {
+    }
 
+    @Override
+    public void setIsAllCreatureTypes(boolean value, Game game) {
     }
 
     @Override

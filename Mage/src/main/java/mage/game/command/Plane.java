@@ -163,6 +163,11 @@ public class Plane implements CommandObject {
     }
 
     @Override
+    public SubTypes getSubtype() {
+        return new SubTypes();
+    }
+
+    @Override
     public SubTypes getSubtype(Game game) {
         return new SubTypes();
     }
@@ -185,6 +190,11 @@ public class Plane implements CommandObject {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return getAbilities().contains(ability);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
     }
 
     @Override
@@ -267,10 +277,16 @@ public class Plane implements CommandObject {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
+    @Override
     public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
     public void setIsAllCreatureTypes(boolean value, Game game) {
     }
 

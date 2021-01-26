@@ -115,6 +115,11 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public SubTypes getSubtype() {
+        return subtype;
+    }
+
+    @Override
     public SubTypes getSubtype(Game game) {
         if (game != null) {
             MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
@@ -171,6 +176,11 @@ public abstract class MageObjectImpl implements MageObject {
                 ((PlaneswalkerEntersWithLoyaltyCountersAbility) ab).setStartingLoyalty(startingLoyalty);
             }
         }
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return color;
     }
 
     @Override
@@ -279,6 +289,11 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public boolean isAllCreatureTypes(Game game) {
         return this.getSubtype(game).isAllCreatureTypes();
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
     }
 
     @Override
