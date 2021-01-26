@@ -73,7 +73,7 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getData().equals(CounterType.M1M1.getName())
-                || !controllerId.equals(event.getPlayerId())) {
+                || !isControlledBy(event.getPlayerId())) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
