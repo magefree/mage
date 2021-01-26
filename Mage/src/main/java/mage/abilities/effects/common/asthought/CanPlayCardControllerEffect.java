@@ -7,6 +7,7 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -48,6 +49,6 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
             discard();
             return false;
         }
-        return mor.refersTo(sourceId, game) && source.isControlledBy(affectedControllerId);
+        return mor.refersTo(CardUtil.getMainCardId(game, sourceId), game) && source.isControlledBy(affectedControllerId);
     }
 }
