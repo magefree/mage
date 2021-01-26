@@ -28,6 +28,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.watchers.common.ForetoldWatcher;
 
 /**
  * @author jeffwadsworth
@@ -50,6 +51,7 @@ public class ForetellAbility extends SpecialAction {
         // look at face-down card anytime
         addSubAbility(new SimpleStaticAbility(Zone.ALL, new ForetellLookAtCardEffect()));
         this.setRuleVisible(false);
+        this.addWatcher(new ForetoldWatcher());
     }
 
     private ForetellAbility(ForetellAbility ability) {
@@ -194,10 +196,6 @@ class ForetellCostAbility extends SpellAbility {
                 ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                 if (exileZone != null
                         && exileZone.isEmpty()) {
-                    return ActivationStatus.getFalse();
-                }
-                // Cards with no Mana Costs cant't be flashbacked (e.g. Ancestral Vision)
-                if (card.getManaCost().isEmpty()) {
                     return ActivationStatus.getFalse();
                 }
                 if (card instanceof SplitCard) {

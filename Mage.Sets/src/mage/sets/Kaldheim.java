@@ -83,6 +83,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Cleaving Reaper", 376, Rarity.RARE, mage.cards.c.CleavingReaper.class));
         cards.add(new SetCardInfo("Codespell Cleric", 7, Rarity.COMMON, mage.cards.c.CodespellCleric.class));
         cards.add(new SetCardInfo("Colossal Plow", 236, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
+        cards.add(new SetCardInfo("Cosima, God of the Voyage", 50, Rarity.MYTHIC, mage.cards.c.CosimaGodOfTheVoyage.class));
         cards.add(new SetCardInfo("Cosmos Elixir", 237, Rarity.RARE, mage.cards.c.CosmosElixir.class));
         cards.add(new SetCardInfo("Craven Hulk", 127, Rarity.COMMON, mage.cards.c.CravenHulk.class));
         cards.add(new SetCardInfo("Crippling Fear", 82, Rarity.RARE, mage.cards.c.CripplingFear.class));
@@ -212,6 +213,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Path to the World Tree", 186, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Pilfering Hawk", 71, Rarity.COMMON, mage.cards.p.PilferingHawk.class));
         cards.add(new SetCardInfo("Plains", 394, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Poison the Cup", 103, Rarity.UNCOMMON, mage.cards.p.PoisonTheCup.class));
         cards.add(new SetCardInfo("Port of Karfell", 265, Rarity.UNCOMMON, mage.cards.p.PortOfKarfell.class));
         cards.add(new SetCardInfo("Priest of the Haunted Edge", 104, Rarity.COMMON, mage.cards.p.PriestOfTheHauntedEdge.class));
         cards.add(new SetCardInfo("Provoke the Trolls", 144, Rarity.UNCOMMON, mage.cards.p.ProvokeTheTrolls.class));
