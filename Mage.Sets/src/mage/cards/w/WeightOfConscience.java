@@ -159,7 +159,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         for (Permanent permanent1 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, sourceId, game)) {
             for (Permanent permanent2 : game.getBattlefield().getActivePermanents(filterUntapped, sourceControllerId, sourceId, game)) {
-                if (!Objects.equals(permanent1, permanent2) && permanent1.shareCreatureTypes(permanent2, game)) {
+                if (!Objects.equals(permanent1, permanent2) && permanent1.shareCreatureTypes(game, permanent2)) {
                     return true;
                 }
             }
@@ -193,7 +193,7 @@ class WeightOfConscienceTarget extends TargetControlledCreaturePermanent {
             }
         } else {
             Permanent firstTarget = game.getPermanent(this.getTargets().get(0));
-            return firstTarget != null && firstTarget.shareCreatureTypes(targetPermanent, game);
+            return firstTarget != null && firstTarget.shareCreatureTypes(game, targetPermanent);
         }
         return false;
     }

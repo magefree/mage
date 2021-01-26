@@ -623,7 +623,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setIsAllCreatureTypes(boolean value, Game game) {
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     @Override

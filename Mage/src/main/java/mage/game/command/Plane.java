@@ -287,7 +287,7 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public void setIsAllCreatureTypes(boolean value, Game game) {
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     public void discardEffects() {

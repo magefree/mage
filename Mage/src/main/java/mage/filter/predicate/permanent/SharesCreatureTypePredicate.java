@@ -18,6 +18,6 @@ public class SharesCreatureTypePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return mageObject != null && mageObject.shareCreatureTypes(input, game);
+        return mageObject != null && mageObject.shareCreatureTypes(game, input);
     }
 }

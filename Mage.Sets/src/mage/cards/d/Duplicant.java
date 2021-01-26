@@ -129,7 +129,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                permanent.copySubType(card, game, SubTypeSet.CreatureType);
+                permanent.copySubTypesFrom(game, card, SubTypeSet.CreatureType);
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {

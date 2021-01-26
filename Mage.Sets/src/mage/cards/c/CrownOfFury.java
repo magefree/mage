@@ -80,7 +80,7 @@ class CrownOfFuryEffect extends OneShotEffect {
 
         @Override
         public boolean apply(Card input, Game game) {
-            return input.shareCreatureTypes(card, game);
+            return input.shareCreatureTypes(game, card);
         }
     }
 

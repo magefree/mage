@@ -87,7 +87,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                         permanent.removeAllCreatureTypes(game);
                         break;
                 }
-                permanent.copySubType(token, game);
+                permanent.copySubTypesFrom(game, token);
                 break;
 
             case ColorChangingEffects_5:

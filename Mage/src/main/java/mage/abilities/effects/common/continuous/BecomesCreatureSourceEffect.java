@@ -101,7 +101,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         || theyAreStillType == null && permanent.isLand()) {
                     permanent.removeAllCreatureTypes(game);
                 }
-                permanent.copySubType(token, game);
+                permanent.copySubTypesFrom(game, token);
                 break;
 
             case ColorChangingEffects_5:

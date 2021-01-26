@@ -63,7 +63,7 @@ class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<ObjectSou
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         MageObject sourceObject = game.getObject(input.getSourceId());
-        return sourceObject != null && sourceObject.shareCreatureTypes(input.getObject(), game);
+        return sourceObject != null && sourceObject.shareCreatureTypes(game, input.getObject());
     }
 
     @Override

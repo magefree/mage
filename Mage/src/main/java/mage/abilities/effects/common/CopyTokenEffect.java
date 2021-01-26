@@ -32,7 +32,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
             permanent.addCardType(type);
         }
         permanent.removeAllSubTypes(game);
-        permanent.copySubType(token, game);
+        permanent.copySubTypesFrom(game, token);
         permanent.getSuperType().clear();
         for (SuperType type : token.getSuperType()) {
             permanent.addSuperType(type);

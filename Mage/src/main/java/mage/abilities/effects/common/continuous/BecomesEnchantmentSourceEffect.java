@@ -43,7 +43,7 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl impleme
         permanent.getCardType().clear();
         permanent.getCardType().add(CardType.ENCHANTMENT);
         permanent.retainAllEnchantmentSubTypes(game);
-        permanent.setIsAllCreatureTypes(false, game);
+        permanent.setIsAllCreatureTypes(game, false);
         return true;
     }
 }

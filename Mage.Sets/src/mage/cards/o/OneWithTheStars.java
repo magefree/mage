@@ -87,7 +87,7 @@ class OneWithTheStarsEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        permanent.setIsAllCreatureTypes(false, game);
+        permanent.setIsAllCreatureTypes(game, false);
         permanent.retainAllEnchantmentSubTypes(game);
         permanent.getCardType().clear();
         permanent.addCardType(CardType.ENCHANTMENT);

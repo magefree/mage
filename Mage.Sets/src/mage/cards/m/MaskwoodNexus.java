@@ -132,7 +132,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
                 new FilterControlledCreaturePermanent(), source.getControllerId(), game);
         for (Permanent creature : creatures) {
             if (creature != null) {
-                creature.setIsAllCreatureTypes(true, game);
+                creature.setIsAllCreatureTypes(game, true);
             }
         }
         return true;

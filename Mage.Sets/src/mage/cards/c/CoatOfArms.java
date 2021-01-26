@@ -68,7 +68,7 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
     private int getAmount(List<Permanent> permanents, Permanent target, Game game) {
         int amount = 0;
         for (Permanent permanent : permanents) {
-            if (!permanent.getId().equals(target.getId()) && permanent.shareCreatureTypes(target, game)) {
+            if (!permanent.getId().equals(target.getId()) && permanent.shareCreatureTypes(game, target)) {
                 amount++;
             }
         }

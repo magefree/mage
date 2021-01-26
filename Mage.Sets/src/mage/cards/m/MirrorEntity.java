@@ -87,7 +87,7 @@ class MirrorEntityEffect extends ContinuousEffectImpl {
                 it.remove(); // no longer on the battlefield, remove reference to object
                 continue;
             }
-            permanent.setIsAllCreatureTypes(true, game);
+            permanent.setIsAllCreatureTypes(game, true);
         }
         return true;
     }

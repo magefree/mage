@@ -264,7 +264,7 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public void setIsAllCreatureTypes(boolean value, Game game) {
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     @Override

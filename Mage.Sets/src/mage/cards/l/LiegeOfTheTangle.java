@@ -113,7 +113,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         perm.addCardTypes(token.getCardType());
-                        perm.copySubType(token, game);
+                        perm.copySubTypesFrom(game, token);
                     }
                     break;
                 case ColorChangingEffects_5:

@@ -34,7 +34,7 @@ public class IsAllCreatureTypesSourceEffect extends ContinuousEffectImpl {
         if (sourceObject == null) {
             return false;
         }
-        sourceObject.setIsAllCreatureTypes(true, game);
+        sourceObject.setIsAllCreatureTypes(game, true);
         return true;
     }
 }
