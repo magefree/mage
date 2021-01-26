@@ -130,7 +130,7 @@ class RayamiFirstOfTheFallenReplacementEffect extends ReplacementEffectImpl {
         }
         controller.moveCards(permanent, Zone.EXILED, source, game);
         Card card = game.getCard(permanent.getId());
-        card.addCounters(CounterType.BLOOD.createInstance(), source, game);
+        card.addCounters(CounterType.BLOOD.createInstance(), source.getControllerId(), source, game);
         return true;
     }
 

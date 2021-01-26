@@ -61,6 +61,6 @@ class InvigoratingSurgeEffect extends OneShotEffect {
             return false;
         }
         int counterCount = permanent.getCounters(game).getCount(CounterType.P1P1);
-        return counterCount > 0 && permanent.addCounters(CounterType.P1P1.createInstance(counterCount), source, game);
+        return counterCount > 0 && permanent.addCounters(CounterType.P1P1.createInstance(counterCount), source.getControllerId(), source, game);
     }
 }

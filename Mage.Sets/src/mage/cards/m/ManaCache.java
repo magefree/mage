@@ -78,7 +78,7 @@ class ManaCacheEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             int controlledUntappedLands = game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
-            sourcePermanent.addCounters(CounterType.CHARGE.createInstance(controlledUntappedLands), source, game);
+            sourcePermanent.addCounters(CounterType.CHARGE.createInstance(controlledUntappedLands), source.getControllerId(), source, game);
             return true;
         }
         return false;

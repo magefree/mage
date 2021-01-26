@@ -87,6 +87,6 @@ class SwallowWholeEffect extends OneShotEffect {
                 .map(game::getPermanent)
                 .findFirst()
                 .orElse(null);
-        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
     }
 }

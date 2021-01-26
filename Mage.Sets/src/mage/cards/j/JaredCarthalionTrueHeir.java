@@ -108,7 +108,7 @@ class JaredCarthalionTrueHeirPreventionEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount()), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount()), source.getControllerId(), source, game);
         }
         return super.replaceEvent(event, source, game);
     }

@@ -59,7 +59,7 @@ public class ProliferateEffect extends OneShotEffect {
                 if (!permanent.getCounters(game).isEmpty()) {
                     for (Counter counter : permanent.getCounters(game).values()) {
                         newCounter = new Counter(counter.getName());
-                        permanent.addCounters(newCounter, source, game);
+                        permanent.addCounters(newCounter, source.getControllerId(), source, game);
                     }
                     if (newCounter != null) {
                         game.informPlayers(permanent.getName()

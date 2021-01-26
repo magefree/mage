@@ -101,7 +101,7 @@ class PolukranosUnchainedEffect extends OneShotEffect {
             counters = 6;
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-        permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game, appliedEffects);
+        permanent.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game, appliedEffects);
         return true;
     }
 

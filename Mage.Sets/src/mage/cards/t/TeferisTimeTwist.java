@@ -116,7 +116,7 @@ class TeferisTimeTwistReturnEffect extends OneShotEffect {
             // TODO: This is technically wrong as it should enter with the counters,
             // however there's currently no way to know that for sure
             // this is similar to the blood moon issue
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

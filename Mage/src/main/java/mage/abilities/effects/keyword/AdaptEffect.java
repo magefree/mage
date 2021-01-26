@@ -60,7 +60,7 @@ public class AdaptEffect extends OneShotEffect {
         }
         if (permanent.getCounters(game).getCount(CounterType.P1P1) == 0
                 || event.getFlag()) {
-            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount()), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(event.getAmount()), source.getControllerId(), source, game);
         }
         return true;
     }

@@ -136,7 +136,7 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
                 for (UUID tokenId : hydraToken.getLastAddedTokenIds()) {
                     Permanent permanent = game.getPermanent(tokenId);
                     if (permanent != null)
-                        permanent.addCounters(CounterType.P1P1.createInstance(xValue), source, game);
+                        permanent.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
                 }
                 return true;
             }

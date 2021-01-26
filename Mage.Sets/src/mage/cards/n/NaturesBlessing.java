@@ -101,7 +101,7 @@ class NaturesBlessingEffect extends OneShotEffect {
             if (gainedAbility != null) {
                 game.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.Custom), source);
             } else {
-                targetPermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                targetPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                 game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + targetPermanent.getLogName());
             }
             return true;

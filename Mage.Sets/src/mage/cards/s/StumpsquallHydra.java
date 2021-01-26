@@ -110,7 +110,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            permanent.addCounters(CounterType.P1P1.createInstance(targetAmount.getTargetAmount(targetId)), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(targetAmount.getTargetAmount(targetId)), source.getControllerId(), source, game);
         }
         return true;
     }

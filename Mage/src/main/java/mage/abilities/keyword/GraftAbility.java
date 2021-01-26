@@ -147,7 +147,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
                 Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
                 if (targetCreature != null) {
                     sourcePermanent.removeCounters(CounterType.P1P1.getName(), 1, source, game);
-                    targetCreature.addCounters(CounterType.P1P1.createInstance(1), source, game);
+                    targetCreature.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);
                     if (!game.isSimulation()) {
                         game.informPlayers("Moved one +1/+1 counter from " + sourcePermanent.getLogName() + " to " + targetCreature.getLogName());
                     }

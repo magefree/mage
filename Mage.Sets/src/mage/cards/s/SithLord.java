@@ -63,7 +63,7 @@ public final class SithLord extends CardImpl {
             if (permanent != null) {
                 int oll = OpponentsLostLifeCount.instance.calculate(game, source, this);
                 if (oll > 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(oll), source, game);
+                    permanent.addCounters(CounterType.P1P1.createInstance(oll), source.getControllerId(), source, game);
                 }
                 return true;
             }

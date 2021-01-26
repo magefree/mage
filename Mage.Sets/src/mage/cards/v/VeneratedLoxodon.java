@@ -81,7 +81,7 @@ class VeneratedLoxodonEffect extends OneShotEffect {
                 for (MageObjectReference creatureMOR : creatures) {
                     Permanent creature = creatureMOR.getPermanent(game);
                     if (creature != null) {
-                        creature.addCounters(CounterType.P1P1.createInstance(), source, game);
+                        creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                     }
                 }
             }

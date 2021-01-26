@@ -98,7 +98,7 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
                 return false;
             }
             return controller.moveCardToExileWithInfo(permanent, null, null, source, game, Zone.BATTLEFIELD, true)
-                    && permCard.addCounters(CounterType.EGG.createInstance(3), source, game);
+                    && permCard.addCounters(CounterType.EGG.createInstance(3), source.getControllerId(), source, game);
         }
         return false;
     }

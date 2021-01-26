@@ -81,7 +81,7 @@ class IncrementalGrowthEffect extends OneShotEffect {
             i++;
             Permanent creature = game.getPermanent(target.getFirstTarget());
             if (creature != null) {
-                creature.addCounters(CounterType.P1P1.createInstance(i), source, game);
+                creature.addCounters(CounterType.P1P1.createInstance(i), source.getControllerId(), source, game);
             }
         }
         return false;

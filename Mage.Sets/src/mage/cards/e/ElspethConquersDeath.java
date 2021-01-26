@@ -147,7 +147,7 @@ class ElspethConquersDeathReturnEffect extends OneShotEffect {
                 outcome, "Choose a type of counter to add",
                 null, "+1/+1", "Loyalty", source, game
         ) ? CounterType.P1P1.createInstance() : CounterType.LOYALTY.createInstance();
-        permanent.addCounters(counter, source, game);
+        permanent.addCounters(counter, source.getControllerId(), source, game);
         return true;
     }
 

@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -130,7 +129,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
             CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
             int castCount = watcher.getPlaysCount(permanent.getId());
             if (castCount > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(castCount), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(castCount), source.getControllerId(), source, game);
             }
         }
         return false;

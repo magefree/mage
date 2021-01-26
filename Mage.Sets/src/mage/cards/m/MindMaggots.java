@@ -77,7 +77,7 @@ class MindMaggotsEffect extends OneShotEffect {
         if (permanent == null || counters < 1) {
             return true;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
+        permanent.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game);
         return true;
     }
 }

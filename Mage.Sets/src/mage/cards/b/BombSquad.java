@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -175,7 +174,7 @@ class BombSquadBeginningEffect extends OneShotEffect {
             return false;
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            permanent.addCounters(CounterType.FUSE.createInstance(), source, game);
+            permanent.addCounters(CounterType.FUSE.createInstance(), source.getControllerId(), source, game);
 
             game.informPlayers(card.getName() + " puts a fuse counter on " + permanent.getName());
         }

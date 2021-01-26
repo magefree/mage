@@ -13,7 +13,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -59,7 +58,7 @@ class PhytohydraEffect extends ReplacementEffectImpl {
         DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            p.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), source, game);
+            p.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), source.getControllerId(), source, game);
         }
         return true;
     }

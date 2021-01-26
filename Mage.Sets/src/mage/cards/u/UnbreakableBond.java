@@ -75,7 +75,7 @@ class UnbreakableBondReplacementEffect extends ReplacementEffectImpl {
         if (creature == null) {
             return false;
         }
-        creature.addCounters(CounterType.LIFELINK.createInstance(), source, game, event.getAppliedEffects());
+        creature.addCounters(CounterType.LIFELINK.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
         discard();
         return false;
     }

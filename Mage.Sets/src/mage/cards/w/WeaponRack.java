@@ -73,7 +73,7 @@ class WeaponRackEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(), source, game)) {
+        if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game)) {
             return false;
         }
         sourcePermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);

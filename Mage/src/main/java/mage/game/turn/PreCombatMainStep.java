@@ -1,7 +1,5 @@
-
 package mage.game.turn;
 
-import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -10,8 +8,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PreCombatMainStep extends Step {
@@ -29,7 +28,7 @@ public class PreCombatMainStep extends Step {
         this.postStepEvent = EventType.PRECOMBAT_MAIN_STEP_POST;
     }
 
-    public PreCombatMainStep(final PreCombatMainStep step) {
+    private PreCombatMainStep(final PreCombatMainStep step) {
         super(step);
     }
 
@@ -38,7 +37,7 @@ public class PreCombatMainStep extends Step {
         super.beginStep(game, activePlayerId);
         for (Permanent saga : game.getBattlefield().getAllActivePermanents(filter, activePlayerId, game)) {
             if (saga != null) {
-                saga.addCounters(CounterType.LORE.createInstance(), null, game);
+                saga.addCounters(CounterType.LORE.createInstance(), activePlayerId, null, game);
             }
         }
     }

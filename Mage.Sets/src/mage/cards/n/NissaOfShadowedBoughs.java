@@ -153,7 +153,7 @@ class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         }
         return true;
     }

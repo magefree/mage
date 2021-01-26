@@ -91,6 +91,6 @@ class PrimalEmpathyEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());
-        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
     }
 }

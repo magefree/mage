@@ -139,7 +139,7 @@ class EvolveEffect extends OneShotEffect {
         if (triggeringCreature != null) {
             Permanent sourceCreature = game.getPermanent(source.getSourceId());
             if (sourceCreature != null && EvolveAbility.isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
-                sourceCreature.addCounters(CounterType.P1P1.createInstance(), source, game);
+                sourceCreature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EVOLVED_CREATURE, sourceCreature.getId(), source, source.getControllerId()));
             }
             return true;

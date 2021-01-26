@@ -73,7 +73,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
         for (UUID uuid : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
-                permanent.addCounters(counter.copy(), source, game);
+                permanent.addCounters(counter.copy(), source.getControllerId(), source, game);
                 affectedTargets++;
             }
         }

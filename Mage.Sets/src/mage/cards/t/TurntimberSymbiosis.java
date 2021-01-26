@@ -108,7 +108,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
         if (permanent == null || !small) {
             return true;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
+        permanent.addCounters(CounterType.P1P1.createInstance(3), source.getControllerId(), source, game);
         return true;
     }
 }

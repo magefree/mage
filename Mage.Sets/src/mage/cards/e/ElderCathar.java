@@ -70,9 +70,9 @@ class ElderCatharAddCountersTargetEffect extends OneShotEffect {
         if (permanent != null) {
             if (counter != null) {
                 if (permanent.hasSubtype(SubType.HUMAN, game)) {
-                    permanent.addCounters(counter2.copy(), source, game);
+                    permanent.addCounters(counter2.copy(), source.getControllerId(), source, game);
                 } else {
-                    permanent.addCounters(counter.copy(), source, game);
+                    permanent.addCounters(counter.copy(), source.getControllerId(), source, game);
                 }
                 return true;
             }

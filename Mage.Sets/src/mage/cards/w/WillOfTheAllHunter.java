@@ -66,7 +66,7 @@ class WillOfTheAllHunterEffect extends OneShotEffect {
             return false;
         }
         if (permanent.getBlocking() > 0) {
-            return permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
+            return permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         }
         game.addEffect(new BoostTargetEffect(2, 2), source);
         return true;

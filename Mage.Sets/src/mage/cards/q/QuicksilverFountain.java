@@ -99,7 +99,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             Permanent landChosen = game.getPermanent(source.getFirstTarget());
-            landChosen.addCounters(CounterType.FLOOD.createInstance(), source, game);
+            landChosen.addCounters(CounterType.FLOOD.createInstance(), source.getControllerId(), source, game);
             ContinuousEffect becomesBasicLandTargetEffect
                     = new BecomesBasicLandTargetEffect(Duration.Custom, false, SubType.ISLAND);
             ConditionalContinuousEffect effect

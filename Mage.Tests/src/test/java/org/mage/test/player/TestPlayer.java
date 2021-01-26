@@ -673,7 +673,7 @@ public class TestPlayer implements Player {
                             CounterType counterType = CounterType.findByName(groups[1]);
                             Assert.assertNotNull("Invalid counter type " + groups[1], counterType);
                             Counter counter = counterType.createInstance(Integer.parseInt(groups[2]));
-                            permanent.addCounters(counter, source, game);
+                            permanent.addCounters(counter, source.getControllerId(), source, game);
                             actions.remove(action);
                             return true;
                         }

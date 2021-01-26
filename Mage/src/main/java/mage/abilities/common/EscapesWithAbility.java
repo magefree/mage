@@ -88,7 +88,7 @@ class EscapesWithEffect extends OneShotEffect {
             return false;
         }
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-        permanent.addCounters(CounterType.P1P1.createInstance(counter), source, game, appliedEffects);
+        permanent.addCounters(CounterType.P1P1.createInstance(counter), source.getControllerId(), source, game, appliedEffects);
         if (this.delayedTriggeredAbility != null) {
             game.addDelayedTriggeredAbility(this.delayedTriggeredAbility, source);
         }

@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -106,7 +105,7 @@ class KavuPredatorEffect extends OneShotEffect {
         if (permanent != null) {
             Integer gainedLife  = (Integer) this.getValue("gainedLife");
             if (gainedLife != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(gainedLife), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(gainedLife), source.getControllerId(), source, game);
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
                     game.informPlayers(player.getLogName() + " puts " + gainedLife + " +1/+1 counter on " + permanent.getName());

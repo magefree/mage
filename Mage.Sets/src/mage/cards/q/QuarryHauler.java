@@ -82,7 +82,7 @@ class QuarryHaulerEffect extends OneShotEffect {
                         } else {
                             counterToAdd = new Counter(counter.getName());
                         }
-                        permanent.addCounters(counterToAdd, source, game);
+                        permanent.addCounters(counterToAdd, source.getControllerId(), source, game);
                     } else {
                         counterType = CounterType.findByName(counter.getName());
                         if (counterType != null) {

@@ -114,7 +114,7 @@ class LightningStormAddCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
-            spell.addCounters(CounterType.CHARGE.createInstance(2), source, game);
+            spell.addCounters(CounterType.CHARGE.createInstance(2), source.getControllerId(), source, game);
             spell.chooseNewTargets(game, ((ActivatedAbilityImpl) source).getActivatorId(), false, false, null);
             return true;
         }

@@ -85,7 +85,7 @@ class AscendantSpiritWarriorEffect extends OneShotEffect {
         if (permanent == null || !permanent.hasSubtype(SubType.WARRIOR, game)) {
             return false;
         }
-        permanent.addCounters(CounterType.FLYING.createInstance(), source, game);
+        permanent.addCounters(CounterType.FLYING.createInstance(), source.getControllerId(), source, game);
         game.addEffect(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR, SubType.ANGEL
         ), source);
@@ -119,7 +119,7 @@ class AscendantSpiritAngelEffect extends OneShotEffect {
         if (permanent == null || !permanent.hasSubtype(SubType.ANGEL, game)) {
             return false;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
+        permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         game.addEffect(new GainAbilitySourceEffect(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false
         ), Duration.Custom), source);

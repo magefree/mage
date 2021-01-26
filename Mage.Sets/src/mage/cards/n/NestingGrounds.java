@@ -107,7 +107,7 @@ class NestingGroundsEffect extends OneShotEffect {
                 if (counterType != null) {
                     Counter counter = counterType.createInstance();
                     fromPermanent.removeCounters(counterType.getName(), 1, source, game);
-                    toPermanent.addCounters(counter, source, game);
+                    toPermanent.addCounters(counter, source.getControllerId(), source, game);
                     return true;
                 }
             }

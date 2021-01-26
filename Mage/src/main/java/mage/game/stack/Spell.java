@@ -1,6 +1,5 @@
 package mage.game.stack;
 
-import java.util.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -35,6 +34,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypes;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -593,7 +594,7 @@ public class Spell extends StackObjImpl implements Card {
             if (mageObjectAttribute != null) {
                 return mageObjectAttribute.getColor();
             }
-        }                
+        }
         return color;
     }
 
@@ -959,23 +960,23 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
-        return card.addCounters(counter, source, game);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
+        return card.addCounters(counter, playerAddingCounters, source, game);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
-        return card.addCounters(counter, source, game, isEffect);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, boolean isEffect) {
+        return card.addCounters(counter, playerAddingCounters, source, game, isEffect);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
-        return card.addCounters(counter, source, game, appliedEffects);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects) {
+        return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
-        return card.addCounters(counter, source, game, appliedEffects, isEffect);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+        return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect);
     }
 
     @Override

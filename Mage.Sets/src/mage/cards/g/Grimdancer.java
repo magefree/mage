@@ -100,8 +100,8 @@ class GrimdancerEffect extends OneShotEffect {
                 counter2 = CounterType.LIFELINK.createInstance();
                 break;
         }
-        permanent.addCounters(counter1, source, game);
-        permanent.addCounters(counter2, source, game);
+        permanent.addCounters(counter1, source.getControllerId(), source, game);
+        permanent.addCounters(counter2, source.getControllerId(), source, game);
         return true;
     }
 }

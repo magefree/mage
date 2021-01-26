@@ -224,7 +224,7 @@ class TayamLuminousEnigmaReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.VIGILANCE.createInstance(), source, game, event.getAppliedEffects());
+            creature.addCounters(CounterType.VIGILANCE.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
         }
         return false;
     }

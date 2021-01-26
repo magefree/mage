@@ -109,7 +109,7 @@ class KathrilAspectWarperEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            if (permanent.addCounters(counterType.createInstance(), source, game)) {
+            if (permanent.addCounters(counterType.createInstance(), source.getControllerId(), source, game)) {
                 countersAdded++;
             }
         }
@@ -120,7 +120,7 @@ class KathrilAspectWarperEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(countersAdded), source, game);
+        permanent.addCounters(CounterType.P1P1.createInstance(countersAdded), source.getControllerId(), source, game);
         return true;
     }
 

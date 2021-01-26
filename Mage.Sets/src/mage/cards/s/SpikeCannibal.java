@@ -87,7 +87,7 @@ class SpikeCannibalEffect extends OneShotEffect {
             }
 
             if (countersRemoved > 0) {
-                sourcePermanent.addCounters(CounterType.P1P1.createInstance(countersRemoved), source, game);
+                sourcePermanent.addCounters(CounterType.P1P1.createInstance(countersRemoved), source.getControllerId(), source, game);
                 return true;
             }
         }

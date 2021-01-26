@@ -92,6 +92,6 @@ class EmielTheBlessedEffect extends OneShotEffect {
             return false;
         }
         int counters = permanent.hasSubtype(SubType.UNICORN, game) ? 2 : 1;
-        return permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
+        return permanent.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game);
     }
 }

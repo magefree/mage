@@ -75,7 +75,7 @@ class BloodthirstEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
                     List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game, appliedEffects);
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
                 }
                 return true;
             }

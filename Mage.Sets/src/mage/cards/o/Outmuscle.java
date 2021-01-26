@@ -78,7 +78,7 @@ class OutmuscleEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+        permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature == null) {
             return true;

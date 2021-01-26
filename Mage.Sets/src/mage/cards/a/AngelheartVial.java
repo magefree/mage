@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -106,7 +105,7 @@ class AngelheartVialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.CHARGE.createInstance((Integer) this.getValue("damageAmount")), source, game);
+            permanent.addCounters(CounterType.CHARGE.createInstance((Integer) this.getValue("damageAmount")), source.getControllerId(), source, game);
         }
         return true;
     }

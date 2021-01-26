@@ -75,7 +75,7 @@ class ThoughtGorgerEffectEnters extends OneShotEffect {
                 || player.getHand().isEmpty()
                 || thoughtGorger == null
                 || !thoughtGorger.addCounters(
-                CounterType.P1P1.createInstance(player.getHand().size()), source, game
+                CounterType.P1P1.createInstance(player.getHand().size()), source.getControllerId(), source, game
         )) {
             return false;
         }

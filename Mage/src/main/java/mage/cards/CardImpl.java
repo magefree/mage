@@ -602,7 +602,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
         if (countersToAdd != null) {
             for (Counter counter : countersToAdd.values()) {
-                permanent.addCounters(counter, source, game);
+                permanent.addCounters(counter, source.getControllerId(), source, game);
             }
             game.setEnterWithCounters(permanent.getId(), null);
         }
@@ -715,22 +715,22 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
-        return addCounters(counter, source, game, null, true);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
+        return addCounters(counter, playerAddingCounters, source, game, null, true);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
-        return addCounters(counter, source, game, null, isEffect);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, boolean isEffect) {
+        return addCounters(counter, playerAddingCounters, source, game, null, isEffect);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
-        return addCounters(counter, source, game, appliedEffects, true);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects) {
+        return addCounters(counter, playerAddingCounters, source, game, appliedEffects, true);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         boolean returnCode = true;
         GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, getControllerOrOwner(), counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);

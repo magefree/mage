@@ -21,7 +21,6 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -127,7 +126,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && object instanceof Integer) {
             int amount = ((Integer) object);
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
         }
         return false;
     }

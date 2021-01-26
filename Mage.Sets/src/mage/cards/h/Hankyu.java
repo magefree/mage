@@ -76,7 +76,7 @@ class HankyuAddCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(this.effectGivingEquipmentId);
         if (equipment != null) {
-            equipment.addCounters(CounterType.AIM.createInstance(), source, game);
+            equipment.addCounters(CounterType.AIM.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

@@ -66,7 +66,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(1), source, game);
+                    permanent.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);
                 }
             }
             return true;

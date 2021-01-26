@@ -128,7 +128,7 @@ class LuminousBroodmothEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.addCounters(CounterType.FLYING.createInstance(), source, game);
+        permanent.addCounters(CounterType.FLYING.createInstance(), source.getControllerId(), source, game);
         return true;
     }
 }
