@@ -8,13 +8,12 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
 /**
- *
  * @author Markedagain
  */
 public class BlockedCreatureCount implements DynamicValue {
 
-    private String message;
-    boolean beyondTheFirst;
+    private final String message;
+    private final boolean beyondTheFirst;
 
     public BlockedCreatureCount() {
         this("each creature blocking it");
@@ -26,7 +25,7 @@ public class BlockedCreatureCount implements DynamicValue {
 
     public BlockedCreatureCount(String message, boolean beyondTheFirst) {
         this.message = message;
-        //this.beyondTheFirst = beyondTheFirst; this was never set in the original, so not setting here just in case ??
+        this.beyondTheFirst = beyondTheFirst;
     }
 
     public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {
