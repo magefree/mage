@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 /**
  *
@@ -86,15 +86,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                 controller.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new ApplyToPermanent() {
-                        @Override
-                        public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-                            blueprint.getColor(game).setColor(sourcePermanent.getColor(game));
-                            blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
-                            return true;
-                        }
-
+                    game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new CopyApplier() {
                         @Override
                         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                             blueprint.getColor(game).setColor(sourcePermanent.getColor(game));
@@ -102,7 +94,6 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                                     new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
                             return true;
                         }
-
                     });
                     return true;
                 }

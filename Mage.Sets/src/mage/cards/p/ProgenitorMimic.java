@@ -18,7 +18,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.util.functions.AbilityApplier;
+import mage.util.functions.AbilityCopyApplier;
 
 /**
  *
@@ -45,7 +45,7 @@ public final class ProgenitorMimic extends CardImpl {
         Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("create a token that's a copy of this creature");
 
-        AbilityApplier applier = new AbilityApplier(
+        AbilityCopyApplier applier = new AbilityCopyApplier(
                 new ConditionalInterveningIfTriggeredAbility(
                         new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
                         new SourceMatchesFilterCondition(filter),

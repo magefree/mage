@@ -15,8 +15,7 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class MoritteOfTheFrost extends CardImpl {
 
         // You may have Moritte of the Frost enter the battlefield as a copy of a permanent you control, except it's legendary and snow in addition to its other types and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT, new MoritteOfTheFrostApplier()
+                StaticFilters.FILTER_CONTROLLED_PERMANENT, new MoritteOfTheFrostCopyApplier()
         ).setText("as a copy of a permanent you control, except it's legendary and snow in addition to its other types " +
                 "and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling."
         ), true));
@@ -55,12 +54,7 @@ public final class MoritteOfTheFrost extends CardImpl {
     }
 }
 
-class MoritteOfTheFrostApplier extends ApplyToPermanent {
-
-    @Override
-    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-        return apply(game, (MageObject) blueprint, source, copyToObjectId);
-    }
+class MoritteOfTheFrostCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {

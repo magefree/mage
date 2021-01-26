@@ -27,7 +27,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -89,7 +89,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect {
             if (toCopyFromPermanent != null) {
                 for (Permanent toCopyToPermanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (!toCopyToPermanent.equals(toCopyFromPermanent) && !(toCopyToPermanent instanceof PermanentToken)) {
-                        game.copyPermanent(toCopyFromPermanent, toCopyToPermanent.getId(), source, new EmptyApplyToPermanent());
+                        game.copyPermanent(toCopyFromPermanent, toCopyToPermanent.getId(), source, new EmptyCopyApplier());
                     }
                 }
                 return true;
@@ -129,7 +129,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
         if (sourcePermanent != null && toCopyToObject != null && sourcePermanent.getAttachedTo() != null) {
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
             if (toCopyFromPermanent != null) {
-                game.copyPermanent(toCopyFromPermanent, toCopyToObject.getId(), source, new EmptyApplyToPermanent());
+                game.copyPermanent(toCopyFromPermanent, toCopyToObject.getId(), source, new EmptyCopyApplier());
             }
         }
         return false;

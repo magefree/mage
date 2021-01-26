@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -74,7 +74,7 @@ class AbsorbIdentityEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("shapeshifter");
             filter.add(SubType.SHAPESHIFTER.getPredicate());
             for (Permanent copyTo : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new EmptyCopyApplier());
             }
         }
         return true;

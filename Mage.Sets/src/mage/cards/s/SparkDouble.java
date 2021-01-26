@@ -17,8 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -44,7 +43,7 @@ public final class SparkDouble extends CardImpl {
         // You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control,
         // except it enters with an additional +1/+1 counter on it if it’s a creature,
         // it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
-        Effect effect = new CopyPermanentEffect(filter, new SparkDoubleExceptEffectsApplyerToPermanent());
+        Effect effect = new CopyPermanentEffect(filter, new SparkDoubleExceptEffectsCopyApplier());
         effect.setText("as a copy of a creature or planeswalker you control, "
                 + "except it enters with an additional +1/+1 counter on it if it's a creature, "
                 + "it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.");
@@ -62,12 +61,7 @@ public final class SparkDouble extends CardImpl {
     }
 }
 
-class SparkDoubleExceptEffectsApplyerToPermanent extends ApplyToPermanent {
-
-    @Override
-    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-        return apply(game, (MageObject) blueprint, source, copyToObjectId);
-    }
+class SparkDoubleExceptEffectsCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {

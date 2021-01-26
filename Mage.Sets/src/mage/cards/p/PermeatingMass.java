@@ -13,7 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -63,7 +63,7 @@ class PermeatingMassEffect extends OneShotEffect {
         if (copyTo != null) {
             Permanent copyFrom = ability.getSourcePermanentOrLKI(game);
             if (copyFrom != null) {
-                game.copyPermanent(Duration.Custom, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.Custom, copyFrom, copyTo.getId(), ability, new EmptyCopyApplier());
             }
         }
         return true;

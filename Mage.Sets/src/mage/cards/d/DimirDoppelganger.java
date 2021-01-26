@@ -21,7 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 /**
  *
@@ -83,7 +83,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 controller.moveCards(cardsToExile, Zone.EXILED, source, game);
                 newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
-                ApplyToPermanent applier = new DimirDoppelgangerApplier();
+                CopyApplier applier = new DimirDoppelgangerCopyApplier();
                 applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
                 copyEffect.newId();
@@ -98,15 +98,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
     }
 }
 
-class DimirDoppelgangerApplier extends ApplyToPermanent {
-
-    @Override
-    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl("{1}{U}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
-        blueprint.getAbilities().add(ability);
-        return true;
-    }
+class DimirDoppelgangerCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {

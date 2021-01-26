@@ -17,7 +17,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -76,15 +76,7 @@ class CryptoplasmEffect extends OneShotEffect {
     public boolean apply(Game game, final Ability source) {
         Permanent creatureToCopy = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creatureToCopy != null) {
-            ApplyToPermanent applier = new ApplyToPermanent() {
-                @Override
-                public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-                    Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
-                    upkeepAbility.addTarget(new TargetCreaturePermanent());
-                    blueprint.addAbility(upkeepAbility, source.getSourceId(), game);
-                    return true;
-                }
-
+            CopyApplier applier = new CopyApplier() {
                 @Override
                 public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
@@ -92,7 +84,6 @@ class CryptoplasmEffect extends OneShotEffect {
                     blueprint.getAbilities().add(upkeepAbility);
                     return true;
                 }
-
             };
             game.copyPermanent(creatureToCopy, source.getSourceId(), source, applier);
         }

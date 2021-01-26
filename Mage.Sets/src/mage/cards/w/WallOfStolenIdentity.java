@@ -26,7 +26,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -106,14 +106,7 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         if (copyFromPermanent == null) {
             return false;
         }
-        game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new ApplyToPermanent() {
-            @Override
-            public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-                blueprint.addSubType(game, SubType.WALL);
-                blueprint.getAbilities().add(DefenderAbility.getInstance());
-                return true;
-            }
-
+        game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new CopyApplier() {
             @Override
             public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                 blueprint.addSubType(game, SubType.WALL);

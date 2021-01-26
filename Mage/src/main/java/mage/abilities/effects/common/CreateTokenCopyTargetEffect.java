@@ -17,8 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.util.functions.ApplyToPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.CopyApplier;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,7 +141,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
         // can target card or permanent
         Card copyFrom;
-        ApplyToPermanent applier = new EmptyApplyToPermanent();
+        CopyApplier applier = new EmptyCopyApplier();
         if (permanent != null) {
             // handle copies of copies
             Permanent copyFromPermanent = permanent;

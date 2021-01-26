@@ -41,7 +41,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.MessageToClient;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.io.Serializable;
 import java.util.*;
@@ -411,9 +411,9 @@ public interface Game extends MageItem, Serializable {
      * @param applier
      * @return
      */
-    Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, CopyApplier applier);
 
-    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, CopyApplier applier);
 
     Card copyCard(Card cardToCopy, Ability source, UUID newController);
 

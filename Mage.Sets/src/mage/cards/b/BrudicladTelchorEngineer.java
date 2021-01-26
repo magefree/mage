@@ -19,7 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BrudicladTelchorMyrToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -99,7 +99,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
                 if (toCopyFromPermanent != null) {
                     for (Permanent toCopyToPermanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                         if (!toCopyToPermanent.equals(toCopyFromPermanent)) {
-                            game.copyPermanent(toCopyFromPermanent, toCopyToPermanent.getId(), source, new EmptyApplyToPermanent());
+                            game.copyPermanent(toCopyFromPermanent, toCopyToPermanent.getId(), source, new EmptyCopyApplier());
                         }
                     }
                     return true;

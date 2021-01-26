@@ -7,18 +7,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author noxx
+ *
+ * @author LevelX2
  */
-public class EmptyApplyToPermanent extends ApplyToPermanent {
+public class AbilityCopyApplier extends CopyApplier {
 
-    @Override
-    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-        // do nothing
-        return true;
+    private final Ability ability;
+
+    public AbilityCopyApplier(Ability ability) {
+        this.ability = ability;
     }
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(ability);
         return true;
     }
 

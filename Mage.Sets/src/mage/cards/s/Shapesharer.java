@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  * @author duncant
@@ -78,7 +78,7 @@ class ShapesharerEffect extends OneShotEffect {
         if (copyTo != null) {
             Permanent copyFrom = game.getPermanentOrLKIBattlefield(ability.getTargets().get(1).getFirstTarget());
             if (copyFrom != null) {
-                game.copyPermanent(Duration.UntilYourNextTurn, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.UntilYourNextTurn, copyFrom, copyTo.getId(), ability, new EmptyCopyApplier());
             }
         }
         return true;

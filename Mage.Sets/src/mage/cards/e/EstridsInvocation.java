@@ -17,7 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class EstridsInvocation extends CardImpl {
 
         // You may have Estrid's Invocation enter the battlefield as a copy of any enchantment you control, except it gains "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                filter, new EstridsInvocationApplier()
+                filter, new EstridsInvocationCopyApplier()
         ).setText("as a copy of an enchantment you control, except it gains "
                 + "\"At the beginning of your upkeep, "
                 + "you may exile this enchantment. "
@@ -52,16 +52,7 @@ public final class EstridsInvocation extends CardImpl {
     }
 }
 
-class EstridsInvocationApplier extends ApplyToPermanent {
-
-    @Override
-    public boolean apply(Game game, Permanent blueprint, Ability source, UUID copyToObjectId) {
-        // At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.
-        blueprint.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new EstridsInvocationEffect(), TargetController.YOU, true
-        ), source.getSourceId(), game);
-        return true;
-    }
+class EstridsInvocationCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
@@ -71,7 +62,6 @@ class EstridsInvocationApplier extends ApplyToPermanent {
         ));
         return true;
     }
-
 }
 
 class EstridsInvocationEffect extends OneShotEffect {

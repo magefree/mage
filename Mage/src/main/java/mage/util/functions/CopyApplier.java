@@ -7,9 +7,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
+ * Apply additional modifications for blueprint of the copy permanent
+ *
  * @author LevelX2
  */
-public abstract class ApplyToMageObject {
+public abstract class CopyApplier {
 
     // WARNING:
     // 1. Applier uses for copy effects only;

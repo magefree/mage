@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -75,7 +75,7 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
                     for (UUID copyToId : getTargetPointer().getTargets(game, source)) {
                         Permanent copyToCreature = game.getPermanent(copyToId);
                         if (copyToCreature != null) {
-                            game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToId, source, new EmptyApplyToPermanent());
+                            game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToId, source, new EmptyCopyApplier());
                         }
                     }
                 }
