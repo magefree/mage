@@ -1,7 +1,9 @@
 
 package mage.abilities.keyword;
 
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.CrewWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -81,7 +83,7 @@ class CrewCost extends CostImpl {
                 int selectedPower = this.targets.entrySet().stream()
                         .map(entry -> (game.getPermanent(entry.getKey())))
                         .filter(Objects::nonNull)
-                        .mapToInt(p -> (p.getPower().getValue()))
+                        .mapToInt(p -> (getCrewPower(p, game)))
                         .sum();
                 String extraInfo = "(selected power " + selectedPower + " of " + value + ")";
                 if (selectedPower >= value) {
@@ -99,7 +101,7 @@ class CrewCost extends CostImpl {
                 if (!game.replaceEvent(event)) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null && permanent.tap(source, game)) {
-                        sumPower += permanent.getPower().getValue();
+                        sumPower += getCrewPower(permanent, game);
                     }
                 }
             }
@@ -120,7 +122,8 @@ class CrewCost extends CostImpl {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            int powerToAdd = permanent.getPower().getValue();
+            int powerToAdd = getCrewPower(permanent, game);
+
             if (powerToAdd > 0) {
                 sumPower += powerToAdd;
             }
@@ -134,5 +137,17 @@ class CrewCost extends CostImpl {
     @Override
     public CrewCost copy() {
         return new CrewCost(this);
+    }
+
+    private int getCrewPower(Permanent permanent, Game game) {
+        MageInt crewPowerSource = null;
+
+        if (permanent.hasAbility(CrewWithToughnessAbility.getInstance(), game)) {
+            crewPowerSource = permanent.getToughness();
+        } else {
+            crewPowerSource = permanent.getPower();
+        }
+
+        return crewPowerSource.getValue();
     }
 }
