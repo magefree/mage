@@ -189,6 +189,13 @@ class ForetellCostAbility extends SpellAbility {
                 if ((int) game.getState().getValue(card.getId().toString() + "Foretell Turn Number") == game.getTurnNum()) {
                     return ActivationStatus.getFalse();
                 }
+                // Check that the card is actually in the exile zone (ex: Oblivion Ring exiles it after it was Foretold, etc)
+                UUID exileId = (UUID) game.getState().getValue(card.getId().toString() + "foretellAbility");
+                ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+                if (exileZone != null
+                        && exileZone.isEmpty()) {
+                    return ActivationStatus.getFalse();
+                }
                 // Cards with no Mana Costs cant't be flashbacked (e.g. Ancestral Vision)
                 if (card.getManaCost().isEmpty()) {
                     return ActivationStatus.getFalse();
