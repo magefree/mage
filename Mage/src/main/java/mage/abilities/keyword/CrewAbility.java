@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.CrewWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;

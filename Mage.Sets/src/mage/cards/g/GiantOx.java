@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.keyword.CrewWithToughnessAbility;
+import mage.abilities.common.CrewWithToughnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  * @author varaghar
  */
-public class GiantOx extends CardImpl {
+public final class GiantOx extends CardImpl {
 
     public GiantOx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -23,10 +23,10 @@ public class GiantOx extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Giant Ox crews Vehicles using its toughness rather than its power.
-        this.addAbility(new CrewWithToughnessAbility());
+        this.addAbility(CrewWithToughnessAbility.getInstance());
     }
 
-    public GiantOx(final GiantOx card) {
+    private GiantOx(final GiantOx card) {
         super(card);
     }
 

@@ -1,4 +1,4 @@
-package mage.abilities.keyword;
+package mage.abilities.common;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
@@ -23,16 +23,12 @@ public class CrewWithToughnessAbility extends StaticAbility implements MageSingl
         return instance;
     }
 
-    public CrewWithToughnessAbility() {
+    private CrewWithToughnessAbility() {
         super(Zone.BATTLEFIELD, new InfoEffect("{this} crews Vehicles using its toughness rather than its power."));
-    }
-
-    public CrewWithToughnessAbility(CrewWithToughnessAbility crewWithToughnessAbility) {
-        super(crewWithToughnessAbility);
     }
 
     @Override
     public CrewWithToughnessAbility copy() {
-        return new CrewWithToughnessAbility(this);
+        return instance;
     }
 }
