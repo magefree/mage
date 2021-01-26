@@ -70,7 +70,7 @@ class RaiseTheDraugrTarget extends TargetCardInYourGraveyard {
         if (targetOne == null || targetTwo == null) {
             return false;
         }
-        return targetOne.shareCreatureTypes(targetTwo, game);
+        return targetOne.shareCreatureTypes(game, targetTwo);
     }
 
     @Override
@@ -94,7 +94,7 @@ class RaiseTheDraugrTarget extends TargetCardInYourGraveyard {
                 if (i <= j) {
                     continue;
                 }
-                if (cards.get(i).shareCreatureTypes(cards.get(j), game)) {
+                if (cards.get(i).shareCreatureTypes(game, cards.get(j))) {
                     return true;
                 }
             }

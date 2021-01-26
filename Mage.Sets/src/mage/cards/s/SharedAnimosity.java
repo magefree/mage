@@ -4,15 +4,14 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -69,7 +68,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
             filter.add(AttackingPredicate.instance);
-            filter.add(new SharedAnimosityPredicate(permanent));
+            filter.add(new SharesCreatureTypePredicate(permanent));
             power = game.getBattlefield().count(filter, source.getControllerId(), source.getSourceId(), game);
         }
     }
@@ -87,19 +86,5 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         return "it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it";
-    }
-}
-
-class SharedAnimosityPredicate implements Predicate<Card> {
-
-    private final Permanent permanent;
-
-    SharedAnimosityPredicate(Permanent permanent) {
-        this.permanent = permanent;
-    }
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        return permanent != null && input != null && permanent.shareCreatureTypes(input, game);
     }
 }

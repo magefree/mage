@@ -98,7 +98,7 @@ class PathOfAncestryTriggeredAbility extends DelayedTriggeredAbility {
             if (commander == null) {
                 continue;
             }
-            if (spell.getCard().shareCreatureTypes(commander, game)) {
+            if (spell.getCard().shareCreatureTypes(game, commander)) {
                 return true;
             }
         }

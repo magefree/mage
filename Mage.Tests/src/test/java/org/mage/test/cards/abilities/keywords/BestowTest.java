@@ -459,7 +459,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertType("Nighthowler", CardType.ENCHANTMENT, true);
 
         Permanent nighthowler = getPermanent("Nighthowler");
-        Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.getSubtype(currentGame).contains(SubType.AURA));
+        Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.hasSubtype(SubType.AURA, currentGame));
     }
 
     @Test

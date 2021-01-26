@@ -17,7 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -77,7 +77,7 @@ class MirrorWeaveEffect extends OneShotEffect {
                 filter.add(Predicates.not(new PermanentIdPredicate(copyFromCreature.getId())));
                 for (Permanent copyToCreature : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (copyToCreature != null) {
-                        game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature.getId(), source, new EmptyApplyToPermanent());
+                        game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature.getId(), source, new EmptyCopyApplier());
                     }
                 }
             }

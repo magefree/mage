@@ -45,7 +45,7 @@ public class LignifyTest extends CardTestPlayerBase {
 
         Permanent hivelord = getPermanent("Sliver Hivelord", playerB);
 
-        Assert.assertFalse("Sliver Hivelord may not be of subtype Sliver", hivelord.getSubtype(currentGame).contains(SubType.SLIVER));
+        Assert.assertFalse("Sliver Hivelord may not be of subtype Sliver", hivelord.hasSubtype(SubType.SLIVER, currentGame));
 
     }
 

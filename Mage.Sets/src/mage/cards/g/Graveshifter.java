@@ -27,8 +27,7 @@ public final class Graveshifter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // When Graveshifter enters the battlefield, you may return target creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);

@@ -16,7 +16,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -55,24 +55,18 @@ public final class ProteanThaumaturge extends CardImpl {
     static Ability createAbility() {
         Ability ability = new ConstellationAbility(new CopyPermanentEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
-                new ProteanThaumaturgeApplyToPermanent(), true
+                new ProteanThaumaturgeCopyApplier(), true
         ).setText("{this} become a copy of another target creature, except it has this ability"), true, false);
         ability.addTarget(new TargetPermanent(filter));
         return ability;
     }
 }
 
-class ProteanThaumaturgeApplyToPermanent extends ApplyToPermanent {
+class ProteanThaumaturgeCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(ProteanThaumaturge.createAbility());
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ProteanThaumaturge.createAbility(), source.getSourceId(), game);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(ProteanThaumaturge.createAbility());
         return true;
     }
 }

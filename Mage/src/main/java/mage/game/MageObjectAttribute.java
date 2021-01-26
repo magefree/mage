@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.game;
 
-import java.io.Serializable;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
+
+import java.io.Serializable;
 
 /**
  * This class saves changed attributes of mage objects (e.g. in command zone, graveyard, exile or
@@ -19,12 +15,11 @@ import mage.util.SubTypeList;
 public class MageObjectAttribute implements Serializable {
 
     protected ObjectColor color;
-    protected SubTypeList subtype;
+    protected SubTypes subtype;
 
     public MageObjectAttribute(MageObject mageObject, Game game) {
-        color = mageObject.getColor(null).copy();
-        subtype = new SubTypeList();
-        subtype.addAll(mageObject.getSubtype(game));
+        color = mageObject.getColor().copy();
+        subtype = new SubTypes(mageObject.getSubtype(game));
     }
 
     public MageObjectAttribute(MageObjectAttribute mageObjectAttribute) {
@@ -40,7 +35,7 @@ public class MageObjectAttribute implements Serializable {
         return color;
     }
 
-    public SubTypeList getSubtype() {
+    public SubTypes getSubtype() {
         return subtype;
     }
 

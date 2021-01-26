@@ -15,10 +15,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -111,7 +110,7 @@ class RenegadeDoppelgangerEffect extends OneShotEffect {
             return false;
         }
 
-        game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
+        game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent.getId(), source, new EmptyCopyApplier());
         return false;
     }
 }

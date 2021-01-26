@@ -1,6 +1,5 @@
 package mage;
 
-import java.util.*;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -20,7 +19,9 @@ import mage.game.Game;
 import mage.game.MageObjectAttribute;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
+
+import java.util.*;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -32,8 +33,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
     protected ArrayList<CardType> cardType = new ArrayList<>();
-    protected SubTypeList subtype = new SubTypeList();
-    protected boolean isAllCreatureTypes;
+    protected SubTypes subtype = new SubTypes();
     protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
     protected String text;
@@ -71,8 +71,7 @@ public abstract class MageObjectImpl implements MageObject {
         toughness = object.toughness.copy();
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
-        this.subtype.addAll(object.subtype);
-        isAllCreatureTypes = object.isAllCreatureTypes;
+        this.subtype.copyFrom(object.subtype);
         supertype.addAll(object.supertype);
         this.copy = object.copy;
         this.copyFrom = (object.copyFrom != null ? object.copyFrom.copy() : null);
@@ -116,13 +115,18 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
+    public SubTypes getSubtype() {
+        return subtype;
+    }
+
+    @Override
+    public SubTypes getSubtype(Game game) {
         if (game != null) {
             MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
             if (mageObjectAttribute != null) {
                 return mageObjectAttribute.getSubtype();
             }
-        }        
+        }
         return subtype;
     }
 
@@ -175,13 +179,18 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public ObjectColor getColor() {
+        return color;
+    }
+
+    @Override
     public ObjectColor getColor(Game game) {
         if (game != null) {
             MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
             if (mageObjectAttribute != null) {
                 return mageObjectAttribute.getColor();
             }
-        }        
+        }
         return color;
     }
 
@@ -240,7 +249,7 @@ public abstract class MageObjectImpl implements MageObject {
         if (value == null) {
             return false;
         }
-        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes()) {
+        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)) {
             return true;
         }
         return getSubtype(game).contains(value);
@@ -278,13 +287,18 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean isAllCreatureTypes() {
-        return isAllCreatureTypes;
+    public boolean isAllCreatureTypes(Game game) {
+        return this.getSubtype(game).isAllCreatureTypes();
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        isAllCreatureTypes = value && (this.isTribal() || this.isCreature());
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(Game game, boolean value) {
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
     }
 
     @Override

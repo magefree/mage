@@ -118,7 +118,7 @@ public final class StarfieldOfNyx extends CardImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (!permanent.isCreature()
-                                    && !permanent.getSubtype(game).contains(SubType.AURA)) {
+                                    && !permanent.hasSubtype(SubType.AURA, game)) {
                                 permanent.addCardType(CardType.CREATURE);
                             }
                         }
@@ -127,7 +127,7 @@ public final class StarfieldOfNyx extends CardImpl {
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b
                                 && permanent.isCreature()
-                                && !permanent.getSubtype(game).contains(SubType.AURA)) {
+                                && !permanent.hasSubtype(SubType.AURA, game)) {
                             int manaCost = permanent.getConvertedManaCost();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);

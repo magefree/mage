@@ -24,7 +24,7 @@ import mage.game.permanent.token.ServoToken;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  * @author TheElk801
@@ -101,7 +101,7 @@ class SaheeliSublimeArtificerEffect extends OneShotEffect {
         if (copyTo != null) {
             Permanent copyFrom = game.getPermanentOrLKIBattlefield(source.getTargets().get(1).getFirstTarget());
             if (copyFrom != null) {
-                game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new EmptyCopyApplier());
                 ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT);
                 effect.setTargetPointer(new FixedTarget(copyTo, game));
                 game.addEffect(effect, source);

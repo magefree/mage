@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  * @author duncant
@@ -35,8 +35,7 @@ public final class Shapesharer extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // {2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
         Ability copyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
@@ -79,7 +78,7 @@ class ShapesharerEffect extends OneShotEffect {
         if (copyTo != null) {
             Permanent copyFrom = game.getPermanentOrLKIBattlefield(ability.getTargets().get(1).getFirstTarget());
             if (copyFrom != null) {
-                game.copyPermanent(Duration.UntilYourNextTurn, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.UntilYourNextTurn, copyFrom, copyTo.getId(), ability, new EmptyCopyApplier());
             }
         }
         return true;

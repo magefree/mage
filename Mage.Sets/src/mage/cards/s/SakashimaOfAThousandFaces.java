@@ -15,7 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class SakashimaOfAThousandFaces extends CardImpl {
 
         // You may have Sakashima of a Thousand Faces enter the battlefield as a copy of another creature you control, except it has Sakashima of a Thousand Faces's other abilities.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                StaticFilters.FILTER_CONTROLLED_A_CREATURE, new SakashimaOfAThousandFacesApplier()
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, new SakashimaOfAThousandFacesCopyApplier()
         ).setText("as a copy of another creature you control, except it has {this}'s other abilities"), true));
 
         // The "legend rule" doesn't apply to permanents you control.
@@ -55,19 +55,12 @@ public final class SakashimaOfAThousandFaces extends CardImpl {
     }
 }
 
-class SakashimaOfAThousandFacesApplier extends ApplyToPermanent {
+class SakashimaOfAThousandFacesCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID targetObjectId) {
-        permanent.addAbility(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()), source.getSourceId(), game);
-        permanent.addAbility(PartnerAbility.getInstance(), source.getSourceId(), game);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID targetObjectId) {
-        mageObject.getAbilities().add(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
-        mageObject.getAbilities().add(PartnerAbility.getInstance());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(new SimpleStaticAbility(new SakashimaOfAThousandFacesEffect()));
+        blueprint.getAbilities().add(PartnerAbility.getInstance());
         return true;
     }
 }

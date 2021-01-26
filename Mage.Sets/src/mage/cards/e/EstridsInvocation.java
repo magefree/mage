@@ -17,7 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -33,7 +33,7 @@ public final class EstridsInvocation extends CardImpl {
 
         // You may have Estrid's Invocation enter the battlefield as a copy of any enchantment you control, except it gains "At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control."
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                filter, new EstridsInvocationApplier()
+                filter, new EstridsInvocationCopyApplier()
         ).setText("as a copy of an enchantment you control, except it gains "
                 + "\"At the beginning of your upkeep, "
                 + "you may exile this enchantment. "
@@ -52,26 +52,16 @@ public final class EstridsInvocation extends CardImpl {
     }
 }
 
-class EstridsInvocationApplier extends ApplyToPermanent {
+class EstridsInvocationCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         // At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.
-        permanent.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new EstridsInvocationEffect(), TargetController.YOU, true
-        ), source.getSourceId(), game);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        // At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.
-        mageObject.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
+        blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
                 new EstridsInvocationEffect(), TargetController.YOU, true
         ));
         return true;
     }
-
 }
 
 class EstridsInvocationEffect extends OneShotEffect {

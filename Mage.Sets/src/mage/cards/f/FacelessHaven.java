@@ -49,7 +49,7 @@ class FacelessHavenToken extends TokenImpl {
     FacelessHavenToken() {
         super("", "4/3 creature with vigilance and all creature types");
         cardType.add(CardType.CREATURE);
-        setIsAllCreatureTypes(true);
+        subtype.setIsAllCreatureTypes(true);
         power = new MageInt(4);
         toughness = new MageInt(3);
         addAbility(VigilanceAbility.getInstance());

@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.IsAllCreatureTypesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,10 +34,7 @@ public final class DrJuliusJumblemorph extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Dr. Julius Jumblemorph is every creature type (even if this card isn't on the battlefield).
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
-                "{this} is every creature type <i>(even if this card isn't on the battlefield)</i>."
-        )));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new IsAllCreatureTypesSourceEffect()));
 
         // Whenever a host enters the battlefield under your control, you may search your library and/or graveyard for a card with augment and combine it with that host. If you search your library this way, shuffle it.
         // TODO: Host currently isn't implemented, so this ability currently would never trigger
@@ -46,7 +44,7 @@ public final class DrJuliusJumblemorph extends CardImpl {
         ));
     }
 
-    public DrJuliusJumblemorph(final DrJuliusJumblemorph card) {
+    private DrJuliusJumblemorph(final DrJuliusJumblemorph card) {
         super(card);
     }
 

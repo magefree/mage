@@ -40,34 +40,19 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         for (UUID targetId : targetPointer.getTargets(game, source)) {
-            if (targetId != null) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
-                                permanent.getCardType().remove(CardType.ARTIFACT);
-                                permanent.getSubtype(game).removeAll(SubType.getArtifactTypes());
-                            }
-                            break;
-                    }
-                    return true;
-                }
+            if (targetId == null) {
+                continue;
             }
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent == null) {
+                continue;
+            }
+            permanent.getCardType().remove(CardType.ARTIFACT);
+            permanent.removeAllSubTypes(game, SubTypeSet.ArtifactType);
+            return true;
         }
         return false;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.TypeChangingEffects_4;
-    }
-
 }

@@ -5,18 +5,21 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author TheElk801
  */
 public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
 
-    private final SubTypeList subtypes = new SubTypeList();
+    private final List<SubType> subtypes = new ArrayList<>();
 
     public HasSubtypesSourceEffect(SubType... subTypes) {
         super(Duration.EndOfGame, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        subtypes.add(subTypes);
+        subtypes.addAll(Arrays.asList(subTypes));
         this.staticText = setText();
     }
 

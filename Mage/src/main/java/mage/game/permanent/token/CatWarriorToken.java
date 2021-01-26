@@ -27,9 +27,9 @@ public final class CatWarriorToken extends TokenImpl {
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
         this.color.setGreen(true);
-        this.getSubtype(null).add(SubType.CAT);
-        this.getSubtype(null).add(SubType.WARRIOR);
-        this.addCardType(CardType.CREATURE);
+        this.subtype.add(SubType.CAT);
+        this.subtype.add(SubType.WARRIOR);
+        this.cardType.add(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
     }
 

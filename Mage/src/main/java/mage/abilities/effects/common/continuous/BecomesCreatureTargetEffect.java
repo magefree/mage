@@ -87,9 +87,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     if (loseAllAbilities || removeSubtypes) {
                         permanent.removeAllCreatureTypes(game);
                     }
-                    for (SubType t : token.getSubtype(game)) {
-                        permanent.addSubType(game, t);
-                    }
+                    permanent.copySubTypesFrom(game, token);
 
                     for (SuperType t : token.getSuperType()) {
                         if (!permanent.getSuperType().contains(t)) {

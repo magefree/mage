@@ -23,8 +23,7 @@ public final class VenomousChangeling extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

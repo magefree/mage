@@ -8,13 +8,14 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
@@ -23,9 +24,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Effect for the AmplifyAbility
@@ -74,6 +72,19 @@ public class AmplifyEffect extends ReplacementEffectImpl {
         }
     }
 
+    private static class AmplifyPredicate implements Predicate<Card> {
+        private final Card card;
+
+        private AmplifyPredicate(Card card) {
+            this.card = card;
+        }
+
+        @Override
+        public boolean apply(Card input, Game game) {
+            return input.shareCreatureTypes(game, card);
+        }
+    }
+
     public AmplifyEffect(AmplifyFactor amplifyFactor) {
         super(Duration.EndOfGame, Outcome.BoostCreature);
         this.amplifyFactor = amplifyFactor;
@@ -98,36 +109,31 @@ public class AmplifyEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent sourceCreature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && sourceCreature != null) {
-            FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
-            List<SubType.SubTypePredicate> filterSubtypes = new ArrayList<>();
-            for (SubType subtype : sourceCreature.getSubtype(game)) {
-                filterSubtypes.add(subtype.getPredicate());
-            }
-            if (filterSubtypes.size() > 1) {
-                filter.add(Predicates.or(filterSubtypes));
-            } else if (filterSubtypes.size() == 1) {
-                filter.add(filterSubtypes.get(0));
-            }
+        if (controller == null || sourceCreature == null) {
+            return false;
+        }
+        FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
+        filter.add(new AmplifyPredicate(sourceCreature));
 
-            // You can’t reveal this card or any other cards that are entering the battlefield at the same time as this card.
-            filter.add(Predicates.not(new CardIdPredicate(source.getSourceId())));
-            for (Permanent enteringPermanent : game.getPermanentsEntering().values()) {
-                filter.add(Predicates.not(new CardIdPredicate(enteringPermanent.getId())));
-            }
+        // You can’t reveal this card or any other cards that are entering the battlefield at the same time as this card.
+        filter.add(Predicates.not(new CardIdPredicate(source.getSourceId())));
+        for (Permanent enteringPermanent : game.getPermanentsEntering().values()) {
+            filter.add(Predicates.not(new CardIdPredicate(enteringPermanent.getId())));
+        }
 
-            if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                if (controller.chooseUse(outcome, "Reveal cards to Amplify?", source, game)) {
-                    TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-                    if (controller.chooseTarget(outcome, target, source, game) && !target.getTargets().isEmpty()) {
-                        Cards cards = new CardsImpl();
-                        cards.addAll(target.getTargets());
-                        int amountCounters = cards.size() * amplifyFactor.getFactor();
-                        sourceCreature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
-                        controller.revealCards(sourceCreature.getIdName(), cards, game);
-                    }
-                }
-            }
+        if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) <= 0) {
+            return false;
+        }
+        if (!controller.chooseUse(outcome, "Reveal cards to Amplify?", source, game)) {
+            return false;
+        }
+        TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+        if (controller.chooseTarget(outcome, target, source, game) && !target.getTargets().isEmpty()) {
+            Cards cards = new CardsImpl();
+            cards.addAll(target.getTargets());
+            int amountCounters = cards.size() * amplifyFactor.getFactor();
+            sourceCreature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
+            controller.revealCards(sourceCreature.getIdName(), cards, game);
         }
         return false;
     }

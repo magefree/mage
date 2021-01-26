@@ -18,7 +18,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +130,6 @@ public class Commander implements CommandObject {
 
     @Override
     public void setName(String name) {
-
     }
 
     @Override
@@ -139,7 +138,12 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
+    public SubTypes getSubtype() {
+        return sourceObject.getSubtype();
+    }
+
+    @Override
+    public SubTypes getSubtype(Game game) {
         return sourceObject.getSubtype(game);
     }
 
@@ -165,6 +169,11 @@ public class Commander implements CommandObject {
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
         return otherAbilities != null && otherAbilities.contains(ability);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return sourceObject.getColor();
     }
 
     @Override
@@ -245,12 +254,16 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public boolean isAllCreatureTypes() {
+    public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     @Override

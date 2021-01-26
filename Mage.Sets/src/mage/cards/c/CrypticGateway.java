@@ -150,7 +150,7 @@ class CrypticGatewayPredicate implements Predicate<Card> {
     @Override
     public boolean apply(Card input, Game game) {
         for (Permanent permanent : permanents) {
-            if (!permanent.shareCreatureTypes(input, game)) {
+            if (!permanent.shareCreatureTypes(game, input)) {
                 return false;
             }
         }

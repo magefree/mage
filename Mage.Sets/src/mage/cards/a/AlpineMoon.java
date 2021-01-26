@@ -87,7 +87,7 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
                     // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
                     // So the ability removing has to be done before Layer 6
                     land.removeAllAbilities(source.getSourceId(), game);
-                    land.getSubtype(game).removeAll(SubType.getLandTypes());
+                    land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                     break;
                 case AbilityAddingRemovingEffects_6:
                     land.addAbility(new AnyColorManaAbility(), source.getSourceId(), game);

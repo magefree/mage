@@ -28,8 +28,7 @@ public final class AmoeboidChangeling extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // {tap}: Target creature gains all creature types until end of turn.
         Ability ability = new SimpleActivatedAbility(

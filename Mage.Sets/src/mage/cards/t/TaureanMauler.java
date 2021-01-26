@@ -26,8 +26,7 @@ public final class TaureanMauler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
         
         // Whenever an opponent casts a spell, you may put a +1/+1 counter on Taurean Mauler.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));

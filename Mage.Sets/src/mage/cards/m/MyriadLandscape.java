@@ -21,9 +21,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.SubTypeList;
 
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -48,7 +46,6 @@ public final class MyriadLandscape extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-
     }
 
     public MyriadLandscape(final MyriadLandscape card) {
@@ -75,50 +72,36 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
         filterBasicLandCard.add(SuperType.BASIC.getPredicate());
     }
 
-    public TargetCardInLibrarySharingLandType(int minNumTargets, int maxNumTargets) {
+    TargetCardInLibrarySharingLandType(int minNumTargets, int maxNumTargets) {
         super(minNumTargets, maxNumTargets, filterBasicLandCard);
     }
 
-    public TargetCardInLibrarySharingLandType(final TargetCardInLibrarySharingLandType target) {
+    private TargetCardInLibrarySharingLandType(final TargetCardInLibrarySharingLandType target) {
         super(target);
     }
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        if (super.canTarget(playerId, id, source, cards, game)) {
-            if (!getTargets().isEmpty()) {
-                // check if new target shares a Land Type
-                SubTypeList landTypes = new SubTypeList();
-                for (UUID landId : getTargets()) {
-                    Card landCard = game.getCard(landId);
-                    if (landCard != null) {
-                        if (landTypes.isEmpty()) {
-                            landTypes.addAll(landCard.getSubtype(game));
-                        } else {
-                            landTypes.removeIf(next -> !landCard.hasSubtype(next, game));
-                        }
-                    }
-                }
-                Card card = game.getCard(id);
-                if (card != null && !landTypes.isEmpty()) {
-                    for (Iterator<SubType> iterator = landTypes.iterator(); iterator.hasNext(); ) {
-                        SubType next = iterator.next();
-                        if (card.hasSubtype(next, game)) {
-                            return true;
-                        }
-                    }
-                }
-            } else {
-                // first target
-                return true;
-            }
+        if (!super.canTarget(playerId, id, source, cards, game)) {
+            return false;
         }
-        return false;
+        if (getTargets().isEmpty()) {
+            // first target
+            return true;
+        }
+        Card card1 = game.getCard(getTargets().get(0));
+        Card card2 = game.getCard(id);
+        return card1 != null
+                && card2 != null
+                && card1
+                .getSubtype(game)
+                .stream()
+                .filter(SubType.getLandTypes()::contains)
+                .anyMatch(subType -> card2.hasSubtype(subType, game));
     }
 
     @Override
     public TargetCardInLibrarySharingLandType copy() {
         return new TargetCardInLibrarySharingLandType(this);
     }
-
 }

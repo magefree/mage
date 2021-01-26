@@ -18,7 +18,7 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.Copyable;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -156,8 +156,13 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
-        return new SubTypeList();
+    public SubTypes getSubtype() {
+        return new SubTypes();
+    }
+
+    @Override
+    public SubTypes getSubtype(Game game) {
+        return new SubTypes();
     }
 
     @Override
@@ -173,6 +178,11 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return this.getAbilities().contains(ability);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
     }
 
     @Override
@@ -245,13 +255,16 @@ public abstract class Designation implements MageObject, Copyable<Designation> {
     }
 
     @Override
-    public boolean isAllCreatureTypes() {
+    public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+    }
 
+    @Override
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     @Override

@@ -13,8 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -36,7 +35,7 @@ public final class GlasspoolMimic extends ModalDoubleFacesCard {
 
         // You may have Glasspool Mimic enter the battlefield as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
         this.getLeftHalfCard().addAbility(new EntersBattlefieldAbility(
-                new CopyPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, new GlasspoolMimicApplier()),
+                new CopyPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, new GlasspoolMimicCopyApplier()),
                 true, null, "You may have {this} enter the battlefield as a copy of " +
                 "a creature you control, except it's a Shapeshifter Rogue in addition to its other types.", ""
         ));
@@ -62,19 +61,11 @@ public final class GlasspoolMimic extends ModalDoubleFacesCard {
     }
 }
 
-class GlasspoolMimicApplier extends ApplyToPermanent {
+class GlasspoolMimicCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addSubType(game, SubType.SHAPESHIFTER);
-        permanent.addSubType(game, SubType.ROGUE);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.addSubType(game, SubType.SHAPESHIFTER);
-        mageObject.addSubType(game, SubType.ROGUE);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSubType(SubType.SHAPESHIFTER, SubType.ROGUE);
         return true;
     }
 }

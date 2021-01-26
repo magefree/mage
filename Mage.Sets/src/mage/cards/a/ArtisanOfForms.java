@@ -13,7 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -46,24 +46,18 @@ public final class ArtisanOfForms extends CardImpl {
     static Ability createAbility() {
         Ability ability = new HeroicAbility(new CopyPermanentEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
-                new ArtisanOfFormsApplyToPermanent(), true
+                new ArtisanOfFormsCopyApplier(), true
         ).setText("have {this} become a copy of target creature, except it has this ability"), true);
         ability.addTarget(new TargetCreaturePermanent());
         return ability;
     }
 }
 
-class ArtisanOfFormsApplyToPermanent extends ApplyToPermanent {
+class ArtisanOfFormsCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(ArtisanOfForms.createAbility());
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addAbility(ArtisanOfForms.createAbility(), source.getSourceId(), game);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(ArtisanOfForms.createAbility());
         return true;
     }
 }

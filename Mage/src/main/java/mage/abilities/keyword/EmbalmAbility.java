@@ -51,7 +51,7 @@ public class EmbalmAbility extends ActivatedAbilityImpl {
         StringBuilder sb = new StringBuilder("Embalm ").append(cost.getText());
         sb.append(" <i>(").append(cost.getText());
         sb.append(", Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie ");
-        for (SubType subtype : card.getSubtype(null)) {
+        for (SubType subtype : card.getSubtype()) {
             sb.append(subtype).append(" ");
         }
         sb.append(" with no mana cost. Embalm only as a sorcery.)</i>");
@@ -84,10 +84,12 @@ class EmbalmEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+
+        // create token and modify all attributes permanently (without game usage)
         EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(card, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-        token.getColor(game).setColor(ObjectColor.WHITE);
-        token.addSubType(game, SubType.ZOMBIE);
+        token.getColor().setColor(ObjectColor.WHITE);
+        token.addSubType(SubType.ZOMBIE);
         token.getManaCost().clear();
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source, controller.getId()));
         token.putOntoBattlefield(1, game, source, controller.getId(), false, false, null);

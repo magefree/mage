@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.SubTypeList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,12 +86,12 @@ public class DevourEffect extends ReplacementEffectImpl {
             if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", source, game)) {
                 controller.chooseTarget(Outcome.Detriment, target, source, game);
                 if (!target.getTargets().isEmpty()) {
-                    List<SubTypeList> cardSubtypes = new ArrayList<>();
+                    List<Permanent> creaturesDevoured = new ArrayList<>();
                     int devouredCreatures = 0;
                     for (UUID targetId : target.getTargets()) {
                         Permanent targetCreature = game.getPermanent(targetId);
                         if (targetCreature != null && targetCreature.sacrifice(source, game)) {
-                            cardSubtypes.add(targetCreature.getSubtype(game));
+                            creaturesDevoured.add(targetCreature);
                             devouredCreatures++;
                         }
                     }
@@ -108,7 +107,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                         amountCounters = devouredCreatures * devourFactor.getFactor();
                     }
                     creature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
-                    game.getState().setValue(creature.getId().toString() + "devoured", cardSubtypes);
+                    game.getState().setValue(creature.getId().toString() + "devoured", creaturesDevoured);
                 }
 
             }
@@ -124,10 +123,10 @@ public class DevourEffect extends ReplacementEffectImpl {
         return sb.toString();
     }
 
-    public List<SubTypeList> getSubtypes(Game game, UUID permanentId) {
+    public List<Permanent> getDevouredCreatures(Game game, UUID permanentId) {
         Object object = game.getState().getValue(permanentId.toString() + "devoured");
         if (object != null) {
-            return (List<SubTypeList>) object;
+            return (List<Permanent>) object;
         }
         return Collections.emptyList();
     }
@@ -135,7 +134,7 @@ public class DevourEffect extends ReplacementEffectImpl {
     public int getDevouredCreaturesAmount(Game game, UUID permanentId) {
         Object object = game.getState().getValue(permanentId.toString() + "devoured");
         if (object != null) {
-            return ((List<SubTypeList>) object).size();
+            return ((List<Permanent>) object).size();
         }
         return 0;
     }

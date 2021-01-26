@@ -29,7 +29,7 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.CardUtil;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -58,7 +58,7 @@ public class CardView extends SimpleCardView {
     protected String loyalty = "";
     protected String startingLoyalty;
     protected ArrayList<CardType> cardTypes;
-    protected SubTypeList subTypes;
+    protected SubTypes subTypes;
     protected Set<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
@@ -165,7 +165,7 @@ public class CardView extends SimpleCardView {
         this.loyalty = cardView.loyalty;
         this.startingLoyalty = cardView.startingLoyalty;
         this.cardTypes = new ArrayList<>(cardView.cardTypes);
-        this.subTypes = new SubTypeList(cardView.subTypes);
+        this.subTypes = new SubTypes(cardView.subTypes);
         this.superTypes = cardView.superTypes;
 
         this.color = cardView.color;
@@ -552,9 +552,9 @@ public class CardView extends SimpleCardView {
             this.loyalty = "";
         }
         this.cardTypes = object.getCardType();
-        this.subTypes = object.getSubtype(null);
+        this.subTypes = object.getSubtype(game);
         this.superTypes = object.getSuperType();
-        this.color = object.getColor(null);
+        this.color = object.getColor(game);
         this.manaCostLeft = object.getManaCost().getSymbols();
         this.manaCostRight = new ArrayList<>();
         this.convertedManaCost = object.getManaCost().convertedManaCost();
@@ -596,7 +596,7 @@ public class CardView extends SimpleCardView {
             }
         }
         // Frame color
-        this.frameColor = object.getFrameColor(null);
+        this.frameColor = object.getFrameColor(game);
         // Frame style
         this.frameStyle = object.getFrameStyle();
         // Starting loyalty. Must be extracted from an ability
@@ -671,7 +671,7 @@ public class CardView extends SimpleCardView {
         this.loyalty = "";
         this.startingLoyalty = "";
         this.cardTypes = new ArrayList<>();
-        this.subTypes = new SubTypeList();
+        this.subTypes = new SubTypes();
         this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
@@ -707,7 +707,7 @@ public class CardView extends SimpleCardView {
 
     }
 
-    CardView(Token token) {
+    CardView(Token token, Game game) {
         super(token.getId(), "", "0", false, "", "");
         this.isToken = true;
         this.id = token.getId();
@@ -720,10 +720,10 @@ public class CardView extends SimpleCardView {
         this.loyalty = "";
         this.startingLoyalty = "";
         this.cardTypes = token.getCardType();
-        this.subTypes = token.getSubtype(null);
+        this.subTypes = token.getSubtype(game);
         this.superTypes = token.getSuperType();
-        this.color = token.getColor(null);
-        this.frameColor = token.getFrameColor(null);
+        this.color = token.getColor(game);
+        this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
         this.manaCostLeft = token.getManaCost().getSymbols();
         this.manaCostRight = new ArrayList<>();
@@ -816,7 +816,7 @@ public class CardView extends SimpleCardView {
         return cardTypes;
     }
 
-    public SubTypeList getSubTypes() {
+    public SubTypes getSubTypes() {
         return subTypes;
     }
 

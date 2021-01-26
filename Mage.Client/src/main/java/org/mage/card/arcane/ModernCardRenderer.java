@@ -7,7 +7,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.SubType;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
@@ -1466,7 +1466,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine which background paint to use from a set of colors
     // and the current card.
-    protected static Paint getBackgroundPaint(ObjectColor colors, Collection<CardType> types, SubTypeList subTypes) {
+    protected static Paint getBackgroundPaint(ObjectColor colors, Collection<CardType> types, SubTypes subTypes) {
         if (subTypes.contains(SubType.VEHICLE)) {
             return BG_TEXTURE_VEHICLE;
         } else if (types.contains(CardType.LAND)) {
@@ -1493,7 +1493,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine which background image to use from a set of colors
     // and the current card.
-    protected static BufferedImage getBackgroundImage(ObjectColor colors, Collection<CardType> types, SubTypeList subTypes, boolean isExped) {
+    protected static BufferedImage getBackgroundImage(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
         if (subTypes.contains(SubType.VEHICLE)) {
             return BG_IMG_VEHICLE;
         } else if (types.contains(CardType.LAND)) {

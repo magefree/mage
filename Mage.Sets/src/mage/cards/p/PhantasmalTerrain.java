@@ -99,7 +99,7 @@ public final class PhantasmalTerrain extends CardImpl {
             if (land == null) {
                 return false;
             }
-            land.getSubtype(game).removeAll(SubType.getLandTypes());
+            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
             land.addSubType(game, choice);
             land.removeAllAbilities(source.getSourceId(), game);
             switch (choice) {

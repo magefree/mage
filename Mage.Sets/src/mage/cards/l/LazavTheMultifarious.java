@@ -28,7 +28,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 /**
  *
@@ -112,7 +112,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
             if (copyFromCard != null) {
                 newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                 newBluePrint.assignNewId();
-                ApplyToPermanent applier = new LazavTheMultifariousApplier();
+                CopyApplier applier = new LazavTheMultifariousCopyApplier();
                 applier.apply(game, newBluePrint, source, lazavTheMultifarious.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavTheMultifarious.getId());
                 copyEffect.newId();
@@ -127,31 +127,18 @@ class LazavTheMultifariousEffect extends OneShotEffect {
     }
 }
 
-class LazavTheMultifariousApplier extends ApplyToPermanent {
+class LazavTheMultifariousCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
-        permanent.getAbilities().add(ability);
-        permanent.setName("Lazav, the Multifarious");
-        permanent.addSuperType(SuperType.LEGENDARY);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(
-                new LazavTheMultifariousEffect(),
-                new ManaCostsImpl("{X}")
-        );
-        ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
-        mageObject.getAbilities().add(ability);
-        mageObject.setName("Lazav, the Multifarious");
-        mageObject.addSuperType(SuperType.LEGENDARY);
+        blueprint.getAbilities().add(ability);
+        blueprint.setName("Lazav, the Multifarious");
+        blueprint.addSuperType(SuperType.LEGENDARY);
         return true;
     }
 }

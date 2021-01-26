@@ -16,8 +16,8 @@ public final class CamaridToken extends TokenImpl {
         this.getPower().modifyBaseValue(1);
         this.getToughness().modifyBaseValue(1);
         this.color.setBlue(true);
-        this.getSubtype(null).add(SubType.CAMARID);
-        this.addCardType(CardType.CREATURE);
+        this.subtype.add(SubType.CAMARID);
+        this.cardType.add(CardType.CREATURE);
     }
 
     public CamaridToken(final CamaridToken token) {

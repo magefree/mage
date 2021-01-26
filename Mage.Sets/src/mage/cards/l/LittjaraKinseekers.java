@@ -31,8 +31,7 @@ public final class LittjaraKinseekers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // When Littjara Kinseekers enters the battlefield, if you control three or more creatures that share a creature type, put a +1/+1 counter on Littjara Kinseekers, then scry 1.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

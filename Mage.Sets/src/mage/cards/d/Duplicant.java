@@ -113,34 +113,32 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (!permanent.getImprinted().isEmpty()) {
-                List<UUID> imprinted = permanent.getImprinted();
-                if (imprinted == null || imprinted.isEmpty()) {
-                    return false;
-                }
-                Card card = game.getCard(imprinted.get(imprinted.size() - 1));
-                if (card != null && card.isCreature()) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
-                                permanent.getSubtype(game).addAll(card.getSubtype(game));
-                            }
-
-                            break;
-                        case PTChangingEffects_7:
-                            if (sublayer == SubLayer.SetPT_7b) {
-                                permanent.getPower().setValue(card.getPower().getValue());
-                                permanent.getToughness().setValue(card.getToughness().getValue());
-
-                            }
-                    }
-                    return true;
-                }
-            }
-
+        if (permanent == null) {
+            return false;
         }
-        return false;
+        if (permanent.getImprinted().isEmpty()) {
+            return false;
+        }
+        List<UUID> imprinted = permanent.getImprinted();
+        if (imprinted == null || imprinted.isEmpty()) {
+            return false;
+        }
+        Card card = game.getCard(imprinted.get(imprinted.size() - 1));
+        if (card == null || !card.isCreature()) {
+            return false;
+        }
+        switch (layer) {
+            case TypeChangingEffects_4:
+                permanent.copySubTypesFrom(game, card, SubTypeSet.CreatureType);
+                break;
+            case PTChangingEffects_7:
+                if (sublayer == SubLayer.SetPT_7b) {
+                    permanent.getPower().setValue(card.getPower().getValue());
+                    permanent.getToughness().setValue(card.getToughness().getValue());
+                }
+        }
+        return true;
+
     }
 
     @Override
@@ -152,5 +150,4 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
     }
-
 }

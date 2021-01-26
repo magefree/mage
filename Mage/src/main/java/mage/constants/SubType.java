@@ -594,4 +594,8 @@ public enum SubType {
     public static Set<SubType> getLandTypes() {
         return landTypes;
     }
+
+    public static Set<SubType> getBySubTypeSet(SubTypeSet subTypeSet) {
+        return subTypeSetMap.get(subTypeSet);
+    }
 }

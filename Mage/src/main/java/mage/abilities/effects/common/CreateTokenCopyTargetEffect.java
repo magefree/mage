@@ -17,8 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.util.functions.ApplyToPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.CopyApplier;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,7 +141,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
         // can target card or permanent
         Card copyFrom;
-        ApplyToPermanent applier = new EmptyApplyToPermanent();
+        CopyApplier applier = new EmptyCopyApplier();
         if (permanent != null) {
             // handle copies of copies
             Permanent copyFromPermanent = permanent;
@@ -169,6 +169,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             return false;
         }
 
+        // create token and modify all attributes permanently (without game usage)
         EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
@@ -200,14 +201,14 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.getToughness().modifyBaseValue(tokenToughness);
         }
         if (onlySubType != null) {
-            token.removeAllCreatureTypes(game);
-            token.addSubType(game, onlySubType);
+            token.removeAllCreatureTypes();
+            token.addSubType(onlySubType);
         }
-        if (additionalSubType != null && !token.hasSubtype(additionalSubType, game)) {
-            token.addSubType(game, additionalSubType);
+        if (additionalSubType != null) {
+            token.addSubType(additionalSubType);
         }
         if (color != null) {
-            token.getColor(game).setColor(color);
+            token.getColor().setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
 

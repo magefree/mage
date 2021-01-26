@@ -58,6 +58,7 @@ public class PermanentToken extends PermanentImpl {
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
+        // modify all attributes permanently (without game usage)
         this.name = token.getName();
         this.abilities.clear();
         if (reset) {
@@ -81,9 +82,7 @@ public class PermanentToken extends PermanentImpl {
         this.frameStyle = token.getFrameStyle();
         this.supertype.clear();
         this.supertype.addAll(token.getSuperType());
-        this.subtype.clear();
-        this.subtype.addAll(token.getSubtype(game));
-        this.isAllCreatureTypes = token.isAllCreatureTypes();
+        this.subtype.copyFrom(token.getSubtype(game));
         this.tokenDescriptor = token.getTokenDescriptor();
     }
 

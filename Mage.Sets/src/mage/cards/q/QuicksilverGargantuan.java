@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 /**
  * @author ayratn
@@ -27,7 +27,7 @@ public final class QuicksilverGargantuan extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(new QuicksilverGargantuanApplyToPermanent()),
+        Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(new QuicksilverGargantuanCopyApplier()),
                 "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's 7/7");
         this.addAbility(ability);
     }
@@ -42,22 +42,13 @@ public final class QuicksilverGargantuan extends CardImpl {
     }
 }
 
-class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
+class QuicksilverGargantuanCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.removePTCDA();
-        permanent.getPower().modifyBaseValue(7);
-        permanent.getToughness().modifyBaseValue(7);
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.removePTCDA();
+        blueprint.getPower().modifyBaseValue(7);
+        blueprint.getToughness().modifyBaseValue(7);
         return true;
     }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.removePTCDA();
-        mageObject.getPower().modifyBaseValue(7);
-        mageObject.getToughness().modifyBaseValue(7);
-        return true;
-    }
-
 }

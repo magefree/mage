@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GolemToken;
 import mage.target.TargetPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -71,7 +71,7 @@ class MasterfulReplicationEffect extends OneShotEffect {
         }
         for (Permanent copyToArtifact : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
             if (copyToArtifact.isArtifact() && !copyToArtifact.getId().equals(copyFromArtifact.getId())) {
-                game.copyPermanent(Duration.EndOfTurn, copyFromArtifact, copyToArtifact.getId(), source, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.EndOfTurn, copyFromArtifact, copyToArtifact.getId(), source, new EmptyCopyApplier());
             }
         }
         return true;

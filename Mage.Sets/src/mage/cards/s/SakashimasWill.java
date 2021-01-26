@@ -18,7 +18,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -132,7 +132,7 @@ class SakashimasWillCopyEffect extends OneShotEffect {
                 continue;
             }
             game.copyPermanent(
-                    Duration.EndOfTurn, chosenCreature, permanent.getId(), source, new EmptyApplyToPermanent()
+                    Duration.EndOfTurn, chosenCreature, permanent.getId(), source, new EmptyCopyApplier()
             );
         }
         return true;

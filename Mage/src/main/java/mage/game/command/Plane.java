@@ -22,7 +22,7 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -163,8 +163,13 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
-        return new SubTypeList();
+    public SubTypes getSubtype() {
+        return new SubTypes();
+    }
+
+    @Override
+    public SubTypes getSubtype(Game game) {
+        return new SubTypes();
     }
 
     @Override
@@ -185,6 +190,11 @@ public class Plane implements CommandObject {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return getAbilities().contains(ability);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
     }
 
     @Override
@@ -267,11 +277,17 @@ public class Plane implements CommandObject {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
-    public boolean isAllCreatureTypes() {
+    @Override
+    public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
+    @Override
     public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     public void discardEffects() {

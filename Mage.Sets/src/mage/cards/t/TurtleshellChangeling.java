@@ -28,8 +28,7 @@ public final class TurtleshellChangeling extends CardImpl {
         this.toughness = new MageInt(4);
 
         //Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         //{1}{U}: Switch {this}'s power and toughness until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));

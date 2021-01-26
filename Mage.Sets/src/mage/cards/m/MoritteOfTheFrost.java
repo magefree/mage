@@ -15,8 +15,7 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -35,12 +34,11 @@ public final class MoritteOfTheFrost extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // You may have Moritte of the Frost enter the battlefield as a copy of a permanent you control, except it's legendary and snow in addition to its other types and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT, new MoritteOfTheFrostApplier()
+                StaticFilters.FILTER_CONTROLLED_PERMANENT, new MoritteOfTheFrostCopyApplier()
         ).setText("as a copy of a permanent you control, except it's legendary and snow in addition to its other types " +
                 "and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling."
         ), true));
@@ -56,24 +54,18 @@ public final class MoritteOfTheFrost extends CardImpl {
     }
 }
 
-class MoritteOfTheFrostApplier extends ApplyToPermanent {
+class MoritteOfTheFrostCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent copyFromBlueprint, Ability source, UUID copyToObjectId) {
-        return apply(game, (MageObject) copyFromBlueprint, source, copyToObjectId);
-    }
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSuperType(SuperType.LEGENDARY);
+        blueprint.addSuperType(SuperType.SNOW);
 
-    @Override
-    public boolean apply(Game game, MageObject copyFromBlueprint, Ability source, UUID copyToObjectId) {
-        copyFromBlueprint.addSuperType(SuperType.LEGENDARY);
-        copyFromBlueprint.addSuperType(SuperType.SNOW);
-
-        if (!isCopyOfCopy(source, copyToObjectId) && copyFromBlueprint.isCreature()) {
-            copyFromBlueprint.setIsAllCreatureTypes(true);
-            copyFromBlueprint.getAbilities().add(ChangelingAbility.getInstance());
-            new AddCountersSourceEffect(
-                    CounterType.P1P1.createInstance(2), false
-            ).apply(game, source);
+        if (!isCopyOfCopy(source, copyToObjectId) && blueprint.isCreature()) {
+            blueprint.getAbilities().add(new ChangelingAbility());
+            blueprint.getAbilities().add(new EntersBattlefieldAbility(
+                    new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), false)
+            ));
         }
         return true;
     }

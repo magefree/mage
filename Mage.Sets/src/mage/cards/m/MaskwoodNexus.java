@@ -57,7 +57,7 @@ public final class MaskwoodNexus extends CardImpl {
 class MaskwoodNexusEffect extends ContinuousEffectImpl {
 
     MaskwoodNexusEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Creatures you control are every creature type. " +
                 "The same is true for creature spells you control " +
                 "and creature cards you own that aren't on the battlefield.";
@@ -73,7 +73,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -83,26 +83,26 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
             if (card != null && card.isCreature()) {
-                card.setIsAllCreatureTypes(true);
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // on Hand
         for (UUID cardId : controller.getHand()) {
             Card card = game.getCard(cardId);
             if (card != null && card.isCreature()) {
-                card.setIsAllCreatureTypes(true);
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // in Exile
         for (Card card : game.getState().getExile().getAllCards(game)) {
             if (card.isCreature() && card.isOwnedBy(controller.getId())) {
-                card.setIsAllCreatureTypes(true);
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // in Library (e.g. for Mystical Teachings)
         for (Card card : controller.getLibrary().getCards(game)) {
             if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
-                card.setIsAllCreatureTypes(true);
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // commander in command zone
@@ -114,7 +114,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
             if (card != null
                     && card.isOwnedBy(controller.getId())
                     && card.isCreature()) {
-                card.setIsAllCreatureTypes(true);
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // creature spells you control
@@ -124,7 +124,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
                     && stackObject.isControlledBy(source.getControllerId())
                     && stackObject.isCreature()) {
                 Card card = ((Spell) stackObject).getCard();
-                card.setIsAllCreatureTypes(true);
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
             }
         }
         // creatures you control
@@ -132,16 +132,10 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
                 new FilterControlledCreaturePermanent(), source.getControllerId(), game);
         for (Permanent creature : creatures) {
             if (creature != null) {
-                creature.setIsAllCreatureTypes(true);
+                creature.setIsAllCreatureTypes(game, true);
             }
         }
         return true;
 
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
 }

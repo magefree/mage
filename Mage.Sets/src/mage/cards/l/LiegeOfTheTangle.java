@@ -2,8 +2,6 @@
 
 package mage.cards.l;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -20,20 +18,21 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class LiegeOfTheTangle extends CardImpl {
 
-    public LiegeOfTheTangle (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+    public LiegeOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(8);
@@ -42,7 +41,7 @@ public final class LiegeOfTheTangle extends CardImpl {
         this.addAbility(new LiegeOfTheTangleTriggeredAbility());
     }
 
-    public LiegeOfTheTangle (final LiegeOfTheTangle card) {
+    public LiegeOfTheTangle(final LiegeOfTheTangle card) {
         super(card);
     }
 
@@ -76,7 +75,7 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent p = game.getPermanent(event.getSourceId());
         return damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId());
     }
@@ -101,32 +100,33 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent perm = it.next().getPermanent(game);
-            if (perm != null) {
-                if (perm.getCounters(game).getCount(CounterType.AWAKENING) > 0) {
-                    switch (layer) {
-                        case TypeChangingEffects_4:
-                            if (sublayer == SubLayer.NA) {
-                                perm.addCardTypes(token.getCardType());
-                                perm.getSubtype(game).addAll(token.getSubtype(game));
-                            }
-                            break;
-                        case ColorChangingEffects_5:
-                            if (sublayer == SubLayer.NA) {
-                                perm.getColor(game).setColor(token.getColor(game));
-                            }
-                            break;
-                        case PTChangingEffects_7:
-                            if (sublayer == SubLayer.SetPT_7b) {
-                                perm.getPower().setValue(token.getPower().getValue());
-                                perm.getToughness().setValue(token.getToughness().getValue());
-                            }
-                            break;
-                    }
-                }
-            } else {
+            if (perm == null) {
                 it.remove();
+                continue;
+            }
+            if (perm.getCounters(game).getCount(CounterType.AWAKENING) <= 0) {
+                continue;
+            }
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        perm.addCardTypes(token.getCardType());
+                        perm.copySubTypesFrom(game, token);
+                    }
+                    break;
+                case ColorChangingEffects_5:
+                    if (sublayer == SubLayer.NA) {
+                        perm.getColor(game).setColor(token.getColor(game));
+                    }
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        perm.getPower().setValue(token.getPower().getValue());
+                        perm.getToughness().setValue(token.getToughness().getValue());
+                    }
+                    break;
             }
         }
         return true;
@@ -141,7 +141,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (UUID permId: targetPointer.getTargets(game, source)) {
+            for (UUID permId : targetPointer.getTargets(game, source)) {
                 affectedObjectList.add(new MageObjectReference(permId, game));
             }
         }
@@ -154,7 +154,9 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7
+                || layer == Layer.ColorChangingEffects_5
+                || layer == layer.TypeChangingEffects_4;
     }
 
 }

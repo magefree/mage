@@ -17,8 +17,7 @@ public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
         subtype.add(SubType.SHAPESHIFTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        setIsAllCreatureTypes(true);
-        addAbility(ChangelingAbility.getInstance());
+        addAbility(new ChangelingAbility());
     }
 
     public CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {

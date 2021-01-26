@@ -60,7 +60,7 @@ class BakisCurseEffect extends OneShotEffect {
             List<UUID> attachments = creature.getAttachments();
             for (UUID attachmentId : attachments) {
                 Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.getSubtype(game).contains(SubType.AURA)) {
+                if (attached != null && attached.hasSubtype(SubType.AURA, game)) {
                     count++;
                 }
             }

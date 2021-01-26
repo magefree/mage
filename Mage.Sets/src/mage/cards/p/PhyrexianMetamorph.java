@@ -17,8 +17,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 /**
  *
@@ -41,25 +40,19 @@ public final class PhyrexianMetamorph extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        ApplyToPermanent phyrexianMetamorphApplier = new ApplyToPermanent() {
+        CopyApplier phyrexianMetamorphCopyApplier = new CopyApplier() {
             @Override
-            public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-                return apply(game, (MageObject) permanent, source, copyToObjectId);
-            }
-
-            @Override
-            public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-                if (!mageObject.isArtifact()) {
-                    mageObject.addCardType(CardType.ARTIFACT);
+            public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+                if (!blueprint.isArtifact()) {
+                    blueprint.addCardType(CardType.ARTIFACT);
                 }
                 return true;
             }
-
         };
 
         // {U/P} ( can be paid with either {U} or 2 life.)
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-        Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphApplier);
+        Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphCopyApplier);
         effect.setText("You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
         Ability ability = new SimpleStaticAbility(Zone.ALL, new EntersBattlefieldEffect(effect, "", true));
         this.addAbility(ability);

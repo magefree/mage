@@ -34,7 +34,7 @@ import mage.game.permanent.token.EmptyToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -253,10 +253,11 @@ public class Spell extends StackObjImpl implements Card {
             if (ability.getTargets().stillLegal(ability, game)) {
                 boolean bestow = SpellAbilityCastMode.BESTOW.equals(ability.getSpellAbilityCastMode());
                 if (bestow) {
+                    // before put to play:
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
-                    if (!card.getSubtype(game).contains(SubType.AURA)) {
+                    if (!card.hasSubtype(SubType.AURA, game)) {
                         card.addSubType(game, SubType.AURA);
                     }
                 }
@@ -280,9 +281,11 @@ public class Spell extends StackObjImpl implements Card {
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
                         Permanent permanent = game.getPermanent(permId);
                         if (permanent instanceof PermanentCard) {
+                            // after put to play:
+                            // restore removed stats (see "before put to play" above)
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             card.addCardType(CardType.CREATURE);
-                            card.getSubtype(game).remove(SubType.AURA);
+                            card.removeSubType(game, SubType.AURA);
                         }
                     }
                     if (isCopy()) {
@@ -312,7 +315,7 @@ public class Spell extends StackObjImpl implements Card {
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent instanceof PermanentCard) {
                         ((PermanentCard) permanent).getCard().addCardType(CardType.CREATURE);
-                        ((PermanentCard) permanent).getCard().getSubtype(game).remove(SubType.AURA);
+                        ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);
                         return true;
                     }
                 }
@@ -524,9 +527,14 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
+    public SubTypes getSubtype() {
+        return card.getSubtype();
+    }
+
+    @Override
+    public SubTypes getSubtype(Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
-            SubTypeList subtypes = card.getSubtype(game);
+            SubTypes subtypes = card.getSubtype(game);
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
             }
@@ -538,7 +546,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
         if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) { // workaround for Bestow (don't like it)
-            SubTypeList subtypes = card.getSubtype(game);
+            SubTypes subtypes = card.getSubtype(game);
             if (!subtypes.contains(SubType.AURA)) { // do it only once
                 subtypes.add(SubType.AURA);
             }
@@ -571,6 +579,11 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return card.hasAbility(ability, game);
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return color;
     }
 
     @Override
@@ -1090,12 +1103,16 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean isAllCreatureTypes() {
+    public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     @Override

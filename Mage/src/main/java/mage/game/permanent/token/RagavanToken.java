@@ -14,12 +14,12 @@ public final class RagavanToken extends TokenImpl {
     public RagavanToken() {
         super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");
         this.setOriginalExpansionSetCode("AER");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(1);
         this.color.setRed(true);
-        this.getSubtype(null).add(SubType.MONKEY);
-        this.addCardType(CardType.CREATURE);
+        this.subtype.add(SubType.MONKEY);
+        this.cardType.add(CardType.CREATURE);
     }
 
     public RagavanToken(final RagavanToken token) {
