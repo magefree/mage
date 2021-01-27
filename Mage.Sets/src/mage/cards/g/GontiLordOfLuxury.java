@@ -147,21 +147,22 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        if (targetId == null) {
+            this.discard(); // card is no longer in the origin zone, effect can be discarded
+            return false;
+        }
         Card theCard = game.getCard(objectId);
-        if (theCard == null) {
+        if (theCard == null || theCard.isLand()) {
             return false;
         }
         objectId = theCard.getMainCard().getId(); // for split cards
 
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        if (targetId == null) {
-            this.discard();
-        } else if (objectId.equals(targetId)
+        if (objectId.equals(targetId)
                 && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             // TODO: Allow to cast Zoetic Cavern face down
-            return card != null
-                    && !card.isLand();
+            return card != null;
         }
         return false;
     }
