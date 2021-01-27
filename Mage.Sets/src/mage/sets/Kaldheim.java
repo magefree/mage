@@ -1,10 +1,14 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +22,8 @@ public final class Kaldheim extends ExpansionSet {
         return instance;
     }
 
+    private final List<CardInfo> savedSpecialLand = new ArrayList<>();
+
     private Kaldheim() {
         super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION);
         this.blockName = "Kaldheim";
@@ -30,6 +36,8 @@ public final class Kaldheim extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
         this.maxCardNumberInBooster = 285;
+        this.ratioBoosterSpecialLand = 12; // TODO: change when actual ratio is known
+        this.ratioBoosterSpecialLandNumerator = 5; // TODO: change when actual ratio is known
 
         cards.add(new SetCardInfo("Absorb Identity", 383, Rarity.UNCOMMON, mage.cards.a.AbsorbIdentity.class));
         cards.add(new SetCardInfo("Aegar, the Freezing Flame", 200, Rarity.UNCOMMON, mage.cards.a.AegarTheFreezingFlame.class));
@@ -333,5 +341,43 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Withercrown", 119, Rarity.COMMON, mage.cards.w.Withercrown.class));
         cards.add(new SetCardInfo("Woodland Chasm", 274, Rarity.COMMON, mage.cards.w.WoodlandChasm.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 382, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
+    }
+
+    @Override
+    public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        if (rarity != Rarity.COMMON) {
+            return super.getCardsByRarity(rarity);
+        }
+        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
+        if (savedCardsInfos == null) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(this.code).notTypes(CardType.LAND);
+            criteria.rarities(rarity).doubleFaced(false);
+            savedCardsInfos = CardRepository.instance.findCards(criteria);
+            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
+            }
+            criteria = new CardCriteria();
+            criteria.setCodes(this.code).nameExact("Shimmerdrift Vale");
+            savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
+            savedCards.put(rarity, savedCardsInfos);
+        }
+        // Return a copy of the saved cards information, as not to modify the original.
+        return new ArrayList<>(savedCardsInfos);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(this.code);
+            criteria.rarities(Rarity.COMMON);
+            criteria.types(CardType.LAND);
+            criteria.supertypes("Snow");
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+            savedSpecialLand.removeIf(cardInfo -> cardInfo.getName() == "Shimmerdrift Vale");
+            savedSpecialLand.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
+        }
+        return new ArrayList<>(savedSpecialLand);
     }
 }
