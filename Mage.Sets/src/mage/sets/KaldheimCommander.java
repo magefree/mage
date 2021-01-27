@@ -27,6 +27,7 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Pact of the Serpent", 9, Rarity.RARE, mage.cards.p.PactOfTheSerpent.class));
         cards.add(new SetCardInfo("Ruthless Winnower", 10, Rarity.RARE, mage.cards.r.RuthlessWinnower.class));
         cards.add(new SetCardInfo("Sage of the Beyond", 6, Rarity.RARE, mage.cards.s.SageOfTheBeyond.class));
+        cards.add(new SetCardInfo("Serpent's Soul-Jar", 11, Rarity.RARE, mage.cards.s.SerpentsSoulJar.class));
         cards.add(new SetCardInfo("Spectral Deluge", 7, Rarity.RARE, mage.cards.s.SpectralDeluge.class));
         cards.add(new SetCardInfo("Stoic Farmer", 5, Rarity.RARE, mage.cards.s.StoicFarmer.class));
         cards.add(new SetCardInfo("Tales of the Ancestors", 8, Rarity.RARE, mage.cards.t.TalesOfTheAncestors.class));
