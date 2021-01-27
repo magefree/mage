@@ -95,7 +95,7 @@ class OrzhovAdvokistEffect extends OneShotEffect {
             for (UUID creatureId : creatures) {
                 Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
-                    creature.addCounters(CounterType.P1P1.createInstance(2), source, game);
+                    creature.addCounters(CounterType.P1P1.createInstance(2), creature.getControllerId(), source, game);
                 }
             }
             for (UUID playerId : players) {

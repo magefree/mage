@@ -100,7 +100,7 @@ class CombineGuildmageReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
         }
         return false;
     }
@@ -136,7 +136,7 @@ class CombineGuildmageCounterEffect extends OneShotEffect {
         }
         if (fromPermanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
             fromPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
-            toPermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            toPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

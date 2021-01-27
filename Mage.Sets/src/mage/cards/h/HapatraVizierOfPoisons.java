@@ -1,12 +1,10 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -22,8 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DeathtouchSnakeToken;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class HapatraVizierOfPoisons extends CardImpl {
@@ -43,8 +42,7 @@ public final class HapatraVizierOfPoisons extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you put one or more -1/-1 counters on a creature, create a 1/1 green Snake creature token with deathtouch.
-        this.addAbility(new HapatraVizierOfPoisonsTriggeredAbility(new CreateTokenEffect(new DeathtouchSnakeToken()), false));
-
+        this.addAbility(new HapatraVizierOfPoisonsTriggeredAbility());
     }
 
     public HapatraVizierOfPoisons(final HapatraVizierOfPoisons card) {
@@ -59,11 +57,11 @@ public final class HapatraVizierOfPoisons extends CardImpl {
 
 class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
 
-    public HapatraVizierOfPoisonsTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+    HapatraVizierOfPoisonsTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new DeathtouchSnakeToken()), false);
     }
 
-    public HapatraVizierOfPoisonsTriggeredAbility(HapatraVizierOfPoisonsTriggeredAbility ability) {
+    private HapatraVizierOfPoisonsTriggeredAbility(HapatraVizierOfPoisonsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,16 +72,15 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getData().equals(CounterType.M1M1.getName())
-                && controllerId.equals(game.getControllerId(event.getSourceId()))) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent == null) {
-                permanent = game.getPermanentEntering(event.getTargetId());
-            }
-            return (permanent != null
-                    && permanent.isCreature());
+        if (!event.getData().equals(CounterType.M1M1.getName())
+                || !isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
+        return permanent != null && permanent.isCreature();
 
     }
 

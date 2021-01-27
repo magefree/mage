@@ -111,7 +111,7 @@ class RhythmOfTheWildEffect extends ReplacementEffectImpl {
                 null, "+1/+1 counter", "Haste", source, game
         )) {
             game.informPlayers(player.getLogName() + " choose to put a +1/+1 counter on " + creature.getName());
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
         } else {
             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
             effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));

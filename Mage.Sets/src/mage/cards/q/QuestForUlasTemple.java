@@ -19,7 +19,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -84,7 +83,7 @@ class QuestForUlasTempleEffect extends OneShotEffect {
                     controller.revealCards(sourcePermanent.getName(), cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
                     if (questForUlasTemple != null) {
-                        questForUlasTemple.addCounters(CounterType.QUEST.createInstance(), source, game);
+                        questForUlasTemple.addCounters(CounterType.QUEST.createInstance(), source.getControllerId(), source, game);
                         return true;
                     }
                 }

@@ -80,7 +80,7 @@ public final class UrborgTombOfYawgmoth extends CardImpl {
                         // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
                         // So the ability removing has to be done before Layer 6
                         // Lands have their mana ability intrinsically, so that is added in layer 4
-                        if (!land.getSubtype(game).contains(SubType.SWAMP)) {
+                        if (!land.hasSubtype(SubType.SWAMP, game)) {
                             land.addSubType(game, SubType.SWAMP);
                         }
                         if (!land.getAbilities().containsRule(new BlackManaAbility())) {

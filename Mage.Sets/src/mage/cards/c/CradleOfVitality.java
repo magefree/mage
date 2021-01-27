@@ -66,6 +66,6 @@ class CradleOfVitalityEffect extends OneShotEffect {
             lifeGained = (Integer) this.getValue("gainedLife");
         }
         return permanent != null && lifeGained > 0
-                && permanent.addCounters(CounterType.P1P1.createInstance(lifeGained), source, game);
+                && permanent.addCounters(CounterType.P1P1.createInstance(lifeGained), source.getControllerId(), source, game);
     }
 }

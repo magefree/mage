@@ -68,7 +68,7 @@ class ReplicatingRingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
-            permanent.addCounters(CounterType.NIGHT.createInstance(), source, game);
+            permanent.addCounters(CounterType.NIGHT.createInstance(), source.getControllerId(), source, game);
         }
         permanent = source.getSourcePermanentOrLKI(game);
         if (permanent == null || permanent.getCounters(game).getCount(CounterType.NIGHT) < 8) {

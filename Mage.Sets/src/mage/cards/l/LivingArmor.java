@@ -63,7 +63,7 @@ public final class LivingArmor extends CardImpl {
             Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
             if (creature != null) {
                 int amount = creature.getConvertedManaCost();
-                creature.addCounters(new BoostCounter(0, 1, amount), source, game);
+                creature.addCounters(new BoostCounter(0, 1, amount), source.getControllerId(), source, game);
                 return true;
             }
             return false;

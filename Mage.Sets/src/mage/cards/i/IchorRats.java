@@ -59,7 +59,7 @@ class IchorRatsEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.addCounters(CounterType.POISON.createInstance(), source, game);
+                player.addCounters(CounterType.POISON.createInstance(), source.getControllerId(), source, game);
             }
         }
         return true;

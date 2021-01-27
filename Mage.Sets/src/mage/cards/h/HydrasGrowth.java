@@ -76,7 +76,7 @@ class HydrasGrowthDoubleEffect extends OneShotEffect {
             if (attachedTo != null) {
                 int amount = attachedTo.getCounters(game).getCount(CounterType.P1P1);
                 if (amount > 0) {
-                    attachedTo.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                    attachedTo.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
                 }
                 return true;
             }

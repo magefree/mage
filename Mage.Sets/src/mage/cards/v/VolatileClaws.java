@@ -73,7 +73,7 @@ class VolatileClawsEffect extends ContinuousEffectImpl {
                 it.remove(); // no longer on the battlefield, remove reference to object
                 continue;
             }
-            permanent.setIsAllCreatureTypes(true);
+            permanent.setIsAllCreatureTypes(game, true);
         }
         return true;
     }

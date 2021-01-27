@@ -17,8 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -44,7 +43,7 @@ public final class SparkDouble extends CardImpl {
         // You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control,
         // except it enters with an additional +1/+1 counter on it if it’s a creature,
         // it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
-        Effect effect = new CopyPermanentEffect(filter, new SparkDoubleExceptEffectsApplyerToPermanent());
+        Effect effect = new CopyPermanentEffect(filter, new SparkDoubleExceptEffectsCopyApplier());
         effect.setText("as a copy of a creature or planeswalker you control, "
                 + "except it enters with an additional +1/+1 counter on it if it's a creature, "
                 + "it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.");
@@ -62,15 +61,10 @@ public final class SparkDouble extends CardImpl {
     }
 }
 
-class SparkDoubleExceptEffectsApplyerToPermanent extends ApplyToPermanent {
+class SparkDoubleExceptEffectsCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent copyFromBlueprint, Ability source, UUID copyToObjectId) {
-        return apply(game, (MageObject) copyFromBlueprint, source, copyToObjectId);
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject copyFromBlueprint, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         // copyToObjectId can be new token outside from game, don't use it
 
         // it isn’t legendary if that permanent is legendary
@@ -81,7 +75,7 @@ class SparkDoubleExceptEffectsApplyerToPermanent extends ApplyToPermanent {
         // (2019-05-03)
         //
         // So, it's must make changes in blueprint (for farther copyable)
-        copyFromBlueprint.getSuperType().remove(SuperType.LEGENDARY);
+        blueprint.getSuperType().remove(SuperType.LEGENDARY);
 
         // TODO: Blood Moon problem, can't apply on type changing effects (same as TeferisTimeTwist)
         // see https://magic.wizards.com/en/articles/archive/feature/war-spark-release-notes-2019-04-19
@@ -96,13 +90,19 @@ class SparkDoubleExceptEffectsApplyerToPermanent extends ApplyToPermanent {
         // counters only for original card, not copies
         if (!isCopyOfCopy(source, copyToObjectId)) {
             // enters with an additional +1/+1 counter on it if it’s a creature
-            if (copyFromBlueprint.isCreature()) {
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false).apply(game, source);
+            if (blueprint.isCreature()) {
+                blueprint.getAbilities().add(new EntersBattlefieldAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)
+                        .setText("with an additional +1/+1 counter on it")
+                ));
             }
 
             // enters with an additional loyalty counter on it if it’s a planeswalker
-            if (copyFromBlueprint.isPlaneswalker()) {
-                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), false).apply(game, source);
+            if (blueprint.isPlaneswalker()) {
+                blueprint.getAbilities().add(new EntersBattlefieldAbility(
+                        new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), false)
+                        .setText("with an additional loyalty counter on it")
+                ));
             }
         }
 

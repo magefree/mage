@@ -82,8 +82,7 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
         if (land == null) {
             return true;
         }
-        land.getSubtype(game).removeAll(SubType.getBasicLands());
-        land.getSubtype(game).addAll(SubType.getBasicLands());
+        land.addSubType(game,SubType.getBasicLands());
         land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
         land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
         land.addAbility(new BlackManaAbility(), source.getSourceId(), game);

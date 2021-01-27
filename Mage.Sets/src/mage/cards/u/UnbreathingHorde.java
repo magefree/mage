@@ -78,7 +78,7 @@ class UnbreathingHordeEffect1 extends OneShotEffect {
             int amount = game.getBattlefield().countAll(filter1, source.getControllerId(), game);
             amount += player.getGraveyard().count(filter2, game);
             if (amount > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;
         }

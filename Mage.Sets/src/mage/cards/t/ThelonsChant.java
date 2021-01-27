@@ -78,7 +78,7 @@ class ThelonsChantEffect extends OneShotEffect {
                     && player.choose(Outcome.UnboostCreature, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.M1M1.createInstance(), source, game);
+                    permanent.addCounters(CounterType.M1M1.createInstance(), player.getId(), source, game);
                     paid = true;
                 }
             }

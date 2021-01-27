@@ -67,7 +67,7 @@ class FabricateEffect extends OneShotEffect {
                     "Create " + CardUtil.numberToText(value, "a") + " 1/1 token" + (value > 1 ? "s" : ""),
                     source,
                     game)) {
-                ((Card) sourceObject).addCounters(CounterType.P1P1.createInstance(value), source, game);
+                ((Card) sourceObject).addCounters(CounterType.P1P1.createInstance(value), source.getControllerId(), source, game);
             }
             else {
                 new ServoToken().putOntoBattlefield(value, game, source, controller.getId());

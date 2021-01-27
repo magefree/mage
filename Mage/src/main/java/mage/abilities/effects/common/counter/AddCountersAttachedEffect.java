@@ -59,7 +59,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
                 if (countersToAdd > 0) {
                     countersToAdd--;
                     newCounter.add(countersToAdd);
-                    attachedTo.addCounters(newCounter, source, game);
+                    attachedTo.addCounters(newCounter, source.getControllerId(), source, game);
                 }
             }
             return true;

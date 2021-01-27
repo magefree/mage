@@ -87,7 +87,7 @@ class EzuriClawOfProgressEffect extends OneShotEffect {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
-                target.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                target.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;
         }

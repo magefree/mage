@@ -1,9 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -13,18 +9,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SubTypeSet;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.SubTypeList;
+
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
- *
  * @author TheElk801
  */
 public final class EndemicPlague extends CardImpl {
@@ -39,7 +35,7 @@ public final class EndemicPlague extends CardImpl {
         this.getSpellAbility().addEffect(new EndemicPlagueEffect());
     }
 
-    public EndemicPlague(final EndemicPlague card) {
+    private EndemicPlague(final EndemicPlague card) {
         super(card);
     }
 
@@ -51,40 +47,34 @@ public final class EndemicPlague extends CardImpl {
 
 class EndemicPlagueEffect extends OneShotEffect {
 
-    public EndemicPlagueEffect() {
+    EndemicPlagueEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy all creatures that share a creature type with the sacrificed creature. They can't be regenerated";
     }
 
-    public EndemicPlagueEffect(final EndemicPlagueEffect effect) {
+    private EndemicPlagueEffect(final EndemicPlagueEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            SubTypeList subs = null;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                    subs = ((SacrificeTargetCost) cost).getPermanents().get(0).getSubtype(game);
-                    break;
-                }
-            }
-            if (subs == null) {
-                return false;
-            }
-            List<SubType.SubTypePredicate> preds = new ArrayList<>();
-            for (SubType subType : subs) {
-                if (subType.getSubTypeSet() == SubTypeSet.CreatureType) {
-                    preds.add(subType.getPredicate());
-                }
-            }
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(Predicates.or(preds));
-            new DestroyAllEffect(filter, true).apply(game, source);
+        if (controller == null) {
+            return false;
         }
-        return true;
+        Permanent permanent = null;
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
+                permanent = ((SacrificeTargetCost) cost).getPermanents().get(0);
+                break;
+            }
+        }
+        if (permanent == null) {
+            return false;
+        }
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(new SharesCreatureTypePredicate(permanent));
+        return new DestroyAllEffect(filter, true).apply(game, source);
     }
 
     @Override

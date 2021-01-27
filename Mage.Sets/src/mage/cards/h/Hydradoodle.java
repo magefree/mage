@@ -97,7 +97,7 @@ class HydradoodleEffect extends OneShotEffect {
                         total += thisRoll;
                     }
 
-                    permanent.addCounters(CounterType.P1P1.createInstance(total), source, game);
+                    permanent.addCounters(CounterType.P1P1.createInstance(total), source.getControllerId(), source, game);
                 }
             }
             return true;

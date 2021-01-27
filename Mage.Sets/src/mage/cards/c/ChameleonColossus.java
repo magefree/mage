@@ -31,8 +31,7 @@ public final class ChameleonColossus extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Changeling (This card is every creature type at all times.)
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Protection from black
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));

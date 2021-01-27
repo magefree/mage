@@ -150,7 +150,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
                                 if (targetObject.hasSubtype(fromSubType, game)) {
-                                    targetObject.getSubtype(game).remove(fromSubType);
+                                    targetObject.removeSubType(game, fromSubType);
                                     if (!targetObject.hasSubtype(toSubType, game)) {
                                         targetObject.addSubType(game, toSubType);
                                     }

@@ -12,26 +12,29 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author LevelX2
  */
 public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
 
-    private final SubTypeList subtypes = new SubTypeList();
+    private final List<SubType> subtypes = new ArrayList<>();
     private final boolean loseOther; // loses other subtypes
     private final FilterCreaturePermanent filter;
 
     public BecomesSubtypeAllEffect(Duration duration, SubType subtype) {
-        this(duration, new SubTypeList(subtype));
+        this(duration, Arrays.asList(subtype));
     }
 
-    public BecomesSubtypeAllEffect(Duration duration, SubTypeList subtypes) {
+    public BecomesSubtypeAllEffect(Duration duration, List<SubType> subtypes) {
         this(duration, subtypes, StaticFilters.FILTER_PERMANENT_CREATURE, true);
     }
 
-    public BecomesSubtypeAllEffect(Duration duration, SubTypeList subtypes, FilterCreaturePermanent filter, boolean loseOther) {
+    public BecomesSubtypeAllEffect(Duration duration, List<SubType> subtypes, FilterCreaturePermanent filter, boolean loseOther) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.subtypes.addAll(subtypes);
         this.staticText = setText();

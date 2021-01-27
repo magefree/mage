@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -119,7 +118,7 @@ class BloodTyrantEffect extends OneShotEffect {
             }
             Permanent bloodTyrant = game.getPermanent(source.getSourceId());
             if (bloodTyrant != null && counters > 0) {
-                bloodTyrant.addCounters(CounterType.P1P1.createInstance(counters), source, game);
+                bloodTyrant.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game);
             }
             return true;
         }

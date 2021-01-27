@@ -1,36 +1,27 @@
-
-
 package mage.abilities.keyword;
 
-import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.effects.common.continuous.IsAllCreatureTypesSourceEffect;
 import mage.constants.Zone;
-
-import java.io.ObjectStreamException;
 
 
 /**
  * October 1, 2012
  * 702.71. Changeling
- *  702.71a Changeling is a characteristic-defining ability. "Changeling" means "This object
- *  is every creature type." This ability works everywhere, even outside the game. See rule 604.3.
- *  702.71b Multiple instances of changeling on the same object are redundant.
+ * 702.71a Changeling is a characteristic-defining ability. "Changeling" means "This object
+ * is every creature type." This ability works everywhere, even outside the game. See rule 604.3.
+ * 702.71b Multiple instances of changeling on the same object are redundant.
  *
  * @author nantuko
  */
-public class ChangelingAbility extends StaticAbility implements MageSingleton {
-    private static final ChangelingAbility instance =  new ChangelingAbility();
+public class ChangelingAbility extends StaticAbility {
 
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
+    public ChangelingAbility() {
+        super(Zone.ALL, new IsAllCreatureTypesSourceEffect());
     }
 
-    public static ChangelingAbility getInstance() {
-        return instance;
-    }
-
-    private ChangelingAbility() {
-        super(Zone.ALL, null);
+    private ChangelingAbility(final ChangelingAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -40,6 +31,6 @@ public class ChangelingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public ChangelingAbility copy() {
-        return instance;
+        return new ChangelingAbility(this);
     }
 }

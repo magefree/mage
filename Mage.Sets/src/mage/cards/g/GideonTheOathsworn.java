@@ -139,7 +139,7 @@ class GideonTheOathswornEffect extends OneShotEffect {
         for (MageObjectReference mor : attackers) {
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
         }
         return true;

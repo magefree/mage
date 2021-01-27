@@ -83,7 +83,7 @@ class PrimalAmuletEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && player != null) {
-            permanent.addCounters(CounterType.CHARGE.createInstance(), source, game);
+            permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
             int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
                 permanent.removeCounters("charge", counters, source, game);

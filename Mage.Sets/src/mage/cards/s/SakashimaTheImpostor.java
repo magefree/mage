@@ -21,8 +21,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 /**
  * @author LevelX2
@@ -38,7 +37,7 @@ public final class SakashimaTheImpostor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may have Sakashima the Impostor enter the battlefield as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has "{2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step."
-        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new SakashimaTheImpostorApplier());
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new SakashimaTheImpostorCopyApplier());
         effect.setText("as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has \"{2}{U}{U}: Return {this} to its owner's hand at the beginning of the next end step.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
@@ -53,27 +52,14 @@ public final class SakashimaTheImpostor extends CardImpl {
     }
 }
 
-class SakashimaTheImpostorApplier extends ApplyToPermanent {
+class SakashimaTheImpostorCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.addSuperType(SuperType.LEGENDARY);
-
-        permanent.setName("Sakashima the Impostor");
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.addSuperType(SuperType.LEGENDARY);
+        blueprint.setName("Sakashima the Impostor");
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
-        permanent.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
-                new ManaCostsImpl("{2}{U}{U}")
-        ), source.getSourceId(), game);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.addSuperType(SuperType.LEGENDARY);
-        mageObject.setName("Sakashima the Impostor");
-        // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
-        mageObject.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        blueprint.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
                 new ManaCostsImpl("{2}{U}{U}")
         ));

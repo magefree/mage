@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -20,7 +17,11 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author bunchOfDevs
@@ -50,16 +51,16 @@ public final class Conspiracy extends CardImpl {
 
     static class ConspiracyEffect extends ContinuousEffectImpl {
 
-        public ConspiracyEffect() {
+        private ConspiracyEffect() {
             super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
             staticText = "Creatures you control are the chosen type. The same is "
                     + "true for creature spells you control and creature cards "
                     + "you own that aren't on the battlefield.";
-            
+
             this.dependendToTypes.add(DependencyType.BecomeCreature);  // Opalescence and Starfield of Nyx
         }
 
-        public ConspiracyEffect(final ConspiracyEffect effect) {
+        private ConspiracyEffect(final ConspiracyEffect effect) {
             super(effect);
         }
 
@@ -69,94 +70,77 @@ public final class Conspiracy extends CardImpl {
         }
 
         @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (controller != null && subType != null) {
-                        // Creature cards you own that aren't on the battlefield
-                        // in graveyard
-                        for (UUID cardId : controller.getGraveyard()) {
-                            Card card = game.getCard(cardId);
-                            if (card != null && card.isCreature()) {
-                                setCreatureSubtype(card, subType, game);
-                            }
-                        }
-                        // on Hand
-                        for (UUID cardId : controller.getHand()) {
-                            Card card = game.getCard(cardId);
-                            if (card != null && card.isCreature()) {
-                                setCreatureSubtype(card, subType, game);
-                            }
-                        }
-                        // in Exile
-                        for (Card card : game.getState().getExile().getAllCards(game)) {
-                            if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
-                                setCreatureSubtype(card, subType, game);
-                            }
-                        }
-                        // in Library (e.g. for Mystical Teachings)
-                        for (Card card : controller.getLibrary().getCards(game)) {
-                            if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
-                                setCreatureSubtype(card, subType, game);
-                            }
-                        }
-                        // in command zone
-                        for (CommandObject commandObject : game.getState().getCommand()) {
-                            if (commandObject instanceof Commander) {
-                                Card card = game.getCard(((Commander) commandObject).getId());
-                                if (card != null && card.isCreature() && card.isOwnedBy(controller.getId())) {
-                                    setCreatureSubtype(card, subType, game);
-                                }
-                            }
-                        }                            
-                        // creature spells you control
-                        for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
-                            StackObject stackObject = iterator.next();
-                            if (stackObject instanceof Spell
-                                    && stackObject.isControlledBy(controller.getId())
-                                    && stackObject.isCreature()) {
-                                setCreatureSubtype(stackObject, subType, game);
-                                setCreatureSubtype(((Spell) stackObject).getCard(), subType, game);
-                            }
-                        }
-                        // creatures you control
-                        List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
-                        for (Permanent permanent : permanents) {
-                            if (permanent.isCreature()) {
-                                setCreatureSubtype(permanent, subType, game);
-                            }
-                        }
-                    }
-                    return true;
+            if (controller == null || subType == null) {
+                return true;
             }
-            return false;
+            // Creature cards you own that aren't on the battlefield
+            // in graveyard
+            for (UUID cardId : controller.getGraveyard()) {
+                Card card = game.getCard(cardId);
+                if (card != null && card.isCreature()) {
+                    setCreatureSubtype(card, subType, game);
+                }
+            }
+            // on Hand
+            for (UUID cardId : controller.getHand()) {
+                Card card = game.getCard(cardId);
+                if (card != null && card.isCreature()) {
+                    setCreatureSubtype(card, subType, game);
+                }
+            }
+            // in Exile
+            for (Card card : game.getState().getExile().getAllCards(game)) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+                    setCreatureSubtype(card, subType, game);
+                }
+            }
+            // in Library (e.g. for Mystical Teachings)
+            for (Card card : controller.getLibrary().getCards(game)) {
+                if (card.isOwnedBy(controller.getId()) && card.isCreature()) {
+                    setCreatureSubtype(card, subType, game);
+                }
+            }
+            // in command zone
+            for (CommandObject commandObject : game.getState().getCommand()) {
+                if (commandObject instanceof Commander) {
+                    Card card = game.getCard(((Commander) commandObject).getId());
+                    if (card != null && card.isCreature() && card.isOwnedBy(controller.getId())) {
+                        setCreatureSubtype(card, subType, game);
+                    }
+                }
+            }
+            // creature spells you control
+            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
+                StackObject stackObject = iterator.next();
+                if (stackObject instanceof Spell
+                        && stackObject.isControlledBy(controller.getId())
+                        && stackObject.isCreature()) {
+                    setCreatureSubtype(stackObject, subType, game);
+                    setCreatureSubtype(((Spell) stackObject).getCard(), subType, game);
+                }
+            }
+            // creatures you control
+            List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
+            for (Permanent permanent : permanents) {
+                if (permanent.isCreature()) {
+                    permanent.removeAllCreatureTypes(game);
+                    permanent.addSubType(game, subType);
+                }
+            }
+            return true;
         }
 
         private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {
-            if (object != null) {
-                setChosenSubtype(game.getState()
-                    .getCreateMageObjectAttribute(object, game).getSubtype(), subtype);
+            if (object == null) {
+                return;
             }
-        }
-
-        private void setChosenSubtype(SubTypeList subtype, SubType choice) {
-            if (subtype.size() != 1 
-                    || !subtype.contains(choice)) {
-                subtype.clear();
-                subtype.add(choice);
-            }
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.TypeChangingEffects_4;
+            SubTypes subTypes = game.getState().getCreateMageObjectAttribute(object, game).getSubtype();
+            subTypes.setIsAllCreatureTypes(false);
+            subTypes.removeAll(SubType.getCreatureTypes());
+            subTypes.add(subtype);
         }
     }
 }

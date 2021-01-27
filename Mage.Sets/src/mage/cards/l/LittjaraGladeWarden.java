@@ -33,8 +33,7 @@ public final class LittjaraGladeWarden extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // {2}{G}, {T}, Exile a creature card from your graveyard: Put two +1/+1 counters on target creature. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(

@@ -1119,7 +1119,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Permanent found = getPermanent(cardName);
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
         if (subType != null) {
-            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.getSubtype(currentGame).contains(subType));
+            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.hasSubtype(subType, currentGame));
         }
     }
 

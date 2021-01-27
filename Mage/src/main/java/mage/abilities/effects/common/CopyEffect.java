@@ -10,7 +10,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public class CopyEffect extends ContinuousEffectImpl {
     protected MageObject copyFromObject;
 
     protected UUID copyToObjectId;
-    protected ApplyToPermanent applier;
+    protected CopyApplier applier;
 
     public CopyEffect(MageObject copyFromObject, UUID copyToObjectId) {
         this(Duration.Custom, copyFromObject, copyToObjectId);
@@ -105,8 +105,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
 
         permanent.removeAllSubTypes(game);
-        permanent.getSubtype(game).addAll(copyFromObject.getSubtype(game));
-        permanent.setIsAllCreatureTypes(copyFromObject.isAllCreatureTypes());
+        permanent.copySubTypesFrom(game, copyFromObject);
 
         permanent.getSuperType().clear();
         for (SuperType type : copyFromObject.getSuperType()) {
@@ -165,11 +164,11 @@ public class CopyEffect extends ContinuousEffectImpl {
         return copyToObjectId;
     }
 
-    public ApplyToPermanent getApplier() {
+    public CopyApplier getApplier() {
         return applier;
     }
 
-    public void setApplier(ApplyToPermanent applier) {
+    public void setApplier(CopyApplier applier) {
         this.applier = applier;
     }
 

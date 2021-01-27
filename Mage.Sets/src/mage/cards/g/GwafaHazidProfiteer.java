@@ -70,7 +70,7 @@ class GwafaHazidProfiteerEffect1 extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
             Player controller = game.getPlayer(targetCreature.getControllerId());
-            targetCreature.addCounters(CounterType.BRIBERY.createInstance(), source, game);
+            targetCreature.addCounters(CounterType.BRIBERY.createInstance(), source.getControllerId(), source, game);
             if (controller != null) {
                 controller.drawCards(1, source, game);
             }

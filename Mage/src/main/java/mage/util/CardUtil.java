@@ -13,6 +13,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -1024,21 +1025,30 @@ public final class CardUtil {
         }
     }
 
+    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration) {
+        makeCardPlayableAndSpendManaAsAnyColor(game, source, card, duration, null);
+    }
+
     /**
      * Add effects to game that allows to play/cast card from current zone and spend mana as any type for it.
      * Effects will be discarded/ignored on any card movements or blinks (after ZCC change)
      *
+     * Affected to all card's parts
+     *
      * @param game
      * @param card
      * @param duration
+     * @param condition can be null
      */
-    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration) {
+    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
-        // So there is a workaround to get real ZCC (PermanentCard's ZCC is static, but it must be from Card's ZCC)
+        // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
+        // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
-        int zcc = game.getState().getZoneChangeCounter(card.getId());
-        game.addEffect(new CanPlayCardControllerEffect(game, card.getId(), zcc, duration), source);
-        game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration).setTargetPointer(new FixedTarget(card.getId(), zcc)), source);
+        UUID objectId = card.getMainCard().getId();
+        int zcc = game.getState().getZoneChangeCounter(objectId);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, condition), source);
+        game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
     }
 
     /**

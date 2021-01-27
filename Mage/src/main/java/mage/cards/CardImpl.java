@@ -602,7 +602,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Counters countersToAdd = game.getEnterWithCounters(permanent.getId());
         if (countersToAdd != null) {
             for (Counter counter : countersToAdd.values()) {
-                permanent.addCounters(counter, source, game);
+                permanent.addCounters(counter, source.getControllerId(), source, game);
             }
             game.setEnterWithCounters(permanent.getId(), null);
         }
@@ -715,24 +715,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
-        return addCounters(counter, source, game, null, true);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
+        return addCounters(counter, playerAddingCounters, source, game, null, true);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, boolean isEffect) {
-        return addCounters(counter, source, game, null, isEffect);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, boolean isEffect) {
+        return addCounters(counter, playerAddingCounters, source, game, null, isEffect);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
-        return addCounters(counter, source, game, appliedEffects, true);
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects) {
+        return addCounters(counter, playerAddingCounters, source, game, appliedEffects, true);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
         boolean returnCode = true;
-        GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, getControllerOrOwner(), counter.getName(), counter.getCount());
+        GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, source, playerAddingCounters, counter.getName(), counter.getCount());
         addingAllEvent.setAppliedEffects(appliedEffects);
         addingAllEvent.setFlag(isEffect);
         if (!game.replaceEvent(addingAllEvent)) {
@@ -742,12 +742,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
                 eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, source, getControllerOrOwner(), counter.getName(), 1);
+                GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, source, playerAddingCounters, counter.getName(), 1);
                 addingOneEvent.setAppliedEffects(appliedEffects);
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
                     getCounters(game).addCounter(eventCounter);
-                    GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, source, getControllerOrOwner(), counter.getName(), 1);
+                    GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, source, playerAddingCounters, counter.getName(), 1);
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
                 } else {
@@ -756,7 +756,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
             if (finalAmount > 0) {
-                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, getControllerOrOwner(), counter.getName(), amount);
+                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), amount);
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
             }

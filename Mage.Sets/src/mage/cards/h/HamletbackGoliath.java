@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -102,7 +101,7 @@ class HamletbackGoliathEffect extends OneShotEffect {
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (creature != null && sourceObject != null) {
-            sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), source, game);
+            sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), source.getControllerId(), source, game);
         }
         return true;
     }

@@ -36,8 +36,7 @@ public final class GladewalkerRitualist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Whenever another creature named Gladewalker Ritualist enters the battlefield under your control, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

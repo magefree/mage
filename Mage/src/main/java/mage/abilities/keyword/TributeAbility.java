@@ -89,7 +89,7 @@ class TributeEffect extends OneShotEffect {
                             game.informPlayers(opponent.getLogName() + " pays tribute to " + sourcePermanent.getLogName());
                         }
                         game.getState().setValue("tributeValue" + source.getSourceId(), "yes");
-                        return new AddCountersSourceEffect(CounterType.P1P1.createInstance(tributeValue), true).apply(game, source);
+                        return sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue),opponent.getId(),source,game);
                     } else {
                         if (!game.isSimulation()) {
                             game.informPlayers(opponent.getLogName() + " does not pay tribute to " + sourcePermanent.getLogName());

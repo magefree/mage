@@ -82,7 +82,7 @@ class ChangeLandAttachedEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                permanent.getSubtype(game).removeAll(SubType.getLandTypes());
+                permanent.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                 break;
             case AbilityAddingRemovingEffects_6:
                 permanent.removeAllAbilities(source.getSourceId(), game);

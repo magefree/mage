@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.constants.SuperType;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -28,7 +28,7 @@ public class AbilityView extends CardView {
         this.toughness = "";
         this.loyalty = "";
         this.cardTypes = new ArrayList<>();
-        this.subTypes = new SubTypeList();
+        this.subTypes = new SubTypes();
         this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
         this.manaCostLeft = ability.getManaCosts().getSymbols();

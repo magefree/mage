@@ -87,7 +87,7 @@ class TestOfFaithPreventDamageTargetEffect extends PreventionEffectImpl {
             if (prevented > 0) {
                 Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
                 if (targetPermanent != null) {
-                    targetPermanent.addCounters(CounterType.P1P1.createInstance(prevented), source, game);
+                    targetPermanent.addCounters(CounterType.P1P1.createInstance(prevented), source.getControllerId(), source, game);
                     game.informPlayers("Test of Faith: Prevented " + prevented + " damage ");
                     game.informPlayers("Test of Faith: Adding " + prevented + " +1/+1 counters to " + targetPermanent.getName());
                 }

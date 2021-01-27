@@ -53,7 +53,7 @@ public class DistributeCountersEffect extends OneShotEffect {
             for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
-                    permanent.addCounters(counterType.createInstance(multiTarget.getTargetAmount(target)), source, game);
+                    permanent.addCounters(counterType.createInstance(multiTarget.getTargetAmount(target)), source.getControllerId(), source, game);
                 }
             }
 

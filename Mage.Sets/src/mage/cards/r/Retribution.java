@@ -75,7 +75,7 @@ class RetributionEffect extends OneShotEffect {
                         creature.sacrifice(source, game);
                         sacrificeDone = true;
                     } else {
-                        creature.addCounters(CounterType.M1M1.createInstance(), source, game);
+                        creature.addCounters(CounterType.M1M1.createInstance(), source.getControllerId(), source, game);
                     }
                     count++;
                 }

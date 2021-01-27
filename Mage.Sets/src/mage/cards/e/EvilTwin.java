@@ -23,7 +23,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class EvilTwin extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Evil Twin enter the battlefield as a copy of any creature on the battlefield, except it has "{U}{B}, {T}: Destroy target creature with the same name as this creature."
-        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new EvilTwinApplyToPermanent());
+        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new EvilTwinCopyApplier());
         effect.setText("as a copy of any creature on the battlefield, except it has \"{U}{B}, {T}: Destroy target creature with the same name as this creature.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
 
@@ -56,7 +56,7 @@ public final class EvilTwin extends CardImpl {
     }
 }
 
-class EvilTwinApplyToPermanent extends ApplyToPermanent {
+class EvilTwinCopyApplier extends CopyApplier {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with the same name as this creature");
 
@@ -65,20 +65,11 @@ class EvilTwinApplyToPermanent extends ApplyToPermanent {
     }
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        permanent.addAbility(ability, source.getSourceId(), game);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        mageObject.getAbilities().add(ability);
+        blueprint.getAbilities().add(ability);
         return true;
     }
 

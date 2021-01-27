@@ -79,7 +79,7 @@ public class AmassEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(xValue), source, game);
+        permanent.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
         this.amassedCreatureId = permanent.getId();
         return true;
     }

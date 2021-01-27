@@ -89,7 +89,7 @@ class SwordOfTruthAndJusticeEffect extends OneShotEffect {
         if (player.choose(outcome, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
         }
         return new ProliferateEffect().apply(game, source);

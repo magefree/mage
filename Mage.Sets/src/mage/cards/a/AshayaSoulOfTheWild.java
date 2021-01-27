@@ -89,11 +89,9 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
             if (!permanent.isLand()) {
                 permanent.addCardType(CardType.LAND);
             }
-            if (!permanent.hasSubtype(SubType.FOREST, game)) {
-                permanent.addSubType(game, SubType.FOREST);
-                if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
-                    permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                }
+            permanent.addSubType(game, SubType.FOREST);
+            if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
+                permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
             }
         }
         return true;

@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -24,23 +22,21 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author andyfries
  */
 
 public final class JinxedChoker extends CardImpl {
 
     public JinxedChoker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.
         Ability endStepAbility = new BeginningOfYourEndStepTriggeredAbility(new JinxedChokerChangeControllerEffect(), false);
+        endStepAbility.addEffect(new JinxedChokerAddCounterEffect());
         endStepAbility.addTarget(new TargetOpponent());
-
-        AddCountersSourceEffect addCountersSourceEffect = new AddCountersSourceEffect(CounterType.CHARGE.createInstance());
-        addCountersSourceEffect.setText("");
-        endStepAbility.addEffect(addCountersSourceEffect);
         this.addAbility(endStepAbility);
 
         // At the beginning of your upkeep, Jinxed Choker deals damage to you equal to the number of charge counters on it.
@@ -66,7 +62,7 @@ class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
 
     public JinxedChokerChangeControllerEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this} and puts a charge counter on it";
+        staticText = "target opponent gains control of {this}";
     }
 
     public JinxedChokerChangeControllerEffect(final JinxedChokerChangeControllerEffect effect) {
@@ -91,6 +87,32 @@ class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
 
 }
 
+class JinxedChokerAddCounterEffect extends OneShotEffect {
+
+    JinxedChokerAddCounterEffect() {
+        super(Outcome.Benefit);
+        staticText = "and puts a charge counter on it";
+    }
+
+    private JinxedChokerAddCounterEffect(final JinxedChokerAddCounterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public JinxedChokerAddCounterEffect copy() {
+        return new JinxedChokerAddCounterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null && permanent.addCounters(
+                CounterType.CHARGE.createInstance(), source.getFirstTarget(), source, game
+        );
+    }
+}
+
+
 class JinxedChokerDynamicValue implements DynamicValue {
 
     @Override
@@ -98,7 +120,7 @@ class JinxedChokerDynamicValue implements DynamicValue {
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
 
         int count = 0;
-        if (permanent != null){
+        if (permanent != null) {
             count = permanent.getCounters(game).getCount(CounterType.CHARGE);
         }
         return count;

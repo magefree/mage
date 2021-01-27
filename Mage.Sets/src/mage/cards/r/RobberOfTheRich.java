@@ -8,8 +8,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -52,14 +53,17 @@ public final class RobberOfTheRich extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Robber of the Rich attacks, if defending player has more cards in hand than you, exile the top card of their library. During any turn you attacked with a Rogue, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(
                         new RobberOfTheRichEffect(), false, "", SetTargetPointer.PLAYER
-                ), RobberOfTheRichCondition.instance, "Whenever {this} attacks, " +
+                ), RobberOfTheRichAttacksCondition.instance, "Whenever {this} attacks, " +
                 "if defending player has more cards in hand than you, exile the top card of their library. " +
                 "During any turn you attacked with a Rogue, you may cast that card and " +
-                "you may spend mana as though it were mana of any color to cast that spell."
-        ), new RobberOfTheRichWatcher());
+                "you may spend mana as though it were mana of any color to cast that spell.");
+        ability.addWatcher(new AttackedThisTurnWatcher());
+        ability.addHint(new ConditionHint(RobberOfTheRichAnyTurnAttackedCondition.instance));
+
+        this.addAbility(ability);
     }
 
     private RobberOfTheRich(final RobberOfTheRich card) {
@@ -72,7 +76,7 @@ public final class RobberOfTheRich extends CardImpl {
     }
 }
 
-enum RobberOfTheRichCondition implements Condition {
+enum RobberOfTheRichAttacksCondition implements Condition {
     instance;
 
     @Override
@@ -80,6 +84,30 @@ enum RobberOfTheRichCondition implements Condition {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
         return controller != null && player != null && controller.getHand().size() < player.getHand().size();
+    }
+}
+
+enum RobberOfTheRichAnyTurnAttackedCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // your turn
+        if (!source.isControlledBy(game.getActivePlayerId())) {
+            return false;
+        }
+        // attacked with Rogue
+        AttackedThisTurnWatcher watcher = game.getState().getWatcher(AttackedThisTurnWatcher.class);
+        return watcher != null && watcher.getAttackedThisTurnCreatures()
+                .stream()
+                .map(mor -> mor.getPermanentOrLKIBattlefield(game))
+                .filter(Objects::nonNull)
+                .anyMatch(permanent -> permanent.hasSubtype(SubType.ROGUE, game));
+    }
+
+    @Override
+    public String toString() {
+        return "During that turn you attacked with a Rogue";
     }
 }
 
@@ -114,129 +142,12 @@ class RobberOfTheRichEffect extends OneShotEffect {
         // move card to exile
         controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
         // Add effects only if the card has a spellAbility (e.g. not for lands).
-        if (card.getSpellAbility() == null) {
-            return true;
+        if (card.getSpellAbility() != null) {
+            // allow to cast the card
+            // and you may spend mana as though it were mana of any color to cast it
+            CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.Custom, RobberOfTheRichAnyTurnAttackedCondition.instance);
         }
-        // allow to cast the card
-        game.addEffect(new RobberOfTheRichCastFromExileEffect(card.getId(), exileId), source);
-        // and you may spend mana as though it were mana of any color to cast it
-        ContinuousEffect effect = new RobberOfTheRichSpendAnyManaEffect();
-        effect.setTargetPointer(new FixedTarget(card.getId()));
-        game.addEffect(effect, source);
         return true;
-    }
-}
-
-class RobberOfTheRichCastFromExileEffect extends AsThoughEffectImpl {
-
-    private UUID cardId;
-    private UUID exileId;
-
-    RobberOfTheRichCastFromExileEffect(UUID cardId, UUID exileId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.cardId = cardId;
-        this.exileId = exileId;
-    }
-
-    private RobberOfTheRichCastFromExileEffect(final RobberOfTheRichCastFromExileEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-        this.exileId = effect.exileId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public RobberOfTheRichCastFromExileEffect copy() {
-        return new RobberOfTheRichCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        RobberOfTheRichWatcher watcher = game.getState().getWatcher(RobberOfTheRichWatcher.class);
-        if (watcher == null || !watcher.getAttackedWithRogue(source.getControllerId())) {
-            return false;
-        }
-        if (!sourceId.equals(cardId) || !source.isControlledBy(affectedControllerId)) {
-            return false;
-        }
-        ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-        if (exileZone != null && exileZone.contains(cardId)) {
-            return true;
-        }
-        discard();
-        return false;
-    }
-}
-
-class RobberOfTheRichSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    RobberOfTheRichSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-    }
-
-    private RobberOfTheRichSpendAnyManaEffect(final RobberOfTheRichSpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public RobberOfTheRichSpendAnyManaEffect copy() {
-        return new RobberOfTheRichSpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
-        return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
-    }
-}
-
-class RobberOfTheRichWatcher extends Watcher {
-
-    private Set<UUID> rogueAttackers = new HashSet();
-
-    RobberOfTheRichWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.ATTACKER_DECLARED) {
-            return;
-        }
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent == null || !permanent.hasSubtype(SubType.ROGUE, game)) {
-            return;
-        }
-        rogueAttackers.add(event.getPlayerId());
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        rogueAttackers.clear();
-    }
-
-    boolean getAttackedWithRogue(UUID playerId) {
-        return rogueAttackers.contains(playerId);
     }
 }
 

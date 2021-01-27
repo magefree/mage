@@ -123,7 +123,7 @@ class TheOzolithLeaveEffect extends OneShotEffect {
         }
         counters.values()
                 .stream()
-                .forEach(counter -> permanent.addCounters(counter, source, game));
+                .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
         return true;
     }
 }
@@ -174,7 +174,7 @@ class TheOzolithMoveCountersEffect extends OneShotEffect {
                 .copy()
                 .values()
                 .stream()
-                .filter(counter -> creature.addCounters(counter, source, game))
+                .filter(counter -> creature.addCounters(counter, source.getControllerId(), source, game))
                 .forEach(counter -> permanent.removeCounters(counter, source, game));
         return true;
     }

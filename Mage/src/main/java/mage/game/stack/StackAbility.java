@@ -30,7 +30,7 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -161,8 +161,13 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public SubTypeList getSubtype(Game game) {
-        return new SubTypeList();
+    public SubTypes getSubtype() {
+        return new SubTypes();
+    }
+
+    @Override
+    public SubTypes getSubtype(Game game) {
+        return new SubTypes();
     }
 
     @Override
@@ -183,6 +188,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public boolean hasAbility(Ability ability, Game game) {
         return false;
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
     }
 
     @Override
@@ -604,12 +614,16 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public boolean isAllCreatureTypes() {
+    public boolean isAllCreatureTypes(Game game) {
         return false;
     }
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
     @Override

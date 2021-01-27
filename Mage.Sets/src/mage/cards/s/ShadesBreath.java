@@ -13,7 +13,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.SubTypeList;
 
 import java.util.List;
 import java.util.UUID;
@@ -79,26 +78,26 @@ class ShadesBreathSetColorEffect extends ContinuousEffectImpl {
 
 class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
 
-    public ShadesBreathSetSubtypeEffect() {
+    ShadesBreathSetSubtypeEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Shade";
     }
 
-    public ShadesBreathSetSubtypeEffect(final ShadesBreathSetSubtypeEffect effect) {
+    private ShadesBreathSetSubtypeEffect(final ShadesBreathSetSubtypeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
+        );
         for (Permanent permanent : permanents) {
-            if (permanent != null) {
-                SubTypeList subtype = permanent.getSubtype(game);
-                if (subtype != null && (subtype.size() != 1 || !subtype.contains(SubType.SHADE))) {
-                    subtype.clear();
-                    subtype.add(SubType.SHADE);
-                }
+            if (permanent == null) {
+                continue;
             }
+            permanent.removeAllCreatureTypes(game);
+            permanent.addSubType(game, SubType.SHADE);
         }
         return true;
     }

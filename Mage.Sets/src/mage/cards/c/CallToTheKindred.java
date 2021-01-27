@@ -11,7 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.permanent.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -88,7 +88,7 @@ class CallToTheKindredEffect extends OneShotEffect {
 
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
         FilterCreatureCard filter = new FilterCreatureCard();
-        filter.add(new CallToTheKindredPredicate(creature));
+        filter.add(new SharesCreatureTypePredicate(creature));
 
         if (cards.count(filter, game) > 0) {
             TargetCard target = new TargetCardInLibrary(0, 1, filter);
@@ -101,19 +101,5 @@ class CallToTheKindredEffect extends OneShotEffect {
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
-    }
-}
-
-class CallToTheKindredPredicate implements Predicate<Card> {
-
-    private final Permanent permanent;
-
-    CallToTheKindredPredicate(Permanent permanent) {
-        this.permanent = permanent;
-    }
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        return permanent != null && input != null && permanent.shareCreatureTypes(input, game);
     }
 }

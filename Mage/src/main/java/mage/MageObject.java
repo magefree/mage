@@ -13,10 +13,11 @@ import mage.constants.SubTypeSet;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.SubTypeList;
+import mage.util.SubTypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,20 @@ public interface MageObject extends MageItem, Serializable {
 
     ArrayList<CardType> getCardType();
 
-    SubTypeList getSubtype(Game game);
+    /**
+     * Return original object's subtypes
+     *
+     * @return
+     */
+    SubTypes getSubtype();
+
+    /**
+     * Return full subtypes list (from object, from effects)
+     *
+     * @param game
+     * @return
+     */
+    SubTypes getSubtype(Game game);
 
     boolean hasSubtype(SubType subtype, Game game);
 
@@ -49,6 +63,8 @@ public interface MageObject extends MageItem, Serializable {
     Abilities<Ability> getAbilities();
 
     boolean hasAbility(Ability ability, Game game);
+
+    ObjectColor getColor();
 
     ObjectColor getColor(Game game);
 
@@ -91,7 +107,7 @@ public interface MageObject extends MageItem, Serializable {
     default boolean isHistoric() {
         return getCardType().contains(CardType.ARTIFACT)
                 || getSuperType().contains(SuperType.LEGENDARY)
-                || hasSubtype(SubType.SAGA, null);
+                || getSubtype().contains(SubType.SAGA);
     }
 
     default boolean isCreature() {
@@ -164,23 +180,104 @@ public interface MageObject extends MageItem, Serializable {
         getCardType().add(cardType);
     }
 
+    /**
+     * Add subtype temporary, for continuous effects only
+     *
+     * @param game
+     * @param subTypes
+     */
+    default void addSubType(Game game, Collection<SubType> subTypes) {
+        for (SubType subType : subTypes) {
+            addSubType(game, subType);
+        }
+    }
+
+    /**
+     * Add subtype permanently, for one shot effects and tokens setup
+     *
+     * @param subTypes
+     */
+    default void addSubType(SubType... subTypes) {
+        for (SubType subType : subTypes) {
+            if (subType.canGain(this)
+                    && !getSubtype().contains(subType)) {
+                getSubtype().add(subType);
+            }
+        }
+    }
+
+    /**
+     * Add subtype temporary, for continuous effects only
+     *
+     * @param game
+     * @param subTypes
+     */
     default void addSubType(Game game, SubType... subTypes) {
         for (SubType subType : subTypes) {
             if (subType.canGain(this)
                     && !hasSubtype(subType, game)) {
-                getSubtype(game).add(subType);
+                game.getState().getCreateMageObjectAttribute(this, game).getSubtype().add(subType);
+            }
+        }
+    }
+
+    default void copySubTypesFrom(Game game, MageObject mageObject) {
+        copySubTypesFrom(game, mageObject, null);
+    }
+
+    default void copySubTypesFrom(Game game, MageObject mageObject, SubTypeSet subTypeSet) {
+        if (subTypeSet == SubTypeSet.CreatureType || subTypeSet == null) {
+            this.setIsAllCreatureTypes(game, mageObject.isAllCreatureTypes(game));
+        }
+        for (SubType subType : mageObject.getSubtype(game)) {
+            if (subType.getSubTypeSet() == subTypeSet || subTypeSet == null) {
+                this.addSubType(game, subType);
             }
         }
     }
 
     default void removeAllSubTypes(Game game) {
-        getSubtype(game).clear();
-        setIsAllCreatureTypes(false);
+        removeAllSubTypes(game, null);
     }
 
-    default void removeAllCreatureTypes(Game game) {
-        getSubtype(game).removeAll(SubType.getCreatureTypes());
+    default void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
+        if (subTypeSet == null) {
+            setIsAllCreatureTypes(game, false);
+            game.getState().getCreateMageObjectAttribute(this, game).getSubtype().clear();
+        } else if (subTypeSet == SubTypeSet.CreatureType) {
+            removeAllCreatureTypes(game);
+        } else if (subTypeSet == SubTypeSet.NonBasicLandType) {
+            game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getLandTypes());
+        } else {
+            game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getBySubTypeSet(subTypeSet));
+        }
+    }
+
+    default void retainAllEnchantmentSubTypes(Game game) {
+        setIsAllCreatureTypes(game, false);
+        game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getEnchantmentTypes());
+    }
+
+    /**
+     * Remove object's own creature types forever (for copy effects usage)
+     */
+    default void removeAllCreatureTypes() {
         setIsAllCreatureTypes(false);
+        getSubtype().removeAll(SubType.getCreatureTypes());
+    }
+
+    /**
+     * Remove object attribute's creature types temporary (for continuous effects usage)
+     *
+     * @param game
+     */
+    default void removeAllCreatureTypes(Game game) {
+        setIsAllCreatureTypes(game, false);
+        game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getCreatureTypes());
+    }
+
+    default void removeSubType(Game game, SubType subType) {
+        game.getState().getCreateMageObjectAttribute(this, game).getSubtype().remove(subType);
     }
 
     /**
@@ -209,19 +306,19 @@ public interface MageObject extends MageItem, Serializable {
         return false;
     }
 
-    default boolean shareCreatureTypes(Card otherCard, Game game) {
+    default boolean shareCreatureTypes(Game game, MageObject otherCard) {
         if (!isCreature() && !isTribal()) {
             return false;
         }
         if (!otherCard.isCreature() && !otherCard.isTribal()) {
             return false;
         }
-        boolean isAllA = this.isAllCreatureTypes();
+        boolean isAllA = this.isAllCreatureTypes(game);
         boolean isAnyA = isAllA || this.getSubtype(game)
                 .stream()
                 .map(SubType::getSubTypeSet)
                 .anyMatch(SubTypeSet.CreatureType::equals);
-        boolean isAllB = otherCard.isAllCreatureTypes();
+        boolean isAllB = otherCard.isAllCreatureTypes(game);
         boolean isAnyB = isAllB || otherCard
                 .getSubtype(game)
                 .stream()
@@ -241,9 +338,17 @@ public interface MageObject extends MageItem, Serializable {
                 .anyMatch(subType -> otherCard.hasSubtype(subType, game)));
     }
 
-    boolean isAllCreatureTypes();
+    boolean isAllCreatureTypes(Game game);
 
     void setIsAllCreatureTypes(boolean value);
+
+    /**
+     * Change all creature type mark temporary, for continuous effects only
+     *
+     * @param game
+     * @param value
+     */
+    void setIsAllCreatureTypes(Game game, boolean value);
 
     default void addCardTypes(ArrayList<CardType> cardType) {
         getCardType().addAll(cardType);

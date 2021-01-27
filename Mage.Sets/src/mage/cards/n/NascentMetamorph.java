@@ -14,7 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -86,7 +86,7 @@ class NascentMetamorphEffect extends OneShotEffect {
         if (toCopy != null && permanent != null) {
             game.copyPermanent(Duration.EndOfTurn, new PermanentCard(
                     toCopy, source.getControllerId(), game
-            ), permanent.getId(), source, new EmptyApplyToPermanent());
+            ), permanent.getId(), source, new EmptyCopyApplier());
         }
         player.revealCards(source, toReveal, game);
         player.putCardsOnBottomOfLibrary(toReveal, game, source, false);

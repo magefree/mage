@@ -17,7 +17,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -76,23 +76,14 @@ class CryptoplasmEffect extends OneShotEffect {
     public boolean apply(Game game, final Ability source) {
         Permanent creatureToCopy = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creatureToCopy != null) {
-            ApplyToPermanent applier = new ApplyToPermanent() {
+            CopyApplier applier = new CopyApplier() {
                 @Override
-                public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+                public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                     Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
-                    permanent.addAbility(upkeepAbility, source.getSourceId(), game);
+                    blueprint.getAbilities().add(upkeepAbility);
                     return true;
                 }
-
-                @Override
-                public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-                    Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
-                    upkeepAbility.addTarget(new TargetCreaturePermanent());
-                    mageObject.getAbilities().add(upkeepAbility);
-                    return true;
-                }
-
             };
             game.copyPermanent(creatureToCopy, source.getSourceId(), source, applier);
         }

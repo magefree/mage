@@ -90,7 +90,7 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(5), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(5), source.getControllerId(), source, game);
         }
         return true;
     }

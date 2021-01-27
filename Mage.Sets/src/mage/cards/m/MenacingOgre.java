@@ -99,7 +99,7 @@ class MenacingOgreEffect extends OneShotEffect {
                     player.loseLife(highestNumber, game, source, false);
                     if (player.getId().equals(source.getControllerId())
                             && menacingOgre != null) {
-                        menacingOgre.addCounters(CounterType.P1P1.createInstance(2), source, game);
+                        menacingOgre.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
                     }
                 }
             }

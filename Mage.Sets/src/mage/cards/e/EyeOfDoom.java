@@ -22,9 +22,7 @@ import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -78,7 +76,7 @@ class EyeOfDoomEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = new ArrayList<>();
+        Map<UUID,Permanent>permanents=new HashMap<>();
         Target target = new TargetNonlandPermanent();
         target.setNotTarget(true);
         PlayerList playerList = game.getPlayerList().copy();
@@ -89,15 +87,15 @@ class EyeOfDoomEffect extends OneShotEffect {
             if (player != null && player.chooseTarget(outcome, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanents.add(permanent);
+                    permanents.put(player.getId(),permanent);
                     game.informPlayers(player.getLogName() + " chooses " + permanent.getName());
                 }
             }
             player = playerList.getNext(game, false);
         } while (player != null && !player.getId().equals(game.getActivePlayerId()));
 
-        for (Permanent permanent : permanents) {
-            permanent.addCounters(CounterType.DOOM.createInstance(), source, game);
+        for (Map.Entry<UUID,Permanent> entry : permanents.entrySet()) {
+            entry.getValue().addCounters(CounterType.DOOM.createInstance(), entry.getKey(), source, game);
         }
 
         return true;

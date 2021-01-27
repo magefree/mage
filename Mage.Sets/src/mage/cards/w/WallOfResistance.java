@@ -1,9 +1,9 @@
 package mage.cards.w;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceDealtDamageCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -14,7 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.watchers.common.DamageDoneWatcher;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -22,8 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WallOfResistance extends CardImpl {
-
-    private static final Condition condition = new SourceDealtDamageCondition(1);
 
     public WallOfResistance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -43,9 +42,9 @@ public final class WallOfResistance extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
                         TargetController.ANY, false
-                ), condition, "At the beginning of each end step, " +
+                ), WallOfResistanceCondition.instance, "At the beginning of each end step, " +
                 "if {this} was dealt damage this turn, put a +0/+1 counter on it."
-        ), new DamageDoneWatcher());
+        ));
     }
 
     private WallOfResistance(final WallOfResistance card) {
@@ -55,5 +54,15 @@ public final class WallOfResistance extends CardImpl {
     @Override
     public WallOfResistance copy() {
         return new WallOfResistance(this);
+    }
+}
+
+enum WallOfResistanceCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        return permanent != null && !permanent.getDealtDamageByThisTurn().isEmpty();
     }
 }

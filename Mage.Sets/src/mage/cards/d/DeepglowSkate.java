@@ -73,7 +73,7 @@ class DeepglowSkateEffect extends OneShotEffect {
                 if (permanent != null) {
                     for (Counter counter : permanent.getCounters(game).values()) {
                         Counter newCounter = new Counter(counter.getName(), counter.getCount());
-                        permanent.addCounters(newCounter, source, game);
+                        permanent.addCounters(newCounter, source.getControllerId(), source, game);
                         didOne = true;
                     }
                 }

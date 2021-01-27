@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 // http://magic.wizards.com/en/articles/archive/feature/kaladesh-mechanics-2016-09-02
@@ -79,4 +78,17 @@ public class CrewTest extends CardTestPlayerBase {
         assertNotType("Smuggler's Copter", CardType.CREATURE);
     }
 
+    @Test
+    public void testGiantOx() {
+        addCard(Zone.BATTLEFIELD, playerA, "Giant Ox");
+        addCard(Zone.BATTLEFIELD, playerA, "Colossal Plow");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped("Giant Ox", true);
+        assertType("Colossal Plow", CardType.CREATURE, true);
+    }
 }

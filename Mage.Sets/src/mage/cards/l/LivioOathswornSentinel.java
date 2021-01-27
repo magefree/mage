@@ -104,7 +104,7 @@ class LivioOathswornSentinelExileEffect extends OneShotEffect {
         if (card == null || game.getState().getZone(card.getId()) != Zone.EXILED) {
             return false;
         }
-        card.addCounters(CounterType.AEGIS.createInstance(), source, game);
+        card.addCounters(CounterType.AEGIS.createInstance(), source.getControllerId(), source, game);
         return true;
     }
 }

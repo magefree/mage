@@ -80,6 +80,6 @@ class LightOfPromiseEffect extends OneShotEffect {
             return false;
         }
         int gainedLife = (int) this.getValue("gainedLife");
-        return permanent.addCounters(CounterType.P1P1.createInstance(gainedLife), source, game);
+        return permanent.addCounters(CounterType.P1P1.createInstance(gainedLife), source.getControllerId(), source, game);
     }
 }

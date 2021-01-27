@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -78,7 +77,7 @@ class BloodsporeThrinaxEntersBattlefieldEffect extends ReplacementEffectImpl {
         if (sourceCreature != null && creature != null) {
             int amount = sourceCreature.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
-                creature.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                creature.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
         }
         return false;

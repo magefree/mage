@@ -19,15 +19,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
+import mage.constants.*;
+
 import static mage.constants.Layer.TypeChangingEffects_4;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -93,27 +88,27 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             // the land mana ability is intrinsic, so add it here, not layer 6
-                            if (land.getSubtype(game).contains(firstChoice)) {
-                                land.getSubtype(game).removeAll(SubType.getLandTypes());
+                            if (land.hasSubtype(firstChoice, game)) {
+                                land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                                 land.addSubType(game, secondChoice);
                                 land.removeAllAbilities(source.getSourceId(), game);
-                                if (land.getSubtype(game).contains(SubType.FOREST)) {
+                                if (land.hasSubtype(SubType.FOREST, game)) {
                                     this.dependencyTypes.add(DependencyType.BecomeForest);
                                     land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                 }
-                                if (land.getSubtype(game).contains(SubType.PLAINS)) {
+                                if (land.hasSubtype(SubType.PLAINS, game)) {
                                     this.dependencyTypes.add(DependencyType.BecomePlains);
                                     land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                 }
-                                if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
+                                if (land.hasSubtype(SubType.MOUNTAIN, game)) {
                                     this.dependencyTypes.add(DependencyType.BecomeMountain);
                                     land.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                 }
-                                if (land.getSubtype(game).contains(SubType.ISLAND)) {
+                                if (land.hasSubtype(SubType.ISLAND, game)) {
                                     this.dependencyTypes.add(DependencyType.BecomeIsland);
                                     land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                 }
-                                if (land.getSubtype(game).contains(SubType.SWAMP)) {
+                                if (land.hasSubtype(SubType.SWAMP, game)) {
                                     this.dependencyTypes.add(DependencyType.BecomeSwamp);
                                     land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                 }

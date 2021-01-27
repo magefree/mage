@@ -35,8 +35,7 @@ public final class ValiantChangeling extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ValiantChangelingCostReductionEffect()));
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
@@ -71,8 +70,7 @@ class ValiantChangelingCostReductionEffect extends CostModificationEffectImpl {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source.getSourceId(), game
         )) {
-            if (permanent.getAbilities().contains(ChangelingAbility.getInstance())
-                    || permanent.isAllCreatureTypes()) {
+            if (permanent.isAllCreatureTypes(game)) {
                 reductionAmount = 5;
                 break;
             }

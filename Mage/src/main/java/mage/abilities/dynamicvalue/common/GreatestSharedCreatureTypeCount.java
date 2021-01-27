@@ -1,6 +1,5 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -34,10 +33,10 @@ public enum GreatestSharedCreatureTypeCount implements DynamicValue {
         int changelings = permanentList
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isAllCreatureTypes)
+                .filter(permanent1 -> permanent1.isAllCreatureTypes(game))
                 .mapToInt(x -> 1)
                 .sum();
-        permanentList.removeIf(MageObject::isAllCreatureTypes);
+        permanentList.removeIf(permanent1 -> permanent1.isAllCreatureTypes(game));
         Map<SubType, Integer> typeMap = new HashMap<>();
         permanentList
                 .stream()

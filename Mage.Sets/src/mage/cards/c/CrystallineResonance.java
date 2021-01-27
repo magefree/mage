@@ -12,9 +12,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public final class CrystallineResonance extends CardImpl {
         Ability ability = new CycleControllerTriggeredAbility(
                 new CopyPermanentEffect(
                         StaticFilters.FILTER_PERMANENT_CREATURE,
-                        new CrystallineResonanceApplier(), true
+                        new CrystallineResonanceCopyApplier(), true
                 ).setDuration(Duration.UntilYourNextTurn).setText(
                         "have {this} become a copy of another target permanent until your next turn, " +
                                 "except it has this ability"
@@ -60,17 +59,11 @@ public final class CrystallineResonance extends CardImpl {
     }
 }
 
-class CrystallineResonanceApplier extends ApplyToPermanent {
+class CrystallineResonanceCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
-        permanent.getAbilities().add(CrystallineResonance.createAbility());
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        mageObject.getAbilities().add(CrystallineResonance.createAbility());
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(CrystallineResonance.createAbility());
         return true;
     }
 }

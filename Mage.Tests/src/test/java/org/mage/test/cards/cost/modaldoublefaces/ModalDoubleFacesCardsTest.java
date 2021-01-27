@@ -249,7 +249,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         Card card = getHandCards(playerA).get(0);
         Assert.assertFalse("must be non land", card.isLand());
         Assert.assertTrue("must be creature", card.isCreature());
-        Assert.assertTrue("must be minotaur", card.getSubtype(currentGame).contains(SubType.MINOTAUR));
+        Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
         Assert.assertEquals("power", 4, card.getPower().getValue());
         Assert.assertEquals("toughness", 5, card.getToughness().getValue());
     }
@@ -694,6 +694,46 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 2);
+    }
+
+    @Test
+    public void test_Single_HostageTaker_CastFromExile() {
+        // bug: mdf must be playable as both sides
+        // https://github.com/magefree/mage/pull/7446
+
+        // Akoum Warrior {5}{R} - creature
+        // Akoum Teeth - land
+        addCard(Zone.HAND, playerA, "Akoum Warrior");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6); // cast from hostage taker for any color
+        //
+        // When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker
+        // leaves the battlefield. You may cast that card as long as it remains exiled, and you may spend mana
+        // as though it were mana of any type to cast that spell.
+        addCard(Zone.HAND, playerA, "Hostage Taker", 1); // {2}{U}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        // prepare mdf on battlefield
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // exile by hostage
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
+        addTarget(playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        // play as creature for any color
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Akoum Warrior", 1);
     }
 
     @Test

@@ -86,7 +86,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && controller != null) {
-            sourcePermanent.addCounters(CounterType.DESPAIR.createInstance(), source, game);
+            sourcePermanent.addCounters(CounterType.DESPAIR.createInstance(), source.getControllerId(), source, game);
         }
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);

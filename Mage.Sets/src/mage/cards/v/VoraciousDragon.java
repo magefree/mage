@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
-import mage.util.SubTypeList;
 
 import java.util.UUID;
 
@@ -40,12 +39,12 @@ public final class VoraciousDragon extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
 
         // When Voracious Dragon enters the battlefield, it deals damage to any target equal to twice the number of Goblins it devoured.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new TwiceDevouredGoblins(), "it"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(TwiceDevouredGoblins.instance, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
-    public VoraciousDragon(final VoraciousDragon card) {
+    private VoraciousDragon(final VoraciousDragon card) {
         super(card);
     }
 
@@ -55,27 +54,31 @@ public final class VoraciousDragon extends CardImpl {
     }
 }
 
-class TwiceDevouredGoblins implements DynamicValue {
+enum TwiceDevouredGoblins implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
-        if (sourcePermanent != null) {
-            for (Ability ability : sourcePermanent.getAbilities()) {
-                if (ability instanceof DevourAbility) {
-                    for (Effect abilityEffect : ability.getEffects()) {
-                        if (abilityEffect instanceof DevourEffect) {
-                            DevourEffect devourEffect = (DevourEffect) abilityEffect;
-                            int amountGoblins = 0;
-                            for (SubTypeList subtypesItem : devourEffect.getSubtypes(game, sourcePermanent.getId())) {
-                                if (subtypesItem.contains(SubType.GOBLIN)) {
-                                    ++amountGoblins;
-                                }
-                            }
-                            return amountGoblins * 2;
-                        }
+        if (sourcePermanent == null) {
+            return 0;
+        }
+        for (Ability ability : sourcePermanent.getAbilities()) {
+            if (!(ability instanceof DevourAbility)) {
+                continue;
+            }
+            for (Effect abilityEffect : ability.getEffects()) {
+                if (!(abilityEffect instanceof DevourEffect)) {
+                    continue;
+                }
+                DevourEffect devourEffect = (DevourEffect) abilityEffect;
+                int amountGoblins = 0;
+                for (Permanent permanent : devourEffect.getDevouredCreatures(game, sourcePermanent.getId())) {
+                    if (permanent.hasSubtype(SubType.GOBLIN, game)) {
+                        ++amountGoblins;
                     }
                 }
+                return amountGoblins * 2;
             }
         }
         return 0;
@@ -83,7 +86,7 @@ class TwiceDevouredGoblins implements DynamicValue {
 
     @Override
     public TwiceDevouredGoblins copy() {
-        return new TwiceDevouredGoblins();
+        return instance;
     }
 
     @Override

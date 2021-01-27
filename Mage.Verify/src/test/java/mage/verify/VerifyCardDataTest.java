@@ -110,6 +110,7 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor");
+        subtypesToIgnore.add("Phyrexian"); // large errata incoming, adding this for now
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -1233,7 +1234,7 @@ public class VerifyCardDataTest {
 
         // Remove subtypes that need to be ignored
         Collection<String> actual = card
-                .getSubtype(null)
+                .getSubtype()
                 .stream()
                 .map(SubType::toString)
                 .collect(Collectors.toSet());
@@ -1272,10 +1273,6 @@ public class VerifyCardDataTest {
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
-        }
-
-        if (card.getAbilities().contains(ChangelingAbility.getInstance()) && !card.isAllCreatureTypes()) {
-            fail(card, "abilities", "card has Changeling but doesn't have isAllCreatureTypes set to true");
         }
 
         // special check: missing or wrong ability/effect hints

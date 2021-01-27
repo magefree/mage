@@ -66,7 +66,7 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.MessageToClient;
 import mage.util.RandomUtil;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
@@ -1651,12 +1651,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
+    public Permanent copyPermanent(Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, CopyApplier applier) {
         return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanentId, source, applier);
     }
 
     @Override
-    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, ApplyToPermanent applier) {
+    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, UUID copyToPermanentId, Ability source, CopyApplier applier) {
         Permanent newBluePrint = null;
         // handle copies of copies
         for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
@@ -2231,9 +2231,9 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null
                             && (attachment.isCreature()
-                            || !(attachment.getSubtype(this).contains(SubType.AURA)
-                            || attachment.getSubtype(this).contains(SubType.EQUIPMENT)
-                            || attachment.getSubtype(this).contains(SubType.FORTIFICATION)))) {
+                            || !(attachment.hasSubtype(SubType.AURA, this)
+                            || attachment.hasSubtype(SubType.EQUIPMENT, this)
+                            || attachment.hasSubtype(SubType.FORTIFICATION, this)))) {
                         if (perm.removeAttachment(attachment.getId(), null, this)) {
                             somethingHappened = true;
                             break;

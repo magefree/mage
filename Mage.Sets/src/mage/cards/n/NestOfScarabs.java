@@ -55,7 +55,7 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean weAreDoingIt = isControlledBy(game.getControllerId(event.getSourceId()));
+        boolean weAreDoingIt = isControlledBy(event.getPlayerId());
         boolean isM1M1Counters = event.getData().equals(CounterType.M1M1.getName());
         if (weAreDoingIt && isM1M1Counters && event.getAmount() > 0) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
@@ -63,7 +63,7 @@ class NestOfScarabsTriggeredAbility extends TriggeredAbilityImpl {
                 permanent = game.getPermanentEntering(event.getTargetId());
             }
             if (permanent != null && permanent.isCreature()) {
-                getEffects().forEach(effect -> effect.setValue("countersAdded", event.getAmount()));
+                getEffects().setValue("countersAdded", event.getAmount());
                 return true;
             }
         }

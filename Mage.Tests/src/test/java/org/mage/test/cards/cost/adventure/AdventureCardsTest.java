@@ -689,4 +689,58 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
     }
+
+    @Test
+    public void test_HostageTaker_CastFromExileAllParts() {
+        // bug: mdf must be playable as both sides
+        // https://github.com/magefree/mage/pull/7446
+
+        // Curious Pair {1}{G}, creature
+        // Treats to Share {G}, sorcery
+        // Create a Food token.
+        addCard(Zone.HAND, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2); // for prepare
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // cast from hostage taker for any color
+        //
+        // When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker
+        // leaves the battlefield. You may cast that card as long as it remains exiled, and you may spend mana
+        // as though it were mana of any type to cast that spell.
+        addCard(Zone.HAND, playerA, "Hostage Taker", 2); // {2}{U}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        // prepare adventure card on battlefield
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+
+        // turn 1 - exile by hostage
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
+        addTarget(playerA, "Curious Pair");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after exile 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        // play as creature for any color
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after play 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+
+        // eat green mana (test what hostage's any color effect work)
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+
+        // turn 3 - exile by hostage
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hostage Taker");
+        addTarget(playerA, "Curious Pair");
+        waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
+        checkExileCount("after exile 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
+        // play as adventure spell
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Treats to Share");
+        waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
+        checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
 }

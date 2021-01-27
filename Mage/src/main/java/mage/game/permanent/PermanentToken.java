@@ -3,6 +3,7 @@ package mage.game.permanent;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -58,6 +59,7 @@ public class PermanentToken extends PermanentImpl {
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
+        // modify all attributes permanently (without game usage)
         this.name = token.getName();
         this.abilities.clear();
         if (reset) {
@@ -81,9 +83,7 @@ public class PermanentToken extends PermanentImpl {
         this.frameStyle = token.getFrameStyle();
         this.supertype.clear();
         this.supertype.addAll(token.getSuperType());
-        this.subtype.clear();
-        this.subtype.addAll(token.getSubtype(game));
-        this.isAllCreatureTypes = token.isAllCreatureTypes();
+        this.subtype.copyFrom(token.getSubtype(game));
         this.tokenDescriptor = token.getTokenDescriptor();
     }
 
@@ -119,4 +119,9 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
+    @Override
+    public Card getMainCard() {
+        // token don't have game card, so return itself
+        return this;
+    }
 }

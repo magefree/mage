@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -78,7 +77,7 @@ class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl {
         if (actualDamage > 0) {
             Player player = game.getPlayer(damageEvent.getPlayerId());
             Permanent damageSource = game.getPermanent(damageEvent.getSourceId());
-            player.addCounters(CounterType.POISON.createInstance(actualDamage), source, game);
+            player.addCounters(CounterType.POISON.createInstance(actualDamage), source.getControllerId(), source, game);
             if (damageSource != null && damageSource.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
                 Player controlPlayer = game.getPlayer(damageSource.getControllerId());
                 controlPlayer.gainLife(actualDamage, game, source);

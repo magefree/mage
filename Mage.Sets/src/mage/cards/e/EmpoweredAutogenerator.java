@@ -94,7 +94,7 @@ class EmpoweredAutogeneratorManaEffect extends ManaEffect {
             return mana;
         }
 
-        sourcePermanent.addCounters(CounterType.CHARGE.createInstance(), source, game);
+        sourcePermanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
         int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
         if (counters == 0) {
             return mana;

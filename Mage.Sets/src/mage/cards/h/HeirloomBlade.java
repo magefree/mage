@@ -82,7 +82,7 @@ class HeirloomBladeEffect extends OneShotEffect {
                 Cards otherCards = new CardsImpl();
                 for (Card card : controller.getLibrary().getCards(game)) {
                     revealed.add(card);
-                    if (card != null && card.isCreature() && equipped.shareCreatureTypes(card, game)) {
+                    if (card != null && card.isCreature() && equipped.shareCreatureTypes(game, card)) {
                         controller.moveCardToHandWithInfo(card, source, game, true);
                         break;
                     } else {

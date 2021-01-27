@@ -36,7 +36,7 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
-                target.setIsAllCreatureTypes(true);
+                target.setIsAllCreatureTypes(game, true);
                 affectedTargets++;
             }
         }

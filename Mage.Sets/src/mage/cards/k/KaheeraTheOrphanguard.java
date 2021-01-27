@@ -16,8 +16,9 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.util.SubTypeList;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -83,7 +84,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
         return "Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur or Beast card.";
     }
 
-    private static final SubTypeList subtypes = new SubTypeList(
+    private static final List<SubType> subtypes = Arrays.asList(
             SubType.CAT,
             SubType.ELEMENTAL,
             SubType.NIGHTMARE,
@@ -92,7 +93,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     );
 
     private static boolean checkTypes(Card card) {
-        return subtypes.stream().anyMatch(subtype -> card.hasSubtype(subtype, null));
+        return subtypes.stream().anyMatch(subtype -> card.getSubtype().contains(subtype));
     }
 
     @Override

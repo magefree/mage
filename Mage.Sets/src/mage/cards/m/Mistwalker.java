@@ -27,8 +27,7 @@ public final class Mistwalker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Changeling
-        this.setIsAllCreatureTypes(true);
-        this.addAbility(ChangelingAbility.getInstance());
+        this.addAbility(new ChangelingAbility());
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

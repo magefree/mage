@@ -91,9 +91,9 @@ public final class RateCard {
             type = 15;
         } else if (card.isCreature()) {
             type = 10;
-        } else if (card.getSubtype(null).contains(SubType.EQUIPMENT)) {
+        } else if (card.getSubtype().contains(SubType.EQUIPMENT)) {
             type = 8;
-        } else if (card.getSubtype(null).contains(SubType.AURA)) {
+        } else if (card.getSubtype().contains(SubType.AURA)) {
             type = 5;
         } else if (card.isInstant()) {
             type = 7;

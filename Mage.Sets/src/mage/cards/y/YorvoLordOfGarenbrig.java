@@ -87,14 +87,14 @@ class YorvoLordOfGarenbrigEffect extends OneShotEffect {
         if (sourcePerm == null) {
             return false;
         }
-        sourcePerm.addCounters(CounterType.P1P1.createInstance(), source, game);
+        sourcePerm.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent == null) {
             return true;
         }
         game.getState().processAction(game);
         if (permanent.getPower().getValue() > sourcePerm.getPower().getValue()) {
-            sourcePerm.addCounters(CounterType.P1P1.createInstance(), source, game);
+            sourcePerm.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

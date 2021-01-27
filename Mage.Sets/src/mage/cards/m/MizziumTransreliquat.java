@@ -15,7 +15,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -68,7 +68,7 @@ class MizziumTransreliquatCopyEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
+            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
             return true;
         }
         return false;
@@ -96,7 +96,7 @@ class MizziumTransreliquatCopyAndGainAbilityEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
+            Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
             Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MizziumTransreliquatCopyAndGainAbilityEffect(), new ManaCostsImpl("{1}{U}{R}"));
             ability.addTarget(new TargetArtifactPermanent());
             newPermanent.addAbility(ability, source.getSourceId(), game);

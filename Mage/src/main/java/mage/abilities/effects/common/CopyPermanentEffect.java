@@ -16,8 +16,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.CopyApplier;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ import java.util.UUID;
 public class CopyPermanentEffect extends OneShotEffect {
 
     private final FilterPermanent filter;
-    private final ApplyToPermanent applier;
+    private final CopyApplier applier;
     private final boolean useTargetOfAbility;
     private Permanent bluePrintPermanent;
     private Duration duration = Duration.Custom;
@@ -36,19 +36,19 @@ public class CopyPermanentEffect extends OneShotEffect {
         this(StaticFilters.FILTER_PERMANENT_CREATURE);
     }
 
-    public CopyPermanentEffect(ApplyToPermanent applier) {
+    public CopyPermanentEffect(CopyApplier applier) {
         this(StaticFilters.FILTER_PERMANENT_CREATURE, applier);
     }
 
     public CopyPermanentEffect(FilterPermanent filter) {
-        this(filter, new EmptyApplyToPermanent());
+        this(filter, new EmptyCopyApplier());
     }
 
-    public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier) {
+    public CopyPermanentEffect(FilterPermanent filter, CopyApplier applier) {
         this(filter, applier, false);
     }
 
-    public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier, boolean useTarget) {
+    public CopyPermanentEffect(FilterPermanent filter, CopyApplier applier, boolean useTarget) {
         super(Outcome.Copy);
         this.applier = applier;
         this.filter = filter;

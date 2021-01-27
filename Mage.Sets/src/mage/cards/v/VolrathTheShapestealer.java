@@ -23,7 +23,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -101,7 +101,7 @@ class VolrathTheShapestealerEffect extends OneShotEffect {
         }
         newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
         newBluePrint.assignNewId();
-        ApplyToPermanent applier = new VolrathTheShapestealerApplier();
+        CopyApplier applier = new VolrathTheShapestealerCopyApplier();
         applier.apply(game, newBluePrint, source, volrathTheShapestealer.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.UntilYourNextTurn, newBluePrint, volrathTheShapestealer.getId());
         copyEffect.newId();
@@ -113,25 +113,16 @@ class VolrathTheShapestealerEffect extends OneShotEffect {
     }
 }
 
-class VolrathTheShapestealerApplier extends ApplyToPermanent {
+class VolrathTheShapestealerCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(new VolrathTheShapestealerEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetPermanent(VolrathTheShapestealer.filter));
-        permanent.getAbilities().add(ability);
-        permanent.getPower().modifyBaseValue(7);
-        permanent.getToughness().modifyBaseValue(5);
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(new VolrathTheShapestealerEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetPermanent(VolrathTheShapestealer.filter));
-        mageObject.getAbilities().add(ability);
-        mageObject.getPower().modifyBaseValue(7);
-        mageObject.getToughness().modifyBaseValue(5);
+        blueprint.getAbilities().add(ability);
+        blueprint.removePTCDA();
+        blueprint.getPower().modifyBaseValue(7);
+        blueprint.getToughness().modifyBaseValue(5);
         return true;
     }
 }

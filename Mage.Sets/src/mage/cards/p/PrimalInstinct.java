@@ -55,10 +55,10 @@ class PrimalInstictEffect extends OneShotEffect {
         if (controller != null) {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
-                target.addCounters(CounterType.P1P1.createInstance(), source, game);
+                target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                 int addCounterCount = target.getCounters(game).getCount(CounterType.P1P1);
                 game.informPlayers("Counters " + addCounterCount);
-                target.addCounters(CounterType.P1P1.createInstance(addCounterCount), source, game);
+                target.addCounters(CounterType.P1P1.createInstance(addCounterCount), source.getControllerId(), source, game);
                 return true;
             }
         }

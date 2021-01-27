@@ -72,8 +72,8 @@ public final class Glaciers extends CardImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         // the land mana ability is intrinsic, so apply at this layer not layer 6
-                        if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
-                            land.getSubtype(game).removeAll(SubType.getLandTypes());
+                        if (land.hasSubtype(SubType.MOUNTAIN, game)) {
+                            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                             land.addSubType(game, SubType.PLAINS);
                             land.removeAllAbilities(source.getSourceId(), game);
                             land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);

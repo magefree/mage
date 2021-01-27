@@ -74,7 +74,7 @@ class SunburstEffect extends OneShotEffect {
                     counter = CounterType.CHARGE.createInstance(countersAmount);
                 }
                 List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-                permanent.addCounters(counter, source, game, appliedEffects);
+                permanent.addCounters(counter, source.getControllerId(), source, game, appliedEffects);
                 if (!game.isSimulation()) {
                     Player player = game.getPlayer(source.getControllerId());
                     if (player != null) {

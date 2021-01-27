@@ -242,9 +242,9 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
             Cards cards = game.getExile().getExileZone(exileId);
             if (!cards.isEmpty()
                     && controller.choose(Outcome.Benefit, cards, target, game)) {
-                Card chosenExiledCreature = game.getCard(target.getFirstTarget());
-                if (chosenExiledCreature != null) {
-                    ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCreature.getMainCard(), source.getSourceId());
+                Card chosenExiledCard = game.getCard(target.getFirstTarget());
+                if (chosenExiledCard != null) {
+                    ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCard.getMainCard(), source.getSourceId());
                     copyEffect.setTargetPointer(new FixedTarget(Valki.getId()));
                     game.addEffect(copyEffect, source);
                     return true;

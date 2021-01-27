@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -77,7 +77,7 @@ class MirrorOfTheForebearsCopyEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
+            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
             game.addEffect(new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT), source);
             return true;
         }

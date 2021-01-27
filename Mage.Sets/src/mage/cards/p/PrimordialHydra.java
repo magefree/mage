@@ -79,7 +79,7 @@ class PrimordialHydraDoubleEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
-                sourcePermanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                sourcePermanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;
         }

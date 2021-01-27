@@ -1,7 +1,5 @@
 package mage.cards;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.Zone;
@@ -9,6 +7,9 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -103,17 +104,17 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isMelded(game)) {
-            return super.addCounters(counter, source, game, appliedEffects);
+            return super.addCounters(counter, playerAddingCounters, source, game, appliedEffects);
         } else {
             // can this really happen?
             boolean returnState = true;
             if (hasTopHalf(game)) {
-                returnState |= topHalfCard.addCounters(counter, source, game, appliedEffects);
+                returnState |= topHalfCard.addCounters(counter, playerAddingCounters, source, game, appliedEffects);
             }
             if (hasBottomHalf(game)) {
-                returnState |= bottomHalfCard.addCounters(counter, source, game, appliedEffects);
+                returnState |= bottomHalfCard.addCounters(counter, playerAddingCounters, source, game, appliedEffects);
             }
             return returnState;
         }

@@ -73,7 +73,7 @@ class CrazedFirecatEffect extends OneShotEffect {
                     break;
                 }
             }
-            sourceObject.addCounters(CounterType.P1P1.createInstance(flipsWon), source, game);
+            sourceObject.addCounters(CounterType.P1P1.createInstance(flipsWon), source.getControllerId(), source, game);
             return true;
         }
         return false;

@@ -112,12 +112,12 @@ class TimecraftingAddEffect extends OneShotEffect {
             int xValue = source.getManaCostsToPay().getX();
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                permanent.addCounters(CounterType.TIME.createInstance(xValue), source, game);
+                permanent.addCounters(CounterType.TIME.createInstance(xValue), source.getControllerId(), source, game);
             }
             else {
                 Card card = game.getExile().getCard(this.getTargetPointer().getFirst(game, source), game);
                 if (card != null) {
-                    card.addCounters(CounterType.TIME.createInstance(xValue), source, game);
+                    card.addCounters(CounterType.TIME.createInstance(xValue), source.getControllerId(), source, game);
                 }
             }
             return true;

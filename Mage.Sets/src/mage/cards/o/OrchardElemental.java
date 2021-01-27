@@ -69,7 +69,7 @@ class OrchardElementalDilemmaEffect extends CouncilsDilemmaVoteEffect {
         //Sprout Votes
         //If sprout received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counter on it.
         if (voteOneCount > 0 && permanent != null)
-            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount * 2), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount * 2), source.getControllerId(), source, game);
 
         //Harvest Votes
         if (voteTwoCount > 0) {

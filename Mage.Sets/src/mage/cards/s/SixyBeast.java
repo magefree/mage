@@ -68,7 +68,7 @@ class SixyBeastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
             int counterAmount = controller.getAmount(0, 6, "Secretly put up to six counters on " + permanent.getName(), game);
-            permanent.addCounters(CounterType.P1P1.createInstance(counterAmount), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(counterAmount), source.getControllerId(), source, game);
             Player opponent = null;
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             if (!opponents.isEmpty()) {

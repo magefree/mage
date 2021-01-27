@@ -269,6 +269,7 @@ public enum SubType {
     PEST("Pest", SubTypeSet.CreatureType),
     PHELDDAGRIF("Phelddagrif", SubTypeSet.CreatureType),
     PHOENIX("Phoenix", SubTypeSet.CreatureType),
+    PHYREXIAN("Phyrexian", SubTypeSet.CreatureType),
     PILOT("Pilot", SubTypeSet.CreatureType),
     PINCHER("Pincher", SubTypeSet.CreatureType),
     PIRATE("Pirate", SubTypeSet.CreatureType),
@@ -593,5 +594,9 @@ public enum SubType {
 
     public static Set<SubType> getLandTypes() {
         return landTypes;
+    }
+
+    public static Set<SubType> getBySubTypeSet(SubTypeSet subTypeSet) {
+        return subTypeSetMap.get(subTypeSet);
     }
 }

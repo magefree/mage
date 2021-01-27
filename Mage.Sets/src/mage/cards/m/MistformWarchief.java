@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,24 +8,24 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.constants.SubType;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubTypeSet;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MistformWarchief extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Creature spells you cast that share a creature type with {this}");
+    private static final FilterCard filter = new FilterCard();
 
     static {
         filter.add(new MistformWarchiefPredicate());
@@ -41,7 +40,6 @@ public final class MistformWarchief extends CardImpl {
 
         // Creature spells you cast that share a creature type with Mistform Warchief cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new SpellsCostReductionControllerEffect(filter, 1)
                         .setText("Creature spells you cast that share a creature type with {this} cost {1} less to cast")
         ));
@@ -50,7 +48,7 @@ public final class MistformWarchief extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new TapSourceCost()));
     }
 
-    public MistformWarchief(final MistformWarchief card) {
+    private MistformWarchief(final MistformWarchief card) {
         super(card);
     }
 
@@ -60,20 +58,12 @@ public final class MistformWarchief extends CardImpl {
     }
 }
 
-class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+class MistformWarchiefPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Card>> {
 
     @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         MageObject sourceObject = game.getObject(input.getSourceId());
-        if (sourceObject != null) {
-            for (SubType subType : sourceObject.getSubtype(game)) {
-                if (subType.getSubTypeSet() == SubTypeSet.CreatureType && input.getObject().hasSubtype(subType, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-
+        return sourceObject != null && sourceObject.shareCreatureTypes(game, input.getObject());
     }
 
     @Override

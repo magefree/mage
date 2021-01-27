@@ -24,7 +24,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -155,7 +154,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
         }
 
         for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
         }
         return true;

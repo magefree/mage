@@ -81,7 +81,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                         }
                         newCounter.add(countersToAdd);
                         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                        card.addCounters(newCounter, source, game, appliedEffects);
+                        card.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects);
                         if (informPlayers && !game.isSimulation()) {
                             Player player = game.getPlayer(source.getControllerId());
                             if (player != null) {
@@ -109,7 +109,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             newCounter.add(countersToAdd);
                             int before = permanent.getCounters(game).getCount(newCounter.getName());
                             List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                            permanent.addCounters(newCounter, source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
+                            permanent.addCounters(newCounter, source.getControllerId(), source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
                             if (informPlayers && !game.isSimulation()) {
                                 int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
                                 Player player = game.getPlayer(source.getControllerId());

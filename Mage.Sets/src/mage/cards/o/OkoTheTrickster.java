@@ -17,7 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.functions.EmptyApplyToPermanent;
+import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
 
@@ -91,7 +91,7 @@ class OkoTheTricksterCopyEffect extends OneShotEffect {
         if (sourcePermanent == null || copyFromPermanent == null) {
             return false;
         }
-        game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyApplyToPermanent());
+        game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
         return true;
     }
 }

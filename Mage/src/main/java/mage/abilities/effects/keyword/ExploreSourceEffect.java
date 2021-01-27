@@ -110,7 +110,7 @@ public class ExploreSourceEffect extends OneShotEffect {
                     permanentController.moveCards(card, Zone.HAND, source, game);
                 } else {
                     if (game.getState().getZone(permanentId) == Zone.BATTLEFIELD) { // needed in case LKI object is used
-                        permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                        permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                     }
                     if (permanentController.chooseUse(Outcome.Neutral, "Put " + card.getLogName() + " in your graveyard?", source, game)) {
                         permanentController.moveCards(card, Zone.GRAVEYARD, source, game);
@@ -124,7 +124,7 @@ public class ExploreSourceEffect extends OneShotEffect {
                 && game.getState().getZone(permanentId) == Zone.BATTLEFIELD) {
             // If no card is revealed, most likely because that player's library is empty,
             // the exploring creature receives a +1/+1 counter.
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

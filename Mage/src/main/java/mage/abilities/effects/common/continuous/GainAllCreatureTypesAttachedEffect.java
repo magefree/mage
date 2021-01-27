@@ -38,7 +38,7 @@ public class GainAllCreatureTypesAttachedEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        permanent.setIsAllCreatureTypes(true);
+        permanent.setIsAllCreatureTypes(game, true);
         return true;
     }
 }

@@ -1,9 +1,5 @@
 package mage.cards.c;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,8 +15,12 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class Conversion extends CardImpl {
@@ -75,8 +75,8 @@ public final class Conversion extends CardImpl {
             for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (land.getSubtype(game).contains(SubType.MOUNTAIN)) {
-                            land.getSubtype(game).removeAll(SubType.getLandTypes());
+                        if (land.hasSubtype(SubType.MOUNTAIN, game)) {
+                            land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
                             land.addSubType(game, SubType.PLAINS);
                             land.removeAllAbilities(source.getSourceId(), game);
                             land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);

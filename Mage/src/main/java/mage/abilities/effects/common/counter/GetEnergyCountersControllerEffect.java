@@ -37,7 +37,7 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.addCounters(CounterType.ENERGY.createInstance(value.calculate(game, source, this)), source, game);
+            return controller.addCounters(CounterType.ENERGY.createInstance(value.calculate(game, source, this)), source.getControllerId(), source, game);
         }
         return false;
     }

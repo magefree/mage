@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -41,7 +41,7 @@ public final class VizierOfManyFaces extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Vizier of Many Faces enter the battlefield as a copy of any creature on the battlefield, except if Vizier of Many Faces was embalmed, the token has no mana cost, it's white, and it's a Zombie in addition to its other types.
-        Effect effect = new CopyPermanentEffect(new VizierOfManyFacesApplyToPermanent());
+        Effect effect = new CopyPermanentEffect(new VizierOfManyFacesCopyApplier());
         effect.setText("as a copy of any creature on the battlefield, except if {this} was embalmed, the token has no mana cost, it's white, and it's a Zombie in addition to its other types.");
         this.addAbility(new EntersBattlefieldAbility(effect, true), new EmbalmedThisTurnWatcher());
 
@@ -59,15 +59,10 @@ public final class VizierOfManyFaces extends CardImpl {
     }
 }
 
-class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
+class VizierOfManyFacesCopyApplier extends CopyApplier {
 
     @Override
-    public boolean apply(Game game, MageObject mageObject, Ability source, UUID copyToObjectId) {
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Permanent permanent, Ability source, UUID copyToObjectId) {
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         for (Permanent entering : game.getPermanentsEntering().values()) {
             if (!entering.getId().equals(copyToObjectId) || !(entering instanceof PermanentToken)) {
                 continue;
@@ -81,14 +76,15 @@ class VizierOfManyFacesApplyToPermanent extends ApplyToPermanent {
                 if (!Objects.equals(mor.getSourceId(), originalCardId) || game.getState().getZoneChangeCounter(originalCardId) != mor.getZoneChangeCounter()) {
                     continue;
                 }
-                permanent.getManaCost().clear();
-                permanent.addSubType(game, SubType.ZOMBIE);
-                permanent.getColor(game).setColor(ObjectColor.WHITE);
+                blueprint.getManaCost().clear();
+                if (!blueprint.getSubtype().contains(SubType.ZOMBIE)) {
+                    blueprint.getSubtype().add(SubType.ZOMBIE);
+                }
+                blueprint.getColor().setColor(ObjectColor.WHITE);
             }
         }
         return true;
     }
-
 }
 
 class EmbalmedThisTurnWatcher extends Watcher {

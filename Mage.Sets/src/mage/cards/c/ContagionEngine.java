@@ -68,7 +68,7 @@ class ContagionEngineEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, targetPlayer.getId(), game)) {
-                creature.addCounters(CounterType.M1M1.createInstance(), source, game);
+                creature.addCounters(CounterType.M1M1.createInstance(), source.getControllerId(), source, game);
             }
             return true;
         }

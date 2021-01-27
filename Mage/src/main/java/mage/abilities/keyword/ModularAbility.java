@@ -162,7 +162,7 @@ class ModularDistributeCounterEffect extends OneShotEffect {
             int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
                 List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-                targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), source, game, appliedEffects);
+                targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), source.getControllerId(), source, game, appliedEffects);
             }
             return true;
         }

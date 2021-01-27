@@ -76,7 +76,7 @@ class ImmaculateMagistrateEffect extends OneShotEffect {
         if (permanent != null) {
             int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             if (count > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(count), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(count), source.getControllerId(), source, game);
                 return true;
             }
         }
