@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -43,7 +43,7 @@ public final class MaskedVandal extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // When enters the battlefield, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.
-        Ability ability = new EntersBattlefieldAbility(
+        Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DoIfCostPaid(new ExileTargetEffect(), new ExileFromGraveCost(
                         new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)
                 ))
