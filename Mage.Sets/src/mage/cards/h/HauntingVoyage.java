@@ -61,6 +61,7 @@ class HauntingVoyageEffect extends OneShotEffect {
         super(effect);
     }
 
+    @Override
     public HauntingVoyageEffect copy() {
         return new HauntingVoyageEffect(this);
     }
