@@ -147,6 +147,12 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId();// for split cards
+
         UUID cardId = getTargetPointer().getFirst(game, source);
         if (cardId == null) {
             this.discard(); // card is no longer in the origin zone, effect can be discarded
