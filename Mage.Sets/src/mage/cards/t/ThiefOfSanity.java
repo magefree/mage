@@ -44,7 +44,7 @@ public final class ThiefOfSanity extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ThiefOfSanityEffect(), false, true));
     }
 
-    public ThiefOfSanity(final ThiefOfSanity card) {
+    private ThiefOfSanity(final ThiefOfSanity card) {
         super(card);
     }
 
@@ -62,7 +62,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
                 + "For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it";
     }
 
-    public ThiefOfSanityEffect(final ThiefOfSanityEffect effect) {
+    private ThiefOfSanityEffect(final ThiefOfSanityEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
 
 class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
 
-    final UUID authorizedPlayerId;
+    private final UUID authorizedPlayerId;
 
     public ThiefOfSanityCastFromExileEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
@@ -130,7 +130,7 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "For as long as that card remains exiled, you may cast it";
     }
 
-    public ThiefOfSanityCastFromExileEffect(final ThiefOfSanityCastFromExileEffect effect) {
+    private ThiefOfSanityCastFromExileEffect(final ThiefOfSanityCastFromExileEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
     }
@@ -156,7 +156,7 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
         if (theCard == null || theCard.isLand()) {
             return false;
         }
-        objectId = theCard.getMainCard().getId();// for split cards
+        objectId = theCard.getMainCard().getId(); // for split cards
 
         if (objectId.equals(cardId)
                 && affectedControllerId.equals(authorizedPlayerId)) {
@@ -170,7 +170,7 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
 
 class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
-    final UUID authorizedPlayerId;
+    private final UUID authorizedPlayerId;
 
     public ThiefOfSanitySpendAnyManaEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
@@ -178,7 +178,7 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
         staticText = "For as long as that card remains exiled, you may spend mana as though it were mana of any color to cast it";
     }
 
-    public ThiefOfSanitySpendAnyManaEffect(final ThiefOfSanitySpendAnyManaEffect effect) {
+    private ThiefOfSanitySpendAnyManaEffect(final ThiefOfSanitySpendAnyManaEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
     }
@@ -201,7 +201,7 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
             // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
             return affectedControllerId.equals(authorizedPlayerId);
         } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarted
+            // object has moved zone so effect can be discarded
             this.discard();
         }
         return false;
@@ -215,7 +215,7 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
 
 class ThiefOfSanityLookEffect extends AsThoughEffectImpl {
 
-    final UUID authorizedPlayerId;
+    private final UUID authorizedPlayerId;
 
     public ThiefOfSanityLookEffect(UUID authorizedPlayerId) {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
@@ -223,7 +223,7 @@ class ThiefOfSanityLookEffect extends AsThoughEffectImpl {
         staticText = "For as long as that card remains exiled, you may look at it";
     }
 
-    public ThiefOfSanityLookEffect(final ThiefOfSanityLookEffect effect) {
+    private ThiefOfSanityLookEffect(final ThiefOfSanityLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
     }
