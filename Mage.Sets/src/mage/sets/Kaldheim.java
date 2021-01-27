@@ -208,6 +208,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Mistwalker", 68, Rarity.COMMON, mage.cards.m.Mistwalker.class));
         cards.add(new SetCardInfo("Moritte of the Frost", 223, Rarity.UNCOMMON, mage.cards.m.MoritteOfTheFrost.class));
         cards.add(new SetCardInfo("Mountain", 397, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mystic Reflection", 69, Rarity.RARE, mage.cards.m.MysticReflection.class));
         cards.add(new SetCardInfo("Narfi, Betrayer King", 224, Rarity.UNCOMMON, mage.cards.n.NarfiBetrayerKing.class));
         cards.add(new SetCardInfo("Niko Aris", 225, Rarity.MYTHIC, mage.cards.n.NikoAris.class));
         cards.add(new SetCardInfo("Niko Defies Destiny", 226, Rarity.UNCOMMON, mage.cards.n.NikoDefiesDestiny.class));
