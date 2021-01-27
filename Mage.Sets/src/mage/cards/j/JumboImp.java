@@ -80,7 +80,7 @@ class JumboImpEffect extends EntersBattlefieldWithXCountersEffect {
         if (controller != null && permanent != null) {
             int amount = controller.rollDice(source, game, 6);
             List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game, appliedEffects);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
             return super.apply(game, source);
         }
         return false;
@@ -115,7 +115,7 @@ class JumboImpAddCountersEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             int amount = controller.rollDice(source, game, 6);
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             return true;
         }
         return false;

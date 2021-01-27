@@ -93,7 +93,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
                         return false;
                     }
                 }
-                creature.addCounters(CounterType.P1P1.createInstance(sacrificedCreatures), source, game);
+                creature.addCounters(CounterType.P1P1.createInstance(sacrificedCreatures), source.getControllerId(), source, game);
             }
         }
         return false;

@@ -17,7 +17,6 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -79,7 +78,7 @@ class DamageDealtAsIfSourceHadWitherEffect extends ReplacementEffectImpl {
             Counter counter = CounterType.M1M1.createInstance(damageAmount);
             Permanent creatureDamaged = game.getPermanent(event.getTargetId());
             if (creatureDamaged != null) {
-                creatureDamaged.addCounters(counter, source, game);
+                creatureDamaged.addCounters(counter, source.getControllerId(), source, game);
             }
         }
         return true;

@@ -518,7 +518,7 @@ public final class SystemUtil {
                 } else if ("loyalty".equalsIgnoreCase(command.zone)) {
                     for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
                         if (perm.getName().equals(command.cardName) && perm.getCardType().contains(CardType.PLANESWALKER)) {
-                            perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), fakeSourceAbility, game);
+                            perm.addCounters(CounterType.LOYALTY.createInstance(command.Amount), fakeSourceAbility.getControllerId(), fakeSourceAbility, game);
                         }
                     }
                     continue;

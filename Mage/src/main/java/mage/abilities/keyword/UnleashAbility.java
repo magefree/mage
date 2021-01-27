@@ -12,7 +12,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -78,7 +77,7 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " unleashes " + creature.getName());
                 }
-                creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+                creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
             }
         }
         return false;

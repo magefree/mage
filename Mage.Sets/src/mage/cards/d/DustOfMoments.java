@@ -114,7 +114,7 @@ public final class DustOfMoments extends CardImpl {
                         final Counter modifiedCounter = new Counter(counterName, countersToRemove);
                         card.removeCounters(modifiedCounter, source, game);
                     } else {
-                        card.addCounters(counter, source, game);
+                        card.addCounters(counter, source.getControllerId(), source, game);
                     }
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getName() + ": " +
@@ -139,7 +139,7 @@ public final class DustOfMoments extends CardImpl {
                         final Counter modifiedCounter = new Counter(counterName, countersToRemove);
                         card.removeCounters(modifiedCounter, source, game);
                     } else {
-                        card.addCounters(counter, source, game);
+                        card.addCounters(counter, source.getControllerId(), source, game);
                     }
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getName() + ": " +

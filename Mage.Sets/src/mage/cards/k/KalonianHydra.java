@@ -82,7 +82,7 @@ class KalonianHydraEffect extends OneShotEffect {
         for (Permanent permanent : permanents) {
             int existingCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
             if (existingCounters > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(existingCounters), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(existingCounters), source.getControllerId(), source, game);
             }
         }
         return true;

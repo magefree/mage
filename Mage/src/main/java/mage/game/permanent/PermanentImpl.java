@@ -960,7 +960,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             } else if (mdi.sourceObject instanceof Permanent) {
                 source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
-            addCounters(mdi.counter, source, game);
+            addCounters(mdi.counter, game.getControllerId(mdi.sourceObject.getId()), source, game);
         }
         markedDamage.clear();
         return 0;
@@ -1023,7 +1023,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     damageSourceAbility = ((Permanent) attacker).getSpellAbility();
                 }
                 // deal damage immediately
-                addCounters(CounterType.M1M1.createInstance(actualDamage), damageSourceAbility, game);
+                addCounters(CounterType.M1M1.createInstance(actualDamage), game.getControllerId(attackerId), damageSourceAbility, game);
             }
         } else {
             this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);

@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -96,7 +95,7 @@ class AzorsElocutorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source, game);
+            permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source.getControllerId(), source, game);
             if (permanent.getCounters(game).getCount(CounterType.FILIBUSTER) > 4) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {

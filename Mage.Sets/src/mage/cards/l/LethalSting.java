@@ -73,7 +73,7 @@ class LethalStingCost extends CostImpl {
             controller.chooseTarget(Outcome.UnboostCreature, target, ability, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
+                permanent.addCounters(CounterType.M1M1.createInstance(), controllerId, ability, game);
                 game.informPlayers(controller.getLogName() + " puts a -1/-1 counter on " + permanent.getLogName());
                 this.paid = true;
             }

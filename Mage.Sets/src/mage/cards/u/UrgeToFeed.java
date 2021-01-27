@@ -69,7 +69,7 @@ class UrgeToFeedEffect extends OneShotEffect {
                 Permanent vampire = game.getPermanent(vampireId);
                 if (vampire != null) {
                     vampire.tap(source, game);
-                    vampire.addCounters(CounterType.P1P1.createInstance(), source, game);
+                    vampire.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                 }
             }
         }

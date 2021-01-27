@@ -78,7 +78,7 @@ class CorrosionUpkeepEffect extends OneShotEffect {
             // put a rust counter on each artifact target opponent controls
             if (targetPlayer != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPlayer.getId(), game)) {
-                    permanent.addCounters(CounterType.RUST.createInstance(), source, game);
+                    permanent.addCounters(CounterType.RUST.createInstance(), source.getControllerId(), source, game);
                 }
             }
             // destroy each artifact with converted mana cost less than or equal to the number of rust counters on it

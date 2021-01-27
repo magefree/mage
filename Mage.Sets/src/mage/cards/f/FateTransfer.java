@@ -77,7 +77,7 @@ class FateTransferEffect extends OneShotEffect {
             Permanent copyCreature = creatureToMoveCountersFrom.copy();
             for (Counter counter : copyCreature.getCounters(game).values()) {
                 creatureToMoveCountersFrom.removeCounters(counter, source, game);
-                creatureToMoveCountersTo.addCounters(counter, source, game);
+                creatureToMoveCountersTo.addCounters(counter, source.getControllerId(), source, game);
             }
             return true;
         }

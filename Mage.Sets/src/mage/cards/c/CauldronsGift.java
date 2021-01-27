@@ -84,7 +84,7 @@ class CauldronsGiftEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

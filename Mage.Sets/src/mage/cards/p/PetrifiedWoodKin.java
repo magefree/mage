@@ -93,7 +93,7 @@ class PetrifiedWoodKinEffect extends OneShotEffect {
             MageObjectReference mor = new MageObjectReference(opponentId, game);
             amount += watcher.getDamagedObjects().getOrDefault(mor, 0);
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game, appliedEffects);
+        permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
         return true;
     }
 

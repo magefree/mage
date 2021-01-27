@@ -81,7 +81,7 @@ class LittjaraMirrorlakeEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
     }

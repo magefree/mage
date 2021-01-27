@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -22,8 +20,9 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class DefiantGreatmaw extends CardImpl {
@@ -44,7 +43,7 @@ public final class DefiantGreatmaw extends CardImpl {
         this.addAbility(new DefiantGreatmawTriggeredAbility());
     }
 
-    public DefiantGreatmaw(final DefiantGreatmaw card) {
+    private DefiantGreatmaw(final DefiantGreatmaw card) {
         super(card);
     }
 
@@ -68,7 +67,7 @@ class DefiantGreatmawTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreaturePermanent(filter));
     }
 
-    DefiantGreatmawTriggeredAbility(final DefiantGreatmawTriggeredAbility ability) {
+    private DefiantGreatmawTriggeredAbility(final DefiantGreatmawTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,12 +78,9 @@ class DefiantGreatmawTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean weAreDoingIt = isControlledBy(game.getControllerId(event.getSourceId()));
-        boolean isM1M1Counters = event.getData().equals(CounterType.M1M1.getName());
-        if (weAreDoingIt && isM1M1Counters && event.getTargetId().equals(this.getSourceId())) {
-                return true;
-            }
-        return false;
+        return event.getData().equals(CounterType.M1M1.getName())
+                && isControlledBy(event.getPlayerId())
+                && event.getTargetId().equals(getSourceId());
     }
 
     @Override
@@ -94,6 +90,7 @@ class DefiantGreatmawTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you put one or more -1/-1 counters on {this}, remove a -1/-1 counter from another target creature you control.";
+        return "Whenever you put one or more -1/-1 counters on {this}, " +
+                "remove a -1/-1 counter from another target creature you control.";
     }
 }

@@ -85,6 +85,6 @@ class LilianasScroungerEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
         player.choose(outcome, target, source.getSourceId(), game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
-        return permanent != null && permanent.addCounters(CounterType.LOYALTY.createInstance(), source, game);
+        return permanent != null && permanent.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
     }
 }

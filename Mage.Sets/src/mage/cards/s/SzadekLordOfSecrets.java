@@ -69,7 +69,7 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
         if (damageEvent.isCombatDamage()) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), source.getControllerId(), source, game);
                 if (damagedPlayer != null) {
                     damagedPlayer.millCards(damageEvent.getAmount(), source, game);
                 }

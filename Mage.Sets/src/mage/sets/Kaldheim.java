@@ -320,6 +320,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Vengeful Reaper", 116, Rarity.UNCOMMON, mage.cards.v.VengefulReaper.class));
         cards.add(new SetCardInfo("Village Rites", 117, Rarity.COMMON, mage.cards.v.VillageRites.class));
         cards.add(new SetCardInfo("Volatile Fjord", 273, Rarity.COMMON, mage.cards.v.VolatileFjord.class));
+        cards.add(new SetCardInfo("Vorinclex, Monstrous Raider", 199, Rarity.MYTHIC, mage.cards.v.VorinclexMonstrousRaider.class));
         cards.add(new SetCardInfo("Waking the Trolls", 234, Rarity.RARE, mage.cards.w.WakingTheTrolls.class));
         cards.add(new SetCardInfo("Warchanter Skald", 381, Rarity.UNCOMMON, mage.cards.w.WarchanterSkald.class));
         cards.add(new SetCardInfo("Warhorn Blast", 38, Rarity.COMMON, mage.cards.w.WarhornBlast.class));

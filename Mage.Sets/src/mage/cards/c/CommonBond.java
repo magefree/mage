@@ -57,12 +57,12 @@ class CommonBondEffect extends OneShotEffect {
         int affectedTargets = 0;
         Permanent permanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(1), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);
             affectedTargets ++;
         }
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(1), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);
             affectedTargets ++;
         }
         return affectedTargets > 0;

@@ -81,7 +81,7 @@ class NineLivesPreventionEffect extends PreventionEffectImpl {
             if (player != null) {
                 Permanent nineLives = source.getSourcePermanentIfItStillExists(game);
                 if (nineLives != null) {
-                    nineLives.addCounters(CounterType.INCARNATION.createInstance(1), source, game);
+                    nineLives.addCounters(CounterType.INCARNATION.createInstance(1), source.getControllerId(), source, game);
                 }
             }
             event.setAmount(0);

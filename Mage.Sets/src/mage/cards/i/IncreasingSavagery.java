@@ -64,7 +64,7 @@ class IncreasingSavageryEffect extends OneShotEffect {
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;
         }

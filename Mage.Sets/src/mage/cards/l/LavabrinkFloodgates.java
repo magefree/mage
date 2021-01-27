@@ -87,7 +87,7 @@ class LavabrinkFloodgatesEffect extends OneShotEffect {
         player.choose(outcome, choice, game);
         switch (choice.getChoice()) {
             case "Add a doom counter":
-                permanent.addCounters(CounterType.DOOM.createInstance(), source, game);
+                permanent.addCounters(CounterType.DOOM.createInstance(), player.getId(), source, game);
                 break;
             case "Remove a doom counter":
                 permanent.removeCounters(CounterType.DOOM.createInstance(), source, game);

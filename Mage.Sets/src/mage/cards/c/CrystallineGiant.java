@@ -97,6 +97,6 @@ class CrystallineGiantEffect extends OneShotEffect {
         }
         return permanent.addCounters(counterTypes.get(
                 RandomUtil.nextInt(counterTypes.size())
-        ).createInstance(), source, game);
+        ).createInstance(), source.getControllerId(), source, game);
     }
 }

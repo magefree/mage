@@ -121,7 +121,7 @@ class AnimationModuleEffect extends OneShotEffect {
                     if (permanent.getCounters(game).size() == 1) {
                         for (Counter counter : permanent.getCounters(game).values()) {
                             Counter newCounter = new Counter(counter.getName());
-                            permanent.addCounters(newCounter, source, game);
+                            permanent.addCounters(newCounter, source.getControllerId(), source, game);
                         }
                     } else {
                         Choice choice = new ChoiceImpl(true);
@@ -135,7 +135,7 @@ class AnimationModuleEffect extends OneShotEffect {
                             for (Counter counter : permanent.getCounters(game).values()) {
                                 if (counter.getName().equals(choice.getChoice())) {
                                     Counter newCounter = new Counter(counter.getName());
-                                    permanent.addCounters(newCounter, source, game);
+                                    permanent.addCounters(newCounter, source.getControllerId(), source, game);
                                     break;
                                 }
                             }
@@ -151,7 +151,7 @@ class AnimationModuleEffect extends OneShotEffect {
                         if (player.getCounters().size() == 1) {
                             for (Counter counter : player.getCounters().values()) {
                                 Counter newCounter = new Counter(counter.getName());
-                                player.addCounters(newCounter, source, game);
+                                player.addCounters(newCounter, source.getControllerId(), source, game);
                             }
                         } else {
                             Choice choice = new ChoiceImpl(true);
@@ -165,7 +165,7 @@ class AnimationModuleEffect extends OneShotEffect {
                                 for (Counter counter : player.getCounters().values()) {
                                     if (counter.getName().equals(choice.getChoice())) {
                                         Counter newCounter = new Counter(counter.getName());
-                                        player.addCounters(newCounter, source, game);
+                                        player.addCounters(newCounter, source.getControllerId(), source, game);
                                         break;
                                     }
                                 }

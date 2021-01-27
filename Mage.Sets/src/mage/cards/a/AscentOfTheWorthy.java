@@ -171,7 +171,7 @@ class AscentOfTheWorthyReturnEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        permanent.addCounters(CounterType.FLYING.createInstance(), source, game);
+        permanent.addCounters(CounterType.FLYING.createInstance(), source.getControllerId(), source, game);
         game.addEffect(new AddCardSubTypeTargetEffect(
                 SubType.ANGEL, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);

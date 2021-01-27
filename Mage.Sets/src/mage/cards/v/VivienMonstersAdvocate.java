@@ -114,7 +114,7 @@ class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
             String chosen = choice.getChoice();
             if (chosen != null) {
                 permanent.addCounters(CounterType.findByName(chosen.toLowerCase(
-                        Locale.ENGLISH)).createInstance(), source, game);
+                        Locale.ENGLISH)).createInstance(), source.getControllerId(), source, game);
             }
         }
         return true;

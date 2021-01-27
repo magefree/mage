@@ -68,7 +68,7 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
                     final Counter modifiedCounter = new Counter(counterName, countersToRemove);
                     card.removeCounters(modifiedCounter, source, game);
                 } else {
-                    card.addCounters(counter, source, game);
+                    card.addCounters(counter, source.getControllerId(), source, game);
                 }
                 if (!game.isSimulation()) {
                     game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")

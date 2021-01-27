@@ -266,7 +266,7 @@ class SuspendExileEffect extends OneShotEffect {
                 if (suspend == Integer.MAX_VALUE) {
                     suspend = source.getManaCostsToPay().getX();
                 }
-                card.addCounters(CounterType.TIME.createInstance(suspend), source, game);
+                card.addCounters(CounterType.TIME.createInstance(suspend), source.getControllerId(), source, game);
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName()
                             + " suspends (" + suspend + ") " + card.getLogName());

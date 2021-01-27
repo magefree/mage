@@ -46,7 +46,7 @@ public class PutCountersSourceCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            this.paid = permanent.addCounters(counter, ability, game, false);
+            this.paid = permanent.addCounters(counter, controllerId, ability, game, false);
         }
         return paid;
     }

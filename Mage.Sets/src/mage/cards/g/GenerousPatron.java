@@ -1,21 +1,21 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.SupportAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class GenerousPatron extends CardImpl {
@@ -47,11 +47,11 @@ public final class GenerousPatron extends CardImpl {
 
 class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
 
-    public GenerousPatronTriggeredAbility() {
+    GenerousPatronTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public GenerousPatronTriggeredAbility(GenerousPatronTriggeredAbility ability) {
+    private GenerousPatronTriggeredAbility(GenerousPatronTriggeredAbility ability) {
         super(ability);
     }
 
@@ -62,7 +62,7 @@ class GenerousPatronTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(game.getControllerId(event.getSourceId()))) {
+        if (!isControlledBy(event.getPlayerId())) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());

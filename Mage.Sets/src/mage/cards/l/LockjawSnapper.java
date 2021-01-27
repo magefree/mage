@@ -73,7 +73,7 @@ class LockjawSnapperEffect extends OneShotEffect {
         }
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (creature != null) {
-                creature.addCounters(CounterType.M1M1.createInstance(), source, game);
+                creature.addCounters(CounterType.M1M1.createInstance(), source.getControllerId(), source, game);
                 applied = true;
             }
         }

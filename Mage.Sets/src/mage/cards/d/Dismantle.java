@@ -82,7 +82,7 @@ class DismantleEffect extends OneShotEffect {
                             counter = CounterType.CHARGE.createInstance(counterCount);
                         }
                         if (artifact != null) {
-                            artifact.addCounters(counter, source, game);
+                            artifact.addCounters(counter, source.getControllerId(), source, game);
                         }
                     }
                 }

@@ -77,7 +77,7 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.LOYALTY.createInstance(), source, game);
+            creature.addCounters(CounterType.LOYALTY.createInstance(), source.getControllerId(), source, game);
         }
         return false;
     }

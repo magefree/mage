@@ -13,7 +13,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -73,7 +72,7 @@ class RiotReplacementEffect extends ReplacementEffectImpl {
         if (creature != null && controller != null) {
             if (controller.chooseUse(outcome, "Have " + creature.getLogName() + " enter the battlefield with a +1/+1 counter on it or with haste?", null, "+1/+1 counter", "Haste", source, game)) {
                 game.informPlayers(controller.getLogName() + " choose to put a +1/+1 counter on " + creature.getName());
-                creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+                creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
             } else {
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom), source);
             }

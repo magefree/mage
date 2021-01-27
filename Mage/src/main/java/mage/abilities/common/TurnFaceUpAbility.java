@@ -82,7 +82,7 @@ class TurnFaceUpEffect extends OneShotEffect {
             if (sourcePermanent != null) {
                 if (sourcePermanent.turnFaceUp(source, game, source.getControllerId())) {
                     if (megamorph) {
-                        sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                        sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                     }
                     game.getState().setValue(source.getSourceId().toString() + "TurnFaceUpX", source.getManaCostsToPay().getX());
                     return true;

@@ -131,7 +131,7 @@ public final class ForgottenAncient extends CardImpl {
             //Move all the counters for each chosen creature
             for (CounterMovement cm : counterMovements) {
                 sourcePermanent.removeCounters(CounterType.P1P1.createInstance(cm.counters), source, game);
-                game.getPermanent(cm.target).addCounters(CounterType.P1P1.createInstance(cm.counters), source, game);
+                game.getPermanent(cm.target).addCounters(CounterType.P1P1.createInstance(cm.counters), source.getControllerId(), source, game);
             }
             return true;
         }

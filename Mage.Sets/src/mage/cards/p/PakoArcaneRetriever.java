@@ -100,14 +100,14 @@ class PakoArcaneRetrieverEffect extends OneShotEffect {
         }
         cards.getCards(game)
                 .stream()
-                .filter(card -> card.addCounters(CounterType.FETCH.createInstance(), source, game))
+                .filter(card -> card.addCounters(CounterType.FETCH.createInstance(), source.getControllerId(), source, game))
                 .filter(card -> !card.isCreature())
                 .forEach(card -> watcher.addCard(controller.getId(), card, game));
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null || counters == 0) {
             return true;
         }
-        return permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
+        return permanent.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game);
     }
 }
 

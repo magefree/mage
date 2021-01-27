@@ -1,6 +1,5 @@
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,12 +11,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -27,8 +21,9 @@ import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class QuicksilverFountain extends CardImpl {
@@ -99,12 +94,12 @@ class QuicksilverFountainEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             Permanent landChosen = game.getPermanent(source.getFirstTarget());
-            landChosen.addCounters(CounterType.FLOOD.createInstance(), source, game);
+            landChosen.addCounters(CounterType.FLOOD.createInstance(), player.getId(), source, game);
             ContinuousEffect becomesBasicLandTargetEffect
                     = new BecomesBasicLandTargetEffect(Duration.Custom, false, SubType.ISLAND);
             ConditionalContinuousEffect effect
                     = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
-                            new LandHasFloodCounterCondition(), staticText);
+                    new LandHasFloodCounterCondition(), staticText);
             // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
             SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
             gainAbility.setSourceId(landChosen.getId());

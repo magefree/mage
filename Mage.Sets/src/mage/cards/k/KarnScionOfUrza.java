@@ -109,7 +109,7 @@ class KarnPlus1Effect extends OneShotEffect {
                 if (!cards.isEmpty()) {
                     controller.moveCards(cards, Zone.EXILED, source, game);
                     for (Card c : cards.getCards(game)) {
-                        c.addCounters(CounterType.SILVER.createInstance(1), source, game);
+                        c.addCounters(CounterType.SILVER.createInstance(1), source.getControllerId(), source, game);
                     }
                 }
             }

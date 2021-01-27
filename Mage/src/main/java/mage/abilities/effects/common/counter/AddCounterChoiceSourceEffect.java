@@ -48,7 +48,7 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
         } else {
             counter = counterType2.createInstance();
         }
-        return permanent.addCounters(counter, source, game);
+        return permanent.addCounters(counter, source.getControllerId(), source, game);
     }
 
     private static final String cap(String string) {

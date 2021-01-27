@@ -83,7 +83,7 @@ class DiregrafColossusEffect extends OneShotEffect {
             int amount = 0;
             amount += player.getGraveyard().count(filter, game);
             if (amount > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;
         }

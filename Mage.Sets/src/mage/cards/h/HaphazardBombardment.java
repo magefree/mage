@@ -92,7 +92,7 @@ class HaphazardBombardmentEffect extends OneShotEffect {
                 }
             }
             for (Permanent permanent : permanents) {
-                permanent.addCounters(CounterType.AIM.createInstance(), source, game);
+                permanent.addCounters(CounterType.AIM.createInstance(), source.getControllerId(), source, game);
             }
             return true;
 

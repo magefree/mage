@@ -89,7 +89,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.MANIFESTATION.createInstance(), source, game);
+                    permanent.addCounters(CounterType.MANIFESTATION.createInstance(), source.getControllerId(), source, game);
                     ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ENCHANTMENT);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);

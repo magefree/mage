@@ -114,7 +114,7 @@ class ImminentDoomEffect extends OneShotEffect {
         if (imminentDoom != null) {
             Effect effect = new DamageTargetEffect((int) game.getState().getValue("ImminentDoomCount" + source.getSourceId().toString()));
             effect.apply(game, source);
-            imminentDoom.addCounters(CounterType.DOOM.createInstance(), source, game);
+            imminentDoom.addCounters(CounterType.DOOM.createInstance(), source.getControllerId(), source, game);
             return true;
         }
         return false;

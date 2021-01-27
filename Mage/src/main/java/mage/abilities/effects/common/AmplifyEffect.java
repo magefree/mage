@@ -132,7 +132,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             Cards cards = new CardsImpl();
             cards.addAll(target.getTargets());
             int amountCounters = cards.size() * amplifyFactor.getFactor();
-            sourceCreature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
+            sourceCreature.addCounters(CounterType.P1P1.createInstance(amountCounters), source.getControllerId(), source, game);
             controller.revealCards(sourceCreature.getIdName(), cards, game);
         }
         return false;

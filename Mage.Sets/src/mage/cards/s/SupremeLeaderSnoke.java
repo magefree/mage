@@ -137,7 +137,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
             if (amount > 0) {
                 Counter counterToAdd = counter.copy();
                 counterToAdd.add(amount - counter.getCount());
-                permanent.addCounters(counterToAdd, source, game);
+                permanent.addCounters(counterToAdd, source.getControllerId(), source, game);
             }
         }
         return true;

@@ -72,7 +72,7 @@ class ScaleBlessingEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                 game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
             }
         }

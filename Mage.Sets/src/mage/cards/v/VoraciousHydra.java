@@ -90,6 +90,6 @@ class VoraciousHydraEffect extends OneShotEffect {
         }
         return permanent.addCounters(CounterType.P1P1.createInstance(
                 permanent.getCounters(game).getCount(CounterType.P1P1)
-        ), source, game);
+        ), source.getControllerId(), source, game);
     }
 }

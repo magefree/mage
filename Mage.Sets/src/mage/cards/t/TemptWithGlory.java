@@ -84,7 +84,7 @@ class TemptWithGloryEffect extends OneShotEffect {
 
     private void addCounterToEachCreature(UUID playerId, Counter counter, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-            permanent.addCounters(counter, source, game);
+            permanent.addCounters(counter, playerId, source, game);
         }
     }
 }

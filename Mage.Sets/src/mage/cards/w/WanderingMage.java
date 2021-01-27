@@ -101,7 +101,7 @@ class WanderingMageCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
+            permanent.addCounters(CounterType.M1M1.createInstance(), controllerId, ability, game);
             this.paid = true;
         }
         return paid;

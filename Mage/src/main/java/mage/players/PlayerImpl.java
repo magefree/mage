@@ -2112,7 +2112,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             sourceControllerId = ((Permanent) attacker).getControllerId();
                         }
                         if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
-                            addCounters(CounterType.POISON.createInstance(actualDamage), source, game);
+                            addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
                         } else {
                             GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
                                     playerId, source, playerId, actualDamage, combatDamage);
@@ -2151,10 +2151,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Ability source, Game game) {
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game) {
         boolean returnCode = true;
-        GameEvent addingAllEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, playerId, source,
-                playerId, counter.getName(), counter.getCount());
+        GameEvent addingAllEvent = GameEvent.getEvent(
+                GameEvent.EventType.ADD_COUNTERS, playerId, source,
+                playerAddingCounters, counter.getName(), counter.getCount()
+        );
         if (!game.replaceEvent(addingAllEvent)) {
             int amount = addingAllEvent.getAmount();
             int finalAmount = amount;
@@ -2162,13 +2164,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
                 eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent addingOneEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, source,
-                        playerId, counter.getName(), 1);
+                GameEvent addingOneEvent = GameEvent.getEvent(
+                        GameEvent.EventType.ADD_COUNTER, playerId, source,
+                        playerAddingCounters, counter.getName(), 1
+                );
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
                     getCounters().addCounter(eventCounter);
-                    GameEvent addedOneEvent = GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, playerId, source,
-                            playerId, counter.getName(), 1);
+                    GameEvent addedOneEvent = GameEvent.getEvent(
+                            GameEvent.EventType.COUNTER_ADDED, playerId, source,
+                            playerAddingCounters, counter.getName(), 1
+                    );
                     addedOneEvent.setFlag(addingOneEvent.getFlag());
                     game.fireEvent(addedOneEvent);
                 } else {
@@ -2177,8 +2183,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
             if (finalAmount > 0) {
-                GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, playerId, source,
-                        playerId, counter.getName(), amount);
+                GameEvent addedAllEvent = GameEvent.getEvent(
+                        GameEvent.EventType.COUNTERS_ADDED, playerId, source,
+                        playerAddingCounters, counter.getName(), amount
+                );
                 addedAllEvent.setFlag(addingAllEvent.getFlag());
                 game.fireEvent(addedAllEvent);
             }

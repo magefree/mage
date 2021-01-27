@@ -78,7 +78,7 @@ class TheBattleOfEndorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source.getControllerId(), source, game);
             }
             return true;
         }

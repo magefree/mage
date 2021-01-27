@@ -269,6 +269,7 @@ public enum SubType {
     PEST("Pest", SubTypeSet.CreatureType),
     PHELDDAGRIF("Phelddagrif", SubTypeSet.CreatureType),
     PHOENIX("Phoenix", SubTypeSet.CreatureType),
+    PHYREXIAN("Phyrexian", SubTypeSet.CreatureType),
     PILOT("Pilot", SubTypeSet.CreatureType),
     PINCHER("Pincher", SubTypeSet.CreatureType),
     PIRATE("Pirate", SubTypeSet.CreatureType),

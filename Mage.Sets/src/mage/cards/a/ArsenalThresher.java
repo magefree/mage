@@ -87,7 +87,7 @@ class ArsenalThresherEffect extends OneShotEffect {
                     if (arsenalThresher != null) {
                         controller.revealCards(arsenalThresher.getIdName(), cards, game);
                         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source, game, appliedEffects);
+                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source.getControllerId(), source, game, appliedEffects);
                     }
                 }
             }

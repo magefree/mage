@@ -88,7 +88,7 @@ class AgitatorAntEffect extends OneShotEffect {
             targetPermanent.setNotTarget(true);
             player.choose(Outcome.BoostCreature, targetPermanent, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
-            if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(2), source, game)) {
+            if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(2), player.getId(), source, game)) {
                 continue;
             }
             new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);

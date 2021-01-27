@@ -89,7 +89,7 @@ class ShivanSandMageEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             if (addCounters) {
-                permanent.addCounters(CounterType.TIME.createInstance(2), source, game);
+                permanent.addCounters(CounterType.TIME.createInstance(2), source.getControllerId(), source, game);
             } else {
                 permanent.removeCounters(CounterType.TIME.getName(), 2, source, game);
             }
@@ -98,7 +98,7 @@ class ShivanSandMageEffect extends OneShotEffect {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
             if (addCounters) {
-                card.addCounters(CounterType.TIME.createInstance(2), source, game);
+                card.addCounters(CounterType.TIME.createInstance(2), source.getControllerId(), source, game);
             } else {
                 card.removeCounters(CounterType.TIME.getName(), 2, source, game);
             }

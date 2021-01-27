@@ -140,7 +140,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         controller.moveCards(creature, Zone.EXILED, source, game);
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
-            card.addCounters(CounterType.HIT.createInstance(), source, game);
+            card.addCounters(CounterType.HIT.createInstance(), source.getControllerId(), source, game);
         }
         int cardsFound = 0;
         cardsFound = game.getExile().getAllCards(game).stream().filter((exiledCard) -> (exiledCard.getCounters(game).getCount(CounterType.HIT) >= 1

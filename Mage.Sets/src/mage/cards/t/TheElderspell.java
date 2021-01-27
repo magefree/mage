@@ -82,6 +82,6 @@ class TheElderspellEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        return permanent.addCounters(CounterType.LOYALTY.createInstance(2 * count), source, game);
+        return permanent.addCounters(CounterType.LOYALTY.createInstance(2 * count), source.getControllerId(), source, game);
     }
 }

@@ -19,7 +19,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -158,7 +157,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
+            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
             ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
             game.addEffect(effect, source);

@@ -54,7 +54,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
                         Counter counterToAdd = counter.copy();
                         counterToAdd.add(amount - counter.getCount());
                         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                        permanent.addCounters(counterToAdd, source, game, appliedEffects);
+                        permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
                     }
                 }
             }

@@ -81,7 +81,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
         }
         controller.moveCards(permanent, Zone.EXILED, source, game);
         Card card = game.getCard(permanent.getId());
-        card.addCounters(CounterType.ICE.createInstance(), source, game);
+        card.addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
         return true;
     }
 

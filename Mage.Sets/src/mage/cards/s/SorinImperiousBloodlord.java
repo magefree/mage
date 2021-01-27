@@ -110,7 +110,7 @@ class SorinImperiousBloodlordEffect extends OneShotEffect {
             return false;
         }
         if (permanent.hasSubtype(SubType.VAMPIRE, game)) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         game.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), source);
         game.addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), source);

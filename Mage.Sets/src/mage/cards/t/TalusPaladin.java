@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -116,7 +115,7 @@ class TalusPaladinEffect extends OneShotEffect {
             if (!player.chooseUse(Outcome.Benefit, question, source, game)) {
                 return false;
             }
-            taluspPaladin.addCounters(CounterType.P1P1.createInstance(), source, game);
+            taluspPaladin.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return false;
     }
