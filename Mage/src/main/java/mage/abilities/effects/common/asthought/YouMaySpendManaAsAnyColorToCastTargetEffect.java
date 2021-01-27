@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.asthought;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.constants.*;
@@ -15,17 +16,27 @@ import java.util.UUID;
 /**
  * Spend mana as any color to cast targeted card. Will not affected after any card movements or blinks.
  *
+ * Affects to all card's parts
+ *
  * @author JayDi85
  */
 public class YouMaySpendManaAsAnyColorToCastTargetEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
+    private final Condition condition;
+
     public YouMaySpendManaAsAnyColorToCastTargetEffect(Duration duration) {
+        this(duration, null);
+    }
+
+    public YouMaySpendManaAsAnyColorToCastTargetEffect(Duration duration, Condition condition) {
         super(AsThoughEffectType.SPEND_OTHER_MANA, duration, Outcome.Benefit);
         this.staticText = "You may spend mana as though it were mana of any color to cast it";
+        this.condition = condition;
     }
 
     public YouMaySpendManaAsAnyColorToCastTargetEffect(final YouMaySpendManaAsAnyColorToCastTargetEffect effect) {
         super(effect);
+        this.condition = effect.condition;
     }
 
     @Override
@@ -40,10 +51,15 @@ public class YouMaySpendManaAsAnyColorToCastTargetEffect extends AsThoughEffectI
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (condition != null && !condition.apply(game, source)) {
+            return false;
+        }
+
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
+        UUID targetId = CardUtil.getMainCardId(game, fixedTarget.getTarget()); // Affects to all card's parts (example: Hostage Taker exile mdf card)
         return source.isControlledBy(affectedControllerId)
-                && Objects.equals(objectId, fixedTarget.getTarget())
+                && Objects.equals(objectId, targetId)
                 && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
                 && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
     }

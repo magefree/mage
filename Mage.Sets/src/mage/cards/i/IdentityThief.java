@@ -113,7 +113,7 @@ class IdentityThiefEffect extends OneShotEffect {
         if (controller != null
                 && targetPermanent != null
                 && sourcePermanent != null) {
-            ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, targetPermanent.getMainCard(), source.getSourceId());
+            ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, targetPermanent, source.getSourceId());
             copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
             game.addEffect(copyEffect, source);
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());

@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
@@ -22,10 +23,8 @@ import java.util.UUID;
 public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
-    // A copy of the origin card that was cast (this is not the original card, so it's possible to chnage some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
+    // A copy of the origin card that was cast (this is not the original card, so it's possible to change some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
     protected Card card;
-    // A copy of original card that was used for copy and create current permanent (used in copy effects and special commands like adjustTargets)
-    protected Card copiedFromCard;
     // the number this permanent instance had
     protected int zoneChangeCounter;
 
@@ -220,4 +219,8 @@ public class PermanentCard extends PermanentImpl {
         card.setZoneChangeCounter(value, game);
     }
 
+    @Override
+    public Card getMainCard() {
+        return card.getMainCard();
+    }
 }

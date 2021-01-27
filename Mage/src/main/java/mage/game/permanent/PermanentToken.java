@@ -3,6 +3,7 @@ package mage.game.permanent;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -118,4 +119,9 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
+    @Override
+    public Card getMainCard() {
+        // token don't have game card, so return itself
+        return this;
+    }
 }
