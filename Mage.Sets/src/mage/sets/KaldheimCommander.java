@@ -28,5 +28,6 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of the Beyond", 6, Rarity.RARE, mage.cards.s.SageOfTheBeyond.class));
         cards.add(new SetCardInfo("Spectral Deluge", 7, Rarity.RARE, mage.cards.s.SpectralDeluge.class));
         cards.add(new SetCardInfo("Stoic Farmer", 5, Rarity.RARE, mage.cards.s.StoicFarmer.class));
+        cards.add(new SetCardInfo("Wolverine Riders", 14, Rarity.RARE, mage.cards.w.WolverineRiders.class));
     }
 }

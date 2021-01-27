@@ -84,25 +84,22 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("permanentEnteringBattlefield", permanent);
-            }
-            if (setTargetPointer != SetTargetPointer.NONE) {
-                for (Effect effect : this.getEffects()) {
-                    switch (setTargetPointer) {
-                        case PLAYER:
-                            effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                            break;
-                        case PERMANENT:
-                            effect.setTargetPointer(new FixedTarget(permanent, game));
-                            break;
-                    }
-                }
-            }
+        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            return false;
+        }
+        this.getEffects().setValue("permanentEnteringBattlefield", permanent);
+        if (setTargetPointer == SetTargetPointer.NONE) {
             return true;
         }
-        return false;
+        switch (setTargetPointer) {
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                break;
+            case PERMANENT:
+                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                break;
+        }
+        return true;
     }
 
     @Override
