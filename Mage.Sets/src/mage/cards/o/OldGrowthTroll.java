@@ -177,7 +177,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
                 troll.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
                 // add the activated ability
-                troll.addAbility(makeAbility());
+                troll.addAbility(makeAbility(), source.getSourceId(), game);
         }
         return true;
     }
@@ -201,11 +201,11 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
         Cost cost = new SacrificeSourceCost();
         cost.setText("sacrifice this land");
         activatedAbility.addCost(cost);
-        Ability ability=new SimpleStaticAbility(new GainAbilityAttachedEffect(new SimpleManaAbility(
-                Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()),AttachmentType.AURA
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(new SimpleManaAbility(
+                Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()), AttachmentType.AURA
         ).setText("enchanted Forest has \"{T}: Add {G}{G}\""));
         ability.addEffect(new GainAbilityAttachedEffect(
-                activatedAbility,AttachmentType.AURA
+                activatedAbility, AttachmentType.AURA
         ).setText("and \"{1}, {T}, Sacrifice this land: Create a 4/4 green Troll Warrior creature token with trample.\""));
         return ability;
     }
