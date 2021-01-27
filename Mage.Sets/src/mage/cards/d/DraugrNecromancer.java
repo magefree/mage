@@ -75,12 +75,13 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || permanent == null
-                || controller.hasOpponent(permanent.getControllerId(), game)) {
+        if (controller == null
+                || permanent == null
+                || !controller.hasOpponent(permanent.getControllerId(), game)) {
             return false;
         }
-        controller.moveCards(permanent, Zone.EXILED, source, game);
         Card card = game.getCard(permanent.getId());
+        controller.moveCards(permanent, Zone.EXILED, source, game);
         card.addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
         return true;
     }
