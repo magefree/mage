@@ -147,6 +147,12 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards
+
         UUID targetId = getTargetPointer().getFirst(game, source);
         if (targetId == null) {
             this.discard();
@@ -194,7 +200,7 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
             // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
             return source.isControlledBy(affectedControllerId);
         } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarted
+            // object has moved zone so effect can be discarded
             this.discard();
         }
         return false;
