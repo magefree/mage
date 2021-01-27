@@ -21,8 +21,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  *
  * @author varaghar
@@ -40,7 +38,7 @@ public final class KingNarfisBetrayal extends CardImpl {
         //I — Each player mills four cards. You may exile up to one creature or planeswalker card from each graveyard.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new KingNarfisBetrayalFirstEffect());
 
-        //II, III — Until end of turn, you may cast spells from among cards exiled with King Narfi’s Betrayal, and you may spend mana as though it were mana of any color to cast those spells.
+        //II, III — Until end of turn, you may cast spells from among cards exiled with King Narfi's Betrayal, and you may spend mana as though it were mana of any color to cast those spells.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III, new KingNarfisBetrayalSecondEffect());
 
         this.addAbility(sagaAbility);
@@ -69,9 +67,9 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
     }
 
     KingNarfisBetrayalFirstEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Each player mills four cards. You may exile up to one creature or planeswalker " +
-                "card from each graveyard. ";
+                "card from each graveyard";
     }
 
     private KingNarfisBetrayalFirstEffect(final KingNarfisBetrayalFirstEffect effect) {
@@ -106,6 +104,9 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
         //Each opponent's graveyard
         for (UUID opponentId : game.getOpponents(controllerId)) {
             Player opponent = game.getPlayer(opponentId);
+            if (opponent == null) {
+                continue;
+            }
 
             if (opponent.getGraveyard().count(filter, game) != 0) {
                 if (controller.chooseUse(outcome, "Exile a creature or planeswalker card from " + opponent.getName() + "'s graveyard?", source, game)) {
@@ -127,8 +128,8 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
 
     public KingNarfisBetrayalSecondEffect() {
         super(Outcome.Benefit);
-        this.staticText = " Until end of turn, you may cast spells from among cards exiled with King Narfi's Betrayal," +
-                " and you may spend mana as though it were mana of any color to cast those spells.";
+        this.staticText = "Until end of turn, you may cast spells from among cards exiled with King Narfi's Betrayal," +
+                " and you may spend mana as though it were mana of any color to cast those spells";
     }
 
     public KingNarfisBetrayalSecondEffect(final KingNarfisBetrayalSecondEffect effect) {
