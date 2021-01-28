@@ -164,6 +164,7 @@ public enum CounterType {
     VIGILANCE("vigilance"),
     VITALITY("vitality"),
     VORTEX("vortex"),
+    VOYAGE("voyage"),
     WAGE("wage"),
     WINCH("winch"),
     WIND("wind"),

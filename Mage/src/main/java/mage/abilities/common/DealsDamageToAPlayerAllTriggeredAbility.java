@@ -58,30 +58,28 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage()) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                    effect.setValue("sourceId", event.getSourceId());
-                    if (affectsDefendingPlayer) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                        continue;
-                    }
-                    switch (setTargetPointer) {
-                        case PLAYER:
-                            effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                            break;
-                        case PERMANENT:
-                            effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-                            break;
-                    }
-
-                }
-                return true;
+        if (onlyCombat && !((DamagedPlayerEvent) event).isCombatDamage()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            return false;
+        }
+        this.getEffects().setValue("damage", event.getAmount());
+        this.getEffects().setValue("sourceId", event.getSourceId());
+        if (affectsDefendingPlayer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+        } else {
+            switch (setTargetPointer) {
+                case PLAYER:
+                    this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                    break;
+                case PERMANENT:
+                    this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                    break;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
