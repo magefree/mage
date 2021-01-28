@@ -98,6 +98,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Drain Life", 118, Rarity.COMMON, mage.cards.d.DrainLife.class));
         cards.add(new SetCardInfo("Dread Specter", 119, Rarity.UNCOMMON, mage.cards.d.DreadSpecter.class));
         cards.add(new SetCardInfo("Dream Cache", 62, Rarity.COMMON, mage.cards.d.DreamCache.class));
+        cards.add(new SetCardInfo("Dream Fighter", 63, Rarity.COMMON, mage.cards.d.DreamFighter.class));
         cards.add(new SetCardInfo("Dwarven Miner", 169, Rarity.UNCOMMON, mage.cards.d.DwarvenMiner.class));
         cards.add(new SetCardInfo("Dwarven Nomad", 170, Rarity.COMMON, mage.cards.d.DwarvenNomad.class));
         cards.add(new SetCardInfo("Early Harvest", 213, Rarity.RARE, mage.cards.e.EarlyHarvest.class));
