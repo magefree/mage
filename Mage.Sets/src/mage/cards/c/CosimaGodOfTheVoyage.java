@@ -136,8 +136,7 @@ class CosimaGodOfTheVoyageGainAbilityEffect extends ContinuousEffectImpl {
         if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
             Ability ability = new CosimaGodOfTheVoyageTriggeredAbility();
             ability.setSourceId(card.getId());
-            ability.setControllerId(source.getSourceId());
-            game.getState().addAbility(ability, card);
+            ability.setControllerId(source.getControllerId());
             game.getState().addOtherAbility(card, ability);
         } else {
             discard();
@@ -269,6 +268,7 @@ class TheOmenkeelPlayFromExileEffect extends AsThoughEffectImpl {
 
     private TheOmenkeelPlayFromExileEffect(final TheOmenkeelPlayFromExileEffect effect) {
         super(effect);
+        this.morSet.addAll(effect.morSet);
     }
 
     @Override
