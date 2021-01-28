@@ -194,6 +194,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Mangara's Tome", 309, Rarity.RARE, mage.cards.m.MangarasTome.class));
         cards.add(new SetCardInfo("Marble Diamond", 310, Rarity.UNCOMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Maro", 228, Rarity.RARE, mage.cards.m.Maro.class));
+        cards.add(new SetCardInfo("Meddle", 73, Rarity.UNCOMMON, mage.cards.m.Meddle.class));
         cards.add(new SetCardInfo("Melesse Spirit", 27, Rarity.UNCOMMON, mage.cards.m.MelesseSpirit.class));
         cards.add(new SetCardInfo("Memory Lapse", 74, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
         cards.add(new SetCardInfo("Merfolk Raiders", 75, Rarity.COMMON, mage.cards.m.MerfolkRaiders.class));

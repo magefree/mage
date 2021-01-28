@@ -207,6 +207,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Lonely Sandbar", 320, Rarity.COMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Mage's Guile", 91, Rarity.COMMON, mage.cards.m.MagesGuile.class));
         cards.add(new SetCardInfo("Mana Echoes", 218, Rarity.RARE, mage.cards.m.ManaEchoes.class));
+        cards.add(new SetCardInfo("Meddle", 92, Rarity.UNCOMMON, mage.cards.m.Meddle.class));
         cards.add(new SetCardInfo("Menacing Ogre", 219, Rarity.RARE, mage.cards.m.MenacingOgre.class));
         cards.add(new SetCardInfo("Misery Charm", 158, Rarity.COMMON, mage.cards.m.MiseryCharm.class));
         cards.add(new SetCardInfo("Mistform Dreamer", 93, Rarity.COMMON, mage.cards.m.MistformDreamer.class));
