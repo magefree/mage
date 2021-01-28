@@ -43,9 +43,9 @@ public class RLPlayer extends RandomPlayer{
     private static final Logger logger = Logger.getLogger(RLPlayer.class);
     public RLPlayer(String name , RangeOfInfluence range, int skill){
         super(name);
-        //learner=loadLearner("default",false);
+        learner=loadPyLearner("pydefault");
         if(Objects.isNull(learner)){
-            logger.warn("learner is null");
+            logger.warn("learner is null in RLPlayer creation!");
         }
     }
     public RLPlayer(String name,RLAgent inLearner) {  
@@ -76,6 +76,37 @@ public class RLPlayer extends RandomPlayer{
     }
     public static String getModelLoc(String fileName){
         return getPath(fileName,"-model.zip");
+    }
+    public static void savePyLearner(RLAgent agent, String loc){
+        try {
+        FileOutputStream fileClassOut =new FileOutputStream(getClassLoc(loc));
+        ObjectOutputStream classOut = new ObjectOutputStream(fileClassOut);
+        classOut.writeObject(agent.representer);
+        classOut.close();
+        }catch (IOException i) {
+            i.printStackTrace();
+         }
+    }
+    public static RLAgent loadPyLearner(String loc){
+        try {
+            FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
+            ObjectInputStream classIn = new ObjectInputStream(fileClassIn);
+            PyConnection conn=new PyConnection(5000);
+            RLAgent agent= new RLPyAgent(conn);
+            agent.representer= (Representer) classIn.readObject();
+            return agent;
+        }catch (IOException i) {
+            logger.warn("IO exception");
+            System.err.println("IO exception!");
+            i.printStackTrace();
+            return null;
+         }
+         catch (ClassNotFoundException c) {
+            logger.warn("Class Not Found exception");
+            System.out.println("RLAgent class not found");
+            c.printStackTrace();
+            return null;
+         }
     }
     public static void saveLearner(RLLearner learner,String loc){
         try {
@@ -139,7 +170,7 @@ public class RLPlayer extends RandomPlayer{
             } else {
                 List<RLAction> toUse=new ArrayList<RLAction>();
                 for(int i=0;i<options.size();i++){
-                    toUse.add((RLAction) new ActionAbility(options.get(i)));
+                    toUse.add((RLAction) new ActionAbility(game,options.get(i)));
                 }
                 int choice=learner.choose(game,this,toUse);
                 ActionAbility chosenAction=(ActionAbility) toUse.get(choice);

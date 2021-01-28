@@ -5,7 +5,7 @@ import socket
 import json
 import random
 import numpy as np 
-
+import pickle
 class learnerVsRandom(gym.Env):
     metadata = {'render.modes': ['human']}
 
@@ -20,8 +20,9 @@ class learnerVsRandom(gym.Env):
         self.java_hparams=self.recieve_and_parse(self.clientsocket)
         print("java hparams are",self.java_hparams)
         max_act=self.java_hparams['max_representable_actions']
-        self.action_space=spaces.Discrete(max_act)
-        self.observation_space=spaces.Box(0,self.java_hparams['max_represents'],shape=(max_act,),dtype=np.int32)
+        self.dumped=False
+        self.action_space=spaces.Discrete(self.java_hparams['max_representable_actions'])
+        self.observation_space=spaces.Box(0,self.java_hparams['max_represents'],shape=(69,),dtype=np.float32)
     def step(self, action):
         self.clientsocket.send(bytes(str(action),'ascii')+b"\n")
         message=self.recieve_and_parse(self.clientsocket)
@@ -34,10 +35,19 @@ class learnerVsRandom(gym.Env):
         actions=message['actionRepr']
         state=message['gameRepr']
         actions=np.array(actions)
+        #print('actions shape is',actions.shape)
         gameReals=np.array(state[0])
+        #print('gameReals shape is',gameReals.shape)
         perms=np.array(state[1])
-        actpart1=actions[0,:,0]
-        return actpart1
+        #print('perms shape is',perms.shape)
+        flat_features=(actions[0,:,0],actions[0,:,1],perms,gameReals)
+        flat_lens=[len(item) for item in flat_features]
+        if(not self.dumped):
+            with open('featureShapes',"wb") as f:
+                pickle.dump(flat_lens,f)
+            self.dumped=True
+        gamerepr=np.concatenate(flat_features,axis=0)
+        return gamerepr
     def render(self, mode='human'):
         pass
     def close(self):

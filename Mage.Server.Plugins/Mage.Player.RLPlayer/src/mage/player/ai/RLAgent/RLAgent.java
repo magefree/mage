@@ -4,7 +4,7 @@ import mage.players.Player;
 import java.util.*;
 
 public abstract class RLAgent {
-    Representer representer;
+    public Representer representer;
     public RLAgent(){
         representer=new Representer();
     }

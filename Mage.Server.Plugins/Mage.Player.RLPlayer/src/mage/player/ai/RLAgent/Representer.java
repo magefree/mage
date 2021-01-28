@@ -29,7 +29,18 @@ public class Representer implements Serializable{
     protected String nameObject(MageObject obj){
         return obj.getName(); 
     }
+    public String indexToName(int index){
+        for (Map.Entry<String,Integer> e : nameToIndex.entrySet()) {
+            String key = e.getKey();
+            Integer value = e.getValue();
+            if(value==index){
+                return key;
+            }
+        }
+        return "";
+    }
 
+    
     public RepresentedGame represent(Game game,Player player, List<RLAction> actions){
         List<INDArray> gameRepr=representGame(game, player);
         List<INDArray> actionRepr=representActions(game, actions);
@@ -63,7 +74,7 @@ public class Representer implements Serializable{
                 return -1.0f;
             }
         }
-        return (LPlayer.getLife()-OPlayer.getLife())/(200.0f);
+        return (LPlayer.getLife()-OPlayer.getLife())/(1000.0f);
     }
     //Takes the string representation of a permanent or
     //an action and maps it to it's ID. If it is not in 
@@ -120,7 +131,7 @@ public class Representer implements Serializable{
         System.arraycopy(playerToArray(LPlayer), 0, gameReals, 0,hparams.player_reals);
         System.arraycopy(playerToArray(OPlayer), 0, gameReals, hparams.player_reals, hparams.player_reals);
         int nextIndex=2*hparams.player_reals;
-        gameReals[nextIndex]=game.getTurnNum();
+        gameReals[nextIndex]=game.getTurnNum()/20.0f;
         return gameReals;
     }
     protected List<INDArray> representGame(Game game,Player LPlayer){
@@ -169,27 +180,14 @@ public class Representer implements Serializable{
     protected INDArray representAction(Game game, RLAction action){
         int[] embeds=new int[hparams.input_seqlen];
         if(action instanceof ActionAbility){
-            Ability ability=((ActionAbility) action).ability;
-            MageObject source=ability.getSourceObjectIfItStillExists(game);
-            String abilityName;
-            if(ability instanceof PassAbility){
-                abilityName="Ability:Pass";
-            }
-            else if(source==null){
-                //logger.info("source is NULL!");
-                abilityName="Ability:NULL";
-                logger.info(ability.getRule());
-            }
-            else{
-                abilityName="Ability:"+nameObject(source);
-            }
+            String abilityName=action.getText();
             embeds[0]=getActionID(abilityName);
         }
         else if(action instanceof ActionAttack){
             ActionAttack attack=((ActionAttack) action);
             if(attack.isAttack){
-                Permanent attacker=attack.perm;
-                String attackName="Attacker:"+nameObject(attacker);
+                
+                String attackName=action.getText();
                 embeds[0]=getActionID(attackName);
             }
             else{

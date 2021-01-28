@@ -9,6 +9,7 @@ public class ActionAttack extends RLAction{
     public Boolean isAttack;
     public ActionAttack(Permanent p, Boolean attck){
         perm=p;
+        name="Attack:"+p.getName()+":"+attck;
         isAttack=attck;
     }
 }

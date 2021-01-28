@@ -40,11 +40,10 @@ public class  GameRunner{
     private static final int DECK_SIZE = 40;
     private static final Logger logger = Logger.getLogger(GameRunner.class);
     PyConnection conn;
-    RLPyAgent agent;
+    public RLPyAgent agent;
     public GameRunner(){
         int port=5000;
         conn=new PyConnection(port);
-        conn.write_hparams();
         agent=new RLPyAgent(conn);
     }
     

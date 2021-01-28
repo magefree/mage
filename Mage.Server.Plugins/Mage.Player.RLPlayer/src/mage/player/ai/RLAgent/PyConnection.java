@@ -6,7 +6,7 @@ import java.io.*;
 import org.apache.log4j.Logger;
 import org.nd4j.shade.wstx.sw.OutputElementBase;
 import com.google.gson.*;
-
+import java.lang.NumberFormatException;
 public class PyConnection {
     BufferedReader reader;
     InputStreamReader input;
@@ -29,7 +29,7 @@ public class PyConnection {
         } catch (IOException ex) {
 
             System.out.println("I/O error in Init: " + ex.getMessage());
-            System.exit(-1);
+            //System.exit(-1);
         }
     }
     public void write(RepresentedGame repr){
@@ -44,7 +44,6 @@ public class PyConnection {
             buff.flush();
         }catch (IOException ex) {
             System.out.println("I/O error in send: " + ex.getMessage());
-            System.exit(-1);
         }
     }
     public void write_hparams(){
@@ -66,8 +65,11 @@ public class PyConnection {
         }
         catch (IOException ex) {
             System.out.println("I/O error in read: " + ex.getMessage());
-            System.exit(-1);
-            return -1;
+            return -2;
+        }
+        catch (NumberFormatException ex){
+            System.out.println("Treminating due to closed python server" + ex.getMessage());
+            return -2;
         }
     }
 }

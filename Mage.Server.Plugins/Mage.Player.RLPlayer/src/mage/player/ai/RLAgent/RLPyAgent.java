@@ -30,19 +30,29 @@ import mage.player.ai.RLAgent.*;
 import java.io.*;
 
 public class RLPyAgent extends RLAgent {
-    Representer representer;
+    public Representer representer;
     PyConnection conn;
+    public transient boolean done=false;
     private static final Logger logger = Logger.getLogger(RLPyAgent.class);
     public RLPyAgent(PyConnection conn){
         representer=new Representer();
         this.conn=conn;
+        conn.write_hparams();
     }
     public int choose(Game game, Player player,List<RLAction> actions){
+        if(done){
+            return 0;
+        }
         sendGame(game, player,actions);
         //logger.info("wrote data");
         int action=conn.read();
+        if(action==-2){
+            done=true;
+            return 0;
+        }
         assert 0<= action && action <actions.size();
-        return action%actions.size();
+        int chosenact=action%actions.size();
+        return chosenact;
     }
     public void sendGame(Game game,Player player,List<RLAction> actions){
         RepresentedGame repr=representer.represent(game, player, actions);
