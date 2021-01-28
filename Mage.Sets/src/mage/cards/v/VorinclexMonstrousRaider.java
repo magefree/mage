@@ -85,6 +85,10 @@ class VorinclexMonstrousRaiderEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.getPlayer(event.getTargetId()) == null
+                && game.getState().getZone(event.getTargetId()) != Zone.BATTLEFIELD) {
+            return false;
+        }
         return source.isControlledBy(event.getPlayerId())
                 || game.getOpponents(event.getPlayerId()).contains(source.getControllerId());
     }
