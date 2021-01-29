@@ -11,10 +11,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
 
+    // If you would put one or more counters on a permanent or player, put twice that many of each of
+    // those kinds of counters on that permanent or player instead.
+    // If an opponent would put one or more counters on a permanent or player, they put half that
+    // many of each of those kinds of counters on that permanent or player instead, rounded down.
     private static final String vorinclex = "Vorinclex, Monstrous Raider";
     private static final String boon = "Dragonscale Boon";
     private static final String bear = "Grizzly Bears";
     private static final String rats = "Ichor Rats";
+    private static final String planeswalker = "Chandra, Fire Artisan"; // 4 loyalty
 
     @Test
     public void testIDoubleCountersOnMyStuff() {
@@ -65,6 +70,22 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, CounterType.POISON, 2);
         assertCounterCount(playerB, CounterType.POISON, 2);
+    }
+
+    @Test
+    public void testIDoubleCountersOnPlaneswalker() {
+        addCard(Zone.BATTLEFIELD, playerA, vorinclex);
+        addCard(Zone.HAND, playerA, planeswalker); // {2}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, planeswalker);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertCounterCount(playerA, planeswalker, CounterType.LOYALTY, 4 * 2);
     }
 
     @Test

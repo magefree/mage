@@ -12,6 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -85,10 +87,17 @@ class VorinclexMonstrousRaiderEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getPlayer(event.getTargetId()) == null
-                && game.getState().getZone(event.getTargetId()) != Zone.BATTLEFIELD) {
+        Player targetPlayer = game.getPlayer(event.getTargetId());
+        Permanent targetPermanet = game.getPermanentEntering(event.getTargetId());
+        if (targetPermanet == null) {
+            targetPermanet = game.getPermanent(event.getTargetId());
+        }
+
+        // on a permanent or player
+        if (targetPlayer == null && targetPermanet == null) {
             return false;
         }
+
         return source.isControlledBy(event.getPlayerId())
                 || game.getOpponents(event.getPlayerId()).contains(source.getControllerId());
     }
