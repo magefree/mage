@@ -52,7 +52,7 @@ public final class LathrilBladeOfTheElves extends CardImpl {
         // Whenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(
                 new ElfToken(), LathrilBladeOfTheElvesValue.instance
-        ).setText("create that many 1/1 green Elf Warrior creature tokens"), false));
+        ).setText("create that many 1/1 green Elf Warrior creature tokens"), false, true));
 
         // {T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(10), new TapSourceCost());
