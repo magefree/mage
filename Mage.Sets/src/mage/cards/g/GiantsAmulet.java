@@ -45,8 +45,9 @@ public final class GiantsAmulet extends CardImpl {
                                 HexproofAbility.getInstance(),
                                 Duration.WhileOnBattlefield
                         ), new InvertCondition(SourceTappedCondition.instance),
-                        "{this} has hexproof as long as it's untapped")
-                ), AttachmentType.EQUIPMENT));
+                        "{this} has hexproof as long as it's untapped"
+                )), AttachmentType.EQUIPMENT
+        ).setText("and has \"This creature has hexproof as long as it's untapped.\""));
         this.addAbility(ability);
 
         // Equip {2}

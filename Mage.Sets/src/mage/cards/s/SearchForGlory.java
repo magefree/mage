@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class SearchForGlory extends CardImpl {
 
     private static final FilterCard filter = new FilterCard(
-            "a snow permanent card, a legendary card, or a Saga card"
+            "snow permanent card, a legendary card, or a Saga card"
     );
 
     static {

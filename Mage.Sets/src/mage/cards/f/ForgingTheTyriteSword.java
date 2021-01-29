@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class ForgingTheTyriteSword extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCard("a card named Halvar, God of Battle or an Equipment card");
+            = new FilterCard("card named Halvar, God of Battle or an Equipment card");
 
     static {
         filter.add(Predicates.or(

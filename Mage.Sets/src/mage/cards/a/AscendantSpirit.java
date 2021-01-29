@@ -101,7 +101,7 @@ class AscendantSpiritAngelEffect extends OneShotEffect {
     AscendantSpiritAngelEffect() {
         super(Outcome.Benefit);
         staticText = "if {this} is an Angel, put two +1/+1 counters on it and it gains " +
-                "\"Whenever this creature deals damage to a player, draw a card.\"";
+                "\"Whenever this creature deals combat damage to a player, draw a card.\"";
     }
 
     private AscendantSpiritAngelEffect(final AscendantSpiritAngelEffect effect) {

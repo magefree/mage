@@ -22,7 +22,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -32,10 +31,14 @@ import java.util.UUID;
  */
 public final class TheWorldTree extends CardImpl {
 
-    private static final FilterCard filter = new FilterBySubtypeCard(SubType.GOD);
+    private static final FilterCard filter = new FilterCard("God cards");
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ComparisonType.MORE_THAN, 5
     );
+
+    static {
+        filter.add(SubType.GOD.getPredicate());
+    }
 
     public TheWorldTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

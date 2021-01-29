@@ -47,7 +47,7 @@ public final class NarfiBetrayerKing extends CardImpl {
         // {S}{S}{S}: Return Narfi, Betrayer King from your graveyard to the battlefield tapped.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl("{S}{S}{S}")
         ));
     }

@@ -31,6 +31,7 @@ public final class DoomskarTitan extends CardImpl {
         // When Doomskar Titan enters the battlefield, creatures you control get +1/+0 and gain haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn)
+                        .setText("creatures you control get +1/+0")
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

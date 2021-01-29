@@ -27,9 +27,11 @@ public final class TyvarKellEmblem extends Emblem {
         this.setName("Emblem Tyvar");
         this.setExpansionSetCodeForImage("KHM");
 
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND,
-                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, null, true),
-                filter, false, true, true
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.COMMAND,
+                new GainAbilityTargetEffect(
+                        HasteAbility.getInstance(), Duration.EndOfTurn, null, true
+                ).setText("it gains haste until end of turn"), filter, false, true, true
         );
         ability.addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("and"));
         this.getAbilities().add(ability);

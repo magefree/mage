@@ -39,7 +39,8 @@ public final class GlitteringFrost extends CardImpl {
         ).setText("enchanted land is snow")));
 
         // Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.
-        this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaAnyColorAttachedControllerEffect()));
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaAnyColorAttachedControllerEffect()
+                .setText("its controller adds an additional one mana of any color")));
     }
 
     private GlitteringFrost(final GlitteringFrost card) {

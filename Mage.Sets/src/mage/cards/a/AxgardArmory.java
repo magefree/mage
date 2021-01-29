@@ -27,7 +27,6 @@ public final class AxgardArmory extends CardImpl {
     public AxgardArmory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-
         // Axgard Armory enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
@@ -35,8 +34,11 @@ public final class AxgardArmory extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {1}{R}{R}{W}, {T}: Sacrifice Axgard Armory: Search your library for an Aura card and/or Equipment card, reveal them, put them into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(
-                new AxgardArmoryTarget()), new ManaCostsImpl("{1}{R}{R}{W}")
+        Ability ability = new SimpleActivatedAbility(
+                new SearchLibraryPutInHandEffect(new AxgardArmoryTarget())
+                        .setText("search your library for an Aura card and/or Equipment card, reveal them, " +
+                                "put them into your hand, then shuffle your library"),
+                new ManaCostsImpl("{1}{R}{R}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

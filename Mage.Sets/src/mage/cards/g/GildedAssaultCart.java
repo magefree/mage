@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class GildedAssaultCart extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent(SubType.TREASURE, "treasures");
+            = new FilterControlledPermanent(SubType.TREASURE, "Treasures");
 
     public GildedAssaultCart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}{R}");

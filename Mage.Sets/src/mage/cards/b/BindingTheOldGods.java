@@ -50,7 +50,7 @@ public final class BindingTheOldGods extends CardImpl {
         // III — Creatures you control gain deathtouch until end of turn.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
                 new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn,
-                        StaticFilters.FILTER_CONTROLLED_CREATURES)
+                        StaticFilters.FILTER_PERMANENT_CREATURES)
         );
         this.addAbility(sagaAbility);
     }

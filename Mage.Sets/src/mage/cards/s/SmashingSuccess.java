@@ -50,7 +50,7 @@ class SmashingSuccessEffect extends OneShotEffect {
 
     public SmashingSuccessEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy target artifact or land. If an artifact is destroyed this was, create a Treasure token.";
+        staticText = "Destroy target artifact or land. If an artifact is destroyed this way, create a Treasure token.";
     }
 
     private SmashingSuccessEffect(final SmashingSuccessEffect effect) {

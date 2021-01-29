@@ -38,7 +38,7 @@ public final class TheBearsOfLittjara extends CardImpl {
 
         // I — Create a 2/2 blue Shapeshifter creature token with changeling.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_II,
+                this, SagaChapter.CHAPTER_I,
                 new CreateTokenEffect(new ShapeshifterBlueToken())
         );
 

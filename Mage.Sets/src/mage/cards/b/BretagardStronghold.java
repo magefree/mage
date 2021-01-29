@@ -45,11 +45,11 @@ public final class BretagardStronghold extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, countersEffect, new ManaCostsImpl<>("{G}{W}{W}"));
 
         Effect vigilanceEffect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
-        vigilanceEffect.setText("They gain vigilance until end of turn");
+        vigilanceEffect.setText("They gain vigilance");
         ability.addEffect(vigilanceEffect);
 
         Effect lifelinkEffect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        lifelinkEffect.setText("They gain lifelink until end of turn");
+        lifelinkEffect.setText("and lifelink until end of turn");
         ability.addEffect(lifelinkEffect);
 
         ability.addCost(new TapSourceCost());

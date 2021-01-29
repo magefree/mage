@@ -67,7 +67,7 @@ public final class ToralfGodOfFury extends ModalDoubleFacesCard {
 
         // Equipped creature has "{1}{R}, {T}, Unattach Toralf's Hammer: It deals 3 damage to any target. Return Toralf's Hammer to its owner's hand."
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
-                "equipped creature has \"{tap}, Unattach {this}: It deals 3 damage to any target. Return {this} to its owner's hand.\"",
+                "equipped creature has \"{1}{R}, {T}, Unattach {this}: It deals 3 damage to any target. Return {this} to its owner's hand.\"",
                 new ToralfsHammerEffect(), new TargetAnyTarget(), new UnattachCost(), new ManaCostsImpl<>("{1}{R}"), new TapSourceCost()
         )));
 

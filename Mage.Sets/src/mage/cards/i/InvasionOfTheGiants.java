@@ -83,7 +83,7 @@ class InvasionOfTheGiantsEffect extends CostModificationEffectImpl {
 
     InvasionOfTheGiantsEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "the next Giant spell you cast this turns costs {2} less to cast";
+        staticText = "the next Giant spell you cast this turn costs {2} less to cast";
     }
 
     private InvasionOfTheGiantsEffect(final InvasionOfTheGiantsEffect effect) {

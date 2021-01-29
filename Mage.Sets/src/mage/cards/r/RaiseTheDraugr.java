@@ -50,7 +50,7 @@ class RaiseTheDraugrTarget extends TargetCardInYourGraveyard {
 
     RaiseTheDraugrTarget() {
         super(2, 2, StaticFilters.FILTER_CARD_CREATURE, false);
-        targetName = "creature cards that share a creature type";
+        targetName = "creature cards that share a creature type from your graveyard";
     }
 
     private RaiseTheDraugrTarget(final RaiseTheDraugrTarget target) {

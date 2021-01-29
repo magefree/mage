@@ -74,6 +74,6 @@ class FrenziedRaiderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you activate a boast ability, put a +1/+1 counter on {this}";
+        return "Whenever you activate a boast ability, put a +1/+1 counter on {this}.";
     }
 }

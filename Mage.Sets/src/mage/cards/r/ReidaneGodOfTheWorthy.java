@@ -121,7 +121,7 @@ class ReidaneGodOfTheWorthyCostEffect extends CostModificationEffectImpl {
 
     ReidaneGodOfTheWorthyCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Noncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast until your next turn";
+        staticText = "Noncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast";
     }
 
     private ReidaneGodOfTheWorthyCostEffect(ReidaneGodOfTheWorthyCostEffect effect) {
@@ -155,7 +155,7 @@ class ValkmiraProtectorsShieldPreventionEffect extends PreventionEffectImpl {
 
     ValkmiraProtectorsShieldPreventionEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
-        this.staticText = "If a source would deal damage to you or a permanent you control, prevent 1 of that damage";
+        this.staticText = "If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage";
     }
 
     private ValkmiraProtectorsShieldPreventionEffect(ValkmiraProtectorsShieldPreventionEffect effect) {
@@ -169,6 +169,9 @@ class ValkmiraProtectorsShieldPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!game.getOpponents(event.getSourceId()).contains(source.getControllerId())) {
+            return false;
+        }
         switch (event.getType()) {
             case DAMAGE_PLAYER:
                 return source.isControlledBy(event.getTargetId())

@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class FynnTheFangbearer extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control with deathtouch");
+            = new FilterControlledCreaturePermanent("a creature you control with deathtouch");
 
     static {
         filter.add(new AbilityPredicate(DeathtouchAbility.class));

@@ -6,6 +6,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -28,7 +29,7 @@ public final class PriestOfTheHauntedEdge extends CardImpl {
         filter.add(SuperType.SNOW.getPredicate());
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new MultipliedValue(new PermanentsOnBattlefieldCount(filter), -1);
 
     public PriestOfTheHauntedEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -43,7 +44,7 @@ public final class PriestOfTheHauntedEdge extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD, new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
-        ), new TapSourceCost());
+        ).setText("target creature gets -X/-X until end of turn, where X is the number of snow lands you control"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

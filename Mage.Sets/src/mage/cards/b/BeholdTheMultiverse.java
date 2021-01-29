@@ -18,7 +18,7 @@ public final class BeholdTheMultiverse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Scry 2, then draw two cards.
-        this.getSpellAbility().addEffect(new ScryEffect(2));
+        this.getSpellAbility().addEffect(new ScryEffect(2, false));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
 
         // Foretell {1}{U}

@@ -27,7 +27,7 @@ public final class HorizonSeeker extends CardImpl {
 
         // Boast — {1}{G}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new BoastAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ), "{1}{G}"));
     }
 

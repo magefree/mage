@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 import java.util.UUID;
 
@@ -70,8 +71,17 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
         if (!mode.getTargets().get(0).getTargetName().contains("target")) {
             sb.append("target ");
         }
-        sb.append(mode.getTargets().get(0).getTargetName()).append(" has base power and toughness ");
-        sb.append(power).append('/').append(toughness).append(' ').append(duration.toString());
+        sb.append(mode.getTargets().get(0).getTargetName());
+        if (mode.getTargets().stream().mapToInt(Target::getMaxNumberOfTargets).max().orElse(0) > 1) {
+            sb.append(" have");
+        } else {
+            sb.append(" has");
+        }
+        sb.append(" base power and toughness ");
+        sb.append(power).append('/').append(toughness);
+        if (!duration.toString().isEmpty()) {
+            sb.append(' ').append(duration.toString());
+        }
         return sb.toString();
     }
 

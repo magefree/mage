@@ -69,8 +69,8 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
         this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever Hakka, Whispering Raven deals combat damage to a player, return it to its owner’s hand, then scry 2.
-        Ability ability3 = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandSourceEffect(), false);
-        ability3.addEffect(new ScryEffect(2));
+        Ability ability3 = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandSourceEffect().setText("return it to its owner's hand"), false);
+        ability3.addEffect(new ScryEffect(2).concatBy(", then"));
         this.getRightHalfCard().addAbility(ability3);
 
     }
@@ -89,7 +89,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
 
     public AlrundGodOfTheCosmosEffect() {
         super(Outcome.Neutral);
-        staticText = "then reveal the top two cards of your library. Put all cards of the chosen type into your hand and the rest on the bottom of your library in any order";
+        staticText = ", then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }
 
     public AlrundGodOfTheCosmosEffect(final AlrundGodOfTheCosmosEffect effect) {

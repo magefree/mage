@@ -55,7 +55,7 @@ public final class Withercrown extends CardImpl {
         effect2.setText("you lose 1 life unless you sacrifice this creature.");
         Effect effect3 = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 effect2, TargetController.YOU, false, false, null), AttachmentType.AURA);
-        effect3.setText("and has “At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature.");
+        effect3.setText("and has \"At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature.\"");
         abilityTest.addEffect(effect3);
         this.addAbility(abilityTest);
 

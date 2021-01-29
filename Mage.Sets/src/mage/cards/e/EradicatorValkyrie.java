@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public final class EradicatorValkyrie extends CardImpl {
         Ability ability = new BoastAbility(new SacrificeOpponentsEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER
         ), "{1}{B}");
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

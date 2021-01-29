@@ -43,7 +43,7 @@ public final class ShepherdOfTheCosmos extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Shepherd of the Cosmos enters the battlefield, return target permanent card with converted mana cost 2 or less from your graveyard to the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

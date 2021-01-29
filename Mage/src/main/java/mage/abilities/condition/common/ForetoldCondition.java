@@ -24,6 +24,6 @@ public enum ForetoldCondition implements Condition {
 
     @Override
     public String toString() {
-        return "this card was foretold";
+        return "this spell was foretold";
     }
 }

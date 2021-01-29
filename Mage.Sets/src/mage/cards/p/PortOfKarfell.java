@@ -57,7 +57,7 @@ class PortOfKarfellEffect extends OneShotEffect {
 
     PortOfKarfellEffect() {
         super(Outcome.Benefit);
-        staticText = "mill four cards, then return a creature card from your graveyard to the battlefield";
+        staticText = "mill four cards, then return a creature card from your graveyard to the battlefield tapped";
     }
 
     private PortOfKarfellEffect(final PortOfKarfellEffect effect) {

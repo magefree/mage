@@ -24,6 +24,9 @@ public final class RunAshore extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
 
         // Choose one or both —
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
         // • The owner of target nonland permanent puts it on the top or bottom of their library.
         this.getSpellAbility().addEffect(new RunAshoreEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

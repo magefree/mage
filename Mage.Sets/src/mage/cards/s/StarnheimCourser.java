@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class StarnheimCourser extends CardImpl {
 
-    private static final FilterCard filter = new FilterArtifactOrEnchantmentCard("artifact and enchantment");
+    private static final FilterCard filter = new FilterArtifactOrEnchantmentCard("artifact and enchantment spells");
 
     public StarnheimCourser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

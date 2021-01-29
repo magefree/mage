@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class SpiritOfTheAldergard extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterLandCard("a snow land card");
+            = new FilterLandCard("snow land card");
     private static final FilterPermanent filter2
             = new FilterControlledPermanent("other snow permanent you control");
 

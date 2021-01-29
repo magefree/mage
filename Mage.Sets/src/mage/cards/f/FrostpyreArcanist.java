@@ -34,9 +34,9 @@ import java.util.UUID;
  */
 public final class FrostpyreArcanist extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("you control a Giant or Wizard");
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control a Giant or a Wizard");
     private static final FilterCard filter2 = new FilterInstantOrSorceryCard(
-            "an instant or sorcery card with the same name as a card in your graveyard"
+            "instant or sorcery card with the same name as a card in your graveyard"
     );
 
     static {
