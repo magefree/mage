@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
@@ -8,14 +7,15 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Locale;
+
 public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private Condition interveningIfClauseCondition;
+    private final TargetController targetController;
+    private final Condition interveningIfClauseCondition;
 
     public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, null, isOptional);
@@ -113,7 +113,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         }
         String abilityWordRule = "";
         if (abilityWord != null) {
-            abilityWordRule = "<i>" + abilityWord.toString() + "</i> &mdash ";
+            abilityWordRule = "<i>" + abilityWord.toString() + "</i> &mdash; ";
         }
 
         switch (targetController) {
@@ -139,7 +139,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
 
                 //Fixes punctuation on multiple sentence if-then construction
                 // see -- Colfenor's Urn
-                if (interveningIfClauseCondition.toString().endsWith(".")){
+                if (interveningIfClauseCondition.toString().endsWith(".")) {
                     return interveningIfClauseCondition.toString() + " ";
                 }
 

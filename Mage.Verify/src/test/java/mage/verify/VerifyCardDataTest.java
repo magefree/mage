@@ -1322,6 +1322,9 @@ public class VerifyCardDataTest {
             if (rule.contains("’")) {
                 fail(card, "rules", "card's rules contains restricted symbol ’");
             }
+            if (rule.contains("&mdash ")) {
+                fail(card, "rules", "card's rules contains restricted test [&mdash ] instead [&mdash;]");
+            }
         }
     }
 

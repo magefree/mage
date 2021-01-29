@@ -40,7 +40,7 @@ public final class StubbornDenial extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
                 FerociousCondition.instance,
-                "<br><i>Ferocious</i> &mdash If you control a creature with power 4 or greater, counter that spell instead"));
+                "<br><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, counter that spell instead"));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
