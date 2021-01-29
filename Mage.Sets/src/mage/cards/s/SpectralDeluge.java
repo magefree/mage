@@ -57,7 +57,7 @@ enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<ObjectSource
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         return input
                 .getObject()
-                .getPower()
+                .getToughness()
                 .getValue()
                 <= game
                 .getBattlefield()
