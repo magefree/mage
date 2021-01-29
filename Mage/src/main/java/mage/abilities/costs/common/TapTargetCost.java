@@ -9,6 +9,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -36,6 +38,7 @@ public class TapTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        List<Permanent> permanents = new ArrayList<>();
         if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
@@ -43,8 +46,10 @@ public class TapTargetCost extends CostImpl {
                     return false;
                 }
                 paid |= permanent.tap(source, game);
+                permanents.add(permanent);
             }
         }
+        source.getEffects().setValue("tappedPermanents", permanents);
         return paid;
     }
 

@@ -318,6 +318,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Tropical Storm", 246, Rarity.UNCOMMON, mage.cards.t.TropicalStorm.class));
         cards.add(new SetCardInfo("Uktabi Faerie", 247, Rarity.COMMON, mage.cards.u.UktabiFaerie.class));
         cards.add(new SetCardInfo("Uktabi Wildcats", 248, Rarity.RARE, mage.cards.u.UktabiWildcats.class));
+        cards.add(new SetCardInfo("Unerring Sling", 322, Rarity.UNCOMMON, mage.cards.u.UnerringSling.class));
         cards.add(new SetCardInfo("Unfulfilled Desires", 285, Rarity.RARE, mage.cards.u.UnfulfilledDesires.class));
         cards.add(new SetCardInfo("Unseen Walker", 249, Rarity.UNCOMMON, mage.cards.u.UnseenWalker.class));
         cards.add(new SetCardInfo("Unyaro Bee Sting", 250, Rarity.UNCOMMON, mage.cards.u.UnyaroBeeSting.class));
