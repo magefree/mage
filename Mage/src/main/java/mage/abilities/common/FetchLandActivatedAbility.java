@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
@@ -55,7 +54,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
     }
 
     private String subTypeNames(Set<SubType> subTypes) {
-        return subTypes.stream().map(SubType::getDescription).collect(Collectors.joining(" or "));
+        return subTypes.stream().map(SubType::getDescription).collect(Collectors.joining(" or ")) + " card";
     }
 
     @Override

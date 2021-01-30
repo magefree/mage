@@ -26,7 +26,7 @@ public class TunnelIgnusTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Scalding Tarn");
         
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scalding Tarn");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}, Pay 1 life, Sacrifice {this}: Search your library for a Island or Mountain and put it onto the battlefield. Then shuffle your library.");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}, ");
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
