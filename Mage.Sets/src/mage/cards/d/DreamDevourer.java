@@ -67,7 +67,7 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
 
     DreamDevourerAddAbilityEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Each nonland card in your hand without foretell has foretell.  Its foretell cost is equal to its mana cost reduced by 2";
+        this.staticText = "Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}";
     }
 
     private DreamDevourerAddAbilityEffect(final DreamDevourerAddAbilityEffect effect) {

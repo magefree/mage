@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,19 +8,15 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CosmosCharger extends CardImpl {
@@ -41,12 +36,12 @@ public final class CosmosCharger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Foretelling cards from your hand costs {1} less and can be done on any player's turn. 
-        this.addAbility(new SimpleStaticAbility(new CosmosChargerCostReductionEffect(ForetellAbility.class)));
-        this.addAbility(new SimpleStaticAbility(new CosmosChargerAllowForetellAnytime()));
+        Ability ability = new SimpleStaticAbility(new CosmosChargerCostReductionEffect());
+        ability.addEffect(new CosmosChargerAllowForetellAnytime());
+        this.addAbility(ability);
 
         // Foretell 2U
         this.addAbility(new ForetellAbility(this, "{2}{U}"));
-
     }
 
     private CosmosCharger(final CosmosCharger card) {
@@ -61,17 +56,13 @@ public final class CosmosCharger extends CardImpl {
 
 class CosmosChargerCostReductionEffect extends CostModificationEffectImpl {
 
-    private final Class specialAction;
-
-    public CosmosChargerCostReductionEffect(Class specialAction) {
+    CosmosChargerCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, CostModificationType.REDUCE_COST);
-        this.specialAction = specialAction;
-        staticText = "Foretelling cards from your hand costs {1} less and can be done on any player's turn";
+        staticText = "foretelling cards from your hand costs {1} less";
     }
 
-    public CosmosChargerCostReductionEffect(CosmosChargerCostReductionEffect effect) {
+    private CosmosChargerCostReductionEffect(CosmosChargerCostReductionEffect effect) {
         super(effect);
-        this.specialAction = effect.specialAction;
     }
 
     @Override
@@ -88,17 +79,18 @@ class CosmosChargerCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.isControlledBy(source.getControllerId())
-                && specialAction.isInstance(abilityToModify);
+                && abilityToModify instanceof ForetellAbility;
     }
 }
 
 class CosmosChargerAllowForetellAnytime extends AsThoughEffectImpl {
 
-    public CosmosChargerAllowForetellAnytime() {
+    CosmosChargerAllowForetellAnytime() {
         super(AsThoughEffectType.ALLOW_FORETELL_ANYTIME, Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "and can be done on any player's turn";
     }
 
-    public CosmosChargerAllowForetellAnytime(final CosmosChargerAllowForetellAnytime effect) {
+    private CosmosChargerAllowForetellAnytime(final CosmosChargerAllowForetellAnytime effect) {
         super(effect);
     }
 
