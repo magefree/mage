@@ -56,7 +56,7 @@ public final class OldGrowthTroll extends CardImpl {
                 OldGrowthTrollCondition.instance, "When {this} dies, if it was a creature, " +
                 "return it to the battlefield. It's an Aura enchantment with enchant Forest you control " +
                 "and \"Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: " +
-                "Create a 4/4 green Troll Warrior creature token with trample.'\""
+                "Create a tapped 4/4 green Troll Warrior creature token with trample.'\""
         ));
     }
 
@@ -195,7 +195,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
 
     private static final Ability makeAbility() {
         Ability activatedAbility = new SimpleActivatedAbility(
-                new CreateTokenEffect(new TrollWarriorToken()), new GenericManaCost(1)
+                new CreateTokenEffect(new TrollWarriorToken(), 1, true, false), new GenericManaCost(1)
         );
         activatedAbility.addCost(new TapSourceCost());
         Cost cost = new SacrificeSourceCost();
@@ -206,7 +206,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
         ).setText("enchanted Forest has \"{T}: Add {G}{G}\""));
         ability.addEffect(new GainAbilityAttachedEffect(
                 activatedAbility, AttachmentType.AURA
-        ).setText("and \"{1}, {T}, Sacrifice this land: Create a 4/4 green Troll Warrior creature token with trample.\""));
+        ).setText("and \"{1}, {T}, Sacrifice this land: Create a tapped 4/4 green Troll Warrior creature token with trample.\""));
         return ability;
     }
 }

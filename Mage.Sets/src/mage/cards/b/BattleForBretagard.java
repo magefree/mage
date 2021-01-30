@@ -69,7 +69,7 @@ class BattleForBretagardEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Choose any number of artifact tokens and/or " +
                 "creature tokens you control with different names. " +
-                "For each of them, create a token thats a copy of it.";
+                "For each of them, create a token that's a copy of it.";
     }
 
     private BattleForBretagardEffect(final BattleForBretagardEffect effect) {

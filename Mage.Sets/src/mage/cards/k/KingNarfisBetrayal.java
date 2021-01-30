@@ -68,7 +68,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
 
     KingNarfisBetrayalFirstEffect() {
         super(Outcome.Benefit);
-        staticText = "Each player mills four cards. You may exile up to one creature or planeswalker " +
+        staticText = "Each player mills four cards. Then you may exile a creature or planeswalker " +
                 "card from each graveyard";
     }
 

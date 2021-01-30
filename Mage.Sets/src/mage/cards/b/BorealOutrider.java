@@ -38,7 +38,7 @@ public final class BorealOutrider extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new BorealOutriderEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false, true
                 ), BorealOutriderCondition.instance, "Whenever you cast a creature spell, " +
-                "if {S} of any of that spell's color was spent to cast it, that creature " +
+                "if {S} of any of that spell's colors was spent to cast it, that creature " +
                 "enters the battlefield with an additional +1/+1 counter on it."
         ));
     }

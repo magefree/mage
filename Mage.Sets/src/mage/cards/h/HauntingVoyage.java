@@ -53,8 +53,8 @@ class HauntingVoyageEffect extends OneShotEffect {
 
     public HauntingVoyageEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Return up to two creature cards of the chosen type from your graveyard to the battlefield. "
-                + "If this spell was foretold, return all creature cards of the chosen type from your graveyard to the battlefield instead";
+        staticText = "Return up to two creature cards of that type from your graveyard to the battlefield. "
+                + "If this spell was foretold, return all creature cards of that type from your graveyard to the battlefield instead";
     }
 
     private HauntingVoyageEffect(final HauntingVoyageEffect effect) {

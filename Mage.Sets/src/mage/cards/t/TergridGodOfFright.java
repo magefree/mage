@@ -78,7 +78,7 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
 
 class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
 
-    static final String RULE_TEXT = "Whenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card onto the battlefield under your control from their graveyard";
+    private static final String RULE_TEXT = "Whenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card from a graveyard onto the battlefield under your control";
 
     public TergridGodOfFrightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TergridGodOfFrightEffect());

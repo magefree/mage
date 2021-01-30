@@ -63,7 +63,7 @@ class MysticReflectionEffect extends OneShotEffect {
     MysticReflectionEffect() {
         super(Outcome.Benefit);
         staticText = "Choose target nonlegendary creature. The next time one or more creatures or planeswalkers " +
-                "enter the battlefield this turn, they enter as copies of the chosen creature instead.";
+                "enter the battlefield this turn, they enter as copies of the chosen creature.";
     }
 
     private MysticReflectionEffect(final MysticReflectionEffect effect) {

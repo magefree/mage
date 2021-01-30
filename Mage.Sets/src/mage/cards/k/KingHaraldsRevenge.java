@@ -26,10 +26,10 @@ public final class KingHaraldsRevenge extends CardImpl {
     public KingHaraldsRevenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        // Until end of tun, target creature gets +1/+1 for each creature you control and gains trample. It must be blocked this turn if able.
+        // Until end of turn, target creature gets +1/+1 for each creature you control and gains trample. It must be blocked this turn if able.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
                 xValue, xValue, Duration.EndOfTurn, true
-        ).setText("until end of tun, target creature gets +1/+1 for each creature you control"));
+        ).setText("until end of turn, target creature gets +1/+1 for each creature you control"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample."));

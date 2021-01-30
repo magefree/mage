@@ -97,7 +97,7 @@ class TheBloodskyMassacreEffect extends OneShotEffect {
     TheBloodskyMassacreEffect() {
         super(Outcome.Benefit);
         staticText = "add {R} for each Berserker you control. Until end of turn, " +
-                "you don't lose this mana as steps or phases end";
+                "you don't lose this mana as steps and phases end";
     }
 
     private TheBloodskyMassacreEffect(final TheBloodskyMassacreEffect effect) {

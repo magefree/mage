@@ -61,15 +61,15 @@ public final class AvalancheCaller extends CardImpl {
 class AvalancheCallerToken extends TokenImpl {
 
     AvalancheCallerToken() {
-        super("", "4/4 Elemental creature with haste and hexproof");
+        super("", "4/4 Elemental creature with hexproof and haste");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(HasteAbility.getInstance());
         this.addAbility(HexproofAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
     }
 
     private AvalancheCallerToken(final AvalancheCallerToken token) {
