@@ -92,6 +92,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Codespell Cleric", 7, Rarity.COMMON, mage.cards.c.CodespellCleric.class));
         cards.add(new SetCardInfo("Colossal Plow", 236, Rarity.UNCOMMON, mage.cards.c.ColossalPlow.class));
         cards.add(new SetCardInfo("Cosima, God of the Voyage", 50, Rarity.RARE, mage.cards.c.CosimaGodOfTheVoyage.class));
+        cards.add(new SetCardInfo("Cosmos Charger", 51, Rarity.RARE, mage.cards.c.CosmosCharger.class));
         cards.add(new SetCardInfo("Cosmos Elixir", 237, Rarity.RARE, mage.cards.c.CosmosElixir.class));
         cards.add(new SetCardInfo("Craven Hulk", 127, Rarity.COMMON, mage.cards.c.CravenHulk.class));
         cards.add(new SetCardInfo("Crippling Fear", 82, Rarity.RARE, mage.cards.c.CripplingFear.class));
@@ -114,6 +115,7 @@ public final class Kaldheim extends ExpansionSet {
         cards.add(new SetCardInfo("Draugr Thought-Thief", 55, Rarity.COMMON, mage.cards.d.DraugrThoughtThief.class));
         cards.add(new SetCardInfo("Draugr's Helm", 88, Rarity.UNCOMMON, mage.cards.d.DraugrsHelm.class));
         cards.add(new SetCardInfo("Dread Rider", 89, Rarity.COMMON, mage.cards.d.DreadRider.class));
+        cards.add(new SetCardInfo("Dream Devourer", 352, Rarity.RARE, mage.cards.d.DreamDevourer.class));
         cards.add(new SetCardInfo("Dual Strike", 132, Rarity.UNCOMMON, mage.cards.d.DualStrike.class));
         cards.add(new SetCardInfo("Duskwielder", 91, Rarity.COMMON, mage.cards.d.Duskwielder.class));
         cards.add(new SetCardInfo("Dwarven Hammer", 133, Rarity.UNCOMMON, mage.cards.d.DwarvenHammer.class));

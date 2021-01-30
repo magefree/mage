@@ -2,6 +2,7 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
@@ -11,6 +12,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -19,9 +21,11 @@ import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -44,13 +48,11 @@ public class ForetellAbility extends SpecialAction {
         this.card = card;
         this.usesStack = Boolean.FALSE;
         this.addCost(new GenericManaCost(2));
-        // exile the card
-        this.addEffect(new ForetellExileEffect(card));
-        // foretell cost from exile : it can't be any other cost
-        addSubAbility(new ForetellCostAbility(foretellCost));
+        // exile the card and it can't be cast the turn it was foretold
+        this.addEffect(new ForetellExileEffect(card, foretellCost));
         // look at face-down card anytime
         addSubAbility(new SimpleStaticAbility(Zone.ALL, new ForetellLookAtCardEffect()));
-        this.setRuleVisible(false);
+        this.setRuleVisible(true);
         this.addWatcher(new ForetoldWatcher());
     }
 
@@ -68,10 +70,66 @@ public class ForetellAbility extends SpecialAction {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // activate only during the controller's turn
-        if (!game.isActivePlayer(this.getControllerId())) {
+        if (game.getState().getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.ALLOW_FORETELL_ANYTIME, game).isEmpty()
+                && !game.isActivePlayer(this.getControllerId())) {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
+    }
+}
+
+class ForetellExileEffect extends OneShotEffect {
+
+    private Card card;
+    String foretellCost;
+
+    public ForetellExileEffect(Card card, String foretellCost) {
+        super(Outcome.Neutral);
+        this.card = card;
+        this.foretellCost = foretellCost;
+        StringBuilder sbRule = new StringBuilder("Foretell");
+        sbRule.append("&mdash;");
+        sbRule.append(foretellCost);
+        sbRule.append(" <i>(During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)</i>");
+        staticText = sbRule.toString();
+    }
+
+    public ForetellExileEffect(final ForetellExileEffect effect) {
+        super(effect);
+        this.card = effect.card;
+        this.foretellCost = effect.foretellCost;
+    }
+
+    @Override
+    public ForetellExileEffect copy() {
+        return new ForetellExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null
+                && card != null) {
+            // retrieve the exileId of the foretold card
+            UUID exileId = CardUtil.getExileZoneId(card.getId().toString() + "foretellAbility", game);
+
+            // foretell turn number shows up on exile window
+            Effect effect = new ExileTargetEffect(exileId, " Foretell Turn Number: " + game.getTurnNum());
+
+            // remember turn number it was cast
+            game.getState().setValue(card.getId().toString() + "Foretell Turn Number", game.getTurnNum());
+
+            // remember the foretell cost
+            game.getState().setValue(card.getId().toString() + "Foretell Cost", foretellCost);
+
+            // exile the card face-down
+            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.apply(game, source);
+            card.setFaceDown(true, game);
+            game.addEffect(new ForetellAddCostEffect(new MageObjectReference(card, game)), source);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -115,42 +173,41 @@ class ForetellLookAtCardEffect extends AsThoughEffectImpl {
     }
 }
 
-class ForetellExileEffect extends OneShotEffect {
+// this needed to be a continuousEffect for a card like Dream Devourer...unless someone has a better idea
+class ForetellAddCostEffect extends ContinuousEffectImpl {
 
-    private Card card;
+    private final MageObjectReference mor;
 
-    public ForetellExileEffect(Card card) {
-        super(Outcome.Neutral);
-        this.card = card;
-        staticText = "Foretold this card";
+    public ForetellAddCostEffect(MageObjectReference mor) {
+        super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.mor = mor;
+        staticText = "Foretold card";
     }
 
-    public ForetellExileEffect(final ForetellExileEffect effect) {
+    public ForetellAddCostEffect(final ForetellAddCostEffect effect) {
         super(effect);
-        this.card = effect.card;
-    }
-
-    @Override
-    public ForetellExileEffect copy() {
-        return new ForetellExileEffect(this);
+        this.mor = effect.mor;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null
-                && card != null) {
-            UUID exileId = CardUtil.getExileZoneId(card.getId().toString() + "foretellAbility", game);
-            // foretell turn number shows up on exile window
-            Effect effect = new ExileTargetEffect(exileId, " Foretell Turn Number: " + game.getTurnNum());
-            // remember turn number it was cast
-            game.getState().setValue(card.getId().toString() + "Foretell Turn Number", game.getTurnNum());
-            effect.setTargetPointer(new FixedTarget(card.getId()));
-            effect.apply(game, source);
-            card.setFaceDown(true, game);
-            return true;
+        Card card = mor.getCard(game);
+        if (card != null
+                && game.getState().getZone(card.getId()) == Zone.EXILED) {
+            String foretellCost = (String) game.getState().getValue(card.getId().toString() + "Foretell Cost");
+            Ability ability = new ForetellCostAbility(foretellCost);
+            ability.setSourceId(card.getId());
+            ability.setControllerId(source.getControllerId());
+            game.getState().addOtherAbility(card, ability);
+        } else {
+            discard();
         }
-        return false;
+        return true;
+    }
+
+    @Override
+    public ForetellAddCostEffect copy() {
+        return new ForetellAddCostEffect(this);
     }
 }
 
@@ -160,7 +217,7 @@ class ForetellCostAbility extends SpellAbility {
     private SpellAbility spellAbilityToResolve;
 
     public ForetellCostAbility(String foretellCost) {
-        super(null, "Foretell", Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
+        super(null, "Testing", Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
         this.setAdditionalCostsRuleVisible(false);
         this.name = "Foretell " + foretellCost;
         this.addCost(new ManaCostsImpl(foretellCost));
@@ -268,33 +325,7 @@ class ForetellCostAbility extends SpellAbility {
 
     @Override
     public String getRule(boolean all) {
-        return this.getRule();
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sbRule = new StringBuilder("Foretell");
-        if (!costs.isEmpty()) {
-            sbRule.append("&mdash;");
-        } else {
-            sbRule.append(' ');
-        }
-        if (!manaCosts.isEmpty()) {
-            sbRule.append(manaCosts.getText());
-        }
-        if (!costs.isEmpty()) {
-            if (!manaCosts.isEmpty()) {
-                sbRule.append(", ");
-            }
-            sbRule.append(costs.getText());
-            sbRule.append('.');
-        }
-        if (abilityName != null) {
-            sbRule.append(' ');
-            sbRule.append(abilityName);
-        }
-        sbRule.append(" <i>(During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)</i>");
-        return sbRule.toString();
+        return "";
     }
 
     /**
