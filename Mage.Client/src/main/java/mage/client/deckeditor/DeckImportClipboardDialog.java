@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
+ * App GUI: deck import window, uses in deck editor
+ *
  * @author JayDi85
  */
 public class DeckImportClipboardDialog extends MageDialog {

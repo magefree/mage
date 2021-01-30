@@ -246,7 +246,7 @@
                          .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
          );
 
-         btnRemoveTable.setLabel("Remove Table");
+         btnRemoveTable.setText("Remove Table");
          btnRemoveTable.addActionListener(new java.awt.event.ActionListener() {
              public void actionPerformed(java.awt.event.ActionEvent evt) {
                  btnRemoveTableActionPerformed(evt);

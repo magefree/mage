@@ -1,7 +1,13 @@
 package mage.client.themes;
 
+import mage.abilities.hint.HintUtils;
+import org.mage.card.arcane.SvgUtils;
+
 import java.awt.*;
 
+/**
+ * @author 18ths, JayDi85
+ */
 public enum ThemeType {
     // https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/_nimbusDefaults.html
     DEFAULT("Default",
@@ -21,7 +27,11 @@ public enum ThemeType {
             null, // mageToolbar
             new Color(200, 200, 180, 200), // playerPanel_inactiveBackgroundColor
             new Color(200, 255, 200, 200), // playerPanel_activeBackgroundColor
-            new Color(131, 94, 83, 200) // playerPanel_deadBackgroundColor
+            new Color(131, 94, 83, 200), // playerPanel_deadBackgroundColor
+            // card icons
+            new Color(169, 176, 190),
+            Color.black,
+            new Color(51, 98, 140)
     ),
     GREY("Grey",
             "grey-theme/",
@@ -40,7 +50,11 @@ public enum ThemeType {
             null, // mageToolbar
             new Color(172, 172, 172, 200), // playerPanel_inactiveBackgroundColor
             new Color(180, 234, 180, 200), // playerPanel_activeBackgroundColor
-            new Color(99, 99, 99, 200) // playerPanel_deadBackgroundColor
+            new Color(99, 99, 99, 200), // playerPanel_deadBackgroundColor
+            // card icons
+            new Color(158, 158, 158),
+            Color.black,
+            Color.black
     ),
     SUNSET_VAPORWAVE("Vaporwave Sunset",
             "16bit-theme/",
@@ -59,6 +73,10 @@ public enum ThemeType {
             new Color(192, 166, 232),
             new Color(243, 233, 164),
             new Color(204, 236, 201),
+            new Color(106, 0, 255),
+            // card icons
+            new Color(246, 136, 158),
+            Color.black,
             new Color(106, 0, 255)
     ),
     COFFEE("Coffee",
@@ -78,7 +96,11 @@ public enum ThemeType {
             new Color(219, 193, 172), // mageToolbar
             new Color(219, 193, 172),
             new Color(204, 236, 201),
-            new Color(99, 72, 50, 255)
+            new Color(99, 72, 50, 255),
+            // card icons
+            new Color(219, 193, 172),
+            Color.black,
+            new Color(97, 27, 0)
     ),
     ISLAND("Island",
             "island-theme/",
@@ -97,7 +119,11 @@ public enum ThemeType {
             new Color(172, 195, 219), // mageToolbar
             new Color(172, 195, 219),
             new Color(204, 236, 201),
-            new Color(50, 68, 99, 255)
+            new Color(50, 68, 99, 255),
+            // card icons
+            new Color(172, 197, 219),
+            Color.black,
+            new Color(0, 78, 97)
     );
 
     private final String name;
@@ -118,6 +144,10 @@ public enum ThemeType {
     private final Color playerPanel_inactiveBackgroundColor;
     private final Color playerPanel_activeBackgroundColor;
     private final Color playerPanel_deadBackgroundColor;
+    // card icons settings (example: flying icon)
+    private final Color cardIconsFillColor;
+    private final Color cardIconsStrokeColor;
+    private final Color cardIconsTextColor;
 
     ThemeType(String name,
               String path,
@@ -136,7 +166,10 @@ public enum ThemeType {
               Color mageToolbar,
               Color playerPanel_inactiveBackgroundColor,
               Color playerPanel_activeBackgroundColor,
-              Color playerPanel_deadBackgroundColor
+              Color playerPanel_deadBackgroundColor,
+              Color cardIconsFillColor,
+              Color cardIconsStrokeColor,
+              Color cardIconsTextColor
     ) {
         this.name = name;
         this.path = path;
@@ -156,6 +189,9 @@ public enum ThemeType {
         this.playerPanel_activeBackgroundColor = playerPanel_activeBackgroundColor;
         this.playerPanel_deadBackgroundColor = playerPanel_deadBackgroundColor;
         this.playerPanel_inactiveBackgroundColor = playerPanel_inactiveBackgroundColor;
+        this.cardIconsFillColor = cardIconsFillColor;
+        this.cardIconsStrokeColor = cardIconsStrokeColor;
+        this.cardIconsTextColor = cardIconsTextColor;
     }
 
     @Override
@@ -266,5 +302,47 @@ public enum ThemeType {
         } else {
             return getBackgroundPath();
         }
+    }
+
+    public Color getCardIconsFillColor() {
+        return this.cardIconsFillColor;
+    }
+
+    public Color getCardIconsStrokeColor() {
+        return cardIconsStrokeColor;
+    }
+
+    public Color getCardIconsTextColor() {
+        return cardIconsTextColor;
+    }
+
+    public String getCardIconsResourcePath(String resourceName) {
+        return "/card/icons/" + resourceName;
+    }
+
+    public String getCardIconsCssFile() {
+        return "card-icons-svg-settings.css";
+    }
+
+    public String getCardIconsCssSettings() {
+        String fillColorVal = HintUtils.colorToHtml(this.getCardIconsFillColor());
+        String strokeColorVal = HintUtils.colorToHtml(this.getCardIconsStrokeColor());
+
+        return String.format(""
+                        + "fill: %s;"
+                        + "stroke: %s;"
+                        + "stroke-width: 0.5;" // px
+                        + "stroke-opacity: 0.7;", // 1 = 100%
+                fillColorVal,
+                strokeColorVal
+        );
+    }
+
+    /**
+     * Prepare theme settings and files before using. Call it on app loading or after theme changed
+     */
+    public void reload() {
+        // reload card icons css file (run it all the time, even on svg unsupport mode)
+        SvgUtils.prepareCss(this.getCardIconsCssFile(), this.getCardIconsCssSettings(), true);
     }
 }

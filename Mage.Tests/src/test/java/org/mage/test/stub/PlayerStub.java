@@ -34,6 +34,7 @@ import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.players.Library;
 import mage.players.ManaPool;
+import mage.players.PlayableObjectsList;
 import mage.players.Player;
 import mage.players.net.UserData;
 import mage.target.Target;
@@ -1060,7 +1061,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
         return null;
     }
 

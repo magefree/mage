@@ -1,16 +1,13 @@
 package org.mage.card.arcane;
 
-import mage.cards.MagePermanent;
-import mage.cards.TextPopup;
+import mage.cards.*;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
-import mage.constants.CardType;
-import mage.constants.EnlargeMode;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -24,19 +21,22 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 import java.util.UUID;
 
 /**
  * Main class for drawing Mage card object.
  *
- * @author arcane, nantuko, noxx
+ * WARNING, if you want to catch mouse events then use cardEventSource and related code. You can't use outer listeners.
+ *
+ * @author arcane, nantuko, noxx, JayDi85
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public abstract class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener, MouseWheelListener, ComponentListener {
+public abstract class CardPanel extends MagePermanent implements ComponentListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
     private static final long serialVersionUID = -3272134219262184410L;
 
-    private static final Logger LOGGER = Logger.getLogger(CardPanel.class);
+    private static final Logger logger = Logger.getLogger(CardPanel.class);
 
     public static final double TAPPED_ANGLE = Math.PI / 2;
     public static final double FLIPPED_ANGLE = Math.PI;
@@ -57,7 +57,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     private double tappedAngle = 0;
     private double flippedAngle = 0;
 
-    private final List<MagePermanent> links = new ArrayList<>();
+    private final List<MageCard> links = new ArrayList<>();
 
     public final JPanel buttonPanel;
     private JButton dayNightButton;
@@ -65,7 +65,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
-    private int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    private int cardWidth, cardHeight;
     private int symbolWidth;
 
     private boolean isSelected;
@@ -82,7 +82,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     private boolean isPermanent;
     private boolean hasSickness;
-    private String zone;
+    private Zone zone;
+
+    // mouse clicks
+    private int mouseClicksCount = 0;
+    private java.util.Timer mouseResetTimer = null;
+    static private final int MOUSE_DOUBLE_CLICK_RESET_MS = 200;
 
     // Permanent and card renders are different (another sizes and positions of panel, tapped, etc -- that's weird)
     // Some card view components support only permanents (BattlefieldPanel), but another support only cards (CardArea)
@@ -95,7 +100,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     private boolean transformed;
     private boolean animationInProgress = false;
 
-    private JPanel cardArea;
+    private Container cardContainer;
+    private MageCard topPanel;
 
     // default offset, e.g. for battlefield
     private int yCardCaptionOffsetPercent = 8; // card caption offset (use for moving card caption view center, below mana icons -- for more good UI)
@@ -104,6 +110,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     private JPopupMenu popupMenu;
 
     public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
+        // warning, it can be used under MageLayer so make all rotates or other card manipulation as parent
+
         // Store away params
         this.setGameCard(newGameCard);
         this.callback = callback;
@@ -154,7 +162,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
                 if (animationInProgress || isTapped() || isPermanent) {
                     return;
                 }
-                Animation.transformCard(CardPanel.this, CardPanel.this, true);
+                Animation.transformCard(this);
             });
 
             // Add it
@@ -183,6 +191,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         setOpaque(false);
 
         // JPanel event listeners
+
+        // all listeneres to process mouse and another events
         addMouseListener(this);
         addMouseMotionListener(this);
         addMouseWheelListener(this);
@@ -201,7 +211,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     @Override
     public void doLayout() {
         // Position transform and show source buttons
-        buttonPanel.setLocation(cardXOffset, cardYOffset);
+        buttonPanel.setLocation(0, 0);
         buttonPanel.setSize(cardWidth, cardHeight);
         int x = cardWidth / 20;
         int y = cardHeight / 10;
@@ -255,12 +265,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public abstract void transferResources(CardPanel panel);
 
     @Override
-    public void setZone(String zone) {
+    public void setZone(Zone zone) {
         this.zone = zone;
     }
 
     @Override
-    public String getZone() {
+    public Zone getZone() {
         return zone;
     }
 
@@ -290,8 +300,13 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     @Override
-    public List<MagePermanent> getLinks() {
+    public List<MageCard> getLinks() {
         return links;
+    }
+
+    @Override
+    public MageCardSpace getOuterSpace() {
+        return MageCardSpace.empty;
     }
 
     @Override
@@ -299,6 +314,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         this.isChoosable = isChoosable;
     }
 
+    @Override
     public boolean isChoosable() {
         return this.isChoosable;
     }
@@ -312,8 +328,18 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     @Override
-    public void setCardAreaRef(JPanel cardArea) {
-        this.cardArea = cardArea;
+    public void setCardContainerRef(Container cardContainer) {
+        this.cardContainer = cardContainer;
+    }
+
+    @Override
+    public void setTopPanelRef(MageCard topPanel) {
+        this.topPanel = topPanel;
+    }
+
+    @Override
+    public MageCard getTopPanelRef() {
+        return this.topPanel;
     }
 
     public void setShowCastingCost(boolean showCastingCost) {
@@ -333,25 +359,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     @Override
     public void paint(Graphics g) {
-        if (!displayEnabled) {
-            return;
-        }
-        if (!isValid()) {
-            super.validate();
-        }
-        Graphics2D g2d = (Graphics2D) g;
-        if (transformAngle < 1) {
-            float edgeOffset = (cardWidth + cardXOffset) / 2f;
-            g2d.translate(edgeOffset * (1 - transformAngle), 0);
-            g2d.scale(transformAngle, 1);
-        }
-        if (getTappedAngle() + getFlippedAngle() > 0) {
-            g2d = (Graphics2D) g2d.create();
-            float edgeOffset = cardWidth / 2f;
-            double angle = getTappedAngle() + (Math.abs(getFlippedAngle() - FLIPPED_ANGLE) < 0.001 ? 0 : getFlippedAngle());
-            g2d.rotate(angle, cardXOffset + edgeOffset, cardYOffset + cardHeight - edgeOffset);
-        }
-        super.paint(g2d);
+        // card rotating implemented by top layer panel
+        // TODO: is CardPanel can be used without MageLayer?
+        super.paint(g);
     }
 
     @Override
@@ -373,83 +383,40 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     @Override
     public void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
         if (cardWidth == this.cardWidth && cardHeight == this.cardHeight) {
-            setBounds(x - cardXOffset, y - cardYOffset, getWidth(), getHeight());
-            return;
-        }
-
-        this.cardWidth = cardWidth;
-        this.symbolWidth = cardWidth / 7;
-        this.cardHeight = cardHeight;
-        if (this.isPermanent && needFullPermanentRender) {
-            int rotCenterX = Math.round(cardWidth / 2f);
-            int rotCenterY = cardHeight - rotCenterX;
-            int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
-            int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
-            int xOffset = getXOffset(cardWidth);
-            int yOffset = getYOffset(cardWidth, cardHeight);
-            cardXOffset = -xOffset;
-            cardYOffset = -yOffset;
-            int width = -xOffset + rotCenterX + rotCenterToTopCorner;
-            int height = -yOffset + rotCenterY + rotCenterToBottomCorner;
-            setBounds(x + xOffset, y + yOffset, width, height);
+            // coords changed
+            //noinspection deprecation
+            setBounds(x, y, getWidth(), getHeight());
         } else {
-            cardXOffset = 0;
-            cardYOffset = 0;
-            int width = cardXOffset * 2 + cardWidth;
-            int height = cardYOffset * 2 + cardHeight;
-            setBounds(x - cardXOffset, y - cardYOffset, width, height);
+            // coords + sizes changed
+            this.cardWidth = cardWidth;
+            this.symbolWidth = cardWidth / 7;
+            this.cardHeight = cardHeight;
+            // no needs in size settings here - all outer/draw spaces calcs by top parent panel
+            //noinspection deprecation
+            setBounds(x, y, cardWidth, cardHeight);
         }
-    }
-
-    public int getXOffset(int cardWidth) {
-        if (this.isPermanent && needFullPermanentRender) {
-            int rotCenterX = Math.round(cardWidth / 2f);
-            int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
-            int xOffset = rotCenterX - rotCenterToBottomCorner;
-            return xOffset;
-        } else {
-            return cardXOffset;
-        }
-    }
-
-    public final int getYOffset(int cardWidth, int cardHeight) {
-        if (this.isPermanent && needFullPermanentRender) {
-            int rotCenterX = Math.round(cardWidth / 2f);
-            int rotCenterY = cardHeight - rotCenterX;
-            int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
-            int yOffset = rotCenterY - rotCenterToTopCorner;
-            return yOffset;
-        } else {
-            return cardYOffset;
-        }
-
     }
 
     public final int getCardX() {
-        return getX() + cardXOffset;
+        return getX() + this.getOuterSpace().getLeft();
     }
 
     public final int getCardY() {
-        return getY() + cardYOffset;
+        return getY() + this.getOuterSpace().getTop();
     }
 
+    @Override
     public final int getCardWidth() {
         return cardWidth;
     }
 
+    @Override
     public final int getCardHeight() {
         return cardHeight;
     }
 
     public final int getSymbolWidth() {
         return symbolWidth;
-    }
-
-    public final Point getCardLocation() {
-        Point p = getLocation();
-        p.x += cardXOffset;
-        p.y += cardYOffset;
-        return p;
     }
 
     public final CardView getCard() {
@@ -466,12 +433,38 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         return alpha;
     }
 
-    public final int getCardXOffset() {
-        return cardXOffset;
-    }
+    @Override
+    public MageCardAnimationSettings getAnimationSettings(int offsetX, int offsetY, float cardBoundWidth, float cardBoundHeight) {
+        // card panel can be rotated after tap so send drawning settings to rotate parent panel too
+        MageCardAnimationSettings settings = new MageCardAnimationSettings();
 
-    public final int getCardYOffset() {
-        return cardYOffset;
+        // display
+        settings.withVisible(this.displayEnabled);
+
+        // TODO: remove cardXOffset and cardYOffset
+
+        // animate tap
+        if (getTappedAngle() + getFlippedAngle() > 0) {
+            // Rectangle rotation to keep bottom left corner
+            // Algorithm logic:
+            // 1. Take the start and the final figure positions (example: vertical and horizontal)
+            // 2. Find share figure between start/end positions;
+            // 3. Find center of the share figure;
+            // 4. Rotate from that center.
+            // Rotate center schema: https://user-images.githubusercontent.com/8344157/104398558-6981b500-5568-11eb-9e97-5c16926d481b.png
+            double angle = getTappedAngle() + (Math.abs(getFlippedAngle() - FLIPPED_ANGLE) < 0.001 ? 0 : getFlippedAngle());
+            float edgeOffset = cardBoundWidth / 2f;
+            settings.withRotate(angle, offsetX + edgeOffset, offsetY + cardBoundHeight - edgeOffset);
+        }
+
+        // animate transform (shrink/flip animation)
+        if (transformAngle < 1) {
+            float edgeOffset = cardBoundWidth / 2f;
+            settings.withTranslate((offsetX + edgeOffset) * (1 - transformAngle), 0);
+            settings.withScale(transformAngle, 1);
+        }
+
+        return settings;
     }
 
     @Override
@@ -542,14 +535,14 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             boolean needsTapping = isTapped() != ((PermanentView) card).isTapped();
             boolean needsFlipping = isFlipped() != ((PermanentView) card).isFlipped();
             if (needsTapping || needsFlipping) {
-                Animation.tapCardToggle(this, this, needsTapping, needsFlipping);
+                Animation.tapCardToggle(this, needsTapping, needsFlipping);
             }
             if (needsTapping && ((PermanentView) card).isTapped()) {
                 AudioManager.playTapPermanent();
             }
             boolean needsTranforming = isTransformed() != card.isTransformed();
             if (needsTranforming) {
-                Animation.transformCard(this, this, card.isTransformed());
+                Animation.transformCard(this);
             }
         }
 
@@ -590,33 +583,49 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     @Override
-    public boolean contains(int x, int y) {
-        return containsThis(x, y, true);
-    }
-
-    public boolean containsThis(int x, int y, boolean root) {
-        Point component = getLocation();
-
-        int cx = getCardX() - component.x;
-        int cy = getCardY() - component.y;
-        int cw = cardWidth;
-        int ch = cardHeight;
-        if (isTapped()) {
-            cy = ch - cw + cx;
-            ch = cw;
-            cw = cardHeight;
-        }
-
-        return x >= cx && x <= cx + cw && y >= cy && y <= cy + ch;
-    }
-
-    @Override
     public CardView getOriginal() {
         return this.getGameCard();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        data.setComponent(this);
+        data.setCard(this.getGameCard());
+        data.setGameId(this.gameId);
+
+        // popup menu processing
+        if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
+            callback.popupMenuCard(e, data);
+            return;
+        }
+
+        // double clicks processing, see https://stackoverflow.com/questions/4051659/identifying-double-click-in-java
+        // logic: run timer to reset clicks counter
+        mouseClicksCount = e.getClickCount();
+        if (mouseClicksCount > 1) {
+            // forced to double click
+            if (mouseResetTimer != null) {
+                mouseResetTimer.cancel();
+            }
+            callback.mouseClicked(e, data, true);
+        } else {
+            // can be single or double click, start the reset timer
+            if (mouseResetTimer != null) {
+                mouseResetTimer.cancel();
+            }
+            mouseResetTimer = new java.util.Timer("mouseResetTimer", false);
+            mouseResetTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (mouseClicksCount == 1) {
+                        callback.mouseClicked(e, data, false);
+                    } else if (mouseClicksCount > 1) {
+                        callback.mouseClicked(e, data, true);
+                    }
+                    mouseClicksCount = 0;
+                }
+            }, MOUSE_DOUBLE_CLICK_RESET_MS);
+        }
     }
 
     @Override
@@ -626,7 +635,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         }
         if (!tooltipShowing) {
             synchronized (this) {
-                if (!tooltipShowing) {
+                if (!tooltipShowing) { // TODO: remove tooltip showing to callback processing code, not here
                     TransferData transferData = getTransferDataForMouseEntered();
                     if (this.isShowing()) {
                         tooltipShowing = true;
@@ -637,31 +646,15 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         }
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        data.setComponent(this);
-        callback.mouseDragged(e, data);
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        if (getGameCard().hideInfo()) {
-            return;
-        }
-        data.setComponent(this);
-        callback.mouseMoved(e, data);
-    }
-
-    @Override
+   @Override
     public void mouseExited(MouseEvent e) {
         if (getGameCard().hideInfo()) {
             return;
         }
-
         if (tooltipShowing) {
             synchronized (this) {
                 if (tooltipShowing) {
-                    tooltipShowing = false;
+                    tooltipShowing = false; // TODO: same, move code for callback processing
                     data.setComponent(this);
                     data.setCard(this.getGameCard());
                     data.setPopupText(tooltipText);
@@ -681,7 +674,40 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        data.setComponent(this);
+        data.setCard(this.getGameCard());
+        data.setGameId(this.gameId);
         callback.mouseReleased(e, data);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        data.setComponent(this);
+        data.setCard(this.getGameCard());
+        data.setGameId(this.gameId);
+        callback.mouseDragged(e, data);
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        if (getGameCard().hideInfo()) {
+            return;
+        }
+        data.setComponent(this);
+        data.setCard(this.getGameCard());
+        data.setGameId(this.gameId);
+        callback.mouseMoved(e, data);
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (getGameCard().hideInfo()) {
+            return;
+        }
+        data.setComponent(this);
+        data.setCard(this.getGameCard());
+        data.setGameId(this.gameId);
+        callback.mouseWheelMoved(e, data);
     }
 
     /**
@@ -690,12 +716,13 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
      * @return
      */
     private TransferData getTransferDataForMouseEntered() {
+        MageCard cardPanel = this.getTopPanelRef();
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setPopupText(tooltipText);
         data.setGameId(this.gameId);
-        data.setLocationOnScreen(data.getComponent().getLocationOnScreen()); // we need this for popup
-        data.setPopupOffsetX(isTapped() ? cardHeight + cardXOffset + POPUP_X_GAP : cardWidth + cardXOffset + POPUP_X_GAP);
+        data.setLocationOnScreen(cardPanel.getCardLocationOnScreen().getCardPoint()); // we need this for popup
+        data.setPopupOffsetX(isTapped() ? cardHeight + POPUP_X_GAP : cardWidth + POPUP_X_GAP);
         data.setPopupOffsetY(40);
         return data;
     }
@@ -760,7 +787,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public void update(PermanentView card) {
         this.hasSickness = card.hasSummoningSickness();
         this.showCopySourceButton.setVisible(card.isCopy());
-        update((CardView) card);
+
+        // must update from top layer (e.g. card icons)
+        this.getTopPanelRef().update(card);
     }
 
     @Override
@@ -769,12 +798,6 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             return (PermanentView) this.getGameCard();
         }
         throw new IllegalStateException("Is not permanent.");
-    }
-
-    @Override
-    public void updateCallback(ActionCallback callback, UUID gameId) {
-        this.callback = callback;
-        this.gameId = gameId;
     }
 
     public void setTransformed(boolean transformed) {
@@ -798,7 +821,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
                 dayNightButton.setIcon(new ImageIcon(night));
             }
             if (this.getGameCard().getSecondCardFace() == null) {
-                LOGGER.error("no second side for card to transform!");
+                logger.error("no second side for card to transform!");
                 return;
             }
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
@@ -829,16 +852,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        if (getGameCard().hideInfo()) {
-            return;
-        }
-        data.setComponent(this);
-        callback.mouseWheelMoved(e, data);
-    }
-
-    public JPanel getCardArea() {
-        return cardArea;
+    public Container getCardContainer() {
+        return cardContainer;
     }
 
     @Override
@@ -921,5 +936,33 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     public void setFlippedAngle(double flippedAngle) {
         this.flippedAngle = flippedAngle;
+    }
+
+    @Override
+    public boolean contains(int x, int y) {
+        // if you need a mouse related features in the tapped state then implement contains here (see MageLayer for info)
+        // example: you want a working button
+        //return super.contains(x, y);
+
+        // Swing uses relative coords here (0,0 is component's top left corner)
+        MageCardLocation needLocation = this.getCardLocation();
+        Rectangle normalRect = new Rectangle(
+                0,
+                0,
+                needLocation.getCardWidth(),
+                needLocation.getCardHeight()
+        );
+        Rectangle animatedRect = MageLayer.animateCoords(this, normalRect);
+        return animatedRect.contains(x, y);
+    }
+
+    @Override
+    public Font getFont() {
+        Font res = super.getFont();
+        if (res == null) {
+            // workaround: sometimes the card panels haven't default font
+            res = GUISizeHelper.getCardFont();
+        }
+        return res;
     }
 }

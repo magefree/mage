@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**
+ * App GUI: about window
+ *
  * @author JayDi85
  */
 public class AboutDialog extends MageDialog {
@@ -14,7 +16,7 @@ public class AboutDialog extends MageDialog {
     private static String devsList = "BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, "
             + "Jeff, Plopman, dustinconrad, emerald000, fireshoes, lunaskyrise, "
             + "mnapoleon, jgod, LoneFox, drmDev, spjspj, TheElk801, L_J, JayDi85, "
-            + "jmharmon, Ketsuban, hitch17";
+            + "jmharmon, Ketsuban, hitch17, weirddan455";
 
     public AboutDialog() {
         initComponents();

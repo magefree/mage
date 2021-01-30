@@ -1,10 +1,3 @@
-
-
- /*
-  * GameEndDialog.java
-  *
-  * Created on Jul 31, 2013, 9:41:00 AM
-  */
  package mage.client.dialog;
 
  import mage.client.MageFrame;
@@ -27,6 +20,8 @@
  import java.util.Calendar;
 
  /**
+  * Game GUI: end game window
+  *
   * @author LevelX2
   */
  public class GameEndDialog extends MageDialog {

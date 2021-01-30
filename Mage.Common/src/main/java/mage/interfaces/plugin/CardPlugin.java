@@ -1,6 +1,6 @@
 package mage.interfaces.plugin;
 
-import mage.cards.MagePermanent;
+import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -16,17 +16,16 @@ import java.util.UUID;
  * Interface for card plugins
  *
  * @author nantuko
- * @version 0.1 31.10.2010 #getMagePermanent, #sortPermanents
  */
 public interface CardPlugin extends Plugin {
 
-    MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
-                                   boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender);
-
-    MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
+    MageCard getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
                               boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender);
 
-    int sortPermanents(Map<String, JComponent> ui, Map<UUID, MagePermanent> cards, boolean nonPermanentsOwnRow, boolean topPanel);
+    MageCard getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
+                         boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender);
+
+    int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean nonPermanentsOwnRow, boolean topPanel);
 
     /**
      * Download various symbols (mana, tap, set).
@@ -35,9 +34,21 @@ public interface CardPlugin extends Plugin {
      */
     void downloadSymbols(String imagesDir);
 
-    void onAddCard(MagePermanent card, int count);
+    /**
+     * Uses for show/hide animation on the battlefield
+     *
+     * @param card
+     * @param count
+     */
+    void onAddCard(MageCard card, int count);
 
-    void onRemoveCard(MagePermanent card, int count);
+    /**
+     * Uses for show/hide animation on the battlefield
+     *
+     * @param card
+     * @param count
+     */
+    void onRemoveCard(MageCard card, int count);
 
     JComponent getCardInfoPane();
 

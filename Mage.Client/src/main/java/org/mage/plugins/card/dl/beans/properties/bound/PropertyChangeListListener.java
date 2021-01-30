@@ -1,16 +1,7 @@
-/**
- * PropertyChangeListListener.java
- * 
- * Created on 16.07.2010
- */
-
 package org.mage.plugins.card.dl.beans.properties.bound;
 
 import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
 import org.mage.plugins.card.dl.beans.collections.ListenableCollections.ListListener;
-
-
-
 
 /**
  * The class PropertyChangeListListener.

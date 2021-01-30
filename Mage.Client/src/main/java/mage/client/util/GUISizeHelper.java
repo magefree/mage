@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.client.util;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.util.Locale;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import org.mage.card.arcane.CardRenderer;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Locale;
+
 /**
- *
  * @author LevelX2
  */
 public final class GUISizeHelper {
@@ -66,7 +57,7 @@ public final class GUISizeHelper {
     public static int gameDialogButtonWidth;
 
     public static Dimension handCardDimension;
-    public static int stackWidth;
+    public static int stackWidth; // percent
 
     public static Dimension otherZonesCardDimension;
     public static int otherZonesCardVerticalOffset;
@@ -75,7 +66,7 @@ public final class GUISizeHelper {
     public static Dimension battlefieldCardMaxDimension;
 
     public static Dimension editorCardDimension;
-    public static int editorCardOffsetSize;
+    public static int editorCardVertOffsetInStack;
     public static int enlargedImageHeight;
 
     public static int getTableRowHeight() {
@@ -86,6 +77,11 @@ public final class GUISizeHelper {
     public static Font getTabFont() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
         return new java.awt.Font("Arial", 0, fontSize);
+    }
+
+    public static Font getCardFont() {
+        // default font type for some card panels (each render mode uses it's own font sizes)
+        return new Font("Arial", Font.PLAIN, 14);
     }
 
     public static void changeGUISize() {
@@ -158,9 +154,9 @@ public final class GUISizeHelper {
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
         editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);
         if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
-            editorCardOffsetSize = CardRenderer.getCardTopHeight(editorCardDimension.width);
+            editorCardVertOffsetInStack = CardRenderer.getCardTopHeight(editorCardDimension.width);
         } else {
-            editorCardOffsetSize = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
+            editorCardVertOffsetInStack = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
         }
 
         enlargedImageHeight = 25 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_ENLARGED_IMAGE_SIZE, 20);
@@ -185,5 +181,15 @@ public final class GUISizeHelper {
             return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
         }
         return text;
+    }
+
+    /**
+     * Return scrollbar settings, so user can scroll it more faster for bigger cards
+     *
+     * @param cardSize card's wight or height (depends on vertical or horizontal scrollbar)
+     * @return
+     */
+    public static int getCardsScrollbarUnitInc(int cardSize) {
+        return Math.max(8, cardSize / 4);
     }
 }

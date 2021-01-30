@@ -1,20 +1,22 @@
 package mage.client.util;
 
+/**
+ * @author JayDi85
+ */
 public enum ClientEventType {
+    CARD_CLICK,
+    CARD_DOUBLE_CLICK,
+    CARD_POPUP_MENU, // right click on windows // TODO: split into two events: CARD_ and PANEL_
+    //
     SET_NUMBER,
-    ACTION_CONSUMED,
-    DOUBLE_CLICK,
-    ALT_DOUBLE_CLICK,
-    REMOVE_MAIN,
-    REMOVE_SIDEBOARD,
-    SHOW_POP_UP_MENU,
-    REMOVE_SPECIFIC_CARD,
-    ADD_SPECIFIC_CARD,
-    PICK_A_CARD,
-    MARK_A_CARD,
+    //
+    DECK_REMOVE_SELECTION_MAIN,
+    DECK_REMOVE_SELECTION_SIDEBOARD,
+    DECK_REMOVE_SPECIFIC_CARD,
+    DECK_ADD_SPECIFIC_CARD,
+    //
+    DRAFT_PICK_CARD,
+    DRAFT_MARK_CARD,
+    //
     PLAYER_TYPE_CHANGED
-
-
-
-
 }

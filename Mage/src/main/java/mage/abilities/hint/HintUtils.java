@@ -31,7 +31,7 @@ public class HintUtils {
 
         // text
         if (text != null && color != null) {
-            String hex = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+            String hex = colorToHtml(color);
             res = String.format("<font color=%s>%s</font>", hex, text);
         } else {
             res = text;
@@ -54,5 +54,15 @@ public class HintUtils {
                 used.add(s);
             }
         }
+    }
+
+    /**
+     * Conver color to html hex format like #7FFFD4
+     *
+     * @param color
+     * @return
+     */
+    public static String colorToHtml(Color color) {
+        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 }

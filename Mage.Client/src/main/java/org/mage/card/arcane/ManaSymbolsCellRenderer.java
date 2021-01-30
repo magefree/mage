@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 public final class ManaSymbolsCellRenderer extends DefaultTableCellRenderer {
 
     // base panel to render
-    private JPanel renderPanel = new JPanel();
+    private final JPanel renderPanel = new JPanel();
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -48,7 +48,6 @@ public final class ManaSymbolsCellRenderer extends DefaultTableCellRenderer {
                 JLabel symbolLabel = new JLabel();
                 symbolLabel.setFont(GUISizeHelper.tableFont);
                 symbolLabel.setBorder(new EmptyBorder(0, symbolHorizontalMargin, 0, 0));
-                //symbolLabel.setBorder(new LineBorder(new Color(150, 150, 150))); // debug draw
 
                 BufferedImage image = ManaSymbols.getSizedManaSymbol(symbol, symbolWidth);
                 if (image != null) {

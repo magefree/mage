@@ -28,6 +28,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * App GUI: show latest xmage news from the web page
+ *
  * @author JayDi85
  */
 public class WhatsNewDialog extends MageDialog {

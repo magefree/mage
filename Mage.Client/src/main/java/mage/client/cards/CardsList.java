@@ -1,12 +1,6 @@
-
-
- /*
-  * CardsList.java
-  *
-  * Created on Dec 18, 2009, 10:40:12 AM
-  */
  package mage.client.cards;
 
+ import mage.abilities.icon.CardIconRenderSettings;
  import mage.cards.MageCard;
  import mage.client.constants.Constants.DeckEditorMode;
  import mage.client.constants.Constants.SortBy;
@@ -17,11 +11,10 @@
  import mage.client.plugins.impl.Plugins;
  import mage.client.util.Event;
  import mage.client.util.*;
+ import mage.client.util.comparators.*;
  import mage.client.util.gui.TableSpinnerEditor;
  import mage.view.CardView;
  import mage.view.CardsView;
- import mage.view.SimpleCardView;
- import org.mage.card.arcane.CardPanel;
  import org.mage.card.arcane.ManaSymbolsCellRenderer;
 
  import javax.swing.*;
@@ -37,12 +30,17 @@
  import java.util.*;
 
  /**
-  * @author BetaSteward_at_googlemail.com
+  * Deck editor: grid mode for drafting (NOT a normal deck editor or sideboarding)
+  * TODO: combine with CardGrid.java
+  *
+  * @author BetaSteward_at_googlemail.com, JayDi85
   */
- public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {
+ public class CardsList extends javax.swing.JPanel implements ICardGrid, CardEventProducer {
 
      protected final CardEventSource cardEventSource = new CardEventSource();
+
      private Dimension cardDimension;
+     private final List<JLabel> countLabels = new ArrayList<>(); // count label code copy-pasted from CardGrid.java
      private int rowHeight;
      private CardsView cards;
      private Map<UUID, MageCard> mageCards = new LinkedHashMap<>();
@@ -53,6 +51,7 @@
      private TableModel mainModel;
      private JTable mainTable;
      private ICardGrid currentView;
+     private boolean isLoading; // disable events from comboboxes while updating
 
      /**
       * Creates new form Cards
@@ -78,8 +77,8 @@
                  cardArea.removeMouseListener(ml);
              }
              for (Component comp : cardArea.getComponents()) {
-                 if (comp instanceof CardPanel) {
-                     ((CardPanel) comp).cleanUp();
+                 if (comp instanceof MageCard) {
+                     ((MageCard) comp).cleanUp();
                  }
              }
              cardArea.removeAll();
@@ -108,7 +107,7 @@
          mainTable.setFont(GUISizeHelper.tableFont);
          mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
          cardDimension = GUISizeHelper.editorCardDimension;
-         rowHeight = GUISizeHelper.editorCardOffsetSize;
+         rowHeight = GUISizeHelper.editorCardVertOffsetInStack;
      }
 
      private void makeTransparent() {
@@ -157,27 +156,38 @@
              chkPiles.setEnabled(true);
          }
 
-         cardArea.addMouseListener(this);
-
          mainTable.setOpaque(false);
+
+         // ENABLE double clicks in table mode
          mainTable.addMouseListener(new MouseAdapter() {
              @Override
              public void mousePressed(MouseEvent e) {
+                 // simulate mouse click on the card
                  if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
                      e.consume();
-                     if (e.isAltDown()) {
-                         handleAltDoubleClick();
-                     } else {
-                         handleDoubleClick();
-                     }
+                     handleTableDoubleClick(e); // TODO: replace on card's event source instead mouse listener
                  }
              }
          });
-
          mainModel.setUpdateCountsCallback(new UpdateCountsCallback(lblCount, lblCreatureCount, lblLandCount, null, null, null, null));
+
+         // ENABLE popup menu for non card area
+         cardArea.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
+                     cardEventSource.fireEvent(null, e.getComponent(), e.getX(), e.getY(), ClientEventType.CARD_POPUP_MENU);
+                 }
+             }
+         });
      }
 
-     // if you use the deck ediot to build a free deck, numbers can be set directly in deck and sideboard
+     @Override
+     public CardEventSource getCardEventSource() {
+         return cardEventSource;
+     }
+
+     // if you use the deck editor to build a free deck, numbers can be set directly in deck and sideboard
      public void setDeckEditorMode(DeckEditorMode mode) {
          if (mode == DeckEditorMode.FREE_BUILDING) {
              // activate spinner for card number change
@@ -197,24 +207,13 @@
          }
      }
 
-     public void handleDoubleClick() {
+     public void handleTableDoubleClick(MouseEvent e) {
          if (mainTable.getSelectedRowCount() > 0) {
              int[] n = mainTable.getSelectedRows();
              List<Integer> indexes = asList(n);
              Collections.reverse(indexes);
              for (Integer index : indexes) {
-                 mainModel.doubleClick(index);
-             }
-         }
-     }
-
-     public void handleAltDoubleClick() {
-         if (mainTable.getSelectedRowCount() > 0) {
-             int[] n = mainTable.getSelectedRows();
-             List<Integer> indexes = asList(n);
-             Collections.reverse(indexes);
-             for (Integer index : indexes) {
-                 mainModel.altDoubleClick(index);
+                 mainModel.doubleClick(index, e, false);
              }
          }
      }
@@ -240,8 +239,13 @@
          this.bigCard = bigCard;
          this.gameId = gameId;
 
-         cbSortBy.setSelectedItem(sortSetting.getSortBy());
-         chkPiles.setSelected(sortSetting.isPilesToggle());
+         isLoading = true;
+         try {
+             cbSortBy.setSelectedItem(sortSetting.getSortBy());
+             chkPiles.setSelected(sortSetting.isPilesToggle());
+         } finally {
+             isLoading = false;
+         }
          currentView.loadCards(showCards, sortSetting, bigCard, gameId);
          if (selectedRow >= 0) {
              selectedRow = Math.min(selectedRow, mainTable.getRowCount() - 1);
@@ -260,13 +264,18 @@
 
      @Override
      public void drawCards(SortSetting sortSetting) {
+         for (JLabel label : this.countLabels) {
+             cardArea.remove(label);
+         }
+         this.countLabels.clear();
+
          int maxWidth = this.getParent().getWidth();
          int numColumns = maxWidth / cardDimension.width;
          int curColumn = 0;
          int curRow = 0;
          int maxRow = 0;
          int maxColumn = 0;
-         Comparator<CardView> comparator = null;
+         CardViewComparator comparator = null;
          Map<UUID, MageCard> oldMageCards = mageCards;
          mageCards = new LinkedHashMap<>();
 
@@ -308,25 +317,43 @@
                  case CASTING_COST:
                      comparator = new CardViewCostComparator();
                      break;
+                 case UNSORTED:
+                     comparator = new CardViewNoneComparator();
+                     break;
+                 case EDH_POWER_LEVEL:
+                     comparator = new CardViewEDHPowerLevelComparator();
+                     break;
+                 default:
+                     throw new IllegalArgumentException("Error, unknown sort settings in deck editor: " + sortSetting.getSortBy());
              }
-             if (comparator != null) {
-                 sortedCards.sort(new CardViewNameComparator());
-                 sortedCards.sort(comparator);
-             }
+
+             sortedCards.sort(new CardViewNameComparator());
+             sortedCards.sort(comparator);
+
              CardView lastCard = null;
+             JLabel lastCountLabel = null;
              for (CardView card : sortedCards) {
                  if (sortSetting.isPilesToggle()) {
                      if (lastCard == null) {
                          lastCard = card;
+                         // new new count label
+                         lastCountLabel = addNewCountLabel(curColumn);
                      }
-                     if (comparator != null) {
-                         if (comparator.compare(card, lastCard) > 0) {
-                             curColumn++;
-                             maxRow = Math.max(maxRow, curRow);
-                             curRow = 0;
-                         }
+
+                     // create new column on different card sorting
+                     if (comparator.compare(card, lastCard) != 0) {
+                         curColumn++;
+                         maxRow = Math.max(maxRow, curRow);
+                         curRow = 0;
+                         // add new count label
+                         lastCountLabel = addNewCountLabel(curColumn);
                      }
-                     rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight);
+
+                     // update last count label stats
+                     String description = comparator.getCategoryName(card);
+                     DragCardGrid.updateCountLabel(lastCountLabel, curRow + 1, description);
+
+                     rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight + DragCardGrid.COUNT_LABEL_HEIGHT);
                      setCardBounds(mageCards.get(card.getId()), rectangle);
 
                      curRow++;
@@ -351,6 +378,16 @@
          this.revalidate();
          this.repaint();
          this.setVisible(true);
+     }
+
+     private JLabel addNewCountLabel(int columnNumber) {
+         JLabel label = DragCardGrid.createCountLabel(null);
+         this.countLabels.add(label);
+         cardArea.add(label, (Integer) 0); // draw on background
+         label.setLocation(columnNumber * cardDimension.width, 5);
+         label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT);
+         label.setVisible(true);
+         return label;
      }
 
      private void updateCounts() {
@@ -389,15 +426,16 @@
      }
 
      private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
-         MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true, PreferencesDialog.getRenderMode(), true);
-         cardArea.add(cardImg);
+         MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, true, PreferencesDialog.getRenderMode(), true);
+         cardImg.setCardContainerRef(this);
          cardImg.update(card);
-         cardImg.addMouseListener(this);
+         // card position calculated on parent call by drawCards
+         //cardImg.setCardBounds(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+         cardArea.add(cardImg, (Integer) 10); // count label must be on layer 0 for background drawing
          return cardImg;
      }
 
      private void setCardBounds(MageCard card, Rectangle rectangle) {
-         card.setBounds(rectangle);
          card.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
          cardArea.moveToFront(card);
      }
@@ -605,13 +643,17 @@
      }//GEN-LAST:event_jToggleListViewActionPerformed
 
      private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
-         sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
-         drawCards(sortSetting);
+         if (!isLoading) {
+            sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());
+            drawCards(sortSetting);
+         }
      }//GEN-LAST:event_cbSortByActionPerformed
 
      private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
-         sortSetting.setPilesToggle(chkPiles.isSelected());
-         drawCards(sortSetting);
+         if (!isLoading) {
+            sortSetting.setPilesToggle(chkPiles.isSelected());
+            drawCards(sortSetting);
+         }
      }//GEN-LAST:event_chkPilesActionPerformed
 
      // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -628,64 +670,6 @@
      private javax.swing.JPanel panelControl;
      // End of variables declaration//GEN-END:variables
 
-     @Override
-     public void mouseClicked(MouseEvent e) {
-     }
-
-     @Override
-     public void mousePressed(MouseEvent e) {
-         if (e.getClickCount() >= 1 && !e.isConsumed()) {
-             Object obj = e.getSource();
-             if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0)) { // double clicks and repeated double clicks
-                 e.consume();
-                 if (obj instanceof Card) {
-                     if (e.isAltDown()) {
-                         cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
-                     } else {
-                         cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
-                     }
-                 } else if (obj instanceof MageCard) {
-                     if (e.isAltDown()) {
-                         cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
-                     } else {
-                         cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
-                     }
-                 }
-             }
-             if (obj instanceof MageCard) {
-                 checkMenu(e, ((MageCard) obj).getOriginal());
-             } else {
-                 checkMenu(e, null);
-             }
-         }
-     }
-
-     @Override
-     public void mouseReleased(MouseEvent e) {
-         if (!e.isConsumed()) {
-             Object obj = e.getSource();
-             if (obj instanceof MageCard) {
-                 checkMenu(e, ((MageCard) obj).getOriginal());
-             } else {
-                 checkMenu(e, null);
-             }
-         }
-     }
-
-     private void checkMenu(MouseEvent Me, SimpleCardView card) {
-         if (Me.isPopupTrigger()) {
-             Me.consume();
-             cardEventSource.fireEvent(card, Me.getComponent(), Me.getX(), Me.getY(), ClientEventType.SHOW_POP_UP_MENU);
-         }
-     }
-
-     @Override
-     public void mouseEntered(MouseEvent e) {
-     }
-
-     @Override
-     public void mouseExited(MouseEvent e) {
-     }
 
      public void setDisplayNoCopies(boolean value) {
          mainModel.setDisplayNoCopies(value);

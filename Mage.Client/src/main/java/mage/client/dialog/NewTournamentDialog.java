@@ -34,6 +34,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * App GUI: create new TOURNEY
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class NewTournamentDialog extends MageDialog {

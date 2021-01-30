@@ -22,6 +22,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
+ * App GUI: adding new lands to the deck, uses in deck editor and drafting
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class AddLandDialog extends MageDialog {

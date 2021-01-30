@@ -1,10 +1,3 @@
-
-
- /*
-  * DraftPanel.java
-  *
-  * Created on Jan 7, 2011, 2:15:48 PM
-  */
  package mage.client.draft;
 
  import mage.cards.repository.CardInfo;
@@ -21,10 +14,12 @@
  import mage.client.util.gui.BufferedImageBuilder;
  import mage.constants.PlayerAction;
  import mage.view.*;
+ import org.apache.log4j.Logger;
 
  import javax.swing.Timer;
  import javax.swing.*;
  import java.awt.*;
+ import java.awt.dnd.DragSourceEvent;
  import java.awt.event.ActionEvent;
  import java.awt.event.ActionListener;
  import java.awt.event.KeyEvent;
@@ -35,9 +30,13 @@
  import java.util.*;
 
  /**
-  * @author BetaSteward_at_googlemail.com
+  * Game GUI: draft panel for drafting game mode only
+  *
+  * @author BetaSteward_at_googlemail.com, JayDi85
   */
  public class DraftPanel extends javax.swing.JPanel {
+
+     private static final Logger logger = Logger.getLogger(DraftPanel.class);
 
      private UUID draftId;
      private Timer countdown;
@@ -72,6 +71,9 @@
      private String[] currentBooster;
 
      private static final CardsView EMPTY_VIEW = new CardsView();
+
+     private Listener<Event> selectedCardsListener = null;
+     private Listener<Event> pickingCardsListener = null;
 
      /**
       * Creates new form DraftPanel
@@ -247,47 +249,52 @@
          // upper area that shows the picks
          loadCardsToPickedCardsArea(draftPickView.getPicks());
 
-         this.draftPicks.clearCardEventListeners();
-         this.draftPicks.addCardEventListener((Listener<Event>) event -> {
-                     if (event.getEventType() == ClientEventType.SHOW_POP_UP_MENU) {
-                         if (event.getSource() != null) {
-                             // Popup Menu Card
-                             cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
-                             popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
-                         } else {
-                             // Popup Menu area
-                             popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
-                         }
+         // ENABLE clicks on selected/picked cards
+         if (this.selectedCardsListener == null) {
+             this.selectedCardsListener = event -> {
+                 if (event.getEventType() == ClientEventType.CARD_POPUP_MENU) {
+                     if (event.getSource() != null) {
+                         // Popup Menu Card
+                         cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
+                         popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
+                     } else {
+                         // Popup Menu area
+                         popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
                      }
                  }
-         );
+             };
+             this.draftPicks.addCardEventListener(this.selectedCardsListener);
+         }
 
          // lower area that shows the booster
-         draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
-         this.draftBooster.clearCardEventListeners();
-         this.draftBooster.addCardEventListener(
-                 (Listener<Event>) event -> {
-                     if (event.getEventType() == ClientEventType.PICK_A_CARD) {
-                         SimpleCardView source = (SimpleCardView) event.getSource();
-                         DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
-                         if (view != null) {
-                             loadCardsToPickedCardsArea(view.getPicks());
-                             draftBooster.loadBooster(EMPTY_VIEW, bigCard);
-                             Plugins.instance.getActionCallback().hideOpenComponents();
-                             setMessage("Waiting for other players");
-                         }
+         this.draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
+         if (this.pickingCardsListener == null) {
+             this.pickingCardsListener = event -> {
+                 if (event.getEventType() == ClientEventType.DRAFT_PICK_CARD) {
+                     logger.info("draft panel: catch pick card");
+                     SimpleCardView source = (SimpleCardView) event.getSource();
+                     DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
+                     if (view != null) {
+                         loadCardsToPickedCardsArea(view.getPicks());
+                         draftBooster.loadBooster(EMPTY_VIEW, bigCard);
+                         Plugins.instance.getActionCallback().hideOpenComponents();
+                         setMessage("Waiting for other players");
                      }
-                     if (event.getEventType() == ClientEventType.MARK_A_CARD) {
-                         SimpleCardView source = (SimpleCardView) event.getSource();
-                         SessionHandler.sendCardMark(draftId, source.getId());
-                     }
+                 } else if (event.getEventType() == ClientEventType.DRAFT_MARK_CARD) {
+                     logger.info("draft panel: catch mark card");
+                     SimpleCardView source = (SimpleCardView) event.getSource();
+                     SessionHandler.sendCardMark(draftId, source.getId());
                  }
-         );
+             };
+             this.draftBooster.addCardEventListener(this.pickingCardsListener);
+         }
+
          setMessage("Pick a card");
          if (!AppUtil.isAppActive()) {
              MageTray.instance.displayMessage("Pick the next card.");
              MageTray.instance.blink();
          }
+
          countdown.stop();
          this.timeout = draftPickView.getTimeout();
          setTimeout(timeout);

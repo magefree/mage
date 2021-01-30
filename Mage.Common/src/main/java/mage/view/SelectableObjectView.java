@@ -1,5 +1,7 @@
 package mage.view;
 
+import mage.players.PlayableObjectStats;
+
 /**
  * @author JayDi85
  */
@@ -7,11 +9,9 @@ public interface SelectableObjectView {
 
     boolean isPlayable();
 
-    void setPlayable(boolean isPlayable);
+    void setPlayableStats(PlayableObjectStats playableStats);
 
-    void setPlayableAmount(int playableAmount);
-
-    int getPlayableAmount();
+    PlayableObjectStats getPlayableStats();
 
     boolean isChoosable();
 

@@ -1,9 +1,3 @@
-/**
- * PropertyChangeSetListener.java
- * 
- * Created on 16.07.2010
- */
-
 package org.mage.plugins.card.dl.beans.properties.bound;
 
 

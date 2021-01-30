@@ -49,31 +49,41 @@ public class CallbackClientImpl implements CallbackClient {
             try {
                 logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
                 switch (callback.getMethod()) {
+
                     case START_GAME: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         GameManager.instance.setCurrentPlayerUUID(message.getPlayerId());
                         gameStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
+
                     case START_TOURNAMENT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         tournamentStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
+
                     case START_DRAFT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         draftStarted(message.getGameId(), message.getPlayerId());
                         break;
                     }
-                    case REPLAY_GAME:
+
+                    case REPLAY_GAME: {
                         replayGame(callback.getObjectId());
                         break;
-                    case SHOW_TOURNAMENT:
+                    }
+
+                    case SHOW_TOURNAMENT: {
                         showTournament(callback.getObjectId());
                         break;
-                    case WATCHGAME:
+                    }
+
+                    case WATCHGAME: {
                         watchGame(callback.getObjectId());
                         break;
+                    }
+
                     case CHATMESSAGE: {
                         ChatMessage message = (ChatMessage) callback.getData();
                         // Drop messages from ignored users
@@ -117,7 +127,8 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case SERVER_MESSAGE:
+
+                    case SERVER_MESSAGE: {
                         if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
                             if (message.getColor() == ChatMessage.MessageColor.RED) {
@@ -127,11 +138,14 @@ public class CallbackClientImpl implements CallbackClient {
                             }
                         }
                         break;
+                    }
+
                     case JOINED_TABLE: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
                         break;
                     }
+
                     case REPLAY_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -139,6 +153,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case REPLAY_DONE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -146,6 +161,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case REPLAY_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -153,6 +169,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_INIT: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -161,6 +178,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_OVER: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -175,9 +193,12 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case GAME_ERROR:
+
+                    case GAME_ERROR: {
                         frame.showErrorDialog("Game Error", (String) callback.getData());
                         break;
+                    }
+
                     case GAME_ASK: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -187,6 +208,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_TARGET: // e.g. Pick triggered ability
                     {
                         GameClientMessage message = (GameClientMessage) callback.getData();
@@ -199,6 +221,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_SELECT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
 
@@ -209,6 +232,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_CHOOSE_ABILITY: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
@@ -217,6 +241,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_CHOOSE_PILE: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -226,6 +251,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_CHOOSE_CHOICE: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
 
@@ -237,6 +263,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_PLAY_MANA: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -246,6 +273,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_PLAY_XMANA: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
 
@@ -256,6 +284,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_GET_AMOUNT: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
 
@@ -267,6 +296,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case GAME_UPDATE: {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
 
@@ -277,17 +307,31 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case END_GAME_INFO:
-                        MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
 
+                    case GAME_REDRAW_GUI: {
+                        // re-draw game's gui elements like attack arrows
+                        // uses for client side only (example: update after scrollbars support)
+                        GamePanel panel = MageFrame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.updateGame();
+                        }
                         break;
-                    case SHOW_USERMESSAGE:
+                    }
+
+                    case END_GAME_INFO: {
+                        MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
+                        break;
+                    }
+
+                    case SHOW_USERMESSAGE: {
                         List<String> messageData = (List<String>) callback.getData();
                         if (messageData.size() == 2) {
                             JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
                         }
                         break;
-                    case GAME_INFORM:
+                    }
+
+                    case GAME_INFORM: {
                         if (callback.getMessageId() > gameInformMessageId) {
                             {
                                 GameClientMessage message = (GameClientMessage) callback.getData();
@@ -297,13 +341,14 @@ public class CallbackClientImpl implements CallbackClient {
                                     panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
                                 }
                             }
-// no longer needed because phase skip handling on server side now
+                            // no longer needed because phase skip handling on server side now
                         } else {
                             logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
-                            //logger.warn("message out of sequence - ignoring");
                         }
                         gameInformMessageId = messageId;
                         break;
+                    }
+
                     case GAME_INFORM_PERSONAL: {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -313,6 +358,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case SIDEBOARD: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
@@ -324,6 +370,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case VIEW_LIMITED_DECK: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
@@ -331,6 +378,7 @@ public class CallbackClientImpl implements CallbackClient {
                         viewLimitedDeck(deck, message.getTableId(), message.getTime());
                         break;
                     }
+
                     case CONSTRUCT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
@@ -338,9 +386,13 @@ public class CallbackClientImpl implements CallbackClient {
                         construct(deck, message.getTableId(), message.getTime());
                         break;
                     }
-                    case DRAFT_OVER:
+
+                    case DRAFT_OVER: {
                         MageFrame.removeDraft(callback.getObjectId());
                         break;
+                    }
+
+                    case DRAFT_INIT:
                     case DRAFT_PICK: {
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
@@ -349,6 +401,7 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
+
                     case DRAFT_UPDATE: {
                         DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
                         DraftClientMessage message = (DraftClientMessage) callback.getData();
@@ -357,23 +410,25 @@ public class CallbackClientImpl implements CallbackClient {
                         }
                         break;
                     }
-                    case DRAFT_INIT: {
-                        DraftClientMessage message = (DraftClientMessage) callback.getData();
-                        DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                        if (panel != null) {
-                            panel.loadBooster(message.getDraftPickView());
-                        }
+
+                    case TOURNAMENT_INIT: {
                         break;
                     }
-                    case TOURNAMENT_INIT:
-                        break;
-                    case USER_REQUEST_DIALOG:
+
+                    case USER_REQUEST_DIALOG: {
                         frame.showUserRequestDialog((UserRequestMessage) callback.getData());
                         break;
-                    default:
+                    }
+
+                    default: {
                         break;
+                    }
                 }
-                messageId = callback.getMessageId();
+
+                // sync message for server side events only
+                if (!callback.getMethod().isClientSideMessage()) {
+                    messageId = callback.getMessageId();
+                }
             } catch (Exception ex) {
                 handleException(ex);
             }
@@ -551,6 +606,10 @@ public class CallbackClientImpl implements CallbackClient {
 
     private void handleException(Exception ex) {
         logger.fatal("Client error\n", ex);
-        frame.showError("Error: " + ex.getMessage());
+        String errorMessage = ex.getMessage();
+        if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
+            errorMessage = ex.getClass().getSimpleName() + " - look server logs for more details";
+        }
+        frame.showError("Server's error: " + errorMessage);
     }
 }

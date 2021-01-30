@@ -1,18 +1,11 @@
-
-
-/*
- * DraftGrid.java
- *
- * Created on 7-Jan-2011, 6:23:39 PM
- */
-
 package mage.client.cards;
 
 import mage.cards.CardDimensions;
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.MageCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardViewRarityComparator;
+import mage.client.util.comparators.CardViewRarityComparator;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -23,15 +16,15 @@ import mage.view.CardsView;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Drafting: panel with the picks
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class DraftGrid extends javax.swing.JPanel implements MouseListener {
+public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
 
     private static final Logger logger = Logger.getLogger(DraftGrid.class);
 
@@ -47,20 +40,44 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
         initComponents();
         markedCard = null;
         emptyGrid = true;
+
+        // ENABLE picks and other actions
+        cardEventSource.addListener(new Listener<Event>() {
+            @Override
+            public void event(Event event) {
+                if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK) {
+                    logger.info("draft grid: catch double click");
+                    CardView card = (CardView) event.getSource();
+                    cardEventSource.fireEvent(card, ClientEventType.DRAFT_PICK_CARD);
+                    hidePopup();
+                    AudioManager.playOnDraftSelect();
+                } else if (event.getEventType() == ClientEventType.CARD_CLICK) {
+                    logger.info("draft grid: catch single click");
+                    CardView card = (CardView) event.getSource();
+                    MageCard cardPanel = (MageCard) event.getComponent();
+                    if (markedCard != null) {
+                        markedCard.setSelected(false);
+                    }
+                    cardEventSource.fireEvent(card, ClientEventType.DRAFT_MARK_CARD);
+                    markedCard = cardPanel;
+                    markedCard.setSelected(true);
+                    repaint();
+                }
+            }
+        });
     }
 
     public void clear() {
         markedCard = null;
-        this.clearCardEventListeners();
         for (Component comp : getComponents()) {
-            if (comp instanceof Card || comp instanceof MageCard) {
+            if (comp instanceof MageCard) {
                 this.remove(comp);
             }
         }
     }
 
     public void loadBooster(CardsView booster, BigCard bigCard) {
-        if (booster instanceof CardsView && booster.isEmpty()) {
+        if (booster != null && booster.isEmpty()) {
             emptyGrid = true;
         } else {
             if (!emptyGrid) {
@@ -103,13 +120,12 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             List<CardView> sortedCards = new ArrayList<>(booster.values());
             sortedCards.sort(new CardViewRarityComparator());
             for (CardView card : sortedCards) {
-                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, dimension, null, true, true, PreferencesDialog.getRenderMode(), true);
-                cardImg.addMouseListener(this);
-                add(cardImg);
+                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(), dimension, null, true, true, PreferencesDialog.getRenderMode(), true);
+                cardImg.setCardContainerRef(this);
                 cardImg.update(card);
-                rectangle.setLocation(curColumn * (cardDimension.getFrameWidth() + offsetX) + offsetX, curRow * (rectangle.height + offsetY) + offsetY);
+                this.add(cardImg);
 
-                cardImg.setBounds(rectangle);
+                rectangle.setLocation(curColumn * (cardDimension.getFrameWidth() + offsetX) + offsetX, curRow * (rectangle.height + offsetY) + offsetY);
                 cardImg.setCardBounds(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
                 curColumn++;
                 if (curColumn == numColumns) {
@@ -125,10 +141,6 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     public void addCardEventListener(Listener<Event> listener) {
         cardEventSource.addListener(listener);
-    }
-
-    public void clearCardEventListeners() {
-        cardEventSource.clearListeners();
     }
 
     private void hidePopup() {
@@ -158,53 +170,13 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0)) { // double clicks and repeated double clicks
-            if (e.getButton() == MouseEvent.BUTTON1) {
-                Object obj = e.getSource();
-                if (obj instanceof MageCard) {
-                    this.cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.PICK_A_CARD);
-                    this.hidePopup();
-                    AudioManager.playOnDraftSelect();
-                }
-            }
-        }
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) { // left or right click
-            Object obj = e.getSource();
-            if (obj instanceof MageCard) {
-                if (this.markedCard != null) {
-                    markedCard.setSelected(false);
-                }
-                this.cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.MARK_A_CARD);
-                markedCard = ((MageCard) obj);
-                markedCard.setSelected(true);
-                repaint();
-            }
-        }
-
+    public CardEventSource getCardEventSource() {
+        return cardEventSource;
     }
 
     public boolean isEmptyGrid() {
         return emptyGrid;
     }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -1,10 +1,16 @@
 package org.mage.card.arcane;
 
 import mage.MageInt;
+import mage.util.DebugUtil;
 import mage.view.CardView;
 import mage.view.PermanentView;
 
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
+import java.awt.font.LineMetrics;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -253,4 +259,90 @@ public final class CardRendererUtils {
         return defaultColor;
     }
 
+    /**
+     * Reduce rect by percent (add empty space from all sides and keep rect position)
+     * Example usage: reduce rect to fit auto-size text
+     *
+     * @param rect
+     * @param reduceFactor
+     * @return
+     */
+    public static Rectangle reduceRect(Rectangle rect, float reduceFactor) {
+        float newWidth = rect.width * reduceFactor;
+        float newHeight = rect.height * reduceFactor;
+        int offsetX = Math.round((rect.width - newWidth) / 2f);
+        int offsetY = Math.round((rect.height - newHeight) / 2f);
+        return new Rectangle(rect.x + offsetX, rect.y + offsetY, Math.round(newWidth), Math.round(newHeight));
+    }
+
+    /**
+     * Draw a String centered in the middle of a rectangle.
+     *
+     * @param g2d             The graphics instance
+     * @param text            The string to draw
+     * @param rect            The rectangle to center the text in
+     * @param font
+     * @param isAutoScaleFont if the text is too big then it will scale a font to fit it in the rect
+     */
+    public static void drawCenteredText(Graphics2D g2d, String text, Rectangle rect, Font font, boolean isAutoScaleFont) {
+        if (DebugUtil.GUI_RENDER_CENTERED_TEXT_DRAW_DEBUG_LINES) {
+            g2d.drawLine(rect.x, rect.y + rect.height / 2, rect.x + rect.width, rect.y + rect.height / 2);
+            g2d.drawLine(rect.x + rect.width / 2, rect.y, rect.x + rect.width / 2, rect.y + rect.height);
+        }
+
+        // https://stackoverflow.com/a/23730104/1276632
+        Font affectedFont = font;
+        if (isAutoScaleFont) {
+            affectedFont = scaleFont(g2d, text, rect, font);
+        }
+
+        g2d.setFont(affectedFont);
+        FontRenderContext frc = g2d.getFontRenderContext();
+        GlyphVector gv = affectedFont.createGlyphVector(frc, text);
+        Rectangle2D box = gv.getVisualBounds();
+        float offsetX = (float) (((rect.getWidth() - box.getWidth()) / 2d) + (-box.getX()));
+        float offsetY = (float) (((rect.getHeight() - box.getHeight()) / 2d) + (-box.getY()));
+
+        g2d.drawString(text, rect.x + offsetX, rect.y + offsetY);
+    }
+
+    /**
+     * Auto scale font to fit current text inside the rect (e.g. decrease font size for too big text)
+     *
+     * @param g2d  graphics context
+     * @param text text to draw
+     * @param font base font
+     * @param rect the bounds for fitting the string
+     * @return a scaled font
+     */
+    private static Font scaleFont(Graphics2D g2d, String text, Rectangle rect, Font font) {
+        // https://stackoverflow.com/a/876266/1276632
+        FontRenderContext frc = g2d.getFontRenderContext();
+
+        double needWidth = rect.getWidth();
+        double needHeight = rect.getHeight();
+
+        float fontMinSize = 1f;
+        float fontMaxSize = 1000f;
+        Font scaledFont = font;
+        float scaledFontSize = scaledFont.getSize();
+
+        while (fontMaxSize - fontMinSize > 1f) {
+            scaledFont = scaledFont.deriveFont(scaledFontSize);
+
+            TextLayout layout = new TextLayout(text, scaledFont, frc);
+            float currentWidth = layout.getVisibleAdvance();
+            LineMetrics metrics = scaledFont.getLineMetrics(text, frc);
+            float currentHeight = metrics.getHeight();
+
+            if ((currentWidth > needWidth) || (currentHeight > needHeight)) {
+                fontMaxSize = scaledFontSize;
+            } else {
+                fontMinSize = scaledFontSize;
+            }
+            scaledFontSize = (fontMinSize + fontMaxSize) / 2f;
+        }
+
+        return scaledFont.deriveFont((float) Math.floor(scaledFontSize));
+    }
 }

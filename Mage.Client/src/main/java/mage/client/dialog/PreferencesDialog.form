@@ -2056,7 +2056,7 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The maximum size of permanents on the battlefield"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The minimum size of permanents on the battlefield"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>

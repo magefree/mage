@@ -1,12 +1,6 @@
-
-
- /*
-  * ShowCardsDialog.java
-  *
-  * Created on 3-Feb-2010, 8:59:11 PM
-  */
  package mage.client.dialog;
 
+ import mage.cards.MageCard;
  import mage.client.MageFrame;
  import mage.client.cards.BigCard;
  import mage.client.cards.CardArea;
@@ -25,6 +19,8 @@
  import java.util.UUID;
 
  /**
+  * Game GUI: choose target card from the cards list (example: exile and choose card to cast)
+  *
   * @author BetaSteward_at_googlemail.com
   */
  public class ShowCardsDialog extends MageDialog {
@@ -48,8 +44,8 @@
      public void cleanUp() {
          cardArea.cleanUp();
          for (Component comp : cardArea.getComponents()) {
-             if (comp instanceof CardPanel) {
-                 ((CardPanel) comp).cleanUp();
+             if (comp instanceof MageCard) {
+                 ((MageCard) comp).cleanUp();
                  cardArea.remove(comp);
              }
          }

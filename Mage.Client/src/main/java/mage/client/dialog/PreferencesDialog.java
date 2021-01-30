@@ -323,9 +323,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (currentTheme == null) {
             currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
             logger.info("Using GUI theme: " + currentTheme.getName());
+            currentTheme.reload();
         }
 
         return currentTheme;
+    }
+
+    /**
+     * Set and reload current theme. App need restart to apply all new settings.
+     *
+     * @param newTheme
+     */
+    public static void setCurrentTheme(ThemeType newTheme) {
+        currentTheme = newTheme;
+        currentTheme.reload();
     }
 
     private final JFileChooser fc = new JFileChooser();
@@ -656,7 +667,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showFullImagePath.setSelected(true);
         showFullImagePath.setToolTipText("Show the path Xmage is expecting for this card's image (only displays if missing)");
         showFullImagePath.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showFullImagePath.setLabel("Display image path for missing images");
+        showFullImagePath.setText("Display image path for missing images");
         showFullImagePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showFullImagePathActionPerformed(evt);
@@ -1149,7 +1160,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeMinBattlefield.setPaintLabels(true);
         sliderCardSizeMinBattlefield.setPaintTicks(true);
         sliderCardSizeMinBattlefield.setSnapToTicks(true);
-        sliderCardSizeMinBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeMinBattlefield.setToolTipText("<HTML>The minimum size of permanents on the battlefield");
         sliderCardSizeMinBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeMinBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2766,7 +2777,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Themes", tabThemes);
 
-        saveButton.setLabel("Save");
+        saveButton.setText("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -2777,7 +2788,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        exitButton.setLabel("Exit");
+        exitButton.setText("Exit");
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));

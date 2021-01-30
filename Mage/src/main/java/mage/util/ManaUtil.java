@@ -3,6 +3,7 @@ package mage.util;
 import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -21,9 +22,15 @@ import mage.players.Player;
 import java.util.*;
 
 /**
- * @author noxx
+ * @author noxx, JayDi85
  */
 public final class ManaUtil {
+
+    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
+    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
+    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
+    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
+    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     private ManaUtil() {
     }
@@ -502,6 +509,121 @@ public final class ManaUtil {
         if (newColors.isGreen()) {
             destColors.setGreen(true);
         }
+    }
+
+    /**
+     * Find full card's color identity (from mana cost and rules)
+     *
+     * @param cardColor       color indicator
+     * @param cardManaSymbols mana cost
+     * @param cardRules       rules list
+     * @param secondSideCard  second side of double faces card
+     * @return
+     */
+    public static FilterMana getColorIdentity(ObjectColor cardColor, List<String> cardManaSymbols, List<String> cardRules, Card secondSideCard) {
+        // 20210121
+        // 903.4
+        // The Commander variant uses color identity to determine what cards can be in a deck with a certain
+        // commander. The color identity of a card is the color or colors of any mana symbols in that card’s mana
+        // cost or rules text, plus any colors defined by its characteristic-defining abilities (see rule 604.3)
+        // or color indicator (see rule 204).
+        // 903.4d
+        // The back face of a double-faced card (see rule 711) is included when determining a card’s color identity.
+        // This is an exception to rule 711.4a.
+        FilterMana res = new FilterMana();
+
+        // from object (color indicator)
+        ObjectColor color = (cardColor != null ? new ObjectColor(cardColor) : new ObjectColor());
+
+        // from mana
+        res.setWhite(color.isWhite() || containsManaSymbol(cardManaSymbols, "W"));
+        res.setBlue(color.isBlue() || containsManaSymbol(cardManaSymbols, "U"));
+        res.setBlack(color.isBlack() || containsManaSymbol(cardManaSymbols, "B"));
+        res.setRed(color.isRed() || containsManaSymbol(cardManaSymbols, "R"));
+        res.setGreen(color.isGreen() || containsManaSymbol(cardManaSymbols, "G"));
+
+        // from rules
+        for (String rule : cardRules) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (!res.isWhite() && (rule.matches(regexWhite))) {
+                res.setWhite(true);
+            }
+            if (!res.isBlue() && (rule.matches(regexBlue))) {
+                res.setBlue(true);
+            }
+            if (!res.isBlack() && rule.matches(regexBlack)) {
+                res.setBlack(true);
+            }
+            if (!res.isRed() && (rule.matches(regexRed))) {
+                res.setRed(true);
+            }
+            if (!res.isGreen() && (rule.matches(regexGreen))) {
+                res.setGreen(true);
+            }
+        }
+
+        // SECOND SIDE CARD
+        if (secondSideCard != null) {
+            // from object (color indicator)
+            ObjectColor secondColor = secondSideCard.getColor(null);
+            res.setBlack(res.isBlack() || secondColor.isBlack());
+            res.setGreen(res.isGreen() || secondColor.isGreen());
+            res.setRed(res.isRed() || secondColor.isRed());
+            res.setBlue(res.isBlue() || secondColor.isBlue());
+            res.setWhite(res.isWhite() || secondColor.isWhite());
+
+            // from mana
+            List<String> secondManaSymbols = secondSideCard.getManaCost().getSymbols();
+            res.setWhite(res.isWhite() || containsManaSymbol(secondManaSymbols, "W"));
+            res.setBlue(res.isBlue() || containsManaSymbol(secondManaSymbols, "U"));
+            res.setBlack(res.isBlack() || containsManaSymbol(secondManaSymbols, "B"));
+            res.setRed(res.isRed() || containsManaSymbol(secondManaSymbols, "R"));
+            res.setGreen(res.isGreen() || containsManaSymbol(secondManaSymbols, "G"));
+
+            // from rules
+            for (String rule : secondSideCard.getRules()) {
+                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                if (!res.isWhite() && rule.matches(regexWhite)) {
+                    res.setWhite(true);
+                }
+                if (!res.isBlue() && rule.matches(regexBlue)) {
+                    res.setBlue(true);
+                }
+                if (!res.isBlack() && rule.matches(regexBlack)) {
+                    res.setBlack(true);
+                }
+                if (!res.isRed() && rule.matches(regexRed)) {
+                    res.setRed(true);
+                }
+                if (!res.isGreen() && rule.matches(regexGreen)) {
+                    res.setGreen(true);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private static boolean containsManaSymbol(List<String> cardManaSymbols, String needSymbol) {
+        // search R in {R/B}
+        return cardManaSymbols.stream().anyMatch(s -> s.contains(needSymbol));
+    }
+
+    public static FilterMana getColorIdentity(Card card) {
+        // TODO: is it support mdf cards?
+        // TODO: is it support adventure cards?
+        Card secondSide = card.getSecondCardFace();
+        return getColorIdentity(card.getColor(null), card.getManaCost().getSymbols(), card.getRules(), secondSide);
+    }
+
+    public static int getColorIdentityHash(FilterMana colorIdentity) {
+        int hash = 3;
+        hash = 23 * hash + (colorIdentity.isWhite() ? 1 : 0);
+        hash = 23 * hash + (colorIdentity.isBlue() ? 1 : 0);
+        hash = 23 * hash + (colorIdentity.isBlack() ? 1 : 0);
+        hash = 23 * hash + (colorIdentity.isRed() ? 1 : 0);
+        hash = 23 * hash + (colorIdentity.isGreen() ? 1 : 0);
+        return hash;
     }
 
     /**

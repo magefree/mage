@@ -1,11 +1,3 @@
-
-
-/*
- * TablePlayerPanel.java
- *
- * Created on 9-May-2010, 11:43:03 AM
- */
-
 package mage.client.table;
 
 import mage.cards.decks.importer.DeckImporter;

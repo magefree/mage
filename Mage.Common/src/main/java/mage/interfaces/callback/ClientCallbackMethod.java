@@ -28,6 +28,7 @@ public enum ClientCallbackMethod {
     GAME_INFORM_PERSONAL("gameInformPersonal"),
     GAME_ERROR("gameError"),
     GAME_UPDATE("gameUpdate"),
+    GAME_REDRAW_GUI("gameRedrawGUI", true),
     DRAFT_OVER("draftOver"),
     REPLAY_DONE("replayDone"),
     USER_REQUEST_DIALOG("userRequestDialog"),
@@ -44,13 +45,22 @@ public enum ClientCallbackMethod {
     GAME_PLAY_XMANA("gamePlayXMana"),
     GAME_GET_AMOUNT("gameSelectAmount"),
     DRAFT_INIT("draftInit"),
-    // DRAFT_INFORM("draftInform"),
     DRAFT_PICK("draftPick"),
     DRAFT_UPDATE("draftUpdate");
 
-    String value;
+    String code;
+    boolean isClientSideMessage;
 
-    ClientCallbackMethod(String value) {
-        this.value = value;
+    ClientCallbackMethod(String code) {
+        this(code, false);
+    }
+
+    ClientCallbackMethod(String code, boolean isClientSideMessage) {
+        this.code = code;
+        this.isClientSideMessage = isClientSideMessage;
+    }
+
+    public boolean isClientSideMessage() {
+        return this.isClientSideMessage;
     }
 }

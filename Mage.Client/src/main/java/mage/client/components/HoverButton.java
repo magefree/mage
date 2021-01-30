@@ -15,8 +15,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
+
 import mage.client.util.Command;
 
 /**
@@ -261,7 +261,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
+        if (SwingUtilities.isLeftMouseButton(e)) {
             if (isEnabled() && observer != null) {
                 observer.execute();
             }

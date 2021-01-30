@@ -3710,31 +3710,44 @@ public abstract class PlayerImpl implements Player, Serializable {
      * abilities
      */
     @Override
-    public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
+        // collect abilities per object
         List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false); // do not hide duplicated abilities/cards
-        Map<UUID, Integer> playableObjects = new HashMap<>();
-        for (Ability ability : playableAbilities) {
+        Map<UUID, List<ActivatedAbility>> playableObjects = new HashMap<>();
+        for (ActivatedAbility ability : playableAbilities) {
             if (ability.getSourceId() != null) {
-                playableObjects.put(ability.getSourceId(), playableObjects.getOrDefault(ability.getSourceId(), 0) + 1);
 
-                // main card must be marked playable in GUI
+                // normal card
+                putToPlayableObjects(playableObjects, ability.getSourceId(), ability);
+
+                // main card - must be marked playable in GUI
                 Card card = game.getCard(ability.getSourceId());
                 if (card != null && card.getMainCard().getId() != card.getId()) {
-                    UUID mainCardId = card.getMainCard().getId();
-                    playableObjects.put(mainCardId, playableObjects.getOrDefault(mainCardId, 0) + 1);
+                    putToPlayableObjects(playableObjects, card.getMainCard().getId(), ability);
                 }
 
-                // spell on stack can have activated abilities,
+                // spell on stack - can have activated abilities,
                 // so mark it as playable too (users must able to clicks on stack objects)
                 // example: Lightning Storm
                 Spell spell = game.getSpell(ability.getSourceId());
                 if (spell != null) {
-                    playableObjects.put(spell.getId(), playableObjects.getOrDefault(spell.getId(), 0) + 1);
+                    putToPlayableObjects(playableObjects, spell.getId(), ability);
                 }
             }
         }
-        return playableObjects;
+
+        // collect stats
+        PlayableObjectsList playableObjectsList = new PlayableObjectsList(playableObjects);
+        return playableObjectsList;
     }
+
+    private void putToPlayableObjects(Map<UUID, List<ActivatedAbility>> playableObjects, UUID objectId, ActivatedAbility ability) {
+        if (!playableObjects.containsKey(objectId)) {
+            playableObjects.put(objectId, new ArrayList<>());
+        }
+        playableObjects.get(objectId).add(ability);
+    }
+
 
     /**
      * Skip "silent" phase step when players are not allowed to cast anything.

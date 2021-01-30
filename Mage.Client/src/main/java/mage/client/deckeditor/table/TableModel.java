@@ -293,22 +293,17 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         cardEventSource.fireEvent(card, ClientEventType.SET_NUMBER, number);
     }
 
-    public void doubleClick(int index) {
+    public void doubleClick(int index, MouseEvent e, boolean forceFakeAltDown) {
         CardView card = view.get(index);
-        cardEventSource.fireEvent(card, ClientEventType.DOUBLE_CLICK);
-    }
-
-    public void altDoubleClick(int index) {
-        CardView card = view.get(index);
-        cardEventSource.fireEvent(card, ClientEventType.ALT_DOUBLE_CLICK);
+        cardEventSource.fireEvent(card, ClientEventType.CARD_DOUBLE_CLICK, e, forceFakeAltDown);
     }
 
     public void removeFromMainEvent(int index) {
-        cardEventSource.fireEvent(ClientEventType.REMOVE_MAIN);
+        cardEventSource.fireEvent(ClientEventType.DECK_REMOVE_SELECTION_MAIN);
     }
 
     public void removeFromSideEvent(int index) {
-        cardEventSource.fireEvent(ClientEventType.REMOVE_SIDEBOARD);
+        cardEventSource.fireEvent(ClientEventType.DECK_REMOVE_SELECTION_SIDEBOARD);
     }
 
     public void addListeners(final JTable table) {

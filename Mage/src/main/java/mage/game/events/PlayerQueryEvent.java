@@ -25,7 +25,20 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
     public enum QueryType {
 
-        ASK, CHOOSE_CHOICE, CHOOSE_ABILITY, CHOOSE_MODE, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, PICK_CARD, CONSTRUCT, CHOOSE_PILE, PERSONAL_MESSAGE
+        ASK,
+        CHOOSE_CHOICE,
+        CHOOSE_ABILITY,
+        CHOOSE_MODE,
+        PICK_TARGET,
+        PICK_ABILITY,
+        SELECT,
+        PLAY_MANA,
+        PLAY_X_MANA,
+        AMOUNT,
+        PICK_CARD,
+        CONSTRUCT,
+        CHOOSE_PILE,
+        PERSONAL_MESSAGE
     }
 
     private String message;

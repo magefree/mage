@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * App GUI: create new GAME
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class NewTableDialog extends MageDialog {

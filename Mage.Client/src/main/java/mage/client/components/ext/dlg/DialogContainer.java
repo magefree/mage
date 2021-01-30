@@ -2,7 +2,6 @@ package mage.client.components.ext.dlg;
 
 import mage.client.components.ext.MessageDialogType;
 import mage.client.components.ext.dlg.impl.ChoiceDialog;
-import mage.client.components.ext.dlg.impl.StackDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,15 +9,15 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
- * @author mw, noxx
+ * Game GUI: part of the old dialog system
+ *
+ * @author mw, noxx, JayDi85
  */
 public class DialogContainer extends JPanel {
 
     private static final int X_OFFSET = 30;
     private static final int Y_OFFSET = 30;
     private final BufferedImage shadow = null;
-    //private DialogManager.MTGDialogs dialogType;
-    //private DlgParams params;
     private Color backgroundColor = new Color(0, 255, 255, 60);
     private int alpha = 50;
 
@@ -38,102 +37,61 @@ public class DialogContainer extends JPanel {
         drawContainer = true;
 
         switch (dialogType) {
-            case MESSAGE:
-                //backgroundColor = new Color(0, 255, 255, 60);
+
+            case MESSAGE: {
                 if (params.type == MessageDialogType.WARNING) {
                     backgroundColor = new Color(255, 0, 0, 90);
                 } else {
                     backgroundColor = new Color(0, 0, 0, 90);
                 }
                 alpha = 0;
-                //MessageDlg dlg = new MessageDlg(params);
-                //add(dlg);
-                //dlg.setLocation(X_OFFSET + 10, Y_OFFSET);
-                //dlg.updateSize(params.rect.width, params.rect.height);
-                break;
-            case STACK: {
-                //backgroundColor = new Color(0, 255, 255, 60);
-                backgroundColor = new Color(0, 0, 0, 50);
-                alpha = 0;
-                StackDialog dlg = new StackDialog(params);
-                add(dlg);
-                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-                //int width = Math.min(params.rect.width - 80, 600);
-                int width = params.rect.width;
-                int height = params.rect.height - 80;
-                dlg.updateSize(width, height);
                 break;
             }
-        /*
-        else if (dialogType == DialogManager.MTGDialogs.COMBAT) {
-            backgroundColor = new Color(0, 0, 0, 60);
-            alpha = 0;
-            COMBAT dlg = new COMBAT(params);
-            add(dlg);
-            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 
-        }*/
             case CHOICE: {
-
-                //backgroundColor = new Color(200, 200, 172, 120);
-                //backgroundColor = new Color(180, 150, 200, 120);
-                //backgroundColor = new Color(0, 255, 0, 60);
-
-                //backgroundColor = new Color(139, 46, 173, 20);
                 backgroundColor = new Color(0, 0, 0, 110);
-                //backgroundColor = new Color(139, 46, 173, 0);
-
                 alpha = 0;
                 ChoiceDialog dlg = new ChoiceDialog(params, "Choose");
                 add(dlg);
-                //GameManager.getManager().setCurrentChoiceDlg(dlg);
                 dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
                 break;
             }
+
             case GRAVEYARD: {
-
                 backgroundColor = new Color(0, 0, 0, 110);
-
                 alpha = 0;
                 ChoiceDialog dlg = new ChoiceDialog(params, "Graveyard");
                 add(dlg);
                 dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
                 break;
             }
+
             case EXILE: {
-
                 backgroundColor = new Color(250, 250, 250, 50);
-
                 alpha = 0;
                 ChoiceDialog dlg = new ChoiceDialog(params, "Exile");
                 add(dlg);
                 dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
                 break;
             }
+
             case EMBLEMS: {
-
                 backgroundColor = new Color(0, 0, 50, 110);
-
                 alpha = 0;
                 ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
                 add(dlg);
                 dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-
                 break;
             }
         }
     }
 
     public void cleanUp() {
-        for (Component component:this.getComponents()) {
+        for (Component component : this.getComponents()) {
             if (component instanceof ChoiceDialog) {
                 ((ChoiceDialog) component).cleanUp();
             }

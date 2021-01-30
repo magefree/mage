@@ -10,6 +10,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 
 /**
+ * App GUI: confirm some actions from the user (example: close the app)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class UserRequestDialog extends MageDialog {

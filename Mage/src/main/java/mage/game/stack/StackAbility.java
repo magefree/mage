@@ -15,6 +15,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
+import mage.abilities.icon.CardIcon;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -678,6 +679,16 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public Ability addHint(Hint hint) {
         throw new IllegalArgumentException("Stack ability is not supports hint adding");
+    }
+
+    @Override
+    public List<CardIcon> getIcons() {
+        return this.ability.getIcons();
+    }
+
+    @Override
+    public Ability addIcon(CardIcon cardIcon) {
+        throw new IllegalArgumentException("Stack ability is not supports icon adding");
     }
 
     @Override

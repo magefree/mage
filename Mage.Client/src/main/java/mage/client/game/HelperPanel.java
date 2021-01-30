@@ -186,13 +186,13 @@ public class HelperPanel extends JPanel {
 
         MouseListener checkPopupAdapter = new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent me) {
-                checkPopupMenu(me);
+            public void mousePressed(MouseEvent e) {
+                checkPopupMenu(e);
             }
 
             @Override
-            public void mouseReleased(MouseEvent me) {
-                checkPopupMenu(me);
+            public void mouseReleased(MouseEvent e) {
+                checkPopupMenu(e);
             }
 
         };
@@ -230,26 +230,26 @@ public class HelperPanel extends JPanel {
         dialogTextArea.addMouseListener(new MouseAdapter() {
 
             @Override
-            public void mouseEntered(MouseEvent me) {
+            public void mouseEntered(MouseEvent e) {
                 ToolTipManager.sharedInstance().setDismissDelay(100 * 1000);
                 UIManager.put("info", Color.DARK_GRAY);
             }
 
             @Override
-            public void mouseExited(MouseEvent me) {
+            public void mouseExited(MouseEvent e) {
                 ToolTipManager.sharedInstance().setDismissDelay(Constants.TOOLTIPS_DELAY_MS);
                 UIManager.put("info", tooltipBackground);
             }
         });
     }
 
-    private void checkPopupMenu(MouseEvent me) {
-        if (me.isPopupTrigger()
+    private void checkPopupMenu(MouseEvent e) {
+        if (e.isPopupTrigger()
                 && originalId != null) { // only Yes/No requests from abilities can be automated
-            JButton source = (JButton) me.getSource();
+            JButton source = (JButton) e.getSource();
             if (source.getActionCommand().startsWith(QUESTION.toString())) {
-                showPopupMenu(me.getComponent(), source.getActionCommand());
-                me.consume();
+                showPopupMenu(e.getComponent(), source.getActionCommand());
+                e.consume();
             }
         }
     }

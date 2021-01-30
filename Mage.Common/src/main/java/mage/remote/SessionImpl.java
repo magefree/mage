@@ -116,6 +116,9 @@ public class SessionImpl implements Session {
     }
 
     private void showMessageToUser(String message) {
+        if (message.contains("free port for use")) {
+            message += " (try to close and restart a client app)";
+        }
         client.showMessage("Remote task error. " + message);
     }
 
@@ -558,15 +561,6 @@ public class SessionImpl implements Session {
         @Override
         public void handleCallback(Callback callback) throws HandleCallbackException {
             try {
-//                Object object = callback.getCallbackObject();
-//                if (((ClientCallback) object).getMethod().equals(ClientCallbackMethod.GAME_TARGET)) {
-//                    Object data = ((ClientCallback) object).getData();
-//                    if (data instanceof GameClientMessage) {
-//                        GameClientMessage message = (GameClientMessage) ((ClientCallback) object).getData();
-//                        logger.info("Client Session Event->" + ((ClientCallback) object).getMethod() + " (id:" + ((ClientCallback) object).getMessageId() + ") " + message.getMessage()
-//                        );
-//                    }
-//                }
                 client.processCallback((ClientCallback) callback.getCallbackObject());
             } catch (Exception ex) {
                 logger.error("handleCallback error", ex);

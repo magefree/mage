@@ -1,9 +1,10 @@
-
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
-import mage.constants.Zone;
 import mage.abilities.StaticAbility;
+import mage.abilities.icon.abilities.IndestructibleAbilityIcon;
+import mage.constants.Zone;
+
+import java.io.ObjectStreamException;
 
 /**
  * OLD RULES: 700.4. If a permanent is indestructible, rules and effects can't
@@ -11,17 +12,12 @@ import mage.abilities.StaticAbility;
  * lethal damage, and they ignore the lethal-damage state-based action (see rule
  * 704.5g). Rules or effects may cause an indestructible permanent to be
  * sacrificed, put into a graveyard, or exiled. #
- *
+ * <p>
  * 700.4a Although the text "[This permanent] is indestructible" is an ability,
  * actually being indestructible is neither an ability nor a characteristic.
  * It's just something that's true about a permanent.
- *
+ * <p>
  * NEW RULES
- *
- *
- *
- *
- *
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -31,6 +27,7 @@ public class IndestructibleAbility extends StaticAbility {
 
     static {
         instance = new IndestructibleAbility();
+        instance.addIcon(IndestructibleAbilityIcon.instance);
     }
 
     private Object readResolve() throws ObjectStreamException {

@@ -2,6 +2,7 @@ package mage.client.game;
 
 import mage.client.components.KeyboundButton;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
@@ -32,7 +33,7 @@ public class FirstButtonMousePressedAction extends MouseAdapter {
             KeyboundButton button = (KeyboundButton) e.getSource();
             button.setTint(false);
         }
-        if (e.getButton() == MouseEvent.BUTTON1 && inside) {
+        if (SwingUtilities.isLeftMouseButton(e) && inside) {
             callback.accept(e);
         }
     }

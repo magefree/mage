@@ -1,6 +1,7 @@
 package mage.client.components.ext.dlg.impl;
 
 import mage.cards.MageCard;
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.ext.ShadowLabel;
@@ -15,7 +16,6 @@ import mage.client.util.SettingsManager;
 import mage.client.util.audio.AudioManager;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
@@ -24,7 +24,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * @author mw, noxx
+ * Game GUI: transparent dialog with cards list (example: exile button on player's panel)
+ *
+ * @author mw, noxx, JayDi85
  */
 public class ChoiceDialog extends IDialogPanel {
 
@@ -74,25 +76,15 @@ public class ChoiceDialog extends IDialogPanel {
         in_a_row = 5;
         rows = 2;
 
-        /**
-         * Calculate max pages
-         */
+        // calculate max pages
         maxPages = cards.size() / (in_a_row * rows);
         if (cards.size() % (in_a_row * rows) != 0) {
             maxPages++;
         }
 
-        /**
-         * Init
-         */
         initialize();
     }
 
-    /**
-     * This method initializes this
-     *
-     * @return void
-     */
     private void initialize() {
         jTitle = new ShadowLabel(title, 14);
         jTitle.setBounds(new Rectangle(5, 4, 500, 16));
@@ -100,9 +92,7 @@ public class ChoiceDialog extends IDialogPanel {
 
         this.setLayout(null);
 
-        /**
-         * Components
-         */
+        // components
         this.add(jTitle, null);
         this.add(getJButtonOK(), null);
         this.add(getJButtonPrevPage(), null);
@@ -111,17 +101,14 @@ public class ChoiceDialog extends IDialogPanel {
         this.add(getJButtonCancel(), null);
         makeTransparent();
 
-        /**
-         * Manage cards
-         */
-        ///GameManager.getManager().resetChosenCards();
+        // cards
         displayCards(params.getCards(), params.gameId, params.bigCard);
     }
 
     public void cleanUp() {
         for (Component comp : this.getComponents()) {
-            if (comp instanceof CardPanel) {
-                ((CardPanel) comp).cleanUp();
+            if (comp instanceof MageCard) {
+                ((MageCard) comp).cleanUp();
                 this.remove(comp);
             }
         }
@@ -163,10 +150,11 @@ public class ChoiceDialog extends IDialogPanel {
             }
 
             CardView card = cardList.get(i);
-            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode(), true);
-
-            cardImg.setLocation(dx, dy + j * (height + 30));
-            add(cardImg);
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(), getCardDimension(), gameId, true, true, PreferencesDialog.getRenderMode(), true);
+            cardImg.setCardContainerRef(this);
+            cardImg.update(card);
+            cardImg.setCardBounds(dx, dy + j * (height + 30), width, height);
+            this.add(cardImg);
 
             dx += (width + 20);
         }

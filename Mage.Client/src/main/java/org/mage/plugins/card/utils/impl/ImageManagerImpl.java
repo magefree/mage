@@ -1,27 +1,25 @@
 package org.mage.plugins.card.utils.impl;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.WritableRaster;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.util.gui.BufferedImageBuilder;
+import org.apache.log4j.Logger;
+import org.mage.card.arcane.SvgUtils;
+import org.mage.plugins.card.utils.ImageManager;
+import org.mage.plugins.card.utils.Transparency;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import javax.imageio.ImageIO;
-
-import mage.client.dialog.PreferencesDialog;
-import mage.client.util.gui.BufferedImageBuilder;
-import org.mage.plugins.card.utils.ImageManager;
-import org.mage.plugins.card.utils.Transparency;
 
 public enum ImageManagerImpl implements ImageManager {
     instance;
+
+    private static final Logger logger = Logger.getLogger(ImageManagerImpl.class);
 
     ImageManagerImpl() {
         init();
@@ -29,8 +27,8 @@ public enum ImageManagerImpl implements ImageManager {
 
     public void init() {
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
-            "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-            "Main2", "Cleanup", "Next_Turn"};
+                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+                "Main2", "Cleanup", "Next_Turn"};
         phasesImages = new HashMap<>();
         for (String name : phases) {
             Image image = getImageFromResource(
@@ -224,6 +222,7 @@ public enum ImageManagerImpl implements ImageManager {
         return imageDlgAcceptButton;
     }
 
+
     @Override
     public Image getDlgActiveAcceptButtonImage() {
         if (imageDlgActiveAcceptButton == null) {
@@ -361,6 +360,22 @@ public enum ImageManagerImpl implements ImageManager {
                     PreferencesDialog.getCurrentTheme().getButtonPath("toggle_macro.png"));
         }
         return imageToggleRecordMacroButton;
+    }
+
+    @Override
+    public BufferedImage getCardIcon(String resourceName, int size) {
+        // icon must be same, but color can be changed by themes
+        InputStream data = ImageManager.class.getResourceAsStream(PreferencesDialog.getCurrentTheme().getCardIconsResourcePath(resourceName));
+        try {
+            // no need to resize svg (lib already do it on load)
+            return SvgUtils.loadSVG(data, "card icon = " + resourceName,
+                    PreferencesDialog.getCurrentTheme().getCardIconsCssFile(),
+                    PreferencesDialog.getCurrentTheme().getCardIconsCssSettings(),
+                    size, size, false);
+        } catch (Exception e) {
+            logger.error("Can't load card icon: " + resourceName + " , reason: " + e.getMessage(), e);
+            return null;
+        }
     }
 
     protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {

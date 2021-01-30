@@ -1,8 +1,3 @@
-/**
- * EventListenerList.java
- *
- * Created on 08.04.2010
- */
 package org.mage.plugins.card.dl.beans;
 
 import com.google.common.base.Function;

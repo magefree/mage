@@ -4,7 +4,7 @@ import mage.cards.ArtRect;
 import mage.view.CardView;
 
 /**
- * Created by StravantUser on 2017-03-30.
+ * @author StravantUser
  */
 public class CardRendererFactory {
 

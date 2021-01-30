@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**
+ * App GUI: debug only, testing dialogs system
+ *
  * @author JayDi85
  */
 public class TestModalDialog extends MageDialog {

@@ -82,10 +82,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void setLife(int life, Game game, Ability source);
 
     /**
-     * @param amount   amount of life loss
+     * @param amount     amount of life loss
      * @param game
-     * @param source can be null for default game events like mana burn
-     * @param atCombat was the source combat damage
+     * @param source     can be null for default game events like mana burn
+     * @param atCombat   was the source combat damage
      * @param attackerId id of the attacker for combat events (can be null)
      * @return
      */
@@ -94,7 +94,6 @@ public interface Player extends MageItem, Copyable<Player> {
     int loseLife(int amount, Game game, Ability source, boolean atCombat);
 
     /**
-     *
      * @param amount
      * @param game
      * @param source can be null for default game events life lifelink damage
@@ -338,7 +337,6 @@ public interface Player extends MageItem, Copyable<Player> {
     void reset();
 
     /**
-     *
      * @param source can be null for game default shuffle (non effects, example: mulligans)
      * @param game
      */
@@ -360,7 +358,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param num
      * @param source can be null for game default draws (non effects, example: start of the turn)
      * @param game
-     * @param event original draw event in replacement code
+     * @param event  original draw event in replacement code
      * @return
      */
     int drawCards(int num, Ability source, Game game, GameEvent event);
@@ -609,7 +607,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param source
      * @param xFromTheTop
-     * @param withName - show card name in game logs for all players
+     * @param withName    - show card name in game logs for all players
      * @return
      */
     boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop, boolean withName);
@@ -705,7 +703,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
-    Map<UUID, Integer> getPlayableObjects(Game game, Zone zone);
+    PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
     LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 
@@ -846,7 +844,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param withName
      * @return
      */
-    @Deprecated // if you want to use it in replaceEvent, then use ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+    @Deprecated
+    // if you want to use it in replaceEvent, then use ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
     boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, Ability source, Game game, Zone fromZone, boolean withName);
 
     /**

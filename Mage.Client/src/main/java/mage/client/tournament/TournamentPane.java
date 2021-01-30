@@ -1,10 +1,3 @@
-
-
- /*
- * TournamentPane.java
- *
- * Created on 22-Jan-2011, 11:41:47 PM
- */
 package mage.client.tournament;
 
 import java.util.UUID;

@@ -1,8 +1,3 @@
-/*
- * CardSelector.java
- *
- * Created on Feb 18, 2010, 2:49:03 PM
- */
 package mage.client.deckeditor;
 
 import mage.MageObject;
@@ -1272,7 +1267,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             java.util.List<Integer> indexes = asList(n);
             Collections.reverse(indexes);
             for (Integer index : indexes) {
-                mainModel.doubleClick(index);
+                // normal double click emulation
+                mainModel.doubleClick(index, null, false);
             }
             //if (!mode.equals(Constants.DeckEditorMode.Constructed))
             if (limited) {
@@ -1287,7 +1283,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             java.util.List<Integer> indexes = asList(n);
             Collections.reverse(indexes);
             for (Integer index : indexes) {
-                mainModel.altDoubleClick(index);
+                // ALT double click emulation
+                mainModel.doubleClick(index, null, true);
             }
             //if (!mode.equals(Constants.DeckEditorMode.Constructed))
             if (limited) {
@@ -1537,7 +1534,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JToggleButton tbWhite;
     // End of variables declaration//GEN-END:variables
 
-    private final mage.client.cards.CardGrid cardGrid;
+    private final mage.client.cards.CardGrid cardGrid; // grid for piles view mode (example: selected cards in drafting)
 
     @Override
     public void componentResized(ComponentEvent e) {

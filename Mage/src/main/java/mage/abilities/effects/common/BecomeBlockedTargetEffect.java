@@ -47,8 +47,7 @@ public class BecomeBlockedTargetEffect extends OneShotEffect {
                 continue;
             }
             boolean alreadyBlocked = combatGroup.getBlocked();
-            combatGroup.setBlocked(true); // non-banded creatures
-            combatGroup.setBlocked(true, game); // this only works for banded creatures and needs to be checked out
+            combatGroup.setBlocked(true, game);
             if (alreadyBlocked) {
                 continue;
             }

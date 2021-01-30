@@ -15,10 +15,11 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * Game GUI: part of the old dialog system, transparent dialog with cards list (example: exile button on player's panel)
+ *
  * @author mw, noxx
  */
-public class DialogManager extends JComponent implements MouseListener,
-        MouseMotionListener {
+public class DialogManager extends JComponent implements MouseListener, MouseMotionListener {
 
     private static final Map<UUID, DialogManager> dialogManagers = new HashMap<>();
 
@@ -39,7 +40,7 @@ public class DialogManager extends JComponent implements MouseListener,
     }
 
     public enum MTGDialogs {
-        NONE, ABOUT, MESSAGE, STACK, ASSIGN_DAMAGE, MANA_CHOICE, CHOICE, EMBLEMS, GRAVEYARD, DialogContainer, COMBAT,
+        NONE, ABOUT, MESSAGE, ASSIGN_DAMAGE, MANA_CHOICE, CHOICE, EMBLEMS, GRAVEYARD, DialogContainer, COMBAT,
         CHOOSE_DECK, CHOOSE_COMMON, REVEAL, EXILE
     }
 
@@ -105,75 +106,6 @@ public class DialogManager extends JComponent implements MouseListener,
 
     public void setScreenHeight(int screen_height) {
         this.screen_height = screen_height;
-    }
-
-    public void showStackDialog(CardsView cards, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
-
-        int w = (int) (screen_width * 0.7);
-        //int h = (int) (screen_height * 0.5);
-        int h = 360;
-
-        /*if (h < 200) {
-            h = 200;
-        }*/
-
-        if (w > 800) {
-            w = 800;
-        }
-
-        int height = getHeight();
-        int width = getWidth();
-
-        int x = ((width - w) / 2);
-        int y = ((height - h) / 2);
-
-        DlgParams params = new DlgParams();
-        params.rect = new Rectangle(x, y, w, h);
-        params.bigCard = bigCard;
-        params.gameId = gameId;
-        params.feedbackPanel = feedbackPanel;
-        params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.STACK, params);
-        dialogContainer.setVisible(true);
-        add(dialogContainer);
-
-        this.currentDialog = MTGDialogs.DialogContainer;
-
-        setDlgBounds(new Rectangle(x, y, w, h));
-
-        dialogContainer.showDialog(true);
-
-        setVisible(true);
-    }
-
-    public void showGraveyardDialog(CardsView cards, BigCard bigCard, UUID gameId) {
-
-        int w = 720;
-        int h = 550;
-
-        int height = getHeight();
-        int width = getWidth();
-
-        int x = ((width - w) / 2);
-        int y = ((height - h) / 2);
-
-        DlgParams params = new DlgParams();
-        params.rect = new Rectangle(x, y, w, h);
-        params.bigCard = bigCard;
-        params.gameId = gameId;
-        //params.feedbackPanel = feedbackPanel;
-        params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.GRAVEYARD, params);
-        dialogContainer.setVisible(true);
-        add(dialogContainer);
-
-        this.currentDialog = MTGDialogs.DialogContainer;
-
-        setDlgBounds(new Rectangle(x, y, w, h));
-
-        dialogContainer.showDialog(true);
-
-        setVisible(true);
     }
 
     public void showExileDialog(CardsView cards, BigCard bigCard, UUID gameId) {
@@ -317,7 +249,7 @@ public class DialogManager extends JComponent implements MouseListener,
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
+        if (SwingUtilities.isLeftMouseButton(e)) {
             j = (JComponent) getComponentAt(e.getX(), e.getY());
 
             if (j instanceof DialogContainer) {

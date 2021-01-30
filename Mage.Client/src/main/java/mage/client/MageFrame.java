@@ -1,5 +1,6 @@
 package mage.client;
 
+import mage.MageException;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardRepository;
@@ -53,6 +54,7 @@ import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
+import org.mage.card.arcane.SvgUtils;
 import org.mage.plugins.card.images.DownloadPicturesService;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -81,6 +83,7 @@ import java.util.prefs.Preferences;
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static final String TITLE_NAME = "XMage";
+    private static final Logger logger = Logger.getLogger(MageFrame.class);
 
     private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
     private static final String LITE_MODE_ARG = "-lite";
@@ -186,7 +189,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     /**
      * Creates new form MageFrame
      */
-    public MageFrame() {
+    public MageFrame() throws MageException {
         setWindowTitle();
 
         EDTExceptionHandler.registerExceptionHandler();
@@ -248,8 +251,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (RateCard.PRELOAD_CARD_RATINGS_ON_STARTUP) {
             RateCard.bootstrapCardsAndRatings();
         }
+        SvgUtils.checkSvgSupport();
         ManaSymbols.loadImages();
         Plugins.instance.loadPlugins();
+        if (!Plugins.instance.isCardPluginLoaded()) {
+            throw new MageException("can't load card plugin");
+        }
 
         initComponents();
 
@@ -1232,7 +1239,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         } else {
             SwingUtilities.invokeLater(() -> userRequestDialog.showDialog(userRequestMessage));
         }
-
     }
 
     public void showErrorDialog(final String title, final String message) {
@@ -1241,7 +1247,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         } else {
             SwingUtilities.invokeLater(() -> errorDialog.showDialog(title, message));
         }
-
     }
 
     public void showCollectionViewer() {
@@ -1329,7 +1334,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     splash.update();
                 }
             }
-            instance = new MageFrame();
+            try {
+                instance = new MageFrame();
+            } catch (Throwable e) {
+                logger.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
+                System.exit(1);
+            }
 
             // debug menu
             instance.separatorDebug.setVisible(debugMode);
@@ -1348,7 +1358,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 instance.currentConnection.setPassword(startPassword);
             }
             instance.setVisible(true);
-
         });
     }
 

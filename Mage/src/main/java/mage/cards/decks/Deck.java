@@ -1,18 +1,14 @@
-
 package mage.cards.decks;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.GameException;
 import mage.util.DeckUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 public class Deck implements Serializable {
 
@@ -59,8 +55,8 @@ public class Deck implements Serializable {
      * Warning, AI can't play Mock cards, so call it with extra params in real games or tests
      *
      * @param deckCardLists cards to load
-     * @param ignoreErrors - do not raise exception error on wrong deck
-     * @param mockCards - use it for GUI only code, real game cards must be real
+     * @param ignoreErrors  - do not raise exception error on wrong deck
+     * @param mockCards     - use it for GUI only code, real game cards must be real
      * @return
      * @throws GameException
      */
@@ -182,12 +178,28 @@ public class Deck implements Serializable {
         return cards;
     }
 
+    public Card findCard(UUID cardId) {
+        return cards
+                .stream()
+                .filter(card -> card.getId().equals(cardId))
+                .findFirst()
+                .orElse(null);
+    }
+
     public DeckCardLayout getCardsLayout() {
         return cardsLayout;
     }
 
     public Set<Card> getSideboard() {
         return sideboard;
+    }
+
+    public Card findSideboardCard(UUID cardId) {
+        return sideboard
+                .stream()
+                .filter(card -> card.getId().equals(cardId))
+                .findFirst()
+                .orElse(null);
     }
 
     public DeckCardLayout getSideboardLayout() {

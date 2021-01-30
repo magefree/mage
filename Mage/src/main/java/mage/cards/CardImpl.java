@@ -21,6 +21,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+import mage.util.ManaUtil;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
@@ -33,12 +34,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     private static final long serialVersionUID = 1L;
 
     private static final Logger logger = Logger.getLogger(CardImpl.class);
-
-    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
-    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
-    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
-    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
-    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     protected UUID ownerId;
     protected String cardNumber;
@@ -807,60 +802,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public FilterMana getColorIdentity() {
-        FilterMana mana = new FilterMana();
-        mana.setBlack(getManaCost().getText().matches(regexBlack));
-        mana.setBlue(getManaCost().getText().matches(regexBlue));
-        mana.setGreen(getManaCost().getText().matches(regexGreen));
-        mana.setRed(getManaCost().getText().matches(regexRed));
-        mana.setWhite(getManaCost().getText().matches(regexWhite));
-
-        for (String rule : getRules()) {
-            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-            if (!mana.isBlack() && (rule.matches(regexBlack) || this.color.isBlack())) {
-                mana.setBlack(true);
-            }
-            if (!mana.isBlue() && (rule.matches(regexBlue) || this.color.isBlue())) {
-                mana.setBlue(true);
-            }
-            if (!mana.isGreen() && (rule.matches(regexGreen) || this.color.isGreen())) {
-                mana.setGreen(true);
-            }
-            if (!mana.isRed() && (rule.matches(regexRed) || this.color.isRed())) {
-                mana.setRed(true);
-            }
-            if (!mana.isWhite() && (rule.matches(regexWhite) || this.color.isWhite())) {
-                mana.setWhite(true);
-            }
-        }
-        if (isTransformable()) {
-            Card secondCard = getSecondCardFace();
-            ObjectColor color = secondCard.getColor(null);
-            mana.setBlack(mana.isBlack() || color.isBlack());
-            mana.setGreen(mana.isGreen() || color.isGreen());
-            mana.setRed(mana.isRed() || color.isRed());
-            mana.setBlue(mana.isBlue() || color.isBlue());
-            mana.setWhite(mana.isWhite() || color.isWhite());
-            for (String rule : secondCard.getRules()) {
-                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-                if (!mana.isBlack() && rule.matches(regexBlack)) {
-                    mana.setBlack(true);
-                }
-                if (!mana.isBlue() && rule.matches(regexBlue)) {
-                    mana.setBlue(true);
-                }
-                if (!mana.isGreen() && rule.matches(regexGreen)) {
-                    mana.setGreen(true);
-                }
-                if (!mana.isRed() && rule.matches(regexRed)) {
-                    mana.setRed(true);
-                }
-                if (!mana.isWhite() && rule.matches(regexWhite)) {
-                    mana.setWhite(true);
-                }
-            }
-        }
-
-        return mana;
+        return ManaUtil.getColorIdentity(this);
     }
 
     @Override

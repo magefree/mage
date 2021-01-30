@@ -1,9 +1,3 @@
-/**
- * ListenableCollections.java
- * 
- * Created on 25.04.2010
- */
-
 package org.mage.plugins.card.dl.beans.collections;
 
 

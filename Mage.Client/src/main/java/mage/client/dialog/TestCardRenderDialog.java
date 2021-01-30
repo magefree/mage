@@ -1,9 +1,12 @@
 package mage.client.dialog;
 
-import mage.cards.Card;
-import mage.cards.CardGraphicInfo;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
+import mage.abilities.icon.CardIconOrder;
+import mage.abilities.icon.CardIconPosition;
+import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -11,9 +14,14 @@ import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.themes.ThemeType;
+import mage.client.util.ClientEventType;
+import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.Listener;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameImpl;
 import mage.game.command.Emblem;
@@ -21,9 +29,11 @@ import mage.game.command.Plane;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.players.StubPlayer;
+import mage.util.RandomUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
@@ -31,21 +41,20 @@ import org.mage.card.arcane.CardPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
+ * App GUI: debug only, testing card renders and manipulations
+ *
  * @author JayDi85
  */
 public class TestCardRenderDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(TestCardRenderDialog.class);
     float cardSizeMod = 1.0f;
+    private Game game = null;
+    Listener<Event> cardListener = null;
 
     public TestCardRenderDialog() {
         initComponents();
@@ -54,6 +63,24 @@ public class TestCardRenderDialog extends MageDialog {
     public void showDialog() {
         this.setModal(false);
         getRootPane().setDefaultButton(buttonCancel);
+
+        // init render mode
+        this.comboRenderMode.setSelectedIndex(PreferencesDialog.getRenderMode());
+
+        // init themes list
+        this.comboTheme.setModel(new DefaultComboBoxModel(ThemeType.values()));
+        this.comboTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
+
+        // debug logs to show current component
+        /*
+        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            public void eventDispatched(AWTEvent e) {
+                logger.info("component: " + e.getSource());
+            }
+        }, AWTEvent.MOUSE_EVENT_MASK);
+         */
+
+        // render cards
         reloadCards();
 
         // windows settings
@@ -75,12 +102,15 @@ public class TestCardRenderDialog extends MageDialog {
         this.removeDialog();
     }
 
-    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped) {
+    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped, List<Ability> extraAbilities) {
         CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
         Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+        if (extraAbilities != null) {
+            extraAbilities.forEach(ability -> card.addAbility(ability));
+        }
 
         Set<Card> cardsList = new HashSet<>();
         cardsList.add(card);
@@ -154,59 +184,86 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private void reloadCards() {
+        // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
+        PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+
         cardsPanel.cleanUp();
         cardsPanel.setCustomRenderMode(comboRenderMode.getSelectedIndex());
-        cardsPanel.setCustomNeedFullPermanentRender(false); // to fix cropped/position bugged with PermanentView (CardArean do not support it as normal, see CardArea for info)
+        cardsPanel.setCustomNeedFullPermanentRender(true); // enable full battlefield render mode (it was bugged in test dialog so was disabled in old days, not it works fine)
         cardsPanel.setCustomCardSize(new Dimension(getCardWidth(), getCardHeight()));
         cardsPanel.setCustomXOffsetBetweenCardsOrColumns(10);
-        cardsPanel.changeGUISize(); // reload new settings
+        cardsPanel.setCustomCardIconsPanelPosition(CardIconPosition.fromString((String) comboCardIconsPosition.getSelectedItem()));
+        cardsPanel.setCustomCardIconsPanelOrder(CardIconOrder.fromString((String) comboCardIconsOrder.getSelectedItem()));
+        cardsPanel.setCustomCardIconsMaxVisibleCount((Integer) spinnerCardIconsMaxVisible.getValue());
+        int needAdditionalIcons = Math.min(99, Math.max(0, (Integer) spinnerCardIconsAdditionalAmount.getValue()));
 
-        // create custom mouse listener
-        cardsPanel.setCustomMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cardsPanel.mouseClicked(e); // default
+        // reload new settings
+        cardsPanel.changeGUISize();
 
-                // make cards chooseable or not
-                if (e.getSource() instanceof CardPanel) {
-                    CardPanel panel = (CardPanel) e.getSource();
-                    panel.setChoosable(!panel.isChoosable());
-                    cardsPanel.redraw();
+        // sample popup menus
+        JMenuItem item;
+        JPopupMenu popupCardMenu = new JPopupMenu();
+        item = new JMenuItem("Card menu 1");
+        popupCardMenu.add(item);
+        item = new JMenuItem("Card menu 2");
+        popupCardMenu.add(item);
+        item = new JMenuItem("Card menu 3");
+        popupCardMenu.add(item);
+        //
+        JPopupMenu popupPanelMenu = new JPopupMenu();
+        item = new JMenuItem("Panel menu 1");
+        popupPanelMenu.add(item);
+        item = new JMenuItem("Panel menu 2");
+        popupPanelMenu.add(item);
+        item = new JMenuItem("Panel menu 3");
+        popupPanelMenu.add(item);
+
+        // init card listener for clicks, menu and other events
+        if (this.cardListener == null) {
+            this.cardListener = event -> {
+                switch(event.getEventType()) {
+                    case CARD_CLICK:
+                    case CARD_DOUBLE_CLICK:
+                        handleCardClick(event);
+                        break;
+                    case CARD_POPUP_MENU:
+                        if (event.getSource() != null) {
+                            // card
+                            handlePopupMenu(event, popupCardMenu);
+                        } else {
+                            // panel
+                            handlePopupMenu(event, popupPanelMenu);
+                        }
+                        break;
                 }
-            }
+            };
+            cardsPanel.addCardEventListener(this.cardListener);
+        }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                cardsPanel.mousePressed(e); // default
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                cardsPanel.mouseReleased(e); // default
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                cardsPanel.mouseEntered(e); // default
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                cardsPanel.mouseExited(e); // default
-            }
-        });
-
-        Game game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         Deck deck = new Deck();
         Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
         game.addPlayer(playerYou, deck);
         Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
         game.addPlayer(playerOpponent, deck);
 
+        List<Ability> additionalIcons = Collections.singletonList(new SimpleStaticAbility(Zone.ALL, null));
+        for (int i = 0; i < needAdditionalIcons; i++) {
+            String text = "";
+            if (RandomUtil.nextBoolean()) {
+                if (RandomUtil.nextBoolean()) {
+                    text = "75";
+                } else {
+                    text = "8";
+                }
+            }
+            additionalIcons.get(0).addIcon(new CardIconImpl(CardIconType.PLAYABLE_COUNT, "test icon " + i + 1, text));
+        }
+
         List<CardView> cardViews = new ArrayList<>();
         /* // test morphed
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false)); // mountain
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true)); // Judith, the Scourge Diva
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, null)); // mountain
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
@@ -215,20 +272,28 @@ public class TestCardRenderDialog extends MageDialog {
         //*/
 
         /* //test emblems
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false)); // Noxious Groodion
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false)); // Knight of Sorrows
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false)); // Huntmaster of the Fells, transforms
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false)); // Bedeck // Bedazzle
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false)); // Conqueror's Galleon
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, null)); // Noxious Groodion
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, null)); // Knight of Sorrows
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, null)); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "221", 0, 0, 0, false, null)); // Bedeck // Bedazzle
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "XLN", "234", 0, 0, 0, false, null)); // Conqueror's Galleon
         cardViews.add(createEmblem(new AjaniAdversaryOfTyrantsEmblem())); // Emblem Ajani
         cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
         //*/
 
-        //* //test split, transform and mdf in hands
+        /* //test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
         cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
         cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        //*/
+
+        //* //test card icons
+        cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
+        cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, additionalIcons)); // Hinterland Drake
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, additionalIcons)); // Kathari Remnant
+
         //*/
 
         // duplicate cards
@@ -246,6 +311,39 @@ public class TestCardRenderDialog extends MageDialog {
         BigCard big = new BigCard();
         CardsView view = new CardsView(cardViews);
         cardsPanel.loadCards(view, big, game.getId());
+    }
+
+    private void handleCardClick(Event event) {
+        MageCard panel = (MageCard) event.getComponent();
+        if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK) {
+            // card tap
+            if (panel.getMainPanel() instanceof CardPanel) {
+                CardPanel main = (CardPanel) panel.getMainPanel();
+                if (main.getGameCard() instanceof PermanentView) {
+                    // new settings must be as a new copy -- it would activate the animations
+                    PermanentView oldPermanent = (PermanentView) main.getGameCard();
+                    PermanentView newPermament = new PermanentView(
+                            (Permanent) oldPermanent.getOriginalCard(),
+                            game.getCard(oldPermanent.getOriginalCard().getId()),
+                            UUID.randomUUID(),
+                            game
+                    );
+                    newPermament.overrideTapped(!oldPermanent.isTapped());
+                    main.update(newPermament);
+                }
+            }
+        } else {
+            // card choose
+            panel.setChoosable(!panel.isChoosable());
+        }
+        cardsPanel.redraw();
+    }
+
+    private void handlePopupMenu(Event event, JPopupMenu popupMenu) {
+        //Point p = event.getComponent().getLocationOnScreen();
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        popupMenu.show(this, 0, 0); // use relative coords
+        popupMenu.setLocation(p); // use screen coords
     }
 
     private int getCardWidth() {
@@ -277,6 +375,17 @@ public class TestCardRenderDialog extends MageDialog {
         sliderSize = new javax.swing.JSlider();
         labelSize = new javax.swing.JLabel();
         checkBoxGenerateManyCards = new javax.swing.JCheckBox();
+        panelCardIcons = new javax.swing.JPanel();
+        labelCardIconsPosition = new javax.swing.JLabel();
+        comboCardIconsPosition = new javax.swing.JComboBox<>();
+        labelCardIconsMaxVisible = new javax.swing.JLabel();
+        spinnerCardIconsMaxVisible = new javax.swing.JSpinner();
+        labelCardIconsAdditionalAmount = new javax.swing.JLabel();
+        spinnerCardIconsAdditionalAmount = new javax.swing.JSpinner();
+        labelCardIconsOrder = new javax.swing.JLabel();
+        comboCardIconsOrder = new javax.swing.JComboBox<>();
+        labelTheme = new javax.swing.JLabel();
+        comboTheme = new javax.swing.JComboBox<>();
 
         buttonCancel.setText("Close");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +403,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelRenderMode.setText("Render mode:");
 
-        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"MTGO", "Image"}));
+        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MTGO", "Image" }));
         comboRenderMode.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRenderModeItemStateChanged(evt);
@@ -316,49 +425,141 @@ public class TestCardRenderDialog extends MageDialog {
             }
         });
 
+        labelCardIconsPosition.setText("Card icons position:");
+
+        comboCardIconsPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TOP", "LEFT", "RIGHT", "BOTTOM", "CORNER_TOP_LEFT", "CORNER_TOP_RIGHT", "CORNER_BOTTOM_LEFT", "CORNER_BOTTOM_RIGHT" }));
+        comboCardIconsPosition.setSelectedIndex(1);
+        comboCardIconsPosition.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboCardIconsPositionItemStateChanged(evt);
+            }
+        });
+
+        labelCardIconsMaxVisible.setText("Max visible:");
+
+        spinnerCardIconsMaxVisible.setValue(3);
+        spinnerCardIconsMaxVisible.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerCardIconsMaxVisibleStateChanged(evt);
+            }
+        });
+
+        labelCardIconsAdditionalAmount.setText("Add additional icons:");
+
+        spinnerCardIconsAdditionalAmount.setValue(10);
+        spinnerCardIconsAdditionalAmount.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerCardIconsAdditionalAmountStateChanged(evt);
+            }
+        });
+
+        labelCardIconsOrder.setText("Order:");
+
+        comboCardIconsOrder.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "START", "CENTER", "END" }));
+        comboCardIconsOrder.setSelectedIndex(2);
+        comboCardIconsOrder.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboCardIconsOrderItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelCardIconsLayout = new javax.swing.GroupLayout(panelCardIcons);
+        panelCardIcons.setLayout(panelCardIconsLayout);
+        panelCardIconsLayout.setHorizontalGroup(
+            panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCardIconsLayout.createSequentialGroup()
+                .addComponent(labelCardIconsPosition)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboCardIconsPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelCardIconsOrder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboCardIconsOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelCardIconsMaxVisible)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spinnerCardIconsMaxVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelCardIconsAdditionalAmount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(188, Short.MAX_VALUE))
+        );
+        panelCardIconsLayout.setVerticalGroup(
+            panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(comboCardIconsPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelCardIconsPosition)
+                .addComponent(labelCardIconsMaxVisible)
+                .addComponent(spinnerCardIconsMaxVisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelCardIconsAdditionalAmount)
+                .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelCardIconsOrder)
+                .addComponent(comboCardIconsOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        labelTheme.setText("Theme:");
+
+        comboTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "loading..." }));
+        comboTheme.setToolTipText("WARNING, selected theme will be applied to full app, not render dialog only");
+        comboTheme.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboThemeItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(0, 748, Short.MAX_VALUE)
-                                                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(buttonReloadCards)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(labelRenderMode)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(labelSize)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(checkBoxGenerateManyCards)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCardIcons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonReloadCards)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelRenderMode)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelTheme)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelSize)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkBoxGenerateManyCards)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(buttonReloadCards)
-                                                .addComponent(labelRenderMode)
-                                                .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(labelSize))
-                                        .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(checkBoxGenerateManyCards))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonReloadCards)
+                        .addComponent(labelRenderMode)
+                        .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelSize)
+                        .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelTheme))
+                    .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkBoxGenerateManyCards))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCardIcons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -373,7 +574,10 @@ public class TestCardRenderDialog extends MageDialog {
     }//GEN-LAST:event_buttonReloadCardsActionPerformed
 
     private void comboRenderModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRenderModeItemStateChanged
-        reloadCards();
+        // render modes are loading on show dialog, so must ignore change event on startup
+        if (this.isVisible()) {
+            reloadCards();
+        }
     }//GEN-LAST:event_comboRenderModeItemStateChanged
 
     private void sliderSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderSizeStateChanged
@@ -389,15 +593,49 @@ public class TestCardRenderDialog extends MageDialog {
         reloadCards();
     }//GEN-LAST:event_checkBoxGenerateManyCardsItemStateChanged
 
+    private void comboCardIconsPositionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsPositionItemStateChanged
+        reloadCards();
+    }//GEN-LAST:event_comboCardIconsPositionItemStateChanged
+
+    private void spinnerCardIconsMaxVisibleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsMaxVisibleStateChanged
+        reloadCards();
+    }//GEN-LAST:event_spinnerCardIconsMaxVisibleStateChanged
+
+    private void spinnerCardIconsAdditionalAmountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsAdditionalAmountStateChanged
+        reloadCards();
+    }//GEN-LAST:event_spinnerCardIconsAdditionalAmountStateChanged
+
+    private void comboCardIconsOrderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsOrderItemStateChanged
+        reloadCards();
+    }//GEN-LAST:event_comboCardIconsOrderItemStateChanged
+
+    private void comboThemeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboThemeItemStateChanged
+        // themes list are loading on show dialog, so must ignore change event on startup
+        if (this.isVisible()) {
+            reloadCards();
+        }
+    }//GEN-LAST:event_comboThemeItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonReloadCards;
     private mage.client.cards.CardArea cardsPanel;
     private javax.swing.JCheckBox checkBoxGenerateManyCards;
+    private javax.swing.JComboBox<String> comboCardIconsOrder;
+    private javax.swing.JComboBox<String> comboCardIconsPosition;
     private javax.swing.JComboBox<String> comboRenderMode;
+    private javax.swing.JComboBox<String> comboTheme;
+    private javax.swing.JLabel labelCardIconsAdditionalAmount;
+    private javax.swing.JLabel labelCardIconsMaxVisible;
+    private javax.swing.JLabel labelCardIconsOrder;
+    private javax.swing.JLabel labelCardIconsPosition;
     private javax.swing.JLabel labelRenderMode;
     private javax.swing.JLabel labelSize;
+    private javax.swing.JLabel labelTheme;
+    private javax.swing.JPanel panelCardIcons;
     private javax.swing.JSlider sliderSize;
+    private javax.swing.JSpinner spinnerCardIconsAdditionalAmount;
+    private javax.swing.JSpinner spinnerCardIconsMaxVisible;
     // End of variables declaration//GEN-END:variables
 }
 

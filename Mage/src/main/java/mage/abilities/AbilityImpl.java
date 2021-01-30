@@ -15,6 +15,7 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -70,6 +71,7 @@ public abstract class AbilityImpl implements Ability {
     protected TargetAdjuster targetAdjuster = null;
     protected CostAdjuster costAdjuster = null;
     protected List<Hint> hints = new ArrayList<>();
+    protected List<CardIcon> icons = new ArrayList<>();
     protected Outcome customOutcome = null; // uses for AI decisions instead effects
     protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
@@ -119,6 +121,9 @@ public abstract class AbilityImpl implements Ability {
         this.costAdjuster = ability.costAdjuster;
         for (Hint hint : ability.getHints()) {
             this.hints.add(hint.copy());
+        }
+        for (CardIcon icon : ability.getIcons()) {
+            this.icons.add(icon.copy());
         }
         this.customOutcome = ability.customOutcome;
         this.identifier = ability.identifier;
@@ -1291,6 +1296,17 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Ability addHint(Hint hint) {
         this.hints.add(hint);
+        return this;
+    }
+
+    @Override
+    public List<CardIcon> getIcons() {
+        return this.icons;
+    }
+
+    @Override
+    public Ability addIcon(CardIcon cardIcon) {
+        this.icons.add(cardIcon);
         return this;
     }
 

@@ -92,8 +92,8 @@ public class DeckArea extends javax.swing.JPanel {
                 // Add to hidden and move to sideboard
                 for (CardView card : cards) {
                     hiddenCards.add(card.getId());
-                    maindeckVirtualEvent.fireEvent(card, ClientEventType.REMOVE_SPECIFIC_CARD);
-                    sideboardVirtualEvent.fireEvent(card, ClientEventType.ADD_SPECIFIC_CARD);
+                    maindeckVirtualEvent.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
+                    sideboardVirtualEvent.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
                 }
                 loadDeck(lastDeck, lastBigCard);
             }

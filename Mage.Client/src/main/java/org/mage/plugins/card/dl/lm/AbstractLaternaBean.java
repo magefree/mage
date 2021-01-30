@@ -1,18 +1,10 @@
-/**
- * AbstractLaternaBean.java
- * <p>
- * Created on 25.08.2010
- */
-
 package org.mage.plugins.card.dl.lm;
-
 
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.beans.AbstractBoundBean;
 import org.mage.plugins.card.dl.beans.EventListenerList;
 import org.mage.plugins.card.dl.beans.properties.Properties;
 import org.mage.plugins.card.dl.beans.properties.bound.BoundProperties;
-
 
 /**
  * The class AbstractLaternaBean.
