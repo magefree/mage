@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,14 +18,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityCastMode;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -34,13 +26,15 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.ForetoldWatcher;
 
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
  */
 public class ForetellAbility extends SpecialAction {
 
-    private String foretellCost;
-    private Card card;
+    private final String foretellCost;
+    private final Card card;
 
     public ForetellAbility(Card card, String foretellCost) {
         super(Zone.HAND);
@@ -72,6 +66,7 @@ public class ForetellAbility extends SpecialAction {
         // activate only during the controller's turn
         if (game.getState().getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.ALLOW_FORETELL_ANYTIME, game).isEmpty()
                 && !game.isActivePlayer(this.getControllerId())) {
+            // TODO: must be fixed to call super.canActivate here for additional checks someday
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
@@ -80,7 +75,7 @@ public class ForetellAbility extends SpecialAction {
 
 class ForetellExileEffect extends OneShotEffect {
 
-    private Card card;
+    private final Card card;
     String foretellCost;
 
     public ForetellExileEffect(Card card, String foretellCost) {
