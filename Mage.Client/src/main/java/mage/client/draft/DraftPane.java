@@ -1,10 +1,3 @@
-
-
- /*
- * DraftPane.java
- *
- * Created on Jan 7, 2011, 2:11:44 PM
- */
 package mage.client.draft;
 
 import java.awt.Component;
@@ -16,6 +9,7 @@ import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
 
 /**
+ * Game GUI: draft panel with scrolls
  *
  * @author BetaSteward_at_googlemail.com
  */

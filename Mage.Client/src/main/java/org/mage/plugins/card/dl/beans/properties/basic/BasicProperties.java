@@ -1,9 +1,3 @@
-/**
- * BoundProperties.java
- * 
- * Created on 24.08.2010
- */
-
 package org.mage.plugins.card.dl.beans.properties.basic;
 
 

@@ -36,7 +36,7 @@ import java.util.*;
 import static mage.constants.Constants.*;
 
 /**
- * Enhanced player pane.
+ * Game GUI: player panel with avatar and icons
  *
  * @author nantuko, JayDi85
  */
@@ -150,7 +150,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         // can play
         if (gameView.getCanPlayObjects() != null && !gameView.getCanPlayObjects().isEmpty()) {
             for (CardView card : cards) {
-                if (gameView.getCanPlayObjects().containsKey(card.getId())) {
+                if (gameView.getCanPlayObjects().containsObject(card.getId())) {
                     return true;
                 }
             }
@@ -247,7 +247,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         Color commandColor = Color.BLACK;
         for (CommandObjectView com : player.getCommandObjectList()) {
-            if (game != null && game.getCanPlayObjects() != null && game.getCanPlayObjects().containsKey(com.getId())) {
+            if (game != null && game.getCanPlayObjects() != null && game.getCanPlayObjects().containsObject(com.getId())) {
                 commandColor = activeValueColor;
                 break;
             }
@@ -545,7 +545,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.addActionListener(e -> btnCheatActionPerformed(e));
 
         zonesPanel = new JPanel();
-        //zonesPanel.setBorder(BorderFactory.createLineBorder(Color.red));
         zonesPanel.setPreferredSize(new Dimension(100, 60));
         zonesPanel.setSize(100, 60);
         zonesPanel.setLayout(null);

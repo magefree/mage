@@ -1,11 +1,3 @@
-
-
-/*
- * TextPopup.java
- *
- * Created on Apr 6, 2010, 9:36:13 AM
- */
-
 package mage.cards;
 
 /**

@@ -13,8 +13,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * @author JayDi85
- * @author Salco
+ * App GUI: fast search in the combobox, uses in deck editor (sets choosing)
+ *
+ * @author Salco, JayDi85
  */
 
 public class PickCheckBoxDialog extends MageDialog {

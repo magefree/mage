@@ -158,7 +158,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1) {
+                if (SwingUtilities.isLeftMouseButton(evt)) {
                     objectMouseClicked(evt);
                 }
             }
@@ -320,7 +320,6 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             if (isSelected) {
                 label.setIcon(new ImageIcon(rightImageHovered));
                 label.setForeground(SELECTED_COLOR);
-                //label.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
                 label.setBorder(BorderFactory.createEmptyBorder());
             } else {
                 label.setIcon(new ImageIcon(rightImage));

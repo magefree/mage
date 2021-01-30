@@ -1,6 +1,7 @@
 package mage.client.game;
 
 import mage.cards.Card;
+import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.choices.Choice;
 import mage.client.MageFrame;
@@ -25,9 +26,9 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
+import mage.players.PlayableObjectsList;
 import mage.view.*;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
@@ -52,6 +53,8 @@ import static mage.client.dialog.PreferencesDialog.*;
 import static mage.constants.PlayerAction.*;
 
 /**
+ * Game GUI: main game panel with all controls
+ *
  * @author BetaSteward_at_googlemail.com, nantuko8, JayDi85
  */
 public final class GamePanel extends javax.swing.JPanel {
@@ -59,7 +62,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
     private static final int X_PHASE_WIDTH = 55;
-    private static final int STACK_MIN_CARDS_OFFSET_Y = 7;  // TODO: Size bui GUISize value
 
     private static final String CMD_AUTO_ORDER_FIRST = "cmdAutoOrderFirst";
     private static final String CMD_AUTO_ORDER_LAST = "cmdAutoOrderLast";
@@ -77,8 +79,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<String, CardInfoWindowDialog> graveyardWindows = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> companion = new HashMap<>();
     private final Map<String, CardsView> graveyards = new HashMap<>();
-
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
+    private final ArrayList<PickPileDialog> pickPile = new ArrayList<>();
     private UUID gameId;
     private UUID playerId; // playerId of the player
     GamePane gamePane;
@@ -114,6 +116,17 @@ public final class GamePanel extends javax.swing.JPanel {
     // popup menu for triggered abilities order
     private JPopupMenu popupMenuTriggerOrder;
 
+    // keep game data for updates/re-draws
+    // warning, it keeps updates from GAME_UPDATE events only and ignore another events with GameView
+    static class LastGameData {
+        GameView game;
+        boolean showPlayable;
+        Map<String, Serializable> options;
+        Set<UUID> targets;
+    }
+    private final LastGameData lastGameData = new LastGameData();
+
+
     public GamePanel() {
         initComponents = true;
         initComponents();
@@ -122,8 +135,6 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
-
-        this.stackObjects.setMinOffsetY(STACK_MIN_CARDS_OFFSET_Y);
 
         // Override layout (I can't edit generated code)
         this.setLayout(new BorderLayout());
@@ -161,6 +172,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
             }
         });
+
         // Resize the width of the stack area if the size of the play area is changed
         ComponentAdapter componentAdapterPlayField = new ComponentAdapter() {
             @Override
@@ -179,7 +191,6 @@ public final class GamePanel extends javax.swing.JPanel {
             resizeTimer.stop();
             setGUISize();
             feedbackPanel.changeGUISize();
-
         }));
 
         pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
@@ -247,10 +258,10 @@ public final class GamePanel extends javax.swing.JPanel {
             companionDialog.cleanUp();
             companionDialog.removeDialog();
         }
-        for (ShowCardsDialog pickTargetDialog : pickTarget) {
-            pickTargetDialog.cleanUp();
-            pickTargetDialog.removeDialog();
-        }
+
+        clearPickTargetDialogs();
+        clearPickPileDialogs();
+
         Plugins.instance.getActionCallback().hideOpenComponents();
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
@@ -261,6 +272,23 @@ public final class GamePanel extends javax.swing.JPanel {
         jPanel2.remove(bigCard);
         this.bigCard = null;
     }
+
+    private void clearPickTargetDialogs() {
+        for (ShowCardsDialog pickTargetDialog : this.pickTarget) {
+            pickTargetDialog.cleanUp();
+            pickTargetDialog.removeDialog();
+        }
+        this.pickTarget.clear();
+    }
+
+    private void clearPickPileDialogs() {
+        for (PickPileDialog pickPileDialog : this.pickPile) {
+            pickPileDialog.cleanUp();
+            pickPileDialog.removeDialog();
+        }
+        this.pickPile.clear();
+    }
+
 
     public void changeGUISize() {
         initComponents = true;
@@ -290,6 +318,9 @@ public final class GamePanel extends javax.swing.JPanel {
         for (ShowCardsDialog showCardsDialog : pickTarget) {
             showCardsDialog.changeGUISize();
         }
+        for (PickPileDialog pickPileDialog : pickPile) {
+            pickPileDialog.changeGUISize();
+        }
 
         this.revalidate();
         this.repaint();
@@ -300,21 +331,28 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
-        stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
 
         txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
+        // hand + stack panels
+        // the stack takes up a portion of the possible space (GUISizeHelper.stackWidth)
+
         int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
-        if (newStackWidth < 410) {
-            newStackWidth = 410;
-        }
-        Dimension newDimension = new Dimension(pnlHelperHandButtonsStackArea.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+        newStackWidth = Math.max(410, newStackWidth);
+        Dimension newDimension = new Dimension(
+                pnlHelperHandButtonsStackArea.getWidth() - newStackWidth,
+                MageActionCallback.getHandOrStackMargins(Zone.HAND).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
+        );
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
 
-        newDimension = new Dimension(newStackWidth, STACK_MIN_CARDS_OFFSET_Y + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+        newDimension = new Dimension(
+                newStackWidth,
+                MageActionCallback.getHandOrStackMargins(Zone.STACK).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
+        );
+        stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
@@ -633,24 +671,27 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void updateGame(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        keepLastGameData(game, showPlayable, options, targets);
+        prepareSelectableView();
+        updateGame();
+    }
 
-        prepareSelectableView(game, showPlayable, options, targets);
-
-        if (playerId == null && game.getWatchedHands() == null) {
+    public synchronized void updateGame() {
+        if (playerId == null && lastGameData.game.getWatchedHands() == null) {
             this.handContainer.setVisible(false);
         } else {
             this.handContainer.setVisible(true);
             handCards.clear();
-            if (game.getWatchedHands() != null) {
-                for (Map.Entry<String, SimpleCardsView> hand : game.getWatchedHands().entrySet()) {
+            if (lastGameData.game.getWatchedHands() != null) {
+                for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getWatchedHands().entrySet()) {
                     handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                 }
             }
             if (playerId != null) {
-                handCards.put(YOUR_HAND, game.getHand());
+                handCards.put(YOUR_HAND, lastGameData.game.getHand());
                 // Get opponents hand cards if available (only possible for players)
-                if (game.getOpponentHands() != null) {
-                    for (Map.Entry<String, SimpleCardsView> hand : game.getOpponentHands().entrySet()) {
+                if (lastGameData.game.getOpponentHands() != null) {
+                    for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getOpponentHands().entrySet()) {
                         handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                     }
                 }
@@ -669,7 +710,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (playerId != null) {
                 // set visible only if we have any other hand visible than ours
                 btnSwitchHands.setVisible(handCards.size() > 1);
-                boolean change = (handCardsOfOpponentAvailable != (game.getOpponentHands() != null));
+                boolean change = (handCardsOfOpponentAvailable != (lastGameData.game.getOpponentHands() != null));
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
@@ -683,45 +724,45 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        if (game.getPhase() != null) {
-            this.txtPhase.setText(game.getPhase().toString());
+        if (lastGameData.game.getPhase() != null) {
+            this.txtPhase.setText(lastGameData.game.getPhase().toString());
         } else {
             this.txtPhase.setText("");
         }
 
-        if (game.getStep() != null) {
-            updatePhases(game.getStep());
-            this.txtStep.setText(game.getStep().toString());
+        if (lastGameData.game.getStep() != null) {
+            updatePhases(lastGameData.game.getStep());
+            this.txtStep.setText(lastGameData.game.getStep().toString());
         } else {
             logger.debug("Step is empty");
             this.txtStep.setText("");
         }
-        if (game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
+        if (lastGameData.game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
             this.txtSpellsCast.setVisible(true);
-            this.txtSpellsCast.setText(' ' + Integer.toString(game.getSpellsCastCurrentTurn()) + ' ');
+            this.txtSpellsCast.setText(' ' + Integer.toString(lastGameData.game.getSpellsCastCurrentTurn()) + ' ');
         } else {
             this.txtSpellsCast.setVisible(false);
         }
 
-        this.txtActivePlayer.setText(game.getActivePlayerName());
-        this.txtPriority.setText(game.getPriorityPlayerName());
-        this.txtTurn.setText(Integer.toString(game.getTurn()));
+        this.txtActivePlayer.setText(lastGameData.game.getActivePlayerName());
+        this.txtPriority.setText(lastGameData.game.getPriorityPlayerName());
+        this.txtTurn.setText(Integer.toString(lastGameData.game.getTurn()));
 
         List<UUID> possibleAttackers = new ArrayList<>();
-        if (options != null && options.containsKey(Constants.Option.POSSIBLE_ATTACKERS)) {
-            if (options.get(Constants.Option.POSSIBLE_ATTACKERS) instanceof List) {
-                possibleAttackers.addAll((List) options.get(Constants.Option.POSSIBLE_ATTACKERS));
+        if (lastGameData.options != null && lastGameData.options.containsKey(Constants.Option.POSSIBLE_ATTACKERS)) {
+            if (lastGameData.options.get(Constants.Option.POSSIBLE_ATTACKERS) instanceof List) {
+                possibleAttackers.addAll((List) lastGameData.options.get(Constants.Option.POSSIBLE_ATTACKERS));
             }
         }
 
         List<UUID> possibleBlockers = new ArrayList<>();
-        if (options != null && options.containsKey(Constants.Option.POSSIBLE_BLOCKERS)) {
-            if (options.get(Constants.Option.POSSIBLE_BLOCKERS) instanceof List) {
-                possibleBlockers.addAll((List) options.get(Constants.Option.POSSIBLE_BLOCKERS));
+        if (lastGameData.options != null && lastGameData.options.containsKey(Constants.Option.POSSIBLE_BLOCKERS)) {
+            if (lastGameData.options.get(Constants.Option.POSSIBLE_BLOCKERS) instanceof List) {
+                possibleBlockers.addAll((List) lastGameData.options.get(Constants.Option.POSSIBLE_BLOCKERS));
             }
         }
 
-        for (PlayerView player : game.getPlayers()) {
+        for (PlayerView player : lastGameData.game.getPlayers()) {
             if (players.containsKey(player.getPlayerId())) {
                 if (!possibleAttackers.isEmpty()) {
                     for (UUID permanentId : possibleAttackers) {
@@ -737,7 +778,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         }
                     }
                 }
-                players.get(player.getPlayerId()).update(game, player, targets);
+                players.get(player.getPlayerId()).update(lastGameData.game, player, lastGameData.targets);
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
@@ -778,7 +819,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 sb.append("Playing: ");
             }
             boolean first = true;
-            for (PlayerView player : game.getPlayers()) {
+            for (PlayerView player : lastGameData.game.getPlayers()) {
                 if (first) {
                     first = false;
                 } else {
@@ -790,10 +831,10 @@ public final class GamePanel extends javax.swing.JPanel {
             gamePane.setTitle(sb.toString());
         }
 
-        GameManager.instance.setStackSize(game.getStack().size());
-        displayStack(game, bigCard, feedbackPanel, gameId);
+        GameManager.instance.setStackSize(lastGameData.game.getStack().size());
+        displayStack(lastGameData.game, bigCard, feedbackPanel, gameId);
 
-        for (ExileView exile : game.getExile()) {
+        for (ExileView exile : lastGameData.game.getExile()) {
             if (!exiles.containsKey(exile.getId())) {
                 CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
                 exiles.put(exile.getId(), newExile);
@@ -803,16 +844,16 @@ public final class GamePanel extends javax.swing.JPanel {
             exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
         }
 
-        showRevealed(game);
-        showLookedAt(game);
-        showCompanion(game);
-        if (!game.getCombat().isEmpty()) {
-            CombatManager.instance.showCombat(game.getCombat(), gameId);
+        showRevealed(lastGameData.game);
+        showLookedAt(lastGameData.game);
+        showCompanion(lastGameData.game);
+        if (!lastGameData.game.getCombat().isEmpty()) {
+            CombatManager.instance.showCombat(lastGameData.game.getCombat(), gameId);
         } else {
             CombatManager.instance.hideCombat(gameId);
         }
 
-        for (PlayerView player : game.getPlayers()) {
+        for (PlayerView player : lastGameData.game.getPlayers()) {
             if (player.hasLeft() && !playersWhoLeft.get(player.getPlayerId())) {
                 PlayAreaPanel playerLeftPanel = players.get(player.getPlayerId());
                 playersWhoLeft.put(player.getPlayerId(), true);
@@ -1230,34 +1271,43 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
     }
 
-    private void prepareSelectableView(GameView gameView, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
-        // make cards/perm selectable/chooseable/playable
-        // playable must be used for ask dialog only (priority and mana pay)
+    private void keepLastGameData(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        lastGameData.game = game;
+        lastGameData.showPlayable = showPlayable;
+        lastGameData.options = options;
+        lastGameData.targets = targets;
+    }
+
+    private void prepareSelectableView() {
+        // make cards/perm selectable/chooseable/playable update game data updates
+        if (lastGameData.game == null) {
+            return;
+        }
 
         Zone needZone = Zone.ALL;
-        if (options != null && options.containsKey("targetZone")) {
-            needZone = (Zone) options.get("targetZone");
+        if (lastGameData.options != null && lastGameData.options.containsKey("targetZone")) {
+            needZone = (Zone) lastGameData.options.get("targetZone");
         }
 
         List<UUID> needChoosen;
-        if (options != null && options.containsKey("chosen")) {
-            needChoosen = (List<UUID>) options.get("chosen");
+        if (lastGameData.options != null && lastGameData.options.containsKey("chosen")) {
+            needChoosen = (List<UUID>) lastGameData.options.get("chosen");
         } else {
             needChoosen = new ArrayList<>();
         }
 
         Set<UUID> needSelectable;
-        if (targets != null) {
-            needSelectable = targets;
+        if (lastGameData.targets != null) {
+            needSelectable = lastGameData.targets;
         } else {
             needSelectable = new HashSet<>();
         }
 
-        Map<UUID, Integer> needPlayable;
-        if (showPlayable && gameView.getCanPlayObjects() != null) {
-            needPlayable = gameView.getCanPlayObjects();
+        PlayableObjectsList needPlayable;
+        if (lastGameData.showPlayable && lastGameData.game.getCanPlayObjects() != null) {
+            needPlayable = lastGameData.game.getCanPlayObjects();
         } else {
-            needPlayable = new HashMap<>();
+            needPlayable = new PlayableObjectsList();
         }
 
         if (needChoosen.isEmpty() && needSelectable.isEmpty() && needPlayable.isEmpty()) {
@@ -1266,23 +1316,22 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
-            for (CardView card : gameView.getHand().values()) {
+            for (CardView card : lastGameData.game.getHand().values()) {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }
                 if (needChoosen.contains(card.getId())) {
                     card.setSelected(true);
                 }
-                if (needPlayable.containsKey(card.getId())) {
-                    card.setPlayable(true);
-                    card.setPlayableAmount(needPlayable.get(card.getId()));
+                if (needPlayable.containsObject(card.getId())) {
+                    card.setPlayableStats(needPlayable.getStats(card.getId()));
                 }
             }
         }
 
         // stack
         if (needZone == Zone.STACK || needZone == Zone.ALL) {
-            for (Map.Entry<UUID, CardView> card : gameView.getStack().entrySet()) {
+            for (Map.Entry<UUID, CardView> card : lastGameData.game.getStack().entrySet()) {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
                 }
@@ -1290,16 +1339,15 @@ public final class GamePanel extends javax.swing.JPanel {
                     card.getValue().setSelected(true);
                 }
                 // users can activate abilities of the spell on the stack (example: Lightning Storm);
-                if (needPlayable.containsKey(card.getKey())) {
-                    card.getValue().setPlayable(true);
-                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                if (needPlayable.containsObject(card.getKey())) {
+                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
         }
 
         // battlefield
         if (needZone == Zone.BATTLEFIELD || needZone == Zone.ALL) {
-            for (PlayerView player : gameView.getPlayers()) {
+            for (PlayerView player : lastGameData.game.getPlayers()) {
                 for (Map.Entry<UUID, PermanentView> perm : player.getBattlefield().entrySet()) {
                     if (needSelectable.contains(perm.getKey())) {
                         perm.getValue().setChoosable(true);
@@ -1307,9 +1355,8 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChoosen.contains(perm.getKey())) {
                         perm.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsKey(perm.getKey())) {
-                        perm.getValue().setPlayable(true);
-                        perm.getValue().setPlayableAmount(needPlayable.get(perm.getKey()));
+                    if (needPlayable.containsObject(perm.getKey())) {
+                        perm.getValue().setPlayableStats(needPlayable.getStats(perm.getKey()));
                     }
                 }
             }
@@ -1317,7 +1364,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // graveyard
         if (needZone == Zone.GRAVEYARD || needZone == Zone.ALL) {
-            for (PlayerView player : gameView.getPlayers()) {
+            for (PlayerView player : lastGameData.game.getPlayers()) {
                 for (Map.Entry<UUID, CardView> card : player.getGraveyard().entrySet()) {
                     if (needSelectable.contains(card.getKey())) {
                         card.getValue().setChoosable(true);
@@ -1325,17 +1372,31 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChoosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsKey(card.getKey())) {
-                        card.getValue().setPlayable(true);
-                        card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                    if (needPlayable.containsObject(card.getKey())) {
+                        card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                     }
                 }
             }
         }
 
         // exile
-        if (needZone == Zone.HAND || needZone == Zone.ALL) {
-            for (ExileView exile : gameView.getExile()) {
+        if (needZone == Zone.EXILED || needZone == Zone.ALL) {
+            // exile from player panel
+            for (PlayerView player : lastGameData.game.getPlayers()) {
+                for (CardView card : player.getExile().values()) {
+                    if (needSelectable.contains(card.getId())) {
+                        card.setChoosable(true);
+                    }
+                    if (needChoosen.contains(card.getId())) {
+                        card.setSelected(true);
+                    }
+                    if (needPlayable.containsObject(card.getId())) {
+                        card.setPlayableStats(needPlayable.getStats(card.getId()));
+                    }
+                }
+            }
+            // exile from windows
+            for (ExileView exile : lastGameData.game.getExile()) {
                 for (Map.Entry<UUID, CardView> card : exile.entrySet()) {
                     if (needSelectable.contains(card.getKey())) {
                         card.getValue().setChoosable(true);
@@ -1343,9 +1404,8 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChoosen.contains(card.getKey())) {
                         card.getValue().setSelected(true);
                     }
-                    if (needPlayable.containsKey(card.getKey())) {
-                        card.getValue().setPlayable(true);
-                        card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                    if (needPlayable.containsObject(card.getKey())) {
+                        card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                     }
                 }
             }
@@ -1353,7 +1413,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // command
         if (needZone == Zone.COMMAND || needZone == Zone.ALL) {
-            for (PlayerView player : gameView.getPlayers()) {
+            for (PlayerView player : lastGameData.game.getPlayers()) {
                 for (CommandObjectView com : player.getCommandObjectList()) {
                     if (needSelectable.contains(com.getId())) {
                         com.setChoosable(true);
@@ -1361,16 +1421,15 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (needChoosen.contains(com.getId())) {
                         com.setSelected(true);
                     }
-                    if (needPlayable.containsKey(com.getId())) {
-                        com.setPlayable(true);
-                        com.setPlayableAmount(needPlayable.get(com.getId()));
+                    if (needPlayable.containsObject(com.getId())) {
+                        com.setPlayableStats(needPlayable.getStats(com.getId()));
                     }
                 }
             }
         }
 
         // revealed
-        for (RevealedView rev : gameView.getRevealed()) {
+        for (RevealedView rev : lastGameData.game.getRevealed()) {
             for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
@@ -1378,15 +1437,14 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChoosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
-                if (needPlayable.containsKey(card.getKey())) {
-                    card.getValue().setPlayable(true);
-                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                if (needPlayable.containsObject(card.getKey())) {
+                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
         }
 
         // companion
-        for (RevealedView rev : gameView.getCompanion()) {
+        for (RevealedView rev : lastGameData.game.getCompanion()) {
             for (Map.Entry<UUID, CardView> card : rev.getCards().entrySet()) {
                 if (needSelectable.contains(card.getKey())) {
                     card.getValue().setChoosable(true);
@@ -1394,19 +1452,17 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (needChoosen.contains(card.getKey())) {
                     card.getValue().setSelected(true);
                 }
-                if (needPlayable.containsKey(card.getKey())) {
-                    card.getValue().setPlayable(true);
-                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                if (needPlayable.containsObject(card.getKey())) {
+                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
         }
 
         // looked at
-        for (LookedAtView look : gameView.getLookedAt()) {
+        for (LookedAtView look : lastGameData.game.getLookedAt()) {
             for (Map.Entry<UUID, SimpleCardView> card : look.getCards().entrySet()) {
-                if (needPlayable.containsKey(card.getKey())) {
-                    card.getValue().setPlayable(true);
-                    card.getValue().setPlayableAmount(needPlayable.get(card.getKey()));
+                if (needPlayable.containsObject(card.getKey())) {
+                    card.getValue().setPlayableStats(needPlayable.getStats(card.getKey()));
                 }
             }
         }
@@ -1417,14 +1473,14 @@ public final class GamePanel extends javax.swing.JPanel {
      * the pick triggered ability)
      *
      * @param message
-     * @param cardView
+     * @param cardsView
      * @param gameView
      * @param targets
      * @param required
      * @param options
      * @param messageId
      */
-    public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
+    public void pickTarget(String message, CardsView cardsView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         PopUpMenuType popupMenuType = null;
         if (options != null) {
             if (options.containsKey("queryType")) {
@@ -1446,13 +1502,15 @@ public final class GamePanel extends javax.swing.JPanel {
 
         Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
-        if (cardView != null && !cardView.isEmpty()) {
-            dialog = showCards(message, cardView, required, options0, popupMenuType);
+        if (cardsView != null && !cardsView.isEmpty()) {
+            // clear old dialogs before the new
+            clearPickTargetDialogs();
+            dialog = showCards(message, cardsView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
         this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
         if (dialog != null) {
-            this.pickTarget.add(dialog); // TODO: 01.01.2018, JayDi85: why feedbackPanel saved to pickTarget list? Need to research
+            this.pickTarget.add(dialog);
         }
     }
 
@@ -1581,9 +1639,17 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void pickPile(String message, CardsView pile1, CardsView pile2) {
         hideAll();
+
+        // remove old dialogs before the new
+        clearPickPileDialogs();
+
         PickPileDialog pickPileDialog = new PickPileDialog();
+        this.pickPile.add(pickPileDialog);
+
         pickPileDialog.loadCards(message, pile1, pile2, bigCard, gameId);
-        SessionHandler.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+        if (pickPileDialog.isPickedOK()) {
+            SessionHandler.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+        }
         pickPileDialog.cleanUp();
         pickPileDialog.removeDialog();
     }
@@ -2453,7 +2519,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void mouseClickPhaseBar(MouseEvent evt) {
-        if (evt.getButton() == MouseEvent.BUTTON1) { // Left button
+        if (SwingUtilities.isLeftMouseButton(evt)) {
             PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_PHASES_TAB});
             // TODO: add event handler on preferences closed and refresh game data from server
         }
@@ -2542,17 +2608,14 @@ public final class GamePanel extends javax.swing.JPanel {
     // Event listener for the ShowCardsDialog
     private Listener<Event> getShowCardsEventListener(final ShowCardsDialog dialog) {
         return event -> {
-            if (event.getEventType() == ClientEventType.SHOW_POP_UP_MENU) {
-                if (event.getComponent() != null && event.getComponent() instanceof CardPanel) {
-                    JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();
+            if (event.getEventType() == ClientEventType.CARD_POPUP_MENU) {
+                if (event.getComponent() != null && event.getComponent() instanceof MageCard) {
+                    JPopupMenu menu = ((MageCard) event.getComponent()).getPopupMenu();
                     if (menu != null) {
                         cardViewPopupMenu = ((CardView) event.getSource());
                         menu.show(event.getComponent(), event.getxPos(), event.getyPos());
                     }
                 }
-            }
-            if (event.getEventType() == ClientEventType.ACTION_CONSUMED) {
-                dialog.removeDialog();
             }
         };
     }
@@ -2594,7 +2657,12 @@ public final class GamePanel extends javax.swing.JPanel {
             default:
                 break;
         }
+
+        // TODO: 2021-01-23 why it here? Can be removed?
         for (ShowCardsDialog dialog : pickTarget) {
+            dialog.removeDialog();
+        }
+        for (PickPileDialog dialog : pickPile) {
             dialog.removeDialog();
         }
     }

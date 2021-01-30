@@ -1,10 +1,3 @@
-
-
- /*
- * ConnectDialog.java
- *
- * Created on 20-Jan-2010, 9:37:07 PM
- */
 package mage.server.console;
 
 import java.awt.*;

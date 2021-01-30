@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Planes;
 import mage.constants.Zone;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.GameCommanderImpl;
@@ -395,13 +396,13 @@ public final class SystemUtil {
                         break;
 
                     case COMMAND_SHOW_MY_HAND:
-                            info = getCardsListForSpecialInform(game, feedbackPlayer.getHand(), runGroup.commands);
-                            game.informPlayer(feedbackPlayer, info);
+                        info = getCardsListForSpecialInform(game, feedbackPlayer.getHand(), runGroup.commands);
+                        game.informPlayer(feedbackPlayer, info);
                         break;
 
                     case COMMAND_SHOW_MY_LIBRARY:
-                            info = getCardsListForSpecialInform(game, feedbackPlayer.getLibrary().getCardList(), runGroup.commands);
-                            game.informPlayer(feedbackPlayer, info);
+                        info = getCardsListForSpecialInform(game, feedbackPlayer.getLibrary().getCardList(), runGroup.commands);
+                        game.informPlayer(feedbackPlayer, info);
                         break;
 
                     case COMMAND_ACTIVATE_OPPONENT_ABILITY:

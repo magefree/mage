@@ -1,11 +1,3 @@
-
-
-/*
- * TournamentPlayerPanel.java
- *
- * Created on Jan 28, 2011, 1:50:29 PM
- */
-
 package mage.client.table;
 
 import mage.cards.decks.DeckCardLists;

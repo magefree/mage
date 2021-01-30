@@ -1,10 +1,11 @@
 package org.mage.card.arcane;
 
+import mage.cards.MageCard;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.swing.*;
-import mage.cards.MagePermanent;
 
 public abstract class Animation {
 
@@ -18,7 +19,7 @@ public abstract class Animation {
     private static CardPanel enlargedAnimationPanel;
     private static final Object enlargeLock = new Object();
 
-    private TimerTask timerTask;
+    private final TimerTask timerTask;
     private FrameTimer frameTimer;
     private long elapsed;
 
@@ -115,53 +116,59 @@ public abstract class Animation {
         }
     }
 
-    public static void tapCardToggle(final CardPanel panel, final MagePermanent parent, final boolean tapped, final boolean flipped) {
+    public static void tapCardToggle(final CardPanel source, final boolean tapped, final boolean flipped) {
+        CardPanel mainPanel = source;
+        MageCard parentPanel = mainPanel.getTopPanelRef();
+
         new Animation(300) {
             @Override
             protected void start() {
-                parent.onBeginAnimation();
+                parentPanel.onBeginAnimation();
             }
 
             @Override
             protected void update(float percentage) {
                 if (tapped) {
-                    panel.setTappedAngle(CardPanel.TAPPED_ANGLE * percentage);
+                    mainPanel.setTappedAngle(CardPanel.TAPPED_ANGLE * percentage);
                     // reverse movement if untapping
-                    if (!panel.isTapped()) {
-                        panel.setTappedAngle(CardPanel.TAPPED_ANGLE - panel.getTappedAngle());
+                    if (!mainPanel.isTapped()) {
+                        mainPanel.setTappedAngle(CardPanel.TAPPED_ANGLE - mainPanel.getTappedAngle());
                     }
                 }
                 if (flipped) {
-                    panel.setFlippedAngle(CardPanel.FLIPPED_ANGLE * percentage);
-                    if (!panel.isFlipped()) {
-                        panel.setFlippedAngle(CardPanel.FLIPPED_ANGLE - panel.getFlippedAngle());
+                    mainPanel.setFlippedAngle(CardPanel.FLIPPED_ANGLE * percentage);
+                    if (!mainPanel.isFlipped()) {
+                        mainPanel.setFlippedAngle(CardPanel.FLIPPED_ANGLE - mainPanel.getFlippedAngle());
                     }
                 }
-                panel.repaint();
+                parentPanel.repaint();
             }
 
             @Override
             protected void end() {
                 if (tapped) {
-                    panel.setTappedAngle(panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0);
+                    mainPanel.setTappedAngle(mainPanel.isTapped() ? CardPanel.TAPPED_ANGLE : 0);
                 }
                 if (flipped) {
-                    panel.setFlippedAngle(panel.isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
+                    mainPanel.setFlippedAngle(mainPanel.isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
                 }
-                parent.onEndAnimation();
-                parent.repaint();
+                parentPanel.onEndAnimation();
+                parentPanel.repaint();
             }
         };
     }
 
-    public static void transformCard(final CardPanel panel, final MagePermanent parent, final boolean transformed) {
+    public static void transformCard(final CardPanel source) {
+
+        CardPanel mainPanel = source;
+        MageCard parentPanel = mainPanel.getTopPanelRef();
 
         new Animation(600) {
             private boolean state = false;
 
             @Override
             protected void start() {
-                parent.onBeginAnimation();
+                parentPanel.onBeginAnimation();
             }
 
             @Override
@@ -169,48 +176,51 @@ public abstract class Animation {
                 double p = percentage * 2;
                 if (percentage > 0.5) {
                     if (!state) {
-                        parent.toggleTransformed();
+                        parentPanel.toggleTransformed();
                     }
                     state = true;
                     p = (p - 0.5) * 2;
                 }
                 if (!state) {
-                    panel.transformAngle = Math.max(0.01, 1 - p);
+                    mainPanel.transformAngle = Math.max(0.01, 1 - p);
                 } else {
-                    panel.transformAngle = Math.max(0.01, p - 1);
+                    mainPanel.transformAngle = Math.max(0.01, p - 1);
                 }
-                panel.repaint();
+                parentPanel.repaint();
             }
 
             @Override
             protected void end() {
                 if (!state) {
-                    parent.toggleTransformed();
+                    parentPanel.toggleTransformed();
                 }
                 state = true;
-                panel.transformAngle = 1;
+                mainPanel.transformAngle = 1;
 
-                parent.onEndAnimation();
-                parent.repaint();
+                parentPanel.onEndAnimation();
+                parentPanel.repaint();
             }
         };
     }
 
     public static void moveCardToPlay(final int startX, final int startY, final int startWidth, final int endX, final int endY,
-            final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
-            final int speed) {
+                                      final int endWidth, final CardPanel cardToAnimate, final CardPanel placeholder, final JLayeredPane layeredPane,
+                                      final int speed) {
+        CardPanel cardPanel = (CardPanel) cardToAnimate.getMainPanel();
+        MageCard mainPanel = cardToAnimate.getTopPanelRef();
+
         UI.invokeLater(() -> {
             final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
             final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
             final float a = 2f;
             final float sqrta = (float) Math.sqrt(1 / a);
 
-            animationPanel.setCardBounds(startX, startY, startWidth, startHeight);
-            animationPanel.setAnimationPanel(true);
-            Container parent = animationPanel.getParent();
+            mainPanel.setCardBounds(startX, startY, startWidth, startHeight);
+            cardPanel.setAnimationPanel(true);
+            Container parent = mainPanel.getParent();
             if (parent != null && !parent.equals(layeredPane)) {
-                layeredPane.add(animationPanel);
-                layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
+                layeredPane.add(mainPanel);
+                layeredPane.setLayer(mainPanel, JLayeredPane.MODAL_LAYER);
             }
 
             new Animation(700) {
@@ -241,7 +251,7 @@ public abstract class Animation {
                     }
                     currentX -= currentWidth / 2;
                     currentY -= currentHeight / 2;
-                    animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
+                    mainPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
                 }
 
                 @Override
@@ -249,11 +259,11 @@ public abstract class Animation {
                     EventQueue.invokeLater(() -> {
                         if (placeholder != null) {
                             placeholder.setDisplayEnabled(true);
-                            placeholder.transferResources(animationPanel);
+                            placeholder.transferResources(cardPanel);
                         }
-                        animationPanel.setVisible(false);
-                        animationPanel.repaint();
-                        layeredPane.remove(animationPanel);
+                        mainPanel.setVisible(false);
+                        mainPanel.repaint();
+                        layeredPane.remove(mainPanel);
                     });
                 }
             };
@@ -261,18 +271,21 @@ public abstract class Animation {
     }
 
     public static void moveCard(final int startX, final int startY, final int startWidth, final int endX, final int endY,
-            final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
-            final int speed) {
+                                final int endWidth, final MageCard cardToAnimate, final CardPanel placeholder, final JLayeredPane layeredPane,
+                                final int speed) {
+        CardPanel cardPanel = (CardPanel) cardToAnimate.getMainPanel();
+        MageCard mainPanel = cardToAnimate.getTopPanelRef();
+
         UI.invokeLater(() -> {
             final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
             final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
 
-            animationPanel.setCardBounds(startX, startY, startWidth, startHeight);
-            animationPanel.setAnimationPanel(true);
-            Container parent = animationPanel.getParent();
+            mainPanel.setCardBounds(startX, startY, startWidth, startHeight);
+            cardPanel.setAnimationPanel(true);
+            Container parent = mainPanel.getParent();
             if (parent != null && !parent.equals(layeredPane)) {
-                layeredPane.add(animationPanel);
-                layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
+                layeredPane.add(mainPanel);
+                layeredPane.setLayer(mainPanel, JLayeredPane.MODAL_LAYER);
             }
 
             new Animation(speed) {
@@ -282,7 +295,7 @@ public abstract class Animation {
                     int currentY = startY + Math.round((endY - startY) * percentage);
                     int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
                     int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
-                    animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
+                    mainPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
                 }
 
                 @Override
@@ -290,11 +303,11 @@ public abstract class Animation {
                     EventQueue.invokeLater(() -> {
                         if (placeholder != null) {
                             placeholder.setDisplayEnabled(true);
-                            placeholder.transferResources(animationPanel);
+                            placeholder.transferResources(cardPanel);
                         }
-                        animationPanel.setVisible(false);
-                        animationPanel.repaint();
-                        layeredPane.remove(animationPanel);
+                        mainPanel.setVisible(false);
+                        mainPanel.repaint();
+                        layeredPane.remove(mainPanel);
                     });
                 }
             };
@@ -327,7 +340,7 @@ public abstract class Animation {
             protected void update(float percentage) {
                 int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
                 int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
-                Point startPos = SwingUtilities.convertPoint(overPanel.getParent(), overPanel.getCardLocation(), layeredPane);
+                Point startPos = SwingUtilities.convertPoint(overPanel.getParent(), overPanel.getCardLocation().getCardPoint(), layeredPane);
                 int centerX = startPos.x + Math.round(endWidth / 2f);
                 int centerY = startPos.y + Math.round(endHeight / 2f);
                 int currentX = Math.max(0, centerX - Math.round(currentWidth / 2f));
@@ -353,7 +366,7 @@ public abstract class Animation {
         }
     }
 
-    public static void showCard(final MagePermanent card, int count) {
+    public static void showCard(final MageCard card, int count) {
         if (count == 0) {
             return;
         }
@@ -376,7 +389,7 @@ public abstract class Animation {
         };
     }
 
-    public static void hideCard(final MagePermanent card, int count) {
+    public static void hideCard(final MageCard card, int count) {
         if (count == 0) {
             return;
         }

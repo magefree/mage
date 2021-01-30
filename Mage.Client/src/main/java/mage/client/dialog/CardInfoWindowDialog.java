@@ -1,6 +1,8 @@
 package mage.client.dialog;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.util.EnumSet;
 import java.util.LinkedHashSet;
@@ -9,6 +11,8 @@ import java.util.UUID;
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 import mage.client.cards.BigCard;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -23,6 +27,8 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
+ * Game GUI: popup windows with title like reveal, graveyard
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class CardInfoWindowDialog extends MageDialog {
@@ -44,6 +50,22 @@ public class CardInfoWindowDialog extends MageDialog {
         this.positioned = false;
         initComponents();
 
+        // ENABLE a minimizing window on double clicks
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+        ui.getNorthPane().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
+                    e.consume();
+                    try {
+                        CardInfoWindowDialog.this.setIcon(!CardInfoWindowDialog.this.isIcon());
+                    } catch (PropertyVetoException exp) {
+                        // ignore read only
+                    }
+                }
+            }
+        });
+
         this.setModal(false);
         switch (this.showType) {
             case LOOKED_AT:
@@ -62,7 +84,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 this.setFrameIcon(new ImageIcon(ImageHelper.getImageFromResources("/info/grave.png")));
                 this.setClosable(true);
                 this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-                addInternalFrameListener(new InternalFrameAdapter() {
+                this.addInternalFrameListener(new InternalFrameAdapter() {
                     @Override
                     public void internalFrameClosing(InternalFrameEvent e) {
                         CardInfoWindowDialog.this.hideDialog();

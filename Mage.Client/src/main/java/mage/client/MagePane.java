@@ -1,10 +1,3 @@
-
-
- /*
-  * MagePane.java
-  *
-  * Created on 15-Dec-2009, 9:34:25 PM
-  */
  package mage.client;
 
  import java.awt.*;

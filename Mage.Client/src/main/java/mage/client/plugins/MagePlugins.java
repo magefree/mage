@@ -1,7 +1,7 @@
 package mage.client.plugins;
 
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.MageCard;
-import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.cards.BigCard;
 import mage.view.CardView;
@@ -23,9 +23,9 @@ public interface MagePlugins {
 
     JComponent updateTablePanel(Map<String, JComponent> ui);
 
-    MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, int renderMode, boolean needFullPermanentRender);
+    MageCard getMagePermanent(PermanentView card, BigCard bigCard, CardIconRenderSettings cardIconRenderSettings, Dimension dimension, UUID gameId, boolean loadImage, int renderMode, boolean needFullPermanentRender);
 
-    MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode, boolean needFullPermanentRender);
+    MageCard getMageCard(CardView card, BigCard bigCard, CardIconRenderSettings cardIconRenderSettings, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode, boolean needFullPermanentRender);
 
     boolean isThemePluginLoaded();
 
@@ -33,7 +33,7 @@ public interface MagePlugins {
 
     boolean isCounterPluginLoaded();
 
-    int sortPermanents(Map<String, JComponent> ui, Map<UUID, MagePermanent> permanents, boolean topRow);
+    int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean topRow);
 
     void downloadSymbols();
 
@@ -41,9 +41,9 @@ public interface MagePlugins {
 
     void addGamesPlayed();
 
-    void onAddCard(MagePermanent card, int count);
+    void onAddCard(MageCard card, int count);
 
-    void onRemoveCard(MagePermanent card, int count);
+    void onRemoveCard(MageCard card, int count);
 
     JComponent getCardInfoPane();
 

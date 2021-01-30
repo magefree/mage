@@ -12,21 +12,18 @@ import mage.view.CardsView;
 
 public class HandPanel extends JPanel {
 
-    private static final int HAND_MIN_CARDS_OFFSET_Y = -10;
-
     public HandPanel() {
         initComponents();
         changeGUISize();
     }
 
     public void initComponents() {
-        hand = new mage.client.cards.Cards(true);
-        hand.setMinOffsetY(HAND_MIN_CARDS_OFFSET_Y);
-        hand.setCardDimension(GUISizeHelper.handCardDimension);
-
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane(jPanel);
         jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 0));
+
+        hand = new mage.client.cards.Cards(true, jScrollPane1);
+        hand.setCardDimension(GUISizeHelper.handCardDimension);
 
         jPanel.setLayout(new GridBagLayout()); // centers hand
         jPanel.setBackground(new Color(0, 0, 0, 0));
@@ -49,7 +46,7 @@ public class HandPanel extends JPanel {
         hand.setBackgroundColor(new Color(0, 0, 0, 0));
         hand.setVisibleIfEmpty(false);
         hand.setBorder(EMPTY_BORDER);
-        hand.setZone(Zone.HAND.toString());
+        hand.setZone(Zone.HAND);
     }
 
     public void cleanUp() {
@@ -63,6 +60,7 @@ public class HandPanel extends JPanel {
     private void setGUISize() {
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+        jScrollPane1.getHorizontalScrollBar().setUnitIncrement(GUISizeHelper.getCardsScrollbarUnitInc(GUISizeHelper.handCardDimension.width));
         hand.setCardDimension(GUISizeHelper.handCardDimension);
         hand.changeGUISize();
     }

@@ -19,14 +19,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="panelCardIcons" alignment="1" max="32767" attributes="0"/>
+                  <Component id="cardsPanel" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="748" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="buttonCancel" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="cardsPanel" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonReloadCards" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -34,9 +35,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboRenderMode" min="-2" pref="131" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelTheme" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="comboTheme" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelSize" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="sliderSize" min="-2" max="-2" attributes="0"/>
+                      <Component id="sliderSize" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkBoxGenerateManyCards" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -56,12 +61,16 @@
                       <Component id="labelRenderMode" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboRenderMode" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboTheme" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTheme" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="sliderSize" min="-2" max="-2" attributes="0"/>
                   <Component id="checkBoxGenerateManyCards" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cardsPanel" pref="421" max="32767" attributes="0"/>
+              <Component id="panelCardIcons" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cardsPanel" pref="401" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="buttonCancel" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -126,6 +135,147 @@
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="checkBoxGenerateManyCardsItemStateChanged"/>
       </Events>
+    </Component>
+    <Container class="javax.swing.JPanel" name="panelCardIcons">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="labelCardIconsPosition" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="comboCardIconsPosition" min="-2" pref="80" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="labelCardIconsOrder" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="comboCardIconsOrder" min="-2" pref="80" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="labelCardIconsMaxVisible" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="spinnerCardIconsMaxVisible" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="labelCardIconsAdditionalAmount" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="spinnerCardIconsAdditionalAmount" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace pref="188" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="comboCardIconsPosition" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCardIconsPosition" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCardIconsMaxVisible" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spinnerCardIconsMaxVisible" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCardIconsAdditionalAmount" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spinnerCardIconsAdditionalAmount" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCardIconsOrder" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboCardIconsOrder" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="labelCardIconsPosition">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Card icons position:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="comboCardIconsPosition">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="8">
+                <StringItem index="0" value="TOP"/>
+                <StringItem index="1" value="LEFT"/>
+                <StringItem index="2" value="RIGHT"/>
+                <StringItem index="3" value="BOTTOM"/>
+                <StringItem index="4" value="CORNER_TOP_LEFT"/>
+                <StringItem index="5" value="CORNER_TOP_RIGHT"/>
+                <StringItem index="6" value="CORNER_BOTTOM_LEFT"/>
+                <StringItem index="7" value="CORNER_BOTTOM_RIGHT"/>
+              </StringArray>
+            </Property>
+            <Property name="selectedIndex" type="int" value="1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboCardIconsPositionItemStateChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelCardIconsMaxVisible">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Max visible:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="spinnerCardIconsMaxVisible">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spinnerCardIconsMaxVisibleStateChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="spinnerCardIconsMaxVisible.setValue(3);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelCardIconsAdditionalAmount">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Add additional icons:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="spinnerCardIconsAdditionalAmount">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spinnerCardIconsAdditionalAmountStateChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="spinnerCardIconsAdditionalAmount.setValue(10);&#xd;&#xa;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelCardIconsOrder">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Order:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="comboCardIconsOrder">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="START"/>
+                <StringItem index="1" value="CENTER"/>
+                <StringItem index="2" value="END"/>
+              </StringArray>
+            </Property>
+            <Property name="selectedIndex" type="int" value="2"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboCardIconsOrderItemStateChanged"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="labelTheme">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Theme:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboTheme">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="loading..."/>
+          </StringArray>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="WARNING, selected theme will be applied to full app, not render dialog only"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboThemeItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

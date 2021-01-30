@@ -781,20 +781,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    /**
-     * There are effects, that set an attacker to be blocked. Therefore this
-     * setter can be used.
-     * <p>
-     * This method lacks a band check, use setBlocked(blocked, game) instead.
-     *
-     * @param blocked
-     * @deprecated
-     */
-    @Deprecated
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
-    }
-
     public void setBlocked(boolean blocked, Game game) {
         this.blocked = blocked;
         for (UUID attackerId : attackers) {

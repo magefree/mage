@@ -2,6 +2,7 @@ package mage.view;
 
 import mage.cards.Card;
 import mage.game.command.Emblem;
+import mage.players.PlayableObjectStats;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +17,7 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected String name;
     protected String expansionSetCode;
     protected List<String> rules;
-    protected boolean isPlayable = false;
-    protected int playableAmount = 0;
+    protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
     public EmblemView(Emblem emblem, Card sourceCard) {
         this.id = emblem.getId();
@@ -57,25 +57,19 @@ public class EmblemView implements CommandObjectView, Serializable {
         return rules;
     }
 
-
     @Override
     public boolean isPlayable() {
-        return isPlayable;
+        return this.playableStats.getPlayableAmount() > 0;
     }
 
     @Override
-    public void setPlayable(boolean isPlayable) {
-        this.isPlayable = isPlayable;
+    public void setPlayableStats(PlayableObjectStats playableStats) {
+        this.playableStats = playableStats;
     }
 
     @Override
-    public void setPlayableAmount(int playableAmount) {
-        this.playableAmount = playableAmount;
-    }
-
-    @Override
-    public int getPlayableAmount() {
-        return playableAmount;
+    public PlayableObjectStats getPlayableStats() {
+        return this.playableStats;
     }
 
     @Override

@@ -1,18 +1,23 @@
-
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.icon.abilities.FirstStrikeAbilityIcon;
 import mage.constants.Zone;
 
+import java.io.ObjectStreamException;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FirstStrikeAbility extends StaticAbility implements MageSingleton {
 
-    private static final FirstStrikeAbility instance = new FirstStrikeAbility();
+    private static final FirstStrikeAbility instance;
+
+    static {
+        instance = new FirstStrikeAbility();
+        instance.addIcon(FirstStrikeAbilityIcon.instance);
+    }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;

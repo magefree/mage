@@ -19,6 +19,7 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +39,7 @@ public class Session {
     private final String sessionId;
     private UUID userId;
     private String host;
-    private int messageId = 0;
+    private final AtomicInteger messageId = new AtomicInteger(0);
     private final Date timeConnected;
     private boolean isAdmin = false;
     private final AsynchInvokerCallbackHandler callbackHandler;
@@ -357,17 +358,9 @@ public class Session {
         boolean lockSet = false;
         try {
             if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
-                call.setMessageId(messageId++);
+                call.setMessageId(messageId.incrementAndGet());
                 lockSet = true;
                 Callback callback = new Callback(call);
-//                if (call.getMethod().equals(ClientCallbackMethod.GAME_TARGET)) {
-//                    Object object = call.getData();
-//                    if (object instanceof GameClientMessage) {
-//                        String message = ((GameClientMessage) object).getMessage();
-//                        logger.info("Server Session Event->" + call.getMethod() + " (id:" + call.getMessageId() + ") " + message);
-//                        logger.info(callback.toString());
-//                    }
-//                }
                 callbackHandler.handleCallbackOneway(callback);
             }
         } catch (InterruptedException ex) {

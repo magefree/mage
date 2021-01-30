@@ -1,11 +1,12 @@
 package mage.cards.action;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 public interface ActionCallback {
 
-    void mouseClicked(MouseEvent e, TransferData data);
+    void mouseClicked(MouseEvent e, TransferData data, boolean doubleClick);
 
     void mousePressed(MouseEvent e, TransferData data);
 
@@ -23,4 +24,13 @@ public interface ActionCallback {
 
     void hideOpenComponents();
 
+    void popupMenuCard(MouseEvent e, TransferData data);
+
+    /**
+     * Show popup menu
+     *
+     * @param e
+     * @param sourceComponent custom source component for the event, must support CardEventProducer
+     */
+    void popupMenuPanel(MouseEvent e, Component sourceComponent);
 }

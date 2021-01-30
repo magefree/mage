@@ -1,25 +1,35 @@
 package mage.cards.action;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.util.UUID;
+import mage.cards.MageCard;
 import mage.cards.TextPopup;
 import mage.view.CardView;
 
+import java.awt.*;
+import java.util.UUID;
+
+/**
+ * Data for main card panel events like mouse moves or clicks
+ */
 public class TransferData {
-    private Component component;
+
+    private MageCard component; // real card panel (it may lie under multiple layer panels, so use getTopPanelRef for top)
     private TextPopup popupText;
-    private Point locationOnScreen;
+    private Point locationOnScreen; // must contains REAL card location (e.g. without outer/draw spaces), so use getCardLocationOnScreen to update it
     private int popupOffsetX;
     private int popupOffsetY;
     private UUID gameId;
     private CardView card;
 
-    public Component getComponent() {
+    /**
+     * If you use it with cards then call top layer panel like data.getComponent().getTopPanelRef()
+     *
+     * @return
+     */
+    public MageCard getComponent() {
         return component;
     }
 
-    public void setComponent(Component component) {
+    public void setComponent(MageCard component) {
         this.component = component;
     }
 

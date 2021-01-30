@@ -1,5 +1,6 @@
 package mage.client.deckeditor.collection.viewer;
 
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.*;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -45,17 +46,17 @@ import static java.lang.Math.min;
 import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardUrls;
 
 /**
- * Mage book with cards and page flipping.
+ * Card viewer (mage book) with cards and page flipping
  *
- * @author nantuko
+ * @author nantuko, JayDi85
  */
 public class MageBook extends JComponent {
 
     private static final long serialVersionUID = 1L;
 
     public static final String LAYOUT_3X3 = "small";
-
     public static final String LAYOUT_4X4 = "big";
+    private static final int CARD_CAPTION_OFFSET_Y = 8; // apply offset to see card names with mana icons at the same time
 
     public MageBook(BigCard bigCard) {
         super();
@@ -71,7 +72,6 @@ public class MageBook extends JComponent {
         setSize(conf.WIDTH, conf.HEIGHT);
         setPreferredSize(new Dimension(conf.WIDTH, conf.HEIGHT));
         setMinimumSize(new Dimension(conf.WIDTH, conf.HEIGHT));
-        //setBorder(BorderFactory.createLineBorder(Color.green));
 
         jPanelLeft = getImagePanel(LEFT_PANEL_IMAGE_PATH, ImagePanelStyle.TILED);
         jPanelLeft.setPreferredSize(new Dimension(LEFT_RIGHT_PAGES_WIDTH, 0));
@@ -87,7 +87,6 @@ public class MageBook extends JComponent {
 
         Image image = ImageHelper.loadImage(LEFT_PAGE_BUTTON_IMAGE_PATH);
         pageLeft = new HoverButton(null, image, image, image, new Rectangle(64, 64));
-        //pageLeft.setBorder(BorderFactory.createLineBorder(new Color(180, 50, 0), 3, true)); //debug
         pageLeft.setBounds(0, 0, 64, 64);
         pageLeft.setVisible(false);
         pageLeft.setObserver(() -> {
@@ -124,7 +123,6 @@ public class MageBook extends JComponent {
         // Top Panel (left page + (caption / stats) + right page
         jPanelTop = new JPanel();
         jPanelTop.setLayout(new BorderLayout());
-        // jPanelTop.setBorder(BorderFactory.createLineBorder(new Color(180, 50, 150), 3, true)); // debug
         jPanelTop.setPreferredSize(new Dimension(captionHeight, captionHeight));
         jPanelCenter.add(jPanelTop, BorderLayout.NORTH);
 
@@ -144,7 +142,6 @@ public class MageBook extends JComponent {
         // set's caption
         setCaption = new JLabel();
         setCaption.setHorizontalAlignment(SwingConstants.CENTER);
-        //setCaption.setBorder(BorderFactory.createLineBorder(new Color(180, 50, 150), 3, true)); // debug
         setCaption.setFont(jLayeredPane.getFont().deriveFont(25f));
         setCaption.setText("EMPTY CAPTION");
         jPanelCaption.add(setCaption, BorderLayout.NORTH);
@@ -152,7 +149,6 @@ public class MageBook extends JComponent {
         // set's info
         setInfo = new JLabel();
         setInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        //setCaption.setBorder(BorderFactory.createLineBorder(new Color(180, 50, 150), 3, true)); // debug
         setInfo.setFont(jLayeredPane.getFont().deriveFont(17f));
         setInfo.setText("EMPTY STATS");
         jPanelCaption.add(setInfo, BorderLayout.SOUTH);
@@ -245,7 +241,6 @@ public class MageBook extends JComponent {
         for (int i = 0; i < min(conf.CARDS_PER_PAGE / 2, size); i++) {
             Card card = cards.get(i).getMockCard();
             addCard(new CardView(card), bigCard, null, rectangle);
-
             rectangle = CardPosition.translatePosition(i, rectangle, conf);
         }
 
@@ -407,30 +402,29 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        final MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true, PreferencesDialog.getRenderMode(), true);
-        cardImg.setBounds(rectangle);
-        jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
+        final MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, true, PreferencesDialog.getRenderMode(), true);
+        cardImg.setCardContainerRef(jLayeredPane);
         cardImg.update(card);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());
+        jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
 
-        cardImg.setCardCaptionTopOffset(8); // card caption below real card caption to see full name even with mana icons
+        // card caption must be below real card caption to see full name even with mana icons
+        cardImg.setCardCaptionTopOffset(CARD_CAPTION_OFFSET_Y);
 
         // card number label
         JLabel cardNumber = new JLabel();
         int dy = -5; // image panel have empty space in bottom (bug?), need to move label up
-        cardNumber.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.getFrameWidth(), 20);
+        cardNumber.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
         cardNumber.setHorizontalAlignment(SwingConstants.CENTER);
-        //cardNumber.setBorder(BorderFactory.createLineBorder(new Color(180, 50, 150), 3, true));
         cardNumber.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
         cardNumber.setText(card.getCardNumber());
         jLayeredPane.add(cardNumber);
 
-        // draft rating label (
+        // draft rating label
         JLabel draftRating = new JLabel();
         dy = -5 * 2 + cardNumber.getHeight(); // under card number
-        draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getHeight() + dy, cardDimensions.getFrameWidth(), 20);
+        draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
         draftRating.setHorizontalAlignment(SwingConstants.CENTER);
-        //draftRating.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 150), 3, true));
         draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
         if (card.getOriginalCard() != null) {
             draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
@@ -448,8 +442,8 @@ public class MageBook extends JComponent {
         newToken.removeSummoningSickness();
         PermanentView theToken = new PermanentView(newToken, null, null, null);
         theToken.setInViewerOnly(true);
-        final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
-        cardImg.setBounds(rectangle);
+        final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
+        cardImg.setCardContainerRef(jLayeredPane);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
         cardImg.update(theToken);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());

@@ -13,6 +13,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * App GUI: register new user on the server
+ *
+ */
 public class RegisterUserDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);

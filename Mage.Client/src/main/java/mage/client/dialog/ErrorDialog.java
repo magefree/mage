@@ -1,15 +1,7 @@
-
-
-
-/*
- * ErrorDialog.java
- *
- * Created on Dec 23, 2009, 11:01:32 AM
- */
-
 package mage.client.dialog;
 
 /**
+ * Game GUI: error dialog
  *
  * @author BetaSteward_at_googlemail.com
  */

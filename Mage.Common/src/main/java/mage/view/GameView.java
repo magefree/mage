@@ -21,6 +21,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.players.PlayableObjectsList;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
@@ -42,7 +43,7 @@ public class GameView implements Serializable {
     private final int priorityTime;
     private final List<PlayerView> players = new ArrayList<>();
     private CardsView hand;
-    private Map<UUID, Integer> canPlayObjects;
+    private PlayableObjectsList canPlayObjects;
     private Map<String, SimpleCardsView> opponentHands;
     private Map<String, SimpleCardsView> watchedHands;
     private final CardsView stack = new CardsView();
@@ -313,11 +314,11 @@ public class GameView implements Serializable {
         return isPlayer;
     }
 
-    public Map<UUID, Integer> getCanPlayObjects() {
+    public PlayableObjectsList getCanPlayObjects() {
         return canPlayObjects;
     }
 
-    public void setCanPlayObjects(Map<UUID, Integer> canPlayObjects) {
+    public void setCanPlayObjects(PlayableObjectsList canPlayObjects) {
         this.canPlayObjects = canPlayObjects;
     }
 

@@ -421,19 +421,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseReleased(MouseEvent Me) {
-                this.checkMenu(Me);
+            public void mouseReleased(MouseEvent e) {
+                this.checkMenu(e);
             }
 
             // neccessary for linux and mac systems
             @Override
-            public void mousePressed(MouseEvent Me) {
-                this.checkMenu(Me);
+            public void mousePressed(MouseEvent e) {
+                this.checkMenu(e);
             }
 
-            private void checkMenu(MouseEvent Me) {
-                if (Me.isPopupTrigger() && playingMode) {
-                    popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
+            private void checkMenu(MouseEvent e) {
+                if (e.isPopupTrigger() && playingMode) {
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
         });
@@ -474,19 +474,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseReleased(MouseEvent Me) {
-                this.checkMenu(Me);
+            public void mouseReleased(MouseEvent e) {
+                this.checkMenu(e);
             }
 
             // neccessary for linux and mac systems
             @Override
-            public void mousePressed(MouseEvent Me) {
-                this.checkMenu(Me);
+            public void mousePressed(MouseEvent e) {
+                this.checkMenu(e);
             }
 
-            private void checkMenu(MouseEvent Me) {
-                if (Me.isPopupTrigger() && playingMode) {
-                    popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
+            private void checkMenu(MouseEvent e) {
+                if (e.isPopupTrigger() && playingMode) {
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
         });

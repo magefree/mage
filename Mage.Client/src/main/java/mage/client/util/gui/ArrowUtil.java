@@ -1,6 +1,6 @@
 package mage.client.util.gui;
 
-import mage.cards.MagePermanent;
+import mage.cards.MageCard;
 import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @author noxx
+ * @author noxx, JayDi85
  */
 public final class ArrowUtil {
 
@@ -25,9 +25,9 @@ public final class ArrowUtil {
             me.translate(-parentPoint.x, -parentPoint.y);
             UUID uuid = data.getCard().getPairedCard();
             for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
-                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                MageCard permanent = pa.getBattlefieldPanel().getPermanentPanels().get(uuid);
                 if (permanent != null) {
-                    Point target = permanent.getLocationOnScreen();
+                    Point target = permanent.getCardLocationOnScreen().getCardPoint();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
                 }
@@ -41,9 +41,9 @@ public final class ArrowUtil {
             me.translate(-parentPoint.x, -parentPoint.y);
             for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
                 for (UUID uuid : data.getCard().getBandedCards()) {
-                    MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                    MageCard permanent = pa.getBattlefieldPanel().getPermanentPanels().get(uuid);
                     if (permanent != null) {
-                        Point target = permanent.getLocationOnScreen();
+                        Point target = permanent.getCardLocationOnScreen().getCardPoint();
                         target.translate(-parentPoint.x, -parentPoint.y);
                         ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 55, (int) me.getY() + 25, (int) target.getX() + 60, (int) target.getY() + 35, Color.yellow, ArrowBuilder.Type.BANDED);
                     }
@@ -77,9 +77,9 @@ public final class ArrowUtil {
             me.translate(-parentPoint.x, -parentPoint.y);
             UUID uuid = data.getCard().getParentId();
             for (PlayAreaPanel pa : MageFrame.getGamePlayers(data.getGameId()).values()) {
-                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                MageCard permanent = pa.getBattlefieldPanel().getPermanentPanels().get(uuid);
                 if (permanent != null) {
-                    Point source = permanent.getLocationOnScreen();
+                    Point source = permanent.getCardLocationOnScreen().getCardPoint();
                     source.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) source.getX() + 40, (int) source.getY() + 10, (int) me.getX() + 35, (int) me.getY() + 20, Color.blue, ArrowBuilder.Type.SOURCE);
                 }
@@ -106,9 +106,9 @@ public final class ArrowUtil {
             }
 
             for (PlayAreaPanel panel : MageFrame.getGamePlayers(data.getGameId()).values()) {
-                MagePermanent permanent = panel.getBattlefieldPanel().getPermanents().get(uuid);
+                MageCard permanent = panel.getBattlefieldPanel().getPermanentPanels().get(uuid);
                 if (permanent != null) {
-                    Point target = permanent.getLocationOnScreen();
+                    Point target = permanent.getCardLocationOnScreen().getCardPoint();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.getBuilder().addArrow(data.getGameId(), (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
                     continue;

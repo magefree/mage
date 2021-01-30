@@ -1,11 +1,3 @@
-
-
-/*
- * ManaPool.java
- *
- * Created on Dec 22, 2009, 9:52:00 AM
- */
-
 package mage.client.game;
 
 import mage.view.ManaPoolView;

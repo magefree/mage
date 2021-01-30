@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * App GUI: download card images window
+ *
  * @author JayDi85
  */
 public class DownloadImagesDialog extends MageDialog {

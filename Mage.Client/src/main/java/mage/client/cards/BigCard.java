@@ -1,11 +1,3 @@
-
-
-/*
- * BigCard.java
- *
- * Created on Jan 18, 2010, 3:21:33 PM
- */
-
 package mage.client.cards;
 
 import java.awt.Dimension;

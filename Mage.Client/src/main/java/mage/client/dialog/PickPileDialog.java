@@ -1,5 +1,6 @@
 package mage.client.dialog;
 
+import mage.cards.MageCard;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
@@ -11,7 +12,9 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Game GUI: pile choosing (select a 1 pile from a 2 piles)
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class PickPileDialog extends MageDialog {
 
@@ -19,6 +22,7 @@ public class PickPileDialog extends MageDialog {
     private final CardArea pile2;
 
     private boolean pickedPile1 = false;
+    private boolean pickedOK = false;
 
     /**
      * Create the frame.
@@ -51,20 +55,22 @@ public class PickPileDialog extends MageDialog {
 
     public void cleanUp() {
         for (Component comp : pile1.getComponents()) {
-            if (comp instanceof CardPanel) {
-                ((CardPanel) comp).cleanUp();
+            if (comp instanceof MageCard) {
+                ((MageCard) comp).cleanUp();
                 pile1.remove(comp);
             }
         }
         for (Component comp : pile2.getComponents()) {
-            if (comp instanceof CardPanel) {
-                ((CardPanel) comp).cleanUp();
+            if (comp instanceof MageCard) {
+                ((MageCard) comp).cleanUp();
                 pile2.remove(comp);
             }
         }
     }
 
     public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, UUID gameId) {
+        this.pickedOK = false;
+        this.pickedPile1 = false;
         this.title = name;
         this.pile1.loadCardsNarrow(pile1, bigCard, gameId);
         this.pile2.loadCardsNarrow(pile2, bigCard, gameId);
@@ -81,23 +87,25 @@ public class PickPileDialog extends MageDialog {
         }
         this.makeWindowCentered();
 
-        this.revalidate(); // TODO: remove?
-        this.repaint(); // TODO: remove?
-
         this.setVisible(true);
     }
 
     private void btnPile1ActionPerformed(java.awt.event.ActionEvent evt) {
         pickedPile1 = true;
+        pickedOK = true;
         this.hideDialog();
     }
 
     private void btnPile2ActionPerformed(java.awt.event.ActionEvent evt) {
         pickedPile1 = false;
+        pickedOK = true;
         this.hideDialog();
     }
 
     public boolean isPickedPile1() {
         return this.pickedPile1;
+    }
+    public boolean isPickedOK() {
+        return this.pickedOK;
     }
 }

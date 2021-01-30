@@ -1,6 +1,7 @@
 package mage.view;
 
 import com.google.gson.annotations.Expose;
+import mage.players.PlayableObjectStats;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -18,10 +19,9 @@ public class SimpleCardView implements Serializable, SelectableObjectView {
     protected boolean usesVariousArt;
     protected boolean gameObject;
 
-    protected boolean isPlayable;
     protected boolean isChoosable;
     protected boolean isSelected;
-    protected int playableAmount; // playable abilities count on object
+    protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
     public SimpleCardView(final SimpleCardView view) {
         this.id = view.id;
@@ -32,10 +32,9 @@ public class SimpleCardView implements Serializable, SelectableObjectView {
         this.usesVariousArt = view.usesVariousArt;
         this.gameObject = view.gameObject;
 
-        this.isPlayable = view.isPlayable;
         this.isChoosable = view.isChoosable;
         this.isSelected = view.isSelected;
-        this.playableAmount = view.playableAmount;
+        this.playableStats = view.playableStats.copy();
     }
 
     public SimpleCardView(UUID id, String expansionSetCode, String cardNumber, boolean usesVariousArt, String tokenSetCode, String tokenDescriptor) {
@@ -82,22 +81,17 @@ public class SimpleCardView implements Serializable, SelectableObjectView {
 
     @Override
     public boolean isPlayable() {
-        return isPlayable;
+        return this.playableStats.getPlayableAmount() > 0;
     }
 
     @Override
-    public void setPlayable(boolean isPlayable) {
-        this.isPlayable = isPlayable;
+    public void setPlayableStats(PlayableObjectStats playableStats) {
+        this.playableStats = playableStats;
     }
 
     @Override
-    public void setPlayableAmount(int playableAmount) {
-        this.playableAmount = playableAmount;
-    }
-
-    @Override
-    public int getPlayableAmount() {
-        return playableAmount;
+    public PlayableObjectStats getPlayableStats() {
+        return this.playableStats;
     }
 
     @Override

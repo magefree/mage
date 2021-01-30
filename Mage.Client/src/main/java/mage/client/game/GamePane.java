@@ -1,10 +1,3 @@
-
-
- /*
- * GamePane.java
- *
- * Created on Dec 17, 2009, 9:34:10 AM
- */
 package mage.client.game;
 
 import java.awt.AWTEvent;
@@ -14,6 +7,7 @@ import javax.swing.*;
 import mage.client.MagePane;
 
 /**
+ * Game GUI: game panel with scrollbars
  *
  * @author BetaSteward_at_googlemail.com
  */

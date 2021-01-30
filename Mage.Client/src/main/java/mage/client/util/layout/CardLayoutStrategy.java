@@ -13,5 +13,5 @@ public interface CardLayoutStrategy {
 
     void onAdd(BattlefieldPanel jLayeredPane);
 
-    void doLayout(BattlefieldPanel jLayeredPane, int battlefieldWidth);
+    void doLayout(BattlefieldPanel battlefieldPanel, int battlefieldWidth);
 }

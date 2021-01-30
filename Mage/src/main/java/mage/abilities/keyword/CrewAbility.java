@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageInt;
@@ -9,6 +8,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.icon.abilities.CrewAbilityIcon;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -36,6 +36,7 @@ public class CrewAbility extends SimpleActivatedAbility {
     public CrewAbility(int value) {
         super(Zone.BATTLEFIELD, new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT), new CrewCost(value));
         this.addEffect(new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE));
+        this.addIcon(CrewAbilityIcon.instance);
         this.value = value;
     }
 

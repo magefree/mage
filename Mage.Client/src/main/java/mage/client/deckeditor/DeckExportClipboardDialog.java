@@ -14,6 +14,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
+ * App GUI: deck export window, uses in deck editor
+ *
  * @author JayDi85
  */
 public class DeckExportClipboardDialog extends MageDialog {

@@ -10,6 +10,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.icon.CardIcon;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
@@ -118,6 +119,7 @@ public class CardView extends SimpleCardView {
     protected boolean canAttack;
     protected boolean canBlock;
     protected boolean inViewerOnly;
+    protected List<CardIcon> cardIcons = new ArrayList<>(); // additional icons to render
 
     protected Card originalCard = null;
 
@@ -138,7 +140,7 @@ public class CardView extends SimpleCardView {
         this(card, null, false);
         this.id = simpleCardView.getId();
 
-        this.isPlayable = simpleCardView.isPlayable;
+        this.playableStats = simpleCardView.playableStats.copy();
         this.isChoosable = simpleCardView.isChoosable;
         this.isSelected = simpleCardView.isSelected;
     }
@@ -148,7 +150,7 @@ public class CardView extends SimpleCardView {
         this.id = cardId;
     }
 
-    public CardView(CardView cardView) {
+    public CardView(final CardView cardView) {
         super(cardView);
 
         // generetate new ID (TODO: why new ID?)
@@ -222,6 +224,9 @@ public class CardView extends SimpleCardView {
         this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
         this.originalCard = cardView.originalCard == null ? null : cardView.originalCard.copy();
+        if (cardView.cardIcons != null) {
+            cardView.cardIcons.forEach(icon -> this.cardIcons.add(icon.copy()));
+        }
     }
 
     /**
@@ -408,6 +413,11 @@ public class CardView extends SimpleCardView {
                     controlledByOwner = false;
                 }
             }
+
+            // card icons for permanents on battlefield
+            permanent.getAbilities(game).forEach(ability -> {
+                this.cardIcons.addAll(ability.getIcons());
+            });
         } else {
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
@@ -1133,5 +1143,9 @@ public class CardView extends SimpleCardView {
 
     public Card getOriginalCard() {
         return this.originalCard;
+    }
+
+    public List<CardIcon> getCardIcons() {
+        return this.cardIcons;
     }
 }

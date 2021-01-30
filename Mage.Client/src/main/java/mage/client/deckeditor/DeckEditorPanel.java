@@ -304,77 +304,92 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private void init() {
         //this.cardSelector.setVisible(true);
         this.panelLeft.setVisible(true);
+
+        // TOP AREA: ENABLE ADDING/REMOVING BY DOUBLE CLICKS
         for (ICardGrid component : this.cardSelector.getCardGridComponents()) {
-            component.clearCardEventListeners();
+            //component.clearCardEventListeners();
             component.addCardEventListener((Listener<Event>) event -> {
                 switch (event.getEventType()) {
-                    case DOUBLE_CLICK:
-                        moveSelectorCardToDeck(event);
-                        break;
-                    case ALT_DOUBLE_CLICK:
-                        if (mode == DeckEditorMode.FREE_BUILDING) {
-                            moveSelectorCardToSideboard(event);
-                        } else {
-                            // because in match mode selector is used as sideboard the card goes to deck also for shift click
+
+                    case CARD_DOUBLE_CLICK: {
+                        boolean gameMode = mode != DeckEditorMode.FREE_BUILDING;
+                        if (gameMode) {
+                            // in game mode selector is used as sideboard, so the card must goes to deck all the time
                             moveSelectorCardToDeck(event);
+                        } else {
+                            // edit mode
+                            if (event.isMouseAltDown()) {
+                                moveSelectorCardToSideboard(event);
+                            } else {
+                                moveSelectorCardToDeck(event);
+                            }
                         }
                         break;
-                    case REMOVE_MAIN:
+                    }
+
+                    case DECK_REMOVE_SELECTION_MAIN: {
                         DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
                         break;
-                    case REMOVE_SIDEBOARD:
+                    }
+
+                    case DECK_REMOVE_SELECTION_SIDEBOARD: {
                         DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
                         break;
+                    }
                 }
                 refreshDeck();
             });
         }
-        this.deckArea.clearDeckEventListeners();
+
+        // BOTTOM AREA: ENABLE ADDING/REMOVING CARDS in MAINBOARD
+        // do not clear event listener - DragCardGrid already have own listeners for cards
+        //this.deckArea.clearDeckEventListeners();
         this.deckArea.addDeckEventListener(
+                // card manipulation events
+                // warning, do not use drag or single click events here, it's already processing by DragCardGrid
+
                 (Listener<Event>) event -> {
                     if (mode == DeckEditorMode.FREE_BUILDING) {
                         switch (event.getEventType()) {
-                            case DOUBLE_CLICK: {
+                            case CARD_DOUBLE_CLICK: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getCards()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getCards().remove(card);
-                                        break;
-                                    }
+                                Card card = deck.findCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                if (event.isMouseAltDown()) {
+                                    // ALT + double click: MOVE card from one deck to another
+                                    deck.getCards().remove(card);
+                                    deck.getSideboard().add(card);
+                                } else {
+                                    // double click: DELETE card from deck
+                                    deck.getCards().remove(card);
+                                }
+
                                 hidePopup();
                                 refreshDeck();
                                 break;
                             }
-                            case ALT_DOUBLE_CLICK: {
-                                SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getCards()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getCards().remove(card);
-                                        deck.getSideboard().add(card);
-                                        break;
-                                    }
-                                }
-                                hidePopup();
-                                refreshDeck();
-                                break;
-                            }
+
                             case SET_NUMBER: {
                                 setCardNumberToCardsList(event, deck.getCards());
                                 break;
                             }
-                            case REMOVE_SPECIFIC_CARD: {
+
+                            case DECK_REMOVE_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getCards()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getCards().remove(card);
-                                        storeTemporaryCard(card);
-                                        break;
-                                    }
+                                Card card = deck.findCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                deck.getCards().remove(card);
+                                storeTemporaryCard(card);
                                 break;
                             }
-                            case ADD_SPECIFIC_CARD: {
+
+                            case DECK_ADD_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getCards().add(retrieveTemporaryCard(cardView));
                                 break;
@@ -383,33 +398,36 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     } else {
                         // constructing phase or sideboarding during match -> card goes always to sideboard
                         switch (event.getEventType()) {
-                            case DOUBLE_CLICK:
-                            case ALT_DOUBLE_CLICK: {
+
+                            case CARD_DOUBLE_CLICK: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getCards()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getCards().remove(card);
-                                        deck.getSideboard().add(card);
-                                        cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
-                                        break;
-                                    }
+                                Card card = deck.findCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                deck.getCards().remove(card);
+                                deck.getSideboard().add(card);
+                                cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
+
                                 hidePopup();
                                 refreshDeck();
                                 break;
                             }
-                            case REMOVE_SPECIFIC_CARD: {
+
+                            case DECK_REMOVE_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getCards()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getCards().remove(card);
-                                        storeTemporaryCard(card);
-                                        break;
-                                    }
+                                Card card = deck.findCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                deck.getCards().remove(card);
+                                storeTemporaryCard(card);
                                 break;
                             }
-                            case ADD_SPECIFIC_CARD: {
+
+                            case DECK_ADD_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getCards().add(retrieveTemporaryCard(cardView));
                                 break;
@@ -417,95 +435,104 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                     }
                 });
-        this.deckArea.clearSideboardEventListeners();
+
+        // BOTTOM AREA: ENABLE ADDING/REMOVING CARDS in SIDEBOARD
+        // do not clear event listener - DragCardGrid already have own listeners for cards
+        //this.deckArea.clearSideboardEventListeners();
         this.deckArea.addSideboardEventListener(
+                // card manipulation events
                 (Listener<Event>) event -> {
                     if (mode == DeckEditorMode.FREE_BUILDING) {
-                        // normal edit mode
+                        // DECK EDITOR MODE
                         switch (event.getEventType()) {
-                            case DOUBLE_CLICK:
-                                // remove card from sideboard (don't add it to deck)
+                            case CARD_DOUBLE_CLICK: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getSideboard()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getSideboard().remove(card);
-                                        break;
-                                    }
+                                Card card = deck.findSideboardCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                if (event.isMouseAltDown()) {
+                                    // ALT + double click: MOVE card from one deck to another
+                                    deck.getSideboard().remove(card);
+                                    deck.getCards().add(card);
+                                } else {
+                                    // double click: DELETE card from deck
+                                    deck.getSideboard().remove(card);
+                                }
+
                                 hidePopup();
                                 refreshDeck();
                                 break;
-                            case ALT_DOUBLE_CLICK:
-                                // remove card from sideboard
-                                cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getSideboard()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getSideboard().remove(card);
-                                        deck.getCards().add(card);
-                                        break;
-                                    }
-                                }
-                                hidePopup();
-                                refreshDeck();
-                                break;
+                            }
+
                             case SET_NUMBER: {
                                 setCardNumberToCardsList(event, deck.getSideboard());
                                 break;
                             }
-                            case REMOVE_SPECIFIC_CARD: {
-                                cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getSideboard()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getSideboard().remove(card);
-                                        storeTemporaryCard(card);
-                                        break;
-                                    }
+
+                            case DECK_REMOVE_SPECIFIC_CARD: {
+                                SimpleCardView cardView = (SimpleCardView) event.getSource();
+                                Card card = deck.findSideboardCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                deck.getSideboard().remove(card);
+                                storeTemporaryCard(card);
                                 break;
                             }
-                            case ADD_SPECIFIC_CARD: {
-                                cardView = (CardView) event.getSource();
+
+                            case DECK_ADD_SPECIFIC_CARD: {
+                                SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getSideboard().add(retrieveTemporaryCard(cardView));
                                 break;
                             }
                         }
                     } else {
-                        // construct phase or sideboarding during match
+                        // GAME MODE
+                        // constructing phase or sideboarding during match -> card goes always to main board
                         switch (event.getEventType()) {
-                            case REMOVE_SPECIFIC_CARD: {
+
+                            case DECK_REMOVE_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getSideboard()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getSideboard().remove(card);
-                                        storeTemporaryCard(card);
-                                        break;
-                                    }
+                                Card card = deck.findSideboardCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                deck.getSideboard().remove(card);
+                                storeTemporaryCard(card);
                                 break;
                             }
-                            case ADD_SPECIFIC_CARD: {
+
+                            case DECK_ADD_SPECIFIC_CARD: {
                                 SimpleCardView cardView = (CardView) event.getSource();
                                 deck.getSideboard().add(retrieveTemporaryCard(cardView));
                                 break;
                             }
-                            case DOUBLE_CLICK:
-                            case ALT_DOUBLE_CLICK:
+
+                            case CARD_DOUBLE_CLICK: {
+                                // in games you can't delete cards, only moves from one deck to another
                                 SimpleCardView cardView = (SimpleCardView) event.getSource();
-                                for (Card card : deck.getSideboard()) {
-                                    if (card.getId().equals(cardView.getId())) {
-                                        deck.getSideboard().remove(card);
-                                        deck.getCards().add(card);
-                                        break;
-                                    }
+                                Card card = deck.findSideboardCard(cardView.getId());
+                                if (card == null) {
+                                    return;
                                 }
+
+                                deck.getSideboard().remove(card);
+                                deck.getCards().add(card);
+
                                 hidePopup();
                                 refreshDeck();
                                 break;
+                            }
                         }
                     }
                 });
         refreshDeck(true);
 
+        // auto-import dropped files from OS
         if (mode == DeckEditorMode.FREE_BUILDING) {
             setDropTarget(new DropTarget(this, new DnDDeckTargetListener() {
 
@@ -562,26 +589,32 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void moveSelectorCardToDeck(Event event) {
         SimpleCardView cardView = (SimpleCardView) event.getSource();
-        CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
         Card card = null;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
-            for (Object o : deck.getSideboard()) {
-                card = (Card) o;
-                if (card.getId().equals(cardView.getId())) {
+        boolean gameMode = mode != DeckEditorMode.FREE_BUILDING;
+        if (gameMode) {
+            // game: use existing real cards
+            for (Card sideCard : deck.getSideboard()) {
+                if (sideCard.getId().equals(cardView.getId())) {
+                    card = sideCard;
                     break;
                 }
             }
         } else {
+            // editor: create mock card
+            CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
             card = cardInfo != null ? cardInfo.getMockCard() : null;
         }
+
         if (card != null) {
             deck.getCards().add(card);
-            if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+            if (gameMode) {
+                // game: move card from another board
                 deck.getSideboard().remove(card);
                 cardSelector.removeCard(card.getId());
                 cardSelector.setCardCount(deck.getSideboard().size());
                 cardSelector.refresh();
             }
+            // card hint update
             if (cardInfoPane instanceof CardInfoPane) {
                 ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
             }
@@ -590,12 +623,19 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void moveSelectorCardToSideboard(Event event) {
+        boolean gameMode = mode != DeckEditorMode.FREE_BUILDING;
+        if (gameMode) {
+            throw new IllegalArgumentException("ERROR, you can move card to sideboard from selector in game mode.");
+        }
+
         SimpleCardView cardView = (SimpleCardView) event.getSource();
         CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
         Card card = cardInfo != null ? cardInfo.getMockCard() : null;
         if (card != null) {
             deck.getSideboard().add(card);
         }
+
+        // card hint update
         if (cardInfoPane instanceof CardInfoPane) {
             ((CardInfoPane) cardInfoPane).setCard(new CardView(card), null);
         }

@@ -1,19 +1,23 @@
-
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.icon.abilities.DeathtouchAbilityIcon;
+import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeathtouchAbility extends StaticAbility implements MageSingleton {
 
-    private static final DeathtouchAbility instance = new DeathtouchAbility();
+    private static final DeathtouchAbility instance;
+
+    static {
+        instance = new DeathtouchAbility();
+        instance.addIcon(DeathtouchAbilityIcon.instance);
+    }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;

@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.util.UUID;
 
 /**
+ * App GUI: join to the new game window
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class JoinTableDialog extends MageDialog {

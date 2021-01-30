@@ -1,12 +1,14 @@
 package mage.client.game;
 
-import java.util.concurrent.TimeUnit;
-import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Ignore;
+
+import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ayratn
@@ -22,7 +24,7 @@ public class StartMultiGamesTest {
     private static final Integer GAME_START_COUNT = 10;
 
     private MageFrame frame = null;
-    private Object sync = new Object();
+    private final Object sync = new Object();
     private MageUI ui;
 
     public static void main(String[] argv) throws Exception {
@@ -46,11 +48,16 @@ public class StartMultiGamesTest {
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.fatal(null, e));
         SwingUtilities.invokeLater(() -> {
             synchronized (sync) {
-                frame = new MageFrame();
+                try {
+                    frame = new MageFrame();
+                } catch (Throwable e) {
+                    Assert.fail("Can't start client app");
+                }
                 frame.setVisible(true);
                 sync.notifyAll();
             }
         });
+
         synchronized (sync) {
             if (frame == null) {
                 sync.wait();

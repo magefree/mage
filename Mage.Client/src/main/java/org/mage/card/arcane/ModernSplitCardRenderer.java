@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by StravantUser on 2017-03-30.
+ * @author StravantUser
  */
 public class ModernSplitCardRenderer extends ModernCardRenderer {
 
@@ -29,7 +29,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         List<TextboxRule> keywords = new ArrayList<>();
     }
 
-    private static ArrayList<CardType> ONLY_LAND_TYPE = new ArrayList<CardType>() {
+    private static final ArrayList<CardType> ONLY_LAND_TYPE = new ArrayList<CardType>() {
         {
             add(CardType.LAND);
         }

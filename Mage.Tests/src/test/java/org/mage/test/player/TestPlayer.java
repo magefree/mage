@@ -46,10 +46,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.ComputerPlayer;
-import mage.players.Library;
-import mage.players.ManaPool;
-import mage.players.Player;
-import mage.players.PlayerImpl;
+import mage.players.*;
 import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
@@ -3420,7 +3417,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Map<UUID, Integer> getPlayableObjects(Game game, Zone zone) {
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
         return computerPlayer.getPlayableObjects(game, zone);
     }
 

@@ -123,7 +123,7 @@ public class ColorPane extends JEditorPane {
                 tooltipCounter = 0;
             }
             if (tooltipCounter > 0) {
-                Point location = new Point(getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
+                Point location = new Point(this.getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
                 Component parentComponent = MageFrame.getInstance();
                 location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
                 container.setLocation(location);

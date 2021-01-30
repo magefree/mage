@@ -1,40 +1,53 @@
 package mage.client.cards;
 
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.MageCard;
 import mage.client.MagePane;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ClientDefaultSettings;
+import mage.util.DebugUtil;
 import mage.view.CardView;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * Created by StravantUser on 2016-09-22.
+ * Popup panel for dragging cards drawing
+ *
+ * @author StravantUser, JayDi85
  */
-public class CardDraggerGlassPane implements MouseListener, MouseMotionListener {
+public class CardDraggerGlassPane {
+
+    private static final Logger logger = Logger.getLogger(CardDraggerGlassPane.class);
+
     private final DragCardSource source;
-    private Component dragComponent;
-    private JRootPane currentRoot;
-    private JComponent glassPane;
+    private DragCardTarget currentTarget;
+
+    private MageCard draggingCard; // original card that starting the dragging (full dragging cards keeps in currentCards)
     private ArrayList<CardView> currentCards;
-    private MageCard dragView;
-    private DragCardTarget currentDragTarget;
+    private JComponent draggingGlassPane;
+    private MageCard draggingDrawView; // fake card for drawing on glass pane
+
+    // processing drag events (moving and the end)
+    private MouseListener draggingMouseListener;
+    private MouseMotionListener draggingMouseMotionListener;
+
     private boolean isDragging;
+    private Dimension cardDimension;
 
     // This should not be strictly needed, but for some reason I can't figure out getDeepestComponentAt and
     // getComponentAt do not seem to work correctly for our setup if called on the root MageFrame.
-    private MagePane currentEventRootMagePane;
+    private MagePane eventRootPane; // example: deck editor pane
 
     public CardDraggerGlassPane(DragCardSource source) {
         this.source = source;
     }
 
-    public void beginDrag(Component c, MouseEvent e) {
+    public void handleDragStart(MageCard card, MouseEvent cardEvent) {
         // Start drag
         if (isDragging) {
             return;
@@ -42,145 +55,153 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         isDragging = true;
 
         // Record what we are dragging on
-        dragComponent = c;
-        currentRoot = SwingUtilities.getRootPane(c);
+        draggingCard = card;
 
-        // Pane
-        glassPane = (JComponent) currentRoot.getGlassPane();
-        glassPane.setLayout(null);
-        glassPane.setOpaque(false);
-        glassPane.setVisible(true);
+        // Pane for dragging drawing (fake card)
+        JRootPane currentRoot = SwingUtilities.getRootPane(draggingCard);
+        draggingGlassPane = (JComponent) currentRoot.getGlassPane();
+        draggingGlassPane.setLayout(null);
+        draggingGlassPane.setOpaque(false);
+        draggingGlassPane.setVisible(true);
+        if (DebugUtil.GUI_DECK_EDITOR_DRAW_DRAGGING_PANE_BORDER) {
+            draggingGlassPane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+        }
 
         // Get root mage pane to handle drag targeting in
-        Component rootMagePane = c;
+        Component rootMagePane = draggingCard;
         while (rootMagePane != null && !(rootMagePane instanceof MagePane)) {
             rootMagePane = rootMagePane.getParent();
         }
         if (rootMagePane == null) {
             throw new RuntimeException("CardDraggerGlassPane::beginDrag not in a MagePane?");
         } else {
-            currentEventRootMagePane = (MagePane) rootMagePane;
+            eventRootPane = (MagePane) rootMagePane;
         }
 
-        // Hook up events
-        c.addMouseListener(this);
-        c.addMouseMotionListener(this);
+        // ENABLE drag moving and drag ending processing
+        if (this.draggingMouseMotionListener == null) {
+            this.draggingMouseMotionListener = new MouseMotionAdapter() {
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    handleDragging(e);
+                }
+            };
+        }
+        if (this.draggingMouseListener == null) {
+            this.draggingMouseListener = new MouseAdapter() {
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    handleDragEnd(e);
+                }
+            };
+        }
+        draggingCard.addMouseMotionListener(this.draggingMouseMotionListener);
+        draggingCard.addMouseListener(this.draggingMouseListener);
 
         // Event to local space
-        e = SwingUtilities.convertMouseEvent(c, e, glassPane);
+        MouseEvent glassEvent = SwingUtilities.convertMouseEvent(draggingCard.getMainPanel(), cardEvent, draggingGlassPane);
 
         // Get the cards to drag
         currentCards = new ArrayList<>(source.dragCardList());
 
-        // Make a view for the first one and add it to us
-        dragView = Plugins.instance.getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false, PreferencesDialog.getRenderMode(), true);
-        for (MouseListener l : dragView.getMouseListeners()) {
-            dragView.removeMouseListener(l);
+        // make a fake card to drawing (card's top left corner under the cursor)
+        Rectangle rectangle = new Rectangle(glassEvent.getX(), glassEvent.getY(), getCardDimension().width, getCardDimension().height);
+        draggingDrawView = Plugins.instance.getMageCard(currentCards.get(0), null, new CardIconRenderSettings(), getCardDimension(), null, true, false, PreferencesDialog.getRenderMode(), true);
+        draggingDrawView.setCardContainerRef(null); // no feedback events
+        draggingDrawView.update(currentCards.get(0));
+        draggingDrawView.setCardBounds(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+
+        // disable mouse events from fake card
+        for (MouseListener l : draggingDrawView.getMouseListeners()) {
+            draggingDrawView.removeMouseListener(l);
         }
-        for (MouseMotionListener l : dragView.getMouseMotionListeners()) {
-            dragView.removeMouseMotionListener(l);
+        for (MouseMotionListener l : draggingDrawView.getMouseMotionListeners()) {
+            draggingDrawView.removeMouseMotionListener(l);
         }
-        dragView.setLocation(e.getX(), e.getY());
-        glassPane.add(dragView);
+        draggingGlassPane.add(draggingDrawView);
 
         // Notify the sounce
         source.dragCardBegin();
 
         // Update the target
-        currentDragTarget = null;
-        updateCurrentTarget(SwingUtilities.convertMouseEvent(glassPane, e, currentEventRootMagePane), false);
+        currentTarget = null;
+        MouseEvent rootEvent = SwingUtilities.convertMouseEvent(draggingGlassPane, glassEvent, eventRootPane);
+        updateCurrentTarget(rootEvent, false);
     }
 
-    // e is relative to currentRoot
-    private void updateCurrentTarget(MouseEvent e, boolean isEnding) {
-        Component mouseOver = SwingUtilities.getDeepestComponentAt(currentEventRootMagePane, e.getX(), e.getY());
+    private void handleDragging(MouseEvent e) {
+        // redraw fake card near the cursor
+        MouseEvent glassEvent = SwingUtilities.convertMouseEvent(draggingCard.getMainPanel(), e, draggingGlassPane);
+        draggingDrawView.setCardLocation(glassEvent.getX(), glassEvent.getY());
+        draggingDrawView.repaint();
+
+        // Convert the event into root coords and update target
+        MouseEvent rootEvent = SwingUtilities.convertMouseEvent(draggingCard.getMainPanel(), e, eventRootPane);
+        updateCurrentTarget(rootEvent, false);
+    }
+
+    private void handleDragEnd(MouseEvent e) {
+        // No longer dragging
+        isDragging = false;
+
+        // Remove custom listeners
+        draggingCard.removeMouseListener(this.draggingMouseListener);
+        draggingCard.removeMouseMotionListener(this.draggingMouseMotionListener);
+
+        // Convert the event into root coords
+        MouseEvent rootEvent = SwingUtilities.convertMouseEvent(draggingCard.getMainPanel(), e, eventRootPane);
+
+        // Remove the drag card
+        draggingGlassPane.remove(draggingDrawView);
+        draggingGlassPane.repaint();
+
+        // Let the drag source know
+        source.dragCardEnd(currentTarget);
+
+        // Update the target, and do the drop
+        updateCurrentTarget(rootEvent, true);
+    }
+
+    private void updateCurrentTarget(MouseEvent rootEvent, boolean isEnding) {
+        // event related to eventRootPane
+        Component mouseOver = SwingUtilities.getDeepestComponentAt(eventRootPane, rootEvent.getX(), rootEvent.getY());
         while (mouseOver != null) {
             if (mouseOver instanceof DragCardTarget) {
                 DragCardTarget target = (DragCardTarget) mouseOver;
-                MouseEvent targetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, mouseOver);
-                if (target != currentDragTarget) {
-                    if (currentDragTarget != null) {
-                        MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, (Component) currentDragTarget);
-                        currentDragTarget.dragCardExit(oldTargetEvent);
+                MouseEvent targetEvent = SwingUtilities.convertMouseEvent(eventRootPane, rootEvent, mouseOver);
+                if (target != currentTarget) {
+                    if (currentTarget != null) {
+                        MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(eventRootPane, rootEvent, (Component) currentTarget);
+                        currentTarget.dragCardExit(oldTargetEvent);
                     }
-                    currentDragTarget = target;
-                    currentDragTarget.dragCardEnter(targetEvent);
+                    currentTarget = target;
+                    currentTarget.dragCardEnter(targetEvent);
                 }
                 if (isEnding) {
-                    currentDragTarget.dragCardExit(targetEvent);
-                    currentDragTarget.dragCardDrop(targetEvent, source, currentCards);
+                    currentTarget.dragCardExit(targetEvent);
+                    currentTarget.dragCardDrop(targetEvent, source, currentCards);
                 } else {
-                    currentDragTarget.dragCardMove(targetEvent);
+                    currentTarget.dragCardMove(targetEvent);
                 }
                 return;
             }
             mouseOver = mouseOver.getParent();
         }
-        if (currentDragTarget != null) {
-            MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(currentEventRootMagePane, e, (Component) currentDragTarget);
-            currentDragTarget.dragCardExit(oldTargetEvent);
+        if (currentTarget != null) {
+            MouseEvent oldTargetEvent = SwingUtilities.convertMouseEvent(eventRootPane, rootEvent, (Component) currentTarget);
+            currentTarget.dragCardExit(oldTargetEvent);
         }
-        currentDragTarget = null;
+        currentTarget = null;
+    }
+
+    protected Dimension getCardDimension() {
+        if (cardDimension == null) {
+            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
+        }
+        return cardDimension;
     }
 
     public boolean isDragging() {
         return isDragging;
-    }
-
-    /**
-     * Mouse released -> we are done the drag
-     */
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // No longer dragging
-        isDragging = false;
-
-        // Remove listeners
-        dragComponent.removeMouseListener(this);
-        dragComponent.removeMouseMotionListener(this);
-
-        // Convert the event into root coords
-        e = SwingUtilities.convertMouseEvent(dragComponent, e, currentEventRootMagePane);
-
-        // Remove the drag card
-        glassPane.remove(dragView);
-        glassPane.repaint();
-
-        // Let the drag source know
-        source.dragCardEnd(currentDragTarget);
-
-        // Update the target, and do the drop
-        updateCurrentTarget(e, true);
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // Update the view
-        MouseEvent glassE = SwingUtilities.convertMouseEvent(dragComponent, e, glassPane);
-        dragView.setLocation(glassE.getX(), glassE.getY());
-        dragView.repaint();
-        // Convert the event into root coords and update target
-        e = SwingUtilities.convertMouseEvent(dragComponent, e, currentEventRootMagePane);
-        updateCurrentTarget(e, false);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
     }
 }

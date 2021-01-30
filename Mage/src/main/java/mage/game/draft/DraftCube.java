@@ -1,4 +1,3 @@
-
 package mage.game.draft;
 
 import java.util.ArrayList;

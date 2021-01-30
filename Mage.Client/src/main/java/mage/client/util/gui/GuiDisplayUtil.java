@@ -84,7 +84,6 @@ public final class GuiDisplayUtil {
         descriptionPanel.setVisible(false);
         descriptionPanel.setLayout(null);
 
-        //descriptionPanel.setBorder(BorderFactory.createLineBorder(Color.green));
         JButton j = new JButton("");
         j.setBounds(0, 0, width, height);
         j.setBackground(Color.black);

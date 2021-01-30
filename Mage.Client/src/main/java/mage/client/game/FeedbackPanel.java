@@ -67,7 +67,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
                             int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
             if (messageId < this.lastMessageId) {
-                LOGGER.warn("ignoring message from later source: " + messageId + ", text=" + message);
+                // if too many warning messages here then look at GAME_REDRAW_GUI event logic
+                LOGGER.warn("catch un-synced message from later source (possible reason: connection or performance problems): " + messageId + ", text=" + message);
                 return;
             }
             this.lastMessageId = messageId;
@@ -76,7 +77,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setOriginalId(null); // reference to the feedback causing ability
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
-        //this.lblMessage.setText(lblText);
 
         this.mode = mode;
         switch (this.mode) {
@@ -167,6 +167,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void handleOptions(Map<String, Serializable> options) {
+        // clear already opened dialog (second request)
+        if (connectedDialog != null) {
+            connectedDialog.removeDialog();
+            connectedDialog = null;
+        }
+
         if (options != null) {
             if (options.containsKey("UI.left.btn.text")) {
                 String text = (String) options.get("UI.left.btn.text");

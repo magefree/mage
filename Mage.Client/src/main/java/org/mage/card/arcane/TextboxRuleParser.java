@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public final class TextboxRuleParser {
 
-    private static final Logger LOGGER = Logger.getLogger(CardPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(TextboxRuleParser.class);
 
     private static final Pattern BasicManaAbility = Pattern.compile("\\{T\\}: Add \\{(\\w)\\}\\.");
     private static final Pattern LevelAbilityPattern = Pattern.compile("Level (\\d+)-?(\\d*)(\\+?)");

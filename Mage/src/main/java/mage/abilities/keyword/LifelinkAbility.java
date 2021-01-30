@@ -1,20 +1,23 @@
-
-
 package mage.abilities.keyword;
 
-import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.icon.abilities.LifelinkAbilityIcon;
+import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LifelinkAbility extends StaticAbility implements MageSingleton {
 
-    private static final LifelinkAbility instance =  new LifelinkAbility();
+    private static final LifelinkAbility instance;
+
+    static {
+        instance = new LifelinkAbility();
+        instance.addIcon(LifelinkAbilityIcon.instance);
+    }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;

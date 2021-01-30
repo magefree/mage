@@ -13,6 +13,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * App GUI: reset password on the server
+ *
+ */
 public class ResetPasswordDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);

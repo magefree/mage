@@ -1,16 +1,13 @@
 package mage.client.plugins.impl;
 
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.MageCard;
-import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
-import mage.client.cards.Card;
-import mage.client.cards.Permanent;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
-import mage.client.util.ClientDefaultSettings;
 import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
 import mage.interfaces.plugin.CounterPlugin;
@@ -21,6 +18,7 @@ import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import net.xeoh.plugins.base.util.uri.ClassURI;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.MageLayer;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
@@ -42,7 +40,7 @@ public enum Plugins implements MagePlugins {
     private static PluginManager pm;
 
     private ThemePlugin themePlugin = null;
-    private CardPlugin cardPlugin = null;
+    private CardPlugin cardPlugin = null; // required by game
     private CounterPlugin counterPlugin = null;
     private static final MageActionCallback mageActionCallback = new MageActionCallback();
     private final Map<String, String> sortingOptions = new HashMap<>();
@@ -93,27 +91,39 @@ public enum Plugins implements MagePlugins {
     }
 
     @Override
-    public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+    public MageCard getMagePermanent(PermanentView card, BigCard bigCard, CardIconRenderSettings cardIconRenderSettings, Dimension dimension, UUID gameId, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+        MageCard mageCard;
         if (cardPlugin != null) {
             mageActionCallback.refreshSession();
             mageActionCallback.setCardPreviewComponent(bigCard);
-            return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
+            mageCard = cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
         } else {
-            return new Permanent(card, bigCard, ClientDefaultSettings.dimensions, gameId);
+            throw new IllegalArgumentException("Card's plugin must be loaded");
         }
+        return createLayeredCard(mageCard, dimension, cardIconRenderSettings);
     }
 
     @Override
-    public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode, boolean needFullPermanentRender) {
+    public MageCard getMageCard(CardView card, BigCard bigCard, CardIconRenderSettings cardIconRenderSettings, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable, int renderMode, boolean needFullPermanentRender) {
+        // Card icons panels must be put outside of the card like MTG Arena.
+        // So for compatibility purposes: keep free space for icons and change card dimention
+        MageCard mageCard;
         if (cardPlugin != null) {
             if (previewable) {
                 mageActionCallback.refreshSession();
                 mageActionCallback.setCardPreviewComponent(bigCard);
             }
-            return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
+            mageCard = cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
         } else {
-            return new Card(card, bigCard, ClientDefaultSettings.dimensions, gameId);
+            throw new IllegalArgumentException("Card's plugin must be loaded");
         }
+        return createLayeredCard(mageCard, dimension, cardIconRenderSettings);
+    }
+
+    private MageCard createLayeredCard(MageCard mageCard, Dimension dimension, CardIconRenderSettings cardIconRenderSettings) {
+        MageLayer mageLayer = new MageLayer(mageCard, cardIconRenderSettings);
+        mageLayer.setCardBounds(0, 0, dimension.width, dimension.height); // default size
+        return mageLayer;
     }
 
     @Override
@@ -122,9 +132,9 @@ public enum Plugins implements MagePlugins {
     }
 
     @Override
-    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MagePermanent> permanents, boolean topRow) {
+    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean topRow) {
         if (this.cardPlugin != null) {
-            return this.cardPlugin.sortPermanents(ui, permanents, PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false").equals("true"), topRow);
+            return this.cardPlugin.sortPermanents(ui, cards, PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false").equals("true"), topRow);
         }
         return -1;
     }
@@ -176,14 +186,14 @@ public enum Plugins implements MagePlugins {
     }
 
     @Override
-    public void onAddCard(MagePermanent card, int count) {
+    public void onAddCard(MageCard card, int count) {
         if (this.cardPlugin != null) {
             this.cardPlugin.onAddCard(card, count);
         }
     }
 
     @Override
-    public void onRemoveCard(MagePermanent card, int count) {
+    public void onRemoveCard(MageCard card, int count) {
         if (this.cardPlugin != null) {
             this.cardPlugin.onRemoveCard(card, count);
         }

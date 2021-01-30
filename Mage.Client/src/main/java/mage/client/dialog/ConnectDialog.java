@@ -28,6 +28,8 @@ import java.util.concurrent.TimeoutException;
 import static mage.client.dialog.PreferencesDialog.*;
 
 /**
+ * App GUI: connection windows
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class ConnectDialog extends MageDialog {

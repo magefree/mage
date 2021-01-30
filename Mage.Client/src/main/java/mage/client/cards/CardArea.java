@@ -1,26 +1,35 @@
 package mage.client.cards;
 
+import mage.abilities.icon.CardIconOrder;
+import mage.abilities.icon.CardIconPosition;
+import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.MageCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
-import mage.view.AbilityView;
-import mage.view.CardView;
-import mage.view.CardsView;
-import mage.view.SimpleCardView;
-import org.mage.card.arcane.CardPanel;
+import mage.util.DebugUtil;
+import mage.view.*;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.UUID;
 
-public class CardArea extends JPanel implements MouseListener {
+/**
+ * Panel with cards list, can show cards in two modes:
+ *  - cards one by one in the line;
+ *  - stacked and multicolumns (if many cards);
+ *
+ *  Uses in some dialogs like pile choose and cards choosing
+ */
+public class CardArea extends JPanel implements CardEventProducer {
+
+    private static final Logger logger = Logger.getLogger(CardArea.class);
 
     protected final CardEventSource cardEventSource = new CardEventSource();
 
@@ -38,7 +47,9 @@ public class CardArea extends JPanel implements MouseListener {
     private Dimension customCardSize = null; // custom card size for tests
     private boolean customNeedFullPermanentRender = false; // disable permanent render mode, see CardArea for more info
     private int customXOffsetBetweenCardsOrColumns = 0;
-    private MouseListener customMouseListener = null;
+    private CardIconPosition customCardIconPosition = null;
+    private CardIconOrder customCardIconOrder = null;
+    private int customCardIconsMaxVisibleCount = 0;
 
     /**
      * Create the panel.
@@ -51,12 +62,26 @@ public class CardArea extends JPanel implements MouseListener {
         setGUISize();
         cardArea = new JLayeredPane();
         scrollPane.setViewportView(cardArea);
+        if (DebugUtil.GUI_GAME_DIALOGS_DRAW_CARDS_AREA_BORDER) {
+            this.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        }
+
+        // ENABLE non card popup menu
+        // if you want process popup menu from card then use special event
+        cardArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
+                    Plugins.instance.getActionCallback().popupMenuPanel(e, CardArea.this);
+                }
+            }
+        });
     }
 
     public void cleanUp() {
         for (Component comp : cardArea.getComponents()) {
-            if (comp instanceof CardPanel) {
-                ((CardPanel) comp).cleanUp();
+            if (comp instanceof MageCard) {
+                ((MageCard) comp).cleanUp();
                 cardArea.remove(comp);
             }
         }
@@ -65,7 +90,7 @@ public class CardArea extends JPanel implements MouseListener {
     public void changeGUISize() {
         setGUISize();
         for (Component component : cardArea.getComponents()) {
-            if (component instanceof CardPanel) {
+            if (component instanceof MageCard) {
                 component.setBounds(0, 0, cardDimension.width, cardDimension.height);
             }
         }
@@ -93,6 +118,8 @@ public class CardArea extends JPanel implements MouseListener {
         newSize.width += 20;
         newSize.height += 20;
         this.setPreferredSize(newSize);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(GUISizeHelper.getCardsScrollbarUnitInc(cardDimension.width));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(GUISizeHelper.getCardsScrollbarUnitInc(cardDimension.height));
     }
 
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -107,7 +134,6 @@ public class CardArea extends JPanel implements MouseListener {
         }
 
         redraw();
-
         fixDialogSize();
     }
 
@@ -157,10 +183,16 @@ public class CardArea extends JPanel implements MouseListener {
             tmp.setAbility(card); // cross-reference, required for ability picker
             card = tmp;
         }
-        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, cardDimension, gameId, true, true,
+
+        CardIconRenderSettings customIconsRender = new CardIconRenderSettings()
+                .withDebugMode(true)
+                .withCustomPosition(customCardIconPosition)
+                .withCustomOrder(customCardIconOrder)
+                .withCustomMaxVisibleCount(customCardIconsMaxVisibleCount)
+                .withCustomIconSizePercent(30);
+        MageCard cardPanel = Plugins.instance.getMageCard(card, bigCard, customIconsRender, cardDimension, gameId, true, true,
                 customRenderMode != -1 ? customRenderMode : PreferencesDialog.getRenderMode(), customNeedFullPermanentRender);
-        cardPanel.setBounds(rectangle);
-        cardPanel.addMouseListener(customMouseListener != null ? customMouseListener : this);
+        cardPanel.setCardContainerRef(this);
         cardPanel.update(card);
         cardPanel.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
         cardArea.add(cardPanel);
@@ -238,59 +270,6 @@ public class CardArea extends JPanel implements MouseListener {
         cardEventSource.clearListeners();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (e.getClickCount() >= 1 && !e.isConsumed()) {
-            Object obj = e.getSource();
-            if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0)) { // double clicks and repeated double clicks
-                e.consume();
-                if (obj instanceof Card) {
-                    if (e.isAltDown()) {
-                        cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
-                    } else {
-                        cardEventSource.fireEvent(((Card) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
-                    }
-                } else if (obj instanceof MageCard) {
-                    if (e.isAltDown()) {
-                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.ALT_DOUBLE_CLICK);
-                    } else {
-                        cardEventSource.fireEvent(((MageCard) obj).getOriginal(), ClientEventType.DOUBLE_CLICK);
-                    }
-                }
-            }
-            if (obj instanceof MageCard) {
-                checkMenu(e, ((MageCard) obj).getOriginal());
-            } else {
-                checkMenu(e, null);
-            }
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        if (!e.isConsumed()) {
-            Object obj = e.getSource();
-            if (obj instanceof MageCard) {
-                checkMenu(e, ((MageCard) obj).getOriginal());
-            } else {
-                checkMenu(e, null);
-            }
-        } else {
-            cardEventSource.fireEvent(ClientEventType.ACTION_CONSUMED);
-        }
-    }
-
-    private void checkMenu(MouseEvent Me, SimpleCardView card) {
-        if (Me.isPopupTrigger()) {
-            Me.consume();
-            cardEventSource.fireEvent(card, Me.getComponent(), Me.getX(), Me.getY(), ClientEventType.SHOW_POP_UP_MENU);
-        }
-    }
-
     public void setCustomRenderMode(int customRenderMode) {
         this.customRenderMode = customRenderMode;
     }
@@ -307,16 +286,20 @@ public class CardArea extends JPanel implements MouseListener {
         this.customXOffsetBetweenCardsOrColumns = customXOffsetBetweenCardsOrColumns;
     }
 
-    public void setCustomMouseListener(MouseListener customMouseListener) {
-        this.customMouseListener = customMouseListener;
+    public void setCustomCardIconsPanelPosition(CardIconPosition panelPosition) {
+        this.customCardIconPosition = panelPosition;
+    }
+
+    public void setCustomCardIconsPanelOrder(CardIconOrder panelOrder) {
+        this.customCardIconOrder = panelOrder;
+    }
+
+    public void setCustomCardIconsMaxVisibleCount(int maxVisibleCount) {
+        this.customCardIconsMaxVisibleCount = maxVisibleCount;
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public CardEventSource getCardEventSource() {
+        return this.cardEventSource;
     }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
 }

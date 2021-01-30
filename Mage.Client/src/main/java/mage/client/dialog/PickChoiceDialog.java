@@ -11,6 +11,8 @@ import mage.client.MageFrame;
 import mage.client.util.gui.MageDialogState;
 
 /**
+ * Game GUI: choosing one of the list's item
+ *
  * @author JayDi85
  */
 public class PickChoiceDialog extends MageDialog {

@@ -8,12 +8,15 @@ import mage.constants.Zone;
 import java.io.ObjectStreamException;
 
 /**
- *
  * @author varaghar
  */
 public class CrewWithToughnessAbility extends StaticAbility implements MageSingleton {
 
-    private static final CrewWithToughnessAbility instance = new CrewWithToughnessAbility();
+    private static final CrewWithToughnessAbility instance;
+
+    static {
+        instance = new CrewWithToughnessAbility();
+    }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;

@@ -1,8 +1,3 @@
-/**
- * GathererSymbols.java
- *
- * Created on 25.08.2010
- */
 package org.mage.plugins.card.dl.sources;
 
 import com.google.common.collect.AbstractIterator;

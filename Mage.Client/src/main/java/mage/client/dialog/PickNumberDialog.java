@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
+ * Game GUI: choose number
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class PickNumberDialog extends MageDialog {

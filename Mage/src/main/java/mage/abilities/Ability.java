@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
+import mage.abilities.icon.CardIcon;
 import mage.constants.*;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -522,6 +523,10 @@ public interface Ability extends Controllable, Serializable {
     List<Hint> getHints();
 
     Ability addHint(Hint hint);
+
+    List<CardIcon> getIcons();
+
+    Ability addIcon(CardIcon cardIcon);
 
     Ability addCustomOutcome(Outcome customOutcome);
 
