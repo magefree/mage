@@ -174,6 +174,16 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
         CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
         if (!created || !game.replaceEvent(event)) {
+            int currentTokens = game
+                    .getBattlefield()
+                    .getAllActivePermanents()
+                    .stream()
+                    .map(PermanentToken.class::isInstance)
+                    .mapToInt(x -> x ? 1 : 0)
+                    .sum();
+            int tokenLimit = 250; // should maybe be an environment variable?
+            int tokenSlots = Math.max(currentTokens - tokenLimit, 0);
+            event.setAmount(Math.min(event.getAmount(), tokenSlots));
             putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
             return true;
         }
