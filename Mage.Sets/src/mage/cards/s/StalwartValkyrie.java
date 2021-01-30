@@ -30,7 +30,7 @@ public final class StalwartValkyrie extends CardImpl {
 
         // You may pay {1}{W} and exile a creature card from your graveyard rather than pay this spell's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)));
         this.addAbility(ability);
 
         // Flying

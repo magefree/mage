@@ -37,7 +37,7 @@ public final class MasterSkald extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new ReturnFromGraveyardToHandTargetEffect(),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                        StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
+                        StaticFilters.FILTER_CARD_CREATURE_A
                 ))
         ));
         ability.addTarget(new TargetCardInYourGraveyard(filter));

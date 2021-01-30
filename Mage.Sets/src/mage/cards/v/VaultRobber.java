@@ -36,7 +36,7 @@ public final class VaultRobber extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
+                StaticFilters.FILTER_CARD_CREATURE_A
         )));
         this.addAbility(ability);
     }

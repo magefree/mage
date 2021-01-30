@@ -21,7 +21,7 @@ public final class WeighDown extends CardImpl {
 
         // As an additional cost to cast this spell, exile a creature card from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(
-                new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)
+                new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)
         ));
 
         // Target creature gets -3/-3 until end of turn.
