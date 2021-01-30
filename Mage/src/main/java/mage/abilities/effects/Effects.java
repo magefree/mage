@@ -41,9 +41,6 @@ public class Effects extends ArrayList<Effect> {
         String lastRule = null;
         int effectNum = 0;
         for (Effect effect : this) {
-            if (effect == null) {
-                continue;
-            }
             String endString = "";
             String nextRule = effect.getText(mode);
 

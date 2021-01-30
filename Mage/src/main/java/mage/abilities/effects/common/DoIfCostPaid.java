@@ -33,7 +33,9 @@ public class DoIfCostPaid extends OneShotEffect {
 
     public DoIfCostPaid(Effect effectOnPaid, Effect effectOnNotPaid, Cost cost, boolean optional) {
         this(effectOnPaid, cost, null, optional);
-        this.otherwiseEffects.add(effectOnNotPaid);
+        if (effectOnNotPaid != null) {
+            this.otherwiseEffects.add(effectOnNotPaid);
+        }
     }
 
     public DoIfCostPaid(Effect effectOnPaid, Cost cost, String chooseUseText) {
@@ -155,8 +157,8 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        String otherwiseText = otherwiseEffects.getText(mode);
-        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode) + (!otherwiseText.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
+        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode)
+                + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
     }
 
     protected String getCostText() {
