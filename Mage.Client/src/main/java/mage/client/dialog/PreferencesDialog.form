@@ -4273,7 +4273,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelCardImages" max="32767" attributes="0"/>
-                          <Component id="jPanel1" max="32767" attributes="0"/>
+                          <Component id="panelCardStyles" max="32767" attributes="0"/>
                           <Component id="panelBackgroundImages" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -4284,12 +4284,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="panelCardStyles" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelBackgroundImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="98" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4448,7 +4448,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel1">
+            <Container class="javax.swing.JPanel" name="panelCardStyles">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -4461,67 +4461,41 @@
                 </Property>
               </Properties>
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbCardRenderShowAbilityTextOverlay" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbCardRenderShowAbilityTextOverlay" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="1"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderImageFallback">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Render mode: MTGO style (off) or IMAGE style (on)"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderImageFallbackActionPerformed"/>
-                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderIconsForAbilities">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Enable card icons for abilities (example: flying, deathtouch)"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderIconsForPlayable">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Enable card icons for playable abilities (example: if you can activate card&apos;s ability then show a special icon in the corner)"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSeparator" name="jSeparator1">
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderShowReminderText">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Show reminder text in rendered card textboxes"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowReminderTextActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderHideSetSymbol">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Hide set symbols on cards (more space on the type line for card types)"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderHideSetSymbolActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderShowAbilityTextOverlay">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Show ability text as overlay in big card view"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowAbilityTextOverlayActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

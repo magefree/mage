@@ -138,7 +138,7 @@ public final class GUISizeHelper {
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
-        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
+        if (PreferencesDialog.getRenderMode() == 0) {
             otherZonesCardVerticalOffset = CardRenderer.getCardTopHeight(otherZonesCardDimension.width);
         } else if (otherZonesCardSize > 29) {
             otherZonesCardVerticalOffset = otherZonesCardDimension.height / 8;

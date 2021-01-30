@@ -10,6 +10,7 @@ import mage.cards.MageCardLocation;
 import mage.cards.MageCardSpace;
 import mage.client.cards.CardIconsPanel;
 import mage.client.cards.CardIconsPanelFactory;
+import mage.client.dialog.PreferencesDialog;
 import mage.constants.Zone;
 import mage.util.DebugUtil;
 import mage.view.CardView;
@@ -146,10 +147,14 @@ public class MageLayer extends MageCard {
             this.iconsPanels.add(this.iconsDebugPanel);
         } else {
             // NORMAL mode -- multiple panels
-            this.iconsAbilitiesPanel = CardIconsPanelFactory.createAbilitiesPanel();
-            this.iconsPanels.add(this.iconsAbilitiesPanel);
-            this.iconsPlayablePanel = CardIconsPanelFactory.createPlayablePanel();
-            this.iconsPanels.add(this.iconsPlayablePanel);
+            if (PreferencesDialog.getRenderIconsForAbilities()) {
+                this.iconsAbilitiesPanel = CardIconsPanelFactory.createAbilitiesPanel();
+                this.iconsPanels.add(this.iconsAbilitiesPanel);
+            }
+            if (PreferencesDialog.getRenderIconsForPlayable()) {
+                this.iconsPlayablePanel = CardIconsPanelFactory.createPlayablePanel();
+                this.iconsPanels.add(this.iconsPlayablePanel);
+            }
         }
 
         this.iconsPanels.forEach(panel -> this.mainLayerIcons.add(panel));
