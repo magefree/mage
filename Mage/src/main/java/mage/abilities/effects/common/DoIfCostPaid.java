@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,6 +12,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Locale;
 
 public class DoIfCostPaid extends OneShotEffect {
 
@@ -63,7 +64,7 @@ public class DoIfCostPaid extends OneShotEffect {
         return this;
     }
 
-    public DoIfCostPaid addOtherwiseEffect (Effect effect) {
+    public DoIfCostPaid addOtherwiseEffect(Effect effect) {
         otherwiseEffects.add(effect);
         return this;
     }
@@ -154,7 +155,8 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode) + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
+        String otherwiseText = otherwiseEffects.getText(mode);
+        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode) + (!otherwiseText.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
     }
 
     protected String getCostText() {
