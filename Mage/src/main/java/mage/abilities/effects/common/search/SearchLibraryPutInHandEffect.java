@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common.search;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
@@ -14,8 +13,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LokiX, BetaSteward_at_googlemail.com
  */
 public class SearchLibraryPutInHandEffect extends SearchEffect {
@@ -96,14 +96,26 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         sb.append(rulePrefix);
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-            sb.append(target.getTargetName()).append(revealCards ? ", reveal them," : "").append(" and put them into your hand");
+            sb.append(target.getTargetName());
+            if (forceShuffle) {
+                sb.append(revealCards ? ", reveal them" : "");
+                sb.append(", put them into your hand, then shuffle your library");
+            } else {
+                sb.append(revealCards ? ", reveal them," : "");
+                sb.append(" and put them into your hand. If you do, shuffle your library");
+            }
         } else {
-            sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it," : "").append(" and put that card into your hand");
-        }
-        if (forceShuffle) {
-            sb.append(". Then shuffle your library");
-        } else {
-            sb.append(". If you do, shuffle your library");
+            if (!target.getTargetName().startsWith("a ") && !target.getTargetName().startsWith("an ")) {
+                sb.append("a ");
+            }
+            sb.append(target.getTargetName());
+            if (forceShuffle) {
+                sb.append(revealCards ? ", reveal it" : "");
+                sb.append(", put it into your hand, then shuffle your library");
+            } else {
+                sb.append(revealCards ? ", reveal it," : "");
+                sb.append(" and put that card into your hand. If you do, shuffle your library");
+            }
         }
         staticText = sb.toString();
     }

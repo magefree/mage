@@ -84,17 +84,20 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             } else {
                 sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             }
-            sb.append(target.getTargetName()).append(" and put them onto the battlefield");
+            sb.append(target.getTargetName());
+            sb.append(forceShuffle ? ", " : " and ");
+            sb.append("put them onto the battlefield");
         } else {
             sb.append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "" : "a ")
-                    .append(target.getTargetName())
-                    .append(" and put it onto the battlefield");
+                    .append(target.getTargetName());
+            sb.append(forceShuffle ? ", " : " and ");
+            sb.append("put it onto the battlefield");
         }
         if (tapped) {
             sb.append(" tapped");
         }
         if (forceShuffle) {
-            sb.append(". Then shuffle your library");
+            sb.append(", then shuffle your library");
         } else {
             sb.append(". If you do, shuffle your library");
         }

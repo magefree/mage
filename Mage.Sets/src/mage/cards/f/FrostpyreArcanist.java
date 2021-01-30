@@ -36,7 +36,7 @@ public final class FrostpyreArcanist extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent("you control a Giant or a Wizard");
     private static final FilterCard filter2 = new FilterInstantOrSorceryCard(
-            "instant or sorcery card with the same name as a card in your graveyard"
+            "an instant or sorcery card with the same name as a card in your graveyard"
     );
 
     static {
