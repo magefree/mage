@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common.counter;
 
-import java.util.HashSet;
-import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -11,13 +9,16 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- *
  * @author LevelX2
  */
 public class RemoveCounterTargetEffect extends OneShotEffect {
@@ -111,7 +112,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         if (counter == null) {
             text += "a counter";
         } else {
-            text += CardUtil.numberToText(counter.getCount(), "a") + ' ' + counter.getName();
+            text += CardUtil.numberToText(counter.getCount(), CounterType.findArticle(counter.getName())) + ' ' + counter.getName();
             text += counter.getCount() > 1 ? " counters" : " counter";
         }
         text += " from target " + (mode.getTargets().isEmpty() ? " object" : mode.getTargets().get(0).getTargetName());

@@ -1,18 +1,17 @@
-
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class RemoveCountersSourceCost extends CostImpl {
@@ -23,7 +22,7 @@ public class RemoveCountersSourceCost extends CostImpl {
     public RemoveCountersSourceCost(Counter counter) {
         this.amount = counter.getCount();
         this.name = counter.getName();
-        this.text = new StringBuilder("remove ").append((amount == 1 ? "a" : CardUtil.numberToText(amount)))
+        this.text = new StringBuilder("remove ").append((amount == 1 ? CounterType.findArticle(counter.getName()) : CardUtil.numberToText(amount)))
                 .append(' ').append(name).append(" counter").append((amount != 1 ? "s" : ""))
                 .append(" from {this}").toString();
 

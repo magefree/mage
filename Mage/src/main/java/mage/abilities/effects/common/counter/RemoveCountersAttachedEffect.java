@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -14,7 +15,6 @@ import mage.util.CardUtil;
 import java.util.Locale;
 
 /**
- *
  * @author noahg
  */
 public class RemoveCountersAttachedEffect extends OneShotEffect {
@@ -28,9 +28,8 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
     }
 
     /**
-     *
      * @param counter
-     * @param amount this amount will be added to the counter instances
+     * @param amount        this amount will be added to the counter instances
      * @param textEnchanted text used for the enchanted permanent in rule text
      */
     public RemoveCountersAttachedEffect(Counter counter, DynamicValue amount, String textEnchanted) {
@@ -73,7 +72,7 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
             sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
             sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counters from ");
         } else {
-            sb.append("a ");
+            sb.append(CounterType.findArticle(counter.getName())).append(' ');
             sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter from ");
         }
         sb.append(textEnchanted);

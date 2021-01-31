@@ -129,7 +129,7 @@ public class RemoveCounterCost extends CostImpl {
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Remove ");
-        sb.append(CardUtil.numberToText(countersToRemove, "a")).append(' ');
+        sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle())).append(' ');
         if (counterTypeToRemove != null) {
             sb.append(counterTypeToRemove.getName());
         }

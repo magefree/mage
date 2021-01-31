@@ -5,11 +5,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Loki
  */
 public class RemoveCounterSourceEffect extends OneShotEffect {
@@ -69,7 +69,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
             sb.append("remove ").append(Integer.toString(counter.getCount())).append(' ').append(counter.getName()).append(" counters from {this}");
             staticText = sb.toString();
         } else {
-            staticText = "remove a " + counter.getName() + " counter from {this}";
+            staticText = "remove " + CounterType.findArticle(counter.getName()) + " " + counter.getName() + " counter from {this}";
         }
     }
 }
