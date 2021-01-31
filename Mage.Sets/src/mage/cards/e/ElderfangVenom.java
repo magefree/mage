@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class ElderfangVenom extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "attacking elves");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "attacking Elves");
 
     static {
         filter.add(AttackingPredicate.instance);

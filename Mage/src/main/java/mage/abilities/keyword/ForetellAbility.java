@@ -71,6 +71,13 @@ public class ForetellAbility extends SpecialAction {
         }
         return super.canActivate(playerId, game);
     }
+
+    @Override
+    public String getRule() {
+        return "Foretell " + foretellCost + " <i>(During your turn, " +
+                "you may pay {2} and exile this card from your hand face down. " +
+                "Cast it on a later turn for its foretell cost.)</i>";
+    }
 }
 
 class ForetellExileEffect extends OneShotEffect {
@@ -82,11 +89,6 @@ class ForetellExileEffect extends OneShotEffect {
         super(Outcome.Neutral);
         this.card = card;
         this.foretellCost = foretellCost;
-        StringBuilder sbRule = new StringBuilder("Foretell");
-        sbRule.append("&mdash;");
-        sbRule.append(foretellCost);
-        sbRule.append(" <i>(During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)</i>");
-        staticText = sbRule.toString();
     }
 
     public ForetellExileEffect(final ForetellExileEffect effect) {

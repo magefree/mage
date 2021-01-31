@@ -24,7 +24,7 @@ public class DreamDevourerTest extends CardTestPlayerBase {
 
         // bears must have foretell and normal cast
         checkPlayableAbility("normal cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Grizzly Bears", true);
-        checkPlayableAbility("foretell exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Foretell", true);
+        checkPlayableAbility("foretell exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell", true);
         checkPT("no boost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dream Devourer", 0, 3);
 
         // normal cast and no boost
@@ -35,7 +35,7 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         checkPT("after normal cast - no boost", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dream Devourer", 0, 3);
 
         // foretell for {2}
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}: Fore");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 1);
         checkExileCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 1);

@@ -17,7 +17,7 @@ public class KarfellHarbingerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Karfell Harbinger");
         addCard(Zone.HAND, playerA, "Augury Raven");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}: Fore");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fore");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class RuthlessWinnower extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a non-Elf creature");
+    private static final FilterPermanent filter = new FilterPermanent("non-Elf creature");
 
     static {
         filter.add(Predicates.not(SubType.ELF.getPredicate()));
