@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
@@ -15,7 +16,6 @@ import mage.players.Player;
 
 import java.util.Optional;
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -81,14 +81,17 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return ActivationStatus.getFalse();
             }
-            // fix for Gitaxian Probe and casting opponent's spells
-            ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
+
+            // play from not own hand
+            ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
             if (approvingObject == null) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
                     return ActivationStatus.getFalse();
                 }
             }
+
+            // play restrict
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (game.inCheckPlayableState()) {
                 if (game.getContinuousEffects().preventedByRuleModification(
@@ -96,6 +99,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
                 }
             }
+
+            // no mana restrict
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
@@ -104,6 +109,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
                 }
             }
+
+            // can pay all costs
             if (costs.canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
@@ -116,7 +123,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
                         }
                     }
                     return ActivationStatus.getFalse();
-
                 } else {
                     return new ActivationStatus(canChooseTarget(game), approvingObject);
                 }

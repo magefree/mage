@@ -1,26 +1,24 @@
 package mage.abilities.effects.common.asthought;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.PlayLandAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
@@ -28,6 +26,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
     private final Zone fromZone;
     private final TargetController allowedCaster;
     private final boolean withoutMana;
+    private final boolean onlyCastAllowed; // can cast spells, but can't play lands
 
     public PlayFromNotOwnHandZoneTargetEffect() {
         this(Duration.EndOfTurn);
@@ -46,10 +45,15 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
     }
 
     public PlayFromNotOwnHandZoneTargetEffect(Zone fromZone, TargetController allowedCaster, Duration duration, boolean withoutMana) {
+        this(fromZone, allowedCaster, duration, withoutMana, false);
+    }
+
+    public PlayFromNotOwnHandZoneTargetEffect(Zone fromZone, TargetController allowedCaster, Duration duration, boolean withoutMana, boolean onlyCastAllowed) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, withoutMana ? Outcome.PlayForFree : Outcome.PutCardInPlay);
         this.fromZone = fromZone;
         this.allowedCaster = allowedCaster;
         this.withoutMana = withoutMana;
+        this.onlyCastAllowed = onlyCastAllowed;
     }
 
     public PlayFromNotOwnHandZoneTargetEffect(final PlayFromNotOwnHandZoneTargetEffect effect) {
@@ -57,6 +61,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         this.fromZone = effect.fromZone;
         this.allowedCaster = effect.allowedCaster;
         this.withoutMana = effect.withoutMana;
+        this.onlyCastAllowed = effect.onlyCastAllowed;
     }
 
     @Override
@@ -76,12 +81,25 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (affectedAbility == null) {
+            // ContinuousEffects.asThough already checks affectedAbility, so that error must never be called here
+            // PLAY_FROM_NOT_OWN_HAND_ZONE must applies to affectedAbility only
+            throw new IllegalArgumentException("ERROR, can't call applies method on empty affectedAbility");
+        }
 
+        // invalid targets
         List<UUID> targets = getTargetPointer().getTargets(game, source);
         if (targets.isEmpty()) {
             this.discard();
             return false;
         }
+
+        // invalid zone
+        if (!game.getState().getZone(objectId).match(fromZone)) {
+            return false;
+        }
+
+        // invalid caster
         switch (allowedCaster) {
             case YOU:
                 if (playerId != source.getControllerId()) {
@@ -101,41 +119,50 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
             case ANY:
                 break;
         }
+
+        // targets goes to main card all the time
         UUID objectIdToCast = CardUtil.getMainCardId(game, objectId);
-        if (targets.contains(objectIdToCast)
-                && playerId.equals(source.getControllerId())
-                && game.getState().getZone(objectId).match(fromZone)) {
-            if (withoutMana) {
-                if (affectedAbility != null) {
-                    objectIdToCast = affectedAbility.getSourceId();                    
-                }
-                return allowCardToPlayWithoutMana(objectIdToCast, source, playerId, game);
-            }
-            return true;
+        if (!targets.contains(objectIdToCast)) {
+            return false;
         }
-        return false;
+
+        // if can't play lands
+        if (!affectedAbility.getAbilityType().isPlayCardAbility()
+                || onlyCastAllowed && affectedAbility instanceof PlayLandAbility) {
+            return false;
+        }
+
+        // OK, allow to play
+        if (withoutMana) {
+            allowCardToPlayWithoutMana(objectId, source, playerId, game);
+        }
+        return true;
     }
-    
-    public static boolean exileAndPlayFromExile(Game game, Ability source, Card card, TargetController allowedCaster, Duration duration, boolean withoutMana) {
+
+    public static boolean exileAndPlayFromExile(Game game, Ability source, Card card, TargetController allowedCaster,
+                                                Duration duration, boolean withoutMana, boolean onlyCastAllowed) {
         if (card == null) {
             return true;
         }
         Set<Card> cards = new HashSet<>();
         cards.add(card);
-        return exileAndPlayFromExile(game, source, cards, allowedCaster, duration, withoutMana);
-    }    
+        return exileAndPlayFromExile(game, source, cards, allowedCaster, duration, withoutMana, onlyCastAllowed);
+    }
+
     /**
      * Exiles the cards and let the allowed player play them from exile for the given duration
-     * 
+     *
      * @param game
      * @param source
      * @param cards
      * @param allowedCaster
      * @param duration
      * @param withoutMana
-     * @return 
+     * @param onlyCastAllowed true for rule "cast that card" and false for rule "play that card"
+     * @return
      */
-    public static boolean exileAndPlayFromExile(Game game, Ability source, Set<Card> cards, TargetController allowedCaster, Duration duration, boolean withoutMana) {
+    public static boolean exileAndPlayFromExile(Game game, Ability source, Set<Card> cards, TargetController allowedCaster,
+                                                Duration duration, boolean withoutMana, boolean onlyCastAllowed) {
         if (cards == null || cards.isEmpty()) {
             return true;
         }
@@ -149,17 +176,25 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
                         + "-" + game.getState().getTurnNum()
                         + "-" + sourceObject.getIdName(), game
         );
-        String exileName = sourceObject.getIdName() + " free play" 
-                + (Duration.EndOfTurn.equals(duration) ? " on turn " + game.getState().getTurnNum():"") 
+        String exileName = sourceObject.getIdName() + " free play"
+                + (Duration.EndOfTurn.equals(duration) ? " on turn " + game.getState().getTurnNum() : "")
                 + " for " + controller.getName();
         if (Duration.EndOfTurn.equals(duration)) {
             game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
-        }        
+        }
         if (!controller.moveCardsToExile(cards, source, game, true, exileId, exileName)) {
             return false;
         }
-        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, allowedCaster, duration, withoutMana);
-        effect.setTargetPointer(new FixedTargets(cards, game));
+
+        // get real cards (if it was called on permanent instead card, example: Release to the Wind)
+        Set<Card> cardsToPlay = cards
+                .stream()
+                .map(Card::getMainCard)
+                .filter(card -> Zone.EXILED.equals(game.getState().getZone(card.getId())))
+                .collect(Collectors.toSet());
+
+        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, allowedCaster, duration, withoutMana, onlyCastAllowed);
+        effect.setTargetPointer(new FixedTargets(cardsToPlay, game));
         game.addEffect(effect, source);
         return true;
     }

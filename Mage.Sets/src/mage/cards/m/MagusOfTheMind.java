@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -14,18 +12,15 @@ import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffec
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MagusOfTheMind extends CardImpl {
@@ -84,7 +79,8 @@ class MagusOfTheMindEffect extends OneShotEffect {
             controller.shuffleLibrary(source, game);
             if (controller.getLibrary().hasCards()) {
                 Set<Card> cards = controller.getLibrary().getTopCards(game, stormCount);
-                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards, TargetController.YOU, Duration.EndOfTurn, true);
+                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
+                        TargetController.YOU, Duration.EndOfTurn, true, false);
             }
             return true;
         }

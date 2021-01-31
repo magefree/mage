@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -16,7 +17,6 @@ import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 
 /**
  * @author emerald000
@@ -76,8 +76,9 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
                 && game.getStack().counter(targetPointer.getFirst(game, source), source, game, Zone.EXILED, false, ZoneDetail.NONE)) {
             if (!stackObject.isCopy()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
-                if (card instanceof Card) {                    
-                    return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, (Card)card, TargetController.YOU, Duration.Custom, true);
+                if (card instanceof Card) {
+                    return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, (Card) card,
+                            TargetController.YOU, Duration.Custom, true, true);
                 }
             }
         }

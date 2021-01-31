@@ -1,7 +1,5 @@
 package mage.cards.u;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -13,12 +11,14 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -28,9 +28,9 @@ import mage.game.permanent.token.KarnConstructToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.mana.BasicManaEffect;
-import mage.filter.FilterPermanent;
 
 /**
  * @author TheElk801
@@ -55,7 +55,7 @@ public final class UrzaLordHighArtificer extends CardImpl {
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
         filter.add(Predicates.not(TappedPredicate.instance));
         this.addAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 new UrzaLordHighArtificerManaEffect(filter),
                 new TapTargetCost(new TargetControlledPermanent(filter))));
 
@@ -100,14 +100,14 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         controller.shuffleLibrary(source, game);
         Card card = controller.getLibrary().getFromTop(game);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card,
-                TargetController.YOU, Duration.EndOfTurn, true);
+                TargetController.YOU, Duration.EndOfTurn, true, false);
     }
 }
 
 class UrzaLordHighArtificerManaEffect extends BasicManaEffect {
 
     private final FilterPermanent filter;
-    
+
     public UrzaLordHighArtificerManaEffect(FilterPermanent filter) {
         super(Mana.BlueMana(1));
         this.filter = filter;
@@ -131,7 +131,7 @@ class UrzaLordHighArtificerManaEffect extends BasicManaEffect {
             if (count > 0) {
                 netMana.add(Mana.BlueMana(count));
             }
-            return netMana;                    
+            return netMana;
         }
         return super.getNetMana(game, source);
     }

@@ -1,9 +1,5 @@
 package mage.abilities.effects;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -31,6 +27,11 @@ import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -500,22 +501,43 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * @param objectId
+     * @param objectId        object to check
      * @param type
-     * @param affectedAbility
+     * @param affectedAbility null if check full object or ability if check only one ability from that object
      * @param controllerId
      * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns
-     * null
+     * @return sourceId of the permitting effect if any exists otherwise returns null
      */
     public ApprovingObject asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+
+        // usage check: effect must apply for specific ability only, not to full object (example: PLAY_FROM_NOT_OWN_HAND_ZONE)
+        if (type.needAffectedAbility() && affectedAbility == null) {
+            throw new IllegalArgumentException("ERROR, you can't call asThough check to whole object, call it with affected ability instead: " + type);
+        }
+
+        // usage check: effect must apply to full object, not specific ability (example: ATTACK_AS_HASTE)
+        // P.S. In theory a same AsThough effect can be applied to object or to ability, so if you really, really
+        // need it then disable that check or add extra param to AsThoughEffectType like needAffectedAbilityOrFullObject
+        if (!type.needAffectedAbility() && affectedAbility != null) {
+            throw new IllegalArgumentException("ERROR, you can't call AsThough check to affected ability, call it empty affected ability instead: " + type);
+        }
+
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         if (!asThoughEffectsList.isEmpty()) {
+            MageObject objectToCheck;
+            if (affectedAbility != null) {
+                objectToCheck = affectedAbility.getSourceObject(game);
+            } else {
+                objectToCheck = game.getCard(objectId);
+            }
+
             UUID idToCheck;
-            if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof SplitCardHalf) {
-                idToCheck = ((SplitCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
-            } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof ModalDoubleFacesCardHalf
-                    && !type.needPlayCardAbility()) {
+            if (objectToCheck instanceof SplitCardHalf) {
+                idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
+                // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
+                idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacesCardHalf) {
                 // each mdf side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
                 // "If an effect allows you to play a land or cast a spell from among a group of cards,
@@ -523,26 +545,9 @@ public class ContinuousEffects implements Serializable {
                 // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
                 // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
                 // That effect doesn't allow you to cast Sejiri Shelter."
-                idToCheck = ((ModalDoubleFacesCardHalf) affectedAbility.getSourceObject(game)).getParentCard().getId();
-            } else if (affectedAbility != null && affectedAbility.getSourceObject(game) instanceof AdventureCardSpell
-                    && !type.needPlayCardAbility()) {
-                // adventure spell uses alternative characteristics for spell/stack
-                idToCheck = ((AdventureCardSpell) affectedAbility.getSourceObject(game)).getParentCard().getId();
+                idToCheck = ((ModalDoubleFacesCardHalf) objectToCheck).getMainCard().getId();
             } else {
-                Card card = game.getCard(objectId);
-                if (card instanceof SplitCardHalf) {
-                    idToCheck = ((SplitCardHalf) card).getParentCard().getId();
-                } else if (card instanceof ModalDoubleFacesCardHalf
-                        && !type.needPlayCardAbility()) {
-                    // each mdf side uses own characteristics to check for playing, all other cases must use main card
-                    idToCheck = ((ModalDoubleFacesCardHalf) card).getParentCard().getId();
-                } else if (card instanceof AdventureCardSpell
-                        && !type.needPlayCardAbility()) {
-                    // adventure spell uses alternative characteristics for spell/stack
-                    idToCheck = ((AdventureCardSpell) card).getParentCard().getId();
-                } else {
-                    idToCheck = objectId;
-                }
+                idToCheck = objectId;
             }
 
             Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
@@ -550,7 +555,7 @@ public class ContinuousEffects implements Serializable {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (affectedAbility == null) {
-                        // applies to own ability (one effect can be used in multiple abilities)
+                        // applies to full object (one effect can be used in multiple abilities)
                         if (effect.applies(idToCheck, ability, controllerId, game)) {
                             if (effect.isConsumable() && !game.inCheckPlayableState()) {
                                 possibleApprovingObjects.add(new ApprovingObject(ability, game));
@@ -559,7 +564,7 @@ public class ContinuousEffects implements Serializable {
                             }
                         }
                     } else {
-                        // applies to affected ability
+                        // applies to one affected ability
 
                         // filter play abilities (no need to check it in every effect's code)
                         if (type.needPlayCardAbility() && !affectedAbility.getAbilityType().isPlayCardAbility()) {
@@ -576,6 +581,7 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
             }
+
             if (possibleApprovingObjects.size() == 1) {
                 return possibleApprovingObjects.iterator().next();
             } else if (possibleApprovingObjects.size() > 1) {
@@ -601,7 +607,6 @@ public class ContinuousEffects implements Serializable {
 
         }
         return null;
-
     }
 
     public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
@@ -1390,18 +1395,19 @@ public class ContinuousEffects implements Serializable {
         }
         return controllerFound;
     }
-    
-     /**
+
+    /**
      * Prints out a status of the currently existing continuous effects
+     *
      * @param game
      */
     public void traceContinuousEffects(Game game) {
         game.getContinuousEffects().getLayeredEffects(game);
         logger.info("-------------------------------------------------------------------------------------------------");
         int numberEffects = 0;
-        for(ContinuousEffectsList list: allEffectsLists) {
-           numberEffects += list.size();
-        }        
+        for (ContinuousEffectsList list : allEffectsLists) {
+            numberEffects += list.size();
+        }
         logger.info("Turn: " + game.getTurnNum() + " - currently existing continuous effects: " + numberEffects);
         logger.info("layeredEffects ...................: " + layeredEffects.size());
         logger.info("continuousRuleModifyingEffects ...: " + continuousRuleModifyingEffects.size());
@@ -1415,10 +1421,10 @@ public class ContinuousEffects implements Serializable {
         logger.info("asThoughEffects:");
         for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
             logger.info("... " + entry.getKey().toString() + ": " + entry.getValue().size());
-        }        
-        logger.info("applyCounters ....................: " + (applyCounters != null ? "exists":"null"));
-        logger.info("auraReplacementEffect ............: " + (continuousRuleModifyingEffects != null ? "exists":"null"));
-        Map<String, TraceInfo> orderedEffects = new TreeMap<>();   
+        }
+        logger.info("applyCounters ....................: " + (applyCounters != null ? "exists" : "null"));
+        logger.info("auraReplacementEffect ............: " + (continuousRuleModifyingEffects != null ? "exists" : "null"));
+        Map<String, TraceInfo> orderedEffects = new TreeMap<>();
         traceAddContinuousEffects(orderedEffects, layeredEffects, game, "layeredEffects................");
         traceAddContinuousEffects(orderedEffects, continuousRuleModifyingEffects, game, "continuousRuleModifyingEffects");
         traceAddContinuousEffects(orderedEffects, replacementEffects, game, "replacementEffects............");
@@ -1430,28 +1436,29 @@ public class ContinuousEffects implements Serializable {
         traceAddContinuousEffects(orderedEffects, spliceCardEffects, game, "spliceCardEffects.............");
         for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
             traceAddContinuousEffects(orderedEffects, entry.getValue(), game, entry.getKey().toString());
-        }        
+        }
         String playerName = "";
-        for (Map.Entry<String, TraceInfo> entry : orderedEffects.entrySet()) {            
+        for (Map.Entry<String, TraceInfo> entry : orderedEffects.entrySet()) {
             if (!entry.getValue().getPlayerName().equals(playerName)) {
                 playerName = entry.getValue().getPlayerName();
                 logger.info("--- Player: " + playerName + "  --------------------------------");
-            }                
-            logger.info(entry.getValue().getInfo() 
-                    + " " + entry.getValue().getSourceName() 
+            }
+            logger.info(entry.getValue().getInfo()
+                    + " " + entry.getValue().getSourceName()
                     + " " + entry.getValue().getDuration().name()
                     + " " + entry.getValue().getRule()
-                    + " (Order: "+entry.getValue().getOrder() +")"
+                    + " (Order: " + entry.getValue().getOrder() + ")"
             );
-        }  
+        }
         logger.info("---- End trace Continuous effects --------------------------------------------------------------------------");
     }
+
     public static void traceAddContinuousEffects(Map orderedEffects, ContinuousEffectsList<?> cel, Game game, String listName) {
         for (ContinuousEffect effect : cel) {
             Set<Ability> abilities = cel.getAbility(effect.getId());
             for (Ability ability : abilities) {
                 Player controller = game.getPlayer(ability.getControllerId());
-                MageObject source = game.getObject(ability.getSourceId());                
+                MageObject source = game.getObject(ability.getSourceId());
                 TraceInfo traceInfo = new TraceInfo();
                 traceInfo.setInfo(listName);
                 traceInfo.setOrder(effect.getOrder());
@@ -1459,16 +1466,16 @@ public class ContinuousEffects implements Serializable {
                     traceInfo.setPlayerName("Mage Singleton");
                     traceInfo.setSourceName("Mage Singleton");
                 } else {
-                    traceInfo.setPlayerName(controller == null ? "no controller": controller.getName());
-                    traceInfo.setSourceName(source == null ? "no source": source.getIdName());
-                }                
+                    traceInfo.setPlayerName(controller == null ? "no controller" : controller.getName());
+                    traceInfo.setSourceName(source == null ? "no source" : source.getIdName());
+                }
                 traceInfo.setRule(ability.getRule());
                 traceInfo.setAbilityId(ability.getId());
-                traceInfo.setEffectId(effect.getId());                
+                traceInfo.setEffectId(effect.getId());
                 traceInfo.setDuration(effect.getDuration());
                 orderedEffects.put(traceInfo.getPlayerName() + traceInfo.getSourceName() + effect.getId() + ability.getId(), traceInfo);
             }
-        }  
+        }
     }
-    
+
 }

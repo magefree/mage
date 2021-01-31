@@ -238,8 +238,7 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkGraveyardCount("after grave a", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 0);
         checkGraveyardCount("after grave b", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears", 0);
-        checkExileCount("after exile a", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
-        checkExileCount("after exile b", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears", 0);
+        checkExileCount("after exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
 
         // B can cast green bear for red mana
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears");

@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -14,18 +12,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FuriousRise extends CardImpl {
@@ -77,7 +73,7 @@ class FuriousRiseEffect extends OneShotEffect {
             controller.moveCardsToExile(cardToExile, source, game, true, exileId, mageObject.getIdName() + " (" + source.getSourceObjectZoneChangeCounter() + ")");
             Card cardToPlay = game.getCard(cardToExile.getId());
 
-            endPreviousEffect(game, source);
+            endPreviousEffect(game, source); // workaround for Furious Rise
 
             ContinuousEffect effect = new FuriousRisePlayEffect();
             effect.setTargetPointer(new FixedTarget(cardToPlay, game));
@@ -93,7 +89,7 @@ class FuriousRiseEffect extends OneShotEffect {
                 for (Ability ability : game.getContinuousEffects().getAsThoughEffectsAbility(effect)) {
                     if (ability.getSourceId().equals(source.getSourceId())
                             && source.getSourceObjectZoneChangeCounter() == ability.getSourceObjectZoneChangeCounter()) {
-                        ((FuriousRisePlayEffect) effect).discard();
+                        effect.discard();
                         return true;
                     }
                 }

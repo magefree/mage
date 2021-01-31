@@ -820,7 +820,7 @@ public class TestPlayer implements Player {
 
                         // check exile count: card name, count
                         if (params[0].equals(CHECK_COMMAND_EXILE_COUNT) && params.length == 3) {
-                            assertExileCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            assertExileCount(action, game, params[1], Integer.parseInt(params[2]));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -1355,15 +1355,20 @@ public class TestPlayer implements Player {
         Assert.assertEquals(action.getActionName() + " - permanent " + permanentName + " must have " + count + " " + counterType.toString(), count, foundCount);
     }
 
-    private void assertExileCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
+    private void assertExileCount(PlayerAction action, Game game, String permanentName, int count) {
         int foundCount = 0;
         for (Card card : game.getExile().getAllCards(game)) {
-            if (hasObjectTargetNameOrAlias(card, permanentName) && card.isOwnedBy(player.getId())) {
+            if (hasObjectTargetNameOrAlias(card, permanentName)) {
                 foundCount++;
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in exile zone with " + count + " instances", count, foundCount);
+        if (foundCount != count) {
+            printStart("Exile cards");
+            printCards(game.getExile().getAllCards(game));
+            printEnd();
+            Assert.fail(action.getActionName() + " - exile zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
+        }
     }
 
     private void assertGraveyardCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
@@ -1374,7 +1379,12 @@ public class TestPlayer implements Player {
             }
         }
 
-        Assert.assertEquals(action.getActionName() + " - card " + permanentName + " must exists in graveyard zone with " + count + " instances", count, foundCount);
+        if (foundCount != count) {
+            printStart("Graveyard of " + player.getName());
+            printCards(player.getGraveyard().getCards(game));
+            printEnd();
+            Assert.fail(action.getActionName() + " - graveyard zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
+        }
     }
 
     private void assertLibraryCount(PlayerAction action, Game game, Player player, String permanentName, int count) {

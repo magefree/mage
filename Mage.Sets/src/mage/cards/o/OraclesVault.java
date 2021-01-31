@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -13,17 +12,14 @@ import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffec
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class OraclesVault extends CardImpl {
@@ -46,7 +42,7 @@ public final class OraclesVault extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new OraclesVaultFreeEffect(), new TapSourceCost(), new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE),
                 "{T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. "
-                + "Activate this ability only if there are three or more brick counters on {this}"));
+                        + "Activate this ability only if there are three or more brick counters on {this}"));
     }
 
     public OraclesVault(final OraclesVault card) {
@@ -79,7 +75,7 @@ class OraclesVaultEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, false);
+                    TargetController.YOU, Duration.EndOfTurn, false, false);
         }
         return false;
     }
@@ -105,7 +101,7 @@ class OraclesVaultFreeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true);            
+                    TargetController.YOU, Duration.EndOfTurn, true, false);
         }
         return false;
     }

@@ -437,12 +437,18 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         skipInitShuffling();
 
+        // attack and exile 2 cards from library
         attack(2, playerB, "Fallen Shinobi");
+        checkExileCount("after exile a", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge", 1);
+        checkExileCount("after exile b", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Curious Pair", 1);
 
+        // cast purge from exile
+        checkPlayableAbility("after exile - can play purge", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Angelic Purge", true);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge");
-        setChoice(playerB, "Silvercoat Lion"); // Sacrifice for Purge
-        addTarget(playerB, "Amulet of Kroog"); // Exile with Purge
+        setChoice(playerB, "Silvercoat Lion"); // sacrifice cost
+        addTarget(playerB, "Amulet of Kroog"); // exile target
 
+        // cast adventure spell from exile
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Treats to Share");
 
         setStopAt(2, PhaseStep.END_TURN);

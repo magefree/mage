@@ -1,14 +1,14 @@
 package mage.abilities;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayLandAbility extends ActivatedAbilityImpl {
@@ -25,7 +25,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, null, playerId, game);
+        ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
         if (!controlsAbility(playerId, game) && null == approvingObject) {
             return ActivationStatus.getFalse();
         }

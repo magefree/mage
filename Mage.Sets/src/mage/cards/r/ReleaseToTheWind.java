@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -16,8 +14,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ReleaseToTheWind extends CardImpl {
@@ -28,7 +27,6 @@ public final class ReleaseToTheWind extends CardImpl {
         // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
         getSpellAbility().addEffect(new ReleaseToTheWindEffect());
         getSpellAbility().addTarget(new TargetNonlandPermanent());
-
     }
 
     public ReleaseToTheWind(final ReleaseToTheWind card) {
@@ -63,7 +61,8 @@ class ReleaseToTheWindEffect extends OneShotEffect {
         if (controller != null) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
-                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent, TargetController.OWNER, Duration.Custom, true);
+                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
+                        TargetController.OWNER, Duration.Custom, true, true);
             }
         }
         return false;

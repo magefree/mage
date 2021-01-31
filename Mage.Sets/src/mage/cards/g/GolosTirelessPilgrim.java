@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,6 +16,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -74,7 +75,7 @@ class GolosTirelessPilgrimEffect extends OneShotEffect {
         }
         Set<Card> cards = player.getLibrary().getTopCards(game, 3);
         return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                TargetController.YOU, Duration.EndOfTurn, true);
+                TargetController.YOU, Duration.EndOfTurn, true, false);
     }
 
     @Override

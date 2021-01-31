@@ -38,12 +38,10 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        // affectedControllerId = player to check
-        if (getAsThoughEffectType().equals(AsThoughEffectType.LOOK_AT_FACE_DOWN)) {
-            return applies(objectId, source, playerId, game);
-        } else {
-            return applies(objectId, source, playerId, game);
-        }
+        // affectedControllerId = player to check (example: you can activate ability from opponent's card)
+        // by default it applies to full object
+        // if you AsThough effect type needs affected ability then override that method
+        return applies(objectId, source, playerId, game);
     }
 
     @Override

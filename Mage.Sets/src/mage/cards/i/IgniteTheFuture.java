@@ -3,6 +3,7 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -14,7 +15,6 @@ import mage.players.Player;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 
 /**
  * @author TheElk801
@@ -68,7 +68,7 @@ class IgniteTheFutureEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards, 
-                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()));
+        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
+                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()), false);
     }
 }

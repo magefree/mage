@@ -169,8 +169,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
                             player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
                                     + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
-                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED
-                                    , null, attacker.getControllerId(), game) != null) {
+                            game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
+                                    null, attacker.getControllerId(), game) != null) {
                         // for handling creatures like Thorn Elemental
                         blocked = false;
                         unblockedDamage(first, game);
@@ -672,16 +672,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attackers.contains(creatureId)) {
             attackers.remove(creatureId);
             result = true;
-            if (attackerOrder.contains(creatureId)) {
-                attackerOrder.remove(creatureId);
-            }
+            attackerOrder.remove(creatureId);
         } else if (blockers.contains(creatureId)) {
             blockers.remove(creatureId);
             result = true;
             //20100423 - 509.2a
-            if (blockerOrder.contains(creatureId)) {
-                blockerOrder.remove(creatureId);
-            }
+            blockerOrder.remove(creatureId);
         }
         return result;
     }
@@ -854,10 +850,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
         }
-        if (appliesBandsWithOther(attackers, game)) { // 702.21k - both a [quality] creature with “bands with other [quality]” and another [quality] creature (...)
-            return true;
-        }
-        return false;
+        // 702.21k - both a [quality] creature with “bands with other [quality]” and another [quality] creature (...)
+        return appliesBandsWithOther(attackers, game);
     }
 
     /**

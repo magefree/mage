@@ -21,7 +21,7 @@ public enum TrampleAbilityIcon implements CardIcon {
 
     @Override
     public String getHint() {
-        return "Trumple ability";
+        return "Trample ability";
     }
 
     @Override

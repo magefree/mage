@@ -2,18 +2,18 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.constants.TargetController;
 
 /**
  * @author emerald000
@@ -62,7 +62,7 @@ class MindsDesireEffect extends OneShotEffect {
         if (controller != null) {
             controller.shuffleLibrary(source, game);
             return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true);            
+                    TargetController.YOU, Duration.EndOfTurn, true, false);
         }
         return false;
     }
