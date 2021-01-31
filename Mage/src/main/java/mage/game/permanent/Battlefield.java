@@ -372,4 +372,14 @@ public class Battlefield implements Serializable {
         return controlChanged;
     }
 
+    public int countTokens(UUID controllerId) {
+        return field
+                .values()
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(PermanentToken.class::isInstance)
+                .map(permanent -> permanent.isControlledBy(controllerId))
+                .mapToInt(x -> x ? 1 : 0)
+                .sum();
+    }
 }
