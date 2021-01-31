@@ -30,6 +30,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     private String tokenDescriptor;
     private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
+    private static final int MAX_TOKENS_PER_GAME = 500;
 
     // list of set codes token images are available for
     protected List<String> availableImageSetCodes = new ArrayList<>();
@@ -174,15 +175,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
         CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
         if (!created || !game.replaceEvent(event)) {
-            int currentTokens = game
-                    .getBattlefield()
-                    .getAllActivePermanents()
-                    .stream()
-                    .map(PermanentToken.class::isInstance)
-                    .mapToInt(x -> x ? 1 : 0)
-                    .sum();
-            int tokenLimit = 250; // should maybe be an environment variable?
-            int tokenSlots = Math.max(currentTokens - tokenLimit, 0);
+            int currentTokens = game.getBattlefield().countTokens(event.getPlayerId());
+            int tokenSlots = Math.max(currentTokens - MAX_TOKENS_PER_GAME, 0);
+            if (event.getAmount() > tokenSlots) {
+                game.informPlayers(
+                        "The token limit per player is " + MAX_TOKENS_PER_GAME + ", " + controller.getName()
+                                + " will only create " + tokenSlots + " tokens."
+                );
+            }
             event.setAmount(Math.min(event.getAmount(), tokenSlots));
             putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
             return true;
