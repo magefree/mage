@@ -129,9 +129,10 @@ public class RemoveCounterCost extends CostImpl {
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Remove ");
-        sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle())).append(' ');
         if (counterTypeToRemove != null) {
-            sb.append(counterTypeToRemove.getName());
+            sb.append(CardUtil.numberToText(countersToRemove, counterTypeToRemove.getArticle())).append(' ').append(counterTypeToRemove.getName());
+        } else {
+            sb.append(CardUtil.numberToText(countersToRemove, "a"));
         }
         sb.append(countersToRemove == 1 ? " counter from " : " counters from ").append(target.getMaxNumberOfTargets() == 1 ? "a " : "").append(target.getTargetName());
         return sb.toString();
