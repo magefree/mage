@@ -176,7 +176,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
         if (!created || !game.replaceEvent(event)) {
             int currentTokens = game.getBattlefield().countTokens(event.getPlayerId());
-            int tokenSlots = Math.max(currentTokens - MAX_TOKENS_PER_GAME, 0);
+            int tokenSlots = Math.max(MAX_TOKENS_PER_GAME - currentTokens, 0);
             if (event.getAmount() > tokenSlots) {
                 game.informPlayers(
                         "The token limit per player is " + MAX_TOKENS_PER_GAME + ", " + controller.getName()
