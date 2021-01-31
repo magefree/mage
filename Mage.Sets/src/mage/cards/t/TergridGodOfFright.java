@@ -1,14 +1,9 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
-import mage.game.Game;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -16,7 +11,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
+import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -25,6 +24,8 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -54,14 +55,14 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         // Legendary Artifact
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
 
-        // Tap: Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
+        // {T}: Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
         Ability tergridsLaternActivatedAbility = new SimpleActivatedAbility(
                 new TergridsLaternEffect(), new TapSourceCost()
         );
         tergridsLaternActivatedAbility.addTarget(new TargetPlayer());
         this.getRightHalfCard().addAbility(tergridsLaternActivatedAbility);
 
-        // 3{B}: Untap Tergrid’s Lantern.
+        // {3}{B}: Untap Tergrid’s Lantern.
         this.getRightHalfCard().addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl("{3}{B}")));
 
     }
@@ -81,7 +82,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
     private static final String RULE_TEXT = "Whenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card from a graveyard onto the battlefield under your control";
 
     public TergridGodOfFrightTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TergridGodOfFrightEffect());
+        super(Zone.BATTLEFIELD, new TergridGodOfFrightEffect(), true);
     }
 
     public TergridGodOfFrightTriggeredAbility(final TergridGodOfFrightTriggeredAbility ability) {
@@ -110,7 +111,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
                     && !(permanent instanceof PermanentToken)
                     && game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(((Card) permanent).getId(), game));
+                    effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
                 }
                 return true;
             }
@@ -184,10 +185,17 @@ class TergridsLaternEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetedPlayer = game.getPlayer(source.getTargets().getFirstTarget());
-        if (targetedPlayer != null
-                && targetedPlayer.chooseUse(Outcome.Neutral, "Do you wish to sacrifice a nonland permanent to prevent the loss of 3 life?", source, game)) {
+        if (targetedPlayer == null) {
+            return false;
+        }
+
+        // AI hint to discard/sacrifice before die
+        Outcome aiOutcome = (targetedPlayer.getLife() <= 3 * 2) ? Outcome.Benefit : Outcome.Detriment;
+
+        if (targetedPlayer.chooseUse(aiOutcome, "Question 1 of 2: do you wish to sacrifice a nonland permanent to prevent the loss of 3 life?", source, game)) {
             TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-            if (targetedPlayer.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
+            target.setNotTarget(true);
+            if (targetedPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 if (chosenLand != null) {
                     if (chosenLand.sacrifice(source, game)) {
@@ -196,10 +204,10 @@ class TergridsLaternEffect extends OneShotEffect {
                 }
             }
         }
-        if (targetedPlayer != null
-                && targetedPlayer.chooseUse(Outcome.Neutral, "Do you wish to discard a card to prevent the loss of 3 life?", source, game)) {
+
+        if (targetedPlayer.chooseUse(aiOutcome, "Question 2 of 2: do you wish to discard a card to prevent the loss of 3 life?", source, game)) {
             TargetCardInHand targetCard = new TargetCardInHand();
-            if (targetedPlayer.chooseTarget(Outcome.Detriment, targetCard, source, game)) {
+            if (targetedPlayer.chooseTarget(Outcome.Discard, targetCard, source, game)) {
                 Card chosenCard = game.getCard(targetCard.getFirstTarget());
                 if (chosenCard != null) {
                     if (targetedPlayer.discard(chosenCard, false, source, game)) {
@@ -208,10 +216,8 @@ class TergridsLaternEffect extends OneShotEffect {
                 }
             }
         }
-        if (targetedPlayer != null) {
-            targetedPlayer.loseLife(3, game, source, false);
-            return true;
-        }
-        return false;
+
+        targetedPlayer.loseLife(3, game, source, false);
+        return true;
     }
 }
