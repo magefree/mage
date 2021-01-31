@@ -783,7 +783,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
-        return doDiscard(card, source, game, payForCost, false);
+        return doDiscard(card, source, game, payForCost, true);
     }
 
     private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {
