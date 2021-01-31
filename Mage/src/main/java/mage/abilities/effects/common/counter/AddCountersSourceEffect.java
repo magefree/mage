@@ -1,9 +1,5 @@
 package mage.abilities.effects.common.counter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -12,10 +8,16 @@ import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -40,12 +42,11 @@ public class AddCountersSourceEffect extends OneShotEffect {
     }
 
     /**
-     *
      * @param counter
-     * @param amount this amount will be added to the counter instances
+     * @param amount        this amount will be added to the counter instances
      * @param informPlayers
-     * @param putOnCard - counters have to be put on a card instead of a
-     * permanent
+     * @param putOnCard     - counters have to be put on a card instead of a
+     *                      permanent
      */
     public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard) {
         super(Outcome.Benefit);
@@ -135,12 +136,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
         } else if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
             sb.append("X ");
         } else {
-            //if counter name starts with a vowel use 'an' instead of 'a' 
-            if ("aeiou".indexOf(counter.getName().toLowerCase(Locale.ENGLISH).charAt(0)) >= 0 ){
-                sb.append("an ");
-            } else {
-                sb.append("a ");
-            }
+            sb.append(CounterType.findArticle(counter.getName())).append(' ');
             plural = false;
         }
         sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");

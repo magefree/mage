@@ -79,12 +79,12 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     permanent.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                        + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + permanent.getLogName());
+                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + permanent.getLogName());
                 } else if (player != null) {
                     player.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                        + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + player.getLogName());
+                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + player.getLogName());
                 } else if (card != null) {
                     card.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
@@ -104,12 +104,13 @@ public class AddCountersTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
+        String counterName = counter.getName().toLowerCase(Locale.ENGLISH);
         if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else {
-            sb.append("a ");
+            sb.append(CounterType.findArticle(counterName)).append(' ');
         }
-        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");
+        sb.append(counterName).append(" counter");
         if (counter.getCount() > 1) {
             sb.append('s');
         }

@@ -74,8 +74,8 @@ public enum CounterType {
     HEXPROOF("hexproof"),
     HIT("hit"),
     HOOFPRINT("hoofprint"),
-    HOUR("hour"),
-    HOURGLASS("hourglass"),
+    HOUR("hour", "an"),
+    HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
     ICE("ice"),
     INCARNATION("incarnation"),
@@ -158,7 +158,7 @@ public enum CounterType {
     TRAMPLE("trample"),
     TRAP("trap"),
     TREASURE("treasure"),
-    UNITY("unity"),
+    UNITY("unity", "a"),
     VELOCITY("velocity"),
     VERSE("verse"),
     VIGILANCE("vigilance"),
@@ -171,10 +171,16 @@ public enum CounterType {
     WISH("wish");
 
     private final String name;
+    private final String article;
     private final CounterPredicate predicate;
 
     CounterType(String name) {
+        this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
+    }
+
+    CounterType(String name, String article) {
         this.name = name;
+        this.article = article;
         this.predicate = new CounterPredicate(this);
     }
 
@@ -185,6 +191,10 @@ public enum CounterType {
      */
     public String getName() {
         return this.name;
+    }
+
+    public String getArticle() {
+        return article;
     }
 
     /**
@@ -266,6 +276,11 @@ public enum CounterType {
             }
         }
         return null;
+    }
+
+    public static String findArticle(String name) {
+        CounterType counterType = findByName(name);
+        return counterType == null ? "a" : counterType.article;
     }
 
     public CounterPredicate getPredicate() {

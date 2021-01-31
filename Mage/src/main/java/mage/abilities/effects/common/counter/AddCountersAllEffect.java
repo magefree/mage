@@ -1,20 +1,21 @@
 
 package mage.abilities.effects.common.counter;
 
-import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Locale;
+
 /**
- *
  * @author North
  */
 public class AddCountersAllEffect extends OneShotEffect {
@@ -60,7 +61,7 @@ public class AddCountersAllEffect extends OneShotEffect {
         if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount(), "a")).append(' ').append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counters on each ");
         } else {
-            sb.append("a ").append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter on each ");
+            sb.append(CounterType.findArticle(counter.getName())).append(' ').append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter on each ");
         }
         sb.append(filter.getMessage());
         staticText = sb.toString();
