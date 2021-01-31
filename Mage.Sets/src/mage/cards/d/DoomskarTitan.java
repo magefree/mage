@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -34,7 +35,8 @@ public final class DoomskarTitan extends CardImpl {
                         .setText("creatures you control get +1/+0")
         );
         ability.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn
+                HasteAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURE
         ).setText("and gain haste until end of turn"));
         this.addAbility(ability);
 
