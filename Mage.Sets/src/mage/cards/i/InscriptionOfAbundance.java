@@ -93,7 +93,8 @@ class InscriptionOfAbundanceEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
-                .max().orElse(0);
+                .max()
+                .orElse(0);
         if (maxPower > 0) {
             player.gainLife(maxPower, game, source);
             return true;

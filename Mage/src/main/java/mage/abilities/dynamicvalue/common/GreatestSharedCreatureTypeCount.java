@@ -50,7 +50,7 @@ public enum GreatestSharedCreatureTypeCount implements DynamicValue {
                 .stream()
                 .mapToInt(x -> x)
                 .max()
-                .getAsInt();
+                .orElse(0);
     }
 
     @Override
