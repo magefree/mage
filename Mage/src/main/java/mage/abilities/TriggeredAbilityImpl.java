@@ -121,6 +121,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
                         || ruleLow.startsWith("counter")
+                        || ruleLow.startsWith("exchange")
                         || ruleLow.startsWith("goad")) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {

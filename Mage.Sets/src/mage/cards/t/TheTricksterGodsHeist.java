@@ -45,7 +45,7 @@ public final class TheTricksterGodsHeist extends CardImpl {
 
         // II — You may exchange control of two target nonbasic, noncreature permanents that share a card type.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
+                this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
                 new ExchangeControlTargetEffect(
                         Duration.EndOfGame, "exchange control of two target nonbasic, " +
                         "noncreature permanents that share a card type"

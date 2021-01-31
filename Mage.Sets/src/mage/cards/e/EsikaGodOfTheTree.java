@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -8,16 +7,17 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.*;
 import mage.constants.*;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
@@ -50,7 +50,7 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new CompoundAbility(VigilanceAbility.getInstance(), new AnyColorManaAbility()),
                 Duration.WhileOnBattlefield, filter, true
-        )));
+        ).setText("other legendary creatures you control have vigilance and \"{T}: Add one mana of any color.\"")));
 
         // 2.
         // The Prismatic Bridge

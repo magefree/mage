@@ -32,7 +32,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class FirjasRetribution extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature with less power than this creature's power");
+            = new FilterCreaturePermanent("creature with power less than this creature's power");
     private static final FilterControlledPermanent filter2
             = new FilterControlledPermanent(SubType.ANGEL, "Angels you control");
 
@@ -56,7 +56,7 @@ public final class FirjasRetribution extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new GainAbilityAllEffect(
                 ability, Duration.EndOfTurn, filter2
-        ));
+        ).setText("until end of turn, Angels you control gain \"{T}: Destroy target creature with power less than this creature's power.\""));
 
         // III — Angels you control gain double strike until end of turn.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new GainAbilityAllEffect(

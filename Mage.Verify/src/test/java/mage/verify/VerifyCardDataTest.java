@@ -4,7 +4,6 @@ import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.*;
@@ -1497,7 +1496,7 @@ public class VerifyCardDataTest {
         }
         // mana ability fix
         for (String s : refText.split("[\\$\\\n]")) {
-            if (!s.startsWith("{T}: Add {") || !s.contains("} or {")) {
+            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {")) || !s.contains("} or {")) {
                 continue;
             }
             String newStr = "";

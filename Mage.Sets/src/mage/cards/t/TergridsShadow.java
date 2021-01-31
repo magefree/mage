@@ -5,7 +5,8 @@ import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -14,13 +15,13 @@ import java.util.UUID;
  */
 public final class TergridsShadow extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("creatures");
+
     public TergridsShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
 
         // Each player sacrifices two creatures.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(
-                2, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(2, filter));
 
         // Foretell {2}{B}{B}
         this.addAbility(new ForetellAbility(this, "{2}{B}{B}"));

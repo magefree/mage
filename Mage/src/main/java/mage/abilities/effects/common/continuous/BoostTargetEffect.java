@@ -103,6 +103,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
         } else {
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+            }
             if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
                 sb.append("target ");
             }

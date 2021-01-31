@@ -1,24 +1,28 @@
 package mage.cards.t;
 
-import java.util.*;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
-import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class TheThreeSeasons extends CardImpl {
@@ -63,12 +67,12 @@ public final class TheThreeSeasons extends CardImpl {
 
 class TheThreeSeasonsEffect extends OneShotEffect {
 
-    public TheThreeSeasonsEffect() {
+    TheThreeSeasonsEffect() {
         super(Outcome.Neutral);
-        staticText = "Choose up to three cards in each graveyard. Their owners shuffle those cards into their libraries";
+        staticText = "Choose three cards in each graveyard. Their owners shuffle those cards into their libraries";
     }
 
-    private TheThreeSeasonsEffect (final TheThreeSeasonsEffect effect) {
+    private TheThreeSeasonsEffect(final TheThreeSeasonsEffect effect) {
         super(effect);
     }
 
@@ -80,83 +84,27 @@ class TheThreeSeasonsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Map<Player, Cards> playerCardsMap = new LinkedHashMap<>();
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    TheThreeSeasonsTarget target = new TheThreeSeasonsTarget(player);
-                    controller.chooseTarget(outcome, target, source, game);
-                    playerCardsMap.put(player, new CardsImpl(target.getTargets()));
-                }
-            }
-            for (Map.Entry<Player, Cards> entry : playerCardsMap.entrySet()) {
-                entry.getKey().shuffleCardsToLibrary(entry.getValue(), game, source);
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class TheThreeSeasonsTarget extends TargetCard {
-
-    private final Player player;
-
-    public TheThreeSeasonsTarget(Player player) {
-        super(0, 3, Zone.GRAVEYARD, new FilterCard(
-                "cards in " + player.getLogName() + "'s graveyard"
-        ));
-        this.setNotTarget(true);
-        this.player = player;
-    }
-
-    private TheThreeSeasonsTarget(final TheThreeSeasonsTarget target) {
-        super(target);
-        this.player = target.player;
-    }
-
-    @Override
-    public TheThreeSeasonsTarget copy() {
-        return new TheThreeSeasonsTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Game game) {
-        Card card = game.getCard(id);
-        return card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                && player.getGraveyard().contains(id) && filter.match(card, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        return this.canTarget(id, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        return this.canTarget(id, game);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (Card card : player.getGraveyard().getCards(filter, game)) {
-            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
-                possibleTargets.add(card.getId());
+        Map<Player, Cards> playerCardsMap = new LinkedHashMap<>();
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (Card card : cards.getCards(filter, game)) {
-            if (player.getGraveyard().getCards(game).contains(card)) {
-                possibleTargets.add(card.getId());
+            int cardCount = Math.min(player.getGraveyard().size(), 3);
+            if (cardCount < 1) {
+                continue;
             }
+            TargetCard target = new TargetCardInGraveyard(cardCount, StaticFilters.FILTER_CARD);
+            target.setNotTarget(true);
+            controller.chooseTarget(outcome, player.getGraveyard(), target, source, game);
+            playerCardsMap.put(player, new CardsImpl(target.getTargets()));
         }
-        return possibleTargets;
+        for (Map.Entry<Player, Cards> entry : playerCardsMap.entrySet()) {
+            entry.getKey().shuffleCardsToLibrary(entry.getValue(), game, source);
+        }
+        return true;
     }
 }

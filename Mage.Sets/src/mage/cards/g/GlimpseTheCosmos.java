@@ -9,7 +9,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.Card;
@@ -32,9 +31,12 @@ public class GlimpseTheCosmos extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        Effect glimpseTheCosmosEffect = new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false, false, Zone.HAND, false);
-        this.getSpellAbility().addEffect(glimpseTheCosmosEffect);
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
+                StaticValue.get(3), false, StaticValue.get(1),
+                StaticFilters.FILTER_CARD, Zone.LIBRARY, false,
+                false, false, Zone.HAND, false
+        ).setText("look at the top three cards of your library. " +
+                "Put one of them into your hand and the rest on the bottom of your library in any order"));
 
         //As long as you control a Giant, you may cast Glimpse the Cosmos from your graveyard by paying {U} rather than paying its mana cost. If you cast Glimpse the Cosmos this way and it would be put into your graveyard, exile it instead.
         this.addAbility(new GlimpseTheCosmosAbility(new ManaCostsImpl("{U}")));
@@ -80,7 +82,7 @@ class GlimpseTheCosmosAbility extends SpellAbility {
             }
 
             //Must control a giant
-            Condition controlGiantCondition =  new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.GIANT, "you control a Giant"));
+            Condition controlGiantCondition = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.GIANT, "you control a Giant"));
             if (!controlGiantCondition.apply(game, this)) {
                 return ActivationStatus.getFalse();
             }
