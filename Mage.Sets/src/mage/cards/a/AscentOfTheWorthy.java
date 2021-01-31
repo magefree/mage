@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagePlayerEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -116,10 +116,10 @@ class AscentOfTheWorthyRedirectEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
+        DamageEvent damageEvent = (DamageEvent) event;
         Permanent permanent = mor.getPermanent(game);
         if (permanent != null) {
-            permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
             return true;
         }
         return false;
