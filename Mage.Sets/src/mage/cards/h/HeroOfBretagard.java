@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceHasAnyCountersCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -27,8 +28,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.filter.predicate.Predicate;
 
 /**
  * @author jeffwadsworth
@@ -39,8 +38,8 @@ public final class HeroOfBretagard extends CardImpl {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
 
     static {
-        filter.add(test1.instance);
-        filter2.add(test2.instance);
+        filter.add(new SourceHasAnyCountersCondition(5));
+        filter2.add(new SourceHasAnyCountersCondition(10));
     }
 
     public HeroOfBretagard(UUID ownerId, CardSetInfo setInfo) {
@@ -163,33 +162,5 @@ class HeroOfBretagardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         return new AddCountersSourceEffect(CounterType.P1P1.createInstance((Integer) this.getValue("number"))).apply(game, source);
-    }
-}
-
-enum test1 implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getCounters(game).values().stream().anyMatch(counter -> counter.getCount() > 4);
-    }
-
-    @Override
-    public String toString() {
-        return "any counter";
-    }
-}
-
-enum test2 implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getCounters(game).values().stream().anyMatch(counter -> counter.getCount() > 9);
-    }
-
-    @Override
-    public String toString() {
-        return "any counter";
     }
 }
