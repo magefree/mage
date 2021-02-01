@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -11,13 +12,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.Watcher;
 
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -42,7 +45,7 @@ public final class CodespellCleric extends CardImpl {
                 "if it was the second spell you cast this turn, put a +1/+1 counter on target creature."
         );
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability, new CodespellClericWatcher());
     }
 
     private CodespellCleric(final CodespellCleric card) {
@@ -60,9 +63,47 @@ enum CodespellClericCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        return watcher != null && watcher.getPermanentSpellOrder(
-                (Permanent) source.getEffects().get(0).getValue("permanentEnteredBattlefield"), game
-        ) == 2;
+        CodespellClericWatcher watcher = game.getState().getWatcher(CodespellClericWatcher.class);
+        return watcher != null && watcher.checkSpell(source, game);
+    }
+}
+
+class CodespellClericWatcher extends Watcher {
+
+    private final Map<UUID, List<MageObjectReference>> spellMap = new HashMap<>();
+    private static final List<MageObjectReference> emptyList = new ArrayList<>();
+
+    CodespellClericWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            spellMap.computeIfAbsent(event.getPlayerId(), x -> new ArrayList<>())
+                    .add(new MageObjectReference(event.getSourceId(), game));
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        spellMap.clear();
+    }
+
+    boolean checkSpell(Ability source, Game game) {
+        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentEnteredBattlefield");
+        if (permanent == null) {
+            return false;
+        }
+        int index = 0;
+        for (MageObjectReference mor : spellMap.getOrDefault(source.getControllerId(), emptyList)) {
+            index++;
+            if (mor.getSourceId() == permanent.getId()
+                    && mor.getZoneChangeCounter() + 1 == permanent.getZoneChangeCounter(game)) {
+                return index == 2;
+            }
+        }
+        return false;
     }
 }

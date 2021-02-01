@@ -4,7 +4,6 @@ import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -69,19 +68,5 @@ public class CastSpellLastTurnWatcher extends Watcher {
             }
         }
         return 0;
-    }
-
-    public int getPermanentSpellOrder(Permanent permanent, Game game) {
-        if (permanent == null) {
-            return -1;
-        }
-        int index = 0;
-        for (MageObjectReference mor : spellsCastThisTurnInOrder) {
-            index++;
-            if (mor.getSourceId() == permanent.getId() && mor.getZoneChangeCounter() + 1 == permanent.getZoneChangeCounter(game)) {
-                return index;
-            }
-        }
-        return -1;
     }
 }
