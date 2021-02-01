@@ -11,6 +11,7 @@ public final class IcyManalithToken extends TokenImpl {
 
     public IcyManalithToken() {
         super("Icy Manalith", "colorless snow artifact token named Icy Manalith with \"{T}: Add one mana of any color.\"");
+        this.addSuperType(SuperType.SNOW);
         cardType.add(CardType.ARTIFACT);
         this.addAbility(new AnyColorManaAbility());
     }
