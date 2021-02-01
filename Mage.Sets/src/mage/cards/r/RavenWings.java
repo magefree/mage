@@ -34,6 +34,7 @@ public final class RavenWings extends CardImpl {
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.BIRD, Duration.WhileOnBattlefield, AttachmentType.AURA
         ).setText("and is a Bird in addition to its other types"));
+        this.addAbility(ability);
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));
