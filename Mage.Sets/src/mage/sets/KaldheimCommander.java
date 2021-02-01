@@ -39,6 +39,7 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudgoat Ranger", 21, Rarity.UNCOMMON, mage.cards.c.CloudgoatRanger.class));
         cards.add(new SetCardInfo("Command Tower", 108, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 99, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Cosmic Intervention", 3, Rarity.RARE, mage.cards.c.CosmicIntervention.class));
         cards.add(new SetCardInfo("Crown of Skemfar", 13, Rarity.RARE, mage.cards.c.CrownOfSkemfar.class));
         cards.add(new SetCardInfo("Cryptic Caves", 109, Rarity.UNCOMMON, mage.cards.c.CrypticCaves.class));
         cards.add(new SetCardInfo("Cultivator of Blades", 55, Rarity.RARE, mage.cards.c.CultivatorOfBlades.class));
@@ -53,6 +54,7 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Rejuvenator", 60, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Empyrean Eagle", 85, Rarity.UNCOMMON, mage.cards.e.EmpyreanEagle.class));
         cards.add(new SetCardInfo("End-Raze Forerunners", 61, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
+        cards.add(new SetCardInfo("Ethereal Valkyrie", 16, Rarity.RARE, mage.cards.e.EtherealValkyrie.class));
         cards.add(new SetCardInfo("Evangel of Heliod", 23, Rarity.UNCOMMON, mage.cards.e.EvangelOfHeliod.class));
         cards.add(new SetCardInfo("Eyeblight Cullers", 48, Rarity.COMMON, mage.cards.e.EyeblightCullers.class));
         cards.add(new SetCardInfo("Eyeblight Massacre", 49, Rarity.UNCOMMON, mage.cards.e.EyeblightMassacre.class));
@@ -67,6 +69,7 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Guildgate", 111, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 112, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Harvest Season", 63, Rarity.RARE, mage.cards.h.HarvestSeason.class));
+        cards.add(new SetCardInfo("Hero of Bretagard", 4, Rarity.RARE, mage.cards.h.HeroOfBretagard.class));
         cards.add(new SetCardInfo("Imperious Perfect", 64, Rarity.RARE, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Inspired Sphinx", 40, Rarity.MYTHIC, mage.cards.i.InspiredSphinx.class));
         cards.add(new SetCardInfo("Jagged-Scar Archers", 65, Rarity.UNCOMMON, mage.cards.j.JaggedScarArchers.class));
@@ -100,6 +103,7 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Pride of the Perfect", 52, Rarity.UNCOMMON, mage.cards.p.PrideOfThePerfect.class));
         cards.add(new SetCardInfo("Prowess of the Fair", 53, Rarity.UNCOMMON, mage.cards.p.ProwessOfTheFair.class));
         cards.add(new SetCardInfo("Putrefy", 91, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Ranar the Ever-Watchful", 2, Rarity.RARE, mage.cards.r.RanarTheEverWatchful.class));
         cards.add(new SetCardInfo("Reclamation Sage", 72, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Restoration Angel", 31, Rarity.COMMON, mage.cards.r.RestorationAngel.class));
         cards.add(new SetCardInfo("Return to Dust", 32, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
