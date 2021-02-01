@@ -79,7 +79,7 @@ class ArniBrokenbrowEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(permanent -> !permanent.getId().equals(source.getSourceId())
-                        && permanent.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter())
+                        || permanent.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter())
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
                 .max()
