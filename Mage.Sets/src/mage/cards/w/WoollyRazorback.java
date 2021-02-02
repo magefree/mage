@@ -48,7 +48,7 @@ public final class WoollyRazorback extends CardImpl {
             new SourceHasCounterCondition(CounterType.ICE), "and it has defender"));
         this.addAbility(ability);
         // Whenever Woolly Razorback blocks, remove an ice counter from it.
-        this.addAbility(new BlocksSourceTriggeredAbility(new RemoveCounterSourceEffect(CounterType.ICE.createInstance()), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new RemoveCounterSourceEffect(CounterType.ICE.createInstance()).setText("remove an ice counter from it"), false));
     }
 
     public WoollyRazorback(final WoollyRazorback card) {

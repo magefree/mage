@@ -126,7 +126,7 @@ public class ChampionAbility extends StaticAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Champion ").append(objectDescription);
-        sb.append("<i>(When this enters the battlefield, sacrifice it unless you exile another ");
+        sb.append(" <i>(When this enters the battlefield, sacrifice it unless you exile another ");
         sb.append(objectDescription);
         sb.append(" you control. When this leaves the battlefield, that card returns to the battlefield.)</i>");
         return sb.toString();
