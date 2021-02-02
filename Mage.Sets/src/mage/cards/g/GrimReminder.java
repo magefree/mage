@@ -68,7 +68,7 @@ class GrimReminderEffect extends OneShotEffect {
     GrimReminderEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for a nonland card and reveal it. "
-                + "Each opponent who cast a card this turn with the same name as that card loses 6 life. "
+                + "Each opponent who cast a spell this turn with the same name as that card loses 6 life. "
                 + "Then shuffle your library.";
     }
 

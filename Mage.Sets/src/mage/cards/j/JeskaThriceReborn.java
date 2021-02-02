@@ -42,7 +42,7 @@ public final class JeskaThriceReborn extends CardImpl {
         // Jeska, Thrice Reborn enters the battlefield with a loyalty counter on it for each time you've cast a commander from the command zone this game.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.LOYALTY.createInstance(0), JeskaThriceRebornValue.instance, false
-        ), "with a loyalty counter on it for each time " +
+        ), "with a loyalty counter on her for each time " +
                 "you've cast a commander from the command zone this game"
         ).addHint(JeskaThriceRebornValue.getHint()), new CommanderPlaysCountWatcher());
 

@@ -70,7 +70,7 @@ class DranaTheLastBloodchiefEffect extends OneShotEffect {
     DranaTheLastBloodchiefEffect() {
         super(Outcome.Benefit);
         staticText = "defending player chooses a nonlegendary creature card in your graveyard. " +
-                "You return that card to the battlefield with a +1/+1 counter on it. " +
+                "You return that card to the battlefield with an additional +1/+1 counter on it. " +
                 "The creature is a Vampire in addition to its other types.";
     }
 

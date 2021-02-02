@@ -53,7 +53,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     public QuickenAsThoughEffect() {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next sorcery card you cast this turn can be cast as though it had flash";
+        staticText = "The next sorcery spell you cast this turn can be cast as though it had flash";
     }
 
     public QuickenAsThoughEffect(final QuickenAsThoughEffect effect) {

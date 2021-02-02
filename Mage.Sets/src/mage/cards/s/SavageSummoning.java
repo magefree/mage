@@ -62,7 +62,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
     public SavageSummoningAsThoughEffect() {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next creature card you cast this turn can be cast as though it had flash";
+        staticText = "The next creature spell you cast this turn can be cast as though it had flash";
     }
 
     public SavageSummoningAsThoughEffect(final SavageSummoningAsThoughEffect effect) {
