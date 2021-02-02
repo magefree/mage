@@ -66,7 +66,7 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
 
     RanarTheEverWatchfulCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, CostModificationType.REDUCE_COST);
-        staticText = "The first card you foretell each turn costs 0 to foretell";
+        staticText = "The first card you foretell each turn costs {0} to foretell";
     }
 
     private RanarTheEverWatchfulCostReductionEffect(RanarTheEverWatchfulCostReductionEffect effect) {

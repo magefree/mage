@@ -144,7 +144,7 @@ class ArcaneArtisanLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggered
 
     @Override
     public String getRule() {
-        return "When {this} leaves the battlefield, exile all tokens created with it at the beginning of the next end step";
+        return "When {this} leaves the battlefield, exile all tokens created with it at the beginning of the next end step.";
     }
 }
 

@@ -53,7 +53,7 @@ class CosmicInterventionReplacementEffect extends ReplacementEffectImpl {
 
     CosmicInterventionReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead.  Return it to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "If a permanent you control would be put into a graveyard from the battlefield this turn, exile it instead. Return it to the battlefield under its owner's control at the beginning of the next end step";
     }
 
     private CosmicInterventionReplacementEffect(final CosmicInterventionReplacementEffect effect) {

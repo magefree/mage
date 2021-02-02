@@ -51,7 +51,7 @@ class PactOfTheSerpentEffect extends OneShotEffect {
     PactOfTheSerpentEffect() {
         super(Outcome.Benefit);
         staticText = "Target player draws X cards and loses X life, " +
-                "where X is the number of creature they control of the chosen type";
+                "where X is the number of creatures they control of the chosen type";
     }
 
     private PactOfTheSerpentEffect(final PactOfTheSerpentEffect effect) {

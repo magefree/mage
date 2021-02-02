@@ -18,7 +18,7 @@ import mage.game.permanent.token.ElfToken;
  */
 public final class LysAlanaHuntmaster extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("Elf spell");
+    private static final FilterSpell filter = new FilterSpell("an Elf spell");
 
     static {
         filter.add(SubType.ELF.getPredicate());

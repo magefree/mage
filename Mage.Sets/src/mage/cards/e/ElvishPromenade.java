@@ -20,7 +20,7 @@ import mage.game.permanent.token.ElfToken;
  */
 public final class ElvishPromenade extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 
     static {
         filter.add(SubType.ELF.getPredicate());

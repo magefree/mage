@@ -22,7 +22,7 @@ import mage.game.permanent.token.ElfToken;
  */
 public final class ImperiousPerfect extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
 
     static {
         filter.add(SubType.ELF.getPredicate());

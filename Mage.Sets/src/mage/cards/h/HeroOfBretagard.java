@@ -1,10 +1,10 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasAnyCountersCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -18,16 +18,14 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -42,6 +40,9 @@ public final class HeroOfBretagard extends CardImpl {
         filter2.add(new SourceHasAnyCountersCondition(10));
     }
 
+    private static final Condition condition = new SourceMatchesFilterCondition(filter);
+    private static final Condition condition2 = new SourceMatchesFilterCondition(filter2);
+
     public HeroOfBretagard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
@@ -54,23 +55,24 @@ public final class HeroOfBretagard extends CardImpl {
         this.addAbility(new HeroOfBretagardTriggeredAbility(new HeroOfBretagardEffect()));
 
         // As long as Hero of Bretagard has five or more counters on it, it has flying and is an Angel in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                        new SourceMatchesFilterCondition(filter),
-                        "As long as Hero of Bretagard has five or more counters on it, it has flying ")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.ANGEL), new SourceMatchesFilterCondition(filter),
-                        "and is an Angel in addition to its other types.")));
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(
+                        FlyingAbility.getInstance(), Duration.WhileOnBattlefield
+                ), condition, "As long as {this} has five or more counters on it, it has flying"
+        ));
+        ability.addEffect(new ConditionalContinuousEffect(new AddCardSubTypeSourceEffect(
+                Duration.WhileOnBattlefield, SubType.ANGEL
+        ), condition, "and is an Angel in addition to its other types."));
+        this.addAbility(ability);
 
         // As long as Hero of Bretagard has ten or more counters on it, it has indestructible and is a God in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                        new SourceMatchesFilterCondition(filter2),
-                        "As long as Hero of Bretagard has ten or more counters on it, it has indestructible ")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.GOD), new SourceMatchesFilterCondition(filter2),
-                        "and is a God in addition to its other types.")));
-
+        ability = new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
+                IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield
+        ), condition2, "As long as {this} has ten or more counters on it, it has indestructible"));
+        ability.addEffect(new ConditionalContinuousEffect(new AddCardSubTypeSourceEffect(
+                Duration.WhileOnBattlefield, SubType.GOD
+        ), condition2, "and is a God in addition to its other types."));
+        this.addAbility(ability);
     }
 
     private HeroOfBretagard(final HeroOfBretagard card) {
@@ -139,7 +141,7 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you exile one or more cards from your hand and/or permanents from the battlefield, put that many +1/+1 counters on {this}";
+        return "Whenever you exile one or more cards from your hand and/or permanents from the battlefield, put that many +1/+1 counters on {this}.";
 
     }
 }
