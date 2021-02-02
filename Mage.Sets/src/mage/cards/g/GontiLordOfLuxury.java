@@ -66,7 +66,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
 
     public GontiLordOfLuxuryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it";
+        this.staticText = "look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell";
     }
 
     private GontiLordOfLuxuryEffect(final GontiLordOfLuxuryEffect effect) {

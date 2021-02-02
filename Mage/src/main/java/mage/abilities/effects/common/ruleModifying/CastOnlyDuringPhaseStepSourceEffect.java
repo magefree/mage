@@ -11,6 +11,8 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Locale;
+
 /**
  * @author LevelX2
  */
@@ -61,7 +63,7 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
     private String setText() {
         StringBuilder sb = new StringBuilder("cast this spell only during ");
         if (turnPhase != null) {
-            sb.append(turnPhase.toString());
+            sb.append(turnPhase.toString().toLowerCase());
         }
         if (phaseStep != null) {
             sb.append("the ").append(phaseStep.getStepText());

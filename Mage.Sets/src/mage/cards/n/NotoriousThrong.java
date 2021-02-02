@@ -39,7 +39,7 @@ public final class NotoriousThrong extends CardImpl {
 
         // If Notorious Throng's prowl cost was paid, take an extra turn after this one.
         Effect effect = new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), ProwlCostWasPaidCondition.instance);
-        effect.setText("If {this}'s prowl cost was paid, take an extra turn after this one.");
+        effect.setText("If this spell's prowl cost was paid, take an extra turn after this one.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addHint(ProwlCostWasPaidHint.instance);
     }

@@ -46,7 +46,7 @@ class ExtractFromDarknessEffect extends OneShotEffect {
 
     ExtractFromDarknessEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put a creature card from a graveyard onto the battlefield under your control";
+        staticText = "Then you put a creature card from a graveyard onto the battlefield under your control";
     }
 
     private ExtractFromDarknessEffect(final ExtractFromDarknessEffect effect) {

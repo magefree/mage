@@ -37,7 +37,7 @@ public final class KrosanVerge extends CardImpl {
         // {2}, {T}, Sacrifice Krosan Verge: Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
                 new KrosanVergeTarget(), true, Outcome.PutLandInPlay
-        ), new GenericManaCost(2));
+        ).setText("search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle your library"), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

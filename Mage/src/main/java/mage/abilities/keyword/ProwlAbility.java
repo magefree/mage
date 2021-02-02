@@ -154,7 +154,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     private void setReminderText(Card card) {
         reminderText
                 = "(You may cast this for its prowl cost if you dealt combat damage to a "
-                + "player this turn with a creature that shared a creature type with {this}";
+                + "player this turn with a creature that shared a creature type with {this})";
     }
 
     @Override

@@ -40,13 +40,13 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
         StringBuilder sb = new StringBuilder("if an opponent lost ");
         switch (type) {
             case MORE_THAN:
-                sb.append(value + 1).append(" or more life this turn ");
+                sb.append(value + 1).append(" or more life this turn");
                 break;
             case EQUAL_TO:
-                sb.append(value).append(" life this turn ");
+                sb.append(value).append(" life this turn");
                 break;
             case FEWER_THAN:
-                sb.append(" less than ").append(value).append(" life this turn ");
+                sb.append(" less than ").append(value).append(" life this turn");
                 break;
         }
         return sb.toString();

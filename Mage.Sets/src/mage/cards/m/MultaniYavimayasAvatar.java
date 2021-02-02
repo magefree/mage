@@ -27,7 +27,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class MultaniYavimayasAvatar extends CardImpl {
 
-    private static final FilterControlledLandPermanent LANDS_YOU_CONTROL_FILTER = new FilterControlledLandPermanent();
+    private static final FilterControlledLandPermanent LANDS_YOU_CONTROL_FILTER = new FilterControlledLandPermanent("lands you control");
     private static final FilterLandCard LAND_FILTER = new FilterLandCard();
 
     public MultaniYavimayasAvatar(UUID ownerId, CardSetInfo setInfo) {
@@ -49,7 +49,7 @@ public final class MultaniYavimayasAvatar extends CardImpl {
         DynamicValue powerToughnessValue = new AdditiveDynamicValue(graveyardCount, permanentsOnBattlefieldCount);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(powerToughnessValue, powerToughnessValue, Duration.WhileOnBattlefield)
-                        .setText("{this} gets +1/+1 for each land you control and each land in your graveyard")
+                        .setText("{this} gets +1/+1 for each land you control and each land card in your graveyard")
         ));
 
         //{1}{G}, Return two lands you control to their owner's hand: Return Multani from your graveyard to your hand.

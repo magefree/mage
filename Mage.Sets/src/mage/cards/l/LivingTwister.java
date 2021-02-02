@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class LivingTwister extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledLandPermanent("a tapped land you control");
+            = new FilterControlledLandPermanent("tapped land you control");
 
     static {
         filter.add(TappedPredicate.instance);

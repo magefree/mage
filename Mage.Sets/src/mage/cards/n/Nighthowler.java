@@ -1,12 +1,10 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BestowAbility;
@@ -15,14 +13,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Nighthowler extends CardImpl {
+
+    private static final DynamicValue graveCreatures = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
 
     public Nighthowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");
@@ -33,14 +33,15 @@ public final class Nighthowler extends CardImpl {
 
         // Bestow {2}{B}{B}
         this.addAbility(new BestowAbility(this, "{2}{B}{B}"));
-        // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
-        DynamicValue graveCreatures = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
-        Effect effect = new BoostSourceEffect(graveCreatures, graveCreatures, Duration.WhileOnBattlefield);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new BoostEnchantedEffect(graveCreatures, graveCreatures, Duration.WhileOnBattlefield);
-        ability.addEffect(effect);
-        this.addAbility(ability);
 
+        // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
+        Ability ability = new SimpleStaticAbility(new BoostSourceEffect(
+                graveCreatures, graveCreatures, Duration.WhileOnBattlefield
+        ).setText("{this} and enchanted creature each get +X/+X"));
+        ability.addEffect(new BoostEnchantedEffect(
+                graveCreatures, graveCreatures, Duration.WhileOnBattlefield
+        ).setText(", where X is the number of creature cards in all graveyards"));
+        this.addAbility(ability);
     }
 
     public Nighthowler(final Nighthowler card) {
