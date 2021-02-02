@@ -27,7 +27,7 @@ public final class HypnoticCloud extends CardImpl {
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3), new DiscardTargetEffect(1), KickedCondition.instance,
-                "Target player discards a card. if this spell was kicked, that player discards three cards instead"));
+                "Target player discards a card. If this spell was kicked, that player discards three cards instead"));
 
     }
 

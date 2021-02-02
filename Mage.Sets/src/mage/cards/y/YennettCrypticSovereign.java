@@ -1,27 +1,27 @@
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class YennettCrypticSovereign extends CardImpl {
@@ -64,10 +64,10 @@ class YennettCrypticSovereignEffect extends OneShotEffect {
 
     public YennettCrypticSovereignEffect() {
         super(Outcome.Benefit);
-        this.staticText = "reveal the top card of your library. "
-                + "If that card's converted mana cost is odd, "
-                + "you may cast it without paying its mana cost. "
-                + "Otherwise, draw a card";
+        this.staticText = "reveal the top card of your library. " +
+                "You may cast it without paying its mana cost " +
+                "if its converted mana cost is odd. " +
+                "If you don't cast it, draw a card.";
     }
 
     public YennettCrypticSovereignEffect(final YennettCrypticSovereignEffect effect) {

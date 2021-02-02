@@ -22,7 +22,7 @@ public class AdaptEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
         this.adaptNumber = adaptNumber;
         staticText = "Adapt " + adaptNumber
-                + " <i>(If this creature has no +1/+1 counters on it, put "
+                + ". <i>(If this creature has no +1/+1 counters on it, put "
                 + CardUtil.numberToText(adaptNumber) + " +1/+1 counter"
                 + (adaptNumber > 1 ? "s" : "") + " on it.)</i>";
     }

@@ -31,7 +31,7 @@ public final class ZealotIlVec extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // Whenever Zealot il-Vec attacks and isn't blocked, you may have it deal 1 damage to target creature. If you do, prevent all combat damage Zealot il-Vec would deal this turn.
-        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new DamageTargetEffect(1), true);
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new DamageTargetEffect(1).setText("it deal 1 damage to target creature"), true);
         Effect effect = new PreventCombatDamageBySourceEffect(Duration.EndOfTurn);
         effect.setText("if you do, prevent all combat damage {this} would deal this turn");
         ability.addEffect(effect);

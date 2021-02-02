@@ -84,6 +84,6 @@ class ZombieCannibalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, "
-                + "you may exile target card from that player's graveyard";
+                + "you may exile target card from that player's graveyard.";
     }
 }

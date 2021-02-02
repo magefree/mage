@@ -112,7 +112,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
     private String setText(int monstrosityValue) {
         StringBuilder sb = new StringBuilder("Monstrosity ");
         sb.append(monstrosityValue == Integer.MAX_VALUE ? "X":monstrosityValue)
-                .append(".  <i>(If this creature isn't monstrous, put ")
+                .append(". <i>(If this creature isn't monstrous, put ")
                 .append(monstrosityValue == Integer.MAX_VALUE ? "X":CardUtil.numberToText(monstrosityValue))
                 .append(" +1/+1 counters on it and it becomes monstrous.)</i>").toString();
         return sb.toString();

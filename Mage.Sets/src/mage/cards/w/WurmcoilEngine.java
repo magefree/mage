@@ -32,7 +32,7 @@ public final class WurmcoilEngine extends CardImpl {
 
         // When Wurmcoil Engine dies, create a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink.
         Ability ability = new DiesSourceTriggeredAbility(new CreateTokenEffect(new WurmWithDeathtouchToken()), false);
-        ability.addEffect(new CreateTokenEffect(new WurmWithLifelinkToken()));
+        ability.addEffect(new CreateTokenEffect(new WurmWithLifelinkToken()).setText("and a 3/3 colorless Wurm artifact creature token with lifelink"));
         this.addAbility(ability);
     }
 

@@ -54,7 +54,7 @@ class TwinflameCopyEffect extends OneShotEffect {
 
     public TwinflameCopyEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature, except it has haste. Exile them at the beginning of the next end step";
+        this.staticText = "choose any number of target creatures you control. For each of them, create a token that's a copy of that creature, except it has haste. Exile those tokens at the beginning of the next end step";
     }
 
     public TwinflameCopyEffect(final TwinflameCopyEffect effect) {

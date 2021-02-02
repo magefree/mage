@@ -141,7 +141,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder(amplifyFactor.toString());
-        sb.append("<i>(As this enter the battlefield, ");
+        sb.append(" <i>(As this enter the battlefield, ");
         sb.append(amplifyFactor.getRuleText()).append(" for each card"
                 + " you reveal that shares a type with it in your hand.)</i>");
         return sb.toString();

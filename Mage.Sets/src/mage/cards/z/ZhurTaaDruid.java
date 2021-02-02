@@ -49,7 +49,7 @@ public final class ZhurTaaDruid extends CardImpl {
 class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
 
     public ZhurTaaDruidAbility() {
-        super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT));
+        super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT, "it"));
     }
 
     public ZhurTaaDruidAbility(final ZhurTaaDruidAbility ability) {
