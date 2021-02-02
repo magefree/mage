@@ -59,7 +59,7 @@ public class RielleTheEverwiseTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Tolaria West");
         addCard(Zone.HAND, playerA, "Brainwash");
-        addCard(Zone.LIBRARY, playerA, "Memnite");
+        addCard(Zone.LIBRARY, playerA, "Memnite", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Rielle, the Everwise");
 
