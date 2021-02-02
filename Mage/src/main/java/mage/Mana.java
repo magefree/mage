@@ -3,6 +3,7 @@ package mage;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
+import mage.util.CardUtil;
 import mage.util.Copyable;
 import org.apache.log4j.Logger;
 
@@ -10,6 +11,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * WARNING, all mana operations must use overflow check, see usage of CardUtil.addWithOverflowCheck and same methods
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
@@ -38,20 +41,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
 
         protected void incrementAmount(ManaColor manaColor) {
-            this.amount += manaColor.amount;
-            this.snowAmount += manaColor.snowAmount;
+            this.amount = CardUtil.addWithOverflowCheck(this.amount, manaColor.amount);
+            this.snowAmount = CardUtil.addWithOverflowCheck(this.snowAmount, manaColor.snowAmount);
         }
 
         protected void incrementAmount(int amount, boolean snow) {
-            this.amount += amount;
+            this.amount = CardUtil.addWithOverflowCheck(this.amount, amount);
             if (snow) {
-                this.snowAmount += amount;
+                this.snowAmount = CardUtil.addWithOverflowCheck(this.snowAmount, amount);
             }
         }
 
         protected void removeAmount(ManaColor manaColor) {
-            this.amount -= manaColor.amount;
-            this.snowAmount -= manaColor.snowAmount;
+            this.amount = CardUtil.subtractWithOverflowCheck(this.amount, manaColor.amount);
+            this.snowAmount = CardUtil.subtractWithOverflowCheck(this.snowAmount, manaColor.snowAmount);
         }
 
         protected void clear() {
@@ -64,11 +67,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 return false;
             }
             if (manaColor.getSnowAmount() > 0) {
-                manaColor.snowAmount -= 1;
-                snowAmount += 1;
+                manaColor.snowAmount = CardUtil.subtractWithOverflowCheck(manaColor.snowAmount, 1);
+                this.snowAmount = CardUtil.addWithOverflowCheck(this.snowAmount, 1);
             }
-            manaColor.amount -= 1;
-            amount += 1;
+            manaColor.amount = CardUtil.subtractWithOverflowCheck(manaColor.amount, 1);
+            this.amount = CardUtil.addWithOverflowCheck(this.amount, 1);
             return true;
         }
 
@@ -594,25 +597,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         int count = 0;
         if (filter.isWhite()) {
-            count += white.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, white.getAmount());
         }
         if (filter.isBlue()) {
-            count += blue.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, blue.getAmount());
         }
         if (filter.isBlack()) {
-            count += black.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, black.getAmount());
         }
         if (filter.isRed()) {
-            count += red.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, red.getAmount());
         }
         if (filter.isGreen()) {
-            count += green.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, green.getAmount());
         }
         if (filter.isGeneric()) {
-            count += generic.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, generic.getAmount());
         }
         if (filter.isColorless()) {
-            count += colorless.getAmount();
+            count = CardUtil.addWithOverflowCheck(count, colorless.getAmount());
         }
         return count;
     }
@@ -640,29 +643,33 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
         if (generic.getAmount() > 0) {
-            sbMana.append('{').append(Integer.toString(generic.getAmount())).append('}');
+            sbMana.append('{').append(generic.getAmount()).append('}');
         }
+
+        // too many mana - replace by single icon
         if (colorless.getAmount() >= 20) {
-            sbMana.append(Integer.toString(colorless.getAmount())).append("{C}");
+            sbMana.append(colorless.getAmount()).append("{C}");
         }
         if (white.getAmount() >= 20) {
-            sbMana.append(Integer.toString(white.getAmount())).append("{W}");
+            sbMana.append(white.getAmount()).append("{W}");
         }
         if (blue.getAmount() >= 20) {
-            sbMana.append(Integer.toString(blue.getAmount())).append("{U}");
+            sbMana.append(blue.getAmount()).append("{U}");
         }
         if (black.getAmount() >= 20) {
-            sbMana.append(Integer.toString(black.getAmount())).append("{B}");
+            sbMana.append(black.getAmount()).append("{B}");
         }
         if (red.getAmount() >= 20) {
-            sbMana.append(Integer.toString(red.getAmount())).append("{R}");
+            sbMana.append(red.getAmount()).append("{R}");
         }
         if (green.getAmount() >= 20) {
-            sbMana.append(Integer.toString(green.getAmount())).append("{G}");
+            sbMana.append(green.getAmount()).append("{G}");
         }
         if (any.getAmount() >= 20) {
-            sbMana.append(Integer.toString(any.getAmount())).append("{Any}");
+            sbMana.append(any.getAmount()).append("{Any}");
         }
+
+        // normal mana
         for (int i = 0; i < colorless.getAmount() && colorless.getAmount() < 20; i++) {
             sbMana.append("{C}");
         }
@@ -684,6 +691,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         for (int i = 0; i < any.getAmount() && any.getAmount() < 20; i++) {
             sbMana.append("{Any}");
         }
+
         return sbMana.toString();
     }
 
@@ -757,9 +765,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             compare.generic.incrementAmount(compare.green);
             compare.generic.incrementAmount(compare.colorless);
             compare.generic.incrementAmount(compare.any);
-            if (compare.generic.getAmount() < 0) {
-                return false;
-            }
+            return compare.generic.getAmount() >= 0;
         }
         return true;
     }
@@ -805,13 +811,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         if (compare.generic.getAmount() < 0) {
             int remaining = 0;
-            remaining += Math.min(0, compare.white.getAmount());
-            remaining += Math.min(0, compare.blue.getAmount());
-            remaining += Math.min(0, compare.black.getAmount());
-            remaining += Math.min(0, compare.red.getAmount());
-            remaining += Math.min(0, compare.green.getAmount());
-            remaining += Math.min(0, compare.colorless.getAmount());
-            remaining += Math.min(0, compare.any.getAmount());
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.white.getAmount()));
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.blue.getAmount()));
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.black.getAmount()));
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.red.getAmount()));
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.green.getAmount()));
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.colorless.getAmount()));
+            remaining = CardUtil.addWithOverflowCheck(remaining, Math.min(0, compare.any.getAmount()));
             if (remaining > 0) {
                 int diff = Math.min(remaining, Math.abs(compare.generic.getAmount()));
                 compare.generic.incrementAmount(diff, false);
@@ -1022,10 +1028,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (color.isRed() && red.getSnowAmount() > 0) {
             return true;
-        } else if (color.isGreen() && green.getSnowAmount() > 0) {
-            return true;
-        }
-        return false;
+        } else return color.isGreen() && green.getSnowAmount() > 0;
     }
 
     /**
@@ -1036,7 +1039,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     @Override
     public int compareTo(final Mana o) {
-        return this.count() - o.count();
+        return Integer.compare(this.count(), o.count());
     }
 
     /**
@@ -1065,11 +1068,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         if (mana.colorless.getAmount() > 0 && this.colorless.getAmount() > 0) {
             return true;
         }
-        if (mana.generic.getAmount() > 0 && this.count() > 0) {
-            return true;
-        }
-
-        return false;
+        return mana.generic.getAmount() > 0 && this.count() > 0;
     }
 
     public boolean containsAny(final Mana mana) {
@@ -1098,11 +1097,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (mana.colorless.getAmount() > 0 && this.colorless.getAmount() > 0 && includeColorless) {
             return true;
-        } else if (mana.any.getAmount() > 0 && this.count() > 0) {
-            return true;
-        }
-
-        return false;
+        } else return mana.any.getAmount() > 0 && this.count() > 0;
     }
 
     /**
@@ -1153,7 +1148,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             case GREEN:
                 return green.getAmount();
             case COLORLESS:
-                return generic.getAmount() + colorless.getAmount();
+                return CardUtil.addWithOverflowCheck(generic.getAmount(), colorless.getAmount());
         }
         return 0;
     }
@@ -1161,6 +1156,9 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     /**
      * Set the color of mana specified by the passed in {@link ManaType} to
      * {@code amount} .
+     * <p>
+     * WARNING, you must check amount for overflow values, see CardUtil.multiplyWithOverflowCheck
+     * and other CardUtil.xxxWithOverflowCheck math methods
      *
      * @param manaType the color of the mana to set
      * @param amount   the value to set the mana too
@@ -1168,22 +1166,22 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public void set(final ManaType manaType, final int amount) {
         switch (manaType) {
             case WHITE:
-                setWhite(amount);
+                setWhite(notNegative(amount, "white"));
                 break;
             case BLUE:
-                setBlue(amount);
+                setBlue(notNegative(amount, "blue"));
                 break;
             case BLACK:
-                setBlack(amount);
+                setBlack(notNegative(amount, "black"));
                 break;
             case RED:
-                setRed(amount);
+                setRed(notNegative(amount, "red"));
                 break;
             case GREEN:
-                setGreen(amount);
+                setGreen(notNegative(amount, "green"));
                 break;
             case COLORLESS:
-                setColorless(amount);
+                setColorless(notNegative(amount, "colorless"));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown color: " + manaType);
@@ -1248,7 +1246,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 && this.green.getAmount() >= mana.green.getAmount()
                 && this.colorless.getAmount() >= mana.colorless.getAmount()
                 && (this.generic.getAmount() >= mana.generic.getAmount()
-                || this.countColored() + this.colorless.getAmount() >= mana.count());
+                || CardUtil.addWithOverflowCheck(this.countColored(), this.colorless.getAmount()) >= mana.count());
 
     }
 
@@ -1284,33 +1282,33 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             moreMana = mana1;
             lessMana = mana2;
         }
-        int anyDiff = mana2.getAny() - mana1.getAny();
+        int anyDiff = CardUtil.subtractWithOverflowCheck(mana2.getAny(), mana1.getAny());
         if (lessMana.getWhite() > moreMana.getWhite()) {
-            anyDiff -= lessMana.getWhite() - moreMana.getWhite();
+            anyDiff = CardUtil.subtractWithOverflowCheck(anyDiff, CardUtil.subtractWithOverflowCheck(lessMana.getWhite(), moreMana.getWhite()));
             if (anyDiff < 0) {
                 return null;
             }
         }
         if (lessMana.getRed() > moreMana.getRed()) {
-            anyDiff -= lessMana.getRed() - moreMana.getRed();
+            anyDiff = CardUtil.subtractWithOverflowCheck(anyDiff, CardUtil.subtractWithOverflowCheck(lessMana.getRed(), moreMana.getRed()));
             if (anyDiff < 0) {
                 return null;
             }
         }
         if (lessMana.getGreen() > moreMana.getGreen()) {
-            anyDiff -= lessMana.getGreen() - moreMana.getGreen();
+            anyDiff = CardUtil.subtractWithOverflowCheck(anyDiff, CardUtil.subtractWithOverflowCheck(lessMana.getGreen(), moreMana.getGreen()));
             if (anyDiff < 0) {
                 return null;
             }
         }
         if (lessMana.getBlue() > moreMana.getBlue()) {
-            anyDiff -= lessMana.getBlue() - moreMana.getBlue();
+            anyDiff = CardUtil.subtractWithOverflowCheck(anyDiff, CardUtil.subtractWithOverflowCheck(lessMana.getBlue(), moreMana.getBlue()));
             if (anyDiff < 0) {
                 return null;
             }
         }
         if (lessMana.getBlack() > moreMana.getBlack()) {
-            anyDiff -= lessMana.getBlack() - moreMana.getBlack();
+            anyDiff = CardUtil.subtractWithOverflowCheck(anyDiff, CardUtil.subtractWithOverflowCheck(lessMana.getBlack(), moreMana.getBlack()));
             if (anyDiff < 0) {
                 return null;
             }

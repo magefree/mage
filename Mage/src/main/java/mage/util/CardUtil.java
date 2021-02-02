@@ -1,12 +1,6 @@
 package mage.util;
 
 import com.google.common.collect.ImmutableList;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -43,6 +37,13 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author nantuko
  */
@@ -75,9 +76,9 @@ public final class CardUtil {
     /**
      * calculates the maximal possible generic mana reduction for a given mana cost
      *
-     * @param mana mana costs that should be reduced
-     * @param maxPossibleReduction max possible generic mana reduction 
-     * @param notLessThan the complete costs may not be reduced more than this CMC mana costs
+     * @param mana                 mana costs that should be reduced
+     * @param maxPossibleReduction max possible generic mana reduction
+     * @param notLessThan          the complete costs may not be reduced more than this CMC mana costs
      */
     public static int calculateActualPossibleGenericManaReduction(Mana mana, int maxPossibleReduction, int notLessThan) {
         int nonGeneric = mana.count() - mana.getGeneric();
@@ -85,12 +86,11 @@ public final class CardUtil {
         int actualPossibleGenericManaReduction = Math.max(0, mana.getGeneric() - notPossibleGenericReduction);
         if (actualPossibleGenericManaReduction > maxPossibleReduction) {
             actualPossibleGenericManaReduction = maxPossibleReduction;
-        }        
+        }
         return actualPossibleGenericManaReduction;
     }
-    
-    
-    
+
+
     /**
      * Reduces ability cost to be paid.
      *
@@ -656,6 +656,16 @@ public final class CardUtil {
         return base - decrement;
     }
 
+    public static int multiplyWithOverflowCheck(int base, int multiply) {
+        long result = ((long) base) * multiply;
+        if (result > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        return base * multiply;
+    }
+
     public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
@@ -1032,7 +1042,7 @@ public final class CardUtil {
     /**
      * Add effects to game that allows to play/cast card from current zone and spend mana as any type for it.
      * Effects will be discarded/ignored on any card movements or blinks (after ZCC change)
-     *
+     * <p>
      * Affected to all card's parts
      *
      * @param game

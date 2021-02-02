@@ -383,10 +383,11 @@ public class CommandersCastTest extends CardTestCommander4Players {
         addCustomEffect_TargetDamage(playerA, 10); // kill creature
 
         // use case:
-        // cast adventure spell from command zone and keep it in exile (inc next command cost)
-        // cast card from exile (do not inc next command cost)
-        // return commander to command zone
-        // cast as adventure spell (with x1 command cost)
+        // cast adventure spell from command zone (inc command tax to 1x)
+        // return to command zone
+        // cast adventure spell from command zone (inc command tax to 2x)
+        // return to command zone
+        // cast as creature (with 2x command tax)
 
         // Curious Pair, creature, {1}{G}, 1/3
         // Treats to Share, sorcery, {G}
@@ -417,7 +418,6 @@ public class CommandersCastTest extends CardTestCommander4Players {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         checkPlayableAbility("after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
         checkPlayableAbility("after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
-
 
         // play adventure spell, but keep it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");

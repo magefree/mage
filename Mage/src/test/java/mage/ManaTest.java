@@ -656,4 +656,34 @@ public class ManaTest {
         assertEquals(0, mana.getGeneric());
         assertEquals(0, mana.getAny());
     }
+
+    @Test
+    public void shouldNotOverflow() {
+        // given
+        Mana mana = new Mana();
+
+        // when
+        mana.setRed(Integer.MAX_VALUE);
+        mana.increaseRed();
+        mana.setGreen(Integer.MAX_VALUE);
+        mana.increaseGreen();
+        mana.setBlue(Integer.MAX_VALUE);
+        mana.increaseBlue();
+        mana.setWhite(Integer.MAX_VALUE);
+        mana.increaseWhite();
+        mana.setBlack(Integer.MAX_VALUE);
+        mana.increaseBlack();
+        mana.setGeneric(Integer.MAX_VALUE);
+        mana.increaseGeneric();
+        mana.setAny(Integer.MAX_VALUE);
+
+        // then
+        assertEquals(Integer.MAX_VALUE, mana.getRed());
+        assertEquals(Integer.MAX_VALUE, mana.getGreen());
+        assertEquals(Integer.MAX_VALUE, mana.getBlue());
+        assertEquals(Integer.MAX_VALUE, mana.getWhite());
+        assertEquals(Integer.MAX_VALUE, mana.getBlack());
+        assertEquals(Integer.MAX_VALUE, mana.getGeneric());
+        assertEquals(Integer.MAX_VALUE, mana.getAny());
+    }
 }

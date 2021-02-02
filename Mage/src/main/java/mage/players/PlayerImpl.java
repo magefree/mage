@@ -3244,7 +3244,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 restVal = 0;
                 availableLifeMana -= oldPayOption.get(manaType);
             } else {
-                restVal = oldPayOption.get(manaType) - availableLifeMana;
+                restVal = CardUtil.subtractWithOverflowCheck(oldPayOption.get(manaType), availableLifeMana);
                 availableLifeMana = 0;
             }
             manaCopy.set(manaType, restVal);

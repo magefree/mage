@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -55,22 +56,22 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Mana mana = ((ManaEvent) event).getMana();
         if (mana.getBlack() > 0) {
-            mana.set(ManaType.BLACK, mana.getBlack() * 2);
+            mana.set(ManaType.BLACK, CardUtil.multiplyWithOverflowCheck(mana.getBlack(), 2));
         }
         if (mana.getBlue() > 0) {
-            mana.set(ManaType.BLUE, mana.getBlue() * 2);
+            mana.set(ManaType.BLUE, CardUtil.multiplyWithOverflowCheck(mana.getBlue(), 2));
         }
         if (mana.getWhite() > 0) {
-            mana.set(ManaType.WHITE, mana.getWhite() * 2);
+            mana.set(ManaType.WHITE, CardUtil.multiplyWithOverflowCheck(mana.getWhite(), 2));
         }
         if (mana.getGreen() > 0) {
-            mana.set(ManaType.GREEN, mana.getGreen() * 2);
+            mana.set(ManaType.GREEN, CardUtil.multiplyWithOverflowCheck(mana.getGreen(), 2));
         }
         if (mana.getRed() > 0) {
-            mana.set(ManaType.RED, mana.getRed() * 2);
+            mana.set(ManaType.RED, CardUtil.multiplyWithOverflowCheck(mana.getRed(), 2));
         }
         if (mana.getColorless() > 0) {
-            mana.set(ManaType.COLORLESS, mana.getColorless() * 2);
+            mana.set(ManaType.COLORLESS, CardUtil.multiplyWithOverflowCheck(mana.getColorless(), 2));
         }
         return false;
     }

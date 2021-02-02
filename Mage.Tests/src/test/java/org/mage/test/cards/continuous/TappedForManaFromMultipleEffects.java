@@ -12,7 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
 
     @Test
-    public void test_One() {
+    public void test_NyxbloomAncient_One() {
         // If you tap a permanent for mana, it produces three times as much of that mana instead.
         addCard(Zone.HAND, playerA, "Nyxbloom Ancient"); // {4}{G}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
@@ -36,7 +36,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_Two() {
+    public void test_NyxbloomAncient_Two() {
         // If you tap a permanent for mana, it produces three times as much of that mana instead.
         addCard(Zone.HAND, playerA, "Nyxbloom Ancient", 1); // {4}{G}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
@@ -68,6 +68,25 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Nyxbloom Ancient", 2);
         assertPermanentCount(playerA, "Chlorophant", 1);
+    }
+
+    @Test
+    public void test_NyxbloomAncient_IntegerOverflow() {
+        // If you tap a permanent for mana, it produces three times as much of that mana instead.
+        int permanentsCount = 30;
+
+        addCard(Zone.BATTLEFIELD, playerA, "Nyxbloom Ancient", permanentsCount);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // total mana = 3^count, so must be Integer overflow protection (no zero or negative values)
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        checkManaPool("max mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", Integer.MAX_VALUE);
+        setChoice(playerA, "Nyxbloom Ancient", permanentsCount - 1); // choose replacement effects order
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 
     @Test

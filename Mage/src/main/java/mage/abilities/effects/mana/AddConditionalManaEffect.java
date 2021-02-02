@@ -5,14 +5,16 @@
  */
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.ManaType;
 import mage.game.Game;
+import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -55,8 +57,8 @@ public class AddConditionalManaEffect extends ManaEffect {
             int amountAvailableMana = netAmount.calculate(game, source, this);
             if (amountAvailableMana > 0) {
                 Mana calculatedMana = mana.copy();
-                for(ManaType manaType: ManaType.getTrueManaTypes()) {
-                   calculatedMana.set(manaType, calculatedMana.get(manaType) * amountAvailableMana);
+                for (ManaType manaType : ManaType.getTrueManaTypes()) {
+                    calculatedMana.set(manaType, CardUtil.multiplyWithOverflowCheck(calculatedMana.get(manaType), amountAvailableMana));
                 }
                 maxAvailableMana.add(manaBuilder.setMana(calculatedMana, source, game).build());
             }
